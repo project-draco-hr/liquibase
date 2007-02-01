@@ -2,7 +2,7 @@
   TestMigrator migrator=testMigrator;
   migrator.setUrl("jdbc:oracle:thin:@localhost:1521:latest");
   assertTrue(migrator.isSaveToRunMigration());
-  migrator.setUrl("jdbc:oracle:thin:@devoracle1.sundog.net:1521:latest");
+  migrator.setUrl("jdbc:oracle:thin:@liquibase:1521:latest");
   assertFalse(migrator.isSaveToRunMigration());
   migrator.setMode(Migrator.OUTPUT_SQL_MODE);
   assertTrue("Safe to run if outputing sql, even if non-localhost URL",migrator.isSaveToRunMigration());
