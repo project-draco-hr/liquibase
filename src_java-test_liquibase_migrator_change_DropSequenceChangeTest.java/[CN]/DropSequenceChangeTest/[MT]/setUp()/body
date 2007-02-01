@@ -1,0 +1,5 @@
+{
+  super.setUp();
+  change=new DropSequenceChange();
+  change.setSequenceName("SEQ_NAME");
+}

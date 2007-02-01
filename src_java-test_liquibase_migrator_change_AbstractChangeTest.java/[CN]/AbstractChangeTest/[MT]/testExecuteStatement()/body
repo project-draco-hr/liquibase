@@ -1,0 +1,28 @@
+{
+  AbstractChange change=new AbstractChange("test","Test Refactorign"){
+    public String generateStatement(    AbstractDatabase database){
+      return "GENERATED STATEMENT;";
+    }
+    public String getConfirmationMessage(){
+      return null;
+    }
+    public boolean isApplicableTo(    Set<DatabaseStructure> selectedDatabaseStructures){
+      return false;
+    }
+    public Element createNode(    Document currentMigrationFileDOM){
+      return null;
+    }
+  }
+;
+  Connection conn=createMock(Connection.class);
+  Statement statement=createMock(Statement.class);
+  expect(conn.createStatement()).andReturn(statement);
+  expect(statement.execute("GENERATED STATEMENT;")).andStubReturn(true);
+  statement.close();
+  expectLastCall();
+  replay(conn);
+  replay(statement);
+  OracleDatabase database=new OracleDatabase();
+  database.setConnection(conn);
+  change.executeStatement(database);
+}

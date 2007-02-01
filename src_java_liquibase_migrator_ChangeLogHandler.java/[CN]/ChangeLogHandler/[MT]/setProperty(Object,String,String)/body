@@ -1,0 +1,18 @@
+{
+  String methodName="set" + attributeName.substring(0,1).toUpperCase() + attributeName.substring(1);
+  Method[] methods=object.getClass().getMethods();
+  for (int i=0; i < methods.length; i++) {
+    Method method=methods[i];
+    if (method.getName().equals(methodName)) {
+      if (method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(Boolean.class)) {
+        method.invoke(object,new Object[]{Boolean.valueOf(attributeValue)});
+        return;
+      }
+ else       if (method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(String.class)) {
+        method.invoke(object,new Object[]{attributeValue.toString()});
+        return;
+      }
+    }
+  }
+  throw new RuntimeException("Property not found: " + attributeName);
+}

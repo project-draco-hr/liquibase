@@ -1,0 +1,3 @@
+{
+  return new Sequence("SEQ_NAME",null,null,null);
+}

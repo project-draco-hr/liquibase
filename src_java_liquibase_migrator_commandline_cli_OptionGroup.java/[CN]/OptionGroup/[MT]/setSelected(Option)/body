@@ -1,0 +1,8 @@
+{
+  if (this.selected == null || this.selected.equals(opt.getOpt())) {
+    this.selected=opt.getOpt();
+  }
+ else {
+    throw new AlreadySelectedException("an option from this group has " + "already been selected: '" + selected + "'");
+  }
+}

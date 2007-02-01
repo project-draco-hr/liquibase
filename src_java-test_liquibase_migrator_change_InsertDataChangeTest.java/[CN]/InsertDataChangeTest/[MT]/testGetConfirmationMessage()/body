@@ -1,0 +1,3 @@
+{
+  assertEquals("New rows have been inserted into the table TABLE_NAME",refactoring.getConfirmationMessage());
+}

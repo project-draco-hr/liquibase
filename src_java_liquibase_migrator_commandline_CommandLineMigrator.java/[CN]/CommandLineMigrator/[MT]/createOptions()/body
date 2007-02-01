@@ -1,0 +1,16 @@
+{
+  Options options=new Options();
+  options.addOption(OptionBuilder.withArgName("value").hasArg().withDescription("Database Driver").isRequired().create("driver"));
+  options.addOption(OptionBuilder.withArgName("value").hasArg().withDescription("Username").isRequired().create("username"));
+  options.addOption(OptionBuilder.withArgName("value").hasArg().withDescription("Database Password").isRequired().create("password"));
+  options.addOption(OptionBuilder.withArgName("value").hasArg().withDescription("Database URL").isRequired().create("url"));
+  options.addOption(OptionBuilder.withArgName("value").hasArg().withDescription("Migration File").isRequired(false).create("migrationFile"));
+  options.addOption(OptionBuilder.withArgName("value").hasArg().withDescription("Classpath").isRequired(false).create("classpath"));
+  options.addOption(OptionBuilder.withDescription("Execute Mode").isRequired(false).create("execute"));
+  options.addOption(OptionBuilder.withArgName("filename").hasArg().withDescription("Output SQL Mode").isRequired(false).create("outputSQL"));
+  options.addOption(OptionBuilder.withArgName("filename").hasArg().withDescription("Output Changelog SQL Only Mode").isRequired(false).create("outputChangelogSQL"));
+  options.addOption(OptionBuilder.withDescription("Drop All Database Objects First").isRequired(false).create("dropAllFirst"));
+  options.addOption(OptionBuilder.withDescription("Display Change Log Lock").isRequired(false).create("listLocks"));
+  options.addOption(OptionBuilder.withDescription("Release Change Log Locks").isRequired(false).create("releaseLocks"));
+  return options;
+}

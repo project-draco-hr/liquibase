@@ -1,0 +1,53 @@
+{
+  Connection conn=getConnection();
+  Statement selectStatement=null;
+  Statement dropStatement=null;
+  ResultSet rs=null;
+  try {
+    selectStatement=conn.createStatement();
+    dropStatement=conn.createStatement();
+    rs=conn.getMetaData().getTables(null,getSchemaName(),null,new String[]{"TABLE","VIEW","GLOBAL TEMPORARY","LOCAL TEMPORARY","ALIAS","SYNONYM"});
+    while (rs.next()) {
+      String tableName=rs.getString("TABLE_NAME");
+      if (tableName.startsWith("BIN$")) {
+        continue;
+      }
+      String type=rs.getString("TABLE_TYPE");
+      String sql;
+      if ("TABLE".equals(type)) {
+        sql="DROP TABLE " + tableName + " CASCADE CONSTRAINTS";
+      }
+ else       if ("VIEW".equals(type)) {
+        sql="DROP VIEW " + tableName;
+      }
+ else {
+        throw new MigrationFailedException("Unknown type " + type + " for "+ tableName);
+      }
+      try {
+        log.finest("Dropping " + tableName);
+        dropStatement.executeUpdate(sql);
+      }
+ catch (      SQLException e) {
+        throw new MigrationFailedException("Error dropping table '" + tableName + "': "+ e.getMessage(),e);
+      }
+    }
+    rs.close();
+    if (this.supportsSequences()) {
+      dropSequences(conn);
+    }
+  }
+  finally {
+    if (rs != null) {
+      rs.close();
+    }
+    if (selectStatement != null) {
+      selectStatement.close();
+    }
+    if (dropStatement != null) {
+      dropStatement.close();
+    }
+    if (conn != null) {
+      conn.commit();
+    }
+  }
+}

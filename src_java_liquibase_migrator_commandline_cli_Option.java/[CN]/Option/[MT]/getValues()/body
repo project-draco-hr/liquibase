@@ -1,0 +1,3 @@
+{
+  return this.values.size() == 0 ? null : (String[])this.values.toArray(new String[]{});
+}

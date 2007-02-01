@@ -1,0 +1,7 @@
+{
+  Sequence sequence=new Sequence("name",1,2,3);
+  assertEquals("name",sequence.getName());
+  assertEquals(1,sequence.getIncrementBy().intValue());
+  assertEquals(2,sequence.getMinValue().intValue());
+  assertEquals(3,sequence.getMaxValue().intValue());
+}

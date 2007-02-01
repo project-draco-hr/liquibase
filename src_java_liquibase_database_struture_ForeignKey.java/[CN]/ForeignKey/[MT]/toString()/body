@@ -1,0 +1,3 @@
+{
+  return getForeignKeyTable().getName() + "." + getForeignKeyColumnName()+ "->"+ getPrimaryKeyTable().getName()+ "."+ getPrimaryKeyColumnName();
+}

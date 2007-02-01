@@ -1,0 +1,52 @@
+{
+  CommandLineParser parser=new GnuParser();
+  try {
+    cmd=parser.parse(options,args);
+  }
+ catch (  ParseException e) {
+    new HelpFormatter().printHelp("java -jar sun.dbmigrator.jar",options);
+    System.exit(-1);
+  }
+  String[] classpath;
+  if (isWindows()) {
+    classpath=cmd.getOptionValue("classpath").split(";");
+  }
+ else {
+    classpath=cmd.getOptionValue("classpath").split(":");
+  }
+  List<URL> urls=new ArrayList<URL>();
+  for (  String classpathEntry : classpath) {
+    File classPathFile=new File(classpathEntry);
+    if (!classPathFile.exists()) {
+      throw new MigrationFailedException(classPathFile.getAbsolutePath() + " does not exist");
+    }
+    try {
+      if (classpathEntry.endsWith(".war")) {
+        addWarFileClasspathEntries(classPathFile,urls);
+      }
+ else       if (classpathEntry.endsWith(".ear")) {
+        JarFile earZip=new JarFile(classPathFile);
+        Enumeration<? extends JarEntry> entries=earZip.entries();
+        while (entries.hasMoreElements()) {
+          JarEntry entry=entries.nextElement();
+          if (entry.getName().toLowerCase().endsWith(".jar")) {
+            File jar=extract(earZip,entry);
+            urls.add(new URL("jar:" + jar.toURL() + "!/"));
+            jar.deleteOnExit();
+          }
+ else           if (entry.getName().toLowerCase().endsWith("war")) {
+            File warFile=extract(earZip,entry);
+            addWarFileClasspathEntries(warFile,urls);
+          }
+        }
+      }
+ else {
+        urls.add(new File(classpathEntry).toURL());
+      }
+    }
+ catch (    Exception e) {
+      throw new MigrationFailedException(e);
+    }
+  }
+  classLoader=new URLClassLoader(urls.toArray(new URL[urls.size()]),Thread.currentThread().getContextClassLoader());
+}

@@ -1,0 +1,5 @@
+{
+  if (text != null) {
+    text.append(StringUtils.trimToEmpty(new String(ch,start,length)));
+  }
+}

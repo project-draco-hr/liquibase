@@ -1,0 +1,3 @@
+{
+  assertEquals("NUMBER(15, 2)",getDatabase().getCurrencyType());
+}

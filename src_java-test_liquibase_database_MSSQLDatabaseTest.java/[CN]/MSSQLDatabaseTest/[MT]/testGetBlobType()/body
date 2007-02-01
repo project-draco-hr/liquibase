@@ -1,0 +1,3 @@
+{
+  assertEquals("IMAGE",getDatabase().getBlobType());
+}

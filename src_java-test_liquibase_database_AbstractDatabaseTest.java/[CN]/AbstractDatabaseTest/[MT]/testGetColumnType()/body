@@ -1,0 +1,25 @@
+{
+  ColumnConfig column=new ColumnConfig();
+  column.setType("boolean");
+  assertEquals(database.getBooleanType(),database.getColumnType(column));
+  column.setType("BooLean");
+  assertEquals(database.getBooleanType(),database.getColumnType(column));
+  column.setType("currency");
+  assertEquals(database.getCurrencyType(),database.getColumnType(column));
+  column.setType("currEncy");
+  assertEquals(database.getCurrencyType(),database.getColumnType(column));
+  column.setType("uuid");
+  assertEquals(database.getUUIDType(),database.getColumnType(column));
+  column.setType("UUID");
+  assertEquals(database.getUUIDType(),database.getColumnType(column));
+  column.setType("blob");
+  assertEquals(database.getBlobType(),database.getColumnType(column));
+  column.setType("BLOB");
+  assertEquals(database.getBlobType(),database.getColumnType(column));
+  column.setType("clob");
+  assertEquals(database.getClobType(),database.getColumnType(column));
+  column.setType("CLOB");
+  assertEquals(database.getClobType(),database.getColumnType(column));
+  column.setType("SomethingElse");
+  assertEquals("SomethingElse",database.getColumnType(column));
+}

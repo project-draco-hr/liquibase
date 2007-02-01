@@ -1,0 +1,4 @@
+{
+  instance.numberOfArgs=num;
+  return instance;
+}

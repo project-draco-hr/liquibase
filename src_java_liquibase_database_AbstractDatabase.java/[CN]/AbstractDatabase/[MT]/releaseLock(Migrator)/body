@@ -1,0 +1,28 @@
+{
+  if (doesChangeLogLockTableExist()) {
+    Connection conn=getConnection();
+    PreparedStatement stmt=null;
+    try {
+      stmt=conn.prepareStatement("update databasechangeloglock set locked=?, lockgranted=null, lockedby=null where id=1".toUpperCase());
+      stmt.setBoolean(1,false);
+      if (stmt.executeUpdate() != 1) {
+        throw new MigrationFailedException("Did not update change log lock correctly");
+      }
+      conn.commit();
+      log.info("Successfully released change log lock");
+    }
+ catch (    Exception e) {
+      throw new MigrationFailedException(e);
+    }
+ finally {
+      if (stmt != null) {
+        try {
+          stmt.close();
+        }
+ catch (        SQLException e) {
+          ;
+        }
+      }
+    }
+  }
+}

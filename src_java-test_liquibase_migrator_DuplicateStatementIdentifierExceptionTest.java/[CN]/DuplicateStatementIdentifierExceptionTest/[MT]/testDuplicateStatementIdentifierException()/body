@@ -1,0 +1,4 @@
+{
+  DuplicateStatementIdentifierException ex=new DuplicateStatementIdentifierException("Message Here");
+  assertEquals("Message Here",ex.getMessage());
+}

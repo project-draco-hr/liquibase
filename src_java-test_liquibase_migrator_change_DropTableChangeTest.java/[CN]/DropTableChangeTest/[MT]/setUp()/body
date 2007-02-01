@@ -1,0 +1,5 @@
+{
+  change=new DropTableChange();
+  change.setTableName("TAB_NAME");
+  change.setCascadeConstraints(true);
+}

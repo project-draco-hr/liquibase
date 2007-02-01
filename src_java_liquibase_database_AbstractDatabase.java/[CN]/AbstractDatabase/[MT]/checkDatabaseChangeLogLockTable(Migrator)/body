@@ -1,0 +1,66 @@
+{
+  Statement statement=null;
+  Connection connection=getConnection();
+  ResultSet rs=null;
+  changeLogLockTableExists=true;
+  try {
+    rs=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogLockTableName(),null);
+    if (!rs.next()) {
+      String createTableStatement=getCreateChangeLogLockSQL();
+      if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
+        statement=connection.createStatement();
+        statement.executeUpdate(createTableStatement);
+        connection.commit();
+        log.info("Created database lock table with name: DATABASECHANGELOGLOCK");
+      }
+ else {
+        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + "-----------------------------------------------------------------------------------------------\n");
+        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " DATABASECHANGELOGLOCK table does not exist.\n");
+        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Race conditions may cause a corrupted sql script.\n");
+        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Consider running: \n");
+        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getCreateChangeLogLockSQL()+ ";\n");
+        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getChangeLogLockInsertSQL()+ ";\n");
+        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + "-----------------------------------------------------------------------------------------------\n\n");
+        migrator.getOutputSQLWriter().append(createTableStatement + ";\n\n");
+        changeLogLockTableExists=false;
+      }
+    }
+    rs.close();
+    if (statement != null) {
+      statement.close();
+    }
+    String insertRowStatment=getChangeLogLockInsertSQL();
+    if (changeLogLockTableExists) {
+      statement=connection.createStatement();
+      rs=statement.executeQuery("select * from DATABASECHANGELOGLOCK where id=1".toUpperCase());
+      if (!rs.next()) {
+        if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
+          statement=connection.createStatement();
+          statement.executeUpdate(insertRowStatment);
+          connection.commit();
+          log.info("Created database lock table with name: DATABASECHANGELOGLOCK");
+        }
+ else {
+          migrator.getOutputSQLWriter().append(insertRowStatment + ";\n\n");
+        }
+        rs.close();
+      }
+    }
+ else {
+      if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
+        throw new SQLException("Change log lock table does not exist");
+      }
+ else {
+        migrator.getOutputSQLWriter().append(insertRowStatment + ";\n\n");
+      }
+    }
+  }
+  finally {
+    if (statement != null) {
+      statement.close();
+    }
+    if (rs != null) {
+      rs.close();
+    }
+  }
+}

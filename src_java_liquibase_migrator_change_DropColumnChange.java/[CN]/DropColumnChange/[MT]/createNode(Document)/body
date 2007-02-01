@@ -1,0 +1,6 @@
+{
+  Element element=currentMigrationFileDOM.createElement("dropColumn");
+  element.setAttribute("tableName",getTableName());
+  element.setAttribute("columnName",getColumnName());
+  return element;
+}

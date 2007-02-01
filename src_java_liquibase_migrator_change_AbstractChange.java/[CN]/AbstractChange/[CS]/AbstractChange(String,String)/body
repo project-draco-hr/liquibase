@@ -1,0 +1,4 @@
+{
+  this.tagName=tagName;
+  this.refactoringName=refactoringName;
+}

@@ -1,0 +1,5 @@
+{
+  super("net/sundog/test.xml",new ClassLoaderFileOpener());
+  inputStream=createMock(InputStream.class);
+  replay(inputStream);
+}

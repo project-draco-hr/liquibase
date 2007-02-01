@@ -1,0 +1,14 @@
+{
+  try {
+    if (str.indexOf(".") >= 0) {
+      return Double.valueOf(str);
+    }
+ else {
+      return Integer.valueOf(str);
+    }
+  }
+ catch (  NumberFormatException nfe) {
+    System.err.println(nfe.getMessage());
+    return null;
+  }
+}

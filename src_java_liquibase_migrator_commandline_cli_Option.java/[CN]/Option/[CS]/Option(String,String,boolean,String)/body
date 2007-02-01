@@ -1,0 +1,10 @@
+{
+  validateOption(opt);
+  this.opt=opt;
+  this.longOpt=longOpt;
+  if (hasArg) {
+    this.numberOfArgs=1;
+  }
+  this.hasArg=hasArg;
+  this.description=description;
+}

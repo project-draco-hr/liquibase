@@ -1,0 +1,4 @@
+{
+  super("createIndex","Create Index");
+  columns=new ArrayList<ColumnConfig>();
+}

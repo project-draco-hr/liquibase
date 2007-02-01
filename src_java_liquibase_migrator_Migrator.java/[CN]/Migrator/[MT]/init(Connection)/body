@@ -1,0 +1,16 @@
+{
+  AbstractDatabase[] implementedDatabases=getImplementedDatabases();
+  boolean foundImplementation=false;
+  for (int i=0; i < implementedDatabases.length; i++) {
+    database=implementedDatabases[i];
+    if (database.isCorrectDatabaseImplementation(connection)) {
+      database.setConnection(connection);
+      database.getConnection().setAutoCommit(false);
+      foundImplementation=true;
+      break;
+    }
+  }
+  if (!foundImplementation) {
+    throw new MigrationFailedException("Unknown database: " + connection.getMetaData().getDatabaseProductName());
+  }
+}

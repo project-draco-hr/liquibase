@@ -1,0 +1,3 @@
+{
+  assertEquals("Column with the name NAME has been modified.",change.getConfirmationMessage());
+}

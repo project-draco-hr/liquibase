@@ -1,0 +1,9 @@
+Table table
+String name
+int dataType
+String typeName
+int columnSize
+int decimalDigits
+int nullable
+String remarks
+String columnDef

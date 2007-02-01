@@ -1,0 +1,3 @@
+{
+  assertTrue(change.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createTableDatabaseStructure()}))));
+}

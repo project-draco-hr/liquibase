@@ -1,0 +1,10 @@
+{
+  try {
+    StringBuffer buffer=new StringBuffer();
+    nodeToStringBuffer(createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()),buffer);
+    return MD5Util.computeMD5(buffer.toString());
+  }
+ catch (  ParserConfigurationException e) {
+    throw new RuntimeException(e);
+  }
+}

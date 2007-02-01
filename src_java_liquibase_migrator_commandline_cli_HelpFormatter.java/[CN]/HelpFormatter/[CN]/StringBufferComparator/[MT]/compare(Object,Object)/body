@@ -1,0 +1,5 @@
+{
+  String str1=stripPrefix(o1.toString());
+  String str2=stripPrefix(o2.toString());
+  return (str1.compareTo(str2));
+}

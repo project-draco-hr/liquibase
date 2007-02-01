@@ -1,0 +1,6 @@
+{
+  if (obj == null) {
+    return false;
+  }
+  return getName().equals(((Sequence)obj).getName());
+}

@@ -1,0 +1,24 @@
+{
+  try {
+    if (changeSet != null && "changeSet".equals(qName)) {
+      changeSet.execute();
+      changeSet=null;
+    }
+ else     if (change != null && qName.equals(change.getTagName())) {
+      if (text.length() > 0) {
+        if (change instanceof RawSQLChange) {
+          ((RawSQLChange)change).setSql(text.toString());
+        }
+ else {
+          throw new RuntimeException("Unexpected text in " + change.getTagName());
+        }
+      }
+      text=null;
+      changeSet.addRefactoring(change);
+      change=null;
+    }
+  }
+ catch (  Exception e) {
+    throw new SAXException(e);
+  }
+}

@@ -1,0 +1,14 @@
+{
+  if (connectionForConstructor != null) {
+    reset(connectionForConstructor);
+  }
+  connectionForConstructor=createMock(Connection.class);
+  connectionForConstructor.setAutoCommit(false);
+  expectLastCall().atLeastOnce();
+  DatabaseMetaData metaData=createMock(DatabaseMetaData.class);
+  expect(metaData.getDatabaseProductName()).andReturn("Oracle");
+  replay(metaData);
+  expect(connectionForConstructor.getMetaData()).andReturn(metaData);
+  replay(connectionForConstructor);
+  testMigrator=new TestMigrator();
+}

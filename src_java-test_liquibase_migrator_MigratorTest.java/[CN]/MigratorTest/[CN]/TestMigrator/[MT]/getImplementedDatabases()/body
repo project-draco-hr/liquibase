@@ -1,0 +1,14 @@
+{
+  AbstractDatabase mockDatabase=createMock(AbstractDatabase.class);
+  try {
+    expect(mockDatabase.isCorrectDatabaseImplementation(null)).andReturn(true).atLeastOnce();
+    mockDatabase.setConnection(null);
+    expectLastCall();
+    expect(mockDatabase.getConnection()).andReturn(connectionForConstructor);
+    replay(mockDatabase);
+    return new AbstractDatabase[]{mockDatabase};
+  }
+ catch (  SQLException e) {
+    throw new RuntimeException(e);
+  }
+}

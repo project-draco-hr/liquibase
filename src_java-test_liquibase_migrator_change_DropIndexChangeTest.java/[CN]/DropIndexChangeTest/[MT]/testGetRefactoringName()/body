@@ -1,0 +1,3 @@
+{
+  assertEquals("Drop Index",new DropIndexChange().getRefactoringName());
+}

@@ -1,0 +1,6 @@
+{
+  RenameTableChange refactoring=new RenameTableChange();
+  refactoring.setOldTableName("OLD_NAME");
+  refactoring.setNewTableName("NEW_NAME");
+  assertEquals("rename OLD_NAME to NEW_NAME",refactoring.generateStatement(new OracleDatabase()));
+}

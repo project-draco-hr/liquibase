@@ -1,0 +1,5 @@
+{
+  CreateIndexChange refactoring=new CreateIndexChange();
+  refactoring.setIndexName("IDX_TEST");
+  assertEquals("Index IDX_TEST has been created",refactoring.getConfirmationMessage());
+}

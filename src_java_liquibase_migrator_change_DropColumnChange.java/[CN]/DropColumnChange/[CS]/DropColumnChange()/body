@@ -1,0 +1,3 @@
+{
+  super("dropColumn","Drop Column");
+}

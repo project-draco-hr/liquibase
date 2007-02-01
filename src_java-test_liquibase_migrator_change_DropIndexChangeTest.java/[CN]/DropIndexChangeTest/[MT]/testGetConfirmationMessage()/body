@@ -1,0 +1,5 @@
+{
+  DropIndexChange refactoring=new DropIndexChange();
+  refactoring.setIndexName("IDX_NAME");
+  assertEquals("Index IDX_NAME dropped",refactoring.getConfirmationMessage());
+}

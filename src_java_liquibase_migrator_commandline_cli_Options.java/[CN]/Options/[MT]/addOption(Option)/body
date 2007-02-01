@@ -1,0 +1,11 @@
+{
+  String shortOpt="-" + opt.getOpt();
+  if (opt.hasLongOpt()) {
+    longOpts.put("--" + opt.getLongOpt(),opt);
+  }
+  if (opt.isRequired()) {
+    requiredOpts.add(shortOpt);
+  }
+  shortOpts.put(shortOpt,opt);
+  return this;
+}

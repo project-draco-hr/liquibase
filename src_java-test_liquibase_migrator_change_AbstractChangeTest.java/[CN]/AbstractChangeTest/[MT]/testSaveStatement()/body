@@ -1,0 +1,21 @@
+{
+  AbstractChange change=new AbstractChange("test","Test Refactoring"){
+    public String generateStatement(    AbstractDatabase database){
+      return "GENERATED STATEMENT";
+    }
+    public String getConfirmationMessage(){
+      return null;
+    }
+    public boolean isApplicableTo(    Set<DatabaseStructure> selectedDatabaseStructures){
+      return false;
+    }
+    public Element createNode(    Document currentMigrationFileDOM){
+      return null;
+    }
+  }
+;
+  StringWriter stringWriter=new StringWriter();
+  OracleDatabase database=new OracleDatabase();
+  change.saveStatement(database,stringWriter);
+  assertEquals("GENERATED STATEMENT;\n\n",stringWriter.getBuffer().toString());
+}

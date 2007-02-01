@@ -1,0 +1,5 @@
+{
+  this.conn=conn;
+  this.tables=new ArrayList<Table>();
+  dbInfo=conn.getMetaData().getURL();
+}

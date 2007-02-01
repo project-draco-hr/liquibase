@@ -1,0 +1,32 @@
+{
+switch (numberOfArgs) {
+case UNINITIALIZED:
+    return false;
+case UNLIMITED_VALUES:
+  if (getValueSeparator() > 0) {
+    int index=0;
+    while ((index=value.indexOf(getValueSeparator())) != -1) {
+      this.values.add(value.substring(0,index));
+      value=value.substring(index + 1);
+    }
+  }
+this.values.add(value);
+return true;
+default :
+if (getValueSeparator() > 0) {
+int index=0;
+while ((index=value.indexOf(getValueSeparator())) != -1) {
+if (values.size() > numberOfArgs - 1) {
+  return false;
+}
+this.values.add(value.substring(0,index));
+value=value.substring(index + 1);
+}
+}
+if (values.size() > numberOfArgs - 1) {
+return false;
+}
+this.values.add(value);
+return true;
+}
+}

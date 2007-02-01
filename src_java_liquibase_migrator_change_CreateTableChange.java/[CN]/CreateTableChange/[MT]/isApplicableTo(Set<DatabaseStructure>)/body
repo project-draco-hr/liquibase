@@ -1,0 +1,3 @@
+{
+  return selectedDatabaseStructures.size() == 1 && (selectedDatabaseStructures.iterator().next() instanceof DatabaseSystem);
+}

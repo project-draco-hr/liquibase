@@ -1,0 +1,3 @@
+{
+  assertEquals("RAW(16)",getDatabase().getUUIDType());
+}

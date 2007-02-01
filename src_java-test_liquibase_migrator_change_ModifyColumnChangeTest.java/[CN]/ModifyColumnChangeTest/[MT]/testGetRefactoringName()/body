@@ -1,0 +1,3 @@
+{
+  assertEquals("Modify Column",change.getRefactoringName());
+}

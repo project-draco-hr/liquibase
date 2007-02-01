@@ -1,0 +1,22 @@
+{
+  Migrator migrator=new Migrator(null,new ClassLoaderFileOpener());
+  List<AbstractDatabase> abstractDatabases=Arrays.asList(migrator.getImplementedDatabases());
+  assertTrue(abstractDatabases.size() == 4);
+  boolean foundOracle=false;
+  boolean foundPostgres=false;
+  boolean foundMSSQL=false;
+  for (  AbstractDatabase db : abstractDatabases) {
+    if (db instanceof OracleDatabase) {
+      foundOracle=true;
+    }
+ else     if (db instanceof PostgresDatabase) {
+      foundPostgres=true;
+    }
+ else     if (db instanceof MSSQLDatabase) {
+      foundMSSQL=true;
+    }
+  }
+  assertTrue("Oracle not in Implemented Databases",foundOracle);
+  assertTrue("MSSQL not in Implemented Databases",foundMSSQL);
+  assertTrue("Postgres not in Implemented Databases",foundPostgres);
+}

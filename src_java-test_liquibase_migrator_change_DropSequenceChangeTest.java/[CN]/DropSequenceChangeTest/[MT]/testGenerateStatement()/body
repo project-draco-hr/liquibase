@@ -1,0 +1,3 @@
+{
+  assertEquals("DROP SEQUENCE SEQ_NAME",change.generateStatement(new OracleDatabase()));
+}

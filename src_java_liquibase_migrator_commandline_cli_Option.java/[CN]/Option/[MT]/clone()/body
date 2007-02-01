@@ -1,0 +1,10 @@
+{
+  Option option=new Option(getOpt(),getDescription());
+  option.setArgs(getArgs());
+  option.setOptionalArg(hasOptionalArg());
+  option.setRequired(isRequired());
+  option.setLongOpt(getLongOpt());
+  option.setType(getType());
+  option.setValueSeparator(getValueSeparator());
+  return option;
+}

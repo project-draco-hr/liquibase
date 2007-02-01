@@ -1,0 +1,6 @@
+{
+  super(file,parentMigrator.getFileOpener(),true);
+  this.parentMigrator=parentMigrator;
+  setMode(parentMigrator.getMode());
+  setOutputSQLWriter(parentMigrator.getOutputSQLWriter());
+}

@@ -1,0 +1,4 @@
+{
+  Project project=new Project();
+  return new AntFileOpener(project,new Path(project));
+}

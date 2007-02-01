@@ -1,0 +1,10 @@
+{
+  ResultSet rs=EasyMock.createMock(ResultSet.class);
+  EasyMock.expect(rs.getString("TABLE_NAME")).andStubReturn(null);
+  EasyMock.expect(rs.getString("TABLE_CAT")).andStubReturn(null);
+  EasyMock.expect(rs.getString("TABLE_SCHEM")).andStubReturn(null);
+  EasyMock.expect(rs.getString("TABLE_TYPE")).andStubReturn(null);
+  EasyMock.expect(rs.getString("REMARKS")).andStubReturn(null);
+  EasyMock.replay(rs);
+  return new Table(null,null,null,null,null,null);
+}

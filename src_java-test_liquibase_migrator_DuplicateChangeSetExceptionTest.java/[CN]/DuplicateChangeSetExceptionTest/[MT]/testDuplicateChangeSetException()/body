@@ -1,0 +1,4 @@
+{
+  DuplicateChangeSetException duplicateChangeSetException=new DuplicateChangeSetException("MESSAGE HERE");
+  assertEquals("MESSAGE HERE",duplicateChangeSetException.getMessage());
+}

@@ -1,0 +1,4 @@
+{
+  instance.numberOfArgs=Option.UNLIMITED_VALUES;
+  return instance;
+}

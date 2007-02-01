@@ -1,0 +1,3 @@
+{
+  assertEquals("Column with the name oldColName has been renamed to newColName",refactoring.getConfirmationMessage());
+}

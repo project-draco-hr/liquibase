@@ -1,0 +1,11 @@
+{
+  if (opt.length() == 1) {
+    return shortOpts.containsKey("-" + opt);
+  }
+ else   if (opt.startsWith("--")) {
+    return longOpts.containsKey(opt);
+  }
+ else {
+    return shortOpts.containsKey(opt);
+  }
+}

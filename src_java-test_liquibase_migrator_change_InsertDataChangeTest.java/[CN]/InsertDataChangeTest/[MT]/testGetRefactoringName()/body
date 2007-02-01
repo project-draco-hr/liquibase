@@ -1,0 +1,3 @@
+{
+  assertEquals("Insert Row",refactoring.getRefactoringName());
+}

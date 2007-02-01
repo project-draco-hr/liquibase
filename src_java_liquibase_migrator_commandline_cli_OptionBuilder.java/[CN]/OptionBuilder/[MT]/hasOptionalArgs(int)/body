@@ -1,0 +1,5 @@
+{
+  instance.numberOfArgs=numArgs;
+  instance.optionalArg=true;
+  return instance;
+}

@@ -1,0 +1,12 @@
+{
+  List values=new java.util.ArrayList();
+  if (options.containsKey(opt)) {
+    List opts=(List)options.get(opt);
+    Iterator iter=opts.iterator();
+    while (iter.hasNext()) {
+      Option optt=(Option)iter.next();
+      values.addAll(optt.getValuesList());
+    }
+  }
+  return (values.size() == 0) ? null : (String[])values.toArray(new String[]{});
+}

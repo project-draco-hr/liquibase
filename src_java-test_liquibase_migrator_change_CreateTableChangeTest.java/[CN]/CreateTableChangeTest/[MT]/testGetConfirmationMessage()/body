@@ -1,0 +1,4 @@
+{
+  change.setTableName("TAB_NAME");
+  assertEquals("Table TAB_NAME created",change.getConfirmationMessage());
+}

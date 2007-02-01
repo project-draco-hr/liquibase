@@ -1,0 +1,6 @@
+{
+  Element element=currentMigrationFileDOM.createElement("renameTable");
+  element.setAttribute("oldTableName",getOldTableName());
+  element.setAttribute("newTableName",getNewTableName());
+  return element;
+}

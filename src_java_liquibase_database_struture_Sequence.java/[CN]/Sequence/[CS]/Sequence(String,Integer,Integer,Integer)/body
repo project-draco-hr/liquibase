@@ -1,0 +1,6 @@
+{
+  this.name=name;
+  this.incrementBy=incrementBy;
+  this.minValue=minValue;
+  this.maxValue=maxValue;
+}

@@ -1,0 +1,4 @@
+{
+  AddColumnChange refactoring=new AddColumnChange();
+  assertTrue(refactoring.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createTableDatabaseStructure()}))));
+}

@@ -1,0 +1,3 @@
+{
+  super("renameTable","Rename Table");
+}

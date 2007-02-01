@@ -1,0 +1,20 @@
+{
+  AlterSequenceChange refactoring=new AlterSequenceChange();
+  refactoring.setSequenceName("SEQ_NAME");
+  OracleDatabase oracleDatabase=new OracleDatabase();
+  refactoring.setMinValue(100);
+  assertEquals("ALTER SEQUENCE SEQ_NAME MINVALUE 100",refactoring.generateStatement(oracleDatabase));
+  refactoring.setMinValue(null);
+  refactoring.setMaxValue(1000);
+  assertEquals("ALTER SEQUENCE SEQ_NAME MAXVALUE 1000",refactoring.generateStatement(oracleDatabase));
+  refactoring.setMaxValue(null);
+  refactoring.setIncrementBy(50);
+  assertEquals("ALTER SEQUENCE SEQ_NAME INCREMENT BY 50",refactoring.generateStatement(oracleDatabase));
+  refactoring.setIncrementBy(null);
+  refactoring.setOrdered(true);
+  assertEquals("ALTER SEQUENCE SEQ_NAME ORDER",refactoring.generateStatement(oracleDatabase));
+  refactoring.setMinValue(1);
+  refactoring.setMaxValue(2);
+  refactoring.setIncrementBy(3);
+  assertEquals("ALTER SEQUENCE SEQ_NAME INCREMENT BY 3 MINVALUE 1 MAXVALUE 2 ORDER",refactoring.generateStatement(oracleDatabase));
+}

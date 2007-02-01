@@ -1,0 +1,23 @@
+{
+  try {
+    InputStream inputStream=getFileOpener().getResourceAsStream(getMigrationFile());
+    if (inputStream == null) {
+      throw new MigrationFailedException(getMigrationFile() + " does not exist");
+    }
+    xmlReader.parse(new InputSource(inputStream));
+    inputStream.close();
+  }
+ catch (  IOException e) {
+    throw new MigrationFailedException("Error Reading Migration File: " + e.getMessage(),e);
+  }
+catch (  SAXException e) {
+    Throwable parentCause=e.getException();
+    while (parentCause != null) {
+      if (parentCause instanceof MigrationFailedException) {
+        throw ((MigrationFailedException)parentCause);
+      }
+      parentCause=parentCause.getCause();
+    }
+    throw new MigrationFailedException("Invalid Migration File: " + e.getMessage(),e);
+  }
+}

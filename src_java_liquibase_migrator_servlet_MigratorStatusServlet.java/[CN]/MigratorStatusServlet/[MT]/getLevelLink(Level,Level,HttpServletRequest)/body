@@ -1,0 +1,8 @@
+{
+  if (currentLevel.equals(level)) {
+    return level.getName();
+  }
+ else {
+    return "<a href=" + request.getRequestURI() + "?logLevel="+ level.getName()+ ">"+ level.getName()+ "</a>";
+  }
+}

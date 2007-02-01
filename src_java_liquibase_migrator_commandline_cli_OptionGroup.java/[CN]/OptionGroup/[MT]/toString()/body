@@ -1,0 +1,17 @@
+{
+  StringBuffer buff=new StringBuffer();
+  Iterator iter=getOptions().iterator();
+  buff.append("[");
+  while (iter.hasNext()) {
+    Option option=(Option)iter.next();
+    buff.append("-");
+    buff.append(option.getOpt());
+    buff.append(" ");
+    buff.append(option.getDescription());
+    if (iter.hasNext()) {
+      buff.append(", ");
+    }
+  }
+  buff.append("]");
+  return buff.toString();
+}

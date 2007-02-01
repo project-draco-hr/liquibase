@@ -1,0 +1,14 @@
+{
+  if (database == null) {
+    database=new OracleDatabase(){
+      public String getConnectionURL() throws SQLException {
+        return url;
+      }
+      public String getConnectionUsername() throws SQLException {
+        return "testUser";
+      }
+    }
+;
+  }
+  return database;
+}

@@ -1,0 +1,5 @@
+{
+  String res=getOptionValue(opt);
+  Object type=((Option)((List)options.get(opt)).iterator().next()).getType();
+  return res == null ? null : TypeHandler.createValue(res,type);
+}

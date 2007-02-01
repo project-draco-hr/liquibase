@@ -1,0 +1,3 @@
+{
+  assertEquals("BYTEA",getDatabase().getBlobType());
+}

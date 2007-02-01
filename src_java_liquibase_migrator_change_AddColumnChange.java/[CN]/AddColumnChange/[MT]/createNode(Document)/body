@@ -1,0 +1,6 @@
+{
+  Element node=currentMigrationFileDOM.createElement("addColumn");
+  node.setAttribute("tableName",getTableName());
+  node.appendChild(getColumn().createNode(currentMigrationFileDOM));
+  return node;
+}

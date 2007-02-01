@@ -1,0 +1,10 @@
+{
+  defaultWidth=DEFAULT_WIDTH;
+  defaultLeftPad=DEFAULT_LEFT_PAD;
+  defaultDescPad=DEFAULT_DESC_PAD;
+  defaultSyntaxPrefix=DEFAULT_SYNTAX_PREFIX;
+  defaultNewLine=System.getProperty("line.separator");
+  defaultOptPrefix=DEFAULT_OPT_PREFIX;
+  defaultLongOptPrefix=DEFAULT_LONG_OPT_PREFIX;
+  defaultArgName=DEFAULT_ARG_NAME;
+}

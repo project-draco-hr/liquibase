@@ -1,0 +1,38 @@
+{
+  Connection conn=getConnection();
+  Statement stmt=null;
+  ResultSet rs=null;
+  try {
+    List<DatabaseChangeLogLock> allLocks=new ArrayList<DatabaseChangeLogLock>();
+    stmt=conn.createStatement();
+    rs=stmt.executeQuery("select id, locked, lockgranted, lockedby from databasechangeloglock".toUpperCase());
+    while (rs.next()) {
+      boolean locked=rs.getBoolean("locked");
+      if (locked) {
+        allLocks.add(new DatabaseChangeLogLock(rs.getInt("ID"),rs.getTimestamp("LOCKGRANTED"),rs.getString("LOCKEDBY")));
+      }
+    }
+    return allLocks.toArray(new DatabaseChangeLogLock[allLocks.size()]);
+  }
+ catch (  Exception e) {
+    throw new MigrationFailedException(e);
+  }
+ finally {
+    if (rs != null) {
+      try {
+        rs.close();
+      }
+ catch (      SQLException e) {
+        ;
+      }
+    }
+    if (stmt != null) {
+      try {
+        stmt.close();
+      }
+ catch (      SQLException e) {
+        ;
+      }
+    }
+  }
+}

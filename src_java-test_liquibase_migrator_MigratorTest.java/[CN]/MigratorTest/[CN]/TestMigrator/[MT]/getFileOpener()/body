@@ -1,0 +1,11 @@
+{
+  return new FileOpener(){
+    public InputStream getResourceAsStream(    String file) throws IOException {
+      return inputStream;
+    }
+    public Enumeration<URL> getResources(    String packageName) throws IOException {
+      return null;
+    }
+  }
+;
+}

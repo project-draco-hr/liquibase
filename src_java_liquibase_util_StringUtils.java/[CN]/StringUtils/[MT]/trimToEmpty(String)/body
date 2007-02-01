@@ -1,0 +1,6 @@
+{
+  if (string == null) {
+    return "";
+  }
+  return string.trim();
+}

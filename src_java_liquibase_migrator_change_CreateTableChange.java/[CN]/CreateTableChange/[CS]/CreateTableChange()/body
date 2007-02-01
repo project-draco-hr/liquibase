@@ -1,0 +1,4 @@
+{
+  super("createTable","Create Table");
+  columns=new ArrayList<ColumnConfig>();
+}

@@ -1,0 +1,8 @@
+{
+  this.primaryKeyTable=primaryKeyTable;
+  this.primaryKeyColumnName=primaryKeyColumnName;
+  this.foreignKeyTable=foreignKeyTable;
+  this.foreignKeyColumnName=foreignKeyColumnName;
+  this.foreignKeyName=foreignKeyName;
+  this.primaryKeyName=primaryKeyName;
+}

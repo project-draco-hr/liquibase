@@ -1,0 +1,7 @@
+{
+  CreateSequenceChange change=new CreateSequenceChange();
+  assertFalse(change.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createTableDatabaseStructure()}))));
+  assertFalse(change.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createSequenceDatabaseStructure()}))));
+  assertTrue(change.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createDatabaseSystem()}))));
+  assertFalse(change.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createDatabaseSystem(),createDatabaseSystem()}))));
+}

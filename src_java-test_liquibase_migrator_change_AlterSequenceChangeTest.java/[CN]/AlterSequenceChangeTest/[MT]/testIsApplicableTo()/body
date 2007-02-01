@@ -1,0 +1,6 @@
+{
+  AlterSequenceChange refactoring=new AlterSequenceChange();
+  assertFalse(refactoring.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createTableDatabaseStructure()}))));
+  assertTrue(refactoring.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createSequenceDatabaseStructure()}))));
+  assertFalse(refactoring.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createSequenceDatabaseStructure(),createSequenceDatabaseStructure()}))));
+}

@@ -1,0 +1,3 @@
+{
+  assertEquals("TEXT",getDatabase().getClobType());
+}

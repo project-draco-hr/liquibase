@@ -1,0 +1,8 @@
+{
+  Document document=DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+  Element node=refactoring.createNode(document);
+  assertEquals("renameColumn",node.getTagName());
+  assertEquals("TABLE_NAME",node.getAttribute("tableName"));
+  assertEquals("oldColName",node.getAttribute("oldColumnName"));
+  assertEquals("newColName",node.getAttribute("newColumnName"));
+}

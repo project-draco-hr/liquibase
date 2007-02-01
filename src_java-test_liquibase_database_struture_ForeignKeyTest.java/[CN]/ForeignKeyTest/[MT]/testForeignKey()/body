@@ -1,0 +1,11 @@
+{
+  Table pkTable=new Table("pkTable","cat",null,null,null,null);
+  Table fkTable=new Table("fkTable","cat",null,null,null,null);
+  ForeignKey key=new ForeignKey(pkTable,"pkColName",fkTable,"fkColName","fkName","pkName");
+  assertEquals(pkTable,key.getPrimaryKeyTable());
+  assertEquals(fkTable,key.getForeignKeyTable());
+  assertEquals("pkColName",key.getPrimaryKeyColumnName());
+  assertEquals("fkColName",key.getForeignKeyColumnName());
+  assertEquals("fkName",key.getForeignKeyName());
+  assertEquals("pkName",key.getPrimaryKeyName());
+}

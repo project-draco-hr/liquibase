@@ -1,0 +1,11 @@
+{
+  Connection connection=createMock(Connection.class);
+  DatabaseMetaData metaData=createMock(DatabaseMetaData.class);
+  expect(connection.getMetaData()).andReturn(metaData);
+  expect(metaData.getUserName()).andReturn("usernameHere");
+  replay(connection);
+  replay(metaData);
+  AbstractDatabase database=getDatabase();
+  database.setConnection(connection);
+  assertEquals("usernameHere",database.getConnectionUsername());
+}

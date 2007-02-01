@@ -1,0 +1,3 @@
+{
+  super("alterSequence","Alter Sequence");
+}

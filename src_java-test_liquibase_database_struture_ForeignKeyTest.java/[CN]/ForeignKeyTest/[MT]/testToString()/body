@@ -1,0 +1,6 @@
+{
+  Table pkTable=new Table("pkTable","cat",null,null,null,null);
+  Table fkTable=new Table("fkTable","cat",null,null,null,null);
+  ForeignKey key=new ForeignKey(pkTable,"pkColName",fkTable,"fkColName","fkName","pkName");
+  assertEquals("fkTable.fkColName->pkTable.pkColName",key.toString());
+}

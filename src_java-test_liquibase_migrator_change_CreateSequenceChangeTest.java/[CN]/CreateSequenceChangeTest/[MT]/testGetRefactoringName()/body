@@ -1,0 +1,3 @@
+{
+  assertEquals("Create Sequence",new CreateSequenceChange().getRefactoringName());
+}

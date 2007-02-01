@@ -1,0 +1,21 @@
+{
+  buffer.append("<").append(node.getNodeName());
+  SortedMap<String,String> attributeMap=new TreeMap<String,String>();
+  NamedNodeMap attributes=node.getAttributes();
+  for (int i=0; i < attributes.getLength(); i++) {
+    Node attribute=attributes.item(i);
+    attributeMap.put(attribute.getNodeName(),attribute.getNodeValue());
+  }
+  for (  String key : attributeMap.keySet()) {
+    buffer.append(" ").append(key).append("=\"").append(attributeMap.get(key)).append("\"");
+  }
+  buffer.append(">" + StringUtils.trimToEmpty(node.getTextContent()));
+  NodeList childNodes=node.getChildNodes();
+  for (int i=0; i < childNodes.getLength(); i++) {
+    Node childNode=childNodes.item(i);
+    if (childNode instanceof Element) {
+      nodeToStringBuffer(((Element)childNode),buffer);
+    }
+  }
+  buffer.append("</").append(node.getNodeName()).append(">");
+}

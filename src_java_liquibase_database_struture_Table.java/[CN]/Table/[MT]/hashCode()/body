@@ -1,0 +1,7 @@
+{
+  int result;
+  result=(name != null ? name.hashCode() : 0);
+  result=29 * result + (catalog != null ? catalog.hashCode() : 0);
+  result=29 * result + (schema != null ? schema.hashCode() : 0);
+  return result;
+}

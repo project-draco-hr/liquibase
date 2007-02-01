@@ -1,0 +1,16 @@
+{
+  refactoring=new InsertDataChange();
+  refactoring.setTableName("TABLE_NAME");
+  ColumnConfig col1=new ColumnConfig();
+  col1.setName("id");
+  col1.setValue("123");
+  ColumnConfig col2=new ColumnConfig();
+  col2.setName("name");
+  col2.setValue("Andrew");
+  ColumnConfig col3=new ColumnConfig();
+  col3.setName("age");
+  col3.setValue("21");
+  refactoring.addColumn(col1);
+  refactoring.addColumn(col2);
+  refactoring.addColumn(col3);
+}

@@ -1,0 +1,7 @@
+{
+  assertEquals("DROP TABLE TAB_NAME CASCADE CONSTRAINTS",change.generateStatement(new OracleDatabase()));
+  change.setCascadeConstraints(null);
+  assertEquals("DROP TABLE TAB_NAME",change.generateStatement(new OracleDatabase()));
+  change.setCascadeConstraints(false);
+  assertEquals("DROP TABLE TAB_NAME",change.generateStatement(new OracleDatabase()));
+}

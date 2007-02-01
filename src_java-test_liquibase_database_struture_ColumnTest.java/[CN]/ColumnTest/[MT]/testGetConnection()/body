@@ -1,0 +1,10 @@
+{
+  Table mockTable=createMock(Table.class);
+  Connection mockConnection=createMock(Connection.class);
+  expect(mockTable.getConnection()).andReturn(mockConnection);
+  replay(mockTable);
+  replay(mockConnection);
+  Column column=new Column(mockTable,"column",-1,null,-1,-1,-1,null,null);
+  assertEquals(mockConnection,column.getConnection());
+  verify(mockTable);
+}

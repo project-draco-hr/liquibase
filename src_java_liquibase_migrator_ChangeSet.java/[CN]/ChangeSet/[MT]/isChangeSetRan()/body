@@ -1,0 +1,39 @@
+{
+  AbstractDatabase database=getDatabaseChangeLog().getMigrator().getDatabase();
+  if (!database.doesChangeLogTableExist()) {
+    return RunStatus.NOT_RAN;
+  }
+  PreparedStatement pstmt;
+  ResultSet rs;
+  Connection connection=database.getConnection();
+  pstmt=connection.prepareStatement("select md5sum from DatabaseChangeLog where id=? AND author=? AND filename=?".toUpperCase());
+  pstmt.setString(1,getId());
+  pstmt.setString(2,getAuthor());
+  pstmt.setString(3,databaseChangeLog.getMigrator().getMigrationFile());
+  rs=pstmt.executeQuery();
+  if (rs.next()) {
+    log.finest("ChangeSet: " + getId() + ":"+ databaseChangeLog.getMigrator().getMigrationFile()+ " was already run");
+    String md5sum=rs.getString("md5sum");
+    if (md5sum == null) {
+      log.info("Updating NULL md5sum for " + this.toString());
+      PreparedStatement updatePstmt=connection.prepareStatement("update DatabaseChangeLog set md5sum=? where id=? AND author=? AND filename=?".toUpperCase());
+      updatePstmt.setString(1,getMd5sum());
+      updatePstmt.setString(2,getId());
+      updatePstmt.setString(3,getAuthor());
+      updatePstmt.setString(4,databaseChangeLog.getMigrator().getMigrationFile());
+      updatePstmt.executeUpdate();
+      updatePstmt.close();
+      connection.commit();
+    }
+ else     if (!md5sum.equals(getMd5sum())) {
+      if (shouldRunOnChange()) {
+        return RunStatus.RUN_AGAIN;
+      }
+ else {
+        throw new DatabaseHistoryException("MD5 Check for " + toString() + " failed");
+      }
+    }
+    return RunStatus.ALREADY_RAN;
+  }
+  return RunStatus.NOT_RAN;
+}

@@ -1,0 +1,8 @@
+{
+  if (o instanceof Column) {
+    return toString().compareTo(o.toString());
+  }
+ else {
+    return getClass().getName().compareTo(o.getClass().getName());
+  }
+}

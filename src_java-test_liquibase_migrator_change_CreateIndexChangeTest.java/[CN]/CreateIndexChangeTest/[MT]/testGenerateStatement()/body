@@ -1,0 +1,13 @@
+{
+  CreateIndexChange refactoring=new CreateIndexChange();
+  refactoring.setIndexName("IDX_TEST");
+  refactoring.setTableName("TAB_NAME");
+  ColumnConfig column1=new ColumnConfig();
+  column1.setName("COL1");
+  refactoring.addColumn(column1);
+  assertEquals("CREATE INDEX IDX_TEST ON TAB_NAME(COL1)",refactoring.generateStatement(new OracleDatabase()));
+  ColumnConfig column2=new ColumnConfig();
+  column2.setName("COL2");
+  refactoring.addColumn(column2);
+  assertEquals("CREATE INDEX IDX_TEST ON TAB_NAME(COL1, COL2)",refactoring.generateStatement(new OracleDatabase()));
+}

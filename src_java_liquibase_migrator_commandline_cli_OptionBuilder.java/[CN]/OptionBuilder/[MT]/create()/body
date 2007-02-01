@@ -1,0 +1,6 @@
+{
+  if (longopt == null) {
+    throw new IllegalArgumentException("must specify longopt");
+  }
+  return create(" ");
+}

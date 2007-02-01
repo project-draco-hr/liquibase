@@ -1,0 +1,6 @@
+Table primaryKeyTable
+String primaryKeyColumnName
+Table foreignKeyTable
+String foreignKeyColumnName
+String foreignKeyName
+String primaryKeyName

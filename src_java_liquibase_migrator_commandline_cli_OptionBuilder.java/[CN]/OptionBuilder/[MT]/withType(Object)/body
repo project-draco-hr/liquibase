@@ -1,0 +1,4 @@
+{
+  instance.type=type;
+  return instance;
+}

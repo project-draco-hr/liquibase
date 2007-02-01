@@ -1,0 +1,4 @@
+{
+  optionMap.put("-" + opt.getOpt(),opt);
+  return this;
+}

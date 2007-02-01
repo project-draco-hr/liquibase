@@ -1,0 +1,3 @@
+{
+  return "New rows have been inserted into the table " + tableName;
+}

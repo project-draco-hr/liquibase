@@ -1,0 +1,6 @@
+{
+  DatabaseSystem databaseSystem=createMock(DatabaseSystem.class);
+  replay(databaseSystem);
+  Table table=new Table("name","catalog","schema","type","remarks",databaseSystem);
+  assertEquals("name",table.toString());
+}

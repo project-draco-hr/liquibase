@@ -1,0 +1,11 @@
+{
+  try {
+    fileOpener.getResourceAsStream("non/existant/file.txt");
+    fail("Exception should have been thrown");
+  }
+ catch (  IOException e) {
+    ;
+  }
+  InputStream inputStream=fileOpener.getResourceAsStream("liquibase/migrator/ant/AntFileOpenerTest.class");
+  assertNotNull(inputStream);
+}

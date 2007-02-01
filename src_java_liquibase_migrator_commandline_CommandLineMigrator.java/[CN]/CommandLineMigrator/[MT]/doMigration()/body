@@ -1,0 +1,81 @@
+{
+  Driver driver;
+  try {
+    driver=(Driver)Class.forName(cmd.getOptionValue("driver"),true,classLoader).newInstance();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Cannot get database driver: " + e.getMessage());
+  }
+  Properties info=new Properties();
+  info.put("user",cmd.getOptionValue("username"));
+  info.put("password",cmd.getOptionValue("password"));
+  Connection connection=driver.connect(cmd.getOptionValue("url"),info);
+  if (connection == null) {
+    throw new MigrationFailedException("Incorrect driver for URL");
+  }
+  Writer outputSQLFileWriter=null;
+  File outputSqlFile;
+  try {
+    Migrator migrator=new Migrator(cmd.getOptionValue("migrationFile"),new CommandLineFileOpener(classLoader));
+    migrator.init(connection);
+    if (cmd.hasOption("listLocks")) {
+      DatabaseChangeLogLock[] locks=migrator.listLocks();
+      System.out.println("Database change log locks for " + migrator.getDatabase().getConnectionUsername() + "@"+ migrator.getDatabase().getConnectionURL());
+      if (locks.length == 0) {
+        System.out.println(" - No locks");
+      }
+      for (      DatabaseChangeLogLock lock : locks) {
+        System.out.println(" - " + lock.getLockedBy() + " at "+ DateFormat.getDateTimeInstance().format(lock.getLockGranted()));
+      }
+      return;
+    }
+    if (cmd.hasOption("releaseLocks")) {
+      migrator.forceReleaseLock();
+      System.out.println("Successfully released all database change log locks for " + migrator.getDatabase().getConnectionUsername() + "@"+ migrator.getDatabase().getConnectionURL());
+      return;
+    }
+    migrator.setMode(Migrator.EXECUTE_MODE);
+    if (cmd.hasOption("outputSQL") || cmd.hasOption("outputChangelogSQL")) {
+      if (cmd.hasOption("outputChangelogSQL")) {
+        migrator.setMode(Migrator.OUTPUT_CHANGELOG_ONLY_SQL_MODE);
+        outputSqlFile=new File(cmd.getOptionValue("outputChangelogSQL"));
+      }
+ else {
+        migrator.setMode(Migrator.OUTPUT_SQL_MODE);
+        outputSqlFile=new File(cmd.getOptionValue("outputSQL"));
+      }
+      if (outputSqlFile.exists()) {
+        throw new MigrationFailedException(outputSqlFile.getAbsolutePath() + " already exists");
+      }
+      outputSQLFileWriter=new BufferedWriter(new FileWriter(outputSqlFile));
+      migrator.setOutputSQLWriter(outputSQLFileWriter);
+    }
+    if (cmd.hasOption("dropAllFirst")) {
+      migrator.setShouldDropDatabaseObjectsFirst(true);
+    }
+    if (!migrator.isSaveToRunMigration()) {
+      if (JOptionPane.showConfirmDialog(null,"You are running a database refactoring against a non-development database.\n" + "Database URL is: " + migrator.getDatabase().getConnectionURL() + "\n"+ "Username is: "+ migrator.getDatabase().getConnectionUsername()+ "\n\n"+ "Area you sure you want to do this?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE) == JOptionPane.NO_OPTION) {
+        System.out.println("Chose not to run against non-production database");
+        System.exit(-1);
+      }
+    }
+    migrator.migrate();
+  }
+ catch (  Throwable e) {
+    String message=e.getMessage();
+    if (e.getCause() != null) {
+      message=e.getCause().getMessage();
+    }
+    System.out.println("Migration Failed: " + message);
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).log(Level.SEVERE,message,e);
+    System.exit(-1);
+  }
+ finally {
+    if (connection != null) {
+      connection.close();
+    }
+    if (outputSQLFileWriter != null) {
+      outputSQLFileWriter.close();
+    }
+  }
+}

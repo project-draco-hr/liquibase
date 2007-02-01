@@ -1,0 +1,78 @@
+{
+  try {
+    if ("databaseChangeLog".equals(qName)) {
+      changeLog=new DatabaseChangeLog(migrator);
+    }
+ else     if ("include".equals(qName)) {
+      new IncludeMigrator(atts.getValue("file"),migrator).migrate();
+    }
+ else     if (changeSet == null && "changeSet".equals(qName)) {
+      boolean alwaysRun=false;
+      boolean runOnChange=false;
+      if ("true".equalsIgnoreCase(atts.getValue("runAlways"))) {
+        alwaysRun=true;
+      }
+      if ("true".equalsIgnoreCase(atts.getValue("runOnChange"))) {
+        runOnChange=true;
+      }
+      changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,changeLog);
+    }
+ else     if (changeSet != null && change == null) {
+      change=ChangeFactory.getInstance().create(qName);
+      text=new StringBuffer();
+      if (change == null) {
+        throw new MigrationFailedException("Unknown refactoring: " + qName);
+      }
+      for (int i=0; i < atts.getLength(); i++) {
+        String attributeName=atts.getQName(i);
+        String attributeValue=atts.getValue(i);
+        setProperty(change,attributeName,attributeValue);
+      }
+    }
+ else     if (change != null && "column".equals(qName)) {
+      ColumnConfig column=new ColumnConfig();
+      for (int i=0; i < atts.getLength(); i++) {
+        String attributeName=atts.getQName(i);
+        String attributeValue=atts.getValue(i);
+        setProperty(column,attributeName,attributeValue);
+      }
+      if (change instanceof AddColumnChange) {
+        ((AddColumnChange)change).setColumn(column);
+      }
+ else       if (change instanceof CreateTableChange) {
+        ((CreateTableChange)change).addColumn(column);
+      }
+ else       if (change instanceof InsertDataChange) {
+        ((InsertDataChange)change).addColumn(column);
+      }
+ else {
+        throw new RuntimeException("Unexpected column tag for " + change.getClass().getName());
+      }
+    }
+ else     if (change != null && "constraints".equals(qName)) {
+      ConstraintsConfig constraints=new ConstraintsConfig();
+      for (int i=0; i < atts.getLength(); i++) {
+        String attributeName=atts.getQName(i);
+        String attributeValue=atts.getValue(i);
+        setProperty(constraints,attributeName,attributeValue);
+      }
+      ColumnConfig lastColumn;
+      if (change instanceof AddColumnChange) {
+        lastColumn=((AddColumnChange)change).getColumn();
+      }
+ else       if (change instanceof CreateTableChange) {
+        lastColumn=((CreateTableChange)change).getColumns().get(((CreateTableChange)change).getColumns().size() - 1);
+      }
+ else {
+        throw new RuntimeException("Unexpected change: " + change.getClass().getName());
+      }
+      lastColumn.setConstraints(constraints);
+    }
+ else {
+      throw new MigrationFailedException("Unexpected tag: " + qName);
+    }
+  }
+ catch (  Exception e) {
+    throw new SAXException(e);
+  }
+}

@@ -1,0 +1,11 @@
+{
+  String shouldRunProperty=System.getProperty(Migrator.SHOULD_RUN_SYSTEM_PROPERTY);
+  if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
+    System.out.println("Migrator did not run because '" + Migrator.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
+    return;
+  }
+  CommandLineMigrator commandLineMigrator=new CommandLineMigrator();
+  commandLineMigrator.parseOptions(args);
+  commandLineMigrator.doMigration();
+  System.exit(0);
+}

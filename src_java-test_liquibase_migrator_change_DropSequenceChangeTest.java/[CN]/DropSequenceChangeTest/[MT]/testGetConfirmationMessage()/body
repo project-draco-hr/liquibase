@@ -1,0 +1,3 @@
+{
+  assertEquals("Sequence SEQ_NAME dropped",change.getConfirmationMessage());
+}

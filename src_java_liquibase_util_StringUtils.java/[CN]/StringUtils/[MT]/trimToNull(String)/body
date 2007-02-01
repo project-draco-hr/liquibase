@@ -1,0 +1,12 @@
+{
+  if (string == null) {
+    return null;
+  }
+  String returnString=string.trim();
+  if (returnString.length() == 0) {
+    return null;
+  }
+ else {
+    return returnString;
+  }
+}

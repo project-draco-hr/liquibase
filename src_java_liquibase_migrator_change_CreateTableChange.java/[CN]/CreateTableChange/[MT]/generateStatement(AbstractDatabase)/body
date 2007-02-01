@@ -1,0 +1,43 @@
+{
+  StringBuffer buffer=new StringBuffer();
+  buffer.append("CREATE TABLE " + getTableName() + " ");
+  buffer.append("(");
+  Iterator iterator=getColumns().iterator();
+  while (iterator.hasNext()) {
+    ColumnConfig column=(ColumnConfig)iterator.next();
+    ConstraintsConfig constraints=column.getConstraints();
+    buffer.append(column.getName());
+    if (column.getType() != null) {
+      buffer.append(" ").append(database.getColumnType(column));
+    }
+    if (constraints != null) {
+      if (constraints.isNullable() != null && !constraints.isNullable()) {
+        buffer.append(" NOT NULL");
+      }
+      if (constraints.isPrimaryKey() != null && constraints.isPrimaryKey()) {
+        buffer.append(" PRIMARY KEY");
+      }
+      if (constraints.getReferences() != null) {
+        buffer.append(" CONSTRAINT ").append(constraints.getForeignKeyName()).append(" REFERENCES ").append(constraints.getReferences());
+      }
+      if (constraints.isUnique() != null && constraints.isUnique()) {
+        buffer.append(" UNIQUE");
+      }
+      if (constraints.getCheck() != null)       buffer.append(constraints.getCheck()).append(" ");
+      if (constraints.isInitiallyDeferred() != null && constraints.isInitiallyDeferred()) {
+        buffer.append(" INITIALLY DEFERRED");
+      }
+      if (constraints.isDeferrable() != null && constraints.isDeferrable()) {
+        buffer.append(" DEFERRABLE");
+      }
+    }
+    if (column.getDefaultValue() != null) {
+      buffer.append(" DEFAULT '").append(column.getDefaultValue()).append("'");
+    }
+    if (iterator.hasNext()) {
+      buffer.append(", ");
+    }
+  }
+  buffer.append(")");
+  return buffer.toString().trim();
+}

@@ -1,0 +1,3 @@
+{
+  assertEquals("CURRENT_DATE",getDatabase().getCurrentDateTimeFunction());
+}

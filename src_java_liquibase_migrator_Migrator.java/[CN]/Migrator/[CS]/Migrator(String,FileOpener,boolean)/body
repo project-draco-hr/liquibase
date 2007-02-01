@@ -1,0 +1,36 @@
+{
+  log=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
+  this.migrationFile=migrationFile;
+  this.fileOpener=fileOpener;
+  SAXParserFactory saxParserFactory=SAXParserFactory.newInstance();
+  saxParserFactory.setValidating(true);
+  saxParserFactory.setNamespaceAware(true);
+  try {
+    SAXParser parser=saxParserFactory.newSAXParser();
+    parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaLanguage","http://www.w3.org/2001/XMLSchema");
+    parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaSource",getClass().getClassLoader().getResource("liquibase/dbchangelog-1.0.xsd").toURI().toString());
+    this.xmlReader=parser.getXMLReader();
+    xmlReader.setEntityResolver(new MigratorSchemaResolver());
+    xmlReader.setErrorHandler(new ErrorHandler(){
+      public void warning(      SAXParseException exception) throws SAXException {
+        Logger.getLogger(Migrator.DEFAULT_LOG_NAME).warning(exception.getMessage());
+        throw exception;
+      }
+      public void error(      SAXParseException exception) throws SAXException {
+        Logger.getLogger(Migrator.DEFAULT_LOG_NAME).severe(exception.getMessage());
+        throw exception;
+      }
+      public void fatalError(      SAXParseException exception) throws SAXException {
+        Logger.getLogger(Migrator.DEFAULT_LOG_NAME).severe(exception.getMessage());
+        throw exception;
+      }
+    }
+);
+    xmlReader.setContentHandler(new ChangeLogHandler(this));
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+  setMode(EXECUTE_MODE);
+  this.hasChangeLogLock=alreadyHasChangeLogLock;
+}

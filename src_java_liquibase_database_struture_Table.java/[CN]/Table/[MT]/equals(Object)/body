@@ -1,0 +1,9 @@
+{
+  if (this == o)   return true;
+  if (o == null || getClass() != o.getClass())   return false;
+  final Table table=(Table)o;
+  if (catalog != null ? !catalog.equals(table.catalog) : table.catalog != null)   return false;
+  if (name != null ? !name.equals(table.name) : table.name != null)   return false;
+  if (schema != null ? !schema.equals(table.schema) : table.schema != null)   return false;
+  return true;
+}

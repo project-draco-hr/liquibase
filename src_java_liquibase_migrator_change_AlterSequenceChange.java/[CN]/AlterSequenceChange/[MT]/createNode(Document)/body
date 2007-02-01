@@ -1,0 +1,17 @@
+{
+  Element node=currentMigrationFileDOM.createElement("alterSequence");
+  node.setAttribute("sequenceName",getSequenceName());
+  if (getMinValue() != null) {
+    node.setAttribute("minValue",getMinValue().toString());
+  }
+  if (getMaxValue() != null) {
+    node.setAttribute("maxValue",getMaxValue().toString());
+  }
+  if (getIncrementBy() != null) {
+    node.setAttribute("incrementBy",getIncrementBy().toString());
+  }
+  if (isOrdered() != null) {
+    node.setAttribute("ordered",isOrdered().toString());
+  }
+  return node;
+}

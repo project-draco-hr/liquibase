@@ -1,0 +1,3 @@
+{
+  assertEquals("Create Index",new CreateIndexChange().getRefactoringName());
+}

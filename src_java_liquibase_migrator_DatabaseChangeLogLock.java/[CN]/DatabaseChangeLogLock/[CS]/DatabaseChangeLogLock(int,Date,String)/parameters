@@ -1,0 +1,3 @@
+int id
+Date lockGranted
+String lockedBy

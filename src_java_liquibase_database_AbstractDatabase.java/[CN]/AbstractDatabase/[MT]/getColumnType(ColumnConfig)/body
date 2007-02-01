@@ -1,0 +1,20 @@
+{
+  if ("boolean".equalsIgnoreCase(column.getType())) {
+    return getBooleanType();
+  }
+ else   if ("currency".equalsIgnoreCase(column.getType())) {
+    return getCurrencyType();
+  }
+ else   if ("UUID".equalsIgnoreCase(column.getType())) {
+    return getUUIDType();
+  }
+ else   if ("BLOB".equalsIgnoreCase(column.getType())) {
+    return getBlobType();
+  }
+ else   if ("CLOB".equalsIgnoreCase(column.getType())) {
+    return getClobType();
+  }
+ else {
+    return column.getType();
+  }
+}

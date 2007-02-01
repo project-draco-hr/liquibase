@@ -1,0 +1,4 @@
+{
+  assertTrue(change.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createColumnDatabaseStructure()}))));
+  assertFalse(change.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createColumnDatabaseStructure(),createColumnDatabaseStructure()}))));
+}

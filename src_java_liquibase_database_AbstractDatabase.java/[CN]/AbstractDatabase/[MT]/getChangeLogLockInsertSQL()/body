@@ -1,0 +1,3 @@
+{
+  return ("insert into DatabaseChangeLogLock (id, locked) values (1, " + getFalseBooleanValue() + ")").toUpperCase();
+}

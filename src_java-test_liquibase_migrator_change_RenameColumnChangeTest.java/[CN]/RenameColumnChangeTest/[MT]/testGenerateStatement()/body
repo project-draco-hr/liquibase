@@ -1,0 +1,3 @@
+{
+  assertEquals("alter table TABLE_NAME rename column oldColName  to newColName",refactoring.generateStatement(new OracleDatabase()));
+}

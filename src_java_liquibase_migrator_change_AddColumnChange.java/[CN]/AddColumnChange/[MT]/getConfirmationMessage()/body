@@ -1,0 +1,3 @@
+{
+  return "Column " + column.getName() + "("+ column.getType()+ ") has been added to "+ tableName;
+}

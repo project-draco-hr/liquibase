@@ -1,0 +1,12 @@
+{
+  Table pkTable=createMock(Table.class);
+  Connection conn=createMock(Connection.class);
+  expect(pkTable.getConnection()).andReturn(conn);
+  Table fkTable=new Table("fkTableA","cat",null,null,null,null);
+  replay(pkTable);
+  replay(conn);
+  ForeignKey key=new ForeignKey(pkTable,"pkColName",fkTable,"fkColName","fkName","pkName");
+  assertEquals(conn,key.getConnection());
+  verify(pkTable);
+  verify(conn);
+}

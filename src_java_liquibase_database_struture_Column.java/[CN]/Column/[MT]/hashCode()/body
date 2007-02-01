@@ -1,0 +1,11 @@
+{
+  int result;
+  if (table == null) {
+    result=super.hashCode();
+  }
+ else {
+    result=table.hashCode();
+    result=29 * result + name.hashCode();
+  }
+  return result;
+}
