@@ -34,6 +34,9 @@
     if (column.getDefaultValue() != null) {
       buffer.append(" DEFAULT '").append(column.getDefaultValue()).append("'");
     }
+    if (column.isAutoIncrement() != null && column.isAutoIncrement().booleanValue()) {
+      buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
+    }
     if (iterator.hasNext()) {
       buffer.append(", ");
     }

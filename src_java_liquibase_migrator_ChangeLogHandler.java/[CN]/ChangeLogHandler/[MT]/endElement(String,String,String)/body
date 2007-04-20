@@ -1,13 +1,17 @@
 {
+  String textString=null;
+  if (text != null && text.length() > 0) {
+    textString=StringUtils.trimToNull(text.toString());
+  }
   try {
     if (changeSet != null && "changeSet".equals(qName)) {
       changeSet.execute();
       changeSet=null;
     }
  else     if (change != null && qName.equals(change.getTagName())) {
-      if (text.length() > 0) {
+      if (textString != null) {
         if (change instanceof RawSQLChange) {
-          ((RawSQLChange)change).setSql(text.toString());
+          ((RawSQLChange)change).setSql(textString);
         }
  else {
           throw new RuntimeException("Unexpected text in " + change.getTagName());

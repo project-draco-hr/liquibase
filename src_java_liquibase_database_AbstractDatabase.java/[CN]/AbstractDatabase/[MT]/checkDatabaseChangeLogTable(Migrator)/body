@@ -6,7 +6,7 @@
   try {
     rs=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogTableName(),null);
     if (!rs.next()) {
-      String createTableStatement=("create table DATABASECHANGELOG (id varchar(255) not null, author varchar(255) not null, filename varchar(255) not null, dateExecuted " + getDateTimeType() + " not null, md5sum varchar(32) not null, primary key(id, author, filename))").toUpperCase();
+      String createTableStatement=("create table DATABASECHANGELOG (id varchar(255) not null, author varchar(255) not null, filename varchar(255) not null, dateExecuted " + getDateTimeType() + " not null, md5sum varchar(32), primary key(id, author, filename))").toUpperCase();
       if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
         statement=connection.createStatement();
         statement.executeUpdate(createTableStatement);

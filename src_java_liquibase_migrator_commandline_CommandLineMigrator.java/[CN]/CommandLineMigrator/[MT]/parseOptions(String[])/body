@@ -4,7 +4,7 @@
     cmd=parser.parse(options,args);
   }
  catch (  ParseException e) {
-    new HelpFormatter().printHelp("java -jar sun.dbmigrator.jar",options);
+    new HelpFormatter().printHelp("java -jar liquibase.jar",options);
     System.exit(-1);
   }
   String[] classpath;

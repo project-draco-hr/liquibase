@@ -12,6 +12,12 @@
       if (tableName.startsWith("BIN$")) {
         continue;
       }
+      if (tableName.startsWith("AQ$")) {
+        continue;
+      }
+      if (tableName.equals(getDatabaseChangeLogLockTableName())) {
+        continue;
+      }
       String type=rs.getString("TABLE_TYPE");
       String sql;
       if ("TABLE".equals(type)) {

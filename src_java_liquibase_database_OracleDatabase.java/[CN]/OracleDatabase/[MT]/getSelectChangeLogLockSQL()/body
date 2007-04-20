@@ -1,0 +1,3 @@
+{
+  return (super.getSelectChangeLogLockSQL() + " for update").toUpperCase();
+}

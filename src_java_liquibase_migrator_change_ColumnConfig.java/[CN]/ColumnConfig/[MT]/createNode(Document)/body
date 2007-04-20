@@ -10,6 +10,9 @@
   if (getValue() != null) {
     element.setAttribute("value",getValue());
   }
+  if (isAutoIncrement() != null && isAutoIncrement().booleanValue()) {
+    element.setAttribute("autoIncrement","true");
+  }
   ConstraintsConfig constraints=getConstraints();
   if (constraints != null) {
     Element constraintsElement=document.createElement("constraints");
