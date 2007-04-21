@@ -1,0 +1,23 @@
+{
+  boolean returnvalue=true;
+  boolean boolReturnArray[]=new boolean[dbmsArray.size()];
+  try {
+    for (int i=0; i < dbmsArray.size(); i++) {
+      DBMSPrecondition dbmsPrecondition=dbmsArray.get(i);
+      if (dbmsPrecondition.checkDatabaseType(migrator)) {
+        boolReturnArray[i]=true;
+      }
+ else {
+        boolReturnArray[i]=false;
+      }
+    }
+    for (int i=0; i < dbmsArray.size(); i++) {
+      returnvalue=returnvalue && boolReturnArray[i];
+    }
+    returnvalue=!returnvalue;
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+  return returnvalue;
+}

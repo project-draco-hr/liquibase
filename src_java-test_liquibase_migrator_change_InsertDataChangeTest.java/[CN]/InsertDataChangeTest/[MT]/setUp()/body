@@ -1,4 +1,5 @@
 {
+  super.setUp();
   refactoring=new InsertDataChange();
   refactoring.setTableName("TABLE_NAME");
   ColumnConfig col1=new ColumnConfig();

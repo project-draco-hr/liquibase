@@ -1,3 +1,3 @@
 {
-  return conn.getMetaData().getDatabaseProductName().equalsIgnoreCase("Microsoft SQL Server");
+  return "Microsoft SQL Server".equalsIgnoreCase(conn.getMetaData().getDatabaseProductName());
 }

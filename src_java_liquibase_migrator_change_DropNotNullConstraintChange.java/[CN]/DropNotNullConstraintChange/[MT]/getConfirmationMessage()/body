@@ -1,0 +1,3 @@
+{
+  return "Null Constraint has been dropped to the column " + getColumnName() + " of the table "+ getTableName();
+}

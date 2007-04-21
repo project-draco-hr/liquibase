@@ -1,0 +1,3 @@
+{
+  assertEquals("Drop Not-Null Constraint",new DropNotNullConstraintChange().getRefactoringName());
+}

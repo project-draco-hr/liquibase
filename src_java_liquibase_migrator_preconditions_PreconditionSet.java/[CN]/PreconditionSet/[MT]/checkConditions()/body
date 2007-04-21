@@ -1,0 +1,57 @@
+{
+  boolean dbmsreturnvalue=true;
+  boolean orReturnValue=true;
+  boolean notReturnValue=true;
+  boolean userExistsReturnValue=true;
+  try {
+    if (dbmsArray.size() > 0) {
+      for (int i=0; i < dbmsArray.size(); i++) {
+        DBMSPrecondition dbmsPrecondition=dbmsArray.get(i);
+        if (dbmsPrecondition.checkDatabaseType(migrator)) {
+          dbmsreturnvalue=true;
+        }
+ else {
+          dbmsreturnvalue=false;
+          strExceptionMsg="DBMS Precondition failed";
+          break;
+        }
+      }
+    }
+ else     if (orprecond != null) {
+      if (orprecond.checkDbmsType(migrator)) {
+        orReturnValue=true;
+      }
+ else {
+        orReturnValue=false;
+        strExceptionMsg="Or Precondition failed";
+      }
+    }
+ else     if (notprecond != null) {
+      if (notprecond.checkNotPrecondition(migrator)) {
+        notReturnValue=true;
+      }
+ else {
+        notReturnValue=false;
+        strExceptionMsg="Not Precondition failed";
+      }
+    }
+    if (userexists != null) {
+      if (userexists.checkUserName(migrator)) {
+        userExistsReturnValue=true;
+      }
+ else {
+        userExistsReturnValue=false;
+        strExceptionMsg="UserExists Precondition failed";
+      }
+    }
+    if (!(dbmsreturnvalue && orReturnValue && notReturnValue&& userExistsReturnValue)) {
+      throw new PreconditionFailedException();
+    }
+  }
+ catch (  PreconditionFailedException ePrecondExcep) {
+    throw new PreconditionFailedException("Unable to process change set:" + strExceptionMsg);
+  }
+catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

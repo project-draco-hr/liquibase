@@ -1,0 +1,6 @@
+String id
+String author
+boolean alwaysRun
+boolean runOnChange
+DatabaseChangeLog databaseChangeLog
+String context

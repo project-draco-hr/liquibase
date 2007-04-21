@@ -1,4 +1,5 @@
 {
+  super.setUp();
   change=new ModifyColumnChange();
   change.setTableName("TABLE_NAME");
   ColumnConfig col1=new ColumnConfig();

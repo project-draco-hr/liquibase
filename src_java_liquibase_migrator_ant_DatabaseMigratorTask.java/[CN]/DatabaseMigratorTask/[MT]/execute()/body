@@ -20,6 +20,7 @@
     String[] migrationFiles=getMigrationFiles().split(",");
     for (    String migrationFile : migrationFiles) {
       Migrator migrator=new Migrator(migrationFile.trim(),new AntFileOpener(getProject(),classpath));
+      migrator.setContexts(getContexts());
       migrator.init(connection);
       if (isPromptOnNonDevDatabase() && !migrator.isSaveToRunMigration()) {
         if (JOptionPane.showConfirmDialog(null,"You are running a database refactoring against a non-local database.\n" + "Database URL is: " + migrator.getDatabase().getConnectionURL() + "\n"+ "Username is: "+ migrator.getDatabase().getConnectionUsername()+ "\n\n"+ "Area you sure you want to do this?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE) == JOptionPane.NO_OPTION) {

@@ -1,0 +1,7 @@
+{
+  productToTypeMap=new HashMap<String,String>();
+  productToTypeMap.put("Oracle","oracle");
+  productToTypeMap.put("MySQL","mysql");
+  productToTypeMap.put("Postgres","postgresql");
+  productToTypeMap.put("Microsoft SQL Server","mssql");
+}

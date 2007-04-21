@@ -5,11 +5,11 @@
     Method method=methods[i];
     if (method.getName().equals(methodName)) {
       if (method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(Boolean.class)) {
-        method.invoke(object,new Object[]{Boolean.valueOf(attributeValue)});
+        method.invoke(object,Boolean.valueOf(attributeValue));
         return;
       }
  else       if (method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(String.class)) {
-        method.invoke(object,new Object[]{attributeValue.toString()});
+        method.invoke(object,attributeValue.toString());
         return;
       }
     }

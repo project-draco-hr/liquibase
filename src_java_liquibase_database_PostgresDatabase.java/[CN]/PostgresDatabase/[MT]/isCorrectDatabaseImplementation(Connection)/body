@@ -1,3 +1,3 @@
 {
-  return conn.getMetaData().getDatabaseProductName().equalsIgnoreCase("PostgreSQL");
+  return "PostgreSQL".equalsIgnoreCase(conn.getMetaData().getDatabaseProductName());
 }

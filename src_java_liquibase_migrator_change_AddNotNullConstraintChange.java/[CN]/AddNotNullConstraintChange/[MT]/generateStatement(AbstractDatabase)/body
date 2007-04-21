@@ -1,0 +1,16 @@
+{
+  StringBuffer buffer=new StringBuffer();
+  try {
+    String strColumnType=database.getColumnDataType(getTableName(),getColumnName());
+    database.updateNullColumns(getTableName(),getColumnName(),getDefaultNullValue());
+    buffer.append("alter table ").append(getTableName());
+    buffer.append(" modify ");
+    buffer.append(getColumnName()).append(" ");
+    buffer.append(strColumnType).append(" ");
+    buffer.append("not null");
+  }
+ catch (  SQLException eSqlException) {
+    throw new RuntimeException(eSqlException);
+  }
+  return buffer.toString();
+}

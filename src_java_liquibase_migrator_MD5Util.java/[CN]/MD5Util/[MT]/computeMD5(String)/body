@@ -1,5 +1,5 @@
 {
-  MessageDigest digest=null;
+  MessageDigest digest;
   try {
     digest=MessageDigest.getInstance("MD5");
     digest.update(input.getBytes("UTF-8"));

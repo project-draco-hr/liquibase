@@ -1,0 +1,13 @@
+{
+  DropNotNullConstraintChange change=new DropNotNullConstraintChange();
+  change.setTableName("TABLE_NAME");
+  change.setColumnName("COL_HERE");
+  assertEquals("alter table TABLE_NAME modify COL_HERE varchar(200) default null",change.generateStatement(new MySQLDatabase(){
+    public String getColumnDataType(    String tblName,    String colName){
+      return "varchar(200)";
+    }
+    public void updateNullColumns(    String tblName,    String colName,    String defaultValue){
+    }
+  }
+));
+}

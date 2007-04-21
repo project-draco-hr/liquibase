@@ -17,6 +17,7 @@
   File outputSqlFile;
   try {
     Migrator migrator=new Migrator(cmd.getOptionValue("migrationFile"),new CommandLineFileOpener(classLoader));
+    migrator.setContexts(cmd.getOptionValue("contexts"));
     migrator.init(connection);
     if (cmd.hasOption("listLocks")) {
       DatabaseChangeLogLock[] locks=migrator.listLocks();

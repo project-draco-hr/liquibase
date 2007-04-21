@@ -10,8 +10,8 @@
   for (Iterator i=optList.iterator(); i.hasNext(); ) {
     option=(Option)i.next();
     optBuf=new StringBuffer(8);
-    if (option.getOpt().equals(" ")) {
-      optBuf.append(lpad).append("   " + defaultLongOptPrefix).append(option.getLongOpt());
+    if (" ".equals(option.getOpt())) {
+      optBuf.append(lpad).append("   ").append(defaultLongOptPrefix).append(option.getLongOpt());
     }
  else {
       optBuf.append(lpad).append(defaultOptPrefix).append(option.getOpt());

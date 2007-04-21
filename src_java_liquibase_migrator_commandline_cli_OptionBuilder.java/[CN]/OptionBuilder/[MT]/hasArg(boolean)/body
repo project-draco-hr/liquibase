@@ -1,4 +1,4 @@
 {
-  instance.numberOfArgs=(hasArg == true) ? 1 : Option.UNINITIALIZED;
+  instance.numberOfArgs=(hasArg) ? 1 : Option.UNINITIALIZED;
   return instance;
 }

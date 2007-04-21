@@ -1,0 +1,10 @@
+{
+  this.refactorings=new ArrayList<AbstractChange>();
+  log=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
+  this.id=id;
+  this.author=author;
+  this.databaseChangeLog=databaseChangeLog;
+  this.alwaysRun=alwaysRun;
+  this.runOnChange=runOnChange;
+  this.context=context.toLowerCase();
+}

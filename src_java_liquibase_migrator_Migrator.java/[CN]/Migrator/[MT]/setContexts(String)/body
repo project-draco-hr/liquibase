@@ -1,0 +1,7 @@
+{
+  this.contexts=new HashSet<String>();
+  String[] strings=contexts.split(",");
+  for (  String string : strings) {
+    this.contexts.add(string.trim().toLowerCase());
+  }
+}

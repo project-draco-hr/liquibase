@@ -1,0 +1,29 @@
+{
+  ResultSet rs=null;
+  Statement selectStatement=null;
+  Connection connection=getConnection();
+  ResultSetMetaData rsdata;
+  int iColumnCount;
+  String strColumnType="";
+  try {
+    selectStatement=connection.createStatement();
+    rs=selectStatement.executeQuery("SELECT * FROM " + tableName);
+    rsdata=rs.getMetaData();
+    iColumnCount=rsdata.getColumnCount();
+    for (int i=1; i <= iColumnCount; i++) {
+      if (columnName.equals(rsdata.getColumnName(i))) {
+        strColumnType=rsdata.getColumnTypeName(i) + "(" + rsdata.getColumnDisplaySize(i)+ ")";
+        break;
+      }
+    }
+  }
+  finally {
+    if (selectStatement != null) {
+      selectStatement.close();
+    }
+    if (rs != null) {
+      rs.close();
+    }
+  }
+  return strColumnType;
+}
