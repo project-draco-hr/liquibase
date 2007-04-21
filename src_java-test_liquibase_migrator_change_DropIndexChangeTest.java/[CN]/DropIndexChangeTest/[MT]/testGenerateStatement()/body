@@ -1,5 +1,6 @@
 {
   DropIndexChange refactoring=new DropIndexChange();
   refactoring.setIndexName("IDX_NAME");
-  assertEquals("DROP INDEX IDX_NAME",refactoring.generateStatement(new OracleDatabase()));
+  refactoring.setTableName("TABLE_NAME");
+  assertEquals("DROP INDEX IDX_NAME ON TABLE_NAME",refactoring.generateStatement(new OracleDatabase()));
 }
