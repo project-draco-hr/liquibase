@@ -1,0 +1,3 @@
+{
+  super("changelogs/mssql.changelog.xml","jtds-1.2","net.sourceforge.jtds.jdbc.Driver","jdbc:jtds:sqlserver://localhost;databaseName=liquibase");
+}

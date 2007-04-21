@@ -1,0 +1,13 @@
+{
+  StringBuffer buffer=new StringBuffer();
+  String columnType=getColumnDataType(tableName,columnName);
+  buffer.append("alter table ");
+  buffer.append(tableName);
+  buffer.append(" modify ");
+  buffer.append(columnName);
+  buffer.append(" ");
+  buffer.append(columnType);
+  buffer.append(" ");
+  buffer.append("default null");
+  return buffer.toString();
+}

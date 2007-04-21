@@ -17,8 +17,8 @@
         }
       }
     }
- else     if (orprecond != null) {
-      if (orprecond.checkDbmsType(migrator)) {
+ else     if (or != null) {
+      if (or.checkDbmsType(migrator)) {
         orReturnValue=true;
       }
  else {
@@ -26,8 +26,8 @@
         exceptionMsg="Or Precondition failed";
       }
     }
- else     if (notprecond != null) {
-      if (notprecond.checkNotPrecondition(migrator)) {
+ else     if (not != null) {
+      if (not.checkNotPrecondition(migrator)) {
         notReturnValue=true;
       }
  else {
@@ -35,8 +35,8 @@
         exceptionMsg="Not Precondition failed";
       }
     }
-    if (userexists != null) {
-      if (userexists.checkUserName(migrator)) {
+    if (runningAs != null) {
+      if (runningAs.checkUserName(migrator)) {
         userExistsReturnValue=true;
       }
  else {
@@ -49,7 +49,7 @@
     }
   }
  catch (  PreconditionFailedException ePrecondExcep) {
-    throw new PreconditionFailedException("Unable to process change set:" + exceptionMsg);
+    throw new PreconditionFailedException("Unable to process change set: " + exceptionMsg);
   }
 catch (  Exception e) {
     throw new RuntimeException(e);

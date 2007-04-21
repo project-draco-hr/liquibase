@@ -1,0 +1,6 @@
+{
+  this.changeLog=changeLog;
+  this.driverName=driverName;
+  this.url=url;
+  this.driverDirectory=driverDir;
+}

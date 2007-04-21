@@ -1,13 +1,10 @@
 {
-  String product;
-  boolean flag=true;
   try {
-    product=migrator.getDatabase().getConnection().getMetaData().getDatabaseProductName();
-    if (type.equals(product.toLowerCase()))     flag=true;
- else     flag=false;
+    String product=migrator.getDatabase().getConnection().getMetaData().getDatabaseProductName();
+    String expectedType=productToTypeMap.get(product.toLowerCase());
+    return type.equals(expectedType);
   }
  catch (  SQLException e) {
     throw new RuntimeException("Cannot determine database type");
   }
-  return flag;
 }

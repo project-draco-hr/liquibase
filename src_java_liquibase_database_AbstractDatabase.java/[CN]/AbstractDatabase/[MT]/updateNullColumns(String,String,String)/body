@@ -3,7 +3,7 @@
   Connection connection=getConnection();
   try {
     updateStatement=connection.createStatement();
-    updateStatement.executeUpdate("update " + tableName + " set "+ columnName+ "='"+ defalutValue+ "' where "+ columnName+ "=\"\"  or "+ columnName+ " is NULL");
+    updateStatement.executeUpdate("update " + tableName + " set "+ columnName+ "='"+ defalutValue+ "' where "+ columnName+ " is NULL");
   }
   finally {
     if (updateStatement != null) {
