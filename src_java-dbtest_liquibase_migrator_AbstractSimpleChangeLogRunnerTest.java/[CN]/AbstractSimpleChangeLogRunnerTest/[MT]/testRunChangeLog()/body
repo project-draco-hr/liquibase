@@ -9,6 +9,8 @@
   info.put("password","liquibase");
   Connection connection=driver.connect(url,info);
   migrator.init(connection);
+  migrator.setShouldDropDatabaseObjectsFirst(true);
   migrator.migrate();
+  migrator.setShouldDropDatabaseObjectsFirst(false);
   migrator.migrate();
 }

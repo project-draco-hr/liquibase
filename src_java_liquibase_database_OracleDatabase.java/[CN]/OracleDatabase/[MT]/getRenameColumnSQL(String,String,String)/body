@@ -1,0 +1,3 @@
+{
+  return "ALTER TABLE " + tableName + " RENAME COLUMN "+ oldColumnName+ " TO "+ newColumnName;
+}

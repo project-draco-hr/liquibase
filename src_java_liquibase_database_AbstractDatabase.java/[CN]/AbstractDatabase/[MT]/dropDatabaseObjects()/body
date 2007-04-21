@@ -1,27 +1,31 @@
 {
   Connection conn=getConnection();
+  conn.setAutoCommit(false);
   Statement selectStatement=null;
   Statement dropStatement=null;
   ResultSet rs=null;
   try {
     selectStatement=conn.createStatement();
     dropStatement=conn.createStatement();
-    rs=conn.getMetaData().getTables(null,getSchemaName(),null,new String[]{"TABLE","VIEW","GLOBAL TEMPORARY","LOCAL TEMPORARY","ALIAS","SYNONYM"});
+    rs=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,new String[]{"TABLE","VIEW","GLOBAL TEMPORARY","LOCAL TEMPORARY","ALIAS","SYNONYM"});
     while (rs.next()) {
       String tableName=rs.getString("TABLE_NAME");
       if (tableName.startsWith("BIN$")) {
         continue;
       }
-      if (tableName.startsWith("AQ$")) {
+ else       if (tableName.startsWith("AQ$")) {
         continue;
       }
-      if (tableName.equals(getDatabaseChangeLogLockTableName())) {
+ else       if (tableName.equals(getDatabaseChangeLogLockTableName())) {
+        continue;
+      }
+ else       if (getSystemTablesAndViews().contains(tableName)) {
         continue;
       }
       String type=rs.getString("TABLE_TYPE");
       String sql;
       if ("TABLE".equals(type)) {
-        sql="DROP TABLE " + tableName + " CASCADE CONSTRAINTS";
+        sql=getDropTableSQL(tableName);
       }
  else       if ("VIEW".equals(type)) {
         sql="DROP VIEW " + tableName;
@@ -42,7 +46,10 @@
       dropSequences(conn);
     }
   }
-  finally {
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+ finally {
     if (rs != null) {
       rs.close();
     }

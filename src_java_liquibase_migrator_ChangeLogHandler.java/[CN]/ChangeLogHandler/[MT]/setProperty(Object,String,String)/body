@@ -12,6 +12,10 @@
         method.invoke(object,attributeValue.toString());
         return;
       }
+ else       if (method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(Integer.class)) {
+        method.invoke(object,Integer.valueOf(attributeValue.toString()));
+        return;
+      }
     }
   }
   throw new RuntimeException("Property not found: " + attributeName);
