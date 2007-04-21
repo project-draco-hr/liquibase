@@ -10,6 +10,9 @@
  catch (  IOException e) {
     throw new MigrationFailedException("Error Reading Migration File: " + e.getMessage(),e);
   }
+catch (  SAXParseException e) {
+    throw new MigrationFailedException("Error parsing line " + e.getLineNumber() + " column "+ e.getColumnNumber()+ ": "+ e.getMessage());
+  }
 catch (  SAXException e) {
     Throwable parentCause=e.getException();
     while (parentCause != null) {
@@ -18,6 +21,10 @@ catch (  SAXException e) {
       }
       parentCause=parentCause.getCause();
     }
-    throw new MigrationFailedException("Invalid Migration File: " + e.getMessage(),e);
+    String reason=e.getMessage();
+    if (reason == null) {
+      reason="Unknown Reason";
+    }
+    throw new MigrationFailedException("Invalid Migration File: " + reason,e);
   }
 }

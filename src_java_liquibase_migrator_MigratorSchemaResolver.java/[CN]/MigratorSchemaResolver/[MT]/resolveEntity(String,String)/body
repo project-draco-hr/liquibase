@@ -8,6 +8,7 @@
       return source;
     }
  catch (    Exception ex) {
+      throw new IOException(ex.getMessage());
     }
   }
   return null;

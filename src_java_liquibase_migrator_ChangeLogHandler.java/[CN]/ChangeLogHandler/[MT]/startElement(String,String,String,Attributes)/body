@@ -1,6 +1,8 @@
 {
   try {
-    if ("databaseChangeLog".equals(qName)) {
+    if ("comment".equals(qName)) {
+    }
+ else     if ("databaseChangeLog".equals(qName)) {
       changeLog=new DatabaseChangeLog(migrator);
     }
  else     if ("include".equals(qName)) {
@@ -44,6 +46,9 @@
       }
  else       if (change instanceof InsertDataChange) {
         ((InsertDataChange)change).addColumn(column);
+      }
+ else       if (change instanceof CreateIndexChange) {
+        ((CreateIndexChange)change).addColumn(column);
       }
  else {
         throw new RuntimeException("Unexpected column tag for " + change.getClass().getName());

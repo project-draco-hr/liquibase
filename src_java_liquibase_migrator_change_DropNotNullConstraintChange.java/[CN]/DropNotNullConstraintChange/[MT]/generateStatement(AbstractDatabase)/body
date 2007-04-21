@@ -1,18 +1,13 @@
 {
   StringBuffer buffer=new StringBuffer();
-  try {
-    String strColumnType=database.getColumnDataType(getTableName(),getColumnName());
-    buffer.append("alter table ");
-    buffer.append(getTableName());
-    buffer.append(" modify ");
-    buffer.append(getColumnName());
-    buffer.append(" ");
-    buffer.append(strColumnType);
-    buffer.append(" ");
-    buffer.append("default null");
-  }
- catch (  SQLException eSqlException) {
-    throw new RuntimeException(eSqlException);
-  }
+  String columnType=database.getColumnDataType(getTableName(),getColumnName());
+  buffer.append("alter table ");
+  buffer.append(getTableName());
+  buffer.append(" modify ");
+  buffer.append(getColumnName());
+  buffer.append(" ");
+  buffer.append(columnType);
+  buffer.append(" ");
+  buffer.append("default null");
   return buffer.toString();
 }

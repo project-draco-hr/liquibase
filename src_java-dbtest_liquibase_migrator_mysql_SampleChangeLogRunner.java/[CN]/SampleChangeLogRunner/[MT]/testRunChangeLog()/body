@@ -1,0 +1,14 @@
+{
+  JUnitFileOpener fileOpener=new JUnitFileOpener();
+  Migrator migrator=new Migrator("changelogs/mysql.changelog.xml",fileOpener);
+  migrator.setContexts("test");
+  migrator.setMode(Migrator.EXECUTE_MODE);
+  Driver driver=(Driver)Class.forName("com.mysql.jdbc.Driver",true,new JUnitJDBCDriverClassLoader("mysql-5.0.4")).newInstance();
+  Properties info=new Properties();
+  info.put("user","liquibase");
+  info.put("password","liquibase");
+  Connection connection=driver.connect("jdbc:mysql://localhost/liquibase",info);
+  migrator.init(connection);
+  migrator.migrate();
+  migrator.migrate();
+}

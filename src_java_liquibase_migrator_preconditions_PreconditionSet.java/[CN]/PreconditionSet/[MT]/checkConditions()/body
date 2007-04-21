@@ -12,7 +12,7 @@
         }
  else {
           dbmsreturnvalue=false;
-          strExceptionMsg="DBMS Precondition failed";
+          exceptionMsg="DBMS Precondition failed";
           break;
         }
       }
@@ -23,7 +23,7 @@
       }
  else {
         orReturnValue=false;
-        strExceptionMsg="Or Precondition failed";
+        exceptionMsg="Or Precondition failed";
       }
     }
  else     if (notprecond != null) {
@@ -32,7 +32,7 @@
       }
  else {
         notReturnValue=false;
-        strExceptionMsg="Not Precondition failed";
+        exceptionMsg="Not Precondition failed";
       }
     }
     if (userexists != null) {
@@ -41,7 +41,7 @@
       }
  else {
         userExistsReturnValue=false;
-        strExceptionMsg="UserExists Precondition failed";
+        exceptionMsg="UserExists Precondition failed";
       }
     }
     if (!(dbmsreturnvalue && orReturnValue && notReturnValue&& userExistsReturnValue)) {
@@ -49,7 +49,7 @@
     }
   }
  catch (  PreconditionFailedException ePrecondExcep) {
-    throw new PreconditionFailedException("Unable to process change set:" + strExceptionMsg);
+    throw new PreconditionFailedException("Unable to process change set:" + exceptionMsg);
   }
 catch (  Exception e) {
     throw new RuntimeException(e);
