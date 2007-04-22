@@ -1,0 +1,16 @@
+{
+  Connection conn=getConnection();
+  Statement dropStatement=conn.createStatement();
+  try {
+    dropStatement.executeUpdate("DROP OWNED BY " + getConnectionUsername());
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+ finally {
+    if (dropStatement != null) {
+      dropStatement.close();
+    }
+    conn.commit();
+  }
+}

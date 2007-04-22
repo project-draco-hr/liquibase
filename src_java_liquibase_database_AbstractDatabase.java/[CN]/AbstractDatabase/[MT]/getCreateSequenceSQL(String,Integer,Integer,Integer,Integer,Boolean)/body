@@ -1,0 +1,18 @@
+{
+  StringBuffer buffer=new StringBuffer();
+  buffer.append("CREATE SEQUENCE ");
+  buffer.append(sequenceName);
+  if (startValue != null) {
+    buffer.append(" START WITH ").append(startValue);
+  }
+  if (incrementBy != null) {
+    buffer.append(" INCREMENT BY ").append(incrementBy);
+  }
+  if (minValue != null) {
+    buffer.append(" MINVALUE ").append(minValue);
+  }
+  if (maxValue != null) {
+    buffer.append(" MAXVALUE ").append(maxValue);
+  }
+  return buffer.toString().trim();
+}

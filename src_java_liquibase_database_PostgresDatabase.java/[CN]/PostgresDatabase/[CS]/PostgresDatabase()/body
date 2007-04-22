@@ -1,0 +1,3 @@
+{
+  systemTablesAndViews.add("pg_logdir_ls");
+}

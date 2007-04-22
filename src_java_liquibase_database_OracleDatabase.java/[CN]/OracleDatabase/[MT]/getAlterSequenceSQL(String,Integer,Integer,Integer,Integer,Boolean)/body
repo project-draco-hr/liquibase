@@ -1,0 +1,7 @@
+{
+  String sql=super.getAlterSequenceSQL(sequenceName,incrementBy,minValue,maxValue,ordered);
+  if (ordered != null && ordered) {
+    sql+=" ORDER ";
+  }
+  return sql;
+}

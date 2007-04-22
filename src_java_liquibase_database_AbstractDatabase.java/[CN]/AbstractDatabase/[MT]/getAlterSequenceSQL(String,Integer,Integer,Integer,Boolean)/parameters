@@ -1,0 +1,5 @@
+String sequenceName
+Integer incrementBy
+Integer minValue
+Integer maxValue
+Boolean ordered
