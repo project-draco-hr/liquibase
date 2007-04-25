@@ -1,25 +1,19 @@
 {
   String shouldRunProperty=System.getProperty(Migrator.SHOULD_RUN_SYSTEM_PROPERTY);
   if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
-    log("Migrator did not run because '" + Migrator.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
+    getLog().warn("Migrator did not run because '" + Migrator.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
     return;
   }
   Connection connection=null;
   try {
-    String[] strings=classpath.list();
-    List<URL> taskClassPath=new ArrayList<URL>();
-    for (int i=0; i < strings.length; i++) {
-      URL url=new File(strings[i]).toURL();
-      taskClassPath.add(url);
-    }
-    Driver driver=(Driver)Class.forName(getDriver(),true,new URLClassLoader(taskClassPath.toArray(new URL[taskClassPath.size()]))).newInstance();
+    Driver driver=(Driver)Class.forName(getDriver(),true,getClass().getClassLoader()).newInstance();
     Properties info=new Properties();
     info.put("user",getUsername());
     info.put("password",getPassword());
     connection=driver.connect(getUrl(),info);
     String[] migrationFiles=getMigrationFiles().split(",");
     for (    String migrationFile : migrationFiles) {
-      Migrator migrator=new Migrator(migrationFile.trim(),new AntFileOpener(getProject(),classpath));
+      Migrator migrator=new Migrator(migrationFile.trim(),new MavenFileOpener());
       migrator.setContexts(getContexts());
       migrator.init(connection);
       if (isPromptOnNonLocalDatabase() && !migrator.isSaveToRunMigration()) {

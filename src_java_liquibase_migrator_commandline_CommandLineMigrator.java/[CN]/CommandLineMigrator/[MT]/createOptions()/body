@@ -13,5 +13,6 @@
   options.addOption(OptionBuilder.withDescription("Display Change Log Lock").isRequired(false).create("listLocks"));
   options.addOption(OptionBuilder.withDescription("Release Change Log Locks").isRequired(false).create("releaseLocks"));
   options.addOption(OptionBuilder.withArgName("value").hasArg().withDescription("Context of Deployment").isRequired(false).create("contexts"));
+  options.addOption(OptionBuilder.withArgName("true|false").hasArg().withDescription("Prompt For Non-localhost databases").isRequired(false).create("promptForNonLocalhostDatabase"));
   return options;
 }
