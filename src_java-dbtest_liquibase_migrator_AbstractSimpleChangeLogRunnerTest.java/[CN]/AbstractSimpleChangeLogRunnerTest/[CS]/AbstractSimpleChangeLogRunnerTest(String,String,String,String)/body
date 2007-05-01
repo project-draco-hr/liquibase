@@ -3,4 +3,6 @@
   this.driverName=driverName;
   this.url=url;
   this.driverDirectory=driverDir;
+  username="liquibase";
+  password="liquibase";
 }

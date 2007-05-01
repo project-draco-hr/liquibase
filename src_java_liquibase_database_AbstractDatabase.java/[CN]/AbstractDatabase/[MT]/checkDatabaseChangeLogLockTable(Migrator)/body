@@ -4,7 +4,7 @@
   ResultSet rs=null;
   changeLogLockTableExists=true;
   try {
-    rs=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogLockTableName(),null);
+    rs=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogLockTableName(),new String[]{"TABLE"});
     if (!rs.next()) {
       String createTableStatement=getCreateChangeLogLockSQL();
       if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {

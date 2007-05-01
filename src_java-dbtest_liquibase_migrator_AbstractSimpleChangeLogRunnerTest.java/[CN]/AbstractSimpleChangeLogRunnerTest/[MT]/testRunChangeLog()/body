@@ -5,8 +5,8 @@
   migrator.setMode(Migrator.EXECUTE_MODE);
   Driver driver=(Driver)Class.forName(driverName,true,new JUnitJDBCDriverClassLoader(driverDirectory)).newInstance();
   Properties info=new Properties();
-  info.put("user","liquibase");
-  info.put("password","liquibase");
+  info.put("user",username);
+  info.put("password",password);
   Connection connection=driver.connect(url,info);
   migrator.init(connection);
   migrator.setShouldDropDatabaseObjectsFirst(true);
