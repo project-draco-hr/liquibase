@@ -2,5 +2,6 @@
   super(file,parentMigrator.getFileOpener(),true);
   this.parentMigrator=parentMigrator;
   setMode(parentMigrator.getMode());
+  setRollbackToDate(parentMigrator.getRollbackToDate());
   setOutputSQLWriter(parentMigrator.getOutputSQLWriter());
 }

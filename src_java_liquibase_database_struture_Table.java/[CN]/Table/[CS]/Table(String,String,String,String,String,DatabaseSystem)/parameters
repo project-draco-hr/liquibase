@@ -1,6 +1,0 @@
-String name
-String catalog
-String schema
-String type
-String remarks
-DatabaseSystem databaseSystem

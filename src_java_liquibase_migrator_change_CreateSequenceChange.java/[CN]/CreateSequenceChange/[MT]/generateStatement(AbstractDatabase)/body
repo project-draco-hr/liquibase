@@ -1,3 +1,0 @@
-{
-  return database.getCreateSequenceSQL(getSequenceName(),getStartValue(),getIncrementBy(),getMinValue(),getMaxValue(),isOrdered()).trim();
-}

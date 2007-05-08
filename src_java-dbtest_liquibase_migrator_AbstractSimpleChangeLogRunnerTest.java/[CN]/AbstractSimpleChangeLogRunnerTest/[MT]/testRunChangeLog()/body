@@ -1,16 +1,8 @@
 {
-  JUnitFileOpener fileOpener=new JUnitFileOpener();
-  Migrator migrator=new Migrator(changeLog,fileOpener);
-  migrator.setContexts("test");
-  migrator.setMode(Migrator.EXECUTE_MODE);
-  Driver driver=(Driver)Class.forName(driverName,true,new JUnitJDBCDriverClassLoader(driverDirectory)).newInstance();
-  Properties info=new Properties();
-  info.put("user",username);
-  info.put("password",password);
-  Connection connection=driver.connect(url,info);
-  migrator.init(connection);
+  Migrator migrator=createMigrator(completeChangeLog);
   migrator.setShouldDropDatabaseObjectsFirst(true);
   migrator.migrate();
+  migrator=createMigrator(completeChangeLog);
   migrator.setShouldDropDatabaseObjectsFirst(false);
   migrator.migrate();
 }

@@ -1,0 +1,7 @@
+{
+  int result;
+  result=changeLog.hashCode();
+  result=29 * result + id.hashCode();
+  result=29 * result + author.hashCode();
+  return result;
+}

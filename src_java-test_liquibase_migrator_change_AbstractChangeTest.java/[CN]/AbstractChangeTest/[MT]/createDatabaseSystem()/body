@@ -1,9 +1,0 @@
-{
-  Connection conn=createMock(Connection.class);
-  DatabaseMetaData metaData=createMock(DatabaseMetaData.class);
-  expect(conn.getMetaData()).andReturn(metaData);
-  expect(metaData.getURL()).andReturn("jdbc:test:url");
-  replay(conn);
-  replay(metaData);
-  return new DatabaseSystem(conn);
-}

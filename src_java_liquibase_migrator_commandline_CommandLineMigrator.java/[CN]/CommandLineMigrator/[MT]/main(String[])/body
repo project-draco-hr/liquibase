@@ -6,6 +6,35 @@
   }
   CommandLineMigrator commandLineMigrator=new CommandLineMigrator();
   commandLineMigrator.parseOptions(args);
-  commandLineMigrator.doMigration();
-  System.exit(0);
+  File propertiesFile=new File("liquibase.properties");
+  if (propertiesFile.exists()) {
+    commandLineMigrator.parsePropertiesFile(new FileInputStream(propertiesFile));
+  }
+  if (!commandLineMigrator.checkSetup()) {
+    commandLineMigrator.printHelp(System.out);
+    return;
+  }
+  try {
+    commandLineMigrator.applyDefaults();
+    commandLineMigrator.configureClassLoader();
+    commandLineMigrator.doMigration();
+  }
+ catch (  Throwable e) {
+    String message=e.getMessage();
+    if (e.getCause() != null) {
+      message=e.getCause().getMessage();
+    }
+    if (message == null) {
+      message="Unknown Reason";
+    }
+    System.out.println("Migration Failed: " + message);
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).log(Level.SEVERE,message,e);
+    return;
+  }
+  if ("migrate".equals(commandLineMigrator.command)) {
+    System.out.println("Migration successful");
+  }
+ else   if ("rollback".equals(commandLineMigrator.command)) {
+    System.out.println("Rollback successful");
+  }
 }

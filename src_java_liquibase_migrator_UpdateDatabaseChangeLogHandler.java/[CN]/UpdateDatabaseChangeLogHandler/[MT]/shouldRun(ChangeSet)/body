@@ -1,0 +1,11 @@
+{
+  ChangeSet.RunStatus isChangeSetRan=migrator.getRunStatus(changeSet);
+  if (changeSet.shouldAlwaysRun() || isChangeSetRan.equals(ChangeSet.RunStatus.NOT_RAN) || isChangeSetRan.equals(ChangeSet.RunStatus.RUN_AGAIN)) {
+    Set<String> requiredContexts=changeSet.getDatabaseChangeLog().getMigrator().getContexts();
+    String changeSetContext=changeSet.getContext();
+    return changeSetContext == null || requiredContexts.contains(changeSetContext);
+  }
+ else {
+    return false;
+  }
+}

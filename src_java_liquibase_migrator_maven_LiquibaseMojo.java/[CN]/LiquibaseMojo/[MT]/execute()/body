@@ -11,7 +11,7 @@
     info.put("user",getUsername());
     info.put("password",getPassword());
     connection=driver.connect(getUrl(),info);
-    String[] migrationFiles=getMigrationFiles().split(",");
+    String[] migrationFiles=getChangeLogFile().split(",");
     for (    String migrationFile : migrationFiles) {
       Migrator migrator=new Migrator(migrationFile.trim(),new MavenFileOpener());
       migrator.setContexts(getContexts());

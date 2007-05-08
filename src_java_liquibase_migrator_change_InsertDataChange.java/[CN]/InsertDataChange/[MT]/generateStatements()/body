@@ -1,0 +1,26 @@
+{
+  StringBuffer buffer=new StringBuffer();
+  buffer.append("INSERT INTO ").append(getTableName()).append(" ");
+  Iterator iterator=columns.iterator();
+  StringBuffer columnNames=new StringBuffer();
+  StringBuffer columnValues=new StringBuffer();
+  columnNames.append("(");
+  columnValues.append("(");
+  while (iterator.hasNext()) {
+    ColumnConfig column=(ColumnConfig)iterator.next();
+    columnNames.append(column.getName());
+    columnValues.append("'");
+    columnValues.append(column.getValue());
+    columnValues.append("'");
+    if (iterator.hasNext()) {
+      columnNames.append(", ");
+      columnValues.append(", ");
+    }
+  }
+  columnNames.append(")");
+  columnValues.append(")");
+  buffer.append(columnNames);
+  buffer.append(" VALUES ");
+  buffer.append(columnValues);
+  return new String[]{buffer.toString()};
+}

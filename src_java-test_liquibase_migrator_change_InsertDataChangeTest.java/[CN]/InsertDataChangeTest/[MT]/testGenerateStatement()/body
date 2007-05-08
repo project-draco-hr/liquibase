@@ -1,3 +1,3 @@
 {
-  assertEquals("insert into TABLE_NAME (id, name, age) values ('123', 'Andrew', '21')",refactoring.generateStatement(new OracleDatabase()));
+  assertEquals("INSERT INTO TABLE_NAME (id, name, age) VALUES ('123', 'Andrew', '21')",refactoring.generateStatements(new OracleDatabase())[0]);
 }

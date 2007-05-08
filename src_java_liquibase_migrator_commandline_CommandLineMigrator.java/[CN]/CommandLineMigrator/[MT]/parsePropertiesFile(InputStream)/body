@@ -1,0 +1,22 @@
+{
+  Properties props=new Properties();
+  props.load(propertiesInputStream);
+  for (  Object property : props.keySet()) {
+    try {
+      Field field=getClass().getDeclaredField((String)property);
+      Object currentValue=field.get(this);
+      if (currentValue == null) {
+        String value=(String)props.get(property);
+        if (field.getType().equals(Boolean.class)) {
+          field.set(this,Boolean.valueOf(value));
+        }
+ else {
+          field.set(this,value);
+        }
+      }
+    }
+ catch (    Exception e) {
+      throw new CommandLineParsingException("Unknown parameter: '" + property + "'");
+    }
+  }
+}

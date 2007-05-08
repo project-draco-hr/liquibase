@@ -1,3 +1,6 @@
 {
-  writer.append(generateStatement(database) + ";\n\n");
+  String[] statements=generateStatements(database);
+  for (  String statement : statements) {
+    writer.append(statement + ";\n\n");
+  }
 }

@@ -9,7 +9,7 @@
     SAXParser parser=saxParserFactory.newSAXParser();
     parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaLanguage","http://www.w3.org/2001/XMLSchema");
     parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaSource",getClass().getClassLoader().getResource("liquibase/dbchangelog-1.0.xsd").toURI().toString());
-    this.xmlReader=parser.getXMLReader();
+    xmlReader=parser.getXMLReader();
     xmlReader.setEntityResolver(new MigratorSchemaResolver());
     xmlReader.setErrorHandler(new ErrorHandler(){
       public void warning(      SAXParseException exception) throws SAXException {
@@ -26,7 +26,6 @@
       }
     }
 );
-    xmlReader.setContentHandler(new ChangeLogHandler(this));
   }
  catch (  Exception e) {
     throw new RuntimeException(e);

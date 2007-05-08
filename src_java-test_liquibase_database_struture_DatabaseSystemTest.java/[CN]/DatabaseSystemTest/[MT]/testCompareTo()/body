@@ -1,6 +1,0 @@
-{
-  DatabaseSystem databaseSystem1=createDatabaseSystem();
-  DatabaseSystem databaseSystem2=createDatabaseSystem();
-  assertEquals(0,databaseSystem1.compareTo(databaseSystem2));
-  assertTrue(databaseSystem1.compareTo(new String()) > 0);
-}

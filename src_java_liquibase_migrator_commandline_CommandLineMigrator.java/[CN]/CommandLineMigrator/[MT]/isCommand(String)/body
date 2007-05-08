@@ -1,0 +1,3 @@
+{
+  return "migrate".equals(arg) || "migrateSQL".equals(arg) || "rollbackSQL".equals(arg)|| "futureRollbackSQL".equals(arg)|| "listLocks".equals(arg)|| "listLocks".equals(arg)|| "releaseLocks".equals(arg);
+}

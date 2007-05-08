@@ -43,14 +43,59 @@
  else {
       if (!outputtedHeader) {
         outputSQLWriter.write("--------------------------------------------------------------------------------------\n");
-        outputSQLWriter.write("-- Migration file: " + getMigrationFile() + "\n");
-        outputSQLWriter.write("-- Run at: " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date()) + "\n");
+        if (mode.equals(OUTPUT_SQL_MODE)) {
+          outputSQLWriter.write("-- SQL to update database to newest version\n");
+        }
+ else         if (mode.equals(OUTPUT_CHANGELOG_ONLY_SQL_MODE)) {
+          outputSQLWriter.write("-- SQL to add all changesets to database history table\n");
+        }
+ else         if (mode.equals(OUTPUT_ROLLBACK_SQL_MODE)) {
+          outputSQLWriter.write("-- SQL to roll-back database to the state it was at " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(getRollbackToDate()) + "\n");
+        }
+ else         if (mode.equals(OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
+          outputSQLWriter.write("-- SQL to roll-back database from an updated version back to current version\n");
+        }
+ else {
+          throw new MigrationFailedException("Unexpected output mode: " + mode);
+        }
+        outputSQLWriter.write("-- Change Log: " + getMigrationFile() + "\n");
+        outputSQLWriter.write("-- Ran at: " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date()) + "\n");
         outputSQLWriter.write("-- Against: " + getDatabase().getConnectionUsername() + "@"+ getDatabase().getConnectionURL()+ "\n");
         outputSQLWriter.write("--------------------------------------------------------------------------------------\n\n\n");
         outputtedHeader=true;
       }
     }
-    processMigration();
+    if (mode.equals(EXECUTE_MODE) || mode.equals(OUTPUT_SQL_MODE) || mode.equals(OUTPUT_CHANGELOG_ONLY_SQL_MODE)) {
+      runChangeLogs(new UpdateDatabaseChangeLogHandler(this));
+    }
+ else     if (mode.equals(EXECUTE_ROLLBACK_MODE) || mode.equals(OUTPUT_ROLLBACK_SQL_MODE)) {
+      RollbackDatabaseChangeLogHandler rollbackHandler=new RollbackDatabaseChangeLogHandler(this,getRollbackToDate());
+      runChangeLogs(rollbackHandler);
+      ChangeSet unrollbackableChangeSet=rollbackHandler.getUnRollBackableChangeSet();
+      if (unrollbackableChangeSet == null) {
+        rollbackHandler.doRollback();
+      }
+ else {
+        throw new MigrationFailedException("Cannot roll back changelog to selected date due to change set " + unrollbackableChangeSet);
+      }
+    }
+ else     if (mode.equals(OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
+      RollbackFutureDatabaseChangeLogHandler rollbackHandler=new RollbackFutureDatabaseChangeLogHandler(this);
+      runChangeLogs(rollbackHandler);
+      ChangeSet unrollbackableChangeSet=rollbackHandler.getUnRollBackableChangeSet();
+      if (unrollbackableChangeSet == null) {
+        rollbackHandler.doRollback();
+      }
+ else {
+        throw new MigrationFailedException("Will not be able to rollback changes due to change set " + unrollbackableChangeSet);
+      }
+    }
+ else {
+      throw new MigrationFailedException("Unknown mode: " + getMode());
+    }
+    if (outputSQLWriter != null) {
+      outputSQLWriter.flush();
+    }
   }
  catch (  MigrationFailedException e) {
     throw e;

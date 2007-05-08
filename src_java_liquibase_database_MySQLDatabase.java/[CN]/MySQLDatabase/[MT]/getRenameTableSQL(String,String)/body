@@ -1,5 +1,0 @@
-{
-  StringBuffer buffer=new StringBuffer();
-  buffer.append("alter table ").append(oldTableName).append(" rename ").append(newTableName);
-  return buffer.toString();
-}

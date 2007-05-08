@@ -1,0 +1,6 @@
+{
+  if (columnDataType == null) {
+    throw new RuntimeException("columnDataType is required to add not null constraints with MySQL");
+  }
+  return new String[]{generateUpdateStatement(),"ALTER TABLE " + getTableName() + " MODIFY "+ getColumnName()+ " "+ columnDataType+ " NOT NULL"};
+}

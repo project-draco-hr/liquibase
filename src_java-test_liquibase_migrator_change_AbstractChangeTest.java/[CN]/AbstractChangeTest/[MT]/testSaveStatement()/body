@@ -1,16 +1,25 @@
 {
   AbstractChange change=new AbstractChange("test","Test Refactoring"){
-    public String generateStatement(    AbstractDatabase database){
-      return "GENERATED STATEMENT";
+    private String[] generateStatements(){
+      return new String[]{"GENERATED STATEMENT"};
     }
     public String getConfirmationMessage(){
       return null;
     }
-    public boolean isApplicableTo(    Set<DatabaseStructure> selectedDatabaseStructures){
-      return false;
-    }
     public Element createNode(    Document currentMigrationFileDOM){
       return null;
+    }
+    public String[] generateStatements(    MSSQLDatabase database){
+      return generateStatements();
+    }
+    public String[] generateStatements(    OracleDatabase database){
+      return generateStatements();
+    }
+    public String[] generateStatements(    MySQLDatabase database){
+      return generateStatements();
+    }
+    public String[] generateStatements(    PostgresDatabase database){
+      return generateStatements();
     }
   }
 ;

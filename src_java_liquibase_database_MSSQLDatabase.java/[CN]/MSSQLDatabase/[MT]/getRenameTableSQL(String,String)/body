@@ -1,3 +1,0 @@
-{
-  return "sp_rename '" + oldTableName + "', "+ newTableName;
-}

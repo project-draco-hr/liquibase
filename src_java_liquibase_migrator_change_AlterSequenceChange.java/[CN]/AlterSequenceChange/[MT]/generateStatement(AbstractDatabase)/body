@@ -1,3 +1,0 @@
-{
-  return database.getAlterSequenceSQL(getSequenceName(),getIncrementBy(),getMinValue(),getMaxValue(),isOrdered());
-}

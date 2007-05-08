@@ -5,9 +5,9 @@
   ColumnConfig column1=new ColumnConfig();
   column1.setName("COL1");
   refactoring.addColumn(column1);
-  assertEquals("CREATE INDEX IDX_TEST ON TAB_NAME(COL1)",refactoring.generateStatement(new OracleDatabase()));
+  assertEquals("CREATE INDEX IDX_TEST ON TAB_NAME(COL1)",refactoring.generateStatements(new OracleDatabase())[0]);
   ColumnConfig column2=new ColumnConfig();
   column2.setName("COL2");
   refactoring.addColumn(column2);
-  assertEquals("CREATE INDEX IDX_TEST ON TAB_NAME(COL1, COL2)",refactoring.generateStatement(new OracleDatabase()));
+  assertEquals("CREATE INDEX IDX_TEST ON TAB_NAME(COL1, COL2)",refactoring.generateStatements(new OracleDatabase())[0]);
 }

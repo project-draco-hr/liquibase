@@ -1,25 +1,48 @@
 {
+  if ("finest".equalsIgnoreCase(logLevel)) {
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.FINEST);
+  }
+ else   if ("finer".equalsIgnoreCase(logLevel)) {
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.FINER);
+  }
+ else   if ("fine".equalsIgnoreCase(logLevel)) {
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.FINE);
+  }
+ else   if ("info".equalsIgnoreCase(logLevel)) {
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.INFO);
+  }
+ else   if ("warning".equalsIgnoreCase(logLevel)) {
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.WARNING);
+  }
+ else   if ("severe".equalsIgnoreCase(logLevel)) {
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.SEVERE);
+  }
+ else   if ("off".equalsIgnoreCase(logLevel)) {
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.OFF);
+  }
+ else {
+    throw new CommandLineParsingException("Unknown log level: " + logLevel);
+  }
   Driver driver;
   try {
-    driver=(Driver)Class.forName(cmd.getOptionValue("driver"),true,classLoader).newInstance();
+    driver=(Driver)Class.forName(this.driver,true,classLoader).newInstance();
   }
  catch (  Exception e) {
     throw new RuntimeException("Cannot get database driver: " + e.getMessage());
   }
   Properties info=new Properties();
-  info.put("user",cmd.getOptionValue("username"));
-  info.put("password",cmd.getOptionValue("password"));
-  Connection connection=driver.connect(cmd.getOptionValue("url"),info);
+  info.put("user",username);
+  info.put("password",password);
+  Connection connection=driver.connect(url,info);
   if (connection == null) {
     throw new MigrationFailedException("Incorrect driver for URL");
   }
   Writer outputSQLFileWriter=null;
-  File outputSqlFile;
   try {
-    Migrator migrator=new Migrator(cmd.getOptionValue("migrationFile"),new CommandLineFileOpener(classLoader));
-    migrator.setContexts(cmd.getOptionValue("contexts"));
+    Migrator migrator=new Migrator(migrationFile,new CommandLineFileOpener(classLoader));
+    migrator.setContexts(contexts);
     migrator.init(connection);
-    if (cmd.hasOption("listLocks")) {
+    if ("listLocks".equalsIgnoreCase(command)) {
       DatabaseChangeLogLock[] locks=migrator.listLocks();
       System.out.println("Database change log locks for " + migrator.getDatabase().getConnectionUsername() + "@"+ migrator.getDatabase().getConnectionURL());
       if (locks.length == 0) {
@@ -30,55 +53,61 @@
       }
       return;
     }
-    if (cmd.hasOption("releaseLocks")) {
+ else     if ("releaseLocks".equalsIgnoreCase(command)) {
       migrator.forceReleaseLock();
       System.out.println("Successfully released all database change log locks for " + migrator.getDatabase().getConnectionUsername() + "@"+ migrator.getDatabase().getConnectionURL());
       return;
     }
-    migrator.setMode(Migrator.EXECUTE_MODE);
-    if (cmd.hasOption("outputSQL") || cmd.hasOption("outputChangelogSQL")) {
-      if (cmd.hasOption("outputChangelogSQL")) {
-        migrator.setMode(Migrator.OUTPUT_CHANGELOG_ONLY_SQL_MODE);
-        outputSqlFile=new File(cmd.getOptionValue("outputChangelogSQL"));
-      }
- else {
-        migrator.setMode(Migrator.OUTPUT_SQL_MODE);
-        outputSqlFile=new File(cmd.getOptionValue("outputSQL"));
-      }
-      if (outputSqlFile.exists()) {
-        throw new MigrationFailedException(outputSqlFile.getAbsolutePath() + " already exists");
-      }
-      outputSQLFileWriter=new BufferedWriter(new FileWriter(outputSqlFile));
-      migrator.setOutputSQLWriter(outputSQLFileWriter);
-    }
-    if (cmd.hasOption("dropAllFirst")) {
+    if (dropAllFirst) {
       migrator.setShouldDropDatabaseObjectsFirst(true);
     }
-    String promptForNonLocal=cmd.getOptionValue("promptForNonLocalhostDatabase");
-    if (promptForNonLocal != null && Boolean.valueOf(promptForNonLocal)) {
-      if (!migrator.isSaveToRunMigration()) {
-        if (JOptionPane.showConfirmDialog(null,"You are running a database refactoring against a non-local database.\n" + "Database URL is: " + migrator.getDatabase().getConnectionURL() + "\n"+ "Username is: "+ migrator.getDatabase().getConnectionUsername()+ "\n\n"+ "Area you sure you want to do this?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE) == JOptionPane.NO_OPTION) {
-          System.out.println("Chose not to run against non-production database");
-          System.exit(-1);
-        }
+    DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    try {
+      if ("migrate".equalsIgnoreCase(command)) {
+        migrator.setMode(Migrator.EXECUTE_MODE);
       }
+ else       if ("changelogSyncSQL".equalsIgnoreCase(command)) {
+        migrator.setMode(Migrator.OUTPUT_CHANGELOG_ONLY_SQL_MODE);
+        migrator.setOutputSQLWriter(getOutputWriter());
+      }
+ else       if ("migrateSQL".equalsIgnoreCase(command)) {
+        migrator.setMode(Migrator.OUTPUT_SQL_MODE);
+        migrator.setOutputSQLWriter(getOutputWriter());
+      }
+ else       if ("rollback".equalsIgnoreCase(command)) {
+        migrator.setMode(Migrator.EXECUTE_ROLLBACK_MODE);
+        if (commandParam == null) {
+          throw new CommandLineParsingException("rollback requires a rollback date");
+        }
+        migrator.setRollbackToDate(dateFormat.parse(commandParam));
+      }
+ else       if ("rollbackSQL".equalsIgnoreCase(command)) {
+        migrator.setMode(Migrator.OUTPUT_ROLLBACK_SQL_MODE);
+        migrator.setOutputSQLWriter(getOutputWriter());
+        if (commandParam == null) {
+          throw new CommandLineParsingException("rollbackSQL requires a rollback date");
+        }
+        migrator.setRollbackToDate(dateFormat.parse(commandParam));
+      }
+ else       if ("futureRollbackSQL".equalsIgnoreCase(command)) {
+        migrator.setMode(Migrator.OUTPUT_FUTURE_ROLLBACK_SQL_MODE);
+        migrator.setOutputSQLWriter(getOutputWriter());
+      }
+ else {
+        throw new CommandLineParsingException("Unknown command: " + command);
+      }
+    }
+ catch (    ParseException e) {
+      throw new CommandLineParsingException("Unexpected date/time format.  Use 'yyyy-MM-dd HH:mm:ss'");
     }
     migrator.migrate();
   }
- catch (  Throwable e) {
-    String message=e.getMessage();
-    if (e.getCause() != null) {
-      message=e.getCause().getMessage();
-    }
-    System.out.println("Migration Failed: " + message);
-    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).log(Level.SEVERE,message,e);
-    System.exit(-1);
-  }
- finally {
+  finally {
     if (connection != null) {
       connection.close();
     }
     if (outputSQLFileWriter != null) {
+      outputSQLFileWriter.flush();
       outputSQLFileWriter.close();
     }
   }

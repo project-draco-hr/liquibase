@@ -1,0 +1,25 @@
+{
+  CommandLineMigrator cli=new CommandLineMigrator();
+  Properties props=new Properties();
+  props.setProperty("driver","DRIVER");
+  props.setProperty("username","USERNAME");
+  props.setProperty("password","PASSWD");
+  props.setProperty("url","URL");
+  props.setProperty("migrationFile","FILE");
+  props.setProperty("classpath","CLASSPAHT");
+  props.setProperty("contexts","CONTEXTS");
+  props.setProperty("promptForNonLocalDatabase","TRUE");
+  props.setProperty("dropAllFirst","TRUE");
+  ByteArrayOutputStream propFile=new ByteArrayOutputStream();
+  props.store(propFile,"");
+  cli.parsePropertiesFile(new ByteArrayInputStream(propFile.toByteArray()));
+  assertEquals("DRIVER",cli.driver);
+  assertEquals("USERNAME",cli.username);
+  assertEquals("PASSWD",cli.password);
+  assertEquals("URL",cli.url);
+  assertEquals("FILE",cli.migrationFile);
+  assertEquals("CLASSPAHT",cli.classpath);
+  assertEquals("CONTEXTS",cli.contexts);
+  assertEquals(Boolean.TRUE,cli.promptForNonLocalDatabase);
+  assertEquals(Boolean.TRUE,cli.dropAllFirst);
+}

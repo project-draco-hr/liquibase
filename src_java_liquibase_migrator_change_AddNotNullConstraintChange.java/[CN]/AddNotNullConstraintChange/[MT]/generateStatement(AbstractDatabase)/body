@@ -1,3 +1,0 @@
-{
-  return database.getAddNullConstraintSQL(getTableName(),getColumnName(),getDefaultNullValue());
-}

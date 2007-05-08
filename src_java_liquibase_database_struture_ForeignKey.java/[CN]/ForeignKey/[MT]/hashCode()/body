@@ -1,6 +1,0 @@
-{
-  int result;
-  result=foreignKeyName.hashCode();
-  result=29 * result + primaryKeyName.hashCode();
-  return result;
-}

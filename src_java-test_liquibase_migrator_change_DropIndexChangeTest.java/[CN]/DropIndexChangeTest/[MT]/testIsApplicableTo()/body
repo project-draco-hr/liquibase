@@ -1,6 +1,0 @@
-{
-  DropIndexChange refactoring=new DropIndexChange();
-  assertFalse(refactoring.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createTableDatabaseStructure()}))));
-  assertTrue(refactoring.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createIndexDatabaseStructure()}))));
-  assertFalse(refactoring.isApplicableTo(new HashSet<DatabaseStructure>(Arrays.asList(new DatabaseStructure[]{createIndexDatabaseStructure(),createIndexDatabaseStructure()}))));
-}

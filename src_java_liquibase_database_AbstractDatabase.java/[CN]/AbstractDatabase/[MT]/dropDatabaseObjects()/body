@@ -45,6 +45,7 @@
     if (this.supportsSequences()) {
       dropSequences(conn);
     }
+    changeLogTableExists=false;
   }
  catch (  Exception e) {
     e.printStackTrace();

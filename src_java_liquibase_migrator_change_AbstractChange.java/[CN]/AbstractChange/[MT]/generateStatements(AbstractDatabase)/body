@@ -1,0 +1,17 @@
+{
+  if (database instanceof MSSQLDatabase) {
+    return generateStatements(((MSSQLDatabase)database));
+  }
+ else   if (database instanceof OracleDatabase) {
+    return generateStatements(((OracleDatabase)database));
+  }
+ else   if (database instanceof MySQLDatabase) {
+    return generateStatements(((MySQLDatabase)database));
+  }
+ else   if (database instanceof PostgresDatabase) {
+    return generateStatements(((PostgresDatabase)database));
+  }
+ else {
+    throw new RuntimeException("Unknown database type: " + database.getClass().getName());
+  }
+}

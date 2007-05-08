@@ -1,0 +1,12 @@
+{
+  if (shouldRun(changeSet)) {
+    changeSet.execute();
+    if (migrator.getRunStatus(changeSet).equals(ChangeSet.RunStatus.NOT_RAN)) {
+      markChangeSetAsRan(changeSet);
+    }
+ else {
+      markChangeSetAsReRan(changeSet);
+    }
+    migrator.getDatabase().getConnection().commit();
+  }
+}

@@ -1,7 +1,0 @@
-{
-  Column column1=new Column(new Table("table1","catalog","schem",null,null,null),"colB",-1,null,-1,-1,-1,null,null);
-  assertEquals(-1,column1.compareTo(new Column(new Table("table1","catalog","schem",null,null,null),"colC",-1,null,-1,-1,-1,null,null)));
-  assertEquals(1,column1.compareTo(new Column(new Table("table1","catalog","schem",null,null,null),"colA",-1,null,-1,-1,-1,null,null)));
-  assertEquals(0,column1.compareTo(new Column(new Table("table1","catalog","schem",null,null,null),"colB",-1,null,-1,-1,-1,null,null)));
-  assertTrue(column1.compareTo(new String()) > 0);
-}

@@ -1,3 +1,3 @@
 {
-  assertEquals("alter table TABLE_NAME modify (NAME integer(3))",change.generateStatement(new OracleDatabase()));
+  assertEquals("ALTER TABLE TABLE_NAME MODIFY (NAME integer(3))",change.generateStatements(new OracleDatabase())[0]);
 }

@@ -1,0 +1,22 @@
+{
+  Migrator migrator=null;
+  try {
+    migrator=createMigrator();
+    migrator.setMode(Migrator.EXECUTE_ROLLBACK_MODE);
+    migrator.setRollbackToDate(getRollbackDate());
+    migrator.migrate();
+  }
+ catch (  Exception e) {
+    throw new BuildException(e);
+  }
+ finally {
+    if (migrator != null && migrator.getDatabase() != null && migrator.getDatabase().getConnection() != null) {
+      try {
+        migrator.getDatabase().getConnection().close();
+      }
+ catch (      SQLException e) {
+        throw new BuildException(e);
+      }
+    }
+  }
+}

@@ -3,12 +3,8 @@
   change.setTableName("TABLE_NAME");
   change.setColumnName("COL_HERE");
   change.setDefaultNullValue("DEFAULT_VALUE");
-  assertEquals("alter table TABLE_NAME modify COL_HERE varchar(200) not null",change.generateStatement(new MySQLDatabase(){
-    public String getColumnDataType(    String tblName,    String colName){
-      return "varchar(200)";
-    }
-    public void updateNullColumns(    String tblName,    String colName,    String defaultValue){
-    }
-  }
-));
+  change.setColumnDataType("varchar(200)");
+  MySQLDatabase database=new MySQLDatabase();
+  assertEquals("UPDATE TABLE_NAME SET COL_HERE='DEFAULT_VALUE' WHERE COL_HERE IS NULL",change.generateStatements(database)[0]);
+  assertEquals("ALTER TABLE TABLE_NAME MODIFY COL_HERE varchar(200) NOT NULL",change.generateStatements(database)[1]);
 }

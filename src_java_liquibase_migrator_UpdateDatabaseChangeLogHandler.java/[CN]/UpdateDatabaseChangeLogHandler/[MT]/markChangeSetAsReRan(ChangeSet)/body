@@ -1,0 +1,19 @@
+{
+  String dateValue=changeSet.getDatabaseChangeLog().getMigrator().getDatabase().getCurrentDateTimeFunction();
+  String sql="UPDATE DATABASECHANGELOG SET DATEEXECUTED=" + dateValue + ", MD5SUM='?' WHERE ID='?' AND AUTHOR='?' AND FILENAME='?'";
+  sql=sql.replaceFirst("\\?",changeSet.getMd5sum().replaceAll("'","''"));
+  sql=sql.replaceFirst("\\?",changeSet.getId().replaceAll("'","''"));
+  sql=sql.replaceFirst("\\?",changeSet.getAuthor().replaceAll("'","''"));
+  sql=sql.replaceFirst("\\?",changeSet.getDatabaseChangeLog().getMigrator().getMigrationFile().replaceAll("'","''"));
+  Writer sqlOutputWriter=changeSet.getDatabaseChangeLog().getMigrator().getOutputSQLWriter();
+  if (sqlOutputWriter == null) {
+    Connection connection=changeSet.getDatabaseChangeLog().getMigrator().getDatabase().getConnection();
+    Statement statement=connection.createStatement();
+    statement.executeUpdate(sql);
+    statement.close();
+    connection.commit();
+  }
+ else {
+    sqlOutputWriter.write(sql + ";\n\n");
+  }
+}

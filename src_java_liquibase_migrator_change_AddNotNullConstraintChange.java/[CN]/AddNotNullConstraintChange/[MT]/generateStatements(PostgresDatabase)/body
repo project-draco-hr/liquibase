@@ -1,0 +1,3 @@
+{
+  return new String[]{generateUpdateStatement(),"ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL"};
+}

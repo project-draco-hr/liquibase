@@ -1,0 +1,14 @@
+{
+  if (this.dropAllFirst == null) {
+    this.dropAllFirst=Boolean.FALSE;
+  }
+  if (this.promptForNonLocalDatabase == null) {
+    this.promptForNonLocalDatabase=Boolean.FALSE;
+  }
+  if (this.logLevel == null) {
+    this.logLevel="off";
+  }
+  if (this.includeSystemClasspath == null) {
+    this.includeSystemClasspath=Boolean.TRUE;
+  }
+}

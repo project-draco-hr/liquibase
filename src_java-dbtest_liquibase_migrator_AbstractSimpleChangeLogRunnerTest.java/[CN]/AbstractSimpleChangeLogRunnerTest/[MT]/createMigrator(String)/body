@@ -1,0 +1,12 @@
+{
+  JUnitFileOpener fileOpener=new JUnitFileOpener();
+  Migrator migrator=new Migrator(changeLogFile,fileOpener);
+  migrator.setContexts("test");
+  Driver driver=(Driver)Class.forName(driverName,true,new JUnitJDBCDriverClassLoader(driverDirectory)).newInstance();
+  Properties info=new Properties();
+  info.put("user",username);
+  info.put("password",password);
+  Connection connection=driver.connect(url,info);
+  migrator.init(connection);
+  return migrator;
+}

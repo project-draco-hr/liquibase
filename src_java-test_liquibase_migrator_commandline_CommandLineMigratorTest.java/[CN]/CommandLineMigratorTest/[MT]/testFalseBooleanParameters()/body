@@ -1,0 +1,8 @@
+{
+  String[] args=new String[]{"-promptForNonLocalDatabase=false","-dropAllFirst=false","migrate"};
+  CommandLineMigrator cli=new CommandLineMigrator();
+  cli.parseOptions(args);
+  assertEquals(Boolean.FALSE,cli.promptForNonLocalDatabase);
+  assertEquals(Boolean.FALSE,cli.dropAllFirst);
+  assertEquals("migrate",cli.command);
+}

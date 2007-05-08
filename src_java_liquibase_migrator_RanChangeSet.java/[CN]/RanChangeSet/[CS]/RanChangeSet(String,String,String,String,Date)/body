@@ -1,0 +1,7 @@
+{
+  this.changeLog=changeLog;
+  this.id=id;
+  this.author=author;
+  this.md5sum=md5sum;
+  this.dateExecuted=dateExecuted;
+}

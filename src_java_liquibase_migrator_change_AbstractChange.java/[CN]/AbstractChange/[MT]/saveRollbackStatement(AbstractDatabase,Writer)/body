@@ -1,0 +1,6 @@
+{
+  String[] statements=generateRollbackStatements(database);
+  for (  String statement : statements) {
+    writer.append(statement + ";\n\n");
+  }
+}

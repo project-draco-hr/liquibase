@@ -1,0 +1,12 @@
+{
+  Migrator migrator=createMigrator(rollbackChangeLog);
+  migrator.setMode(Migrator.EXECUTE_MODE);
+  migrator.setShouldDropDatabaseObjectsFirst(true);
+  migrator.migrate();
+  StringWriter writer=new StringWriter();
+  migrator=createMigrator(rollbackChangeLog);
+  migrator.setMode(Migrator.OUTPUT_ROLLBACK_SQL_MODE);
+  migrator.setOutputSQLWriter(writer);
+  migrator.setRollbackToDate(new Date(0));
+  migrator.migrate();
+}

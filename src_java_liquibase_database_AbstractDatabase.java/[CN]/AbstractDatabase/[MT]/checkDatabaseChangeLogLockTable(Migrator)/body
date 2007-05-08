@@ -14,14 +14,19 @@
         log.info("Created database lock table with name: DATABASECHANGELOGLOCK");
       }
  else {
-        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + "-----------------------------------------------------------------------------------------------\n");
-        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " DATABASECHANGELOGLOCK table does not exist.\n");
-        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Race conditions may cause a corrupted sql script.\n");
-        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Consider running: \n");
-        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getCreateChangeLogLockSQL()+ ";\n");
-        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getChangeLogLockInsertSQL()+ ";\n");
-        migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + "-----------------------------------------------------------------------------------------------\n\n");
-        migrator.getOutputSQLWriter().append(createTableStatement + ";\n\n");
+        if (!migrator.getMode().equals(Migrator.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
+          if (!outputtedLockWarning) {
+            migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + "-----------------------------------------------------------------------------------------------\n");
+            migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " DATABASECHANGELOGLOCK table does not exist.\n");
+            migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Race conditions may cause a corrupted sql script.\n");
+            migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Consider running: \n");
+            migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getCreateChangeLogLockSQL()+ ";\n");
+            migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getChangeLogLockInsertSQL()+ ";\n");
+            migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + "-----------------------------------------------------------------------------------------------\n\n");
+            outputtedLockWarning=true;
+          }
+          migrator.getOutputSQLWriter().append(createTableStatement + ";\n\n");
+        }
         changeLogLockTableExists=false;
       }
     }

@@ -1,0 +1,3 @@
+{
+  return "UPDATE " + tableName + " SET "+ columnName+ "='"+ defaultNullValue+ "' WHERE "+ columnName+ " IS NULL";
+}

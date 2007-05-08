@@ -1,0 +1,11 @@
+{
+  if (rollBackStatements != null && rollBackStatements.length > 0) {
+    return true;
+  }
+  for (  AbstractChange change : getRefactorings()) {
+    if (!change.canRollBack()) {
+      return false;
+    }
+  }
+  return true;
+}

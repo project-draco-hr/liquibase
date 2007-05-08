@@ -1,8 +1,0 @@
-{
-  StringBuffer buffer=new StringBuffer();
-  buffer.append("DROP INDEX ");
-  buffer.append(indexName);
-  buffer.append(" ON ");
-  buffer.append(tableName);
-  return buffer.toString();
-}

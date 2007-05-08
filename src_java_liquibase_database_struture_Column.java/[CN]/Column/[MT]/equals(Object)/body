@@ -1,8 +1,0 @@
-{
-  if (this == o)   return true;
-  if (o == null || getClass() != o.getClass())   return false;
-  final Column column=(Column)o;
-  if (!name.equals(column.name))   return false;
-  if (!table.equals(column.table))   return false;
-  return true;
-}

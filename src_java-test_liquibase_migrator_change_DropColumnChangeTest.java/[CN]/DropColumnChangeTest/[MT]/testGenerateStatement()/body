@@ -2,5 +2,5 @@
   DropColumnChange change=new DropColumnChange();
   change.setTableName("TABLE_NAME");
   change.setColumnName("COL_HERE");
-  assertEquals("ALTER TABLE TABLE_NAME DROP COLUMN COL_HERE",change.generateStatement(new OracleDatabase()));
+  assertEquals("ALTER TABLE TABLE_NAME DROP COLUMN COL_HERE",change.generateStatements(new OracleDatabase())[0]);
 }

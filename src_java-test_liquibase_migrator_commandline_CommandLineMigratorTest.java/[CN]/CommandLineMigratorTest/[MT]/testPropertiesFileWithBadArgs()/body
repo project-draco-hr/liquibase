@@ -1,0 +1,16 @@
+{
+  CommandLineMigrator cli=new CommandLineMigrator();
+  Properties props=new Properties();
+  props.setProperty("driver","DRIVER");
+  props.setProperty("username","USERNAME");
+  props.setProperty("badArg","ARG");
+  ByteArrayOutputStream propFile=new ByteArrayOutputStream();
+  props.store(propFile,"");
+  try {
+    cli.parsePropertiesFile(new ByteArrayInputStream(propFile.toByteArray()));
+    fail("Should have thrown an exception");
+  }
+ catch (  CommandLineParsingException e) {
+    assertEquals("Unknown parameter: 'badArg'",e.getMessage());
+  }
+}

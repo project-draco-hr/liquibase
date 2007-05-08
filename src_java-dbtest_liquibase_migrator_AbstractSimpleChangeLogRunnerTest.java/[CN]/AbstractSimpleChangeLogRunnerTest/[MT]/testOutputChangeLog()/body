@@ -1,0 +1,8 @@
+{
+  StringWriter output=new StringWriter();
+  Migrator migrator=createMigrator(completeChangeLog);
+  migrator.setOutputSQLWriter(output);
+  migrator.setShouldDropDatabaseObjectsFirst(true);
+  migrator.setMode(Migrator.OUTPUT_SQL_MODE);
+  migrator.migrate();
+}

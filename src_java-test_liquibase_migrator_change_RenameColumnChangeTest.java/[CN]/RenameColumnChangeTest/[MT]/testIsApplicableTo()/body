@@ -1,4 +1,0 @@
-{
-  assertTrue(refactoring.isApplicableTo(new HashSet(Arrays.asList(new DatabaseStructure[]{createColumnDatabaseStructure()}))));
-  assertFalse(refactoring.isApplicableTo(new HashSet(Arrays.asList(new DatabaseStructure[]{createColumnDatabaseStructure(),createColumnDatabaseStructure()}))));
-}

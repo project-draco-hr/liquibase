@@ -3,19 +3,19 @@
   change.setSequenceName("SEQ_NAME");
   OracleDatabase oracleDatabase=new OracleDatabase();
   change.setMinValue(100);
-  assertEquals("CREATE SEQUENCE SEQ_NAME MINVALUE 100",change.generateStatement(oracleDatabase));
+  assertEquals("CREATE SEQUENCE SEQ_NAME MINVALUE 100",change.generateStatements(oracleDatabase)[0]);
   change.setMinValue(null);
   change.setMaxValue(1000);
-  assertEquals("CREATE SEQUENCE SEQ_NAME MAXVALUE 1000",change.generateStatement(oracleDatabase));
+  assertEquals("CREATE SEQUENCE SEQ_NAME MAXVALUE 1000",change.generateStatements(oracleDatabase)[0]);
   change.setMaxValue(null);
   change.setIncrementBy(50);
-  assertEquals("CREATE SEQUENCE SEQ_NAME INCREMENT BY 50",change.generateStatement(oracleDatabase));
+  assertEquals("CREATE SEQUENCE SEQ_NAME INCREMENT BY 50",change.generateStatements(oracleDatabase)[0]);
   change.setIncrementBy(null);
   change.setOrdered(true);
-  assertEquals("CREATE SEQUENCE SEQ_NAME ORDER",change.generateStatement(oracleDatabase));
+  assertEquals("CREATE SEQUENCE SEQ_NAME ORDER",change.generateStatements(oracleDatabase)[0]);
   change.setMinValue(1);
   change.setMaxValue(2);
   change.setIncrementBy(3);
   change.setStartValue(4);
-  assertEquals("CREATE SEQUENCE SEQ_NAME START WITH 4 INCREMENT BY 3 MINVALUE 1 MAXVALUE 2 ORDER",change.generateStatement(oracleDatabase));
+  assertEquals("CREATE SEQUENCE SEQ_NAME START WITH 4 INCREMENT BY 3 MINVALUE 1 MAXVALUE 2 ORDER",change.generateStatements(oracleDatabase)[0]);
 }

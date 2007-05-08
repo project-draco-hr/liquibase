@@ -1,6 +1,0 @@
-String sequenceName
-Integer startValue
-Integer incrementBy
-Integer minValue
-Integer maxValue
-Boolean ordered

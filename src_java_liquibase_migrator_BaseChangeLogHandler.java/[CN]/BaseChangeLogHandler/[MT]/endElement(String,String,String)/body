@@ -1,0 +1,48 @@
+{
+  String textString=null;
+  if (text != null && text.length() > 0) {
+    textString=StringUtils.trimToNull(text.toString());
+  }
+  try {
+    if (precondition != null && "preConditions".equals(qName)) {
+      changeLog.setPreconditions(precondition);
+      precondition.checkConditions();
+    }
+ else     if (precondition != null && "or".equals(qName) && notprecondition == null) {
+      precondition.setOrPreCondition(orprecondition);
+    }
+ else     if (precondition != null && "not".equals(qName)) {
+      precondition.setNotPreCondition(notprecondition);
+    }
+ else     if (precondition != null && "runningAs".equals(qName)) {
+      precondition.setRunningAs(runningAs);
+    }
+ else     if (changeSet != null && "rollback".equals(qName)) {
+      changeSet.setRollBackSQL(textString);
+    }
+ else     if (changeSet != null && "comment".equals(qName)) {
+      changeSet.setComments(textString);
+    }
+ else     if (changeSet != null && "changeSet".equals(qName)) {
+      handleChangeSet(changeSet);
+      changeSet=null;
+    }
+ else     if (change != null && qName.equals(change.getTagName())) {
+      if (textString != null) {
+        if (change instanceof RawSQLChange) {
+          ((RawSQLChange)change).setSql(textString);
+        }
+ else {
+          throw new RuntimeException("Unexpected text in " + change.getTagName());
+        }
+      }
+      text=null;
+      changeSet.addRefactoring(change);
+      change=null;
+    }
+  }
+ catch (  Exception e) {
+    log.log(Level.SEVERE,"Error thrown as a SAXException: " + e.getMessage(),e);
+    throw new SAXException(e);
+  }
+}

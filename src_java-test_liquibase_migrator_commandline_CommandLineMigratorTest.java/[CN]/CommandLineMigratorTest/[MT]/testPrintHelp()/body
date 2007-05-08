@@ -1,0 +1,12 @@
+{
+  ByteArrayOutputStream stream=new ByteArrayOutputStream();
+  CommandLineMigrator cli=new CommandLineMigrator();
+  cli.printHelp(new PrintStream(stream));
+  BufferedReader reader=new BufferedReader(new StringReader(new String(stream.toByteArray())));
+  String line;
+  while ((line=reader.readLine()) != null) {
+    if (line.length() > 80) {
+      fail("'" + line + "' is longer than 80 chars");
+    }
+  }
+}

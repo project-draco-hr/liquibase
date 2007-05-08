@@ -1,35 +1,74 @@
 {
   Migrator migrator=getDatabaseChangeLog().getMigrator();
+  Connection connection=migrator.getDatabase().getConnection();
   try {
-    RunStatus isChangeSetRan=isChangeSetRan();
-    if (shouldAlwaysRun() || !isChangeSetRan.equals(RunStatus.ALREADY_RAN)) {
-      if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
-        log.finest("Reading ChangeSet: " + toString());
-        for (        AbstractChange change : getRefactorings()) {
-          change.executeStatement(migrator.getDatabase());
-          log.finest(change.getConfirmationMessage());
-        }
-        migrator.getDatabase().getConnection().commit();
-        log.finest("ChangeSet " + toString() + " has been successfully ran.");
+    Writer outputSQLWriter=getDatabaseChangeLog().getMigrator().getOutputSQLWriter();
+    if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
+      log.finest("Reading ChangeSet: " + toString());
+      for (      AbstractChange change : getRefactorings()) {
+        change.executeStatements(migrator.getDatabase());
+        log.finest(change.getConfirmationMessage());
       }
- else       if (migrator.getMode().equals(Migrator.OUTPUT_SQL_MODE)) {
-        getDatabaseChangeLog().getMigrator().getOutputSQLWriter().write("-- Changeset " + toString() + "\n");
-        for (        AbstractChange change : getRefactorings()) {
-          change.saveStatement(getDatabaseChangeLog().getMigrator().getDatabase(),getDatabaseChangeLog().getMigrator().getOutputSQLWriter());
-        }
-      }
-      if (isChangeSetRan.equals(RunStatus.NOT_RAN)) {
-        markChangeSetAsRan();
-      }
- else {
-        markChangeSetAsReRan();
+      connection.commit();
+      log.finest("ChangeSet " + toString() + " has been successfully ran.");
+    }
+ else     if (migrator.getMode().equals(Migrator.OUTPUT_SQL_MODE)) {
+      outputSQLWriter.write("-- Changeset " + toString() + "\n");
+      writeComments(outputSQLWriter);
+      for (      AbstractChange change : getRefactorings()) {
+        change.saveStatement(getDatabaseChangeLog().getMigrator().getDatabase(),outputSQLWriter);
       }
     }
-    migrator.getDatabase().getConnection().commit();
+ else     if (migrator.getMode().equals(Migrator.EXECUTE_ROLLBACK_MODE)) {
+      log.finest("Rolling Back ChangeSet: " + toString());
+      if (rollBackStatements != null && rollBackStatements.length > 0) {
+        Statement statement=connection.createStatement();
+        for (        String rollback : rollBackStatements) {
+          try {
+            statement.execute(rollback);
+          }
+ catch (          SQLException e) {
+            throw new RollbackFailedException("Error executing custom SQL [" + rollback + "]");
+          }
+        }
+        statement.close();
+      }
+ else {
+        List<AbstractChange> refactorings=getRefactorings();
+        for (int i=refactorings.size() - 1; i >= 0; i--) {
+          AbstractChange change=refactorings.get(i);
+          change.executeRollbackStatements(migrator.getDatabase());
+          log.finest(change.getConfirmationMessage());
+        }
+      }
+      connection.commit();
+      log.finest("ChangeSet " + toString() + " has been successfully rolled back.");
+    }
+ else     if (migrator.getMode().equals(Migrator.OUTPUT_ROLLBACK_SQL_MODE) || migrator.getMode().equals(Migrator.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
+      outputSQLWriter.write("-- Changeset " + toString() + "\n");
+      writeComments(outputSQLWriter);
+      if (rollBackStatements != null && rollBackStatements.length > 0) {
+        for (        String statement : rollBackStatements) {
+          outputSQLWriter.append(statement + ";\n\n");
+        }
+      }
+ else {
+        for (int i=refactorings.size() - 1; i >= 0; i--) {
+          AbstractChange change=refactorings.get(i);
+          change.saveRollbackStatement(getDatabaseChangeLog().getMigrator().getDatabase(),outputSQLWriter);
+        }
+      }
+    }
+ else     if (migrator.getMode().equals(Migrator.OUTPUT_CHANGELOG_ONLY_SQL_MODE)) {
+    }
+ else {
+      throw new MigrationFailedException("Unexpected mode: " + migrator.getMode());
+    }
+    connection.commit();
   }
  catch (  Exception e) {
     try {
-      migrator.getDatabase().getConnection().rollback();
+      connection.rollback();
     }
  catch (    SQLException e1) {
       throw new MigrationFailedException("Unable to process change set: " + toString() + ": "+ e.getMessage(),e);

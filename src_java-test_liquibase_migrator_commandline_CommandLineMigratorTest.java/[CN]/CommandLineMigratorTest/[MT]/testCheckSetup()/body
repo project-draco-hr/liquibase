@@ -1,0 +1,15 @@
+{
+  CommandLineMigrator cli=new CommandLineMigrator();
+  assertFalse(cli.checkSetup());
+  cli.driver="driver";
+  cli.username="username";
+  cli.password="pwd";
+  cli.url="url";
+  cli.migrationFile="file";
+  cli.classpath="classpath";
+  assertFalse(cli.checkSetup());
+  cli.command="BadCommand";
+  assertFalse(cli.checkSetup());
+  cli.command="migrate";
+  assertTrue(cli.checkSetup());
+}

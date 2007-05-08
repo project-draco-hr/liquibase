@@ -4,42 +4,28 @@
     log("Migrator did not run because '" + Migrator.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
     return;
   }
-  Connection connection=null;
+  Migrator migrator=null;
   try {
-    String[] strings=classpath.list();
-    List<URL> taskClassPath=new ArrayList<URL>();
-    for (int i=0; i < strings.length; i++) {
-      URL url=new File(strings[i]).toURL();
-      taskClassPath.add(url);
-    }
-    Driver driver=(Driver)Class.forName(getDriver(),true,new URLClassLoader(taskClassPath.toArray(new URL[taskClassPath.size()]))).newInstance();
-    Properties info=new Properties();
-    info.put("user",getUsername());
-    info.put("password",getPassword());
-    connection=driver.connect(getUrl(),info);
-    String[] migrationFiles=getMigrationFiles().split(",");
-    for (    String migrationFile : migrationFiles) {
-      Migrator migrator=new Migrator(migrationFile.trim(),new AntFileOpener(getProject(),classpath));
-      migrator.setContexts(getContexts());
-      migrator.init(connection);
-      if (isPromptOnNonLocalDatabase() && !migrator.isSaveToRunMigration()) {
-        if (JOptionPane.showConfirmDialog(null,"You are running a database refactoring against a non-local database.\n" + "Database URL is: " + migrator.getDatabase().getConnectionURL() + "\n"+ "Username is: "+ migrator.getDatabase().getConnectionUsername()+ "\n\n"+ "Area you sure you want to do this?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE) == JOptionPane.NO_OPTION) {
-          throw new MigrationFailedException("Chose not to run against non-production database");
-        }
+    migrator=createMigrator();
+    migrator.setContexts(getContexts());
+    migrator.setMode(Migrator.EXECUTE_MODE);
+    if (isPromptOnNonLocalDatabase() && !migrator.isSaveToRunMigration()) {
+      if (JOptionPane.showConfirmDialog(null,"You are running a database refactoring against a non-local database.\n" + "Database URL is: " + migrator.getDatabase().getConnectionURL() + "\n"+ "Username is: "+ migrator.getDatabase().getConnectionUsername()+ "\n\n"+ "Area you sure you want to do this?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE) == JOptionPane.NO_OPTION) {
+        throw new MigrationFailedException("Chose not to run against non-production database");
       }
-      if (isDropFirst()) {
-        migrator.setShouldDropDatabaseObjectsFirst(isRebuildDatabase());
-      }
-      migrator.migrate();
     }
+    if (isDropFirst()) {
+      migrator.setShouldDropDatabaseObjectsFirst(isRebuildDatabase());
+    }
+    migrator.migrate();
   }
  catch (  Exception e) {
     throw new BuildException(e);
   }
  finally {
-    if (connection != null) {
+    if (migrator != null && migrator.getDatabase() != null && migrator.getDatabase().getConnection() != null) {
       try {
-        connection.close();
+        migrator.getDatabase().getConnection().close();
       }
  catch (      SQLException e) {
         throw new BuildException(e);

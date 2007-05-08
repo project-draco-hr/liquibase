@@ -1,0 +1,50 @@
+{
+  StringBuffer fkConstraints=new StringBuffer();
+  StringBuffer buffer=new StringBuffer();
+  buffer.append("CREATE TABLE ").append(getTableName()).append(" ");
+  buffer.append("(");
+  Iterator iterator=getColumns().iterator();
+  while (iterator.hasNext()) {
+    ColumnConfig column=(ColumnConfig)iterator.next();
+    ConstraintsConfig constraints=column.getConstraints();
+    buffer.append(column.getName());
+    if (column.getType() != null) {
+      buffer.append(" ").append(database.getColumnType(column));
+    }
+    if (constraints != null) {
+      if (constraints.isNullable() != null && !constraints.isNullable()) {
+        buffer.append(" NOT NULL");
+      }
+      if (constraints.isPrimaryKey() != null && constraints.isPrimaryKey()) {
+        buffer.append(" PRIMARY KEY");
+      }
+      if (constraints.getReferences() != null) {
+        fkConstraints.append(" CONSTRAINT ").append(constraints.getForeignKeyName()).append(" FOREIGN KEY (").append(column.getName()).append(") REFERENCES ").append(constraints.getReferences());
+        if (constraints.isInitiallyDeferred() != null && constraints.isInitiallyDeferred()) {
+          fkConstraints.append(" INITIALLY DEFERRED");
+        }
+        if (constraints.isDeferrable() != null && constraints.isDeferrable()) {
+          fkConstraints.append(" DEFERRABLE,");
+        }
+      }
+      if (constraints.isUnique() != null && constraints.isUnique()) {
+        buffer.append(" UNIQUE");
+      }
+      if (constraints.getCheck() != null)       buffer.append(constraints.getCheck()).append(" ");
+    }
+    if (column.getDefaultValue() != null) {
+      buffer.append(" DEFAULT '").append(column.getDefaultValue()).append("'");
+    }
+    if (column.isAutoIncrement() != null && column.isAutoIncrement().booleanValue()) {
+      buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
+    }
+    if (iterator.hasNext()) {
+      buffer.append(", ");
+    }
+  }
+  if (fkConstraints.length() > 0) {
+    buffer.append(", ").append(fkConstraints.toString().replaceFirst(",$",""));
+  }
+  buffer.append(")");
+  return new String[]{buffer.toString().trim()};
+}

@@ -1,0 +1,44 @@
+{
+  if (!getDatabase().doesChangeLogTableExist()) {
+    return ChangeSet.RunStatus.NOT_RAN;
+  }
+  RanChangeSet foundRan=null;
+  for (  RanChangeSet ranChange : getRanChangeSetList()) {
+    if (ranChange.isSameAs(changeSet)) {
+      foundRan=ranChange;
+      break;
+    }
+  }
+  if (foundRan == null) {
+    return ChangeSet.RunStatus.NOT_RAN;
+  }
+ else {
+    if (foundRan.getMd5sum() == null) {
+      log.info("Updating NULL md5sum for " + this.toString());
+      Migrator migrator=changeSet.getDatabaseChangeLog().getMigrator();
+      Connection connection=migrator.getDatabase().getConnection();
+      PreparedStatement updatePstmt=connection.prepareStatement("update DatabaseChangeLog set md5sum=? where id=? AND author=? AND filename=?".toUpperCase());
+      updatePstmt.setString(1,changeSet.getMd5sum());
+      updatePstmt.setString(2,changeSet.getId());
+      updatePstmt.setString(3,changeSet.getAuthor());
+      updatePstmt.setString(4,migrator.getMigrationFile());
+      updatePstmt.executeUpdate();
+      updatePstmt.close();
+      connection.commit();
+      return ChangeSet.RunStatus.ALREADY_RAN;
+    }
+ else {
+      if (foundRan.getMd5sum().equals(changeSet.getMd5sum())) {
+        return ChangeSet.RunStatus.ALREADY_RAN;
+      }
+ else {
+        if (changeSet.shouldRunOnChange()) {
+          return ChangeSet.RunStatus.RUN_AGAIN;
+        }
+ else {
+          throw new DatabaseHistoryException("MD5 Check for " + toString() + " failed");
+        }
+      }
+    }
+  }
+}

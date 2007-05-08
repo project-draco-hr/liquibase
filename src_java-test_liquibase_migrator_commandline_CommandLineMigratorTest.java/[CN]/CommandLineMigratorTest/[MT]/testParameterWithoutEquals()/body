@@ -1,0 +1,11 @@
+{
+  String[] args=new String[]{"-promptForNonLocalDatabase","true","-dropAllFirst=true","migrate"};
+  CommandLineMigrator cli=new CommandLineMigrator();
+  try {
+    cli.parseOptions(args);
+    fail("Should have thrown an exception");
+  }
+ catch (  CommandLineParsingException e) {
+    assertEquals("Could not parse '-promptForNonLocalDatabase'",e.getMessage());
+  }
+}
