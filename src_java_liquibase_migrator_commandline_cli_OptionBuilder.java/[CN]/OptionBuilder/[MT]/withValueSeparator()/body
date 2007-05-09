@@ -1,4 +1,0 @@
-{
-  instance.valuesep='=';
-  return instance;
-}

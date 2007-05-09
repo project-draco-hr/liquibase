@@ -1,9 +1,0 @@
-{
-  try {
-    return Class.forName(str);
-  }
- catch (  ClassNotFoundException cnfe) {
-    System.err.println("Unable to find: " + str);
-    return null;
-  }
-}

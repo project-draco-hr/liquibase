@@ -1,0 +1,6 @@
+{
+  Element element=currentMigrationFileDOM.createElement("createView");
+  element.setAttribute("viewName",getViewName());
+  element.appendChild(currentMigrationFileDOM.createTextNode(getSelectQuery()));
+  return element;
+}

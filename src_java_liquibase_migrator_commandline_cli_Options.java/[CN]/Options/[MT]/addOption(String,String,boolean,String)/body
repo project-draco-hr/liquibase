@@ -1,4 +1,0 @@
-{
-  addOption(new Option(opt,longOpt,hasArg,description));
-  return this;
-}

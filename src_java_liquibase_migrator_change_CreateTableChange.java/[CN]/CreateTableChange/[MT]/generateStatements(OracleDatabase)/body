@@ -1,3 +1,3 @@
 {
-  return generateStatements(((AbstractDatabase)database));
+  return generateCommonStatements(((AbstractDatabase)database));
 }

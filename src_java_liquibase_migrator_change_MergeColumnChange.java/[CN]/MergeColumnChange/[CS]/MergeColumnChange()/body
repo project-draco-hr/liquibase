@@ -1,0 +1,3 @@
+{
+  super("mergeColumns","Merge Column");
+}

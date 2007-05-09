@@ -1,7 +1,0 @@
-{
-  if (eatTheRest) {
-    while (iter.hasNext()) {
-      tokens.add(iter.next());
-    }
-  }
-}

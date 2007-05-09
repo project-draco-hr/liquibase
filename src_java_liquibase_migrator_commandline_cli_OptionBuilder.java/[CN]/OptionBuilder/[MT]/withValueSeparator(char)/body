@@ -1,4 +1,0 @@
-{
-  instance.valuesep=sep;
-  return instance;
-}

@@ -1,5 +1,0 @@
-{
-  PrintWriter pw=new PrintWriter(System.out);
-  printHelp(pw,width,cmdLineSyntax,header,options,defaultLeftPad,defaultDescPad,footer,autoUsage);
-  pw.flush();
-}

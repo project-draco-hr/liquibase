@@ -1,0 +1,36 @@
+{
+  List<String> statements=new ArrayList<String>();
+  AddColumnChange addNewColumnChange=new AddColumnChange();
+  addNewColumnChange.setTableName(getTableName());
+  ColumnConfig columnConfig=new ColumnConfig();
+  columnConfig.setName(getFinalColumnName());
+  columnConfig.setType(getFinalColumnType());
+  addNewColumnChange.setColumn(columnConfig);
+  statements.addAll(Arrays.asList(addNewColumnChange.generateStatements(database)));
+  String updateStatement;
+  if (database instanceof OracleDatabase) {
+    updateStatement="UPDATE " + getTableName() + " SET "+ getFinalColumnName()+ " = "+ getColumn1Name()+ " || '"+ getJoinString()+ "' ||"+ getColumn2Name();
+  }
+ else   if (database instanceof PostgresDatabase) {
+    updateStatement="UPDATE " + getTableName() + " SET "+ getFinalColumnName()+ " = "+ getColumn1Name()+ " || '"+ getJoinString()+ "' ||"+ getColumn2Name();
+  }
+ else   if (database instanceof MSSQLDatabase) {
+    updateStatement="UPDATE " + getTableName() + " SET "+ getFinalColumnName()+ " = "+ getColumn1Name()+ " + '"+ getJoinString()+ "' + "+ getColumn2Name();
+  }
+ else   if (database instanceof MySQLDatabase) {
+    updateStatement="UPDATE " + getTableName() + " SET "+ getFinalColumnName()+ " = CONCAT_WS('"+ getJoinString()+ "', "+ getColumn1Name()+ ", "+ getColumn2Name()+ ")";
+  }
+ else {
+    throw new UnsupportedChangeException("Merge Column not supported for " + database.getProductName());
+  }
+  statements.add(updateStatement);
+  DropColumnChange dropColumn1Change=new DropColumnChange();
+  dropColumn1Change.setTableName(getTableName());
+  dropColumn1Change.setColumnName(getColumn1Name());
+  statements.addAll(Arrays.asList(dropColumn1Change.generateStatements(database)));
+  DropColumnChange dropColumn2Change=new DropColumnChange();
+  dropColumn2Change.setTableName(getTableName());
+  dropColumn2Change.setColumnName(getColumn2Name());
+  statements.addAll(Arrays.asList(dropColumn2Change.generateStatements(database)));
+  return statements.toArray(new String[statements.size()]);
+}

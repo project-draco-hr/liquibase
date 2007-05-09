@@ -1,5 +1,0 @@
-{
-  eatTheRest=false;
-  tokens.clear();
-  currentOption=null;
-}

@@ -1,9 +1,0 @@
-{
-  if (this.options.hasOption(token)) {
-    currentOption=this.options.getOption(token);
-    tokens.add(token);
-  }
- else   if (stopAtNonOption) {
-    eatTheRest=true;
-  }
-}

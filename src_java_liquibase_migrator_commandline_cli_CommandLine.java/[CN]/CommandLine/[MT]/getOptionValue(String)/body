@@ -1,4 +1,0 @@
-{
-  String[] values=getOptionValues(opt);
-  return (values == null) ? null : values[0];
-}

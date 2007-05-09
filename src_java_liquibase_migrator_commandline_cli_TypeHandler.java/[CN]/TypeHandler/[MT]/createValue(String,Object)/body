@@ -1,3 +1,0 @@
-{
-  return createValue(str,(Class)obj);
-}

@@ -1,9 +1,0 @@
-{
-  try {
-    return new URL(str);
-  }
- catch (  MalformedURLException mue) {
-    System.err.println("Unable to parse: " + str);
-    return null;
-  }
-}

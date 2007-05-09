@@ -1,4 +1,0 @@
-{
-  instance.argName=name;
-  return instance;
-}

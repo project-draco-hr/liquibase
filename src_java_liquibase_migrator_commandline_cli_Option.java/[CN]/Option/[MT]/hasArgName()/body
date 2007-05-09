@@ -1,3 +1,0 @@
-{
-  return (this.argName != null && this.argName.length() > 0);
-}

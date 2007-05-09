@@ -1,3 +1,0 @@
-{
-  return getOptionValues(String.valueOf(opt));
-}

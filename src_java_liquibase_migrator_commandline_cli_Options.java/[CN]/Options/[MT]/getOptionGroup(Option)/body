@@ -1,3 +1,0 @@
-{
-  return (OptionGroup)optionGroups.get(opt.getOpt());
-}

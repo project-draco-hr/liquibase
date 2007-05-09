@@ -1,5 +1,0 @@
-{
-  Collection processed=hashcodeMap.values();
-  optionsArray=new Option[processed.size()];
-  return (Option[])processed.toArray(optionsArray);
-}

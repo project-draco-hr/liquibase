@@ -1,5 +1,0 @@
-{
-  instance.numberOfArgs=1;
-  instance.optionalArg=true;
-  return instance;
-}

@@ -1,5 +1,0 @@
-{
-  instance.numberOfArgs=Option.UNLIMITED_VALUES;
-  instance.optionalArg=true;
-  return instance;
-}

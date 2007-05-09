@@ -1,4 +1,0 @@
-{
-  instance.longopt=longopt;
-  return instance;
-}

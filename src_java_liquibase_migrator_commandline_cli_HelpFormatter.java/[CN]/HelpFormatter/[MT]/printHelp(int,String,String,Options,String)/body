@@ -1,3 +1,0 @@
-{
-  printHelp(width,cmdLineSyntax,header,options,footer,false);
-}

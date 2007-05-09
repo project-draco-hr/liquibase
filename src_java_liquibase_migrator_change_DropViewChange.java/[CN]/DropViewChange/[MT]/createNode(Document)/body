@@ -1,0 +1,5 @@
+{
+  Element element=currentMigrationFileDOM.createElement("dropView");
+  element.setAttribute("viewName",getViewName());
+  return element;
+}

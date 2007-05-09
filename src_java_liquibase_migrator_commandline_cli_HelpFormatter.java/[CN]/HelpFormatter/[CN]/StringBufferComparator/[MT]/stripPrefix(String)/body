@@ -1,7 +1,0 @@
-{
-  int iStartIndex=strOption.lastIndexOf('-');
-  if (iStartIndex == -1) {
-    iStartIndex=0;
-  }
-  return strOption.substring(iStartIndex);
-}

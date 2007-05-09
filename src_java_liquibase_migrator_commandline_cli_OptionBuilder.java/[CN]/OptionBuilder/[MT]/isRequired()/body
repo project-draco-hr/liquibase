@@ -1,4 +1,0 @@
-{
-  instance.required=true;
-  return instance;
-}

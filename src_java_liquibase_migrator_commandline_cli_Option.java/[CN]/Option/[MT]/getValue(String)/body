@@ -1,4 +1,0 @@
-{
-  String value=getValue();
-  return (value != null) ? value : defaultValue;
-}

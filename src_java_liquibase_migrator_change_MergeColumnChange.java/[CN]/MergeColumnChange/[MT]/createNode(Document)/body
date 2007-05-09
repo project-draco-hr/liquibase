@@ -1,0 +1,10 @@
+{
+  Element element=currentMigrationFileDOM.createElement(getTagName());
+  element.setAttribute("tableName",getTableName());
+  element.setAttribute("column1Name",getColumn1Name());
+  element.setAttribute("joinString",getJoinString());
+  element.setAttribute("column2Name",getColumn2Name());
+  element.setAttribute("finalColumnName",getFinalColumnName());
+  element.setAttribute("finalColumnType",getFinalColumnType());
+  return element;
+}

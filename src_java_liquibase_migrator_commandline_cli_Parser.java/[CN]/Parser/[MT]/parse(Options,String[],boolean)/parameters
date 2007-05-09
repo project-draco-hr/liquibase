@@ -1,3 +1,0 @@
-Options opts
-String[] arguments
-boolean stopAtNonOption

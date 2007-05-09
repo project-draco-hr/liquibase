@@ -1,4 +1,0 @@
-{
-  instance.numberOfArgs=1;
-  return instance;
-}

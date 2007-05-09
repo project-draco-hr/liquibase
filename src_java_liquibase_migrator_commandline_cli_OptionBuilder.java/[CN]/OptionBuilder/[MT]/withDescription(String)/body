@@ -1,4 +1,0 @@
-{
-  instance.description=description;
-  return instance;
-}
