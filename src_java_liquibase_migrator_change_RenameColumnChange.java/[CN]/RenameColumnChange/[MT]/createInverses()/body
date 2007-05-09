@@ -1,0 +1,8 @@
+{
+  RenameColumnChange inverse=new RenameColumnChange();
+  inverse.setTableName(getTableName());
+  inverse.setOldColumnName(getNewColumnName());
+  inverse.setNewColumnName(getOldColumnName());
+  inverse.setColumnDataType(getColumnDataType());
+  return new AbstractChange[]{inverse};
+}

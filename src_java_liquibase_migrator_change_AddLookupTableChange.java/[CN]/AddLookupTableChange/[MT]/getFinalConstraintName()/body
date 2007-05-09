@@ -1,0 +1,8 @@
+{
+  if (constraintName == null) {
+    return ("FK_" + getExistingTableName() + "_"+ getNewTableName()).toUpperCase();
+  }
+ else {
+    return constraintName;
+  }
+}

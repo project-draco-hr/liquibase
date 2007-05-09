@@ -1,3 +1,3 @@
 {
-  return createInverse() != null;
+  return createInverses() != null;
 }

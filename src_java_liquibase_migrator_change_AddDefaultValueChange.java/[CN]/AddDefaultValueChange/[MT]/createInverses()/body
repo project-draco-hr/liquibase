@@ -1,0 +1,6 @@
+{
+  DropDefaultValueChange inverse=new DropDefaultValueChange();
+  inverse.setTableName(getTableName());
+  inverse.setColumnName(getColumnName());
+  return new AbstractChange[]{inverse};
+}

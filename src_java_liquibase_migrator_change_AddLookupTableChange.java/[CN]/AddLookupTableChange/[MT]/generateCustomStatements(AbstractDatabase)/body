@@ -19,11 +19,7 @@
   addFKChange.setBaseColumnNames(getExistingColumnName());
   addFKChange.setReferencedTableName(getNewTableName());
   addFKChange.setReferencedColumnNames(getNewColumnName());
-  String constraintName=getConstraintName();
-  if (constraintName == null) {
-    constraintName=("FK_" + getExistingTableName() + "_"+ getNewTableName()).toUpperCase();
-  }
-  addFKChange.setConstraintName(constraintName);
+  addFKChange.setConstraintName(getFinalConstraintName());
   statements.addAll(Arrays.asList(addFKChange.generateStatements(database)));
   return statements.toArray(new String[statements.size()]);
 }

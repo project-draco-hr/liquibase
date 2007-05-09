@@ -1,0 +1,6 @@
+{
+  if (getConstraintName() == null) {
+    throw new UnsupportedChangeException("MS-SQL requires a constraint name to drop the primary key");
+  }
+  return new String[]{"ALTER TABLE " + getTableName() + " DROP CONSTRAINT "+ getConstraintName()};
+}

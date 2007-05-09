@@ -1,6 +1,0 @@
-{
-  DropColumnChange inverse=new DropColumnChange();
-  inverse.setColumnName(getColumn().getName());
-  inverse.setTableName(getTableName());
-  return inverse;
-}

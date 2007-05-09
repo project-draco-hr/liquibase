@@ -1,3 +1,8 @@
 {
-  return new String[]{"ALTER TABLE " + getTableName() + " ADD PRIMARY KEY ("+ getColumnNames()+ ")"};
+  if (getConstraintName() == null) {
+    return new String[]{"ALTER TABLE " + getTableName() + " ADD PRIMARY KEY ("+ getColumnNames()+ ")"};
+  }
+ else {
+    return new String[]{"ALTER TABLE " + getTableName() + " ADD CONSTRAINT "+ getConstraintName()+ " PRIMARY KEY ("+ getColumnNames()+ ")"};
+  }
 }

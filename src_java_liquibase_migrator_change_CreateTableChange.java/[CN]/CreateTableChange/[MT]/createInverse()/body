@@ -1,5 +1,0 @@
-{
-  DropTableChange inverse=new DropTableChange();
-  inverse.setTableName(getTableName());
-  return inverse;
-}

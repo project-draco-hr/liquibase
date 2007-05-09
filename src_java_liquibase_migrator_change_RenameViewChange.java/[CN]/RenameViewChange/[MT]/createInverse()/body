@@ -1,6 +1,0 @@
-{
-  RenameViewChange inverse=new RenameViewChange();
-  inverse.setOldViewName(getNewViewName());
-  inverse.setNewViewName(getOldViewName());
-  return inverse;
-}

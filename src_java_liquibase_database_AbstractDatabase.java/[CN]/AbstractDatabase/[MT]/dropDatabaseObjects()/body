@@ -1,65 +1,15 @@
 {
   Connection conn=getConnection();
   conn.setAutoCommit(false);
-  Statement selectStatement=null;
-  Statement dropStatement=null;
-  ResultSet rs=null;
   try {
-    selectStatement=conn.createStatement();
-    dropStatement=conn.createStatement();
-    rs=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,new String[]{"TABLE","VIEW","GLOBAL TEMPORARY","LOCAL TEMPORARY","ALIAS","SYNONYM"});
-    while (rs.next()) {
-      String tableName=rs.getString("TABLE_NAME");
-      if (tableName.startsWith("BIN$")) {
-        continue;
-      }
- else       if (tableName.startsWith("AQ$")) {
-        continue;
-      }
- else       if (tableName.equals(getDatabaseChangeLogLockTableName())) {
-        continue;
-      }
- else       if (getSystemTablesAndViews().contains(tableName)) {
-        continue;
-      }
-      String type=rs.getString("TABLE_TYPE");
-      String sql;
-      if ("TABLE".equals(type)) {
-        sql=getDropTableSQL(tableName);
-      }
- else       if ("VIEW".equals(type)) {
-        sql="DROP VIEW " + tableName;
-      }
- else {
-        throw new MigrationFailedException("Unknown type " + type + " for "+ tableName);
-      }
-      try {
-        log.finest("Dropping " + tableName);
-        dropStatement.executeUpdate(sql);
-      }
- catch (      SQLException e) {
-        throw new MigrationFailedException("Error dropping table '" + tableName + "': "+ e.getMessage(),e);
-      }
-    }
-    rs.close();
+    dropForeignKeys(conn);
+    dropTables(conn);
     if (this.supportsSequences()) {
       dropSequences(conn);
     }
     changeLogTableExists=false;
   }
- catch (  Exception e) {
-    e.printStackTrace();
-  }
- finally {
-    if (rs != null) {
-      rs.close();
-    }
-    if (selectStatement != null) {
-      selectStatement.close();
-    }
-    if (dropStatement != null) {
-      dropStatement.close();
-    }
+  finally {
     if (conn != null) {
       conn.commit();
     }

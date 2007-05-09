@@ -1,0 +1,7 @@
+{
+  AddNotNullConstraintChange inverse=new AddNotNullConstraintChange();
+  inverse.setColumnName(getColumnName());
+  inverse.setTableName(getTableName());
+  inverse.setColumnDataType(getColumnDataType());
+  return new AbstractChange[]{inverse};
+}

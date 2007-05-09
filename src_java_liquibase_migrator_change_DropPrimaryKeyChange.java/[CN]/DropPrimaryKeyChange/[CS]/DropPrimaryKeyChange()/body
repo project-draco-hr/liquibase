@@ -1,0 +1,3 @@
+{
+  super("dropPrimaryKey","Drop Primary Key");
+}
