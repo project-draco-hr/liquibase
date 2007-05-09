@@ -1,0 +1,6 @@
+{
+  Element element=currentMigrationFileDOM.createElement(getTagName());
+  element.setAttribute("oldViewName",getOldViewName());
+  element.setAttribute("newViewName",getNewViewName());
+  return element;
+}
