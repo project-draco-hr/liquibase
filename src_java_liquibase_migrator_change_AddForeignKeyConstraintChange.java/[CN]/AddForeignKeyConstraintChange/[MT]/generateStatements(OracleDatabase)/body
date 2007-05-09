@@ -1,0 +1,10 @@
+{
+  String[] strings=generateCommonStatements(database);
+  if (deferrable != null && deferrable) {
+    strings[0]+=" DEFERRABLE";
+  }
+  if (initiallyDeferred != null && initiallyDeferred) {
+    strings[0]+=" INITIALLY DEFERRED";
+  }
+  return strings;
+}

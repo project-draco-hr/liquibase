@@ -1,0 +1,9 @@
+{
+  Element node=currentMigrationFileDOM.createElement(getTagName());
+  node.setAttribute("baseTableName",getBaseTableName());
+  node.setAttribute("baseColumnNames",getBaseColumnNames());
+  node.setAttribute("constraintName",getConstraintName());
+  node.setAttribute("referencedTableName",getReferencedTableName());
+  node.setAttribute("referencedColumnNames",getReferencedColumnNames());
+  return node;
+}

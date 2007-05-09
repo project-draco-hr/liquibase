@@ -1,3 +1,8 @@
 {
-  return new String[]{generateUpdateStatement(),"ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL"};
+  List<String> statements=new ArrayList<String>();
+  if (defaultNullValue != null) {
+    statements.add(generateUpdateStatement());
+  }
+  statements.add("ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL");
+  return statements.toArray(new String[statements.size()]);
 }
