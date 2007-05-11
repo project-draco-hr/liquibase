@@ -1,0 +1,7 @@
+{
+  Element element=currentMigrationFileDOM.createElement(getTagName());
+  element.setAttribute("tableName",getTableName());
+  element.setAttribute("columnNames",getColumnNames());
+  element.setAttribute("constraintName",getConstraintName());
+  return element;
+}

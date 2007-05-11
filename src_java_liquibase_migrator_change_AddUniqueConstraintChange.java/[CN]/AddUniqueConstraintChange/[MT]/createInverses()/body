@@ -1,0 +1,6 @@
+{
+  DropUniqueConstraintChange inverse=new DropUniqueConstraintChange();
+  inverse.setTableName(getTableName());
+  inverse.setConstraintName(getConstraintName());
+  return new AbstractChange[]{inverse};
+}
