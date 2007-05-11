@@ -22,7 +22,7 @@
         }
       }
       if (isDropFirst()) {
-        migrator.setShouldDropDatabaseObjectsFirst(isRebuildDatabase());
+        migrator.dropAll();
       }
       migrator.migrate();
     }

@@ -10,6 +10,5 @@
   assertEquals("CLASSPATH;CLASSPATH2",cli.classpath);
   assertEquals("CONTEXT1,CONTEXT2",cli.contexts);
   assertEquals(Boolean.TRUE,cli.promptForNonLocalDatabase);
-  assertEquals(Boolean.TRUE,cli.dropAllFirst);
   assertEquals("migrate",cli.command);
 }

@@ -23,5 +23,4 @@
   assertEquals("CLASSPAHT",cli.classpath);
   assertEquals("CONTEXTS",cli.contexts);
   assertEquals(Boolean.TRUE,cli.promptForNonLocalDatabase);
-  assertEquals(Boolean.TRUE,cli.dropAllFirst);
 }

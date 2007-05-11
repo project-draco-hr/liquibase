@@ -1,0 +1,7 @@
+{
+  Migrator migrator=createMigrator(completeChangeLog);
+  migrator.dropAll();
+  migrator=createMigrator(completeChangeLog);
+  migrator.migrate();
+  migrator.tag("Test Tag");
+}

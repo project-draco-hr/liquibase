@@ -13,7 +13,8 @@
         String id=rs.getString("id");
         String md5sum=rs.getString("md5sum");
         Date dateExecuted=rs.getTimestamp("dateExecuted");
-        RanChangeSet ranChangeSet=new RanChangeSet(fileName,id,author,md5sum,dateExecuted);
+        String tag=rs.getString("tag");
+        RanChangeSet ranChangeSet=new RanChangeSet(fileName,id,author,md5sum,dateExecuted,tag);
         ranChangeSetList.add(ranChangeSet);
       }
       rs.close();

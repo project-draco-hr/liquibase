@@ -4,4 +4,5 @@
   this.author=author;
   this.md5sum=md5sum;
   this.dateExecuted=dateExecuted;
+  this.tag=tag;
 }

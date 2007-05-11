@@ -34,7 +34,7 @@
   if ("migrate".equals(commandLineMigrator.command)) {
     System.out.println("Migration successful");
   }
- else   if ("rollback".equals(commandLineMigrator.command)) {
+ else   if (commandLineMigrator.command.startsWith("rollback") && !commandLineMigrator.command.endsWith("SQL")) {
     System.out.println("Rollback successful");
   }
 }

@@ -1,7 +1,8 @@
 {
   Migrator migrator=createMigrator(rollbackChangeLog);
+  migrator.dropAll();
+  migrator=createMigrator(rollbackChangeLog);
   migrator.setMode(Migrator.EXECUTE_MODE);
-  migrator.setShouldDropDatabaseObjectsFirst(true);
   migrator.migrate();
   StringWriter writer=new StringWriter();
   migrator=createMigrator(rollbackChangeLog);

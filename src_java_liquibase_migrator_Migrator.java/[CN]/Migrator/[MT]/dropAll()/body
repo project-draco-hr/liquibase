@@ -1,0 +1,47 @@
+{
+  try {
+    if (!hasChangeLogLock) {
+      checkDatabaseChangeLogTable();
+    }
+    boolean locked=false;
+    long timeToGiveUp=new Date().getTime() + changeLogLockWaitTime;
+    while (!locked && new Date().getTime() < timeToGiveUp) {
+      locked=aquireLock();
+      if (!locked) {
+        log.info("Waiting for changelog lock....");
+        try {
+          Thread.sleep(1000 * 10);
+        }
+ catch (        InterruptedException e) {
+          ;
+        }
+      }
+    }
+    if (!locked) {
+      DatabaseChangeLogLock[] locks=listLocks();
+      String lockedBy;
+      if (locks.length > 0) {
+        DatabaseChangeLogLock lock=locks[0];
+        lockedBy=lock.getLockedBy() + " since " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(lock.getLockGranted());
+      }
+ else {
+        lockedBy="UNKNOWN";
+      }
+      log.severe("Could not aquire change log lock.  Currently locked by " + lockedBy);
+      return;
+    }
+    log.info("Dropping Database Objects in " + getDatabase().getSchemaName());
+    getDatabase().dropDatabaseObjects();
+    checkDatabaseChangeLogTable();
+    log.finest("Objects dropped successfully");
+  }
+ catch (  MigrationFailedException e) {
+    throw e;
+  }
+catch (  Exception e) {
+    throw new MigrationFailedException(e);
+  }
+ finally {
+    releaseLock();
+  }
+}

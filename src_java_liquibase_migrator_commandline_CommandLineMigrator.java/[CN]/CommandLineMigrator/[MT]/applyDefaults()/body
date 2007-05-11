@@ -1,7 +1,4 @@
 {
-  if (this.dropAllFirst == null) {
-    this.dropAllFirst=Boolean.FALSE;
-  }
   if (this.promptForNonLocalDatabase == null) {
     this.promptForNonLocalDatabase=Boolean.FALSE;
   }

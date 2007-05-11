@@ -1,0 +1,3 @@
+{
+  return "SELECT MAX(DATEEXECUTED) FROM " + getDatabaseChangeLogTableName() + "";
+}

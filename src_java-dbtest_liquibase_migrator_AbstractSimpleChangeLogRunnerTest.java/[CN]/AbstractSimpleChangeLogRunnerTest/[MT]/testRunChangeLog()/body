@@ -1,8 +1,6 @@
 {
   Migrator migrator=createMigrator(completeChangeLog);
-  migrator.setShouldDropDatabaseObjectsFirst(true);
-  migrator.migrate();
+  migrator.dropAll();
   migrator=createMigrator(completeChangeLog);
-  migrator.setShouldDropDatabaseObjectsFirst(false);
   migrator.migrate();
 }
