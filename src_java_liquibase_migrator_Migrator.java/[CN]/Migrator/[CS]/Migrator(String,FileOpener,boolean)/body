@@ -32,4 +32,5 @@
   }
   setMode(EXECUTE_MODE);
   this.hasChangeLogLock=alreadyHasChangeLogLock;
+  this.buildVersion=findVersion();
 }

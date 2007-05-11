@@ -53,7 +53,7 @@
           outputSQLWriter.write("-- SQL to roll-back database to the state it was at " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(getRollbackToDate()) + "\n");
         }
  else         if (mode.equals(OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
-          outputSQLWriter.write("-- SQL to roll-back database from an updated version back to current version\n");
+          outputSQLWriter.write("-- SQL to roll-back database from an updated buildVersion back to current version\n");
         }
  else {
           throw new MigrationFailedException("Unexpected output mode: " + mode);
