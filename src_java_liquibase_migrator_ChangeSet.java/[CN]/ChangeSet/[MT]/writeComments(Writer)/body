@@ -1,8 +1,8 @@
 {
   if (StringUtils.trimToNull(comments) != null) {
-    String[] commentLines=comments.split("\n");
+    String[] commentLines=comments.split(StreamUtil.getLineSeparator());
     for (    String line : commentLines) {
-      writer.append("-- " + line.trim() + "\n");
+      writer.append("-- " + line.trim() + StreamUtil.getLineSeparator());
     }
   }
 }

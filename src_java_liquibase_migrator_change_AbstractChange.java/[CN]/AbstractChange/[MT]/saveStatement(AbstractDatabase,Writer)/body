@@ -1,6 +1,6 @@
 {
   String[] statements=generateStatements(database);
   for (  String statement : statements) {
-    writer.append(statement + ";\n\n");
+    writer.append(statement + ";" + StreamUtil.getLineSeparator()+ StreamUtil.getLineSeparator());
   }
 }

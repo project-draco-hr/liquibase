@@ -13,6 +13,6 @@
     connection.commit();
   }
  else {
-    sqlOutputWriter.write(sql + ";\n\n");
+    sqlOutputWriter.write(sql + ";" + StreamUtil.getLineSeparator()+ StreamUtil.getLineSeparator());
   }
 }

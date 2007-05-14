@@ -6,4 +6,5 @@
   migrator.setOutputSQLWriter(output);
   migrator.setMode(Migrator.OUTPUT_SQL_MODE);
   migrator.migrate();
+  System.out.println(output.getBuffer().toString());
 }

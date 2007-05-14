@@ -5,6 +5,7 @@
   ResultSet checkColumnsRS=null;
   changeLogTableExists=true;
   List<String> statementsToExecute=new ArrayList<String>();
+  boolean wroteToOutput=false;
   try {
     checkTableRS=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogTableName(),new String[]{"TABLE"});
     if (checkTableRS.next()) {
@@ -59,9 +60,13 @@
       }
  else {
         if (!migrator.getMode().equals(Migrator.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
-          migrator.getOutputSQLWriter().append(sql + ";\n");
+          migrator.getOutputSQLWriter().append(sql + ";" + StreamUtil.getLineSeparator());
+          wroteToOutput=true;
         }
       }
+    }
+    if (wroteToOutput) {
+      migrator.getOutputSQLWriter().append(StreamUtil.getLineSeparator());
     }
   }
   finally {
