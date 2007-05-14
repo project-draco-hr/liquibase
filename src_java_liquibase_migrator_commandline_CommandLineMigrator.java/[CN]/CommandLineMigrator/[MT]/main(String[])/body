@@ -5,6 +5,14 @@
     return;
   }
   CommandLineMigrator commandLineMigrator=new CommandLineMigrator();
+  if (args.length == 1 && "--help".equals(args[0])) {
+    commandLineMigrator.printHelp(System.out);
+    return;
+  }
+ else   if (args.length == 1 && "--version".equals(args[0])) {
+    System.out.println("LiquiBase Version: " + new Migrator(null,null).getBuildVersion() + StreamUtil.getLineSeparator());
+    return;
+  }
   commandLineMigrator.parseOptions(args);
   File propertiesFile=new File("liquibase.properties");
   if (propertiesFile.exists()) {

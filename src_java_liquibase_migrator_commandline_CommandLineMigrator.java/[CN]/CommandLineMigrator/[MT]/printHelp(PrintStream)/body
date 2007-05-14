@@ -56,6 +56,7 @@
   stream.println("                                            (finest, finer, fine, info,");
   stream.println("                                            warning, severe)");
   stream.println(" --help                                     Prints this message");
+  stream.println(" --version                                  Prints this version information");
   stream.println("");
   stream.println("Default value for parameters can be stored in a file called");
   stream.println("'liquibase.properties' that is read from the current working directory.");
