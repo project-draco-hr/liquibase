@@ -1,5 +1,5 @@
 {
-  super(migrator);
+  super(migrator,physicalFilePath);
   changesToRollback=new ArrayList<ChangeSet>();
   ranChangeSets=migrator.getRanChangeSetList();
 }

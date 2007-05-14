@@ -4,7 +4,8 @@
       text=new StringBuffer();
     }
  else     if ("databaseChangeLog".equals(qName)) {
-      changeLog=new DatabaseChangeLog(migrator);
+      changeLog=new DatabaseChangeLog(migrator,physicalChangeLogLocation);
+      changeLog.setLogicalFilePath(atts.getValue("logicalFilePath"));
     }
  else     if ("include".equals(qName)) {
       new IncludeMigrator(atts.getValue("file"),migrator).migrate();

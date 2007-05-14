@@ -4,7 +4,7 @@
   sql=sql.replaceFirst("\\?",changeSet.getMd5sum().replaceAll("'","''"));
   sql=sql.replaceFirst("\\?",changeSet.getId().replaceAll("'","''"));
   sql=sql.replaceFirst("\\?",changeSet.getAuthor().replaceAll("'","''"));
-  sql=sql.replaceFirst("\\?",changeSet.getDatabaseChangeLog().getMigrator().getMigrationFile().replaceAll("'","''"));
+  sql=sql.replaceFirst("\\?",changeSet.getDatabaseChangeLog().getFilePath().replaceAll("'","''"));
   Writer sqlOutputWriter=changeSet.getDatabaseChangeLog().getMigrator().getOutputSQLWriter();
   if (sqlOutputWriter == null) {
     Connection connection=changeSet.getDatabaseChangeLog().getMigrator().getDatabase().getConnection();

@@ -1,4 +1,5 @@
 {
   this.migrator=migrator;
+  this.physicalChangeLogLocation=physicalChangeLogLocation;
   log=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
 }

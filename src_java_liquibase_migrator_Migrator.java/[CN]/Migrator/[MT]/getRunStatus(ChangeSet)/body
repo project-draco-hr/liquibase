@@ -21,7 +21,7 @@
       updatePstmt.setString(1,changeSet.getMd5sum());
       updatePstmt.setString(2,changeSet.getId());
       updatePstmt.setString(3,changeSet.getAuthor());
-      updatePstmt.setString(4,migrator.getMigrationFile());
+      updatePstmt.setString(4,changeSet.getDatabaseChangeLog().getFilePath());
       updatePstmt.executeUpdate();
       updatePstmt.close();
       connection.commit();

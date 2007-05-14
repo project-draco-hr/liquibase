@@ -1,3 +1,3 @@
 {
-  return this.getChangeLog().equals(changeSet.getDatabaseChangeLog().getMigrator().getMigrationFile()) && this.getId().equals(changeSet.getId()) && this.getAuthor().equals(changeSet.getAuthor());
+  return this.getChangeLog().equals(changeSet.getDatabaseChangeLog().getFilePath()) && this.getId().equals(changeSet.getId()) && this.getAuthor().equals(changeSet.getAuthor());
 }

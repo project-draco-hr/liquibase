@@ -1,13 +1,12 @@
 {
-  super(migrator);
+  super(migrator,physicalFilePath);
   ranChangesToRollback=new ArrayList<RanChangeSet>();
   int currentChangeSetCount=migrator.getRanChangeSetList().size();
   for (int i=currentChangeSetCount - 1; i >= 0; i--) {
     RanChangeSet ranChangeSet=migrator.getRanChangeSetList().get(i);
-    if (rollbackToTag.equals(ranChangeSet.getTag())) {
-      break;
+    if (ranChangeSet.getDateExecuted().getTime() > rollbackToDate.getTime()) {
+      ranChangesToRollback.add(ranChangeSet);
     }
-    ranChangesToRollback.add(ranChangeSet);
   }
   allChangeSets=new ArrayList<ChangeSet>();
 }

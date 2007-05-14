@@ -1,0 +1,8 @@
+{
+  if (logicalFilePath == null) {
+    return physicalFilePath;
+  }
+ else {
+    return logicalFilePath;
+  }
+}

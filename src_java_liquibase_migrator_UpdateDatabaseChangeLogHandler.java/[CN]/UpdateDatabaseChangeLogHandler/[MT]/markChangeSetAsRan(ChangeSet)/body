@@ -4,7 +4,7 @@
   String sql="INSERT INTO DATABASECHANGELOG (ID, AUTHOR, FILENAME, DATEEXECUTED, MD5SUM, DESCRIPTION, COMMENTS, LIQUIBASE) VALUES ('?', '?', '?', " + dateValue + ", '?', '?', '?', '?')";
   sql=sql.replaceFirst("\\?",changeSet.getId().replaceAll("'","''"));
   sql=sql.replaceFirst("\\?",changeSet.getAuthor().replaceAll("'","''"));
-  sql=sql.replaceFirst("\\?",migrator.getMigrationFile().replaceAll("'","''"));
+  sql=sql.replaceFirst("\\?",changeSet.getDatabaseChangeLog().getFilePath().replaceAll("'","''"));
   sql=sql.replaceFirst("\\?",changeSet.getMd5sum().replaceAll("'","''"));
   sql=sql.replaceFirst("\\?",limitSize(changeSet.getDescription().replaceAll("'","''")));
   sql=sql.replaceFirst("\\?",limitSize(StringUtils.trimToEmpty(changeSet.getComments()).replaceAll("'","''")));

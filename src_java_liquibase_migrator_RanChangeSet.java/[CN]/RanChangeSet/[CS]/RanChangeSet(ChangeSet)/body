@@ -1,5 +1,5 @@
 {
-  this.changeLog=changeSet.getDatabaseChangeLog().getMigrator().getMigrationFile();
+  this.changeLog=changeSet.getDatabaseChangeLog().getFilePath();
   this.id=changeSet.getId();
   this.author=changeSet.getAuthor();
   this.md5sum=changeSet.getMd5sum();
