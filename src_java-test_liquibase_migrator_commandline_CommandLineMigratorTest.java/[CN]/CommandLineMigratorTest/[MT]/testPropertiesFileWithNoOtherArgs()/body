@@ -9,7 +9,6 @@
   props.setProperty("classpath","CLASSPAHT");
   props.setProperty("contexts","CONTEXTS");
   props.setProperty("promptForNonLocalDatabase","TRUE");
-  props.setProperty("dropAllFirst","TRUE");
   ByteArrayOutputStream propFile=new ByteArrayOutputStream();
   props.store(propFile,"");
   cli.parsePropertiesFile(new ByteArrayInputStream(propFile.toByteArray()));

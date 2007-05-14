@@ -95,9 +95,9 @@
         }
         migrator.setRollbackToDate(dateFormat.parse(commandParam));
       }
- else       if ("rollbackLatest".equalsIgnoreCase(command)) {
+ else       if ("rollbackCount".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.EXECUTE_ROLLBACK_MODE);
-        migrator.setRollbackCount(new Integer(1));
+        migrator.setRollbackCount(Integer.parseInt(commandParam));
       }
  else       if ("rollbackSQL".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.OUTPUT_ROLLBACK_SQL_MODE);
@@ -115,10 +115,10 @@
         }
         migrator.setRollbackToDate(dateFormat.parse(commandParam));
       }
- else       if ("rollbackLatestSQL".equalsIgnoreCase(command)) {
+ else       if ("rollbackCountSQL".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.OUTPUT_ROLLBACK_SQL_MODE);
         migrator.setOutputSQLWriter(getOutputWriter());
-        migrator.setRollbackCount(1);
+        migrator.setRollbackCount(Integer.valueOf(commandParam));
       }
  else       if ("futureRollbackSQL".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.OUTPUT_FUTURE_ROLLBACK_SQL_MODE);

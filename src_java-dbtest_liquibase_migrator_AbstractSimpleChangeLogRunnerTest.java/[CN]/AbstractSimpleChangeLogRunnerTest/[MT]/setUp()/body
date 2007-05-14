@@ -1,0 +1,8 @@
+{
+  super.setUp();
+  Driver driver=(Driver)Class.forName(driverName,true,new JUnitJDBCDriverClassLoader(driverDirectory)).newInstance();
+  Properties info=new Properties();
+  info.put("user",username);
+  info.put("password",password);
+  connection=driver.connect(url,info);
+}

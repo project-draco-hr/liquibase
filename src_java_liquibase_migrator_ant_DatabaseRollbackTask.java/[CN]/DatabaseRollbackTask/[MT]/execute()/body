@@ -1,9 +1,14 @@
 {
+  if (getRollbackDate() == null && getRollbackCount() == null && getRollbackTag() == null) {
+    throw new BuildException("rollbackDatabase requires rollbackTag, rollbackDate, or rollbackCount to be set");
+  }
   Migrator migrator=null;
   try {
     migrator=createMigrator();
     migrator.setMode(Migrator.EXECUTE_ROLLBACK_MODE);
     migrator.setRollbackToDate(getRollbackDate());
+    migrator.setRollbackToTag(getRollbackTag());
+    migrator.setRollbackCount(getRollbackCount());
     migrator.migrate();
   }
  catch (  Exception e) {
