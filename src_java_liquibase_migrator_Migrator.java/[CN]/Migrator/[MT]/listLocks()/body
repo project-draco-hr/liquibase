@@ -1,4 +1,4 @@
 {
   checkDatabaseChangeLogTable();
-  return getDatabase().listLocks(this);
+  return getDatabase().listLocks();
 }
