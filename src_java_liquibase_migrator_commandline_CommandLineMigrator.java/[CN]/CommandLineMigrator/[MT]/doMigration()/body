@@ -37,7 +37,6 @@
   if (connection == null) {
     throw new MigrationFailedException("Incorrect driver for URL");
   }
-  Writer outputSQLFileWriter=null;
   try {
     Migrator migrator=new Migrator(migrationFile,new CommandLineFileOpener(classLoader));
     migrator.setContexts(contexts);
@@ -136,10 +135,6 @@
   finally {
     if (connection != null) {
       connection.close();
-    }
-    if (outputSQLFileWriter != null) {
-      outputSQLFileWriter.flush();
-      outputSQLFileWriter.close();
     }
   }
 }

@@ -100,7 +100,7 @@
         }
       }
  else {
-        new RuntimeException("Unexpected Dbms tag");
+        throw new RuntimeException("Unexpected Dbms tag");
       }
     }
  else     if ("or".equals(qName)) {
@@ -111,7 +111,7 @@
         }
       }
  else {
-        new RuntimeException("Unexpected Or tag");
+        throw new RuntimeException("Unexpected Or tag");
       }
     }
  else     if ("not".equals(qName)) {
@@ -119,7 +119,7 @@
         notprecondition=new NotPrecondition();
       }
  else {
-        new RuntimeException("Unexpected Or tag");
+        throw new RuntimeException("Unexpected Or tag");
       }
     }
  else     if ("runningAs".equals(qName)) {
@@ -132,7 +132,7 @@
         }
       }
  else {
-        new RuntimeException("Unexpected Or tag");
+        throw new RuntimeException("Unexpected Or tag");
       }
     }
  else {

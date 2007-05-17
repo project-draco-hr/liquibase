@@ -2,13 +2,13 @@
   Migrator migrator=changeSet.getDatabaseChangeLog().getMigrator();
   String dateValue=migrator.getDatabase().getCurrentDateTimeFunction();
   String sql="INSERT INTO DATABASECHANGELOG (ID, AUTHOR, FILENAME, DATEEXECUTED, MD5SUM, DESCRIPTION, COMMENTS, LIQUIBASE) VALUES ('?', '?', '?', " + dateValue + ", '?', '?', '?', '?')";
-  sql=sql.replaceFirst("\\?",changeSet.getId().replaceAll("'","''"));
-  sql=sql.replaceFirst("\\?",changeSet.getAuthor().replaceAll("'","''"));
-  sql=sql.replaceFirst("\\?",changeSet.getDatabaseChangeLog().getFilePath().replaceAll("'","''"));
-  sql=sql.replaceFirst("\\?",changeSet.getMd5sum().replaceAll("'","''"));
-  sql=sql.replaceFirst("\\?",limitSize(changeSet.getDescription().replaceAll("'","''")));
-  sql=sql.replaceFirst("\\?",limitSize(StringUtils.trimToEmpty(changeSet.getComments()).replaceAll("'","''")));
-  sql=sql.replaceFirst("\\?",changeSet.getDatabaseChangeLog().getMigrator().getBuildVersion().replaceAll("'","''"));
+  sql=sql.replaceFirst("\\?",escapeStringForDatabase(escapeStringForDatabase(changeSet.getId())));
+  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getAuthor()));
+  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getDatabaseChangeLog().getFilePath()));
+  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getMd5sum()));
+  sql=sql.replaceFirst("\\?",escapeStringForDatabase(limitSize(changeSet.getDescription())));
+  sql=sql.replaceFirst("\\?",escapeStringForDatabase(limitSize(StringUtils.trimToEmpty(changeSet.getComments()))));
+  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getDatabaseChangeLog().getMigrator().getBuildVersion()));
   Writer sqlOutputWriter=migrator.getOutputSQLWriter();
   if (sqlOutputWriter == null) {
     Connection connection=migrator.getDatabase().getConnection();

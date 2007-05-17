@@ -9,11 +9,11 @@
         return;
       }
  else       if (method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(String.class)) {
-        method.invoke(object,attributeValue.toString());
+        method.invoke(object,attributeValue);
         return;
       }
  else       if (method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(Integer.class)) {
-        method.invoke(object,Integer.valueOf(attributeValue.toString()));
+        method.invoke(object,Integer.valueOf(attributeValue));
         return;
       }
     }
