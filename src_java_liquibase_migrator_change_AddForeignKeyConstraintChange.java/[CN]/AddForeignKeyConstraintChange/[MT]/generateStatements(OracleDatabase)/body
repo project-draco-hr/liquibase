@@ -1,5 +1,5 @@
 {
-  String[] strings=generateCommonStatements(database);
+  String[] strings=generateCommonStatements();
   if (deferrable != null && deferrable) {
     strings[0]+=" DEFERRABLE";
   }

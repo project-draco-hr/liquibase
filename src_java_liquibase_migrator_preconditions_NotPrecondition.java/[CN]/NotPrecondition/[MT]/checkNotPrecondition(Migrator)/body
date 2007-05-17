@@ -1,7 +1,6 @@
 {
   boolean booldbmsRetVal=true;
   boolean boolOrRetVal=true;
-  boolean returnVal=true;
   if (dbmsArray.size() != 0) {
     booldbmsRetVal=checkDbmsType(migrator);
   }
@@ -9,11 +8,5 @@
     boolOrRetVal=orprecondition.checkDbmsType(migrator);
     boolOrRetVal=!boolOrRetVal;
   }
-  if (boolOrRetVal && booldbmsRetVal) {
-    returnVal=true;
-  }
- else {
-    returnVal=false;
-  }
-  return returnVal;
+  return boolOrRetVal && booldbmsRetVal;
 }

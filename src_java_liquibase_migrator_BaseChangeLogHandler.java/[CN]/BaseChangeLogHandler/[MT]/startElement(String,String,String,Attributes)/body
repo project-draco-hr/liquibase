@@ -83,7 +83,7 @@
     }
  else     if ("dbms".equals(qName)) {
       if (precondition != null) {
-        dbmsPrecondition=new DBMSPrecondition();
+        DBMSPrecondition dbmsPrecondition=new DBMSPrecondition();
         for (int i=0; i < atts.getLength(); i++) {
           String attributeName=atts.getQName(i);
           String attributeValue=atts.getValue(i);

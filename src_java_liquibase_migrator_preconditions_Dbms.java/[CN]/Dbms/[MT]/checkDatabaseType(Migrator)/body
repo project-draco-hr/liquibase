@@ -1,13 +1,4 @@
 {
-  String product;
-  boolean flag=true;
-  try {
-    product=migrator.getDatabase().getConnection().getMetaData().getDatabaseProductName();
-    if (type.equals(product.toLowerCase()))     flag=true;
- else     flag=false;
-  }
- catch (  SQLException e) {
-    e.printStackTrace();
-  }
-  return flag;
+  String product=migrator.getDatabase().getConnection().getMetaData().getDatabaseProductName();
+  return type.equals(product.toLowerCase());
 }

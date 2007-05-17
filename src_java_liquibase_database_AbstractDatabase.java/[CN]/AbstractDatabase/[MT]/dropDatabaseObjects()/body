@@ -10,8 +10,6 @@
     changeLogTableExists=false;
   }
   finally {
-    if (conn != null) {
-      conn.commit();
-    }
+    conn.commit();
   }
 }

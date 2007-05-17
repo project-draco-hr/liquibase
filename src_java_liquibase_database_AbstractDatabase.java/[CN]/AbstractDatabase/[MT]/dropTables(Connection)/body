@@ -37,7 +37,6 @@
         throw new MigrationFailedException("Error dropping table '" + tableName + "': "+ e.getMessage(),e);
       }
     }
-    return rs;
   }
   finally {
     if (dropStatement != null) {

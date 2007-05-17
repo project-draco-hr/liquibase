@@ -2,7 +2,7 @@
   File tempFile=File.createTempFile("migrator.tmp",null);
   BufferedInputStream inStream=new BufferedInputStream(jar.getInputStream(entry));
   BufferedOutputStream outStream=new BufferedOutputStream(new FileOutputStream(tempFile));
-  int status=-1;
+  int status;
   while ((status=inStream.read()) != -1) {
     outStream.write(status);
   }
