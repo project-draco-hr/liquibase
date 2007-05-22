@@ -26,6 +26,7 @@
         if (constraints.isDeferrable() != null && constraints.isDeferrable()) {
           fkConstraints.append(" DEFERRABLE,");
         }
+        fkConstraints.append(",");
       }
       if (constraints.isUnique() != null && constraints.isUnique()) {
         buffer.append(" UNIQUE");

@@ -1,5 +1,4 @@
 {
-  this.contexts=new HashSet<String>();
   if (contexts != null) {
     String[] strings=contexts.split(",");
     for (    String string : strings) {
