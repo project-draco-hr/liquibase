@@ -1,5 +1,5 @@
 {
-  if (migrationFile == null || username == null || password == null || url == null || driver == null || command == null) {
+  if (classpath == null || migrationFile == null || username == null || password == null || url == null || driver == null || command == null) {
     return false;
   }
   return isCommand(command);
