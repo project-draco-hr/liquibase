@@ -24,7 +24,7 @@
           fkConstraints.append(" INITIALLY DEFERRED");
         }
         if (constraints.isDeferrable() != null && constraints.isDeferrable()) {
-          fkConstraints.append(" DEFERRABLE,");
+          fkConstraints.append(" DEFERRABLE");
         }
         fkConstraints.append(",");
       }
