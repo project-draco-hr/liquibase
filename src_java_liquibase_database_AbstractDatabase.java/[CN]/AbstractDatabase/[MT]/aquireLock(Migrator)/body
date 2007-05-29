@@ -30,7 +30,7 @@
         throw new MigrationFailedException("Did not update change log lock correctly");
       }
       conn.commit();
-      log.info("Successfully aquired change log lock");
+      log.info("Successfully acquired change log lock");
       return true;
     }
   }
