@@ -1,5 +1,0 @@
-{
-  String loggedusername=migrator.getDatabase().getConnection().getMetaData().getUserName();
-  loggedusername=loggedusername.substring(0,loggedusername.indexOf("@"));
-  return username.equals(loggedusername);
-}

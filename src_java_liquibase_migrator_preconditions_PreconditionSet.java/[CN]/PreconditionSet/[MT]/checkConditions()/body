@@ -41,7 +41,7 @@
       }
  else {
         userExistsReturnValue=false;
-        exceptionMsg="UserExists Precondition failed";
+        exceptionMsg="rnningAs Precondition failed";
       }
     }
     if (!(dbmsreturnvalue && orReturnValue && notReturnValue&& userExistsReturnValue)) {

@@ -1,4 +1,0 @@
-{
-  String product=migrator.getDatabase().getConnection().getMetaData().getDatabaseProductName();
-  return type.equals(product.toLowerCase());
-}
