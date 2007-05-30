@@ -1,5 +1,5 @@
 {
-  File thisClassFile=new File(Thread.currentThread().getContextClassLoader().getResource("liquibase/migrator/JUnitJDBCDriverClassLoader.class").toURI());
+  File thisClassFile=new File(new URI(Thread.currentThread().getContextClassLoader().getResource("liquibase/migrator/JUnitJDBCDriverClassLoader.class").toExternalForm()));
   File jdbcLib=new File(thisClassFile.getParentFile().getParentFile().getParentFile().getParent(),"lib-jdbc");
   File[] driverJars=new File(jdbcLib,driverDir).listFiles(new FilenameFilter(){
     public boolean accept(    File dir,    String name){

@@ -1,0 +1,11 @@
+{
+  StringBuffer text=new StringBuffer();
+  NodeList childNodes=element.getChildNodes();
+  for (int i=0; i < childNodes.getLength(); i++) {
+    Node child=childNodes.item(i);
+    if (child instanceof Text) {
+      text.append(child.getNodeValue());
+    }
+  }
+  return text.toString();
+}
