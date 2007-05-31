@@ -1,8 +1,8 @@
 {
   try {
-    InputStream inputStream=getFileOpener().getResourceAsStream(migrationFile);
+    InputStream inputStream=getFileOpener().getResourceAsStream(changeLogFile);
     if (inputStream == null) {
-      throw new MigrationFailedException(migrationFile + " does not exist");
+      throw new MigrationFailedException(changeLogFile + " does not exist");
     }
     xmlReader.setContentHandler(contentHandler);
     xmlReader.parse(new InputSource(inputStream));

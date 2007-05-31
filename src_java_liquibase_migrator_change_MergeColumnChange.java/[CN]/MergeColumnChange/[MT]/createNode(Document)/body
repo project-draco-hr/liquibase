@@ -1,5 +1,5 @@
 {
-  Element element=currentMigrationFileDOM.createElement(getTagName());
+  Element element=currentChangeLogFileDOM.createElement(getTagName());
   element.setAttribute("tableName",getTableName());
   element.setAttribute("column1Name",getColumn1Name());
   element.setAttribute("joinString",getJoinString());

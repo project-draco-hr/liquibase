@@ -5,7 +5,7 @@
   cli.username="username";
   cli.password="pwd";
   cli.url="url";
-  cli.migrationFile="file";
+  cli.changeLogFile="file";
   cli.classpath="classpath";
   assertFalse(cli.checkSetup());
   cli.command="BadCommand";

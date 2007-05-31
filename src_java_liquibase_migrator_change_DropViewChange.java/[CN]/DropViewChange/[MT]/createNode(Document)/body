@@ -1,5 +1,5 @@
 {
-  Element element=currentMigrationFileDOM.createElement("dropView");
+  Element element=currentChangeLogFileDOM.createElement("dropView");
   element.setAttribute("viewName",getViewName());
   return element;
 }

@@ -1,6 +1,6 @@
 {
-  Element node=currentMigrationFileDOM.createElement("modifyColumn");
+  Element node=currentChangeLogFileDOM.createElement("modifyColumn");
   node.setAttribute("tableName",getTableName());
-  node.appendChild(getColumn().createNode(currentMigrationFileDOM));
+  node.appendChild(getColumn().createNode(currentChangeLogFileDOM));
   return node;
 }

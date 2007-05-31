@@ -1,5 +1,5 @@
 {
-  Element node=currentMigrationFileDOM.createElement(getTagName());
+  Element node=currentChangeLogFileDOM.createElement(getTagName());
   node.setAttribute("baseTableName",getBaseTableName());
   node.setAttribute("constraintName",getConstraintName());
   return node;

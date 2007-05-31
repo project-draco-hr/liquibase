@@ -1,9 +1,9 @@
 {
-  Element element=currentMigrationFileDOM.createElement("createIndex");
+  Element element=currentChangeLogFileDOM.createElement("createIndex");
   element.setAttribute("indexName",getIndexName());
   element.setAttribute("tableName",getTableName());
   for (  ColumnConfig column : getColumns()) {
-    Element columnElement=currentMigrationFileDOM.createElement("column");
+    Element columnElement=currentChangeLogFileDOM.createElement("column");
     columnElement.setAttribute("name",column.getName());
     element.appendChild(columnElement);
   }

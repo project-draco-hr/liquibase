@@ -1,5 +1,5 @@
 {
-  Element element=currentMigrationFileDOM.createElement("addNotNullConstraint");
+  Element element=currentChangeLogFileDOM.createElement("addNotNullConstraint");
   element.setAttribute("tableName",getTableName());
   element.setAttribute("columnName",getColumnName());
   element.setAttribute("defaultNullValue",getDefaultNullValue());

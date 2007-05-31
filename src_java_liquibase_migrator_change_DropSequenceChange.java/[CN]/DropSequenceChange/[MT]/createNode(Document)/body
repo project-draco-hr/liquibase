@@ -1,5 +1,5 @@
 {
-  Element element=currentMigrationFileDOM.createElement("dropSequence");
+  Element element=currentChangeLogFileDOM.createElement("dropSequence");
   element.setAttribute("sequenceName",getSequenceName());
   return element;
 }

@@ -38,7 +38,7 @@
     throw new MigrationFailedException("Incorrect driver for URL");
   }
   try {
-    Migrator migrator=new Migrator(migrationFile,new CommandLineFileOpener(classLoader));
+    Migrator migrator=new Migrator(changeLogFile,new CommandLineFileOpener(classLoader));
     migrator.setContexts(contexts);
     migrator.init(connection);
     if ("listLocks".equalsIgnoreCase(command)) {

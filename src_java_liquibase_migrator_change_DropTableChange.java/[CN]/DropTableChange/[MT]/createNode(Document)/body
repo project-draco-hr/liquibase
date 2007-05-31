@@ -1,5 +1,5 @@
 {
-  Element element=currentMigrationFileDOM.createElement("dropTable");
+  Element element=currentChangeLogFileDOM.createElement("dropTable");
   element.setAttribute("tableName",getTableName());
   if (isCascadeConstraints() != null) {
     element.setAttribute("cascadeConstraints",isCascadeConstraints().toString());

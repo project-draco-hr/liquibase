@@ -1,9 +1,9 @@
 {
   return new FileOpener(){
-    public InputStream getResourceAsStream(    String file) throws IOException {
+    public InputStream getResourceAsStream(    String file){
       return inputStream;
     }
-    public Enumeration<URL> getResources(    String packageName) throws IOException {
+    public Enumeration<URL> getResources(    String packageName){
       return null;
     }
   }

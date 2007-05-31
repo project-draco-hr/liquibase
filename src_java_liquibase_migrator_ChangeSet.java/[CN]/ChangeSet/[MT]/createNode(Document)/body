@@ -1,9 +1,9 @@
 {
-  Element node=currentMigrationFileDOM.createElement("changeSet");
+  Element node=currentChangeLogDOM.createElement("changeSet");
   node.setAttribute("id",getId());
   node.setAttribute("author",getAuthor());
   for (  AbstractChange change : getRefactorings()) {
-    node.appendChild(change.createNode(currentMigrationFileDOM));
+    node.appendChild(change.createNode(currentChangeLogDOM));
   }
   return node;
 }

@@ -1,5 +1,5 @@
 {
-  Element node=currentMigrationFileDOM.createElement(getTagName());
+  Element node=currentChangeLogFileDOM.createElement(getTagName());
   node.setAttribute("existingTableName",getExistingTableName());
   node.setAttribute("existingColumnName",getExistingColumnName());
   node.setAttribute("newTableName",getNewTableName());

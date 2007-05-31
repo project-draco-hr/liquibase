@@ -1,5 +1,5 @@
 {
-  Element sqlElement=currentMigrationFileDOM.createElement("sql");
-  sqlElement.appendChild(currentMigrationFileDOM.createTextNode(getSql()));
+  Element sqlElement=currentChangeLogFileDOM.createElement("sql");
+  sqlElement.appendChild(currentChangeLogFileDOM.createTextNode(getSql()));
   return sqlElement;
 }

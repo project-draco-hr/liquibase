@@ -37,7 +37,7 @@
   stream.println("Required Parameters:");
   stream.println(" --classpath=<value>                        Classpath containing");
   stream.println("                                            migration files and JDBC Driver");
-  stream.println(" --migrationFile=<path and filename>        Migration file");
+  stream.println(" --changeLogFile=<path and filename>        Migration file");
   stream.println(" --username=<value>                         Database username");
   stream.println(" --password=<value>                         Database password");
   stream.println(" --url=<value>                              Database URL");

@@ -1,5 +1,5 @@
 {
-  Element node=currentMigrationFileDOM.createElement("renameColumn");
+  Element node=currentChangeLogFileDOM.createElement("renameColumn");
   node.setAttribute("tableName",getTableName());
   node.setAttribute("oldColumnName",getOldColumnName());
   node.setAttribute("newColumnName",getNewColumnName());

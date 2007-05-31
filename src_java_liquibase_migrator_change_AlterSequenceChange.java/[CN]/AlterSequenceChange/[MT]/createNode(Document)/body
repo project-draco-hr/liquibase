@@ -1,5 +1,5 @@
 {
-  Element node=currentMigrationFileDOM.createElement("alterSequence");
+  Element node=currentChangeLogFileDOM.createElement("alterSequence");
   node.setAttribute("sequenceName",getSequenceName());
   if (getMinValue() != null) {
     node.setAttribute("minValue",getMinValue().toString());

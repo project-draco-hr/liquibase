@@ -1,5 +1,5 @@
 {
-  Element element=currentMigrationFileDOM.createElement("dropIndex");
+  Element element=currentChangeLogFileDOM.createElement("dropIndex");
   element.setAttribute("indexName",getIndexName());
   element.setAttribute("tableName",getTableName());
   return element;

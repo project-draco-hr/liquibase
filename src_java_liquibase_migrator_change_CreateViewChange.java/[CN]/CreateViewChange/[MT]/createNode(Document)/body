@@ -1,6 +1,6 @@
 {
-  Element element=currentMigrationFileDOM.createElement("createView");
+  Element element=currentChangeLogFileDOM.createElement("createView");
   element.setAttribute("viewName",getViewName());
-  element.appendChild(currentMigrationFileDOM.createTextNode(getSelectQuery()));
+  element.appendChild(currentChangeLogFileDOM.createTextNode(getSelectQuery()));
   return element;
 }

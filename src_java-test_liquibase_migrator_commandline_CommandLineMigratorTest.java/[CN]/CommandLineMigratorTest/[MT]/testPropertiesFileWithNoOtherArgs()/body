@@ -5,7 +5,7 @@
   props.setProperty("username","USERNAME");
   props.setProperty("password","PASSWD");
   props.setProperty("url","URL");
-  props.setProperty("migrationFile","FILE");
+  props.setProperty("changeLogFile","FILE");
   props.setProperty("classpath","CLASSPAHT");
   props.setProperty("contexts","CONTEXTS");
   props.setProperty("promptForNonLocalDatabase","TRUE");
@@ -16,7 +16,7 @@
   assertEquals("USERNAME",cli.username);
   assertEquals("PASSWD",cli.password);
   assertEquals("URL",cli.url);
-  assertEquals("FILE",cli.migrationFile);
+  assertEquals("FILE",cli.changeLogFile);
   assertEquals("CLASSPAHT",cli.classpath);
   assertEquals("CONTEXTS",cli.contexts);
   assertEquals(Boolean.TRUE,cli.promptForNonLocalDatabase);

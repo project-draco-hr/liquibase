@@ -18,7 +18,7 @@
     public String getConfirmationMessage(){
       return null;
     }
-    public Element createNode(    Document currentMigrationFileDOM){
+    public Element createNode(    Document changeLogFileDOM){
       return null;
     }
   }

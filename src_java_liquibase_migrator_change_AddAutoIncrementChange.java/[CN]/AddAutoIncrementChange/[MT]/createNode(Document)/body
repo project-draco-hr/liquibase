@@ -1,5 +1,5 @@
 {
-  Element node=currentMigrationFileDOM.createElement("addAutoIncrement");
+  Element node=currentChangeLogFileDOM.createElement("addAutoIncrement");
   node.setAttribute("tableName",getTableName());
   node.setAttribute("columnName",getColumnName());
   return node;
