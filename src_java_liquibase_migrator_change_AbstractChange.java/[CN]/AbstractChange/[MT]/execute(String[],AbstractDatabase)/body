@@ -1,0 +1,13 @@
+{
+  for (  String statement : statements) {
+    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).finest("Executing Statement: " + statement);
+    try {
+      Statement dbStatement=database.getConnection().createStatement();
+      dbStatement.execute(statement);
+      dbStatement.close();
+    }
+ catch (    SQLException e) {
+      throw new SQLException((e.getMessage() + " [" + statement+ "]").replaceAll("\n","").replaceAll("\r",""));
+    }
+  }
+}
