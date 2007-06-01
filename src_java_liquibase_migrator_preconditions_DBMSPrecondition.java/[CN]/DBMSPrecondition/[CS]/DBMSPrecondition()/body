@@ -1,7 +1,2 @@
 {
-  productToTypeMap=new HashMap<String,String>();
-  productToTypeMap.put(OracleDatabase.PRODUCT_NAME.toLowerCase(),"oracle");
-  productToTypeMap.put(MySQLDatabase.PRODUCT_NAME.toLowerCase(),"mysql");
-  productToTypeMap.put(PostgresDatabase.PRODUCT_NAME.toLowerCase(),"postgresql");
-  productToTypeMap.put(MSSQLDatabase.PRODUCT_NAME.toLowerCase(),"mssql");
 }
