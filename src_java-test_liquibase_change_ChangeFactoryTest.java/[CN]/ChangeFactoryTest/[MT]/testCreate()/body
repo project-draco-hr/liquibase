@@ -1,0 +1,11 @@
+{
+  ChangeFactory factory=ChangeFactory.getInstance();
+  AbstractChange createTableChange=factory.create("createTable");
+  assertEquals(CreateTableChange.class,createTableChange.getClass());
+  try {
+    factory.create("invalidChange");
+  }
+ catch (  Exception e) {
+    ;
+  }
+}
