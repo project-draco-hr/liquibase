@@ -25,7 +25,7 @@
       text=new StringBuffer();
     }
  else     if (changeSet != null && change == null) {
-      change=ChangeFactory.getInstance().create(qName);
+      change=migrator.getChangeFactory().create(qName);
       text=new StringBuffer();
       if (change == null) {
         throw new MigrationFailedException("Unknown refactoring: " + qName);

@@ -1,5 +1,0 @@
-{
-  ChangeFactory firstCall=ChangeFactory.getInstance();
-  ChangeFactory secondCall=ChangeFactory.getInstance();
-  assertSame("First and second calls to getInstance returned different instances.  Singleton not implemented correctly",firstCall,secondCall);
-}
