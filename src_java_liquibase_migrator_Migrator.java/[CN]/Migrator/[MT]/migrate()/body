@@ -10,13 +10,13 @@
  else {
       if (!outputtedHeader) {
         outputSQLWriter.write("--------------------------------------------------------------------------------------" + StreamUtil.getLineSeparator());
-        if (mode.equals(OUTPUT_SQL_MODE)) {
+        if (mode.equals(Mode.OUTPUT_SQL_MODE)) {
           outputSQLWriter.write("-- SQL to update database to newest version" + StreamUtil.getLineSeparator());
         }
- else         if (mode.equals(OUTPUT_CHANGELOG_ONLY_SQL_MODE)) {
+ else         if (mode.equals(Mode.OUTPUT_CHANGELOG_ONLY_SQL_MODE)) {
           outputSQLWriter.write("-- SQL to add all changesets to database history table" + StreamUtil.getLineSeparator());
         }
- else         if (mode.equals(OUTPUT_ROLLBACK_SQL_MODE)) {
+ else         if (mode.equals(Mode.OUTPUT_ROLLBACK_SQL_MODE)) {
           String stateDescription;
           if (getRollbackToTag() != null) {
             stateDescription=getRollbackToTag();
@@ -32,7 +32,7 @@
           }
           outputSQLWriter.write("-- SQL to roll-back database to the state it was at " + stateDescription + StreamUtil.getLineSeparator());
         }
- else         if (mode.equals(OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
+ else         if (mode.equals(Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
           outputSQLWriter.write("-- SQL to roll-back database from an updated buildVersion back to current version" + StreamUtil.getLineSeparator());
         }
  else {
@@ -45,10 +45,10 @@
         outputtedHeader=true;
       }
     }
-    if (mode.equals(EXECUTE_MODE) || mode.equals(OUTPUT_SQL_MODE) || mode.equals(OUTPUT_CHANGELOG_ONLY_SQL_MODE)) {
+    if (mode.equals(Mode.EXECUTE_MODE) || mode.equals(Mode.OUTPUT_SQL_MODE) || mode.equals(Mode.OUTPUT_CHANGELOG_ONLY_SQL_MODE)) {
       runChangeLogs(new UpdateDatabaseChangeLogHandler(this,changeLogFile));
     }
- else     if (mode.equals(EXECUTE_ROLLBACK_MODE) || mode.equals(OUTPUT_ROLLBACK_SQL_MODE)) {
+ else     if (mode.equals(Mode.EXECUTE_ROLLBACK_MODE) || mode.equals(Mode.OUTPUT_ROLLBACK_SQL_MODE)) {
       RollbackDatabaseChangeLogHandler rollbackHandler;
       if (getRollbackToDate() != null) {
         rollbackHandler=new RollbackDatabaseChangeLogHandler(this,changeLogFile,getRollbackToDate());
@@ -74,7 +74,7 @@
         throw new MigrationFailedException("Cannot roll back changelog to selected date due to change set " + unrollbackableChangeSet);
       }
     }
- else     if (mode.equals(OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
+ else     if (mode.equals(Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
       RollbackFutureDatabaseChangeLogHandler rollbackHandler=new RollbackFutureDatabaseChangeLogHandler(this,changeLogFile);
       runChangeLogs(rollbackHandler);
       ChangeSet unrollbackableChangeSet=rollbackHandler.getUnRollBackableChangeSet();

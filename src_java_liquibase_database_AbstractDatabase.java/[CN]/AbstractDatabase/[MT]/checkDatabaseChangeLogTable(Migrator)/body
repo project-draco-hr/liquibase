@@ -45,7 +45,7 @@
  else {
       String createTableStatement=("CREATE TABLE DATABASECHANGELOG (id varchar(255) not null, author varchar(255) not null, filename varchar(255) not null, dateExecuted " + getDateTimeType() + " not null, md5sum varchar(32), description varchar(255), comments varchar(255), tag varchar(255), liquibase varchar(10), primary key(id, author, filename))").toUpperCase();
       statementsToExecute.add(createTableStatement);
-      if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
+      if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
         log.info("Creating database history table with name: DATABASECHANGELOG");
       }
  else {
@@ -53,13 +53,13 @@
       }
     }
     for (    String sql : statementsToExecute) {
-      if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
+      if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
         statement=connection.createStatement();
         statement.executeUpdate(sql);
         connection.commit();
       }
  else {
-        if (!migrator.getMode().equals(Migrator.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
+        if (!migrator.getMode().equals(Migrator.Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
           migrator.getOutputSQLWriter().append(sql + ";" + StreamUtil.getLineSeparator());
           wroteToOutput=true;
         }

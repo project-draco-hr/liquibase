@@ -8,8 +8,8 @@
   try {
     migrator=createMigrator();
     migrator.setContexts(getContexts());
-    migrator.setMode(Migrator.EXECUTE_MODE);
-    if (isPromptOnNonLocalDatabase() && !migrator.isSaveToRunMigration()) {
+    migrator.setMode(Migrator.Mode.EXECUTE_MODE);
+    if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration()) {
       if (migrator.swingPromptForNonLocalDatabase()) {
         throw new MigrationFailedException("Chose not to run against non-production database");
       }

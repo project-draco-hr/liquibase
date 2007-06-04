@@ -1,6 +1,0 @@
-{
-  if (OUTPUT_SQL_MODE.equals(getMode()) || OUTPUT_CHANGELOG_ONLY_SQL_MODE.equals(getMode())) {
-    return true;
-  }
-  return getDatabase().getConnectionURL().indexOf("localhost") >= 0;
-}

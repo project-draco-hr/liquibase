@@ -3,7 +3,7 @@
   Migrator migrator=createMigrator(rollbackChangeLog);
   migrator.dropAll();
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.OUTPUT_FUTURE_ROLLBACK_SQL_MODE);
+  migrator.setMode(Migrator.Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE);
   migrator.setOutputSQLWriter(writer);
   migrator.setRollbackToDate(new Date(0));
   migrator.migrate();

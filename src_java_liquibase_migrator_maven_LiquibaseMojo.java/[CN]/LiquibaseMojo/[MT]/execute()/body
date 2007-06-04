@@ -16,7 +16,7 @@
       Migrator migrator=new Migrator(changeLogFile.trim(),new MavenFileOpener());
       migrator.setContexts(getContexts());
       migrator.init(connection);
-      if (isPromptOnNonLocalDatabase() && !migrator.isSaveToRunMigration()) {
+      if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration()) {
         if (migrator.swingPromptForNonLocalDatabase()) {
           throw new MigrationFailedException("Chose not to run against non-production database");
         }

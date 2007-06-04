@@ -2,17 +2,17 @@
   Migrator migrator=createMigrator(rollbackChangeLog);
   migrator.dropAll();
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.EXECUTE_MODE);
+  migrator.setMode(Migrator.Mode.EXECUTE_MODE);
   migrator.migrate();
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.EXECUTE_ROLLBACK_MODE);
+  migrator.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
   migrator.setRollbackToDate(new Date(0));
   migrator.migrate();
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.EXECUTE_MODE);
+  migrator.setMode(Migrator.Mode.EXECUTE_MODE);
   migrator.migrate();
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.EXECUTE_ROLLBACK_MODE);
+  migrator.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
   migrator.setRollbackToDate(new Date(0));
   migrator.migrate();
 }

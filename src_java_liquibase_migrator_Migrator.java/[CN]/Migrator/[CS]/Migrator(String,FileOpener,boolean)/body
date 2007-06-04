@@ -52,7 +52,7 @@ catch (    SAXNotSupportedException e) {
  catch (  Exception e) {
     throw new RuntimeException(e);
   }
-  setMode(EXECUTE_MODE);
+  setMode(Mode.EXECUTE_MODE);
   this.hasChangeLogLock=alreadyHasChangeLogLock;
   this.buildVersion=findVersion();
 }

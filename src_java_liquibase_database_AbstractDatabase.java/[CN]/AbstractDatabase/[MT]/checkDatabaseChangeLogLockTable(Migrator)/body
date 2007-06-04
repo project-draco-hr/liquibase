@@ -7,14 +7,14 @@
     rs=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogLockTableName(),new String[]{"TABLE"});
     if (!rs.next()) {
       String createTableStatement=getCreateChangeLogLockSQL();
-      if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
+      if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
         statement=connection.createStatement();
         statement.executeUpdate(createTableStatement);
         connection.commit();
         log.info("Created database lock table with name: DATABASECHANGELOGLOCK");
       }
  else {
-        if (!migrator.getMode().equals(Migrator.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
+        if (!migrator.getMode().equals(Migrator.Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
           if (!outputtedLockWarning) {
             migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + "-----------------------------------------------------------------------------------------------" + StreamUtil.getLineSeparator());
             migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " DATABASECHANGELOGLOCK table does not exist." + StreamUtil.getLineSeparator());
@@ -39,7 +39,7 @@
       statement=connection.createStatement();
       rs=statement.executeQuery("select * from DATABASECHANGELOGLOCK where id=1".toUpperCase());
       if (!rs.next()) {
-        if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
+        if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
           statement=connection.createStatement();
           statement.executeUpdate(insertRowStatment);
           connection.commit();
@@ -52,7 +52,7 @@
       }
     }
  else {
-      if (migrator.getMode().equals(Migrator.EXECUTE_MODE)) {
+      if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
         throw new SQLException("Change log lock table does not exist");
       }
  else {

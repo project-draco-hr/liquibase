@@ -2,11 +2,11 @@
   Migrator migrator=createMigrator(rollbackChangeLog);
   migrator.dropAll();
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.EXECUTE_MODE);
+  migrator.setMode(Migrator.Mode.EXECUTE_MODE);
   migrator.migrate();
   StringWriter writer=new StringWriter();
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.OUTPUT_ROLLBACK_SQL_MODE);
+  migrator.setMode(Migrator.Mode.OUTPUT_ROLLBACK_SQL_MODE);
   migrator.setOutputSQLWriter(writer);
   migrator.setRollbackToDate(new Date(0));
   migrator.migrate();
