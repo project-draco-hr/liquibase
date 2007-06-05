@@ -3,6 +3,7 @@
   conn.setAutoCommit(false);
   try {
     dropForeignKeys(conn);
+    dropViews(conn);
     dropTables(conn);
     if (this.supportsSequences()) {
       dropSequences(conn);

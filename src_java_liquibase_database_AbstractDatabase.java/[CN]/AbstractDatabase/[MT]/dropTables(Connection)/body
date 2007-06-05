@@ -2,7 +2,7 @@
   ResultSet rs=null;
   Statement dropStatement=null;
   try {
-    rs=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,new String[]{"TABLE","VIEW","GLOBAL TEMPORARY","LOCAL TEMPORARY","ALIAS","SYNONYM"});
+    rs=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,new String[]{"TABLE","GLOBAL TEMPORARY","LOCAL TEMPORARY","ALIAS","SYNONYM"});
     dropStatement=conn.createStatement();
     while (rs.next()) {
       String tableName=rs.getString("TABLE_NAME");

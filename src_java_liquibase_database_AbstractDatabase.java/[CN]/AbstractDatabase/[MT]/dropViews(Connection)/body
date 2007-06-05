@@ -1,0 +1,31 @@
+{
+  ResultSet rs=null;
+  Statement dropStatement=null;
+  try {
+    rs=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,new String[]{"VIEW"});
+    dropStatement=conn.createStatement();
+    while (rs.next()) {
+      String tableName=rs.getString("TABLE_NAME");
+      if (getSystemTablesAndViews().contains(tableName)) {
+        continue;
+      }
+      String type=rs.getString("TABLE_TYPE");
+      String sql="DROP VIEW " + tableName;
+      try {
+        log.finest("Dropping view " + tableName);
+        dropStatement.executeUpdate(sql);
+      }
+ catch (      SQLException e) {
+        throw new MigrationFailedException("Error dropping view '" + tableName + "': "+ e.getMessage(),e);
+      }
+    }
+  }
+  finally {
+    if (dropStatement != null) {
+      dropStatement.close();
+    }
+    if (rs != null) {
+      rs.close();
+    }
+  }
+}
