@@ -1,0 +1,19 @@
+{
+  if (column.getValue() != null) {
+    return "'" + column.getValue().replaceAll("'","''") + "'";
+  }
+ else   if (column.getValueNumeric() != null) {
+    return column.getValueNumeric();
+  }
+ else   if (column.getValueBoolean() != null) {
+    if (column.getValueBoolean()) {
+      return database.getTrueBooleanValue();
+    }
+ else {
+      return database.getFalseBooleanValue();
+    }
+  }
+ else {
+    return "NULL";
+  }
+}

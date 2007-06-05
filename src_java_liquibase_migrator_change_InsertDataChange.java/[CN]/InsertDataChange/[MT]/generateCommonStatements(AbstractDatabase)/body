@@ -9,9 +9,7 @@
   while (iterator.hasNext()) {
     ColumnConfig column=(ColumnConfig)iterator.next();
     columnNames.append(column.getName());
-    columnValues.append("'");
-    columnValues.append(column.getValue());
-    columnValues.append("'");
+    columnValues.append(getColumnValue(column,database));
     if (iterator.hasNext()) {
       columnNames.append(", ");
       columnValues.append(", ");

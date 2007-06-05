@@ -10,6 +10,12 @@
   if (getValue() != null) {
     element.setAttribute("value",getValue());
   }
+  if (getValueNumeric() != null) {
+    element.setAttribute("valueNumeric",getValueNumeric());
+  }
+  if (getValueBoolean() != null) {
+    element.setAttribute("valueBoolean",getValueBoolean().toString());
+  }
   if (isAutoIncrement() != null && isAutoIncrement().booleanValue()) {
     element.setAttribute("autoIncrement","true");
   }
