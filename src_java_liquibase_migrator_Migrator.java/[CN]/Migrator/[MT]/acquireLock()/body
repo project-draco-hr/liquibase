@@ -2,5 +2,5 @@
   if (hasChangeLogLock) {
     return true;
   }
-  return getDatabase().aquireLock(this);
+  return getDatabase().acquireLock(this);
 }

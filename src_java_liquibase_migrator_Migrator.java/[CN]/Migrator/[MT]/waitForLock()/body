@@ -5,7 +5,7 @@
   boolean locked=false;
   long timeToGiveUp=new Date().getTime() + changeLogLockWaitTime;
   while (!locked && new Date().getTime() < timeToGiveUp) {
-    locked=aquireLock();
+    locked=acquireLock();
     if (!locked) {
       log.info("Waiting for changelog lock....");
       try {
@@ -26,7 +26,7 @@
  else {
       lockedBy="UNKNOWN";
     }
-    log.severe("Could not aquire change log lock.  Currently locked by " + lockedBy);
+    log.severe("Could not acquire change log lock.  Currently locked by " + lockedBy);
     return false;
   }
   return true;
