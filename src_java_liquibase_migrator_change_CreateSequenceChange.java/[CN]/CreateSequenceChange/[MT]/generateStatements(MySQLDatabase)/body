@@ -1,3 +1,0 @@
-{
-  throw new UnsupportedChangeException("MySQL does not support sequences");
-}

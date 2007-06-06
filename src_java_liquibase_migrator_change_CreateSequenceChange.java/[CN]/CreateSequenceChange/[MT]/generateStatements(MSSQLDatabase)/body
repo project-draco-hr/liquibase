@@ -1,3 +1,0 @@
-{
-  throw new UnsupportedChangeException("MSSQL does not support sequences");
-}

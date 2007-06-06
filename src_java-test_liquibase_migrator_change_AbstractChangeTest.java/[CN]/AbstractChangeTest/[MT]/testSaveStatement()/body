@@ -1,6 +1,6 @@
 {
   AbstractChange change=new AbstractChange("test","Test Refactoring"){
-    private String[] generateStatements(){
+    public String[] generateStatements(    AbstractDatabase database) throws UnsupportedChangeException {
       return new String[]{"GENERATED STATEMENT"};
     }
     public String getConfirmationMessage(){
@@ -8,18 +8,6 @@
     }
     public Element createNode(    Document changeLogFileDOM){
       return null;
-    }
-    public String[] generateStatements(    MSSQLDatabase database){
-      return generateStatements();
-    }
-    public String[] generateStatements(    OracleDatabase database){
-      return generateStatements();
-    }
-    public String[] generateStatements(    MySQLDatabase database){
-      return generateStatements();
-    }
-    public String[] generateStatements(    PostgresDatabase database){
-      return generateStatements();
     }
   }
 ;

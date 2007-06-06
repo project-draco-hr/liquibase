@@ -1,0 +1,9 @@
+{
+  if (database instanceof MSSQLDatabase) {
+    return generateMSSQLStatements();
+  }
+ else   if (database instanceof PostgresDatabase) {
+    return generatePostgresStatements();
+  }
+  return new String[]{"ALTER TABLE " + getTableName() + " DROP PRIMARY KEY"};
+}

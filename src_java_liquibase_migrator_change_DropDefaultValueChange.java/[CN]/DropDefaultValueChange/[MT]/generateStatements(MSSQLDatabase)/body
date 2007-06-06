@@ -1,3 +1,0 @@
-{
-  throw new UnsupportedChangeException("Dropping default values is not currently supported in MS-SQL");
-}

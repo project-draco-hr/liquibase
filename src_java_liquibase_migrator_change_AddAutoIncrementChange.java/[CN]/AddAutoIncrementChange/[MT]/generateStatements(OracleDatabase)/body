@@ -1,3 +1,0 @@
-{
-  throw new UnsupportedChangeException("Oracle does not support auto-increment columns");
-}

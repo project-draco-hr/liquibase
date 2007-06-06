@@ -1,3 +1,0 @@
-{
-  return new String[]{"ALTER TABLE " + getTableName() + " MODIFY COLUMN "+ getColumn().getName()+ " "+ getColumn().getType()};
-}

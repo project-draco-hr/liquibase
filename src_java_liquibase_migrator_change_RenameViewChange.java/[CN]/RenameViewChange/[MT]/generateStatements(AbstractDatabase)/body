@@ -1,0 +1,12 @@
+{
+  if (database instanceof MSSQLDatabase) {
+    return new String[]{"exec sp_rename '" + oldViewName + "', "+ newViewName};
+  }
+ else   if (database instanceof MySQLDatabase) {
+    return new String[]{"RENAME TABLE " + oldViewName + " TO "+ newViewName};
+  }
+ else   if (database instanceof PostgresDatabase) {
+    return new String[]{"ALTER TABLE " + oldViewName + " RENAME TO "+ newViewName};
+  }
+  return new String[]{"RENAME " + oldViewName + " TO "+ newViewName};
+}

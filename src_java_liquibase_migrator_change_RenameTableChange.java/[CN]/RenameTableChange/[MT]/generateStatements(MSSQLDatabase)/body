@@ -1,3 +1,0 @@
-{
-  return new String[]{"exec sp_rename '" + oldTableName + "', "+ newTableName};
-}

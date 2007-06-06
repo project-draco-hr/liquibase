@@ -1,0 +1,12 @@
+{
+  String[] statements=new String[]{"ALTER TABLE " + getBaseTableName() + " ADD CONSTRAINT "+ getConstraintName()+ " FOREIGN KEY ("+ getBaseColumnNames()+ ") REFERENCES "+ getReferencedTableName()+ "("+ getReferencedColumnNames()+ ")"};
+  if (database.supportsInitiallyDeferrableColumns()) {
+    if (deferrable != null && deferrable) {
+      statements[0]+=" DEFERRABLE";
+    }
+    if (initiallyDeferred != null && initiallyDeferred) {
+      statements[0]+=" INITIALLY DEFERRED";
+    }
+  }
+  return statements;
+}

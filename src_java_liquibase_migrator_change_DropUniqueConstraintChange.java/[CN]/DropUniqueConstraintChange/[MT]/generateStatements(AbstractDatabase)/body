@@ -1,0 +1,6 @@
+{
+  if (database instanceof MySQLDatabase) {
+    return new String[]{"ALTER TABLE " + getTableName() + " DROP KEY "+ getConstraintName()};
+  }
+  return new String[]{"ALTER TABLE " + getTableName() + " DROP CONSTRAINT "+ getConstraintName()};
+}

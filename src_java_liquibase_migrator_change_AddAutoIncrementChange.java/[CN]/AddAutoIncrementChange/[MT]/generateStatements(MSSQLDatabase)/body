@@ -1,3 +1,0 @@
-{
-  throw new UnsupportedChangeException("MS-SQL does not support adding identities to existing tables");
-}

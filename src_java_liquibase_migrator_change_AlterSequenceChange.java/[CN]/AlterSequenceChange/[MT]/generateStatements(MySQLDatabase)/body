@@ -1,3 +1,0 @@
-{
-  throw new UnsupportedChangeException("Sequences do not exist in PostgreSQL");
-}

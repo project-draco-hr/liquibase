@@ -1,7 +1,0 @@
-{
-  String[] statements=generateStatements();
-  if (ordered != null && ordered) {
-    statements[0]+=" ORDER";
-  }
-  return statements;
-}

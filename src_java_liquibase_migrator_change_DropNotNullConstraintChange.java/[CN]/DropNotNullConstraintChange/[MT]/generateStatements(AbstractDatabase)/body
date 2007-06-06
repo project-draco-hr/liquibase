@@ -1,0 +1,12 @@
+{
+  if (database instanceof MSSQLDatabase) {
+    return generateMSSQLStatements();
+  }
+ else   if (database instanceof MySQLDatabase) {
+    return generateMySQLStatements();
+  }
+ else   if (database instanceof OracleDatabase) {
+    return generateOracleStatements();
+  }
+  return new String[]{"ALTER TABLE " + tableName + " ALTER COLUMN "+ columnName+ " DROP NOT NULL"};
+}

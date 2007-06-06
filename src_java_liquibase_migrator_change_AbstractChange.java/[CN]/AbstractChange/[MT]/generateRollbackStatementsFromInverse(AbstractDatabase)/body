@@ -5,21 +5,7 @@
   }
   List<String> statements=new ArrayList<String>();
   for (  AbstractChange inverse : inverses) {
-    if (database instanceof MSSQLDatabase) {
-      statements.addAll(Arrays.asList(inverse.generateStatements(((MSSQLDatabase)database))));
-    }
- else     if (database instanceof OracleDatabase) {
-      statements.addAll(Arrays.asList(inverse.generateStatements(((OracleDatabase)database))));
-    }
- else     if (database instanceof MySQLDatabase) {
-      statements.addAll(Arrays.asList(inverse.generateStatements(((MySQLDatabase)database))));
-    }
- else     if (database instanceof PostgresDatabase) {
-      statements.addAll(Arrays.asList(inverse.generateStatements(((PostgresDatabase)database))));
-    }
- else {
-      throw new RuntimeException("Unknown database type: " + database.getClass().getName());
-    }
+    statements.addAll(Arrays.asList(inverse.generateStatements(database)));
   }
   return statements.toArray(new String[statements.size()]);
 }
