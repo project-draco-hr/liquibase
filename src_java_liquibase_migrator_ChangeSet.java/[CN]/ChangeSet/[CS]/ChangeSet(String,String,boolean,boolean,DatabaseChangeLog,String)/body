@@ -1,5 +1,5 @@
 {
-  this.refactorings=new ArrayList<AbstractChange>();
+  this.changes=new ArrayList<Change>();
   log=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
   this.id=id;
   this.author=author;

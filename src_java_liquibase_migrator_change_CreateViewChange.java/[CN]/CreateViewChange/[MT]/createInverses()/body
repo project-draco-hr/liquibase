@@ -1,5 +1,5 @@
 {
   DropViewChange inverse=new DropViewChange();
   inverse.setViewName(getViewName());
-  return new AbstractChange[]{inverse};
+  return new Change[]{inverse};
 }

@@ -1,6 +1,6 @@
 {
   ChangeFactory factory=new ChangeFactory();
-  AbstractChange createTableChange=factory.create("createTable");
+  Change createTableChange=factory.create("createTable");
   assertEquals(CreateTableChange.class,createTableChange.getClass());
   try {
     factory.create("invalidChange");

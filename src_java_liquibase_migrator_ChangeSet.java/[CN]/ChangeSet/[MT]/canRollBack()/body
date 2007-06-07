@@ -2,7 +2,7 @@
   if (rollBackStatements != null && rollBackStatements.length > 0) {
     return true;
   }
-  for (  AbstractChange change : getRefactorings()) {
+  for (  Change change : getChanges()) {
     if (!change.canRollBack()) {
       return false;
     }

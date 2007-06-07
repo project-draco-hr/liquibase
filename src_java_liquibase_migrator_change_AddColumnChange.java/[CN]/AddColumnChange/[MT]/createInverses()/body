@@ -2,5 +2,5 @@
   DropColumnChange inverse=new DropColumnChange();
   inverse.setColumnName(getColumn().getName());
   inverse.setTableName(getTableName());
-  return new AbstractChange[]{inverse};
+  return new Change[]{inverse};
 }

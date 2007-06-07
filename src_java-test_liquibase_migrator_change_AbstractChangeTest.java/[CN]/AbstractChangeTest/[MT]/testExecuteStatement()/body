@@ -1,6 +1,6 @@
 {
-  AbstractChange change=new AbstractChange("test","Test Refactorign"){
-    public String[] generateStatements(    AbstractDatabase database) throws UnsupportedChangeException {
+  Change change=new AbstractChange("test","Test Refactorign"){
+    public String[] generateStatements(    Database database) throws UnsupportedChangeException {
       return new String[]{"GENERATED STATEMENT;"};
     }
     public String getConfirmationMessage(){

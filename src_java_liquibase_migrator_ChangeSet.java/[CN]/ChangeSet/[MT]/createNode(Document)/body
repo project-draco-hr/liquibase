@@ -2,7 +2,7 @@
   Element node=currentChangeLogDOM.createElement("changeSet");
   node.setAttribute("id",getId());
   node.setAttribute("author",getAuthor());
-  for (  AbstractChange change : getRefactorings()) {
+  for (  Change change : getChanges()) {
     node.appendChild(change.createNode(currentChangeLogDOM));
   }
   return node;

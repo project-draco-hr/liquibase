@@ -5,7 +5,7 @@
   expect(metaData.getDriverName()).andReturn("DriverNameHere");
   replay(connection);
   replay(metaData);
-  AbstractDatabase database=getDatabase();
+  Database database=getDatabase();
   database.setConnection(connection);
   assertEquals("DriverNameHere",database.getDriverName());
 }

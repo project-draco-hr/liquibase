@@ -1,7 +1,7 @@
 {
   if (md5sum == null) {
     StringBuffer stringToMD5=new StringBuffer();
-    for (    AbstractChange change : getRefactorings()) {
+    for (    Change change : getChanges()) {
       stringToMD5.append(change.getMD5Sum()).append(":");
     }
     md5sum=MD5Util.computeMD5(stringToMD5.toString());

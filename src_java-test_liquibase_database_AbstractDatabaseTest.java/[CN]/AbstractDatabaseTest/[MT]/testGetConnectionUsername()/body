@@ -5,7 +5,7 @@
   expect(metaData.getUserName()).andReturn("usernameHere");
   replay(connection);
   replay(metaData);
-  AbstractDatabase database=getDatabase();
+  Database database=getDatabase();
   database.setConnection(connection);
   assertEquals("usernameHere",database.getConnectionUsername());
 }

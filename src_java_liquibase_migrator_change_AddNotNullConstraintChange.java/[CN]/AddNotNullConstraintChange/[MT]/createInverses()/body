@@ -3,5 +3,5 @@
   inverse.setColumnName(getColumnName());
   inverse.setTableName(getTableName());
   inverse.setColumnDataType(getColumnDataType());
-  return new AbstractChange[]{inverse};
+  return new Change[]{inverse};
 }

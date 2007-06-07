@@ -4,5 +4,5 @@
   dropFK.setConstraintName(getFinalConstraintName());
   DropTableChange dropTable=new DropTableChange();
   dropTable.setTableName(getNewTableName());
-  return new AbstractChange[]{dropFK,dropTable};
+  return new Change[]{dropFK,dropTable};
 }

@@ -1,12 +1,12 @@
 {
-  List<AbstractChange> refactorings=getRefactorings();
+  List<Change> refactorings=getChanges();
   if (refactorings.size() == 0) {
     return "Empty";
   }
   StringBuffer returnString=new StringBuffer();
   Class lastRefactoringClass=null;
   int refactoringCount=0;
-  for (  AbstractChange change : refactorings) {
+  for (  Change change : refactorings) {
     if (change.getClass().equals(lastRefactoringClass)) {
       refactoringCount++;
     }
