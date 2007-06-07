@@ -1,29 +1,29 @@
 {
-  List<Change> refactorings=getChanges();
-  if (refactorings.size() == 0) {
+  List<Change> changes=getChanges();
+  if (changes.size() == 0) {
     return "Empty";
   }
   StringBuffer returnString=new StringBuffer();
-  Class lastRefactoringClass=null;
-  int refactoringCount=0;
-  for (  Change change : refactorings) {
-    if (change.getClass().equals(lastRefactoringClass)) {
-      refactoringCount++;
+  Class lastChangeClass=null;
+  int changeCount=0;
+  for (  Change change : changes) {
+    if (change.getClass().equals(lastChangeClass)) {
+      changeCount++;
     }
- else     if (refactoringCount > 1) {
-      returnString.append(" (x").append(refactoringCount).append(")");
+ else     if (changeCount > 1) {
+      returnString.append(" (x").append(changeCount).append(")");
       returnString.append(", ");
-      returnString.append(change.getRefactoringName());
-      refactoringCount=1;
+      returnString.append(change.getChangeName());
+      changeCount=1;
     }
  else {
-      returnString.append(", ").append(change.getRefactoringName());
-      refactoringCount=1;
+      returnString.append(", ").append(change.getChangeName());
+      changeCount=1;
     }
-    lastRefactoringClass=change.getClass();
+    lastChangeClass=change.getClass();
   }
-  if (refactoringCount > 1) {
-    returnString.append(" (x").append(refactoringCount).append(")");
+  if (changeCount > 1) {
+    returnString.append(" (x").append(changeCount).append(")");
   }
   return returnString.toString().replaceFirst("^, ","");
 }

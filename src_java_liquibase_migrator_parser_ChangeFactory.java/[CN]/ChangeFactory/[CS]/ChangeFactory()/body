@@ -1,10 +1,10 @@
 {
   tagToClassMap=new HashMap<String,Class>();
-  Class[] refactorings=new Class[]{AddColumnChange.class,AlterSequenceChange.class,CreateIndexChange.class,CreateSequenceChange.class,CreateTableChange.class,DropColumnChange.class,DropIndexChange.class,DropSequenceChange.class,DropTableChange.class,InsertDataChange.class,ModifyColumnChange.class,RawSQLChange.class,RenameColumnChange.class,RenameTableChange.class,AddNotNullConstraintChange.class,DropNotNullConstraintChange.class,CreateViewChange.class,DropViewChange.class,MergeColumnChange.class,RenameViewChange.class,AddForeignKeyConstraintChange.class,DropForeignKeyConstraintChange.class,AddLookupTableChange.class,AddPrimaryKeyChange.class,DropPrimaryKeyChange.class,AddAutoIncrementChange.class,AddDefaultValueChange.class,DropDefaultValueChange.class,AddUniqueConstraintChange.class,DropUniqueConstraintChange.class};
+  Class[] changes=new Class[]{AddColumnChange.class,AlterSequenceChange.class,CreateIndexChange.class,CreateSequenceChange.class,CreateTableChange.class,DropColumnChange.class,DropIndexChange.class,DropSequenceChange.class,DropTableChange.class,InsertDataChange.class,ModifyColumnChange.class,RawSQLChange.class,RenameColumnChange.class,RenameTableChange.class,AddNotNullConstraintChange.class,DropNotNullConstraintChange.class,CreateViewChange.class,DropViewChange.class,MergeColumnChange.class,RenameViewChange.class,AddForeignKeyConstraintChange.class,DropForeignKeyConstraintChange.class,AddLookupTableChange.class,AddPrimaryKeyChange.class,DropPrimaryKeyChange.class,AddAutoIncrementChange.class,AddDefaultValueChange.class,DropDefaultValueChange.class,AddUniqueConstraintChange.class,DropUniqueConstraintChange.class};
   try {
-    for (    Class refactoringClass : refactorings) {
-      Change change=(Change)refactoringClass.newInstance();
-      tagToClassMap.put(change.getTagName(),refactoringClass);
+    for (    Class changeClass : changes) {
+      Change change=(Change)changeClass.newInstance();
+      tagToClassMap.put(change.getTagName(),changeClass);
     }
   }
  catch (  Exception e) {

@@ -40,7 +40,7 @@
         }
       }
       text=null;
-      changeSet.addRefactoring(change);
+      changeSet.addChange(change);
       change=null;
     }
   }

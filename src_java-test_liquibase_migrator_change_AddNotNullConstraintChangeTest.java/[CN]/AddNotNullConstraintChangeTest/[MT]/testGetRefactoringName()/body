@@ -1,3 +1,3 @@
 {
-  assertEquals("Add Not-Null Constraint",new AddNotNullConstraintChange().getRefactoringName());
+  assertEquals("Add Not-Null Constraint",new AddNotNullConstraintChange().getChangeName());
 }

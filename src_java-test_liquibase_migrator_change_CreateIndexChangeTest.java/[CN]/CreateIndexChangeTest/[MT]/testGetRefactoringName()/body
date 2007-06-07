@@ -1,3 +1,3 @@
 {
-  assertEquals("Create Index",new CreateIndexChange().getRefactoringName());
+  assertEquals("Create Index",new CreateIndexChange().getChangeName());
 }

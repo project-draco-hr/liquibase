@@ -1,3 +1,3 @@
 {
-  assertEquals("Alter Sequence",new AlterSequenceChange().getRefactoringName());
+  assertEquals("Alter Sequence",new AlterSequenceChange().getChangeName());
 }
