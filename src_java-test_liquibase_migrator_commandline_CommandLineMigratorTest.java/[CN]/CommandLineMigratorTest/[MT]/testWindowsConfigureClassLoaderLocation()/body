@@ -1,11 +1,13 @@
 {
   CommandLineMigrator cli=new CommandLineMigrator();
-  System.setProperty("os.name","Windows XP");
-  cli.classpath="c:\\;c:\\windows\\";
-  cli.applyDefaults();
-  cli.configureClassLoader();
-  URL[] classloaderURLs=((URLClassLoader)cli.classLoader).getURLs();
-  assertEquals(2,classloaderURLs.length);
-  assertEquals("file:/c:/",classloaderURLs[0].toExternalForm());
-  assertEquals("file:/c:/windows/",classloaderURLs[1].toExternalForm());
+  if (cli.isWindows()) {
+    System.setProperty("os.name","Windows XP");
+    cli.classpath="c:\\;c:\\windows\\";
+    cli.applyDefaults();
+    cli.configureClassLoader();
+    URL[] classloaderURLs=((URLClassLoader)cli.classLoader).getURLs();
+    assertEquals(2,classloaderURLs.length);
+    assertEquals("file:/c:/",classloaderURLs[0].toExternalForm());
+    assertEquals("file:/c:/windows/",classloaderURLs[1].toExternalForm());
+  }
 }
