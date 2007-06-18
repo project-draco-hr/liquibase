@@ -1,5 +1,5 @@
 {
   this.id=id;
-  this.lockGranted=lockGranted;
+  this.lockGranted=new Date(lockGranted.getTime());
   this.lockedBy=lockedBy;
 }

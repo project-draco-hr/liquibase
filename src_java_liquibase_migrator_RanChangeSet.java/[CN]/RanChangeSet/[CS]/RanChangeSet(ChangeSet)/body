@@ -1,7 +1,3 @@
 {
-  this.changeLog=changeSet.getDatabaseChangeLog().getFilePath();
-  this.id=changeSet.getId();
-  this.author=changeSet.getAuthor();
-  this.md5sum=changeSet.getMd5sum();
-  this.dateExecuted=new Date();
+  this(changeSet.getDatabaseChangeLog().getFilePath(),changeSet.getId(),changeSet.getAuthor(),changeSet.getMd5sum(),new Date(),null);
 }
