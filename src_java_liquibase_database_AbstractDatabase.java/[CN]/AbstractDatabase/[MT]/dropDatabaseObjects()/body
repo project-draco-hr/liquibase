@@ -1,7 +1,7 @@
 {
   Connection conn=getConnection();
-  conn.setAutoCommit(false);
   try {
+    conn.setAutoCommit(false);
     dropForeignKeys(conn);
     dropViews(conn);
     dropTables(conn);
@@ -10,7 +10,15 @@
     }
     changeLogTableExists=false;
   }
-  finally {
-    conn.commit();
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
+    try {
+      conn.commit();
+    }
+ catch (    SQLException e) {
+      throw new JDBCException(e);
+    }
   }
 }

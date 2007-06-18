@@ -8,7 +8,7 @@
     replay(mockDatabase);
     return new Database[]{mockDatabase};
   }
- catch (  SQLException e) {
+ catch (  JDBCException e) {
     throw new RuntimeException(e);
   }
 }

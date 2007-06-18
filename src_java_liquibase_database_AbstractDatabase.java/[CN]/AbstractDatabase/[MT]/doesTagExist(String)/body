@@ -8,12 +8,25 @@
     rs.next();
     return rs.getInt(1) > 0;
   }
-  finally {
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
     if (rs != null) {
-      rs.close();
+      try {
+        rs.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
     if (pstmt != null) {
-      pstmt.close();
+      try {
+        pstmt.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
   }
 }

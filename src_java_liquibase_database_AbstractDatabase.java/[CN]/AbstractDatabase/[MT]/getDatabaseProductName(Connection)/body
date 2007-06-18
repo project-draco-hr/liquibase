@@ -1,6 +1,6 @@
 {
   try {
-    return getConnection().getCatalog();
+    return conn.getMetaData().getDatabaseProductName();
   }
  catch (  SQLException e) {
     throw new JDBCException(e);

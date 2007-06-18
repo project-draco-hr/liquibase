@@ -14,17 +14,22 @@
   }
  else {
     if (foundRan.getMd5sum() == null) {
-      log.info("Updating NULL md5sum for " + changeSet.toString());
-      Migrator migrator=changeSet.getDatabaseChangeLog().getMigrator();
-      Connection connection=migrator.getDatabase().getConnection();
-      PreparedStatement updatePstmt=connection.prepareStatement("update DatabaseChangeLog set md5sum=? where id=? AND author=? AND filename=?".toUpperCase());
-      updatePstmt.setString(1,changeSet.getMd5sum());
-      updatePstmt.setString(2,changeSet.getId());
-      updatePstmt.setString(3,changeSet.getAuthor());
-      updatePstmt.setString(4,changeSet.getDatabaseChangeLog().getFilePath());
-      updatePstmt.executeUpdate();
-      updatePstmt.close();
-      connection.commit();
+      try {
+        log.info("Updating NULL md5sum for " + changeSet.toString());
+        Migrator migrator=changeSet.getDatabaseChangeLog().getMigrator();
+        Connection connection=migrator.getDatabase().getConnection();
+        PreparedStatement updatePstmt=connection.prepareStatement("update DatabaseChangeLog set md5sum=? where id=? AND author=? AND filename=?".toUpperCase());
+        updatePstmt.setString(1,changeSet.getMd5sum());
+        updatePstmt.setString(2,changeSet.getId());
+        updatePstmt.setString(3,changeSet.getAuthor());
+        updatePstmt.setString(4,changeSet.getDatabaseChangeLog().getFilePath());
+        updatePstmt.executeUpdate();
+        updatePstmt.close();
+        connection.commit();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
       return ChangeSet.RunStatus.ALREADY_RAN;
     }
  else {

@@ -5,11 +5,13 @@
     createTablesSQL="SELECT DISTINCT " + getExistingColumnName() + " AS "+ getNewColumnName()+ " INTO "+ getNewTableName()+ " FROM "+ getExistingTableName()+ " WHERE "+ getExistingColumnName()+ " IS NOT NULL";
   }
   statements.add(createTablesSQL);
-  AddNotNullConstraintChange addNotNullChange=new AddNotNullConstraintChange();
-  addNotNullChange.setTableName(getNewTableName());
-  addNotNullChange.setColumnName(getNewColumnName());
-  addNotNullChange.setColumnDataType(getNewColumnDataType());
-  statements.addAll(Arrays.asList(addNotNullChange.generateStatements(database)));
+  if (!(database instanceof OracleDatabase)) {
+    AddNotNullConstraintChange addNotNullChange=new AddNotNullConstraintChange();
+    addNotNullChange.setTableName(getNewTableName());
+    addNotNullChange.setColumnName(getNewColumnName());
+    addNotNullChange.setColumnDataType(getNewColumnDataType());
+    statements.addAll(Arrays.asList(addNotNullChange.generateStatements(database)));
+  }
   AddPrimaryKeyChange addPKChange=new AddPrimaryKeyChange();
   addPKChange.setTableName(getNewTableName());
   addPKChange.setColumnNames(getNewColumnName());

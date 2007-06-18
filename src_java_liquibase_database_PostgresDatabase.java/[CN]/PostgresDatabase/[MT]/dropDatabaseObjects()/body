@@ -1,13 +1,22 @@
 {
   Connection conn=getConnection();
-  Statement dropStatement=conn.createStatement();
+  Statement dropStatement=null;
   try {
+    dropStatement=conn.createStatement();
     dropStatement.executeUpdate("DROP OWNED BY " + getConnectionUsername());
   }
-  finally {
-    if (dropStatement != null) {
-      dropStatement.close();
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
+    try {
+      if (dropStatement != null) {
+        dropStatement.close();
+      }
+      conn.commit();
     }
-    conn.commit();
+ catch (    SQLException e) {
+      throw new JDBCException(e);
+    }
   }
 }

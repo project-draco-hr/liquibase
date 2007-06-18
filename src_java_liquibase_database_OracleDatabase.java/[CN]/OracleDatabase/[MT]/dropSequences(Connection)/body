@@ -18,15 +18,23 @@
       }
     }
   }
-  finally {
-    if (selectStatement != null) {
-      selectStatement.close();
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
+    try {
+      if (selectStatement != null) {
+        selectStatement.close();
+      }
+      if (dropStatement != null) {
+        dropStatement.close();
+      }
+      if (rs != null) {
+        rs.close();
+      }
     }
-    if (dropStatement != null) {
-      dropStatement.close();
-    }
-    if (rs != null) {
-      rs.close();
+ catch (    SQLException e) {
+      throw new JDBCException(e);
     }
   }
 }

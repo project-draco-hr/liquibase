@@ -69,15 +69,33 @@
       migrator.getOutputSQLWriter().append(StreamUtil.getLineSeparator());
     }
   }
-  finally {
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
     if (statement != null) {
-      statement.close();
+      try {
+        statement.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
     if (checkTableRS != null) {
-      checkTableRS.close();
+      try {
+        checkTableRS.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
     if (checkColumnsRS != null) {
-      checkColumnsRS.close();
+      try {
+        checkColumnsRS.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
   }
 }

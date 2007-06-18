@@ -1,3 +1,8 @@
 {
-  return connection.getMetaData().getUserName();
+  try {
+    return connection.getMetaData().getUserName();
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
 }

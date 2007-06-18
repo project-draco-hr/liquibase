@@ -9,7 +9,6 @@
       if (getSystemTablesAndViews().contains(tableName)) {
         continue;
       }
-      String type=rs.getString("TABLE_TYPE");
       String sql="DROP VIEW " + tableName;
       try {
         log.finest("Dropping view " + tableName);
@@ -20,12 +19,25 @@
       }
     }
   }
-  finally {
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
     if (dropStatement != null) {
-      dropStatement.close();
+      try {
+        dropStatement.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
     if (rs != null) {
-      rs.close();
+      try {
+        rs.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
   }
 }

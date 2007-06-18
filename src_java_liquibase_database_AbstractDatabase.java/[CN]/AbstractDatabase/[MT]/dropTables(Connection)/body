@@ -38,12 +38,25 @@
       }
     }
   }
-  finally {
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
     if (dropStatement != null) {
-      dropStatement.close();
+      try {
+        dropStatement.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
     if (rs != null) {
-      rs.close();
+      try {
+        rs.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
   }
 }

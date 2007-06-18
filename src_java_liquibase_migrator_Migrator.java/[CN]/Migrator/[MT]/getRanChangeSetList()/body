@@ -1,25 +1,30 @@
 {
-  String databaseChangeLogTableName=getDatabase().getDatabaseChangeLogTableName();
-  if (ranChangeSetList == null) {
-    ranChangeSetList=new ArrayList<RanChangeSet>();
-    if (getDatabase().doesChangeLogTableExist()) {
-      log.info("Reading from " + databaseChangeLogTableName);
-      String sql="SELECT * FROM " + databaseChangeLogTableName + " ORDER BY dateExecuted asc";
-      Statement statement=getDatabase().getConnection().createStatement();
-      ResultSet rs=statement.executeQuery(sql);
-      while (rs.next()) {
-        String fileName=rs.getString("filename");
-        String author=rs.getString("author");
-        String id=rs.getString("id");
-        String md5sum=rs.getString("md5sum");
-        Date dateExecuted=rs.getTimestamp("dateExecuted");
-        String tag=rs.getString("tag");
-        RanChangeSet ranChangeSet=new RanChangeSet(fileName,id,author,md5sum,dateExecuted,tag);
-        ranChangeSetList.add(ranChangeSet);
+  try {
+    String databaseChangeLogTableName=getDatabase().getDatabaseChangeLogTableName();
+    if (ranChangeSetList == null) {
+      ranChangeSetList=new ArrayList<RanChangeSet>();
+      if (getDatabase().doesChangeLogTableExist()) {
+        log.info("Reading from " + databaseChangeLogTableName);
+        String sql="SELECT * FROM " + databaseChangeLogTableName + " ORDER BY dateExecuted asc";
+        Statement statement=getDatabase().getConnection().createStatement();
+        ResultSet rs=statement.executeQuery(sql);
+        while (rs.next()) {
+          String fileName=rs.getString("filename");
+          String author=rs.getString("author");
+          String id=rs.getString("id");
+          String md5sum=rs.getString("md5sum");
+          Date dateExecuted=rs.getTimestamp("dateExecuted");
+          String tag=rs.getString("tag");
+          RanChangeSet ranChangeSet=new RanChangeSet(fileName,id,author,md5sum,dateExecuted,tag);
+          ranChangeSetList.add(ranChangeSet);
+        }
+        rs.close();
+        statement.close();
       }
-      rs.close();
-      statement.close();
     }
+    return ranChangeSetList;
   }
-  return ranChangeSetList;
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
 }

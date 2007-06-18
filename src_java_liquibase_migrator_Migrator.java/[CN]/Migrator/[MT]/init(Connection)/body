@@ -1,16 +1,21 @@
 {
-  Database[] implementedDatabases=getImplementedDatabases();
-  boolean foundImplementation=false;
-  for (int i=0; i < implementedDatabases.length; i++) {
-    database=implementedDatabases[i];
-    if (database.isCorrectDatabaseImplementation(connection)) {
-      database.setConnection(connection);
-      database.getConnection().setAutoCommit(false);
-      foundImplementation=true;
-      break;
+  try {
+    Database[] implementedDatabases=getImplementedDatabases();
+    boolean foundImplementation=false;
+    for (int i=0; i < implementedDatabases.length; i++) {
+      database=implementedDatabases[i];
+      if (database.isCorrectDatabaseImplementation(connection)) {
+        database.setConnection(connection);
+        database.getConnection().setAutoCommit(false);
+        foundImplementation=true;
+        break;
+      }
+    }
+    if (!foundImplementation) {
+      throw new MigrationFailedException("Unknown database: " + connection.getMetaData().getDatabaseProductName());
     }
   }
-  if (!foundImplementation) {
-    throw new MigrationFailedException("Unknown database: " + connection.getMetaData().getDatabaseProductName());
+ catch (  SQLException e) {
+    throw new JDBCException(e);
   }
 }

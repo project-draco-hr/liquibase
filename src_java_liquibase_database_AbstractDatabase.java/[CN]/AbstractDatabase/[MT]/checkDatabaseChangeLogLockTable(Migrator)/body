@@ -53,19 +53,32 @@
     }
  else {
       if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
-        throw new SQLException("Change log lock table does not exist");
+        throw new JDBCException("Change log lock table does not exist");
       }
  else {
         migrator.getOutputSQLWriter().append(insertRowStatment + ";" + StreamUtil.getLineSeparator()+ StreamUtil.getLineSeparator());
       }
     }
   }
-  finally {
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
     if (statement != null) {
-      statement.close();
+      try {
+        statement.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
     if (rs != null) {
-      rs.close();
+      try {
+        rs.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
     }
   }
 }

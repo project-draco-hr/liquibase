@@ -7,6 +7,11 @@
  else {
       markChangeSetAsReRan(changeSet);
     }
-    migrator.getDatabase().getConnection().commit();
+    try {
+      migrator.getDatabase().getConnection().commit();
+    }
+ catch (    SQLException e) {
+      throw new JDBCException(e);
+    }
   }
 }
