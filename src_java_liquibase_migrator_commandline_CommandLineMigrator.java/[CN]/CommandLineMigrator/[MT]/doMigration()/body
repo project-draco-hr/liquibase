@@ -35,7 +35,7 @@
   info.put("password",password);
   Connection connection=driver.connect(url,info);
   if (connection == null) {
-    throw new MigrationFailedException("Incorrect driver for URL");
+    throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
   try {
     Migrator migrator=new Migrator(changeLogFile,new CommandLineFileOpener(classLoader));
