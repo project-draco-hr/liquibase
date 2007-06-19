@@ -6,7 +6,7 @@
  else {
     classpath=this.classpath.split(":");
   }
-  List<URL> urls=new ArrayList<URL>();
+  final List<URL> urls=new ArrayList<URL>();
   for (  String classpathEntry : classpath) {
     File classPathFile=new File(classpathEntry);
     if (!classPathFile.exists()) {
@@ -41,9 +41,19 @@
     }
   }
   if (includeSystemClasspath) {
-    classLoader=new URLClassLoader(urls.toArray(new URL[urls.size()]),Thread.currentThread().getContextClassLoader());
+    classLoader=AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>(){
+      public URLClassLoader run(){
+        return new URLClassLoader(urls.toArray(new URL[urls.size()]),Thread.currentThread().getContextClassLoader());
+      }
+    }
+);
   }
  else {
-    classLoader=new URLClassLoader(urls.toArray(new URL[urls.size()]));
+    classLoader=AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>(){
+      public URLClassLoader run(){
+        return new URLClassLoader(urls.toArray(new URL[urls.size()]));
+      }
+    }
+);
   }
 }
