@@ -1,11 +1,4 @@
 {
-  ChangeFactory factory=new ChangeFactory();
   Change createTableChange=factory.create("createTable");
   assertEquals(CreateTableChange.class,createTableChange.getClass());
-  try {
-    factory.create("invalidChange");
-  }
- catch (  Exception e) {
-    ;
-  }
 }
