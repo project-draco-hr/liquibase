@@ -1,4 +1,3 @@
 {
-  super.setUp();
   fileOpener=createFileOpener();
 }

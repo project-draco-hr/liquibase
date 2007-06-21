@@ -1,0 +1,3 @@
+{
+  fileOpener.getResourceAsStream("non/existant/file.txt");
+}

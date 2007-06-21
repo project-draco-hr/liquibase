@@ -1,5 +1,4 @@
 {
-  super.setUp();
   refactoring=new RenameColumnChange();
   refactoring.setTableName("TABLE_NAME");
   refactoring.setOldColumnName("oldColName");

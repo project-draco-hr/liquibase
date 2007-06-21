@@ -1,0 +1,4 @@
+{
+  InputStream inputStream=fileOpener.getResourceAsStream("liquibase/migrator/ant/AntFileOpenerTest.class");
+  assertNotNull(inputStream);
+}
