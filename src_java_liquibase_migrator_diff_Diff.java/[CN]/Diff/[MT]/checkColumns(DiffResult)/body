@@ -1,0 +1,12 @@
+{
+  for (  Column baseColumn : baseSnapshot.getColumns()) {
+    if (!targetSnapshot.getColumns().contains(baseColumn) && (baseColumn.getTable() == null || !diffResult.getMissingTables().contains(baseColumn.getTable())) && (baseColumn.getView() == null || !diffResult.getMissingViews().contains(baseColumn.getView()))) {
+      diffResult.addMissingColumn(baseColumn);
+    }
+  }
+  for (  Column targetColumn : targetSnapshot.getColumns()) {
+    if (!baseSnapshot.getColumns().contains(targetColumn) && (targetColumn.getTable() == null || !diffResult.getUnexpectedTables().contains(targetColumn.getTable())) && (targetColumn.getView() == null || !diffResult.getUnexpectedViews().contains(targetColumn.getView()))) {
+      diffResult.addUnexpectedColumn(targetColumn);
+    }
+  }
+}

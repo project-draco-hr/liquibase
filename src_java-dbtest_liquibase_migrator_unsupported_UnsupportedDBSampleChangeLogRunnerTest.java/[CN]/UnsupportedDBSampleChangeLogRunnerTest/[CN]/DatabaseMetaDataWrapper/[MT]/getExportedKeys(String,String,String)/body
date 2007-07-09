@@ -1,0 +1,3 @@
+{
+  return delegate.getExportedKeys(catalog,schema,table);
+}

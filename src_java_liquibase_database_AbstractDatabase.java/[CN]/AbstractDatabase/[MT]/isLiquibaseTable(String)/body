@@ -1,0 +1,3 @@
+{
+  return tableName.equals(this.getDatabaseChangeLogTableName()) || tableName.equals(this.getDatabaseChangeLogLockTableName());
+}

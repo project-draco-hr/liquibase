@@ -7,26 +7,11 @@
       seenCommand=true;
     }
  else     if (seenCommand) {
-      if (commandParam == null) {
-        commandParam=arg;
-      }
- else {
-        throw new CommandLineParsingException("Only one command option is allowed");
-      }
+      commandParams.add(arg);
     }
  else     if (arg.startsWith("--")) {
-      String[] splitArg=arg.split("=");
-      if (splitArg.length < 2) {
-        throw new CommandLineParsingException("Could not parse '" + arg + "'");
-      }
- else       if (splitArg.length > 2) {
-        StringBuffer secondHalf=new StringBuffer();
-        for (int j=1; j < splitArg.length; j++) {
-          secondHalf.append(splitArg[j]).append("=");
-        }
-        splitArg=new String[]{splitArg[0],secondHalf.toString().replaceFirst("=$","")};
-      }
-      String attributeName=splitArg[0].replaceFirst("--","");
+      String[] splitArg=splitArg(arg);
+      String attributeName=splitArg[0];
       String value=splitArg[1];
       try {
         Field field=getClass().getDeclaredField(attributeName);

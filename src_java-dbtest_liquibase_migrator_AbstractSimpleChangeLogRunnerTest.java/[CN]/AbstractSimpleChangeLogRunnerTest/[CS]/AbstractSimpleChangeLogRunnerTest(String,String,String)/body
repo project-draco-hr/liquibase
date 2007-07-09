@@ -1,0 +1,9 @@
+{
+  this.completeChangeLog="changelogs/" + changelogDir + "/complete/root.changelog.xml";
+  this.rollbackChangeLog="changelogs/" + changelogDir + "/rollback/rollbackable.changelog.xml";
+  this.driverName=driverName;
+  this.url=url;
+  username="liquibase";
+  password="liquibase";
+  Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.OFF);
+}

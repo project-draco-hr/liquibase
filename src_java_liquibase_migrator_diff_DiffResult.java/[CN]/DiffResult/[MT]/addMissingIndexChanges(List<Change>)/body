@@ -1,0 +1,11 @@
+{
+  for (  Index index : getMissingIndexes()) {
+    CreateIndexChange change=new CreateIndexChange();
+    change.setTableName(index.getTableName());
+    change.setIndexName(index.getName());
+    ColumnConfig column=new ColumnConfig();
+    column.setName(index.getColumnName());
+    change.addColumn(column);
+    changes.add(change);
+  }
+}

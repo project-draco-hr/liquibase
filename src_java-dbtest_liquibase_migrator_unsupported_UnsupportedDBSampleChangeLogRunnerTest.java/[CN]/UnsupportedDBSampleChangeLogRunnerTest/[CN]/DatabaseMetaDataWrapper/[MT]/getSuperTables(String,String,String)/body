@@ -1,0 +1,3 @@
+{
+  return delegate.getSuperTables(catalog,schemaPattern,tableNamePattern);
+}

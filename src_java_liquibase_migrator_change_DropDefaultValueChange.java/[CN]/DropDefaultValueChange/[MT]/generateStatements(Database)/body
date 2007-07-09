@@ -8,5 +8,8 @@
  else   if (database instanceof OracleDatabase) {
     return new String[]{"ALTER TABLE " + getTableName() + " MODIFY "+ getColumnName()+ " DEFAULT NULL"};
   }
+ else   if (database instanceof DerbyDatabase) {
+    return new String[]{"ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " WITH DEFAULT NULL"};
+  }
   return new String[]{"ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET DEFAULT NULL"};
 }

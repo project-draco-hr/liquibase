@@ -1,7 +1,6 @@
 {
-  Migrator migrator=new Migrator(null,new ClassLoaderFileOpener());
-  List<Database> databases=Arrays.asList(migrator.getImplementedDatabases());
-  assertEquals(4,databases.size());
+  List<Database> databases=Arrays.asList(DatabaseFactory.getInstance().getImplementedDatabases());
+  assertEquals(7,databases.size());
   boolean foundOracle=false;
   boolean foundPostgres=false;
   boolean foundMSSQL=false;

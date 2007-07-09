@@ -1,0 +1,9 @@
+{
+  for (  PrimaryKey pk : getMissingPrimaryKeys()) {
+    AddPrimaryKeyChange change=new AddPrimaryKeyChange();
+    change.setTableName(pk.getTableName());
+    change.setConstraintName(pk.getName());
+    change.setColumnNames(pk.getColumnNames());
+    changes.add(change);
+  }
+}

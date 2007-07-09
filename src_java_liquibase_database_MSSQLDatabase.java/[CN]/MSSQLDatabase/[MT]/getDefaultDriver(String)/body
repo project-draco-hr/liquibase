@@ -1,0 +1,9 @@
+{
+  if (url.startsWith("jdbc:sqlserver")) {
+    return "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+  }
+ else   if (url.startsWith("jdbc:jtds:sqlserver")) {
+    return "net.sourceforge.jtds.jdbc.Driver";
+  }
+  return null;
+}

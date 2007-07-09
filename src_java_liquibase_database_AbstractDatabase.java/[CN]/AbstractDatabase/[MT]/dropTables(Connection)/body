@@ -6,16 +6,7 @@
     dropStatement=conn.createStatement();
     while (rs.next()) {
       String tableName=rs.getString("TABLE_NAME");
-      if (tableName.startsWith("BIN$")) {
-        continue;
-      }
- else       if (tableName.startsWith("AQ$")) {
-        continue;
-      }
- else       if (tableName.equalsIgnoreCase(getDatabaseChangeLogLockTableName())) {
-        continue;
-      }
- else       if (getSystemTablesAndViews().contains(tableName)) {
+      if (isSystemTable(tableName)) {
         continue;
       }
       String type=rs.getString("TABLE_TYPE");
@@ -25,6 +16,9 @@
       }
  else       if ("VIEW".equals(type)) {
         sql="DROP VIEW " + tableName;
+      }
+ else       if ("SYSTEM TABLE".equals(type)) {
+        continue;
       }
  else {
         throw new MigrationFailedException("Unknown type " + type + " for "+ tableName);

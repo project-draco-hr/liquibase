@@ -1,0 +1,5 @@
+{
+  Database database=new HsqlDatabase();
+  assertEquals("org.hsqldb.jdbcDriver",database.getDefaultDriver("jdbc:hsqldb:mem:liquibase"));
+  assertNull(database.getDefaultDriver("jdbc:oracle://localhost;databaseName=liquibase"));
+}

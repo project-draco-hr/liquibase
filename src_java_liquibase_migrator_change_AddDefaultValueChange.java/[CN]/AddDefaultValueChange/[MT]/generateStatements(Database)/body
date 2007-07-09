@@ -15,5 +15,8 @@
  else   if (database instanceof OracleDatabase) {
     return new String[]{"ALTER TABLE " + getTableName() + " MODIFY "+ getColumnName()+ " DEFAULT "+ maybeQuotedValue};
   }
+ else   if (database instanceof DerbyDatabase) {
+    return new String[]{"ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " WITH DEFAULT '"+ getDefaultValue()+ "'"};
+  }
   return new String[]{"ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET DEFAULT "+ maybeQuotedValue};
 }

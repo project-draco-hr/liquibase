@@ -1,0 +1,6 @@
+{
+  Statement statement=connection.createStatement();
+  statement.execute("SHUTDOWN");
+  statement.close();
+  super.tearDown();
+}

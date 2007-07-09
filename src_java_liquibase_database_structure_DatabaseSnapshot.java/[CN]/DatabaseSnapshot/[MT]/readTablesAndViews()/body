@@ -1,0 +1,21 @@
+{
+  ResultSet rs=databaseMetaData.getTables(database.getCatalogName(),database.getSchemaName(),null,new String[]{"TABLE","VIEW"});
+  while (rs.next()) {
+    String type=rs.getString("TABLE_TYPE");
+    String name=rs.getString("TABLE_NAME");
+    if (database.isSystemTable(name) || database.isLiquibaseTable(name)) {
+      continue;
+    }
+    if ("TABLE".equals(type)) {
+      Table table=new Table();
+      table.setName(name);
+      tablesMap.put(name,table);
+    }
+ else     if ("VIEW".equals(type)) {
+      View view=new View();
+      view.setName(name);
+      viewsMap.put(name,view);
+    }
+  }
+  rs.close();
+}

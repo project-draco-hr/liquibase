@@ -1,0 +1,15 @@
+{
+  if (tableName.startsWith("BIN$")) {
+    return true;
+  }
+ else   if (tableName.startsWith("AQ$")) {
+    return true;
+  }
+ else   if (tableName.equalsIgnoreCase(getDatabaseChangeLogLockTableName())) {
+    return true;
+  }
+ else   if (getSystemTablesAndViews().contains(tableName)) {
+    return true;
+  }
+  return false;
+}

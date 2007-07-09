@@ -1,0 +1,11 @@
+{
+  out.print(title + ":");
+  if (comparison.areTheSame()) {
+    out.println(" EQUAL");
+  }
+ else {
+    out.println();
+    out.println("     Base:   '" + comparison.getBaseVersion() + "'");
+    out.println("     Target: '" + comparison.getTargetVersion() + "'");
+  }
+}

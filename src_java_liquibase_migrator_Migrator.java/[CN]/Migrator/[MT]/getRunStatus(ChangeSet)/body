@@ -41,7 +41,7 @@
           return ChangeSet.RunStatus.RUN_AGAIN;
         }
  else {
-          throw new DatabaseHistoryException("MD5 Check for " + changeSet.toString() + " failed");
+          return ChangeSet.RunStatus.INVALID_MD5SUM;
         }
       }
     }

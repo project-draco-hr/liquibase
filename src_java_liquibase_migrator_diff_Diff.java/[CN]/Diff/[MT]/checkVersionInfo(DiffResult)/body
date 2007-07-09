@@ -1,0 +1,4 @@
+{
+  diffResult.setProductName(new DiffComparison(baseDatabase.getDatabaseProductName(),targetDatabase.getDatabaseProductName()));
+  diffResult.setProductVersion(new DiffComparison(baseDatabase.getDatabaseProductVersion(),targetDatabase.getDatabaseProductVersion()));
+}

@@ -1,0 +1,4 @@
+{
+  this.baseVersion=baseVersion;
+  this.targetVersion=targetVersion;
+}

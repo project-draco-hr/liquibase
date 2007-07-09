@@ -1,0 +1,6 @@
+{
+  Diff diff=new Diff();
+  diff.init(originalDatabase);
+  DiffResult diffResult=diff.compare();
+  diffResult.printChangeLog(System.out);
+}

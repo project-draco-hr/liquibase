@@ -1,0 +1,3 @@
+{
+  return delegate.getIndexInfo(catalog,schema,table,unique,approximate);
+}

@@ -1,0 +1,5 @@
+{
+  Properties properties=super.createProperties();
+  properties.put("retrieveMessagesFromServerOnGetMessage","true");
+  return properties;
+}

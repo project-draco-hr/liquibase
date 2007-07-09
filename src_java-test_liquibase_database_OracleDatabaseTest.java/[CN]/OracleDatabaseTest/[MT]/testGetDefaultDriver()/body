@@ -1,0 +1,5 @@
+{
+  Database database=new OracleDatabase();
+  assertEquals("oracle.jdbc.OracleDriver",database.getDefaultDriver("jdbc:oracle:thin:@localhost/XE"));
+  assertNull(database.getDefaultDriver("jdbc:db2://localhost;databaseName=liquibase"));
+}

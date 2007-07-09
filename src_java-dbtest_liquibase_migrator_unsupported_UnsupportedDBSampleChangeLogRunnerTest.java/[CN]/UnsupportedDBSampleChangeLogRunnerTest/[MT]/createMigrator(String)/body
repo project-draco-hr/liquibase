@@ -1,0 +1,5 @@
+{
+  Migrator migrator=super.createMigrator(changeLogFile);
+  migrator.setCurrentDateTimeFunction("CURRENT_TIMESTAMP");
+  return migrator;
+}

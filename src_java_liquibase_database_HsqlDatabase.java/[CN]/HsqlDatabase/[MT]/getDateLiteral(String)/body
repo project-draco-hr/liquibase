@@ -1,0 +1,14 @@
+{
+  String returnString=isoDate;
+  try {
+    if (isDateTime(isoDate)) {
+      DateFormat isoTimestampFormat=new ISODateFormat();
+      DateFormat dbTimestampFormat=new SimpleDateFormat("yyyy-mm-dd HH:MM:ss.000000000");
+      returnString=dbTimestampFormat.format(isoTimestampFormat.parse(isoDate));
+    }
+  }
+ catch (  ParseException e) {
+    throw new RuntimeException("Unexpected date format");
+  }
+  return "'" + returnString + "'";
+}

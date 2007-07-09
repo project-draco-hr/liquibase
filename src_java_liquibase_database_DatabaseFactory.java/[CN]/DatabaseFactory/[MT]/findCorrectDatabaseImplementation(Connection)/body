@@ -1,0 +1,22 @@
+{
+  Database database=null;
+  boolean foundImplementation=false;
+  Database[] implementedDatabases=getImplementedDatabases();
+  for (int i=0; i < implementedDatabases.length; i++) {
+    database=implementedDatabases[i];
+    if (database.isCorrectDatabaseImplementation(connection)) {
+      foundImplementation=true;
+      break;
+    }
+  }
+  if (!foundImplementation) {
+    try {
+      log.warning("Unknown database: " + connection.getMetaData().getDatabaseProductName());
+    }
+ catch (    SQLException e) {
+      throw new JDBCException(e);
+    }
+    database=new UnsupportedDatabase();
+  }
+  return database;
+}

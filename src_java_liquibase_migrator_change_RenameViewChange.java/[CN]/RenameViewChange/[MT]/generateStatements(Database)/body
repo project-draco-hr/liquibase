@@ -8,5 +8,14 @@
  else   if (database instanceof PostgresDatabase) {
     return new String[]{"ALTER TABLE " + oldViewName + " RENAME TO "+ newViewName};
   }
+ else   if (database instanceof DerbyDatabase) {
+    throw new UnsupportedChangeException("Derby does not currently support renaming views");
+  }
+ else   if (database instanceof HsqlDatabase) {
+    throw new UnsupportedChangeException("HSQL does not currently support renaming views");
+  }
+ else   if (database instanceof DB2Database) {
+    throw new UnsupportedChangeException("DB2 does not currently support renaming views");
+  }
   return new String[]{"RENAME " + oldViewName + " TO "+ newViewName};
 }

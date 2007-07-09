@@ -1,0 +1,3 @@
+{
+  return delegate.supportsTransactionIsolationLevel(level);
+}

@@ -1,0 +1,3 @@
+{
+  return delegate.getTablePrivileges(catalog,schemaPattern,tableNamePattern);
+}

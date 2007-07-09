@@ -1,0 +1,3 @@
+{
+  return delegate.getBestRowIdentifier(catalog,schema,table,scope,nullable);
+}

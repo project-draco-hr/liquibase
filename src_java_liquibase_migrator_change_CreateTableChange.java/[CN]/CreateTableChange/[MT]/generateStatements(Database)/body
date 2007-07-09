@@ -11,6 +11,17 @@
     if (column.getType() != null) {
       buffer.append(" ").append(database.getColumnType(column));
     }
+    if (column.getDefaultValue() != null) {
+      if ("null".equalsIgnoreCase(column.getDefaultValue())) {
+        buffer.append(" DEFAULT NULL");
+      }
+ else {
+        buffer.append(" DEFAULT '").append(column.getDefaultValue()).append("'");
+      }
+    }
+    if (column.isAutoIncrement() != null && column.isAutoIncrement().booleanValue()) {
+      buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
+    }
     if (constraints != null) {
       if (constraints.isNullable() != null && !constraints.isNullable()) {
         buffer.append(" NOT NULL");
@@ -32,17 +43,6 @@
         buffer.append(" UNIQUE");
       }
       if (constraints.getCheck() != null)       buffer.append(constraints.getCheck()).append(" ");
-    }
-    if (column.getDefaultValue() != null) {
-      if (column.getDefaultValue().equalsIgnoreCase("null")) {
-        buffer.append(" DEFAULT NULL");
-      }
- else {
-        buffer.append(" DEFAULT '").append(column.getDefaultValue()).append("'");
-      }
-    }
-    if (column.isAutoIncrement() != null && column.isAutoIncrement().booleanValue()) {
-      buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
     }
     if (iterator.hasNext()) {
       buffer.append(", ");

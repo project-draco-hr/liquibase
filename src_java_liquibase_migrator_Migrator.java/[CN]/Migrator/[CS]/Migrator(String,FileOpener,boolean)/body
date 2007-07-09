@@ -22,15 +22,6 @@
 catch (    SAXNotSupportedException e) {
       ;
     }
-    try {
-      parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaSource",new URI(getClass().getClassLoader().getResource("liquibase/dbchangelog-1.0.xsd").toExternalForm()).toString());
-    }
- catch (    SAXNotRecognizedException e) {
-      ;
-    }
-catch (    SAXNotSupportedException e) {
-      ;
-    }
     xmlReader=parser.getXMLReader();
     xmlReader.setEntityResolver(new MigratorSchemaResolver());
     xmlReader.setErrorHandler(new ErrorHandler(){

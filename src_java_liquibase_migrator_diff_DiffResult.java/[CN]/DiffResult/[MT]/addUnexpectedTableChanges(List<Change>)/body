@@ -1,0 +1,7 @@
+{
+  for (  Table unexpectedTable : getUnexpectedTables()) {
+    DropTableChange change=new DropTableChange();
+    change.setTableName(unexpectedTable.getName());
+    changes.add(change);
+  }
+}

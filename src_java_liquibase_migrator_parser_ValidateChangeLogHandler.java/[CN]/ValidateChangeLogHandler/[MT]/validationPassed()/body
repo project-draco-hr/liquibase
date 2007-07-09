@@ -1,0 +1,3 @@
+{
+  return invalidMD5Sums.size() == 0 && failedPreconditions.size() == 0 && duplicateChangeSets.size() == 0;
+}

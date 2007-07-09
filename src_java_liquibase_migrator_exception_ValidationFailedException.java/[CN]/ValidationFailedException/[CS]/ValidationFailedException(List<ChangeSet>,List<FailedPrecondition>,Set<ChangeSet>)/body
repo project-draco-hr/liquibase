@@ -1,0 +1,5 @@
+{
+  this.invalidMD5Sums=invalidMD5Sums;
+  this.failedPreconditions=failedPreconditions;
+  this.duplicateChangeSets=duplicateChangeSets;
+}

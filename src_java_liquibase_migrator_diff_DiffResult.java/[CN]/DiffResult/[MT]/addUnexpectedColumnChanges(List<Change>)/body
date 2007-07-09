@@ -1,0 +1,11 @@
+{
+  for (  Column column : getUnexpectedColumns()) {
+    if (baseDatabase.isLiquibaseTable(column.getTable().getName())) {
+      continue;
+    }
+    DropColumnChange change=new DropColumnChange();
+    change.setTableName(column.getTable().getName());
+    change.setColumnName(column.getName());
+    changes.add(change);
+  }
+}

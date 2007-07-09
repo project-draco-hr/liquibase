@@ -1,0 +1,18 @@
+{
+  out.println("Base Database: " + baseDatabase.getConnectionUsername() + " "+ baseDatabase.getConnectionURL());
+  out.println("Target Database: " + targetDatabase.getConnectionUsername() + " "+ targetDatabase.getConnectionURL());
+  printComparision("Product Name",productName,out);
+  printComparision("Product Version",productVersion,out);
+  printSetComparison("Missing Tables",getMissingTables(),out);
+  printSetComparison("Unexpected Tables",getUnexpectedTables(),out);
+  printSetComparison("Missing Views",getMissingViews(),out);
+  printSetComparison("Unexpected Views",getUnexpectedViews(),out);
+  printSetComparison("Missing Columns",getMissingColumns(),out);
+  printSetComparison("Unexpected Columns",getUnexpectedColumns(),out);
+  printSetComparison("Missing Foreign Keys",getMissingForeignKeys(),out);
+  printSetComparison("Unexpected Foreign Keys",getUnexpectedForeignKey(),out);
+  printSetComparison("Missing Primary Keys",getMissingPrimaryKeys(),out);
+  printSetComparison("Unexpected Primary Keys",getUnexpectedPrimaryKeys(),out);
+  printSetComparison("Missing Indexes",getMissingIndexes(),out);
+  printSetComparison("Unexpected Indexes",getUnexpectedIndexes(),out);
+}

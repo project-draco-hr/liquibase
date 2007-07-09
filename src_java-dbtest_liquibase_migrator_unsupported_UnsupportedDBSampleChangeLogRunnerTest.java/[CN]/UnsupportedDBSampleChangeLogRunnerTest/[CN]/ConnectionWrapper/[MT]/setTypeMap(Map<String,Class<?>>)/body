@@ -1,0 +1,3 @@
+{
+  delegateConnection.setTypeMap(map);
+}

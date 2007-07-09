@@ -1,0 +1,3 @@
+{
+  return delegate.getProcedures(catalog,schemaPattern,procedureNamePattern);
+}

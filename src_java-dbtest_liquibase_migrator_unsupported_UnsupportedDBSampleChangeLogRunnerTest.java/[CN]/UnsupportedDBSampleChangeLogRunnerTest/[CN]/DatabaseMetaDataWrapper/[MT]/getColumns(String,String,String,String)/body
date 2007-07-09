@@ -1,0 +1,3 @@
+{
+  return delegate.getColumns(catalog,schemaPattern,tableNamePattern,columnNamePattern);
+}

@@ -8,7 +8,8 @@
       changeLog.setLogicalFilePath(atts.getValue("logicalFilePath"));
     }
  else     if ("include".equals(qName)) {
-      new IncludeMigrator(atts.getValue("file"),migrator).migrate();
+      String fileName=atts.getValue("file");
+      handleIncludedChangeLog(fileName);
     }
  else     if (changeSet == null && "changeSet".equals(qName)) {
       boolean alwaysRun=false;
@@ -19,7 +20,7 @@
       if ("true".equalsIgnoreCase(atts.getValue("runOnChange"))) {
         runOnChange=true;
       }
-      changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,changeLog,atts.getValue("context"));
+      changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,changeLog,atts.getValue("context"),atts.getValue("dbms"));
     }
  else     if (changeSet != null && "rollback".equals(qName)) {
       text=new StringBuffer();
@@ -82,7 +83,7 @@
       lastColumn.setConstraints(constraints);
     }
  else     if ("preConditions".equals(qName)) {
-      precondition=new PreconditionSet(migrator);
+      precondition=new PreconditionSet(migrator,changeLog);
     }
  else     if ("dbms".equals(qName)) {
       if (precondition != null) {

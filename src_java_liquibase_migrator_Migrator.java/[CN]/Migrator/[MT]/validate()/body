@@ -1,0 +1,15 @@
+{
+  try {
+    if (!waitForLock()) {
+      return;
+    }
+    ValidateChangeLogHandler validateChangeLogHandler=new ValidateChangeLogHandler(this,changeLogFile);
+    runChangeLogs(validateChangeLogHandler);
+    if (!validateChangeLogHandler.validationPassed()) {
+      throw new ValidationFailedException(validateChangeLogHandler.getInvalidMD5Sums(),validateChangeLogHandler.getFailedPreconditions(),validateChangeLogHandler.getDuplicateChangeSets());
+    }
+  }
+  finally {
+    releaseLock();
+  }
+}

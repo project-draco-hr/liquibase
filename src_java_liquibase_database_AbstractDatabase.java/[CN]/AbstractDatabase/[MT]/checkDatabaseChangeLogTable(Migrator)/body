@@ -60,7 +60,7 @@
       }
  else {
         if (!migrator.getMode().equals(Migrator.Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
-          migrator.getOutputSQLWriter().append(sql + ";" + StreamUtil.getLineSeparator());
+          migrator.getOutputSQLWriter().append(sql).append(";").append(StreamUtil.getLineSeparator());
           wroteToOutput=true;
         }
       }

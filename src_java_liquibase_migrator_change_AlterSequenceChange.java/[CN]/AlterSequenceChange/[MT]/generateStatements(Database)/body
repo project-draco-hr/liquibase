@@ -1,9 +1,9 @@
 {
-  if (database instanceof MySQLDatabase) {
-    throw new UnsupportedChangeException("Sequences do not exist in MySQL");
+  if (!database.supportsSequences()) {
+    throw new UnsupportedChangeException("Sequences do not exist in " + database.getProductName());
   }
- else   if (database instanceof MSSQLDatabase) {
-    throw new UnsupportedChangeException("Sequences do not exist in MSSQL");
+ else   if (database instanceof HsqlDatabase) {
+    return new String[]{"ALTER SEQUENCE " + sequenceName + " RESTART WITH "+ minValue};
   }
   StringBuffer buffer=new StringBuffer();
   buffer.append("ALTER SEQUENCE ");

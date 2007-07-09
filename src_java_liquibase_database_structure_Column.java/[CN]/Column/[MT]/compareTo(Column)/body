@@ -1,0 +1,25 @@
+{
+  try {
+    int returnValue=0;
+    if (this.getTable() != null && o.getTable() == null) {
+      return 1;
+    }
+ else     if (this.getTable() == null && o.getTable() != null) {
+      return -1;
+    }
+ else     if (this.getTable() == null && o.getTable() == null) {
+      returnValue=this.getView().compareTo(o.getView());
+    }
+ else {
+      returnValue=this.getTable().compareTo(o.getTable());
+    }
+    if (returnValue == 0) {
+      returnValue=this.getName().compareTo(o.getName());
+    }
+    return returnValue;
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+    throw new RuntimeException(e);
+  }
+}

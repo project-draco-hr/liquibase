@@ -1,0 +1,6 @@
+{
+  if (values.length != 3) {
+    throw new RuntimeException("Expected 3 values");
+  }
+  return "CONCAT(CONCAT(" + values[0] + ", "+ values[1]+ "), "+ values[2]+ ")";
+}

@@ -1,0 +1,6 @@
+{
+  if (url.startsWith("jdbc:mysql")) {
+    return "com.mysql.jdbc.Driver";
+  }
+  return null;
+}

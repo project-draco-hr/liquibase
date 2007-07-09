@@ -1,0 +1,3 @@
+List<ChangeSet> invalidMD5Sums
+List<FailedPrecondition> failedPreconditions
+Set<ChangeSet> duplicateChangeSets

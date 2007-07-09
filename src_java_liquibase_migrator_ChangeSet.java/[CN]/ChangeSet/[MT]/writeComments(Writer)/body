@@ -2,7 +2,7 @@
   if (StringUtils.trimToNull(comments) != null) {
     String[] commentLines=comments.split("\n");
     for (    String line : commentLines) {
-      writer.append("-- " + line.trim() + StreamUtil.getLineSeparator());
+      writer.append("-- ").append(line.trim()).append(StreamUtil.getLineSeparator());
     }
   }
 }

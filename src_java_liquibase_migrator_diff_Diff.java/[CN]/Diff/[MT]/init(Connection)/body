@@ -1,0 +1,11 @@
+{
+  try {
+    targetDatabase=new NullDatabase();
+    baseDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(originalDatabase);
+    baseDatabase.setConnection(originalDatabase);
+    baseDatabase.getConnection().setAutoCommit(false);
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+}

@@ -1,0 +1,18 @@
+{
+  try {
+    baseSnapshot=new DatabaseSnapshot(baseDatabase);
+    targetSnapshot=new DatabaseSnapshot(targetDatabase);
+    DiffResult diffResult=new DiffResult(baseDatabase,targetDatabase);
+    checkVersionInfo(diffResult);
+    checkTables(diffResult);
+    checkViews(diffResult);
+    checkColumns(diffResult);
+    checkForeignKeys(diffResult);
+    checkPrimaryKeys(diffResult);
+    checkIndexes(diffResult);
+    return diffResult;
+  }
+ catch (  SQLException e) {
+    throw new JDBCException();
+  }
+}

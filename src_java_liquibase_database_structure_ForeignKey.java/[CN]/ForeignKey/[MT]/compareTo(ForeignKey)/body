@@ -1,0 +1,16 @@
+{
+  int returnValue=this.getForeignKeyTable().compareTo(o.getPrimaryKeyTable());
+  if (returnValue == 0) {
+    returnValue=this.getForeignKeyColumn().compareTo(o.getForeignKeyColumn());
+  }
+  if (returnValue == 0) {
+    returnValue=this.getPrimaryKeyTable().compareTo(o.getPrimaryKeyTable());
+  }
+  if (returnValue == 0) {
+    returnValue=this.getPrimaryKeyColumn().compareTo(o.getPrimaryKeyColumn());
+  }
+  if (returnValue == 0) {
+    returnValue=this.getName().compareTo(o.getName());
+  }
+  return returnValue;
+}

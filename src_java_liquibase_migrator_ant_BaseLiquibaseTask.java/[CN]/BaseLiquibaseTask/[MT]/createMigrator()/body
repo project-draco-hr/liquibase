@@ -1,4 +1,5 @@
 {
+  Migrator migrator=new Migrator(getChangeLogFile().trim(),new AntFileOpener(getProject(),classpath));
   String[] strings=classpath.list();
   final List<URL> taskClassPath=new ArrayList<URL>();
   for (int i=0; i < strings.length; i++) {
@@ -11,7 +12,14 @@
     }
   }
 );
-  Driver driver=(Driver)Class.forName(getDriver(),true,loader).newInstance();
+  String driverClassName=getDriver();
+  if (driverClassName == null) {
+    driverClassName=DatabaseFactory.getInstance().findDefaultDriver(getUrl());
+  }
+  if (driverClassName == null) {
+    throw new JDBCException("driver not specified and no default could be found for the given url");
+  }
+  Driver driver=(Driver)Class.forName(driverClassName,true,loader).newInstance();
   Properties info=new Properties();
   info.put("user",getUsername());
   info.put("password",getPassword());
@@ -19,7 +27,7 @@
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + getUrl() + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
-  Migrator migrator=new Migrator(getChangeLogFile().trim(),new AntFileOpener(getProject(),classpath));
   migrator.init(connection);
+  migrator.setCurrentDateTimeFunction(currentDateTimeFunction);
   return migrator;
 }

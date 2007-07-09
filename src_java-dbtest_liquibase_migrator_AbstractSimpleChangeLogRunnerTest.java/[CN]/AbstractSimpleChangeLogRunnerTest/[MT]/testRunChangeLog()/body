@@ -2,5 +2,11 @@
   Migrator migrator=createMigrator(completeChangeLog);
   migrator.dropAll();
   migrator=createMigrator(completeChangeLog);
-  migrator.migrate();
+  try {
+    migrator.migrate();
+  }
+ catch (  ValidationFailedException e) {
+    e.printDescriptiveError(System.out);
+    throw e;
+  }
 }

@@ -1,0 +1,3 @@
+{
+  return delegate.getImportedKeys(catalog,schema,table);
+}

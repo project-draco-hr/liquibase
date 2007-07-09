@@ -49,7 +49,7 @@
       writeComments(outputSQLWriter);
       if (rollBackStatements != null && rollBackStatements.length > 0) {
         for (        String statement : rollBackStatements) {
-          outputSQLWriter.append(statement + ";" + StreamUtil.getLineSeparator()+ StreamUtil.getLineSeparator());
+          outputSQLWriter.append(statement).append(";").append(StreamUtil.getLineSeparator()).append(StreamUtil.getLineSeparator());
         }
       }
  else {

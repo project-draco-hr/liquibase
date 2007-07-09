@@ -1,9 +1,6 @@
 {
-  if (database instanceof MSSQLDatabase) {
-    throw new UnsupportedChangeException("Sequences not supported in MS SQL");
-  }
- else   if (database instanceof MySQLDatabase) {
-    throw new UnsupportedChangeException("Sequences not supported in MySQL");
+  if (!database.supportsSequences()) {
+    throw new UnsupportedChangeException("Sequences not supported in " + database.getProductName());
   }
   return new String[]{"DROP SEQUENCE " + getSequenceName()};
 }

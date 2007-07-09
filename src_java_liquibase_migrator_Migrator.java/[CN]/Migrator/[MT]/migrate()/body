@@ -1,5 +1,9 @@
 {
   try {
+    if (!wasValidationRan()) {
+      validate();
+      wasValidationRan=true;
+    }
     if (!waitForLock()) {
       return;
     }
@@ -84,6 +88,9 @@
  else {
         throw new MigrationFailedException("Will not be able to rollback changes due to change set " + unrollbackableChangeSet);
       }
+    }
+ else     if (mode.equals(Mode.FIND_UNRUN_CHANGESETS_MODE)) {
+      runChangeLogs(new FindChangeSetsHandler(this,changeLogFile));
     }
  else {
       throw new MigrationFailedException("Unknown mode: " + getMode());

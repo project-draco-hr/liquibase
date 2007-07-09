@@ -1,3 +1,0 @@
-{
-  return new Database[]{new OracleDatabase(),new PostgresDatabase(),new MSSQLDatabase(),new MySQLDatabase()};
-}

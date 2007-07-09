@@ -1,0 +1,7 @@
+{
+  super.setConnection(conn);
+  dateTimeType=findDateTypeType();
+  if (currentDateTimeFunction == null) {
+    currentDateTimeFunction=findCurrentDateTimeFunction();
+  }
+}

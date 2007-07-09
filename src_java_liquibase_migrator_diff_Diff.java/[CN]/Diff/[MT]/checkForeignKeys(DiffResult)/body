@@ -1,0 +1,12 @@
+{
+  for (  ForeignKey baseFK : baseSnapshot.getForeignKeys()) {
+    if (!targetSnapshot.getForeignKeys().contains(baseFK)) {
+      diffResult.addMissingForeignKey(baseFK);
+    }
+  }
+  for (  ForeignKey targetFK : targetSnapshot.getForeignKeys()) {
+    if (!baseSnapshot.getForeignKeys().contains(targetFK)) {
+      diffResult.addUnexpectedForeignKey(targetFK);
+    }
+  }
+}

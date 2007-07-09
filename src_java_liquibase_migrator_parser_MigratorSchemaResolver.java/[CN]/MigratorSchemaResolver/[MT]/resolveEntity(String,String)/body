@@ -1,14 +1,21 @@
 {
-  if (systemId != null && systemId.indexOf(XSD_NAME) > systemId.lastIndexOf("/")) {
-    String xsdFile=systemId.substring(systemId.indexOf(XSD_NAME));
-    try {
-      InputSource source=new InputSource(getClass().getClassLoader().getResourceAsStream(SEARCH_PACKAGE + xsdFile));
-      source.setPublicId(publicId);
-      source.setSystemId(systemId);
-      return source;
-    }
- catch (    Exception ex) {
-      throw new IOException(ex.getMessage());
+  if (systemId != null) {
+    int iSlash=systemId.lastIndexOf("/");
+    if (iSlash >= 0) {
+      String xsdFile=systemId.substring(iSlash + 1);
+      try {
+        InputStream resourceAsStream=getClass().getClassLoader().getResourceAsStream(SEARCH_PACKAGE + xsdFile);
+        if (resourceAsStream == null) {
+          return null;
+        }
+        InputSource source=new InputSource(resourceAsStream);
+        source.setPublicId(publicId);
+        source.setSystemId(systemId);
+        return source;
+      }
+ catch (      Exception ex) {
+        return null;
+      }
     }
   }
   return null;

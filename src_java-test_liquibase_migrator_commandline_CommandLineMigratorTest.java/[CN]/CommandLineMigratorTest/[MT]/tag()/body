@@ -10,5 +10,5 @@
   assertEquals("CLASSPATH;CLASSPATH2",cli.classpath);
   assertEquals("CONTEXT1,CONTEXT2",cli.contexts);
   assertEquals("tag",cli.command);
-  assertEquals("TagHere",cli.commandParam);
+  assertEquals("TagHere",cli.commandParams.iterator().next());
 }

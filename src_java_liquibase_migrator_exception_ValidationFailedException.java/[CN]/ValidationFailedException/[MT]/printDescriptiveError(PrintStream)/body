@@ -1,0 +1,21 @@
+{
+  out.println("Validation Error: ");
+  if (invalidMD5Sums.size() > 0) {
+    out.println("     " + invalidMD5Sums.size() + " change sets have changed since they were ran against the database");
+    for (    ChangeSet changeSet : invalidMD5Sums) {
+      out.println("          " + changeSet.toString(false));
+    }
+  }
+  if (failedPreconditions.size() > 0) {
+    out.println("     " + failedPreconditions.size() + " preconditions failed");
+    for (    FailedPrecondition failedPrecondition : failedPreconditions) {
+      out.println("          " + failedPrecondition.toString());
+    }
+  }
+  if (duplicateChangeSets.size() > 0) {
+    out.println("     " + duplicateChangeSets.size() + " change sets had duplicate identifiers");
+    for (    ChangeSet duplicate : duplicateChangeSets) {
+      out.println("          " + duplicate.toString(false));
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  StringBuffer returnString=new StringBuffer();
+  returnString.append("CONCAT_WS(");
+  for (  String value : values) {
+    returnString.append(value).append(", ");
+  }
+  return returnString.toString().replaceFirst(", $",")");
+}

@@ -1,0 +1,3 @@
+{
+  return getDatabaseChangeLog().getFilePath() + " :: " + getId()+ " :: "+ getAuthor()+ (includeMD5Sum ? (" :: (MD5Sum: " + getMd5sum() + ")") : "");
+}

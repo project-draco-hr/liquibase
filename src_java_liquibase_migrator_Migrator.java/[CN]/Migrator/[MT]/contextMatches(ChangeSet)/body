@@ -1,0 +1,5 @@
+{
+  Set<String> requiredContexts=getContexts();
+  String changeSetContext=changeSet.getContext();
+  return changeSetContext == null || requiredContexts.size() == 0 || requiredContexts.contains(changeSetContext);
+}

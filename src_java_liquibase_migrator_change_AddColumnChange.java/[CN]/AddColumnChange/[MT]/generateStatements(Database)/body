@@ -1,6 +1,9 @@
 {
   List<String> sql=new ArrayList<String>();
   sql.add("ALTER TABLE " + getTableName() + " ADD "+ getColumn().getName()+ " "+ database.getColumnType(getColumn()));
+  if (database instanceof DB2Database) {
+    sql.add("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')");
+  }
   if (getColumn().getDefaultValue() != null) {
     AddDefaultValueChange change=new AddDefaultValueChange();
     change.setTableName(getTableName());

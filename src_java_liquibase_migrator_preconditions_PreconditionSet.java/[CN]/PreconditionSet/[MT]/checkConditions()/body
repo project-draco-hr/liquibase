@@ -3,6 +3,7 @@
   boolean orReturnValue=true;
   boolean notReturnValue=true;
   boolean userExistsReturnValue=true;
+  List<FailedPrecondition> failedPreconditions=new ArrayList<FailedPrecondition>();
   try {
     if (dbmsArray.size() > 0) {
       for (int i=0; i < dbmsArray.size(); i++) {
@@ -12,7 +13,7 @@
         }
  else {
           dbmsreturnvalue=false;
-          exceptionMsg="DBMS Precondition failed";
+          failedPreconditions.add(new FailedPrecondition("DBMS Precondition failed",changeLog,dbmsPrecondition));
           break;
         }
       }
@@ -23,7 +24,7 @@
       }
  else {
         orReturnValue=false;
-        exceptionMsg="Or Precondition failed";
+        failedPreconditions.add(new FailedPrecondition("Or Precondition failed",changeLog,or));
       }
     }
  else     if (not != null) {
@@ -32,7 +33,7 @@
       }
  else {
         notReturnValue=false;
-        exceptionMsg="Not Precondition failed";
+        failedPreconditions.add(new FailedPrecondition("Not Precondition failed",changeLog,not));
       }
     }
     if (runningAs != null) {
@@ -41,15 +42,15 @@
       }
  else {
         userExistsReturnValue=false;
-        exceptionMsg="rnningAs Precondition failed";
+        failedPreconditions.add(new FailedPrecondition("runningAs Precondition failed",changeLog,runningAs));
       }
     }
     if (!(dbmsreturnvalue && orReturnValue && notReturnValue&& userExistsReturnValue)) {
-      throw new PreconditionFailedException();
+      throw new PreconditionFailedException(failedPreconditions);
     }
   }
  catch (  PreconditionFailedException ePrecondExcep) {
-    throw new PreconditionFailedException("Unable to process change set: " + exceptionMsg);
+    throw ePrecondExcep;
   }
 catch (  Exception e) {
     throw new RuntimeException(e);

@@ -1,0 +1,13 @@
+{
+  for (  Table table : tablesMap.values()) {
+    ResultSet rs=databaseMetaData.getPrimaryKeys(database.getCatalogName(),database.getSchemaName(),table.getName());
+    while (rs.next()) {
+      PrimaryKey primaryKey=new PrimaryKey();
+      primaryKey.setTableName(rs.getString("TABLE_NAME"));
+      primaryKey.setColumnNames(rs.getString("COLUMN_NAME"));
+      primaryKey.setName(rs.getString("PK_NAME"));
+      primaryKeys.add(primaryKey);
+    }
+    rs.close();
+  }
+}

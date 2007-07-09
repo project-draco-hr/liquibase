@@ -1,0 +1,41 @@
+{
+  String driver=null;
+  String url=null;
+  String username=null;
+  String password=null;
+  for (  String param : commandParams) {
+    String[] splitArg=splitArg(param);
+    String attributeName=splitArg[0];
+    String value=splitArg[1];
+    if ("baseDriver".equalsIgnoreCase(attributeName)) {
+      driver=value;
+    }
+ else     if ("baseUrl".equalsIgnoreCase(attributeName)) {
+      url=value;
+    }
+ else     if ("baseUsername".equals(attributeName)) {
+      username=value;
+    }
+ else     if ("basePassword".equals(attributeName)) {
+      password=value;
+    }
+  }
+  if (driver == null) {
+    driver=DatabaseFactory.getInstance().findDefaultDriver(url);
+  }
+  Driver driverObject;
+  try {
+    driverObject=(Driver)Class.forName(driver,true,classLoader).newInstance();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Cannot get database driver: " + e.getMessage());
+  }
+  Properties info=new Properties();
+  info.put("user",username);
+  info.put("password",password);
+  Connection connection=driverObject.connect(url,info);
+  if (connection == null) {
+    throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
+  }
+  return connection;
+}

@@ -1,0 +1,27 @@
+{
+  String normalLiteral=super.getDateLiteral(isoDate);
+  if (isDateOnly(isoDate)) {
+    StringBuffer val=new StringBuffer();
+    val.append("to_date(");
+    val.append(normalLiteral);
+    val.append(", 'YYYY-MM-DD')");
+    return val.toString();
+  }
+ else   if (isTimeOnly(isoDate)) {
+    StringBuffer val=new StringBuffer();
+    val.append("to_date(");
+    val.append(normalLiteral);
+    val.append(", 'HH24:MI:SS')");
+    return val.toString();
+  }
+ else   if (isDateTime(isoDate)) {
+    StringBuffer val=new StringBuffer();
+    val.append("to_date(");
+    val.append(normalLiteral);
+    val.append(", 'YYYY-MM-DD HH24:MI:SS')");
+    return val.toString();
+  }
+ else {
+    return "UNSUPPORTED:" + isoDate;
+  }
+}

@@ -1,0 +1,3 @@
+{
+  return "HSQL Database Engine".equalsIgnoreCase(getDatabaseProductName(conn));
+}

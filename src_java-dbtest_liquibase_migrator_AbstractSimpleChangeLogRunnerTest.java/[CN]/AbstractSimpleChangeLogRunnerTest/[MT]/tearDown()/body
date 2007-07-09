@@ -1,4 +1,6 @@
 {
   super.tearDown();
   connection.close();
+  connection=null;
+  driver=null;
 }

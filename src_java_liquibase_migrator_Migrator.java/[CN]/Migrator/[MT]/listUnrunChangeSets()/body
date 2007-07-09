@@ -1,0 +1,10 @@
+{
+  setMode(Mode.FIND_UNRUN_CHANGESETS_MODE);
+  try {
+    migrate();
+  }
+ catch (  MigrationFailedException e) {
+    throw new JDBCException(e);
+  }
+  return FindChangeSetsHandler.getUnrunChangeSets();
+}

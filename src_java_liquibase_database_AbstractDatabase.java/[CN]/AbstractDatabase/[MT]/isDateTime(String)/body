@@ -1,0 +1,3 @@
+{
+  return isoDate.length() == "YYYY-MM-DDThh:mm:ss".length();
+}

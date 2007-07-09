@@ -1,0 +1,12 @@
+{
+  try {
+    int result;
+    result=(table != null ? table.hashCode() : 0);
+    result=31 * result + (view != null ? view.hashCode() : 0);
+    result=31 * result + name.hashCode();
+    return result;
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

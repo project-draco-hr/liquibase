@@ -23,8 +23,15 @@
  else {
     throw new CommandLineParsingException("Unknown log level: " + logLevel);
   }
+  Migrator migrator=new Migrator(changeLogFile,new CommandLineFileOpener(classLoader));
   Driver driver;
   try {
+    if (this.driver == null) {
+      this.driver=DatabaseFactory.getInstance().findDefaultDriver(url);
+    }
+    if (this.driver == null) {
+      throw new RuntimeException("Driver class was not specified and could not be determined from the url");
+    }
     driver=(Driver)Class.forName(this.driver,true,classLoader).newInstance();
   }
  catch (  Exception e) {
@@ -37,8 +44,19 @@
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
+  if ("diff".equalsIgnoreCase(command)) {
+    doDiff(connection,createConnectionFromCommandParams(commandParams));
+    return;
+  }
+ else   if ("diffChangeLog".equalsIgnoreCase(command)) {
+    doDiffToChangeLog(connection,createConnectionFromCommandParams(commandParams));
+    return;
+  }
+ else   if ("generateChangeLog".equals(command)) {
+    doGenerateChangeLog(connection);
+    return;
+  }
   try {
-    Migrator migrator=new Migrator(changeLogFile,new CommandLineFileOpener(classLoader));
     migrator.setContexts(contexts);
     migrator.init(connection);
     if ("listLocks".equalsIgnoreCase(command)) {
@@ -58,13 +76,38 @@
       return;
     }
  else     if ("tag".equalsIgnoreCase(command)) {
-      migrator.tag(commandParam);
+      migrator.tag(commandParams.iterator().next());
       System.out.println("Successfully tagged " + migrator.getDatabase().getConnectionUsername() + "@"+ migrator.getDatabase().getConnectionURL());
       return;
     }
  else     if ("dropAll".equals(command)) {
       migrator.dropAll();
       System.out.println("All objects dropped from " + migrator.getDatabase().getConnectionUsername() + "@"+ migrator.getDatabase().getConnectionURL());
+      return;
+    }
+ else     if ("status".equalsIgnoreCase(command)) {
+      boolean runVerbose=false;
+      if (commandParams.contains("--verbose")) {
+        runVerbose=true;
+      }
+      List<ChangeSet> unrunChangeSets=migrator.listUnrunChangeSets();
+      System.out.println(unrunChangeSets.size() + " change sets have not been applied to " + migrator.getDatabase().getConnectionUsername()+ "@"+ migrator.getDatabase().getConnectionURL());
+      if (runVerbose) {
+        for (        ChangeSet changeSet : unrunChangeSets) {
+          System.out.println("     " + changeSet.toString(false));
+        }
+      }
+      return;
+    }
+ else     if ("validate".equalsIgnoreCase(command)) {
+      try {
+        migrator.validate();
+      }
+ catch (      ValidationFailedException e) {
+        e.printDescriptiveError(System.out);
+        return;
+      }
+      System.out.println("No validation errors found");
       return;
     }
     DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -82,42 +125,42 @@
       }
  else       if ("rollback".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
-        if (commandParam == null) {
+        if (commandParams == null) {
           throw new CommandLineParsingException("rollback requires a rollback tag");
         }
-        migrator.setRollbackToTag(commandParam);
+        migrator.setRollbackToTag(commandParams.iterator().next());
       }
  else       if ("rollbackToDate".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
-        if (commandParam == null) {
+        if (commandParams == null) {
           throw new CommandLineParsingException("rollback requires a rollback date");
         }
-        migrator.setRollbackToDate(dateFormat.parse(commandParam));
+        migrator.setRollbackToDate(dateFormat.parse(commandParams.iterator().next()));
       }
  else       if ("rollbackCount".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
-        migrator.setRollbackCount(Integer.parseInt(commandParam));
+        migrator.setRollbackCount(Integer.parseInt(commandParams.iterator().next()));
       }
  else       if ("rollbackSQL".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.Mode.OUTPUT_ROLLBACK_SQL_MODE);
         migrator.setOutputSQLWriter(getOutputWriter());
-        if (commandParam == null) {
+        if (commandParams == null) {
           throw new CommandLineParsingException("rollbackSQL requires a rollback tag");
         }
-        migrator.setRollbackToTag(commandParam);
+        migrator.setRollbackToTag(commandParams.iterator().next());
       }
  else       if ("rollbackToDateSQL".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.Mode.OUTPUT_ROLLBACK_SQL_MODE);
         migrator.setOutputSQLWriter(getOutputWriter());
-        if (commandParam == null) {
+        if (commandParams == null) {
           throw new CommandLineParsingException("rollbackToDateSQL requires a rollback date");
         }
-        migrator.setRollbackToDate(dateFormat.parse(commandParam));
+        migrator.setRollbackToDate(dateFormat.parse(commandParams.iterator().next()));
       }
  else       if ("rollbackCountSQL".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.Mode.OUTPUT_ROLLBACK_SQL_MODE);
         migrator.setOutputSQLWriter(getOutputWriter());
-        migrator.setRollbackCount(Integer.valueOf(commandParam));
+        migrator.setRollbackCount(Integer.valueOf(commandParams.iterator().next()));
       }
  else       if ("futureRollbackSQL".equalsIgnoreCase(command)) {
         migrator.setMode(Migrator.Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE);

@@ -6,7 +6,7 @@
   try {
     if (precondition != null && "preConditions".equals(qName)) {
       changeLog.setPreconditions(precondition);
-      precondition.checkConditions();
+      handlePreCondition(precondition);
     }
  else     if (precondition != null && "or".equals(qName) && notprecondition == null) {
       precondition.setOrPreCondition(orprecondition);
@@ -35,6 +35,10 @@
  else         if (change instanceof CreateViewChange) {
           ((CreateViewChange)change).setSelectQuery(textString);
         }
+ else         if (change instanceof InsertDataChange) {
+          List<ColumnConfig> columns=((InsertDataChange)change).getColumns();
+          columns.get(columns.size() - 1).setValue(textString);
+        }
  else {
           throw new RuntimeException("Unexpected text in " + change.getTagName());
         }
@@ -46,6 +50,6 @@
   }
  catch (  Exception e) {
     log.log(Level.SEVERE,"Error thrown as a SAXException: " + e.getMessage(),e);
-    throw new SAXException(e);
+    throw new SAXException(changeLog.getPhysicalFilePath() + ": " + e.getMessage(),e);
   }
 }

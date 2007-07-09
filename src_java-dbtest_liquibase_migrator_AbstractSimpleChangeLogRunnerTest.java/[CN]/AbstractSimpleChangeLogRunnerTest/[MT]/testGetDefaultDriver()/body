@@ -1,0 +1,4 @@
+{
+  Migrator migrator=createMigrator(completeChangeLog);
+  assertEquals(driverName,migrator.getDatabase().getDefaultDriver(url));
+}

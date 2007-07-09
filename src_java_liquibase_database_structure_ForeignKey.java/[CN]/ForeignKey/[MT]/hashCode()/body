@@ -1,0 +1,9 @@
+{
+  int result;
+  result=primaryKeyTable.hashCode();
+  result=31 * result + primaryKeyColumn.hashCode();
+  result=31 * result + foreignKeyTable.hashCode();
+  result=31 * result + foreignKeyColumn.hashCode();
+  result=31 * result + (name != null ? name.hashCode() : 0);
+  return result;
+}

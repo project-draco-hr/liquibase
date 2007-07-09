@@ -1,0 +1,14 @@
+{
+  StringBuffer message=new StringBuffer();
+  message.append("Validation Failed:");
+  if (invalidMD5Sums.size() > 0) {
+    message.append(invalidMD5Sums.size()).append(" change sets failed MD5Sum Check");
+  }
+  if (failedPreconditions.size() > 0) {
+    message.append(failedPreconditions.size()).append(" preconditions failed");
+  }
+  if (duplicateChangeSets.size() > 0) {
+    message.append(duplicateChangeSets.size()).append(" change sets had duplicate identifiers");
+  }
+  return message.toString();
+}

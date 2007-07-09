@@ -1,0 +1,5 @@
+{
+  super("hsqldb","org.hsqldb.jdbcDriver","jdbc:hsqldb:mem:liquibase");
+  username="sa";
+  password="";
+}

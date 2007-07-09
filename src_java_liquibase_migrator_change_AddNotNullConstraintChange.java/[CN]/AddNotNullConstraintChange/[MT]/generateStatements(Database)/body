@@ -8,10 +8,16 @@
  else   if (database instanceof OracleDatabase) {
     return generateOracleStatements();
   }
+ else   if (database instanceof DerbyDatabase) {
+    return generateDerbyStatements();
+  }
   List<String> statements=new ArrayList<String>();
   if (defaultNullValue != null) {
     statements.add(generateUpdateStatement());
   }
   statements.add("ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL");
+  if (database instanceof DB2Database) {
+    statements.add("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')");
+  }
   return statements.toArray(new String[statements.size()]);
 }

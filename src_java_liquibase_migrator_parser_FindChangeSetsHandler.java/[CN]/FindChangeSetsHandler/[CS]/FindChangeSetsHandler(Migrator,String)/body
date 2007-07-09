@@ -1,0 +1,6 @@
+{
+  super(migrator,physicalChangeLogLocation);
+  if (unrunChangeSets == null) {
+    unrunChangeSets=new ArrayList<ChangeSet>();
+  }
+}

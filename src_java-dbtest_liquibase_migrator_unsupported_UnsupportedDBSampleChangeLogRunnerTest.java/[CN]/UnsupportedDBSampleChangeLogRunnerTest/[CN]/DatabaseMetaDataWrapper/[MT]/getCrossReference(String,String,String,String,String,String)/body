@@ -1,0 +1,3 @@
+{
+  return delegate.getCrossReference(primaryCatalog,primarySchema,primaryTable,foreignCatalog,foreignSchema,foreignTable);
+}

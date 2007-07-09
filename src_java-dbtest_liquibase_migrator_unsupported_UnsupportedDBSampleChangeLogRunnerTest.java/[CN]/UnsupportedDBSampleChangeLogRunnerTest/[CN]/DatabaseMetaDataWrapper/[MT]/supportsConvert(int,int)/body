@@ -1,0 +1,3 @@
+{
+  return delegate.supportsConvert(fromType,toType);
+}

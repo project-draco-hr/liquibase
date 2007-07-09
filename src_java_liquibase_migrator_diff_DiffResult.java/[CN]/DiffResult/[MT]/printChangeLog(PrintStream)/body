@@ -1,0 +1,35 @@
+{
+  DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+  DocumentBuilder documentBuilder=factory.newDocumentBuilder();
+  documentBuilder.setEntityResolver(new MigratorSchemaResolver());
+  Document doc=documentBuilder.newDocument();
+  Element changeLogElement=doc.createElement("databaseChangeLog");
+  changeLogElement.setAttribute("xmlns","http://www.liquibase.org/xml/ns/dbchangelog/1.1");
+  changeLogElement.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
+  changeLogElement.setAttribute("xsi:schemaLocation","http://www.liquibase.org/xml/ns/dbchangelog/1.1 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.1.xsd");
+  doc.appendChild(changeLogElement);
+  List<Change> changes=new ArrayList<Change>();
+  addMissingTableChanges(changes);
+  addUnexpectedTableChanges(changes);
+  addMissingColumnChanges(changes);
+  addUnexpectedColumnChanges(changes);
+  addMissingForeignKeyChanges(changes);
+  addUnexpectedForeignKeyChanges(changes);
+  addMissingIndexChanges(changes);
+  addUnexpectedIndexChanges(changes);
+  addMissingPrimaryKeyChanges(changes);
+  addUnexpectedPrimaryKeyChanges(changes);
+  for (  Change change : changes) {
+    Element changeSet=doc.createElement("changeSet");
+    changeSet.setAttribute("author","diff-generated");
+    changeSet.setAttribute("id",UUID.randomUUID().toString());
+    changeSet.appendChild(change.createNode(doc));
+    doc.getDocumentElement().appendChild(changeSet);
+  }
+  OutputFormat format=new OutputFormat(doc);
+  format.setIndenting(true);
+  XMLSerializer serializer=new XMLSerializer(out,format);
+  serializer.asDOMSerializer();
+  serializer.serialize(doc);
+  out.flush();
+}

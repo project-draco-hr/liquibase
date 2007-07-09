@@ -1,0 +1,13 @@
+{
+  try {
+    baseDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(baseConnection);
+    baseDatabase.setConnection(baseConnection);
+    baseDatabase.getConnection().setAutoCommit(false);
+    targetDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(targetConnection);
+    targetDatabase.setConnection(targetConnection);
+    targetDatabase.getConnection().setAutoCommit(false);
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+}

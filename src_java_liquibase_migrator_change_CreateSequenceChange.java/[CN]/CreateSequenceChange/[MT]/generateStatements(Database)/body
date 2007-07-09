@@ -1,9 +1,6 @@
 {
-  if (database instanceof MSSQLDatabase) {
-    throw new UnsupportedChangeException("MSSQL does not support sequences");
-  }
- else   if (database instanceof MySQLDatabase) {
-    throw new UnsupportedChangeException("MySQL does not support sequences");
+  if (!database.supportsSequences()) {
+    throw new UnsupportedChangeException(database.getProductName() + " does not support sequences");
   }
   StringBuffer buffer=new StringBuffer();
   buffer.append("CREATE SEQUENCE ");

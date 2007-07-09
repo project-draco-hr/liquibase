@@ -1,0 +1,7 @@
+{
+  StringBuffer returnString=new StringBuffer();
+  for (  String value : values) {
+    returnString.append(value).append(" + ");
+  }
+  return returnString.toString().replaceFirst(" \\+ $","");
+}

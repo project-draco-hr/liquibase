@@ -1,6 +1,3 @@
 {
-  if (hasChangeLogLock) {
-    return true;
-  }
-  return getDatabase().acquireLock(this);
+  return hasChangeLogLock || getDatabase().acquireLock(this);
 }

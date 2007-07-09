@@ -1,0 +1,12 @@
+{
+  out.print(title + ": ");
+  if (objects.size() == 0) {
+    out.println("NONE");
+  }
+ else {
+    out.println();
+    for (    Object object : objects) {
+      out.println("     " + object);
+    }
+  }
+}

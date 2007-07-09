@@ -1,0 +1,9 @@
+{
+  for (  Database database : this.getImplementedDatabases()) {
+    String defaultDriver=database.getDefaultDriver(url);
+    if (defaultDriver != null) {
+      return defaultDriver;
+    }
+  }
+  return null;
+}
