@@ -2,6 +2,28 @@
   Element node=currentChangeLogDOM.createElement("changeSet");
   node.setAttribute("id",getId());
   node.setAttribute("author",getAuthor());
+  if (alwaysRun) {
+    node.setAttribute("alwaysRun","true");
+  }
+  if (runOnChange) {
+    node.setAttribute("runOnChange","true");
+  }
+  if (StringUtils.trimToNull(getContext()) != null) {
+    node.setAttribute("context",StringUtils.trimToEmpty(getContext()));
+  }
+  if (getDbmsSet() != null && getDbmsSet().size() > 0) {
+    StringBuffer dbmsString=new StringBuffer();
+    for (    String dbms : getDbmsSet()) {
+      dbmsString.append(dbms).append(",");
+    }
+    node.setAttribute("dbms",dbmsString.toString().replaceFirst(",$",""));
+  }
+  if (StringUtils.trimToNull(getComments()) != null) {
+    Element commentsElement=currentChangeLogDOM.createElement("comments");
+    Text commentsText=currentChangeLogDOM.createTextNode(getComments());
+    commentsElement.appendChild(commentsText);
+    node.appendChild(commentsElement);
+  }
   for (  Change change : getChanges()) {
     node.appendChild(change.createNode(currentChangeLogDOM));
   }
