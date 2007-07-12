@@ -1,4 +1,5 @@
 {
+  updateListeners("Reading foreign keys for " + database.toString() + " ...");
   for (  Table table : tablesMap.values()) {
     ResultSet rs=databaseMetaData.getExportedKeys(database.getCatalogName(),database.getSchemaName(),table.getName());
     while (rs.next()) {

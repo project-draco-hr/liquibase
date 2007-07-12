@@ -1,4 +1,5 @@
 {
+  updateListeners("Reading primary keys for " + database.toString() + " ...");
   for (  Table table : tablesMap.values()) {
     ResultSet rs=databaseMetaData.getPrimaryKeys(database.getCatalogName(),database.getSchemaName(),table.getName());
     while (rs.next()) {

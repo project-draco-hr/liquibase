@@ -1,0 +1,8 @@
+{
+  try {
+    return getConnectionUsername() + " @ " + getConnectionURL();
+  }
+ catch (  JDBCException e) {
+    return super.toString();
+  }
+}

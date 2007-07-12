@@ -1,0 +1,13 @@
+{
+  updateListeners("Reading sequences for " + database.toString() + " ...");
+  if (database.supportsSequences()) {
+    Statement stmt=database.getConnection().createStatement();
+    ResultSet rs=stmt.executeQuery(database.createFindSequencesSQL());
+    while (rs.next()) {
+      Sequence seq=new Sequence();
+      seq.setName(rs.getString("SEQUENCE_NAME"));
+      sequences.add(seq);
+    }
+    rs.close();
+  }
+}

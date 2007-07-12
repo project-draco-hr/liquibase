@@ -1,0 +1,19 @@
+{
+  try {
+    this.database=database;
+    this.databaseMetaData=database.getConnection().getMetaData();
+    this.statusListeners=statusListeners;
+    readTablesAndViews();
+    readColumns();
+    readForeignKeyInformation();
+    readPrimaryKeys();
+    readIndexes();
+    readSequences();
+    this.tables=new HashSet<Table>(tablesMap.values());
+    this.views=new HashSet<View>(viewsMap.values());
+    this.columns=new HashSet<Column>(columnsMap.values());
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+}

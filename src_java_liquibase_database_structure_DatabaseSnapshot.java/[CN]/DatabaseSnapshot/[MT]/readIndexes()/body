@@ -1,6 +1,13 @@
 {
+  updateListeners("Reading indexes for " + database.toString() + " ...");
   for (  Table table : tablesMap.values()) {
-    ResultSet rs=databaseMetaData.getIndexInfo(database.getCatalogName(),database.getSchemaName(),table.getName(),true,true);
+    ResultSet rs=null;
+    try {
+      rs=databaseMetaData.getIndexInfo(database.getCatalogName(),database.getSchemaName(),table.getName(),true,true);
+    }
+ catch (    SQLException e) {
+      throw e;
+    }
     while (rs.next()) {
       Index indexInformation=new Index();
       indexInformation.setTableName(rs.getString("TABLE_NAME"));

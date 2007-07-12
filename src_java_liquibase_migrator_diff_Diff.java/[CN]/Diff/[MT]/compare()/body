@@ -1,7 +1,7 @@
 {
   try {
-    baseSnapshot=new DatabaseSnapshot(baseDatabase);
-    targetSnapshot=new DatabaseSnapshot(targetDatabase);
+    baseSnapshot=new DatabaseSnapshot(baseDatabase,statusListeners);
+    targetSnapshot=new DatabaseSnapshot(targetDatabase,statusListeners);
     DiffResult diffResult=new DiffResult(baseDatabase,targetDatabase);
     checkVersionInfo(diffResult);
     checkTables(diffResult);
@@ -10,6 +10,7 @@
     checkForeignKeys(diffResult);
     checkPrimaryKeys(diffResult);
     checkIndexes(diffResult);
+    checkSequences(diffResult);
     return diffResult;
   }
  catch (  SQLException e) {

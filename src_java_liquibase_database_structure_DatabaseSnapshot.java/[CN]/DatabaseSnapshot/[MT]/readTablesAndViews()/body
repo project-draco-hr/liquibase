@@ -1,4 +1,5 @@
 {
+  updateListeners("Reading tables for " + database.toString() + " ...");
   ResultSet rs=databaseMetaData.getTables(database.getCatalogName(),database.getSchemaName(),null,new String[]{"TABLE","VIEW"});
   while (rs.next()) {
     String type=rs.getString("TABLE_TYPE");

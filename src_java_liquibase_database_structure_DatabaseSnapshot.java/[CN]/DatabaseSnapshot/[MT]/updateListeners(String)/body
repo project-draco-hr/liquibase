@@ -1,0 +1,8 @@
+{
+  if (this.statusListeners == null) {
+    return;
+  }
+  for (  DiffStatusListener listener : this.statusListeners) {
+    listener.statusUpdate(message);
+  }
+}

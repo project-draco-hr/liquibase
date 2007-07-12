@@ -15,4 +15,6 @@
   printSetComparison("Unexpected Primary Keys",getUnexpectedPrimaryKeys(),out);
   printSetComparison("Missing Indexes",getMissingIndexes(),out);
   printSetComparison("Unexpected Indexes",getUnexpectedIndexes(),out);
+  printSetComparison("Missing Sequences",getMissingSequences(),out);
+  printSetComparison("Unexpected Sequences",getUnexpectedSequences(),out);
 }

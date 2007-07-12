@@ -1,4 +1,5 @@
 {
+  updateListeners("Reading columns for " + database.toString() + " ...");
   ResultSet rs=databaseMetaData.getColumns(database.getCatalogName(),database.getSchemaName(),null,null);
   while (rs.next()) {
     Column columnInfo=new Column();
