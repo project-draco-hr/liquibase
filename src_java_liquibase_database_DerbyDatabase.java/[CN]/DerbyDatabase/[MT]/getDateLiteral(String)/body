@@ -1,0 +1,11 @@
+{
+  if (isDateOnly(isoDate)) {
+    return "DATE(" + super.getDateLiteral(isoDate) + ")";
+  }
+ else   if (isTimeOnly(isoDate)) {
+    return "TIME(" + super.getDateLiteral(isoDate) + ")";
+  }
+ else {
+    return "TIMESTAMP(" + super.getDateLiteral(isoDate) + ")";
+  }
+}
