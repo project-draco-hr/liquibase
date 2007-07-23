@@ -22,7 +22,7 @@
   for (  Change change : changes) {
     Element changeSet=doc.createElement("changeSet");
     changeSet.setAttribute("author","diff-generated");
-    changeSet.setAttribute("id",UUID.randomUUID().toString());
+    changeSet.setAttribute("id",generateId());
     changeSet.appendChild(change.createNode(doc));
     doc.getDocumentElement().appendChild(changeSet);
   }

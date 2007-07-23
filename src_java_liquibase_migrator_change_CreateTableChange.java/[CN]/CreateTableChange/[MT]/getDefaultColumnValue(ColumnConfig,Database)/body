@@ -1,0 +1,25 @@
+{
+  if (column.getDefaultValue() != null) {
+    if ("null".equalsIgnoreCase(column.getDefaultValue())) {
+      return "NULL";
+    }
+    return "'" + column.getDefaultValue().replaceAll("'","''") + "'";
+  }
+ else   if (column.getDefaultValueNumeric() != null) {
+    return column.getDefaultValueNumeric();
+  }
+ else   if (column.getDefaultValueBoolean() != null) {
+    if (column.getDefaultValueBoolean()) {
+      return database.getTrueBooleanValue();
+    }
+ else {
+      return database.getFalseBooleanValue();
+    }
+  }
+ else   if (column.getDefaultValueDate() != null) {
+    return database.getDateLiteral(column.getDefaultValueDate());
+  }
+ else {
+    return "NULL";
+  }
+}

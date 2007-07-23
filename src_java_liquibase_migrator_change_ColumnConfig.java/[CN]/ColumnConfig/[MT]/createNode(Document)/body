@@ -7,6 +7,15 @@
   if (getDefaultValue() != null) {
     element.setAttribute("defaultValue",getDefaultValue());
   }
+  if (getDefaultValueNumeric() != null) {
+    element.setAttribute("defaultValueNumeric",getDefaultValueNumeric());
+  }
+  if (getDefaultValueDate() != null) {
+    element.setAttribute("defaultValueDate",getDefaultValueDate());
+  }
+  if (getDefaultValueBoolean() != null) {
+    element.setAttribute("defaultValueBoolean",getDefaultValueBoolean().toString());
+  }
   if (getValue() != null) {
     element.setAttribute("value",getValue());
   }

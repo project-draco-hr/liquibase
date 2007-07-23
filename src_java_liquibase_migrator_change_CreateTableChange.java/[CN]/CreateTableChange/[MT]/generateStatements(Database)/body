@@ -11,13 +11,8 @@
     if (column.getType() != null) {
       buffer.append(" ").append(database.getColumnType(column));
     }
-    if (column.getDefaultValue() != null) {
-      if ("null".equalsIgnoreCase(column.getDefaultValue())) {
-        buffer.append(" DEFAULT NULL");
-      }
- else {
-        buffer.append(" DEFAULT '").append(column.getDefaultValue()).append("'");
-      }
+    if (column.getDefaultValue() != null || column.getDefaultValueBoolean() != null || column.getDefaultValueDate() != null || column.getDefaultValueNumeric() != null) {
+      buffer.append(" DEFAULT ").append(getDefaultColumnValue(column,database));
     }
     if (column.isAutoIncrement() != null && column.isAutoIncrement().booleanValue()) {
       buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");

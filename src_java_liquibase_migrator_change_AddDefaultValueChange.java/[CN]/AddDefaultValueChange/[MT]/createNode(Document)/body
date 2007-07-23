@@ -2,6 +2,17 @@
   Element node=currentChangeLogFileDOM.createElement(getTagName());
   node.setAttribute("tableName",getTableName());
   node.setAttribute("columnName",getColumnName());
-  node.setAttribute("defaultValue",getDefaultValue());
+  if (getDefaultValue() != null) {
+    node.setAttribute("defaultValue",getDefaultValue());
+  }
+  if (getDefaultValueNumeric() != null) {
+    node.setAttribute("defaultValueNumeric",getDefaultValueNumeric());
+  }
+  if (getDefaultValueDate() != null) {
+    node.setAttribute("defaultValueDate",getDefaultValueDate());
+  }
+  if (getDefaultValueBoolean() != null) {
+    node.setAttribute("defaultValueBoolean",getDefaultValueBoolean().toString());
+  }
   return node;
 }
