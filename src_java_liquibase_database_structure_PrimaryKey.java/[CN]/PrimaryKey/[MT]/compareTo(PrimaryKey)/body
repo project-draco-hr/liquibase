@@ -1,3 +1,10 @@
 {
-  return this.getName().compareTo(o.getName());
+  int returnValue=this.getTableName().compareTo(o.getTableName());
+  if (returnValue == 0) {
+    returnValue=this.getColumnNames().compareTo(o.getColumnNames());
+  }
+  if (returnValue == 0) {
+    returnValue=this.getName().compareTo(o.getName());
+  }
+  return returnValue;
 }

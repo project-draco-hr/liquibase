@@ -1,5 +1,5 @@
 {
-  for (  ForeignKey fk : getUnexpectedForeignKey()) {
+  for (  ForeignKey fk : getUnexpectedForeignKeys()) {
     DropForeignKeyConstraintChange change=new DropForeignKeyConstraintChange();
     change.setConstraintName(fk.getName());
     change.setBaseTableName(fk.getPrimaryKeyTable().getName());

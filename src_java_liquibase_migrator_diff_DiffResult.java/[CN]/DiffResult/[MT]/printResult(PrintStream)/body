@@ -10,7 +10,7 @@
   printSetComparison("Missing Columns",getMissingColumns(),out);
   printSetComparison("Unexpected Columns",getUnexpectedColumns(),out);
   printSetComparison("Missing Foreign Keys",getMissingForeignKeys(),out);
-  printSetComparison("Unexpected Foreign Keys",getUnexpectedForeignKey(),out);
+  printSetComparison("Unexpected Foreign Keys",getUnexpectedForeignKeys(),out);
   printSetComparison("Missing Primary Keys",getMissingPrimaryKeys(),out);
   printSetComparison("Unexpected Primary Keys",getUnexpectedPrimaryKeys(),out);
   printSetComparison("Missing Indexes",getMissingIndexes(),out);

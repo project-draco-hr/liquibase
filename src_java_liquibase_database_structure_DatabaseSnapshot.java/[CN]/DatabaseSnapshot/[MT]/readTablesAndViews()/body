@@ -4,7 +4,9 @@
   while (rs.next()) {
     String type=rs.getString("TABLE_TYPE");
     String name=rs.getString("TABLE_NAME");
-    if (database.isSystemTable(name) || database.isLiquibaseTable(name)) {
+    String schemaName=rs.getString("TABLE_SCHEM");
+    String catalogName=rs.getString("TABLE_CAT");
+    if (database.isSystemTable(catalogName,schemaName,name) || database.isLiquibaseTable(name)) {
       continue;
     }
     if ("TABLE".equals(type)) {

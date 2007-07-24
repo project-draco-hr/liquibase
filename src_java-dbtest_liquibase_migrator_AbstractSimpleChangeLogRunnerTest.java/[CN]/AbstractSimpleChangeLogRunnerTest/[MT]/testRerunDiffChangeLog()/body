@@ -1,0 +1,22 @@
+{
+  runCompleteChangeLog();
+  Diff diff=new Diff();
+  diff.init(connection);
+  DiffResult diffResult=diff.compare();
+  File tempFile=File.createTempFile("liquibase-test",".xml");
+  FileOutputStream output=new FileOutputStream(tempFile);
+  diffResult.printChangeLog(new PrintStream(output),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
+  output.flush();
+  output.close();
+  Migrator migrator=createMigrator(tempFile.getName());
+  migrator.dropAll();
+  migrator=createMigrator(tempFile.getName());
+  try {
+    migrator.migrate();
+  }
+ catch (  ValidationFailedException e) {
+    e.printDescriptiveError(System.out);
+    throw e;
+  }
+  tempFile.deleteOnExit();
+}

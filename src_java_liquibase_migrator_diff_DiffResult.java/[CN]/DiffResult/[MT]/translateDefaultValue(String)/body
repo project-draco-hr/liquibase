@@ -1,0 +1,7 @@
+{
+  if (defaultValue != null) {
+    defaultValue=defaultValue.replaceFirst("^'","").replaceFirst("'$","");
+    defaultValue=defaultValue.replaceFirst("'\\:\\:[a-zA-Z0-9 ]+$","");
+  }
+  return defaultValue;
+}

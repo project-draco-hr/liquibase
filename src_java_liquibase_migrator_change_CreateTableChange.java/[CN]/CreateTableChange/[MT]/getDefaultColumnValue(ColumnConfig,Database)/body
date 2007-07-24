@@ -3,7 +3,12 @@
     if ("null".equalsIgnoreCase(column.getDefaultValue())) {
       return "NULL";
     }
-    return "'" + column.getDefaultValue().replaceAll("'","''") + "'";
+    if (!database.shouldQuoteValue(column.getDefaultValue())) {
+      return column.getDefaultValue();
+    }
+ else {
+      return "'" + column.getDefaultValue().replaceAll("'","''") + "'";
+    }
   }
  else   if (column.getDefaultValueNumeric() != null) {
     return column.getDefaultValueNumeric();

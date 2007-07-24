@@ -2,10 +2,10 @@
   for (  ForeignKey fk : getMissingForeignKeys()) {
     AddForeignKeyConstraintChange change=new AddForeignKeyConstraintChange();
     change.setConstraintName(fk.getName());
-    change.setBaseTableName(fk.getPrimaryKeyTable().getName());
-    change.setBaseColumnNames(fk.getPrimaryKeyColumn());
-    change.setReferencedTableName(fk.getForeignKeyTable().getName());
-    change.setReferencedColumnNames(fk.getForeignKeyColumn());
+    change.setReferencedTableName(fk.getPrimaryKeyTable().getName());
+    change.setReferencedColumnNames(fk.getPrimaryKeyColumn());
+    change.setBaseTableName(fk.getForeignKeyTable().getName());
+    change.setBaseColumnNames(fk.getForeignKeyColumn());
     change.setDeferrable(fk.isDeferrable());
     change.setInitiallyDeferred(fk.isInitiallyDeferred());
     changes.add(change);

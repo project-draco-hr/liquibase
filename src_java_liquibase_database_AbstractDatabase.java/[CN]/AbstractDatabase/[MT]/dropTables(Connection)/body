@@ -6,7 +6,9 @@
     dropStatement=conn.createStatement();
     while (rs.next()) {
       String tableName=rs.getString("TABLE_NAME");
-      if (isSystemTable(tableName)) {
+      String schemaName=rs.getString("TABLE_SCHEM");
+      String catalogName=rs.getString("TABLE_CAT");
+      if (isSystemTable(catalogName,schemaName,tableName)) {
         continue;
       }
       String type=rs.getString("TABLE_TYPE");

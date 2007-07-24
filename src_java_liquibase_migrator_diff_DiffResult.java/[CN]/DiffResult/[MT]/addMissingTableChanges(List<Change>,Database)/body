@@ -1,0 +1,27 @@
+{
+  for (  Table missingTable : getMissingTables()) {
+    if (baseDatabase.isLiquibaseTable(missingTable.getName())) {
+      continue;
+    }
+    CreateTableChange change=new CreateTableChange();
+    change.setTableName(missingTable.getName());
+    for (    Column column : missingTable.getColumns()) {
+      ColumnConfig columnConfig=new ColumnConfig();
+      columnConfig.setName(column.getName());
+      columnConfig.setType(column.getDataTypeString(database));
+      if (column.isNullable() != null && !column.isNullable()) {
+        ConstraintsConfig constraintsConfig=new ConstraintsConfig();
+        constraintsConfig.setNullable(false);
+        columnConfig.setConstraints(constraintsConfig);
+      }
+      if (column.isNumeric()) {
+        columnConfig.setDefaultValueNumeric(StringUtils.trimToNull(column.getDefaultValue()));
+      }
+ else {
+        columnConfig.setDefaultValue(StringUtils.trimToNull(translateDefaultValue(column.getDefaultValue())));
+      }
+      change.addColumn(columnConfig);
+    }
+    changes.add(change);
+  }
+}

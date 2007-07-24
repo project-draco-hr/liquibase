@@ -6,4 +6,5 @@
   info.put("user",username);
   info.put("password",password);
   connection=driver.connect(url,info);
+  connection.setAutoCommit(false);
 }

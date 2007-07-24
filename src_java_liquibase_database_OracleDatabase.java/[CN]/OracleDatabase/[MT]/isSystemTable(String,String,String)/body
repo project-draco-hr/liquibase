@@ -1,0 +1,15 @@
+{
+  if (super.isSystemTable(catalogName,schemaName,tableName)) {
+    return true;
+  }
+ else   if (tableName.startsWith("BIN$")) {
+    return true;
+  }
+ else   if (tableName.startsWith("AQ$")) {
+    return true;
+  }
+ else   if (tableName.startsWith("DR$")) {
+    return true;
+  }
+  return false;
+}

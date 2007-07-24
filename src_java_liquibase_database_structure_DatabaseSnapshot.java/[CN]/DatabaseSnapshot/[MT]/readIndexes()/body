@@ -9,14 +9,27 @@
       throw e;
     }
     while (rs.next()) {
-      Index indexInformation=new Index();
-      indexInformation.setTableName(rs.getString("TABLE_NAME"));
+      String indexName=rs.getString("INDEX_NAME");
+      short type=rs.getShort("TYPE");
+      String tableName=rs.getString("TABLE_NAME");
       String columnName=rs.getString("COLUMN_NAME");
+      boolean isPKIndex=false;
+      for (      PrimaryKey pk : primaryKeys) {
+        if (pk.getTableName().equalsIgnoreCase(tableName) && pk.getColumnNames().equalsIgnoreCase(columnName)) {
+          isPKIndex=true;
+          break;
+        }
+      }
+      if (isPKIndex || type == DatabaseMetaData.tableIndexStatistic) {
+        continue;
+      }
+      Index indexInformation=new Index();
+      indexInformation.setTableName(tableName);
       if (columnName == null) {
         continue;
       }
       indexInformation.setColumnName(columnName);
-      indexInformation.setName(rs.getString("INDEX_NAME"));
+      indexInformation.setName(indexName);
       indexes.add(indexInformation);
     }
     rs.close();

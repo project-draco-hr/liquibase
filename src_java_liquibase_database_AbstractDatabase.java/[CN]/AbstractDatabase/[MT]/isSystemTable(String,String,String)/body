@@ -1,11 +1,5 @@
 {
-  if (tableName.startsWith("BIN$")) {
-    return true;
-  }
- else   if (tableName.startsWith("AQ$")) {
-    return true;
-  }
- else   if (tableName.startsWith("DR")) {
+  if ("information_schema".equalsIgnoreCase(schemaName)) {
     return true;
   }
  else   if (tableName.equalsIgnoreCase(getDatabaseChangeLogLockTableName())) {

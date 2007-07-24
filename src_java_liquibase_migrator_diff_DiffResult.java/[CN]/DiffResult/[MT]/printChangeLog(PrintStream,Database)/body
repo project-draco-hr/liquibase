@@ -9,16 +9,16 @@
   changeLogElement.setAttribute("xsi:schemaLocation","http://www.liquibase.org/xml/ns/dbchangelog/1.1 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.1.xsd");
   doc.appendChild(changeLogElement);
   List<Change> changes=new ArrayList<Change>();
-  addMissingTableChanges(changes);
+  addMissingTableChanges(changes,targetDatabase);
   addUnexpectedTableChanges(changes);
-  addMissingColumnChanges(changes);
+  addMissingColumnChanges(changes,targetDatabase);
   addUnexpectedColumnChanges(changes);
-  addMissingForeignKeyChanges(changes);
-  addUnexpectedForeignKeyChanges(changes);
-  addMissingIndexChanges(changes);
-  addUnexpectedIndexChanges(changes);
   addMissingPrimaryKeyChanges(changes);
   addUnexpectedPrimaryKeyChanges(changes);
+  addMissingIndexChanges(changes);
+  addUnexpectedIndexChanges(changes);
+  addMissingForeignKeyChanges(changes);
+  addUnexpectedForeignKeyChanges(changes);
   for (  Change change : changes) {
     Element changeSet=doc.createElement("changeSet");
     changeSet.setAttribute("author","diff-generated");
