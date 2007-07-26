@@ -5,5 +5,8 @@
  else   if (database instanceof DB2Database) {
     return new String[]{"ALTER TABLE " + getTableName() + " DROP COLUMN "+ getColumnName(),"CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')"};
   }
+ else   if (database instanceof SybaseDatabase) {
+    return new String[]{"ALTER TABLE " + getTableName() + " DROP "+ getColumnName()};
+  }
   return new String[]{"ALTER TABLE " + getTableName() + " DROP COLUMN "+ getColumnName()};
 }

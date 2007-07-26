@@ -1,2 +1,50 @@
 {
+  ResultSet tableRS=null;
+  ResultSet fkRS=null;
+  Statement dropStatement=null;
+  try {
+    tableRS=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,new String[]{"TABLE","GLOBAL TEMPORARY","LOCAL TEMPORARY","ALIAS","SYNONYM"});
+    while (tableRS.next()) {
+      String tableName=tableRS.getString("TABLE_NAME");
+      String schemaName=tableRS.getString("TABLE_SCHEM");
+      String catalogName=tableRS.getString("TABLE_CAT");
+      if (isSystemTable(catalogName,schemaName,tableName)) {
+        continue;
+      }
+      fkRS=conn.getMetaData().getExportedKeys(getCatalogName(),getSchemaName(),tableName);
+      dropStatement=conn.createStatement();
+      while (fkRS.next()) {
+        DropForeignKeyConstraintChange dropFK=new DropForeignKeyConstraintChange();
+        dropFK.setBaseTableName(fkRS.getString("FKTABLE_NAME"));
+        dropFK.setConstraintName(fkRS.getString("FK_NAME"));
+        try {
+          dropStatement.execute(dropFK.generateStatements(this)[0]);
+        }
+ catch (        UnsupportedChangeException e) {
+          throw new JDBCException(e.getMessage());
+        }
+      }
+    }
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
+    if (dropStatement != null) {
+      try {
+        dropStatement.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
+    }
+    if (fkRS != null) {
+      try {
+        fkRS.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
+    }
+  }
 }

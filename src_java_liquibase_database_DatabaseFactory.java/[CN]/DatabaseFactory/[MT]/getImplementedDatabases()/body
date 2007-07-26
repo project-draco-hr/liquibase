@@ -1,3 +1,3 @@
 {
-  return new Database[]{new OracleDatabase(),new PostgresDatabase(),new MSSQLDatabase(),new MySQLDatabase(),new DerbyDatabase(),new HsqlDatabase(),new DB2Database()};
+  return new Database[]{new OracleDatabase(),new PostgresDatabase(),new MSSQLDatabase(),new MySQLDatabase(),new DerbyDatabase(),new HsqlDatabase(),new DB2Database(),new SybaseDatabase()};
 }

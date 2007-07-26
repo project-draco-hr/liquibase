@@ -1,6 +1,6 @@
 {
   if (database instanceof MSSQLDatabase) {
-    return new String[]{"exec sp_rename '" + tableName + "."+ oldColumnName+ "', "+ newColumnName};
+    return new String[]{"exec sp_rename '" + tableName + "."+ oldColumnName+ "', '"+ newColumnName+ "'"};
   }
  else   if (database instanceof MySQLDatabase) {
     if (columnDataType == null) {

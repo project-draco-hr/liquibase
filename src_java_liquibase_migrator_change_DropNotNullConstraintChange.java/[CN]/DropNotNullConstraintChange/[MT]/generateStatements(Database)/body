@@ -1,5 +1,8 @@
 {
-  if (database instanceof MSSQLDatabase) {
+  if (database instanceof SybaseDatabase) {
+    return generateSybaseStatements();
+  }
+ else   if (database instanceof MSSQLDatabase) {
     return generateMSSQLStatements();
   }
  else   if (database instanceof MySQLDatabase) {
