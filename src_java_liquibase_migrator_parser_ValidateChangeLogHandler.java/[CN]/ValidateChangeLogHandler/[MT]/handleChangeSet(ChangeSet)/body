@@ -1,4 +1,12 @@
 {
+  for (  Change change : changeSet.getChanges()) {
+    try {
+      change.setUp();
+    }
+ catch (    SetupException se) {
+      setupExceptions.add(se);
+    }
+  }
   if (changeSet.getDatabaseChangeLog().getMigrator().getRunStatus(changeSet).equals(ChangeSet.RunStatus.INVALID_MD5SUM)) {
     invalidMD5Sums.add(changeSet);
   }

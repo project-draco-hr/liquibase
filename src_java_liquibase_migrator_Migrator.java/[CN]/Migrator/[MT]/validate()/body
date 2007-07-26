@@ -3,10 +3,10 @@
     if (!waitForLock()) {
       return;
     }
-    ValidateChangeLogHandler validateChangeLogHandler=new ValidateChangeLogHandler(this,changeLogFile);
+    ValidateChangeLogHandler validateChangeLogHandler=new ValidateChangeLogHandler(this,changeLogFile,fileOpener);
     runChangeLogs(validateChangeLogHandler);
     if (!validateChangeLogHandler.validationPassed()) {
-      throw new ValidationFailedException(validateChangeLogHandler.getInvalidMD5Sums(),validateChangeLogHandler.getFailedPreconditions(),validateChangeLogHandler.getDuplicateChangeSets());
+      throw new ValidationFailedException(validateChangeLogHandler);
     }
   }
   finally {

@@ -1,0 +1,4 @@
+Migrator migrator
+String physicalFilePath
+FileOpener fileOpener
+Integer numberOfChangeSetsToRollback

@@ -23,8 +23,17 @@ catch (  SAXException e) {
       parentCause=parentCause.getCause();
     }
     String reason=e.getMessage();
+    String causeReason=null;
+    if (e.getCause() != null) {
+      causeReason=e.getCause().getMessage();
+    }
     if (reason == null) {
-      reason="Unknown Reason";
+      if (causeReason != null) {
+        reason=causeReason;
+      }
+ else {
+        reason="Unknown Reason";
+      }
     }
     throw new MigrationFailedException("Invalid Migration File: " + reason,e);
   }

@@ -1,0 +1,4 @@
+{
+  InputStreamReader reader=new InputStreamReader(ins);
+  return getReaderContents(reader);
+}

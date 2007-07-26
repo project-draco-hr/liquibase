@@ -18,4 +18,10 @@
       out.println("          " + duplicate.toString(false));
     }
   }
+  if (setupExceptions.size() > 0) {
+    out.println("     " + setupExceptions.size() + " changes had errors");
+    for (    SetupException setupEx : setupExceptions) {
+      out.println("          " + setupEx.getMessage());
+    }
+  }
 }

@@ -50,21 +50,21 @@
       }
     }
     if (mode.equals(Mode.EXECUTE_MODE) || mode.equals(Mode.OUTPUT_SQL_MODE) || mode.equals(Mode.OUTPUT_CHANGELOG_ONLY_SQL_MODE)) {
-      runChangeLogs(new UpdateDatabaseChangeLogHandler(this,changeLogFile));
+      runChangeLogs(new UpdateDatabaseChangeLogHandler(this,changeLogFile,fileOpener));
     }
  else     if (mode.equals(Mode.EXECUTE_ROLLBACK_MODE) || mode.equals(Mode.OUTPUT_ROLLBACK_SQL_MODE)) {
       RollbackDatabaseChangeLogHandler rollbackHandler;
       if (getRollbackToDate() != null) {
-        rollbackHandler=new RollbackDatabaseChangeLogHandler(this,changeLogFile,getRollbackToDate());
+        rollbackHandler=new RollbackDatabaseChangeLogHandler(this,changeLogFile,fileOpener,getRollbackToDate());
       }
  else       if (getRollbackToTag() != null) {
         if (!getDatabase().doesTagExist(getRollbackToTag())) {
           throw new MigrationFailedException("'" + getRollbackToTag() + "' is not tag that exists in the database");
         }
-        rollbackHandler=new RollbackDatabaseChangeLogHandler(this,changeLogFile,getRollbackToTag());
+        rollbackHandler=new RollbackDatabaseChangeLogHandler(this,changeLogFile,fileOpener,getRollbackToTag());
       }
  else       if (getRollbackCount() != null) {
-        rollbackHandler=new RollbackDatabaseChangeLogHandler(this,changeLogFile,getRollbackCount());
+        rollbackHandler=new RollbackDatabaseChangeLogHandler(this,changeLogFile,fileOpener,getRollbackCount());
       }
  else {
         throw new RuntimeException("Don't know what to rollback to");
@@ -79,7 +79,7 @@
       }
     }
  else     if (mode.equals(Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
-      RollbackFutureDatabaseChangeLogHandler rollbackHandler=new RollbackFutureDatabaseChangeLogHandler(this,changeLogFile);
+      RollbackFutureDatabaseChangeLogHandler rollbackHandler=new RollbackFutureDatabaseChangeLogHandler(this,changeLogFile,fileOpener);
       runChangeLogs(rollbackHandler);
       ChangeSet unrollbackableChangeSet=rollbackHandler.getUnRollBackableChangeSet();
       if (unrollbackableChangeSet == null) {
@@ -90,7 +90,7 @@
       }
     }
  else     if (mode.equals(Mode.FIND_UNRUN_CHANGESETS_MODE)) {
-      runChangeLogs(new FindChangeSetsHandler(this,changeLogFile));
+      runChangeLogs(new FindChangeSetsHandler(this,changeLogFile,fileOpener));
     }
  else {
       throw new MigrationFailedException("Unknown mode: " + getMode());

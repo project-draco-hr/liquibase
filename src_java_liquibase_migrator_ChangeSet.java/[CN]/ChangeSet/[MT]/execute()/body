@@ -1,4 +1,12 @@
 {
+  for (  Change change : changes) {
+    try {
+      change.setUp();
+    }
+ catch (    SetupException se) {
+      throw new MigrationFailedException(se);
+    }
+  }
   Migrator migrator=getDatabaseChangeLog().getMigrator();
   Connection connection=migrator.getDatabase().getConnection();
   try {
