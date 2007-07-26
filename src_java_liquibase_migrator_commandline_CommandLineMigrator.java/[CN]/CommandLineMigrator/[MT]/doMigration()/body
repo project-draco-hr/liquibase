@@ -56,7 +56,7 @@
     doDiffToChangeLog(connection,createConnectionFromCommandParams(commandParams));
     return;
   }
- else   if ("generateChangeLog".equals(command)) {
+ else   if ("generateChangeLog".equalsIgnoreCase(command)) {
     doGenerateChangeLog(connection);
     return;
   }
@@ -112,6 +112,10 @@
         return;
       }
       System.out.println("No validation errors found");
+      return;
+    }
+ else     if ("clearCheckSums".equalsIgnoreCase(command)) {
+      migrator.clearCheckSums();
       return;
     }
     DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
