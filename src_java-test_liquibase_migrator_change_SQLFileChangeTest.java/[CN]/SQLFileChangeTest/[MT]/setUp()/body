@@ -1,0 +1,8 @@
+{
+  fileName="liquibase/migrator/change/SQLFileTestData.sql";
+  change=new SQLFileChange();
+  ClassLoaderFileOpener opener=new ClassLoaderFileOpener();
+  change.setFileOpener(opener);
+  change.setPath(fileName);
+  change.setUp();
+}

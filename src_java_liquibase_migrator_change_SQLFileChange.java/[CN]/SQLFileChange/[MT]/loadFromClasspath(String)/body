@@ -1,0 +1,23 @@
+{
+  InputStream in=null;
+  try {
+    FileOpener fo=getFileOpener();
+    if (fo == null)     return false;
+    in=fo.getResourceAsStream(file);
+    if (in == null)     return false;
+    sql=StreamUtil.getStreamContents(in);
+    return true;
+  }
+ catch (  IOException ioe) {
+    throw new SetupException("<sqlfile path=" + file + "> -Unable to read file",ioe);
+  }
+ finally {
+    if (in != null) {
+      try {
+        in.close();
+      }
+ catch (      IOException ioe) {
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  try {
+    change.setPath("doesnotexist.sql");
+    change.setUp();
+    change.generateStatements(new OracleDatabase());
+    fail("The file does not exist so should not be found");
+  }
+ catch (  SetupException fnfe) {
+  }
+}

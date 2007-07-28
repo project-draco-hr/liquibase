@@ -1,0 +1,3 @@
+{
+  return MD5Util.computeMD5(getSql());
+}

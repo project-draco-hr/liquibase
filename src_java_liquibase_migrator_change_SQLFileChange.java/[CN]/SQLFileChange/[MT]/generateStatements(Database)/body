@@ -1,0 +1,4 @@
+{
+  String[] statements=sql.split(";|\ngo\\s*\n|\ngo$");
+  return statements;
+}

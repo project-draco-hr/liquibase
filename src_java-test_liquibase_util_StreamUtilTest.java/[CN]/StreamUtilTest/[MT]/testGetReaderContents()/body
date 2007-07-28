@@ -1,0 +1,6 @@
+{
+  String contents="TEST";
+  StringReader reader=new StringReader(contents);
+  String result=StreamUtil.getReaderContents(reader);
+  assertEquals(contents,result);
+}

@@ -1,0 +1,6 @@
+{
+  byte[] contents="TEST2".getBytes();
+  ByteArrayInputStream stream=new ByteArrayInputStream(contents);
+  String result=StreamUtil.getStreamContents(stream);
+  assertEquals("TEST2",result);
+}

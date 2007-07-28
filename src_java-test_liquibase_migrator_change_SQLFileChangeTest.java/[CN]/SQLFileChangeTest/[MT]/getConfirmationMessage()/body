@@ -1,0 +1,4 @@
+{
+  change.setPath(fileName);
+  assertEquals("SQL File " + fileName + " has been executed",change.getConfirmationMessage());
+}

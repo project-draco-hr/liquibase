@@ -1,0 +1,8 @@
+{
+  SQLFileChange change2=new SQLFileChange();
+  change2.setSql("SELECT * FROM customer;" + "SELECT * from table;");
+  String[] statements=change2.generateStatements(new OracleDatabase());
+  assertEquals(2,statements.length);
+  assertEquals("SELECT * FROM customer",statements[0]);
+  assertEquals("SELECT * from table",statements[1]);
+}

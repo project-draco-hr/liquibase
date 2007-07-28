@@ -1,0 +1,5 @@
+{
+  assertEquals(fileName,change.getPath());
+  assertEquals("TESTDATA",change.generateStatements(new OracleDatabase())[0]);
+  assertEquals(MD5Util.computeMD5(change.getSql()),change.getMD5Sum());
+}

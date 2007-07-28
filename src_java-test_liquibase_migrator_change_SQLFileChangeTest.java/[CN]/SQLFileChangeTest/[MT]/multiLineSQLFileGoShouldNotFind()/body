@@ -1,0 +1,8 @@
+{
+  SQLFileChange change2=new SQLFileChange();
+  change2.setSql("SELECT * FROM go\ngo\n" + "SELECT * from gogo\ngo\n");
+  String[] statements=change2.generateStatements(new MSSQLDatabase());
+  assertEquals(2,statements.length);
+  assertEquals("SELECT * FROM go",statements[0]);
+  assertEquals("SELECT * from gogo",statements[1]);
+}

@@ -1,0 +1,23 @@
+{
+  FileInputStream fis=null;
+  try {
+    fis=new FileInputStream(file);
+    sql=StreamUtil.getStreamContents(fis);
+    return true;
+  }
+ catch (  FileNotFoundException fnfe) {
+    return false;
+  }
+catch (  IOException e) {
+    throw new SetupException("<sqlfile path=" + file + "> -Unable to read file",e);
+  }
+ finally {
+    if (fis != null) {
+      try {
+        fis.close();
+      }
+ catch (      IOException ioe) {
+      }
+    }
+  }
+}

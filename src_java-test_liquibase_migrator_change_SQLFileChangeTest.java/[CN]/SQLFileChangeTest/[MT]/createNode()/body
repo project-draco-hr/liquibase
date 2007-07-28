@@ -1,0 +1,5 @@
+{
+  Element element=change.createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
+  assertEquals("sqlFile",element.getTagName());
+  assertEquals(fileName,element.getAttribute("path"));
+}

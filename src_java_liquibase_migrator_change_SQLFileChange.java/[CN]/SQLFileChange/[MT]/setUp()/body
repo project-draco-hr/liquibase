@@ -1,0 +1,6 @@
+{
+  if (file == null)   throw new SetupException("<sqlfile> - No path specified");
+  boolean loaded=loadFromClasspath(file);
+  if (!loaded)   loaded=loadFromFileSystem(file);
+  if (!loaded)   throw new SetupException("<sqlfile path=" + file + "> - Could not find file");
+}

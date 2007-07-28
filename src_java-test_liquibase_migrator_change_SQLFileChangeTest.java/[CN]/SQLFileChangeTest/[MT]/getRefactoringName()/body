@@ -1,0 +1,3 @@
+{
+  assertEquals("SQL From File",change.getChangeName());
+}
