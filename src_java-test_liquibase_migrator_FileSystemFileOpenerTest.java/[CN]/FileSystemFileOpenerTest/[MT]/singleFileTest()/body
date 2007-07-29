@@ -1,0 +1,3 @@
+{
+  assertNotNull(opener.getResourceAsStream("FileSystemFileOpener.class"));
+}

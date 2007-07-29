@@ -1,0 +1,10 @@
+{
+  expect(first.getResourceAsStream("file")).andReturn(null);
+  expect(second.getResourceAsStream("file")).andReturn(null);
+  replay(first);
+  replay(second);
+  InputStream is=composite.getResourceAsStream("file");
+  assertNull(is);
+  verify(first);
+  verify(second);
+}

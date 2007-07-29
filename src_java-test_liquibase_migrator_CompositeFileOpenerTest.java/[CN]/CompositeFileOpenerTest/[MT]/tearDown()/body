@@ -1,0 +1,3 @@
+{
+  validStream.close();
+}

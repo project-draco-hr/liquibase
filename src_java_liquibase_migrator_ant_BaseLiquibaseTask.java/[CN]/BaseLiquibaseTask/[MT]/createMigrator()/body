@@ -1,5 +1,7 @@
 {
-  Migrator migrator=new Migrator(getChangeLogFile().trim(),new AntFileOpener(getProject(),classpath));
+  FileOpener antFO=new AntFileOpener(getProject(),classpath);
+  FileOpener fsFO=new FileSystemFileOpener();
+  Migrator migrator=new Migrator(getChangeLogFile().trim(),new CompositeFileOpener(antFO,fsFO));
   String[] strings=classpath.list();
   final List<URL> taskClassPath=new ArrayList<URL>();
   for (int i=0; i < strings.length; i++) {

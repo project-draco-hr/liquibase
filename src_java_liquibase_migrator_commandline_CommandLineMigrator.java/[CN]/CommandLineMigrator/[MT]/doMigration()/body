@@ -27,7 +27,9 @@
  else {
     throw new CommandLineParsingException("Unknown log level: " + logLevel);
   }
-  Migrator migrator=new Migrator(changeLogFile,new CommandLineFileOpener(classLoader));
+  FileSystemFileOpener fsOpener=new FileSystemFileOpener();
+  CommandLineFileOpener clOpener=new CommandLineFileOpener(classLoader);
+  Migrator migrator=new Migrator(changeLogFile,new CompositeFileOpener(fsOpener,clOpener));
   Driver driver;
   try {
     if (this.driver == null) {

@@ -1,0 +1,5 @@
+{
+  File thisClassFile=new File(new URI(this.getClass().getClassLoader().getResource("liquibase/migrator/FileSystemFileOpener.class").toExternalForm()));
+  String packageDirectory=thisClassFile.getParent();
+  opener=new FileSystemFileOpener(packageDirectory);
+}

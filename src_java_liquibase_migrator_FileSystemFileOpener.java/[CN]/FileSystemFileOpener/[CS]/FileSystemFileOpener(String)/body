@@ -1,0 +1,4 @@
+{
+  if (new File(base).isFile())   throw new IllegalArgumentException("base must be a directory");
+  baseDirectory=base;
+}

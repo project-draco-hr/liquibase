@@ -16,7 +16,9 @@
     }
     String[] changeLogFiles=getChangeLogFile().split(",");
     for (    String changeLogFile : changeLogFiles) {
-      Migrator migrator=new Migrator(changeLogFile.trim(),new MavenFileOpener());
+      FileOpener mFO=new MavenFileOpener();
+      FileOpener fsFO=new FileSystemFileOpener();
+      Migrator migrator=new Migrator(changeLogFile.trim(),new CompositeFileOpener(mFO,fsFO));
       migrator.setContexts(getContexts());
       migrator.init(connection);
       if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration()) {

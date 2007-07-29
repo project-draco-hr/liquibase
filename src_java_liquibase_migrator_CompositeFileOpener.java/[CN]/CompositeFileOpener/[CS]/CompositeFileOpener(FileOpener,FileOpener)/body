@@ -1,0 +1,5 @@
+{
+  openers=new ArrayList<FileOpener>();
+  openers.add(first);
+  openers.add(second);
+}

@@ -68,7 +68,9 @@
       ic=new InitialContext();
       DataSource dataSource=(DataSource)ic.lookup(this.dataSource);
       connection=dataSource.getConnection();
-      Migrator migrator=new Migrator(getChangeLogFile(),new ClassLoaderFileOpener());
+      FileOpener clFO=new ClassLoaderFileOpener();
+      FileOpener fsFO=new FileSystemFileOpener();
+      Migrator migrator=new Migrator(getChangeLogFile(),new CompositeFileOpener(clFO,fsFO));
       migrator.init(connection);
       migrator.setContexts(getContexts());
       migrator.migrate();
