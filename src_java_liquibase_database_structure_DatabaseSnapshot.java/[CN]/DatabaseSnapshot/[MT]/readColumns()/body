@@ -31,7 +31,9 @@
     columnInfo.setColumnSize(rs.getInt("COLUMN_SIZE"));
     columnInfo.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
     columnInfo.setTypeName(rs.getString("TYPE_NAME"));
-    columnInfo.setDefaultValue(rs.getString("COLUMN_DEF"));
+    String defaultValue=rs.getString("COLUMN_DEF");
+    columnInfo.setAutoIncrement(isAutoIncrement(defaultValue,database));
+    columnInfo.setDefaultValue(translateDefaultValue(defaultValue,database));
     int nullable=rs.getInt("NULLABLE");
     if (nullable == DatabaseMetaData.columnNoNulls) {
       columnInfo.setNullable(false);

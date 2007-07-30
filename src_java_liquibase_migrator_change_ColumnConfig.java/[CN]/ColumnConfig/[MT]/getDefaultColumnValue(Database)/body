@@ -1,0 +1,37 @@
+{
+  if (this.getDefaultValue() != null) {
+    if ("null".equalsIgnoreCase(this.getDefaultValue())) {
+      return "NULL";
+    }
+    if (!database.shouldQuoteValue(this.getDefaultValue())) {
+      return this.getDefaultValue();
+    }
+ else {
+      return "'" + this.getDefaultValue().replaceAll("'","''") + "'";
+    }
+  }
+ else   if (this.getDefaultValueNumeric() != null) {
+    return this.getDefaultValueNumeric();
+  }
+ else   if (this.getDefaultValueBoolean() != null) {
+    String returnValue;
+    if (this.getDefaultValueBoolean()) {
+      returnValue=database.getTrueBooleanValue();
+    }
+ else {
+      returnValue=database.getFalseBooleanValue();
+    }
+    if (returnValue.matches("\\d+")) {
+      return returnValue;
+    }
+ else {
+      return "'" + returnValue + "'";
+    }
+  }
+ else   if (this.getDefaultValueDate() != null) {
+    return database.getDateLiteral(this.getDefaultValueDate());
+  }
+ else {
+    return "NULL";
+  }
+}

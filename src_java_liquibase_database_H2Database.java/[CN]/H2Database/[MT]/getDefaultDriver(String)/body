@@ -1,0 +1,6 @@
+{
+  if (url.startsWith("jdbc:h2")) {
+    return "org.h2.Driver";
+  }
+  return null;
+}

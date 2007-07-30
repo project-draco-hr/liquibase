@@ -1,5 +1,5 @@
 {
-  ResultSet tableRS=null;
+  ResultSet tableRS;
   ResultSet fkRS=null;
   Statement dropStatement=null;
   try {

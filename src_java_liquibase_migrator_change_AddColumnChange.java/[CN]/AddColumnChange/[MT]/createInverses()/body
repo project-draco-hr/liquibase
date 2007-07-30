@@ -1,6 +1,14 @@
 {
+  List<Change> inverses=new ArrayList<Change>();
+  if (column.hasDefaultValue()) {
+    DropDefaultValueChange dropChange=new DropDefaultValueChange();
+    dropChange.setTableName(getTableName());
+    dropChange.setColumnName(getColumn().getName());
+    inverses.add(dropChange);
+  }
   DropColumnChange inverse=new DropColumnChange();
   inverse.setColumnName(getColumn().getName());
   inverse.setTableName(getTableName());
-  return new Change[]{inverse};
+  inverses.add(inverse);
+  return inverses.toArray(new Change[inverses.size()]);
 }

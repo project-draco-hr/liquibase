@@ -1,0 +1,3 @@
+{
+  return this.getDefaultValue() != null || this.getDefaultValueBoolean() != null || this.getDefaultValueDate() != null || this.getDefaultValueNumeric() != null;
+}

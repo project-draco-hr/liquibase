@@ -12,7 +12,7 @@
       buffer.append(" ").append(database.getColumnType(column));
     }
     if (column.getDefaultValue() != null || column.getDefaultValueBoolean() != null || column.getDefaultValueDate() != null || column.getDefaultValueNumeric() != null) {
-      buffer.append(" DEFAULT ").append(getDefaultColumnValue(column,database));
+      buffer.append(" DEFAULT ").append(column.getDefaultColumnValue(database));
     }
     if (column.isAutoIncrement() != null && column.isAutoIncrement().booleanValue()) {
       buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
@@ -22,7 +22,6 @@
         buffer.append(" NOT NULL");
       }
  else {
-        buffer.append(" NULL");
       }
       if (constraints.isPrimaryKey() != null && constraints.isPrimaryKey()) {
         buffer.append(" PRIMARY KEY");

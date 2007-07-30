@@ -1,0 +1,5 @@
+{
+  super("h2","org.h2.Driver","jdbc:h2:mem:liquibase");
+  username="sa";
+  password="";
+}
