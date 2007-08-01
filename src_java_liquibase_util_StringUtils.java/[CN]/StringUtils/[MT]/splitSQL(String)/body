@@ -1,0 +1,3 @@
+{
+  return multiLineSQL.split(";|\ngo\\s*\n|\ngo$");
+}

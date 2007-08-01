@@ -1,4 +1,4 @@
 {
-  String[] statements=sql.split(";|\ngo\\s*\n|\ngo$");
+  String[] statements=StringUtils.splitSQL(sql);
   return statements;
 }
