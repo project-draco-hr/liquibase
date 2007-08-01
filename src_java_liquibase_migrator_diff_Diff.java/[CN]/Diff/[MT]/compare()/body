@@ -1,7 +1,12 @@
 {
   try {
     baseSnapshot=new DatabaseSnapshot(baseDatabase,statusListeners);
-    targetSnapshot=new DatabaseSnapshot(targetDatabase,statusListeners);
+    if (targetDatabase == null) {
+      targetSnapshot=new DatabaseSnapshot();
+    }
+ else {
+      targetSnapshot=new DatabaseSnapshot(targetDatabase,statusListeners);
+    }
     DiffResult diffResult=new DiffResult(baseDatabase,targetDatabase);
     checkVersionInfo(diffResult);
     checkTables(diffResult);

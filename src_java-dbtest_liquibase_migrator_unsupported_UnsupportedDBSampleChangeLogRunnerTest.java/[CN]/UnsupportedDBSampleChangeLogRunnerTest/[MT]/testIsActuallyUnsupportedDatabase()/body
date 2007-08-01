@@ -1,4 +1,0 @@
-{
-  Migrator migrator=createMigrator(null);
-  assertTrue("Not using unsupported database",migrator.getDatabase() instanceof UnsupportedDatabase);
-}

@@ -1,4 +1,0 @@
-{
-  this.delegateConnection=connection;
-  this.databaseMetaData=new DatabaseMetaDataWrapper(connection.getMetaData());
-}

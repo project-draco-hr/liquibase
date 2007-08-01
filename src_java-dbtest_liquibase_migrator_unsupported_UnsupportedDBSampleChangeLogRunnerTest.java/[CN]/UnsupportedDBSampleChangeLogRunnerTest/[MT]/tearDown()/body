@@ -1,9 +1,0 @@
-{
-  try {
-    driver.connect("jdbc:derby:liquibase;shutdown=true",new Properties());
-  }
- catch (  SQLException e) {
-    ;
-  }
-  super.tearDown();
-}

@@ -1,3 +1,0 @@
-{
-  return delegateConnection.createStatement(resultSetType,resultSetConcurrency,resultSetHoldability);
-}

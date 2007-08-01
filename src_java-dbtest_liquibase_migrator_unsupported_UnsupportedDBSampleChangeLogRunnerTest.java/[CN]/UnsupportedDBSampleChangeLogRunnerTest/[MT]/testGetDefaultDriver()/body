@@ -1,3 +1,0 @@
-{
-  assertNull(createMigrator(null).getDatabase().getDefaultDriver(url));
-}

@@ -1,3 +1,0 @@
-{
-  return delegateConnection.prepareCall(sql,resultSetType,resultSetConcurrency,resultSetHoldability);
-}

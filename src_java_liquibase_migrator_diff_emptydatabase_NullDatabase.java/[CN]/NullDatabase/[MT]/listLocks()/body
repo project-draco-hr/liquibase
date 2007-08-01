@@ -1,3 +1,0 @@
-{
-  return new DatabaseChangeLogLock[0];
-}

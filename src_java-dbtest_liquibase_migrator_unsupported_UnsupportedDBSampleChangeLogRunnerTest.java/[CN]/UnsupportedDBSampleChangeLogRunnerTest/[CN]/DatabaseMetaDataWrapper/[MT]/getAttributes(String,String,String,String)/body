@@ -1,3 +1,0 @@
-{
-  return delegate.getAttributes(catalog,schemaPattern,typeNamePattern,attributeNamePattern);
-}

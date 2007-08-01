@@ -1,6 +1,6 @@
 {
   try {
-    targetDatabase=new NullDatabase();
+    targetDatabase=null;
     baseDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(originalDatabase);
     baseDatabase.setConnection(originalDatabase);
     baseDatabase.getConnection().setAutoCommit(false);

@@ -1,3 +1,0 @@
-{
-  return delegate.getColumnPrivileges(catalog,schema,table,columnNamePattern);
-}
