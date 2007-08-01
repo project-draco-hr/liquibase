@@ -1,6 +1,6 @@
-String primaryCatalog
-String primarySchema
-String primaryTable
+String parentCatalog
+String parentSchema
+String parentTable
 String foreignCatalog
 String foreignSchema
 String foreignTable
