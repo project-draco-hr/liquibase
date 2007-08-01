@@ -1,0 +1,8 @@
+{
+  if (values.size() == 1) {
+    return values.get(0);
+  }
+ else {
+    return START_CONCAT + values.get(0) + SEP_CONCAT+ getConcatSql(values.subList(1,values.size()))+ END_CONCAT;
+  }
+}
