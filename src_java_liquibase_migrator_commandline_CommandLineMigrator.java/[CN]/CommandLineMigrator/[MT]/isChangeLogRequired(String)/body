@@ -1,0 +1,3 @@
+{
+  return command.toLowerCase().startsWith("migrate") || command.toLowerCase().startsWith("rollback") || "validate".equals(command);
+}

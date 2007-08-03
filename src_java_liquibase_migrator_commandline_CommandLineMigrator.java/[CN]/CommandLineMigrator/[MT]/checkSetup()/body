@@ -1,6 +1,21 @@
 {
-  if (classpath == null || changeLogFile == null || username == null || password == null || url == null || driver == null || command == null) {
-    return false;
+  List<String> messages=new ArrayList<String>();
+  if (command == null) {
+    messages.add("Command not passed");
   }
-  return isCommand(command);
+ else   if (!isCommand(command)) {
+    messages.add("Unknown command: " + command);
+  }
+ else {
+    if (username == null) {
+      messages.add("--username is required");
+    }
+    if (url == null) {
+      messages.add("--url is required");
+    }
+    if (isChangeLogRequired(command) && changeLogFile == null) {
+      messages.add("--changeLog is required");
+    }
+  }
+  return messages;
 }

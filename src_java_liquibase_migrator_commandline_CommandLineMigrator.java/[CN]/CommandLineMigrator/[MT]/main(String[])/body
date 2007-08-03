@@ -18,8 +18,9 @@
   if (propertiesFile.exists()) {
     commandLineMigrator.parsePropertiesFile(new FileInputStream(propertiesFile));
   }
-  if (!commandLineMigrator.checkSetup()) {
-    commandLineMigrator.printHelp(System.out);
+  List<String> setupMessages=commandLineMigrator.checkSetup();
+  if (setupMessages.size() > 0) {
+    commandLineMigrator.printHelp(setupMessages,System.out);
     return;
   }
   try {

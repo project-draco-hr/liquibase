@@ -1,0 +1,8 @@
+{
+  stream.println("Errors:");
+  for (  String message : errorMessages) {
+    stream.println("  " + message);
+  }
+  stream.println();
+  printHelp(stream);
+}

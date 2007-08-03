@@ -48,14 +48,14 @@
   stream.println(" dropAll                   Drop all database objects owned by user");
   stream.println("");
   stream.println("Required Parameters:");
-  stream.println(" --classpath=<value>                        Classpath containing");
-  stream.println("                                            migration files and JDBC Driver");
   stream.println(" --changeLogFile=<path and filename>        Migration file");
   stream.println(" --username=<value>                         Database username");
   stream.println(" --password=<value>                         Database password");
   stream.println(" --url=<value>                              Database URL");
   stream.println("");
   stream.println("Optional Parameters:");
+  stream.println(" --classpath=<value>                        Classpath containing");
+  stream.println("                                            migration files and JDBC Driver");
   stream.println(" --driver=<jdbc.driver.ClassName>           Database driver class name");
   stream.println(" --contexts=<value>                         ChangeSet contexts to execute");
   stream.println(" --defaultsFile=</path/to/file.properties>  File with default option values");

@@ -45,7 +45,9 @@
   }
   Properties info=new Properties();
   info.put("user",username);
-  info.put("password",password);
+  if (password != null) {
+    info.put("password",password);
+  }
   Connection connection=driver.connect(url,info);
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
