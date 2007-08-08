@@ -1,0 +1,4 @@
+{
+  WizardDialog dialog=new WizardDialog(getWindow().getShell(),createWizard(getSelection()));
+  dialog.open();
+}

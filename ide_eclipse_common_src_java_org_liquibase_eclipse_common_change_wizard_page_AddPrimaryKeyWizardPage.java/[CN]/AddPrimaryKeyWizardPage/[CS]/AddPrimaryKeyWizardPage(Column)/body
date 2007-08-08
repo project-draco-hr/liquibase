@@ -1,0 +1,6 @@
+{
+  super("addPrimaryKey");
+  setTitle("Make Primary Key");
+  setDescription("Make " + column.getTable().getName() + "."+ column.getName()+ " a primary key");
+  this.column=column;
+}

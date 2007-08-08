@@ -1,0 +1,5 @@
+{
+  DropTableChange change=new DropTableChange();
+  change.setTableName(table.getName());
+  return new Change[]{change};
+}

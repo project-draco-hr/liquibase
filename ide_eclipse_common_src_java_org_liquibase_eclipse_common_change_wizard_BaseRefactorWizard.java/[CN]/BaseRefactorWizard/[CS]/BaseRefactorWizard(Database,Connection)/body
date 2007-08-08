@@ -1,0 +1,4 @@
+{
+  this.database=database;
+  this.connection=connection;
+}

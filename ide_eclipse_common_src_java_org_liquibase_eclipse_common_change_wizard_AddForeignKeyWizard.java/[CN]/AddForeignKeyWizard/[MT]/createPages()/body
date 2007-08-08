@@ -1,0 +1,4 @@
+{
+  page1=new AddForeignKeyWizardPage(column);
+  return new IWizardPage[]{page1};
+}

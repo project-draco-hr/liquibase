@@ -1,0 +1,3 @@
+{
+  return new DropForeignKeyConstraintWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedForeignKey(selection));
+}

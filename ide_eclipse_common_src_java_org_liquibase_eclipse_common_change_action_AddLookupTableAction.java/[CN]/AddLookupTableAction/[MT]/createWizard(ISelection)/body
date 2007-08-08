@@ -1,0 +1,3 @@
+{
+  return new AddLookupTableWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedColumn(selection));
+}

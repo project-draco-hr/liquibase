@@ -1,0 +1,3 @@
+{
+  return new AddTableWizard(getSelectedDatabase(selection),getSelectedSchema(selection),getSelectedConnection(selection));
+}

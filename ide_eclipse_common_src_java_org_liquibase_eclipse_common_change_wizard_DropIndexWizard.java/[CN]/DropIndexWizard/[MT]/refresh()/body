@@ -1,0 +1,3 @@
+{
+  ((JDBCTable)table).refresh();
+}

@@ -1,0 +1,11 @@
+{
+  AddForeignKeyConstraintChange change=new AddForeignKeyConstraintChange();
+  change.setBaseTableName(column.getTable().getName());
+  change.setBaseColumnNames(column.getName());
+  change.setReferencedTableName(page1.getTableName());
+  change.setReferencedColumnNames(page1.getColumnNames());
+  change.setConstraintName(page1.getConstraintName());
+  change.setDeferrable(page1.isDeferrable());
+  change.setInitiallyDeferred(page1.isInitiallyDeferred());
+  return new Change[]{change};
+}

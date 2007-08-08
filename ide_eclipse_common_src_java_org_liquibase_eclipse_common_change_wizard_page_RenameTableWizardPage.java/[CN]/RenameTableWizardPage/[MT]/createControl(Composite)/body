@@ -1,0 +1,11 @@
+{
+  Composite composite=new Composite(parent,SWT.NONE);
+  GridLayout layout=new GridLayout(2,false);
+  composite.setLayout(layout);
+  addLabel("&New Table Name:",composite);
+  newTableName=new Text(composite,SWT.BORDER);
+  validateOnChange(newTableName,"New Table Name");
+  newTableName.setText(table.getName());
+  newTableName.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  setControl(composite);
+}

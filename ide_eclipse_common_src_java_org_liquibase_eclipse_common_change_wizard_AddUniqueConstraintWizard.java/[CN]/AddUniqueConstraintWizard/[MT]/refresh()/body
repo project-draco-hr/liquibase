@@ -1,0 +1,3 @@
+{
+  ((JDBCColumn)column).refresh();
+}

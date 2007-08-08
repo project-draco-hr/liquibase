@@ -1,0 +1,3 @@
+{
+  return new RenameViewWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedView(selection));
+}

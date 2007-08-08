@@ -1,0 +1,18 @@
+{
+  Composite composite=new Composite(parent,SWT.NONE);
+  GridLayout layout=new GridLayout(2,false);
+  composite.setLayout(layout);
+  addLabel("&Column Name:",composite);
+  columnName=new Text(composite,SWT.BORDER);
+  validateOnChange(columnName,"Column Name");
+  columnName.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  addLabel("&Data Type:",composite);
+  dataType=new Text(composite,SWT.BORDER);
+  validateOnChange(dataType,"Data Type");
+  dataType.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  addLabel("&Default Value:",composite);
+  defaultValue=new Text(composite,SWT.BORDER);
+  defaultValue.setText("NULL");
+  defaultValue.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  setControl(composite);
+}

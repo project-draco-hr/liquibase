@@ -1,0 +1,10 @@
+{
+  CreateIndexChange change=new CreateIndexChange();
+  change.setTableName(column.getTable().getName());
+  ColumnConfig config=new ColumnConfig();
+  config.setName(column.getName());
+  config.setType(column.getType().getName());
+  change.setColumns(Arrays.asList(new ColumnConfig[]{config}));
+  change.setIndexName(page1.getIndexName());
+  return new Change[]{change};
+}

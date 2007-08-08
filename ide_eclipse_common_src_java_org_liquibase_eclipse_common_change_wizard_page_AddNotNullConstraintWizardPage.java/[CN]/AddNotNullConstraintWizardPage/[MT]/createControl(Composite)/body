@@ -1,0 +1,9 @@
+{
+  Composite composite=new Composite(parent,SWT.NONE);
+  GridLayout layout=new GridLayout(2,false);
+  composite.setLayout(layout);
+  addLabel("&Value For Current Nulls:",composite);
+  defaultNullValue=new Text(composite,SWT.BORDER);
+  defaultNullValue.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  setControl(composite);
+}

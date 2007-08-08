@@ -1,0 +1,16 @@
+{
+  TagDatabaseDialog dialog=new TagDatabaseDialog(null);
+  if (Dialog.OK != dialog.open() || dialog.getTagName() == null) {
+    return;
+  }
+  Migrator migrator=getMigrator();
+  try {
+    migrator.init(getSelectedConnection(getSelection()));
+    migrator.tag(dialog.getTagName());
+    ((JDBCDatabase)getSelectedDatabase(getSelection())).refresh();
+  }
+ catch (  Exception e) {
+    IStatus status=new OperationStatus(IStatus.ERROR,LiquibasePreferences.PLUGIN_ID,2,"Error Updating Database: " + e.getMessage(),e);
+    ErrorDialog.openError(null,"Update Error","Error Updating Database",status);
+  }
+}

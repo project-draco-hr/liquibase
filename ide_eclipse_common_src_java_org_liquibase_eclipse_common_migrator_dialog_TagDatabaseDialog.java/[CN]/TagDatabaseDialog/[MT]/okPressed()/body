@@ -1,0 +1,4 @@
+{
+  this.tagName=StringUtils.trimToNull(tagNameText.getText());
+  super.okPressed();
+}

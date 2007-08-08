@@ -1,0 +1,18 @@
+{
+  Composite composite=new Composite(parent,SWT.NONE);
+  GridLayout layout=new GridLayout(2,false);
+  composite.setLayout(layout);
+  addLabel("&New Table Name:",composite);
+  tableName=new Text(composite,SWT.BORDER);
+  validateOnChange(tableName,"New Table Name");
+  tableName.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  addLabel("&Column Name:",composite);
+  columnName=new Text(composite,SWT.BORDER);
+  validateOnChange(columnName,"Column Name");
+  columnName.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  addLabel("&Constraint Name:",composite);
+  constraintName=new Text(composite,SWT.BORDER);
+  validateOnChange(constraintName,"Constraint Name");
+  constraintName.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  setControl(composite);
+}

@@ -1,0 +1,4 @@
+{
+  this.page1=new AddDefaultValueWizardPage(column);
+  return new IWizardPage[]{page1};
+}

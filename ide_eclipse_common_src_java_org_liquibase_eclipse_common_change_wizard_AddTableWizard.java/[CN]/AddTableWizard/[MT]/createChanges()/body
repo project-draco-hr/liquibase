@@ -1,0 +1,17 @@
+{
+  CreateTableChange change=new CreateTableChange();
+  change.setTableName(table.getName());
+  for (  Object columnAsObject : table.getColumns()) {
+    Column column=(Column)columnAsObject;
+    ColumnConfig columnConfig=new ColumnConfig();
+    columnConfig.setName(column.getName());
+    columnConfig.setType(column.getDataType().getName());
+    columnConfig.setDefaultValue(column.getDefaultValue());
+    ConstraintsConfig constraints=new ConstraintsConfig();
+    constraints.setNullable(column.isNullable());
+    constraints.setPrimaryKey(column.isPartOfPrimaryKey());
+    columnConfig.setConstraints(constraints);
+    change.addColumn(columnConfig);
+  }
+  return new Change[]{change};
+}

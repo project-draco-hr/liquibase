@@ -1,0 +1,3 @@
+{
+  ((JDBCSchema)schema).refresh();
+}

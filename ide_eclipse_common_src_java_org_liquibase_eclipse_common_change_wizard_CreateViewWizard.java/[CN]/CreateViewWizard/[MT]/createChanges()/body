@@ -1,0 +1,6 @@
+{
+  CreateViewChange change=new CreateViewChange();
+  change.setViewName(page1.getViewName());
+  change.setSelectQuery(page1.getViewDefinition());
+  return new Change[]{change};
+}

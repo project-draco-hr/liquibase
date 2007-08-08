@@ -1,0 +1,4 @@
+{
+  super(database,connection);
+  this.view=view;
+}

@@ -1,0 +1,11 @@
+{
+  Composite composite=new Composite(parent,SWT.NONE);
+  GridLayout layout=new GridLayout(2,false);
+  composite.setLayout(layout);
+  addLabel("&Index Name:",composite);
+  indexName=new Text(composite,SWT.BORDER);
+  validateOnChange(indexName,"Index Name");
+  indexName.setText(("idx_" + column.getTable().getName() + "_"+ column.getName()).toUpperCase());
+  indexName.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  setControl(composite);
+}

@@ -1,0 +1,4 @@
+{
+  this.page1=new CreateIndexWizardPage(column);
+  return new IWizardPage[]{page1};
+}

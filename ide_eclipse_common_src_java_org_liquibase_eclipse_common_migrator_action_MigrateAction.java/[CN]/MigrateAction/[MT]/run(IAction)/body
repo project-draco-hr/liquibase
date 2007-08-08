@@ -1,0 +1,12 @@
+{
+  Migrator migrator=getMigrator();
+  try {
+    migrator.init(getSelectedConnection(getSelection()));
+    migrator.migrate();
+    ((JDBCDatabase)getSelectedDatabase(getSelection())).refresh();
+  }
+ catch (  Exception e) {
+    IStatus status=new OperationStatus(IStatus.ERROR,LiquibasePreferences.PLUGIN_ID,2,"Error Updating Database: " + e.getMessage(),e);
+    ErrorDialog.openError(null,"Update Error","Error Updating Database",status);
+  }
+}

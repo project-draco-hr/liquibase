@@ -1,0 +1,3 @@
+{
+  return new DropTableWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedTable(selection));
+}

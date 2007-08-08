@@ -1,0 +1,4 @@
+{
+  ((JDBCTable)baseTable).refresh();
+  ((JDBCTable)referencedTable).refresh();
+}

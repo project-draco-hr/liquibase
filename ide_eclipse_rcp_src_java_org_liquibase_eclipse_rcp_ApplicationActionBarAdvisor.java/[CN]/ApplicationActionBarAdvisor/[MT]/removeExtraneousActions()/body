@@ -1,0 +1,6 @@
+{
+  ActionSetRegistry reg=WorkbenchPlugin.getDefault().getActionSetRegistry();
+  removeStandardAction(reg,"org.eclipse.ui.edit.text.actionSet.navigation");
+  removeStandardAction(reg,"org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo");
+  removeStandardAction(reg,"org.eclipse.ui.WorkingSetActionSet");
+}

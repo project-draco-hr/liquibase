@@ -1,0 +1,9 @@
+{
+  validators.add(new Validator(text,columnName));
+  text.addModifyListener(new ModifyListener(){
+    public void modifyText(    ModifyEvent e){
+      validate();
+    }
+  }
+);
+}

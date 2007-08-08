@@ -1,0 +1,3 @@
+{
+  return viewDefinition.getText();
+}

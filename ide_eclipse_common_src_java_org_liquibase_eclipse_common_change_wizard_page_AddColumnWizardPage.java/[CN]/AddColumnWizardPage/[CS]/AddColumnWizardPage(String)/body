@@ -1,0 +1,5 @@
+{
+  super("addColumn");
+  setTitle("Add Column");
+  setDescription("Add Column to " + tableName);
+}

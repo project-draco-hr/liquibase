@@ -1,0 +1,5 @@
+{
+  super("addForeignKey");
+  setTitle("Add Foreign Key Constraint");
+  setDescription("Add foreign key constraint to " + column.getTable().getName() + "."+ column.getName());
+}

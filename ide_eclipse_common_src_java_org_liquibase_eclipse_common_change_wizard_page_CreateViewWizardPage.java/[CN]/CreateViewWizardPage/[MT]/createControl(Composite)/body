@@ -1,0 +1,15 @@
+{
+  Composite composite=new Composite(parent,SWT.NONE);
+  GridLayout layout=new GridLayout(2,false);
+  composite.setLayout(layout);
+  addLabel("&View Name:",composite);
+  viewName=new Text(composite,SWT.BORDER);
+  validateOnChange(viewName,"View Name");
+  viewName.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+  addLabel("&Definition:",composite);
+  viewDefinition=new Text(composite,SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+  validateOnChange(viewDefinition,"Definition");
+  viewDefinition.setSize(200,100);
+  viewDefinition.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+  setControl(composite);
+}

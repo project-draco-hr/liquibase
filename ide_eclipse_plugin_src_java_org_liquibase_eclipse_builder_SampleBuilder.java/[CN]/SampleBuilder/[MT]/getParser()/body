@@ -1,0 +1,6 @@
+{
+  if (parserFactory == null) {
+    parserFactory=SAXParserFactory.newInstance();
+  }
+  return parserFactory.newSAXParser();
+}

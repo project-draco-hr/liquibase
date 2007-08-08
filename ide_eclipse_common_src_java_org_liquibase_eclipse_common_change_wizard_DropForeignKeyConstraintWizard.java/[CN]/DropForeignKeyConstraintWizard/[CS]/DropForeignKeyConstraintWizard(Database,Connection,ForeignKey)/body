@@ -1,0 +1,6 @@
+{
+  super(database,connection);
+  this.fk=fk;
+  this.baseTable=fk.getBaseTable();
+  this.referencedTable=fk.getReferencedTable();
+}

@@ -1,0 +1,23 @@
+{
+  try {
+    IProjectDescription description=project.getDescription();
+    String[] natures=description.getNatureIds();
+    for (int i=0; i < natures.length; ++i) {
+      if (SampleNature.NATURE_ID.equals(natures[i])) {
+        String[] newNatures=new String[natures.length - 1];
+        System.arraycopy(natures,0,newNatures,0,i);
+        System.arraycopy(natures,i + 1,newNatures,i,natures.length - i - 1);
+        description.setNatureIds(newNatures);
+        project.setDescription(description,null);
+        return;
+      }
+    }
+    String[] newNatures=new String[natures.length + 1];
+    System.arraycopy(natures,0,newNatures,0,natures.length);
+    newNatures[natures.length]=SampleNature.NATURE_ID;
+    description.setNatureIds(newNatures);
+    project.setDescription(description,null);
+  }
+ catch (  CoreException e) {
+  }
+}

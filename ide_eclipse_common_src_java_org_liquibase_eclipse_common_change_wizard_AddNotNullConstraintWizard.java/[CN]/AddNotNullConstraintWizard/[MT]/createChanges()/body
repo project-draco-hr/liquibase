@@ -1,0 +1,8 @@
+{
+  AddNotNullConstraintChange change=new AddNotNullConstraintChange();
+  change.setTableName(column.getTable().getName());
+  change.setColumnName(column.getName());
+  change.setDefaultNullValue(page1.getDefaultNullValue());
+  change.setColumnDataType(column.getType().getName());
+  return new Change[]{change};
+}

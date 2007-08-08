@@ -1,0 +1,3 @@
+{
+  return new AddDefaultValueWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedColumn(selection));
+}

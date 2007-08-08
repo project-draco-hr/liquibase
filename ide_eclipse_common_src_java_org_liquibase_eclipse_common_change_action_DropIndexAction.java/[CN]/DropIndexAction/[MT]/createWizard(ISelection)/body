@@ -1,0 +1,3 @@
+{
+  return new DropIndexWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedIndex(selection));
+}
