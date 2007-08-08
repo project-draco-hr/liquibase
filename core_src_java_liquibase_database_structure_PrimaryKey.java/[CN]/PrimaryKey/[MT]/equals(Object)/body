@@ -2,5 +2,5 @@
   if (this == o)   return true;
   if (o == null || getClass() != o.getClass())   return false;
   PrimaryKey that=(PrimaryKey)o;
-  return columnNames.equals(that.columnNames) && tableName.equals(that.tableName);
+  return !(getColumnNames() != null ? !getColumnNames().equals(that.getColumnNames()) : that.getColumnNames() != null) && !(tableName != null ? !tableName.equals(that.tableName) : that.tableName != null);
 }

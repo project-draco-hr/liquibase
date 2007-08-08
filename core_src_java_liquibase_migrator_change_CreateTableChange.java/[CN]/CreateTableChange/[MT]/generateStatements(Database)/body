@@ -1,4 +1,10 @@
 {
+  Set<String> pkColumns=new HashSet<String>();
+  for (  ColumnConfig column : getColumns()) {
+    if (column.getConstraints() != null && column.getConstraints().isPrimaryKey() != null && column.getConstraints().isPrimaryKey()) {
+      pkColumns.add(column.getName());
+    }
+  }
   StringBuffer fkConstraints=new StringBuffer();
   StringBuffer buffer=new StringBuffer();
   buffer.append("CREATE TABLE ").append(getTableName()).append(" ");
@@ -14,7 +20,7 @@
     if (column.getDefaultValue() != null || column.getDefaultValueBoolean() != null || column.getDefaultValueDate() != null || column.getDefaultValueNumeric() != null) {
       buffer.append(" DEFAULT ").append(column.getDefaultColumnValue(database));
     }
-    if (column.isAutoIncrement() != null && column.isAutoIncrement().booleanValue()) {
+    if (column.isAutoIncrement() != null && column.isAutoIncrement()) {
       buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
     }
     if (constraints != null) {
@@ -23,7 +29,7 @@
       }
  else {
       }
-      if (constraints.isPrimaryKey() != null && constraints.isPrimaryKey()) {
+      if (pkColumns.size() == 1 && constraints.isPrimaryKey() != null && constraints.isPrimaryKey()) {
         buffer.append(" PRIMARY KEY");
       }
       if (constraints.getReferences() != null) {
@@ -49,5 +55,14 @@
     buffer.append(", ").append(fkConstraints.toString().replaceFirst(",$",""));
   }
   buffer.append(")");
-  return new String[]{buffer.toString().trim()};
+  List<String> statements=new ArrayList<String>();
+  statements.add(buffer.toString().trim());
+  if (pkColumns.size() > 1) {
+    AddPrimaryKeyChange addPKChange=new AddPrimaryKeyChange();
+    addPKChange.setTableName(getTableName());
+    addPKChange.setConstraintName(("PK_" + getTableName()).toUpperCase());
+    addPKChange.setColumnNames(StringUtils.join(pkColumns,","));
+    statements.addAll(Arrays.asList(addPKChange.generateStatements(database)));
+  }
+  return statements.toArray(new String[statements.size()]);
 }

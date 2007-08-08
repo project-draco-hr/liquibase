@@ -1,14 +1,27 @@
 {
   updateListeners("Reading primary keys for " + database.toString() + " ...");
+  List<PrimaryKey> foundPKs=new ArrayList<PrimaryKey>();
   for (  Table table : tablesMap.values()) {
     ResultSet rs=databaseMetaData.getPrimaryKeys(database.getCatalogName(),database.getSchemaName(),table.getName());
     while (rs.next()) {
-      PrimaryKey primaryKey=new PrimaryKey();
-      primaryKey.setTableName(rs.getString("TABLE_NAME"));
-      primaryKey.setColumnNames(rs.getString("COLUMN_NAME"));
-      primaryKey.setName(rs.getString("PK_NAME"));
-      primaryKeys.add(primaryKey);
+      String tableName=rs.getString("TABLE_NAME");
+      String columnName=rs.getString("COLUMN_NAME");
+      boolean foundExistingPK=false;
+      for (      PrimaryKey pk : foundPKs) {
+        if (pk.getTableName().equals(tableName)) {
+          pk.addColumnName(columnName);
+          foundExistingPK=true;
+        }
+      }
+      if (!foundExistingPK) {
+        PrimaryKey primaryKey=new PrimaryKey();
+        primaryKey.setTableName(tableName);
+        primaryKey.addColumnName(columnName);
+        primaryKey.setName(rs.getString("PK_NAME"));
+        foundPKs.add(primaryKey);
+      }
     }
     rs.close();
   }
+  this.primaryKeys.addAll(foundPKs);
 }
