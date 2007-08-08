@@ -44,6 +44,9 @@
     }
  else {
       String createTableStatement=getCreateChangeLogSQL();
+      if (!canCreateChangeLogTable()) {
+        throw new JDBCException("Cannot create DatabaseChangeLog table for your database.\n\n" + "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n" + createTableStatement);
+      }
       statementsToExecute.add(createTableStatement);
       if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
         log.info("Creating database history table with name: DATABASECHANGELOG");
