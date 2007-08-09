@@ -4,21 +4,21 @@
     StringBuffer val=new StringBuffer();
     val.append("DATE(");
     val.append(normalLiteral);
-    val.append(")");
+    val.append(')');
     return val.toString();
   }
  else   if (isTimeOnly(isoDate)) {
     StringBuffer val=new StringBuffer();
     val.append("TIME(");
     val.append(normalLiteral);
-    val.append(")");
+    val.append(')');
     return val.toString();
   }
  else   if (isDateTime(isoDate)) {
     StringBuffer val=new StringBuffer();
     val.append("TIMESTAMP(");
     val.append(normalLiteral);
-    val.append(")");
+    val.append(')');
     return val.toString();
   }
  else {

@@ -18,10 +18,8 @@
     buffer.append(" MAXVALUE ").append(maxValue);
   }
   String[] returnStrings=new String[]{buffer.toString().trim()};
-  if (database instanceof OracleDatabase) {
-    if (ordered != null && ordered) {
-      returnStrings[0]+=" ORDER";
-    }
+  if (database instanceof OracleDatabase && ordered != null && ordered) {
+    returnStrings[0]+=" ORDER";
   }
   return returnStrings;
 }

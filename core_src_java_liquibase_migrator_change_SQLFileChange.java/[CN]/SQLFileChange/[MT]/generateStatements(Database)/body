@@ -1,4 +1,3 @@
 {
-  String[] statements=StringUtils.splitSQL(sql);
-  return statements;
+  return StringUtils.splitSQL(sql);
 }

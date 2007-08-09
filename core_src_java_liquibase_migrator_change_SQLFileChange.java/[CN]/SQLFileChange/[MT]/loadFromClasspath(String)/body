@@ -2,9 +2,13 @@
   InputStream in=null;
   try {
     FileOpener fo=getFileOpener();
-    if (fo == null)     return false;
+    if (fo == null) {
+      return false;
+    }
     in=fo.getResourceAsStream(file);
-    if (in == null)     return false;
+    if (in == null) {
+      return false;
+    }
     sql=StreamUtil.getStreamContents(in);
     return true;
   }
