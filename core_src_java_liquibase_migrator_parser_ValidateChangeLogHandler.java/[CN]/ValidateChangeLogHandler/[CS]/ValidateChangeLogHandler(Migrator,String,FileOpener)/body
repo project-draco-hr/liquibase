@@ -9,7 +9,7 @@
   if (duplicateChangeSets == null) {
     duplicateChangeSets=new HashSet<ChangeSet>();
   }
-  if (setupExceptions != null) {
+  if (setupExceptions == null) {
     setupExceptions=new ArrayList<SetupException>();
   }
 }
