@@ -1,12 +1,6 @@
 {
-  FileDialog fd=new FileDialog(changeLogLabel.getShell(),SWT.OPEN);
-  fd.setText("Select Current Change Log");
-  String[] filterExt={"*.xml","*.*"};
-  fd.setFilterExtensions(filterExt);
-  fd.setFileName(LiquibasePreferences.getCurrentChangeLogFileName());
-  String selected=fd.open();
-  if (selected != null) {
-    LiquibasePreferences.setCurrentChangeLogFileName(selected);
-    changeLogLabel.setText(selected);
+  PreferenceDialog dialog=PreferencesUtil.createPreferenceDialogOn(changeLogLabel.getShell(),GeneralPreferencesPage.ID,null,null);
+  if (dialog.open() == Dialog.OK) {
+    changeLogLabel.setText(LiquibasePreferences.getCurrentChangeLog());
   }
 }

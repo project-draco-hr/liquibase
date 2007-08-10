@@ -6,7 +6,7 @@
   Composite changeLogSelector=new Composite(composite,SWT.NONE);
   changeLogSelector.setLayout(new GridLayout(2,false));
   Label changeLogLabel=new Label(changeLogSelector,SWT.NONE);
-  changeLogLabel.setText(LiquibasePreferences.getCurrentChangeLogFileName());
+  changeLogLabel.setText(LiquibasePreferences.getCurrentChangeLog());
   changeLogLabel.setLayoutData(new GridData(GridData.FILL,GridData.CENTER,true,false));
   Button selectChangeLogButton=new Button(changeLogSelector,SWT.PUSH);
   selectChangeLogButton.setText("Select");

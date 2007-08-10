@@ -1,0 +1,6 @@
+{
+  PathEditor classpathEditor=new PathEditor(LiquibasePreferences.CLASSPATHS,"Change Log Root Directories","Select Directory",getFieldEditorParent());
+  addField(classpathEditor);
+  FileFieldEditor changeLogEditor=new FileFieldEditor(LiquibasePreferences.CURRENT_CHANGE_LOG_FILE_NAME,"Current Change Log File",getFieldEditorParent());
+  addField(changeLogEditor);
+}

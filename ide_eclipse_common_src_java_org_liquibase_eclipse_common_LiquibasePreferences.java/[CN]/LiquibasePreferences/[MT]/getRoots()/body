@@ -1,0 +1,7 @@
+{
+  Set<File> returnSet=new HashSet<File>();
+  for (  String file : getClassPaths().split(";")) {
+    returnSet.add(new File(file));
+  }
+  return returnSet;
+}
