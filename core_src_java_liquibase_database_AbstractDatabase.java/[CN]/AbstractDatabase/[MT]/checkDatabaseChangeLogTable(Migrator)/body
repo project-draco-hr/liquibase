@@ -3,12 +3,12 @@
   Connection connection=getConnection();
   ResultSet checkTableRS=null;
   ResultSet checkColumnsRS=null;
-  changeLogTableExists=true;
   List<String> statementsToExecute=new ArrayList<String>();
   boolean wroteToOutput=false;
   try {
     checkTableRS=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogTableName(),new String[]{"TABLE"});
     if (checkTableRS.next()) {
+      changeLogTableExists=true;
       checkColumnsRS=connection.getMetaData().getColumns(getCatalogName(),getSchemaName(),getDatabaseChangeLogTableName(),null);
       boolean hasDescription=false;
       boolean hasComments=false;
@@ -42,7 +42,8 @@
         statementsToExecute.add("ALTER TABLE DATABASECHANGELOG ADD LIQUIBASE VARCHAR(255)");
       }
     }
- else {
+ else     if (!changeLogCreateAttempted) {
+      changeLogCreateAttempted=true;
       String createTableStatement=getCreateChangeLogSQL();
       if (!canCreateChangeLogTable()) {
         throw new JDBCException("Cannot create DatabaseChangeLog table for your database.\n\n" + "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n" + createTableStatement);
@@ -50,9 +51,7 @@
       statementsToExecute.add(createTableStatement);
       if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
         log.info("Creating database history table with name: DATABASECHANGELOG");
-      }
- else {
-        changeLogTableExists=false;
+        changeLogTableExists=true;
       }
     }
     for (    String sql : statementsToExecute) {
