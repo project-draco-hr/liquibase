@@ -2,5 +2,8 @@
   if (url.startsWith("jdbc:sybase")) {
     return "com.sybase.jdbc3.jdbc.SybDriver";
   }
+ else   if (url.startsWith("jdbc:jtds:sybase")) {
+    return "net.sourceforge.jtds.jdbc.Driver";
+  }
   return null;
 }

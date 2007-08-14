@@ -1,0 +1,9 @@
+{
+  AddColumnChange refactoring=new AddColumnChange();
+  refactoring.setTableName("TAB");
+  ColumnConfig column=new ColumnConfig();
+  column.setName("NEWCOL");
+  column.setType("TYP");
+  refactoring.setColumn(column);
+  assertEquals("ALTER TABLE TAB ADD NEWCOL TYP NULL",refactoring.generateStatements(new SybaseDatabase())[0]);
+}

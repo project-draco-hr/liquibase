@@ -1,3 +1,4 @@
 {
-  return "Adaptive Server Enterprise".equals(getDatabaseProductName(conn));
+  String dbProductName=getDatabaseProductName(conn);
+  return "Adaptive Server Enterprise".equals(dbProductName) || "sql server".equals(dbProductName);
 }

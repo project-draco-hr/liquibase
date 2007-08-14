@@ -1,6 +1,7 @@
 {
   Connection connection=createMock(Connection.class);
   DatabaseMetaData metaData=createMock(DatabaseMetaData.class);
+  connection.setAutoCommit(false);
   expect(connection.getMetaData()).andReturn(metaData);
   expect(metaData.getUserName()).andReturn("usernameHere");
   replay(connection);

@@ -28,6 +28,9 @@
         buffer.append(" NOT NULL");
       }
  else {
+        if (database instanceof SybaseDatabase) {
+          buffer.append(" NULL");
+        }
       }
       if (pkColumns.size() == 1 && constraints.isPrimaryKey() != null && constraints.isPrimaryKey()) {
         buffer.append(" PRIMARY KEY");

@@ -1,11 +1,6 @@
 {
   Connection conn=getConnection();
   try {
-    try {
-      conn.setAutoCommit(false);
-    }
- catch (    SQLException e) {
-    }
     dropForeignKeys(conn);
     dropViews(conn);
     dropTables(conn);

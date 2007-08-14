@@ -13,6 +13,7 @@
 ;
   Connection conn=createMock(Connection.class);
   Statement statement=createMock(Statement.class);
+  conn.setAutoCommit(false);
   expect(conn.createStatement()).andReturn(statement);
   expect(statement.execute("GENERATED STATEMENT;")).andStubReturn(true);
   statement.close();
@@ -22,4 +23,6 @@
   OracleDatabase database=new OracleDatabase();
   database.setConnection(conn);
   change.executeStatements(database);
+  verify(conn);
+  verify(statement);
 }

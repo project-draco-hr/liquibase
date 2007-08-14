@@ -1,0 +1,13 @@
+{
+  AddColumnChange refactoring=new AddColumnChange();
+  refactoring.setTableName("TAB");
+  ColumnConfig column=new ColumnConfig();
+  column.setName("NEWCOL");
+  column.setType("TYP");
+  refactoring.setColumn(column);
+  ConstraintsConfig constraints=new ConstraintsConfig();
+  constraints.setPrimaryKey(Boolean.FALSE);
+  constraints.setNullable(Boolean.FALSE);
+  column.setConstraints(constraints);
+  assertEquals("ALTER TABLE TAB ADD NEWCOL TYP NOT NULL",refactoring.generateStatements(new SybaseDatabase())[0]);
+}

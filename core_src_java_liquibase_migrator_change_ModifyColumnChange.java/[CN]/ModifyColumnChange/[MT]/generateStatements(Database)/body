@@ -1,4 +1,7 @@
 {
+  if (database instanceof SybaseDatabase) {
+    return new String[]{"ALTER TABLE " + getTableName() + " MODIFY "+ getColumn().getName()+ " "+ getColumn().getType()};
+  }
   if (database instanceof MSSQLDatabase) {
     return new String[]{"ALTER TABLE " + getTableName() + " ALTER COLUMN "+ getColumn().getName()+ " "+ getColumn().getType()};
   }

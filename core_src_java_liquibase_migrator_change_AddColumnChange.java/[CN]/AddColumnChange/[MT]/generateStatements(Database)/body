@@ -6,10 +6,18 @@
       alterTable+=" NOT NULL";
     }
  else {
+      if (database instanceof SybaseDatabase) {
+        alterTable+=" NULL";
+      }
     }
-    if (column.getDefaultValue() != null || column.getDefaultValueBoolean() != null || column.getDefaultValueDate() != null || column.getDefaultValueNumeric() != null) {
-      alterTable+=" DEFAULT " + column.getDefaultColumnValue(database);
+  }
+ else {
+    if (database instanceof SybaseDatabase) {
+      alterTable+=" NULL";
     }
+  }
+  if (column.getDefaultValue() != null || column.getDefaultValueBoolean() != null || column.getDefaultValueDate() != null || column.getDefaultValueNumeric() != null) {
+    alterTable+=" DEFAULT " + column.getDefaultColumnValue(database);
   }
   sql.add(alterTable);
   if (database instanceof DB2Database) {
