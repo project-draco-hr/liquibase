@@ -2,6 +2,7 @@
   if (file == null) {
     throw new SetupException("<sqlfile> - No path specified");
   }
+  log.fine("SQLFile file:" + file);
   boolean loaded=loadFromClasspath(file);
   if (!loaded) {
     loaded=loadFromFileSystem(file);
@@ -9,4 +10,5 @@
   if (!loaded) {
     throw new SetupException("<sqlfile path=" + file + "> - Could not find file");
   }
+  log.finer("SQLFile file contents is:" + getSql());
 }
