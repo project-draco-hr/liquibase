@@ -3,7 +3,7 @@
   ResultSet fkRS=null;
   Statement dropStatement=null;
   try {
-    tableRS=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,new String[]{"TABLE","GLOBAL TEMPORARY","LOCAL TEMPORARY","ALIAS","SYNONYM"});
+    tableRS=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,getTableTypes());
     while (tableRS.next()) {
       String tableName=tableRS.getString("TABLE_NAME");
       String schemaName=tableRS.getString("TABLE_SCHEM");

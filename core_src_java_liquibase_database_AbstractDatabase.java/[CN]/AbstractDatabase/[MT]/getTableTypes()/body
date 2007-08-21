@@ -1,0 +1,20 @@
+{
+  List<String> wantedTypes=new ArrayList<String>(Arrays.asList("TABLE","GLOBAL TEMPORARY","LOCAL TEMPORARY","ALIAS","SYNONYM"));
+  List<String> availableTypes=new ArrayList<String>();
+  try {
+    ResultSet types=connection.getMetaData().getTableTypes();
+    while (types.next()) {
+      availableTypes.add("TABLE_TYPE");
+    }
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+  List<String> returnTypes=new ArrayList<String>();
+  for (  String type : wantedTypes) {
+    if (availableTypes.contains(type)) {
+      returnTypes.add(type);
+    }
+  }
+  return returnTypes.toArray(new String[returnTypes.size()]);
+}
