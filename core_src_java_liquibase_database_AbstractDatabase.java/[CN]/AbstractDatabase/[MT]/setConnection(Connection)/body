@@ -1,9 +1,9 @@
 {
   this.connection=conn;
   try {
-    connection.setAutoCommit(!supportsDDLInTransaction());
+    connection.setAutoCommit(getAutoCommitMode());
   }
  catch (  SQLException sqle) {
-    log.warning("Can not set auto commit to " + !supportsDDLInTransaction() + " on connection");
+    log.warning("Can not set auto commit to " + getAutoCommitMode() + " on connection");
   }
 }
