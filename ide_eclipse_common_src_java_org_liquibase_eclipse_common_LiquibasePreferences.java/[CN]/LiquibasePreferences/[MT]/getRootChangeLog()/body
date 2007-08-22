@@ -1,0 +1,3 @@
+{
+  return findChangeLogName(getRootChangeLogFileName());
+}

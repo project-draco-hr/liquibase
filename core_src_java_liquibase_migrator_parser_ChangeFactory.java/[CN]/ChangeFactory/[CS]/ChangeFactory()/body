@@ -2,7 +2,7 @@
   tagToClassMap=new HashMap<String,Class>();
   Class[] changes=new Class[]{AddColumnChange.class,AlterSequenceChange.class,CreateIndexChange.class,CreateSequenceChange.class,CreateTableChange.class,DropColumnChange.class,DropIndexChange.class,DropSequenceChange.class,DropTableChange.class,InsertDataChange.class,ModifyColumnChange.class,RawSQLChange.class,RenameColumnChange.class,RenameTableChange.class,AddNotNullConstraintChange.class,DropNotNullConstraintChange.class,CreateViewChange.class,DropViewChange.class,MergeColumnChange.class,RenameViewChange.class,AddForeignKeyConstraintChange.class,DropForeignKeyConstraintChange.class,AddLookupTableChange.class,AddPrimaryKeyChange.class,DropPrimaryKeyChange.class,AddAutoIncrementChange.class,AddDefaultValueChange.class,DropDefaultValueChange.class,AddUniqueConstraintChange.class,DropUniqueConstraintChange.class,SQLFileChange.class};
   try {
-    for (    Class changeClass : changes) {
+    for (    Class<Change> changeClass : changes) {
       Change change=(Change)changeClass.newInstance();
       tagToClassMap.put(change.getTagName(),changeClass);
     }

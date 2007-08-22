@@ -1,5 +1,5 @@
 {
-  List selectedObjects=((TreeSelection)selection).toList();
+  List<?> selectedObjects=((TreeSelection)selection).toList();
   for (  Object object : selectedObjects) {
     if (object instanceof ICatalogObject) {
       return ((ICatalogObject)object).getCatalogDatabase();

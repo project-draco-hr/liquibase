@@ -1,0 +1,18 @@
+{
+  Set<File> roots=getRoots();
+  File currentFile=new File(changeLogFileName);
+  File parentDir=currentFile.getParentFile();
+  File root=null;
+  while (parentDir != null) {
+    if (roots.contains(parentDir)) {
+      root=parentDir;
+    }
+    parentDir=parentDir.getParentFile();
+  }
+  if (root == null) {
+    return currentFile.getName();
+  }
+ else {
+    return currentFile.toString().substring(root.toString().length() + 1).replaceAll("\\\\","/");
+  }
+}

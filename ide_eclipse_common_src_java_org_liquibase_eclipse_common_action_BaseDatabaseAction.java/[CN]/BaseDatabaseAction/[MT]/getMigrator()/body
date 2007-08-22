@@ -1,3 +1,0 @@
-{
-  return new Migrator(LiquibasePreferences.getCurrentChangeLog(),new EclipseFileOpener());
-}

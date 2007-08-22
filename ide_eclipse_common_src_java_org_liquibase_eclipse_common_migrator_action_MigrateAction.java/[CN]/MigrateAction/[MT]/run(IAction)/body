@@ -1,5 +1,5 @@
 {
-  Migrator migrator=getMigrator();
+  Migrator migrator=getMigrator(LiquibasePreferences.getRootChangeLog());
   try {
     migrator.init(getSelectedConnection(getSelection()));
     migrator.migrate();

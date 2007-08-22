@@ -3,7 +3,7 @@
   if (Dialog.OK != dialog.open() || dialog.getTagName() == null) {
     return;
   }
-  Migrator migrator=getMigrator();
+  Migrator migrator=getMigrator(LiquibasePreferences.getRootChangeLog());
   try {
     migrator.init(getSelectedConnection(getSelection()));
     migrator.tag(dialog.getTagName());
