@@ -1,6 +1,8 @@
 {
   Connection conn=getConnection();
   PreparedStatement stmt=null;
+  Statement countStatement=null;
+  ResultSet countRS=null;
   try {
     stmt=conn.prepareStatement(createChangeToTagSQL());
     ResultSet rs=stmt.executeQuery();
@@ -15,6 +17,13 @@
     stmt.setTimestamp(2,lastExecutedDate);
     int rowsUpdated=stmt.executeUpdate();
     if (rowsUpdated == 0) {
+      countStatement=conn.createStatement();
+      countRS=countStatement.executeQuery("select count(*) from " + getDatabaseChangeLogTableName());
+      countRS.next();
+      if (countRS.getInt(1) == 0) {
+        throw new MigrationFailedException("Cannot tag an empty database");
+      }
+      countRS.close();
       throw new MigrationFailedException("Did not tag database change log correctly");
     }
     conn.commit();
@@ -28,6 +37,15 @@
         stmt.close();
       }
  catch (      SQLException e) {
+        ;
+      }
+    }
+    if (countStatement != null) {
+      try {
+        countStatement.close();
+      }
+ catch (      SQLException e) {
+        ;
       }
     }
   }

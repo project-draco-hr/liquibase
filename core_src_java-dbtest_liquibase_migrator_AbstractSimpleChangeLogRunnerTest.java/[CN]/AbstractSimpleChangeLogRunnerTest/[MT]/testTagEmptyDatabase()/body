@@ -1,0 +1,12 @@
+{
+  Migrator migrator=createMigrator(completeChangeLog);
+  migrator.dropAll();
+  migrator=createMigrator(completeChangeLog);
+  migrator.checkDatabaseChangeLogTable();
+  try {
+    migrator.tag("empty");
+  }
+ catch (  MigrationFailedException e) {
+    assertEquals("liquibase.migrator.exception.MigrationFailedException: Cannot tag an empty database",e.getMessage());
+  }
+}

@@ -1,0 +1,7 @@
+{
+  Migrator migrator=createMigrator(completeChangeLog);
+  migrator.dropAll();
+  migrator=createMigrator(completeChangeLog);
+  List<ChangeSet> list=migrator.listUnrunChangeSets();
+  assertTrue(list.size() > 0);
+}
