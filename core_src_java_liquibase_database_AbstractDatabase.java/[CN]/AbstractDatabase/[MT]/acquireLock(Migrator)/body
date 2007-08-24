@@ -22,7 +22,7 @@
       return false;
     }
  else {
-      pstmt=conn.prepareStatement("update databasechangeloglock set locked=?, lockgranted=?, lockedby=? where id=1".toUpperCase());
+      pstmt=conn.prepareStatement("update " + getDatabaseChangeLogLockTableName() + " set locked=?, lockgranted=?, lockedby=? where id=1".toUpperCase());
       pstmt.setBoolean(1,true);
       pstmt.setTimestamp(2,new Timestamp(new java.util.Date().getTime()));
       pstmt.setString(3,InetAddress.getLocalHost().getCanonicalHostName() + " (" + InetAddress.getLocalHost().getHostAddress()+ ")");

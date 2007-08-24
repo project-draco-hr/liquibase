@@ -5,7 +5,7 @@
   try {
     List<DatabaseChangeLogLock> allLocks=new ArrayList<DatabaseChangeLogLock>();
     stmt=conn.createStatement();
-    rs=stmt.executeQuery("select id, locked, lockgranted, lockedby from databasechangeloglock".toUpperCase());
+    rs=stmt.executeQuery(("select id, locked, lockgranted, lockedby from " + getDatabaseChangeLogLockTableName()).toUpperCase());
     while (rs.next()) {
       boolean locked=rs.getBoolean("locked");
       if (locked) {

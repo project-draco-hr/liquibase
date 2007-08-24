@@ -3,7 +3,7 @@
     Connection conn=getConnection();
     PreparedStatement stmt=null;
     try {
-      String releaseSQL="update databasechangeloglock set locked=?, lockgranted=null, lockedby=null where id=1".toUpperCase();
+      String releaseSQL=("update " + getDatabaseChangeLogLockTableName() + " set locked=?, lockgranted=null, lockedby=null where id=1").toUpperCase();
       stmt=conn.prepareStatement(releaseSQL);
       stmt.setBoolean(1,false);
       int updatedRows=stmt.executeUpdate();

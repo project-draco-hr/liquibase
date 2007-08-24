@@ -12,14 +12,14 @@
           statement=connection.createStatement();
           statement.executeUpdate(createTableStatement);
           connection.commit();
-          log.info("Created database lock table with name: DATABASECHANGELOGLOCK");
+          log.info("Created database lock table with name: " + getDatabaseChangeLogLockTableName());
           changeLogLockTableExists=true;
         }
  else {
           if (!migrator.getMode().equals(Migrator.Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
             if (!outputtedLockWarning) {
               migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + "-----------------------------------------------------------------------------------------------" + StreamUtil.getLineSeparator());
-              migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " DATABASECHANGELOGLOCK table does not exist." + StreamUtil.getLineSeparator());
+              migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getDatabaseChangeLogLockTableName()+ " table does not exist."+ StreamUtil.getLineSeparator());
               migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Race conditions may cause a corrupted sql script." + StreamUtil.getLineSeparator());
               migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Consider running: " + StreamUtil.getLineSeparator());
               migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getCreateChangeLogLockSQL()+ ";"+ StreamUtil.getLineSeparator());
@@ -45,13 +45,13 @@
     String insertRowStatment=getChangeLogLockInsertSQL();
     if (changeLogLockTableExists) {
       statement=connection.createStatement();
-      rs=statement.executeQuery("select * from DATABASECHANGELOGLOCK where id=1".toUpperCase());
+      rs=statement.executeQuery("select * from " + getDatabaseChangeLogLockTableName() + " where id=1".toUpperCase());
       if (!rs.next()) {
         if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
           statement=connection.createStatement();
           statement.executeUpdate(insertRowStatment);
           connection.commit();
-          log.info("Created database lock table with name: DATABASECHANGELOGLOCK");
+          log.info("Created database lock table with name: " + getDatabaseChangeLogLockTableName());
         }
  else {
           migrator.getOutputSQLWriter().append(insertRowStatment);

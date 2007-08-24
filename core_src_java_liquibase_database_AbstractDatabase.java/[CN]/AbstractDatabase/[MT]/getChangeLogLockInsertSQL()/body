@@ -1,3 +1,3 @@
 {
-  return ("insert into DatabaseChangeLogLock (id, locked) values (1, " + getFalseBooleanValue() + ")").toUpperCase();
+  return ("insert into " + getDatabaseChangeLogLockTableName() + " (id, locked) values (1, "+ getFalseBooleanValue()+ ")").toUpperCase();
 }

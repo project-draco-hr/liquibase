@@ -30,27 +30,27 @@
         }
       }
       if (!hasDescription) {
-        statementsToExecute.add("ALTER TABLE DATABASECHANGELOG ADD DESCRIPTION VARCHAR(255)");
+        statementsToExecute.add("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD DESCRIPTION VARCHAR(255)");
       }
       if (!hasTag) {
-        statementsToExecute.add("ALTER TABLE DATABASECHANGELOG ADD TAG VARCHAR(255)");
+        statementsToExecute.add("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD TAG VARCHAR(255)");
       }
       if (!hasComments) {
-        statementsToExecute.add("ALTER TABLE DATABASECHANGELOG ADD COMMENTS VARCHAR(255)");
+        statementsToExecute.add("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD COMMENTS VARCHAR(255)");
       }
       if (!hasLiquibase) {
-        statementsToExecute.add("ALTER TABLE DATABASECHANGELOG ADD LIQUIBASE VARCHAR(255)");
+        statementsToExecute.add("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD LIQUIBASE VARCHAR(255)");
       }
     }
  else     if (!changeLogCreateAttempted) {
       changeLogCreateAttempted=true;
       String createTableStatement=getCreateChangeLogSQL();
       if (!canCreateChangeLogTable()) {
-        throw new JDBCException("Cannot create DatabaseChangeLog table for your database.\n\n" + "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n" + createTableStatement);
+        throw new JDBCException("Cannot create " + getDatabaseChangeLogTableName() + " table for your database.\n\n"+ "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n"+ createTableStatement);
       }
       statementsToExecute.add(createTableStatement);
       if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
-        log.info("Creating database history table with name: DATABASECHANGELOG");
+        log.info("Creating database history table with name: " + getDatabaseChangeLogTableName());
         changeLogTableExists=true;
       }
     }
