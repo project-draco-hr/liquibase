@@ -1,8 +1,7 @@
 {
   args=fixupArgs(args);
   boolean seenCommand=false;
-  for (int i=0; i < args.length; i++) {
-    String arg=args[i];
+  for (  String arg : args) {
     if (isCommand(arg)) {
       this.command=arg;
       seenCommand=true;

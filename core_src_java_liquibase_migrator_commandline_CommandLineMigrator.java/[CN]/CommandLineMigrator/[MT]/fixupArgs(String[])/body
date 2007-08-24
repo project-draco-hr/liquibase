@@ -4,7 +4,7 @@
     String arg=args[i];
     if (arg.startsWith("--") && !arg.contains("=")) {
       String nextArg=args[i + 1];
-      if (arg.startsWith("--") && !isCommand(nextArg)) {
+      if (!nextArg.startsWith("--") && !isCommand(nextArg)) {
         arg=arg + "=" + nextArg;
         i++;
       }
