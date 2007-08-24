@@ -14,14 +14,7 @@
       short type=rs.getShort("TYPE");
       String tableName=rs.getString("TABLE_NAME");
       String columnName=rs.getString("COLUMN_NAME");
-      boolean isPKIndex=false;
-      for (      PrimaryKey pk : primaryKeys) {
-        if (pk.getTableName().equalsIgnoreCase(tableName) && pk.getColumnNames().equalsIgnoreCase(columnName)) {
-          isPKIndex=true;
-          break;
-        }
-      }
-      if (isPKIndex || type == DatabaseMetaData.tableIndexStatistic) {
+      if (type == DatabaseMetaData.tableIndexStatistic) {
         continue;
       }
       if (columnName == null) {
@@ -44,4 +37,13 @@
     }
     rs.close();
   }
+  Set<Index> indexesToRemove=new HashSet<Index>();
+  for (  Index index : indexes) {
+    for (    PrimaryKey pk : primaryKeys) {
+      if (index.getTableName().equalsIgnoreCase(pk.getTableName()) && index.getColumnNames().equals(pk.getColumnNames())) {
+        indexesToRemove.add(index);
+      }
+    }
+  }
+  indexes.removeAll(indexesToRemove);
 }

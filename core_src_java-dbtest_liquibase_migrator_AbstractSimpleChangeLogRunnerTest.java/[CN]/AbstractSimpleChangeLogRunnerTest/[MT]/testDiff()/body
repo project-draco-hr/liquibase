@@ -1,7 +1,6 @@
 {
   runCompleteChangeLog();
-  Diff diff=new Diff();
-  diff.init(connection,connection);
+  Diff diff=new Diff(connection,connection);
   DiffResult diffResult=diff.compare();
   assertEquals(0,diffResult.getMissingColumns().size());
   assertEquals(0,diffResult.getMissingForeignKeys().size());

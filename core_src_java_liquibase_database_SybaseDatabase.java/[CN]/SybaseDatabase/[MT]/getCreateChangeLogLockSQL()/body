@@ -1,0 +1,3 @@
+{
+  return ("create table DatabaseChangeLogLock (id int not null primary key, locked " + getBooleanType() + " not null, lockGranted "+ getDateTimeType()+ " null, lockedby varchar(255) null)").toUpperCase();
+}

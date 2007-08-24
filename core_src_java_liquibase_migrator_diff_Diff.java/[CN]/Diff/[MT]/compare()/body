@@ -1,11 +1,15 @@
 {
   try {
-    baseSnapshot=new DatabaseSnapshot(baseDatabase,statusListeners);
-    if (targetDatabase == null) {
-      targetSnapshot=new DatabaseSnapshot();
+    if (baseSnapshot == null) {
+      baseSnapshot=new DatabaseSnapshot(baseDatabase,statusListeners);
     }
+    if (targetSnapshot == null) {
+      if (targetDatabase == null) {
+        targetSnapshot=new DatabaseSnapshot();
+      }
  else {
-      targetSnapshot=new DatabaseSnapshot(targetDatabase,statusListeners);
+        targetSnapshot=new DatabaseSnapshot(targetDatabase,statusListeners);
+      }
     }
     DiffResult diffResult=new DiffResult(baseDatabase,targetDatabase);
     checkVersionInfo(diffResult);
