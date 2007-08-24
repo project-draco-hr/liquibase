@@ -1,0 +1,9 @@
+{
+  CommandLineMigrator migrator=new CommandLineMigrator();
+  String[] fixedArgs=migrator.fixupArgs(new String[]{"--defaultsFile","liquibase.properties","migrate"});
+  assertEquals("--defaultsFile=liquibase.properties migrate",StringUtils.join(Arrays.asList(fixedArgs)," "));
+  fixedArgs=migrator.fixupArgs(new String[]{"--defaultsFile=liquibase.properties","migrate"});
+  assertEquals("--defaultsFile=liquibase.properties migrate",StringUtils.join(Arrays.asList(fixedArgs)," "));
+  fixedArgs=migrator.fixupArgs(new String[]{"--driver=DRIVER","--username=USERNAME","--password=PASSWORD","--url=URL","--changeLogFile=FILE","--classpath=CLASSPATH;CLASSPATH2","--contexts=CONTEXT1,CONTEXT2","--promptForNonLocalDatabase=true","migrate"});
+  assertEquals("--driver=DRIVER --username=USERNAME --password=PASSWORD --url=URL --changeLogFile=FILE --classpath=CLASSPATH;CLASSPATH2 --contexts=CONTEXT1,CONTEXT2 --promptForNonLocalDatabase=true migrate",StringUtils.join(Arrays.asList(fixedArgs)," "));
+}

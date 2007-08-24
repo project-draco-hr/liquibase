@@ -1,0 +1,15 @@
+{
+  List<String> fixedArgs=new ArrayList<String>();
+  for (int i=0; i < args.length; i++) {
+    String arg=args[i];
+    if (arg.startsWith("--") && !arg.contains("=")) {
+      String nextArg=args[i + 1];
+      if (arg.startsWith("--") && !isCommand(nextArg)) {
+        arg=arg + "=" + nextArg;
+        i++;
+      }
+    }
+    fixedArgs.add(arg);
+  }
+  return fixedArgs.toArray(new String[fixedArgs.size()]);
+}
