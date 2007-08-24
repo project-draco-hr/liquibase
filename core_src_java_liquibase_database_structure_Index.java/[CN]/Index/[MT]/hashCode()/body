@@ -1,6 +1,6 @@
 {
   int result;
   result=tableName.hashCode();
-  result=31 * result + columnName.hashCode();
+  result=31 * result + columns.hashCode();
   return result;
 }

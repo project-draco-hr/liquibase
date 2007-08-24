@@ -2,5 +2,11 @@
   if (this == o)   return true;
   if (o == null || getClass() != o.getClass())   return false;
   Index index=(Index)o;
-  return columnName.equals(index.columnName) && tableName.equals(index.tableName);
+  boolean equals=true;
+  for (  String column : index.getColumns()) {
+    if (!columns.contains(column)) {
+      equals=false;
+    }
+  }
+  return equals && tableName.equals(index.tableName);
 }
