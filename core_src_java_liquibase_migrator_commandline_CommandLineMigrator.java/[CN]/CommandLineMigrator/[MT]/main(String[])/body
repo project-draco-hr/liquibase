@@ -14,7 +14,7 @@
     return;
   }
   commandLineMigrator.parseOptions(args);
-  File propertiesFile=new File("liquibase.properties");
+  File propertiesFile=new File(commandLineMigrator.defaultsFile);
   if (propertiesFile.exists()) {
     commandLineMigrator.parsePropertiesFile(new FileInputStream(propertiesFile));
   }
@@ -40,7 +40,7 @@
       ((ValidationFailedException)e.getCause()).printDescriptiveError(System.out);
     }
  else {
-      System.out.println("Migration Failed: " + message + (Logger.getLogger(Migrator.DEFAULT_LOG_NAME).getLevel().equals(Level.OFF) ? ".  For more information, use the --logLevel flag" : ""));
+      System.out.println("Migration Failed: " + message + ((Logger.getLogger(Migrator.DEFAULT_LOG_NAME) == null || (Logger.getLogger(Migrator.DEFAULT_LOG_NAME).getLevel().equals(Level.OFF))) ? ".  For more information, use the --logLevel flag" : ""));
       Logger.getLogger(Migrator.DEFAULT_LOG_NAME).log(Level.SEVERE,message,e);
     }
     return;
