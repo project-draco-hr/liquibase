@@ -2,17 +2,17 @@
   try {
     InputStream inputStream=getFileOpener().getResourceAsStream(changeLogFile);
     if (inputStream == null) {
-      throw new MigrationFailedException(changeLogFile + " does not exist");
+      throw new MigrationFailedException(null,changeLogFile + " does not exist");
     }
     xmlReader.setContentHandler(contentHandler);
     xmlReader.parse(new InputSource(inputStream));
     inputStream.close();
   }
  catch (  IOException e) {
-    throw new MigrationFailedException("Error Reading Migration File: " + e.getMessage(),e);
+    throw new MigrationFailedException(null,"Error Reading Migration File: " + e.getMessage(),e);
   }
 catch (  SAXParseException e) {
-    throw new MigrationFailedException("Error parsing line " + e.getLineNumber() + " column "+ e.getColumnNumber()+ ": "+ e.getMessage());
+    throw new MigrationFailedException(null,"Error parsing line " + e.getLineNumber() + " column "+ e.getColumnNumber()+ " of "+ ": "+ e.getMessage());
   }
 catch (  SAXException e) {
     Throwable parentCause=e.getException();
@@ -35,6 +35,6 @@ catch (  SAXException e) {
         reason="Unknown Reason";
       }
     }
-    throw new MigrationFailedException("Invalid Migration File: " + reason,e);
+    throw new MigrationFailedException(null,"Invalid Migration File: " + reason,e);
   }
 }

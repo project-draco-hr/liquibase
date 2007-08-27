@@ -10,7 +10,7 @@
     migrator.setContexts(getContexts());
     migrator.setMode(Migrator.Mode.EXECUTE_MODE);
     if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration() && migrator.swingPromptForNonLocalDatabase()) {
-      throw new MigrationFailedException("Chose not to run against non-production database");
+      throw new BuildException("Chose not to run against non-production database");
     }
     if (isDropFirst()) {
       migrator.dropAll();

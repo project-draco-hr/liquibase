@@ -14,7 +14,7 @@
         dropStatement.executeUpdate(sql);
       }
  catch (      SQLException e) {
-        throw new MigrationFailedException("Error dropping sequence '" + sequenceName + "': "+ e.getMessage(),e);
+        throw new JDBCException("Error dropping sequence '" + sequenceName + "': "+ e.getMessage(),e);
       }
     }
   }

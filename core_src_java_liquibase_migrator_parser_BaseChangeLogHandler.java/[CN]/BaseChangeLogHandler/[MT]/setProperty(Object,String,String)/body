@@ -1,8 +1,7 @@
 {
   String methodName="set" + attributeName.substring(0,1).toUpperCase() + attributeName.substring(1);
   Method[] methods=object.getClass().getMethods();
-  for (int i=0; i < methods.length; i++) {
-    Method method=methods[i];
+  for (  Method method : methods) {
     if (method.getName().equals(methodName)) {
       if (method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(Boolean.class)) {
         method.invoke(object,Boolean.valueOf(attributeValue));

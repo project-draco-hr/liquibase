@@ -15,7 +15,7 @@
     return allLocks.toArray(new DatabaseChangeLogLock[allLocks.size()]);
   }
  catch (  Exception e) {
-    throw new MigrationFailedException(e);
+    throw new LockException(e);
   }
  finally {
     if (rs != null) {

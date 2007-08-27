@@ -15,7 +15,7 @@
         dropStatement.executeUpdate(sql);
       }
  catch (      SQLException e) {
-        throw new MigrationFailedException("Error dropping view '" + tableName + "': "+ e.getMessage(),e);
+        throw new JDBCException("Error dropping view '" + tableName + "': "+ e.getMessage(),e);
       }
     }
   }

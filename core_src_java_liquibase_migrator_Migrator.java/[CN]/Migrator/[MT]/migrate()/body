@@ -40,7 +40,7 @@
           outputSQLWriter.write("-- SQL to roll-back database from an updated buildVersion back to current version" + StreamUtil.getLineSeparator());
         }
  else {
-          throw new MigrationFailedException("Unexpected output mode: " + mode);
+          throw new LiquibaseException("Unexpected output mode: " + mode);
         }
         outputSQLWriter.write("-- Change Log: " + changeLogFile + StreamUtil.getLineSeparator());
         outputSQLWriter.write("-- Ran at: " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date()) + StreamUtil.getLineSeparator());
@@ -59,7 +59,7 @@
       }
  else       if (getRollbackToTag() != null) {
         if (!getDatabase().doesTagExist(getRollbackToTag())) {
-          throw new MigrationFailedException("'" + getRollbackToTag() + "' is not tag that exists in the database");
+          throw new LiquibaseException("'" + getRollbackToTag() + "' is not tag that exists in the database");
         }
         rollbackHandler=new RollbackDatabaseChangeLogHandler(this,changeLogFile,fileOpener,getRollbackToTag());
       }
@@ -75,7 +75,7 @@
         rollbackHandler.doRollback();
       }
  else {
-        throw new MigrationFailedException("Cannot roll back changelog to selected date due to change set " + unrollbackableChangeSet);
+        throw new LiquibaseException("Cannot roll back changelog to selected date due to change set " + unrollbackableChangeSet);
       }
     }
  else     if (mode.equals(Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE)) {
@@ -86,24 +86,24 @@
         rollbackHandler.doRollback();
       }
  else {
-        throw new MigrationFailedException("Will not be able to rollback changes due to change set " + unrollbackableChangeSet);
+        throw new LiquibaseException("Will not be able to rollback changes due to change set " + unrollbackableChangeSet);
       }
     }
  else     if (mode.equals(Mode.FIND_UNRUN_CHANGESETS_MODE)) {
       runChangeLogs(new FindChangeSetsHandler(this,changeLogFile,fileOpener));
     }
  else {
-      throw new MigrationFailedException("Unknown mode: " + getMode());
+      throw new LiquibaseException("Unknown mode: " + getMode());
     }
     if (outputSQLWriter != null) {
       outputSQLWriter.flush();
     }
   }
- catch (  MigrationFailedException e) {
+ catch (  LiquibaseException e) {
     throw e;
   }
 catch (  Exception e) {
-    throw new MigrationFailedException(e);
+    throw new LiquibaseException(e);
   }
  finally {
     releaseLock();

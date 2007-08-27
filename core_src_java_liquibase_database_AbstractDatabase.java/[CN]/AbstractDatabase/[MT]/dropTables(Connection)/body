@@ -23,14 +23,14 @@
         continue;
       }
  else {
-        throw new MigrationFailedException("Unknown type " + type + " for "+ tableName);
+        throw new JDBCException("Unknown type " + type + " for "+ tableName);
       }
       try {
         log.finest("Dropping " + tableName);
         dropStatement.executeUpdate(sql);
       }
  catch (      SQLException e) {
-        throw new MigrationFailedException("Error dropping table '" + tableName + "': "+ e.getMessage(),e);
+        throw new JDBCException("Error dropping table '" + tableName + "': "+ e.getMessage(),e);
       }
     }
   }

@@ -8,13 +8,13 @@
       stmt.setBoolean(1,false);
       int updatedRows=stmt.executeUpdate();
       if (updatedRows != 1) {
-        throw new MigrationFailedException("Did not update change log lock correctly.\n\n" + releaseSQL + " updated "+ updatedRows+ " instead of the expected 1 row.");
+        throw new LockException("Did not update change log lock correctly.\n\n" + releaseSQL + " updated "+ updatedRows+ " instead of the expected 1 row.");
       }
       conn.commit();
       log.info("Successfully released change log lock");
     }
  catch (    Exception e) {
-      throw new MigrationFailedException(e);
+      throw new LockException(e);
     }
  finally {
       if (stmt != null) {

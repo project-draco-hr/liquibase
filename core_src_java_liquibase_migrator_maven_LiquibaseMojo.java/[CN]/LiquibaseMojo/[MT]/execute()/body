@@ -23,7 +23,7 @@
       migrator.init(connection);
       if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration()) {
         if (migrator.swingPromptForNonLocalDatabase()) {
-          throw new MigrationFailedException("Chose not to run against non-production database");
+          throw new LiquibaseException("Chose not to run against non-production database");
         }
       }
       if (isDropFirst()) {
@@ -41,7 +41,7 @@
         connection.close();
       }
  catch (      SQLException e) {
-        throw new BuildException(e);
+        ;
       }
     }
   }

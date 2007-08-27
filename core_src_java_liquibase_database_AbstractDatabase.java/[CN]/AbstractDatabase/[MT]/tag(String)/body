@@ -2,12 +2,12 @@
   Connection conn=getConnection();
   PreparedStatement stmt=null;
   Statement countStatement=null;
-  ResultSet countRS=null;
+  ResultSet countRS;
   try {
     stmt=conn.prepareStatement(createChangeToTagSQL());
     ResultSet rs=stmt.executeQuery();
     if (!rs.next()) {
-      throw new MigrationFailedException("Did not tag database correctly");
+      throw new JDBCException("Did not tag database correctly");
     }
     Timestamp lastExecutedDate=rs.getTimestamp(1);
     rs.close();
@@ -21,15 +21,15 @@
       countRS=countStatement.executeQuery("select count(*) from " + getDatabaseChangeLogTableName());
       countRS.next();
       if (countRS.getInt(1) == 0) {
-        throw new MigrationFailedException("Cannot tag an empty database");
+        throw new JDBCException("Cannot tag an empty database");
       }
       countRS.close();
-      throw new MigrationFailedException("Did not tag database change log correctly");
+      throw new JDBCException("Did not tag database change log correctly");
     }
     conn.commit();
   }
  catch (  Exception e) {
-    throw new MigrationFailedException(e);
+    throw new JDBCException(e);
   }
  finally {
     if (stmt != null) {

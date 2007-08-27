@@ -1,7 +1,7 @@
 {
   if (!migrator.getDatabase().doesChangeLogLockTableExist()) {
     if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE) || migrator.getMode().equals(Migrator.Mode.EXECUTE_ROLLBACK_MODE)) {
-      throw new MigrationFailedException("Could not acquire lock, table does not exist");
+      throw new LockException("Could not acquire lock, table does not exist");
     }
  else {
       return true;
@@ -15,7 +15,7 @@
     stmt=conn.createStatement();
     rs=stmt.executeQuery(getSelectChangeLogLockSQL());
     if (!rs.next()) {
-      throw new MigrationFailedException("Error checking database lock status");
+      throw new LockException("Error checking database lock status");
     }
     boolean locked=rs.getBoolean(1);
     if (locked) {
@@ -27,7 +27,7 @@
       pstmt.setTimestamp(2,new Timestamp(new java.util.Date().getTime()));
       pstmt.setString(3,InetAddress.getLocalHost().getCanonicalHostName() + " (" + InetAddress.getLocalHost().getHostAddress()+ ")");
       if (pstmt.executeUpdate() != 1) {
-        throw new MigrationFailedException("Did not update change log lock correctly");
+        throw new LockException("Did not update change log lock correctly");
       }
       conn.commit();
       log.info("Successfully acquired change log lock");
@@ -35,7 +35,7 @@
     }
   }
  catch (  Exception e) {
-    throw new MigrationFailedException(e);
+    throw new LockException(e);
   }
  finally {
     if (rs != null) {

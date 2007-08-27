@@ -8,11 +8,11 @@
     checkDatabaseChangeLogTable();
     log.finest("Objects dropped successfully");
   }
- catch (  MigrationFailedException e) {
+ catch (  JDBCException e) {
     throw e;
   }
 catch (  Exception e) {
-    throw new MigrationFailedException(e);
+    throw new JDBCException(e);
   }
  finally {
     releaseLock();

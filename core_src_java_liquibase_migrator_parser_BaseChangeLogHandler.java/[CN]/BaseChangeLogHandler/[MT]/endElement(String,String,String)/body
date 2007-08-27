@@ -20,8 +20,13 @@
  else     if (changeSet != null && "rollback".equals(qName)) {
       changeSet.setRollBackSQL(textString);
     }
+ else     if (change != null && change instanceof RawSQLChange && "comment".equals(qName)) {
+      ((RawSQLChange)change).setComments(textString);
+      text=new StringBuffer();
+    }
  else     if (changeSet != null && "comment".equals(qName)) {
       changeSet.setComments(textString);
+      text=new StringBuffer();
     }
  else     if (changeSet != null && "changeSet".equals(qName)) {
       handleChangeSet(changeSet);
