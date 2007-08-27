@@ -1,0 +1,8 @@
+{
+  String message="Migration failed";
+  if (failedChangeSet != null) {
+    message+=" for change set " + failedChangeSet.toString(false);
+  }
+  message+=":\n     Reason: " + super.getMessage();
+  return message;
+}
