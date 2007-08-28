@@ -1,0 +1,9 @@
+{
+  List<String> statements=new ArrayList<String>();
+  if (defaultNullValue != null) {
+    statements.add(generateUpdateStatement());
+  }
+  statements.add("COMMIT");
+  statements.add("ALTER TABLE " + getTableName() + " ALTER COLUMN "+ getColumnName()+ " NOT NULL");
+  return statements.toArray(new String[statements.size()]);
+}

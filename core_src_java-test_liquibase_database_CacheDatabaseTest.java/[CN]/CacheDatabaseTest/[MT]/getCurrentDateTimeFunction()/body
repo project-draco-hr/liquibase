@@ -1,0 +1,3 @@
+{
+  assertEquals("SYSDATE",database.getCurrentDateTimeFunction());
+}
