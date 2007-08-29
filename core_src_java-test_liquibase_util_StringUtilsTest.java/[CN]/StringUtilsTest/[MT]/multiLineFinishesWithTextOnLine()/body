@@ -1,0 +1,7 @@
+{
+  String sql="some sql";
+  String comment="/*Some text\nmore text*/";
+  String total=comment + sql;
+  String result=StringUtils.stripComments(total);
+  assertEquals("\n" + sql,result);
+}
