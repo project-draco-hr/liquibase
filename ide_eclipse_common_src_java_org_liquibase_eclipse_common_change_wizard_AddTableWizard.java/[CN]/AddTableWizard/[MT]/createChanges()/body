@@ -5,7 +5,23 @@
     Column column=(Column)columnAsObject;
     ColumnConfig columnConfig=new ColumnConfig();
     columnConfig.setName(column.getName());
-    columnConfig.setType(column.getDataType().getName());
+    String type=column.getDataType().getName();
+    if (column.getDataType() instanceof CharacterStringDataType) {
+      type+="(" + ((CharacterStringDataType)column.getDataType()).getLength() + ")";
+    }
+ else     if (column.getDataType() instanceof BinaryStringDataType) {
+      type+="(" + ((BinaryStringDataType)column.getDataType()).getLength() + ")";
+    }
+ else     if (column.getDataType() instanceof NumericalDataType) {
+      int precision=((NumericalDataType)column.getDataType()).getPrecision();
+      if (precision > 0) {
+        type+="(" + precision + ")";
+      }
+    }
+ else     if (column.getDataType() instanceof ExactNumericDataType) {
+      type+="(" + ((ExactNumericDataType)column.getDataType()).getPrecision() + ", "+ ((ExactNumericDataType)column.getDataType()).getScale()+ ")";
+    }
+    columnConfig.setType(type);
     columnConfig.setDefaultValue(column.getDefaultValue());
     ConstraintsConfig constraints=new ConstraintsConfig();
     constraints.setNullable(column.isNullable());
