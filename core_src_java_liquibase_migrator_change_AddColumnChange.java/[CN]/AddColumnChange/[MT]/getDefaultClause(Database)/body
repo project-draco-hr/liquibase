@@ -1,0 +1,6 @@
+{
+  if (column.getDefaultValue() != null || column.getDefaultValueBoolean() != null || column.getDefaultValueDate() != null || column.getDefaultValueNumeric() != null) {
+    return " DEFAULT " + column.getDefaultColumnValue(database);
+  }
+  return "";
+}

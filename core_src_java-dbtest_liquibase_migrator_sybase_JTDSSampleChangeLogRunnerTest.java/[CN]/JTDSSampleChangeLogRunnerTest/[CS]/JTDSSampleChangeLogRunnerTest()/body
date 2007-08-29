@@ -1,3 +1,0 @@
-{
-  super("sybase","net.sourceforge.jtds.jdbc.Driver","jdbc:jtds:sybase://localhost/nathan:5000");
-}
