@@ -1,0 +1,26 @@
+{
+  Connection conn=getConnection();
+  Statement dropStatement=null;
+  try {
+    dropStatement=conn.createStatement();
+    dropStatement.executeUpdate("DROP ALL OBJECTS");
+    changeLogTableExists=false;
+    changeLogLockTableExists=false;
+    changeLogCreateAttempted=false;
+    changeLogLockCreateAttempted=false;
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
+    try {
+      if (dropStatement != null) {
+        dropStatement.close();
+      }
+      conn.commit();
+    }
+ catch (    SQLException e) {
+      ;
+    }
+  }
+}

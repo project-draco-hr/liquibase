@@ -1,0 +1,7 @@
+{
+  for (  Sequence sequence : getMissingSequences()) {
+    CreateSequenceChange change=new CreateSequenceChange();
+    change.setSequenceName(sequence.getName());
+    changes.add(change);
+  }
+}

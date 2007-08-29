@@ -1,0 +1,7 @@
+{
+  for (  Sequence sequence : getUnexpectedSequences()) {
+    DropSequenceChange change=new DropSequenceChange();
+    change.setSequenceName(sequence.getName());
+    changes.add(change);
+  }
+}
