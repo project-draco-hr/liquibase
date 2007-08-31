@@ -1,0 +1,9 @@
+{
+  this.connection=conn;
+  try {
+    connection.setAutoCommit(getAutoCommitMode());
+  }
+ catch (  SQLException sqle) {
+    log.warning("Can not set auto commit to " + getAutoCommitMode() + " on connection");
+  }
+}

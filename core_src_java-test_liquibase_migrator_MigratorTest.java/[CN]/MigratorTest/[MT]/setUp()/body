@@ -2,7 +2,7 @@
   if (connectionForConstructor != null) {
     reset(connectionForConstructor);
   }
-  connectionForConstructor=createMock(Connection.class);
+  connectionForConstructor=createMock(DatabaseConnection.class);
   connectionForConstructor.setAutoCommit(false);
   expectLastCall().atLeastOnce();
   DatabaseMetaData metaData=createMock(DatabaseMetaData.class);

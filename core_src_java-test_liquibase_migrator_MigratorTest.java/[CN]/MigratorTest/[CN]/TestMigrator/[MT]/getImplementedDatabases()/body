@@ -2,7 +2,7 @@
   Database mockDatabase=createMock(Database.class);
   try {
     expect(mockDatabase.isCorrectDatabaseImplementation(null)).andReturn(true).atLeastOnce();
-    mockDatabase.setConnection(null);
+    mockDatabase.setConnection((DatabaseConnection)null);
     expectLastCall();
     expect(mockDatabase.getConnection()).andReturn(connectionForConstructor);
     replay(mockDatabase);

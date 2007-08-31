@@ -1,5 +1,5 @@
 {
-  Connection conn=getConnection();
+  DatabaseConnection conn=getConnection();
   PreparedStatement stmt=null;
   Statement countStatement=null;
   ResultSet countRS;

@@ -1,5 +1,5 @@
 {
-  Connection conn=getConnection();
+  DatabaseConnection conn=getConnection();
   Statement stmt=null;
   ResultSet rs=null;
   try {

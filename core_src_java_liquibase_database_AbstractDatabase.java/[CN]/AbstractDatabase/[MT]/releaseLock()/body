@@ -1,6 +1,6 @@
 {
   if (doesChangeLogLockTableExist()) {
-    Connection conn=getConnection();
+    DatabaseConnection conn=getConnection();
     PreparedStatement stmt=null;
     try {
       String releaseSQL=("update " + getDatabaseChangeLogLockTableName() + " set locked=?, lockgranted=null, lockedby=null where id=1").toUpperCase();

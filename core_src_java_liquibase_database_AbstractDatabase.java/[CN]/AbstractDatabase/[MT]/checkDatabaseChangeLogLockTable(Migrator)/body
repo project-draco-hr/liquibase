@@ -1,6 +1,6 @@
 {
   Statement statement=null;
-  Connection connection=getConnection();
+  DatabaseConnection connection=getConnection();
   ResultSet rs=null;
   try {
     rs=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogLockTableName(),new String[]{"TABLE"});

@@ -10,7 +10,7 @@
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getDatabaseChangeLog().getMigrator().getBuildVersion()));
   Writer sqlOutputWriter=getOutputSQLWriter();
   if (sqlOutputWriter == null) {
-    Connection connection=getDatabase().getConnection();
+    DatabaseConnection connection=getDatabase().getConnection();
     try {
       Statement statement=connection.createStatement();
       statement.executeUpdate(sql);

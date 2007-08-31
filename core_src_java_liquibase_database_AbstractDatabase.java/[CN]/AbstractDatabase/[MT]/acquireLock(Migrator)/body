@@ -7,7 +7,7 @@
       return true;
     }
   }
-  Connection conn=getConnection();
+  DatabaseConnection conn=getConnection();
   Statement stmt=null;
   PreparedStatement pstmt=null;
   ResultSet rs=null;

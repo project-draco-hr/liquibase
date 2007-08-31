@@ -1,5 +1,5 @@
 {
-  Connection conn=getConnection();
+  DatabaseConnection conn=getConnection();
   Statement dropStatement=null;
   try {
     dropStatement=conn.createStatement();

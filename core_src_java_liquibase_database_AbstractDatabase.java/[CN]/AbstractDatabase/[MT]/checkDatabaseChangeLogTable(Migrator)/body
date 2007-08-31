@@ -1,6 +1,6 @@
 {
   Statement statement=null;
-  Connection connection=getConnection();
+  DatabaseConnection connection=getConnection();
   ResultSet checkTableRS=null;
   ResultSet checkColumnsRS=null;
   List<String> statementsToExecute=new ArrayList<String>();

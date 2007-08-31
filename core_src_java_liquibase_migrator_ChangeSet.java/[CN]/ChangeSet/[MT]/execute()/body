@@ -8,7 +8,7 @@
     }
   }
   Migrator migrator=getDatabaseChangeLog().getMigrator();
-  Connection connection=migrator.getDatabase().getConnection();
+  DatabaseConnection connection=migrator.getDatabase().getConnection();
   try {
     Writer outputSQLWriter=getDatabaseChangeLog().getMigrator().getOutputSQLWriter();
     if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {

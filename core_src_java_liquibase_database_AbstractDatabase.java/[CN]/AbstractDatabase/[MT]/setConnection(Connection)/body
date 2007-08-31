@@ -1,5 +1,5 @@
 {
-  this.connection=conn;
+  this.connection=new SQLConnectionDelegate(conn);
   try {
     connection.setAutoCommit(getAutoCommitMode());
   }
