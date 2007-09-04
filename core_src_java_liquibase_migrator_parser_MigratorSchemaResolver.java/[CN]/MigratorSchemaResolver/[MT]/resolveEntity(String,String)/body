@@ -6,6 +6,9 @@
       try {
         InputStream resourceAsStream=Thread.currentThread().getContextClassLoader().getResourceAsStream(SEARCH_PACKAGE + xsdFile);
         if (resourceAsStream == null) {
+          resourceAsStream=this.getClass().getClassLoader().getResourceAsStream(SEARCH_PACKAGE + xsdFile);
+        }
+        if (resourceAsStream == null) {
           return null;
         }
         InputSource source=new InputSource(resourceAsStream);
