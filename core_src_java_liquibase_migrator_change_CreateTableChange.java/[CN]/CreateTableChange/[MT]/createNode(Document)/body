@@ -1,6 +1,9 @@
 {
   Element element=currentChangeLogFileDOM.createElement("createTable");
   element.setAttribute("tableName",getTableName());
+  if (StringUtils.trimToNull(tablespace) != null) {
+    element.setAttribute("tablespace",tablespace);
+  }
   for (  ColumnConfig column : getColumns()) {
     element.appendChild(column.createNode(currentChangeLogFileDOM));
   }
