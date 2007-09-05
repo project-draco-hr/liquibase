@@ -1,0 +1,8 @@
+{
+  if (position > columnNames.size()) {
+    columnNames.add(columnName);
+  }
+ else {
+    this.columnNames.add(position,columnName);
+  }
+}
