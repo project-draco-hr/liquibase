@@ -1,5 +1,8 @@
 {
   String[] statements=new String[]{"ALTER TABLE " + getBaseTableName() + " ADD CONSTRAINT "+ getConstraintName()+ " FOREIGN KEY ("+ getBaseColumnNames()+ ") REFERENCES "+ getReferencedTableName()+ "("+ getReferencedColumnNames()+ ")"};
+  if (deleteCascade != null && deleteCascade) {
+    statements[0]+=" ON DELETE CASCADE";
+  }
   if (database.supportsInitiallyDeferrableColumns()) {
     if (deferrable != null && deferrable) {
       statements[0]+=" DEFERRABLE";

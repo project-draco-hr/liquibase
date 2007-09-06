@@ -37,6 +37,9 @@
       }
       if (constraints.getReferences() != null) {
         fkConstraints.append(" CONSTRAINT ").append(constraints.getForeignKeyName()).append(" FOREIGN KEY (").append(column.getName()).append(") REFERENCES ").append(constraints.getReferences());
+        if (constraints.isDeleteCascade() != null && constraints.isDeleteCascade()) {
+          fkConstraints.append(" ON DELETE CASCADE");
+        }
         if (constraints.isInitiallyDeferred() != null && constraints.isInitiallyDeferred()) {
           fkConstraints.append(" INITIALLY DEFERRED");
         }
