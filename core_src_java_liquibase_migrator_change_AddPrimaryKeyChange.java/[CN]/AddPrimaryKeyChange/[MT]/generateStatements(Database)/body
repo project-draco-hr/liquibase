@@ -6,6 +6,17 @@
  else {
     sql="ALTER TABLE " + getTableName() + " ADD CONSTRAINT "+ getConstraintName()+ " PRIMARY KEY ("+ getColumnNames()+ ")";
   }
+  if (StringUtils.trimToNull(getTablespace()) != null && database.supportsTablespaces()) {
+    if (database instanceof MSSQLDatabase) {
+      sql+=" ON " + getTablespace();
+    }
+ else     if (database instanceof DB2Database) {
+      ;
+    }
+ else {
+      sql+=" USING INDEX TABLESPACE " + getTablespace();
+    }
+  }
   if (database instanceof DB2Database) {
     return new String[]{sql,"CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')"};
   }
