@@ -2,13 +2,7 @@
   if (!getDatabase().doesChangeLogTableExist()) {
     return ChangeSet.RunStatus.NOT_RAN;
   }
-  RanChangeSet foundRan=null;
-  for (  RanChangeSet ranChange : getRanChangeSetList()) {
-    if (ranChange.isSameAs(changeSet)) {
-      foundRan=ranChange;
-      break;
-    }
-  }
+  RanChangeSet foundRan=getRanChangeSet(changeSet);
   if (foundRan == null) {
     return ChangeSet.RunStatus.NOT_RAN;
   }

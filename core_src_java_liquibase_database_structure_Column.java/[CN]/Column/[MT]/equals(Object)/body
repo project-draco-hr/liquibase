@@ -3,7 +3,7 @@
     if (this == o)     return true;
     if (o == null || getClass() != o.getClass())     return false;
     Column column=(Column)o;
-    return name.equals(column.name) && !(table != null ? !table.equals(column.table) : column.table != null) && !(view != null ? !view.equals(column.view) : column.view != null);
+    return name.equalsIgnoreCase(column.name) && !(table != null ? !table.equals(column.table) : column.table != null) && !(view != null ? !view.equals(column.view) : column.view != null);
   }
  catch (  Exception e) {
     throw new RuntimeException(e);

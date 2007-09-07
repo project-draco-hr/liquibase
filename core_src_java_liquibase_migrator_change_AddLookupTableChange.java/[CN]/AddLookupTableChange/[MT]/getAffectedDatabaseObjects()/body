@@ -1,0 +1,24 @@
+{
+  Set<DatabaseObject> returnSet=new HashSet<DatabaseObject>();
+  Table existingTable=new Table();
+  existingTable.setName(existingTableName);
+  returnSet.add(existingTable);
+  Column existingColumn=new Column();
+  existingColumn.setTable(existingTable);
+  existingColumn.setName(getExistingColumnName());
+  returnSet.add(existingColumn);
+  Table newTable=new Table();
+  newTable.setName(getNewColumnName());
+  returnSet.add(newTable);
+  Column newColumn=new Column();
+  newColumn.setTable(existingTable);
+  newColumn.setName(getNewColumnName());
+  returnSet.add(newColumn);
+  ForeignKey fk=new ForeignKey();
+  fk.setForeignKeyTable(existingTable);
+  fk.setForeignKeyColumn(existingColumn.getName());
+  fk.setPrimaryKeyTable(newTable);
+  fk.setPrimaryKeyColumn(newColumn.getName());
+  returnSet.add(fk);
+  return returnSet;
+}

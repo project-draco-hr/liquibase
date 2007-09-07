@@ -1,0 +1,22 @@
+{
+  copyFile("liquibase/migrator/dbdoc/stylesheet.css");
+  copyFile("liquibase/migrator/dbdoc/index.html");
+  copyFile("liquibase/migrator/dbdoc/globalnav.html");
+  copyFile("liquibase/migrator/dbdoc/overview-summary.html");
+  DatabaseSnapshot snapshot=new DatabaseSnapshot(migrator.getDatabase());
+  new ChangeLogListWriter(rootOutputDir).writeHTML(changeLogs);
+  new TableListWriter(rootOutputDir).writeHTML(new TreeSet<Object>(snapshot.getTables()));
+  new AuthorListWriter(rootOutputDir).writeHTML(new TreeSet<Object>(changesByAuthor.keySet()));
+  for (  String author : changesByAuthor.keySet()) {
+    authorWriter.writeHTML(author,changesByAuthor.get(author),migrator);
+  }
+  for (  Table table : snapshot.getTables()) {
+    tableWriter.writeHTML(table,changesByObject.get(table),migrator);
+  }
+  for (  Column column : snapshot.getColumns()) {
+    columnWriter.writeHTML(column,changesByObject.get(column),migrator);
+  }
+  for (  DatabaseChangeLog changeLog : changeLogs) {
+    changeLogWriter.writeChangeLog(changeLog);
+  }
+}

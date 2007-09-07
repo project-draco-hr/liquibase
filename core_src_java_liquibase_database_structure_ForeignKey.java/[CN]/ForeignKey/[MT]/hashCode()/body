@@ -1,9 +1,17 @@
 {
-  int result;
-  result=primaryKeyTable.hashCode();
-  result=31 * result + primaryKeyColumn.hashCode();
-  result=31 * result + foreignKeyTable.hashCode();
-  result=31 * result + foreignKeyColumn.hashCode();
+  int result=0;
+  if (primaryKeyTable != null) {
+    result=primaryKeyTable.hashCode();
+  }
+  if (primaryKeyColumn != null) {
+    result=31 * result + primaryKeyColumn.toUpperCase().hashCode();
+  }
+  if (foreignKeyTable != null) {
+    result=31 * result + foreignKeyTable.hashCode();
+  }
+  if (foreignKeyColumn != null) {
+    result=31 * result + foreignKeyColumn.toUpperCase().hashCode();
+  }
   result=31 * result + (name != null ? name.hashCode() : 0);
   return result;
 }

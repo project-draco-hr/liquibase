@@ -1,0 +1,7 @@
+{
+  Table oldTable=new Table();
+  oldTable.setName(oldTableName);
+  Table newTable=new Table();
+  newTable.setName(newTableName);
+  return new HashSet<DatabaseObject>(Arrays.asList(oldTable,newTable));
+}

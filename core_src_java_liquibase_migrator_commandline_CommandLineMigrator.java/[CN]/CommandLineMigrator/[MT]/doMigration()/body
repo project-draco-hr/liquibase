@@ -122,6 +122,10 @@
       migrator.clearCheckSums();
       return;
     }
+ else     if ("dbdoc".equalsIgnoreCase(command)) {
+      migrator.generateDocumentation();
+      return;
+    }
     DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     try {
       if ("migrate".equalsIgnoreCase(command)) {

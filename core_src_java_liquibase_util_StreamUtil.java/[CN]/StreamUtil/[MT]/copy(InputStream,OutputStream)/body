@@ -1,0 +1,8 @@
+{
+  byte[] bytes=new byte[1024];
+  int r=inputStream.read(bytes);
+  while (r > 0) {
+    outputStream.write(bytes,0,r);
+    r=inputStream.read(bytes);
+  }
+}

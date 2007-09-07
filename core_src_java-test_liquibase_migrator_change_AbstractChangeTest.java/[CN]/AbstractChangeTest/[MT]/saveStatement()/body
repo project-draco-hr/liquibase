@@ -9,6 +9,9 @@
     public Element createNode(    Document changeLogFileDOM){
       return null;
     }
+    public Set<DatabaseObject> getAffectedDatabaseObjects(){
+      return null;
+    }
   }
 ;
   StringWriter stringWriter=new StringWriter();

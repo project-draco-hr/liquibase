@@ -27,6 +27,7 @@
     }
  else     if (changeSet != null && change == null) {
       change=migrator.getChangeFactory().create(qName);
+      change.setChangeSet(changeSet);
       text=new StringBuffer();
       if (change == null) {
         throw new MigrationFailedException(changeSet,"Unknown change: " + qName);

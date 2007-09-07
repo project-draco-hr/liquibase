@@ -1,0 +1,7 @@
+{
+  Set<DatabaseObject> returnSet=new HashSet<DatabaseObject>();
+  Table table=new Table();
+  table.setName(tableName);
+  returnSet.add(table);
+  return returnSet;
+}

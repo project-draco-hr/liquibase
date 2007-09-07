@@ -1,0 +1,11 @@
+{
+  Set<DatabaseObject> returnSet=new HashSet<DatabaseObject>();
+  Table baseTable=new Table();
+  baseTable.setName(baseTableName);
+  returnSet.add(baseTable);
+  ForeignKey fk=new ForeignKey();
+  fk.setName(constraintName);
+  fk.setForeignKeyTable(baseTable);
+  returnSet.add(fk);
+  return returnSet;
+}

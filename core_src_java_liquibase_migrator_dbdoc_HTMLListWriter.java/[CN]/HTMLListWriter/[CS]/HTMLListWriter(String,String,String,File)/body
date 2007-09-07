@@ -1,0 +1,9 @@
+{
+  this.title=title;
+  this.outputDir=outputDir;
+  this.filename=filename;
+  if (!outputDir.exists()) {
+    outputDir.mkdir();
+  }
+  this.directory=subdir;
+}

@@ -1,0 +1,11 @@
+{
+  InputStream stylesheet=fileOpener.getResourceAsStream(changeLog.getFilePath());
+  if (stylesheet == null) {
+    throw new IOException("Can not find " + changeLog.getFilePath());
+  }
+  File xmlFile=new File(outputDir,changeLog.getFilePath() + ".xml");
+  xmlFile.getParentFile().mkdirs();
+  FileOutputStream changeLogStream=new FileOutputStream(xmlFile,false);
+  StreamUtil.copy(stylesheet,changeLogStream);
+  changeLogStream.close();
+}

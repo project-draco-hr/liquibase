@@ -2,5 +2,5 @@
   if (this == o)   return true;
   if (o == null || getClass() != o.getClass())   return false;
   Sequence sequence=(Sequence)o;
-  return !(name != null ? !name.equals(sequence.name) : sequence.name != null);
+  return !(name != null ? !name.equalsIgnoreCase(sequence.name) : sequence.name != null);
 }

@@ -1,0 +1,8 @@
+{
+  Index index=new Index();
+  index.setTableName(tableName);
+  index.setName(indexName);
+  Table table=new Table();
+  table.setName(tableName);
+  return new HashSet<DatabaseObject>(Arrays.asList(index,table));
+}

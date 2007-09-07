@@ -17,6 +17,7 @@
         typeInfo.close();
       }
  catch (      SQLException e) {
+        ;
       }
     }
   }

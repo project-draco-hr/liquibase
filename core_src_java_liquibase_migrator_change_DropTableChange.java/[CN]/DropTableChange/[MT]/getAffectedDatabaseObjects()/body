@@ -1,0 +1,5 @@
+{
+  Table dbObject=new Table();
+  dbObject.setName(tableName);
+  return new HashSet<DatabaseObject>(Arrays.asList(dbObject));
+}

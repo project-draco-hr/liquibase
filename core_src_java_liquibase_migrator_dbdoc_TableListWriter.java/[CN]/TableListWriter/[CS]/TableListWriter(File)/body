@@ -1,0 +1,3 @@
+{
+  super("Current Tables","currenttables.html","tables",outputDir);
+}

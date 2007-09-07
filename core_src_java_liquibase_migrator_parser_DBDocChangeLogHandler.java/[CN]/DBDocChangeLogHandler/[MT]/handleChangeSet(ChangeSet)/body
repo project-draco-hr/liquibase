@@ -1,0 +1,26 @@
+{
+  if (!changesByAuthor.containsKey(changeSet.getAuthor())) {
+    changesByAuthor.put(changeSet.getAuthor(),new ArrayList<Change>());
+  }
+  for (  Change change : changeSet.getChanges()) {
+    changesByAuthor.get(changeSet.getAuthor()).add(change);
+  }
+  if (!changeLogs.contains(changeSet.getDatabaseChangeLog())) {
+    changeLogs.add(changeSet.getDatabaseChangeLog());
+  }
+  ChangeSet.RunStatus runStatus=migrator.getRunStatus(changeSet);
+  for (  Change change : changeSet.getChanges()) {
+    if (runStatus.equals(ChangeSet.RunStatus.NOT_RAN) || runStatus.equals(ChangeSet.RunStatus.RUN_AGAIN)) {
+      changesToRun.add(change);
+    }
+    Set<DatabaseObject> affectedDatabaseObjects=change.getAffectedDatabaseObjects();
+    if (affectedDatabaseObjects != null) {
+      for (      DatabaseObject dbObject : affectedDatabaseObjects) {
+        if (!changesByObject.containsKey(dbObject)) {
+          changesByObject.put(dbObject,new ArrayList<Change>());
+        }
+        changesByObject.get(dbObject).add(change);
+      }
+    }
+  }
+}

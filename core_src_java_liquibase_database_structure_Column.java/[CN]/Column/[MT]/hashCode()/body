@@ -3,7 +3,7 @@
     int result;
     result=(table != null ? table.hashCode() : 0);
     result=31 * result + (view != null ? view.hashCode() : 0);
-    result=31 * result + name.hashCode();
+    result=31 * result + name.toUpperCase().hashCode();
     return result;
   }
  catch (  Exception e) {

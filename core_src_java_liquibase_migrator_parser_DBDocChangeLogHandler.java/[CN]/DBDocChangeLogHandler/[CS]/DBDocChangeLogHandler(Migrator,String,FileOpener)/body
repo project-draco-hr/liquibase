@@ -1,0 +1,16 @@
+{
+  super(migrator,physicalChangeLogLocation,fileOpener);
+  changesByObject=new HashMap<DatabaseObject,List<Change>>();
+  changesByAuthor=new HashMap<String,List<Change>>();
+  changeLogs=new TreeSet<DatabaseChangeLog>();
+  changesToRun=new ArrayList<Change>();
+  rootOutputDir=new File("/tmp/dbdoc");
+  if (!rootOutputDir.exists()) {
+    rootOutputDir.mkdir();
+  }
+  changeLogWriter=new ChangeLogWriter(migrator.getFileOpener(),rootOutputDir);
+  authorWriter=new AuthorWriter(rootOutputDir);
+  tableWriter=new TableWriter(rootOutputDir);
+  columnWriter=new ColumnWriter(rootOutputDir);
+  this.migrator=migrator;
+}

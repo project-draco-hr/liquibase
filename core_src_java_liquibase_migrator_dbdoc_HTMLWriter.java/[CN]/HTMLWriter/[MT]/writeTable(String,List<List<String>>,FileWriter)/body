@@ -1,0 +1,12 @@
+{
+  fileWriter.append("<P>");
+  fileWriter.append("<TABLE BORDER=\"1\" WIDTH=\"100%\" CELLPADDING=\"3\" CELLSPACING=\"0\" SUMMARY=\"\">\n").append("<TR BGCOLOR=\"#CCCCFF\" CLASS=\"TableHeadingColor\">\n").append("<TD COLSPAN=").append(String.valueOf(cells.get(0).size())).append("><FONT SIZE=\"+2\">\n").append("<B>").append(title).append("</B></FONT></TD>\n").append("</TR>\n");
+  for (  List<String> row : cells) {
+    fileWriter.append("<TR BGCOLOR=\"white\" CLASS=\"TableRowColor\">\n");
+    for (    String cell : row) {
+      writeTD(fileWriter,cell);
+    }
+    fileWriter.append("</TR>\n");
+  }
+  fileWriter.append("</TABLE>\n");
+}

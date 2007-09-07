@@ -1,5 +1,6 @@
 {
   Element node=currentChangeLogFileDOM.createElement(getTagName());
   node.setAttribute("tableName",getTableName());
+  node.setAttribute("constraintName",constraintName);
   return node;
 }

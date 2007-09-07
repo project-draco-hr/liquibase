@@ -1,0 +1,29 @@
+{
+  Set<DatabaseObject> returnSet=new HashSet<DatabaseObject>();
+  Table baseTable=new Table();
+  baseTable.setName(baseTableName);
+  returnSet.add(baseTable);
+  for (  String columnName : getBaseColumnNames().split(",")) {
+    Column baseColumn=new Column();
+    baseColumn.setTable(baseTable);
+    baseColumn.setName(columnName.trim());
+    returnSet.add(baseColumn);
+  }
+  Table referencedTable=new Table();
+  referencedTable.setName(referencedTableName);
+  returnSet.add(referencedTable);
+  for (  String columnName : getReferencedColumnNames().split(",")) {
+    Column referencedColumn=new Column();
+    referencedColumn.setTable(baseTable);
+    referencedColumn.setName(columnName.trim());
+    returnSet.add(referencedColumn);
+  }
+  ForeignKey fk=new ForeignKey();
+  fk.setName(constraintName);
+  fk.setForeignKeyTable(baseTable);
+  fk.setForeignKeyColumn(baseColumnNames);
+  fk.setPrimaryKeyTable(referencedTable);
+  fk.setPrimaryKeyColumn(referencedColumnNames);
+  returnSet.add(fk);
+  return returnSet;
+}

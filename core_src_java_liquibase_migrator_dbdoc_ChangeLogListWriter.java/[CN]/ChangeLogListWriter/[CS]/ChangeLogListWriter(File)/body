@@ -1,0 +1,3 @@
+{
+  super("All Change Logs","changelogs.html","changelogs",outputDir);
+}

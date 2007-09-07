@@ -20,7 +20,7 @@
       conn.commit();
     }
  catch (    SQLException e) {
-      throw new JDBCException(e);
+      ;
     }
   }
 }

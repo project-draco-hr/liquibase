@@ -1,0 +1,13 @@
+{
+  Set<DatabaseObject> dbObjects=new HashSet<DatabaseObject>();
+  Table table=new Table();
+  table.setName(tableName);
+  dbObjects.add(table);
+  for (  String columnName : columnNames.split(",")) {
+    Column column=new Column();
+    column.setTable(table);
+    column.setName(columnName.trim());
+    dbObjects.add(column);
+  }
+  return dbObjects;
+}
