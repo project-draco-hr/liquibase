@@ -1,6 +1,6 @@
 {
   if (database instanceof MySQLDatabase) {
-    return new String[]{"ALTER TABLE " + getBaseTableName() + " DROP FOREIGN KEY "+ getConstraintName()};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getBaseTableName() + " DROP FOREIGN KEY "+ getConstraintName())};
   }
-  return new String[]{"ALTER TABLE " + getBaseTableName() + " DROP CONSTRAINT "+ getConstraintName()};
+  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getBaseTableName() + " DROP CONSTRAINT "+ getConstraintName())};
 }

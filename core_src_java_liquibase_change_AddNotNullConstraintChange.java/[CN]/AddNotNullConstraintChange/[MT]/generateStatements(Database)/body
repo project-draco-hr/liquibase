@@ -20,13 +20,13 @@
  else   if (database instanceof CacheDatabase) {
     return generateCacheStatements();
   }
-  List<String> statements=new ArrayList<String>();
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
   if (defaultNullValue != null) {
     statements.add(generateUpdateStatement());
   }
-  statements.add("ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL ");
+  statements.add(new RawSqlStatement("ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL "));
   if (database instanceof DB2Database) {
-    statements.add("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')");
+    statements.add(new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')"));
   }
-  return statements.toArray(new String[statements.size()]);
+  return statements.toArray(new SqlStatement[statements.size()]);
 }

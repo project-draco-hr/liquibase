@@ -1,12 +1,12 @@
 {
   if (database instanceof MySQLDatabase) {
-    return new String[]{"DROP INDEX " + indexName + " ON "+ tableName};
+    return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + indexName + " ON "+ tableName)};
   }
  else   if (database instanceof MSSQLDatabase) {
-    return new String[]{"DROP INDEX " + tableName + "."+ indexName};
+    return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + tableName + "."+ indexName)};
   }
  else   if (database instanceof OracleDatabase) {
-    return new String[]{"DROP INDEX " + indexName};
+    return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + indexName)};
   }
-  return new String[]{"DROP INDEX " + indexName};
+  return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + indexName)};
 }

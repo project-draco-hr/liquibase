@@ -1,9 +1,9 @@
 {
-  List<String> statements=new ArrayList<String>();
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
   if (defaultNullValue != null) {
     statements.add(generateUpdateStatement());
   }
-  statements.add("COMMIT");
-  statements.add("ALTER TABLE " + getTableName() + " ALTER COLUMN "+ getColumnName()+ " NOT NULL");
-  return statements.toArray(new String[statements.size()]);
+  statements.add(new RawSqlStatement("COMMIT"));
+  statements.add(new RawSqlStatement("ALTER TABLE " + getTableName() + " ALTER COLUMN "+ getColumnName()+ " NOT NULL"));
+  return statements.toArray(new SqlStatement[statements.size()]);
 }

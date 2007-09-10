@@ -1,5 +1,5 @@
 {
-  List<String> sql=new ArrayList<String>();
+  List<SqlStatement> sql=new ArrayList<SqlStatement>();
   String alterTable="ALTER TABLE " + getTableName() + " ADD "+ getColumn().getName()+ " "+ database.getColumnType(getColumn());
   if (defaultClauseBeforeNotNull(database)) {
     alterTable+=getDefaultClause(database);
@@ -22,9 +22,9 @@
   if (!defaultClauseBeforeNotNull(database)) {
     alterTable+=getDefaultClause(database);
   }
-  sql.add(alterTable);
+  sql.add(new RawSqlStatement(alterTable));
   if (database instanceof DB2Database) {
-    sql.add("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')");
+    sql.add(new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')"));
   }
   if (getColumn().getConstraints() != null) {
     if (getColumn().getConstraints().isPrimaryKey() != null && getColumn().getConstraints().isPrimaryKey()) {
@@ -34,5 +34,5 @@
       sql.addAll(Arrays.asList(change.generateStatements(database)));
     }
   }
-  return sql.toArray(new String[sql.size()]);
+  return sql.toArray(new SqlStatement[sql.size()]);
 }

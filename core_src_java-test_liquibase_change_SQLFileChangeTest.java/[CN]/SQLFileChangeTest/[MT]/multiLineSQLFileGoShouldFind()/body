@@ -1,8 +1,9 @@
 {
   SQLFileChange change2=new SQLFileChange();
   change2.setSql("SELECT * FROM customer\ngo\n" + "SELECT * from table\ngo");
-  String[] statements=change2.generateStatements(new MSSQLDatabase());
+  MSSQLDatabase database=new MSSQLDatabase();
+  SqlStatement[] statements=change2.generateStatements(database);
   assertEquals(2,statements.length);
-  assertEquals("SELECT * FROM customer",statements[0]);
-  assertEquals("SELECT * from table",statements[1]);
+  assertEquals("SELECT * FROM customer",statements[0].getSqlStatement(database));
+  assertEquals("SELECT * from table",statements[1].getSqlStatement(database));
 }

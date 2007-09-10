@@ -22,5 +22,5 @@
       buffer.append(" TABLESPACE ").append(tablespace);
     }
   }
-  return new String[]{buffer.toString()};
+  return new SqlStatement[]{new RawSqlStatement(buffer.toString())};
 }

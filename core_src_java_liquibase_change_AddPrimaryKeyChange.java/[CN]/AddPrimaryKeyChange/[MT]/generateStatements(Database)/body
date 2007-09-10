@@ -18,7 +18,7 @@
     }
   }
   if (database instanceof DB2Database) {
-    return new String[]{sql,"CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')"};
+    return new SqlStatement[]{new RawSqlStatement(sql),new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')")};
   }
-  return new String[]{sql};
+  return new SqlStatement[]{new RawSqlStatement(sql)};
 }

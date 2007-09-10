@@ -2,10 +2,10 @@
   if (columnDataType == null) {
     throw new RuntimeException("columnDataType is required to add not null constraints with MS-SQL");
   }
-  List<String> statements=new ArrayList<String>();
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
   if (defaultNullValue != null) {
     statements.add(generateUpdateStatement());
   }
-  statements.add("ALTER TABLE " + getTableName() + " ALTER COLUMN "+ getColumnName()+ " "+ columnDataType+ " "+ " NOT NULL");
-  return statements.toArray(new String[statements.size()]);
+  statements.add(new RawSqlStatement("ALTER TABLE " + getTableName() + " ALTER COLUMN "+ getColumnName()+ " "+ columnDataType+ " "+ " NOT NULL"));
+  return statements.toArray(new SqlStatement[statements.size()]);
 }

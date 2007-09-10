@@ -1,6 +1,6 @@
 {
-  String[] statements=generateRollbackStatements(database);
-  for (  String statement : statements) {
-    writer.append(statement).append(";\n\n");
+  SqlStatement[] statements=generateRollbackStatements(database);
+  for (  SqlStatement statement : statements) {
+    writer.append(statement.getSqlStatement(database)).append(";\n\n");
   }
 }

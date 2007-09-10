@@ -1,5 +1,5 @@
 {
-  List<String> statements=new ArrayList<String>();
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
   AddColumnChange addNewColumnChange=new AddColumnChange();
   addNewColumnChange.setTableName(getTableName());
   ColumnConfig columnConfig=new ColumnConfig();
@@ -8,7 +8,7 @@
   addNewColumnChange.setColumn(columnConfig);
   statements.addAll(Arrays.asList(addNewColumnChange.generateStatements(database)));
   String updateStatement="UPDATE " + getTableName() + " SET "+ getFinalColumnName()+ " = "+ database.getConcatSql(getColumn1Name(),"'" + getJoinString() + "'",getColumn2Name());
-  statements.add(updateStatement);
+  statements.add(new RawSqlStatement(updateStatement));
   DropColumnChange dropColumn1Change=new DropColumnChange();
   dropColumn1Change.setTableName(getTableName());
   dropColumn1Change.setColumnName(getColumn1Name());
@@ -17,5 +17,5 @@
   dropColumn2Change.setTableName(getTableName());
   dropColumn2Change.setColumnName(getColumn2Name());
   statements.addAll(Arrays.asList(dropColumn2Change.generateStatements(database)));
-  return statements.toArray(new String[statements.size()]);
+  return statements.toArray(new SqlStatement[statements.size()]);
 }

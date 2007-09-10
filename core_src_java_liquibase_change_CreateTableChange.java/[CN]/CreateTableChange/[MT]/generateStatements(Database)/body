@@ -72,8 +72,8 @@
       buffer.append(" TABLESPACE ").append(tablespace);
     }
   }
-  List<String> statements=new ArrayList<String>();
-  statements.add(buffer.toString().trim());
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
+  statements.add(new RawSqlStatement(buffer.toString().trim()));
   if (pkColumns.size() > 1) {
     AddPrimaryKeyChange addPKChange=new AddPrimaryKeyChange();
     addPKChange.setTableName(getTableName());
@@ -81,5 +81,5 @@
     addPKChange.setColumnNames(StringUtils.join(pkColumns,","));
     statements.addAll(Arrays.asList(addPKChange.generateStatements(database)));
   }
-  return statements.toArray(new String[statements.size()]);
+  return statements.toArray(new SqlStatement[statements.size()]);
 }

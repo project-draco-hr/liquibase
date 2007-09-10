@@ -11,5 +11,5 @@
       sql+=" USING INDEX TABLESPACE " + getTablespace();
     }
   }
-  return new String[]{sql};
+  return new SqlStatement[]{new RawSqlStatement(sql)};
 }

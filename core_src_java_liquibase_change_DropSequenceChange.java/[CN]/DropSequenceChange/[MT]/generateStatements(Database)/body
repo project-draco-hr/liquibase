@@ -2,5 +2,5 @@
   if (!database.supportsSequences()) {
     throw new UnsupportedChangeException("Sequences not supported in " + database.getProductName());
   }
-  return new String[]{"DROP SEQUENCE " + getSequenceName()};
+  return new SqlStatement[]{new RawSqlStatement("DROP SEQUENCE " + getSequenceName())};
 }

@@ -1,9 +1,9 @@
 {
-  for (  String statement : statements) {
+  for (  SqlStatement statement : statements) {
     Logger.getLogger(Migrator.DEFAULT_LOG_NAME).finest("Executing Statement: " + statement);
     try {
       Statement dbStatement=database.getConnection().createStatement();
-      dbStatement.execute(statement);
+      dbStatement.execute(statement.getSqlStatement(database));
       dbStatement.close();
     }
  catch (    SQLException e) {

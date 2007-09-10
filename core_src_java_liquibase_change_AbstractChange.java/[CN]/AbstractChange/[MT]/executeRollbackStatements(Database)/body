@@ -1,4 +1,4 @@
 {
-  String[] statements=generateRollbackStatements(database);
+  SqlStatement[] statements=generateRollbackStatements(database);
   execute(statements,database);
 }

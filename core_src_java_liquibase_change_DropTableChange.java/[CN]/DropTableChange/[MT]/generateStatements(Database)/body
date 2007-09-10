@@ -4,5 +4,5 @@
   if (isCascadeConstraints() != null && isCascadeConstraints()) {
     buffer.append(" CASCADE CONSTRAINTS");
   }
-  return new String[]{buffer.toString()};
+  return new SqlStatement[]{new RawSqlStatement(buffer.toString())};
 }

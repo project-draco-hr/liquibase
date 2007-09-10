@@ -9,5 +9,6 @@
   constraints.setPrimaryKey(Boolean.FALSE);
   constraints.setNullable(Boolean.FALSE);
   column.setConstraints(constraints);
-  assertEquals("ALTER TABLE TAB ADD NEWCOL TYP NOT NULL",refactoring.generateStatements(new SybaseDatabase())[0]);
+  SybaseDatabase database=new SybaseDatabase();
+  assertEquals("ALTER TABLE TAB ADD NEWCOL TYP NOT NULL",refactoring.generateStatements(database)[0].getSqlStatement(database));
 }

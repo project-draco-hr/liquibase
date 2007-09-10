@@ -1,4 +1,4 @@
 {
-  Enumeration<URL> resources=fileOpener.getResources("liquibase/migrator/ant");
+  Enumeration<URL> resources=fileOpener.getResources("liquibase/ant");
   assertNotNull(resources);
 }

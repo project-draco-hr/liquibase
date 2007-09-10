@@ -1,3 +1,8 @@
 {
-  return StringUtils.processMutliLineSQL(sql);
+  List<SqlStatement> returnStatements=new ArrayList<SqlStatement>();
+  String[] statements=StringUtils.processMutliLineSQL(sql);
+  for (  String statement : statements) {
+    returnStatements.add(new RawSqlStatement(statement));
+  }
+  return returnStatements.toArray(new SqlStatement[returnStatements.size()]);
 }

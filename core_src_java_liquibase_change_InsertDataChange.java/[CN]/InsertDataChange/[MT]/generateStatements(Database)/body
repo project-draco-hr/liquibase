@@ -20,5 +20,5 @@
   buffer.append(columnNames);
   buffer.append(" VALUES ");
   buffer.append(columnValues);
-  return new String[]{buffer.toString()};
+  return new SqlStatement[]{new RawSqlStatement(buffer.toString())};
 }

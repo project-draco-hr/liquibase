@@ -17,9 +17,9 @@
   if (maxValue != null) {
     buffer.append(" MAXVALUE ").append(maxValue);
   }
-  String[] statements=new String[]{buffer.toString().trim()};
+  String sql=buffer.toString().trim();
   if (database instanceof OracleDatabase && ordered != null && ordered) {
-    statements[0]+=" ORDER";
+    sql+=" ORDER";
   }
-  return statements;
+  return new SqlStatement[]{new RawSqlStatement(sql)};
 }

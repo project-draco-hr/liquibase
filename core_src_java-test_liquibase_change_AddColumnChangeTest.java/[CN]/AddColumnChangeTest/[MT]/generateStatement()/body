@@ -9,5 +9,6 @@
   constraints.setNullable(Boolean.FALSE);
   column.setConstraints(constraints);
   refactoring.setColumn(column);
-  assertEquals("ALTER TABLE TAB ADD NEWCOL TYP NOT NULL",refactoring.generateStatements(new OracleDatabase())[0]);
+  OracleDatabase db=new OracleDatabase();
+  assertEquals("ALTER TABLE TAB ADD NEWCOL TYP NOT NULL",refactoring.generateStatements(db)[0].getSqlStatement(db));
 }

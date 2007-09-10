@@ -1,18 +1,18 @@
 {
   if (database instanceof SybaseDatabase) {
-    return new String[]{"ALTER TABLE " + getTableName() + " REPLACE "+ getColumnName()+ " DEFAULT "+ getColumnValue(database)};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getTableName() + " REPLACE "+ getColumnName()+ " DEFAULT "+ getColumnValue(database))};
   }
  else   if (database instanceof MSSQLDatabase) {
-    return new String[]{"ALTER TABLE " + getTableName() + " WITH NOCHECK ADD CONSTRAINT "+ getColumnName()+ "DefaultValue DEFAULT "+ getColumnValue(database)+ " FOR "+ getColumnName()};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getTableName() + " WITH NOCHECK ADD CONSTRAINT "+ getColumnName()+ "DefaultValue DEFAULT "+ getColumnValue(database)+ " FOR "+ getColumnName())};
   }
  else   if (database instanceof MySQLDatabase) {
-    return new String[]{"ALTER TABLE " + getTableName() + " ALTER "+ getColumnName()+ " SET DEFAULT "+ getColumnValue(database)};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getTableName() + " ALTER "+ getColumnName()+ " SET DEFAULT "+ getColumnValue(database))};
   }
  else   if (database instanceof OracleDatabase) {
-    return new String[]{"ALTER TABLE " + getTableName() + " MODIFY "+ getColumnName()+ " DEFAULT "+ getColumnValue(database)};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getTableName() + " MODIFY "+ getColumnName()+ " DEFAULT "+ getColumnValue(database))};
   }
  else   if (database instanceof DerbyDatabase) {
-    return new String[]{"ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " WITH DEFAULT "+ getColumnValue(database)};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " WITH DEFAULT "+ getColumnValue(database))};
   }
-  return new String[]{"ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET DEFAULT "+ getColumnValue(database)};
+  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET DEFAULT "+ getColumnValue(database))};
 }

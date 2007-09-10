@@ -1,7 +1,7 @@
 {
   Change change=new AbstractChange("test","Test Refactorign"){
-    public String[] generateStatements(    Database database){
-      return new String[]{"GENERATED STATEMENT;"};
+    public SqlStatement[] generateStatements(    Database database){
+      return new SqlStatement[]{new RawSqlStatement("GENERATED STATEMENT;")};
     }
     public String getConfirmationMessage(){
       return null;
