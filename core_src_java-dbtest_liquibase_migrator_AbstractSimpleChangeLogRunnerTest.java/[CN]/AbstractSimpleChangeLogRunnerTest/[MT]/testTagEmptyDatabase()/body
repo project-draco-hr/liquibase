@@ -7,6 +7,6 @@
     migrator.tag("empty");
   }
  catch (  JDBCException e) {
-    assertEquals("liquibase.migrator.exception.JDBCException: Cannot tag an empty database",e.getMessage());
+    assertEquals("liquibase.exception.JDBCException: Cannot tag an empty database",e.getMessage());
   }
 }
