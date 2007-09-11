@@ -1,0 +1,7 @@
+{
+  for (  View view : getUnexpectedViews()) {
+    DropViewChange change=new DropViewChange();
+    change.setViewName(view.getName());
+    changes.add(change);
+  }
+}

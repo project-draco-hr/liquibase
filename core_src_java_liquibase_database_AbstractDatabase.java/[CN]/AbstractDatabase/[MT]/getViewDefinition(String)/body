@@ -1,0 +1,40 @@
+{
+  Statement stmt=null;
+  ResultSet resultSet=null;
+  try {
+    String definition;
+    stmt=getConnection().createStatement();
+    resultSet=stmt.executeQuery(getViewDefinitionSql(name));
+    if (resultSet.next()) {
+      definition=resultSet.getString(1);
+    }
+ else {
+      throw new JDBCException("Could not retrieve definition for view " + name);
+    }
+    if (resultSet.next()) {
+      throw new JDBCException("Found too many definitions for " + name);
+    }
+    return definition;
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
+    if (resultSet != null) {
+      try {
+        resultSet.close();
+      }
+ catch (      SQLException e) {
+        ;
+      }
+    }
+    if (stmt != null) {
+      try {
+        stmt.close();
+      }
+ catch (      SQLException e) {
+        ;
+      }
+    }
+  }
+}

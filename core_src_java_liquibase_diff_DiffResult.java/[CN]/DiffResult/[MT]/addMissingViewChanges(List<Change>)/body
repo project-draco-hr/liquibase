@@ -1,0 +1,8 @@
+{
+  for (  View view : getMissingViews()) {
+    CreateViewChange change=new CreateViewChange();
+    change.setViewName(view.getName());
+    change.setSelectQuery(view.getDefinition());
+    changes.add(change);
+  }
+}

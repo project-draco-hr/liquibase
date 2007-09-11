@@ -21,6 +21,8 @@
   addUnexpectedForeignKeyChanges(changes);
   addMissingSequenceChanges(changes);
   addUnexpectedSequenceChanges(changes);
+  addMissingViewChanges(changes);
+  addUnexpectedViewChanges(changes);
   for (  Change change : changes) {
     Element changeSet=doc.createElement("changeSet");
     changeSet.setAttribute("author","diff-generated");
