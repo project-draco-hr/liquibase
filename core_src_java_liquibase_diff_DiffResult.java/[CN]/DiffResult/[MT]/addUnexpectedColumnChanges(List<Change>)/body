@@ -1,5 +1,8 @@
 {
   for (  Column column : getUnexpectedColumns()) {
+    if (column.getView() != null) {
+      continue;
+    }
     if (baseDatabase.isLiquibaseTable(column.getTable().getName())) {
       continue;
     }
