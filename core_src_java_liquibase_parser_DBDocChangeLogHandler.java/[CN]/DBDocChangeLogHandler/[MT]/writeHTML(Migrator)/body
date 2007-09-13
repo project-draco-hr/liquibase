@@ -1,8 +1,8 @@
 {
-  copyFile("liquibase/migrator/dbdoc/stylesheet.css");
-  copyFile("liquibase/migrator/dbdoc/index.html");
-  copyFile("liquibase/migrator/dbdoc/globalnav.html");
-  copyFile("liquibase/migrator/dbdoc/overview-summary.html");
+  copyFile("liquibase/dbdoc/stylesheet.css");
+  copyFile("liquibase/dbdoc/index.html");
+  copyFile("liquibase/dbdoc/globalnav.html");
+  copyFile("liquibase/dbdoc/overview-summary.html");
   DatabaseSnapshot snapshot=new DatabaseSnapshot(migrator.getDatabase());
   new ChangeLogListWriter(rootOutputDir).writeHTML(changeLogs);
   new TableListWriter(rootOutputDir).writeHTML(new TreeSet<Object>(snapshot.getTables()));

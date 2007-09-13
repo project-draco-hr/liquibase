@@ -3,7 +3,7 @@
     if (!waitForLock()) {
       return;
     }
-    DBDocChangeLogHandler changeLogHandler=new DBDocChangeLogHandler(this,changeLogFile,fileOpener);
+    DBDocChangeLogHandler changeLogHandler=new DBDocChangeLogHandler(outputDirectory,this,changeLogFile,fileOpener);
     runChangeLogs(changeLogHandler);
     changeLogHandler.writeHTML(this);
   }

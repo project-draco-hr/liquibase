@@ -1,12 +1,12 @@
 {
+  InputStream inputStream=null;
   try {
-    InputStream inputStream=getFileOpener().getResourceAsStream(changeLogFile);
+    inputStream=getFileOpener().getResourceAsStream(changeLogFile);
     if (inputStream == null) {
       throw new MigrationFailedException(null,changeLogFile + " does not exist");
     }
     xmlReader.setContentHandler(contentHandler);
     xmlReader.parse(new InputSource(inputStream));
-    inputStream.close();
   }
  catch (  IOException e) {
     throw new MigrationFailedException(null,"Error Reading Migration File: " + e.getMessage(),e);
@@ -36,5 +36,15 @@ catch (  SAXException e) {
       }
     }
     throw new MigrationFailedException(null,"Invalid Migration File: " + reason,e);
+  }
+ finally {
+    if (inputStream != null) {
+      try {
+        inputStream.close();
+      }
+ catch (      IOException e) {
+        ;
+      }
+    }
   }
 }

@@ -123,7 +123,10 @@
       return;
     }
  else     if ("dbdoc".equalsIgnoreCase(command)) {
-      migrator.generateDocumentation();
+      if (commandParams.size() == 0) {
+        throw new CommandLineParsingException("dbdoc requires an output directory");
+      }
+      migrator.generateDocumentation(commandParams.iterator().next());
       return;
     }
     DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

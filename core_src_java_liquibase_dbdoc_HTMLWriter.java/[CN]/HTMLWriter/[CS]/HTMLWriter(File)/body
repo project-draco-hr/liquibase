@@ -1,3 +1,6 @@
 {
   this.outputDir=outputDir;
+  if (!outputDir.exists()) {
+    outputDir.mkdirs();
+  }
 }

@@ -1,9 +1,16 @@
 {
-  InputStream stylesheet=getClass().getClassLoader().getResourceAsStream(fileToCopy);
-  if (stylesheet == null) {
-    throw new IOException("Can not find " + fileToCopy);
+  InputStream inputStream=getClass().getClassLoader().getResourceAsStream(fileToCopy);
+  FileOutputStream outputStream=null;
+  try {
+    if (inputStream == null) {
+      throw new IOException("Can not find " + fileToCopy);
+    }
+    outputStream=new FileOutputStream(new File(rootOutputDir,fileToCopy.replaceFirst(".*\\/","")),false);
+    StreamUtil.copy(inputStream,outputStream);
   }
-  FileOutputStream stylesheetOutputStream=new FileOutputStream(new File(rootOutputDir,fileToCopy.replaceFirst(".*\\/","")),false);
-  StreamUtil.copy(stylesheet,stylesheetOutputStream);
-  stylesheetOutputStream.close();
+  finally {
+    if (outputStream != null) {
+      outputStream.close();
+    }
+  }
 }

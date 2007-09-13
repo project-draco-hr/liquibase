@@ -4,9 +4,9 @@
   changesByAuthor=new HashMap<String,List<Change>>();
   changeLogs=new TreeSet<DatabaseChangeLog>();
   changesToRun=new ArrayList<Change>();
-  rootOutputDir=new File("/tmp/dbdoc");
+  rootOutputDir=new File(outputDirectory);
   if (!rootOutputDir.exists()) {
-    rootOutputDir.mkdir();
+    rootOutputDir.mkdirs();
   }
   changeLogWriter=new ChangeLogWriter(migrator.getFileOpener(),rootOutputDir);
   authorWriter=new AuthorWriter(rootOutputDir);
