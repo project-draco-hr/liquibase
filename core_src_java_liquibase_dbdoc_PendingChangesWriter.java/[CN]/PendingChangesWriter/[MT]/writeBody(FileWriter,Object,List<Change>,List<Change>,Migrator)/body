@@ -1,4 +1,4 @@
 {
-  writeCustomHTML(fileWriter,object,ranChanges);
+  writeCustomHTML(fileWriter,object,ranChanges,migrator.getDatabase());
   writeChanges("Pending Changes",fileWriter,object,changesToRun,migrator);
 }

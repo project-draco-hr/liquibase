@@ -1,3 +1,0 @@
-{
-  writeColumns(fileWriter,((Table)object));
-}

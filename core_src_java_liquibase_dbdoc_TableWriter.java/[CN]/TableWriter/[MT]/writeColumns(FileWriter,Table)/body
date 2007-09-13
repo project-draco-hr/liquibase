@@ -1,7 +1,0 @@
-{
-  List<List<String>> cells=new ArrayList<List<String>>();
-  for (  Column column : table.getColumns()) {
-    cells.add(Arrays.asList(column.getTypeName(),"<A HREF=\"../columns/" + table.getName() + "."+ column.getName()+ ".html"+ "\">"+ column.getName()+ "</A>"));
-  }
-  writeTable("Current Columns",cells,fileWriter);
-}
