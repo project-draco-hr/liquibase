@@ -3,7 +3,7 @@
   fileWriter.append("<TR BGCOLOR=\"#CCCCFF\" CLASS=\"TableHeadingColor\">\n");
   fileWriter.append("<TD COLSPAN='4'><FONT SIZE=\"+2\">\n");
   fileWriter.append("<B>");
-  fileWriter.append("Changes Affecting \"");
+  fileWriter.append(title).append(" For \"");
   fileWriter.append(String.valueOf(object));
   fileWriter.append("\"");
   fileWriter.append("</B></FONT></TD>\n");
@@ -22,7 +22,8 @@
         writeTD(fileWriter,"<a href='../authors/" + change.getChangeSet().getAuthor().toLowerCase() + ".html'>"+ change.getChangeSet().getAuthor().toLowerCase()+ "</a>");
         ChangeSet.RunStatus runStatus=migrator.getRunStatus(change.getChangeSet());
         if (runStatus.equals(ChangeSet.RunStatus.NOT_RAN)) {
-          writeTD(fileWriter,"NOT YET RAN");
+          String anchor=change.getChangeSet().toString(false).replaceAll("\\W","_");
+          writeTD(fileWriter,"NOT YET RAN [<a href='../pending/sql.html#" + anchor + "'>SQL</a>]");
         }
  else         if (runStatus.equals(ChangeSet.RunStatus.INVALID_MD5SUM)) {
           writeTD(fileWriter,"INVALID MD5SUM");

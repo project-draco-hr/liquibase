@@ -1,0 +1,5 @@
+{
+  writeCustomHTML(fileWriter,object,ranChanges);
+  writeChanges("Pending Changes",fileWriter,object,changesToRun,migrator);
+  writeChanges("Past Changes",fileWriter,object,ranChanges,migrator);
+}

@@ -1,21 +1,34 @@
 {
+  ChangeSet.RunStatus runStatus=migrator.getRunStatus(changeSet);
   if (!changesByAuthor.containsKey(changeSet.getAuthor())) {
     changesByAuthor.put(changeSet.getAuthor(),new ArrayList<Change>());
   }
+  if (!changesToRunByAuthor.containsKey(changeSet.getAuthor())) {
+    changesToRunByAuthor.put(changeSet.getAuthor(),new ArrayList<Change>());
+  }
+  boolean toRun=runStatus.equals(ChangeSet.RunStatus.NOT_RAN) || runStatus.equals(ChangeSet.RunStatus.RUN_AGAIN);
   for (  Change change : changeSet.getChanges()) {
-    changesByAuthor.get(changeSet.getAuthor()).add(change);
+    if (toRun) {
+      changesToRunByAuthor.get(changeSet.getAuthor()).add(change);
+      changesToRun.add(change);
+    }
+ else {
+      changesByAuthor.get(changeSet.getAuthor()).add(change);
+    }
   }
   if (!changeLogs.contains(changeSet.getDatabaseChangeLog())) {
     changeLogs.add(changeSet.getDatabaseChangeLog());
   }
-  ChangeSet.RunStatus runStatus=migrator.getRunStatus(changeSet);
   for (  Change change : changeSet.getChanges()) {
-    if (runStatus.equals(ChangeSet.RunStatus.NOT_RAN) || runStatus.equals(ChangeSet.RunStatus.RUN_AGAIN)) {
-      changesToRun.add(change);
-    }
     Set<DatabaseObject> affectedDatabaseObjects=change.getAffectedDatabaseObjects();
     if (affectedDatabaseObjects != null) {
       for (      DatabaseObject dbObject : affectedDatabaseObjects) {
+        if (toRun) {
+          if (!changesToRunByObject.containsKey(dbObject)) {
+            changesToRunByObject.put(dbObject,new ArrayList<Change>());
+          }
+          changesToRunByObject.get(dbObject).add(change);
+        }
         if (!changesByObject.containsKey(dbObject)) {
           changesByObject.put(dbObject,new ArrayList<Change>());
         }

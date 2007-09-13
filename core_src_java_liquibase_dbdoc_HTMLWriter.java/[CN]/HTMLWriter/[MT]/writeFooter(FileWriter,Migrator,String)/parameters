@@ -1,4 +1,3 @@
 FileWriter fileWriter
-Object object
-List<Change> changes
 Migrator migrator
+String changeLog
