@@ -1,9 +1,6 @@
 {
   for (  Column column : getUnexpectedColumns()) {
-    if (column.getView() != null) {
-      continue;
-    }
-    if (baseDatabase.isLiquibaseTable(column.getTable().getName())) {
+    if (!shouldModifyColumn(column)) {
       continue;
     }
     DropColumnChange change=new DropColumnChange();

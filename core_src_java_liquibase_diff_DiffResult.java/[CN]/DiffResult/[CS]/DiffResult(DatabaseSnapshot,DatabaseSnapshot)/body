@@ -1,0 +1,6 @@
+{
+  this.baseDatabase=baseDatabase.getDatabase();
+  this.targetDatabase=targetDatabase.getDatabase();
+  this.baseSnapshot=baseDatabase;
+  this.targetSnapshot=targetDatabase;
+}

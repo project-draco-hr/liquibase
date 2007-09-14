@@ -12,6 +12,5 @@
   if (foreignKeyColumn != null) {
     result=31 * result + foreignKeyColumn.toUpperCase().hashCode();
   }
-  result=31 * result + (name != null ? name.hashCode() : 0);
   return result;
 }

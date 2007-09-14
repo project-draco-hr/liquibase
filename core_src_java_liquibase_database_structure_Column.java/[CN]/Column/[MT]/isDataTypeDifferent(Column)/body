@@ -1,0 +1,3 @@
+{
+  return this.getDataType() != otherColumn.getDataType() || this.getColumnSize() != otherColumn.getColumnSize() || this.getDecimalDigits() != otherColumn.getDecimalDigits();
+}

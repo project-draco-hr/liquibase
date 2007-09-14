@@ -11,7 +11,7 @@
         targetSnapshot=new DatabaseSnapshot(targetDatabase,statusListeners);
       }
     }
-    DiffResult diffResult=new DiffResult(baseDatabase,targetDatabase);
+    DiffResult diffResult=new DiffResult(baseSnapshot,targetSnapshot);
     checkVersionInfo(diffResult);
     checkTables(diffResult);
     checkViews(diffResult);

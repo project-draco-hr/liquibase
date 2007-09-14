@@ -9,6 +9,7 @@
   printSetComparison("Unexpected Views",getUnexpectedViews(),out);
   printSetComparison("Missing Columns",getMissingColumns(),out);
   printSetComparison("Unexpected Columns",getUnexpectedColumns(),out);
+  printColumnComparison(getChangedColumns(),out);
   printSetComparison("Missing Foreign Keys",getMissingForeignKeys(),out);
   printSetComparison("Unexpected Foreign Keys",getUnexpectedForeignKeys(),out);
   printSetComparison("Missing Primary Keys",getMissingPrimaryKeys(),out);

@@ -13,6 +13,7 @@
   addUnexpectedTableChanges(changes);
   addMissingColumnChanges(changes,targetDatabase);
   addUnexpectedColumnChanges(changes);
+  addChangedColumnChanges(changes);
   addMissingPrimaryKeyChanges(changes);
   addUnexpectedPrimaryKeyChanges(changes);
   addMissingIndexChanges(changes);

@@ -12,8 +12,5 @@
   if (returnValue == 0 && this.getPrimaryKeyColumn() != null & o.getPrimaryKeyColumn() != null) {
     returnValue=this.getPrimaryKeyColumn().compareTo(o.getPrimaryKeyColumn());
   }
-  if (returnValue == 0) {
-    returnValue=this.getName().compareTo(o.getName());
-  }
   return returnValue;
 }

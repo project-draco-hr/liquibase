@@ -1,9 +1,6 @@
 {
   for (  Column column : getMissingColumns()) {
-    if (column.getView() != null) {
-      continue;
-    }
-    if (baseDatabase.isLiquibaseTable(column.getTable().getName())) {
+    if (!shouldModifyColumn(column)) {
       continue;
     }
     AddColumnChange change=new AddColumnChange();

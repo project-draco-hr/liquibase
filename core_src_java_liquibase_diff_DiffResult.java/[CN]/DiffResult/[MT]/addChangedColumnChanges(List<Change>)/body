@@ -1,0 +1,36 @@
+{
+  for (  Column column : getChangedColumns()) {
+    if (!shouldModifyColumn(column)) {
+      continue;
+    }
+    Column baseColumn=baseSnapshot.getColumn(column);
+    if (column.isDataTypeDifferent(baseColumn)) {
+      ColumnConfig columnConfig=new ColumnConfig();
+      columnConfig.setName(column.getName());
+      columnConfig.setType(baseColumn.getDataTypeString(targetDatabase));
+      ModifyColumnChange change=new ModifyColumnChange();
+      change.setTableName(column.getTable().getName());
+      change.setColumn(columnConfig);
+      changes.add(change);
+    }
+    if (column.isNullabilityDifferent(baseColumn)) {
+      if (baseColumn.isNullable() == null || baseColumn.isNullable()) {
+        DropNotNullConstraintChange change=new DropNotNullConstraintChange();
+        change.setTableName(column.getTable().getName());
+        change.setColumnName(column.getName());
+        change.setColumnDataType(baseColumn.getDataTypeString(targetDatabase));
+        changes.add(change);
+      }
+ else {
+        AddNotNullConstraintChange change=new AddNotNullConstraintChange();
+        change.setTableName(column.getTable().getName());
+        change.setColumnName(column.getName());
+        change.setColumnDataType(baseColumn.getDataTypeString(targetDatabase));
+        changes.add(change);
+      }
+    }
+ else {
+      throw new RuntimeException("Unknown difference");
+    }
+  }
+}
