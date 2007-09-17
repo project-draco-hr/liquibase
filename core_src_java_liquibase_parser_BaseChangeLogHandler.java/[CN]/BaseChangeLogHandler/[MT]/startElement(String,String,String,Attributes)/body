@@ -86,60 +86,19 @@
       lastColumn.setConstraints(constraints);
     }
  else     if ("preConditions".equals(qName)) {
-      precondition=new AndPrecondition();
+      rootPrecondition=new AndPrecondition();
+      preconditionLogicStack.push(rootPrecondition);
     }
- else     if ("dbms".equals(qName)) {
-      if (precondition != null) {
-        DBMSPrecondition dbmsPrecondition=new DBMSPrecondition();
-        for (int i=0; i < atts.getLength(); i++) {
-          String attributeName=atts.getQName(i);
-          String attributeValue=atts.getValue(i);
-          setProperty(dbmsPrecondition,attributeName,attributeValue);
-        }
-        if (orprecondition != null) {
-          orprecondition.addNestedPrecondition(dbmsPrecondition);
-        }
- else         if (notprecondition != null) {
-          notprecondition.addNestedPrecondition(dbmsPrecondition);
-        }
- else {
-          precondition.addNestedPrecondition(dbmsPrecondition);
-        }
+ else     if (rootPrecondition != null) {
+      Precondition currentPrecondition=migrator.getPreconditionFactory().create(qName);
+      for (int i=0; i < atts.getLength(); i++) {
+        String attributeName=atts.getQName(i);
+        String attributeValue=atts.getValue(i);
+        setProperty(currentPrecondition,attributeName,attributeValue);
       }
- else {
-        throw new RuntimeException("Unexpected Dbms tag");
-      }
-    }
- else     if ("or".equals(qName)) {
-      if (precondition != null) {
-        orprecondition=new OrPrecondition();
-        if (notprecondition != null) {
-          notprecondition.addNestedPrecondition(orprecondition);
-        }
-      }
- else {
-        throw new RuntimeException("Unexpected Or tag");
-      }
-    }
- else     if ("not".equals(qName)) {
-      if (precondition != null) {
-        notprecondition=new NotPrecondition();
-      }
- else {
-        throw new RuntimeException("Unexpected Or tag");
-      }
-    }
- else     if ("runningAs".equals(qName)) {
-      if (precondition != null) {
-        runningAs=new RunningAsPrecondition();
-        for (int i=0; i < atts.getLength(); i++) {
-          String attributeName=atts.getQName(i);
-          String attributeValue=atts.getValue(i);
-          setProperty(runningAs,attributeName,attributeValue);
-        }
-      }
- else {
-        throw new RuntimeException("Unexpected Or tag");
+      preconditionLogicStack.peek().addNestedPrecondition(currentPrecondition);
+      if (currentPrecondition instanceof PreconditionLogic) {
+        preconditionLogicStack.push(((PreconditionLogic)currentPrecondition));
       }
     }
  else {

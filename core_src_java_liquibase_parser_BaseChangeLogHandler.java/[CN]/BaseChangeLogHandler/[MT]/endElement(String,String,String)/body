@@ -4,18 +4,21 @@
     textString=StringUtils.trimToNull(text.toString());
   }
   try {
-    if (precondition != null && "preConditions".equals(qName)) {
-      changeLog.setPreconditions(precondition);
-      handlePreCondition(precondition);
-    }
- else     if (precondition != null && "or".equals(qName) && notprecondition == null) {
-      precondition.addNestedPrecondition(orprecondition);
-    }
- else     if (precondition != null && "not".equals(qName)) {
-      precondition.addNestedPrecondition(notprecondition);
-    }
- else     if (precondition != null && "runningAs".equals(qName)) {
-      precondition.addNestedPrecondition(runningAs);
+    if (rootPrecondition != null) {
+      if ("preConditions".equals(qName)) {
+        changeLog.setPreconditions(rootPrecondition);
+        handlePreCondition(rootPrecondition);
+        rootPrecondition=null;
+      }
+ else       if ("and".equals(qName)) {
+        preconditionLogicStack.pop();
+      }
+ else       if ("or".equals(qName)) {
+        preconditionLogicStack.pop();
+      }
+ else       if ("not".equals(qName)) {
+        preconditionLogicStack.pop();
+      }
     }
  else     if (changeSet != null && "rollback".equals(qName)) {
       changeSet.setRollBackSQL(textString);

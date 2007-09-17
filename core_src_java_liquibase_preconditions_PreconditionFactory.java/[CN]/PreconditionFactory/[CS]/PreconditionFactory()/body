@@ -1,0 +1,13 @@
+{
+  tagToClassMap=new HashMap<String,Class>();
+  Class[] preconditions=new Class[]{AndPrecondition.class,OrPrecondition.class,NotPrecondition.class,DBMSPrecondition.class,RunningAsPrecondition.class};
+  try {
+    for (    Class<Precondition> preconditionClass : preconditions) {
+      Precondition precondition=preconditionClass.newInstance();
+      tagToClassMap.put(precondition.getTagName(),preconditionClass);
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}
