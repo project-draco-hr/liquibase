@@ -1,0 +1,9 @@
+{
+  this.className=className;
+  try {
+    customChange=(CustomChange)Class.forName(className).newInstance();
+  }
+ catch (  Exception e) {
+    throw new CustomChangeException(e);
+  }
+}

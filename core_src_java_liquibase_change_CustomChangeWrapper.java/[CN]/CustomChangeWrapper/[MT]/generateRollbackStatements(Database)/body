@@ -1,0 +1,9 @@
+{
+  try {
+    configureCustomChange();
+  }
+ catch (  CustomChangeException e) {
+    throw new UnsupportedChangeException(e);
+  }
+  return customChange.generateRollbackStatements(database);
+}

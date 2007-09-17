@@ -1,0 +1,10 @@
+{
+  try {
+    for (    String param : params) {
+      ObjectUtil.setProperty(customChange,param,paramValues.get(param));
+    }
+  }
+ catch (  Exception e) {
+    throw new CustomChangeException(e);
+  }
+}
