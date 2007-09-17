@@ -1,0 +1,6 @@
+{
+  String dbType=migrator.getDatabase().getTypeName();
+  if (!type.equals(dbType)) {
+    throw new PreconditionFailedException(new FailedPrecondition("DBMS Precondition failed: expected " + dbType + ", got "+ type,changeLog,this));
+  }
+}

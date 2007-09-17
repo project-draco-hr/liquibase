@@ -1,0 +1,15 @@
+{
+  for (  Precondition precondition : getNestedPreconditions()) {
+    boolean threwException=false;
+    try {
+      precondition.check(migrator,changeLog);
+    }
+ catch (    PreconditionFailedException e) {
+      ;
+      threwException=true;
+    }
+    if (!threwException) {
+      throw new PreconditionFailedException(new FailedPrecondition("Not precondition failed",changeLog,this));
+    }
+  }
+}

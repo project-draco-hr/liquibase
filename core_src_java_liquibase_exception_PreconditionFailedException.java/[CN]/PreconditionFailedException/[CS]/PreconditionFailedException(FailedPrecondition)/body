@@ -1,0 +1,5 @@
+{
+  super("Preconditions Failed");
+  this.failedPreconditions=new ArrayList<FailedPrecondition>();
+  failedPreconditions.add(failedPrecondition);
+}

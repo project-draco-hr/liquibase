@@ -86,7 +86,7 @@
       lastColumn.setConstraints(constraints);
     }
  else     if ("preConditions".equals(qName)) {
-      precondition=new PreconditionSet(migrator,changeLog);
+      precondition=new AndPrecondition();
     }
  else     if ("dbms".equals(qName)) {
       if (precondition != null) {
@@ -97,13 +97,13 @@
           setProperty(dbmsPrecondition,attributeName,attributeValue);
         }
         if (orprecondition != null) {
-          orprecondition.addDbms(dbmsPrecondition);
+          orprecondition.addNestedPrecondition(dbmsPrecondition);
         }
  else         if (notprecondition != null) {
-          notprecondition.addDbms(dbmsPrecondition);
+          notprecondition.addNestedPrecondition(dbmsPrecondition);
         }
  else {
-          precondition.addDbms(dbmsPrecondition);
+          precondition.addNestedPrecondition(dbmsPrecondition);
         }
       }
  else {
@@ -114,7 +114,7 @@
       if (precondition != null) {
         orprecondition=new OrPrecondition();
         if (notprecondition != null) {
-          notprecondition.setOrprecondition(orprecondition);
+          notprecondition.addNestedPrecondition(orprecondition);
         }
       }
  else {

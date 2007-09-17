@@ -1,4 +1,0 @@
-{
-  String dbType=migrator.getDatabase().getTypeName();
-  return type.equals(dbType);
-}

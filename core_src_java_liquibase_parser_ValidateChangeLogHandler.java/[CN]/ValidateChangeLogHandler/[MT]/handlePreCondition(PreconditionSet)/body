@@ -1,8 +1,0 @@
-{
-  try {
-    preconditions.checkConditions();
-  }
- catch (  PreconditionFailedException e) {
-    failedPreconditions.addAll(e.getFailedPreconditions());
-  }
-}
