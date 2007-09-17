@@ -12,12 +12,19 @@
       }
  else       if ("and".equals(qName)) {
         preconditionLogicStack.pop();
+        currentPrecondition=null;
       }
  else       if ("or".equals(qName)) {
         preconditionLogicStack.pop();
+        currentPrecondition=null;
       }
  else       if ("not".equals(qName)) {
         preconditionLogicStack.pop();
+        currentPrecondition=null;
+      }
+ else       if (qName.equals("sqlCheck")) {
+        ((SqlPrecondition)currentPrecondition).setSql(textString);
+        currentPrecondition=null;
       }
     }
  else     if (changeSet != null && "rollback".equals(qName)) {
