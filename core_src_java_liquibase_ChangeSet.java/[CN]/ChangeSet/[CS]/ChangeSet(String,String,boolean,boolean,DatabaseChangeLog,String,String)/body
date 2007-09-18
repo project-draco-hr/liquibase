@@ -6,15 +6,21 @@
   this.databaseChangeLog=databaseChangeLog;
   this.alwaysRun=alwaysRun;
   this.runOnChange=runOnChange;
-  if (context != null) {
-    this.context=context.trim().toLowerCase();
+  if (StringUtils.trimToNull(contextList) != null) {
+    String[] strings=contextList.toLowerCase().split(",");
+    if (contexts == null) {
+      contexts=new HashSet<String>();
+    }
+    for (    String string : strings) {
+      contexts.add(string.trim().toLowerCase());
+    }
   }
   if (StringUtils.trimToNull(dbmsList) != null) {
-    String[] strings=dbmsList.split(",");
+    String[] strings=dbmsList.toLowerCase().split(",");
+    if (dbmsSet == null) {
+      dbmsSet=new HashSet<String>();
+    }
     for (    String string : strings) {
-      if (dbmsSet == null) {
-        dbmsSet=new HashSet<String>();
-      }
       dbmsSet.add(string.trim().toLowerCase());
     }
   }

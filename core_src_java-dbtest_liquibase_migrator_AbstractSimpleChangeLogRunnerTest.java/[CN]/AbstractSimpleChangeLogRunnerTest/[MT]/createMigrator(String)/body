@@ -1,7 +1,7 @@
 {
   JUnitFileOpener fileOpener=new JUnitFileOpener();
   Migrator migrator=new Migrator(changeLogFile,fileOpener);
-  migrator.setContexts("test");
+  migrator.setContexts("test, context-b");
   migrator.init(connection);
   return migrator;
 }
