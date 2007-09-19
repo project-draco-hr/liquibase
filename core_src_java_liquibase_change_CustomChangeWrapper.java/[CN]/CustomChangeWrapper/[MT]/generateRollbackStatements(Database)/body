@@ -5,5 +5,5 @@
  catch (  CustomChangeException e) {
     throw new UnsupportedChangeException(e);
   }
-  return customChange.generateRollbackStatements(database);
+  return ((CustomChangeRollback)customChange).generateRollbackStatements(database);
 }
