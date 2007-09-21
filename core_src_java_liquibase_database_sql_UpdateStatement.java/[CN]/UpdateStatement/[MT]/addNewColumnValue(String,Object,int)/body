@@ -1,0 +1,4 @@
+{
+  newColumnValues.put(columnName,newValue);
+  newColumnTypes.put(columnName,type);
+}

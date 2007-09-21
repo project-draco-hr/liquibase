@@ -1,0 +1,3 @@
+{
+  setParameterValueInternal(ps,paramIndex,param.getSqlType(),param.getTypeName(),param.getScale(),inValue);
+}

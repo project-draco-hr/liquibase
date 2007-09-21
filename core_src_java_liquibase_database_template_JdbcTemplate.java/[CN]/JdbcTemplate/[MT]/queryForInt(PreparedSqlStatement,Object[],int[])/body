@@ -1,0 +1,4 @@
+{
+  Number number=(Number)queryForObject(sql,args,argTypes,Integer.class);
+  return (number != null ? number.intValue() : 0);
+}

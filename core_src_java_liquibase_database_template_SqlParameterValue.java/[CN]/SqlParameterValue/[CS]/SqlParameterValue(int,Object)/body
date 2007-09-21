@@ -1,0 +1,4 @@
+{
+  super(sqlType);
+  this.value=value;
+}

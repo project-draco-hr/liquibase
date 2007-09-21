@@ -1,0 +1,18 @@
+{
+  return (Integer)execute(psc,new PreparedStatementCallback(){
+    public Object doInPreparedStatement(    PreparedStatement ps) throws SQLException {
+      try {
+        if (pss != null) {
+          pss.setValues(ps);
+        }
+        return ps.executeUpdate();
+      }
+  finally {
+        if (pss instanceof ParameterDisposer) {
+          ((ParameterDisposer)pss).cleanupParameters();
+        }
+      }
+    }
+  }
+);
+}

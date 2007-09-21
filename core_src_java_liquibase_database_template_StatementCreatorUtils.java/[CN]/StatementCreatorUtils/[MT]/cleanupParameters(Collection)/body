@@ -1,0 +1,10 @@
+{
+  if (paramValues != null) {
+    for (Iterator it=paramValues.iterator(); it.hasNext(); ) {
+      Object inValue=it.next();
+      if (inValue instanceof DisposableSqlTypeValue) {
+        ((DisposableSqlTypeValue)inValue).cleanup();
+      }
+    }
+  }
+}

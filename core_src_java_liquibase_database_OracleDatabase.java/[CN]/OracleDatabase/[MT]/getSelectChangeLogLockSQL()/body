@@ -1,3 +1,3 @@
 {
-  return (super.getSelectChangeLogLockSQL() + " for update").toUpperCase();
+  return new RawSqlStatement((super.getSelectChangeLogLockSQL().getSqlStatement(this) + " for update").toUpperCase());
 }

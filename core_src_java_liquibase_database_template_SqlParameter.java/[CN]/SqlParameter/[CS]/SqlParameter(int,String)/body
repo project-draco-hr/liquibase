@@ -1,0 +1,4 @@
+{
+  this.sqlType=sqlType;
+  this.typeName=typeName;
+}

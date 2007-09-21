@@ -1,9 +1,8 @@
 {
-  Statement statement=null;
   DatabaseConnection connection=getConnection();
   ResultSet checkTableRS=null;
   ResultSet checkColumnsRS=null;
-  List<String> statementsToExecute=new ArrayList<String>();
+  List<SqlStatement> statementsToExecute=new ArrayList<SqlStatement>();
   boolean wroteToOutput=false;
   try {
     checkTableRS=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogTableName(),new String[]{"TABLE"});
@@ -30,21 +29,21 @@
         }
       }
       if (!hasDescription) {
-        statementsToExecute.add("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD DESCRIPTION VARCHAR(255)");
+        statementsToExecute.add(new RawSqlStatement("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD DESCRIPTION VARCHAR(255)"));
       }
       if (!hasTag) {
-        statementsToExecute.add("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD TAG VARCHAR(255)");
+        statementsToExecute.add(new RawSqlStatement("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD TAG VARCHAR(255)"));
       }
       if (!hasComments) {
-        statementsToExecute.add("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD COMMENTS VARCHAR(255)");
+        statementsToExecute.add(new RawSqlStatement("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD COMMENTS VARCHAR(255)"));
       }
       if (!hasLiquibase) {
-        statementsToExecute.add("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD LIQUIBASE VARCHAR(255)");
+        statementsToExecute.add(new RawSqlStatement("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD LIQUIBASE VARCHAR(255)"));
       }
     }
  else     if (!changeLogCreateAttempted) {
       changeLogCreateAttempted=true;
-      String createTableStatement=getCreateChangeLogSQL();
+      SqlStatement createTableStatement=getCreateChangeLogSQL();
       if (!canCreateChangeLogTable()) {
         throw new JDBCException("Cannot create " + getDatabaseChangeLogTableName() + " table for your database.\n\n"+ "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n"+ createTableStatement);
       }
@@ -54,10 +53,9 @@
         changeLogTableExists=true;
       }
     }
-    for (    String sql : statementsToExecute) {
+    for (    SqlStatement sql : statementsToExecute) {
       if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
-        statement=connection.createStatement();
-        statement.executeUpdate(sql);
+        new JdbcTemplate(this).update(sql);
         connection.commit();
       }
  else {
@@ -67,7 +65,7 @@
             wroteToOutput=false;
           }
  else {
-            writer.append(sql).append(";").append(StreamUtil.getLineSeparator());
+            writer.append(sql.getSqlStatement(this)).append(";").append(StreamUtil.getLineSeparator());
             wroteToOutput=true;
           }
         }
@@ -81,14 +79,6 @@
     throw new JDBCException(e);
   }
  finally {
-    if (statement != null) {
-      try {
-        statement.close();
-      }
- catch (      SQLException e) {
-        throw new JDBCException(e);
-      }
-    }
     if (checkTableRS != null) {
       try {
         checkTableRS.close();

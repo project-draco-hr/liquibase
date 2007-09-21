@@ -1,0 +1,22 @@
+{
+  SqlStatement[] statements=null;
+  try {
+    configureCustomChange();
+    if (customChange instanceof CustomSqlRollback) {
+      statements=((CustomSqlRollback)customChange).generateRollbackStatements(database);
+    }
+ else     if (customChange instanceof CustomTaskRollback) {
+      ((CustomTaskRollback)customChange).rollback(database);
+    }
+ else {
+      throw new UnsupportedChangeException("Unknown rollback type: " + customChange.getClass().getName());
+    }
+  }
+ catch (  CustomChangeException e) {
+    throw new UnsupportedChangeException(e);
+  }
+  if (statements == null) {
+    statements=new SqlStatement[0];
+  }
+  return statements;
+}

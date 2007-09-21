@@ -1,0 +1,6 @@
+{
+  this.name=otherParam.name;
+  this.sqlType=otherParam.sqlType;
+  this.typeName=otherParam.typeName;
+  this.scale=otherParam.scale;
+}

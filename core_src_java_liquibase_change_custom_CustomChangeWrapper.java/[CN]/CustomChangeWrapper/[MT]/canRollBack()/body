@@ -1,0 +1,3 @@
+{
+  return customChange instanceof CustomSqlRollback || customChange instanceof CustomTaskRollback;
+}

@@ -1,0 +1,11 @@
+{
+  if (stmt != null) {
+    try {
+      stmt.close();
+    }
+ catch (    SQLException ex) {
+    }
+catch (    Throwable ex) {
+    }
+  }
+}

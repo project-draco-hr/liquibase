@@ -1,9 +1,7 @@
 {
   ResultSet rs=null;
-  Statement dropStatement=null;
   try {
     rs=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,getTableTypes());
-    dropStatement=conn.createStatement();
     while (rs.next()) {
       String tableName=rs.getString("TABLE_NAME");
       String schemaName=rs.getString("TABLE_SCHEM");
@@ -12,12 +10,14 @@
         continue;
       }
       String type=rs.getString("TABLE_TYPE");
-      String sql;
+      Change dropChange;
       if ("TABLE".equals(type)) {
-        sql=getDropTableSQL(tableName);
+        dropChange=new DropTableChange();
+        ((DropTableChange)dropChange).setTableName(tableName);
       }
  else       if ("VIEW".equals(type)) {
-        sql="DROP VIEW " + tableName;
+        dropChange=new DropViewChange();
+        ((DropViewChange)dropChange).setViewName(tableName);
       }
  else       if ("SYSTEM TABLE".equals(type)) {
         continue;
@@ -27,9 +27,9 @@
       }
       try {
         log.finest("Dropping " + tableName);
-        dropStatement.executeUpdate(sql);
+        dropChange.executeStatements(this);
       }
- catch (      SQLException e) {
+ catch (      UnsupportedChangeException e) {
         throw new JDBCException("Error dropping table '" + tableName + "': "+ e.getMessage(),e);
       }
     }
@@ -38,14 +38,6 @@
     throw new JDBCException(e);
   }
  finally {
-    if (dropStatement != null) {
-      try {
-        dropStatement.close();
-      }
- catch (      SQLException e) {
-        throw new JDBCException(e);
-      }
-    }
     if (rs != null) {
       try {
         rs.close();

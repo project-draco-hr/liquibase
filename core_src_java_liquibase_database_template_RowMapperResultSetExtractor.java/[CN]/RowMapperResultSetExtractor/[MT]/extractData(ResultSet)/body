@@ -1,0 +1,8 @@
+{
+  List results=(this.rowsExpected > 0 ? new ArrayList(this.rowsExpected) : new ArrayList());
+  int rowNum=0;
+  while (rs.next()) {
+    results.add(this.rowMapper.mapRow(rs,rowNum++));
+  }
+  return results;
+}

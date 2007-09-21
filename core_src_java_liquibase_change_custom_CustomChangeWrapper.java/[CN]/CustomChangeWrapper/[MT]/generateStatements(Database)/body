@@ -1,0 +1,22 @@
+{
+  SqlStatement[] statements=null;
+  try {
+    configureCustomChange();
+    if (customChange instanceof CustomSqlChange) {
+      statements=((CustomSqlChange)customChange).generateStatements(database);
+    }
+ else     if (customChange instanceof CustomTaskChange) {
+      ((CustomTaskChange)customChange).execute(database);
+    }
+ else {
+      throw new UnsupportedChangeException(customChange.getClass().getName() + " does not implement " + CustomSqlChange.class.getName()+ " or "+ CustomTaskChange.class.getName());
+    }
+  }
+ catch (  CustomChangeException e) {
+    throw new UnsupportedChangeException(e);
+  }
+  if (statements == null) {
+    statements=new SqlStatement[0];
+  }
+  return statements;
+}

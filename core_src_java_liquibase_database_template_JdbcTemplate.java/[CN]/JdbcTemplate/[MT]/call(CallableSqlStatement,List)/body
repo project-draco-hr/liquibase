@@ -1,0 +1,15 @@
+{
+  return (Map)execute(csc,new CallableStatementCallback(){
+    @SuppressWarnings({"unchecked"}) public Object doInCallableStatement(    CallableStatement cs) throws SQLException, JDBCException {
+      boolean retVal=cs.execute();
+      int updateCount=cs.getUpdateCount();
+      Map returnedResults=new HashMap();
+      if (retVal || updateCount != -1) {
+        returnedResults.putAll(extractReturnedResultSets(cs,declaredParameters,updateCount));
+      }
+      returnedResults.putAll(extractOutputParameters(cs,declaredParameters));
+      return returnedResults;
+    }
+  }
+);
+}

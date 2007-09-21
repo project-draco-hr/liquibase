@@ -1,0 +1,3 @@
+{
+  query(psc,new RowCallbackHandlerResultSetExtractor(rch));
+}

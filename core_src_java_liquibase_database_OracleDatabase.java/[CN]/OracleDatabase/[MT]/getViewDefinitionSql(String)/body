@@ -1,3 +1,3 @@
 {
-  return "SELECT TEXT FROM USER_VIEWS WHERE upper(VIEW_NAME)='" + name.toUpperCase() + "'";
+  return new RawSqlStatement("SELECT TEXT FROM USER_VIEWS WHERE upper(VIEW_NAME)='" + name.toUpperCase() + "'");
 }

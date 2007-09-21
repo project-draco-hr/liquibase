@@ -1,0 +1,3 @@
+{
+  return (inValue instanceof java.util.Date && !(inValue instanceof java.sql.Date || inValue instanceof java.sql.Time || inValue instanceof java.sql.Timestamp));
+}

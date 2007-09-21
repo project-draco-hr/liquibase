@@ -1,0 +1,17 @@
+{
+  if (sql instanceof PreparedSqlStatement) {
+    return update(((PreparedSqlStatement)sql));
+  }
+ else   if (sql instanceof CallableSqlStatement) {
+    throw new JDBCException("Direct update using CallableSqlStatement not currently implemented");
+  }
+class UpdateStatementCallback implements StatementCallback {
+    public Object doInStatement(    Statement stmt) throws SQLException {
+      return stmt.executeUpdate(sql.getSqlStatement(database));
+    }
+    public SqlStatement getStatement(){
+      return sql;
+    }
+  }
+  return (Integer)execute(new UpdateStatementCallback());
+}

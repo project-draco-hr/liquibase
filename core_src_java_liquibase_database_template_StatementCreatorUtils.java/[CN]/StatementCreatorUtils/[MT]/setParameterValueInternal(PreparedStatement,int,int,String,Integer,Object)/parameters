@@ -1,0 +1,6 @@
+PreparedStatement ps
+int paramIndex
+int sqlType
+String typeName
+Integer scale
+Object inValue

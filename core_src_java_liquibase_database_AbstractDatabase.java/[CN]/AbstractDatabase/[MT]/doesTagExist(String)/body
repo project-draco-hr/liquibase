@@ -1,32 +1,4 @@
 {
-  PreparedStatement pstmt=null;
-  ResultSet rs=null;
-  try {
-    pstmt=getConnection().prepareStatement("SELECT COUNT(*) FROM " + getDatabaseChangeLogTableName() + " WHERE TAG=?");
-    pstmt.setString(1,tag);
-    rs=pstmt.executeQuery();
-    rs.next();
-    return rs.getInt(1) > 0;
-  }
- catch (  SQLException e) {
-    throw new JDBCException(e);
-  }
- finally {
-    if (rs != null) {
-      try {
-        rs.close();
-      }
- catch (      SQLException e) {
-        throw new JDBCException(e);
-      }
-    }
-    if (pstmt != null) {
-      try {
-        pstmt.close();
-      }
- catch (      SQLException e) {
-        throw new JDBCException(e);
-      }
-    }
-  }
+  int count=new JdbcTemplate(this).queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + getDatabaseChangeLogTableName() + " WHERE TAG='"+ tag+ "'"));
+  return count > 0;
 }

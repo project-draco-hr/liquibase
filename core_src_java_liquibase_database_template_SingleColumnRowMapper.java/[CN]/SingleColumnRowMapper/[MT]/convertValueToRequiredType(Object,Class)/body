@@ -1,0 +1,16 @@
+{
+  if (String.class.equals(this.requiredType)) {
+    return value.toString();
+  }
+ else   if (Number.class.isAssignableFrom(this.requiredType)) {
+    if (value instanceof Number) {
+      return NumberUtils.convertNumberToTargetClass(((Number)value),this.requiredType);
+    }
+ else {
+      return NumberUtils.parseNumber(value.toString(),this.requiredType);
+    }
+  }
+ else {
+    throw new IllegalArgumentException("Value [" + value + "] is of type ["+ value.getClass().getName()+ "] and cannot be converted to required type ["+ this.requiredType.getName()+ "]");
+  }
+}

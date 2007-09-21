@@ -1,0 +1,14 @@
+{
+  if (numberFormat != null) {
+    try {
+      Number number=numberFormat.parse(text.trim());
+      return convertNumberToTargetClass(number,targetClass);
+    }
+ catch (    ParseException ex) {
+      throw new IllegalArgumentException(ex.getMessage());
+    }
+  }
+ else {
+    return parseNumber(text,targetClass);
+  }
+}

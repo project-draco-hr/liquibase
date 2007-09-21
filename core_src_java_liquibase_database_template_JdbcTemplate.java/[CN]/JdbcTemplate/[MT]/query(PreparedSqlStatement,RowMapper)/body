@@ -1,0 +1,3 @@
+{
+  return (List)query(psc,new RowMapperResultSetExtractor(rowMapper));
+}

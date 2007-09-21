@@ -1,0 +1,30 @@
+{
+  String trimmed=text.trim();
+  if (targetClass.equals(Byte.class)) {
+    return Byte.decode(trimmed);
+  }
+ else   if (targetClass.equals(Short.class)) {
+    return Short.decode(trimmed);
+  }
+ else   if (targetClass.equals(Integer.class)) {
+    return Integer.decode(trimmed);
+  }
+ else   if (targetClass.equals(Long.class)) {
+    return Long.decode(trimmed);
+  }
+ else   if (targetClass.equals(BigInteger.class)) {
+    return decodeBigInteger(trimmed);
+  }
+ else   if (targetClass.equals(Float.class)) {
+    return Float.valueOf(trimmed);
+  }
+ else   if (targetClass.equals(Double.class)) {
+    return Double.valueOf(trimmed);
+  }
+ else   if (targetClass.equals(BigDecimal.class) || targetClass.equals(Number.class)) {
+    return new BigDecimal(trimmed);
+  }
+ else {
+    throw new IllegalArgumentException("Cannot convert String [" + text + "] to target class ["+ targetClass.getName()+ "]");
+  }
+}

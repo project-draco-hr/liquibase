@@ -1,52 +1,17 @@
 {
-  DatabaseConnection conn=getConnection();
-  PreparedStatement stmt=null;
-  Statement countStatement=null;
-  ResultSet countRS;
   try {
-    stmt=conn.prepareStatement(createChangeToTagSQL());
-    ResultSet rs=stmt.executeQuery();
-    if (!rs.next()) {
-      throw new JDBCException("Did not tag database correctly");
+    int totalRows=new JdbcTemplate(this).queryForInt(new RawSqlStatement("select count(*) from " + getDatabaseChangeLogTableName()));
+    if (totalRows == 0) {
+      throw new JDBCException("Cannot tag an empty database");
     }
-    Timestamp lastExecutedDate=rs.getTimestamp(1);
-    rs.close();
-    stmt.close();
-    stmt=conn.prepareStatement(createTagSQL());
-    stmt.setString(1,tagString);
-    stmt.setTimestamp(2,lastExecutedDate);
-    int rowsUpdated=stmt.executeUpdate();
+    Date lastExecutedDate=(Date)new JdbcTemplate(this).queryForObject(createChangeToTagSQL(),Date.class);
+    int rowsUpdated=new JdbcTemplate(this).update(createTagSQL(tagString,lastExecutedDate));
     if (rowsUpdated == 0) {
-      countStatement=conn.createStatement();
-      countRS=countStatement.executeQuery("select count(*) from " + getDatabaseChangeLogTableName());
-      countRS.next();
-      if (countRS.getInt(1) == 0) {
-        throw new JDBCException("Cannot tag an empty database");
-      }
-      countRS.close();
       throw new JDBCException("Did not tag database change log correctly");
     }
-    conn.commit();
+    getConnection().commit();
   }
  catch (  Exception e) {
     throw new JDBCException(e);
-  }
- finally {
-    if (stmt != null) {
-      try {
-        stmt.close();
-      }
- catch (      SQLException e) {
-        ;
-      }
-    }
-    if (countStatement != null) {
-      try {
-        countStatement.close();
-      }
- catch (      SQLException e) {
-        ;
-      }
-    }
   }
 }

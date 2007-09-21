@@ -1,0 +1,4 @@
+{
+  this.sqlType=sqlType;
+  this.scale=new Integer(scale);
+}

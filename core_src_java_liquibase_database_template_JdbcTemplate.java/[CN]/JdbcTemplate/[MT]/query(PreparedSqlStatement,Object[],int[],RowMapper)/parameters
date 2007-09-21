@@ -1,0 +1,4 @@
+PreparedSqlStatement sql
+Object[] args
+int[] argTypes
+RowMapper rowMapper

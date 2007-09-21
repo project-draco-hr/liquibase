@@ -1,0 +1,6 @@
+{
+  while (rs.next()) {
+    this.rch.processRow(rs);
+  }
+  return null;
+}

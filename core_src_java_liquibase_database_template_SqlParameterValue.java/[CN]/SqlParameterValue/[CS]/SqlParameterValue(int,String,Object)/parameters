@@ -1,0 +1,3 @@
+int sqlType
+String typeName
+Object value

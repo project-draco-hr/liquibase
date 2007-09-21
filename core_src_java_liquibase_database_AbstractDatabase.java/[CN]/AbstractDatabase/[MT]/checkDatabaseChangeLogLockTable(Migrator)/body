@@ -1,5 +1,4 @@
 {
-  Statement statement=null;
   DatabaseConnection connection=getConnection();
   ResultSet rs=null;
   try {
@@ -7,10 +6,9 @@
     if (!rs.next()) {
       if (!changeLogLockCreateAttempted) {
         changeLogLockCreateAttempted=true;
-        String createTableStatement=getCreateChangeLogLockSQL();
+        SqlStatement createTableStatement=getCreateChangeLogLockSQL();
         if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
-          statement=connection.createStatement();
-          statement.executeUpdate(createTableStatement);
+          new JdbcTemplate(this).update(createTableStatement);
           connection.commit();
           log.info("Created database lock table with name: " + getDatabaseChangeLogLockTableName());
           changeLogLockTableExists=true;
@@ -22,12 +20,12 @@
               migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getDatabaseChangeLogLockTableName()+ " table does not exist."+ StreamUtil.getLineSeparator());
               migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Race conditions may cause a corrupted sql script." + StreamUtil.getLineSeparator());
               migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " Consider running: " + StreamUtil.getLineSeparator());
-              migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getCreateChangeLogLockSQL()+ ";"+ StreamUtil.getLineSeparator());
-              migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getChangeLogLockInsertSQL()+ ";"+ StreamUtil.getLineSeparator());
+              migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getCreateChangeLogLockSQL().getSqlStatement(this)+ ";"+ StreamUtil.getLineSeparator());
+              migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + " " + getChangeLogLockInsertSQL().getSqlStatement(this)+ ";"+ StreamUtil.getLineSeparator());
               migrator.getOutputSQLWriter().write(migrator.getDatabase().getLineComment() + "-----------------------------------------------------------------------------------------------" + StreamUtil.getLineSeparator()+ StreamUtil.getLineSeparator());
               outputtedLockWarning=true;
             }
-            migrator.getOutputSQLWriter().append(createTableStatement);
+            migrator.getOutputSQLWriter().append(createTableStatement.getSqlStatement(this));
             migrator.getOutputSQLWriter().append(";");
             migrator.getOutputSQLWriter().append(StreamUtil.getLineSeparator());
             migrator.getOutputSQLWriter().append(StreamUtil.getLineSeparator());
@@ -39,22 +37,18 @@
       changeLogLockTableExists=true;
     }
     rs.close();
-    if (statement != null) {
-      statement.close();
-    }
-    String insertRowStatment=getChangeLogLockInsertSQL();
+    SqlStatement insertRowStatment=getChangeLogLockInsertSQL();
     if (changeLogLockTableExists) {
-      statement=connection.createStatement();
-      rs=statement.executeQuery("select * from " + getDatabaseChangeLogLockTableName() + " where id=1".toUpperCase());
-      if (!rs.next()) {
+      RawSqlStatement selectStatement=new RawSqlStatement(("select count(*) from " + getDatabaseChangeLogLockTableName() + " where id=1".toUpperCase()));
+      int rows=new JdbcTemplate(this).queryForInt(selectStatement);
+      if (rows == 0) {
         if (migrator.getMode().equals(Migrator.Mode.EXECUTE_MODE)) {
-          statement=connection.createStatement();
-          statement.executeUpdate(insertRowStatment);
+          new JdbcTemplate(this).update(insertRowStatment);
           connection.commit();
-          log.info("Created database lock table with name: " + getDatabaseChangeLogLockTableName());
+          log.info("Inserted lock row into: " + getDatabaseChangeLogLockTableName());
         }
  else {
-          migrator.getOutputSQLWriter().append(insertRowStatment);
+          migrator.getOutputSQLWriter().append(insertRowStatment.getSqlStatement(this));
           migrator.getOutputSQLWriter().append(";");
           migrator.getOutputSQLWriter().append(StreamUtil.getLineSeparator());
           migrator.getOutputSQLWriter().append(StreamUtil.getLineSeparator());
@@ -72,14 +66,6 @@
     throw new JDBCException(e);
   }
  finally {
-    if (statement != null) {
-      try {
-        statement.close();
-      }
- catch (      SQLException e) {
-        throw new JDBCException(e);
-      }
-    }
     if (rs != null) {
       try {
         rs.close();

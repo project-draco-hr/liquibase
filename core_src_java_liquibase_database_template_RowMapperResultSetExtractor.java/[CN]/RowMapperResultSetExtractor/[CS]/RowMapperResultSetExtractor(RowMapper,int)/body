@@ -1,0 +1,4 @@
+{
+  this.rowMapper=rowMapper;
+  this.rowsExpected=rowsExpected;
+}

@@ -1,0 +1,22 @@
+{
+  StringBuffer sql=new StringBuffer("UPDATE " + tableName + " SET");
+  for (  String column : newColumnValues.keySet()) {
+    sql.append(" ").append(column).append(" = ");
+    Object newValue=newColumnValues.get(column);
+    if (newValue instanceof String && database.shouldQuoteValue(((String)newValue))) {
+      sql.append("'").append(newValue).append("',");
+    }
+ else {
+      sql.append(newValue).append(",");
+    }
+  }
+  sql.deleteCharAt(sql.lastIndexOf(","));
+  if (whereClause != null) {
+    String fixedWhereClause="WHERE " + whereClause;
+    for (    Object param : whereParameters) {
+      fixedWhereClause=fixedWhereClause.replaceFirst("\\?","'" + param + "'");
+    }
+    sql.append(" ").append(fixedWhereClause);
+  }
+  return sql.toString();
+}

@@ -1,0 +1,3 @@
+int sqlType
+int scale
+Object value

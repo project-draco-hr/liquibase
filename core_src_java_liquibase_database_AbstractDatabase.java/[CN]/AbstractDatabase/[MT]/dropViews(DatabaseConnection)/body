@@ -1,20 +1,19 @@
 {
   ResultSet rs=null;
-  Statement dropStatement=null;
   try {
     rs=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,new String[]{"VIEW"});
-    dropStatement=conn.createStatement();
     while (rs.next()) {
       String tableName=rs.getString("TABLE_NAME");
       if (getSystemTablesAndViews().contains(tableName)) {
         continue;
       }
-      String sql="DROP VIEW " + tableName;
+      DropViewChange dropChange=new DropViewChange();
+      dropChange.setViewName(tableName);
       try {
         log.finest("Dropping view " + tableName);
-        dropStatement.executeUpdate(sql);
+        dropChange.executeStatements(this);
       }
- catch (      SQLException e) {
+ catch (      UnsupportedChangeException e) {
         throw new JDBCException("Error dropping view '" + tableName + "': "+ e.getMessage(),e);
       }
     }
@@ -23,14 +22,6 @@
     throw new JDBCException(e);
   }
  finally {
-    if (dropStatement != null) {
-      try {
-        dropStatement.close();
-      }
- catch (      SQLException e) {
-        throw new JDBCException(e);
-      }
-    }
     if (rs != null) {
       try {
         rs.close();

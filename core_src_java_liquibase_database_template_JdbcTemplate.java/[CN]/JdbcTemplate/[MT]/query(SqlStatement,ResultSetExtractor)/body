@@ -1,0 +1,25 @@
+{
+  if (sql instanceof PreparedSqlStatement) {
+    return query(((PreparedSqlStatement)sql),rse);
+  }
+ else   if (sql instanceof CallableSqlStatement) {
+    throw new JDBCException("Direct query using CallableSqlStatement not currently implemented");
+  }
+class QueryStatementCallback implements StatementCallback {
+    public Object doInStatement(    Statement stmt) throws SQLException, JDBCException {
+      ResultSet rs=null;
+      try {
+        rs=stmt.executeQuery(sql.getSqlStatement(database));
+        ResultSet rsToUse=rs;
+        return rse.extractData(rsToUse);
+      }
+  finally {
+        JdbcUtils.closeResultSet(rs);
+      }
+    }
+    public SqlStatement getStatement(){
+      return sql;
+    }
+  }
+  return execute(new QueryStatementCallback());
+}

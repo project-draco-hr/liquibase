@@ -1,0 +1,21 @@
+{
+  PreparedStatement ps=null;
+  try {
+    ps=psc.createPreparedStatement(database);
+    PreparedStatement psToUse=ps;
+    return action.doInPreparedStatement(psToUse);
+  }
+ catch (  SQLException ex) {
+    if (psc instanceof ParameterDisposer) {
+      ((ParameterDisposer)psc).cleanupParameters();
+    }
+    JdbcUtils.closeStatement(ps);
+    throw new JDBCException(ex);
+  }
+ finally {
+    if (psc instanceof ParameterDisposer) {
+      ((ParameterDisposer)psc).cleanupParameters();
+    }
+    JdbcUtils.closeStatement(ps);
+  }
+}

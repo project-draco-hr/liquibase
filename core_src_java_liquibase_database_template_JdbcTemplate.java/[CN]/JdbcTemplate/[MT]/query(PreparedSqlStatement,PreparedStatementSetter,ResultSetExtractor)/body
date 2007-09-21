@@ -1,0 +1,22 @@
+{
+  return execute(psc,new PreparedStatementCallback(){
+    public Object doInPreparedStatement(    PreparedStatement ps) throws SQLException, JDBCException {
+      ResultSet rs=null;
+      try {
+        if (pss != null) {
+          pss.setValues(ps);
+        }
+        rs=ps.executeQuery();
+        ResultSet rsToUse=rs;
+        return rse.extractData(rsToUse);
+      }
+  finally {
+        JdbcUtils.closeResultSet(rs);
+        if (pss instanceof ParameterDisposer) {
+          ((ParameterDisposer)pss).cleanupParameters();
+        }
+      }
+    }
+  }
+);
+}

@@ -1,0 +1,22 @@
+{
+  CallableStatement cs=null;
+  try {
+    DatabaseConnection conToUse=database.getConnection();
+    cs=csc.createCallableStatement(conToUse);
+    CallableStatement csToUse=cs;
+    return action.doInCallableStatement(csToUse);
+  }
+ catch (  SQLException ex) {
+    if (csc instanceof ParameterDisposer) {
+      ((ParameterDisposer)csc).cleanupParameters();
+    }
+    JdbcUtils.closeStatement(cs);
+    throw new JDBCException(ex);
+  }
+ finally {
+    if (csc instanceof ParameterDisposer) {
+      ((ParameterDisposer)csc).cleanupParameters();
+    }
+    JdbcUtils.closeStatement(cs);
+  }
+}

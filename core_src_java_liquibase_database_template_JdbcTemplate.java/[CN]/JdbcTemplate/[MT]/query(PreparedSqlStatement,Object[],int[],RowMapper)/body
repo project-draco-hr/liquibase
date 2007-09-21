@@ -1,0 +1,3 @@
+{
+  return (List)query(sql,args,argTypes,new RowMapperResultSetExtractor(rowMapper));
+}

@@ -1,0 +1,5 @@
+{
+  if (paramValues != null) {
+    cleanupParameters(Arrays.asList(paramValues));
+  }
+}

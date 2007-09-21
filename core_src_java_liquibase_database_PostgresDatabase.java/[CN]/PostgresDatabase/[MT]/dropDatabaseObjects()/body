@@ -1,9 +1,7 @@
 {
-  DatabaseConnection conn=getConnection();
-  Statement dropStatement=null;
   try {
-    dropStatement=conn.createStatement();
-    dropStatement.executeUpdate("DROP OWNED BY " + getConnectionUsername());
+    new JdbcTemplate(this).execute(new RawSqlStatement("DROP OWNED BY " + getConnectionUsername()));
+    getConnection().commit();
     changeLogTableExists=false;
     changeLogLockTableExists=false;
     changeLogCreateAttempted=false;
@@ -11,16 +9,5 @@
   }
  catch (  SQLException e) {
     throw new JDBCException(e);
-  }
- finally {
-    try {
-      if (dropStatement != null) {
-        dropStatement.close();
-      }
-      conn.commit();
-    }
- catch (    SQLException e) {
-      ;
-    }
   }
 }

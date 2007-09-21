@@ -1,30 +1,21 @@
 {
   if (doesChangeLogLockTableExist()) {
-    DatabaseConnection conn=getConnection();
-    PreparedStatement stmt=null;
     try {
-      String releaseSQL=("update " + getDatabaseChangeLogLockTableName() + " set locked=?, lockgranted=null, lockedby=null where id=1").toUpperCase();
-      stmt=conn.prepareStatement(releaseSQL);
-      stmt.setBoolean(1,false);
-      int updatedRows=stmt.executeUpdate();
+      UpdateStatement releaseStatement=new UpdateStatement();
+      releaseStatement.setTableName(getDatabaseChangeLogLockTableName());
+      releaseStatement.addNewColumnValue("LOCKED",false,Types.BOOLEAN);
+      releaseStatement.addNewColumnValue("LOCKGRANTED",null,Types.TIMESTAMP);
+      releaseStatement.addNewColumnValue("LOCKEDBY",null,Types.VARCHAR);
+      releaseStatement.setWhereClause(" ID = 1");
+      int updatedRows=new JdbcTemplate(this).update((PreparedSqlStatement)releaseStatement);
       if (updatedRows != 1) {
-        throw new LockException("Did not update change log lock correctly.\n\n" + releaseSQL + " updated "+ updatedRows+ " instead of the expected 1 row.");
+        throw new LockException("Did not update change log lock correctly.\n\n" + releaseStatement + " updated "+ updatedRows+ " instead of the expected 1 row.");
       }
-      conn.commit();
+      getConnection().commit();
       log.info("Successfully released change log lock");
     }
  catch (    Exception e) {
       throw new LockException(e);
-    }
- finally {
-      if (stmt != null) {
-        try {
-          stmt.close();
-        }
- catch (        SQLException e) {
-          ;
-        }
-      }
     }
   }
 }

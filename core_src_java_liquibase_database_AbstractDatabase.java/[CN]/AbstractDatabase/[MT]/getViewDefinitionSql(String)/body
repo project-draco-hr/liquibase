@@ -6,5 +6,5 @@
   if (getCatalogName() != null) {
     sql+=" and table_catalog='" + getCatalogName() + "'";
   }
-  return sql;
+  return new RawSqlStatement(sql);
 }

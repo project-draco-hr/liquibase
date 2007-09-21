@@ -1,3 +1,3 @@
 {
-  return ("CREATE TABLE DATABASECHANGELOG (id varchar(150) not null, " + "author varchar(150) not null, " + "filename varchar(255) not null, "+ "dateExecuted " + getDateTimeType() + " not null, "+ "md5sum varchar(32) null, "+ "description varchar(255) null, "+ "comments varchar(255) null, "+ "tag varchar(255) null, "+ "liquibase varchar(10) null, "+ "primary key(id, author, filename))").toUpperCase();
+  return new RawSqlStatement(("CREATE TABLE DATABASECHANGELOG (id varchar(150) not null, " + "author varchar(150) not null, " + "filename varchar(255) not null, "+ "dateExecuted " + getDateTimeType() + " not null, "+ "md5sum varchar(32) null, "+ "description varchar(255) null, "+ "comments varchar(255) null, "+ "tag varchar(255) null, "+ "liquibase varchar(10) null, "+ "primary key(id, author, filename))").toUpperCase());
 }

@@ -1,0 +1,10 @@
+{
+  int returnType=type;
+  if (returnType == Types.BOOLEAN) {
+    String booleanType=getBooleanType();
+    if (!booleanType.equalsIgnoreCase("boolean")) {
+      returnType=Types.TINYINT;
+    }
+  }
+  return returnType;
+}

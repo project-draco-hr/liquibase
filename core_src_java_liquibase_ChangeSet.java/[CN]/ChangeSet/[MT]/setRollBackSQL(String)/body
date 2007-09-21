@@ -2,8 +2,9 @@
   if (sql == null) {
     return;
   }
-  this.rollBackStatements=sql.split(";");
+  String[] sqlStatements=sql.split(";");
+  this.rollBackStatements=new SqlStatement[sqlStatements.length];
   for (int i=0; i < rollBackStatements.length; i++) {
-    rollBackStatements[i]=rollBackStatements[i].trim();
+    rollBackStatements[i]=new RawSqlStatement(sqlStatements[i].trim());
   }
 }

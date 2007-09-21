@@ -1,0 +1,11 @@
+{
+  if (rs != null) {
+    try {
+      rs.close();
+    }
+ catch (    SQLException ex) {
+    }
+catch (    Throwable ex) {
+    }
+  }
+}
