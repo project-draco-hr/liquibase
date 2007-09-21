@@ -3,7 +3,8 @@
     throw new JDBCException("Direct execution of PreparedSqlStatement not currently implemented");
   }
  else   if (sql instanceof CallableSqlStatement) {
-    throw new JDBCException("Execution of CallableSqlStatement not currently implemented");
+    call(((CallableSqlStatement)sql),new ArrayList());
+    return;
   }
 class ExecuteStatementCallback implements StatementCallback {
     public Object doInStatement(    Statement stmt) throws SQLException {

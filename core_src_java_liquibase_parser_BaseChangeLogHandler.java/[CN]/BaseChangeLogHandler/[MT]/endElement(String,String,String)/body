@@ -34,6 +34,10 @@
       ((RawSQLChange)change).setComments(textString);
       text=new StringBuffer();
     }
+ else     if (change != null && change instanceof CreateProcedureChange && "comment".equals(qName)) {
+      ((CreateProcedureChange)change).setComments(textString);
+      text=new StringBuffer();
+    }
  else     if (changeSet != null && "comment".equals(qName)) {
       changeSet.setComments(textString);
       text=new StringBuffer();
@@ -46,6 +50,9 @@
       if (textString != null) {
         if (change instanceof RawSQLChange) {
           ((RawSQLChange)change).setSql(textString);
+        }
+ else         if (change instanceof CreateProcedureChange) {
+          ((CreateProcedureChange)change).setProcedureBody(textString);
         }
  else         if (change instanceof CreateViewChange) {
           ((CreateViewChange)change).setSelectQuery(textString);
