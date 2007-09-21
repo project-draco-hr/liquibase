@@ -33,7 +33,7 @@
   Properties info=new Properties();
   info.put("user",username);
   info.put("password",password);
-  Connection connection=null;
+  Connection connection;
   try {
     connection=driverObject.connect(url,info);
   }

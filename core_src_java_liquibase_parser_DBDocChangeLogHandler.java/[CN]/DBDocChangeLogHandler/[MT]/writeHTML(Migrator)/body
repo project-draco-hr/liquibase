@@ -21,4 +21,8 @@
   }
   pendingChangesWriter.writeHTML("index",null,changesToRun,migrator,rootChangeLog);
   pendingSQLWriter.writeHTML("sql",null,changesToRun,migrator,rootChangeLog);
+  if (recentChanges.size() > MAX_RECENT_CHANGE) {
+    recentChanges=recentChanges.subList(0,MAX_RECENT_CHANGE);
+  }
+  recentChangesWriter.writeHTML("index",recentChanges,null,migrator,rootChangeLog);
 }

@@ -5,7 +5,7 @@
   buffer.append(getTableName()).append("(");
   Iterator<ColumnConfig> iterator=columns.iterator();
   while (iterator.hasNext()) {
-    ColumnConfig column=(ColumnConfig)iterator.next();
+    ColumnConfig column=iterator.next();
     buffer.append(column.getName());
     if (iterator.hasNext()) {
       buffer.append(", ");

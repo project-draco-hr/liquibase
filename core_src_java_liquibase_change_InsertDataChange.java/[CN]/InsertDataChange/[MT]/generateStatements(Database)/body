@@ -7,7 +7,7 @@
   columnNames.append("(");
   columnValues.append("(");
   while (iterator.hasNext()) {
-    ColumnConfig column=(ColumnConfig)iterator.next();
+    ColumnConfig column=iterator.next();
     columnNames.append(column.getName());
     columnValues.append(getColumnValue(column,database));
     if (iterator.hasNext()) {

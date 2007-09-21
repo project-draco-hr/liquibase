@@ -1,3 +1,3 @@
 {
-  return "Table with the name " + oldTableName + " has been renamed to "+ newTableName;
+  return "Table " + oldTableName + " renamed to "+ newTableName;
 }

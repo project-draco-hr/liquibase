@@ -1,3 +1,3 @@
 {
-  return "Columns Merged";
+  return "Columns " + getTableName() + "."+ getColumn1Name()+ " and "+ getTableName()+ "."+ getColumn2Name()+ " merged";
 }

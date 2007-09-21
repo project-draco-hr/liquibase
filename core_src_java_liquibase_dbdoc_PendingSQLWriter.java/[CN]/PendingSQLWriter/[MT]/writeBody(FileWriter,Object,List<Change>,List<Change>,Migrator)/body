@@ -1,4 +1,7 @@
 {
+  if (changesToRun.size() == 0) {
+    fileWriter.append("<b>NONE</b>");
+  }
   fileWriter.append("<code><pre>");
   ChangeSet lastRunChangeSet=null;
   for (  Change change : changesToRun) {

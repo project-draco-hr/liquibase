@@ -1,3 +1,3 @@
 {
-  return "Primary Key Added";
+  return "Primary key added to " + getTableName() + " ("+ getColumnNames()+ ")";
 }

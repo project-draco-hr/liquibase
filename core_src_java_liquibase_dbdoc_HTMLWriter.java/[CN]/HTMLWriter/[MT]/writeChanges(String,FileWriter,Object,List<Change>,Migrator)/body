@@ -3,13 +3,11 @@
   fileWriter.append("<TR BGCOLOR=\"#CCCCFF\" CLASS=\"TableHeadingColor\">\n");
   fileWriter.append("<TD COLSPAN='4'><FONT SIZE=\"+2\">\n");
   fileWriter.append("<B>");
-  fileWriter.append(title).append(" For \"");
-  fileWriter.append(String.valueOf(object));
-  fileWriter.append("\"");
+  fileWriter.append(title);
   fileWriter.append("</B></FONT></TD>\n");
   fileWriter.append("</TR>\n");
   ChangeSet lastChangeSet=null;
-  if (changes == null) {
+  if (changes == null || changes.size() == 0) {
     fileWriter.append("<tr><td>None Found</td></tr>");
   }
  else {

@@ -8,6 +8,7 @@
     changesToRunByObject=new HashMap<DatabaseObject,List<Change>>();
     changesToRunByAuthor=new HashMap<String,List<Change>>();
     changesToRun=new ArrayList<Change>();
+    recentChanges=new ArrayList<Change>();
     rootOutputDir=new File(outputDirectory);
     if (!rootOutputDir.exists()) {
       rootOutputDir.mkdirs();
@@ -17,6 +18,7 @@
     tableWriter=new TableWriter(rootOutputDir);
     columnWriter=new ColumnWriter(rootOutputDir);
     pendingChangesWriter=new PendingChangesWriter(rootOutputDir);
+    recentChangesWriter=new RecentChangesWriter(rootOutputDir);
     pendingSQLWriter=new PendingSQLWriter(rootOutputDir);
     this.migrator=migrator;
     rootChangeLog=physicalChangeLogLocation;

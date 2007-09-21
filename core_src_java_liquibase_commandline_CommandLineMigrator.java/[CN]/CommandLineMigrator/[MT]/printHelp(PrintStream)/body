@@ -34,6 +34,10 @@
   stream.println("                                 the base database");
   stream.println("                                 to the target database to standard out");
   stream.println("");
+  stream.println("Documentation Commands");
+  stream.println(" dbDoc <outputDirectory>         Generates Javadoc-like documentation");
+  stream.println("                                 based on current database and change log");
+  stream.println("");
   stream.println("Maintenance Commands");
   stream.println(" tag <tag string>          'Tags' the current database state for future rollback");
   stream.println(" status [--verbose]        Outputs count (list if --verbose) of unrun changesets");

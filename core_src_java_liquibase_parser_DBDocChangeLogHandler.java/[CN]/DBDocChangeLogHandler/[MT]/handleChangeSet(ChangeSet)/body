@@ -14,6 +14,7 @@
     }
  else {
       changesByAuthor.get(changeSet.getAuthor()).add(change);
+      recentChanges.add(0,change);
     }
   }
   if (!changeLogs.contains(changeSet.getDatabaseChangeLog())) {

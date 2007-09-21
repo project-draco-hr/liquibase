@@ -1,0 +1,4 @@
+{
+  writeCustomHTML(fileWriter,object,ranChanges,migrator.getDatabase());
+  writeChanges("Most Recent Changes",fileWriter,object,ranChanges,migrator);
+}

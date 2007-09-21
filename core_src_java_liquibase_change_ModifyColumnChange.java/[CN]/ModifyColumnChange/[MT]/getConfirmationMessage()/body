@@ -1,3 +1,3 @@
 {
-  return "Column with the name " + column.getName() + " has been modified.";
+  return "Column " + getTableName() + "."+ column.getName()+ " modified";
 }
