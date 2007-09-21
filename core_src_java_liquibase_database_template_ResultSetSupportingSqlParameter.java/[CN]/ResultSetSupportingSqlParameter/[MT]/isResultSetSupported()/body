@@ -1,3 +1,0 @@
-{
-  return (this.resultSetExtractor != null || this.rowCallbackHandler != null || this.rowMapper != null);
-}

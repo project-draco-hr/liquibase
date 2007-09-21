@@ -1,5 +1,5 @@
 {
   this.name=name;
   this.sqlType=sqlType;
-  this.scale=new Integer(scale);
+  this.scale=scale;
 }

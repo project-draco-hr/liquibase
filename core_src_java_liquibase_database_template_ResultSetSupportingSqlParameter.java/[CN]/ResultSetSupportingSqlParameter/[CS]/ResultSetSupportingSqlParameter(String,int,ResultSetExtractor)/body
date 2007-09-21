@@ -1,4 +1,0 @@
-{
-  super(name,sqlType);
-  this.resultSetExtractor=rse;
-}

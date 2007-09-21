@@ -1,3 +1,0 @@
-{
-  StatementCreatorUtils.cleanupParameters(this.args);
-}

@@ -33,7 +33,7 @@
         ps.setBigDecimal(paramIndex,(BigDecimal)inValue);
       }
  else       if (scale != null) {
-        ps.setObject(paramIndex,inValue,sqlType,scale.intValue());
+        ps.setObject(paramIndex,inValue,sqlType,scale);
       }
  else {
         ps.setObject(paramIndex,inValue,sqlType);

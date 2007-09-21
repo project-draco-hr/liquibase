@@ -5,8 +5,7 @@
       Object arg=this.args[i];
       if (arg instanceof Collection && this.argTypes[i] != Types.ARRAY) {
         Collection entries=(Collection)arg;
-        for (Iterator it=entries.iterator(); it.hasNext(); ) {
-          Object entry=it.next();
+        for (        Object entry : entries) {
           StatementCreatorUtils.setParameterValue(ps,argIndx++,this.argTypes[i],entry);
         }
       }

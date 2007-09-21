@@ -1,3 +1,0 @@
-{
-  setParameterValueInternal(ps,paramIndex,sqlType,typeName,null,inValue);
-}

@@ -1,5 +1,0 @@
-PreparedStatement ps
-int paramIndex
-int sqlType
-String typeName
-Object inValue

@@ -12,9 +12,6 @@
       }
   finally {
         JdbcUtils.closeResultSet(rs);
-        if (pss instanceof ParameterDisposer) {
-          ((ParameterDisposer)pss).cleanupParameters();
-        }
       }
     }
   }

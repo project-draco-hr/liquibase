@@ -1,4 +1,0 @@
-{
-  super(name,sqlType,typeName);
-  this.sqlReturnType=sqlReturnType;
-}
