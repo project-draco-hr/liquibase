@@ -1,6 +1,6 @@
 {
   List<SqlStatement> returnStatements=new ArrayList<SqlStatement>();
-  String[] statements=StringUtils.processMutliLineSQL(sql);
+  String[] statements=StringUtils.processMutliLineSQL(sql,isStrippingComments());
   for (  String statement : statements) {
     returnStatements.add(new RawSqlStatement(statement));
   }

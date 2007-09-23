@@ -1,4 +1,0 @@
-{
-  String stripped=stripComments(multiLineSQL);
-  return splitSQL(stripped);
-}
