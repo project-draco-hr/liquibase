@@ -1,0 +1,5 @@
+{
+  Project application=ProjectManager.getInstance().getDefaultProject();
+  LiquibaseProjectComponent helloWorldComponent=application.getComponent(LiquibaseProjectComponent.class);
+  helloWorldComponent.sayHello();
+}
