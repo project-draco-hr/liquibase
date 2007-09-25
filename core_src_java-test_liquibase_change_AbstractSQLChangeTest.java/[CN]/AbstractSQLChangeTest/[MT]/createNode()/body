@@ -1,0 +1,6 @@
+{
+  refactoring.setSql("SOME SQL HERE");
+  Element element=refactoring.createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
+  assertEquals("sql",element.getTagName());
+  assertEquals("SOME SQL HERE",XMLUtil.getTextContent(element));
+}

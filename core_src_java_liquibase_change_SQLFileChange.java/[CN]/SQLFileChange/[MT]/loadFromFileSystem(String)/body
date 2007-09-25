@@ -2,7 +2,7 @@
   FileInputStream fis=null;
   try {
     fis=new FileInputStream(file);
-    sql=StreamUtil.getStreamContents(fis);
+    setSql(StreamUtil.getStreamContents(fis));
     return true;
   }
  catch (  FileNotFoundException fnfe) {

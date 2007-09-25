@@ -1,0 +1,5 @@
+{
+  refactoring.setSql("SQL STATEMENT HERE");
+  OracleDatabase database=new OracleDatabase();
+  assertEquals("SQL STATEMENT HERE",refactoring.generateStatements(database)[0].getSqlStatement(database));
+}

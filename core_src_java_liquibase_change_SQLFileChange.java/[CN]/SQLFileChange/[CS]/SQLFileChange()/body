@@ -1,4 +1,3 @@
 {
   super("sqlFile","SQL From File");
-  stripComments=false;
 }

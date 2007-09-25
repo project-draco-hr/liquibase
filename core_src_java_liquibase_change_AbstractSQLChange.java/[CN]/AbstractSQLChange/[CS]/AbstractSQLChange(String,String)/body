@@ -1,0 +1,5 @@
+{
+  super(tagName,changeName);
+  setStripComments(false);
+  setSplitStatements(true);
+}

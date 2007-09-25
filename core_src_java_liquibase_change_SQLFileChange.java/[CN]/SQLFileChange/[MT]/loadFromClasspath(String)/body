@@ -9,7 +9,7 @@
     if (in == null) {
       return false;
     }
-    sql=StreamUtil.getStreamContents(in);
+    setSql(StreamUtil.getStreamContents(in));
     return true;
   }
  catch (  IOException ioe) {
