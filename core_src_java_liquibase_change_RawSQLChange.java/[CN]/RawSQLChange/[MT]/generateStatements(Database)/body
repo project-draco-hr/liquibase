@@ -1,7 +1,12 @@
 {
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
-  for (  String sql : StringUtils.processMutliLineSQL(this.sql,isStrippingComments())) {
-    statements.add(new RawSqlStatement(sql));
+  if (splitStatements) {
+    for (    String sql : StringUtils.processMutliLineSQL(this.sql,isStrippingComments())) {
+      statements.add(new RawSqlStatement(sql));
+    }
+  }
+ else {
+    statements.add(new RawSqlStatement(this.sql));
   }
   return statements.toArray(new SqlStatement[statements.size()]);
 }

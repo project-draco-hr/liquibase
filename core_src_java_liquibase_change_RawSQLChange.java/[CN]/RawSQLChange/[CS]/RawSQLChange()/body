@@ -1,4 +1,5 @@
 {
   super("sql","Custom SQL");
   stripComments=false;
+  splitStatements=true;
 }
