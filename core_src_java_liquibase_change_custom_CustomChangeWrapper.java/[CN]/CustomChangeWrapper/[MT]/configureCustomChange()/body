@@ -3,6 +3,8 @@
     for (    String param : params) {
       ObjectUtil.setProperty(customChange,param,paramValues.get(param));
     }
+    customChange.setFileOpener(getFileOpener());
+    customChange.setUp();
   }
  catch (  Exception e) {
     throw new CustomChangeException(e);

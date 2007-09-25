@@ -1,4 +1,3 @@
 {
   super.setFileOpener(fileOpener);
-  customChange.setFileOpener(fileOpener);
 }
