@@ -1,0 +1,4 @@
+{
+  migrator.setMode(Migrator.Mode.EXECUTE_MODE);
+  migrator.migrate();
+}

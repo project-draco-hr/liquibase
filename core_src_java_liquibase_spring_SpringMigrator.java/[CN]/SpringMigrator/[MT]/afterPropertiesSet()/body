@@ -1,0 +1,34 @@
+{
+  Connection c=null;
+  try {
+    c=getDataSource().getConnection();
+    Migrator migrator=createMigrator(c);
+    migrator.init(c);
+    setup(migrator);
+    if (isWriteSqlFileEnabled() && getSqlOutputDir() != null) {
+      if (migrator.listUnrunChangeSets().size() > 0) {
+        log.log(Level.WARNING,getExecuteDisabledWarningMessage());
+      }
+      writeSqlFile(migrator);
+    }
+    if (isExecuteEnabled()) {
+      executeSql(migrator);
+    }
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+ finally {
+    if (c != null) {
+      try {
+        c.close();
+      }
+ catch (      SQLException e) {
+        ;
+      }
+    }
+  }
+}
