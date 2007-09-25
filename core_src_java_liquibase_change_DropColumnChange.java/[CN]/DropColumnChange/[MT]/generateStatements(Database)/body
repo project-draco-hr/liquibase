@@ -8,5 +8,8 @@
  else   if (database instanceof SybaseDatabase) {
     return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getTableName() + " DROP "+ getColumnName())};
   }
+ else   if (database instanceof FirebirdDatabase) {
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getTableName() + " DROP "+ getColumnName())};
+  }
   return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + getTableName() + " DROP COLUMN "+ getColumnName())};
 }

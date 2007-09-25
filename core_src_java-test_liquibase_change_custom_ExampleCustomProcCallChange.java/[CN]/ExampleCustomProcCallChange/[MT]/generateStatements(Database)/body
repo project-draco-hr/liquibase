@@ -1,5 +1,4 @@
 {
-  StoredProcedureStatement procedureStatement=new StoredProcedureStatement();
-  procedureStatement.setProcedureName("testHello");
+  StoredProcedureStatement procedureStatement=new StoredProcedureStatement("testHello");
   return new SqlStatement[]{procedureStatement};
 }
