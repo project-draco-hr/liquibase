@@ -1,30 +1,30 @@
 {
   if (database instanceof SybaseDatabase) {
-    return generateSybaseStatements();
+    return generateSybaseStatements((SybaseDatabase)database);
   }
  else   if (database instanceof MSSQLDatabase) {
-    return generateMSSQLStatements();
+    return generateMSSQLStatements((MSSQLDatabase)database);
   }
  else   if (database instanceof MySQLDatabase) {
-    return generateMySQLStatements();
+    return generateMySQLStatements((MySQLDatabase)database);
   }
  else   if (database instanceof OracleDatabase) {
-    return generateOracleStatements();
+    return generateOracleStatements((OracleDatabase)database);
   }
  else   if (database instanceof DerbyDatabase) {
-    return generateDerbyStatements();
+    return generateDerbyStatements((DerbyDatabase)database);
   }
  else   if (database instanceof H2Database) {
-    return generateH2Statements();
+    return generateH2Statements((H2Database)database);
   }
  else   if (database instanceof CacheDatabase) {
-    return generateCacheStatements();
+    return generateCacheStatements((CacheDatabase)database);
   }
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
   if (defaultNullValue != null) {
-    statements.add(generateUpdateStatement());
+    statements.add(generateUpdateStatement(database));
   }
-  statements.add(new RawSqlStatement("ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL "));
+  statements.add(new RawSqlStatement("ALTER TABLE " + escapeTableName(getTableName(),database) + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL "));
   if (database instanceof DB2Database) {
     statements.add(new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')"));
   }

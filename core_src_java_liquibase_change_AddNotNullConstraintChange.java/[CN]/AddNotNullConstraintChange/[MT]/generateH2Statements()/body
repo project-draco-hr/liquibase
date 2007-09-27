@@ -1,8 +1,0 @@
-{
-  List<SqlStatement> statements=new ArrayList<SqlStatement>();
-  if (defaultNullValue != null) {
-    statements.add(generateUpdateStatement());
-  }
-  statements.add(new RawSqlStatement("ALTER TABLE " + getTableName() + " ALTER COLUMN  "+ getColumnName()+ " "+ getColumnDataType()+ " NOT NULL"));
-  return statements.toArray(new SqlStatement[statements.size()]);
-}

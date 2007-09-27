@@ -10,5 +10,5 @@
   constraints.setNullable(Boolean.FALSE);
   column.setConstraints(constraints);
   SybaseDatabase database=new SybaseDatabase();
-  assertEquals("ALTER TABLE TAB ADD NEWCOL TYP NOT NULL",refactoring.generateStatements(database)[0].getSqlStatement(database));
+  assertEquals("ALTER TABLE [TAB] ADD NEWCOL TYP NOT NULL",refactoring.generateStatements(database)[0].getSqlStatement(database));
 }

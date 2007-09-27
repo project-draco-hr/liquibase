@@ -1,3 +1,0 @@
-{
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + tableName + " MODIFY "+ columnName+ " NULL")};
-}

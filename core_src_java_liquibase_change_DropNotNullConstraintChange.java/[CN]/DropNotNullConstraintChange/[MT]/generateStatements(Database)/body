@@ -1,24 +1,24 @@
 {
   if (database instanceof SybaseDatabase) {
-    return generateSybaseStatements();
+    return generateSybaseStatements((SybaseDatabase)database);
   }
  else   if (database instanceof MSSQLDatabase) {
-    return generateMSSQLStatements();
+    return generateMSSQLStatements((MSSQLDatabase)database);
   }
  else   if (database instanceof MySQLDatabase) {
-    return generateMySQLStatements();
+    return generateMySQLStatements((MySQLDatabase)database);
   }
  else   if (database instanceof OracleDatabase) {
-    return generateOracleStatements();
+    return generateOracleStatements((OracleDatabase)database);
   }
  else   if (database instanceof DerbyDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + tableName + " ALTER COLUMN "+ columnName+ " NULL")};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " NULL")};
   }
  else   if (database instanceof HsqlDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + tableName + " ALTER COLUMN "+ columnName+ " NULL")};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " NULL")};
   }
  else   if (database instanceof CacheDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + tableName + " ALTER COLUMN "+ columnName+ " NULL")};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " NULL")};
   }
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + tableName + " ALTER COLUMN "+ columnName+ " DROP NOT NULL")};
+  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " DROP NOT NULL")};
 }

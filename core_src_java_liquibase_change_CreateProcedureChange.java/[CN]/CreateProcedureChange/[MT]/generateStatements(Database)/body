@@ -1,3 +1,7 @@
 {
-  return new SqlStatement[]{new RawSqlStatement(getProcedureBody())};
+  String endDelimiter=";";
+  if (database instanceof OracleDatabase) {
+    endDelimiter="\n/";
+  }
+  return new SqlStatement[]{new RawSqlStatement(getProcedureBody(),endDelimiter)};
 }

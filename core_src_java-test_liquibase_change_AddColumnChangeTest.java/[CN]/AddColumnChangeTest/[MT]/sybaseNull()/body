@@ -6,5 +6,5 @@
   column.setType("TYP");
   refactoring.setColumn(column);
   SybaseDatabase db=new SybaseDatabase();
-  assertEquals("ALTER TABLE TAB ADD NEWCOL TYP NULL",refactoring.generateStatements(db)[0].getSqlStatement(db));
+  assertEquals("ALTER TABLE [TAB] ADD NEWCOL TYP NULL",refactoring.generateStatements(db)[0].getSqlStatement(db));
 }
