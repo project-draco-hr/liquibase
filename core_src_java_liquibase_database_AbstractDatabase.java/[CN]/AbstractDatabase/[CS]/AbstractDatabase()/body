@@ -1,3 +1,2 @@
 {
-  log=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
 }
