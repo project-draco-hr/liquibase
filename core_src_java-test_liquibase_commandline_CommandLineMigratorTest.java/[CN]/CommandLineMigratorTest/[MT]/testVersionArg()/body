@@ -1,0 +1,3 @@
+{
+  CommandLineMigrator.main(new String[]{"--version"});
+}
