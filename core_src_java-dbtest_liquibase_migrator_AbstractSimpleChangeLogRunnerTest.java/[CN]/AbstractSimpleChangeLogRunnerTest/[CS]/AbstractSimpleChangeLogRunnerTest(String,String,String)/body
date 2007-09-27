@@ -1,6 +1,7 @@
 {
   this.completeChangeLog="changelogs/" + changelogDir + "/complete/root.changelog.xml";
   this.rollbackChangeLog="changelogs/" + changelogDir + "/rollback/rollbackable.changelog.xml";
+  this.includedChangeLog="changelogs/" + changelogDir + "/complete/included.changelog.xml";
   this.driverName=driverName;
   this.url=url;
   username="liquibase";

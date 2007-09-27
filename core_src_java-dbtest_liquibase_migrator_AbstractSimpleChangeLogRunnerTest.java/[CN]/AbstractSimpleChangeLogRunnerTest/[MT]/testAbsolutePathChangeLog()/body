@@ -1,0 +1,14 @@
+{
+  Enumeration<URL> urls=new JUnitFileOpener().getResources(includedChangeLog);
+  URL completeChangeLogURL=urls.nextElement();
+  String absolutePathOfChangeLog=completeChangeLogURL.toExternalForm();
+  absolutePathOfChangeLog=absolutePathOfChangeLog.replaceFirst("file:\\/","");
+  if (System.getProperty("os.name").startsWith("Windows ")) {
+    absolutePathOfChangeLog=absolutePathOfChangeLog.replace('/','\\');
+  }
+  Migrator migrator=createMigrator(absolutePathOfChangeLog,new FileSystemFileOpener());
+  migrator.dropAll();
+  migrator.migrate();
+  migrator.migrate();
+  migrator.dropAll();
+}

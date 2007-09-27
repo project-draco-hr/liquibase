@@ -6,7 +6,7 @@
     results.add(new URL("file://" + f.getCanonicalPath()));
   }
   final Iterator<URL> it=results.iterator();
-  Enumeration<URL> eURL=new Enumeration<URL>(){
+  return new Enumeration<URL>(){
     public boolean hasMoreElements(){
       return it.hasNext();
     }
@@ -15,5 +15,4 @@
     }
   }
 ;
-  return eURL;
 }

@@ -3,7 +3,7 @@
   String sql="INSERT INTO DATABASECHANGELOG (ID, AUTHOR, FILENAME, DATEEXECUTED, MD5SUM, DESCRIPTION, COMMENTS, LIQUIBASE) VALUES ('?', '?', '?', " + dateValue + ", '?', '?', '?', '?')";
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(escapeStringForDatabase(changeSet.getId())));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getAuthor()));
-  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getDatabaseChangeLog().getFilePath()));
+  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getDatabaseChangeLog().getFilePath().replace("\\","\\\\")));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getMd5sum()));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(limitSize(changeSet.getDescription())));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(limitSize(StringUtils.trimToEmpty(changeSet.getComments()))));
