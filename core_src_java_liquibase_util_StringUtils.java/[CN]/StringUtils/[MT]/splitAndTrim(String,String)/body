@@ -1,0 +1,10 @@
+{
+  if (s == null) {
+    return null;
+  }
+  List<String> returnList=new ArrayList<String>();
+  for (  String string : s.split(regex)) {
+    returnList.add(string.trim());
+  }
+  return returnList;
+}

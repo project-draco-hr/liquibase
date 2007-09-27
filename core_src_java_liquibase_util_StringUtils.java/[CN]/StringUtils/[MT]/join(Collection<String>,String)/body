@@ -1,4 +1,10 @@
 {
+  if (collection == null) {
+    return null;
+  }
+  if (collection.size() == 0) {
+    return "";
+  }
   StringBuffer buffer=new StringBuffer();
   for (  String val : collection) {
     buffer.append(val).append(delimiter);

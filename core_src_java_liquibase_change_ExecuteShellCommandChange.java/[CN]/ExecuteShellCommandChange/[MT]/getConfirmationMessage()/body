@@ -1,0 +1,3 @@
+{
+  return "Shell command '" + getCommandString() + "' executed";
+}

@@ -6,5 +6,5 @@
   this.url=url;
   username="liquibase";
   password="liquibase";
-  Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.OFF);
+  Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.SEVERE);
 }
