@@ -1,0 +1,3 @@
+{
+  return getClass().getClassLoader().getResourceAsStream("grails-app/migrations" + file);
+}
