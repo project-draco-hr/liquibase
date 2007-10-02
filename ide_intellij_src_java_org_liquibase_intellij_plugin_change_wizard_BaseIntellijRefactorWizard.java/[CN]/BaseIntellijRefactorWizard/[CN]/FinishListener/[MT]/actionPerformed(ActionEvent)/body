@@ -1,0 +1,20 @@
+{
+  try {
+    DatabaseChangeLog changeLog=new DatabaseChangeLog(getMigrator(),getCurrentChangeLog());
+    ChangeSet changeSet=new ChangeSet(StringUtils.trimToEmpty(metaDataPage.getId()),StringUtils.trimToEmpty(metaDataPage.getAuthor()),metaDataPage.isAlwaysRun(),metaDataPage.isRunOnChange(),changeLog,StringUtils.trimToNull(metaDataPage.getContext()),StringUtils.trimToNull(metaDataPage.getDbms()));
+    changeSet.setComments(metaDataPage.getComments());
+    for (    Change change : createChanges()) {
+      changeSet.addChange(change);
+    }
+    liquibase.database.Database liquibaseDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+    for (    Change change : changeSet.getChanges()) {
+      for (      SqlStatement sql : change.generateStatements(liquibaseDatabase)) {
+        new JdbcTemplate(liquibaseDatabase).execute(sql);
+      }
+    }
+    getMigrator().markChangeSetAsRan(changeSet);
+  }
+ catch (  Throwable e) {
+    e.printStackTrace();
+  }
+}

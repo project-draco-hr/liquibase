@@ -1,0 +1,8 @@
+{
+  try {
+    return getSelectedDatabase().getConnection();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

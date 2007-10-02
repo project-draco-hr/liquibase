@@ -1,0 +1,5 @@
+{
+  ActionGroup refactorActionGroup=new ActionGroup("Refactor");
+  refactorActionGroup.addAction(new AddTableAction());
+  PopupMenuManager.getInstance().addAction(refactorActionGroup,DBTree.class,Table.class);
+}

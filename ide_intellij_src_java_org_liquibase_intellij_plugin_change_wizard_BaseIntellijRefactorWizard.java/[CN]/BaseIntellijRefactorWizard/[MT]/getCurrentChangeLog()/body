@@ -1,0 +1,5 @@
+{
+  Project project=ProjectManager.getInstance().getDefaultProject();
+  LiquibaseProjectComponent liquibaseComponent=project.getComponent(LiquibaseProjectComponent.class);
+  return liquibaseComponent.getCurrentChangeLog();
+}

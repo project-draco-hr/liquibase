@@ -1,0 +1,6 @@
+{
+  Project project=ProjectManager.getInstance().getDefaultProject();
+  LiquibaseProjectComponent liquibaseComponent=project.getComponent(LiquibaseProjectComponent.class);
+  Migrator migrator=liquibaseComponent.getMigrator(getConnection());
+  return migrator;
+}

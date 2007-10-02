@@ -1,0 +1,14 @@
+{
+  Project application=ProjectManager.getInstance().getDefaultProject();
+  LiquibaseProjectComponent liquibaseComponent=application.getComponent(LiquibaseProjectComponent.class);
+  String tag=Messages.showInputDialog(((Project)e.getDataContext().getData(DataConstants.PROJECT)),"Tag: ","Enter Database Tag",Messages.getQuestionIcon(),"",new InputValidator(){
+    public boolean checkInput(    String string){
+      return string.trim().length() > 0;
+    }
+    public boolean canClose(    String string){
+      return true;
+    }
+  }
+);
+  liquibaseComponent.tag(tag,null);
+}

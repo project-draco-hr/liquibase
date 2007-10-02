@@ -1,0 +1,5 @@
+{
+  idTextField.setText(String.valueOf(new Date().getTime()));
+  authorTextField.setText(StringUtils.trimToEmpty(System.getProperty("user.name")));
+  return mainPanel;
+}

@@ -1,0 +1,6 @@
+{
+  Project project=ProjectManager.getInstance().getDefaultProject();
+  BaseIntellijRefactorWizard wizard=createWizard(project);
+  wizard.pack();
+  wizard.show();
+}

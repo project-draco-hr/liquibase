@@ -1,0 +1,8 @@
+{
+  try {
+    getMigrator(conn).migrate();
+  }
+ catch (  LiquibaseException e) {
+    displayError(e);
+  }
+}

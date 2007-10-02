@@ -1,0 +1,10 @@
+{
+  Migrator migrator=new Migrator("changelog.xml",new IntellijFileOpener());
+  try {
+    migrator.init(connection);
+  }
+ catch (  JDBCException e) {
+    throw new RuntimeException(e);
+  }
+  return migrator;
+}

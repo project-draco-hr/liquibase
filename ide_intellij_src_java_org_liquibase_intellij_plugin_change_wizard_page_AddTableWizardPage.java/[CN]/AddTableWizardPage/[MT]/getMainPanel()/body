@@ -1,0 +1,6 @@
+{
+  DefaultTableModel tableModel=new DefaultTableModel(new Object[]{"Column Name","Data Type","Nullable","PK","Auto-Increment","Default Value"},0);
+  columnTable.setModel(tableModel);
+  addColumnButton.addActionListener(new AddColumnActionListener());
+  return mainPanel;
+}
