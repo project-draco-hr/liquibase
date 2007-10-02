@@ -8,6 +8,9 @@
  else   if (database instanceof CacheDatabase) {
     throw new UnsupportedChangeException("Add Lookup Table not currently supported for Cache");
   }
+ else   if (database instanceof FirebirdDatabase) {
+    throw new UnsupportedChangeException("Add Lookup Table not currently supported for Firebird");
+  }
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
   SqlStatement[] createTablesSQL={new RawSqlStatement("CREATE TABLE " + escapeTableName(getNewTableName(),database) + " AS SELECT DISTINCT "+ getExistingColumnName()+ " AS "+ getNewColumnName()+ " FROM "+ escapeTableName(getExistingTableName(),database)+ " WHERE "+ getExistingColumnName()+ " IS NOT NULL")};
   if (database instanceof MSSQLDatabase) {

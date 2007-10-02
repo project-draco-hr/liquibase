@@ -1,3 +1,5 @@
 {
-  con.commit();
+  if (!con.getAutoCommit()) {
+    con.commit();
+  }
 }

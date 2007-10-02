@@ -5,5 +5,8 @@
  else   if (database instanceof PostgresDatabase) {
     return generatePostgresStatements((PostgresDatabase)database);
   }
+ else   if (database instanceof FirebirdDatabase) {
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(getTableName(),database) + " DROP CONSTRAINT "+ getConstraintName())};
+  }
   return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(getTableName(),database) + " DROP PRIMARY KEY")};
 }
