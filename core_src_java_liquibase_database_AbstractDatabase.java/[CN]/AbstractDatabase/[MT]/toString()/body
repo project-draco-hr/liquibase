@@ -1,4 +1,7 @@
 {
+  if (getConnection() == null) {
+    return getProductName() + " Database";
+  }
   try {
     return getConnectionUsername() + " @ " + getConnectionURL();
   }
