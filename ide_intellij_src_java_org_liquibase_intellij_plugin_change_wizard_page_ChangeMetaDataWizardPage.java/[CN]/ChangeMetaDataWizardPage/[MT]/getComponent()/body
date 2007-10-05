@@ -1,5 +1,16 @@
 {
   idTextField.setText(String.valueOf(new Date().getTime()));
   authorTextField.setText(StringUtils.trimToEmpty(System.getProperty("user.name")));
+  selectChangeLogButton.addActionListener(new ActionListener(){
+    public void actionPerformed(    ActionEvent actionEvent){
+      FileChooserDescriptor descriptor=new FileChooserDescriptor(true,false,false,false,true,false);
+      FileChooserDialog dialog=FileChooserFactory.getInstance().createFileChooser(descriptor,project);
+      VirtualFile[] files=dialog.choose(project.getWorkspaceFile(),project);
+      if (files != null && files.length > 0) {
+        LiquibaseProjectComponent.getInstance().setChangeLogFile((XmlFile)PsiManager.getInstance(project).findFile(files[files.length - 1]));
+      }
+    }
+  }
+);
   return mainPanel;
 }

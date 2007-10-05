@@ -1,3 +1,4 @@
 Project project
 Database database
 Connection connection
+AbstractDBObject selectedObject

@@ -1,0 +1,4 @@
+{
+  TreePath selectionPath=((DBTree)getUserData()).getSelectionModel().getLeadSelectionPath();
+  return (AbstractDBObject)selectionPath.getLastPathComponent();
+}

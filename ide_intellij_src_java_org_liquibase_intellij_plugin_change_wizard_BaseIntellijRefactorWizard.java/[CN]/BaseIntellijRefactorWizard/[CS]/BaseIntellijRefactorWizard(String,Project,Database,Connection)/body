@@ -6,6 +6,7 @@
   for (  Step page : createPages()) {
     addStep(page);
   }
+  metaDataPage=new ChangeMetaDataWizardPage(project);
   addStep(metaDataPage);
   getFinishButton().addActionListener(new FinishListener());
   init();

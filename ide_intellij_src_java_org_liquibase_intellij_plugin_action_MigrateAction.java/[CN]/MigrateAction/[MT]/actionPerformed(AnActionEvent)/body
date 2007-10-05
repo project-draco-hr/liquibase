@@ -1,5 +1,4 @@
 {
-  Project application=ProjectManager.getInstance().getDefaultProject();
-  LiquibaseProjectComponent liquibaseComponent=application.getComponent(LiquibaseProjectComponent.class);
+  LiquibaseProjectComponent liquibaseComponent=LiquibaseProjectComponent.getInstance();
   liquibaseComponent.migrate(null);
 }

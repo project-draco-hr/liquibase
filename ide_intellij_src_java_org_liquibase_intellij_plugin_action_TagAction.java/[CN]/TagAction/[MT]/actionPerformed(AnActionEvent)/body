@@ -1,6 +1,5 @@
 {
-  Project application=ProjectManager.getInstance().getDefaultProject();
-  LiquibaseProjectComponent liquibaseComponent=application.getComponent(LiquibaseProjectComponent.class);
+  LiquibaseProjectComponent liquibaseComponent=LiquibaseProjectComponent.getInstance();
   String tag=Messages.showInputDialog(((Project)e.getDataContext().getData(DataConstants.PROJECT)),"Tag: ","Enter Database Tag",Messages.getQuestionIcon(),"",new InputValidator(){
     public boolean checkInput(    String string){
       return string.trim().length() > 0;
