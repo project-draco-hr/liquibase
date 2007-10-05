@@ -1,0 +1,8 @@
+{
+  this.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
+  if (date == null) {
+    throw new LiquibaseException("rollback requires a rollback date");
+  }
+  this.setRollbackToDate(date);
+  migrate();
+}

@@ -1,0 +1,9 @@
+{
+  setMode(Migrator.Mode.OUTPUT_ROLLBACK_SQL_MODE);
+  setOutputSQLWriter(output);
+  if (date == null) {
+    throw new LiquibaseException("rollbackToDateSQL requires a rollback date");
+  }
+  setRollbackToDate(date);
+  migrate();
+}

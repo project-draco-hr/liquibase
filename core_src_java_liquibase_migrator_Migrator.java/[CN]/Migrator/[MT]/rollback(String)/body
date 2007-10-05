@@ -1,0 +1,8 @@
+{
+  this.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
+  if (tag == null) {
+    throw new LiquibaseException("rollback requires a rollback tag");
+  }
+  this.setRollbackToTag(tag);
+  migrate();
+}

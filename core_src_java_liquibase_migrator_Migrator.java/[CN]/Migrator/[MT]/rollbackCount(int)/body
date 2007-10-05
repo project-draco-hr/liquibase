@@ -1,0 +1,5 @@
+{
+  this.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
+  this.setRollbackCount(changesToRollback);
+  migrate();
+}
