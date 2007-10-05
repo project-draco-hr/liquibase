@@ -1,0 +1,9 @@
+{
+  Logger logger=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
+  if (logger == null || (logger.getLevel().equals(Level.OFF))) {
+    return null;
+  }
+ else {
+    return ".  For more information, use the --logLevel flag)";
+  }
+}
