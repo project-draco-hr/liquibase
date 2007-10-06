@@ -1,3 +1,0 @@
-{
-  return getClass().getClassLoader().getResources("grails-app/migrations/" + packageName);
-}
