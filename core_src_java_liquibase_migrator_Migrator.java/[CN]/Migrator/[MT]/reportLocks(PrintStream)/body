@@ -1,0 +1,10 @@
+{
+  DatabaseChangeLogLock[] locks=listLocks();
+  out.println("Database change log locks for " + getDatabase().getConnectionUsername() + "@"+ getDatabase().getConnectionURL());
+  if (locks.length == 0) {
+    out.println(" - No locks");
+  }
+  for (  DatabaseChangeLogLock lock : locks) {
+    out.println(" - " + lock.getLockedBy() + " at "+ DateFormat.getDateTimeInstance().format(lock.getLockGranted()));
+  }
+}

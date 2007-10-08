@@ -1,0 +1,36 @@
+{
+  DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+  DocumentBuilder documentBuilder=factory.newDocumentBuilder();
+  documentBuilder.setEntityResolver(new MigratorSchemaResolver());
+  Document doc=documentBuilder.newDocument();
+  Element changeLogElement=doc.createElement("databaseChangeLog");
+  changeLogElement.setAttribute("xmlns","http://www.liquibase.org/xml/ns/dbchangelog/1.3");
+  changeLogElement.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
+  changeLogElement.setAttribute("xsi:schemaLocation","http://www.liquibase.org/xml/ns/dbchangelog/1.3 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.3.xsd");
+  doc.appendChild(changeLogElement);
+  List<Change> changes=new ArrayList<Change>();
+  addMissingTableChanges(changes,targetDatabase);
+  addUnexpectedTableChanges(changes);
+  addMissingColumnChanges(changes,targetDatabase);
+  addUnexpectedColumnChanges(changes);
+  addChangedColumnChanges(changes);
+  addMissingPrimaryKeyChanges(changes);
+  addUnexpectedPrimaryKeyChanges(changes);
+  addMissingIndexChanges(changes);
+  addUnexpectedIndexChanges(changes);
+  addMissingForeignKeyChanges(changes);
+  addUnexpectedForeignKeyChanges(changes);
+  addMissingSequenceChanges(changes);
+  addUnexpectedSequenceChanges(changes);
+  addMissingViewChanges(changes);
+  addUnexpectedViewChanges(changes);
+  for (  Change change : changes) {
+    Element changeSet=doc.createElement("changeSet");
+    changeSet.setAttribute("author","diff-generated");
+    changeSet.setAttribute("id",generateId());
+    changeSet.appendChild(change.createNode(doc));
+    doc.getDocumentElement().appendChild(changeSet);
+  }
+  xmlWriter.write(doc,out);
+  out.flush();
+}

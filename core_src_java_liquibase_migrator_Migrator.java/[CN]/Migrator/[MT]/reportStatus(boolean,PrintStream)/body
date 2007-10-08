@@ -1,0 +1,9 @@
+{
+  List<ChangeSet> unrunChangeSets=listUnrunChangeSets();
+  out.println(unrunChangeSets.size() + " change sets have not been applied to " + getDatabase().getConnectionUsername()+ "@"+ getDatabase().getConnectionURL());
+  if (verbose) {
+    for (    ChangeSet changeSet : unrunChangeSets) {
+      System.out.println("     " + changeSet.toString(false));
+    }
+  }
+}
