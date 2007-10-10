@@ -1,0 +1,7 @@
+{
+  String sql="some sql\nGO\nmore sql";
+  String[] result=StringUtils.splitSQL(sql);
+  assertEquals(2,result.length);
+  assertEquals("some sql",result[0]);
+  assertEquals("more sql",result[1]);
+}
