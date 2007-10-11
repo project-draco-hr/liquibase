@@ -1,0 +1,18 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws JDBCException {
+      if (database instanceof HsqlDatabase) {
+        return;
+      }
+      UniqueConstraint uniqueConstraint=new UniqueConstraint("UQ_TESTCT_ID");
+      NotNullConstraint notNullConstraint=new NotNullConstraint();
+      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int",false).addColumn("name","varchar(255)").addColumn("username","int",uniqueConstraint,notNullConstraint);
+      new JdbcTemplate(database).execute(statement);
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      Table table=snapshot.getTable(TABLE_NAME);
+      assertEquals(TABLE_NAME.toUpperCase(),table.getName().toUpperCase());
+      assertNotNull(table.getColumn("id"));
+    }
+  }
+);
+}

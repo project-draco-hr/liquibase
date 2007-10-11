@@ -1,5 +1,6 @@
 {
   updateListeners("Reading columns for " + database.toString() + " ...");
+  Statement selectStatement=database.getConnection().createStatement();
   ResultSet rs=databaseMetaData.getColumns(database.getCatalogName(),database.getSchemaName(),null,null);
   while (rs.next()) {
     Column columnInfo=new Column();
@@ -32,7 +33,6 @@
     columnInfo.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
     columnInfo.setTypeName(rs.getString("TYPE_NAME"));
     String defaultValue=rs.getString("COLUMN_DEF");
-    columnInfo.setAutoIncrement(isAutoIncrement(defaultValue,database));
     columnInfo.setDefaultValue(translateDefaultValue(defaultValue,database));
     int nullable=rs.getInt("NULLABLE");
     if (nullable == DatabaseMetaData.columnNoNulls) {
@@ -41,7 +41,20 @@
  else     if (nullable == DatabaseMetaData.columnNullable) {
       columnInfo.setNullable(true);
     }
+    columnInfo.setPrimaryKey(isPrimaryKey(columnInfo));
+    ResultSet selectRS=null;
+    try {
+      selectRS=selectStatement.executeQuery("SELECT " + columnName + " FROM "+ tableName+ " WHERE 1 = 0");
+      ResultSetMetaData meta=selectRS.getMetaData();
+      columnInfo.setAutoIncrement(meta.isAutoIncrement(1));
+    }
+  finally {
+      if (selectRS != null) {
+        selectRS.close();
+      }
+    }
     columnsMap.put(tableName + "." + columnName,columnInfo);
   }
   rs.close();
+  selectStatement.close();
 }

@@ -1,0 +1,9 @@
+{
+  CreateTableChange change=new CreateTableChange();
+  ColumnConfig columnConfig=new ColumnConfig();
+  columnConfig.setName("id");
+  columnConfig.setDefaultValueBoolean(Boolean.TRUE);
+  change.addColumn(columnConfig);
+  CreateTableStatement statement=(CreateTableStatement)change.generateStatements(new MockDatabase())[0];
+  assertEquals("'" + new MockDatabase().getTrueBooleanValue() + "'",statement.getDefaultValue("id"));
+}

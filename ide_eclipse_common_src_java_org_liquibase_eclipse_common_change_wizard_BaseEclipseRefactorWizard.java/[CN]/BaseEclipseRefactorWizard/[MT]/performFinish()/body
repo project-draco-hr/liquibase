@@ -49,11 +49,7 @@
           }
           doc.getDocumentElement().appendChild(changeSet.createNode(doc));
           FileOutputStream out=new FileOutputStream(file);
-          OutputFormat format=new OutputFormat(doc);
-          format.setIndenting(true);
-          XMLSerializer serializer=new XMLSerializer(out,format);
-          serializer.asDOMSerializer();
-          serializer.serialize(doc);
+          new DefaultXmlWriter().write(doc,out);
           monitor.done();
         }
  catch (        Exception e) {

@@ -1,0 +1,13 @@
+{
+  CreateTableChange change=new CreateTableChange();
+  ColumnConfig columnConfig=new ColumnConfig();
+  columnConfig.setName("id");
+  ConstraintsConfig constraints=new ConstraintsConfig();
+  constraints.setReferences("test(id)");
+  columnConfig.setConstraints(constraints);
+  change.addColumn(columnConfig);
+  CreateTableStatement statement=(CreateTableStatement)change.generateStatements(new MockDatabase())[0];
+  ForeignKeyConstraint keyConstraint=statement.getForeignKeyConstraints().iterator().next();
+  assertFalse(keyConstraint.isDeferrable());
+  assertFalse(keyConstraint.isInitiallyDeferred());
+}

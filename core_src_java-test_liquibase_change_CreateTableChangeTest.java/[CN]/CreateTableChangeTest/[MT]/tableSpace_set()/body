@@ -1,0 +1,6 @@
+{
+  CreateTableChange change=new CreateTableChange();
+  change.setTablespace("TESTTABLESPACE");
+  CreateTableStatement statement=(CreateTableStatement)change.generateStatements(new MockDatabase())[0];
+  assertEquals("TESTTABLESPACE",statement.getTablespace());
+}

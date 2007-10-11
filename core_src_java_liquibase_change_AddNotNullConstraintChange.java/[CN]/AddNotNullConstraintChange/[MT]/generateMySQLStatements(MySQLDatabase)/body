@@ -6,6 +6,6 @@
   if (defaultNullValue != null) {
     statements.add(generateUpdateStatement(database));
   }
-  statements.add(new RawSqlStatement("ALTER TABLE " + escapeTableName(getTableName(),database) + " MODIFY "+ getColumnName()+ " "+ columnDataType+ " NOT NULL"));
+  statements.add(new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " MODIFY "+ getColumnName()+ " "+ columnDataType+ " NOT NULL"));
   return statements.toArray(new SqlStatement[statements.size()]);
 }

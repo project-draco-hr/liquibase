@@ -1,0 +1,3 @@
+{
+  notNullColumns.add(notNullConstraint.getColumnName());
+}

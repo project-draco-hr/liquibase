@@ -1,0 +1,10 @@
+{
+  for (  PrimaryKey pk : getPrimaryKeys()) {
+    if (pk.getTableName().equalsIgnoreCase(pk.getTableName())) {
+      if (pk.getColumnNamesAsList().contains(columnInfo.getName())) {
+        return true;
+      }
+    }
+  }
+  return false;
+}

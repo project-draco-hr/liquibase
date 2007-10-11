@@ -4,5 +4,8 @@
       return true;
     }
   }
+ else   if (database instanceof DerbyDatabase) {
+    return defaultValue.equals("GENERATED_BY_DEFAULT");
+  }
   return false;
 }

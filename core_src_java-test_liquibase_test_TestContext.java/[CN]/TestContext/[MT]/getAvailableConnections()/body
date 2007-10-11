@@ -1,0 +1,12 @@
+{
+  if (availableConnections == null) {
+    availableConnections=new HashSet<Connection>();
+    for (    String url : getTestUrls()) {
+      Connection connection=openConnection(url);
+      if (connection != null) {
+        availableConnections.add(connection);
+      }
+    }
+  }
+  return availableConnections;
+}

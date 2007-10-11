@@ -1,29 +1,3 @@
 {
-  if ("boolean".equalsIgnoreCase(column.getType())) {
-    return getBooleanType();
-  }
- else   if ("currency".equalsIgnoreCase(column.getType())) {
-    return getCurrencyType();
-  }
- else   if ("UUID".equalsIgnoreCase(column.getType())) {
-    return getUUIDType();
-  }
- else   if ("BLOB".equalsIgnoreCase(column.getType()) || "LONGVARBINARY".equalsIgnoreCase(column.getType())) {
-    return getBlobType();
-  }
- else   if ("CLOB".equalsIgnoreCase(column.getType()) || "TEXT".equalsIgnoreCase(column.getType()) || "LONGVARCHAR".equalsIgnoreCase(column.getType())) {
-    return getClobType();
-  }
- else   if ("date".equalsIgnoreCase(column.getType())) {
-    return getDateType();
-  }
- else   if ("time".equalsIgnoreCase(column.getType())) {
-    return getTimeType();
-  }
- else   if ("dateTime".equalsIgnoreCase(column.getType())) {
-    return getDateTimeType();
-  }
- else {
-    return column.getType();
-  }
+  return getColumnType(columnConfig.getType(),columnConfig.isAutoIncrement());
 }

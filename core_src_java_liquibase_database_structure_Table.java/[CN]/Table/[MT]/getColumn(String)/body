@@ -1,0 +1,8 @@
+{
+  for (  Column column : getColumns()) {
+    if (column.getName().equalsIgnoreCase(columnName)) {
+      return column;
+    }
+  }
+  return null;
+}

@@ -1,0 +1,4 @@
+{
+  this.foreignKeyName=foreignKeyName;
+  this.references=references;
+}

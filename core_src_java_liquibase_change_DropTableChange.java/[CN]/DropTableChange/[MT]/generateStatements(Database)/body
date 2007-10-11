@@ -1,6 +1,6 @@
 {
   StringBuffer buffer=new StringBuffer(31);
-  buffer.append("DROP TABLE ").append(escapeTableName(getTableName(),database));
+  buffer.append("DROP TABLE ").append(SqlUtil.escapeTableName(getTableName(),database));
   if (isCascadeConstraints() != null && isCascadeConstraints()) {
     buffer.append(" CASCADE CONSTRAINTS");
   }

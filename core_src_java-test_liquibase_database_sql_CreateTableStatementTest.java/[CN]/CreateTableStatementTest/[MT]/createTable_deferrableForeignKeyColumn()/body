@@ -1,0 +1,28 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws JDBCException {
+      if (!database.supportsInitiallyDeferrableColumns()) {
+        return;
+      }
+      String foreignKeyName="fk_test_parent";
+      ForeignKeyConstraint fkConstraint=new ForeignKeyConstraint(foreignKeyName,TABLE_NAME + "(id)");
+      fkConstraint.setDeferrable(true);
+      fkConstraint.setInitiallyDeferred(true);
+      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int",false).addColumn("name","varchar(255)").addColumn("parent_id","int",fkConstraint);
+      new JdbcTemplate(database).execute(statement);
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      Table table=snapshot.getTable(TABLE_NAME);
+      assertEquals(TABLE_NAME.toUpperCase(),table.getName().toUpperCase());
+      assertNotNull(table.getColumn("id"));
+      ForeignKey foundForeignKey=snapshot.getForeignKey(foreignKeyName);
+      assertNotNull(foundForeignKey);
+      assertEquals(TABLE_NAME,foundForeignKey.getPrimaryKeyTable().getName().toUpperCase());
+      assertEquals("ID",foundForeignKey.getPrimaryKeyColumn().toUpperCase());
+      assertEquals(TABLE_NAME,foundForeignKey.getForeignKeyTable().getName().toUpperCase());
+      assertEquals("PARENT_ID",foundForeignKey.getForeignKeyColumn().toUpperCase());
+      assertTrue(foundForeignKey.isDeferrable());
+      assertTrue(foundForeignKey.isInitiallyDeferred());
+    }
+  }
+);
+}

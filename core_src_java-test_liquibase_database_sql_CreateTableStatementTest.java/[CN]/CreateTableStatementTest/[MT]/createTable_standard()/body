@@ -1,0 +1,19 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws JDBCException {
+      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int",false).addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'");
+      new JdbcTemplate(database).execute(statement);
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      Table table=snapshot.getTable(TABLE_NAME);
+      assertEquals(TABLE_NAME.toUpperCase(),table.getName().toUpperCase());
+      assertNotNull(table.getColumn("id"));
+      assertNotNull(table.getColumn("name"));
+      assertNotNull(table.getColumn("username"));
+      assertTrue(table.getColumn("id").isPrimaryKey());
+      assertNull(StringUtils.trimToNull(table.getColumn("name").getDefaultValue()));
+      assertTrue(table.getColumn("username").getDefaultValue().indexOf("NEWUSER") >= 0);
+      assertFalse(table.getColumn("id").isAutoIncrement());
+    }
+  }
+);
+}

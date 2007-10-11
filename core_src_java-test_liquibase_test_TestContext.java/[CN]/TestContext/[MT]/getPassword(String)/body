@@ -1,0 +1,9 @@
+{
+  if (url.startsWith("jdbc:hsqldb")) {
+    return "";
+  }
+ else   if (url.indexOf("windev1") > 0) {
+    return "sundog";
+  }
+  return "liquibase";
+}

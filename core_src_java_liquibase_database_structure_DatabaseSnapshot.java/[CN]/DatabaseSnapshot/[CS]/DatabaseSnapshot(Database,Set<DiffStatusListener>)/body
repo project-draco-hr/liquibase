@@ -4,9 +4,9 @@
     this.databaseMetaData=database.getConnection().getMetaData();
     this.statusListeners=statusListeners;
     readTablesAndViews();
-    readColumns();
     readForeignKeyInformation();
     readPrimaryKeys();
+    readColumns();
     readIndexes();
     readSequences();
     this.tables=new HashSet<Table>(tablesMap.values());

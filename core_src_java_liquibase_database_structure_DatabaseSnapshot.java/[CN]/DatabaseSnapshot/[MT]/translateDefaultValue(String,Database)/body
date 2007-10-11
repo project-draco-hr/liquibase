@@ -8,7 +8,7 @@
  else   if (database instanceof CacheDatabase) {
     if (defaultValue != null) {
       if (defaultValue.charAt(0) == '"' && defaultValue.charAt(defaultValue.length() - 1) == '"') {
-        defaultValue=defaultValue.substring(1,defaultValue.length() - 2);
+        defaultValue=defaultValue.substring(1,defaultValue.length() - 1);
         return "'" + defaultValue + "'";
       }
  else       if (defaultValue.startsWith("$")) {

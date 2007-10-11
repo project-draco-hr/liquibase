@@ -1,0 +1,9 @@
+{
+  new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
+    public void performTest(    Database database){
+      RawSqlStatement statement=new RawSqlStatement("statement here");
+      assertEquals(";",statement.getEndDelimiter(database));
+    }
+  }
+);
+}

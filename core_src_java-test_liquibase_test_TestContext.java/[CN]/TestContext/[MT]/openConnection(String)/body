@@ -1,0 +1,23 @@
+{
+  String username=getUsername(url);
+  String password=getPassword(url);
+  JUnitJDBCDriverClassLoader jdbcDriverLoader=JUnitJDBCDriverClassLoader.getInstance();
+  Driver driver=(Driver)Class.forName(DatabaseFactory.getInstance().findDefaultDriver(url),true,jdbcDriverLoader).newInstance();
+  Properties info=new Properties();
+  info.put("user",username);
+  if (password != null) {
+    info.put("password",password);
+  }
+  Connection connection;
+  try {
+    connection=driver.connect(url,info);
+  }
+ catch (  SQLException e) {
+    System.out.println("Could not connect to " + url + ": Will not test against");
+    return null;
+  }
+  if (connection == null) {
+    throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
+  }
+  return connection;
+}

@@ -1,0 +1,29 @@
+{
+  if ("boolean".equalsIgnoreCase(columnType)) {
+    return getBooleanType();
+  }
+ else   if ("currency".equalsIgnoreCase(columnType)) {
+    return getCurrencyType();
+  }
+ else   if ("UUID".equalsIgnoreCase(columnType)) {
+    return getUUIDType();
+  }
+ else   if ("BLOB".equalsIgnoreCase(columnType) || "LONGVARBINARY".equalsIgnoreCase(columnType)) {
+    return getBlobType();
+  }
+ else   if ("CLOB".equalsIgnoreCase(columnType) || "TEXT".equalsIgnoreCase(columnType) || "LONGVARCHAR".equalsIgnoreCase(columnType)) {
+    return getClobType();
+  }
+ else   if ("date".equalsIgnoreCase(columnType)) {
+    return getDateType();
+  }
+ else   if ("time".equalsIgnoreCase(columnType)) {
+    return getTimeType();
+  }
+ else   if ("dateTime".equalsIgnoreCase(columnType)) {
+    return getDateTimeType();
+  }
+ else {
+    return columnType;
+  }
+}

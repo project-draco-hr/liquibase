@@ -1,0 +1,68 @@
+{
+  StringBuffer buffer=new StringBuffer();
+  buffer.append("CREATE TABLE ").append(SqlUtil.escapeTableName(tableName,database)).append(" ");
+  buffer.append("(");
+  Iterator<String> columnIterator=columns.iterator();
+  while (columnIterator.hasNext()) {
+    String column=columnIterator.next();
+    boolean isAutoIncrement=autoIncrementColumns.contains(column);
+    buffer.append(column);
+    buffer.append(" ").append(database.getColumnType(columnTypes.get(column),isAutoIncrement));
+    if (getDefaultValue(column) != null) {
+      buffer.append(" DEFAULT ").append(getDefaultValue(column));
+    }
+    if (isAutoIncrement) {
+      buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
+    }
+    if (notNullColumns.contains(column)) {
+      buffer.append(" NOT NULL");
+    }
+ else {
+      if (database instanceof SybaseDatabase) {
+        buffer.append(" NULL");
+      }
+    }
+    if (columnIterator.hasNext()) {
+      buffer.append(", ");
+    }
+  }
+  if (primaryKeyConstraint != null && primaryKeyConstraint.getColumns().size() > 0) {
+    buffer.append(", CONSTRAINT ").append(StringUtils.trimToEmpty(primaryKeyConstraint.getConstraintName())).append(" PRIMARY KEY (");
+    buffer.append(StringUtils.join(primaryKeyConstraint.getColumns(),", "));
+    buffer.append(")");
+    buffer.append(",");
+  }
+  for (  ForeignKeyConstraint fkConstraint : foreignKeyConstraints) {
+    buffer.append(" CONSTRAINT ").append(fkConstraint.getForeignKeyName()).append(" FOREIGN KEY (").append(fkConstraint.getColumn()).append(") REFERENCES ").append(fkConstraint.getReferences());
+    if (fkConstraint.isDeleteCascade()) {
+      buffer.append(" ON DELETE CASCADE");
+    }
+    if (fkConstraint.isInitiallyDeferred()) {
+      buffer.append(" INITIALLY DEFERRED");
+    }
+    if (fkConstraint.isDeferrable()) {
+      buffer.append(" DEFERRABLE");
+    }
+    buffer.append(",");
+  }
+  for (  UniqueConstraint uniqueConstraint : uniqueConstraints) {
+    buffer.append(" CONSTRAINT ");
+    buffer.append(uniqueConstraint.getConstraintName());
+    buffer.append(" UNIQUE (");
+    buffer.append(StringUtils.join(uniqueConstraint.getColumns(),", "));
+    buffer.append("),");
+  }
+  String sql=buffer.toString().replaceFirst(",\\s*$","") + ")";
+  if (tablespace != null && database.supportsTablespaces()) {
+    if (database instanceof MSSQLDatabase) {
+      sql+=" ON " + tablespace;
+    }
+ else     if (database instanceof DB2Database) {
+      sql+=" IN " + tablespace;
+    }
+ else {
+      sql+=" TABLESPACE " + tablespace;
+    }
+  }
+  return sql;
+}

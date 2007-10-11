@@ -12,16 +12,16 @@
     return generateOracleStatements((OracleDatabase)database);
   }
  else   if (database instanceof DerbyDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " NULL")};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " NULL")};
   }
  else   if (database instanceof HsqlDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " NULL")};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " NULL")};
   }
  else   if (database instanceof CacheDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " NULL")};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " NULL")};
   }
  else   if (database instanceof FirebirdDatabase) {
     throw new UnsupportedChangeException("LiquiBase does not currently support dropping null constraints in Firebird");
   }
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " DROP NOT NULL")};
+  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " DROP NOT NULL")};
 }

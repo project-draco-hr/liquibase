@@ -1,0 +1,6 @@
+{
+  if (tableName.startsWith("RDB$")) {
+    return true;
+  }
+  return super.isSystemTable(catalogName,schemaName,tableName);
+}

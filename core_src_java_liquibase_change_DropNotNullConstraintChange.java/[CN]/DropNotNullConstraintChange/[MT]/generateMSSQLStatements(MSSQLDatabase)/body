@@ -2,5 +2,5 @@
   if (columnDataType == null) {
     throw new RuntimeException("columnDataType is required to drop not null constraints with MS-SQL");
   }
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " "+ columnDataType+ " NULL")};
+  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(tableName,database) + " ALTER COLUMN "+ columnName+ " "+ columnDataType+ " NULL")};
 }

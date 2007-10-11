@@ -1,0 +1,18 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws JDBCException {
+      if (!database.supportsAutoIncrement()) {
+        return;
+      }
+      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int",true).addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'");
+      new JdbcTemplate(database).execute(statement);
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      Table table=snapshot.getTable(TABLE_NAME);
+      assertEquals(TABLE_NAME.toUpperCase(),table.getName().toUpperCase());
+      assertNotNull(table.getColumn("id"));
+      assertTrue(table.getColumn("id").isPrimaryKey());
+      assertTrue(table.getColumn("id").isAutoIncrement());
+    }
+  }
+);
+}

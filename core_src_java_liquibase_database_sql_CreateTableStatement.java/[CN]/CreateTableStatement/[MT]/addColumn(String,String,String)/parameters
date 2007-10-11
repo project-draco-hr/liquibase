@@ -1,0 +1,3 @@
+String columnName
+String columnType
+String defaultValue

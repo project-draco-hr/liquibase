@@ -1,0 +1,4 @@
+{
+  this.columns.addAll(Arrays.asList(columns));
+  return this;
+}
