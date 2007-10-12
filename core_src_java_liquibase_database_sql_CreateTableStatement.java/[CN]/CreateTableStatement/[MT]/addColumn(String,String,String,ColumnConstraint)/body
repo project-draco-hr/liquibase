@@ -1,5 +1,5 @@
 {
-  this.columns.add(columnName);
+  this.getColumns().add(columnName);
   this.columnTypes.put(columnName,columnType);
   if (defaultValue != null) {
     defaultValues.put(columnName,defaultValue);
@@ -7,25 +7,25 @@
   if (constraints != null) {
     for (    ColumnConstraint constraint : constraints) {
       if (constraint instanceof PrimaryKeyConstraint) {
-        if (this.primaryKeyConstraint == null) {
+        if (this.getPrimaryKeyConstraint() == null) {
           this.primaryKeyConstraint=(PrimaryKeyConstraint)constraint;
         }
  else {
           for (          String column : ((PrimaryKeyConstraint)constraint).getColumns()) {
-            this.primaryKeyConstraint.addColumns(column);
+            this.getPrimaryKeyConstraint().addColumns(column);
           }
         }
       }
  else       if (constraint instanceof NotNullConstraint) {
-        notNullColumns.add(columnName);
+        getNotNullColumns().add(columnName);
       }
  else       if (constraint instanceof ForeignKeyConstraint) {
         ((ForeignKeyConstraint)constraint).setColumn(columnName);
-        foreignKeyConstraints.add(((ForeignKeyConstraint)constraint));
+        getForeignKeyConstraints().add(((ForeignKeyConstraint)constraint));
       }
  else       if (constraint instanceof UniqueConstraint) {
         ((UniqueConstraint)constraint).addColumns(columnName);
-        uniqueConstraints.add(((UniqueConstraint)constraint));
+        getUniqueConstraints().add(((UniqueConstraint)constraint));
       }
  else {
         throw new RuntimeException("Unknown constraint type: " + constraint.getClass().getName());

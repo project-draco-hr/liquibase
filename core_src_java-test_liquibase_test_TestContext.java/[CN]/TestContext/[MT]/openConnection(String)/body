@@ -8,7 +8,7 @@
   if (password != null) {
     info.put("password",password);
   }
-  Connection connection;
+  final Connection connection;
   try {
     connection=driver.connect(url,info);
   }
@@ -19,5 +19,17 @@
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
+  Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+    public void run(){
+      try {
+        connection.close();
+      }
+ catch (      SQLException e) {
+        System.out.println("Could not close " + url);
+        e.printStackTrace();
+      }
+    }
+  }
+));
   return connection;
 }

@@ -1,3 +1,4 @@
 {
-  notNullColumns.add(notNullConstraint.getColumnName());
+  getNotNullColumns().add(notNullConstraint.getColumnName());
+  return this;
 }

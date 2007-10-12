@@ -1,0 +1,7 @@
+{
+  CreateTableStatement statement=new CreateTableStatement("tableName");
+  statement.addColumn("id","int");
+  assertFalse(statement.getNotNullColumns().contains("id"));
+  statement.addColumnConstraint(new NotNullConstraint("id"));
+  assertTrue(statement.getNotNullColumns().contains("id"));
+}

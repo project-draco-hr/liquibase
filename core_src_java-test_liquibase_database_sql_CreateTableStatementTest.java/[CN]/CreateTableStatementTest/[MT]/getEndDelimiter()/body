@@ -1,0 +1,9 @@
+{
+  new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws JDBCException {
+      CreateTableStatement statement=new CreateTableStatement("testTable");
+      assertEquals(";",statement.getEndDelimiter(database));
+    }
+  }
+);
+}

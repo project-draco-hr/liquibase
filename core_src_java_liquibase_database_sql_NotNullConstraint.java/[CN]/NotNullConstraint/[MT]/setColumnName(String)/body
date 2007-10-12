@@ -1,3 +1,4 @@
 {
   this.columnName=columnName;
+  return this;
 }

@@ -1,3 +1,4 @@
 {
-  uniqueConstraints.add(uniqueConstraint);
+  getUniqueConstraints().add(uniqueConstraint);
+  return this;
 }

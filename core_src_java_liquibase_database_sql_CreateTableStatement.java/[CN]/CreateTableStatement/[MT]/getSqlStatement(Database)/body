@@ -1,8 +1,8 @@
 {
   StringBuffer buffer=new StringBuffer();
-  buffer.append("CREATE TABLE ").append(SqlUtil.escapeTableName(tableName,database)).append(" ");
+  buffer.append("CREATE TABLE ").append(SqlUtil.escapeTableName(getTableName(),database)).append(" ");
   buffer.append("(");
-  Iterator<String> columnIterator=columns.iterator();
+  Iterator<String> columnIterator=getColumns().iterator();
   while (columnIterator.hasNext()) {
     String column=columnIterator.next();
     boolean isAutoIncrement=autoIncrementColumns.contains(column);
@@ -14,7 +14,7 @@
     if (isAutoIncrement) {
       buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
     }
-    if (notNullColumns.contains(column)) {
+    if (getNotNullColumns().contains(column)) {
       buffer.append(" NOT NULL");
     }
  else {
@@ -26,13 +26,13 @@
       buffer.append(", ");
     }
   }
-  if (primaryKeyConstraint != null && primaryKeyConstraint.getColumns().size() > 0) {
-    buffer.append(", CONSTRAINT ").append(StringUtils.trimToEmpty(primaryKeyConstraint.getConstraintName())).append(" PRIMARY KEY (");
-    buffer.append(StringUtils.join(primaryKeyConstraint.getColumns(),", "));
+  if (getPrimaryKeyConstraint() != null && getPrimaryKeyConstraint().getColumns().size() > 0) {
+    buffer.append(", CONSTRAINT ").append(StringUtils.trimToEmpty(getPrimaryKeyConstraint().getConstraintName())).append(" PRIMARY KEY (");
+    buffer.append(StringUtils.join(getPrimaryKeyConstraint().getColumns(),", "));
     buffer.append(")");
     buffer.append(",");
   }
-  for (  ForeignKeyConstraint fkConstraint : foreignKeyConstraints) {
+  for (  ForeignKeyConstraint fkConstraint : getForeignKeyConstraints()) {
     buffer.append(" CONSTRAINT ").append(fkConstraint.getForeignKeyName()).append(" FOREIGN KEY (").append(fkConstraint.getColumn()).append(") REFERENCES ").append(fkConstraint.getReferences());
     if (fkConstraint.isDeleteCascade()) {
       buffer.append(" ON DELETE CASCADE");
@@ -45,7 +45,7 @@
     }
     buffer.append(",");
   }
-  for (  UniqueConstraint uniqueConstraint : uniqueConstraints) {
+  for (  UniqueConstraint uniqueConstraint : getUniqueConstraints()) {
     buffer.append(" CONSTRAINT ");
     buffer.append(uniqueConstraint.getConstraintName());
     buffer.append(" UNIQUE (");
@@ -53,15 +53,15 @@
     buffer.append("),");
   }
   String sql=buffer.toString().replaceFirst(",\\s*$","") + ")";
-  if (tablespace != null && database.supportsTablespaces()) {
+  if (getTablespace() != null && database.supportsTablespaces()) {
     if (database instanceof MSSQLDatabase) {
-      sql+=" ON " + tablespace;
+      sql+=" ON " + getTablespace();
     }
  else     if (database instanceof DB2Database) {
-      sql+=" IN " + tablespace;
+      sql+=" IN " + getTablespace();
     }
  else {
-      sql+=" TABLESPACE " + tablespace;
+      sql+=" TABLESPACE " + getTablespace();
     }
   }
   return sql;

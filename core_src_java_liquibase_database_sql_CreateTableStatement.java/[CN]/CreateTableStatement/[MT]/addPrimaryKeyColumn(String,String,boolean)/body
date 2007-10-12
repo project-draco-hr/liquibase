@@ -1,5 +1,5 @@
 {
-  String pkName="PK_" + tableName.toUpperCase();
+  String pkName="PK_" + getTableName().toUpperCase();
   if (pkName.length() > 18) {
     pkName=pkName.substring(0,17);
   }

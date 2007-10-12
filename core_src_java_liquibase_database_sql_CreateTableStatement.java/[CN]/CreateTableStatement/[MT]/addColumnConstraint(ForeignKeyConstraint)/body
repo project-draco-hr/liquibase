@@ -1,3 +1,4 @@
 {
-  foreignKeyConstraints.add(fkConstraint);
+  getForeignKeyConstraints().add(fkConstraint);
+  return this;
 }
