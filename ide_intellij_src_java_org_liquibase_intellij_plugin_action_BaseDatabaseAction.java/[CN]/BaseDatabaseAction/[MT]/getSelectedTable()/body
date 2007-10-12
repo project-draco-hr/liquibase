@@ -1,0 +1,17 @@
+{
+  Object selectedObject=getUserData();
+  if (selectedObject instanceof DBTree) {
+    TreePath selectionPath=((DBTree)getUserData()).getSelectionModel().getLeadSelectionPath();
+    selectedObject=selectionPath.getLastPathComponent();
+  }
+  if (selectedObject instanceof AbstractDBObject.TableNode) {
+    return ((AbstractDBObject.TableNode)selectedObject).getTable();
+  }
+ else   if (selectedObject instanceof Column) {
+    return ((Column)selectedObject).getTable();
+  }
+ else   if (selectedObject instanceof Table) {
+    return ((Table)selectedObject);
+  }
+  return null;
+}

@@ -1,6 +1,0 @@
-{
-  Project project=LiquibaseProjectComponent.getInstance().getProject();
-  AddTableWizard wizard=createWizard(project);
-  wizard.pack();
-  wizard.show();
-}

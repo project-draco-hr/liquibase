@@ -1,0 +1,4 @@
+{
+  wizardPage=new AddColumnWizardPage();
+  return new Step[]{wizardPage};
+}

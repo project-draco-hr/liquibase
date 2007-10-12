@@ -1,4 +1,0 @@
-{
-  super("Create Table",project,database,connection);
-  this.selectedObject=selectedObject;
-}

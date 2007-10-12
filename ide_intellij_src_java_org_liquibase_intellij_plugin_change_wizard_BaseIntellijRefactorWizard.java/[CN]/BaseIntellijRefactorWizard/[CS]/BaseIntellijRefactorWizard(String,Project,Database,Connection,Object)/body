@@ -1,0 +1,14 @@
+{
+  super(title,project);
+  this.database=database;
+  this.connection=connection;
+  this.selectedObject=selectedObject;
+  System.out.println("Database is: " + database);
+  for (  Step page : createPages()) {
+    addStep(page);
+  }
+  metaDataPage=new ChangeMetaDataWizardPage(project);
+  addStep(metaDataPage);
+  getFinishButton().addActionListener(new FinishListener());
+  init();
+}

@@ -1,4 +1,8 @@
 {
-  TreePath selectionPath=((DBTree)getUserData()).getSelectionModel().getLeadSelectionPath();
-  return (AbstractDBObject)selectionPath.getLastPathComponent();
+  Object userData=getUserData();
+  if (userData instanceof JTree) {
+    TreePath selectionPath=((DBTree)userData).getSelectionModel().getLeadSelectionPath();
+    return selectionPath.getLastPathComponent();
+  }
+  return userData;
 }

@@ -1,0 +1,4 @@
+{
+  super("Add Auto-Increment",project,column.getTable().getDatabase(),connection,selectedObject);
+  this.selectedColumn=column;
+}

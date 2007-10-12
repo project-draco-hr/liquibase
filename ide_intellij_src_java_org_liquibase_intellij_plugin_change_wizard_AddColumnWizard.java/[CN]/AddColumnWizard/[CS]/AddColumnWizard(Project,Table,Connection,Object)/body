@@ -1,0 +1,4 @@
+{
+  super("Add Column to " + table.getName(),project,table.getDatabase(),connection,selectedObject);
+  this.selectedTable=table;
+}
