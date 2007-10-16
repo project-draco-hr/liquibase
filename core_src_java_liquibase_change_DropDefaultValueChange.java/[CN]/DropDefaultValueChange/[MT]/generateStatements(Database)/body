@@ -1,6 +1,6 @@
 {
   if (database instanceof MSSQLDatabase) {
-    throw new UnsupportedChangeException("Dropping default values is not currently supported in MS-SQL");
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " DROP CONSTRAINT DF_"+ getTableName()+ "_"+ getColumnName())};
   }
  else   if (database instanceof MySQLDatabase) {
     return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " ALTER "+ getColumnName()+ " DROP DEFAULT")};
