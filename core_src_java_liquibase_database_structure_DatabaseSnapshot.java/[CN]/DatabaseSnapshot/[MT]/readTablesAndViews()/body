@@ -6,7 +6,7 @@
     String name=rs.getString("TABLE_NAME");
     String schemaName=rs.getString("TABLE_SCHEM");
     String catalogName=rs.getString("TABLE_CAT");
-    if (database.isSystemTable(catalogName,schemaName,name) || database.isLiquibaseTable(name)) {
+    if (database.isSystemTable(catalogName,schemaName,name) || database.isLiquibaseTable(name) || database.isSystemView(catalogName,schemaName,name)) {
       continue;
     }
     if ("TABLE".equals(type)) {

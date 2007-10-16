@@ -1,3 +1,4 @@
 {
-  return (String)new JdbcTemplate(this).queryForObject(getViewDefinitionSql(viewName),String.class);
+  String definition=(String)new JdbcTemplate(this).queryForObject(getViewDefinitionSql(viewName),String.class);
+  return definition.replaceFirst("^CREATE VIEW \\w+ AS","");
 }

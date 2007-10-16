@@ -4,7 +4,7 @@
       if (!database.supportsTablespaces()) {
         return;
       }
-      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int",false).addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'").setTablespace("liquibase2");
+      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'").setTablespace("liquibase2");
       new JdbcTemplate(database).execute(statement);
       DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
       Table table=snapshot.getTable(TABLE_NAME);

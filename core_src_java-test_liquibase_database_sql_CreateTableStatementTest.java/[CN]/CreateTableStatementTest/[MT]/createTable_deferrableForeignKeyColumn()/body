@@ -8,7 +8,7 @@
       ForeignKeyConstraint fkConstraint=new ForeignKeyConstraint(foreignKeyName,TABLE_NAME + "(id)");
       fkConstraint.setDeferrable(true);
       fkConstraint.setInitiallyDeferred(true);
-      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int",false).addColumn("name","varchar(255)").addColumn("parent_id","int",fkConstraint);
+      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("parent_id","int",fkConstraint);
       new JdbcTemplate(database).execute(statement);
       DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
       Table table=snapshot.getTable(TABLE_NAME);

@@ -27,6 +27,9 @@
         ((UniqueConstraint)constraint).addColumns(columnName);
         getUniqueConstraints().add(((UniqueConstraint)constraint));
       }
+ else       if (constraint instanceof AutoIncrementConstraint) {
+        autoIncrementColumns.add(columnName);
+      }
  else {
         throw new RuntimeException("Unknown constraint type: " + constraint.getClass().getName());
       }

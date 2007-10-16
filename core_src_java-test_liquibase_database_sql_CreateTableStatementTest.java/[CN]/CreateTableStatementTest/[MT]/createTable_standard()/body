@@ -1,7 +1,7 @@
 {
   new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws JDBCException {
-      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int",false).addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'");
+      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'");
       new JdbcTemplate(database).execute(statement);
       DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
       Table table=snapshot.getTable(TABLE_NAME);

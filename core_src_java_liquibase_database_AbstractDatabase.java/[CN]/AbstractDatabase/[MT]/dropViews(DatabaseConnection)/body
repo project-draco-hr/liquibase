@@ -4,7 +4,9 @@
     rs=conn.getMetaData().getTables(getCatalogName(),getSchemaName(),null,new String[]{"VIEW"});
     while (rs.next()) {
       String tableName=rs.getString("TABLE_NAME");
-      if (getSystemTablesAndViews().contains(tableName)) {
+      String schemaName=rs.getString("TABLE_SCHEM");
+      String catalogName=rs.getString("TABLE_CAT");
+      if (isSystemView(catalogName,schemaName,tableName)) {
         continue;
       }
       DropViewChange dropChange=new DropViewChange();

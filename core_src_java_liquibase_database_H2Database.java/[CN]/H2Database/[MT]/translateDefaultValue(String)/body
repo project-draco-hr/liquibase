@@ -1,0 +1,6 @@
+{
+  if (StringUtils.trimToEmpty(defaultValue).startsWith("(NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_")) {
+    return null;
+  }
+  return defaultValue;
+}

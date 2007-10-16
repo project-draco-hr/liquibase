@@ -1,0 +1,14 @@
+{
+  String pkName="PK_" + getTableName().toUpperCase();
+  if (pkName.length() > 18) {
+    pkName=pkName.substring(0,17);
+  }
+  PrimaryKeyConstraint pkConstraint=new PrimaryKeyConstraint(pkName);
+  pkConstraint.addColumns(columnName);
+  List<ColumnConstraint> allConstraints=new ArrayList<ColumnConstraint>();
+  allConstraints.addAll(Arrays.asList(constraints));
+  allConstraints.add(new NotNullConstraint(columnName));
+  allConstraints.add(pkConstraint);
+  addColumn(columnName,columnType,allConstraints.toArray(new ColumnConstraint[allConstraints.size()]));
+  return this;
+}

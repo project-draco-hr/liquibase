@@ -1,0 +1,4 @@
+{
+  autoIncrementColumns.add(autoIncrementConstraint.getColumnName());
+  return this;
+}
