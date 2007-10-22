@@ -1,8 +1,12 @@
 {
+  if (connectionsAttempted.containsKey(url)) {
+    return connectionsByUrl.get(url);
+  }
+  connectionsAttempted.put(url,Boolean.TRUE);
   String username=getUsername(url);
   String password=getPassword(url);
   JUnitJDBCDriverClassLoader jdbcDriverLoader=JUnitJDBCDriverClassLoader.getInstance();
-  Driver driver=(Driver)Class.forName(DatabaseFactory.getInstance().findDefaultDriver(url),true,jdbcDriverLoader).newInstance();
+  final Driver driver=(Driver)Class.forName(DatabaseFactory.getInstance().findDefaultDriver(url),true,jdbcDriverLoader).newInstance();
   Properties info=new Properties();
   info.put("user",username);
   if (password != null) {
@@ -11,6 +15,7 @@
   final Connection connection;
   try {
     connection=driver.connect(url,info);
+    connection.setAutoCommit(false);
   }
  catch (  SQLException e) {
     System.out.println("Could not connect to " + url + ": Will not test against");
@@ -19,9 +24,36 @@
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
+  connectionsByUrl.put(url,connection);
   Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
     public void run(){
       try {
+        try {
+          if (!connection.getAutoCommit()) {
+            connection.rollback();
+          }
+        }
+ catch (        SQLException e) {
+          ;
+        }
+        if (connection.getMetaData().getURL().startsWith("jdbc:derby")) {
+          try {
+            driver.connect("jdbc:derby:liquibase;shutdown=true",new Properties());
+          }
+ catch (          SQLException e) {
+            ;
+          }
+        }
+ else         if (connection.getMetaData().getURL().startsWith("jdbc:hsqldb")) {
+          try {
+            Statement statement=connection.createStatement();
+            statement.execute("SHUTDOWN");
+            statement.close();
+          }
+ catch (          SQLException e) {
+            ;
+          }
+        }
         connection.close();
       }
  catch (      SQLException e) {

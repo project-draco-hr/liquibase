@@ -9,7 +9,7 @@
     columnConfig.setName(column.getName());
     String dataType=column.getDataTypeString(database);
     columnConfig.setType(dataType);
-    columnConfig.setDefaultValue(StringUtils.trimToNull(column.getDefaultValue()));
+    columnConfig.setDefaultValue(database.convertJavaObjectToString(column.getDefaultValue()));
     change.setColumn(columnConfig);
     changes.add(change);
   }

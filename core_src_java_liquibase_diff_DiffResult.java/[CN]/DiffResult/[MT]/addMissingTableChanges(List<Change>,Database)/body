@@ -14,11 +14,20 @@
         constraintsConfig.setNullable(false);
         columnConfig.setConstraints(constraintsConfig);
       }
-      if (column.isNumeric()) {
-        columnConfig.setDefaultValueNumeric(StringUtils.trimToNull(column.getDefaultValue()));
+      Object defaultValue=column.getDefaultValue();
+      if (defaultValue == null) {
+      }
+ else       if (defaultValue instanceof Date) {
+        columnConfig.setDefaultValueDate((Date)defaultValue);
+      }
+ else       if (defaultValue instanceof Boolean) {
+        columnConfig.setDefaultValueBoolean(((Boolean)defaultValue));
+      }
+ else       if (defaultValue instanceof Number) {
+        columnConfig.setDefaultValueNumeric(((Number)defaultValue));
       }
  else {
-        columnConfig.setDefaultValue(StringUtils.trimToNull(translateDefaultValue(column.getDefaultValue())));
+        columnConfig.setDefaultValue(defaultValue.toString());
       }
       change.addColumn(columnConfig);
     }

@@ -1,0 +1,13 @@
+{
+  AddDefaultValueChange change=new AddDefaultValueChange();
+  change.setTableName("TABLE_NAME");
+  change.setColumnName("COLUMN_NAME");
+  change.setDefaultValueBoolean(Boolean.TRUE);
+  SqlStatement[] statements=change.generateStatements(new MockDatabase());
+  assertEquals(1,statements.length);
+  AddDefaultValueStatement statement=(AddDefaultValueStatement)statements[0];
+  assertEquals("TABLE_NAME",statement.getTableName());
+  assertEquals("COLUMN_NAME",statement.getColumnName());
+  assertTrue(statement.getDefaultValue() instanceof Boolean);
+  assertEquals(Boolean.TRUE,statement.getDefaultValue());
+}

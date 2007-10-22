@@ -1,8 +1,0 @@
-{
-  String result=defaultValue;
-  if (defaultValue != null) {
-    result=defaultValue.replaceFirst("^'","").replaceFirst("'$","");
-    result=result.replaceFirst("'\\:\\:[a-zA-Z0-9 ]+$","");
-  }
-  return result;
-}

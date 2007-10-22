@@ -1,0 +1,13 @@
+{
+  AddDefaultValueChange change=new AddDefaultValueChange();
+  change.setTableName("TABLE_NAME");
+  change.setColumnName("COLUMN_NAME");
+  change.setDefaultValueNumeric("42.56");
+  SqlStatement[] statements=change.generateStatements(new MockDatabase());
+  assertEquals(1,statements.length);
+  AddDefaultValueStatement statement=(AddDefaultValueStatement)statements[0];
+  assertEquals("TABLE_NAME",statement.getTableName());
+  assertEquals("COLUMN_NAME",statement.getColumnName());
+  assertTrue(statement.getDefaultValue() instanceof Number);
+  assertEquals("42.56",statement.getDefaultValue().toString());
+}

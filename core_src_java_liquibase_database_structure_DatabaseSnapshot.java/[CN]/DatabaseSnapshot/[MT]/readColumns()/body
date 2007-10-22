@@ -32,8 +32,13 @@
     columnInfo.setColumnSize(rs.getInt("COLUMN_SIZE"));
     columnInfo.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
     columnInfo.setTypeName(rs.getString("TYPE_NAME"));
-    String defaultValue=rs.getString("COLUMN_DEF");
-    columnInfo.setDefaultValue(database.translateDefaultValue(defaultValue));
+    Object defaultValue=rs.getObject("COLUMN_DEF");
+    try {
+      columnInfo.setDefaultValue(database.convertDatabaseValueToJavaObject(defaultValue,columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits()));
+    }
+ catch (    ParseException e) {
+      throw new JDBCException(e);
+    }
     int nullable=rs.getInt("NULLABLE");
     if (nullable == DatabaseMetaData.columnNoNulls) {
       columnInfo.setNullable(false);

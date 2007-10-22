@@ -1,0 +1,14 @@
+{
+  if (date instanceof java.sql.Date) {
+    return getDateLiteral(((java.sql.Date)date));
+  }
+ else   if (date instanceof java.sql.Time) {
+    return getDateLiteral(((java.sql.Time)date));
+  }
+ else   if (date instanceof Timestamp) {
+    return getDateLiteral(((Timestamp)date));
+  }
+ else {
+    throw new RuntimeException("Unexpected type: " + date.getClass().getName());
+  }
+}

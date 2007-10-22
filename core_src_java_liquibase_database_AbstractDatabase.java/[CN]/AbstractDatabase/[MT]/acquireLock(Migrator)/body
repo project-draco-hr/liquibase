@@ -8,7 +8,7 @@
     }
   }
   try {
-    Boolean locked=null;
+    Boolean locked;
     try {
       locked=(Boolean)new JdbcTemplate(this).queryForObject(getSelectChangeLogLockSQL(),Boolean.class);
     }
@@ -25,7 +25,7 @@
       updateStatement.addNewColumnValue("LOCKGRANTED",new Timestamp(new java.util.Date().getTime()),Types.TIMESTAMP);
       updateStatement.addNewColumnValue("LOCKEDBY",InetAddress.getLocalHost().getCanonicalHostName() + " (" + InetAddress.getLocalHost().getHostAddress()+ ")",Types.VARCHAR);
       updateStatement.setWhereClause("ID  = 1");
-      if (new JdbcTemplate(this).update((PreparedSqlStatement)updateStatement) != 1) {
+      if (new JdbcTemplate(this).update(updateStatement) != 1) {
         throw new LockException("Did not update change log lock correctly");
       }
       getConnection().commit();

@@ -1,0 +1,14 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      new JdbcTemplate(database).execute(new CreateTableStatement(TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getDateTimeType()));
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
+      java.sql.Timestamp date=new java.sql.Timestamp(new Date().getTime());
+      new JdbcTemplate(database).execute(new AddDefaultValueStatement(TABLE_NAME,COLUMN_NAME,date));
+      snapshot=new DatabaseSnapshot(database);
+      assertEquals(date.getTime() / 1000,((Date)snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue()).getTime() / 1000);
+    }
+  }
+);
+}

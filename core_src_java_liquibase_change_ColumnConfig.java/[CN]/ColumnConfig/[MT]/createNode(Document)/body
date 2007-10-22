@@ -8,10 +8,10 @@
     element.setAttribute("defaultValue",getDefaultValue());
   }
   if (getDefaultValueNumeric() != null) {
-    element.setAttribute("defaultValueNumeric",getDefaultValueNumeric());
+    element.setAttribute("defaultValueNumeric",getDefaultValueNumeric().toString());
   }
   if (getDefaultValueDate() != null) {
-    element.setAttribute("defaultValueDate",getDefaultValueDate());
+    element.setAttribute("defaultValueDate",new ISODateFormat().format(getDefaultValueDate()));
   }
   if (getDefaultValueBoolean() != null) {
     element.setAttribute("defaultValueBoolean",getDefaultValueBoolean().toString());

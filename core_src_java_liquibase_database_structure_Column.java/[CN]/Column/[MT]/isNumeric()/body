@@ -1,4 +1,3 @@
 {
-  List<Integer> numericTypes=Arrays.asList(Types.BIGINT,Types.BIT,Types.INTEGER,Types.SMALLINT,Types.TINYINT,Types.DECIMAL,Types.DOUBLE,Types.FLOAT,Types.NUMERIC,Types.REAL);
-  return numericTypes.contains(getDataType());
+  return SqlUtil.isNumeric(getDataType());
 }

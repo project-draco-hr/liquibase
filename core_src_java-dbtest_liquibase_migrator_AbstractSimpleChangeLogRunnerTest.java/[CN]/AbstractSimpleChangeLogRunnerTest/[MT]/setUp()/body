@@ -1,11 +1,4 @@
 {
   super.setUp();
-  JUnitJDBCDriverClassLoader jdbcDriverLoader=JUnitJDBCDriverClassLoader.getInstance();
-  driver=(Driver)Class.forName(driverName,true,jdbcDriverLoader).newInstance();
-  Properties info=createProperties();
-  info.put("user",username);
-  info.put("password",password);
-  connection=driver.connect(url,info);
-  connection.setAutoCommit(false);
   createMigrator(completeChangeLog).forceReleaseLock();
 }

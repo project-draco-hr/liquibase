@@ -1,0 +1,13 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      new JdbcTemplate(database).execute(new CreateTableStatement(TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)"));
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
+      new JdbcTemplate(database).execute(new AddDefaultValueStatement(TABLE_NAME,COLUMN_NAME,"New Default Value"));
+      snapshot=new DatabaseSnapshot(database);
+      assertEquals("New Default Value",snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
+    }
+  }
+);
+}

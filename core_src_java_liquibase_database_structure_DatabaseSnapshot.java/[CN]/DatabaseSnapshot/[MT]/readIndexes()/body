@@ -2,12 +2,7 @@
   updateListeners("Reading indexes for " + database.toString() + " ...");
   for (  Table table : tablesMap.values()) {
     ResultSet rs;
-    try {
-      rs=databaseMetaData.getIndexInfo(database.getCatalogName(),database.getSchemaName(),table.getName(),false,true);
-    }
- catch (    SQLException e) {
-      throw e;
-    }
+    rs=databaseMetaData.getIndexInfo(database.getCatalogName(),database.getSchemaName(),table.getName(),false,true);
     Map<String,Index> indexMap=new HashMap<String,Index>();
     while (rs.next()) {
       String indexName=rs.getString("INDEX_NAME");

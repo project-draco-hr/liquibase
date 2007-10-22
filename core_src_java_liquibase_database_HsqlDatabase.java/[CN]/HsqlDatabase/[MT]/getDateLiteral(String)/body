@@ -2,13 +2,13 @@
   String returnString=isoDate;
   try {
     if (isDateTime(isoDate)) {
-      DateFormat isoTimestampFormat=new ISODateFormat();
-      DateFormat dbTimestampFormat=new SimpleDateFormat("yyyy-mm-dd HH:MM:ss.000000000");
+      ISODateFormat isoTimestampFormat=new ISODateFormat();
+      DateFormat dbTimestampFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
       returnString=dbTimestampFormat.format(isoTimestampFormat.parse(isoDate));
     }
   }
  catch (  ParseException e) {
-    throw new RuntimeException("Unexpected date format");
+    throw new RuntimeException("Unexpected date format: " + isoDate,e);
   }
   return "'" + returnString + "'";
 }

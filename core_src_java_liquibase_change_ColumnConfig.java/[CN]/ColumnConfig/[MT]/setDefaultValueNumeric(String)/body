@@ -1,8 +1,13 @@
 {
-  if ("GENERATED_BY_DEFAULT".equals(defaultValueNumeric)) {
-    setAutoIncrement(true);
+  if (defaultValueNumeric == null) {
+    this.defaultValueNumeric=null;
   }
  else {
-    this.defaultValueNumeric=defaultValueNumeric;
+    if ("GENERATED_BY_DEFAULT".equals(defaultValueNumeric)) {
+      setAutoIncrement(true);
+    }
+ else {
+      this.defaultValueNumeric=NumberFormat.getInstance().parse(defaultValueNumeric);
+    }
   }
 }

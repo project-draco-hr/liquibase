@@ -1,0 +1,24 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      new JdbcTemplate(database).execute(new CreateTableStatement(TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getTimeType()));
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
+      java.sql.Time time=new java.sql.Time(new Date().getTime());
+      new JdbcTemplate(database).execute(new AddDefaultValueStatement(TABLE_NAME,COLUMN_NAME,time));
+      snapshot=new DatabaseSnapshot(database);
+      Object defaultValue=snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue();
+      if (defaultValue instanceof java.sql.Time) {
+        assertEquals(new ISODateFormat().format(time),new ISODateFormat().format(((java.sql.Time)defaultValue)));
+      }
+ else {
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(time);
+        cal.set(Calendar.DAY_OF_YEAR,0);
+        cal.set(Calendar.YEAR,0);
+        assertEquals(new ISODateFormat().format(new java.sql.Time(cal.getTimeInMillis())),new ISODateFormat().format(new java.sql.Time(((Date)defaultValue).getTime())));
+      }
+    }
+  }
+);
+}

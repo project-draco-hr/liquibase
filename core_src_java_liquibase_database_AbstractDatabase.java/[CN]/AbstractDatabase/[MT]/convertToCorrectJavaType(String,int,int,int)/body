@@ -1,0 +1,79 @@
+{
+  if (value == null) {
+    return null;
+  }
+  if (dataType == Types.CLOB || dataType == Types.VARCHAR || dataType == Types.CHAR || dataType == Types.LONGVARCHAR) {
+    if (value.equalsIgnoreCase("NULL")) {
+      return null;
+    }
+ else {
+      return value;
+    }
+  }
+  value=StringUtils.trimToNull(value);
+  if (value == null) {
+    return null;
+  }
+  try {
+    if (dataType == Types.DATE) {
+      return new java.sql.Date(parseDate(value).getTime());
+    }
+ else     if (dataType == Types.TIMESTAMP) {
+      return new Timestamp(parseDate(value).getTime());
+    }
+ else     if (dataType == Types.TIME) {
+      return new Time(parseDate(value).getTime());
+    }
+ else     if (dataType == Types.BIGINT) {
+      return new BigInteger(value);
+    }
+ else     if (dataType == Types.BIT) {
+      if (value.equalsIgnoreCase("true")) {
+        return Boolean.TRUE;
+      }
+ else       if (value.equalsIgnoreCase("false")) {
+        return Boolean.FALSE;
+      }
+ else       if (value.equals("1")) {
+        return Boolean.TRUE;
+      }
+ else       if (value.equals("0")) {
+        return Boolean.FALSE;
+      }
+      throw new ParseException("Unknown bit value: " + value,0);
+    }
+ else     if (dataType == Types.BOOLEAN) {
+      return Boolean.valueOf(value);
+    }
+ else     if (dataType == Types.DECIMAL) {
+      if (decimalDigits == 0) {
+        return new Integer(value);
+      }
+      return new Double(value);
+    }
+ else     if (dataType == Types.DOUBLE) {
+      return new Double(value);
+    }
+ else     if (dataType == Types.FLOAT) {
+      return new Float(value);
+    }
+ else     if (dataType == Types.INTEGER) {
+      return new Integer(value);
+    }
+ else     if (dataType == Types.NULL) {
+      return null;
+    }
+ else     if (dataType == Types.REAL) {
+      return new Float(value);
+    }
+ else     if (dataType == Types.SMALLINT) {
+      return new Integer(value);
+    }
+ else {
+      throw new RuntimeException("Cannot convert type: " + dataType);
+    }
+  }
+ catch (  NumberFormatException e) {
+    return new ComputedNumericValue(value);
+  }
+}
