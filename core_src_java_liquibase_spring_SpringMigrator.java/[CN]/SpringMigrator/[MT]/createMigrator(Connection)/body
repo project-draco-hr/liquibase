@@ -1,5 +1,5 @@
 {
-  Migrator m=new Migrator(getChangeLogResource().getURL().toString(),new SpringResourceOpener());
+  Migrator m=new Migrator(getChangeLog(),new SpringResourceOpener(getChangeLog()));
   m.init(c);
   return m;
 }

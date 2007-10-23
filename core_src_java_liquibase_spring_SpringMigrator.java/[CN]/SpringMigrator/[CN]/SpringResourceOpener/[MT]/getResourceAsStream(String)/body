@@ -1,3 +1,4 @@
 {
-  return getChangeLogResource().getInputStream();
+  Resource resource=getResource(file);
+  return resource.getInputStream();
 }

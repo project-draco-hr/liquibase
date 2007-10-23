@@ -3,7 +3,9 @@
   try {
     c=getDataSource().getConnection();
     Migrator migrator=createMigrator(c);
-    migrator.init(c);
+    if (StringUtils.trimToNull(contexts) != null) {
+      migrator.setContexts(contexts);
+    }
     setup(migrator);
     if (isWriteSqlFileEnabled() && getSqlOutputDir() != null) {
       if (migrator.listUnrunChangeSets().size() > 0) {

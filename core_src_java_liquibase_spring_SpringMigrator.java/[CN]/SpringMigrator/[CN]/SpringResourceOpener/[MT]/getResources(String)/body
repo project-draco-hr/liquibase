@@ -1,5 +1,5 @@
 {
   Vector<URL> tmp=new Vector<URL>();
-  tmp.add(getChangeLogResource().getURL());
+  tmp.add(getResource(packageName).getURL());
   return tmp.elements();
 }
