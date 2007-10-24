@@ -1,0 +1,6 @@
+{
+  if (requestedSchema == null) {
+    return getSchemaName();
+  }
+  return requestedSchema;
+}

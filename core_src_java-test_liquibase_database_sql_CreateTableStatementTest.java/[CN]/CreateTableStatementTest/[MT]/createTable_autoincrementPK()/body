@@ -4,7 +4,7 @@
       if (!database.supportsAutoIncrement()) {
         return;
       }
-      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'");
+      CreateTableStatement statement=new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'");
       statement.addColumnConstraint(new AutoIncrementConstraint("id"));
       new JdbcTemplate(database).execute(statement);
       DatabaseSnapshot snapshot=new DatabaseSnapshot(database);

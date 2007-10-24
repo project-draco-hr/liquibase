@@ -1,6 +1,5 @@
 {
-  Table table=new Table();
-  table.setName(tableName);
+  Table table=new Table(getTableName());
   Column oldColumn=new Column();
   oldColumn.setTable(table);
   oldColumn.setName(getOldColumnName());

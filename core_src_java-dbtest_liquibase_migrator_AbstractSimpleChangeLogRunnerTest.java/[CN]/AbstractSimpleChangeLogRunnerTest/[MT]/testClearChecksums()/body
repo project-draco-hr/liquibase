@@ -1,8 +1,8 @@
 {
   Migrator migrator=createMigrator(completeChangeLog);
-  migrator.dropAll();
+  migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(completeChangeLog);
-  migrator.dropAll();
+  migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(completeChangeLog);
   migrator.migrate();
   migrator.clearCheckSums();

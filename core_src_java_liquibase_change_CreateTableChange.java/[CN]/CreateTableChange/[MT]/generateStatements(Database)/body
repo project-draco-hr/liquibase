@@ -1,5 +1,5 @@
 {
-  CreateTableStatement statement=new CreateTableStatement(tableName);
+  CreateTableStatement statement=new CreateTableStatement(getSchemaName(),getTableName());
   for (  ColumnConfig column : getColumns()) {
     ConstraintsConfig constraints=column.getConstraints();
     boolean isAutoIncrement=column.isAutoIncrement() != null && column.isAutoIncrement();

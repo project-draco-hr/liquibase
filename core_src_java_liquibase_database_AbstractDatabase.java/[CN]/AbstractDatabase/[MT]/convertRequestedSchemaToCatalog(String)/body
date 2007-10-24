@@ -1,0 +1,11 @@
+{
+  if (getCatalogName() == null) {
+    return null;
+  }
+ else {
+    if (requestedSchema == null) {
+      return getCatalogName();
+    }
+    return StringUtils.trimToNull(requestedSchema);
+  }
+}

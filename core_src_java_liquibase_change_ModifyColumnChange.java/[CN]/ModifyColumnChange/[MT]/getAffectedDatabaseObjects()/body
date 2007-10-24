@@ -1,6 +1,5 @@
 {
-  Table table=new Table();
-  table.setName(this.getTableName());
+  Table table=new Table(getTableName());
   Column column=new Column();
   column.setTable(table);
   column.setName(this.column.getName());

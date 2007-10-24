@@ -1,7 +1,7 @@
 {
   StringWriter output=new StringWriter();
   Migrator migrator=createMigrator(completeChangeLog);
-  migrator.dropAll();
+  migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(completeChangeLog);
   migrator.setOutputSQLWriter(output);
   migrator.setMode(Migrator.Mode.OUTPUT_SQL_MODE);

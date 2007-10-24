@@ -1,7 +1,6 @@
 {
   Set<DatabaseObject> returnSet=new HashSet<DatabaseObject>();
-  Table baseTable=new Table();
-  baseTable.setName(baseTableName);
+  Table baseTable=new Table(getBaseTableName());
   returnSet.add(baseTable);
   for (  String columnName : getBaseColumnNames().split(",")) {
     Column baseColumn=new Column();
@@ -9,8 +8,7 @@
     baseColumn.setName(columnName.trim());
     returnSet.add(baseColumn);
   }
-  Table referencedTable=new Table();
-  referencedTable.setName(referencedTableName);
+  Table referencedTable=new Table(getReferencedTableName());
   returnSet.add(referencedTable);
   for (  String columnName : getReferencedColumnNames().split(",")) {
     Column referencedColumn=new Column();

@@ -1,0 +1,47 @@
+{
+  updateListeners("Reading indexes for " + database.toString() + " ...");
+  for (  Table table : tablesMap.values()) {
+    ResultSet rs;
+    rs=databaseMetaData.getIndexInfo(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),table.getName(),false,true);
+    Map<String,Index> indexMap=new HashMap<String,Index>();
+    while (rs.next()) {
+      String indexName=rs.getString("INDEX_NAME");
+      short type=rs.getShort("TYPE");
+      String tableName=rs.getString("TABLE_NAME");
+      String columnName=rs.getString("COLUMN_NAME");
+      short position=rs.getShort("ORDINAL_POSITION");
+      String filterCondition=rs.getString("FILTER_CONDITION");
+      if (type == DatabaseMetaData.tableIndexStatistic) {
+        continue;
+      }
+      if (columnName == null) {
+        continue;
+      }
+      Index indexInformation;
+      if (indexMap.containsKey(indexName)) {
+        indexInformation=indexMap.get(indexName);
+      }
+ else {
+        indexInformation=new Index();
+        indexInformation.setTableName(tableName);
+        indexInformation.setName(indexName);
+        indexInformation.setFilterCondition(filterCondition);
+        indexMap.put(indexName,indexInformation);
+      }
+      indexInformation.getColumns().add(position - 1,columnName);
+    }
+    for (    String key : indexMap.keySet()) {
+      indexes.add(indexMap.get(key));
+    }
+    rs.close();
+  }
+  Set<Index> indexesToRemove=new HashSet<Index>();
+  for (  Index index : indexes) {
+    for (    PrimaryKey pk : primaryKeys) {
+      if (index.getTableName().equalsIgnoreCase(pk.getTableName()) && index.getColumnNames().equals(pk.getColumnNames())) {
+        indexesToRemove.add(index);
+      }
+    }
+  }
+  indexes.removeAll(indexesToRemove);
+}

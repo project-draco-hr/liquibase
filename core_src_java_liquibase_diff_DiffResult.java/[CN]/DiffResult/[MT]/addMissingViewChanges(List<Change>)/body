@@ -2,7 +2,11 @@
   for (  View view : getMissingViews()) {
     CreateViewChange change=new CreateViewChange();
     change.setViewName(view.getName());
-    change.setSelectQuery(view.getDefinition());
+    String selectQuery=view.getDefinition();
+    if (selectQuery == null) {
+      selectQuery="COULD NOT DETERMINE VIEW QUERY";
+    }
+    change.setSelectQuery(selectQuery);
     changes.add(change);
   }
 }

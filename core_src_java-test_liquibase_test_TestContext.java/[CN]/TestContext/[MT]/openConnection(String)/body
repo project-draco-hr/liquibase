@@ -37,12 +37,6 @@
           ;
         }
         if (connection.getMetaData().getURL().startsWith("jdbc:derby")) {
-          try {
-            driver.connect("jdbc:derby:liquibase;shutdown=true",new Properties());
-          }
- catch (          SQLException e) {
-            ;
-          }
         }
  else         if (connection.getMetaData().getURL().startsWith("jdbc:hsqldb")) {
           try {

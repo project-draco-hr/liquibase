@@ -1,5 +1,8 @@
 {
   Element node=currentChangeLogFileDOM.createElement("renameColumn");
+  if (getSchemaName() != null) {
+    node.setAttribute("schemaName",getSchemaName());
+  }
   node.setAttribute("tableName",getTableName());
   node.setAttribute("oldColumnName",getOldColumnName());
   node.setAttribute("newColumnName",getNewColumnName());

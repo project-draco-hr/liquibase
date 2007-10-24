@@ -6,7 +6,7 @@
       }
       UniqueConstraint uniqueConstraint=new UniqueConstraint("UQ_TESTCT_ID");
       NotNullConstraint notNullConstraint=new NotNullConstraint();
-      CreateTableStatement statement=new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("username","int",uniqueConstraint,notNullConstraint);
+      CreateTableStatement statement=new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("username","int",uniqueConstraint,notNullConstraint);
       new JdbcTemplate(database).execute(statement);
       DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
       Table table=snapshot.getTable(TABLE_NAME);

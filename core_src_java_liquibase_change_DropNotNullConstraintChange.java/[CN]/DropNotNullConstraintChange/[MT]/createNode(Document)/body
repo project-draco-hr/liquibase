@@ -1,5 +1,8 @@
 {
   Element element=currentChangeLogFileDOM.createElement("dropNotNullConstraint");
+  if (getSchemaName() != null) {
+    element.setAttribute("schemaName",getSchemaName());
+  }
   element.setAttribute("tableName",getTableName());
   element.setAttribute("columnName",getColumnName());
   return element;

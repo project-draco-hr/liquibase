@@ -1,0 +1,11 @@
+{
+  if (getSchemaName() == null) {
+    return null;
+  }
+ else {
+    if (requestedSchema == null) {
+      return getSchemaName();
+    }
+    return StringUtils.trimToNull(requestedSchema);
+  }
+}

@@ -1,20 +1,3 @@
 {
-  try {
-    if (!waitForLock()) {
-      return;
-    }
-    log.info("Dropping Database Objects in " + getDatabase().getSchemaName());
-    getDatabase().dropDatabaseObjects();
-    checkDatabaseChangeLogTable();
-    log.finest("Objects dropped successfully");
-  }
- catch (  JDBCException e) {
-    throw e;
-  }
-catch (  Exception e) {
-    throw new JDBCException(e);
-  }
- finally {
-    releaseLock();
-  }
+  dropAll(getDatabase().getSchemaName());
 }

@@ -1,8 +1,0 @@
-{
-  if (database instanceof MSSQLDatabase) {
-    return "[" + tableName + "]";
-  }
- else {
-    return tableName;
-  }
-}

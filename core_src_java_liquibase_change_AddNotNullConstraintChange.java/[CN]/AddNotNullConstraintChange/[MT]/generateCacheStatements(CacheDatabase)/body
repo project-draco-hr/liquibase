@@ -4,6 +4,6 @@
     statements.add(generateUpdateStatement(database));
   }
   statements.add(new RawSqlStatement("COMMIT"));
-  statements.add(new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " ALTER COLUMN "+ getColumnName()+ " NOT NULL"));
+  statements.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getColumnName()+ " NOT NULL"));
   return statements.toArray(new SqlStatement[statements.size()]);
 }

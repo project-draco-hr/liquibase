@@ -1,0 +1,8 @@
+{
+  if (StringUtils.trimToNull(schemaName) == null || !supportsSchemas()) {
+    return tableName;
+  }
+ else {
+    return schemaName + "." + tableName;
+  }
+}

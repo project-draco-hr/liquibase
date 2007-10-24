@@ -1,0 +1,27 @@
+{
+  try {
+    if (!waitForLock()) {
+      return;
+    }
+    for (    String schema : schemas) {
+      log.info("Dropping Database Objects in " + schema);
+      getDatabase().dropDatabaseObjects(schema);
+      checkDatabaseChangeLogTable();
+      log.finest("Objects dropped successfully");
+    }
+  }
+ catch (  JDBCException e) {
+    throw e;
+  }
+catch (  Exception e) {
+    throw new JDBCException(e);
+  }
+ finally {
+    try {
+      releaseLock();
+    }
+ catch (    LockException e) {
+      log.severe("Unable to release lock: " + e.getMessage());
+    }
+  }
+}

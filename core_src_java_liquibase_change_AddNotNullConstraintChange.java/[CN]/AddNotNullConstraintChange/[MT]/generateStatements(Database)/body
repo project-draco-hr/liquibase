@@ -27,9 +27,9 @@
   if (defaultNullValue != null) {
     statements.add(generateUpdateStatement(database));
   }
-  statements.add(new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL "));
+  statements.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN  "+ getColumnName()+ " SET NOT NULL "));
   if (database instanceof DB2Database) {
-    statements.add(new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')"));
+    statements.add(new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + "')"));
   }
   return statements.toArray(new SqlStatement[statements.size()]);
 }

@@ -1,7 +1,6 @@
 {
   Column column=new Column();
-  Table table=new Table();
-  table.setName(tableName);
+  Table table=new Table(getTableName());
   column.setTable(table);
   column.setName(this.column.getName());
   return new HashSet<DatabaseObject>(Arrays.asList(table,column));

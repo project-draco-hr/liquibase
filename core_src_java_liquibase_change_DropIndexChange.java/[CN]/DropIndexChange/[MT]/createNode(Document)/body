@@ -1,5 +1,8 @@
 {
   Element element=currentChangeLogFileDOM.createElement("dropIndex");
+  if (getSchemaName() != null) {
+    element.setAttribute("schemaName",getSchemaName());
+  }
   element.setAttribute("indexName",getIndexName());
   element.setAttribute("tableName",getTableName());
   return element;

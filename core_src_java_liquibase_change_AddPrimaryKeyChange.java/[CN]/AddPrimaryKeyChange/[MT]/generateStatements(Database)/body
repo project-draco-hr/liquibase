@@ -1,10 +1,10 @@
 {
   String sql;
-  if (getConstraintName() == null) {
-    sql="ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " ADD PRIMARY KEY ("+ getColumnNames()+ ")";
+  if (getConstraintName() == null || database instanceof MySQLDatabase) {
+    sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD PRIMARY KEY ("+ getColumnNames()+ ")";
   }
  else {
-    sql="ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " ADD CONSTRAINT "+ getConstraintName()+ " PRIMARY KEY ("+ getColumnNames()+ ")";
+    sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD CONSTRAINT "+ getConstraintName()+ " PRIMARY KEY ("+ getColumnNames()+ ")";
   }
   if (StringUtils.trimToNull(getTablespace()) != null && database.supportsTablespaces()) {
     if (database instanceof MSSQLDatabase) {
@@ -18,7 +18,7 @@
     }
   }
   if (database instanceof DB2Database) {
-    return new SqlStatement[]{new RawSqlStatement(sql),new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + getTableName() + "')")};
+    return new SqlStatement[]{new RawSqlStatement(sql),new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + "')")};
   }
   return new SqlStatement[]{new RawSqlStatement(sql)};
 }

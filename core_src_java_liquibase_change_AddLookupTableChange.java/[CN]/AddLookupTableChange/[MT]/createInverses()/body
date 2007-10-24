@@ -1,8 +1,10 @@
 {
   DropForeignKeyConstraintChange dropFK=new DropForeignKeyConstraintChange();
+  dropFK.setBaseTableSchemaName(getExistingTableSchemaName());
   dropFK.setBaseTableName(getExistingTableName());
   dropFK.setConstraintName(getFinalConstraintName());
   DropTableChange dropTable=new DropTableChange();
+  dropTable.setSchemaName(getNewTableSchemaName());
   dropTable.setTableName(getNewTableName());
   return new Change[]{dropFK,dropTable};
 }

@@ -1,0 +1,10 @@
+{
+  super.setUp();
+  try {
+    connection.createStatement().execute("CREATE SCHEMA LIQUIBASEB");
+    connection.commit();
+  }
+ catch (  SQLException e) {
+    ;
+  }
+}

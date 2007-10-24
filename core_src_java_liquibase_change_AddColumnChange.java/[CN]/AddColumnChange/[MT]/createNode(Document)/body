@@ -1,5 +1,8 @@
 {
   Element node=currentChangeLogFileDOM.createElement("addColumn");
+  if (getSchemaName() != null) {
+    node.setAttribute("schemaName",getSchemaName());
+  }
   node.setAttribute("tableName",getTableName());
   node.appendChild(getColumn().createNode(currentChangeLogFileDOM));
   return node;

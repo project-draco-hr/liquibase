@@ -1,8 +1,14 @@
 {
   Element node=currentChangeLogFileDOM.createElement(getTagName());
+  if (getBaseTableSchemaName() != null) {
+    node.setAttribute("baseTableSchemaName",getBaseTableSchemaName());
+  }
   node.setAttribute("baseTableName",getBaseTableName());
   node.setAttribute("baseColumnNames",getBaseColumnNames());
   node.setAttribute("constraintName",getConstraintName());
+  if (getReferencedTableSchemaName() != null) {
+    node.setAttribute("baseTableSchemaName",getReferencedTableSchemaName());
+  }
   node.setAttribute("referencedTableName",getReferencedTableName());
   node.setAttribute("referencedColumnNames",getReferencedColumnNames());
   return node;

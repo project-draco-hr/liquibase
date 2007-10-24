@@ -1,0 +1,60 @@
+{
+  DatabaseConnection conn=getConnection();
+  try {
+    DatabaseSnapshot snapshot=new DatabaseSnapshot(this,new HashSet<DiffStatusListener>(),schema);
+    List<Change> dropChanges=new ArrayList<Change>();
+    for (    ForeignKey fk : snapshot.getForeignKeys()) {
+      DropForeignKeyConstraintChange dropFK=new DropForeignKeyConstraintChange();
+      dropFK.setBaseTableSchemaName(schema);
+      dropFK.setBaseTableName(fk.getForeignKeyTable().getName());
+      dropFK.setConstraintName(fk.getName());
+      dropChanges.add(dropFK);
+    }
+    for (    View view : snapshot.getViews()) {
+      DropViewChange dropChange=new DropViewChange();
+      dropChange.setViewName(view.getName());
+      dropChange.setSchemaName(schema);
+      dropChanges.add(dropChange);
+    }
+    for (    Table table : snapshot.getTables()) {
+      DropTableChange dropChange=new DropTableChange();
+      dropChange.setSchemaName(schema);
+      dropChange.setTableName(table.getName());
+      dropChanges.add(dropChange);
+    }
+    if (this.supportsSequences()) {
+      for (      Sequence seq : snapshot.getSequences()) {
+        DropSequenceChange dropChange=new DropSequenceChange();
+        dropChange.setSequenceName(seq.getName());
+        dropChange.setSchemaName(schema);
+        dropChanges.add(dropChange);
+      }
+    }
+    RawSQLChange clearChangeLogChange=new RawSQLChange();
+    clearChangeLogChange.setSql("DELETE FROM " + getDatabaseChangeLogTableName());
+    dropChanges.add(clearChangeLogChange);
+    try {
+      for (      Change change : dropChanges) {
+        for (        SqlStatement statement : change.generateStatements(this)) {
+          try {
+            new JdbcTemplate(this).execute(statement);
+          }
+ catch (          JDBCException e) {
+            throw e;
+          }
+        }
+      }
+    }
+ catch (    UnsupportedChangeException e) {
+      throw new JDBCException(e);
+    }
+  }
+  finally {
+    try {
+      conn.commit();
+    }
+ catch (    SQLException e) {
+      throw new JDBCException(e);
+    }
+  }
+}

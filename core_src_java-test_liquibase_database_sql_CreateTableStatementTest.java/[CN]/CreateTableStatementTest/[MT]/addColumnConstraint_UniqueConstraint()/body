@@ -1,5 +1,5 @@
 {
-  CreateTableStatement statement=new CreateTableStatement("tableName");
+  CreateTableStatement statement=new CreateTableStatement(null,"tableName");
   statement.addColumn("id","int");
   assertEquals(0,statement.getUniqueConstraints().size());
   statement.addColumnConstraint(new UniqueConstraint("uq_test").addColumns("id"));

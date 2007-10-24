@@ -1,0 +1,4 @@
+{
+  Database database=new MSSQLDatabase();
+  assertEquals("[schemaName].[tableName]",database.escapeTableName("schemaName","tableName"));
+}

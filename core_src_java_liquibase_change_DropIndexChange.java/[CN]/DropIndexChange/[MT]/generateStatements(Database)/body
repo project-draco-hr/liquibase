@@ -1,12 +1,12 @@
 {
   if (database instanceof MySQLDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + indexName + " ON "+ SqlUtil.escapeTableName(tableName,database))};
+    return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + indexName + " ON "+ database.escapeTableName(getSchemaName(),getTableName()))};
   }
  else   if (database instanceof MSSQLDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + tableName + "."+ indexName)};
+    return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + database.escapeTableName(getSchemaName(),getTableName()) + "."+ indexName)};
   }
  else   if (database instanceof OracleDatabase) {
     return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + indexName)};
   }
-  return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + indexName)};
+  return new SqlStatement[]{new RawSqlStatement("DROP INDEX " + database.escapeTableName(getSchemaName(),getIndexName()))};
 }

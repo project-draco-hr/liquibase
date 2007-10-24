@@ -1,5 +1,8 @@
 {
   Element element=currentChangeLogFileDOM.createElement(getTagName());
+  if (getSchemaName() != null) {
+    element.setAttribute("schemaName",getSchemaName());
+  }
   element.setAttribute("tableName",getTableName());
   element.setAttribute("column1Name",getColumn1Name());
   element.setAttribute("joinString",getJoinString());

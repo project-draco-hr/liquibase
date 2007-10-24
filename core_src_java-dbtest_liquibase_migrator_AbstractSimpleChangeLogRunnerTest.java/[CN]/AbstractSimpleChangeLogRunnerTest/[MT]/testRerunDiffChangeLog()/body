@@ -13,7 +13,7 @@
     output.close();
   }
   Migrator migrator=createMigrator(tempFile.getName());
-  migrator.dropAll();
+  migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(tempFile.getName());
   try {
     migrator.migrate();

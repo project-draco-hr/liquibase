@@ -2,5 +2,8 @@
   Element node=currentChangeLogFileDOM.createElement("addAutoIncrement");
   node.setAttribute("tableName",getTableName());
   node.setAttribute("columnName",getColumnName());
+  if (getSchemaName() != null) {
+    node.setAttribute("schemaName",getSchemaName());
+  }
   return node;
 }

@@ -1,7 +1,7 @@
 {
   new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws Exception {
-      assertEquals(";",new AddDefaultValueStatement(null,null,null).getEndDelimiter(database));
+      assertEquals(";",new AddDefaultValueStatement(null,null,null,null).getEndDelimiter(database));
     }
   }
 );

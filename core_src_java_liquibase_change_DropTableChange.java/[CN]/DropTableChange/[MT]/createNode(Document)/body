@@ -1,5 +1,8 @@
 {
   Element element=currentChangeLogFileDOM.createElement("dropTable");
+  if (getSchemaName() != null) {
+    element.setAttribute("schemaName",getSchemaName());
+  }
   element.setAttribute("tableName",getTableName());
   if (isCascadeConstraints() != null) {
     element.setAttribute("cascadeConstraints",isCascadeConstraints().toString());

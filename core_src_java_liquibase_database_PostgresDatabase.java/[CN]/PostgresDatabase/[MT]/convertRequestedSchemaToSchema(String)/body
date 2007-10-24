@@ -1,0 +1,8 @@
+{
+  if (getSchemaName() == null) {
+    return "public";
+  }
+ else {
+    return StringUtils.trimToNull(requestedSchema);
+  }
+}

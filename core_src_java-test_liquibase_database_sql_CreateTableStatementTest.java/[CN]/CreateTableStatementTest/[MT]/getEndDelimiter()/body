@@ -1,7 +1,7 @@
 {
   new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws JDBCException {
-      CreateTableStatement statement=new CreateTableStatement("testTable");
+      CreateTableStatement statement=new CreateTableStatement(null,"testTable");
       assertEquals(";",statement.getEndDelimiter(database));
     }
   }

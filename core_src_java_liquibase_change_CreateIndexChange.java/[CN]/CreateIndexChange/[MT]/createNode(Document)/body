@@ -1,6 +1,9 @@
 {
   Element element=currentChangeLogFileDOM.createElement("createIndex");
   element.setAttribute("indexName",getIndexName());
+  if (getSchemaName() != null) {
+    element.setAttribute("schemaName",getSchemaName());
+  }
   element.setAttribute("tableName",getTableName());
   for (  ColumnConfig column : getColumns()) {
     Element columnElement=currentChangeLogFileDOM.createElement("column");

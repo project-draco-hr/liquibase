@@ -1,7 +1,7 @@
 {
   StringWriter writer=new StringWriter();
   Migrator migrator=createMigrator(rollbackChangeLog);
-  migrator.dropAll();
+  migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(rollbackChangeLog);
   migrator.setMode(Migrator.Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE);
   migrator.setOutputSQLWriter(writer);

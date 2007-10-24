@@ -1,3 +1,3 @@
 {
-  return new RawSqlStatement("UPDATE " + SqlUtil.escapeTableName(tableName,database) + " SET "+ columnName+ "='"+ defaultNullValue+ "' WHERE "+ columnName+ " IS NULL");
+  return new RawSqlStatement("UPDATE " + database.escapeTableName(getSchemaName(),tableName) + " SET "+ columnName+ "='"+ defaultNullValue+ "' WHERE "+ columnName+ " IS NULL");
 }

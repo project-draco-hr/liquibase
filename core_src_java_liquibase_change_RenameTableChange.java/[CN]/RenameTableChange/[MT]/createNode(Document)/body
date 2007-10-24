@@ -1,5 +1,8 @@
 {
   Element element=currentChangeLogFileDOM.createElement("renameTable");
+  if (getSchemaName() != null) {
+    element.setAttribute("schemaName",getSchemaName());
+  }
   element.setAttribute("oldTableName",getOldTableName());
   element.setAttribute("newTableName",getNewTableName());
   return element;

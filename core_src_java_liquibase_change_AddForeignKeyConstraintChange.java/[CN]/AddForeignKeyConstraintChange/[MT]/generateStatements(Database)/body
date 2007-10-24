@@ -1,5 +1,5 @@
 {
-  String sql="ALTER TABLE " + SqlUtil.escapeTableName(getBaseTableName(),database) + " ADD CONSTRAINT "+ getConstraintName()+ " FOREIGN KEY ("+ getBaseColumnNames()+ ") REFERENCES "+ SqlUtil.escapeTableName(getReferencedTableName(),database)+ "("+ getReferencedColumnNames()+ ")";
+  String sql="ALTER TABLE " + database.escapeTableName(getBaseTableSchemaName(),getBaseTableName()) + " ADD CONSTRAINT "+ getConstraintName()+ " FOREIGN KEY ("+ getBaseColumnNames()+ ") REFERENCES "+ database.escapeTableName(getReferencedTableSchemaName(),getReferencedTableName())+ "("+ getReferencedColumnNames()+ ")";
   if (deleteCascade != null && deleteCascade) {
     sql+=" ON DELETE CASCADE";
   }

@@ -10,8 +10,8 @@
     absolutePathOfChangeLog="/" + absolutePathOfChangeLog;
   }
   Migrator migrator=createMigrator(absolutePathOfChangeLog,new FileSystemFileOpener());
-  migrator.dropAll();
+  migrator.dropAll(getSchemasToDrop());
   migrator.migrate();
   migrator.migrate();
-  migrator.dropAll();
+  migrator.dropAll(getSchemasToDrop());
 }

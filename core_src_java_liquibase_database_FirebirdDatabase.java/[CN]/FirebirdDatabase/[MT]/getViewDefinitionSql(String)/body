@@ -1,7 +1,0 @@
-{
-  String sql="select rdb$view_source from rdb$relations where upper(rdb$relation_name)='" + viewName + "'";
-  if (getSchemaName() != null) {
-    sql+=" and rdb$owner_name='" + getSchemaName().toUpperCase() + "'";
-  }
-  return new RawSqlStatement(sql);
-}

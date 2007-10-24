@@ -1,10 +1,10 @@
 {
   new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws Exception {
-      new JdbcTemplate(database).execute(new CreateTableStatement(TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getBooleanType()));
+      new JdbcTemplate(database).execute(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getBooleanType()));
       DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
-      new JdbcTemplate(database).execute(new AddDefaultValueStatement(TABLE_NAME,COLUMN_NAME,Boolean.TRUE));
+      new JdbcTemplate(database).execute(new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,Boolean.TRUE));
       snapshot=new DatabaseSnapshot(database);
       if (database instanceof MySQLDatabase || database instanceof MSSQLDatabase) {
         assertEquals("true",snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue().toString().toLowerCase());

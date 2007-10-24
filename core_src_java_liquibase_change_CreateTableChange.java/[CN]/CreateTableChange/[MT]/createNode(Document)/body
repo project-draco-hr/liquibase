@@ -1,5 +1,8 @@
 {
   Element element=currentChangeLogFileDOM.createElement("createTable");
+  if (getSchemaName() != null) {
+    element.setAttribute("schemaName",getSchemaName());
+  }
   element.setAttribute("tableName",getTableName());
   if (StringUtils.trimToNull(tablespace) != null) {
     element.setAttribute("tablespace",tablespace);

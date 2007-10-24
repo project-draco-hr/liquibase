@@ -1,15 +1,15 @@
 {
   if (database instanceof MSSQLDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " DROP CONSTRAINT "+ ((MSSQLDatabase)database).generateDefaultConstraintName(getTableName(),getColumnName()))};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP CONSTRAINT "+ ((MSSQLDatabase)database).generateDefaultConstraintName(getTableName(),getColumnName()))};
   }
  else   if (database instanceof MySQLDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " ALTER "+ getColumnName()+ " DROP DEFAULT")};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER "+ getColumnName()+ " DROP DEFAULT")};
   }
  else   if (database instanceof OracleDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " MODIFY "+ getColumnName()+ " DEFAULT NULL")};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY "+ getColumnName()+ " DEFAULT NULL")};
   }
  else   if (database instanceof DerbyDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " ALTER COLUMN  "+ getColumnName()+ " WITH DEFAULT NULL")};
+    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN  "+ getColumnName()+ " WITH DEFAULT NULL")};
   }
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + SqlUtil.escapeTableName(getTableName(),database) + " ALTER COLUMN  "+ getColumnName()+ " SET DEFAULT NULL")};
+  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN  "+ getColumnName()+ " SET DEFAULT NULL")};
 }

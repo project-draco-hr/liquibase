@@ -1,6 +1,6 @@
 {
   StringBuffer buffer=new StringBuffer();
-  buffer.append("INSERT INTO ").append(SqlUtil.escapeTableName(getTableName(),database)).append(" ");
+  buffer.append("INSERT INTO ").append(database.escapeTableName(getSchemaName(),getTableName())).append(" ");
   Iterator<ColumnConfig> iterator=columns.iterator();
   StringBuffer columnNames=new StringBuffer();
   StringBuffer columnValues=new StringBuffer();

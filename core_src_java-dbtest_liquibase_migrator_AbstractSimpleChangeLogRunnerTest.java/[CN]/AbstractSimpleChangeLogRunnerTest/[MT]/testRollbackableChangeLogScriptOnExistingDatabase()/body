@@ -1,6 +1,6 @@
 {
   Migrator migrator=createMigrator(rollbackChangeLog);
-  migrator.dropAll();
+  migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(rollbackChangeLog);
   migrator.setMode(Migrator.Mode.EXECUTE_MODE);
   migrator.migrate();

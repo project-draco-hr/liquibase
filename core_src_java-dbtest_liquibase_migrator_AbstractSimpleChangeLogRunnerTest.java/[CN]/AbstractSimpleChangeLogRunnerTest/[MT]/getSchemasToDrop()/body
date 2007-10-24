@@ -1,0 +1,3 @@
+{
+  return new String[]{DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection).getSchemaName(),"liquibaseb".toUpperCase()};
+}
