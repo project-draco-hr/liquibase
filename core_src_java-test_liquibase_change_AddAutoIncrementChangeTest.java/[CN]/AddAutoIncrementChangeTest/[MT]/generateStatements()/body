@@ -1,0 +1,27 @@
+{
+  new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      AddAutoIncrementChange change=new AddAutoIncrementChange();
+      change.setSchemaName("SCHEMA_NAME");
+      change.setTableName("TABLE_NAME");
+      change.setColumnName("COLUMN_NAME");
+      change.setColumnDataType("DATATYPE(255)");
+      SqlStatement[] sqlStatements=change.generateStatements(database);
+      if (database instanceof PostgresDatabase) {
+        assertEquals(3,sqlStatements.length);
+        assertTrue(sqlStatements[0] instanceof RawSqlStatement);
+        assertTrue(sqlStatements[1] instanceof RawSqlStatement);
+        assertTrue(sqlStatements[2] instanceof RawSqlStatement);
+      }
+ else {
+        assertEquals(1,sqlStatements.length);
+        assertTrue(sqlStatements[0] instanceof AddAutoIncrementStatement);
+        assertEquals("SCHEMA_NAME",((AddAutoIncrementStatement)sqlStatements[0]).getSchemaName());
+        assertEquals("TABLE_NAME",((AddAutoIncrementStatement)sqlStatements[0]).getTableName());
+        assertEquals("COLUMN_NAME",((AddAutoIncrementStatement)sqlStatements[0]).getColumnName());
+        assertEquals("DATATYPE(255)",((AddAutoIncrementStatement)sqlStatements[0]).getColumnDataType());
+      }
+    }
+  }
+);
+}

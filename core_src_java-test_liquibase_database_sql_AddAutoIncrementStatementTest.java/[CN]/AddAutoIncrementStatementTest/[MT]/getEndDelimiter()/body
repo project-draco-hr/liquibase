@@ -1,0 +1,8 @@
+{
+  new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      assertEquals(";",new AddAutoIncrementStatement(null,null,null,null).getEndDelimiter(database));
+    }
+  }
+);
+}

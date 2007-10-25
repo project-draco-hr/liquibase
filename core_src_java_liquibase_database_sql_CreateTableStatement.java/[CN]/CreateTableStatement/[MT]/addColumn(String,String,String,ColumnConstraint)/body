@@ -17,6 +17,7 @@
         }
       }
  else       if (constraint instanceof NotNullConstraint) {
+        ((NotNullConstraint)constraint).setColumnName(columnName);
         getNotNullColumns().add(columnName);
       }
  else       if (constraint instanceof ForeignKeyConstraint) {

@@ -6,7 +6,7 @@
     throw new JDBCException("Direct update using CallableSqlStatement not currently implemented");
   }
 class UpdateStatementCallback implements StatementCallback {
-    public Object doInStatement(    Statement stmt) throws SQLException {
+    public Object doInStatement(    Statement stmt) throws SQLException, JDBCException {
       return stmt.executeUpdate(sql.getSqlStatement(database));
     }
     public SqlStatement getStatement(){

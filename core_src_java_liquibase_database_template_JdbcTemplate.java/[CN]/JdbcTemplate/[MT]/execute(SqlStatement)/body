@@ -7,13 +7,8 @@
     return;
   }
 class ExecuteStatementCallback implements StatementCallback {
-    public Object doInStatement(    Statement stmt) throws SQLException {
-      try {
-        stmt.execute(sql.getSqlStatement(database));
-      }
- catch (      SQLException e) {
-        throw e;
-      }
+    public Object doInStatement(    Statement stmt) throws SQLException, JDBCException {
+      stmt.execute(sql.getSqlStatement(database));
       return null;
     }
     public SqlStatement getStatement(){

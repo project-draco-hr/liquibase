@@ -1,0 +1,18 @@
+{
+  for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
+    try {
+      new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + TABLE_NAME));
+    }
+ catch (    JDBCException e) {
+      ;
+    }
+    try {
+      if (database.supportsSchemas()) {
+        new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + ALT_SCHEMA + "."+ TABLE_NAME));
+      }
+    }
+ catch (    JDBCException e) {
+      ;
+    }
+  }
+}

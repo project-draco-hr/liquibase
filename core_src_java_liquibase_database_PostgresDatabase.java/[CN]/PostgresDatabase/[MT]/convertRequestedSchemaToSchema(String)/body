@@ -1,8 +1,8 @@
 {
-  if (getSchemaName() == null) {
+  if (requestedSchema == null) {
     return "public";
   }
  else {
-    return StringUtils.trimToNull(requestedSchema);
+    return StringUtils.trimToNull(requestedSchema).toLowerCase();
   }
 }

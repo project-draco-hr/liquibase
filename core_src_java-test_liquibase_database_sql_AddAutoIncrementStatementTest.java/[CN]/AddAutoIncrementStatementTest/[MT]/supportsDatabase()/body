@@ -1,0 +1,13 @@
+{
+  new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      if (database instanceof OracleDatabase || database instanceof MSSQLDatabase || database instanceof PostgresDatabase|| database instanceof DerbyDatabase|| database instanceof CacheDatabase|| database instanceof H2Database|| database instanceof FirebirdDatabase) {
+        assertFalse(new AddAutoIncrementStatement(TABLE_NAME,COLUMN_NAME,COLUMN_TYPE).supportsDatabase(database));
+      }
+ else {
+        assertTrue(new AddAutoIncrementStatement(TABLE_NAME,COLUMN_NAME,COLUMN_TYPE).supportsDatabase(database));
+      }
+    }
+  }
+);
+}

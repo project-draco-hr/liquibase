@@ -1,0 +1,18 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws JDBCException {
+      if (!database.supportsSchemas()) {
+        return;
+      }
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      assertNull(snapshot.getTable(TABLE_NAME));
+      CreateTableStatement statement=new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'");
+      new JdbcTemplate(database).execute(statement);
+      snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      Table table=snapshot.getTable(TABLE_NAME);
+      assertNotNull(table);
+      assertEquals(TABLE_NAME.toUpperCase(),table.getName().toUpperCase());
+    }
+  }
+);
+}

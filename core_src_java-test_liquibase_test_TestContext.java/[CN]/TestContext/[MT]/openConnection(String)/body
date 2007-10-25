@@ -24,6 +24,20 @@
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
+  try {
+    if (url.startsWith("jdbc:hsql")) {
+      connection.createStatement().execute("CREATE SCHEMA " + ALT_SCHEMA + " AUTHORIZATION DBA");
+    }
+ else     if (url.startsWith("jdbc:sqlserver") || url.startsWith("jdbc:postgresql") || url.startsWith("jdbc:h2")) {
+      connection.createStatement().execute("CREATE SCHEMA " + ALT_SCHEMA);
+    }
+    if (!connection.getAutoCommit()) {
+      connection.commit();
+    }
+  }
+ catch (  SQLException e) {
+    ;
+  }
   connectionsByUrl.put(url,connection);
   Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
     public void run(){
@@ -35,18 +49,6 @@
         }
  catch (        SQLException e) {
           ;
-        }
-        if (connection.getMetaData().getURL().startsWith("jdbc:derby")) {
-        }
- else         if (connection.getMetaData().getURL().startsWith("jdbc:hsqldb")) {
-          try {
-            Statement statement=connection.createStatement();
-            statement.execute("SHUTDOWN");
-            statement.close();
-          }
- catch (          SQLException e) {
-            ;
-          }
         }
         connection.close();
       }

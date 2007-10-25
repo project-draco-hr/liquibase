@@ -1,0 +1,3 @@
+{
+  super(statement.getClass().getName() + " is not supported on " + database.getProductName());
+}

@@ -3,6 +3,6 @@
     return getSchemaName();
   }
  else {
-    return requestedSchema;
+    return requestedSchema.toUpperCase();
   }
 }

@@ -1,0 +1,3 @@
+{
+  return super.convertRequestedSchemaToSchema(requestedSchema).toUpperCase();
+}
