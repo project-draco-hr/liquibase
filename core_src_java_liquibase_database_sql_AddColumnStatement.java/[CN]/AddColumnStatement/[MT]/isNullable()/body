@@ -1,0 +1,11 @@
+{
+  if (isPrimaryKey()) {
+    return false;
+  }
+  for (  ColumnConstraint constraint : constraints) {
+    if (constraint instanceof NotNullConstraint) {
+      return false;
+    }
+  }
+  return true;
+}

@@ -1,0 +1,21 @@
+{
+  AddColumnChange refactoring=new AddColumnChange();
+  refactoring.setSchemaName("SCHEMA");
+  refactoring.setTableName("TAB");
+  ColumnConfig column=new ColumnConfig();
+  column.setName("NEWCOL");
+  column.setType("TYP");
+  ConstraintsConfig constraints=new ConstraintsConfig();
+  constraints.setNullable(Boolean.FALSE);
+  column.setConstraints(constraints);
+  refactoring.setColumn(column);
+  SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
+  assertEquals(1,sqlStatements.length);
+  assertTrue(sqlStatements[0] instanceof AddColumnStatement);
+  assertEquals("SCHEMA",((AddColumnStatement)sqlStatements[0]).getSchemaName());
+  assertEquals("TAB",((AddColumnStatement)sqlStatements[0]).getTableName());
+  assertEquals("NEWCOL",((AddColumnStatement)sqlStatements[0]).getColumnName());
+  assertEquals("TYP",((AddColumnStatement)sqlStatements[0]).getColumnType());
+  assertFalse(((AddColumnStatement)sqlStatements[0]).isPrimaryKey());
+  assertFalse(((AddColumnStatement)sqlStatements[0]).isNullable());
+}

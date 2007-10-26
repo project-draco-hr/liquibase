@@ -8,7 +8,7 @@
     }
     try {
       if (database.supportsSchemas()) {
-        new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + ALT_SCHEMA + "."+ TABLE_NAME));
+        new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + TestContext.ALT_SCHEMA + "."+ TABLE_NAME));
       }
     }
  catch (    JDBCException e) {

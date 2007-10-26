@@ -1,0 +1,22 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertNull(snapshot.getTable(TABLE_NAME).getColumn(NEW_COLUMN_NAME));
+      new JdbcTemplate(database).execute(new AddColumnStatement(null,TABLE_NAME,NEW_COLUMN_NAME,"int",42));
+      snapshot=new DatabaseSnapshot(database);
+      Column columnSnapshot=snapshot.getTable(TABLE_NAME).getColumn(NEW_COLUMN_NAME);
+      assertNotNull(columnSnapshot);
+      assertEquals(NEW_COLUMN_NAME.toUpperCase(),columnSnapshot.getName().toUpperCase());
+      if (database instanceof OracleDatabase) {
+        assertEquals("NUMBER",columnSnapshot.getTypeName().toUpperCase());
+      }
+ else {
+        assertTrue(columnSnapshot.getTypeName().toUpperCase().startsWith("INT"));
+      }
+      assertEquals(42,((Number)columnSnapshot.getDefaultValue()).intValue());
+      assertEquals(true,columnSnapshot.isNullable());
+    }
+  }
+);
+}

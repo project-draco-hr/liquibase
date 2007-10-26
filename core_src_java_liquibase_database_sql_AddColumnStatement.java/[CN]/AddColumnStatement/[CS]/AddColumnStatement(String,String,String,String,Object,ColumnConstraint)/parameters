@@ -1,0 +1,6 @@
+String schemaName
+String tableName
+String columnName
+String columnType
+Object defaultValue
+ColumnConstraint constraints

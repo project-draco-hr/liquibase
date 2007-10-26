@@ -1,0 +1,27 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      AddColumnStatement statement=new AddColumnStatement(null,TABLE_NAME,NEW_COLUMN_NAME,"int",null,new PrimaryKeyConstraint());
+      if (database instanceof CacheDatabase || database instanceof H2Database || database instanceof DB2Database|| database instanceof DerbyDatabase) {
+        try {
+          statement.getSqlStatement(database);
+          fail("Database does support adding primary keys, should throw exception");
+        }
+ catch (        StatementNotSupportedOnDatabaseException e) {
+          assertEquals("Adding primary key columns is not supported",e.getReason());
+        }
+        return;
+      }
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertNull(snapshot.getTable(TABLE_NAME).getColumn(NEW_COLUMN_NAME));
+      new JdbcTemplate(database).execute(statement);
+      snapshot=new DatabaseSnapshot(database);
+      Column columnSnapshot=snapshot.getTable(TABLE_NAME).getColumn(NEW_COLUMN_NAME);
+      assertNotNull(columnSnapshot);
+      assertEquals(false,columnSnapshot.isNullable());
+      assertTrue(columnSnapshot.isPrimaryKey());
+      assertEquals(false,columnSnapshot.isAutoIncrement());
+    }
+  }
+);
+}

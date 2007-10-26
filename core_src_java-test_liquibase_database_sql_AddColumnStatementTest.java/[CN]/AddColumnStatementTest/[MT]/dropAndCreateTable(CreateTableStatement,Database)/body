@@ -1,0 +1,21 @@
+{
+  String schema="";
+  if (statement.getSchemaName() != null) {
+    schema=statement.getSchemaName() + ".";
+  }
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
+  }
+  try {
+    new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + schema + statement.getTableName()));
+  }
+ catch (  JDBCException e) {
+    if (!database.getConnection().getAutoCommit()) {
+      database.getConnection().rollback();
+    }
+  }
+  new JdbcTemplate(database).execute(statement);
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
+  }
+}

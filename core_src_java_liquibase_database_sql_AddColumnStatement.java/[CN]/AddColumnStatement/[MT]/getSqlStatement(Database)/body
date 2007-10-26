@@ -1,0 +1,31 @@
+{
+  if (isPrimaryKey() && (database instanceof CacheDatabase || database instanceof H2Database || database instanceof DB2Database|| database instanceof DerbyDatabase)) {
+    throw new StatementNotSupportedOnDatabaseException("Adding primary key columns is not supported",this,database);
+  }
+  String alterTable="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD "+ getColumnName()+ " "+ database.getColumnType(getColumnType(),isAutoIncrement());
+  if (defaultClauseBeforeNotNull(database)) {
+    alterTable+=getDefaultClause(database);
+  }
+  if (primaryKeyBeforeNotNull(database)) {
+    if (isPrimaryKey()) {
+      alterTable+=" PRIMARY KEY";
+    }
+  }
+  if (!isNullable()) {
+    alterTable+=" NOT NULL";
+  }
+ else {
+    if (database instanceof SybaseDatabase) {
+      alterTable+=" NULL";
+    }
+  }
+  if (!primaryKeyBeforeNotNull(database)) {
+    if (isPrimaryKey()) {
+      alterTable+=" PRIMARY KEY";
+    }
+  }
+  if (!defaultClauseBeforeNotNull(database)) {
+    alterTable+=getDefaultClause(database);
+  }
+  return alterTable;
+}

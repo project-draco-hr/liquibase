@@ -1,0 +1,8 @@
+{
+  for (  ColumnConstraint constraint : constraints) {
+    if (constraint instanceof PrimaryKeyConstraint) {
+      return true;
+    }
+  }
+  return false;
+}

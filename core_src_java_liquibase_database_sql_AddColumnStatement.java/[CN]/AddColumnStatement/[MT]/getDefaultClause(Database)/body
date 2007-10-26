@@ -1,0 +1,10 @@
+{
+  String clause="";
+  if (getDefaultValue() != null) {
+    if (database instanceof MSSQLDatabase) {
+      clause+=" CONSTRAINT " + ((MSSQLDatabase)database).generateDefaultConstraintName(tableName,getColumnName());
+    }
+    clause+=" DEFAULT " + database.convertJavaObjectToString(getDefaultValue());
+  }
+  return clause;
+}

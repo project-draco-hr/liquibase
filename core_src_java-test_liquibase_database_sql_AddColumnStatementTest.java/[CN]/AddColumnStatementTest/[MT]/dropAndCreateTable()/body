@@ -1,0 +1,8 @@
+{
+  for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
+    dropAndCreateTable(new CreateTableStatement(TABLE_NAME).addColumn("existingCol","int"),database);
+    if (database.supportsSchemas()) {
+      dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addColumn("existingCol","int"),database);
+    }
+  }
+}
