@@ -1,0 +1,15 @@
+{
+  String sql="ALTER TABLE " + database.escapeTableName(getBaseTableSchemaName(),getBaseTableName()) + " ADD CONSTRAINT "+ getConstraintName()+ " FOREIGN KEY ("+ getBaseColumnNames()+ ") REFERENCES "+ database.escapeTableName(getReferencedTableSchemaName(),getReferencedTableName())+ "("+ getReferencedColumnNames()+ ")";
+  if (isDeleteCascade()) {
+    sql+=" ON DELETE CASCADE";
+  }
+  if (database.supportsInitiallyDeferrableColumns()) {
+    if (isDeferrable()) {
+      sql+=" DEFERRABLE";
+    }
+    if (isInitiallyDeferred()) {
+      sql+=" INITIALLY DEFERRED";
+    }
+  }
+  return sql;
+}

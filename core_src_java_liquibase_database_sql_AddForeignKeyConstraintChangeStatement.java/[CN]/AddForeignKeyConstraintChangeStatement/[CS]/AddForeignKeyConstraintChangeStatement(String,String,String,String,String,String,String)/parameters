@@ -1,0 +1,7 @@
+String constraintName
+String baseTableSchemaName
+String baseTableName
+String baseColumnNames
+String referencedTableSchemaName
+String referencedTableName
+String referencedColumnNames

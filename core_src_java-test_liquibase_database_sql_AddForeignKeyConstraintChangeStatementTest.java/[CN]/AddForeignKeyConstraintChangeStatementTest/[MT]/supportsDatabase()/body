@@ -1,0 +1,8 @@
+{
+  new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      assertTrue(new AddForeignKeyConstraintChangeStatement(null,null,null,null,null,null,null).supportsDatabase(database));
+    }
+  }
+);
+}

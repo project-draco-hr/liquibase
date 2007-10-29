@@ -1,0 +1,25 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      if (!database.supportsInitiallyDeferrableColumns()) {
+        return;
+      }
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertNull(snapshot.getForeignKey(FK_NAME));
+      AddForeignKeyConstraintChangeStatement constraint=new AddForeignKeyConstraintChangeStatement(FK_NAME,null,BASE_TABLE_NAME,BASE_COLUMN_NAME,null,REF_TABLE_NAME,REF_COL_NAME);
+      constraint.setDeferrable(true);
+      constraint.setInitiallyDeferred(true);
+      new JdbcTemplate(database).execute(constraint);
+      snapshot=new DatabaseSnapshot(database);
+      ForeignKey fkSnapshot=snapshot.getForeignKey(FK_NAME);
+      assertNotNull(fkSnapshot);
+      assertEquals(BASE_TABLE_NAME.toUpperCase(),fkSnapshot.getForeignKeyTable().getName().toUpperCase());
+      assertEquals(BASE_COLUMN_NAME.toUpperCase(),fkSnapshot.getForeignKeyColumn().toUpperCase());
+      assertEquals(REF_TABLE_NAME.toUpperCase(),fkSnapshot.getPrimaryKeyTable().getName().toUpperCase());
+      assertEquals(REF_COL_NAME.toUpperCase(),fkSnapshot.getPrimaryKeyColumn().toUpperCase());
+      assertTrue(fkSnapshot.isDeferrable());
+      assertTrue(fkSnapshot.isInitiallyDeferred());
+    }
+  }
+);
+}
