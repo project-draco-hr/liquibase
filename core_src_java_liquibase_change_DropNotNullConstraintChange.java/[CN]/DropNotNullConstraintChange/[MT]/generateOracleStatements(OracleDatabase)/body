@@ -1,3 +1,0 @@
-{
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY "+ getColumnName()+ " NULL")};
-}

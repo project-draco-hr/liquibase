@@ -1,0 +1,27 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      if (!database.supportsSchemas()) {
+        return;
+      }
+      SetNullableStatement statement=new SetNullableStatement(TestContext.ALT_SCHEMA,NOTNULL_TABLE_NAME,COLUMN_NAME,"varchar(50)",false);
+      if (!statement.supportsDatabase(database)) {
+        try {
+          statement.getSqlStatement(database);
+          fail("Did not throw exception");
+        }
+ catch (        StatementNotSupportedOnDatabaseException e) {
+          ;
+        }
+        return;
+      }
+      new JdbcTemplate(database).execute(new CreateTableStatement(TestContext.ALT_SCHEMA,NOTNULL_TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)"));
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      assertTrue(snapshot.getTable(NOTNULL_TABLE_NAME).getColumn(COLUMN_NAME).isNullable());
+      new JdbcTemplate(database).execute(statement);
+      snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      assertFalse(snapshot.getTable(NOTNULL_TABLE_NAME).getColumn(COLUMN_NAME).isNullable());
+    }
+  }
+);
+}

@@ -1,0 +1,14 @@
+{
+  new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      SetNullableStatement statement=new SetNullableStatement(null,null,null,null,true);
+      if (database instanceof FirebirdDatabase) {
+        assertFalse(statement.supportsDatabase(database));
+      }
+ else {
+        assertTrue(statement.supportsDatabase(database));
+      }
+    }
+  }
+);
+}

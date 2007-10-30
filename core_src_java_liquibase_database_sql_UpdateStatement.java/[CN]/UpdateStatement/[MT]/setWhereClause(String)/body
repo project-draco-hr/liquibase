@@ -1,3 +1,4 @@
 {
   this.whereClause=whereClause;
+  return this;
 }

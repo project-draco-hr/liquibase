@@ -19,8 +19,7 @@
       return false;
     }
  else {
-      UpdateStatement updateStatement=new UpdateStatement();
-      updateStatement.setTableName(getDatabaseChangeLogLockTableName());
+      UpdateStatement updateStatement=new UpdateStatement(null,getDatabaseChangeLogLockTableName());
       updateStatement.addNewColumnValue("LOCKED",true,Types.BOOLEAN);
       updateStatement.addNewColumnValue("LOCKGRANTED",new Timestamp(new java.util.Date().getTime()),Types.TIMESTAMP);
       updateStatement.addNewColumnValue("LOCKEDBY",InetAddress.getLocalHost().getCanonicalHostName() + " (" + InetAddress.getLocalHost().getHostAddress()+ ")",Types.VARCHAR);

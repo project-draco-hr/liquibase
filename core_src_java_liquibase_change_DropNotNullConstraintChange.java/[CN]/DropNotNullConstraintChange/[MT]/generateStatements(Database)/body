@@ -1,27 +1,3 @@
 {
-  if (database instanceof SybaseDatabase) {
-    return generateSybaseStatements((SybaseDatabase)database);
-  }
- else   if (database instanceof MSSQLDatabase) {
-    return generateMSSQLStatements((MSSQLDatabase)database);
-  }
- else   if (database instanceof MySQLDatabase) {
-    return generateMySQLStatements((MySQLDatabase)database);
-  }
- else   if (database instanceof OracleDatabase) {
-    return generateOracleStatements((OracleDatabase)database);
-  }
- else   if (database instanceof DerbyDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ columnName+ " NULL")};
-  }
- else   if (database instanceof HsqlDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ columnName+ " NULL")};
-  }
- else   if (database instanceof CacheDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ columnName+ " NULL")};
-  }
- else   if (database instanceof FirebirdDatabase) {
-    throw new UnsupportedChangeException("LiquiBase does not currently support dropping null constraints in Firebird");
-  }
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getColumnName()+ " DROP NOT NULL")};
+  return new SqlStatement[]{new SetNullableStatement(getSchemaName(),getTableName(),getColumnName(),getColumnDataType(),true)};
 }

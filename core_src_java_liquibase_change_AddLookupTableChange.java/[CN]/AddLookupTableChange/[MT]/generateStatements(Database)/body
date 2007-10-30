@@ -29,7 +29,7 @@
     statements.addAll(Arrays.asList(addNotNullChange.generateStatements(database)));
   }
   if (database instanceof DB2Database) {
-    statements.add(new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(getNewTableSchemaName(),getNewTableName()) + "')"));
+    statements.add(new ReorganizeTableStatement(getNewTableSchemaName(),getNewTableName()));
   }
   AddPrimaryKeyChange addPKChange=new AddPrimaryKeyChange();
   addPKChange.setSchemaName(getNewTableSchemaName());
@@ -37,7 +37,7 @@
   addPKChange.setColumnNames(getNewColumnName());
   statements.addAll(Arrays.asList(addPKChange.generateStatements(database)));
   if (database instanceof DB2Database) {
-    statements.add(new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(getNewTableSchemaName(),getNewTableName()) + "')"));
+    statements.add(new ReorganizeTableStatement(getNewTableSchemaName(),getNewTableName()));
   }
   AddForeignKeyConstraintChange addFKChange=new AddForeignKeyConstraintChange();
   addFKChange.setBaseTableSchemaName(getExistingTableSchemaName());

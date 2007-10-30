@@ -1,0 +1,28 @@
+{
+  String nullableString;
+  if (isNullable()) {
+    nullableString=" NULL";
+  }
+ else {
+    nullableString=" NOT NULL";
+  }
+  if (database instanceof OracleDatabase || database instanceof SybaseDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY "+ getColumnName()+ nullableString;
+  }
+ else   if (database instanceof MSSQLDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getColumnName()+ " "+ getColumnDataType()+ nullableString;
+  }
+ else   if (database instanceof MySQLDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY "+ getColumnName()+ " "+ getColumnDataType()+ nullableString;
+  }
+ else   if (database instanceof DerbyDatabase || database instanceof CacheDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN  "+ getColumnName()+ nullableString;
+  }
+ else   if (database instanceof HsqlDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN  "+ getColumnName()+ " "+ getColumnDataType()+ nullableString;
+  }
+ else   if (database instanceof FirebirdDatabase) {
+    throw new StatementNotSupportedOnDatabaseException(this,database);
+  }
+  return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN  "+ getColumnName()+ (isNullable() ? " DROP NOT NULL" : " SET NOT NULL");
+}

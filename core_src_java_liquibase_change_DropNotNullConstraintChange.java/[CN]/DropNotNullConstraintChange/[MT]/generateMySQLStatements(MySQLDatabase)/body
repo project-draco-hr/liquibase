@@ -1,6 +1,0 @@
-{
-  if (columnDataType == null) {
-    throw new RuntimeException("columnDataType is required to drop not null constraints with MySQL");
-  }
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY "+ getColumnName()+ " "+ getColumnDataType()+ " DEFAULT NULL")};
-}
