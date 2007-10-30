@@ -1,5 +1,6 @@
 {
   DropDefaultValueChange inverse=new DropDefaultValueChange();
+  inverse.setSchemaName(getSchemaName());
   inverse.setTableName(getTableName());
   inverse.setColumnName(getColumnName());
   return new Change[]{inverse};

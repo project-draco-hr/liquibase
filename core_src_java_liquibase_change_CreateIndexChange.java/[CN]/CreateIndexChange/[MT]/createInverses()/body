@@ -1,5 +1,6 @@
 {
   DropIndexChange inverse=new DropIndexChange();
+  inverse.setSchemaName(getSchemaName());
   inverse.setTableName(getTableName());
   inverse.setIndexName(getIndexName());
   return new Change[]{inverse};

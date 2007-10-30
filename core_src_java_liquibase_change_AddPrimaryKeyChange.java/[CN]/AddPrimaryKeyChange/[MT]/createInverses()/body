@@ -1,5 +1,6 @@
 {
   DropPrimaryKeyChange inverse=new DropPrimaryKeyChange();
+  inverse.setSchemaName(getSchemaName());
   inverse.setTableName(getTableName());
   inverse.setConstraintName(getConstraintName());
   return new Change[]{inverse};

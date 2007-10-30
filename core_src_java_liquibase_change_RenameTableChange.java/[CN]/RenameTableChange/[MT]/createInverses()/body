@@ -1,5 +1,6 @@
 {
   RenameTableChange inverse=new RenameTableChange();
+  inverse.setSchemaName(getSchemaName());
   inverse.setOldTableName(getNewTableName());
   inverse.setNewTableName(getOldTableName());
   return new Change[]{inverse};

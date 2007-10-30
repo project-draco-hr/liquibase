@@ -1,5 +1,6 @@
 {
   RenameColumnChange inverse=new RenameColumnChange();
+  inverse.setSchemaName(getSchemaName());
   inverse.setTableName(getTableName());
   inverse.setOldColumnName(getNewColumnName());
   inverse.setNewColumnName(getOldColumnName());

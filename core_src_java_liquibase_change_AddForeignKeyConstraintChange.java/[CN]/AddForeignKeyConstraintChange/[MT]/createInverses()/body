@@ -1,5 +1,6 @@
 {
   DropForeignKeyConstraintChange inverse=new DropForeignKeyConstraintChange();
+  inverse.setBaseTableSchemaName(getBaseTableSchemaName());
   inverse.setBaseTableName(getBaseTableName());
   inverse.setConstraintName(getConstraintName());
   return new Change[]{inverse};

@@ -1,6 +1,7 @@
 {
   DropNotNullConstraintChange inverse=new DropNotNullConstraintChange();
   inverse.setColumnName(getColumnName());
+  inverse.setSchemaName(getSchemaName());
   inverse.setTableName(getTableName());
   inverse.setColumnDataType(getColumnDataType());
   return new Change[]{inverse};
