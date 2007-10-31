@@ -1,6 +1,0 @@
-{
-  for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
-    CreateTableChange createTableChange=new CreateTableChange();
-    createTableChange.setTableName("updateStatementTest");
-  }
-}

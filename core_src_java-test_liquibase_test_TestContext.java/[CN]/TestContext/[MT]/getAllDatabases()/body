@@ -1,9 +1,7 @@
 {
   if (allDatabases == null) {
     allDatabases=new HashSet<Database>();
-    for (    Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
-      allDatabases.add(database);
-    }
+    allDatabases.addAll(Arrays.asList(DatabaseFactory.getInstance().getImplementedDatabases()));
   }
   return allDatabases;
 }

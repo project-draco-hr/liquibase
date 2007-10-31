@@ -1,18 +1,8 @@
 {
   for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
-    try {
-      new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + TABLE_NAME));
-    }
- catch (    JDBCException e) {
-      ;
-    }
-    try {
-      if (database.supportsSchemas()) {
-        new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + TestContext.ALT_SCHEMA + "."+ TABLE_NAME));
-      }
-    }
- catch (    JDBCException e) {
-      ;
+    dropAndCreateTable(new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn(COLUMN_NAME,COLUMN_TYPE).addColumn("otherColumn","varchar(50)"),database);
+    if (database.supportsSchemas()) {
+      dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn(COLUMN_NAME,COLUMN_TYPE).addColumn("otherColumn","varchar(50)"),database);
     }
   }
 }

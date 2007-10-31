@@ -1,0 +1,15 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      if (!database.supportsTablespaces()) {
+        return;
+      }
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertFalse(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isUnique());
+      AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,"uq_adduqtest");
+      statement.setTablespace(TestContext.ALT_TABLESPACE);
+      new JdbcTemplate(database).execute(statement);
+    }
+  }
+);
+}

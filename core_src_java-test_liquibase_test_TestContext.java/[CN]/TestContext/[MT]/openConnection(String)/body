@@ -15,7 +15,6 @@
   final Connection connection;
   try {
     connection=driver.connect(url,info);
-    connection.setAutoCommit(false);
   }
  catch (  SQLException e) {
     System.out.println("Could not connect to " + url + ": Will not test against");
@@ -24,6 +23,7 @@
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
+  connection.setAutoCommit(false);
   try {
     if (url.startsWith("jdbc:hsql")) {
       connection.createStatement().execute("CREATE SCHEMA " + ALT_SCHEMA + " AUTHORIZATION DBA");

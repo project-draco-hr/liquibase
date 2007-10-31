@@ -1,0 +1,15 @@
+{
+  String sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD CONSTRAINT "+ getConstraintName()+ " UNIQUE ("+ getColumnNames()+ ")";
+  if (StringUtils.trimToNull(getTablespace()) != null && database.supportsTablespaces()) {
+    if (database instanceof MSSQLDatabase) {
+      sql+=" ON " + getTablespace();
+    }
+ else     if (database instanceof DB2Database) {
+      ;
+    }
+ else {
+      sql+=" USING INDEX TABLESPACE " + getTablespace();
+    }
+  }
+  return sql;
+}

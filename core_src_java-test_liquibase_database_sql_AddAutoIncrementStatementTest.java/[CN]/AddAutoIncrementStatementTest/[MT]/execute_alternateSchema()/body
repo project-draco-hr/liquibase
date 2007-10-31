@@ -3,7 +3,6 @@
     public void performTest(    Database database) throws Exception {
       AddAutoIncrementStatement statement=new AddAutoIncrementStatement(TestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME,COLUMN_TYPE);
       if (statement.supportsDatabase(database)) {
-        new JdbcTemplate(database).execute(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn(COLUMN_NAME,COLUMN_TYPE).addColumn("otherColumn","varchar(50)"));
         DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
         assertFalse(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isAutoIncrement());
         new JdbcTemplate(database).execute(statement);

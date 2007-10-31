@@ -1,0 +1,20 @@
+{
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
+  }
+  String schema="";
+  if (schemaName != null) {
+    schema=schemaName + ".";
+  }
+  try {
+    new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + schema + tableName));
+    if (!database.getAutoCommitMode()) {
+      database.getConnection().commit();
+    }
+  }
+ catch (  JDBCException e) {
+    if (!database.getConnection().getAutoCommit()) {
+      database.getConnection().rollback();
+    }
+  }
+}

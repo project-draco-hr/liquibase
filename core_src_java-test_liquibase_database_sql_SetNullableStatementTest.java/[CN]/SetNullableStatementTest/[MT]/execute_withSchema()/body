@@ -15,7 +15,6 @@
         }
         return;
       }
-      new JdbcTemplate(database).execute(new CreateTableStatement(TestContext.ALT_SCHEMA,NOTNULL_TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)"));
       DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
       assertTrue(snapshot.getTable(NOTNULL_TABLE_NAME).getColumn(COLUMN_NAME).isNullable());
       new JdbcTemplate(database).execute(statement);

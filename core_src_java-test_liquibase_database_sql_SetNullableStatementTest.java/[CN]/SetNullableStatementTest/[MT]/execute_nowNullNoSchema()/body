@@ -12,7 +12,6 @@
         }
         return;
       }
-      new JdbcTemplate(database).execute(new CreateTableStatement(null,NULLABLE_TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()));
       DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
       assertFalse(snapshot.getTable(NULLABLE_TABLE_NAME).getColumn(COLUMN_NAME).isNullable());
       new JdbcTemplate(database).execute(statement);

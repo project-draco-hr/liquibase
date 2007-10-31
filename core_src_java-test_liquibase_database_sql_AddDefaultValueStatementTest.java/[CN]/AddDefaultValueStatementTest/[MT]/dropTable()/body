@@ -1,12 +1,5 @@
 {
   for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
-    try {
-      new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + TABLE_NAME));
-    }
- catch (    JDBCException e) {
-      if (!database.getAutoCommitMode()) {
-        database.getConnection().rollback();
-      }
-    }
+    dropTableIfExists(null,TABLE_NAME,database);
   }
 }

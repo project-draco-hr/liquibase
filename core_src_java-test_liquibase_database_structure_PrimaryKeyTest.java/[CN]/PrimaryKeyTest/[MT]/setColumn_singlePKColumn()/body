@@ -1,0 +1,5 @@
+{
+  PrimaryKey pk=new PrimaryKey();
+  pk.addColumnName(0,"id");
+  assertEquals(1,pk.getColumnNamesAsList().size());
+}

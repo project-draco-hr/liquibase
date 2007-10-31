@@ -1,0 +1,10 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      assertFalse(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isUnique());
+      new JdbcTemplate(database).execute(new AddUniqueConstraintStatement(TestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME,"uq_adduqtest"));
+    }
+  }
+);
+}

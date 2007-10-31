@@ -1,9 +1,9 @@
 {
   new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
     public void performTest(    Database database){
-      UpdateStatement statement=new UpdateStatement(null,"tableName");
-      statement.addNewColumnValue("colName",null,Types.VARCHAR);
-      assertEquals("UPDATE tableName SET colName = NULL",statement.getSqlStatement(database));
+      UpdateStatement statement=new UpdateStatement(null,TABLE_NAME);
+      statement.addNewColumnValue(COLUMN_NAME,null,Types.VARCHAR);
+      assertEquals("UPDATE " + TABLE_NAME + " SET "+ COLUMN_NAME+ " = NULL",statement.getSqlStatement(database));
     }
   }
 );

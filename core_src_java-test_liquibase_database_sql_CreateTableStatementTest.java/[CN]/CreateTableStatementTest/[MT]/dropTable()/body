@@ -16,12 +16,14 @@
         database.getConnection().rollback();
       }
     }
-    try {
-      new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + TestContext.ALT_SCHEMA + "."+ TABLE_NAME));
-    }
- catch (    JDBCException e) {
-      if (!database.getAutoCommitMode()) {
-        database.getConnection().rollback();
+    if (database.supportsSchemas()) {
+      try {
+        new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + TestContext.ALT_SCHEMA + "."+ TABLE_NAME));
+      }
+ catch (      JDBCException e) {
+        if (!database.getAutoCommitMode()) {
+          database.getConnection().rollback();
+        }
       }
     }
   }

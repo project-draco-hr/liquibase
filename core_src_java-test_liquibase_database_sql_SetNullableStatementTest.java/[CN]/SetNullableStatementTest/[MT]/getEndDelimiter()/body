@@ -1,8 +1,0 @@
-{
-  new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      assertEquals(";",new SetNullableStatement(null,null,null,null,true).getEndDelimiter(database));
-    }
-  }
-);
-}
