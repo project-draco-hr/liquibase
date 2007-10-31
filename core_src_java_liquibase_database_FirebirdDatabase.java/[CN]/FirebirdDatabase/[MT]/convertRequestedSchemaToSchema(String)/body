@@ -1,0 +1,8 @@
+{
+  if (requestedSchema == null) {
+    return getSchemaName();
+  }
+ else {
+    return requestedSchema.toUpperCase();
+  }
+}

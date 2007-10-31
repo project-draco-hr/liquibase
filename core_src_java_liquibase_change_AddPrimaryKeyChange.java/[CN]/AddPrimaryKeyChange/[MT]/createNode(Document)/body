@@ -8,5 +8,8 @@
   if (getConstraintName() != null) {
     node.setAttribute("constraintName",getConstraintName());
   }
+  if (getTablespace() != null) {
+    node.setAttribute("tablespace",getTablespace());
+  }
   return node;
 }

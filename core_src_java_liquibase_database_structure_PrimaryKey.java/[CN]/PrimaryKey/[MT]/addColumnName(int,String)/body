@@ -1,8 +1,8 @@
 {
-  if (position > columnNames.size()) {
-    columnNames.add(columnName);
+  if (position >= columnNames.size()) {
+    for (int i=columnNames.size() - 1; i < position; i++) {
+      this.columnNames.add(null);
+    }
   }
- else {
-    this.columnNames.add(position,columnName);
-  }
+  this.columnNames.set(position,columnName);
 }
