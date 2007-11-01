@@ -4,7 +4,7 @@
     List<String> sequenceNamess=(List<String>)new JdbcTemplate(database).queryForList(database.createFindSequencesSQL(schema),String.class);
     for (    String sequenceName : sequenceNamess) {
       Sequence seq=new Sequence();
-      seq.setName(sequenceName);
+      seq.setName(sequenceName.trim());
       sequences.add(seq);
     }
   }

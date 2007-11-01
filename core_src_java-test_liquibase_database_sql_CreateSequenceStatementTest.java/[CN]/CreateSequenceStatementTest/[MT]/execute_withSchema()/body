@@ -1,0 +1,15 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      if (!database.supportsSequences() || !database.supportsSchemas()) {
+        return;
+      }
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      assertNull(snapshot.getSequence(SEQ_NAME));
+      new JdbcTemplate(database).execute(new CreateSequenceStatement(TestContext.ALT_SCHEMA,SEQ_NAME));
+      snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      assertNotNull(snapshot.getSequence(SEQ_NAME));
+    }
+  }
+);
+}

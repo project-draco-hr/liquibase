@@ -1,0 +1,6 @@
+{
+  AddUniqueConstraintChange change=new AddUniqueConstraintChange();
+  change.setTableName("TABLE_NAME");
+  change.setColumnNames("COL_HERE");
+  assertEquals("Unique constraint added to TABLE_NAME(COL_HERE)",change.getConfirmationMessage());
+}

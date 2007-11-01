@@ -1,0 +1,3 @@
+{
+  assertEquals("Add Unique Constraint",new AddUniqueConstraintChange().getChangeName());
+}

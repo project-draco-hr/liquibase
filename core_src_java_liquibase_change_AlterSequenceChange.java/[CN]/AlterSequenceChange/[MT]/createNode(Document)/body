@@ -1,6 +1,9 @@
 {
   Element node=currentChangeLogFileDOM.createElement("alterSequence");
   node.setAttribute("sequenceName",getSequenceName());
+  if (getSchemaName() != null) {
+    node.setAttribute("schemaName",getSchemaName());
+  }
   if (getMinValue() != null) {
     node.setAttribute("minValue",getMinValue().toString());
   }

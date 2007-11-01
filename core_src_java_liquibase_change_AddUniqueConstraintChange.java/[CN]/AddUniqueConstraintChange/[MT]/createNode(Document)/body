@@ -3,6 +3,9 @@
   if (getSchemaName() != null) {
     element.setAttribute("schemaName",getSchemaName());
   }
+  if (getTablespace() != null) {
+    element.setAttribute("tablespace",getTablespace());
+  }
   element.setAttribute("tableName",getTableName());
   element.setAttribute("columnNames",getColumnNames());
   element.setAttribute("constraintName",getConstraintName());

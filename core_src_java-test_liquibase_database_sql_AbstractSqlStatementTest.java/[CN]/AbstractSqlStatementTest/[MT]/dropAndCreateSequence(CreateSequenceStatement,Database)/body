@@ -1,0 +1,7 @@
+{
+  dropSequenceIfExists(statement.getSchemaName(),statement.getSequenceName(),database);
+  new JdbcTemplate(database).execute(statement);
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
+  }
+}

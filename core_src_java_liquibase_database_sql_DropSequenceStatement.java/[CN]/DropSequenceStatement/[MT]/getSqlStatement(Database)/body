@@ -1,0 +1,6 @@
+{
+  if (!supportsDatabase(database)) {
+    throw new StatementNotSupportedOnDatabaseException(this,database);
+  }
+  return "DROP SEQUENCE " + database.escapeSequenceName(getSchemaName(),getSequenceName());
+}

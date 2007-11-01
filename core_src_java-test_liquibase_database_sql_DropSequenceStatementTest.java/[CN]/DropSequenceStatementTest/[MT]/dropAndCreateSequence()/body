@@ -1,0 +1,10 @@
+{
+  for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
+    if (database.supportsSequences()) {
+      dropAndCreateSequence(new CreateSequenceStatement(null,SEQ_NAME),database);
+      if (database.supportsSchemas()) {
+        dropAndCreateSequence(new CreateSequenceStatement(TestContext.ALT_SCHEMA,SEQ_NAME),database);
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      if (!database.supportsSequences()) {
+        try {
+          generateTestStatement().getSqlStatement(database);
+          fail("Should have thrown exception");
+        }
+ catch (        StatementNotSupportedOnDatabaseException e) {
+          return;
+        }
+      }
+      AlterSequenceStatement statement=new AlterSequenceStatement(null,SEQ_NAME).setMaxValue(50);
+      if (database instanceof FirebirdDatabase || database instanceof HsqlDatabase) {
+        try {
+          statement.getSqlStatement(database);
+          fail("Should have thrown exception");
+        }
+ catch (        StatementNotSupportedOnDatabaseException e) {
+          return;
+        }
+      }
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertNotNull(snapshot.getSequence(SEQ_NAME));
+      new JdbcTemplate(database).execute(statement);
+      snapshot=new DatabaseSnapshot(database);
+      assertNotNull(snapshot.getSequence(SEQ_NAME));
+    }
+  }
+);
+}

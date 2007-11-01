@@ -1,0 +1,8 @@
+{
+  if (sequenceName == null) {
+    return sequenceName;
+  }
+ else {
+    return schemaName + "." + sequenceName;
+  }
+}

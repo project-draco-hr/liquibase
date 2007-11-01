@@ -1,0 +1,8 @@
+{
+  if (StringUtils.trimToNull(schemaName) == null || !supportsSchemas()) {
+    return sequenceName;
+  }
+ else {
+    return schemaName + "." + sequenceName;
+  }
+}

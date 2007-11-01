@@ -1,5 +1,5 @@
 {
-  dropTableIfExists(statement.getSchemaName(),statement.getSchemaName(),database);
+  dropTableIfExists(statement.getSchemaName(),statement.getTableName(),database);
   new JdbcTemplate(database).execute(statement);
   if (!database.getAutoCommitMode()) {
     database.getConnection().commit();

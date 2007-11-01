@@ -1,0 +1,16 @@
+{
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
+  }
+  try {
+    new JdbcTemplate(database).execute(new DropSequenceStatement(schemaName,sequenceName));
+    if (!database.getAutoCommitMode()) {
+      database.getConnection().commit();
+    }
+  }
+ catch (  JDBCException e) {
+    if (!database.getConnection().getAutoCommit()) {
+      database.getConnection().rollback();
+    }
+  }
+}

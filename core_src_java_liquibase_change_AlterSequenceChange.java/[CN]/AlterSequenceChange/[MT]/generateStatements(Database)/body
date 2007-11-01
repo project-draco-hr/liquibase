@@ -2,39 +2,5 @@
   if (!database.supportsSequences()) {
     throw new UnsupportedChangeException("Sequences do not exist in " + database.getProductName());
   }
- else   if (database instanceof HsqlDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER SEQUENCE " + sequenceName + " RESTART WITH "+ minValue)};
-  }
-  StringBuffer buffer=new StringBuffer();
-  buffer.append("ALTER SEQUENCE ");
-  buffer.append(sequenceName);
-  if (incrementBy != null) {
-    if (database instanceof FirebirdDatabase) {
-      throw new UnsupportedChangeException("Firebird does not support creating sequences with increment");
-    }
- else {
-      buffer.append(" INCREMENT BY ").append(incrementBy);
-    }
-  }
-  if (minValue != null) {
-    if (database instanceof FirebirdDatabase) {
-      buffer.append(" RESTART WITH ").append(minValue);
-    }
- else {
-      buffer.append(" MINVALUE ").append(minValue);
-    }
-  }
-  if (maxValue != null) {
-    if (database instanceof FirebirdDatabase) {
-      throw new UnsupportedChangeException("Firebird does not support creating sequences with maxValue");
-    }
- else {
-      buffer.append(" MAXVALUE ").append(maxValue);
-    }
-  }
-  String sql=buffer.toString().trim();
-  if (database instanceof OracleDatabase && ordered != null && ordered) {
-    sql+=" ORDER";
-  }
-  return new SqlStatement[]{new RawSqlStatement(sql)};
+  return new SqlStatement[]{new AlterSequenceStatement(getSchemaName(),getSequenceName()).setIncrementBy(getIncrementBy()).setMaxValue(getMaxValue()).setMinValue(getMinValue()).setOrdered(isOrdered())};
 }

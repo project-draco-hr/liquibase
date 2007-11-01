@@ -1,15 +1,5 @@
 {
-  String sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD CONSTRAINT "+ getConstraintName()+ " UNIQUE ("+ getColumnNames()+ ")";
-  if (StringUtils.trimToNull(getTablespace()) != null && database.supportsTablespaces()) {
-    if (database instanceof MSSQLDatabase) {
-      sql+=" ON " + getTablespace();
-    }
- else     if (database instanceof DB2Database) {
-      ;
-    }
- else {
-      sql+=" USING INDEX TABLESPACE " + getTablespace();
-    }
-  }
-  return new SqlStatement[]{new RawSqlStatement(sql)};
+  AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(getSchemaName(),getTableName(),getColumnNames(),getConstraintName());
+  statement.setTablespace(getTablespace());
+  return new SqlStatement[]{statement};
 }
