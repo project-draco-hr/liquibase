@@ -1,5 +1,0 @@
-{
-  for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
-    dropTableIfExists(null,TABLE_NAME,database);
-  }
-}

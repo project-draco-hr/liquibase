@@ -1,29 +1,12 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      if (!database.supportsSequences()) {
-        try {
-          generateTestStatement().getSqlStatement(database);
-          fail("Should have thrown exception");
-        }
- catch (        StatementNotSupportedOnDatabaseException e) {
-          return;
-        }
-      }
-      CreateSequenceStatement statement=new CreateSequenceStatement(null,SEQ_NAME).setMaxValue(50);
-      if (database instanceof FirebirdDatabase || database instanceof HsqlDatabase) {
-        try {
-          statement.getSqlStatement(database);
-          fail("Should have thrown exception");
-        }
- catch (        StatementNotSupportedOnDatabaseException e) {
-          return;
-        }
-      }
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateSequenceStatement(null,SEQ_NAME).setMaxValue(50)){
+    protected boolean expectedException(    Database database,    JDBCException exception){
+      return database instanceof FirebirdDatabase || database instanceof HsqlDatabase;
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getSequence(SEQ_NAME));
-      new JdbcTemplate(database).execute(statement);
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       assertNotNull(snapshot.getSequence(SEQ_NAME));
     }
   }

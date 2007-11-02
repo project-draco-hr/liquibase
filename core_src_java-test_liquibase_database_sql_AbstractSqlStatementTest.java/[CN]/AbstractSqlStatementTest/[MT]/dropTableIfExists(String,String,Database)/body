@@ -1,4 +1,7 @@
 {
+  if (schemaName != null && !database.supportsSchemas()) {
+    return;
+  }
   if (!database.getAutoCommitMode()) {
     database.getConnection().commit();
   }
@@ -7,7 +10,11 @@
     schema=schemaName + ".";
   }
   try {
-    new JdbcTemplate(database).execute(new RawSqlStatement("drop table " + schema + tableName));
+    String sql="drop table " + schema + tableName;
+    if (database instanceof PostgresDatabase) {
+      sql+=" cascade";
+    }
+    new JdbcTemplate(database).execute(new RawSqlStatement(sql));
     if (!database.getAutoCommitMode()) {
       database.getConnection().commit();
     }

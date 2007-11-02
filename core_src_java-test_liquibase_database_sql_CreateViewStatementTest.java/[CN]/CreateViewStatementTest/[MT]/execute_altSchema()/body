@@ -1,15 +1,13 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      if (!database.supportsSchemas() || database instanceof HsqlDatabase) {
-        return;
-      }
-      String definition="SELECT * FROM " + TABLE_NAME;
-      CreateViewStatement statement=new CreateViewStatement(TestContext.ALT_SCHEMA,VIEW_NAME,definition);
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+  final String definition="SELECT * FROM " + TABLE_NAME;
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new CreateViewStatement(TestContext.ALT_SCHEMA,VIEW_NAME,definition)){
+    protected boolean supportsTest(    Database database){
+      return !(database instanceof HsqlDatabase);
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getView(VIEW_NAME));
-      new JdbcTemplate(database).execute(statement);
-      snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       View view=snapshot.getView(VIEW_NAME);
       assertNotNull(view);
       assertEquals(2,view.getColumns().size());

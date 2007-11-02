@@ -1,19 +1,9 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      if (!database.supportsSequences()) {
-        try {
-          generateTestStatement().getSqlStatement(database);
-          fail("Should have thrown exception");
-        }
- catch (        StatementNotSupportedOnDatabaseException e) {
-          return;
-        }
-      }
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new DropSequenceStatement(TestContext.ALT_SCHEMA,SEQ_NAME)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNotNull(snapshot.getSequence(SEQ_NAME));
-      new JdbcTemplate(database).execute(new DropSequenceStatement(TestContext.ALT_SCHEMA,SEQ_NAME));
-      snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getSequence(SEQ_NAME));
     }
   }

@@ -1,23 +1,12 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      DropColumnStatement statement=new DropColumnStatement(null,TABLE_NAME,COLUMN_NAME);
-      if (!statement.supportsDatabase(database)) {
-        try {
-          statement.getSqlStatement(database);
-          fail("did not throw exception");
-        }
- catch (        StatementNotSupportedOnDatabaseException e) {
-          return;
-        }
-      }
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new DropColumnStatement(null,TABLE_NAME,COLUMN_NAME)){
+    protected boolean supportsTest(    Database database){
+      return !(database instanceof MSSQLDatabase);
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNotNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME));
-      new JdbcTemplate(database).execute(statement);
-      if (database instanceof MSSQLDatabase) {
-        return;
-      }
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME));
     }
   }

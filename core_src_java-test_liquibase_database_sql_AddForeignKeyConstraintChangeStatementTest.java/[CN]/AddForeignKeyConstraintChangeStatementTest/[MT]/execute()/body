@@ -1,10 +1,9 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddForeignKeyConstraintChangeStatement(FK_NAME,null,BASE_TABLE_NAME,BASE_COLUMN_NAME,null,REF_TABLE_NAME,REF_COL_NAME)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getForeignKey(FK_NAME));
-      new JdbcTemplate(database).execute(new AddForeignKeyConstraintChangeStatement(FK_NAME,null,BASE_TABLE_NAME,BASE_COLUMN_NAME,null,REF_TABLE_NAME,REF_COL_NAME));
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       ForeignKey fkSnapshot=snapshot.getForeignKey(FK_NAME);
       assertNotNull(fkSnapshot);
       assertEquals(BASE_TABLE_NAME.toUpperCase(),fkSnapshot.getForeignKeyTable().getName().toUpperCase());

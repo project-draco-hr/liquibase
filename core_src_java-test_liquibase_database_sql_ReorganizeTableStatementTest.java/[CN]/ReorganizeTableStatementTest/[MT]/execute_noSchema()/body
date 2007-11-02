@@ -1,19 +1,10 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      ReorganizeTableStatement statement=new ReorganizeTableStatement(null,TABLE_NAME);
-      if (statement.supportsDatabase(database)) {
-        new JdbcTemplate(database).execute(statement);
-      }
- else {
-        try {
-          statement.getSqlStatement(database);
-          fail("Should have thrown exception");
-        }
- catch (        StatementNotSupportedOnDatabaseException e) {
-          assertEquals("Cannot reorganize table",e.getReason());
-        }
-      }
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new ReorganizeTableStatement(null,TABLE_NAME)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      ;
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+      ;
     }
   }
 );

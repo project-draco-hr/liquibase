@@ -3,7 +3,10 @@
   if (isDeleteCascade()) {
     sql+=" ON DELETE CASCADE";
   }
-  if (database.supportsInitiallyDeferrableColumns()) {
+  if (isDeferrable() || isInitiallyDeferred()) {
+    if (!database.supportsInitiallyDeferrableColumns()) {
+      throw new StatementNotSupportedOnDatabaseException("Database does not support deferrable foreign keys",this,database);
+    }
     if (isDeferrable()) {
       sql+=" DEFERRABLE";
     }

@@ -1,0 +1,4 @@
+{
+  dropAndCreateTable(new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn(COLUMN_NAME,COLUMN_TYPE).addColumn("otherColumn","varchar(50)"),database);
+  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn(COLUMN_NAME,COLUMN_TYPE).addColumn("otherColumn","varchar(50)"),database);
+}

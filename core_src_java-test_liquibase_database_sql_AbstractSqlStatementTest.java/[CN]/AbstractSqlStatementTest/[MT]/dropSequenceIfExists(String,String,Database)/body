@@ -1,4 +1,7 @@
 {
+  if (schemaName != null && !database.supportsSchemas()) {
+    return;
+  }
   if (!database.getAutoCommitMode()) {
     database.getConnection().commit();
   }
@@ -12,5 +15,8 @@
     if (!database.getConnection().getAutoCommit()) {
       database.getConnection().rollback();
     }
+  }
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
   }
 }

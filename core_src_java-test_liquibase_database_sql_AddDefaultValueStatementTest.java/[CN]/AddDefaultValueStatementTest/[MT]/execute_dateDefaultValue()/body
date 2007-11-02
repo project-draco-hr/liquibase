@@ -1,12 +1,14 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
+  final java.sql.Date date=new java.sql.Date(new Date().getTime());
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,date)){
+    protected void setup(    Database database) throws JDBCException {
       new JdbcTemplate(database).execute(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getDateType()));
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      super.setup(database);
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
-      java.sql.Date date=new java.sql.Date(new Date().getTime());
-      new JdbcTemplate(database).execute(new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,date));
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       Object defaultValue=snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue();
       if (defaultValue instanceof java.sql.Date) {
         assertEquals(new ISODateFormat().format(date),new ISODateFormat().format(((java.sql.Date)defaultValue)));

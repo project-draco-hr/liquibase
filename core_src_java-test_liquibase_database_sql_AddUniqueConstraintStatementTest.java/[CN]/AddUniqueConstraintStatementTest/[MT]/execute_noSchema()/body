@@ -1,9 +1,9 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,"uq_adduqtest")){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertFalse(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isUnique());
-      new JdbcTemplate(database).execute(new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,"uq_adduqtest"));
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
     }
   }
 );

@@ -1,12 +1,10 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      String definition="SELECT * FROM " + TABLE_NAME;
-      CreateViewStatement statement=new CreateViewStatement(null,VIEW_NAME,definition);
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  final String definition="SELECT * FROM " + TABLE_NAME;
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateViewStatement(null,VIEW_NAME,definition)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getView(VIEW_NAME));
-      new JdbcTemplate(database).execute(statement);
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       View view=snapshot.getView(VIEW_NAME);
       assertNotNull(view);
       assertEquals(2,view.getColumns().size());

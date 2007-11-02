@@ -1,16 +1,18 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,Boolean.TRUE)){
+    protected void setup(    Database database) throws JDBCException {
       new JdbcTemplate(database).execute(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getBooleanType()));
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      super.setup(database);
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
-      new JdbcTemplate(database).execute(new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,Boolean.TRUE));
-      snapshot=new DatabaseSnapshot(database);
-      if (database instanceof MySQLDatabase || database instanceof MSSQLDatabase) {
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+      if (snapshot.getDatabase() instanceof MySQLDatabase || snapshot.getDatabase() instanceof MSSQLDatabase) {
         assertEquals("true",snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue().toString().toLowerCase());
       }
  else {
-        assertEquals(database.getTrueBooleanValue().toLowerCase(),snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue().toString().toLowerCase());
+        assertEquals(snapshot.getDatabase().getTrueBooleanValue().toLowerCase(),snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue().toString().toLowerCase());
       }
     }
   }

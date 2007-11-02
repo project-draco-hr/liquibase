@@ -1,11 +1,9 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      CreateIndexStatement statement=new CreateIndexStatement(INDEX_NAME,null,TABLE_NAME,COLUMN_NAME).setTablespace(TestContext.ALT_TABLESPACE);
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateIndexStatement(INDEX_NAME,null,TABLE_NAME,COLUMN_NAME).setTablespace(TestContext.ALT_TABLESPACE)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getIndex(INDEX_NAME));
-      new JdbcTemplate(database).execute(statement);
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       assertNotNull(snapshot.getIndex(INDEX_NAME));
       assertEquals(COLUMN_NAME.toUpperCase(),snapshot.getIndex(INDEX_NAME).getColumnNames().toUpperCase());
     }

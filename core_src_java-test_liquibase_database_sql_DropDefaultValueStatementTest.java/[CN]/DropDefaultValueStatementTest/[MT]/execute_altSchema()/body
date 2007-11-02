@@ -1,14 +1,12 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      DropDefaultValueStatement statement=new DropDefaultValueStatement(TestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME);
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new DropDefaultValueStatement(TestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME)){
+    protected boolean supportsTest(    Database database){
+      return !(database instanceof DerbyDatabase);
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNotNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
-      new JdbcTemplate(database).execute(statement);
-      if (database instanceof DerbyDatabase) {
-        return;
-      }
-      snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
     }
   }

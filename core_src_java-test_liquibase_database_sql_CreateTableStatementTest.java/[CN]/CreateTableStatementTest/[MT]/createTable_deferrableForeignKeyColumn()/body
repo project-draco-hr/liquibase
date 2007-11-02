@@ -1,16 +1,13 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws JDBCException {
-      if (!database.supportsInitiallyDeferrableColumns()) {
-        return;
-      }
-      String foreignKeyName="fk_test_parent";
-      ForeignKeyConstraint fkConstraint=new ForeignKeyConstraint(foreignKeyName,TABLE_NAME + "(id)");
-      fkConstraint.setDeferrable(true);
-      fkConstraint.setInitiallyDeferred(true);
-      CreateTableStatement statement=new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("parent_id","int",fkConstraint);
-      new JdbcTemplate(database).execute(statement);
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  final String foreignKeyName="fk_test_parent";
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("parent_id","int",new ForeignKeyConstraint(foreignKeyName,TABLE_NAME + "(id)").setDeferrable(true).setInitiallyDeferred(true))){
+    protected boolean expectedException(    Database database,    JDBCException exception){
+      return !database.supportsInitiallyDeferrableColumns();
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNull(snapshot.getTable(TABLE_NAME));
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       Table table=snapshot.getTable(TABLE_NAME);
       assertEquals(TABLE_NAME.toUpperCase(),table.getName().toUpperCase());
       assertNotNull(table.getColumn("id"));

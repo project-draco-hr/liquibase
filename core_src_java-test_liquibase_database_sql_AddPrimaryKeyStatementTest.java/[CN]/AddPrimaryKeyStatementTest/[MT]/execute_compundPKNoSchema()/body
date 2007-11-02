@@ -1,11 +1,10 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddPrimaryKeyStatement(null,TABLE_NAME,COLUMN_NAME + "," + COLUMN2_NAME,"PK_addpktest")){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertFalse(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isPrimaryKey());
       assertFalse(snapshot.getTable(TABLE_NAME).getColumn(COLUMN2_NAME).isPrimaryKey());
-      new JdbcTemplate(database).execute(new AddPrimaryKeyStatement(null,TABLE_NAME,COLUMN_NAME + "," + COLUMN2_NAME,"PK_addpktest"));
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       assertTrue(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isPrimaryKey());
       assertTrue(snapshot.getTable(TABLE_NAME).getColumn(COLUMN2_NAME).isPrimaryKey());
     }

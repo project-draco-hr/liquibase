@@ -1,0 +1,32 @@
+{
+  if (!supportsTest(database)) {
+    return;
+  }
+  if (!statement.supportsDatabase(database)) {
+    try {
+      statement.getSqlStatement(database);
+      org.junit.Assert.fail("did not throw exception");
+    }
+ catch (    StatementNotSupportedOnDatabaseException e) {
+      return;
+    }
+  }
+  setup(database);
+  DatabaseSnapshot snapshot=new DatabaseSnapshot(database,schema);
+  preExecuteAssert(snapshot);
+  try {
+    new JdbcTemplate(database).execute(statement);
+    database.getConnection().commit();
+  }
+ catch (  JDBCException e) {
+    boolean expectsException=expectedException(database,e);
+    if (expectsException) {
+      return;
+    }
+ else {
+      throw e;
+    }
+  }
+  snapshot=new DatabaseSnapshot(database,schema);
+  postExecuteAssert(snapshot);
+}

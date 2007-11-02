@@ -1,4 +1,7 @@
 {
+  if (statement.getSchemaName() != null && !database.supportsSchemas()) {
+    return;
+  }
   dropSequenceIfExists(statement.getSchemaName(),statement.getSequenceName(),database);
   new JdbcTemplate(database).execute(statement);
   if (!database.getAutoCommitMode()) {

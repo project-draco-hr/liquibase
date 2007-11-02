@@ -1,23 +1,10 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      AddAutoIncrementStatement statement=new AddAutoIncrementStatement(TABLE_NAME,COLUMN_NAME,COLUMN_TYPE);
-      if (statement.supportsDatabase(database)) {
-        DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
-        assertFalse(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isAutoIncrement());
-        new JdbcTemplate(database).execute(statement);
-        snapshot=new DatabaseSnapshot(database);
-        assertTrue(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isAutoIncrement());
-      }
- else {
-        try {
-          statement.getSqlStatement(database);
-          fail("Did not throw expected exception");
-        }
- catch (        StatementNotSupportedOnDatabaseException e) {
-          ;
-        }
-      }
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddAutoIncrementStatement(null,TABLE_NAME,COLUMN_NAME,COLUMN_TYPE)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      assertFalse(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isAutoIncrement());
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+      assertTrue(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).isAutoIncrement());
     }
   }
 );

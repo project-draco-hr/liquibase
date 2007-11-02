@@ -1,11 +1,13 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,42.56)){
+    protected void setup(    Database database) throws JDBCException {
       new JdbcTemplate(database).execute(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"float"));
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      super.setup(database);
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
-      new JdbcTemplate(database).execute(new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,42.56));
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       assertEquals(42.56f,new Float(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue().toString()));
     }
   }

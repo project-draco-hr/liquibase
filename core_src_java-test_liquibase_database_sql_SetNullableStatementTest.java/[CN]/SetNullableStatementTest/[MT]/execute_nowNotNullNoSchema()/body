@@ -1,21 +1,9 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      SetNullableStatement statement=new SetNullableStatement(null,NOTNULL_TABLE_NAME,COLUMN_NAME,"varchar(50)",false);
-      if (!statement.supportsDatabase(database)) {
-        try {
-          statement.getSqlStatement(database);
-          fail("Did not throw exception");
-        }
- catch (        StatementNotSupportedOnDatabaseException e) {
-          ;
-        }
-        return;
-      }
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new SetNullableStatement(null,NOTNULL_TABLE_NAME,COLUMN_NAME,"varchar(50)",false)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertTrue(snapshot.getTable(NOTNULL_TABLE_NAME).getColumn(COLUMN_NAME).isNullable());
-      new JdbcTemplate(database).execute(statement);
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       assertFalse(snapshot.getTable(NOTNULL_TABLE_NAME).getColumn(COLUMN_NAME).isNullable());
     }
   }

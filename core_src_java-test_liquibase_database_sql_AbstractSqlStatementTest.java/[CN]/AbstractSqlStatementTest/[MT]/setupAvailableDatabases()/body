@@ -1,0 +1,7 @@
+{
+  for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
+    if (generateTestStatement().supportsDatabase(database)) {
+      setupDatabase(database);
+    }
+  }
+}

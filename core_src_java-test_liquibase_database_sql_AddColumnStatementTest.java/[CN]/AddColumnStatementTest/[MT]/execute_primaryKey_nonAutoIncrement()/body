@@ -1,21 +1,12 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws Exception {
-      AddColumnStatement statement=new AddColumnStatement(null,TABLE_NAME,NEW_COLUMN_NAME,"int",null,new PrimaryKeyConstraint());
-      if (database instanceof CacheDatabase || database instanceof H2Database || database instanceof DB2Database|| database instanceof DerbyDatabase) {
-        try {
-          statement.getSqlStatement(database);
-          fail("Database does support adding primary keys, should throw exception");
-        }
- catch (        StatementNotSupportedOnDatabaseException e) {
-          assertEquals("Adding primary key columns is not supported",e.getReason());
-        }
-        return;
-      }
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddColumnStatement(null,TABLE_NAME,NEW_COLUMN_NAME,"int",null,new PrimaryKeyConstraint())){
+    protected boolean supportsTest(    Database database){
+      return !(database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof H2Database|| database instanceof CacheDatabase);
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(NEW_COLUMN_NAME));
-      new JdbcTemplate(database).execute(statement);
-      snapshot=new DatabaseSnapshot(database);
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       Column columnSnapshot=snapshot.getTable(TABLE_NAME).getColumn(NEW_COLUMN_NAME);
       assertNotNull(columnSnapshot);
       assertEquals(false,columnSnapshot.isNullable());

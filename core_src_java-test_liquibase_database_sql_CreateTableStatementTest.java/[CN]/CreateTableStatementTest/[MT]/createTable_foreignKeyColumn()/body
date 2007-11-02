@@ -1,11 +1,10 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
-    public void performTest(    Database database) throws JDBCException {
-      String foreignKeyName="fk_test_parent";
-      ForeignKeyConstraint fkConstraint=new ForeignKeyConstraint(foreignKeyName,TABLE_NAME + "(id)");
-      CreateTableStatement statement=new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("parent_id","int",fkConstraint);
-      new JdbcTemplate(database).execute(statement);
-      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+  final String foreignKeyName="fk_test_parent";
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn("name","varchar(255)").addColumn("parent_id","int",new ForeignKeyConstraint(foreignKeyName,TABLE_NAME + "(id)"))){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNull(snapshot.getTable(TABLE_NAME));
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       Table table=snapshot.getTable(TABLE_NAME);
       assertEquals(TABLE_NAME.toUpperCase(),table.getName().toUpperCase());
       assertNotNull(table.getColumn("id"));

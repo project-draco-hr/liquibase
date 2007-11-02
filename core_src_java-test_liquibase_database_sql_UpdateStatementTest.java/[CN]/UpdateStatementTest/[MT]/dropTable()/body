@@ -1,8 +1,0 @@
-{
-  for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
-    dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)"),database);
-    if (database.supportsSchemas()) {
-      dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)"),database);
-    }
-  }
-}
