@@ -1,26 +1,7 @@
 {
-  StringBuffer buffer=new StringBuffer();
-  buffer.append("CREATE INDEX ");
-  buffer.append(getIndexName()).append(" ON ");
-  buffer.append(database.escapeTableName(getSchemaName(),getTableName())).append("(");
-  Iterator<ColumnConfig> iterator=columns.iterator();
-  while (iterator.hasNext()) {
-    ColumnConfig column=iterator.next();
-    buffer.append(column.getName());
-    if (iterator.hasNext()) {
-      buffer.append(", ");
-    }
+  List<String> columns=new ArrayList<String>();
+  for (  ColumnConfig column : getColumns()) {
+    columns.add(column.getName());
   }
-  buffer.append(")");
-  if (StringUtils.trimToNull(tablespace) != null && database.supportsTablespaces()) {
-    if (database instanceof MSSQLDatabase) {
-      buffer.append(" ON ").append(tablespace);
-    }
- else     if (database instanceof DB2Database) {
-    }
- else {
-      buffer.append(" TABLESPACE ").append(tablespace);
-    }
-  }
-  return new SqlStatement[]{new RawSqlStatement(buffer.toString())};
+  return new SqlStatement[]{new CreateIndexStatement(getIndexName(),getSchemaName(),getTableName(),columns.toArray(new String[getColumns().size()])).setTablespace(getTablespace())};
 }

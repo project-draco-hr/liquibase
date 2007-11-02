@@ -1,0 +1,3 @@
+String schemaName
+String viewName
+String selectQuery

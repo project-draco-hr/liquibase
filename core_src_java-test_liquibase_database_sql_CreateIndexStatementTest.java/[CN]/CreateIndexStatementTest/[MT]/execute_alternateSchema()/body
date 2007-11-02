@@ -1,0 +1,11 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      CreateIndexStatement statement=new CreateIndexStatement(INDEX_NAME,TestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME);
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      assertNull(snapshot.getIndex(INDEX_NAME));
+      new JdbcTemplate(database).execute(statement);
+    }
+  }
+);
+}

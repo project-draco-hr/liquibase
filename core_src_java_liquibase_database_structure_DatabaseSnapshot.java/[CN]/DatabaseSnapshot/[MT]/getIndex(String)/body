@@ -1,0 +1,8 @@
+{
+  for (  Index index : getIndexes()) {
+    if (index.getName().equalsIgnoreCase(indexName)) {
+      return index;
+    }
+  }
+  return null;
+}

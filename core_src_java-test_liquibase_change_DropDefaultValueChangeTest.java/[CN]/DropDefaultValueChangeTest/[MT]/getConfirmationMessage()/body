@@ -1,0 +1,6 @@
+{
+  DropDefaultValueChange change=new DropDefaultValueChange();
+  change.setTableName("TABLE_NAME");
+  change.setColumnName("COL_HERE");
+  assertEquals("Default value dropped from TABLE_NAME.COL_HERE",change.getConfirmationMessage());
+}

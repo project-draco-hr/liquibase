@@ -1,0 +1,25 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      DropColumnStatement statement=new DropColumnStatement(null,TABLE_NAME,COLUMN_NAME);
+      if (!statement.supportsDatabase(database)) {
+        try {
+          statement.getSqlStatement(database);
+          fail("did not throw exception");
+        }
+ catch (        StatementNotSupportedOnDatabaseException e) {
+          return;
+        }
+      }
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertNotNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME));
+      new JdbcTemplate(database).execute(statement);
+      if (database instanceof MSSQLDatabase) {
+        return;
+      }
+      snapshot=new DatabaseSnapshot(database);
+      assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME));
+    }
+  }
+);
+}

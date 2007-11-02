@@ -1,0 +1,3 @@
+{
+  assertEquals("Create Procedure",new CreateProcedureChange().getChangeName());
+}

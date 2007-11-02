@@ -1,0 +1,16 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      String definition="SELECT * FROM " + TABLE_NAME;
+      CreateViewStatement statement=new CreateViewStatement(null,VIEW_NAME,definition);
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+      assertNull(snapshot.getView(VIEW_NAME));
+      new JdbcTemplate(database).execute(statement);
+      snapshot=new DatabaseSnapshot(database);
+      View view=snapshot.getView(VIEW_NAME);
+      assertNotNull(view);
+      assertEquals(2,view.getColumns().size());
+    }
+  }
+);
+}

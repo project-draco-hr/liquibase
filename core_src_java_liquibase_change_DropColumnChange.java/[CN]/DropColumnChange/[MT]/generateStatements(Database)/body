@@ -1,15 +1,3 @@
 {
-  if (database instanceof DerbyDatabase) {
-    throw new UnsupportedChangeException("Derby does not currently support dropping columns");
-  }
- else   if (database instanceof DB2Database) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP COLUMN "+ getColumnName()),new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + "')")};
-  }
- else   if (database instanceof SybaseDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP "+ getColumnName())};
-  }
- else   if (database instanceof FirebirdDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP "+ getColumnName())};
-  }
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP COLUMN "+ getColumnName())};
+  return new SqlStatement[]{new DropColumnStatement(getSchemaName(),getTableName(),getColumnName())};
 }

@@ -4,6 +4,7 @@
   change.setColumnName("COL_NAME");
   Element node=change.createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
   assertEquals("dropColumn",node.getTagName());
+  assertFalse(node.hasAttribute("schemaName"));
   assertEquals("TABLE_NAME",node.getAttribute("tableName"));
   assertEquals("COL_NAME",node.getAttribute("columnName"));
 }

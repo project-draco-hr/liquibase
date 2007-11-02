@@ -1,0 +1,16 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      DropDefaultValueStatement statement=new DropDefaultValueStatement(TestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME);
+      DatabaseSnapshot snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      assertNotNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
+      new JdbcTemplate(database).execute(statement);
+      if (database instanceof DerbyDatabase) {
+        return;
+      }
+      snapshot=new DatabaseSnapshot(database,TestContext.ALT_SCHEMA);
+      assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
+    }
+  }
+);
+}

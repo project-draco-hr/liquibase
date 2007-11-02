@@ -1,0 +1,4 @@
+{
+  CreateProcedureChange refactoring=new CreateProcedureChange();
+  assertEquals("Stored procedure created",refactoring.getConfirmationMessage());
+}

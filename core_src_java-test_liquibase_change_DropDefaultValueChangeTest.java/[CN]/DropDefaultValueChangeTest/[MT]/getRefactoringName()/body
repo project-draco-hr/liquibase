@@ -1,0 +1,3 @@
+{
+  assertEquals("Drop Default Value",new DropDefaultValueChange().getChangeName());
+}

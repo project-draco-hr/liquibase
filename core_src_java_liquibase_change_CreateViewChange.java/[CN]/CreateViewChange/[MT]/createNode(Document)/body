@@ -1,5 +1,8 @@
 {
   Element element=currentChangeLogFileDOM.createElement("createView");
+  if (getSchemaName() != null) {
+    element.setAttribute("schemaName",getSchemaName());
+  }
   element.setAttribute("viewName",getViewName());
   element.appendChild(currentChangeLogFileDOM.createTextNode(getSelectQuery()));
   return element;
