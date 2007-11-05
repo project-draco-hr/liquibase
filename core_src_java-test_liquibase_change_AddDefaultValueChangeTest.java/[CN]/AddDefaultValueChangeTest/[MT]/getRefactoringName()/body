@@ -1,0 +1,3 @@
+{
+  assertEquals("Add Default Value",new AddDefaultValueChange().getChangeName());
+}

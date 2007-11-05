@@ -1,0 +1,12 @@
+{
+  DropPrimaryKeyChange change=new DropPrimaryKeyChange();
+  change.setSchemaName("SCHEMA_NAME");
+  change.setTableName("TABLE_NAME");
+  change.setConstraintName("PK_NAME");
+  SqlStatement[] sqlStatements=change.generateStatements(new MockDatabase());
+  assertEquals(1,sqlStatements.length);
+  assertTrue(sqlStatements[0] instanceof DropPrimaryKeyStatement);
+  assertEquals("SCHEMA_NAME",((DropPrimaryKeyStatement)sqlStatements[0]).getSchemaName());
+  assertEquals("TABLE_NAME",((DropPrimaryKeyStatement)sqlStatements[0]).getTableName());
+  assertEquals("PK_NAME",((DropPrimaryKeyStatement)sqlStatements[0]).getConstraintName());
+}

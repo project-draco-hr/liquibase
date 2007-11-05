@@ -1,7 +1,9 @@
 {
   updateListeners("Reading foreign keys for " + database.toString() + " ...");
   for (  Table table : tablesMap.values()) {
-    ResultSet rs=databaseMetaData.getExportedKeys(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),table.getName());
+    String dbCatalog=database.convertRequestedSchemaToCatalog(schema);
+    String dbSchema=database.convertRequestedSchemaToSchema(schema);
+    ResultSet rs=databaseMetaData.getExportedKeys(dbCatalog,dbSchema,table.getName());
     while (rs.next()) {
       ForeignKey fkInfo=new ForeignKey();
       String pkTableName=rs.getString("PKTABLE_NAME");

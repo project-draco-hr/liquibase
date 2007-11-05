@@ -1,0 +1,12 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new DropForeignKeyConstraintStatement(TestContext.ALT_SCHEMA,TABLE_NAME,ALT_SCHEMA_NAME)){
+    protected boolean expectedException(    Database database,    JDBCException exception){
+      return !database.supportsSchemas();
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+    }
+  }
+);
+}

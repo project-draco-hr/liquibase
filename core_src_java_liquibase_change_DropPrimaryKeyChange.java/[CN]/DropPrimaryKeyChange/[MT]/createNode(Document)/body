@@ -4,5 +4,8 @@
     node.setAttribute("schemaName",getSchemaName());
   }
   node.setAttribute("tableName",getTableName());
+  if (getConstraintName() != null) {
+    node.setAttribute("constraintName",getConstraintName());
+  }
   return node;
 }

@@ -1,0 +1,3 @@
+{
+  assertEquals("Set Column as Auto-Increment",new AddAutoIncrementChange().getChangeName());
+}

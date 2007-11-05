@@ -1,12 +1,3 @@
 {
-  if (database instanceof MSSQLDatabase) {
-    return generateMSSQLStatements((MSSQLDatabase)database);
-  }
- else   if (database instanceof PostgresDatabase) {
-    return generatePostgresStatements((PostgresDatabase)database);
-  }
- else   if (database instanceof FirebirdDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP CONSTRAINT "+ getConstraintName())};
-  }
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP PRIMARY KEY")};
+  return new SqlStatement[]{new DropPrimaryKeyStatement(getSchemaName(),getTableName(),getConstraintName())};
 }

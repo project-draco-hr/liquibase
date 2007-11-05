@@ -1,0 +1,8 @@
+{
+  AddAutoIncrementChange change=new AddAutoIncrementChange();
+  change.setSchemaName("SCHEMA_NAME");
+  change.setTableName("TABLE_NAME");
+  change.setColumnName("COLUMN_NAME");
+  change.setColumnDataType("DATATYPE(255)");
+  assertEquals("Auto-increment added to TABLE_NAME.COLUMN_NAME",change.getConfirmationMessage());
+}

@@ -1,0 +1,7 @@
+{
+  DropPrimaryKeyChange change=new DropPrimaryKeyChange();
+  change.setSchemaName("SCHEMA_NAME");
+  change.setTableName("TABLE_NAME");
+  change.setConstraintName("PK_NAME");
+  assertEquals("Primary key dropped from TABLE_NAME",change.getConfirmationMessage());
+}

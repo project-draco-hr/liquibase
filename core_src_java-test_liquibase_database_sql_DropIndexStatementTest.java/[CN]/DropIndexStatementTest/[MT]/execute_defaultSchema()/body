@@ -1,0 +1,11 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new DropIndexStatement(IDX_NAME,null,TABLE_NAME)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNotNull(snapshot.getIndex(IDX_NAME));
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNull(snapshot.getIndex(IDX_NAME));
+    }
+  }
+);
+}

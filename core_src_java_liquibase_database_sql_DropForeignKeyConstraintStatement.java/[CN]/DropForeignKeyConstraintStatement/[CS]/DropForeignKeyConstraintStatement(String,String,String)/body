@@ -1,0 +1,5 @@
+{
+  this.baseTableSchemaName=baseTableSchemaName;
+  this.baseTableName=baseTableName;
+  this.constraintName=constraintName;
+}
