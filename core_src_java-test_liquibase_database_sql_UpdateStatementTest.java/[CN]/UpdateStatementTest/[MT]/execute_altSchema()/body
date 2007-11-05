@@ -1,0 +1,9 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new UpdateStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addNewColumnValue(COLUMN_NAME,null,Types.VARCHAR)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+    }
+  }
+);
+}

@@ -1,7 +1,7 @@
 {
   new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddColumnStatement(null,TABLE_NAME,NEW_COLUMN_NAME,"int",null,new PrimaryKeyConstraint())){
-    protected boolean supportsTest(    Database database){
-      return !(database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof H2Database|| database instanceof CacheDatabase);
+    protected boolean expectedException(    Database database,    JDBCException exception){
+      return (database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof H2Database|| database instanceof CacheDatabase);
     }
     protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(NEW_COLUMN_NAME));

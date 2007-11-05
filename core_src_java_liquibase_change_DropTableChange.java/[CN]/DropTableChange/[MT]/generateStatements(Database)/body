@@ -1,8 +1,7 @@
 {
-  StringBuffer buffer=new StringBuffer(31);
-  buffer.append("DROP TABLE ").append(database.escapeTableName(getSchemaName(),getTableName()));
-  if (isCascadeConstraints() != null && isCascadeConstraints()) {
-    buffer.append(" CASCADE CONSTRAINTS");
+  boolean constraints=false;
+  if (isCascadeConstraints() != null) {
+    constraints=isCascadeConstraints();
   }
-  return new SqlStatement[]{new RawSqlStatement(buffer.toString())};
+  return new SqlStatement[]{new DropTableStatement(getSchemaName(),getTableName(),constraints)};
 }

@@ -1,0 +1,11 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new DropTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME,false)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNotNull(snapshot.getTable(TABLE_NAME));
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNull(snapshot.getTable(TABLE_NAME));
+    }
+  }
+);
+}

@@ -2,7 +2,7 @@
   if (isPrimaryKey()) {
     return false;
   }
-  for (  ColumnConstraint constraint : constraints) {
+  for (  ColumnConstraint constraint : getConstraints()) {
     if (constraint instanceof NotNullConstraint) {
       return false;
     }

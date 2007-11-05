@@ -1,0 +1,4 @@
+{
+  dropAndCreateTable(new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int"),database);
+  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn("id","int"),database);
+}
