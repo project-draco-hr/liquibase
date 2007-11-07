@@ -1,0 +1,26 @@
+{
+  AddForeignKeyConstraintChange change=new AddForeignKeyConstraintChange();
+  change.setConstraintName("FK_NAME");
+  change.setBaseTableSchemaName("BASE_SCHEMA_NAME");
+  change.setBaseTableName("BASE_TABLE_NAME");
+  change.setBaseColumnNames("BASE_COL_NAME");
+  change.setReferencedTableSchemaName("REF_SCHEMA_NAME");
+  change.setReferencedTableName("REF_TABLE_NAME");
+  change.setReferencedColumnNames("REF_COL_NAME");
+  change.setDeferrable(true);
+  change.setDeleteCascade(true);
+  change.setInitiallyDeferred(true);
+  SqlStatement[] statements=change.generateStatements(new MockDatabase());
+  assertEquals(1,statements.length);
+  AddForeignKeyConstraintStatement statement=(AddForeignKeyConstraintStatement)statements[0];
+  assertEquals("FK_NAME",statement.getConstraintName());
+  assertEquals("BASE_SCHEMA_NAME",statement.getBaseTableSchemaName());
+  assertEquals("BASE_TABLE_NAME",statement.getBaseTableName());
+  assertEquals("BASE_COL_NAME",statement.getBaseColumnNames());
+  assertEquals("REF_SCHEMA_NAME",statement.getReferencedTableSchemaName());
+  assertEquals("REF_TABLE_NAME",statement.getReferencedTableName());
+  assertEquals("REF_COL_NAME",statement.getReferencedColumnNames());
+  assertEquals(true,statement.isDeferrable());
+  assertEquals(true,statement.isInitiallyDeferred());
+  assertEquals(true,statement.isDeleteCascade());
+}

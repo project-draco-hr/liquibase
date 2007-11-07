@@ -31,7 +31,12 @@
     }
   }
   if (getPrimaryKeyConstraint() != null && getPrimaryKeyConstraint().getColumns().size() > 0) {
-    buffer.append(", CONSTRAINT ").append(StringUtils.trimToEmpty(getPrimaryKeyConstraint().getConstraintName())).append(" PRIMARY KEY (");
+    buffer.append(",");
+    if (getPrimaryKeyConstraint().getConstraintName() != null) {
+      buffer.append(" CONSTRAINT ");
+      buffer.append(StringUtils.trimToEmpty(getPrimaryKeyConstraint().getConstraintName()));
+    }
+    buffer.append(" PRIMARY KEY (");
     buffer.append(StringUtils.join(getPrimaryKeyConstraint().getColumns(),", "));
     buffer.append(")");
     buffer.append(",");

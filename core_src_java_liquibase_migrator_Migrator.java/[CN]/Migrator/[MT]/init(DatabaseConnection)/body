@@ -1,0 +1,4 @@
+{
+  database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+  database.setConnection(connection);
+}

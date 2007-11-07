@@ -1,0 +1,5 @@
+{
+  refactoring.setOldViewName("OLD_NAME");
+  refactoring.setNewViewName("NEW_NAME");
+  assertEquals("View OLD_NAME renamed to NEW_NAME",refactoring.getConfirmationMessage());
+}

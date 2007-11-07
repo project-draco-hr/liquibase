@@ -1,0 +1,3 @@
+{
+  assertEquals("Drop Unique Constraint",change.getChangeName());
+}

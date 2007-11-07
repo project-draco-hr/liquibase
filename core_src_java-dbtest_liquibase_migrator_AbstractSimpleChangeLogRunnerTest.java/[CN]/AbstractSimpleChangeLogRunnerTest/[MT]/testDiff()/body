@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return;
+  }
   runCompleteChangeLog();
   Diff diff=new Diff(connection,connection);
   DiffResult diffResult=diff.compare();

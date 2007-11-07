@@ -1,0 +1,3 @@
+{
+  return findCorrectDatabaseImplementation(connection.getUnderlyingConnection());
+}

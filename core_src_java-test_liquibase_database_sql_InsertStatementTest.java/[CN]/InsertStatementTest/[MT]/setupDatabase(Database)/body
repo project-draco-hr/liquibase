@@ -1,0 +1,4 @@
+{
+  dropAndCreateTable(new CreateTableStatement(TABLE_NAME).addColumn(VARCHAR_COL_NAME,"varchar(50)").addColumn(DATE_COL_NAME,"varchar(50)").addColumn(BOOLEAN_COL_NAME,database.getBooleanType()).addColumn(INT_COL_NAME,"int").addColumn(FLOAT_COL_NAME,"float"),database);
+  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addColumn(VARCHAR_COL_NAME,"varchar(50)").addColumn(DATE_COL_NAME,"varchar(50)").addColumn(BOOLEAN_COL_NAME,database.getBooleanType()).addColumn(INT_COL_NAME,"int").addColumn(FLOAT_COL_NAME,"float"),database);
+}

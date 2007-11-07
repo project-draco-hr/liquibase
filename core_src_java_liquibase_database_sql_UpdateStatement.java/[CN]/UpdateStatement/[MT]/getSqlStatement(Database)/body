@@ -1,5 +1,5 @@
 {
-  StringBuffer sql=new StringBuffer("UPDATE " + tableName + " SET");
+  StringBuffer sql=new StringBuffer("UPDATE " + database.escapeTableName(getSchemaName(),getTableName()) + " SET");
   for (  String column : newColumnValues.keySet()) {
     sql.append(" ").append(column).append(" = ");
     Object newValue=newColumnValues.get(column);

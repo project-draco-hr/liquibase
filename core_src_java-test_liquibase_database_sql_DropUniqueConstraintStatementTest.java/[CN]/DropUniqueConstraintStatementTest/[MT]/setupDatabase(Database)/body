@@ -1,0 +1,3 @@
+{
+  dropAndCreateTable(new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn(COL_NAME,"varchar(50)",new NotNullConstraint(),new UniqueConstraint(CONSTRAINT_NAME)),database);
+}

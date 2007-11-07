@@ -3,5 +3,5 @@
     schemaName=convertRequestedSchemaToSchema(schemaName);
   }
   String definition=(String)new JdbcTemplate(this).queryForObject(getViewDefinitionSql(schemaName,viewName),String.class);
-  return definition.replaceFirst("^CREATE VIEW \\w+ AS","");
+  return definition.replaceFirst("^CREATE VIEW [\\S]+ AS","");
 }

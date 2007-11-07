@@ -1,5 +1,8 @@
 {
   Element element=currentChangeLogFileDOM.createElement(getTagName());
+  if (getSchemaName() != null) {
+    element.setAttribute("schemaName",getSchemaName());
+  }
   element.setAttribute("oldViewName",getOldViewName());
   element.setAttribute("newViewName",getNewViewName());
   return element;

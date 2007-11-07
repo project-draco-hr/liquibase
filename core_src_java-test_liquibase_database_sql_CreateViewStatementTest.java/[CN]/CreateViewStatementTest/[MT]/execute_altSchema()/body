@@ -2,7 +2,10 @@
   final String definition="SELECT * FROM " + TABLE_NAME;
   new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new CreateViewStatement(TestContext.ALT_SCHEMA,VIEW_NAME,definition)){
     protected boolean supportsTest(    Database database){
-      return !(database instanceof HsqlDatabase);
+      return !(database instanceof HsqlDatabase || database instanceof OracleDatabase);
+    }
+    protected boolean expectedException(    Database database,    JDBCException exception){
+      return !database.supportsSchemas();
     }
     protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getView(VIEW_NAME));

@@ -9,9 +9,9 @@
       SqlStatement[] sqlStatements=change.generateStatements(database);
       if (database instanceof PostgresDatabase) {
         assertEquals(3,sqlStatements.length);
-        assertTrue(sqlStatements[0] instanceof RawSqlStatement);
-        assertTrue(sqlStatements[1] instanceof RawSqlStatement);
-        assertTrue(sqlStatements[2] instanceof RawSqlStatement);
+        assertTrue(sqlStatements[0] instanceof CreateSequenceStatement);
+        assertTrue(sqlStatements[1] instanceof SetNullableStatement);
+        assertTrue(sqlStatements[2] instanceof AddDefaultValueStatement);
       }
  else {
         assertEquals(1,sqlStatements.length);

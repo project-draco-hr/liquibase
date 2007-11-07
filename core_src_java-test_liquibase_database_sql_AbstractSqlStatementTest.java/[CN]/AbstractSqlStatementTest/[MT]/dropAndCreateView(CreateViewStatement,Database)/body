@@ -1,0 +1,10 @@
+{
+  if (statement.getSchemaName() != null && !database.supportsSchemas()) {
+    return;
+  }
+  dropViewIfExists(statement.getSchemaName(),statement.getViewName(),database);
+  new JdbcTemplate(database).execute(statement);
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
+  }
+}

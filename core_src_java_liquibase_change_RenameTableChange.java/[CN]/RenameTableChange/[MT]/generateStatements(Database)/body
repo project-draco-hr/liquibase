@@ -1,30 +1,8 @@
 {
-  if (database instanceof MSSQLDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("exec sp_rename '" + database.escapeTableName(getSchemaName(),oldTableName) + "', "+ database.escapeTableName(null,newTableName))};
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
+  statements.add(new RenameTableStatement(getSchemaName(),getOldTableName(),getNewTableName()));
+  if (database instanceof DB2Database) {
+    statements.add(new ReorganizeTableStatement(getSchemaName(),getNewTableName()));
   }
- else   if (database instanceof MySQLDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),oldTableName) + " RENAME "+ database.escapeTableName(getSchemaName(),getNewTableName()))};
-  }
- else   if (database instanceof PostgresDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),oldTableName) + " RENAME TO "+ database.escapeTableName(null,newTableName))};
-  }
- else   if (database instanceof DerbyDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("RENAME TABLE " + database.escapeTableName(getSchemaName(),oldTableName) + " TO "+ database.escapeTableName(null,newTableName))};
-  }
- else   if (database instanceof HsqlDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),oldTableName) + " RENAME TO "+ database.escapeTableName(null,newTableName))};
-  }
- else   if (database instanceof OracleDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),oldTableName) + " RENAME TO "+ database.escapeTableName(null,newTableName))};
-  }
- else   if (database instanceof DB2Database) {
-    return new SqlStatement[]{new RawSqlStatement("RENAME " + database.escapeTableName(getSchemaName(),oldTableName) + " TO "+ database.escapeTableName(null,newTableName)),new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(getSchemaName(),getNewTableName()) + "')")};
-  }
- else   if (database instanceof CacheDatabase) {
-    throw new UnsupportedChangeException("Rename table not currently supported for Cache");
-  }
- else   if (database instanceof FirebirdDatabase) {
-    throw new UnsupportedChangeException("Rename table not currently supported for Firebird");
-  }
-  return new SqlStatement[]{new RawSqlStatement("RENAME " + database.escapeTableName(getSchemaName(),getOldTableName()) + " TO "+ database.escapeTableName(getSchemaName(),getNewTableName()))};
+  return statements.toArray(new SqlStatement[statements.size()]);
 }

@@ -1,0 +1,3 @@
+{
+  assertEquals("Add Foreign Key Constraint",new AddForeignKeyConstraintChange().getChangeName());
+}

@@ -1,0 +1,32 @@
+{
+  if (getSchemaName() != null && !database.supportsSchemas()) {
+    throw new StatementNotSupportedOnDatabaseException("Database does not support schemas",this,database);
+  }
+  StringBuffer sql=new StringBuffer("INSERT INTO " + database.escapeTableName(getSchemaName(),getTableName()) + " (");
+  for (  String column : newColumnValues.keySet()) {
+    sql.append(column).append(", ");
+  }
+  sql.deleteCharAt(sql.lastIndexOf(" "));
+  sql.deleteCharAt(sql.lastIndexOf(","));
+  sql.append(") VALUES (");
+  for (  String column : newColumnValues.keySet()) {
+    Object newValue=newColumnValues.get(column);
+    if (newValue == null) {
+      sql.append("NULL");
+    }
+ else     if (newValue instanceof String && database.shouldQuoteValue(((String)newValue))) {
+      sql.append("'").append(newValue).append("'");
+    }
+ else     if (newValue instanceof Date) {
+      sql.append(database.getDateLiteral(((Date)newValue)));
+    }
+ else {
+      sql.append(newValue);
+    }
+    sql.append(", ");
+  }
+  sql.deleteCharAt(sql.lastIndexOf(" "));
+  sql.deleteCharAt(sql.lastIndexOf(","));
+  sql.append(")");
+  return sql.toString();
+}

@@ -1,0 +1,13 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new RenameViewStatement(null,VIEW_NAME,NEW_VIEW_NAME)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNotNull(snapshot.getView(VIEW_NAME));
+      assertNull(snapshot.getView(NEW_VIEW_NAME));
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNull(snapshot.getView(VIEW_NAME));
+      assertNotNull(snapshot.getView(NEW_VIEW_NAME));
+    }
+  }
+);
+}

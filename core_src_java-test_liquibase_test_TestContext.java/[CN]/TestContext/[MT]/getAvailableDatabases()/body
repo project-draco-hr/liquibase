@@ -1,7 +1,7 @@
 {
   if (availableDatabases == null) {
     availableDatabases=new HashSet<Database>();
-    for (    Connection conn : getAvailableConnections()) {
+    for (    DatabaseConnection conn : getAvailableConnections()) {
       availableDatabases.add(DatabaseFactory.getInstance().findCorrectDatabaseImplementation(conn));
     }
   }

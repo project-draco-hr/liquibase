@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return;
+  }
   StringWriter output=new StringWriter();
   Migrator migrator=createMigrator(completeChangeLog);
   migrator.dropAll(getSchemasToDrop());

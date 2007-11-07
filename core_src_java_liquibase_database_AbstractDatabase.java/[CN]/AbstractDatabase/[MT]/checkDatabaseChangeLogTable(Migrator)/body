@@ -29,16 +29,16 @@
         }
       }
       if (!hasDescription) {
-        statementsToExecute.add(new RawSqlStatement("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD DESCRIPTION VARCHAR(255)"));
+        statementsToExecute.add(new AddColumnStatement(null,getDatabaseChangeLogTableName(),"DESCRIPTION","VARCHAR(255)",null));
       }
       if (!hasTag) {
-        statementsToExecute.add(new RawSqlStatement("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD TAG VARCHAR(255)"));
+        statementsToExecute.add(new AddColumnStatement(null,getDatabaseChangeLogTableName(),"TAG","VARCHAR(255)",null));
       }
       if (!hasComments) {
-        statementsToExecute.add(new RawSqlStatement("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD COMMENTS VARCHAR(255)"));
+        statementsToExecute.add(new AddColumnStatement(null,getDatabaseChangeLogTableName(),"COMMENTS","VARCHAR(255)",null));
       }
       if (!hasLiquibase) {
-        statementsToExecute.add(new RawSqlStatement("ALTER TABLE " + getDatabaseChangeLogTableName() + " ADD LIQUIBASE VARCHAR(255)"));
+        statementsToExecute.add(new AddColumnStatement(null,getDatabaseChangeLogTableName(),"LIQUIBASE","VARCHAR(255)",null));
       }
     }
  else     if (!changeLogCreateAttempted) {

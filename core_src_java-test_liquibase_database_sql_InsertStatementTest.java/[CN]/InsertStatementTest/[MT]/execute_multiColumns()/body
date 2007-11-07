@@ -1,0 +1,13 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new InsertStatement(null,TABLE_NAME).addColumnValue(VARCHAR_COL_NAME,"new value").addColumnValue(DATE_COL_NAME,new java.sql.Date(new java.util.Date().getTime())).addColumnValue(INT_COL_NAME,42).addColumnValue(FLOAT_COL_NAME,123.456)){
+    private int oldCount;
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot) throws Exception {
+      oldCount=new JdbcTemplate(snapshot.getDatabase()).queryForInt(new RawSqlStatement("select count(*) from " + TABLE_NAME));
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot) throws Exception {
+      int newCount=new JdbcTemplate(snapshot.getDatabase()).queryForInt(new RawSqlStatement("select count(*) from " + TABLE_NAME));
+      assertEquals(oldCount + 1,newCount);
+    }
+  }
+);
+}

@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return;
+  }
   runCompleteChangeLog();
   DatabaseSnapshot originalSnapshot=new DatabaseSnapshot(DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
   Diff diff=new Diff(connection);

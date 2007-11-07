@@ -20,13 +20,13 @@
     element.setAttribute("value",getValue());
   }
   if (getValueNumeric() != null) {
-    element.setAttribute("valueNumeric",getValueNumeric());
+    element.setAttribute("valueNumeric",getValueNumeric().toString());
   }
   if (getValueBoolean() != null) {
     element.setAttribute("valueBoolean",getValueBoolean().toString());
   }
   if (getValueDate() != null) {
-    element.setAttribute("valueDate",getValueDate());
+    element.setAttribute("valueDate",new ISODateFormat().format(getValueDate()));
   }
   if (isAutoIncrement() != null && isAutoIncrement()) {
     element.setAttribute("autoIncrement","true");

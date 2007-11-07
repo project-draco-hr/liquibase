@@ -1,0 +1,13 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new RenameTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME,NEW_TABLE_NAME)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNotNull(snapshot.getTable(TABLE_NAME));
+      assertNull(snapshot.getTable(NEW_TABLE_NAME));
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNull(snapshot.getTable(TABLE_NAME));
+      assertNotNull(snapshot.getTable(NEW_TABLE_NAME));
+    }
+  }
+);
+}

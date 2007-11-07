@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return;
+  }
   Migrator migrator=createMigrator(completeChangeLog);
   migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(completeChangeLog);

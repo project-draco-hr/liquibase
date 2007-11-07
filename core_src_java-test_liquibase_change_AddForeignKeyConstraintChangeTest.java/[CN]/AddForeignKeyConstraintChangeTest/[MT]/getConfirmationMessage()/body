@@ -1,0 +1,8 @@
+{
+  AddForeignKeyConstraintChange change=new AddForeignKeyConstraintChange();
+  change.setConstraintName("FK_NAME");
+  change.setBaseTableSchemaName("SCHEMA_NAME");
+  change.setBaseTableName("TABLE_NAME");
+  change.setBaseColumnNames("COL_NAME");
+  assertEquals("Foreign key contraint added to TABLE_NAME (COL_NAME)",change.getConfirmationMessage());
+}

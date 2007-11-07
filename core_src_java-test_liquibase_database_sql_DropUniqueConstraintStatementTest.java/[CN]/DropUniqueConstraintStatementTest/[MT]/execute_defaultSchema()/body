@@ -1,0 +1,9 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new DropUniqueConstraintStatement(null,TABLE_NAME,CONSTRAINT_NAME)){
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+    }
+  }
+);
+}

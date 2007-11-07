@@ -1,0 +1,8 @@
+{
+  DropViewChange change=new DropViewChange();
+  change.setViewName("VIEW_NAME");
+  Element node=change.createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
+  assertEquals("dropView",node.getTagName());
+  assertFalse(node.hasAttribute("schemaName"));
+  assertEquals("VIEW_NAME",node.getAttribute("viewName"));
+}

@@ -1,0 +1,5 @@
+{
+  this.schemaName=schemaName;
+  this.oldTableName=oldTableName;
+  this.newTableName=newTableName;
+}

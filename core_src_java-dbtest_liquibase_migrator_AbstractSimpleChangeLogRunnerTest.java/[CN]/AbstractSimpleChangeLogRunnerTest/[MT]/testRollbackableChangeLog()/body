@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return;
+  }
   Migrator migrator=createMigrator(rollbackChangeLog);
   migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(rollbackChangeLog);

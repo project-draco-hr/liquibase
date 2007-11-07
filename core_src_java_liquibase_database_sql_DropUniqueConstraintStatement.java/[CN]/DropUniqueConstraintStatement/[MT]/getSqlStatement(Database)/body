@@ -1,0 +1,6 @@
+{
+  if (database instanceof MySQLDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP KEY "+ getConstraintName();
+  }
+  return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP CONSTRAINT "+ getConstraintName();
+}

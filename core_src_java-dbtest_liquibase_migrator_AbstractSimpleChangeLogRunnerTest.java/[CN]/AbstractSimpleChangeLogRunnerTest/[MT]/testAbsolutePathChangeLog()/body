@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return;
+  }
   Enumeration<URL> urls=new JUnitFileOpener().getResources(includedChangeLog);
   URL completeChangeLogURL=urls.nextElement();
   String absolutePathOfChangeLog=completeChangeLogURL.toExternalForm();

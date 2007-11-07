@@ -1,3 +1,8 @@
 {
-  return new SqlStatement[]{new DropColumnStatement(getSchemaName(),getTableName(),getColumnName())};
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
+  statements.add(new DropColumnStatement(getSchemaName(),getTableName(),getColumnName()));
+  if (database instanceof DB2Database) {
+    statements.add(new ReorganizeTableStatement(getSchemaName(),getTableName()));
+  }
+  return statements.toArray(new SqlStatement[statements.size()]);
 }

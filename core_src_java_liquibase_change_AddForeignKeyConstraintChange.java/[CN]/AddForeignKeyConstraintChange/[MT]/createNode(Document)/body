@@ -7,9 +7,18 @@
   node.setAttribute("baseColumnNames",getBaseColumnNames());
   node.setAttribute("constraintName",getConstraintName());
   if (getReferencedTableSchemaName() != null) {
-    node.setAttribute("baseTableSchemaName",getReferencedTableSchemaName());
+    node.setAttribute("referencedTableSchemaName",getReferencedTableSchemaName());
   }
   node.setAttribute("referencedTableName",getReferencedTableName());
   node.setAttribute("referencedColumnNames",getReferencedColumnNames());
+  if (getDeferrable() != null) {
+    node.setAttribute("deferrable",getDeferrable().toString());
+  }
+  if (getInitiallyDeferred() != null) {
+    node.setAttribute("initiallyDeferred",getInitiallyDeferred().toString());
+  }
+  if (getDeleteCascade() != null) {
+    node.setAttribute("deleteCascade",getDeleteCascade().toString());
+  }
   return node;
 }

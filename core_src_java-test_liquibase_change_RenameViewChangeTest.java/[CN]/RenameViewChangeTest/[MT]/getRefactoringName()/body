@@ -1,0 +1,3 @@
+{
+  assertEquals("Rename View",refactoring.getChangeName());
+}

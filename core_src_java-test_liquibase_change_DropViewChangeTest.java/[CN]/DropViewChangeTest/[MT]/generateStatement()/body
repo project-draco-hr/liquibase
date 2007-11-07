@@ -1,0 +1,10 @@
+{
+  DropViewChange change=new DropViewChange();
+  change.setSchemaName("SCHEMA_NAME");
+  change.setViewName("VIEW_NAME");
+  SqlStatement[] sqlStatements=change.generateStatements(new MockDatabase());
+  assertEquals(1,sqlStatements.length);
+  assertTrue(sqlStatements[0] instanceof DropViewStatement);
+  assertEquals("SCHEMA_NAME",((DropViewStatement)sqlStatements[0]).getSchemaName());
+  assertEquals("VIEW_NAME",((DropViewStatement)sqlStatements[0]).getViewName());
+}

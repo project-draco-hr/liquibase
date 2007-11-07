@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return;
+  }
   StringWriter writer=new StringWriter();
   Migrator migrator=createMigrator(rollbackChangeLog);
   migrator.dropAll(getSchemasToDrop());

@@ -36,12 +36,7 @@
     try {
       for (      Change change : dropChanges) {
         for (        SqlStatement statement : change.generateStatements(this)) {
-          try {
-            new JdbcTemplate(this).execute(statement);
-          }
- catch (          JDBCException e) {
-            throw e;
-          }
+          new JdbcTemplate(this).execute(statement);
         }
       }
     }

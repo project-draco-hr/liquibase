@@ -1,0 +1,15 @@
+{
+  if (getValue() != null) {
+    return getValue();
+  }
+ else   if (getValueBoolean() != null) {
+    return getValueBoolean();
+  }
+ else   if (getValueNumeric() != null) {
+    return getValueNumeric();
+  }
+ else   if (getValueDate() != null) {
+    return getValueDate();
+  }
+  return null;
+}

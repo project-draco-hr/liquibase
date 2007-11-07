@@ -1,7 +1,9 @@
 {
   super.setUp();
-  if (!connection.getAutoCommit()) {
-    connection.rollback();
+  if (connection != null) {
+    if (!connection.getAutoCommit()) {
+      connection.rollback();
+    }
+    createMigrator(completeChangeLog).forceReleaseLock();
   }
-  createMigrator(completeChangeLog).forceReleaseLock();
 }

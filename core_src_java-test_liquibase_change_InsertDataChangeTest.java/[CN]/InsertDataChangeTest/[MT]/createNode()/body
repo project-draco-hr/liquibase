@@ -7,11 +7,11 @@
   assertEquals(3,columns.getLength());
   assertEquals("column",((Element)columns.item(0)).getTagName());
   assertEquals("id",((Element)columns.item(0)).getAttribute("name"));
-  assertEquals("123",((Element)columns.item(0)).getAttribute("value"));
+  assertEquals("123",((Element)columns.item(0)).getAttribute("valueNumeric"));
   assertEquals("column",((Element)columns.item(1)).getTagName());
   assertEquals("name",((Element)columns.item(1)).getAttribute("name"));
   assertEquals("Andrew",((Element)columns.item(1)).getAttribute("value"));
   assertEquals("column",((Element)columns.item(2)).getTagName());
   assertEquals("age",((Element)columns.item(2)).getAttribute("name"));
-  assertEquals("21",((Element)columns.item(2)).getAttribute("value"));
+  assertEquals("21",((Element)columns.item(2)).getAttribute("valueNumeric"));
 }

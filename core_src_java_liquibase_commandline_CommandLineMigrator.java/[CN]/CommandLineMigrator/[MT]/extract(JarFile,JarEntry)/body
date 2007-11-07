@@ -16,6 +16,7 @@
         outStream.close();
       }
  catch (      IOException ioe) {
+        ;
       }
     }
     if (inStream != null) {
@@ -23,6 +24,7 @@
         inStream.close();
       }
  catch (      IOException ioe) {
+        ;
       }
     }
   }

@@ -1,0 +1,21 @@
+{
+  if (!supportsDatabase(database)) {
+    throw new StatementNotSupportedOnDatabaseException(this,database);
+  }
+  if (database instanceof MSSQLDatabase) {
+    return "exec sp_rename '" + database.escapeTableName(getSchemaName(),getTableName()) + "."+ getOldColumnName()+ "', '"+ getNewColumnName()+ "'";
+  }
+ else   if (database instanceof MySQLDatabase) {
+    if (getColumnDataType() == null) {
+      throw new StatementNotSupportedOnDatabaseException("columnDataType is required to rename columns",this,database);
+    }
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " CHANGE "+ getOldColumnName()+ " "+ getNewColumnName()+ " "+ getColumnDataType();
+  }
+ else   if (database instanceof HsqlDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getOldColumnName()+ " RENAME TO "+ getNewColumnName();
+  }
+ else   if (database instanceof FirebirdDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getOldColumnName()+ " TO "+ getNewColumnName();
+  }
+  return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " RENAME COLUMN "+ getOldColumnName()+ " TO "+ getNewColumnName();
+}

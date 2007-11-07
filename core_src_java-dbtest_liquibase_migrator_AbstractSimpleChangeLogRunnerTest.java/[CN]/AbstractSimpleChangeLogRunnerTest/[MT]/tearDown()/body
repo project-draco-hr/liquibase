@@ -1,6 +1,8 @@
 {
-  if (shouldRollBack()) {
-    connection.rollback();
+  if (connection != null) {
+    if (shouldRollBack()) {
+      connection.rollback();
+    }
   }
   super.tearDown();
 }

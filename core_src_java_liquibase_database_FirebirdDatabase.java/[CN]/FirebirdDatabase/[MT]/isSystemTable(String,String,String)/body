@@ -1,6 +1,3 @@
 {
-  if (tableName.startsWith("RDB$")) {
-    return true;
-  }
-  return super.isSystemTable(catalogName,schemaName,tableName);
+  return tableName.startsWith("RDB$") || super.isSystemTable(catalogName,schemaName,tableName);
 }

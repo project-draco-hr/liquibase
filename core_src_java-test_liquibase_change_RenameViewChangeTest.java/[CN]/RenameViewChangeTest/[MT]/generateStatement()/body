@@ -1,0 +1,12 @@
+{
+  RenameViewChange refactoring=new RenameViewChange();
+  refactoring.setSchemaName("SCHEMA_NAME");
+  refactoring.setOldViewName("OLD_NAME");
+  refactoring.setNewViewName("NEW_NAME");
+  SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
+  assertEquals(1,sqlStatements.length);
+  assertTrue(sqlStatements[0] instanceof RenameViewStatement);
+  assertEquals("SCHEMA_NAME",((RenameViewStatement)sqlStatements[0]).getSchemaName());
+  assertEquals("OLD_NAME",((RenameViewStatement)sqlStatements[0]).getOldViewName());
+  assertEquals("NEW_NAME",((RenameViewStatement)sqlStatements[0]).getNewViewName());
+}

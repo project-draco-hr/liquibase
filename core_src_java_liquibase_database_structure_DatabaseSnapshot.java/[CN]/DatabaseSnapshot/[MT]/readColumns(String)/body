@@ -53,10 +53,7 @@
       ResultSetMetaData meta=selectRS.getMetaData();
       columnInfo.setAutoIncrement(meta.isAutoIncrement(1));
     }
- catch (    SQLException e) {
-      throw e;
-    }
- finally {
+  finally {
       if (selectRS != null) {
         selectRS.close();
       }

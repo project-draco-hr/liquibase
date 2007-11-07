@@ -3,6 +3,19 @@
     return connectionsByUrl.get(url);
   }
   connectionsAttempted.put(url,Boolean.TRUE);
+  if (System.getProperty("test.databases") != null) {
+    boolean shouldTest=false;
+    String[] databasesToTest=System.getProperty("test.databases").split("\\s*,\\s*");
+    for (    String database : databasesToTest) {
+      if (url.indexOf(database) >= 0) {
+        shouldTest=true;
+      }
+    }
+    if (!shouldTest) {
+      System.out.println("test.databases system property forbids testing against " + url);
+      return null;
+    }
+  }
   String username=getUsername(url);
   String password=getPassword(url);
   JUnitJDBCDriverClassLoader jdbcDriverLoader=JUnitJDBCDriverClassLoader.getInstance();
@@ -38,7 +51,9 @@
  catch (  SQLException e) {
     ;
   }
-  connectionsByUrl.put(url,connection);
+  Database availableDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+  DatabaseConnection databaseConnection=availableDatabase.getConnection();
+  connectionsByUrl.put(url,databaseConnection);
   Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
     public void run(){
       try {
@@ -59,5 +74,5 @@
     }
   }
 ));
-  return connection;
+  return databaseConnection;
 }

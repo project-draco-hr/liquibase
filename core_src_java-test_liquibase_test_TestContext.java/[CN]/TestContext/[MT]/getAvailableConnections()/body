@@ -1,8 +1,8 @@
 {
   if (availableConnections == null) {
-    availableConnections=new HashSet<Connection>();
+    availableConnections=new HashSet<DatabaseConnection>();
     for (    String url : getTestUrls()) {
-      Connection connection=openConnection(url);
+      DatabaseConnection connection=openConnection(url);
       if (connection != null) {
         availableConnections.add(connection);
       }
