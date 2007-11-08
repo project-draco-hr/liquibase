@@ -1,7 +1,6 @@
 {
   String sql="select view_definition from information_schema.views where upper(table_name)='" + viewName.toUpperCase() + "'";
-  if (StringUtils.trimToNull(schemaName) != null) {
-    sql+=" and table_schema='" + schemaName + "'";
-  }
+  sql+=" and table_schema='" + convertRequestedSchemaToSchema(schemaName) + "'";
+  sql+=" and table_catalog='" + getCatalogName() + "'";
   return new RawSqlStatement(sql);
 }

@@ -25,7 +25,7 @@
   if (password != null) {
     info.put("password",password);
   }
-  final Connection connection;
+  Connection connection;
   try {
     connection=driver.connect(url,info);
   }
@@ -36,36 +36,36 @@
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
-  connection.setAutoCommit(false);
+  Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+  final DatabaseConnection databaseConnection=database.getConnection();
+  databaseConnection.setAutoCommit(false);
   try {
     if (url.startsWith("jdbc:hsql")) {
-      connection.createStatement().execute("CREATE SCHEMA " + ALT_SCHEMA + " AUTHORIZATION DBA");
+      databaseConnection.createStatement().execute("CREATE SCHEMA " + ALT_SCHEMA + " AUTHORIZATION DBA");
     }
  else     if (url.startsWith("jdbc:sqlserver") || url.startsWith("jdbc:postgresql") || url.startsWith("jdbc:h2")) {
-      connection.createStatement().execute("CREATE SCHEMA " + ALT_SCHEMA);
+      databaseConnection.createStatement().execute("CREATE SCHEMA " + ALT_SCHEMA);
     }
-    if (!connection.getAutoCommit()) {
-      connection.commit();
+    if (!databaseConnection.getAutoCommit()) {
+      databaseConnection.commit();
     }
   }
  catch (  SQLException e) {
     ;
   }
-  Database availableDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
-  DatabaseConnection databaseConnection=availableDatabase.getConnection();
   connectionsByUrl.put(url,databaseConnection);
   Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
     public void run(){
       try {
         try {
-          if (!connection.getAutoCommit()) {
-            connection.rollback();
+          if (!databaseConnection.getAutoCommit()) {
+            databaseConnection.rollback();
           }
         }
  catch (        SQLException e) {
           ;
         }
-        connection.close();
+        databaseConnection.close();
       }
  catch (      SQLException e) {
         System.out.println("Could not close " + url);

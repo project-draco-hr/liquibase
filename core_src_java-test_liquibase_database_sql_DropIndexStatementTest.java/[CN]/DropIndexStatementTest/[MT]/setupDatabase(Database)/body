@@ -1,5 +1,5 @@
 {
-  dropAndCreateTable(new CreateTableStatement(TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()),database);
+  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()),database);
   new JdbcTemplate(database).execute(new CreateIndexStatement(IDX_NAME,null,TABLE_NAME,COLUMN_NAME));
   dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()),database);
   if (database.supportsSchemas()) {

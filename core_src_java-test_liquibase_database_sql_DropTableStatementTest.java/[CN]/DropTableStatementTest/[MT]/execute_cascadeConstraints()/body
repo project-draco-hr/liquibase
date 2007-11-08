@@ -1,7 +1,7 @@
 {
   new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new DropTableStatement(null,TABLE_NAME,true)){
     protected boolean expectedException(    Database database,    JDBCException exception){
-      return database instanceof DerbyDatabase || database instanceof DB2Database || database instanceof FirebirdDatabase;
+      return database instanceof DerbyDatabase || database instanceof DB2Database || database instanceof FirebirdDatabase|| database instanceof MSSQLDatabase;
     }
     protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNotNull(snapshot.getTable(TABLE_NAME));
