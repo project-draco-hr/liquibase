@@ -1,0 +1,10 @@
+{
+  AddColumnChange change=new AddColumnChange();
+  change.setTableName(selectedTable.getName());
+  AddColumnWizardPage wizardPage=(AddColumnWizardPage)pages[0];
+  ColumnConfig config=new ColumnConfig();
+  config.setName(wizardPage.getColumnName());
+  config.setType(wizardPage.getColumnType());
+  change.setColumn(config);
+  return new Change[]{change};
+}

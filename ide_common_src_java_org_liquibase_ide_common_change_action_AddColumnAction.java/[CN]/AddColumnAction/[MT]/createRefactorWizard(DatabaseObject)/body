@@ -1,0 +1,3 @@
+{
+  return new RefactorWizard("Add column to " + ((Table)dbObject).getName(),new AddColumnWizardPageImpl());
+}
