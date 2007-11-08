@@ -1,3 +1,0 @@
-{
-  return new AddTableWizard(project,getSelectedDatabase(),getSelectedConnection(),getSelectedObject());
-}

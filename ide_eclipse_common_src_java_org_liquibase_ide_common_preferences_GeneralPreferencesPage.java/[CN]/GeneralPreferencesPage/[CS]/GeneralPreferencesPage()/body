@@ -1,4 +1,0 @@
-{
-  preferences=new ScopedPreferenceStore(new InstanceScope(),LiquibasePreferences.PLUGIN_ID);
-  setPreferenceStore(preferences);
-}

@@ -1,0 +1,9 @@
+{
+  if (action instanceof BaseRefactorAction) {
+    IntellijRefactorWizard wizard=new IntellijRefactorWizard(((BaseRefactorAction)action).createRefactorWizard(getSelectedDatabaseObject()),getSelectedDatabaseObject(),getSelectedDatabase(),((BaseRefactorAction)action));
+    wizard.pack();
+    wizard.show();
+  }
+ else {
+  }
+}

@@ -1,4 +1,0 @@
-{
-  wizardPage=new AddTableWizardPage();
-  return new Step[]{wizardPage};
-}

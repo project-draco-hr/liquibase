@@ -1,3 +1,0 @@
-{
-  return new AddColumnWizard(project,getSelectedTable(),getSelectedConnection(),getSelectedObject());
-}

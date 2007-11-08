@@ -1,0 +1,3 @@
+{
+  return LiquibaseProjectComponent.getInstance().getMigrator(database);
+}

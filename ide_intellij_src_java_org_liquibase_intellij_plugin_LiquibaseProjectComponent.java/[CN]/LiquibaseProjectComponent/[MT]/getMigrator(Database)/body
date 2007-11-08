@@ -1,0 +1,14 @@
+{
+  Migrator migrator=new Migrator("changelog.xml",new IntellijFileOpener());
+  if (database == null) {
+    return migrator;
+  }
+  try {
+    migrator.init(database);
+    migrator.checkDatabaseChangeLogTable();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+  return migrator;
+}

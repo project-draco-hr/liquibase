@@ -1,5 +1,0 @@
-{
-  if (selectedObject instanceof AbstractDBObject) {
-    ((AbstractDBObject)selectedObject).refresh();
-  }
-}

@@ -1,0 +1,8 @@
+{
+  try {
+    new RefactorChangeExecutor().executeChangeSet(new IntellijFacade(),database,metaDataPage,action.createChanges(selectedObject,pages));
+  }
+ catch (  MigrationFailedException e) {
+    e.printStackTrace();
+  }
+}

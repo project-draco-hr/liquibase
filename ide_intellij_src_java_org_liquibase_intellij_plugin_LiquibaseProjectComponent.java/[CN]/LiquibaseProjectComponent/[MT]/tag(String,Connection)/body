@@ -1,8 +1,0 @@
-{
-  try {
-    getMigrator(conn).tag(tag);
-  }
- catch (  LiquibaseException e) {
-    displayError(e);
-  }
-}

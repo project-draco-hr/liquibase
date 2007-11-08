@@ -1,4 +1,0 @@
-{
-  LiquibaseProjectComponent liquibaseComponent=LiquibaseProjectComponent.getInstance();
-  return liquibaseComponent.getMigrator(getConnection());
-}

@@ -1,0 +1,35 @@
+{
+  try {
+    Object selectedObject=getUserData();
+    if (selectedObject instanceof DBTree) {
+      TreePath selectionPath=((DBTree)getUserData()).getSelectionModel().getLeadSelectionPath();
+      selectedObject=selectionPath.getPathComponent(1);
+    }
+    if (selectedObject instanceof Catalog) {
+      return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(((Catalog)selectedObject).getDatabase().getConnection());
+    }
+ else     if (selectedObject instanceof dbhelp.db.Column) {
+      dbhelp.db.Column selectedColumn=(dbhelp.db.Column)selectedObject;
+      dbhelp.db.Table selectedTable=selectedColumn.getTable();
+      Table table=createTableObject(selectedTable);
+      Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(selectedTable.getDatabase().getConnection());
+      return createColumnObject(selectedColumn,database,table);
+    }
+ else     if (selectedObject instanceof Schema) {
+      return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(((Schema)selectedObject).getDatabase().getConnection());
+    }
+ else     if (selectedObject instanceof dbhelp.db.Table) {
+      dbhelp.db.Table selectedTable=(dbhelp.db.Table)selectedObject;
+      return createTableObject(selectedTable);
+    }
+ else     if (selectedObject instanceof AbstractDBObject.ProfileNode) {
+      return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(((AbstractDBObject.ProfileNode)selectedObject).getDatabase().getConnection());
+    }
+ else {
+      throw new RuntimeException("Unknown object type: " + selectedObject.getClass().getName());
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

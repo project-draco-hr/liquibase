@@ -1,3 +1,0 @@
-{
-  return new AddAutoIncrementWizard(project,getSelectedColumn(),getSelectedConnection(),getSelectedObject());
-}

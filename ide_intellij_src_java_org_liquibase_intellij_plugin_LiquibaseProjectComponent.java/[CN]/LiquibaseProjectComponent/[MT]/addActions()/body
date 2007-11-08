@@ -1,7 +1,6 @@
 {
   ActionGroup refactorActionGroup=new ActionGroup("Refactor");
-  refactorActionGroup.addAction(new AddTableAction());
-  refactorActionGroup.addAction(new AddColumnAction());
-  refactorActionGroup.addAction(new AddAutoIncrementAction());
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddColumnAction()));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddTableAction()));
   PopupMenuManager.getInstance().addAction(refactorActionGroup,DBTree.class,Table.class,Column.class);
 }
