@@ -1,0 +1,10 @@
+{
+  if (c != null) {
+    try {
+      c.close();
+    }
+ catch (    SQLException e) {
+      getLog().error("Failed to close open connection to database.",e);
+    }
+  }
+}

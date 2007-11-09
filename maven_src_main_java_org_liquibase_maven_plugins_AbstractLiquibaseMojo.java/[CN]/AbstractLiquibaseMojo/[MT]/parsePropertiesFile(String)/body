@@ -1,0 +1,33 @@
+{
+  Properties props=new Properties();
+  try {
+    InputStream propertiesInputStream=new FileInputStream(propertiesFile);
+    props.load(propertiesInputStream);
+  }
+ catch (  IOException e) {
+    throw new MojoExecutionException("Could not load the properties Liquibase file",e);
+  }
+  for (Iterator it=props.keySet().iterator(); it.hasNext(); ) {
+    String key=null;
+    try {
+      key=(String)it.next();
+      Field field=AbstractLiquibaseMojo.class.getDeclaredField(key);
+      Object currentValue=field.get(this);
+      if (currentValue == null) {
+        String value=props.get(key).toString();
+        if (field.getType().equals(Boolean.class)) {
+          field.set(this,Boolean.valueOf(value));
+        }
+ else {
+          if (propertiesFileOverrides || field.get(this) == null) {
+            field.set(this,value);
+          }
+        }
+      }
+    }
+ catch (    Exception e) {
+      getLog().warn(e);
+      throw new MojoExecutionException("Unknown parameter: '" + key + "'",e);
+    }
+  }
+}
