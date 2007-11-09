@@ -1,6 +1,5 @@
 {
-  ActionGroup refactorActionGroup=new ActionGroup("Refactor");
-  refactorActionGroup.addAction(new IntellijActionWrapper(new AddColumnAction()));
-  refactorActionGroup.addAction(new IntellijActionWrapper(new AddTableAction()));
-  PopupMenuManager.getInstance().addAction(refactorActionGroup,DBTree.class,Table.class,Column.class);
+  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.Database.class),DBTree.class);
+  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Table.class),Table.class);
+  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Column.class),Column.class);
 }

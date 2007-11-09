@@ -1,0 +1,7 @@
+{
+  ActionGroup refactorActionGroup=new ActionGroup("Refactor");
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddTableAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddColumnAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddAutoIncrementAction(),dbObjectType));
+  return refactorActionGroup;
+}

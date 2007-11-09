@@ -1,0 +1,3 @@
+{
+  return createChanges(((Column)selectedColumn),pages);
+}

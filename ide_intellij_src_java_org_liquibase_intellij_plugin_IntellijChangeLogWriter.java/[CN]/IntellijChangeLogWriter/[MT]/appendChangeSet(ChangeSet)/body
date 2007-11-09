@@ -5,7 +5,7 @@
         DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder=factory.newDocumentBuilder();
         documentBuilder.setEntityResolver(new MigratorSchemaResolver());
-        VirtualFile file=LiquibaseProjectComponent.getInstance().getChangeLogFile().getVirtualFile();
+        VirtualFile file=LiquibaseProjectComponent.getInstance().getChangeLogVirtualFile();
         if (file == null) {
           throw new RuntimeException("Could not find file");
         }

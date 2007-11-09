@@ -2,7 +2,9 @@
   try {
     new RefactorChangeExecutor().executeChangeSet(new IntellijFacade(),database,metaDataPage,action.createChanges(selectedObject,pages));
   }
- catch (  MigrationFailedException e) {
+ catch (  Exception e) {
+    String message;
+    Messages.showErrorDialog(LiquibaseProjectComponent.getInstance().getProject(),e.getMessage(),"Error Executing Change");
     e.printStackTrace();
   }
 }
