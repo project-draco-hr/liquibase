@@ -1,4 +1,5 @@
 {
+  PopupMenuManager.getInstance().addAction(createLiquibaseMenu(liquibase.database.Database.class),Catalog.class);
   PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.Database.class),Catalog.class);
   PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.Database.class),Schema.class);
   PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Table.class),Table.class);

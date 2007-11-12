@@ -1,5 +1,5 @@
 {
-  Migrator migrator=new Migrator("changelog.xml",new IntellijFileOpener());
+  Migrator migrator=new Migrator(getChangeLogFile(),new CompositeFileOpener(new IntellijFileOpener(),new FileSystemFileOpener()));
   if (database == null) {
     return migrator;
   }

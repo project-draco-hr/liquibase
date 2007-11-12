@@ -1,0 +1,5 @@
+{
+  ActionGroup actionGroup=new ActionGroup("LiquiBase");
+  actionGroup.addAction(new IntellijActionWrapper(new MigrateDatabaseAction(),dbObjectType));
+  return actionGroup;
+}
