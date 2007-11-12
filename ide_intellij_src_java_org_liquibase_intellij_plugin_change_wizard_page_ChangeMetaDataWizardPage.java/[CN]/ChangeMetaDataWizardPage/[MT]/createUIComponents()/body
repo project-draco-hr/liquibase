@@ -1,6 +1,11 @@
 {
   Project project=LiquibaseProjectComponent.getInstance().getProject();
-  changeLogFile=new TextFieldWithBrowseButton();
+  changeLogFile=new TextFieldWithBrowseButton(new ActionListener(){
+    public void actionPerformed(    ActionEvent e){
+      System.out.println(e.getSource());
+    }
+  }
+);
   final FileChooserDescriptor fileChooser=FileChooserDescriptorFactory.createSingleLocalFileDescriptor();
   String currentChangeLogFile=LiquibaseProjectComponent.getInstance().getChangeLogFile();
   if (currentChangeLogFile != null) {

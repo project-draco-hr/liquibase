@@ -1,0 +1,3 @@
+{
+  return new RefactorWizard("Add default value to " + selectedColumn,new AddDefaultValueWizardPageImpl());
+}

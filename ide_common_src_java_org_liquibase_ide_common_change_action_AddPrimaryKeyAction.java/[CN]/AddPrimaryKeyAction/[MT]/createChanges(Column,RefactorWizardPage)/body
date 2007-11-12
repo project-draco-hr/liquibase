@@ -1,0 +1,7 @@
+{
+  AddPrimaryKeyChange change=new AddPrimaryKeyChange();
+  change.setTableName(column.getTable().getName());
+  change.setColumnNames(column.getName());
+  change.setConstraintName(((AddPrimaryKeyWizardPage)pages[0]).getConstraintName());
+  return new Change[]{change};
+}

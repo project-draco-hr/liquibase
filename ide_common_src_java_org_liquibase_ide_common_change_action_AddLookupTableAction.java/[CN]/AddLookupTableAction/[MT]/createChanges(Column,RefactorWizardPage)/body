@@ -1,0 +1,10 @@
+{
+  AddLookupTableChange change=new AddLookupTableChange();
+  change.setExistingTableName(column.getTable().getName());
+  change.setExistingColumnName(column.getName());
+  change.setConstraintName(((AddLookupTableWizardPage)pages[0]).getConstraintName());
+  change.setNewTableName(((AddLookupTableWizardPage)pages[0]).getNewTableName());
+  change.setNewColumnName(((AddLookupTableWizardPage)pages[0]).getNewColumnName());
+  change.setNewColumnDataType(column.getTypeName());
+  return new Change[]{change};
+}

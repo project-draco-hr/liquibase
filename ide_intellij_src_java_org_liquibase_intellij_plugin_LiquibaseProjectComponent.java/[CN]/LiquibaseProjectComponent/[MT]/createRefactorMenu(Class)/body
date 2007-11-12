@@ -3,5 +3,11 @@
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddTableAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddColumnAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddAutoIncrementAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddDefaultValueAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddForeignKeyConstraintAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddLookupTableAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddNotNullConstraintAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddPrimaryKeyAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new AddUniqueConstraintAction(),dbObjectType));
   return refactorActionGroup;
 }

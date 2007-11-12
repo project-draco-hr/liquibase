@@ -1,0 +1,7 @@
+{
+  AddUniqueConstraintChange change=new AddUniqueConstraintChange();
+  change.setTableName(column.getTable().getName());
+  change.setColumnNames(column.getName());
+  change.setConstraintName(((AddUniqueConstraintWizardPage)pages[0]).getConstraintName());
+  return new Change[]{change};
+}

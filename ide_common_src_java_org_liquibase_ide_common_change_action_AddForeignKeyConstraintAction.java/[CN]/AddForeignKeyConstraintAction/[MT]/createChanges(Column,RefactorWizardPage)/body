@@ -1,0 +1,12 @@
+{
+  AddForeignKeyConstraintChange change=new AddForeignKeyConstraintChange();
+  change.setBaseTableName(column.getTable().getName());
+  change.setBaseColumnNames(column.getName());
+  change.setConstraintName(((AddForeignKeyConstraintWizardPage)pages[0]).getConstraintName());
+  change.setReferencedTableName(((AddForeignKeyConstraintWizardPage)pages[0]).getReferencedTableName());
+  change.setReferencedColumnNames(((AddForeignKeyConstraintWizardPage)pages[0]).getReferencedColumnNames());
+  change.setDeleteCascade(((AddForeignKeyConstraintWizardPage)pages[0]).getDeleteCascade());
+  change.setDeferrable(((AddForeignKeyConstraintWizardPage)pages[0]).getDeferrable());
+  change.setInitiallyDeferred(((AddForeignKeyConstraintWizardPage)pages[0]).getInitiallyDeferred());
+  return new Change[]{change};
+}
