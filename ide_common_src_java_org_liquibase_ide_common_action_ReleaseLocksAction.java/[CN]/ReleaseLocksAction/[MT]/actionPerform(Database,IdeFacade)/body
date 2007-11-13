@@ -1,4 +1,4 @@
 {
-  ideFacade.getMigrator(database).releaseLock();
+  ideFacade.getMigrator(null,database).releaseLock();
   ideFacade.displayMessage("Result","All locks released successfully");
 }

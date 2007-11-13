@@ -5,7 +5,10 @@
       TreePath selectionPath=((DBTree)getUserData()).getSelectionModel().getLeadSelectionPath();
       selectedObject=selectionPath.getPathComponent(1);
     }
-    if (selectedObject instanceof Catalog) {
+    if (selectedObject instanceof dbhelp.db.Database) {
+      return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(((dbhelp.db.Database)selectedObject).getConnection());
+    }
+ else     if (selectedObject instanceof Catalog) {
       return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(((Catalog)selectedObject).getDatabase().getConnection());
     }
  else     if (selectedObject instanceof dbhelp.db.Column) {

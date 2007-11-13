@@ -2,6 +2,7 @@
   try {
     DatabaseObject selectedDatabaseObject=getSelectedDatabaseObject();
     Database selectedDatabase=getSelectedDatabase();
+    boolean needsRefresh=true;
     if (action instanceof BaseRefactorAction) {
       IntellijRefactorWizard wizard=new IntellijRefactorWizard(((BaseRefactorAction)action).createRefactorWizard(selectedDatabaseObject),selectedDatabaseObject,selectedDatabase,((BaseRefactorAction)action));
       wizard.pack();
@@ -9,6 +10,10 @@
     }
  else     if (action instanceof MigratorAction) {
       ((MigratorAction)action).actionPerform(selectedDatabase,ideFacade);
+      needsRefresh=((MigratorAction)action).needsRefresh();
+    }
+    if (needsRefresh) {
+      refresh();
     }
   }
  catch (  LiquibaseException e) {

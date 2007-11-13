@@ -1,0 +1,3 @@
+{
+  return promptForChangeLog == null || promptForChangeLog;
+}

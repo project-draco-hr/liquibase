@@ -1,0 +1,31 @@
+{
+  DBTree tree=(DBTree)getUserData();
+  Enumeration<TreePath> expandedPaths=tree.getExpandedDescendants(tree.getSelectionPath());
+  Object c=tree.getLastSelectedPathComponent();
+  if (c instanceof IDBNode) {
+    IDBNode dbObject=(IDBNode)c;
+    dbObject.refresh();
+    DBTreeModel m=(DBTreeModel)tree.getModel();
+    m.fireTreeNodeChange(new TreeModelEvent(this,tree.getSelectionPath()));
+    while (!(dbObject instanceof AbstractDBObject.ProfileNode) && null != dbObject) {
+      dbObject=dbObject.getParent();
+    }
+    if (dbObject != null) {
+      AbstractDBObject.ProfileNode dbNode=(AbstractDBObject.ProfileNode)dbObject;
+      try {
+        dbNode.getDatabase().getResolver().refresh();
+      }
+ catch (      Exception e1) {
+        LiquibaseProjectComponent.getInstance().getIdeFacade().showError(e1);
+      }
+    }
+  }
+  while (expandedPaths.hasMoreElements()) {
+    TreePath path=expandedPaths.nextElement();
+    tree.expandPath(path);
+    TreeExpansionListener[] expansionListeners=tree.getListeners(TreeExpansionListener.class);
+    for (    TreeExpansionListener listener : expansionListeners) {
+      listener.treeExpanded(new TreeExpansionEvent(this,path));
+    }
+  }
+}

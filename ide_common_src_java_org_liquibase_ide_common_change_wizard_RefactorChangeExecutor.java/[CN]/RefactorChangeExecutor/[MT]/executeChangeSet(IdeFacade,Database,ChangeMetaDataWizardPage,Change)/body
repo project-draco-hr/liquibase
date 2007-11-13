@@ -1,6 +1,6 @@
 {
   ProgressMonitor monitor=ide.getProgressMonitor();
-  Migrator migrator=ide.getMigrator(database);
+  Migrator migrator=ide.getMigrator(null,database);
   ChangeLogWriter changeLogWriter=ide.getChangeLogWriter();
   DatabaseChangeLog changeLog=ide.getRootChangeLog();
   monitor.beginTask("Refactoring Database",100);

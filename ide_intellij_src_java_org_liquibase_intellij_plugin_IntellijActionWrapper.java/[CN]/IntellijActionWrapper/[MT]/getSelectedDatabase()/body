@@ -6,7 +6,10 @@
   }
   try {
     Connection connection;
-    if (selectedObject instanceof Catalog) {
+    if (selectedObject instanceof dbhelp.db.Database) {
+      connection=((dbhelp.db.Database)selectedObject).getConnection();
+    }
+ else     if (selectedObject instanceof Catalog) {
       connection=((Catalog)selectedObject).getDatabase().getConnection();
     }
  else     if (selectedObject instanceof dbhelp.db.Column) {

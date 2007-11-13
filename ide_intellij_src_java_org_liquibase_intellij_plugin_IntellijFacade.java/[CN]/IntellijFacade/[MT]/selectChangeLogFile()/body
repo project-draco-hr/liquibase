@@ -1,0 +1,9 @@
+{
+  LiquibaseProjectComponent liquibaseProjectComponent=LiquibaseProjectComponent.getInstance();
+  if (liquibaseProjectComponent.getPromptForChangeLog()) {
+    return new SelectChangeLogDialogImpl().selectChangeLogFile();
+  }
+ else {
+    return liquibaseProjectComponent.getRootChangeLogFile();
+  }
+}

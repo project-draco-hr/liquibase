@@ -1,5 +1,6 @@
 {
-  DialogBuilder builder=new DialogBuilder(LiquibaseProjectComponent.getInstance().getProject());
+  LiquibaseProjectComponent liquibaseProjectComponent=LiquibaseProjectComponent.getInstance();
+  DialogBuilder builder=new DialogBuilder(liquibaseProjectComponent.getProject());
   builder.addOkAction();
   builder.addCancelAction();
   builder.setTitle("Select Change Log");
@@ -8,6 +9,9 @@
   builder.showModal(true);
   int i=builder.show();
   if (i == 0) {
+    if (dontShowThis.isSelected()) {
+      liquibaseProjectComponent.setPromptForChangeLog(false);
+    }
     return changeLogSelect.getText();
   }
  else {

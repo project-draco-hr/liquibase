@@ -1,3 +1,7 @@
 {
-  ideFacade.getMigrator(database).migrate();
+  String changeLogFile=ideFacade.selectChangeLogFile();
+  if (changeLogFile == null) {
+    return;
+  }
+  ideFacade.getMigrator(changeLogFile,database).migrate();
 }
