@@ -1,6 +1,14 @@
 {
   LiquibaseProjectComponent liquibaseProjectComponent=LiquibaseProjectComponent.getInstance();
-  Migrator migrator=new Migrator(liquibaseProjectComponent.getRootChangeLog(),new CompositeFileOpener(new IntellijFileOpener(),new FileSystemFileOpener()));
+  String rootChangeLog=liquibaseProjectComponent.getRootChangeLog();
+  if (rootChangeLog == null) {
+    String changeLogFile=new SelectChangeLogDialog().selectChangeLogFile();
+    if (changeLogFile == null) {
+      return null;
+    }
+    liquibaseProjectComponent.setRootChangeLog(changeLogFile);
+  }
+  Migrator migrator=new Migrator(rootChangeLog,new CompositeFileOpener(new IntellijFileOpener(),new FileSystemFileOpener()));
   if (database == null) {
     return migrator;
   }

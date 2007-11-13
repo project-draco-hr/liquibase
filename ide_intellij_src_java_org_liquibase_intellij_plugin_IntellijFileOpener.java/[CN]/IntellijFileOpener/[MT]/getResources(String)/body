@@ -1,4 +1,7 @@
 {
+  if (packageName == null) {
+    return null;
+  }
   VirtualFile virtualFile=findVirtualFile(packageName);
   if (virtualFile == null) {
     return null;

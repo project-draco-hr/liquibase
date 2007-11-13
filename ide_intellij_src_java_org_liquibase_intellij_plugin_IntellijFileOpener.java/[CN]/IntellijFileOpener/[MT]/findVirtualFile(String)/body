@@ -1,3 +1,5 @@
 {
-  return VirtualFileManager.getInstance().refreshAndFindFileByUrl(VirtualFileManager.constructUrl(LocalFileSystem.PROTOCOL,file));
+  WriteAction action=new WriteAction(file);
+  ApplicationManager.getApplication().runWriteAction(action);
+  return action.returnValue;
 }
