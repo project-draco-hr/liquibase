@@ -1,8 +1,0 @@
-{
-  try {
-    getMigrator(database).tag(tag);
-  }
- catch (  LiquibaseException e) {
-    displayError(e);
-  }
-}

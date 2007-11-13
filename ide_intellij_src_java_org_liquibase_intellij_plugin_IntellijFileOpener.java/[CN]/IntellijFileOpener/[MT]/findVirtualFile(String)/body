@@ -1,0 +1,3 @@
+{
+  return VirtualFileManager.getInstance().refreshAndFindFileByUrl(VirtualFileManager.constructUrl(LocalFileSystem.PROTOCOL,file));
+}

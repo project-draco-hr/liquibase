@@ -1,3 +1,15 @@
 {
-  return LiquibaseProjectComponent.getInstance().getMigrator(database);
+  LiquibaseProjectComponent liquibaseProjectComponent=LiquibaseProjectComponent.getInstance();
+  Migrator migrator=new Migrator(liquibaseProjectComponent.getRootChangeLog(),new CompositeFileOpener(new IntellijFileOpener(),new FileSystemFileOpener()));
+  if (database == null) {
+    return migrator;
+  }
+  try {
+    migrator.init(database);
+    migrator.checkDatabaseChangeLogTable();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+  return migrator;
 }

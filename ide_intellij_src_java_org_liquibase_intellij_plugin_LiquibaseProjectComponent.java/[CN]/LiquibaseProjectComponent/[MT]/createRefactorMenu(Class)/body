@@ -9,5 +9,6 @@
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddNotNullConstraintAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddPrimaryKeyAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddUniqueConstraintAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new CreateIndexAction(),dbObjectType));
   return refactorActionGroup;
 }

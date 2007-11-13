@@ -1,0 +1,6 @@
+{
+  String input=ideFacade.promptForString(getTitle(),"Enter database tag",null);
+  if (input != null) {
+    ideFacade.getMigrator(database).tag(input);
+  }
+}

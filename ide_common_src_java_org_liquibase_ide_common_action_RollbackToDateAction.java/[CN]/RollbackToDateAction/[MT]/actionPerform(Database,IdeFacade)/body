@@ -1,0 +1,6 @@
+{
+  Date input=ideFacade.promptForDateTime(getTitle(),"Enter date/time database tag to roll back to\nFormat: yyyy-dd-mm hh:mm:ss",new Date());
+  if (input != null) {
+    ideFacade.getMigrator(database).rollbackToDate(input);
+  }
+}

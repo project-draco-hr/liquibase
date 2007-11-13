@@ -1,5 +1,22 @@
 {
   ActionGroup actionGroup=new ActionGroup("LiquiBase");
-  actionGroup.addAction(new IntellijActionWrapper(new MigrateDatabaseAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new MigrateAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new MigrateSqlAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new TagDatabaseAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new RollbackCountAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new RollbackCountSqlAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new RollbackFutureSqlAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new RollbackToDateAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new RollbackToDateSqlAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new RollbackToTagAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new RollbackToTagSqlAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new GenerateChangelogAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new GenerateDbDocAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new StatusAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new ValidateAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new ClearChecksumsAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new ListLocksAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new ReleaseLocksAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new DropAllAction(),dbObjectType));
   return actionGroup;
 }

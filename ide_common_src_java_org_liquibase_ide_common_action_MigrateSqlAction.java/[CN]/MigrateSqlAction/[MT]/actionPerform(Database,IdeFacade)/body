@@ -1,0 +1,5 @@
+{
+  StringWriter stringWriter=new StringWriter();
+  ideFacade.getMigrator(database).migrateSQL(stringWriter);
+  ideFacade.displayOutput("Migration SQL",stringWriter.toString());
+}

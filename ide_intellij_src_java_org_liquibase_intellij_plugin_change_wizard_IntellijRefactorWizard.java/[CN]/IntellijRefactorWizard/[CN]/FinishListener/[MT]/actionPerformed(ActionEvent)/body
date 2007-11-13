@@ -1,10 +1,9 @@
 {
+  IdeFacade facade=LiquibaseProjectComponent.getInstance().getIdeFacade();
   try {
-    new RefactorChangeExecutor().executeChangeSet(new IntellijFacade(),database,metaDataPage,action.createChanges(selectedObject,pages));
+    new RefactorChangeExecutor().executeChangeSet(facade,database,metaDataPage,action.createChanges(selectedObject,pages));
   }
  catch (  Exception e) {
-    String message;
-    Messages.showErrorDialog(LiquibaseProjectComponent.getInstance().getProject(),e.getMessage(),"Error Executing Change");
-    e.printStackTrace();
+    facade.showError("Error Executing Change",e);
   }
 }

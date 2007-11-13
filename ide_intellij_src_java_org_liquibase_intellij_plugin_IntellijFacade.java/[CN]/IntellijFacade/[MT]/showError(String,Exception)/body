@@ -1,0 +1,4 @@
+{
+  Messages.showErrorDialog(LiquibaseProjectComponent.getInstance().getProject(),exception.getMessage(),title);
+  exception.printStackTrace();
+}

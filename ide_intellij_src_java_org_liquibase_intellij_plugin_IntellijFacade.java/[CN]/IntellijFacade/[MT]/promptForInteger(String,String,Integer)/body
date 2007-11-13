@@ -1,0 +1,15 @@
+{
+  String input=Messages.showInputDialog(LiquibaseProjectComponent.getInstance().getProject(),message,title,Messages.getQuestionIcon(),defaultValue.toString(),new InputValidator(){
+    public boolean checkInput(    String s){
+      return s.matches("\\d+");
+    }
+    public boolean canClose(    String s){
+      return true;
+    }
+  }
+);
+  if (input == null) {
+    return null;
+  }
+  return Integer.parseInt(input);
+}

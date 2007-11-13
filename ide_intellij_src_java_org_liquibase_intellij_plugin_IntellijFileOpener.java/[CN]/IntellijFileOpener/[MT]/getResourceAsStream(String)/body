@@ -1,3 +1,7 @@
 {
-  return getClass().getClassLoader().getResourceAsStream(file);
+  VirtualFile virtualFile=findVirtualFile(file);
+  if (virtualFile == null) {
+    return null;
+  }
+  return virtualFile.getInputStream();
 }

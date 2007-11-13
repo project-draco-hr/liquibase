@@ -1,3 +1,22 @@
 {
-  return getClass().getClassLoader().getResources(packageName);
+  VirtualFile virtualFile=findVirtualFile(packageName);
+  if (virtualFile == null) {
+    return null;
+  }
+  final Iterator<VirtualFile> iterator=Arrays.asList(virtualFile.getChildren()).iterator();
+  return new Enumeration<URL>(){
+    public boolean hasMoreElements(){
+      return iterator.hasNext();
+    }
+    public URL nextElement(){
+      VirtualFile file=iterator.next();
+      try {
+        return new URL(file.getPresentableUrl());
+      }
+ catch (      MalformedURLException e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+;
 }

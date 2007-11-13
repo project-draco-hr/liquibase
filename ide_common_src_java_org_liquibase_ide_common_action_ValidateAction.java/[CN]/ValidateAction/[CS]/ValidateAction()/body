@@ -1,0 +1,3 @@
+{
+  super("Validate Change Log");
+}

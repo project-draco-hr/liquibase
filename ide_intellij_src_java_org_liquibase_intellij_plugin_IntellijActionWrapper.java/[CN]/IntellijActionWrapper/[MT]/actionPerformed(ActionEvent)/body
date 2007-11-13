@@ -8,12 +8,10 @@
       wizard.show();
     }
  else     if (action instanceof MigratorAction) {
-      Migrator migrator=LiquibaseProjectComponent.getInstance().getMigrator(selectedDatabase);
-      ((MigratorAction)action).actionPerform(migrator);
+      ((MigratorAction)action).actionPerform(selectedDatabase,ideFacade);
     }
   }
  catch (  LiquibaseException e) {
-    Messages.showErrorDialog(LiquibaseProjectComponent.getInstance().getProject(),e.getMessage(),"Error Executing Change");
-    e.printStackTrace();
+    ideFacade.showError("Error Executing Change",e);
   }
 }

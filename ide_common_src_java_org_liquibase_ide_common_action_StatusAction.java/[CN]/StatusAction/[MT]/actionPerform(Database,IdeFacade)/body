@@ -1,0 +1,5 @@
+{
+  ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+  ideFacade.getMigrator(database).reportStatus(true,new PrintStream(byteArrayOutputStream));
+  ideFacade.displayOutput("Change Log Status",byteArrayOutputStream.toString());
+}

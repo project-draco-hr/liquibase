@@ -2,4 +2,5 @@
   super(action.getTitle());
   this.action=action;
   setEnabled(action.isApplicableTo(objectType));
+  ideFacade=LiquibaseProjectComponent.getInstance().getIdeFacade();
 }

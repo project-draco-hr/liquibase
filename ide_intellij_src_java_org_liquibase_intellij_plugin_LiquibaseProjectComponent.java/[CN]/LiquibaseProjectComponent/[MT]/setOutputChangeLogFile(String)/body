@@ -1,0 +1,3 @@
+{
+  this.outputChangeLogFile=StringUtils.trimToNull(outputChangeLogFile);
+}

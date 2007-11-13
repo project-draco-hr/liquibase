@@ -1,0 +1,11 @@
+{
+  return Messages.showInputDialog(LiquibaseProjectComponent.getInstance().getProject(),message,title,Messages.getQuestionIcon(),defaultValue,new InputValidator(){
+    public boolean checkInput(    String s){
+      return true;
+    }
+    public boolean canClose(    String s){
+      return true;
+    }
+  }
+);
+}

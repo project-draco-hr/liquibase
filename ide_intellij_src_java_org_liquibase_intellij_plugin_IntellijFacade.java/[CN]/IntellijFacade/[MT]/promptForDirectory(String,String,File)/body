@@ -1,0 +1,12 @@
+{
+  FileChooserDescriptor descriptor=FileChooserDescriptorFactory.createSingleFolderDescriptor();
+  descriptor.setTitle(title);
+  descriptor.setDescription(title);
+  Project project=LiquibaseProjectComponent.getInstance().getProject();
+  FileChooserDialog fileChooserDialog=FileChooserFactory.getInstance().createFileChooser(descriptor,project);
+  VirtualFile[] files=fileChooserDialog.choose(null,project);
+  if (files == null) {
+    return null;
+  }
+  return new File(files[0].getUrl());
+}

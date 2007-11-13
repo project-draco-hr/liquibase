@@ -1,0 +1,4 @@
+{
+  ideFacade.getMigrator(database).clearCheckSums();
+  ideFacade.displayMessage("Result","Checksums cleared");
+}

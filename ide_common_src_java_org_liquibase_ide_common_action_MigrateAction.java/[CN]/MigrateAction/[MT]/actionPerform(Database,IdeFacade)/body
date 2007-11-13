@@ -1,0 +1,3 @@
+{
+  ideFacade.getMigrator(database).migrate();
+}

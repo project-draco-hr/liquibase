@@ -1,0 +1,28 @@
+{
+  final ISODateFormat dateFormat=new ISODateFormat();
+  String input=Messages.showInputDialog(LiquibaseProjectComponent.getInstance().getProject(),message,title,Messages.getQuestionIcon(),defaultValue.toString(),new InputValidator(){
+    public boolean checkInput(    String s){
+      try {
+        dateFormat.parse(s);
+        return true;
+      }
+ catch (      ParseException e) {
+        return false;
+      }
+    }
+    public boolean canClose(    String s){
+      return true;
+    }
+  }
+);
+  if (input == null) {
+    return null;
+  }
+  try {
+    return dateFormat.parse(input);
+  }
+ catch (  ParseException e) {
+    showError(e);
+    return null;
+  }
+}

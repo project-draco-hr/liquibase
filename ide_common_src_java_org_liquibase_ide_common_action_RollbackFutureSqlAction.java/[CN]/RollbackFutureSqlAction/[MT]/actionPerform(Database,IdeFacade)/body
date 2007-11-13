@@ -1,0 +1,5 @@
+{
+  StringWriter writer=new StringWriter();
+  ideFacade.getMigrator(database).futureRollbackSQL(writer);
+  ideFacade.displayOutput("Rollback SQL",writer.toString());
+}

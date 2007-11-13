@@ -1,0 +1,4 @@
+{
+  int result=Messages.showYesNoDialog(LiquibaseProjectComponent.getInstance().getProject(),message,title,Messages.getQuestionIcon());
+  return result == 0;
+}
