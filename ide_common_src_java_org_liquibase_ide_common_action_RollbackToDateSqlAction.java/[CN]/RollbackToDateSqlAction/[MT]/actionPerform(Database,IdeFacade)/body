@@ -3,6 +3,6 @@
   if (input != null) {
     StringWriter writer=new StringWriter();
     ideFacade.getMigrator(null,database).rollbackToDateSQL(input,writer);
-    ideFacade.displayOutput("Rollback SQL",writer.toString());
+    ideFacade.showOutput("Rollback SQL",writer.toString());
   }
 }

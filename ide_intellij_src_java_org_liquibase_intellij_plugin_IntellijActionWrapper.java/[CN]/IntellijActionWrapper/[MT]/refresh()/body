@@ -1,5 +1,10 @@
 {
-  DBTree tree=(DBTree)getUserData();
+  Object userData=getUserData();
+  if (!(userData instanceof DBTree)) {
+    LiquibaseProjectComponent.getInstance().getIdeFacade().showMessage("Operation Complete","Could not auto-refresh the database display\n\nPlease refresh it manually");
+    return;
+  }
+  DBTree tree=(DBTree)userData;
   Enumeration<TreePath> expandedPaths=tree.getExpandedDescendants(tree.getSelectionPath());
   Object c=tree.getLastSelectedPathComponent();
   if (c instanceof IDBNode) {

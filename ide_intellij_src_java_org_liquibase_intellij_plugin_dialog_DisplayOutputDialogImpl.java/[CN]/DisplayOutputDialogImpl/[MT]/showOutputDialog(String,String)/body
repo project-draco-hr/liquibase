@@ -1,0 +1,11 @@
+{
+  DisplayOutputDialogImpl dialog=new DisplayOutputDialogImpl();
+  LiquibaseProjectComponent liquibaseProjectComponent=LiquibaseProjectComponent.getInstance();
+  DialogBuilder builder=new DialogBuilder(liquibaseProjectComponent.getProject());
+  builder.addCloseButton();
+  builder.setTitle(title);
+  dialog.outputArea.setText(output);
+  builder.setCenterPanel(dialog.mainPanel);
+  builder.showModal(false);
+  builder.show();
+}

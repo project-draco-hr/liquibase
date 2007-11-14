@@ -2,31 +2,19 @@
   ApplicationManager.getApplication().runWriteAction(new Runnable(){
     public void run(){
       try {
-        DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder=factory.newDocumentBuilder();
-        documentBuilder.setEntityResolver(new MigratorSchemaResolver());
+        DocumentBuilder documentBuilder=createDocumentBuilder();
         VirtualFile file=LiquibaseProjectComponent.getInstance().getChangeLogVirtualFile();
         if (file == null) {
           throw new RuntimeException("Could not find file");
         }
         Document doc;
         if (!file.isValid() || file.getLength() == 0) {
-          doc=documentBuilder.newDocument();
-          Element changeLogElement=doc.createElement("databaseChangeLog");
-          changeLogElement.setAttribute("xmlns","http://www.liquibase.org/xml/ns/dbchangelog/1.3");
-          changeLogElement.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
-          changeLogElement.setAttribute("xsi:schemaLocation","http://www.liquibase.org/xml/ns/dbchangelog/1.3 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.3.xsd");
-          doc.appendChild(changeLogElement);
+          createEmptyChangeLog(new File(file.getUrl()));
         }
- else {
-          doc=documentBuilder.parse(file.getInputStream());
-        }
+        doc=documentBuilder.parse(file.getInputStream());
         doc.getDocumentElement().appendChild(changeSet.createNode(doc));
-        OutputFormat format=new OutputFormat(doc);
-        format.setIndenting(true);
-        XMLSerializer serializer=new XMLSerializer(file.getOutputStream(null),format);
-        serializer.asDOMSerializer();
-        serializer.serialize(doc);
+        OutputStream outputStream=file.getOutputStream(null);
+        serializeXML(doc,outputStream);
       }
  catch (      Exception e) {
         throw new RuntimeException(e);

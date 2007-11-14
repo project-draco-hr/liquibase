@@ -1,10 +1,10 @@
 {
   DefaultTableModel tableModel=((DefaultTableModel)columnTable.getModel());
   if (StringUtils.trimToNull(columnNameTextField.getText()) != null) {
-    tableModel.addRow(new Object[]{columnNameTextField.getText(),dataTypeTextField.getText(),nullableCheckBox.isSelected(),primaryKeyCheckBox.isSelected(),autoIncrementCheckBox.isSelected(),defaultValueTextField.getText()});
+    tableModel.addRow(new Object[]{columnNameTextField.getText(),dataTypeTextField.getText(),!notNullCheckBox.isSelected(),primaryKeyCheckBox.isSelected(),autoIncrementCheckBox.isSelected(),defaultValueTextField.getText()});
     columnNameTextField.setText("");
     dataTypeTextField.setText("");
-    nullableCheckBox.setSelected(false);
+    notNullCheckBox.setSelected(false);
     primaryKeyCheckBox.setSelected(false);
     autoIncrementCheckBox.setSelected(false);
     defaultValueTextField.setText("");

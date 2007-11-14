@@ -1,7 +1,7 @@
 {
   String message;
   try {
-    String changeLogFile=ideFacade.selectChangeLogFile();
+    String changeLogFile=ideFacade.promptForChangeLogFile();
     if (changeLogFile == null) {
       return;
     }
@@ -16,5 +16,5 @@
 catch (  Exception e) {
     throw new LiquibaseException(e);
   }
-  ideFacade.displayOutput("Change Log Status",message);
+  ideFacade.showOutput("Change Log Status",message);
 }

@@ -1,0 +1,6 @@
+{
+  DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+  DocumentBuilder documentBuilder=factory.newDocumentBuilder();
+  documentBuilder.setEntityResolver(new MigratorSchemaResolver());
+  return documentBuilder;
+}

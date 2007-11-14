@@ -1,9 +1,9 @@
 {
   StringWriter writer=new StringWriter();
-  String changeLogFile=ideFacade.selectChangeLogFile();
+  String changeLogFile=ideFacade.promptForChangeLogFile();
   if (changeLogFile == null) {
     return;
   }
   ideFacade.getMigrator(changeLogFile,database).futureRollbackSQL(writer);
-  ideFacade.displayOutput("Rollback SQL",writer.toString());
+  ideFacade.showOutput("Rollback SQL",writer.toString());
 }

@@ -18,5 +18,6 @@
   actionGroup.addAction(new IntellijActionWrapper(new ListLocksAction(),dbObjectType));
   actionGroup.addAction(new IntellijActionWrapper(new ReleaseLocksAction(),dbObjectType));
   actionGroup.addAction(new IntellijActionWrapper(new DropAllAction(),dbObjectType));
+  actionGroup.addAction(new IntellijActionWrapper(new CreateEmptyChangeLogAction(),dbObjectType));
   return actionGroup;
 }

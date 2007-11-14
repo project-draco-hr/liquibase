@@ -5,8 +5,6 @@
   builder.addCancelAction();
   builder.setTitle("Select Change Log");
   builder.setCenterPanel(mainPanel);
-  builder.getDialogWrapper().pack();
-  builder.showModal(true);
   int i=builder.show();
   if (i == 0) {
     if (dontShowThis.isSelected()) {

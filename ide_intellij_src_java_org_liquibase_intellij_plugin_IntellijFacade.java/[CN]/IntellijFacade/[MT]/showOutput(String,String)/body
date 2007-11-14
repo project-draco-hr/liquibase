@@ -1,0 +1,3 @@
+{
+  DisplayOutputDialogImpl.showOutputDialog(title,output);
+}

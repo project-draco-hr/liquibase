@@ -1,5 +1,5 @@
 {
-  String changeLogFile=ideFacade.selectChangeLogFile();
+  String changeLogFile=ideFacade.promptForChangeLogFile();
   if (changeLogFile == null) {
     return;
   }

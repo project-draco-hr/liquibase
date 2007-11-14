@@ -11,5 +11,5 @@
 catch (  IOException e) {
     throw new LiquibaseException(e);
   }
-  ideFacade.displayOutput("Rollback SQL",out.toString());
+  ideFacade.showOutput("Rollback SQL",out.toString());
 }
