@@ -4,4 +4,11 @@
   PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.Database.class),Schema.class);
   PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Table.class),Table.class);
   PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Column.class),Column.class);
+  try {
+    this.dbTree=(DBTree)((JScrollPane)((JSplitPane)((JTabbedPane)ProjectMain.getInstance().getBrowser().getComponent(0)).getComponentAt(0)).getComponent(1)).getViewport().getComponent(0);
+  }
+ catch (  Exception e) {
+    System.out.println("Unable to find DBTree");
+    e.printStackTrace();
+  }
 }
