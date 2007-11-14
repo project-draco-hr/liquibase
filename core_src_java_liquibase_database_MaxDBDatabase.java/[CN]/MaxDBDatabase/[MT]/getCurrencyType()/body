@@ -1,0 +1,3 @@
+{
+  return "NUMERIC(15, 2)";
+}

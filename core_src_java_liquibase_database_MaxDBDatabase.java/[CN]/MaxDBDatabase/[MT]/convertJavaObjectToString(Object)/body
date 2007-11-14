@@ -1,0 +1,13 @@
+{
+  if (value instanceof Boolean) {
+    if (((Boolean)value)) {
+      return this.getTrueBooleanValue();
+    }
+ else {
+      return this.getFalseBooleanValue();
+    }
+  }
+ else {
+    return super.convertJavaObjectToString(value);
+  }
+}
