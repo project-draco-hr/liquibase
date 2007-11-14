@@ -1,0 +1,7 @@
+{
+  DropNotNullConstraintChange change=new DropNotNullConstraintChange();
+  change.setTableName(column.getTable().getName());
+  change.setColumnName(column.getName());
+  change.setColumnDataType(column.getDataTypeString(column.getTable().getDatabase()));
+  return new Change[]{change};
+}

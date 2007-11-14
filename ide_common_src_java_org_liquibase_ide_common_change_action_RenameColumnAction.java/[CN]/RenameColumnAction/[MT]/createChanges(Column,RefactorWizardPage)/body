@@ -1,0 +1,8 @@
+{
+  RenameColumnChange change=new RenameColumnChange();
+  change.setTableName(column.getTable().getName());
+  change.setOldColumnName(column.getName());
+  change.setNewColumnName(((SingleValueWizardPage)pages[0]).getValue());
+  change.setColumnDataType(column.getDataTypeString(column.getTable().getDatabase()));
+  return new Change[]{change};
+}

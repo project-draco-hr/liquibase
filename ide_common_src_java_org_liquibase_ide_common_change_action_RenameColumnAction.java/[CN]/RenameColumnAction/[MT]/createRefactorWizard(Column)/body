@@ -1,0 +1,3 @@
+{
+  return new RefactorWizard("Rename " + selectedColumn,new SingleValueWizardPageImpl("New Column Name"));
+}

@@ -1,7 +1,9 @@
 {
   ActionGroup refactorActionGroup=new ActionGroup("Refactor");
-  refactorActionGroup.addAction(new IntellijActionWrapper(new AddTableAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new CreateTableAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddColumnAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new DropTableAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new RenameTableAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddAutoIncrementAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddDefaultValueAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddForeignKeyConstraintAction(),dbObjectType));
@@ -10,5 +12,9 @@
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddPrimaryKeyAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new AddUniqueConstraintAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new CreateIndexAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new DropColumnAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new DropDefaultValueAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new DropNotNullConstraintAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new RenameColumnAction(),dbObjectType));
   return refactorActionGroup;
 }

@@ -1,0 +1,6 @@
+{
+  DropDefaultValueChange change=new DropDefaultValueChange();
+  change.setTableName(column.getTable().getName());
+  change.setColumnName(column.getName());
+  return new Change[]{change};
+}

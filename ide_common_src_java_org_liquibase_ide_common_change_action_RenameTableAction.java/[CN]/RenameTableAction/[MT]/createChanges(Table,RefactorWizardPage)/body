@@ -1,0 +1,6 @@
+{
+  RenameTableChange change=new RenameTableChange();
+  change.setOldTableName(table.getName());
+  change.setNewTableName(((SingleValueWizardPage)pages[0]).getValue());
+  return new Change[]{change};
+}

@@ -1,0 +1,3 @@
+{
+  return new RefactorWizard("Rename " + selectedTable,new SingleValueWizardPageImpl("New Table Name"));
+}
