@@ -1,0 +1,8 @@
+{
+  if ((this.primaryKeyColumns == null) || (this.primaryKeyColumns.length() == 0)) {
+    this.primaryKeyColumns=primaryKeyColumn;
+  }
+ else {
+    this.primaryKeyColumns=this.primaryKeyColumns + ", " + primaryKeyColumn;
+  }
+}

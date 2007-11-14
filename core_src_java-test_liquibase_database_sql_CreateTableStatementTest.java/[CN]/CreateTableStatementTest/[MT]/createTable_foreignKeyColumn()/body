@@ -11,9 +11,9 @@
       ForeignKey foundForeignKey=snapshot.getForeignKey(foreignKeyName);
       assertNotNull(foundForeignKey);
       assertEquals(TABLE_NAME,foundForeignKey.getPrimaryKeyTable().getName().toUpperCase());
-      assertEquals("ID",foundForeignKey.getPrimaryKeyColumn().toUpperCase());
+      assertEquals("ID",foundForeignKey.getPrimaryKeyColumns().toUpperCase());
       assertEquals(TABLE_NAME,foundForeignKey.getForeignKeyTable().getName().toUpperCase());
-      assertEquals("PARENT_ID",foundForeignKey.getForeignKeyColumn().toUpperCase());
+      assertEquals("PARENT_ID",foundForeignKey.getForeignKeyColumns().toUpperCase());
     }
   }
 );

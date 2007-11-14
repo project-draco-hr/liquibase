@@ -1,0 +1,8 @@
+{
+  if ((this.foreignKeyColumns == null) || (this.foreignKeyColumns.length() == 0)) {
+    this.foreignKeyColumns=foreignKeyColumn;
+  }
+ else {
+    this.foreignKeyColumns=this.foreignKeyColumns + ", " + foreignKeyColumn;
+  }
+}
