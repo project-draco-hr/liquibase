@@ -1,5 +1,8 @@
 {
-  if (date instanceof java.sql.Date) {
+  if (date instanceof ComputedDateValue) {
+    return date.toString();
+  }
+ else   if (date instanceof java.sql.Date) {
     return format(((java.sql.Date)date));
   }
  else   if (date instanceof Time) {

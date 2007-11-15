@@ -73,7 +73,10 @@
       throw new RuntimeException("Cannot convert type: " + dataType);
     }
   }
- catch (  NumberFormatException e) {
+ catch (  DateParseException e) {
+    return new ComputedDateValue(value);
+  }
+catch (  NumberFormatException e) {
     return new ComputedNumericValue(value);
   }
 }
