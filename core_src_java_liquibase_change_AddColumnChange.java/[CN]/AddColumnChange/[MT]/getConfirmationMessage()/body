@@ -1,3 +1,7 @@
 {
-  return "Column " + column.getName() + "("+ column.getType()+ ") added to "+ tableName;
+  List<String> names=new ArrayList<String>(columns.size());
+  for (  ColumnConfig col : columns) {
+    names.add(col.getName() + "(" + col.getType()+ ")");
+  }
+  return "Columns " + StringUtils.join(names,",") + " added to "+ tableName;
 }

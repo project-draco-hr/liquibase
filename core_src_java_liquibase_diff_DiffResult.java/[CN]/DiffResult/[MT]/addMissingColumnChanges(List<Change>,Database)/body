@@ -10,7 +10,7 @@
     String dataType=column.getDataTypeString(database);
     columnConfig.setType(dataType);
     columnConfig.setDefaultValue(database.convertJavaObjectToString(column.getDefaultValue()));
-    change.setColumn(columnConfig);
+    change.addColumn(columnConfig);
     changes.add(change);
   }
 }

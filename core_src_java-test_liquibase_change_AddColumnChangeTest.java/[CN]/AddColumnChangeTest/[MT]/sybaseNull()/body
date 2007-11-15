@@ -4,7 +4,7 @@
   ColumnConfig column=new ColumnConfig();
   column.setName("NEWCOL");
   column.setType("TYP");
-  refactoring.setColumn(column);
+  refactoring.addColumn(column);
   SybaseDatabase db=new SybaseDatabase();
   assertEquals("ALTER TABLE [TAB] ADD NEWCOL TYP NULL",refactoring.generateStatements(db)[0].getSqlStatement(db));
 }

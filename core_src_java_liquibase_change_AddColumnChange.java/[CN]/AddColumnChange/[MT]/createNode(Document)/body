@@ -4,6 +4,9 @@
     node.setAttribute("schemaName",getSchemaName());
   }
   node.setAttribute("tableName",getTableName());
-  node.appendChild(getColumn().createNode(currentChangeLogFileDOM));
+  for (  ColumnConfig col : getColumns()) {
+    Element subNode=col.createNode(currentChangeLogFileDOM);
+    node.appendChild(subNode);
+  }
   return node;
 }

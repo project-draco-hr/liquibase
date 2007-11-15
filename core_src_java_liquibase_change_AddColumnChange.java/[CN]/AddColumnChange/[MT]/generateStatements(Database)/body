@@ -1,24 +1,28 @@
 {
   List<SqlStatement> sql=new ArrayList<SqlStatement>();
-  Set<ColumnConstraint> constraints=new HashSet<ColumnConstraint>();
-  if (column.getConstraints() != null) {
-    if (column.getConstraints().isNullable() != null && !column.getConstraints().isNullable()) {
-      constraints.add(new NotNullConstraint());
+  for (  ColumnConfig aColumn : columns) {
+    Set<ColumnConstraint> constraints=new HashSet<ColumnConstraint>();
+    if (aColumn.getConstraints() != null) {
+      if (aColumn.getConstraints().isNullable() != null && !aColumn.getConstraints().isNullable()) {
+        constraints.add(new NotNullConstraint());
+      }
+    }
+    AddColumnStatement addColumnStatement=new AddColumnStatement(getSchemaName(),getTableName(),aColumn.getName(),aColumn.getType(),aColumn.getDefaultValueObject(),constraints.toArray(new ColumnConstraint[constraints.size()]));
+    sql.add(addColumnStatement);
+  }
+  for (  ColumnConfig aColumn : columns) {
+    if (aColumn.getConstraints() != null) {
+      if (aColumn.getConstraints().isPrimaryKey() != null && aColumn.getConstraints().isPrimaryKey()) {
+        AddPrimaryKeyChange change=new AddPrimaryKeyChange();
+        change.setSchemaName(getSchemaName());
+        change.setTableName(getTableName());
+        change.setColumnNames(aColumn.getName());
+        sql.addAll(Arrays.asList(change.generateStatements(database)));
+      }
     }
   }
-  AddColumnStatement addColumnStatement=new AddColumnStatement(getSchemaName(),getTableName(),getColumn().getName(),getColumn().getType(),getColumn().getDefaultValueObject(),constraints.toArray(new ColumnConstraint[constraints.size()]));
-  sql.add(addColumnStatement);
   if (database instanceof DB2Database) {
     sql.add(new ReorganizeTableStatement(getSchemaName(),getTableName()));
-  }
-  if (getColumn().getConstraints() != null) {
-    if (getColumn().getConstraints().isPrimaryKey() != null && getColumn().getConstraints().isPrimaryKey()) {
-      AddPrimaryKeyChange change=new AddPrimaryKeyChange();
-      change.setSchemaName(getSchemaName());
-      change.setTableName(getTableName());
-      change.setColumnNames(getColumn().getName());
-      sql.addAll(Arrays.asList(change.generateStatements(database)));
-    }
   }
   return sql.toArray(new SqlStatement[sql.size()]);
 }

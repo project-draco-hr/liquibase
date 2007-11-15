@@ -4,7 +4,7 @@
   ColumnConfig column=new ColumnConfig();
   column.setName("NEWCOL");
   column.setType("TYP");
-  refactoring.setColumn(column);
+  refactoring.addColumn(column);
   ConstraintsConfig constraints=new ConstraintsConfig();
   constraints.setPrimaryKey(Boolean.FALSE);
   constraints.setNullable(Boolean.FALSE);

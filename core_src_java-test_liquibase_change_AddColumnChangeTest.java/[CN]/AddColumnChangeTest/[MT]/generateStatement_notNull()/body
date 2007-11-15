@@ -8,7 +8,7 @@
   ConstraintsConfig constraints=new ConstraintsConfig();
   constraints.setNullable(Boolean.FALSE);
   column.setConstraints(constraints);
-  refactoring.setColumn(column);
+  refactoring.addColumn(column);
   SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
   assertEquals(1,sqlStatements.length);
   assertTrue(sqlStatements[0] instanceof AddColumnStatement);

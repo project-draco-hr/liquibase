@@ -4,6 +4,6 @@
   ColumnConfig column=new ColumnConfig();
   column.setName("NEWCOL");
   column.setType("TYP");
-  refactoring.setColumn(column);
-  assertEquals("Column NEWCOL(TYP) added to TAB",refactoring.getConfirmationMessage());
+  refactoring.addColumn(column);
+  assertEquals("Columns NEWCOL(TYP) added to TAB",refactoring.getConfirmationMessage());
 }

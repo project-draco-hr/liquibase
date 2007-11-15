@@ -1,0 +1,3 @@
+{
+  return (columns.size() > 0) ? columns.get(columns.size() - 1) : null;
+}

@@ -9,7 +9,7 @@
   constraints.setNullable(Boolean.FALSE);
   constraints.setPrimaryKey(Boolean.TRUE);
   column.setConstraints(constraints);
-  refactoring.setColumn(column);
+  refactoring.addColumn(column);
   SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
   assertEquals(2,sqlStatements.length);
   assertTrue(sqlStatements[0] instanceof AddColumnStatement);
