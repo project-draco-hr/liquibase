@@ -2,7 +2,15 @@
   updateListeners("Reading indexes for " + database.toString() + " ...");
   for (  Table table : tablesMap.values()) {
     ResultSet rs;
-    rs=databaseMetaData.getIndexInfo(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),table.getName(),false,true);
+    Statement statement=null;
+    if (database instanceof OracleDatabase) {
+      statement=database.getConnection().createStatement();
+      String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + database.convertRequestedSchemaToSchema(schema) + "' AND TABLE_NAME='"+ table.getName()+ "'";
+      rs=statement.executeQuery(sql);
+    }
+ else {
+      rs=databaseMetaData.getIndexInfo(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),table.getName(),false,true);
+    }
     Map<String,Index> indexMap=new HashMap<String,Index>();
     while (rs.next()) {
       String indexName=rs.getString("INDEX_NAME");
@@ -34,6 +42,9 @@
       indexes.add(indexMap.get(key));
     }
     rs.close();
+    if (statement != null) {
+      statement.close();
+    }
   }
   Set<Index> indexesToRemove=new HashSet<Index>();
   for (  Index index : indexes) {
