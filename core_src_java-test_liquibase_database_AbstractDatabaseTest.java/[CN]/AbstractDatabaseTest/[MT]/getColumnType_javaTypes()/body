@@ -1,0 +1,8 @@
+{
+  Database database=getDatabase();
+  if (database.getConnection() != null) {
+    assertEquals(database.getDateTimeType(),database.getColumnType("java.sql.Types.TIMESTAMP",false));
+    assertEquals(database.getBooleanType(),database.getColumnType("java.sql.Types.BOOLEAN",false));
+    assertEquals("VARCHAR(255)",database.getColumnType("java.sql.Types.VARCHAR(255)",false));
+  }
+}

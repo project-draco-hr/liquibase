@@ -1,0 +1,3 @@
+{
+  assertEquals("LONGVARBINARY",getDatabase().getBlobType());
+}

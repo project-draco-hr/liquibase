@@ -3,9 +3,9 @@
     return connectionsByUrl.get(url);
   }
   connectionsAttempted.put(url,Boolean.TRUE);
-  if (System.getProperty("test.databases") != null) {
+  if (System.getProperty(TEST_DATABASES_PROPERTY) != null) {
     boolean shouldTest=false;
-    String[] databasesToTest=System.getProperty("test.databases").split("\\s*,\\s*");
+    String[] databasesToTest=System.getProperty(TEST_DATABASES_PROPERTY).split("\\s*,\\s*");
     for (    String database : databasesToTest) {
       if (url.indexOf(database) >= 0) {
         shouldTest=true;

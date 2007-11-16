@@ -1,0 +1,5 @@
+{
+  Database database=getDatabase();
+  assertEquals("org.h2.Driver",database.getDefaultDriver("jdbc:h2:mem:liquibase"));
+  assertNull(database.getDefaultDriver("jdbc:db2://localhost;databaseName=liquibase"));
+}

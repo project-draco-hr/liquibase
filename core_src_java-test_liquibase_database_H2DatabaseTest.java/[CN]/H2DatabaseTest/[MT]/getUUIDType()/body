@@ -1,0 +1,3 @@
+{
+  assertEquals("VARCHAR(36)",getDatabase().getUUIDType());
+}
