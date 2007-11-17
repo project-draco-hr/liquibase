@@ -11,6 +11,9 @@
       alterTable+=" PRIMARY KEY";
     }
   }
+  if (isAutoIncrement()) {
+    alterTable+=" " + database.getAutoIncrementClause();
+  }
   if (!isNullable()) {
     alterTable+=" NOT NULL";
   }
