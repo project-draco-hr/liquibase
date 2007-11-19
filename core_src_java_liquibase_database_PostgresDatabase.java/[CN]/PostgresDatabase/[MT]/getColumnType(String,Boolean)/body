@@ -1,4 +1,7 @@
 {
+  if (columnType.startsWith("java.sql.Types.VARCHAR")) {
+    return columnType.replace("java.sql.Types.","");
+  }
   String type=super.getColumnType(columnType,autoIncrement);
   if (autoIncrement != null && autoIncrement) {
     if ("integer".equals(type.toLowerCase())) {
