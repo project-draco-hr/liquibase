@@ -1,7 +1,11 @@
 {
+  List<DatabaseObject> result=new ArrayList<DatabaseObject>(columns.size());
   Table table=new Table(getTableName());
-  Column column=new Column();
-  column.setTable(table);
-  column.setName(this.column.getName());
-  return new HashSet<DatabaseObject>(Arrays.asList(column));
+  for (  ColumnConfig aColumn : columns) {
+    Column each=new Column();
+    each.setTable(table);
+    each.setName(aColumn.getName());
+    result.add(each);
+  }
+  return new HashSet<DatabaseObject>(result);
 }

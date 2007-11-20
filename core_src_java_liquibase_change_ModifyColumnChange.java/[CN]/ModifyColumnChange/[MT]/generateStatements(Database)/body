@@ -1,27 +1,34 @@
 {
-  if (database instanceof SybaseDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY "+ getColumn().getName()+ " "+ getColumn().getType())};
+  List<SqlStatement> sql=new ArrayList<SqlStatement>();
+  for (  ColumnConfig aColumn : columns) {
+    if (database instanceof SybaseDatabase) {
+      sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY "+ aColumn.getName()+ " "+ aColumn.getType()));
+    }
+ else     if (database instanceof MSSQLDatabase) {
+      sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " "+ aColumn.getType()));
+    }
+ else     if (database instanceof MySQLDatabase) {
+      sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY COLUMN "+ aColumn.getName()+ " "+ aColumn.getType()));
+    }
+ else     if (database instanceof OracleDatabase || database instanceof MaxDBDatabase) {
+      sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY ("+ aColumn.getName()+ " "+ aColumn.getType()+ ")"));
+    }
+ else     if (database instanceof DerbyDatabase) {
+      sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " SET DATA TYPE "+ aColumn.getType()));
+    }
+ else     if (database instanceof HsqlDatabase) {
+      sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " "+ aColumn.getType()));
+    }
+ else     if (database instanceof CacheDatabase) {
+      sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " "+ aColumn.getType()));
+    }
+ else     if (database instanceof DB2Database) {
+      sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " SET DATA TYPE "+ aColumn.getType()));
+      sql.add(new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + "')"));
+    }
+ else {
+      sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " TYPE "+ aColumn.getType()));
+    }
   }
-  if (database instanceof MSSQLDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getColumn().getName()+ " "+ getColumn().getType())};
-  }
- else   if (database instanceof MySQLDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY COLUMN "+ getColumn().getName()+ " "+ getColumn().getType())};
-  }
- else   if (database instanceof OracleDatabase || database instanceof MaxDBDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY ("+ getColumn().getName()+ " "+ getColumn().getType()+ ")")};
-  }
- else   if (database instanceof DerbyDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getColumn().getName()+ " SET DATA TYPE "+ getColumn().getType())};
-  }
- else   if (database instanceof HsqlDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getColumn().getName()+ " "+ getColumn().getType())};
-  }
- else   if (database instanceof CacheDatabase) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getColumn().getName()+ " "+ getColumn().getType())};
-  }
- else   if (database instanceof DB2Database) {
-    return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getColumn().getName()+ " SET DATA TYPE "+ getColumn().getType()),new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + "')")};
-  }
-  return new SqlStatement[]{new RawSqlStatement("ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ getColumn().getName()+ " TYPE "+ getColumn().getType())};
+  return sql.toArray(new SqlStatement[sql.size()]);
 }

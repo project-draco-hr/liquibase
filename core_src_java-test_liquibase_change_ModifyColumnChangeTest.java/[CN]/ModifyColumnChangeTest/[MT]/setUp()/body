@@ -4,5 +4,5 @@
   ColumnConfig col1=new ColumnConfig();
   col1.setName("NAME");
   col1.setType("integer(3)");
-  change.setColumn(col1);
+  change.addColumn(col1);
 }
