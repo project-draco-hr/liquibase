@@ -5,7 +5,7 @@
     Statement statement=null;
     if (database instanceof OracleDatabase) {
       statement=database.getConnection().createStatement();
-      String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + database.convertRequestedSchemaToSchema(schema) + "' AND TABLE_NAME='"+ table.getName()+ "'";
+      String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + database.convertRequestedSchemaToSchema(schema) + "' AND TABLE_NAME='"+ table.getName()+ "' ORDER BY INDEX_NAME, ORDINAL_POSITION";
       rs=statement.executeQuery(sql);
     }
  else {
