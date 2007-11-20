@@ -1,0 +1,4 @@
+{
+  InputStreamReader reader=(charsetName != null) ? new InputStreamReader(ins,charsetName) : new InputStreamReader(ins);
+  return getReaderContents(reader);
+}

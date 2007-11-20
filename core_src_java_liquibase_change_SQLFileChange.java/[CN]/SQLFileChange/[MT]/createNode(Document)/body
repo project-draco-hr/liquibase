@@ -1,5 +1,8 @@
 {
   Element sqlElement=currentChangeLogDOM.createElement("sqlFile");
   sqlElement.setAttribute("path",file);
+  if (encoding != null) {
+    sqlElement.setAttribute("encoding",encoding);
+  }
   return sqlElement;
 }
