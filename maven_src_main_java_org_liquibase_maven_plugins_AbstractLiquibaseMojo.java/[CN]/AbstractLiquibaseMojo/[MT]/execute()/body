@@ -41,6 +41,7 @@
     Migrator migrator=new Migrator(changeLogFile.trim(),new CompositeFileOpener(mFO,fsFO));
     migrator.setContexts(contexts);
     migrator.init(connection);
+    performMigratorConfiguration(migrator);
     getLog().info("Executing on Database: " + url);
     if (promptOnNonLocalDatabase && !migrator.isSafeToRunMigration()) {
       if (migrator.swingPromptForNonLocalDatabase()) {
