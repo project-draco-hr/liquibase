@@ -1,0 +1,8 @@
+{
+  Logger logger=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
+  for (  Handler handler : logger.getHandlers()) {
+    logger.removeHandler(handler);
+  }
+  logger.addHandler(theHandler);
+  logger.setUseParentHandlers(false);
+}

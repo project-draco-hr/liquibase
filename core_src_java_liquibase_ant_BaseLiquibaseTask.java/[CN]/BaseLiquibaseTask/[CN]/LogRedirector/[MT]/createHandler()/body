@@ -1,0 +1,29 @@
+{
+  return new Handler(){
+    public void publish(    LogRecord logRecord){
+      task.log(logRecord.getMessage(),mapLevelToAntLevel(logRecord.getLevel()));
+    }
+    @Override public void close() throws SecurityException {
+    }
+    @Override public void flush(){
+    }
+    protected int mapLevelToAntLevel(    Level level){
+      if (Level.ALL == level) {
+        return Project.MSG_INFO;
+      }
+ else       if (Level.SEVERE == level) {
+        return Project.MSG_ERR;
+      }
+ else       if (Level.WARNING == level) {
+        return Project.MSG_WARN;
+      }
+ else       if (Level.INFO == level) {
+        return Project.MSG_INFO;
+      }
+ else {
+        return Project.MSG_VERBOSE;
+      }
+    }
+  }
+;
+}
