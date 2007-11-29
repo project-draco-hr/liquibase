@@ -12,6 +12,7 @@
           defaultValue=((String)defaultValue).replaceFirst("^to_date\\('","").replaceFirst("', 'HH24:MI:SS'\\)$","");
         }
       }
+      defaultValue=((String)defaultValue).replaceFirst("'\\s*$","'");
     }
   }
   return super.convertDatabaseValueToJavaObject(defaultValue,dataType,columnSize,decimalDigits);
