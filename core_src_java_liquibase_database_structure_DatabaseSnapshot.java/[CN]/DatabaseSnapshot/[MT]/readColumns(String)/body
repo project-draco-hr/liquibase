@@ -47,15 +47,17 @@
       columnInfo.setNullable(true);
     }
     columnInfo.setPrimaryKey(isPrimaryKey(columnInfo));
-    ResultSet selectRS=null;
-    try {
-      selectRS=selectStatement.executeQuery("SELECT " + columnName + " FROM "+ database.escapeTableName(schema,tableName)+ " WHERE 1 = 0");
-      ResultSetMetaData meta=selectRS.getMetaData();
-      columnInfo.setAutoIncrement(meta.isAutoIncrement(1));
-    }
+    if (database.supportsAutoIncrement()) {
+      ResultSet selectRS=null;
+      try {
+        selectRS=selectStatement.executeQuery("SELECT " + columnName + " FROM "+ database.escapeTableName(schema,tableName)+ " WHERE 1 = 0");
+        ResultSetMetaData meta=selectRS.getMetaData();
+        columnInfo.setAutoIncrement(meta.isAutoIncrement(1));
+      }
   finally {
-      if (selectRS != null) {
-        selectRS.close();
+        if (selectRS != null) {
+          selectRS.close();
+        }
       }
     }
     columnsMap.put(tableName + "." + columnName,columnInfo);
