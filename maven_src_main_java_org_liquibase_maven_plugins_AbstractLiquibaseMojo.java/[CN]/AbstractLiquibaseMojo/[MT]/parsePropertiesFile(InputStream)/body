@@ -1,7 +1,9 @@
 {
+  if (propertiesInputStream == null) {
+    throw new MojoExecutionException("Properties file input stream cannot be null.");
+  }
   Properties props=new Properties();
   try {
-    InputStream propertiesInputStream=new FileInputStream(propertiesFile);
     props.load(propertiesInputStream);
   }
  catch (  IOException e) {

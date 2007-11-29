@@ -1,0 +1,10 @@
+{
+  getLog().info("   properties file will override? " + propertiesFileOverrides);
+  getLog().info("   changeLogFile: " + changeLogFile);
+  getLog().info("   driver: " + driver);
+  getLog().info("   url: " + url);
+  getLog().info("   username: " + username);
+  getLog().info("   password: " + password);
+  getLog().info("   prompt on non-local database? " + promptOnNonLocalDatabase);
+  getLog().info("   drop first? " + dropFirst);
+}
