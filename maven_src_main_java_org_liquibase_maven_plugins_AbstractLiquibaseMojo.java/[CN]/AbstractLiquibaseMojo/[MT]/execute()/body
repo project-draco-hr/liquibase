@@ -1,6 +1,4 @@
 {
-  getLog().info("");
-  getLog().info("Liquibase Maven Plugin");
   getLog().info(LOG_SEPARATOR);
   String shouldRunProperty=System.getProperty(Migrator.SHOULD_RUN_SYSTEM_PROPERTY);
   if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty).booleanValue()) {
@@ -35,6 +33,7 @@
     printSettings();
     getLog().info(LOG_SEPARATOR);
   }
+  checkRequiredParametersAreSpecified();
   Connection connection=null;
   try {
     Driver dbDriver=(Driver)Class.forName(driver,true,artifactClassLoader).newInstance();
@@ -69,4 +68,5 @@ catch (  Exception e) {
     throw new MojoFailureException(e.getMessage());
   }
   getLog().info(LOG_SEPARATOR);
+  getLog().info("");
 }
