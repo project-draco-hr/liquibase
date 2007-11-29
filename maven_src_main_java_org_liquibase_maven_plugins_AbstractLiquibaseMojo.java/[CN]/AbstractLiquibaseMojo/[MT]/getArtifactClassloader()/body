@@ -1,25 +1,23 @@
 {
-  getLog().debug("Loading artfacts into URLClassLoader");
-  URL[] urls=new URL[0];
+  if (verbose) {
+    getLog().info("Loading artfacts into URLClassLoader");
+  }
+  Set urls=new HashSet();
   Set dependencies=project.getDependencyArtifacts();
   if (dependencies != null || !dependencies.isEmpty()) {
-    Set artifactURLs=new HashSet(dependencies.size());
     for (Iterator it=dependencies.iterator(); it.hasNext(); ) {
-      Artifact artifact=(Artifact)it.next();
-      File f=artifact.getFile();
-      if (f != null) {
-        URL fileURL=f.toURI().toURL();
-        getLog().debug("  artifact: " + fileURL);
-        artifactURLs.add(fileURL);
-      }
- else {
-        getLog().warn("Artifact with no actual file, '" + artifact.getGroupId() + ":"+ artifact.getArtifactId()+ "'");
-      }
+      addArtifact(urls,(Artifact)it.next());
     }
-    urls=(URL[])artifactURLs.toArray(new URL[artifactURLs.size()]);
   }
  else {
-    getLog().debug("there are no resolved artifacts for the Maven project.");
+    getLog().info("there are no resolved artifacts for the Maven project.");
   }
-  return new URLClassLoader(urls,getClass().getClassLoader());
+  if (includeArtifact) {
+    addArtifact(urls,project.getArtifact());
+  }
+  if (verbose) {
+    getLog().info(LOG_SEPARATOR);
+  }
+  URL[] urlArray=(URL[])urls.toArray(new URL[urls.size()]);
+  return new URLClassLoader(urlArray,getClass().getClassLoader());
 }

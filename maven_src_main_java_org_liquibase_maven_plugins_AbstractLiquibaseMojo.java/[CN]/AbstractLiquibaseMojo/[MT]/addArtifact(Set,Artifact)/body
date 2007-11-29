@@ -1,0 +1,13 @@
+{
+  File f=artifact.getFile();
+  if (f != null) {
+    URL fileURL=f.toURI().toURL();
+    if (verbose) {
+      getLog().info("  artifact: " + fileURL);
+    }
+    urls.add(fileURL);
+  }
+ else {
+    getLog().warn("Artifact with no actual file, '" + artifact.getGroupId() + ":"+ artifact.getArtifactId()+ "'");
+  }
+}

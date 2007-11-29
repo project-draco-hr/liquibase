@@ -18,11 +18,12 @@
   FileOpener fsFO=new FileSystemFileOpener();
   CompositeFileOpener cfo=new CompositeFileOpener(mFO,fsFO);
   if (propertiesFile != null) {
-    if (verbose) {
-      getLog().info("Loading Liquibase settings from properties file, " + propertiesFile);
-    }
+    getLog().info("Loading Liquibase settings from properties file, " + propertiesFile);
     try {
       InputStream is=cfo.getResourceAsStream(propertiesFile);
+      if (is == null) {
+        throw new MojoFailureException("Failed to resolve the properties file.");
+      }
       parsePropertiesFile(is);
     }
  catch (    IOException e) {
