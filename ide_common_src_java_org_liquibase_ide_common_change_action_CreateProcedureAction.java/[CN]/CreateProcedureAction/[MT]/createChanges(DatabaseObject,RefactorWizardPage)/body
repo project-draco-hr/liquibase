@@ -1,0 +1,5 @@
+{
+  CreateProcedureChange change=new CreateProcedureChange();
+  change.setProcedureBody(((SingleValueWizardPageImpl)pages[0]).getValue());
+  return new Change[]{change};
+}

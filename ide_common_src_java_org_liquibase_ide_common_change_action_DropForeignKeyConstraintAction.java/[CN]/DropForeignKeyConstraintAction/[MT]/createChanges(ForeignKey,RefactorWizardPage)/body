@@ -1,0 +1,6 @@
+{
+  DropForeignKeyConstraintChange change=new DropForeignKeyConstraintChange();
+  change.setConstraintName(selectedFK.getName());
+  change.setBaseTableName(selectedFK.getPrimaryKeyTable().getName());
+  return new Change[]{change};
+}

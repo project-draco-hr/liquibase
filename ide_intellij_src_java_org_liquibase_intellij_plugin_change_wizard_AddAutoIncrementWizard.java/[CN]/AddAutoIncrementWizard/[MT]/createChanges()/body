@@ -1,8 +1,0 @@
-{
-  AddAutoIncrementChange change=new AddAutoIncrementChange();
-  Column column=selectedColumn;
-  change.setTableName(column.getTable().getName());
-  change.setColumnName(column.getName());
-  change.setColumnDataType(column.getTypeString());
-  return new Change[]{change};
-}

@@ -1,0 +1,3 @@
+{
+  return new RefactorWizard("Create Procedure",new SingleValueWizardPageTextAreaImpl("Procedure Definition"));
+}

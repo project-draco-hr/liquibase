@@ -1,32 +1,8 @@
 {
-  Object selectedObject=getUserData();
-  if (selectedObject instanceof DBTree) {
-    TreePath selectionPath=((DBTree)getUserData()).getSelectionModel().getLeadSelectionPath();
-    selectedObject=selectionPath.getPathComponent(1);
-  }
+  DBTree tree=LiquibaseProjectComponent.getInstance().getDbTree();
+  Object pathComponent=tree.getSelectionPath().getPathComponent(1);
   try {
-    Connection connection;
-    if (selectedObject instanceof dbhelp.db.Database) {
-      connection=((dbhelp.db.Database)selectedObject).getConnection();
-    }
- else     if (selectedObject instanceof Catalog) {
-      connection=((Catalog)selectedObject).getDatabase().getConnection();
-    }
- else     if (selectedObject instanceof dbhelp.db.Column) {
-      connection=((dbhelp.db.Column)selectedObject).getTable().getDatabase().getConnection();
-    }
- else     if (selectedObject instanceof Schema) {
-      connection=((Schema)selectedObject).getDatabase().getConnection();
-    }
- else     if (selectedObject instanceof dbhelp.db.Table) {
-      connection=((dbhelp.db.Table)selectedObject).getDatabase().getConnection();
-    }
- else     if (selectedObject instanceof AbstractDBObject.ProfileNode) {
-      connection=((AbstractDBObject.ProfileNode)selectedObject).getDatabase().getConnection();
-    }
- else {
-      throw new RuntimeException("Unknown object type: " + selectedObject.getClass().getName());
-    }
+    Connection connection=((AbstractDBObject)pathComponent).getDatabase().getConnection();
     return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
   }
  catch (  Exception e) {

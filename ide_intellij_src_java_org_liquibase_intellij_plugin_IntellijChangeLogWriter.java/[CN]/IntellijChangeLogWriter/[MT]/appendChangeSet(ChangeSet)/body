@@ -9,11 +9,11 @@
         }
         Document doc;
         if (!file.isValid() || file.getLength() == 0) {
-          createEmptyChangeLog(new File(file.getUrl()));
+          createEmptyChangeLog(file.getOutputStream(this,new Date().getTime(),new Date().getTime()));
         }
         doc=documentBuilder.parse(file.getInputStream());
         doc.getDocumentElement().appendChild(changeSet.createNode(doc));
-        OutputStream outputStream=file.getOutputStream(null);
+        OutputStream outputStream=file.getOutputStream(this,new Date().getTime(),new Date().getTime());
         serializeXML(doc,outputStream);
       }
  catch (      Exception e) {

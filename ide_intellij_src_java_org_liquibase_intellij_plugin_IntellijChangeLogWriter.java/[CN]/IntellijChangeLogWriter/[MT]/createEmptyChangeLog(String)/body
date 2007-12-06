@@ -1,0 +1,18 @@
+{
+  ApplicationManager.getApplication().runWriteAction(new Runnable(){
+    public void run(){
+      try {
+        VirtualFileManager virtualFileManager=VirtualFileManager.getInstance();
+        VirtualFile file=virtualFileManager.refreshAndFindFileByUrl(VirtualFileManager.constructUrl(LocalFileSystem.PROTOCOL,changeLogFile));
+        if (file == null) {
+          throw new RuntimeException("Could not find file");
+        }
+        createEmptyChangeLog(file.getOutputStream(this,new Date().getTime(),new Date().getTime()));
+      }
+ catch (      Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+);
+}
