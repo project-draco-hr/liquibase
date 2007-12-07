@@ -1,0 +1,13 @@
+{
+  boolean isValid=true;
+  for (  final JComponent component : getValidationComponents()) {
+    if (StringUtils.trimToNull(((JTextComponent)component).getText()) == null) {
+      isValid=false;
+      component.setBackground(Color.PINK);
+    }
+ else {
+      component.setBackground(Color.WHITE);
+    }
+  }
+  return isValid;
+}

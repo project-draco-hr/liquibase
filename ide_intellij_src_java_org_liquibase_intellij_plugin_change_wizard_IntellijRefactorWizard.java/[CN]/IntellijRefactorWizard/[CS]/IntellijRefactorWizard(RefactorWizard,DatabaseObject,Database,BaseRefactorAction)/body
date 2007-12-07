@@ -1,15 +1,17 @@
 {
   super(refactorWizard.getTitle(),LiquibaseProjectComponent.getInstance().getProject());
-  this.refactorWizard=refactorWizard;
   this.database=database;
   this.selectedObject=selectedObject;
   this.action=action;
   pages=refactorWizard.getPages();
-  for (  RefactorWizardPage page : pages) {
+  for (  final RefactorWizardPage page : pages) {
     addStep(new IntellijRefactorWizardPage(page));
+    addValidationListeners(page);
   }
   metaDataPage=new ChangeMetaDataWizardPage(LiquibaseProjectComponent.getInstance().getProject());
   addStep(metaDataPage);
+  addValidationListeners(metaDataPage);
   getFinishButton().addActionListener(new FinishListener());
   init();
+  validateWizardPages();
 }

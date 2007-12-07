@@ -1,0 +1,3 @@
+{
+  addColumnButton.setEnabled(columnNameTextField.getDocument().getLength() > 0 && dataTypeTextField.getDocument().getLength() > 0);
+}

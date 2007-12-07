@@ -3,6 +3,6 @@
   change.setTableName(column.getTable().getName());
   change.setColumnName(column.getName());
   change.setColumnDataType(column.getDataTypeString(column.getTable().getDatabase()));
-  change.setDefaultNullValue(((AddNotNullConstraintWizardPage)pages[0]).getDefaultNullValue());
+  change.setDefaultNullValue(((SingleValueWizardPage)pages[0]).getValue());
   return new Change[]{change};
 }

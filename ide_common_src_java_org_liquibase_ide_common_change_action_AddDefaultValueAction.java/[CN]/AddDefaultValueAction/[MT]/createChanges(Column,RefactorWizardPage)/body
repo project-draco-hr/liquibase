@@ -2,6 +2,6 @@
   AddDefaultValueChange change=new AddDefaultValueChange();
   change.setTableName(column.getTable().getName());
   change.setColumnName(column.getName());
-  change.setDefaultValue(((AddDefaultValueWizardPage)pages[0]).getDefaultValue());
+  change.setDefaultValue(((SingleValueWizardPage)pages[0]).getValue());
   return new Change[]{change};
 }
