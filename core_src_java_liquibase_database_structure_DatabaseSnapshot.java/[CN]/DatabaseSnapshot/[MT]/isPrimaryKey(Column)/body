@@ -3,7 +3,7 @@
     if (columnInfo.getTable() == null) {
       continue;
     }
-    if (pk.getTableName().equalsIgnoreCase(columnInfo.getTable().getName())) {
+    if (pk.getTable().getName().equalsIgnoreCase(columnInfo.getTable().getName())) {
       if (pk.getColumnNamesAsList().contains(columnInfo.getName())) {
         return true;
       }

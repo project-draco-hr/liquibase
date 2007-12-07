@@ -31,7 +31,7 @@
       }
  else {
         indexInformation=new Index();
-        indexInformation.setTableName(tableName);
+        indexInformation.setTable(table);
         indexInformation.setName(indexName);
         indexInformation.setFilterCondition(filterCondition);
         indexMap.put(indexName,indexInformation);
@@ -49,7 +49,7 @@
   Set<Index> indexesToRemove=new HashSet<Index>();
   for (  Index index : indexes) {
     for (    PrimaryKey pk : primaryKeys) {
-      if (index.getTableName().equalsIgnoreCase(pk.getTableName()) && index.getColumnNames().equals(pk.getColumnNames())) {
+      if (index.getTable().getName().equalsIgnoreCase(pk.getTable().getName()) && index.getColumnNames().equals(pk.getColumnNames())) {
         indexesToRemove.add(index);
       }
     }

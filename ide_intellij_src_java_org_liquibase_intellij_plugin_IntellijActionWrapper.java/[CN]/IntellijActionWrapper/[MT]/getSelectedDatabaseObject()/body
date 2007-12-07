@@ -23,11 +23,22 @@
     }
  else     if (selectedObject instanceof dbhelp.db.Table) {
       dbhelp.db.Table selectedTable=(dbhelp.db.Table)selectedObject;
+      if (selectedTable.getTableType().equals("VIEW")) {
+        return createViewObject(selectedTable);
+      }
       return createTableObject(selectedTable);
     }
  else     if (selectedObject instanceof dbhelp.db.ForeignKey) {
       dbhelp.db.ForeignKey selectedFK=(dbhelp.db.ForeignKey)selectedObject;
       return createForeignKeyObject(selectedFK);
+    }
+ else     if (selectedObject instanceof dbhelp.db.PrimaryKey) {
+      dbhelp.db.PrimaryKey selectedPK=(dbhelp.db.PrimaryKey)selectedObject;
+      return createPrimaryKeyObject(selectedPK);
+    }
+ else     if (selectedObject instanceof dbhelp.db.Index) {
+      dbhelp.db.Index selectedIndex=(dbhelp.db.Index)selectedObject;
+      return createIndexObject(selectedIndex);
     }
  else     if (selectedObject instanceof AbstractDBObject.ProfileNode) {
       return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(((AbstractDBObject.ProfileNode)selectedObject).getDatabase().getConnection());

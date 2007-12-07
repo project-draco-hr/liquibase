@@ -1,0 +1,5 @@
+{
+  DropViewChange change=new DropViewChange();
+  change.setViewName(view.getName());
+  return new Change[]{change};
+}

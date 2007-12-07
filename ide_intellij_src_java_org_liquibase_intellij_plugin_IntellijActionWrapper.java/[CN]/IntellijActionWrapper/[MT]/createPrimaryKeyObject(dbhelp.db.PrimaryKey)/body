@@ -1,0 +1,9 @@
+{
+  PrimaryKey pk=new PrimaryKey();
+  pk.setName(selectedPK.getPkName());
+  Table table=new Table(selectedPK.getTableName());
+  table.setDatabase(getSelectedDatabase());
+  pk.setTable(table);
+  pk.addColumnName(1,selectedPK.getColumnName());
+  return pk;
+}

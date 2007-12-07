@@ -1,0 +1,5 @@
+{
+  View view=new View(selectedTable.getName());
+  view.setDatabase(getSelectedDatabase());
+  return view;
+}

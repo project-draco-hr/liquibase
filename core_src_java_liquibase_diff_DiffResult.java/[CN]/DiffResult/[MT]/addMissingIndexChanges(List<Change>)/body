@@ -1,7 +1,7 @@
 {
   for (  Index index : getMissingIndexes()) {
     CreateIndexChange change=new CreateIndexChange();
-    change.setTableName(index.getTableName());
+    change.setTableName(index.getTable().getName());
     change.setIndexName(index.getName());
     for (    String columnName : index.getColumns()) {
       ColumnConfig column=new ColumnConfig();

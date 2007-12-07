@@ -1,7 +1,7 @@
 {
   for (  Index index : getUnexpectedIndexes()) {
     DropIndexChange change=new DropIndexChange();
-    change.setTableName(index.getTableName());
+    change.setTableName(index.getTable().getName());
     change.setIndexName(index.getName());
     changes.add(change);
   }

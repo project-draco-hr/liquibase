@@ -8,5 +8,5 @@
       equals=false;
     }
   }
-  return equals && tableName.equalsIgnoreCase(index.tableName);
+  return equals && table.getName().equalsIgnoreCase(index.table.getName());
 }

@@ -17,7 +17,7 @@
         constraintsConfig.setPrimaryKey(true);
         PrimaryKey pkToRemove=null;
         for (        PrimaryKey pk : getMissingPrimaryKeys()) {
-          if (pk.getTableName().equalsIgnoreCase(missingTable.getName())) {
+          if (pk.getTable().getName().equalsIgnoreCase(missingTable.getName())) {
             pkToRemove=pk;
           }
         }

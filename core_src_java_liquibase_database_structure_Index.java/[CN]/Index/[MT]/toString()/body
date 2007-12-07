@@ -1,8 +1,8 @@
 {
   StringBuffer stringBuffer=new StringBuffer();
-  stringBuffer.append(getName() + " on " + getTableName()+ "(");
+  stringBuffer.append(getName()).append(" on ").append(table.getName()).append("(");
   for (  String column : columns) {
-    stringBuffer.append(column + ", ");
+    stringBuffer.append(column).append(", ");
   }
   stringBuffer.delete(stringBuffer.length() - 2,stringBuffer.length());
   stringBuffer.append(")");

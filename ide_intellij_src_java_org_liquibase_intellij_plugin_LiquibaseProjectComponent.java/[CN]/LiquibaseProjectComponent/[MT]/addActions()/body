@@ -5,6 +5,8 @@
   PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Table.class),Table.class);
   PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Column.class),Column.class);
   PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.ForeignKey.class),ForeignKey.class);
+  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.PrimaryKey.class),PrimaryKey.class);
+  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Index.class),Index.class);
   try {
     this.dbTree=(DBTree)((JScrollPane)((JSplitPane)((JTabbedPane)ProjectMain.getInstance().getBrowser().getComponent(0)).getComponentAt(0)).getComponent(1)).getViewport().getComponent(0);
   }

@@ -19,5 +19,9 @@
   refactorActionGroup.addAction(new IntellijActionWrapper(new DropNotNullConstraintAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new RenameColumnAction(),dbObjectType));
   refactorActionGroup.addAction(new IntellijActionWrapper(new DropForeignKeyConstraintAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new DropPrimaryKeyAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new DropIndexAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new DropViewAction(),dbObjectType));
+  refactorActionGroup.addAction(new IntellijActionWrapper(new RenameViewAction(),dbObjectType));
   return refactorActionGroup;
 }

@@ -1,0 +1,3 @@
+{
+  return objectType.equals(Index.class);
+}
