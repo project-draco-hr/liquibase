@@ -3,6 +3,11 @@
     this.valueNumeric=null;
   }
  else {
-    this.valueNumeric=NumberFormat.getInstance().parse(valueNumeric);
+    if (valueNumeric.matches("\\d+\\.?\\d*")) {
+      this.valueNumeric=NumberFormat.getInstance().parse(valueNumeric);
+    }
+ else {
+      this.valueNumeric=new ComputedNumericValue(valueNumeric);
+    }
   }
 }
