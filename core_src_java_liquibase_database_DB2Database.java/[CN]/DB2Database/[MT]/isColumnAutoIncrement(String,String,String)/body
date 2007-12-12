@@ -1,0 +1,24 @@
+{
+  boolean autoIncrement=false;
+  PreparedStatement stmt=null;
+  try {
+    stmt=getConnection().prepareStatement("SELECT IDENTITY FROM SYSCAT.COLUMNS WHERE TABSCHEMA = ? AND TABNAME = ? AND COLNAME = ? AND HIDDEN != 'S'");
+    stmt.setString(1,schemaName);
+    stmt.setString(2,tableName);
+    stmt.setString(3,columnName);
+    ResultSet rs=stmt.executeQuery();
+    while (rs.next()) {
+      String identity=rs.getString("IDENTITY");
+      if (identity.equalsIgnoreCase("Y")) {
+        autoIncrement=true;
+      }
+    }
+    rs.close();
+  }
+  finally {
+    if (stmt != null) {
+      stmt.close();
+    }
+  }
+  return autoIncrement;
+}
