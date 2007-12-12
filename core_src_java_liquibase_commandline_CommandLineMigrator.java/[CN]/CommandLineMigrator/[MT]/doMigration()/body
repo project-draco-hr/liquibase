@@ -41,7 +41,7 @@
     driver=(Driver)Class.forName(this.driver,true,classLoader).newInstance();
   }
  catch (  Exception e) {
-    throw new RuntimeException("Cannot get database driver: " + e.getMessage());
+    throw new RuntimeException("Cannot find database driver: " + e.getMessage());
   }
   Properties info=new Properties();
   info.put("user",username);

@@ -6,7 +6,7 @@
       Field field=getClass().getDeclaredField((String)entry.getKey());
       Object currentValue=field.get(this);
       if (currentValue == null) {
-        String value=entry.getValue().toString();
+        String value=entry.getValue().toString().trim();
         if (field.getType().equals(Boolean.class)) {
           field.set(this,Boolean.valueOf(value));
         }
