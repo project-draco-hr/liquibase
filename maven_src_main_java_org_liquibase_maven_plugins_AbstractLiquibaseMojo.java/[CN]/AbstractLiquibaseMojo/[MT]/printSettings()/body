@@ -7,4 +7,5 @@
   getLog().info("   password: " + password);
   getLog().info("   prompt on non-local database? " + promptOnNonLocalDatabase);
   getLog().info("   drop first? " + dropFirst);
+  getLog().info("   context(s): " + contexts);
 }
