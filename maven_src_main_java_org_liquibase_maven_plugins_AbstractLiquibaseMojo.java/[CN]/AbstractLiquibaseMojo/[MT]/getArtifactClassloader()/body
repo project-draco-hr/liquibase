@@ -2,7 +2,7 @@
   if (verbose) {
     getLog().info("Loading artfacts into URLClassLoader");
   }
-  Set urls=new HashSet();
+  Set<URL> urls=new HashSet<URL>();
   Set dependencies=project.getDependencyArtifacts();
   if (dependencies != null || !dependencies.isEmpty()) {
     for (Iterator it=dependencies.iterator(); it.hasNext(); ) {
@@ -18,6 +18,6 @@
   if (verbose) {
     getLog().info(LOG_SEPARATOR);
   }
-  URL[] urlArray=(URL[])urls.toArray(new URL[urls.size()]);
+  URL[] urlArray=urls.toArray(new URL[urls.size()]);
   return new URLClassLoader(urlArray,getClass().getClassLoader());
 }

@@ -14,16 +14,14 @@
     try {
       key=(String)it.next();
       Field field=AbstractLiquibaseMojo.class.getDeclaredField(key);
-      Object currentValue=field.get(this);
-      if (currentValue == null) {
-        String value=props.get(key).toString();
-        if (field.getType().equals(Boolean.class)) {
-          field.set(this,Boolean.valueOf(value));
-        }
+      if (propertyFileWillOverride) {
+        getLog().debug("  properties file setting value: " + field.getName());
+        setFieldValue(field,props.get(key).toString());
+      }
  else {
-          if (propertiesFileOverrides || field.get(this) == null) {
-            field.set(this,value);
-          }
+        if (!isCurrentFieldValueSpecified(field)) {
+          getLog().debug("  properties file setting value: " + field.getName());
+          setFieldValue(field,props.get(key).toString());
         }
       }
     }

@@ -1,5 +1,5 @@
 {
-  getLog().info("   properties file will override? " + propertiesFileOverrides);
+  getLog().info("   properties file will override? " + propertyFileWillOverride);
   getLog().info("   changeLogFile: " + changeLogFile);
   getLog().info("   driver: " + driver);
   getLog().info("   url: " + url);

@@ -13,7 +13,7 @@
     throw new MojoExecutionException("Failed to create artifact classloader",e);
   }
   FileOpener mFO=new MavenFileOpener(artifactClassLoader);
-  FileOpener fsFO=new FileSystemFileOpener();
+  FileOpener fsFO=new FileSystemFileOpener(project.getBasedir().getAbsolutePath());
   CompositeFileOpener cfo=new CompositeFileOpener(mFO,fsFO);
   if (propertiesFile != null) {
     getLog().info("Loading Liquibase settings from properties file, " + propertiesFile);
