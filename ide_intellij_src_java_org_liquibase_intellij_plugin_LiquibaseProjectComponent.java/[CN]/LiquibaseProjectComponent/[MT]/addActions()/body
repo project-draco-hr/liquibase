@@ -1,12 +1,12 @@
 {
-  PopupMenuManager.getInstance().addAction(createLiquibaseMenu(liquibase.database.Database.class),DBTree.class);
-  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.Database.class),Catalog.class);
-  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.Database.class),Schema.class);
-  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Table.class),Table.class);
-  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Column.class),Column.class);
-  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.ForeignKey.class),ForeignKey.class);
-  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.PrimaryKey.class),PrimaryKey.class);
-  PopupMenuManager.getInstance().addAction(createRefactorMenu(liquibase.database.structure.Index.class),Index.class);
+  ProjectMain.getInstance().getPopupMenuManager().addAction(createLiquibaseMenu(liquibase.database.Database.class),DBTree.class);
+  ProjectMain.getInstance().getPopupMenuManager().addAction(createRefactorMenu(liquibase.database.Database.class),Catalog.class);
+  ProjectMain.getInstance().getPopupMenuManager().addAction(createRefactorMenu(liquibase.database.Database.class),Schema.class);
+  ProjectMain.getInstance().getPopupMenuManager().addAction(createRefactorMenu(liquibase.database.structure.Table.class),Table.class);
+  ProjectMain.getInstance().getPopupMenuManager().addAction(createRefactorMenu(liquibase.database.structure.Column.class),Column.class);
+  ProjectMain.getInstance().getPopupMenuManager().addAction(createRefactorMenu(liquibase.database.structure.ForeignKey.class),ForeignKey.class);
+  ProjectMain.getInstance().getPopupMenuManager().addAction(createRefactorMenu(liquibase.database.structure.PrimaryKey.class),PrimaryKey.class);
+  ProjectMain.getInstance().getPopupMenuManager().addAction(createRefactorMenu(liquibase.database.structure.Index.class),Index.class);
   try {
     this.dbTree=(DBTree)((JScrollPane)((JSplitPane)((JTabbedPane)ProjectMain.getInstance().getBrowser().getComponent(0)).getComponentAt(0)).getComponent(1)).getViewport().getComponent(0);
   }

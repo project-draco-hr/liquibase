@@ -1,0 +1,9 @@
+{
+  for (  final RefactorWizardPage page : pages) {
+    addStep(new IntellijRefactorWizardPage(page));
+    addValidationListeners(page);
+  }
+  addStep(metaDataPage);
+  validateWizardPages();
+  init();
+}

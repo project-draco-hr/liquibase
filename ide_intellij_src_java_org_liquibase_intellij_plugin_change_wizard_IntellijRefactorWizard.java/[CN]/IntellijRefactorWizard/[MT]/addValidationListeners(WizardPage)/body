@@ -2,7 +2,10 @@
   JComponent[] validationComponents=page.getValidationComponents();
   if (validationComponents != null) {
     for (    JComponent component : validationComponents) {
-      if (component instanceof JTextComponent) {
+      if (component == null) {
+        System.out.println("Cannot add validation to null component");
+      }
+ else       if (component instanceof JTextComponent) {
         ((JTextComponent)component).getDocument().addDocumentListener(new DocumentListener(){
           public void insertUpdate(          DocumentEvent e){
             validateWizardPages();
