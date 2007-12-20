@@ -14,9 +14,15 @@
     columnConfig.setDefaultValue(defaultValue);
     columnConfig.setAutoIncrement(isAutoIncrement);
     ConstraintsConfig constraints=new ConstraintsConfig();
-    constraints.setNullable(isNullable);
-    constraints.setPrimaryKey(isPrimaryKey);
-    columnConfig.setConstraints(constraints);
+    if (isNullable != null && isNullable) {
+      constraints.setNullable(isNullable);
+    }
+    if (isPrimaryKey != null && isPrimaryKey) {
+      constraints.setPrimaryKey(isPrimaryKey);
+    }
+    if (constraints.isPrimaryKey() != null && constraints.isNullable() != null) {
+      columnConfig.setConstraints(constraints);
+    }
     columns.add(columnConfig);
   }
   return columns.toArray(new ColumnConfig[columns.size()]);

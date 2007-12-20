@@ -2,8 +2,8 @@
   if (rootChangeLogFile != null) {
     return rootChangeLogFile;
   }
-  if (outputChangeLogFile != null) {
-    return outputChangeLogFile;
+  if (getOutputChangeLogFile() != null) {
+    return getOutputChangeLogFile();
   }
   return null;
 }

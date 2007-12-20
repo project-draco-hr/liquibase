@@ -1,5 +1,8 @@
 {
   LiquibaseProjectComponent liquibaseProjectComponent=LiquibaseProjectComponent.getInstance();
+  if (changeLogFile == null) {
+    changeLogFile=liquibaseProjectComponent.getRootChangeLogFile();
+  }
   Migrator migrator=new Migrator(changeLogFile,new CompositeFileOpener(new IntellijFileOpener(),new FileSystemFileOpener()));
   if (database == null) {
     return migrator;

@@ -9,12 +9,15 @@
         }
         Document doc;
         if (!file.isValid() || file.getLength() == 0) {
-          createEmptyChangeLog(file.getOutputStream(this,new Date().getTime(),new Date().getTime()));
+          createEmptyChangeLog(file.getOutputStream(null));
         }
         doc=documentBuilder.parse(file.getInputStream());
         doc.getDocumentElement().appendChild(changeSet.createNode(doc));
-        OutputStream outputStream=file.getOutputStream(this,new Date().getTime(),new Date().getTime());
+        OutputStream outputStream=file.getOutputStream(null);
         serializeXML(doc,outputStream);
+        outputStream.flush();
+        outputStream.close();
+        file.refresh(false,false);
       }
  catch (      Exception e) {
         throw new RuntimeException(e);
