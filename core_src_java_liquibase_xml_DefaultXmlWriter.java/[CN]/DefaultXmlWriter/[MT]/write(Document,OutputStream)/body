@@ -1,8 +1,14 @@
 {
-  OutputFormat format=new OutputFormat(doc);
-  format.setIndenting(true);
-  format.setEncoding("UTF-8");
-  XMLSerializer serializer=new XMLSerializer(outputStream,format);
-  serializer.asDOMSerializer();
-  serializer.serialize(doc);
+  try {
+    TransformerFactory factory=TransformerFactory.newInstance();
+    factory.setAttribute("indent-number",4);
+    Transformer transformer=factory.newTransformer();
+    transformer.setOutputProperty(OutputKeys.METHOD,"xml");
+    transformer.setOutputProperty(OutputKeys.INDENT,"yes");
+    transformer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+    transformer.transform(new DOMSource(doc),new StreamResult(new OutputStreamWriter(outputStream,"utf-8")));
+  }
+ catch (  TransformerException e) {
+    throw new IOException(e.getMessage());
+  }
 }
