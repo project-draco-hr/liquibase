@@ -1,0 +1,16 @@
+{
+  super.configureFieldsAndValues(fo);
+  if (propertiesFile != null) {
+    getLog().info("Loading Liquibase settings from properties file, " + propertiesFile);
+    try {
+      InputStream is=fo.getResourceAsStream(propertiesFile);
+      if (is == null) {
+        throw new MojoFailureException("Failed to resolve the properties file.");
+      }
+      parsePropertiesFile(is);
+    }
+ catch (    IOException e) {
+      throw new MojoExecutionException("Failed to resolve properties file",e);
+    }
+  }
+}

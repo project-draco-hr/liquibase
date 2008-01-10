@@ -5,7 +5,4 @@
  else   if (url == null) {
     throw new MojoFailureException("The database URL has not been specified either as " + "a parameter or in a properties file.");
   }
- else   if (changeLogFile == null) {
-    throw new MojoFailureException("A DatabaseChangeLog has not been specified either " + "as a parameter or in a properties file.");
-  }
 }

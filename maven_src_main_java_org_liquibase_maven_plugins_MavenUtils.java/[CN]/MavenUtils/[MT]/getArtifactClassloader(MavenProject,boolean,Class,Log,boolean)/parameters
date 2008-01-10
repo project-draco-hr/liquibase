@@ -1,0 +1,5 @@
+MavenProject project
+boolean includeArtifact
+Class clazz
+Log log
+boolean verbose

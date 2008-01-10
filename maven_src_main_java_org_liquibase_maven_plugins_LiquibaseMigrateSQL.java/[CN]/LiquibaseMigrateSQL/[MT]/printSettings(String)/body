@@ -1,0 +1,5 @@
+{
+  super.printSettings(indent);
+  getLog().info(indent + "migrationSQLOutputFile: " + migrationSqlOutputFile);
+  getLog().info(indent + "changeLogSqlOnly: " + changeLogSqlOnly);
+}

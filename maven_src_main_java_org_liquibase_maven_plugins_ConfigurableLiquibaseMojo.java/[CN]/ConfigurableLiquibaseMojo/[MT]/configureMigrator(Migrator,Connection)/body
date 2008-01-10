@@ -1,0 +1,4 @@
+{
+  super.configureMigrator(migrator,connection);
+  migrator.setContexts(contexts);
+}

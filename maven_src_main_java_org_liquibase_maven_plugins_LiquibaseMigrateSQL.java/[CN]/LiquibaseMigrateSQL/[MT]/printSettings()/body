@@ -1,5 +1,0 @@
-{
-  super.printSettings();
-  getLog().info("   migrationSQLOutputFile: " + migrationSqlOutputFile);
-  getLog().info("   changeLogSqlOnly: " + changeLogSqlOnly);
-}

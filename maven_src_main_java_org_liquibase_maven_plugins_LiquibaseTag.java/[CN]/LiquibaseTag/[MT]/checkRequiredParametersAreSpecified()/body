@@ -1,0 +1,6 @@
+{
+  super.checkRequiredParametersAreSpecified();
+  if (tag == null || tag.trim().length() == 0) {
+    throw new MojoFailureException("The tag must be specified.");
+  }
+}

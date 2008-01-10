@@ -1,0 +1,10 @@
+{
+  if (indent == null) {
+    indent="";
+  }
+  getLog().info(indent + "driver: " + driver);
+  getLog().info(indent + "url: " + url);
+  getLog().info(indent + "username: " + username);
+  getLog().info(indent + "password: " + password);
+  getLog().info(indent + "prompt on non-local database? " + promptOnNonLocalDatabase);
+}
