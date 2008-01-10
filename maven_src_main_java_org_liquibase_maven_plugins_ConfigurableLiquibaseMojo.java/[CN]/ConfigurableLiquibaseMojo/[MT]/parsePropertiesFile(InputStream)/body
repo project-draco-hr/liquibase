@@ -13,7 +13,7 @@
     String key=null;
     try {
       key=(String)it.next();
-      Field field=AbstractLiquibaseMojo.class.getDeclaredField(key);
+      Field field=MavenUtils.getDeclaredField(this.getClass(),key);
       if (propertyFileWillOverride) {
         getLog().debug("  properties file setting value: " + field.getName());
         setFieldValue(field,props.get(key).toString());

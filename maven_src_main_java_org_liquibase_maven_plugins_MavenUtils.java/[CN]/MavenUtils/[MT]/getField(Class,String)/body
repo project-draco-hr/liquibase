@@ -1,0 +1,9 @@
+{
+  Field[] fields=clazz.getDeclaredFields();
+  for (int i=0; i < fields.length; i++) {
+    if (fields[i].getName().equals(fieldName)) {
+      return fields[i];
+    }
+  }
+  return null;
+}
