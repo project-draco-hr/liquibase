@@ -1,5 +1,5 @@
 {
-  if (field.getType().equals(Boolean.class)) {
+  if (field.getType().equals(Boolean.class) || field.getType().equals(boolean.class)) {
     field.set(this,Boolean.valueOf(value));
   }
  else {

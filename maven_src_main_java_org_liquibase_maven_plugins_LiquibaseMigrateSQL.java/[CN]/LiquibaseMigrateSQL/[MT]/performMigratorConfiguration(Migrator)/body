@@ -12,10 +12,11 @@
   }
   getLog().info("Output SQL Migration File: " + migrationSqlOutputFile.getAbsolutePath());
   if (changeLogSqlOnly) {
-    getLog().info("Change Log only SQL");
+    getLog().info("Creating Change Log SQL Only");
     migrator.setMode(Migrator.Mode.OUTPUT_CHANGELOG_ONLY_SQL_MODE);
   }
  else {
+    getLog().info("Creating Change Log SQL and Migrating Database");
     migrator.setMode(Migrator.Mode.OUTPUT_SQL_MODE);
   }
   migrator.setOutputSQLWriter(w);

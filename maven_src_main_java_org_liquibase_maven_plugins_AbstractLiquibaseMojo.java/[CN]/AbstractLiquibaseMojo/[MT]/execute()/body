@@ -15,7 +15,7 @@
     Migrator migrator=createMigrator(getFileOpener(artifactClassLoader));
     configureMigrator(migrator,connection);
     getLog().info("Executing on Database: " + url);
-    if (promptOnNonLocalDatabase && !migrator.isSafeToRunMigration()) {
+    if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration()) {
       if (migrator.swingPromptForNonLocalDatabase()) {
         throw new LiquibaseException("User decided not to run against non-local database");
       }
