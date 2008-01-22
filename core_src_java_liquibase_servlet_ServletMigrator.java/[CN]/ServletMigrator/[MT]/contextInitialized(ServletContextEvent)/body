@@ -1,5 +1,5 @@
 {
-  Logger.getLogger(Migrator.DEFAULT_LOG_NAME).addHandler(new Handler(){
+  LogFactory.getLogger().addHandler(new Handler(){
     public synchronized void publish(    LogRecord record){
       MigratorStatusServlet.logMessage(record);
     }
@@ -19,7 +19,7 @@
   }
   String shouldRunProperty=System.getProperty(Migrator.SHOULD_RUN_SYSTEM_PROPERTY);
   if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
-    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).info("Migrator did not run on " + hostName + " because '"+ Migrator.SHOULD_RUN_SYSTEM_PROPERTY+ "' system property was set to false");
+    LogFactory.getLogger().info("Migrator did not run on " + hostName + " because '"+ Migrator.SHOULD_RUN_SYSTEM_PROPERTY+ "' system property was set to false");
     return;
   }
   String machineIncludes=servletContextEvent.getServletContext().getInitParameter("MIGRATOR_HOST_INCLUDES");
@@ -68,10 +68,8 @@
       connection=dataSource.getConnection();
       FileOpener clFO=new ClassLoaderFileOpener();
       FileOpener fsFO=new FileSystemFileOpener();
-      Migrator migrator=new Migrator(getChangeLogFile(),new CompositeFileOpener(clFO,fsFO));
-      migrator.init(connection);
-      migrator.setContexts(getContexts());
-      migrator.migrate();
+      Migrator migrator=new Migrator(getChangeLogFile(),new CompositeFileOpener(clFO,fsFO),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
+      migrator.update(getContexts());
     }
   finally {
       if (ic != null) {

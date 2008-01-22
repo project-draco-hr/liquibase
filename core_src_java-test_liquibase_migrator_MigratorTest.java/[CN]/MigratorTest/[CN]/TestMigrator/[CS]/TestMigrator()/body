@@ -1,5 +1,5 @@
 {
-  super("liquibase/test.xml",new ClassLoaderFileOpener());
+  super("liquibase/test.xml",new ClassLoaderFileOpener(),null);
   inputStream=createMock(InputStream.class);
   replay(inputStream);
 }

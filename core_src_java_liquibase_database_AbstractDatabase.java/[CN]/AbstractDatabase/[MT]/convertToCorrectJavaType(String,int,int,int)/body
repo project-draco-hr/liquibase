@@ -57,7 +57,7 @@
       }
       return new Double(value);
     }
- else     if (dataType == Types.DOUBLE) {
+ else     if (dataType == Types.DOUBLE || dataType == Types.NUMERIC) {
       return new Double(value);
     }
  else     if (dataType == Types.FLOAT) {

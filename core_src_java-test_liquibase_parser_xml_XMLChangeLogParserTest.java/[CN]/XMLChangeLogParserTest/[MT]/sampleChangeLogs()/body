@@ -1,0 +1,14 @@
+{
+  new XMLChangeLogParser().parse("changelogs/cache/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/db2/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/derby/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/firebird/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/h2/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/hsqldb/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/maxdb/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/mysql/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/oracle/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/pgsql/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/sybase/complete/root.changelog.xml",new JUnitFileOpener());
+  new XMLChangeLogParser().parse("changelogs/unsupported/complete/root.changelog.xml",new JUnitFileOpener());
+}

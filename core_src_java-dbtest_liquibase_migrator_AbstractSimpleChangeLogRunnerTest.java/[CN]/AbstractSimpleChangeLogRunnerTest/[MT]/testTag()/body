@@ -1,10 +1,10 @@
 {
-  if (connection == null) {
+  if (database == null) {
     return;
   }
   Migrator migrator=createMigrator(completeChangeLog);
   migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(completeChangeLog);
-  migrator.migrate();
+  migrator.update(this.contexts);
   migrator.tag("Test Tag");
 }

@@ -1,0 +1,8 @@
+{
+  changeSet1.addChange(new CreateTableChange());
+  changeSet2.addChange(new CreateTableChange());
+  ValidatingVisitor handler=new ValidatingVisitor(new ArrayList<RanChangeSet>());
+  handler.visit(changeSet1);
+  handler.visit(changeSet2);
+  assertTrue(handler.validationPassed());
+}

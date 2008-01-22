@@ -1,6 +1,6 @@
 {
   for (  SqlStatement statement : statements) {
-    Logger.getLogger(Migrator.DEFAULT_LOG_NAME).finest("Executing Statement: " + statement);
-    new JdbcTemplate(database).execute(statement);
+    LogFactory.getLogger().finest("Executing Statement: " + statement);
+    database.getJdbcTemplate().execute(statement);
   }
 }

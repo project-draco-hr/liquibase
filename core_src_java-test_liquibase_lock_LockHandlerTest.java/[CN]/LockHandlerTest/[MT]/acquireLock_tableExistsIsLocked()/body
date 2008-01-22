@@ -1,0 +1,16 @@
+{
+  Database database=createMock(Database.class);
+  JdbcTemplate template=createMock(JdbcTemplate.class);
+  RawSqlStatement selectLockStatement=new RawSqlStatement("SELECT LOCK");
+  expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
+  expect(database.doesChangeLogLockTableExist()).andReturn(true);
+  expect(database.getSelectChangeLogLockSQL()).andReturn(selectLockStatement);
+  expectLastCall();
+  expect(template.queryForObject(selectLockStatement,Boolean.class)).andReturn(Boolean.TRUE);
+  replay(database);
+  replay(template);
+  LockHandler handler=LockHandler.getInstance(database);
+  handler.acquireLock();
+  verify(database);
+  verify(template);
+}

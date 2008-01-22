@@ -1,0 +1,11 @@
+{
+  try {
+    output.write(database.getLineComment());
+    output.write(" ");
+    output.write(message);
+    output.write(StreamUtil.getLineSeparator());
+  }
+ catch (  IOException e) {
+    throw new JDBCException(e);
+  }
+}

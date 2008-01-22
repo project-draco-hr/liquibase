@@ -1,0 +1,7 @@
+{
+  changeSetsSeen++;
+  if (changeSetsSeen > changeSetsToAllow) {
+    return false;
+  }
+  return true;
+}

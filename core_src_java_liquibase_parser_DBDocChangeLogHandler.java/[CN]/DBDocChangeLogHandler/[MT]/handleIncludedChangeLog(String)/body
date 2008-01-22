@@ -1,8 +1,0 @@
-{
-  try {
-    new IncludeMigrator(fileName,migrator).generateDocumentation(rootOutputDir.getCanonicalPath());
-  }
- catch (  DatabaseHistoryException e) {
-    throw new MigrationFailedException(null,e);
-  }
-}

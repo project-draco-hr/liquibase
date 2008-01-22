@@ -1,0 +1,44 @@
+{
+  if (!database.doesChangeLogLockTableExist()) {
+    throw new LockException("Could not acquire lock, table does not exist");
+  }
+  try {
+    Boolean locked;
+    try {
+      locked=(Boolean)database.getJdbcTemplate().queryForObject(database.getSelectChangeLogLockSQL(),Boolean.class);
+    }
+ catch (    JDBCException e) {
+      if (!database.getJdbcTemplate().executesStatements()) {
+        locked=false;
+      }
+ else {
+        throw new LockException("Error checking database lock status",e);
+      }
+    }
+    if (locked) {
+      return false;
+    }
+ else {
+      UpdateStatement updateStatement=new UpdateStatement(null,database.getDatabaseChangeLogLockTableName());
+      updateStatement.addNewColumnValue("LOCKED",true,Types.BOOLEAN);
+      updateStatement.addNewColumnValue("LOCKGRANTED",new Timestamp(new java.util.Date().getTime()),Types.TIMESTAMP);
+      updateStatement.addNewColumnValue("LOCKEDBY",InetAddress.getLocalHost().getCanonicalHostName() + " (" + InetAddress.getLocalHost().getHostAddress()+ ")",Types.VARCHAR);
+      updateStatement.setWhereClause("ID  = 1");
+      database.getJdbcTemplate().comment("Lock Database");
+      if (database.getJdbcTemplate().update(updateStatement) != 1) {
+        if (!database.getJdbcTemplate().executesStatements()) {
+        }
+ else {
+          throw new LockException("Did not update change log lock correctly");
+        }
+      }
+      database.commit();
+      LogFactory.getLogger().info("Successfully acquired change log lock");
+      hasChangeLogLock=true;
+      return true;
+    }
+  }
+ catch (  Exception e) {
+    throw new LockException(e);
+  }
+}

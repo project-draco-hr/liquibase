@@ -1,15 +1,15 @@
 {
   try {
-    int totalRows=new JdbcTemplate(this).queryForInt(new RawSqlStatement("select count(*) from " + getDatabaseChangeLogTableName()));
+    int totalRows=this.getJdbcTemplate().queryForInt(new RawSqlStatement("select count(*) from " + getDatabaseChangeLogTableName()));
     if (totalRows == 0) {
       throw new JDBCException("Cannot tag an empty database");
     }
-    Date lastExecutedDate=(Date)new JdbcTemplate(this).queryForObject(createChangeToTagSQL(),Date.class);
-    int rowsUpdated=new JdbcTemplate(this).update(createTagSQL(tagString,lastExecutedDate));
+    Date lastExecutedDate=(Date)this.getJdbcTemplate().queryForObject(createChangeToTagSQL(),Date.class);
+    int rowsUpdated=this.getJdbcTemplate().update(createTagSQL(tagString,lastExecutedDate));
     if (rowsUpdated == 0) {
       throw new JDBCException("Did not tag database change log correctly");
     }
-    getConnection().commit();
+    this.commit();
   }
  catch (  Exception e) {
     throw new JDBCException(e);

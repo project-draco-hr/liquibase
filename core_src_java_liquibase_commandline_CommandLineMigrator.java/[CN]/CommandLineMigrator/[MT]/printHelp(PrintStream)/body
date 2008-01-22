@@ -44,6 +44,7 @@
   stream.println(" validate                  Checks changelog for errors");
   stream.println(" clearCheckSums            Removes all saved checksums from database log.");
   stream.println("                           Useful for 'MD5Sum Check Failed' errors");
+  stream.println(" changelogSync             Mark all changes as executed in the database");
   stream.println(" changelogSyncSQL          Writes SQL to mark all changes as executed ");
   stream.println("                           in the database to STDOUT");
   stream.println(" listLocks                 Lists who currently has locks on the");

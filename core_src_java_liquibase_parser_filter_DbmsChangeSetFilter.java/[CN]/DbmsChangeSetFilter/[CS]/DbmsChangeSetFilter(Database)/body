@@ -1,0 +1,3 @@
+{
+  this.databaseString=database.getTypeName();
+}

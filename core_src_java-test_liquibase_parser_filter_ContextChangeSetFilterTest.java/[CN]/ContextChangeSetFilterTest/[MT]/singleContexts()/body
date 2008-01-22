@@ -1,0 +1,7 @@
+{
+  ContextChangeSetFilter filter=new ContextChangeSetFilter("test1");
+  assertTrue(filter.accepts(new ChangeSet(null,null,false,false,null,null,"test1",null)));
+  assertTrue(filter.accepts(new ChangeSet(null,null,false,false,null,null,"test1, test2",null)));
+  assertFalse(filter.accepts(new ChangeSet(null,null,false,false,null,null,"test2",null)));
+  assertTrue(filter.accepts(new ChangeSet(null,null,false,false,null,null,null,null)));
+}

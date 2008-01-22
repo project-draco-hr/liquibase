@@ -1,6 +1,0 @@
-{
-  for (  ChangeSet changeSet : changesToRollback) {
-    changeSet.execute();
-    migrator.removeRanStatus(changeSet);
-  }
-}

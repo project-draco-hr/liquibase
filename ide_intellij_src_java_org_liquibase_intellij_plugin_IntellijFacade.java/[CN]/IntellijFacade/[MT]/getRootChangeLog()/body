@@ -1,3 +1,3 @@
 {
-  return new DatabaseChangeLog(getMigrator(null,null),LiquibaseProjectComponent.getInstance().getRootChangeLogFile());
+  return new DatabaseChangeLog(LiquibaseProjectComponent.getInstance().getRootChangeLogFile());
 }

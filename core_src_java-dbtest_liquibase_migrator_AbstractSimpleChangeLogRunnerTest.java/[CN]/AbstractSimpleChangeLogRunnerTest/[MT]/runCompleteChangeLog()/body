@@ -3,7 +3,7 @@
   migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(completeChangeLog);
   try {
-    migrator.migrate();
+    migrator.update(this.contexts);
   }
  catch (  ValidationFailedException e) {
     e.printDescriptiveError(System.out);

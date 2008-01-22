@@ -1,9 +1,9 @@
 {
-  if (connection == null) {
+  if (database == null) {
     return;
   }
   runCompleteChangeLog();
-  Diff diff=new Diff(connection,connection);
+  Diff diff=new Diff(database.getConnection(),database.getConnection());
   DiffResult diffResult=diff.compare();
   assertEquals(0,diffResult.getMissingColumns().size());
   assertEquals(0,diffResult.getMissingForeignKeys().size());

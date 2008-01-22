@@ -1,5 +1,5 @@
 {
-  if (connection == null) {
+  if (database == null) {
     return;
   }
   Enumeration<URL> urls=new JUnitFileOpener().getResources(includedChangeLog);
@@ -14,7 +14,7 @@
   }
   Migrator migrator=createMigrator(absolutePathOfChangeLog,new FileSystemFileOpener());
   migrator.dropAll(getSchemasToDrop());
-  migrator.migrate();
-  migrator.migrate();
+  migrator.update(this.contexts);
+  migrator.update(this.contexts);
   migrator.dropAll(getSchemasToDrop());
 }

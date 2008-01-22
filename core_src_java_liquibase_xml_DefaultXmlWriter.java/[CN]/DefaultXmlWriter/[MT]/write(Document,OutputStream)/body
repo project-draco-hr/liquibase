@@ -1,7 +1,12 @@
 {
   try {
     TransformerFactory factory=TransformerFactory.newInstance();
-    factory.setAttribute("indent-number",4);
+    try {
+      factory.setAttribute("indent-number",4);
+    }
+ catch (    Exception e) {
+      ;
+    }
     Transformer transformer=factory.newTransformer();
     transformer.setOutputProperty(OutputKeys.METHOD,"xml");
     transformer.setOutputProperty(OutputKeys.INDENT,"yes");

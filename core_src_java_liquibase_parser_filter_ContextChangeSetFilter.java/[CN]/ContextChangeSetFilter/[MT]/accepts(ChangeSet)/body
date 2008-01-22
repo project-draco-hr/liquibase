@@ -1,0 +1,14 @@
+{
+  if (contexts == null || contexts.size() == 0) {
+    return true;
+  }
+  if (changeSet.getContexts() == null) {
+    return true;
+  }
+  for (  String context : changeSet.getContexts()) {
+    if (contexts.contains(context)) {
+      return true;
+    }
+  }
+  return false;
+}

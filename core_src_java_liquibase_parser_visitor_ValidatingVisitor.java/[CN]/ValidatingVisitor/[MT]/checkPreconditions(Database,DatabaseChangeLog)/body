@@ -1,0 +1,8 @@
+{
+  try {
+    changeLog.getPreconditions().check(database,changeLog);
+  }
+ catch (  PreconditionFailedException e) {
+    failedPreconditions.addAll(e.getFailedPreconditions());
+  }
+}

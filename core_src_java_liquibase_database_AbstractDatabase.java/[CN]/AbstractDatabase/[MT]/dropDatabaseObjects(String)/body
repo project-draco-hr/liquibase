@@ -30,13 +30,15 @@
         dropChanges.add(dropChange);
       }
     }
-    RawSQLChange clearChangeLogChange=new RawSQLChange();
-    clearChangeLogChange.setSql("DELETE FROM " + getDatabaseChangeLogTableName());
-    dropChanges.add(clearChangeLogChange);
+    if (this.changeLogTableExists) {
+      RawSQLChange clearChangeLogChange=new RawSQLChange();
+      clearChangeLogChange.setSql("DELETE FROM " + getDatabaseChangeLogTableName());
+      dropChanges.add(clearChangeLogChange);
+    }
     try {
       for (      Change change : dropChanges) {
         for (        SqlStatement statement : change.generateStatements(this)) {
-          new JdbcTemplate(this).execute(statement);
+          this.getJdbcTemplate().execute(statement);
         }
       }
     }
@@ -45,11 +47,6 @@
     }
   }
   finally {
-    try {
-      conn.commit();
-    }
- catch (    SQLException e) {
-      throw new JDBCException(e);
-    }
+    this.commit();
   }
 }

@@ -7,11 +7,11 @@
   ChangeSet changeSet=null;
   try {
     monitor.subTask("Checking Control Tables");
-    migrator.getDatabase().checkDatabaseChangeLogTable(migrator);
-    migrator.getDatabase().checkDatabaseChangeLogLockTable(migrator);
+    migrator.getDatabase().checkDatabaseChangeLogTable();
+    migrator.getDatabase().checkDatabaseChangeLogLockTable();
     monitor.worked(25);
     monitor.subTask("Executing Change");
-    changeSet=new ChangeSet(metaDataPage.getId(),metaDataPage.getAuthor(),metaDataPage.isAlwaysRun(),metaDataPage.isRunOnChange(),changeLog,StringUtils.trimToNull(metaDataPage.getContext()),StringUtils.trimToNull(metaDataPage.getDbms()));
+    changeSet=new ChangeSet(metaDataPage.getId(),metaDataPage.getAuthor(),metaDataPage.isAlwaysRun(),metaDataPage.isRunOnChange(),changeLog.getFilePath(),changeLog.getPhysicalFilePath(),StringUtils.trimToNull(metaDataPage.getContext()),StringUtils.trimToNull(metaDataPage.getDbms()));
     changeSet.setComments(metaDataPage.getComments());
     for (    Change change : changes) {
       changeSet.addChange(change);
@@ -19,12 +19,12 @@
     liquibase.database.Database liquibaseDatabase=migrator.getDatabase();
     for (    Change change : changeSet.getChanges()) {
       for (      SqlStatement sql : change.generateStatements(liquibaseDatabase)) {
-        new JdbcTemplate(liquibaseDatabase).execute(sql);
+        liquibaseDatabase.getJdbcTemplate().execute(sql);
       }
     }
     monitor.worked(25);
     monitor.subTask("Marking Change Set As Ran");
-    migrator.markChangeSetAsRan(changeSet);
+    migrator.getDatabase().markChangeSetAsRan(changeSet);
     monitor.worked(25);
     monitor.subTask("Writing to Change Log");
     changeLogWriter.appendChangeSet(changeSet);

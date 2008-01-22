@@ -1,7 +1,0 @@
-{
-  for (  RanChangeSet cs : ranChangesToRollback) {
-    if (cs.isSameAs(changeSet)) {
-      allChangeSets.add(0,changeSet);
-    }
-  }
-}

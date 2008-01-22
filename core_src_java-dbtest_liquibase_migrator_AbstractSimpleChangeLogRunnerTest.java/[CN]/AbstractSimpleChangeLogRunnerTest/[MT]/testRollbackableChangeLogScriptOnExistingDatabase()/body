@@ -1,16 +1,12 @@
 {
-  if (connection == null) {
+  if (database == null) {
     return;
   }
   Migrator migrator=createMigrator(rollbackChangeLog);
   migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.Mode.EXECUTE_MODE);
-  migrator.migrate();
+  migrator.update(this.contexts);
   StringWriter writer=new StringWriter();
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.Mode.OUTPUT_ROLLBACK_SQL_MODE);
-  migrator.setOutputSQLWriter(writer);
-  migrator.setRollbackToDate(new Date(0));
-  migrator.migrate();
+  migrator.rollback(new Date(0),this.contexts,writer);
 }

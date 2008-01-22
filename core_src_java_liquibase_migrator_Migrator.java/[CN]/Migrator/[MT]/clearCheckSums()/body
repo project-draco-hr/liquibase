@@ -1,19 +1,15 @@
 {
-  DatabaseConnection connection=getDatabase().getConnection();
+  log.info("Clearing database change log checksums");
+  LockHandler lockHandler=LockHandler.getInstance(database);
+  lockHandler.waitForLock();
   try {
-    Statement statement=null;
-    try {
-      statement=connection.createStatement();
-      statement.execute("update databasechangelog set md5sum=null".toUpperCase());
-      connection.commit();
-    }
-  finally {
-      if (statement != null) {
-        statement.close();
-      }
-    }
+    database.checkDatabaseChangeLogTable();
+    UpdateStatement updateStatement=new UpdateStatement(null,getDatabase().getDatabaseChangeLogTableName());
+    updateStatement.addNewColumnValue("MD5SUM",null,Types.VARCHAR);
+    getDatabase().getJdbcTemplate().execute(updateStatement);
+    getDatabase().commit();
   }
- catch (  SQLException e) {
-    throw new JDBCException(e);
+  finally {
+    lockHandler.releaseLock();
   }
 }

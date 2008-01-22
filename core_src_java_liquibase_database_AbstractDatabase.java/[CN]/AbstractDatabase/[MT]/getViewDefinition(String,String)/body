@@ -2,7 +2,7 @@
   if (schemaName == null) {
     schemaName=convertRequestedSchemaToSchema(schemaName);
   }
-  String definition=(String)new JdbcTemplate(this).queryForObject(getViewDefinitionSql(schemaName,viewName),String.class);
+  String definition=(String)this.getJdbcTemplate().queryForObject(getViewDefinitionSql(schemaName,viewName),String.class);
   if (definition == null) {
     return null;
   }

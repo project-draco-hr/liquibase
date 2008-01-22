@@ -1,4 +1,4 @@
 {
-  getDatabase().checkDatabaseChangeLogTable(this);
-  getDatabase().checkDatabaseChangeLogLockTable(this);
+  getDatabase().checkDatabaseChangeLogTable();
+  getDatabase().checkDatabaseChangeLogLockTable();
 }

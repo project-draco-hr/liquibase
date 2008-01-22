@@ -1,8 +1,0 @@
-{
-  for (  ChangeSet changeSet : changesToRollback) {
-    if (!changeSet.canRollBack()) {
-      return changeSet;
-    }
-  }
-  return null;
-}

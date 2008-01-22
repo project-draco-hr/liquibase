@@ -1,8 +1,0 @@
-{
-  if (contexts != null) {
-    String[] strings=contexts.split(",");
-    for (    String string : strings) {
-      this.contexts.add(string.trim().toLowerCase());
-    }
-  }
-}

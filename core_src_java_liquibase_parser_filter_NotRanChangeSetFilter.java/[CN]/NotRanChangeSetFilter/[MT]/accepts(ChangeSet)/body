@@ -1,0 +1,8 @@
+{
+  for (  RanChangeSet ranChangeSet : ranChangeSets) {
+    if (ranChangeSet.getId().equals(changeSet.getId()) && ranChangeSet.getAuthor().equals(changeSet.getAuthor()) && ranChangeSet.getChangeLog().equals(changeSet.getFilePath())) {
+      return false;
+    }
+  }
+  return true;
+}

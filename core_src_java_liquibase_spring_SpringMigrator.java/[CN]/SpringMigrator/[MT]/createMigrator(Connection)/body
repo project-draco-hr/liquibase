@@ -1,5 +1,3 @@
 {
-  Migrator m=new Migrator(getChangeLog(),new SpringResourceOpener(getChangeLog()));
-  m.init(c);
-  return m;
+  return new Migrator(getChangeLog(),new SpringResourceOpener(getChangeLog()),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(c));
 }

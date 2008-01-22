@@ -8,6 +8,9 @@
  else   if (date instanceof Timestamp) {
     return getDateLiteral(((Timestamp)date));
   }
+ else   if (date instanceof ComputedDateValue) {
+    return date.toString();
+  }
  else {
     throw new RuntimeException("Unexpected type: " + date.getClass().getName());
   }

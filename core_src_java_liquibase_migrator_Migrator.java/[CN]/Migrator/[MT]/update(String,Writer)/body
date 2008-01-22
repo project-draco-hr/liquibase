@@ -1,0 +1,14 @@
+{
+  JdbcTemplate oldTemplate=database.getJdbcTemplate();
+  JdbcOutputTemplate outputTemplate=new JdbcOutputTemplate(output,database);
+  database.setJdbcTemplate(outputTemplate);
+  outputHeader("Update Database Script");
+  update(contexts);
+  try {
+    output.flush();
+  }
+ catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+  database.setJdbcTemplate(oldTemplate);
+}

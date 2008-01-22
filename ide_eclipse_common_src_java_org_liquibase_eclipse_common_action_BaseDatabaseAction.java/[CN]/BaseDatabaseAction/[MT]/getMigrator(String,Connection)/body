@@ -1,0 +1,3 @@
+{
+  return new Migrator(changeLogFile,new EclipseFileOpener(),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(conn));
+}

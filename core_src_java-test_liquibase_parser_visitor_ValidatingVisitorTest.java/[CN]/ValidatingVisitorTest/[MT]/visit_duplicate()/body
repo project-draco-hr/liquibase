@@ -1,0 +1,7 @@
+{
+  ValidatingVisitor handler=new ValidatingVisitor(new ArrayList<RanChangeSet>());
+  handler.visit(changeSet1);
+  handler.visit(changeSet1);
+  assertEquals(1,handler.getDuplicateChangeSets().size());
+  assertFalse(handler.validationPassed());
+}

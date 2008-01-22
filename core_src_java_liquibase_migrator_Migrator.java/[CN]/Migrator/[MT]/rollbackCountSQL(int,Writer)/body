@@ -1,6 +1,0 @@
-{
-  setMode(Migrator.Mode.OUTPUT_ROLLBACK_SQL_MODE);
-  setOutputSQLWriter(output);
-  setRollbackCount(changesToRollback);
-  migrate();
-}

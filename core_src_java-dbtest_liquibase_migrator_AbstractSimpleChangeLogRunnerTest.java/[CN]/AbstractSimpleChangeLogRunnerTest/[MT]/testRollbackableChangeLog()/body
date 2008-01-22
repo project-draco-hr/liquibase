@@ -1,21 +1,15 @@
 {
-  if (connection == null) {
+  if (database == null) {
     return;
   }
   Migrator migrator=createMigrator(rollbackChangeLog);
   migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.Mode.EXECUTE_MODE);
-  migrator.migrate();
+  migrator.update(this.contexts);
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
-  migrator.setRollbackToDate(new Date(0));
-  migrator.migrate();
+  migrator.rollback(new Date(0),this.contexts);
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.Mode.EXECUTE_MODE);
-  migrator.migrate();
+  migrator.update(this.contexts);
   migrator=createMigrator(rollbackChangeLog);
-  migrator.setMode(Migrator.Mode.EXECUTE_ROLLBACK_MODE);
-  migrator.setRollbackToDate(new Date(0));
-  migrator.migrate();
+  migrator.rollback(new Date(0),this.contexts);
 }

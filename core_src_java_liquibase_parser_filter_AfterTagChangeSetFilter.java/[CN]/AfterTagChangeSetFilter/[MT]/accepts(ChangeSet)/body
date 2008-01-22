@@ -1,0 +1,3 @@
+{
+  return changeLogsAfterTag.contains(changeLogToString(changeSet.getId(),changeSet.getAuthor(),changeSet.getFilePath()));
+}

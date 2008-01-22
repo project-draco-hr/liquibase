@@ -1,6 +1,6 @@
 {
   String input=ideFacade.promptForString(getTitle(),"Enter database tag to roll back to",null);
   if (input != null) {
-    ideFacade.getMigrator(null,database).rollback(input);
+    ideFacade.getMigrator(null,database).rollback(input,null);
   }
 }

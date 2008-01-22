@@ -1,0 +1,3 @@
+Date dateToRollBackTo
+String contexts
+Writer output

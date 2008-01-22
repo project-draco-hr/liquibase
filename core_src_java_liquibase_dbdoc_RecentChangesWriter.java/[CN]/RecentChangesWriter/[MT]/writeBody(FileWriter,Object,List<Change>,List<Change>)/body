@@ -1,0 +1,4 @@
+{
+  writeCustomHTML(fileWriter,object,ranChanges,database);
+  writeChanges("Most Recent Changes",fileWriter,object,ranChanges);
+}

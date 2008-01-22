@@ -1,5 +1,5 @@
 {
-  Logger logger=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
+  Logger logger=LogFactory.getLogger();
   if (logger == null || logger.getLevel() == null || (logger.getLevel().equals(Level.OFF))) {
     return "";
   }

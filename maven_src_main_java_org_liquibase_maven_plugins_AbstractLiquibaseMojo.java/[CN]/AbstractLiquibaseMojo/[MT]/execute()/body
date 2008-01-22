@@ -12,7 +12,7 @@
   Connection connection=null;
   try {
     connection=MavenUtils.getDatabaseConnection(artifactClassLoader,driver,url,username,password);
-    Migrator migrator=createMigrator(getFileOpener(artifactClassLoader));
+    Migrator migrator=createMigrator(getFileOpener(artifactClassLoader),connection);
     configureMigrator(migrator,connection);
     getLog().info("Executing on Database: " + url);
     if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration()) {

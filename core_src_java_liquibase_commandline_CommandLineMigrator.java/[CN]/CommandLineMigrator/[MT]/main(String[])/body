@@ -10,7 +10,7 @@
     return;
   }
  else   if (args.length == 1 && "--version".equals(args[0])) {
-    System.out.println("LiquiBase Version: " + new Migrator(null,null).getBuildVersion() + StreamUtil.getLineSeparator());
+    System.out.println("LiquiBase Version: " + LiquibaseUtil.getBuildVersion() + StreamUtil.getLineSeparator());
     return;
   }
   commandLineMigrator.parseOptions(args);
@@ -41,7 +41,7 @@
     }
  else {
       System.out.println("Migration Failed: " + message + generateLogLevelWarningMessage());
-      Logger.getLogger(Migrator.DEFAULT_LOG_NAME).log(Level.SEVERE,message,e);
+      LogFactory.getLogger().log(Level.SEVERE,message,e);
     }
     return;
   }

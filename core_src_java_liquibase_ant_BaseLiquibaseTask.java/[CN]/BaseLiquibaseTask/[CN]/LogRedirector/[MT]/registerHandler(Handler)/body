@@ -1,5 +1,5 @@
 {
-  Logger logger=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
+  Logger logger=LogFactory.getLogger();
   for (  Handler handler : logger.getHandlers()) {
     logger.removeHandler(handler);
   }

@@ -3,12 +3,9 @@
   try {
     c=getDataSource().getConnection();
     Migrator migrator=createMigrator(c);
-    if (StringUtils.trimToNull(contexts) != null) {
-      migrator.setContexts(contexts);
-    }
     setup(migrator);
     if (isWriteSqlFileEnabled() && getSqlOutputDir() != null) {
-      if (migrator.listUnrunChangeSets().size() > 0) {
+      if (migrator.listUnrunChangeSets(getContexts()).size() > 0) {
         log.log(Level.WARNING,getExecuteDisabledWarningMessage());
       }
       writeSqlFile(migrator);

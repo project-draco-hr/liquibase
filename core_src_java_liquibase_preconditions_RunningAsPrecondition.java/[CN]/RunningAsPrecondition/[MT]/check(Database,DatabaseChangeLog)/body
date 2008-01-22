@@ -1,0 +1,14 @@
+{
+  try {
+    String loggedusername=database.getConnection().getMetaData().getUserName();
+    if (loggedusername.indexOf('@') >= 0) {
+      loggedusername=loggedusername.substring(0,loggedusername.indexOf('@'));
+    }
+    if (!username.equalsIgnoreCase(loggedusername)) {
+      throw new PreconditionFailedException("RunningAs Precondition failed: expected " + username + ", was "+ loggedusername,changeLog,this);
+    }
+  }
+ catch (  SQLException e) {
+    throw new RuntimeException("Cannot determine username",e);
+  }
+}

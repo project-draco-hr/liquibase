@@ -1,8 +1,0 @@
-{
-  try {
-    preconditions.check(migrator,new DatabaseChangeLog(migrator,physicalChangeLogLocation));
-  }
- catch (  PreconditionFailedException e) {
-    failedPreconditions.addAll(e.getFailedPreconditions());
-  }
-}

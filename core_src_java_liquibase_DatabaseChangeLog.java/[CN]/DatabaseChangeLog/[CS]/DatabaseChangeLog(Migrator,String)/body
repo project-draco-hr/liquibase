@@ -1,4 +1,0 @@
-{
-  this.migrator=migrator;
-  this.physicalFilePath=physicalFilePath;
-}

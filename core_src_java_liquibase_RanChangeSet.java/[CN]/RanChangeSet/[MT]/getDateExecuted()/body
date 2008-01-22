@@ -1,3 +1,6 @@
 {
+  if (dateExecuted == null) {
+    return null;
+  }
   return (Date)dateExecuted.clone();
 }

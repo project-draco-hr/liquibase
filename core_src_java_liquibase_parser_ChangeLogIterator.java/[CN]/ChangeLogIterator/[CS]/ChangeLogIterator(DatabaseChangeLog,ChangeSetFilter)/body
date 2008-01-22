@@ -1,0 +1,4 @@
+{
+  this.databaseChangeLog=databaseChangeLog;
+  this.changeSetFilters=Arrays.asList(changeSetFilters);
+}

@@ -1,0 +1,24 @@
+{
+  if (database.doesChangeLogLockTableExist()) {
+    try {
+      UpdateStatement releaseStatement=new UpdateStatement(null,database.getDatabaseChangeLogLockTableName());
+      releaseStatement.addNewColumnValue("LOCKED",false,Types.BOOLEAN);
+      releaseStatement.addNewColumnValue("LOCKGRANTED",null,Types.TIMESTAMP);
+      releaseStatement.addNewColumnValue("LOCKEDBY",null,Types.VARCHAR);
+      releaseStatement.setWhereClause(" ID = 1");
+      database.getJdbcTemplate().comment("Release Database Lock");
+      int updatedRows=database.getJdbcTemplate().update(releaseStatement);
+      if (updatedRows != 1) {
+        if (database.getJdbcTemplate().executesStatements()) {
+          throw new LockException("Did not update change log lock correctly.\n\n" + releaseStatement + " updated "+ updatedRows+ " instead of the expected 1 row.");
+        }
+      }
+      database.commit();
+      hasChangeLogLock=false;
+      LogFactory.getLogger().info("Successfully released change log lock");
+    }
+ catch (    Exception e) {
+      throw new LockException(e);
+    }
+  }
+}

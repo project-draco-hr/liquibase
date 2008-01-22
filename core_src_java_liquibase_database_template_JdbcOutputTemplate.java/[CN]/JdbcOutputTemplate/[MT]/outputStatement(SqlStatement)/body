@@ -1,0 +1,11 @@
+{
+  try {
+    output.write(sql.getSqlStatement(database));
+    output.write(";");
+    output.write(StreamUtil.getLineSeparator());
+    output.write(StreamUtil.getLineSeparator());
+  }
+ catch (  IOException e) {
+    throw new JDBCException(e);
+  }
+}

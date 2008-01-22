@@ -1,9 +1,9 @@
 {
   super.setUp();
-  if (connection != null) {
-    if (!connection.getAutoCommit()) {
-      connection.rollback();
+  if (database != null) {
+    if (!database.getConnection().getAutoCommit()) {
+      database.rollback();
     }
-    createMigrator(completeChangeLog).forceReleaseLock();
+    LockHandler.getInstance(database).forceReleaseLock();
   }
 }

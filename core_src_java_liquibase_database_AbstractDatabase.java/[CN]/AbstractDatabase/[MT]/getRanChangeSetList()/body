@@ -1,0 +1,33 @@
+{
+  try {
+    String databaseChangeLogTableName=getDatabaseChangeLogTableName();
+    List<RanChangeSet> ranChangeSetList=new ArrayList<RanChangeSet>();
+    if (doesChangeLogTableExist()) {
+      log.info("Reading from " + databaseChangeLogTableName);
+      String sql="SELECT * FROM " + databaseChangeLogTableName + " ORDER BY dateExecuted asc".toUpperCase();
+      Statement statement=getConnection().createStatement();
+      ResultSet rs=statement.executeQuery(sql);
+      while (rs.next()) {
+        String fileName=rs.getString("filename");
+        String author=rs.getString("author");
+        String id=rs.getString("id");
+        String md5sum=rs.getString("md5sum");
+        Date dateExecuted=rs.getTimestamp("dateExecuted");
+        String tag=rs.getString("tag");
+        RanChangeSet ranChangeSet=new RanChangeSet(fileName,id,author,md5sum,dateExecuted,tag);
+        ranChangeSetList.add(ranChangeSet);
+      }
+      rs.close();
+      statement.close();
+    }
+    return ranChangeSetList;
+  }
+ catch (  SQLException e) {
+    if (!getJdbcTemplate().executesStatements()) {
+      return new ArrayList<RanChangeSet>();
+    }
+ else {
+      throw new JDBCException(e);
+    }
+  }
+}

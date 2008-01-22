@@ -1,0 +1,20 @@
+{
+  if (!database.doesChangeLogLockTableExist()) {
+    return new DatabaseChangeLogLock[0];
+  }
+  try {
+    List<DatabaseChangeLogLock> allLocks=new ArrayList<DatabaseChangeLogLock>();
+    RawSqlStatement sqlStatement=new RawSqlStatement((("SELECT ID, LOCKED, LOCKGRANTED, LOCKEDBY FROM " + database.getDatabaseChangeLogLockTableName()).toUpperCase()));
+    List<Map> rows=database.getJdbcTemplate().queryForList(sqlStatement);
+    for (    Map columnMap : rows) {
+      Boolean locked=(Boolean)columnMap.get("LOCKED");
+      if (locked != null && locked) {
+        allLocks.add(new DatabaseChangeLogLock((Integer)columnMap.get("ID"),(Date)columnMap.get("LOCKGRANTED"),(String)columnMap.get("LOCKEDBY")));
+      }
+    }
+    return allLocks.toArray(new DatabaseChangeLogLock[allLocks.size()]);
+  }
+ catch (  Exception e) {
+    throw new LockException(e);
+  }
+}

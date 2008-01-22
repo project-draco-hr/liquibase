@@ -1,0 +1,77 @@
+{
+  String textString=null;
+  if (text != null && text.length() > 0) {
+    textString=StringUtils.trimToNull(text.toString());
+  }
+  try {
+    if (rootPrecondition != null) {
+      if ("preConditions".equals(qName)) {
+        databaseChangeLog.setPreconditions(rootPrecondition);
+        handlePreCondition(rootPrecondition);
+        rootPrecondition=null;
+      }
+ else       if ("and".equals(qName)) {
+        preconditionLogicStack.pop();
+        currentPrecondition=null;
+      }
+ else       if ("or".equals(qName)) {
+        preconditionLogicStack.pop();
+        currentPrecondition=null;
+      }
+ else       if ("not".equals(qName)) {
+        preconditionLogicStack.pop();
+        currentPrecondition=null;
+      }
+ else       if (qName.equals("sqlCheck")) {
+        ((SqlPrecondition)currentPrecondition).setSql(textString);
+        currentPrecondition=null;
+      }
+    }
+ else     if (changeSet != null && "rollback".equals(qName)) {
+      changeSet.setRollBackSQL(textString);
+    }
+ else     if (change != null && change instanceof RawSQLChange && "comment".equals(qName)) {
+      ((RawSQLChange)change).setComments(textString);
+      text=new StringBuffer();
+    }
+ else     if (change != null && change instanceof CreateProcedureChange && "comment".equals(qName)) {
+      ((CreateProcedureChange)change).setComments(textString);
+      text=new StringBuffer();
+    }
+ else     if (changeSet != null && "comment".equals(qName)) {
+      changeSet.setComments(textString);
+      text=new StringBuffer();
+    }
+ else     if (changeSet != null && "changeSet".equals(qName)) {
+      handleChangeSet(changeSet);
+      changeSet=null;
+    }
+ else     if (change != null && qName.equals(change.getTagName())) {
+      if (textString != null) {
+        if (change instanceof RawSQLChange) {
+          ((RawSQLChange)change).setSql(textString);
+        }
+ else         if (change instanceof CreateProcedureChange) {
+          ((CreateProcedureChange)change).setProcedureBody(textString);
+        }
+ else         if (change instanceof CreateViewChange) {
+          ((CreateViewChange)change).setSelectQuery(textString);
+        }
+ else         if (change instanceof InsertDataChange) {
+          List<ColumnConfig> columns=((InsertDataChange)change).getColumns();
+          columns.get(columns.size() - 1).setValue(textString);
+        }
+ else {
+          throw new RuntimeException("Unexpected text in " + change.getTagName());
+        }
+      }
+      text=null;
+      changeSet.addChange(change);
+      change=null;
+    }
+  }
+ catch (  Exception e) {
+    log.log(Level.SEVERE,"Error thrown as a SAXException: " + e.getMessage(),e);
+    throw new SAXException(databaseChangeLog.getPhysicalFilePath() + ": " + e.getMessage(),e);
+  }
+}

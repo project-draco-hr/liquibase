@@ -1,0 +1,3 @@
+int changesToRollback
+String contexts
+Writer output

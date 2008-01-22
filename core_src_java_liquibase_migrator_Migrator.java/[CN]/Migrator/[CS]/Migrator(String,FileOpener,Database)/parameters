@@ -1,0 +1,3 @@
+String changeLogFile
+FileOpener fileOpener
+Database database

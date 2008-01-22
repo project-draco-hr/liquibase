@@ -1,0 +1,19 @@
+{
+  Database database=createMock(Database.class);
+  JdbcTemplate template=createMock(JdbcTemplate.class);
+  expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
+  expect(database.doesChangeLogLockTableExist()).andReturn(false);
+  expectLastCall();
+  replay(database);
+  replay(template);
+  LockHandler handler=LockHandler.getInstance(database);
+  try {
+    handler.acquireLock();
+    fail("did not throw exception");
+  }
+ catch (  LockException e) {
+    assertEquals("Could not acquire lock, table does not exist",e.getMessage());
+  }
+  verify(database);
+  verify(template);
+}

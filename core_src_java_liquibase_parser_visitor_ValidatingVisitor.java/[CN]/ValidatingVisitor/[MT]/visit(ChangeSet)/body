@@ -1,0 +1,24 @@
+{
+  for (  Change change : changeSet.getChanges()) {
+    try {
+      change.setUp();
+    }
+ catch (    SetupException se) {
+      setupExceptions.add(se);
+    }
+  }
+  for (  RanChangeSet ranChangeSet : ranChangeSets) {
+    if (ranChangeSet.getId().equals(changeSet.getId()) && ranChangeSet.getAuthor().equals(changeSet.getAuthor()) && ranChangeSet.getChangeLog().equals(changeSet.getFilePath())) {
+      if (ranChangeSet.getMd5sum() != null && !ranChangeSet.getMd5sum().equals(changeSet.getMd5sum())) {
+        invalidMD5Sums.add(changeSet);
+      }
+    }
+  }
+  String changeSetString=changeSet.toString(false);
+  if (seenChangeSets.contains(changeSetString)) {
+    duplicateChangeSets.add(changeSet);
+  }
+ else {
+    seenChangeSets.add(changeSetString);
+  }
+}

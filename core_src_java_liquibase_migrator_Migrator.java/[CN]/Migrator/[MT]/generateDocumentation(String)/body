@@ -1,13 +1,20 @@
 {
+  log.info("Generating Database Documentation");
+  LockHandler lockHandler=LockHandler.getInstance(database);
+  lockHandler.waitForLock();
   try {
-    if (!waitForLock()) {
-      return;
-    }
-    DBDocChangeLogHandler changeLogHandler=new DBDocChangeLogHandler(outputDirectory,this,changeLogFile,fileOpener);
-    runChangeLogs(changeLogHandler);
-    changeLogHandler.writeHTML(this);
+    database.checkDatabaseChangeLogTable();
+    validate();
+    DatabaseChangeLog changeLog=new ChangeLogParser().parse(changeLogFile,fileOpener);
+    ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new DbmsChangeSetFilter(database));
+    DBDocVisitor visitor=new DBDocVisitor(database);
+    logIterator.run(visitor);
+    visitor.writeHTML(new File(outputDirectory),fileOpener);
   }
-  finally {
-    releaseLock();
+ catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+ finally {
+    lockHandler.releaseLock();
   }
 }

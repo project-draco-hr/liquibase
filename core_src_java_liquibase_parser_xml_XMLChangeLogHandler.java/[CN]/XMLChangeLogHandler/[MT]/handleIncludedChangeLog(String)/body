@@ -1,0 +1,5 @@
+{
+  for (  ChangeSet changeSet : new ChangeLogParser().parse(fileName,fileOpener).getChangeSets()) {
+    databaseChangeLog.addChangeSet(changeSet);
+  }
+}

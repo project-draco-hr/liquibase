@@ -1,0 +1,8 @@
+{
+  try {
+    getConnection().rollback();
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+}

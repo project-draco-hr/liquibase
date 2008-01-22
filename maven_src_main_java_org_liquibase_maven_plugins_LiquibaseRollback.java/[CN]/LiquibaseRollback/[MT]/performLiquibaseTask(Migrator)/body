@@ -2,27 +2,16 @@
 switch (type) {
 case COUNT:
 {
-      migrator.setRollbackCount(rollbackCount);
+      migrator.rollback(rollbackCount,contexts);
       break;
     }
 case DATE:
 {
     DateFormat format=DateFormat.getDateInstance();
-    try {
-      migrator.setRollbackToDate(format.parse(rollbackDate));
-    }
- catch (    ParseException e) {
-      String message="Error parsing rollbackDate: " + e.getMessage();
-      if (format instanceof SimpleDateFormat) {
-        message+="\nDate must match pattern: " + ((SimpleDateFormat)format).toPattern();
-      }
-      throw new LiquibaseException(message,e);
-    }
     break;
   }
 case TAG:
 {
-  migrator.setRollbackToTag(rollbackTag);
   break;
 }
 default :
@@ -30,5 +19,4 @@ default :
 throw new IllegalStateException("Unexpected rollback type, " + type);
 }
 }
-migrator.migrate();
 }

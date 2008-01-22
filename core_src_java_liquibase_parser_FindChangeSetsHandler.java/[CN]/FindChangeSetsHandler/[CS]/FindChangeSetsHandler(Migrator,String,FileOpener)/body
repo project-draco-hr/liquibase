@@ -1,6 +1,0 @@
-{
-  super(migrator,physicalChangeLogLocation,fileOpener);
-  if (unrunChangeSets == null) {
-    unrunChangeSets=new ArrayList<ChangeSet>();
-  }
-}

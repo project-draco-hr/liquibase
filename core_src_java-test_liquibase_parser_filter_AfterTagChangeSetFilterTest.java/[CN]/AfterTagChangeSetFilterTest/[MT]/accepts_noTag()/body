@@ -1,0 +1,9 @@
+{
+  try {
+    new AfterTagChangeSetFilter("tag1",new ArrayList<RanChangeSet>());
+    fail("Did not throw exception");
+  }
+ catch (  RollbackFailedException e) {
+    ;
+  }
+}

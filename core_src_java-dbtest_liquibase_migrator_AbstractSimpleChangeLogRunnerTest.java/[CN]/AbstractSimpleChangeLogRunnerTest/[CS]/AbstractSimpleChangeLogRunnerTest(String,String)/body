@@ -2,6 +2,9 @@
   this.completeChangeLog="changelogs/" + changelogDir + "/complete/root.changelog.xml";
   this.rollbackChangeLog="changelogs/" + changelogDir + "/rollback/rollbackable.changelog.xml";
   this.includedChangeLog="changelogs/" + changelogDir + "/complete/included.changelog.xml";
-  this.connection=TestContext.getInstance().getConnection(url);
-  Logger.getLogger(Migrator.DEFAULT_LOG_NAME).setLevel(Level.SEVERE);
+  DatabaseConnection connection=TestContext.getInstance().getConnection(url);
+  LogFactory.getLogger().setLevel(Level.SEVERE);
+  if (connection != null) {
+    database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+  }
 }

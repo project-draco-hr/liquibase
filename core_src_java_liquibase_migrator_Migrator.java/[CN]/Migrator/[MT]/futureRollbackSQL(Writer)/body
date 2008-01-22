@@ -1,5 +1,0 @@
-{
-  setMode(Migrator.Mode.OUTPUT_FUTURE_ROLLBACK_SQL_MODE);
-  setOutputSQLWriter(output);
-  migrate();
-}

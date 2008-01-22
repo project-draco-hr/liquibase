@@ -1,0 +1,4 @@
+{
+  this.logicalPath=logicalPath;
+  this.physicalPath=physicalPath;
+}

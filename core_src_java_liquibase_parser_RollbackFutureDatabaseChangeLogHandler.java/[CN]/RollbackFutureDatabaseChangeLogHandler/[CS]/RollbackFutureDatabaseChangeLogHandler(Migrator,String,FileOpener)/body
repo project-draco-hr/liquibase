@@ -1,5 +1,0 @@
-{
-  super(migrator,physicalFilePath,fileOpener);
-  changesToRollback=new ArrayList<ChangeSet>();
-  ranChangeSets=migrator.getRanChangeSetList();
-}

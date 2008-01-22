@@ -1,0 +1,42 @@
+{
+  if (hasChangeLogLock) {
+    return;
+  }
+  try {
+    database.checkDatabaseChangeLogLockTable();
+    boolean locked=false;
+    long timeToGiveUp=new Date().getTime() + changeLogLockWaitTime;
+    while (!locked && new Date().getTime() < timeToGiveUp) {
+      locked=acquireLock();
+      if (!locked) {
+        System.out.println("Waiting for changelog lock....");
+        try {
+          Thread.sleep(1000 * 10);
+        }
+ catch (        InterruptedException e) {
+          ;
+        }
+      }
+    }
+    if (!locked) {
+      DatabaseChangeLogLock[] locks=listLocks();
+      String lockedBy;
+      if (locks.length > 0) {
+        DatabaseChangeLogLock lock=locks[0];
+        lockedBy=lock.getLockedBy() + " since " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(lock.getLockGranted());
+      }
+ else {
+        lockedBy="UNKNOWN";
+      }
+      throw new LockException("Could not acquire change log lock.  Currently locked by " + lockedBy);
+    }
+  }
+ catch (  JDBCException e) {
+    if (!database.getJdbcTemplate().executesStatements()) {
+      ;
+    }
+ else {
+      throw new LockException(e);
+    }
+  }
+}

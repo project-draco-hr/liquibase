@@ -1,0 +1,3 @@
+{
+  return changeLogsAfterDate.contains(changeLogToString(changeSet.getId(),changeSet.getAuthor(),changeSet.getFilePath()));
+}

@@ -1,0 +1,53 @@
+{
+  DatabaseConnection connection=getConnection();
+  ResultSet rs=null;
+  boolean knowMustInsertIntoLockTable=false;
+  try {
+    rs=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogLockTableName(),new String[]{"TABLE"});
+    if (!rs.next()) {
+      if (!changeLogLockCreateAttempted) {
+        changeLogLockCreateAttempted=true;
+        SqlStatement createTableStatement=getCreateChangeLogLockSQL();
+        getJdbcTemplate().comment("Create Database Lock Table");
+        this.getJdbcTemplate().execute(createTableStatement);
+        this.commit();
+        log.info("Created database lock table with name: " + getDatabaseChangeLogLockTableName());
+        changeLogLockTableExists=true;
+        knowMustInsertIntoLockTable=true;
+      }
+    }
+ else {
+      changeLogLockTableExists=true;
+    }
+    rs.close();
+    if (changeLogLockTableExists) {
+      int rows=-1;
+      if (!knowMustInsertIntoLockTable) {
+        RawSqlStatement selectStatement=new RawSqlStatement("SELECT COUNT(*) FROM " + getDatabaseChangeLogLockTableName() + " WHERE ID=1");
+        rows=this.getJdbcTemplate().queryForInt(selectStatement);
+      }
+      if (knowMustInsertIntoLockTable || rows == 0) {
+        this.getJdbcTemplate().update(getChangeLogLockInsertSQL());
+        this.commit();
+        log.info("Inserted lock row into: " + getDatabaseChangeLogLockTableName());
+        rs.close();
+      }
+    }
+ else {
+      throw new JDBCException("Change log lock table does not exist");
+    }
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+ finally {
+    if (rs != null) {
+      try {
+        rs.close();
+      }
+ catch (      SQLException e) {
+        throw new JDBCException(e);
+      }
+    }
+  }
+}

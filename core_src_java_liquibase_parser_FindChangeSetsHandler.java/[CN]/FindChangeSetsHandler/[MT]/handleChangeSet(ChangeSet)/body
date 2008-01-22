@@ -1,5 +1,0 @@
-{
-  if (migrator.getRunStatus(changeSet).equals(ChangeSet.RunStatus.NOT_RAN) && migrator.contextMatches(changeSet)) {
-    unrunChangeSets.add(changeSet);
-  }
-}

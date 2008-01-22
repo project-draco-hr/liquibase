@@ -3,9 +3,8 @@
   if (Dialog.OK != dialog.open() || dialog.getTagName() == null) {
     return;
   }
-  Migrator migrator=getMigrator(LiquibasePreferences.getRootChangeLog());
   try {
-    migrator.init(getSelectedConnection(getSelection()));
+    Migrator migrator=getMigrator(LiquibasePreferences.getRootChangeLog(),getSelectedConnection(getSelection()));
     migrator.tag(dialog.getTagName());
     ((JDBCDatabase)getSelectedDatabase(getSelection())).refresh();
   }

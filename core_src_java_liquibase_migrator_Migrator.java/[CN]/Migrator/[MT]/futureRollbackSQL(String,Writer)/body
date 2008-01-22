@@ -1,0 +1,25 @@
+{
+  JdbcOutputTemplate outputTemplate=new JdbcOutputTemplate(output,database);
+  JdbcTemplate oldTemplate=database.getJdbcTemplate();
+  database.setJdbcTemplate(outputTemplate);
+  outputHeader("SQL to roll back currently unexecuted changes");
+  LockHandler lockHandler=LockHandler.getInstance(database);
+  lockHandler.waitForLock();
+  try {
+    database.checkDatabaseChangeLogTable();
+    validate();
+    DatabaseChangeLog changeLog=new ChangeLogParser().parse(changeLogFile,fileOpener);
+    ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new NotRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database));
+    logIterator.run(new RollbackVisitor(database));
+  }
+  finally {
+    database.setJdbcTemplate(oldTemplate);
+    lockHandler.releaseLock();
+  }
+  try {
+    output.flush();
+  }
+ catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+}

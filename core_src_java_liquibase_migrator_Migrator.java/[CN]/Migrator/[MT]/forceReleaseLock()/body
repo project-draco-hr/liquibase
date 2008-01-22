@@ -1,4 +1,0 @@
-{
-  checkDatabaseChangeLogTable();
-  getDatabase().releaseLock();
-}

@@ -3,8 +3,11 @@
   for (int i=0; i < args.length; i++) {
     String arg=args[i];
     if (arg.startsWith("--") && !arg.contains("=")) {
-      String nextArg=args[i + 1];
-      if (!nextArg.startsWith("--") && !isCommand(nextArg)) {
+      String nextArg=null;
+      if (i + 1 < args.length) {
+        nextArg=args[i + 1];
+      }
+      if (nextArg != null && !nextArg.startsWith("--") && !isCommand(nextArg)) {
         arg=arg + "=" + nextArg;
         i++;
       }

@@ -1,0 +1,10 @@
+{
+  this.database=database;
+  changesByObject=new HashMap<DatabaseObject,List<Change>>();
+  changesByAuthor=new HashMap<String,List<Change>>();
+  changeLogs=new TreeSet<ChangeLogInfo>();
+  changesToRunByObject=new HashMap<DatabaseObject,List<Change>>();
+  changesToRunByAuthor=new HashMap<String,List<Change>>();
+  changesToRun=new ArrayList<Change>();
+  recentChanges=new ArrayList<Change>();
+}

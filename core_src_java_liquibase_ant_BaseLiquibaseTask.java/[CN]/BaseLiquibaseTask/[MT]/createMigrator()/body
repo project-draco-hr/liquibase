@@ -1,7 +1,6 @@
 {
   FileOpener antFO=new AntFileOpener(getProject(),classpath);
   FileOpener fsFO=new FileSystemFileOpener();
-  Migrator migrator=new Migrator(getChangeLogFile().trim(),new CompositeFileOpener(antFO,fsFO));
   String[] strings=classpath.list();
   final List<URL> taskClassPath=new ArrayList<URL>();
   for (int i=0; i < strings.length; i++) {
@@ -29,7 +28,7 @@
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + getUrl() + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
-  migrator.init(connection);
+  Migrator migrator=new Migrator(getChangeLogFile().trim(),new CompositeFileOpener(antFO,fsFO),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
   migrator.setCurrentDateTimeFunction(currentDateTimeFunction);
   return migrator;
 }

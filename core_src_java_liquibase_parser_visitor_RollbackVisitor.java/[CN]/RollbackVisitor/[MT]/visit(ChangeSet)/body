@@ -1,0 +1,6 @@
+{
+  LogFactory.getLogger().info("Rolling Back Changeset:" + changeSet);
+  changeSet.rolback(database);
+  database.removeRanStatus(changeSet);
+  database.commit();
+}

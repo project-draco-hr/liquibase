@@ -1,0 +1,4 @@
+{
+  super(database);
+  this.output=output;
+}

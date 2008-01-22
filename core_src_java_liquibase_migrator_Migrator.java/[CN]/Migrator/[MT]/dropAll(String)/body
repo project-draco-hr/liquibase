@@ -1,10 +1,9 @@
 {
   try {
-    if (!waitForLock()) {
-      return;
-    }
+    LockHandler.getInstance(database).waitForLock();
     for (    String schema : schemas) {
       log.info("Dropping Database Objects in " + schema);
+      checkDatabaseChangeLogTable();
       getDatabase().dropDatabaseObjects(schema);
       checkDatabaseChangeLogTable();
       log.finest("Objects dropped successfully");
@@ -18,7 +17,7 @@ catch (  Exception e) {
   }
  finally {
     try {
-      releaseLock();
+      LockHandler.getInstance(database).releaseLock();
     }
  catch (    LockException e) {
       log.severe("Unable to release lock: " + e.getMessage());

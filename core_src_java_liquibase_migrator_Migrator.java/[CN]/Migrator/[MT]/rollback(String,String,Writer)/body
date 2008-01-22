@@ -1,0 +1,13 @@
+{
+  JdbcTemplate oldTemplate=database.getJdbcTemplate();
+  database.setJdbcTemplate(new JdbcOutputTemplate(output,database));
+  outputHeader("Rollback to '" + tagToRollBackTo + "' Script");
+  rollback(tagToRollBackTo,contexts);
+  try {
+    output.flush();
+  }
+ catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+  database.setJdbcTemplate(oldTemplate);
+}

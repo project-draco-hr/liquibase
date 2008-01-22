@@ -1,4 +1,0 @@
-String outputDirectory
-Migrator migrator
-String physicalChangeLogLocation
-FileOpener fileOpener

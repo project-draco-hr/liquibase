@@ -1,0 +1,3 @@
+{
+  return this.logicalPath.compareTo(o.logicalPath);
+}

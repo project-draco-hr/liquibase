@@ -1,9 +1,0 @@
-{
-  this.setMode(Migrator.Mode.OUTPUT_ROLLBACK_SQL_MODE);
-  this.setOutputSQLWriter(output);
-  if (tagToRollBackTo == null) {
-    throw new LiquibaseException("rollbackSQL requires a rollback tag");
-  }
-  this.setRollbackToTag(tagToRollBackTo);
-  migrate();
-}

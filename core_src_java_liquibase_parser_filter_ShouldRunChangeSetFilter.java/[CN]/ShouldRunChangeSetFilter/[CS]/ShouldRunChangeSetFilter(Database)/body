@@ -1,0 +1,4 @@
+{
+  this.database=database;
+  this.ranChangeSets=database.getRanChangeSetList();
+}

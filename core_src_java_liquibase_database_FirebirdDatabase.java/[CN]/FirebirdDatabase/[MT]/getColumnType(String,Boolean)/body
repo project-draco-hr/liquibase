@@ -1,0 +1,9 @@
+{
+  String type=super.getColumnType(columnType,autoIncrement);
+  if (type.startsWith("BLOB SUB_TYPE <0")) {
+    return getBlobType();
+  }
+ else {
+    return type;
+  }
+}

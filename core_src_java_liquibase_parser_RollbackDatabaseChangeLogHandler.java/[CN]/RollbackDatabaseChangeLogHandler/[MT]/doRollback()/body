@@ -1,6 +1,0 @@
-{
-  for (  ChangeSet changeSet : allChangeSets) {
-    changeSet.execute();
-    migrator.removeRanStatus(changeSet);
-  }
-}

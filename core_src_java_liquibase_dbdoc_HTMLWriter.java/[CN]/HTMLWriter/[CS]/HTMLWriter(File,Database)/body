@@ -1,0 +1,7 @@
+{
+  this.outputDir=outputDir;
+  this.database=database;
+  if (!outputDir.exists()) {
+    outputDir.mkdirs();
+  }
+}

@@ -1,5 +1,0 @@
-Object object
-List<Change> ranChanges
-List<Change> changesToRun
-Migrator migrator
-String changeLog

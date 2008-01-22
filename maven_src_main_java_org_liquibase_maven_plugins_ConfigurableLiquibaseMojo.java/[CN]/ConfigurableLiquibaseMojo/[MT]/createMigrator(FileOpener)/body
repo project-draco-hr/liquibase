@@ -1,5 +1,0 @@
-{
-  Migrator m=new Migrator(changeLogFile.trim(),fo);
-  performMigratorConfiguration(m);
-  return m;
-}

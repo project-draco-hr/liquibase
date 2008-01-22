@@ -7,15 +7,13 @@
   Migrator migrator=null;
   try {
     migrator=createMigrator();
-    migrator.setContexts(getContexts());
-    migrator.setMode(Migrator.Mode.EXECUTE_MODE);
     if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration() && migrator.swingPromptForNonLocalDatabase()) {
       throw new BuildException("Chose not to run against non-production database");
     }
     if (isDropFirst()) {
       migrator.dropAll();
     }
-    migrator.migrate();
+    migrator.update(getContexts());
   }
  catch (  Exception e) {
     throw new BuildException(e);

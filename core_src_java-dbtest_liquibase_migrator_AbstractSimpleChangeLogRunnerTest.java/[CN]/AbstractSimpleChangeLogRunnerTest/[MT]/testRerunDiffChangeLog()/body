@@ -1,15 +1,15 @@
 {
-  if (connection == null) {
+  if (database == null) {
     return;
   }
   runCompleteChangeLog();
-  DatabaseSnapshot originalSnapshot=new DatabaseSnapshot(DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
-  Diff diff=new Diff(connection);
+  DatabaseSnapshot originalSnapshot=new DatabaseSnapshot(database);
+  Diff diff=new Diff(database.getConnection());
   DiffResult diffResult=diff.compare();
   File tempFile=File.createTempFile("liquibase-test",".xml");
   FileOutputStream output=new FileOutputStream(tempFile);
   try {
-    diffResult.printChangeLog(new PrintStream(output),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
+    diffResult.printChangeLog(new PrintStream(output),database);
     output.flush();
   }
   finally {
@@ -19,14 +19,14 @@
   migrator.dropAll(getSchemasToDrop());
   migrator=createMigrator(tempFile.getName());
   try {
-    migrator.migrate();
+    migrator.update(this.contexts);
   }
  catch (  ValidationFailedException e) {
     e.printDescriptiveError(System.out);
     throw e;
   }
   tempFile.deleteOnExit();
-  DatabaseSnapshot finalSnapshot=new DatabaseSnapshot(DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
+  DatabaseSnapshot finalSnapshot=new DatabaseSnapshot(database);
   DiffResult finalDiffResult=new Diff(originalSnapshot,finalSnapshot).compare();
   assertEquals(0,finalDiffResult.getMissingColumns().size());
   assertEquals(0,finalDiffResult.getMissingForeignKeys().size());

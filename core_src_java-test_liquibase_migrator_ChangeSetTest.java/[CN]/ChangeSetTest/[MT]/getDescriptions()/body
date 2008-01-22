@@ -1,5 +1,5 @@
 {
-  ChangeSet changeSet=new ChangeSet("testId","testAuthor",false,false,null,null,null);
+  ChangeSet changeSet=new ChangeSet("testId","testAuthor",false,false,null,null,null,null);
   assertEquals("Empty",changeSet.getDescription());
   changeSet.addChange(new InsertDataChange());
   assertEquals("Insert Row",changeSet.getDescription());

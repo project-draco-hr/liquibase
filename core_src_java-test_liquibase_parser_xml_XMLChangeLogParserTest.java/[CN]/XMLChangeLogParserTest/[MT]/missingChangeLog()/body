@@ -1,0 +1,9 @@
+{
+  try {
+    DatabaseChangeLog changeLog=new XMLChangeLogParser().parse("liquibase/parser/xml/missingChangeLog.xml",new JUnitFileOpener());
+  }
+ catch (  Exception e) {
+    assertTrue(e instanceof ChangeLogParseException);
+    assertEquals("liquibase/parser/xml/missingChangeLog.xml does not exist",e.getMessage());
+  }
+}

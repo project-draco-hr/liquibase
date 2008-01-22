@@ -9,9 +9,7 @@
     String fileString=(getDatabaseProductName() + "-" + dateString+ ".sql").replace(" ","-").toLowerCase();
     File upgradeFile=new File(ddlDir,fileString);
     fw=new FileWriter(upgradeFile);
-    migrator.setMode(Migrator.Mode.OUTPUT_SQL_MODE);
-    migrator.setOutputSQLWriter(fw);
-    migrator.migrate();
+    migrator.update(getContexts(),fw);
   }
  catch (  IOException e) {
     throw new LiquibaseException(e);

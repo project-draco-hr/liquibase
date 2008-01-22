@@ -1,6 +1,0 @@
-{
-  if (rollbackToDate == null) {
-    return null;
-  }
-  return (Date)rollbackToDate.clone();
-}

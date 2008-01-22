@@ -1,0 +1,14 @@
+{
+  boolean seenTag=false;
+  for (  RanChangeSet ranChangeSet : ranChangeSets) {
+    if (seenTag && !tag.equalsIgnoreCase(ranChangeSet.getTag())) {
+      changeLogsAfterTag.add(changeLogToString(ranChangeSet.getId(),ranChangeSet.getAuthor(),ranChangeSet.getChangeLog()));
+    }
+    if (!seenTag && tag.equalsIgnoreCase(ranChangeSet.getTag())) {
+      seenTag=true;
+    }
+  }
+  if (!seenTag) {
+    throw new RollbackFailedException("Could not find tag '" + tag + "' in the database");
+  }
+}

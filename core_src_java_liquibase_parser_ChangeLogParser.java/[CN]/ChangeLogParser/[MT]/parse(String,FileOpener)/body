@@ -1,0 +1,3 @@
+{
+  return new XMLChangeLogParser().parse(physicalChangeLogLocation,fileOpener);
+}

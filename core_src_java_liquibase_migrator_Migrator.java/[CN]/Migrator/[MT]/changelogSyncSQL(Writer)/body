@@ -1,5 +1,0 @@
-{
-  this.setMode(Migrator.Mode.OUTPUT_CHANGELOG_ONLY_SQL_MODE);
-  this.setOutputSQLWriter(outputWriter);
-  this.migrate();
-}

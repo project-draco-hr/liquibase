@@ -1,0 +1,14 @@
+{
+  if (databaseString == null) {
+    return true;
+  }
+  if (changeSet.getDbmsSet() == null) {
+    return true;
+  }
+  for (  String dbms : changeSet.getDbmsSet()) {
+    if (databaseString.equals(dbms)) {
+      return true;
+    }
+  }
+  return false;
+}

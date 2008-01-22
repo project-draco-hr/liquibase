@@ -1,7 +1,7 @@
 {
-  if (connection != null) {
+  if (database != null) {
     if (shouldRollBack()) {
-      connection.rollback();
+      database.rollback();
     }
   }
   super.tearDown();

@@ -1,3 +1,0 @@
-{
-  return new ValidateChangeLogHandler(this,changeLogFile,fileOpener);
-}
