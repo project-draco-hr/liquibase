@@ -7,7 +7,7 @@
   Migrator migrator=null;
   try {
     migrator=createMigrator();
-    if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration() && migrator.swingPromptForNonLocalDatabase()) {
+    if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration() && UIFactory.getInstance().getFacade().promptForNonLocalDatabase(migrator.getDatabase())) {
       throw new BuildException("Chose not to run against non-production database");
     }
     if (isDropFirst()) {
