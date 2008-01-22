@@ -1,3 +1,8 @@
 {
-  this.valueDate=new ISODateFormat().parse(valueDate);
+  try {
+    this.valueDate=new ISODateFormat().parse(valueDate);
+  }
+ catch (  ParseException e) {
+    this.valueDate=new ComputedDateValue(valueDate);
+  }
 }
