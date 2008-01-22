@@ -1,0 +1,30 @@
+{
+  try {
+    database.getJdbcTemplate().comment("Changeset " + toString());
+    for (    Change change : changes) {
+      try {
+        change.setUp();
+      }
+ catch (      SetupException se) {
+        throw new MigrationFailedException(this,se);
+      }
+    }
+    log.finest("Reading ChangeSet: " + toString());
+    for (    Change change : getChanges()) {
+      change.executeStatements(database);
+      log.finest(change.getConfirmationMessage());
+    }
+    database.commit();
+    log.finest("ChangeSet " + toString() + " has been successfully ran.");
+    database.commit();
+  }
+ catch (  Exception e) {
+    try {
+      database.rollback();
+    }
+ catch (    Exception e1) {
+      throw new MigrationFailedException(this,e);
+    }
+    throw new MigrationFailedException(this,e);
+  }
+}

@@ -1,9 +1,10 @@
 {
   this.changes=new ArrayList<Change>();
-  log=Logger.getLogger(Migrator.DEFAULT_LOG_NAME);
+  log=LogFactory.getLogger();
   this.id=id;
   this.author=author;
-  this.databaseChangeLog=databaseChangeLog;
+  this.filePath=filePath;
+  this.physicalFilePath=physicalFilePath;
   this.alwaysRun=alwaysRun;
   this.runOnChange=runOnChange;
   if (StringUtils.trimToNull(contextList) != null) {
