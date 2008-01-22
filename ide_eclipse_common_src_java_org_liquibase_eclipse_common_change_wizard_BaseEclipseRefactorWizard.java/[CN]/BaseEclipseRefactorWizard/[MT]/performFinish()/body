@@ -32,7 +32,7 @@
           monitor.subTask("Writing to Change Log");
           DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
           DocumentBuilder documentBuilder=factory.newDocumentBuilder();
-          documentBuilder.setEntityResolver(new MigratorSchemaResolver());
+          documentBuilder.setEntityResolver(new LiquibaseSchemaResolver());
           File file=new File(LiquibasePreferences.getCurrentChangeLogFileName());
           Document doc;
           if (!file.exists() || file.length() == 0) {
