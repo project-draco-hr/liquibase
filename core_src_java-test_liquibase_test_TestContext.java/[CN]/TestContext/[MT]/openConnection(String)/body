@@ -53,6 +53,9 @@
  catch (  SQLException e) {
     ;
   }
+ finally {
+    databaseConnection.rollback();
+  }
   connectionsByUrl.put(url,databaseConnection);
   Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
     public void run(){

@@ -81,6 +81,12 @@
  else   if ("dateTime".equalsIgnoreCase(columnType)) {
     return getDateTimeType();
   }
+ else   if (columnType.toUpperCase().startsWith("FLOAT(")) {
+    return "FLOAT";
+  }
+ else   if (columnType.toUpperCase().startsWith("DOUBLE(")) {
+    return "DOUBLE";
+  }
  else {
     return columnType;
   }
