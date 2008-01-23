@@ -1,8 +1,7 @@
 {
   Database database=null;
   boolean foundImplementation=false;
-  Database[] implementedDatabases=getImplementedDatabases();
-  for (  Database implementedDatabase : implementedDatabases) {
+  for (  Database implementedDatabase : getImplementedDatabases()) {
     database=implementedDatabase;
     if (database.isCorrectDatabaseImplementation(connection)) {
       foundImplementation=true;

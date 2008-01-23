@@ -62,6 +62,8 @@
   stream.println(" --classpath=<value>                        Classpath containing");
   stream.println("                                            migration files and JDBC Driver");
   stream.println(" --driver=<jdbc.driver.ClassName>           Database driver class name");
+  stream.println(" --databaseClass=<database.ClassName>       custom liquibase.database.Database");
+  stream.println("                                            implementation to use");
   stream.println(" --contexts=<value>                         ChangeSet contexts to execute");
   stream.println(" --defaultsFile=</path/to/file.properties>  File with default option values");
   stream.println("                                            (default: ./liquibase.properties)");

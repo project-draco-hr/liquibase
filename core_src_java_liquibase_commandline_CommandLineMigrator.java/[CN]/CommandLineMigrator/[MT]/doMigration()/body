@@ -30,9 +30,13 @@
   FileSystemFileOpener fsOpener=new FileSystemFileOpener();
   CommandLineFileOpener clOpener=new CommandLineFileOpener(classLoader);
   Driver driver;
+  DatabaseFactory databaseFactory=DatabaseFactory.getInstance();
+  if (this.databaseClass != null) {
+    databaseFactory.addDatabaseImplementation((Database)Class.forName(this.databaseClass,true,classLoader).newInstance());
+  }
   try {
     if (this.driver == null) {
-      this.driver=DatabaseFactory.getInstance().findDefaultDriver(url);
+      this.driver=databaseFactory.findDefaultDriver(url);
     }
     if (this.driver == null) {
       throw new RuntimeException("Driver class was not specified and could not be determined from the url");
@@ -64,7 +68,7 @@
     return;
   }
   try {
-    Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+    Database database=databaseFactory.findCorrectDatabaseImplementation(connection);
     Migrator migrator=new Migrator(changeLogFile,new CompositeFileOpener(fsOpener,clOpener),database);
     if ("listLocks".equalsIgnoreCase(command)) {
       migrator.reportLocks(System.out);
