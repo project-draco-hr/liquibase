@@ -1,6 +1,6 @@
 {
   try {
-    int totalRows=this.getJdbcTemplate().queryForInt(new RawSqlStatement("select count(*) from " + getDatabaseChangeLogTableName()));
+    int totalRows=this.getJdbcTemplate().queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + getDatabaseChangeLogTableName()));
     if (totalRows == 0) {
       throw new JDBCException("Cannot tag an empty database");
     }

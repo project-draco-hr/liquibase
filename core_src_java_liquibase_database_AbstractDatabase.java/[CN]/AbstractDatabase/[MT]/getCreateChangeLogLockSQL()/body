@@ -1,3 +1,3 @@
 {
-  return new CreateTableStatement(null,getDatabaseChangeLogLockTableName()).addPrimaryKeyColumn("id","int",new NotNullConstraint()).addColumn("locked",getBooleanType(),new NotNullConstraint()).addColumn("lockGranted",getDateTimeType()).addColumn("lockedby","varchar(255)");
+  return new CreateTableStatement(null,getDatabaseChangeLogLockTableName()).addPrimaryKeyColumn("ID","INT",new NotNullConstraint()).addColumn("LOCKED",getBooleanType(),new NotNullConstraint()).addColumn("LOCKGRANTED",getDateTimeType()).addColumn("LOCKEDBY","VARCHAR(255)");
 }

@@ -1,3 +1,3 @@
 {
-  return new RawSqlStatement(("select locked from " + getDatabaseChangeLogLockTableName() + " where id=1").toUpperCase());
+  return new RawSqlStatement(("SELECT LOCKED FROM " + getDatabaseChangeLogLockTableName() + " WHERE ID=1"));
 }
