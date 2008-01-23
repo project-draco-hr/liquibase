@@ -6,6 +6,12 @@
   if (type.startsWith("TEXT(")) {
     return getClobType();
   }
+ else   if (type.toLowerCase().startsWith("float8")) {
+    return "FLOAT8";
+  }
+ else   if (type.toLowerCase().startsWith("float4")) {
+    return "FLOAT4";
+  }
   if (autoIncrement != null && autoIncrement) {
     if ("integer".equals(type.toLowerCase())) {
       return "serial";
