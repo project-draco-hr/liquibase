@@ -4,6 +4,10 @@
       text=new StringBuffer();
     }
  else     if ("databaseChangeLog".equals(qName)) {
+      String version=uri.substring(uri.lastIndexOf("/") + 1);
+      if (!version.equals(XMLChangeLogParser.getSchemaVersion())) {
+        log.warning(databaseChangeLog.getPhysicalFilePath() + " is using schema version " + version+ " rather than version "+ XMLChangeLogParser.getSchemaVersion());
+      }
       databaseChangeLog.setLogicalFilePath(atts.getValue("logicalFilePath"));
     }
  else     if ("include".equals(qName)) {

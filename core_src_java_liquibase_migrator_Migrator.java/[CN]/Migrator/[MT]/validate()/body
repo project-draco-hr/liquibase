@@ -1,10 +1,4 @@
 {
   DatabaseChangeLog changeLog=new ChangeLogParser().parse(changeLogFile,fileOpener);
-  ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new DbmsChangeSetFilter(database));
-  ValidatingVisitor validatingVisitor=new ValidatingVisitor(database.getRanChangeSetList());
-  validatingVisitor.checkPreconditions(database,changeLog);
-  logIterator.run(validatingVisitor);
-  if (!validatingVisitor.validationPassed()) {
-    throw new ValidationFailedException(validatingVisitor);
-  }
+  changeLog.validate(database);
 }

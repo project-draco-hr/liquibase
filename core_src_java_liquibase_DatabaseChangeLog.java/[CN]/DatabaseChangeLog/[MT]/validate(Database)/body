@@ -1,0 +1,9 @@
+{
+  ChangeLogIterator logIterator=new ChangeLogIterator(this,new DbmsChangeSetFilter(database));
+  ValidatingVisitor validatingVisitor=new ValidatingVisitor(database.getRanChangeSetList());
+  validatingVisitor.checkPreconditions(database,this);
+  logIterator.run(validatingVisitor);
+  if (!validatingVisitor.validationPassed()) {
+    throw new ValidationFailedException(validatingVisitor);
+  }
+}
