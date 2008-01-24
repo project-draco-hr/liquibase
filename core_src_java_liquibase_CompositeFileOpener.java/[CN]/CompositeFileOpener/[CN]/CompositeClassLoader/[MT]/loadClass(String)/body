@@ -1,0 +1,17 @@
+{
+  for (  Object classLoader1 : classLoaders) {
+    ClassLoader classLoader=(ClassLoader)classLoader1;
+    try {
+      return classLoader.loadClass(name);
+    }
+ catch (    ClassNotFoundException notFound) {
+    }
+  }
+  ClassLoader contextClassLoader=Thread.currentThread().getContextClassLoader();
+  if (contextClassLoader != null) {
+    return contextClassLoader.loadClass(name);
+  }
+ else {
+    throw new ClassNotFoundException(name);
+  }
+}
