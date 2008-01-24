@@ -4,6 +4,12 @@
   for (  String arg : args) {
     if (isCommand(arg)) {
       this.command=arg;
+      if (this.command.equalsIgnoreCase("migrate")) {
+        this.command="update";
+      }
+ else       if (this.command.equalsIgnoreCase("migrateSQL")) {
+        this.command="updateSQL";
+      }
       seenCommand=true;
     }
  else     if (seenCommand) {

@@ -1,0 +1,3 @@
+int changesToApply
+String contexts
+Writer output
