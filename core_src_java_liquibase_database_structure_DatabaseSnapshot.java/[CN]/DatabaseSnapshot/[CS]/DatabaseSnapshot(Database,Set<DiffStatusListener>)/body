@@ -1,3 +1,3 @@
 {
-  this(database,statusListeners,null);
+  this(database,statusListeners,database.getDefaultSchemaName());
 }

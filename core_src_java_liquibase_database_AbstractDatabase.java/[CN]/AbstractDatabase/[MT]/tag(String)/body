@@ -4,7 +4,7 @@
     if (totalRows == 0) {
       throw new JDBCException("Cannot tag an empty database");
     }
-    Date lastExecutedDate=(Date)this.getJdbcTemplate().queryForObject(createChangeToTagSQL(),Date.class);
+    Timestamp lastExecutedDate=(Timestamp)this.getJdbcTemplate().queryForObject(createChangeToTagSQL(),Timestamp.class);
     int rowsUpdated=this.getJdbcTemplate().update(createTagSQL(tagString,lastExecutedDate));
     if (rowsUpdated == 0) {
       throw new JDBCException("Did not tag database change log correctly");

@@ -1,3 +1,7 @@
 {
-  return new SqlStatement[]{new CreateViewStatement(getSchemaName(),getViewName(),getSelectQuery())};
+  boolean replaceIfExists=false;
+  if (getReplaceIfExists() != null && getReplaceIfExists()) {
+    replaceIfExists=true;
+  }
+  return new SqlStatement[]{new CreateViewStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getViewName(),getSelectQuery(),replaceIfExists)};
 }

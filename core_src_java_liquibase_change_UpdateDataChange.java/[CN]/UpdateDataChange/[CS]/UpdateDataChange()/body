@@ -1,0 +1,4 @@
+{
+  super("update","Update Data");
+  columns=new ArrayList<ColumnConfig>();
+}

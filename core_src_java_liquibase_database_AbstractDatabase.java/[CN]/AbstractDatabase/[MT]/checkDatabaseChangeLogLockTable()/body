@@ -3,7 +3,7 @@
   ResultSet rs=null;
   boolean knowMustInsertIntoLockTable=false;
   try {
-    rs=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogLockTableName(),new String[]{"TABLE"});
+    rs=connection.getMetaData().getTables(convertRequestedSchemaToCatalog(getDefaultSchemaName()),convertRequestedSchemaToSchema(getDefaultSchemaName()),getDatabaseChangeLogLockTableName(),new String[]{"TABLE"});
     if (!rs.next()) {
       if (!changeLogLockCreateAttempted) {
         changeLogLockCreateAttempted=true;

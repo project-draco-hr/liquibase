@@ -1,0 +1,5 @@
+{
+  DeleteStatement statement=new DeleteStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName());
+  statement.setWhereClause(whereClause);
+  return new SqlStatement[]{statement};
+}

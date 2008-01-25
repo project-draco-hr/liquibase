@@ -1,0 +1,4 @@
+String schemaName
+String viewName
+String selectQuery
+boolean replaceIfExists

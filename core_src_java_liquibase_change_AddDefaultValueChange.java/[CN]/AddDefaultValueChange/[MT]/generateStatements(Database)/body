@@ -17,5 +17,5 @@
  catch (  ParseException e) {
     throw new RuntimeException(e);
   }
-  return new SqlStatement[]{new AddDefaultValueStatement(getSchemaName(),getTableName(),getColumnName(),defaultValue)};
+  return new SqlStatement[]{new AddDefaultValueStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getColumnName(),defaultValue)};
 }

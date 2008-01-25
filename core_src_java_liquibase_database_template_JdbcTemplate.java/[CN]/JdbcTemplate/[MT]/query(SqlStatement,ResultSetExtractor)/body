@@ -1,8 +1,5 @@
 {
-  if (sql instanceof PreparedSqlStatement) {
-    return query(((PreparedSqlStatement)sql),rse);
-  }
- else   if (sql instanceof CallableSqlStatement) {
+  if (sql instanceof CallableSqlStatement) {
     throw new JDBCException("Direct query using CallableSqlStatement not currently implemented");
   }
 class QueryStatementCallback implements StatementCallback {

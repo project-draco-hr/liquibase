@@ -1,4 +1,0 @@
-{
-  outputStatement(sql);
-  return 0;
-}

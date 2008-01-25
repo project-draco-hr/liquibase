@@ -1,3 +1,0 @@
-{
-  return queryForObject(sql,args,getSingleColumnRowMapper(requiredType));
-}

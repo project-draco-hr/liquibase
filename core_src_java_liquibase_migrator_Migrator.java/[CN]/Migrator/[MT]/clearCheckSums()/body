@@ -4,8 +4,8 @@
   lockHandler.waitForLock();
   try {
     database.checkDatabaseChangeLogTable();
-    UpdateStatement updateStatement=new UpdateStatement(null,getDatabase().getDatabaseChangeLogTableName());
-    updateStatement.addNewColumnValue("MD5SUM",null,Types.VARCHAR);
+    UpdateStatement updateStatement=new UpdateStatement(getDatabase().getDefaultSchemaName(),getDatabase().getDatabaseChangeLogTableName());
+    updateStatement.addNewColumnValue("MD5SUM",null);
     getDatabase().getJdbcTemplate().execute(updateStatement);
     getDatabase().commit();
   }

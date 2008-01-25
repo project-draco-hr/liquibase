@@ -1,7 +1,7 @@
 {
-  String[] args=new String[]{"--promptForNonLocalDatabase=true","migrate"};
+  String[] args=new String[]{"--promptForNonLocalDatabase=true","update"};
   CommandLineMigrator cli=new CommandLineMigrator();
   cli.parseOptions(args);
   assertEquals(Boolean.TRUE,cli.promptForNonLocalDatabase);
-  assertEquals("migrate",cli.command);
+  assertEquals("update",cli.command);
 }

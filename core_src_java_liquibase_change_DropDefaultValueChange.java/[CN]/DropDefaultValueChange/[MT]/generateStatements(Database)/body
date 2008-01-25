@@ -1,3 +1,3 @@
 {
-  return new SqlStatement[]{new DropDefaultValueStatement(getSchemaName(),getTableName(),getColumnName())};
+  return new SqlStatement[]{new DropDefaultValueStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getColumnName())};
 }

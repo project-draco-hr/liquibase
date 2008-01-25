@@ -6,6 +6,12 @@
     return "TIME(" + super.getDateLiteral(isoDate) + ")";
   }
  else {
-    return "TIMESTAMP(" + super.getDateLiteral(isoDate) + ")";
+    String dateString=super.getDateLiteral(isoDate);
+    int decimalDigits=dateString.length() - dateString.indexOf(".") - 2;
+    String padding="";
+    for (int i=6; i > decimalDigits; i--) {
+      padding+="0";
+    }
+    return "TIMESTAMP(" + dateString.replaceFirst("'$",padding + "'") + ")";
   }
 }

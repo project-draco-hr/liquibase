@@ -1,3 +1,20 @@
 {
-  return "CREATE VIEW " + database.escapeViewName(getSchemaName(),getViewName()) + " AS "+ getSelectQuery();
+  String createClause;
+  if (database instanceof HsqlDatabase || database instanceof DB2Database || database instanceof CacheDatabase|| database instanceof MSSQLDatabase|| database instanceof DerbyDatabase) {
+    if (replaceIfExists) {
+      throw new StatementNotSupportedOnDatabaseException("replaceIfExists not supported",this,database);
+    }
+  }
+  if (database instanceof FirebirdDatabase) {
+    if (replaceIfExists) {
+      createClause="RECREATE VIEW";
+    }
+ else {
+      createClause="RECREATE VIEW";
+    }
+  }
+ else {
+    createClause="CREATE " + (replaceIfExists ? "OR REPLACE " : "") + "VIEW";
+  }
+  return createClause + " " + database.escapeViewName(getSchemaName(),getViewName())+ " AS "+ getSelectQuery();
 }

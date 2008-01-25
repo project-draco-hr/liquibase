@@ -3,6 +3,7 @@
     if (shouldRollBack()) {
       database.rollback();
     }
+    database.setDefaultSchemaName(null);
   }
   super.tearDown();
 }

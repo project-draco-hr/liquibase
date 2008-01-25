@@ -5,10 +5,10 @@
   List<SqlStatement> statementsToExecute=new ArrayList<SqlStatement>();
   boolean wroteToOutput=false;
   try {
-    checkTableRS=connection.getMetaData().getTables(getCatalogName(),getSchemaName(),getDatabaseChangeLogTableName(),new String[]{"TABLE"});
+    checkTableRS=connection.getMetaData().getTables(convertRequestedSchemaToCatalog(getDefaultSchemaName()),convertRequestedSchemaToSchema(getDefaultSchemaName()),getDatabaseChangeLogTableName(),new String[]{"TABLE"});
     if (checkTableRS.next()) {
       changeLogTableExists=true;
-      checkColumnsRS=connection.getMetaData().getColumns(getCatalogName(),getSchemaName(),getDatabaseChangeLogTableName(),null);
+      checkColumnsRS=connection.getMetaData().getColumns(convertRequestedSchemaToCatalog(getDefaultSchemaName()),convertRequestedSchemaToSchema(getDefaultSchemaName()),getDatabaseChangeLogTableName(),null);
       boolean hasDescription=false;
       boolean hasComments=false;
       boolean hasTag=false;
@@ -29,16 +29,16 @@
         }
       }
       if (!hasDescription) {
-        statementsToExecute.add(new AddColumnStatement(null,getDatabaseChangeLogTableName(),"DESCRIPTION","VARCHAR(255)",null));
+        statementsToExecute.add(new AddColumnStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName(),"DESCRIPTION","VARCHAR(255)",null));
       }
       if (!hasTag) {
-        statementsToExecute.add(new AddColumnStatement(null,getDatabaseChangeLogTableName(),"TAG","VARCHAR(255)",null));
+        statementsToExecute.add(new AddColumnStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName(),"TAG","VARCHAR(255)",null));
       }
       if (!hasComments) {
-        statementsToExecute.add(new AddColumnStatement(null,getDatabaseChangeLogTableName(),"COMMENTS","VARCHAR(255)",null));
+        statementsToExecute.add(new AddColumnStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName(),"COMMENTS","VARCHAR(255)",null));
       }
       if (!hasLiquibase) {
-        statementsToExecute.add(new AddColumnStatement(null,getDatabaseChangeLogTableName(),"LIQUIBASE","VARCHAR(255)",null));
+        statementsToExecute.add(new AddColumnStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName(),"LIQUIBASE","VARCHAR(255)",null));
       }
     }
  else     if (!changeLogCreateAttempted) {

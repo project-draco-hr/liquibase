@@ -19,13 +19,14 @@
       return false;
     }
  else {
-      UpdateStatement updateStatement=new UpdateStatement(null,database.getDatabaseChangeLogLockTableName());
-      updateStatement.addNewColumnValue("LOCKED",true,Types.BOOLEAN);
-      updateStatement.addNewColumnValue("LOCKGRANTED",new Timestamp(new java.util.Date().getTime()),Types.TIMESTAMP);
-      updateStatement.addNewColumnValue("LOCKEDBY",InetAddress.getLocalHost().getCanonicalHostName() + " (" + InetAddress.getLocalHost().getHostAddress()+ ")",Types.VARCHAR);
+      UpdateStatement updateStatement=new UpdateStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName());
+      updateStatement.addNewColumnValue("LOCKED",true);
+      updateStatement.addNewColumnValue("LOCKGRANTED",new Timestamp(new java.util.Date().getTime()));
+      updateStatement.addNewColumnValue("LOCKEDBY",InetAddress.getLocalHost().getCanonicalHostName() + " (" + InetAddress.getLocalHost().getHostAddress()+ ")");
       updateStatement.setWhereClause("ID  = 1");
       database.getJdbcTemplate().comment("Lock Database");
-      if (database.getJdbcTemplate().update(updateStatement) != 1) {
+      int rowsUpdated=database.getJdbcTemplate().update(updateStatement);
+      if (rowsUpdated != 1) {
         if (!database.getJdbcTemplate().executesStatements()) {
         }
  else {

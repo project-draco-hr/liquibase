@@ -1,0 +1,6 @@
+{
+  targetDatabase=null;
+  baseDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(originalDatabase);
+  baseDatabase.setConnection(originalDatabase);
+  baseDatabase.setDefaultSchemaName(schema);
+}

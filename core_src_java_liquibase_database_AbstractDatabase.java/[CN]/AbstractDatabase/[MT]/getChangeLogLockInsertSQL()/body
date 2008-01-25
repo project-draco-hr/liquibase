@@ -1,3 +1,3 @@
 {
-  return new InsertStatement(null,getDatabaseChangeLogLockTableName()).addColumnValue("ID",1).addColumnValue("LOCKED",Boolean.FALSE);
+  return new InsertStatement(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()).addColumnValue("ID",1).addColumnValue("LOCKED",Boolean.FALSE);
 }

@@ -1,0 +1,11 @@
+{
+  try {
+    Method method=conn.getClass().getMethod("setRemarksReporting",Boolean.TYPE);
+    method.setAccessible(true);
+    method.invoke(conn,true);
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+  super.setConnection(conn);
+}

@@ -1,0 +1,8 @@
+{
+  UpdateStatement statement=new UpdateStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName());
+  for (  ColumnConfig column : columns) {
+    statement.addNewColumnValue(column.getName(),column.getValueObject());
+  }
+  statement.setWhereClause(whereClause);
+  return new SqlStatement[]{statement};
+}

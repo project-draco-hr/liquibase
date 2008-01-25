@@ -1,5 +1,5 @@
 {
-  Diff diff=new Diff(originalDatabase);
+  Diff diff=new Diff(originalDatabase,defaultSchemaName);
   diff.addStatusListener(new OutDiffStatusListener());
   DiffResult diffResult=diff.compare();
   PrintStream outputStream=System.out;

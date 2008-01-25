@@ -1,5 +1,5 @@
 {
-  InsertStatement statement=new InsertStatement(getSchemaName(),getTableName());
+  InsertStatement statement=new InsertStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName());
   for (  ColumnConfig column : columns) {
     statement.addColumnValue(column.getName(),column.getValueObject());
   }

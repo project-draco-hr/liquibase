@@ -1,3 +1,3 @@
 {
-  return new SqlStatement[]{new DropForeignKeyConstraintStatement(getBaseTableSchemaName(),getBaseTableName(),getConstraintName())};
+  return new SqlStatement[]{new DropForeignKeyConstraintStatement(getBaseTableSchemaName() == null ? database.getDefaultSchemaName() : getBaseTableSchemaName(),getBaseTableName(),getConstraintName())};
 }

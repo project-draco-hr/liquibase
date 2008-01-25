@@ -1,3 +1,0 @@
-{
-  query(sql,pss,new RowCallbackHandlerResultSetExtractor(rch));
-}

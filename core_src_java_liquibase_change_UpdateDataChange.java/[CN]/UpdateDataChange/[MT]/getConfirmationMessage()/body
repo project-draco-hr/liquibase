@@ -1,0 +1,3 @@
+{
+  return "Data updated in " + getTableName();
+}

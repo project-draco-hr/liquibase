@@ -1,4 +1,0 @@
-PreparedSqlStatement sql
-Object[] args
-int[] argTypes
-ResultSetExtractor rse

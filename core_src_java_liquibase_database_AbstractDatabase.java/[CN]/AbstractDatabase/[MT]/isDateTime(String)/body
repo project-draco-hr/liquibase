@@ -1,3 +1,3 @@
 {
-  return isoDate.length() == "yyyy-MM-ddThh:mm:ss".length();
+  return isoDate.length() >= "yyyy-MM-ddThh:mm:ss".length();
 }

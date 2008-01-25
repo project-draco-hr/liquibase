@@ -1,4 +1,0 @@
-{
-  List results=(List)query(sql,args,new RowMapperResultSetExtractor(rowMapper,1));
-  return JdbcUtils.requiredSingleResult(results);
-}

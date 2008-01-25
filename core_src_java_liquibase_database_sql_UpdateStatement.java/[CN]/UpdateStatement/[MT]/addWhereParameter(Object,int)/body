@@ -1,4 +1,0 @@
-{
-  this.whereParameters.add(value);
-  this.whereParameterTypes.add(type);
-}

@@ -1,6 +1,6 @@
 {
   final String definition="SELECT * FROM " + TABLE_NAME;
-  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateViewStatement(null,VIEW_NAME,definition)){
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateViewStatement(null,VIEW_NAME,definition,false)){
     protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getView(VIEW_NAME));
     }

@@ -1,5 +1,5 @@
 {
-  String[] args=new String[]{"--driver=DRIVER","--username=USERNAME","--password=PASSWORD","--url=URL","--changeLogFile=FILE","--classpath=CLASSPATH;CLASSPATH2","--contexts=CONTEXT1,CONTEXT2","--promptForNonLocalDatabase=true","migrate"};
+  String[] args=new String[]{"--driver=DRIVER","--username=USERNAME","--password=PASSWORD","--url=URL","--changeLogFile=FILE","--classpath=CLASSPATH;CLASSPATH2","--contexts=CONTEXT1,CONTEXT2","--promptForNonLocalDatabase=true","update"};
   CommandLineMigrator cli=new CommandLineMigrator();
   cli.parseOptions(args);
   assertEquals("DRIVER",cli.driver);
@@ -10,5 +10,5 @@
   assertEquals("CLASSPATH;CLASSPATH2",cli.classpath);
   assertEquals("CONTEXT1,CONTEXT2",cli.contexts);
   assertEquals(Boolean.TRUE,cli.promptForNonLocalDatabase);
-  assertEquals("migrate",cli.command);
+  assertEquals("update",cli.command);
 }

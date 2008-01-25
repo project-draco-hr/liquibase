@@ -11,5 +11,5 @@
   if (getDeleteCascade() != null) {
     deleteCascade=getDeleteCascade();
   }
-  return new SqlStatement[]{new AddForeignKeyConstraintStatement(getConstraintName(),getBaseTableSchemaName(),getBaseTableName(),getBaseColumnNames(),getReferencedTableSchemaName(),getReferencedTableName(),getReferencedColumnNames()).setDeferrable(deferrable).setInitiallyDeferred(initiallyDeferred).setDeleteCascade(deleteCascade)};
+  return new SqlStatement[]{new AddForeignKeyConstraintStatement(getConstraintName(),getBaseTableSchemaName() == null ? database.getDefaultSchemaName() : getBaseTableSchemaName(),getBaseTableName(),getBaseColumnNames(),getReferencedTableSchemaName() == null ? database.getDefaultSchemaName() : getReferencedTableSchemaName(),getReferencedTableName(),getReferencedColumnNames()).setDeferrable(deferrable).setInitiallyDeferred(initiallyDeferred).setDeleteCascade(deleteCascade)};
 }

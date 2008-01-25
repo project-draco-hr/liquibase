@@ -7,6 +7,9 @@
   if (StringUtils.trimToNull(tablespace) != null) {
     element.setAttribute("tablespace",tablespace);
   }
+  if (StringUtils.trimToNull(remarks) != null) {
+    element.setAttribute("remarks",remarks);
+  }
   for (  ColumnConfig column : getColumns()) {
     element.appendChild(column.createNode(currentChangeLogFileDOM));
   }

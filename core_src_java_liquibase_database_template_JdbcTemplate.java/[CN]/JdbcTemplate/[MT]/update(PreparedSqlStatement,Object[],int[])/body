@@ -1,3 +1,0 @@
-{
-  return update(sql,new ArgTypePreparedStatementSetter(args,argTypes));
-}

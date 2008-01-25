@@ -1,7 +1,7 @@
 {
   UpdateStatement statement=new UpdateStatement(null,getDatabaseChangeLogTableName());
-  statement.addNewColumnValue("TAG",tagName,Types.VARCHAR);
+  statement.addNewColumnValue("TAG",tagName);
   statement.setWhereClause("DATEEXECUTED = ?");
-  statement.addWhereParameter(dateExecuted,Types.TIMESTAMP);
+  statement.addWhereParameter(dateExecuted);
   return statement;
 }

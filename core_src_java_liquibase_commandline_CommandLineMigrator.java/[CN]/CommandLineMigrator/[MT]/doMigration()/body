@@ -69,6 +69,7 @@
   }
   try {
     Database database=databaseFactory.findCorrectDatabaseImplementation(connection);
+    database.setDefaultSchemaName(StringUtils.trimToNull(defaultSchemaName));
     Migrator migrator=new Migrator(changeLogFile,new CompositeFileOpener(fsOpener,clOpener),database);
     if ("listLocks".equalsIgnoreCase(command)) {
       migrator.reportLocks(System.out);

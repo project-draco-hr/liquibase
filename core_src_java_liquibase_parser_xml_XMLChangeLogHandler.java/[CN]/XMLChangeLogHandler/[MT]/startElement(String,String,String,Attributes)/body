@@ -62,6 +62,9 @@
  else       if (change instanceof InsertDataChange) {
         ((InsertDataChange)change).addColumn(column);
       }
+ else       if (change instanceof UpdateDataChange) {
+        ((UpdateDataChange)change).addColumn(column);
+      }
  else       if (change instanceof CreateIndexChange) {
         ((CreateIndexChange)change).addColumn(column);
       }
@@ -117,6 +120,9 @@
  else {
         throw new MigrationFailedException(changeSet,"'param' unexpected in " + qName);
       }
+    }
+ else     if ("where".equals(qName)) {
+      text=new StringBuffer();
     }
  else     if (change instanceof ExecuteShellCommandChange && "arg".equals(qName)) {
       ((ExecuteShellCommandChange)change).addArg(atts.getValue("value"));

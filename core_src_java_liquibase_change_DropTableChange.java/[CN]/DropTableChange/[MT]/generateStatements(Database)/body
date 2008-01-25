@@ -3,5 +3,5 @@
   if (isCascadeConstraints() != null) {
     constraints=isCascadeConstraints();
   }
-  return new SqlStatement[]{new DropTableStatement(getSchemaName(),getTableName(),constraints)};
+  return new SqlStatement[]{new DropTableStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),constraints)};
 }

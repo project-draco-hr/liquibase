@@ -1,3 +1,0 @@
-{
-  query(sql,new ArgPreparedStatementSetter(args),rch);
-}

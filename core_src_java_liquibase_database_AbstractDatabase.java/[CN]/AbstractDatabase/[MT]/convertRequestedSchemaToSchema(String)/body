@@ -1,11 +1,10 @@
 {
-  if (getSchemaName() == null) {
-    return null;
+  String returnSchema=requestedSchema;
+  if (returnSchema == null) {
+    returnSchema=getDefaultDatabaseSchemaName();
   }
- else {
-    if (requestedSchema == null) {
-      return getSchemaName();
-    }
-    return StringUtils.trimToNull(requestedSchema);
+  if (returnSchema != null) {
+    returnSchema=returnSchema.toUpperCase();
   }
+  return returnSchema;
 }

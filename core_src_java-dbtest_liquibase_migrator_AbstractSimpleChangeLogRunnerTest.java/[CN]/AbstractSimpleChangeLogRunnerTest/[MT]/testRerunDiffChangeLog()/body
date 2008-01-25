@@ -4,7 +4,7 @@
   }
   runCompleteChangeLog();
   DatabaseSnapshot originalSnapshot=new DatabaseSnapshot(database);
-  Diff diff=new Diff(database.getConnection());
+  Diff diff=new Diff(database.getConnection(),(String)null);
   DiffResult diffResult=diff.compare();
   File tempFile=File.createTempFile("liquibase-test",".xml");
   FileOutputStream output=new FileOutputStream(tempFile);
