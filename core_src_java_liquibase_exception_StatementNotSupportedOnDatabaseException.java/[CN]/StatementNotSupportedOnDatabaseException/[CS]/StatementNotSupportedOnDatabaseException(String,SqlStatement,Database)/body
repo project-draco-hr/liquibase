@@ -1,6 +1,4 @@
 {
   super(statement.getClass().getName() + " is not supported on " + database.getProductName()+ ": "+ reason);
-  this.statement=statement;
-  this.database=database;
   this.reason=reason;
 }

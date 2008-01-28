@@ -1,5 +1,3 @@
 {
   super(statement.getClass().getName() + " is not supported on " + database.getProductName());
-  this.statement=statement;
-  this.database=database;
 }
