@@ -1,34 +1,8 @@
 {
   FileOpener antFO=new AntFileOpener(getProject(),classpath);
   FileOpener fsFO=new FileSystemFileOpener();
-  String[] strings=classpath.list();
-  final List<URL> taskClassPath=new ArrayList<URL>();
-  for (int i=0; i < strings.length; i++) {
-    URL url=new File(strings[i]).toURL();
-    taskClassPath.add(url);
-  }
-  URLClassLoader loader=AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>(){
-    public URLClassLoader run(){
-      return new URLClassLoader(taskClassPath.toArray(new URL[taskClassPath.size()]));
-    }
-  }
-);
-  String driverClassName=getDriver();
-  if (driverClassName == null) {
-    driverClassName=DatabaseFactory.getInstance().findDefaultDriver(getUrl());
-  }
-  if (driverClassName == null) {
-    throw new JDBCException("driver not specified and no default could be found for the given url");
-  }
-  Driver driver=(Driver)Class.forName(driverClassName,true,loader).newInstance();
-  Properties info=new Properties();
-  info.put("user",getUsername());
-  info.put("password",getPassword());
-  Connection connection=driver.connect(getUrl(),info);
-  if (connection == null) {
-    throw new JDBCException("Connection could not be created to " + getUrl() + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
-  }
-  Migrator migrator=new Migrator(getChangeLogFile().trim(),new CompositeFileOpener(antFO,fsFO),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
+  Database database=createDatabaseObject(getDriver(),getUrl(),getUsername(),getPassword(),getDefaultSchemaName());
+  Migrator migrator=new Migrator(getChangeLogFile().trim(),new CompositeFileOpener(antFO,fsFO),database);
   migrator.setCurrentDateTimeFunction(currentDateTimeFunction);
   return migrator;
 }

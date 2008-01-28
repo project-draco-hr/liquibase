@@ -55,21 +55,21 @@
   if (connection == null) {
     throw new JDBCException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
-  if ("diff".equalsIgnoreCase(command)) {
-    doDiff(connection,createConnectionFromCommandParams(commandParams));
-    return;
-  }
- else   if ("diffChangeLog".equalsIgnoreCase(command)) {
-    doDiffToChangeLog(connection,createConnectionFromCommandParams(commandParams));
-    return;
-  }
- else   if ("generateChangeLog".equalsIgnoreCase(command)) {
-    doGenerateChangeLog(connection);
-    return;
-  }
   try {
     Database database=databaseFactory.findCorrectDatabaseImplementation(connection);
     database.setDefaultSchemaName(StringUtils.trimToNull(defaultSchemaName));
+    if ("diff".equalsIgnoreCase(command)) {
+      doDiff(database,createDatabaseFromCommandParams(commandParams));
+      return;
+    }
+ else     if ("diffChangeLog".equalsIgnoreCase(command)) {
+      doDiffToChangeLog(database,createDatabaseFromCommandParams(commandParams));
+      return;
+    }
+ else     if ("generateChangeLog".equalsIgnoreCase(command)) {
+      doGenerateChangeLog(database);
+      return;
+    }
     Migrator migrator=new Migrator(changeLogFile,new CompositeFileOpener(fsOpener,clOpener),database);
     if ("listLocks".equalsIgnoreCase(command)) {
       migrator.reportLocks(System.out);

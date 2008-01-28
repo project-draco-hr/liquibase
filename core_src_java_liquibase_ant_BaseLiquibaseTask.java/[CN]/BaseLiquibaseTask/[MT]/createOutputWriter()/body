@@ -1,0 +1,6 @@
+{
+  if (outputFile == null) {
+    return null;
+  }
+  return new FileWriter(new File(getOutputFile()));
+}

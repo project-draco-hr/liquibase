@@ -1,0 +1,11 @@
+{
+  Diff diff=new Diff(originalDatabase,defaultSchemaName);
+  diff.addStatusListener(new OutDiffStatusListener());
+  DiffResult diffResult=diff.compare();
+  PrintStream outputStream=System.out;
+  if (StringUtils.trimToNull(changeLogFile) != null) {
+    File changeFile=new File(changeLogFile);
+    outputStream=new PrintStream(changeFile);
+  }
+  diffResult.printChangeLog(outputStream,originalDatabase);
+}

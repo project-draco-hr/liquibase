@@ -1,6 +1,6 @@
 {
-  DatabaseMigratorTask databaseMigratorTask=new DatabaseMigratorTask();
+  DatabaseUpdateTask databaseUpdateTask=new DatabaseUpdateTask();
   Project project=new Project();
-  databaseMigratorTask.setProject(project);
-  assertEquals(project,databaseMigratorTask.createClasspath().getProject());
+  databaseUpdateTask.setProject(project);
+  assertEquals(project,databaseUpdateTask.createClasspath().getProject());
 }

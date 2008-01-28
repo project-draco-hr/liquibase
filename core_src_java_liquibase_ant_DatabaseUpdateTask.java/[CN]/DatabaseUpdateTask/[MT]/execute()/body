@@ -1,0 +1,30 @@
+{
+  if (!shouldRun()) {
+    return;
+  }
+  Migrator migrator=null;
+  try {
+    migrator=createMigrator();
+    if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration() && UIFactory.getInstance().getFacade().promptForNonLocalDatabase(migrator.getDatabase())) {
+      throw new BuildException("Chose not to run against non-production database");
+    }
+    if (isDropFirst()) {
+      migrator.dropAll();
+    }
+    Writer writer=createOutputWriter();
+    if (writer == null) {
+      migrator.update(getContexts());
+    }
+ else {
+      migrator.update(getContexts(),writer);
+      writer.flush();
+      writer.close();
+    }
+  }
+ catch (  Exception e) {
+    throw new BuildException(e);
+  }
+ finally {
+    closeDatabase(migrator);
+  }
+}

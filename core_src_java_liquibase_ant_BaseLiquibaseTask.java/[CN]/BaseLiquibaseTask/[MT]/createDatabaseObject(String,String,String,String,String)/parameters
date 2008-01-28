@@ -1,0 +1,5 @@
+String driverClassName
+String databaseUrl
+String username
+String password
+String defaultSchemaName

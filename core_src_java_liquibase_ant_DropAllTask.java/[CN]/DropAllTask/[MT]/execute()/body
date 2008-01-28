@@ -1,0 +1,19 @@
+{
+  Migrator migrator=null;
+  try {
+    migrator=createMigrator();
+    if (StringUtils.trimToNull(schemas) != null) {
+      List<String> schemas=StringUtils.splitAndTrim(this.schemas,",");
+      migrator.dropAll(schemas.toArray(new String[schemas.size()]));
+    }
+ else {
+      migrator.dropAll();
+    }
+  }
+ catch (  Exception e) {
+    throw new BuildException(e);
+  }
+ finally {
+    closeDatabase(migrator);
+  }
+}

@@ -1,0 +1,8 @@
+{
+  String shouldRunProperty=System.getProperty(Migrator.SHOULD_RUN_SYSTEM_PROPERTY);
+  if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
+    log("Migrator did not run because '" + Migrator.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
+    return false;
+  }
+  return true;
+}

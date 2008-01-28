@@ -3,7 +3,7 @@
     return;
   }
   runCompleteChangeLog();
-  Diff diff=new Diff(database.getConnection(),database.getConnection());
+  Diff diff=new Diff(database,database);
   DiffResult diffResult=diff.compare();
   assertEquals(0,diffResult.getMissingColumns().size());
   assertEquals(0,diffResult.getMissingForeignKeys().size());

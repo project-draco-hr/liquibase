@@ -1,0 +1,16 @@
+{
+  if (StringUtils.trimToNull(getOutputDirectory()) == null) {
+    throw new BuildException("dbDoc requires outputDirectory to be set");
+  }
+  Migrator migrator=null;
+  try {
+    migrator=createMigrator();
+    migrator.generateDocumentation(getOutputDirectory());
+  }
+ catch (  Exception e) {
+    throw new BuildException(e);
+  }
+ finally {
+    closeDatabase(migrator);
+  }
+}

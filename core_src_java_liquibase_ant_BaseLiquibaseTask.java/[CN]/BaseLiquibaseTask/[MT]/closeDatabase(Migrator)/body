@@ -1,0 +1,10 @@
+{
+  if (migrator != null && migrator.getDatabase() != null && migrator.getDatabase().getConnection() != null) {
+    try {
+      migrator.getDatabase().getConnection().close();
+    }
+ catch (    SQLException e) {
+      ;
+    }
+  }
+}

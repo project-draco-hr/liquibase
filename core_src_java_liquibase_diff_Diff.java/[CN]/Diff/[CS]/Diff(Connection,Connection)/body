@@ -1,6 +1,0 @@
-{
-  baseDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(baseConnection);
-  baseDatabase.setConnection(baseConnection);
-  targetDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(targetConnection);
-  targetDatabase.setConnection(targetConnection);
-}

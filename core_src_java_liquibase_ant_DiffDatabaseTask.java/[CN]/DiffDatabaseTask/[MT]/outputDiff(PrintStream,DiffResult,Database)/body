@@ -1,0 +1,3 @@
+{
+  diffResult.printResult(writer);
+}

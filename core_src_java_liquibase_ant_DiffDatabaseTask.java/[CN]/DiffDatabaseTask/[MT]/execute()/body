@@ -1,0 +1,31 @@
+{
+  if (StringUtils.trimToNull(getBaseUrl()) == null) {
+    throw new BuildException("diffDatabase requires baseUrl to be set");
+  }
+  if (StringUtils.trimToNull(getBaseUsername()) == null) {
+    throw new BuildException("diffDatabase requires baseUsername to be set");
+  }
+  if (StringUtils.trimToNull(getBasePassword()) == null) {
+    throw new BuildException("diffDatabase requires basePassword to be set");
+  }
+  Migrator migrator=null;
+  try {
+    PrintStream writer=createPrintStream();
+    if (writer == null) {
+      throw new BuildException("diffDatabase requires outputFile to be set");
+    }
+    migrator=createMigrator();
+    Database baseDatabase=createDatabaseObject(getBaseDriver(),getBaseUrl(),getBaseUsername(),getBasePassword(),getBaseDefaultSchemaName());
+    Diff diff=new Diff(baseDatabase,migrator.getDatabase());
+    DiffResult diffResult=diff.compare();
+    outputDiff(writer,diffResult,migrator.getDatabase());
+    writer.flush();
+    writer.close();
+  }
+ catch (  Exception e) {
+    throw new BuildException(e);
+  }
+ finally {
+    closeDatabase(migrator);
+  }
+}

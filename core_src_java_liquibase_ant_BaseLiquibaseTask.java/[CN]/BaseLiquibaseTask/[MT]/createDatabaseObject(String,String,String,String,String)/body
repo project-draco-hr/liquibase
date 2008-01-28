@@ -1,0 +1,31 @@
+{
+  String[] strings=classpath.list();
+  final List<URL> taskClassPath=new ArrayList<URL>();
+  for (  String string : strings) {
+    URL url=new File(string).toURL();
+    taskClassPath.add(url);
+  }
+  URLClassLoader loader=AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>(){
+    public URLClassLoader run(){
+      return new URLClassLoader(taskClassPath.toArray(new URL[taskClassPath.size()]));
+    }
+  }
+);
+  if (driverClassName == null) {
+    driverClassName=DatabaseFactory.getInstance().findDefaultDriver(databaseUrl);
+  }
+  if (driverClassName == null) {
+    throw new JDBCException("driver not specified and no default could be found for " + databaseUrl);
+  }
+  Driver driver=(Driver)Class.forName(driverClassName,true,loader).newInstance();
+  Properties info=new Properties();
+  info.put("user",username);
+  info.put("password",password);
+  Connection connection=driver.connect(databaseUrl,info);
+  if (connection == null) {
+    throw new JDBCException("Connection could not be created to " + databaseUrl + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
+  }
+  Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+  database.setDefaultSchemaName(defaultSchemaName);
+  return database;
+}

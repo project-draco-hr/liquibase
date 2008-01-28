@@ -1,0 +1,6 @@
+{
+  if (outputFile == null) {
+    return null;
+  }
+  return new PrintStream(new File(getOutputFile()));
+}

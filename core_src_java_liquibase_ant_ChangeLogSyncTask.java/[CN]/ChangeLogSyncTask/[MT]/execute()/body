@@ -1,0 +1,21 @@
+{
+  Migrator migrator=null;
+  try {
+    migrator=createMigrator();
+    Writer writer=createOutputWriter();
+    if (writer == null) {
+      migrator.changeLogSync(getContexts());
+    }
+ else {
+      migrator.changeLogSync(getContexts(),writer);
+      writer.flush();
+      writer.close();
+    }
+  }
+ catch (  Exception e) {
+    throw new BuildException(e);
+  }
+ finally {
+    closeDatabase(migrator);
+  }
+}

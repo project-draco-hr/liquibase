@@ -1,0 +1,16 @@
+{
+  if (StringUtils.trimToNull(getTag()) == null) {
+    throw new BuildException("tagDatabase requires tag parameter to be set");
+  }
+  Migrator migrator=null;
+  try {
+    migrator=createMigrator();
+    migrator.tag(getTag());
+  }
+ catch (  Exception e) {
+    throw new BuildException(e);
+  }
+ finally {
+    closeDatabase(migrator);
+  }
+}
