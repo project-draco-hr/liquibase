@@ -26,8 +26,7 @@
       }
     }
  catch (    Exception e) {
-      getLog().warn(e);
-      throw new MojoExecutionException("Unknown parameter: '" + key + "'",e);
+      getLog().info("  '" + key + "' in properties file is not being used by this "+ "task.");
     }
   }
 }
