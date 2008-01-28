@@ -1,28 +1,23 @@
 {
-  try {
-    if (baseSnapshot == null) {
-      baseSnapshot=new DatabaseSnapshot(baseDatabase,statusListeners);
+  if (baseSnapshot == null) {
+    baseSnapshot=new DatabaseSnapshot(baseDatabase,statusListeners);
+  }
+  if (targetSnapshot == null) {
+    if (targetDatabase == null) {
+      targetSnapshot=new DatabaseSnapshot();
     }
-    if (targetSnapshot == null) {
-      if (targetDatabase == null) {
-        targetSnapshot=new DatabaseSnapshot();
-      }
  else {
-        targetSnapshot=new DatabaseSnapshot(targetDatabase,statusListeners);
-      }
+      targetSnapshot=new DatabaseSnapshot(targetDatabase,statusListeners);
     }
-    DiffResult diffResult=new DiffResult(baseSnapshot,targetSnapshot);
-    checkVersionInfo(diffResult);
-    checkTables(diffResult);
-    checkViews(diffResult);
-    checkColumns(diffResult);
-    checkForeignKeys(diffResult);
-    checkPrimaryKeys(diffResult);
-    checkIndexes(diffResult);
-    checkSequences(diffResult);
-    return diffResult;
   }
- catch (  SQLException e) {
-    throw new JDBCException();
-  }
+  DiffResult diffResult=new DiffResult(baseSnapshot,targetSnapshot);
+  checkVersionInfo(diffResult);
+  checkTables(diffResult);
+  checkViews(diffResult);
+  checkColumns(diffResult);
+  checkForeignKeys(diffResult);
+  checkPrimaryKeys(diffResult);
+  checkIndexes(diffResult);
+  checkSequences(diffResult);
+  return diffResult;
 }

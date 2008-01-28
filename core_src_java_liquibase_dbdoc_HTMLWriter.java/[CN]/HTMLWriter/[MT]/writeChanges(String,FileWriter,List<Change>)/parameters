@@ -1,4 +1,3 @@
 String title
 FileWriter fileWriter
-Object object
 List<Change> changes

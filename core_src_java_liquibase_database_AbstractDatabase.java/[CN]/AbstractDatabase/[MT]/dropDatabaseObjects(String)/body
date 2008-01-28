@@ -1,5 +1,4 @@
 {
-  DatabaseConnection conn=getConnection();
   try {
     DatabaseSnapshot snapshot=new DatabaseSnapshot(this,new HashSet<DiffStatusListener>(),schema);
     List<Change> dropChanges=new ArrayList<Change>();

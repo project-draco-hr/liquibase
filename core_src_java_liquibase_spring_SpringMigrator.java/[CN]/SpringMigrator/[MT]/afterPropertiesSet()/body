@@ -3,7 +3,6 @@
   try {
     c=getDataSource().getConnection();
     Migrator migrator=createMigrator(c);
-    setup(migrator);
     if (isWriteSqlFileEnabled() && getSqlOutputDir() != null) {
       if (migrator.listUnrunChangeSets(getContexts()).size() > 0) {
         log.log(Level.WARNING,getExecuteDisabledWarningMessage());
@@ -16,9 +15,6 @@
   }
  catch (  SQLException e) {
     throw new JDBCException(e);
-  }
-catch (  IOException e) {
-    throw new LiquibaseException(e);
   }
  finally {
     if (c != null) {

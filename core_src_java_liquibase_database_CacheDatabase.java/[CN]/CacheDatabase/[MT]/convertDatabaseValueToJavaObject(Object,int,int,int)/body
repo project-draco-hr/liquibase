@@ -6,7 +6,7 @@
         defaultValue=stringDefaultValue.substring(1,stringDefaultValue.length() - 1);
       }
  else       if (stringDefaultValue.startsWith("$")) {
-        defaultValue="OBJECTSCRIPT '" + ((String)defaultValue) + "'";
+        defaultValue="OBJECTSCRIPT '" + defaultValue + "'";
       }
     }
   }

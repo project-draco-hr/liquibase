@@ -4,7 +4,6 @@
     fileWriter.append("<html>");
     writeHeader(object,fileWriter);
     fileWriter.append("<body BGCOLOR=\"white\" onload=\"windowTitle();\">");
-    writeNav(fileWriter);
     fileWriter.append("<H2>").append(createTitle(object)).append("</H2>\n");
     writeBody(fileWriter,object,ranChanges,changesToRun);
     writeFooter(fileWriter,changeLog);

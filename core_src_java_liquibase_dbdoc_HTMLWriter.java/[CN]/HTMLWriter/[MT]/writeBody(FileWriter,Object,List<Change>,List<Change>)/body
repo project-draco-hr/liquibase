@@ -1,5 +1,5 @@
 {
   writeCustomHTML(fileWriter,object,ranChanges,database);
-  writeChanges("Pending Changes",fileWriter,object,changesToRun);
-  writeChanges("Past Changes",fileWriter,object,ranChanges);
+  writeChanges("Pending Changes",fileWriter,changesToRun);
+  writeChanges("Past Changes",fileWriter,ranChanges);
 }

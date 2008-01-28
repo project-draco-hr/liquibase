@@ -5,7 +5,8 @@
     method.invoke(conn,true);
   }
  catch (  Exception e) {
-    e.printStackTrace();
+    log.info("Could not set remarks reporting on OracleDatabase: " + e.getMessage());
+    ;
   }
   super.setConnection(conn);
 }

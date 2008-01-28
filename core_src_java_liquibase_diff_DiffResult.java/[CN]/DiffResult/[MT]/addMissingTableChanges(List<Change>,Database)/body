@@ -14,9 +14,7 @@
       columnConfig.setType(column.getDataTypeString(database));
       ConstraintsConfig constraintsConfig=null;
       if (column.isPrimaryKey()) {
-        if (constraintsConfig == null) {
-          constraintsConfig=new ConstraintsConfig();
-        }
+        constraintsConfig=new ConstraintsConfig();
         constraintsConfig.setPrimaryKey(true);
         PrimaryKey pkToRemove=null;
         for (        PrimaryKey pk : getMissingPrimaryKeys()) {

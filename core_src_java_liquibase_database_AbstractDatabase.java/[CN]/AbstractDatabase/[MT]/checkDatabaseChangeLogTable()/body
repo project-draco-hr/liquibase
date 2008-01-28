@@ -3,7 +3,6 @@
   ResultSet checkTableRS=null;
   ResultSet checkColumnsRS=null;
   List<SqlStatement> statementsToExecute=new ArrayList<SqlStatement>();
-  boolean wroteToOutput=false;
   try {
     checkTableRS=connection.getMetaData().getTables(convertRequestedSchemaToCatalog(getDefaultSchemaName()),convertRequestedSchemaToSchema(getDefaultSchemaName()),getDatabaseChangeLogTableName(),new String[]{"TABLE"});
     if (checkTableRS.next()) {

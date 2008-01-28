@@ -1,5 +1,5 @@
 {
-  changeLogWriter=new ChangeLogWriter(fileOpener,rootOutputDir);
+  ChangeLogWriter changeLogWriter=new ChangeLogWriter(fileOpener,rootOutputDir);
   HTMLWriter authorWriter=new AuthorWriter(rootOutputDir,database);
   HTMLWriter tableWriter=new TableWriter(rootOutputDir,database);
   HTMLWriter columnWriter=new ColumnWriter(rootOutputDir,database);
