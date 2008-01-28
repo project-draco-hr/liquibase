@@ -15,11 +15,11 @@
   finally {
     output.close();
   }
-  Migrator migrator=createMigrator(tempFile.getName());
-  migrator.dropAll(getSchemasToDrop());
-  migrator=createMigrator(tempFile.getName());
+  Liquibase liquibase=createLiquibase(tempFile.getName());
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(tempFile.getName());
   try {
-    migrator.update(this.contexts);
+    liquibase.update(this.contexts);
   }
  catch (  ValidationFailedException e) {
     e.printDescriptiveError(System.out);

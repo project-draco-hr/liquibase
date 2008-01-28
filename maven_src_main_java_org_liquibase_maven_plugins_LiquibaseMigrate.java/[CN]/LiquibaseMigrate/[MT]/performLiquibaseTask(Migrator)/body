@@ -1,4 +1,0 @@
-{
-  super.performLiquibaseTask(migrator);
-  migrator.update(contexts);
-}

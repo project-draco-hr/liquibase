@@ -2,21 +2,21 @@
   if (!shouldRun()) {
     return;
   }
-  Migrator migrator=null;
+  Liquibase liquibase=null;
   try {
-    migrator=createMigrator();
-    if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration() && UIFactory.getInstance().getFacade().promptForNonLocalDatabase(migrator.getDatabase())) {
+    liquibase=createLiquibase();
+    if (isPromptOnNonLocalDatabase() && !liquibase.isSafeToRunMigration() && UIFactory.getInstance().getFacade().promptForNonLocalDatabase(liquibase.getDatabase())) {
       throw new BuildException("Chose not to run against non-production database");
     }
     if (isDropFirst()) {
-      migrator.dropAll();
+      liquibase.dropAll();
     }
     Writer writer=createOutputWriter();
     if (writer == null) {
-      migrator.update(getContexts());
+      liquibase.update(getContexts());
     }
  else {
-      migrator.update(getContexts(),writer);
+      liquibase.update(getContexts(),writer);
       writer.flush();
       writer.close();
     }
@@ -25,6 +25,6 @@
     throw new BuildException(e);
   }
  finally {
-    closeDatabase(migrator);
+    closeDatabase(liquibase);
   }
 }

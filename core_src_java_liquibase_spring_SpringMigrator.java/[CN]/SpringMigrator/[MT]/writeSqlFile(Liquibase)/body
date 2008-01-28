@@ -1,0 +1,27 @@
+{
+  FileWriter fw=null;
+  try {
+    File ddlDir=getSqlOutputDir();
+    ddlDir.mkdirs();
+    SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+    String dateString=sdf.format(new java.util.Date());
+    String fileString=(getDatabaseProductName() + "-" + dateString+ ".sql").replace(" ","-").toLowerCase();
+    File upgradeFile=new File(ddlDir,fileString);
+    fw=new FileWriter(upgradeFile);
+    liquibase.update(getContexts(),fw);
+  }
+ catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+ finally {
+    if (fw != null) {
+      try {
+        fw.close();
+      }
+ catch (      IOException e) {
+        log.log(Level.SEVERE,"error closing fileWriter",e);
+      }
+    }
+  }
+}

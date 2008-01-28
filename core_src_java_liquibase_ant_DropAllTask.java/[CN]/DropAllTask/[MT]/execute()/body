@@ -1,19 +1,19 @@
 {
-  Migrator migrator=null;
+  Liquibase liquibase=null;
   try {
-    migrator=createMigrator();
+    liquibase=createLiquibase();
     if (StringUtils.trimToNull(schemas) != null) {
       List<String> schemas=StringUtils.splitAndTrim(this.schemas,",");
-      migrator.dropAll(schemas.toArray(new String[schemas.size()]));
+      liquibase.dropAll(schemas.toArray(new String[schemas.size()]));
     }
  else {
-      migrator.dropAll();
+      liquibase.dropAll();
     }
   }
  catch (  Exception e) {
     throw new BuildException(e);
   }
  finally {
-    closeDatabase(migrator);
+    closeDatabase(liquibase);
   }
 }

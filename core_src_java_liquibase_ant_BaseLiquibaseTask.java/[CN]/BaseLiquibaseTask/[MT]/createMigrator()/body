@@ -1,8 +1,0 @@
-{
-  FileOpener antFO=new AntFileOpener(getProject(),classpath);
-  FileOpener fsFO=new FileSystemFileOpener();
-  Database database=createDatabaseObject(getDriver(),getUrl(),getUsername(),getPassword(),getDefaultSchemaName());
-  Migrator migrator=new Migrator(getChangeLogFile().trim(),new CompositeFileOpener(antFO,fsFO),database);
-  migrator.setCurrentDateTimeFunction(currentDateTimeFunction);
-  return migrator;
-}

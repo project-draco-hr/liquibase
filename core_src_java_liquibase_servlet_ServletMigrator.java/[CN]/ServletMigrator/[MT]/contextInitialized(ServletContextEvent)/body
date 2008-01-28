@@ -17,9 +17,9 @@
     servletContextEvent.getServletContext().log("Cannot find hostname: " + e.getMessage());
     return;
   }
-  String shouldRunProperty=System.getProperty(Migrator.SHOULD_RUN_SYSTEM_PROPERTY);
+  String shouldRunProperty=System.getProperty(Liquibase.SHOULD_RUN_SYSTEM_PROPERTY);
   if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
-    LogFactory.getLogger().info("Migrator did not run on " + hostName + " because '"+ Migrator.SHOULD_RUN_SYSTEM_PROPERTY+ "' system property was set to false");
+    LogFactory.getLogger().info("LiquiBase did not run on " + hostName + " because '"+ Liquibase.SHOULD_RUN_SYSTEM_PROPERTY+ "' system property was set to false");
     return;
   }
   String machineIncludes=servletContextEvent.getServletContext().getInitParameter("MIGRATOR_HOST_INCLUDES");
@@ -68,8 +68,8 @@
       connection=dataSource.getConnection();
       FileOpener clFO=new ClassLoaderFileOpener();
       FileOpener fsFO=new FileSystemFileOpener();
-      Migrator migrator=new Migrator(getChangeLogFile(),new CompositeFileOpener(clFO,fsFO),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
-      migrator.update(getContexts());
+      Liquibase liquibase=new Liquibase(getChangeLogFile(),new CompositeFileOpener(clFO,fsFO),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
+      liquibase.update(getContexts());
     }
   finally {
       if (ic != null) {

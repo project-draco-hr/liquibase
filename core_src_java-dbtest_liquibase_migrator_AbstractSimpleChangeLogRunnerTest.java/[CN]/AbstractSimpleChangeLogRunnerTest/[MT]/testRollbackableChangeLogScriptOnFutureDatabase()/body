@@ -3,8 +3,8 @@
     return;
   }
   StringWriter writer=new StringWriter();
-  Migrator migrator=createMigrator(rollbackChangeLog);
-  migrator.dropAll(getSchemasToDrop());
-  migrator=createMigrator(rollbackChangeLog);
-  migrator.futureRollbackSQL(this.contexts,writer);
+  Liquibase liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.futureRollbackSQL(this.contexts,writer);
 }

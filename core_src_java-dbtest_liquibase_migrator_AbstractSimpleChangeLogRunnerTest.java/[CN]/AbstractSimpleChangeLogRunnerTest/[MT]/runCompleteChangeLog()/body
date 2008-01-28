@@ -1,9 +1,9 @@
 {
-  Migrator migrator=createMigrator(completeChangeLog);
-  migrator.dropAll(getSchemasToDrop());
-  migrator=createMigrator(completeChangeLog);
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(completeChangeLog);
   try {
-    migrator.update(this.contexts);
+    liquibase.update(this.contexts);
   }
  catch (  ValidationFailedException e) {
     e.printDescriptiveError(System.out);

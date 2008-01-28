@@ -1,12 +1,12 @@
 {
-  Migrator migrator=null;
+  Liquibase liquibase=null;
   try {
     PrintStream writer=createPrintStream();
     if (writer == null) {
       throw new BuildException("generateChangeLog requires outputFile to be set");
     }
-    migrator=createMigrator();
-    Database database=migrator.getDatabase();
+    liquibase=createLiquibase();
+    Database database=liquibase.getDatabase();
     Diff diff=new Diff(database,getDefaultSchemaName());
     DiffResult diffResult=diff.compare();
     diffResult.printChangeLog(writer,database);
@@ -17,6 +17,6 @@
     throw new BuildException(e);
   }
  finally {
-    closeDatabase(migrator);
+    closeDatabase(liquibase);
   }
 }

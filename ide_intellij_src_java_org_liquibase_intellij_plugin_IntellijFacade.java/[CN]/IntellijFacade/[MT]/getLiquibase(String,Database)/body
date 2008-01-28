@@ -1,0 +1,14 @@
+{
+  LiquibaseProjectComponent liquibaseProjectComponent=LiquibaseProjectComponent.getInstance();
+  if (changeLogFile == null) {
+    changeLogFile=liquibaseProjectComponent.getRootChangeLogFile();
+  }
+  Liquibase liquibase=new Liquibase(changeLogFile,new CompositeFileOpener(new IntellijFileOpener(),new FileSystemFileOpener()),database);
+  try {
+    liquibase.checkDatabaseChangeLogTable();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+  return liquibase;
+}

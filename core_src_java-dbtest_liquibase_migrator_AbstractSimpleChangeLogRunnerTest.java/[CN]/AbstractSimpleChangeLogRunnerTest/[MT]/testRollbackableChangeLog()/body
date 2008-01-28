@@ -2,14 +2,14 @@
   if (database == null) {
     return;
   }
-  Migrator migrator=createMigrator(rollbackChangeLog);
-  migrator.dropAll(getSchemasToDrop());
-  migrator=createMigrator(rollbackChangeLog);
-  migrator.update(this.contexts);
-  migrator=createMigrator(rollbackChangeLog);
-  migrator.rollback(new Date(0),this.contexts);
-  migrator=createMigrator(rollbackChangeLog);
-  migrator.update(this.contexts);
-  migrator=createMigrator(rollbackChangeLog);
-  migrator.rollback(new Date(0),this.contexts);
+  Liquibase liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.update(this.contexts);
+  liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.rollback(new Date(0),this.contexts);
+  liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.update(this.contexts);
+  liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.rollback(new Date(0),this.contexts);
 }

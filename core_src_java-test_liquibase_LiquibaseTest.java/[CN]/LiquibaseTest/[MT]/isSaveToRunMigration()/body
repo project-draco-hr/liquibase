@@ -1,0 +1,9 @@
+{
+  TestLiquibase migrator=testLiquibase;
+  migrator.setUrl("jdbc:oracle:thin:@localhost:1521:latest");
+  assertTrue(migrator.isSafeToRunMigration());
+  migrator.setUrl("jdbc:oracle:thin:@liquibase:1521:latest");
+  assertFalse(migrator.isSafeToRunMigration());
+  testLiquibase.getDatabase().setJdbcTemplate(new JdbcOutputTemplate(new PrintWriter(System.out),testLiquibase.getDatabase()));
+  assertTrue("Safe to run if outputing sql, even if non-localhost URL",migrator.isSafeToRunMigration());
+}

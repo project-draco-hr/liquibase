@@ -4,8 +4,8 @@
     return;
   }
   try {
-    Migrator migrator=getMigrator(LiquibasePreferences.getRootChangeLog(),getSelectedConnection(getSelection()));
-    migrator.tag(dialog.getTagName());
+    Liquibase liquibase=getLiquibase(LiquibasePreferences.getRootChangeLog(),getSelectedConnection(getSelection()));
+    liquibase.tag(dialog.getTagName());
     ((JDBCDatabase)getSelectedDatabase(getSelection())).refresh();
   }
  catch (  Exception e) {

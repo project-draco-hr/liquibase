@@ -3,8 +3,8 @@
     return;
   }
   StringWriter output=new StringWriter();
-  Migrator migrator=createMigrator(completeChangeLog);
-  migrator.dropAll(getSchemasToDrop());
-  migrator=createMigrator(completeChangeLog);
-  migrator.update(this.contexts,output);
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(completeChangeLog);
+  liquibase.update(this.contexts,output);
 }

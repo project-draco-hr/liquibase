@@ -12,9 +12,9 @@
  else {
     absolutePathOfChangeLog="/" + absolutePathOfChangeLog;
   }
-  Migrator migrator=createMigrator(absolutePathOfChangeLog,new FileSystemFileOpener());
-  migrator.dropAll(getSchemasToDrop());
-  migrator.update(this.contexts);
-  migrator.update(this.contexts);
-  migrator.dropAll(getSchemasToDrop());
+  Liquibase liquibase=createLiquibase(absolutePathOfChangeLog,new FileSystemFileOpener());
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase.update(this.contexts);
+  liquibase.update(this.contexts);
+  liquibase.dropAll(getSchemasToDrop());
 }

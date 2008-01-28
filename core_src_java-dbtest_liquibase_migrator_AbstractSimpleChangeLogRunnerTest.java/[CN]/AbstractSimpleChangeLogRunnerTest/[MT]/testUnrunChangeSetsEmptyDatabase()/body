@@ -2,9 +2,9 @@
   if (database == null) {
     return;
   }
-  Migrator migrator=createMigrator(completeChangeLog);
-  migrator.dropAll(getSchemasToDrop());
-  migrator=createMigrator(completeChangeLog);
-  List<ChangeSet> list=migrator.listUnrunChangeSets(this.contexts);
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(completeChangeLog);
+  List<ChangeSet> list=liquibase.listUnrunChangeSets(this.contexts);
   assertTrue(list.size() > 0);
 }

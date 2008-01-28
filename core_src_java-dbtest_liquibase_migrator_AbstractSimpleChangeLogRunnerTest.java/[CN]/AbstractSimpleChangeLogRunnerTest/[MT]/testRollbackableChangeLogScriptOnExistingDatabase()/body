@@ -2,11 +2,11 @@
   if (database == null) {
     return;
   }
-  Migrator migrator=createMigrator(rollbackChangeLog);
-  migrator.dropAll(getSchemasToDrop());
-  migrator=createMigrator(rollbackChangeLog);
-  migrator.update(this.contexts);
+  Liquibase liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.update(this.contexts);
   StringWriter writer=new StringWriter();
-  migrator=createMigrator(rollbackChangeLog);
-  migrator.rollback(new Date(0),this.contexts,writer);
+  liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.rollback(new Date(0),this.contexts,writer);
 }

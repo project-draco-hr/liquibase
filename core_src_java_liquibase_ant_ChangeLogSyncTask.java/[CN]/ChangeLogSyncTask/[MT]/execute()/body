@@ -1,13 +1,13 @@
 {
-  Migrator migrator=null;
+  Liquibase liquibase=null;
   try {
-    migrator=createMigrator();
+    liquibase=createLiquibase();
     Writer writer=createOutputWriter();
     if (writer == null) {
-      migrator.changeLogSync(getContexts());
+      liquibase.changeLogSync(getContexts());
     }
  else {
-      migrator.changeLogSync(getContexts(),writer);
+      liquibase.changeLogSync(getContexts(),writer);
       writer.flush();
       writer.close();
     }
@@ -16,6 +16,6 @@
     throw new BuildException(e);
   }
  finally {
-    closeDatabase(migrator);
+    closeDatabase(liquibase);
   }
 }

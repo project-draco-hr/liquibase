@@ -1,12 +1,12 @@
 {
-  Migrator migrator=null;
+  Liquibase liquibase=null;
   try {
     Writer writer=createOutputWriter();
     if (writer == null) {
       throw new BuildException("rollbackFutureDatabase requires outputFile to be set");
     }
-    migrator=createMigrator();
-    migrator.futureRollbackSQL(getContexts(),writer);
+    liquibase=createLiquibase();
+    liquibase.futureRollbackSQL(getContexts(),writer);
     writer.flush();
     writer.close();
   }
@@ -14,6 +14,6 @@
     throw new BuildException(e);
   }
  finally {
-    closeDatabase(migrator);
+    closeDatabase(liquibase);
   }
 }

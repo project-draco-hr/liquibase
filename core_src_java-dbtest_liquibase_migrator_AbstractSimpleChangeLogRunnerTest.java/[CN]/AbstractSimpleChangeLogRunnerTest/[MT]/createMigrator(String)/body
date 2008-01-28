@@ -1,4 +1,0 @@
-{
-  JUnitFileOpener fileOpener=new JUnitFileOpener();
-  return createMigrator(changeLogFile,fileOpener);
-}

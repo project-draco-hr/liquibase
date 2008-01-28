@@ -4,6 +4,6 @@
   if (changeLogFile == null) {
     return;
   }
-  ideFacade.getMigrator(changeLogFile,database).update(null,stringWriter);
+  ideFacade.getLiquibase(changeLogFile,database).update(null,stringWriter);
   ideFacade.showOutput("Migration SQL",stringWriter.toString());
 }

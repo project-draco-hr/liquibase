@@ -3,5 +3,5 @@
   if (changeLogFile == null) {
     return;
   }
-  ideFacade.getMigrator(changeLogFile,database).update(null);
+  ideFacade.getLiquibase(changeLogFile,database).update(null);
 }

@@ -27,6 +27,6 @@
   database2.dropDatabaseObjects(database2.getDefaultSchemaName());
   dropDatabaseChangeLogTable(database2.getDefaultSchemaName(),database2);
   JUnitFileOpener fileOpener=new JUnitFileOpener();
-  Migrator migrator=new Migrator(completeChangeLog,fileOpener,database2);
-  migrator.update(this.contexts);
+  Liquibase liquibase=new Liquibase(completeChangeLog,fileOpener,database2);
+  liquibase.update(this.contexts);
 }

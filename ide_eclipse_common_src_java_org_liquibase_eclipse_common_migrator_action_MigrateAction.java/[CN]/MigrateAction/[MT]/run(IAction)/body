@@ -1,7 +1,7 @@
 {
   try {
-    Migrator migrator=getMigrator(LiquibasePreferences.getRootChangeLog(),getSelectedConnection(getSelection()));
-    migrator.update(null);
+    Liquibase liquibase=getLiquibase(LiquibasePreferences.getRootChangeLog(),getSelectedConnection(getSelection()));
+    liquibase.update(null);
     ((JDBCDatabase)getSelectedDatabase(getSelection())).refresh();
   }
  catch (  Exception e) {

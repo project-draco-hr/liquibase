@@ -1,0 +1,4 @@
+{
+  JUnitFileOpener fileOpener=new JUnitFileOpener();
+  return createLiquibase(changeLogFile,fileOpener);
+}

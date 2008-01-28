@@ -1,8 +1,8 @@
 {
   getLog().info(MavenUtils.LOG_SEPARATOR);
-  String shouldRunProperty=System.getProperty(Migrator.SHOULD_RUN_SYSTEM_PROPERTY);
+  String shouldRunProperty=System.getProperty(Liquibase.SHOULD_RUN_SYSTEM_PROPERTY);
   if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty).booleanValue()) {
-    getLog().warn("Migrator did not run because '" + Migrator.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
+    getLog().warn("LiquiBase did not run because '" + Liquibase.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
     return;
   }
   ClassLoader artifactClassLoader=getMavenArtifactClassLoader();
@@ -12,14 +12,14 @@
   Connection connection=null;
   try {
     connection=MavenUtils.getDatabaseConnection(artifactClassLoader,driver,url,username,password);
-    Migrator migrator=createMigrator(getFileOpener(artifactClassLoader),connection);
+    Liquibase liquibase=createLiquibase(getFileOpener(artifactClassLoader),connection);
     getLog().info("Executing on Database: " + url);
-    if (isPromptOnNonLocalDatabase() && !migrator.isSafeToRunMigration()) {
-      if (UIFactory.getInstance().getFacade().promptForNonLocalDatabase(migrator.getDatabase())) {
+    if (isPromptOnNonLocalDatabase() && !liquibase.isSafeToRunMigration()) {
+      if (UIFactory.getInstance().getFacade().promptForNonLocalDatabase(liquibase.getDatabase())) {
         throw new LiquibaseException("User decided not to run against non-local database");
       }
     }
-    performLiquibaseTask(migrator);
+    performLiquibaseTask(liquibase);
   }
  catch (  LiquibaseException e) {
     releaseConnection(connection);

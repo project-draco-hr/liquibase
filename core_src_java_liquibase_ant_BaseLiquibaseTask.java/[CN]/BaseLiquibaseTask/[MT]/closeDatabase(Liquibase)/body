@@ -1,0 +1,10 @@
+{
+  if (liquibase != null && liquibase.getDatabase() != null && liquibase.getDatabase().getConnection() != null) {
+    try {
+      liquibase.getDatabase().getConnection().close();
+    }
+ catch (    SQLException e) {
+      ;
+    }
+  }
+}

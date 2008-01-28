@@ -2,12 +2,12 @@
   if (database == null) {
     return;
   }
-  Migrator migrator=createMigrator(completeChangeLog);
-  migrator.dropAll(getSchemasToDrop());
-  migrator=createMigrator(completeChangeLog);
-  migrator.checkDatabaseChangeLogTable();
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(completeChangeLog);
+  liquibase.checkDatabaseChangeLogTable();
   try {
-    migrator.tag("empty");
+    liquibase.tag("empty");
   }
  catch (  JDBCException e) {
     assertEquals("liquibase.exception.JDBCException: Cannot tag an empty database",e.getMessage());
