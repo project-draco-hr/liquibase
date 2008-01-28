@@ -8,10 +8,21 @@ case COUNT:
 case DATE:
 {
     DateFormat format=DateFormat.getDateInstance();
+    try {
+      migrator.rollback(format.parse(rollbackDate),contexts);
+    }
+ catch (    ParseException e) {
+      String message="Error parsing rollbackDate: " + e.getMessage();
+      if (format instanceof SimpleDateFormat) {
+        message+="\nDate must match pattern: " + ((SimpleDateFormat)format).toPattern();
+      }
+      throw new LiquibaseException(message,e);
+    }
     break;
   }
 case TAG:
 {
+  migrator.rollback(rollbackTag,contexts);
   break;
 }
 default :

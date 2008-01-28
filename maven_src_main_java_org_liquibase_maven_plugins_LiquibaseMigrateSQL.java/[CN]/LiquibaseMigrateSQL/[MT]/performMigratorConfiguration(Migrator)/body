@@ -10,10 +10,4 @@
     throw new MojoExecutionException("Failed to create SQL output writer",e);
   }
   getLog().info("Output SQL Migration File: " + migrationSqlOutputFile.getAbsolutePath());
-  if (changeLogSqlOnly) {
-    getLog().info("Creating Change Log SQL Only");
-  }
- else {
-    getLog().info("Creating Change Log SQL and Migrating Database");
-  }
 }

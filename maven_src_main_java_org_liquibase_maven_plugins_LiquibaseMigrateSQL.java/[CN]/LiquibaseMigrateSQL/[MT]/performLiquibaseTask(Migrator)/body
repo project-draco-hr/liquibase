@@ -1,4 +1,5 @@
 {
+  getLog().info("Creating Change Log SQL and Migrating Database");
   super.performLiquibaseTask(migrator);
-  migrator.update(null,outputWriter);
+  migrator.update(contexts,outputWriter);
 }
