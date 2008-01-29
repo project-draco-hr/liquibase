@@ -1,0 +1,8 @@
+{
+  first=createMock(FileOpener.class);
+  second=createMock(FileOpener.class);
+  composite=new CompositeFileOpener(first,second);
+  validStream=this.getClass().getClassLoader().getResourceAsStream("liquibase/CompositeFileOpenerTest.class");
+  empty=new Vector<URL>().elements();
+  hasElements=this.getClass().getClassLoader().getResources("liquibase");
+}

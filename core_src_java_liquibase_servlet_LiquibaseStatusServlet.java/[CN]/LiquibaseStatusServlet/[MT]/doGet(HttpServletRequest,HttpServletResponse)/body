@@ -1,0 +1,37 @@
+{
+  httpServletResponse.setContentType("text/html");
+  String logLevelToDisplay=httpServletRequest.getParameter("logLevel");
+  Level currentLevel=Level.INFO;
+  if (logLevelToDisplay != null) {
+    currentLevel=Level.parse(logLevelToDisplay);
+  }
+  PrintWriter writer=httpServletResponse.getWriter();
+  writer.println("<html>");
+  writer.println("<head><title>LiquiBase Status</title></head>");
+  writer.println("<body>");
+  if (liquibaseRunLog.size() == 0) {
+    writer.println("<b>LiquiBase did not run</b>");
+  }
+ else {
+    writer.println("<b>View level: " + getLevelLink(Level.SEVERE,currentLevel,httpServletRequest) + " "+ getLevelLink(Level.WARNING,currentLevel,httpServletRequest)+ " "+ getLevelLink(Level.INFO,currentLevel,httpServletRequest)+ " "+ getLevelLink(Level.CONFIG,currentLevel,httpServletRequest)+ " "+ getLevelLink(Level.FINE,currentLevel,httpServletRequest)+ " "+ getLevelLink(Level.FINER,currentLevel,httpServletRequest)+ " "+ getLevelLink(Level.FINEST,currentLevel,httpServletRequest)+ "</b>");
+    writer.println("<hr>");
+    writer.println("<b>LiquiBase started at " + DateFormat.getDateTimeInstance().format(new Date(liquibaseRunLog.get(0).getMillis())));
+    writer.println("<hr>");
+    writer.println("<pre>");
+    for (    LogRecord record : liquibaseRunLog) {
+      if (record.getLevel().intValue() >= currentLevel.intValue()) {
+        writer.println(record.getLevel() + ": " + record.getMessage());
+        if (record.getThrown() != null) {
+          record.getThrown().printStackTrace(writer);
+        }
+      }
+    }
+    writer.println("");
+    writer.println("");
+    writer.println("</pre>");
+    writer.println("<hr>");
+    writer.println("<b>LiquiBase finished at " + DateFormat.getDateTimeInstance().format(new Date(liquibaseRunLog.get(liquibaseRunLog.size() - 1).getMillis())));
+  }
+  writer.println("</body>");
+  writer.println("</html>");
+}

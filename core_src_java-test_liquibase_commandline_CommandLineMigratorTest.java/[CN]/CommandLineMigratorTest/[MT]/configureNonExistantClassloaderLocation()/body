@@ -1,5 +1,0 @@
-{
-  CommandLineMigrator cli=new CommandLineMigrator();
-  cli.classpath="badClasspathLocation";
-  cli.configureClassLoader();
-}

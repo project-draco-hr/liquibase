@@ -1,0 +1,5 @@
+{
+  String[] args=new String[]{"--promptForNonLocalDatabase=true","--badParam=here","migrate"};
+  Main cli=new Main();
+  cli.parseOptions(args);
+}

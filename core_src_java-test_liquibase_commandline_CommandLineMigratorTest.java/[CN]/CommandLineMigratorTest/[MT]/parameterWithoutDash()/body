@@ -1,5 +1,0 @@
-{
-  String[] args=new String[]{"promptForNonLocalDatabase=true","update"};
-  CommandLineMigrator cli=new CommandLineMigrator();
-  cli.parseOptions(args);
-}

@@ -1,0 +1,10 @@
+{
+  Main cli=new Main();
+  Properties props=new Properties();
+  props.setProperty("driver","DRIVER");
+  props.setProperty("username","USERNAME");
+  props.setProperty("badArg","ARG");
+  ByteArrayOutputStream propFile=new ByteArrayOutputStream();
+  props.store(propFile,"");
+  cli.parsePropertiesFile(new ByteArrayInputStream(propFile.toByteArray()));
+}

@@ -1,0 +1,14 @@
+{
+  String[] args=new String[]{"--driver=DRIVER","--username=USERNAME","--password=PASSWORD","--url=URL","--changeLogFile=FILE","--classpath=CLASSPATH;CLASSPATH2","--contexts=CONTEXT1,CONTEXT2","tag","TagHere"};
+  Main cli=new Main();
+  cli.parseOptions(args);
+  assertEquals("DRIVER",cli.driver);
+  assertEquals("USERNAME",cli.username);
+  assertEquals("PASSWORD",cli.password);
+  assertEquals("URL",cli.url);
+  assertEquals("FILE",cli.changeLogFile);
+  assertEquals("CLASSPATH;CLASSPATH2",cli.classpath);
+  assertEquals("CONTEXT1,CONTEXT2",cli.contexts);
+  assertEquals("tag",cli.command);
+  assertEquals("TagHere",cli.commandParams.iterator().next());
+}

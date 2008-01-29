@@ -1,0 +1,5 @@
+{
+  String[] args=new String[]{"promptForNonLocalDatabase=true","update"};
+  Main cli=new Main();
+  cli.parseOptions(args);
+}

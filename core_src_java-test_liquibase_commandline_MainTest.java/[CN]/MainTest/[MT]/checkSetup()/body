@@ -1,0 +1,15 @@
+{
+  Main cli=new Main();
+  assertTrue(cli.checkSetup().size() > 0);
+  cli.driver="driver";
+  cli.username="username";
+  cli.password="pwd";
+  cli.url="url";
+  cli.changeLogFile="file";
+  cli.classpath="classpath";
+  assertTrue(cli.checkSetup().size() > 0);
+  cli.command="BadCommand";
+  assertTrue(cli.checkSetup().size() > 0);
+  cli.command="migrate";
+  assertEquals(0,cli.checkSetup().size());
+}

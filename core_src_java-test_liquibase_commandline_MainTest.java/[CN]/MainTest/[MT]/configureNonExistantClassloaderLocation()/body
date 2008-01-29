@@ -1,0 +1,5 @@
+{
+  Main cli=new Main();
+  cli.classpath="badClasspathLocation";
+  cli.configureClassLoader();
+}
