@@ -5,6 +5,8 @@
   expect(database.doesChangeLogLockTableExist()).andReturn(true);
   expect(database.getDatabaseChangeLogLockTableName()).andReturn("lock_table");
   expectLastCall();
+  expect(database.getDefaultSchemaName()).andReturn("default_schema");
+  expect(database.escapeTableName("default_schema","lock_table")).andReturn("default_schema.lock_table");
   List<Map> locksList=new ArrayList<Map>();
   Map lock=new HashMap();
   lock.put("ID",1);

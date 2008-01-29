@@ -4,6 +4,7 @@
   columnConfig.setName("id");
   ConstraintsConfig constraints=new ConstraintsConfig();
   constraints.setReferences("test(id)");
+  constraints.setForeignKeyName("fk_test");
   columnConfig.setConstraints(constraints);
   change.addColumn(columnConfig);
   CreateTableStatement statement=(CreateTableStatement)change.generateStatements(new MockDatabase())[0];

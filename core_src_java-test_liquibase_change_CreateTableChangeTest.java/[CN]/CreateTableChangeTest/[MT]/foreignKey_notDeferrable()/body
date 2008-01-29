@@ -3,6 +3,7 @@
   ColumnConfig columnConfig=new ColumnConfig();
   columnConfig.setName("id");
   ConstraintsConfig constraints=new ConstraintsConfig();
+  constraints.setForeignKeyName("fk_test");
   constraints.setReferences("test(id)");
   constraints.setDeferrable(false);
   constraints.setInitiallyDeferred(false);

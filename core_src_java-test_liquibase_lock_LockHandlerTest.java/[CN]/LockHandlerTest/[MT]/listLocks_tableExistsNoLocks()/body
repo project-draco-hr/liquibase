@@ -3,8 +3,10 @@
   JdbcTemplate template=createMock(JdbcTemplate.class);
   expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
   expect(database.doesChangeLogLockTableExist()).andReturn(true);
+  expect(database.getDefaultSchemaName()).andReturn("default_schema");
   expect(database.getDatabaseChangeLogLockTableName()).andReturn("lock_table");
   expectLastCall();
+  expect(database.escapeTableName("default_schema","lock_table")).andReturn("default_schema.lock_table");
   List<Map> locksList=new ArrayList<Map>();
   expect(template.queryForList(isA(SqlStatement.class))).andReturn(locksList);
   replay(database);
