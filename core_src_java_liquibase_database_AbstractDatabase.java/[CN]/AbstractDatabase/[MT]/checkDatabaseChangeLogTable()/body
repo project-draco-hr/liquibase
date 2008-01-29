@@ -45,10 +45,10 @@
       getJdbcTemplate().comment("Create Database Change Log Table");
       SqlStatement createTableStatement=getCreateChangeLogSQL();
       if (!canCreateChangeLogTable()) {
-        throw new JDBCException("Cannot create " + getDatabaseChangeLogTableName() + " table for your database.\n\n"+ "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n"+ createTableStatement);
+        throw new JDBCException("Cannot create " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " table for your database.\n\n"+ "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n"+ createTableStatement);
       }
       statementsToExecute.add(createTableStatement);
-      log.info("Creating database history table with name: " + getDatabaseChangeLogTableName());
+      log.info("Creating database history table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()));
       changeLogTableExists=true;
     }
     for (    SqlStatement sql : statementsToExecute) {

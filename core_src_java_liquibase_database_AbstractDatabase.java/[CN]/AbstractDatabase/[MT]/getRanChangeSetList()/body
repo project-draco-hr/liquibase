@@ -1,6 +1,6 @@
 {
   try {
-    String databaseChangeLogTableName=getDatabaseChangeLogTableName();
+    String databaseChangeLogTableName=escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName());
     List<RanChangeSet> ranChangeSetList=new ArrayList<RanChangeSet>();
     if (doesChangeLogTableExist()) {
       log.info("Reading from " + databaseChangeLogTableName);

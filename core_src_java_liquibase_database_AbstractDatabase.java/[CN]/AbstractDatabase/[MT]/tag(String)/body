@@ -1,13 +1,13 @@
 {
   try {
-    int totalRows=this.getJdbcTemplate().queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + getDatabaseChangeLogTableName()));
+    int totalRows=this.getJdbcTemplate().queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName())));
     if (totalRows == 0) {
       throw new JDBCException("Cannot tag an empty database");
     }
     Timestamp lastExecutedDate=(Timestamp)this.getJdbcTemplate().queryForObject(createChangeToTagSQL(),Timestamp.class);
     int rowsUpdated=this.getJdbcTemplate().update(createTagSQL(tagString,lastExecutedDate));
     if (rowsUpdated == 0) {
-      throw new JDBCException("Did not tag database change log correctly");
+      throw new JDBCException("Did not tag database change log correctly.  Should have tagged changeset from " + lastExecutedDate.toString());
     }
     this.commit();
   }

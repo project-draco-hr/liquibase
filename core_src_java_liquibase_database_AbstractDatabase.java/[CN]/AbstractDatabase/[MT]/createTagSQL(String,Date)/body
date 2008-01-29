@@ -1,5 +1,5 @@
 {
-  UpdateStatement statement=new UpdateStatement(null,getDatabaseChangeLogTableName());
+  UpdateStatement statement=new UpdateStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName());
   statement.addNewColumnValue("TAG",tagName);
   statement.setWhereClause("DATEEXECUTED = ?");
   statement.addWhereParameter(dateExecuted);

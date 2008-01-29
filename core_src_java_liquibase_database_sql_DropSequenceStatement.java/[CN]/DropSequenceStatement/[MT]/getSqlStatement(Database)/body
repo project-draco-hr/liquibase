@@ -2,5 +2,9 @@
   if (!supportsDatabase(database)) {
     throw new StatementNotSupportedOnDatabaseException(this,database);
   }
-  return "DROP SEQUENCE " + database.escapeSequenceName(getSchemaName(),getSequenceName());
+  String sql="DROP SEQUENCE " + database.escapeSequenceName(getSchemaName(),getSequenceName());
+  if (database instanceof PostgresDatabase) {
+    sql+=" CASCADE";
+  }
+  return sql;
 }

@@ -11,7 +11,7 @@
         getJdbcTemplate().comment("Create Database Lock Table");
         this.getJdbcTemplate().execute(createTableStatement);
         this.commit();
-        log.info("Created database lock table with name: " + getDatabaseChangeLogLockTableName());
+        log.info("Created database lock table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
         changeLogLockTableExists=true;
         knowMustInsertIntoLockTable=true;
       }
@@ -23,13 +23,13 @@
     if (changeLogLockTableExists) {
       int rows=-1;
       if (!knowMustInsertIntoLockTable) {
-        RawSqlStatement selectStatement=new RawSqlStatement("SELECT COUNT(*) FROM " + getDatabaseChangeLogLockTableName() + " WHERE ID=1");
+        RawSqlStatement selectStatement=new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()) + " WHERE ID=1");
         rows=this.getJdbcTemplate().queryForInt(selectStatement);
       }
       if (knowMustInsertIntoLockTable || rows == 0) {
         this.getJdbcTemplate().update(getChangeLogLockInsertSQL());
         this.commit();
-        log.info("Inserted lock row into: " + getDatabaseChangeLogLockTableName());
+        log.info("Inserted lock row into: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
         rs.close();
       }
     }
