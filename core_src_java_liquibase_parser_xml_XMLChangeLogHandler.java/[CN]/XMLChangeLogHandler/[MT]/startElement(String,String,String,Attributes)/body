@@ -24,6 +24,9 @@
         runOnChange=true;
       }
       changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,databaseChangeLog.getFilePath(),databaseChangeLog.getPhysicalFilePath(),atts.getValue("context"),atts.getValue("dbms"));
+      if (StringUtils.trimToNull(atts.getValue("failOnError")) != null) {
+        changeSet.setFailOnError(Boolean.parseBoolean(atts.getValue("failOnError")));
+      }
     }
  else     if (changeSet != null && "rollback".equals(qName)) {
       text=new StringBuffer();

@@ -8,6 +8,9 @@
   if (runOnChange) {
     node.setAttribute("runOnChange","true");
   }
+  if (failOnError != null) {
+    node.setAttribute("failOnError",failOnError.toString());
+  }
   if (getContexts() != null && getContexts().size() > 0) {
     StringBuffer contextString=new StringBuffer();
     for (    String context : getContexts()) {

@@ -35,6 +35,11 @@
  catch (    Exception e1) {
       throw new MigrationFailedException(this,e);
     }
-    throw new MigrationFailedException(this,e);
+    if (getFailOnError() != null && !getFailOnError()) {
+      log.log(Level.INFO,"Change set " + toString(false) + " failed, but failOnError was false",e);
+    }
+ else {
+      throw new MigrationFailedException(this,e);
+    }
   }
 }
