@@ -19,6 +19,7 @@
  finally {
     if (c != null) {
       try {
+        c.rollback();
         c.close();
       }
  catch (      SQLException e) {

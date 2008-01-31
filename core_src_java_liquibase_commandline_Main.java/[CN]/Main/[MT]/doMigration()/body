@@ -188,6 +188,12 @@
     }
   }
   finally {
-    connection.close();
+    try {
+      connection.rollback();
+      connection.close();
+    }
+ catch (    SQLException e) {
+      LogFactory.getLogger().log(Level.WARNING,"problem closing connection",e);
+    }
   }
 }
