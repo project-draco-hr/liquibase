@@ -25,7 +25,7 @@
     }
  else     if (database instanceof DB2Database) {
       sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(schemaName,getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " SET DATA TYPE "+ aColumn.getType()));
-      sql.add(new RawSqlStatement("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(schemaName,getTableName()) + "')"));
+      sql.add(new ReorganizeTableStatement(schemaName,getTableName()));
     }
  else {
       sql.add(new RawSqlStatement("ALTER TABLE " + database.escapeTableName(schemaName,getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " TYPE "+ aColumn.getType()));
