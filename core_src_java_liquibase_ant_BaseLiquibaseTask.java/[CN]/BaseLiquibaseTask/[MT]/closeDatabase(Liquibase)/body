@@ -1,10 +1,10 @@
 {
   if (liquibase != null && liquibase.getDatabase() != null && liquibase.getDatabase().getConnection() != null) {
     try {
-      liquibase.getDatabase().getConnection().close();
+      liquibase.getDatabase().close();
     }
- catch (    SQLException e) {
-      ;
+ catch (    JDBCException e) {
+      log("Error closing database: " + e.getMessage());
     }
   }
 }

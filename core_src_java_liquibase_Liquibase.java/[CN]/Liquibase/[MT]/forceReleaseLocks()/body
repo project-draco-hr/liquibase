@@ -1,0 +1,4 @@
+{
+  checkDatabaseChangeLogTable();
+  LockHandler.getInstance(getDatabase()).forceReleaseLock();
+}

@@ -1,0 +1,11 @@
+{
+  try {
+    DatabaseConnection connection=getConnection();
+    if (connection != null) {
+      connection.close();
+    }
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+}
