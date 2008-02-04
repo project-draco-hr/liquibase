@@ -1,0 +1,14 @@
+{
+  InetAddress lch=null;
+  Enumeration<NetworkInterface> e=NetworkInterface.getNetworkInterfaces();
+  while (e.hasMoreElements()) {
+    NetworkInterface i=e.nextElement();
+    Enumeration<InetAddress> ie=i.getInetAddresses();
+    if (!ie.hasMoreElements()) {
+      break;
+    }
+    lch=ie.nextElement();
+    if (!lch.isLoopbackAddress())     break;
+  }
+  return lch;
+}

@@ -11,9 +11,9 @@
 );
   String hostName;
   try {
-    hostName=InetAddress.getLocalHost().getHostName();
+    hostName=NetUtil.getLocalHost().getHostName();
   }
- catch (  UnknownHostException e) {
+ catch (  Exception e) {
     servletContextEvent.getServletContext().log("Cannot find hostname: " + e.getMessage());
     return;
   }
