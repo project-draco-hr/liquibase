@@ -1,7 +1,0 @@
-{
-  super.printSettings(indent);
-  getLog().info(indent + "properties file will override? " + propertyFileWillOverride);
-  getLog().info(indent + "changeLogFile: " + changeLogFile);
-  getLog().info(indent + "drop first? " + dropFirst);
-  getLog().info(indent + "context(s): " + contexts);
-}

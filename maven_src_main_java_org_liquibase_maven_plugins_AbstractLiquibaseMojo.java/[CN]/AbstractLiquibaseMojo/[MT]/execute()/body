@@ -12,20 +12,22 @@
   Connection connection=null;
   try {
     connection=MavenUtils.getDatabaseConnection(artifactClassLoader,driver,url,username,password);
-    Liquibase liquibase=createLiquibase(getFileOpener(artifactClassLoader),connection);
+    liquibase=createLiquibase(getFileOpener(artifactClassLoader),connection);
     getLog().info("Executing on Database: " + url);
-    if (isPromptOnNonLocalDatabase() && !liquibase.isSafeToRunMigration()) {
-      if (UIFactory.getInstance().getFacade().promptForNonLocalDatabase(liquibase.getDatabase())) {
-        throw new LiquibaseException("User decided not to run against non-local database");
+    if (isPromptOnNonLocalDatabase()) {
+      if (!liquibase.isSafeToRunMigration()) {
+        if (UIFactory.getInstance().getFacade().promptForNonLocalDatabase(liquibase.getDatabase())) {
+          throw new LiquibaseException("User decided not to run against non-local database");
+        }
       }
     }
     performLiquibaseTask(liquibase);
   }
  catch (  LiquibaseException e) {
-    releaseConnection(connection);
+    cleanup(connection);
     throw new MojoFailureException(e.getMessage());
   }
-  releaseConnection(connection);
+  cleanup(connection);
   getLog().info(MavenUtils.LOG_SEPARATOR);
   getLog().info("");
 }

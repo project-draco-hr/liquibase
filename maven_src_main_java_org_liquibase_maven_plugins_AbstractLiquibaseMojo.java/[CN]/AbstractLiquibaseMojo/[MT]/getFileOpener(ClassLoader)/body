@@ -1,3 +1,5 @@
 {
-  return new MavenFileOpener();
+  FileOpener mFO=new MavenFileOpener(cl);
+  FileOpener fsFO=new FileSystemFileOpener(project.getBasedir().getAbsolutePath());
+  return new CompositeFileOpener(mFO,fsFO);
 }
