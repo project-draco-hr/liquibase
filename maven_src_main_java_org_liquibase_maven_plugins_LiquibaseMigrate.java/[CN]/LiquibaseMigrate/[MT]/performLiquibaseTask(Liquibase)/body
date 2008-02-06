@@ -1,4 +1,0 @@
-{
-  super.performLiquibaseTask(liquibase);
-  liquibase.update(contexts);
-}
