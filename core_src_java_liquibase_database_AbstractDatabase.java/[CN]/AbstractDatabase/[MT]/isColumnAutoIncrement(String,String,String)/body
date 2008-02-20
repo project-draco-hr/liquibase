@@ -5,7 +5,7 @@
   boolean autoIncrement=false;
   ResultSet selectRS=null;
   try {
-    selectRS=getConnection().createStatement().executeQuery("SELECT " + columnName + " FROM "+ escapeTableName(schemaName,tableName)+ " WHERE 1 = 0");
+    selectRS=getConnection().createStatement().executeQuery("SELECT " + escapeColumnName(columnName) + " FROM "+ escapeTableName(schemaName,tableName)+ " WHERE 1 = 0");
     ResultSetMetaData meta=selectRS.getMetaData();
     autoIncrement=meta.isAutoIncrement(1);
   }
