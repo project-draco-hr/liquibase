@@ -6,7 +6,7 @@
   while (columnIterator.hasNext()) {
     String column=columnIterator.next();
     boolean isAutoIncrement=autoIncrementColumns.contains(column);
-    buffer.append(column);
+    buffer.append(database.escapeColumnName(column));
     buffer.append(" ").append(database.getColumnType(columnTypes.get(column),isAutoIncrement));
     if (getDefaultValue(column) != null) {
       if (database instanceof MSSQLDatabase) {
