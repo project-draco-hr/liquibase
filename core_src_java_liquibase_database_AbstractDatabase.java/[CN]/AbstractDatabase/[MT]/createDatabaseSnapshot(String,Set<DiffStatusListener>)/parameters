@@ -1,0 +1,2 @@
+String schema
+Set<DiffStatusListener> statusListeners

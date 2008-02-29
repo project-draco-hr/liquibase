@@ -1,0 +1,8 @@
+{
+  for (  PrimaryKey pk : getPrimaryKeys()) {
+    if (pk.getName().equalsIgnoreCase(pkName)) {
+      return pk;
+    }
+  }
+  return null;
+}

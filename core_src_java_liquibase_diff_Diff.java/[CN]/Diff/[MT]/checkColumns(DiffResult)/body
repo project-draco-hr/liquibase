@@ -10,7 +10,7 @@
     }
  else     if (targetColumn.getTable() != null && !diffResult.getUnexpectedTables().contains(targetColumn.getTable())) {
       Column baseColumn=baseSnapshot.getColumn(targetColumn.getTable().getName(),targetColumn.getName());
-      if (targetColumn.isDifferent(baseColumn)) {
+      if (baseColumn == null || targetColumn.isDifferent(baseColumn)) {
         diffResult.addChangedColumn(targetColumn);
       }
     }

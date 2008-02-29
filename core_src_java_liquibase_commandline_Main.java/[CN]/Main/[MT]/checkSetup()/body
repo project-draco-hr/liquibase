@@ -7,9 +7,6 @@
     messages.add("Unknown command: " + command);
   }
  else {
-    if (username == null) {
-      messages.add("--username is required");
-    }
     if (url == null) {
       messages.add("--url is required");
     }

@@ -1,6 +1,6 @@
 {
   try {
-    DatabaseSnapshot snapshot=new DatabaseSnapshot(this,new HashSet<DiffStatusListener>(),schema);
+    DatabaseSnapshot snapshot=createDatabaseSnapshot(schema,new HashSet<DiffStatusListener>());
     List<Change> dropChanges=new ArrayList<Change>();
     for (    ForeignKey fk : snapshot.getForeignKeys()) {
       DropForeignKeyConstraintChange dropFK=new DropForeignKeyConstraintChange();

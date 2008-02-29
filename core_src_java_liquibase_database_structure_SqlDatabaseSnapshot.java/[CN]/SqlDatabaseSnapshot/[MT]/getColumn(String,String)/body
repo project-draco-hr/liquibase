@@ -1,0 +1,3 @@
+{
+  return columnsMap.get(tableName + "." + columnName);
+}

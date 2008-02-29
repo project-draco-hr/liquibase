@@ -1,13 +1,13 @@
 {
   if (baseSnapshot == null) {
-    baseSnapshot=new DatabaseSnapshot(baseDatabase,statusListeners);
+    baseSnapshot=baseDatabase.createDatabaseSnapshot(null,statusListeners);
   }
   if (targetSnapshot == null) {
     if (targetDatabase == null) {
-      targetSnapshot=new DatabaseSnapshot();
+      targetSnapshot=new SqlDatabaseSnapshot();
     }
  else {
-      targetSnapshot=new DatabaseSnapshot(targetDatabase,statusListeners);
+      targetSnapshot=targetDatabase.createDatabaseSnapshot(null,statusListeners);
     }
   }
   DiffResult diffResult=new DiffResult(baseSnapshot,targetSnapshot);

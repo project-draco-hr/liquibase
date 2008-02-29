@@ -12,7 +12,7 @@
     }
   }
   setup(database);
-  DatabaseSnapshot snapshot=new DatabaseSnapshot(database,schema);
+  DatabaseSnapshot snapshot=database.createDatabaseSnapshot(schema,null);
   preExecuteAssert(snapshot);
   try {
     new JdbcTemplate(database).execute(statement);
@@ -27,6 +27,6 @@
       throw e;
     }
   }
-  snapshot=new DatabaseSnapshot(database,schema);
+  snapshot=database.createDatabaseSnapshot(schema,null);
   postExecuteAssert(snapshot);
 }
