@@ -1,8 +1,8 @@
 {
   if (column.getTable() == null) {
-    return columnsMap.get(column.getView().getName() + "." + column.getName());
+    return getColumn(column.getView().getName(),column.getName());
   }
  else {
-    return columnsMap.get(column.getTable().getName() + "." + column.getName());
+    return getColumn(column.getTable().getName(),column.getName());
   }
 }

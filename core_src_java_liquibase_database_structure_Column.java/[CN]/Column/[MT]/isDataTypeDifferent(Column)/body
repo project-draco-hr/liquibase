@@ -1,8 +1,8 @@
 {
-  try {
-    return this.getDataType() != otherColumn.getDataType() || this.getColumnSize() != otherColumn.getColumnSize() || this.getDecimalDigits() != otherColumn.getDecimalDigits();
+  if (!this.isCertainDataType() || !otherColumn.isCertainDataType()) {
+    return false;
   }
- catch (  NullPointerException e) {
-    throw new NullPointerException();
+ else {
+    return this.getDataType() != otherColumn.getDataType() || this.getColumnSize() != otherColumn.getColumnSize() || this.getDecimalDigits() != otherColumn.getDecimalDigits();
   }
 }

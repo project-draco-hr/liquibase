@@ -4,6 +4,7 @@
     cfg.configure(database.getConfigFile());
     this.database=database;
     Dialect dialect=(Dialect)Class.forName(cfg.getProperty("dialect")).newInstance();
+    cfg.buildMappings();
     Mapping mapping=cfg.buildMapping();
     Iterator tableMappings=cfg.getTableMappings();
     while (tableMappings.hasNext()) {
@@ -17,15 +18,21 @@
           org.hibernate.mapping.Column hibernateColumn=(org.hibernate.mapping.Column)columnIterator.next();
           Column column=new Column();
           column.setName(hibernateColumn.getName());
-          column.setColumnSize(hibernateColumn.getLength());
           column.setDataType(hibernateColumn.getSqlTypeCode(mapping));
-          column.setDecimalDigits(hibernateColumn.getPrecision());
+          if (column.isNumeric()) {
+            column.setColumnSize(hibernateColumn.getPrecision());
+          }
+ else {
+            column.setColumnSize(hibernateColumn.getLength());
+          }
+          column.setDecimalDigits(hibernateColumn.getScale());
           column.setDefaultValue(hibernateColumn.getDefaultValue());
           column.setNullable(hibernateColumn.isNullable());
           column.setPrimaryKey(isPrimaryKey(hibernateTable,hibernateColumn));
           column.setTable(table);
-          column.setTypeName(hibernateColumn.getSqlType(dialect,mapping));
+          column.setTypeName(hibernateColumn.getSqlType(dialect,mapping).replaceFirst("\\(.*\\)",""));
           column.setUnique(hibernateColumn.isUnique());
+          column.setCertainDataType(false);
           columnsMap.put(table.getName() + "." + column.getName(),column);
           table.getColumns().add(column);
         }
@@ -42,8 +49,20 @@
           }
           indexes.add(index);
         }
+        org.hibernate.mapping.PrimaryKey hibernatePrimaryKey=hibernateTable.getPrimaryKey();
+        if (hibernatePrimaryKey != null) {
+          PrimaryKey pk=new PrimaryKey();
+          pk.setName(hibernatePrimaryKey.getName());
+          pk.setTable(table);
+          for (          Object hibernateColumn : hibernatePrimaryKey.getColumns()) {
+            pk.getColumnNamesAsList().add(((org.hibernate.mapping.Column)hibernateColumn).getName());
+          }
+          primaryKeys.add(pk);
+        }
       }
     }
+    this.tables=new HashSet<Table>(tablesMap.values());
+    this.columns=new HashSet<Column>(columnsMap.values());
     tableMappings=cfg.getTableMappings();
     while (tableMappings.hasNext()) {
       org.hibernate.mapping.Table hibernateTable=(org.hibernate.mapping.Table)tableMappings.next();
@@ -54,17 +73,28 @@
           if (hibernateForeignKey.getTable() != null && hibernateForeignKey.getReferencedTable() != null && hibernateForeignKey.isPhysicalConstraint()) {
             ForeignKey fk=new ForeignKey();
             fk.setName(hibernateForeignKey.getName());
-            fk.setForeignKeyTable(tablesMap.get(hibernateForeignKey.getTable().getName()));
-            fk.setForeignKeyColumns(StringUtils.join((Collection<String>)hibernateForeignKey.getColumns(),", "));
-            fk.setForeignKeyTable(tablesMap.get(hibernateForeignKey.getReferencedTable().getName()));
-            fk.setForeignKeyColumns(StringUtils.join((Collection<String>)hibernateForeignKey.getReferencedColumns(),", "));
+            fk.setForeignKeyTable(getTable(hibernateForeignKey.getTable().getName()));
+            List<String> fkColumns=new ArrayList<String>();
+            for (            Object column : hibernateForeignKey.getColumns()) {
+              fkColumns.add(((org.hibernate.mapping.Column)column).getName());
+            }
+            fk.setForeignKeyColumns(StringUtils.join(fkColumns,", "));
+            fk.setPrimaryKeyTable(getTable(hibernateForeignKey.getReferencedTable().getName()));
+            fkColumns=new ArrayList<String>();
+            for (            Object column : hibernateForeignKey.getReferencedColumns()) {
+              fkColumns.add(((org.hibernate.mapping.Column)column).getName());
+            }
+            if (fkColumns.size() == 0) {
+              for (              Object column : hibernateForeignKey.getReferencedTable().getPrimaryKey().getColumns()) {
+                fkColumns.add(((org.hibernate.mapping.Column)column).getName());
+              }
+            }
+            fk.setPrimaryKeyColumns(StringUtils.join(fkColumns,", "));
             foreignKeys.add(fk);
           }
         }
       }
     }
-    this.tables=new HashSet<Table>(tablesMap.values());
-    this.columns=new HashSet<Column>(columnsMap.values());
   }
  catch (  Exception e) {
     throw new JDBCException(e);
