@@ -1,4 +1,0 @@
-{
-  System.out.println(new File("Hibernate.cfg.xml").toURL());
-  HibernateDatabaseSnapshot snapshot=new HibernateDatabaseSnapshot(new HibernateDatabase("Hibernate.cfg.xml"));
-}
