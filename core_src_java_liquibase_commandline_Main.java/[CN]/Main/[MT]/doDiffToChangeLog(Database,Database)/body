@@ -2,5 +2,10 @@
   Diff diff=new Diff(baseDatabase,targetDatabase);
   diff.addStatusListener(new OutDiffStatusListener());
   DiffResult diffResult=diff.compare();
-  diffResult.printChangeLog(System.out,targetDatabase);
+  if (changeLogFile == null) {
+    diffResult.printChangeLog(System.out,targetDatabase);
+  }
+ else {
+    diffResult.printChangeLog(changeLogFile,targetDatabase);
+  }
 }

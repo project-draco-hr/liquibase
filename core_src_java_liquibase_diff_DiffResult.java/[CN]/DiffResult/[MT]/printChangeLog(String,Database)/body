@@ -1,0 +1,3 @@
+{
+  this.printChangeLog(changeLogFile,targetDatabase,new DefaultXmlWriter());
+}

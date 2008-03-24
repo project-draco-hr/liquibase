@@ -31,6 +31,7 @@
   CommandLineFileOpener clOpener=new CommandLineFileOpener(classLoader);
   Database database=createDatabaseObject(this.url,this.username,this.password,this.driver,this.defaultSchemaName,this.databaseClass);
   try {
+    CompositeFileOpener fileOpener=new CompositeFileOpener(fsOpener,clOpener);
     if ("diff".equalsIgnoreCase(command)) {
       doDiff(database,createDatabaseFromCommandParams(commandParams));
       return;
@@ -43,7 +44,7 @@
       doGenerateChangeLog(database);
       return;
     }
-    Liquibase liquibase=new Liquibase(changeLogFile,new CompositeFileOpener(fsOpener,clOpener),database);
+    Liquibase liquibase=new Liquibase(changeLogFile,fileOpener,database);
     if ("listLocks".equalsIgnoreCase(command)) {
       liquibase.reportLocks(System.out);
       return;

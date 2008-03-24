@@ -1,0 +1,9 @@
+{
+  String author=System.getProperty("user.name");
+  if (StringUtils.trimToNull(author) == null) {
+    return "diff-generated";
+  }
+ else {
+    return author + " (generated)";
+  }
+}
