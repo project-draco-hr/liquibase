@@ -33,7 +33,7 @@
       }
     }
  else {
-      throw new CommandLineParsingException("Parameters must start with a '--'");
+      throw new CommandLineParsingException("Unexpected value " + arg + ": parameters must start with a '--'");
     }
   }
 }
