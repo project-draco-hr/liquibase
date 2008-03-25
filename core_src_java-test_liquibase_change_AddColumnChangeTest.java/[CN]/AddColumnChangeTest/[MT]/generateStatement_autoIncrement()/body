@@ -12,7 +12,8 @@
   column.setConstraints(constraints);
   refactoring.addColumn(column);
   SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
-  assertEquals(2,sqlStatements.length);
+  assertEquals(1,sqlStatements.length);
   assertTrue(sqlStatements[0] instanceof AddColumnStatement);
-  assertFalse(((AddColumnStatement)sqlStatements[0]).isPrimaryKey());
+  assertTrue(((AddColumnStatement)sqlStatements[0]).isPrimaryKey());
+  assertTrue(((AddColumnStatement)sqlStatements[0]).isAutoIncrement());
 }
