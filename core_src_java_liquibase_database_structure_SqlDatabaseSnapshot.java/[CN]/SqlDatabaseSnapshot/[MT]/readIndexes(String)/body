@@ -21,9 +21,6 @@
       if (type == DatabaseMetaData.tableIndexStatistic) {
         continue;
       }
-      if (type == DatabaseMetaData.tableIndexOther) {
-        continue;
-      }
       if (columnName == null) {
         continue;
       }
