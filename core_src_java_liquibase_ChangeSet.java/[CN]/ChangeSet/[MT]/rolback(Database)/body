@@ -1,7 +1,7 @@
 {
   try {
     database.getJdbcTemplate().comment("Rolling Back ChangeSet: " + toString());
-    if (rollBackStatements != null && rollBackStatements.length > 0) {
+    if (rollBackStatements != null && rollBackStatements.size() > 0) {
       for (      SqlStatement rollback : rollBackStatements) {
         try {
           database.getJdbcTemplate().execute(rollback);
