@@ -1,5 +1,5 @@
 {
-  PrimaryKeyConstraint pkConstraint=new PrimaryKeyConstraint(null);
+  PrimaryKeyConstraint pkConstraint=new PrimaryKeyConstraint(keyName);
   pkConstraint.addColumns(columnName);
   List<ColumnConstraint> allConstraints=new ArrayList<ColumnConstraint>();
   allConstraints.addAll(Arrays.asList(constraints));

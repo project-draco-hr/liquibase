@@ -1,6 +1,6 @@
 {
   dropTableIfExists(null,NEW_TABLE_NAME,database);
   dropTableIfExists(TestContext.ALT_SCHEMA,NEW_TABLE_NAME,database);
-  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int"),database);
-  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn("id","int"),database);
+  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int",null),database);
+  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn("id","int",null),database);
 }
