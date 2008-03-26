@@ -22,8 +22,12 @@
  catch (      InterruptedException e) {
         ;
       }
-      StreamUtil.copy(p.getErrorStream(),System.err);
-      StreamUtil.copy(p.getInputStream(),System.err);
+      ByteArrayOutputStream errorStream=new ByteArrayOutputStream();
+      ByteArrayOutputStream inputStream=new ByteArrayOutputStream();
+      StreamUtil.copy(p.getErrorStream(),errorStream);
+      StreamUtil.copy(p.getInputStream(),inputStream);
+      LogFactory.getLogger().info(errorStream.toString());
+      LogFactory.getLogger().info(inputStream.toString());
       if (returnCode != 0) {
         throw new RuntimeException(getCommandString() + " returned an code of " + returnCode);
       }
