@@ -33,7 +33,7 @@
       return "{fn " + dateFunction + "()"+ "}";
     }
  else {
-      return "NOW()";
+      return "CURRENT_TIMESTAMP";
     }
   }
  catch (  SQLException e) {
