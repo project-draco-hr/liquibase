@@ -1,6 +1,0 @@
-{
-  UpdateStatement statement=new UpdateStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName());
-  statement.addNewColumnValue("TAG",tagName);
-  statement.setWhereClause("DATEEXECUTED = (" + createChangeToTagSQL() + ")");
-  return statement;
-}

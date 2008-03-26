@@ -1,0 +1,3 @@
+{
+  assertEquals("Tag Database",refactoring.getChangeName());
+}

@@ -1,0 +1,3 @@
+{
+  return "Tag '" + tag + "' applied to database";
+}

@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement("SELECT MAX(DATEEXECUTED) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()));
-}

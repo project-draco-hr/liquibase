@@ -1,0 +1,11 @@
+{
+  UpdateStatement statement=new UpdateStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogTableName());
+  statement.addNewColumnValue("TAG",tag);
+  if (database instanceof MySQLDatabase) {
+    statement.setWhereClause("DATEEXECUTED = (SELECT MAX(DATEEXECUTED) FROM (SELECT DATEEXECUTED FROM " + database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogTableName()) + ") AS X)");
+  }
+ else {
+    statement.setWhereClause("DATEEXECUTED = (SELECT MAX(DATEEXECUTED) FROM " + database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogTableName()) + ")");
+  }
+  return statement.getSqlStatement(database);
+}

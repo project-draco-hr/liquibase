@@ -1,0 +1,6 @@
+{
+  refactoring.setTag("TAG_NAME");
+  Element node=refactoring.createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
+  assertEquals("tagDatabase",node.getTagName());
+  assertEquals("TAG_NAME",node.getAttribute("tag"));
+}

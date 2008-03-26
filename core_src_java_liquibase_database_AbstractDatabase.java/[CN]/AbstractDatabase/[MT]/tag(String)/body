@@ -4,7 +4,7 @@
     if (totalRows == 0) {
       throw new JDBCException("Cannot tag an empty database");
     }
-    int rowsUpdated=this.getJdbcTemplate().update(createTagSQL(tagString));
+    int rowsUpdated=this.getJdbcTemplate().update(new TagDatabaseStatement(tagString));
     if (rowsUpdated == 0) {
       throw new JDBCException("Did not tag database change log correctly");
     }

@@ -1,6 +1,6 @@
 {
   new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,Boolean.TRUE)){
-    protected void setup(    Database database) throws JDBCException {
+    protected void setup(    Database database) throws Exception {
       new JdbcTemplate(database).execute(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getBooleanType()));
       super.setup(database);
     }
