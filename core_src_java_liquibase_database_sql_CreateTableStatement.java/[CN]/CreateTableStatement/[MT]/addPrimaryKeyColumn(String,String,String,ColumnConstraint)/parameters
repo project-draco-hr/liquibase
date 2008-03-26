@@ -1,4 +1,4 @@
 String columnName
-String keyName
 String columnType
+String keyName
 ColumnConstraint constraints
