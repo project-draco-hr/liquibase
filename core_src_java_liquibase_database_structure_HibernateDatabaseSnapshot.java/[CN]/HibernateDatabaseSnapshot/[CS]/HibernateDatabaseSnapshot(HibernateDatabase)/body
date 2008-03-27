@@ -49,6 +49,19 @@
           }
           indexes.add(index);
         }
+        Iterator uniqueIterator=hibernateTable.getUniqueKeyIterator();
+        while (uniqueIterator.hasNext()) {
+          org.hibernate.mapping.UniqueKey hiberateUnique=(org.hibernate.mapping.UniqueKey)uniqueIterator.next();
+          Index index=new Index();
+          index.setTable(table);
+          index.setName(hiberateUnique.getName());
+          columnIterator=hiberateUnique.getColumnIterator();
+          while (columnIterator.hasNext()) {
+            org.hibernate.mapping.Column hibernateColumn=(org.hibernate.mapping.Column)columnIterator.next();
+            index.getColumns().add(hibernateColumn.getName());
+          }
+          indexes.add(index);
+        }
         org.hibernate.mapping.PrimaryKey hibernatePrimaryKey=hibernateTable.getPrimaryKey();
         if (hibernatePrimaryKey != null) {
           PrimaryKey pk=new PrimaryKey();
