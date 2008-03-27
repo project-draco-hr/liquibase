@@ -3,29 +3,11 @@
     printHelp(System.out);
     return;
   }
-  if ("finest".equalsIgnoreCase(logLevel)) {
-    LogFactory.getLogger().setLevel(Level.FINEST);
+  try {
+    LogFactory.setLoggingLevel(logLevel);
   }
- else   if ("finer".equalsIgnoreCase(logLevel)) {
-    LogFactory.getLogger().setLevel(Level.FINER);
-  }
- else   if ("fine".equalsIgnoreCase(logLevel)) {
-    LogFactory.getLogger().setLevel(Level.FINE);
-  }
- else   if ("info".equalsIgnoreCase(logLevel)) {
-    LogFactory.getLogger().setLevel(Level.INFO);
-  }
- else   if ("warning".equalsIgnoreCase(logLevel)) {
-    LogFactory.getLogger().setLevel(Level.WARNING);
-  }
- else   if ("severe".equalsIgnoreCase(logLevel)) {
-    LogFactory.getLogger().setLevel(Level.SEVERE);
-  }
- else   if ("off".equalsIgnoreCase(logLevel)) {
-    LogFactory.getLogger().setLevel(Level.OFF);
-  }
- else {
-    throw new CommandLineParsingException("Unknown log level: " + logLevel);
+ catch (  IllegalArgumentException e) {
+    throw new CommandLineParsingException(e.getMessage(),e);
   }
   FileSystemFileOpener fsOpener=new FileSystemFileOpener();
   CommandLineFileOpener clOpener=new CommandLineFileOpener(classLoader);
