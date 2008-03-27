@@ -17,7 +17,7 @@
   checkRequiredParametersAreSpecified();
   Connection connection=null;
   try {
-    String dbPassword=emptyPassword ? "" : password;
+    String dbPassword=emptyPassword || password == null ? "" : password;
     connection=MavenUtils.getDatabaseConnection(artifactClassLoader,driver,url,username,dbPassword);
     liquibase=createLiquibase(getFileOpener(artifactClassLoader),connection);
     getLog().info("Executing on Database: " + url);
