@@ -57,6 +57,9 @@
  else {
         columnConfig.setDefaultValue(defaultValue.toString());
       }
+      if (column.getRemarks() != null) {
+        columnConfig.setRemarks(column.getRemarks());
+      }
       change.addColumn(columnConfig);
     }
     changes.add(change);

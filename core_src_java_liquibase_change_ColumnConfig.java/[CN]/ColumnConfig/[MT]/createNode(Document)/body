@@ -28,6 +28,9 @@
   if (getValueDate() != null) {
     element.setAttribute("valueDate",new ISODateFormat().format(getValueDate()));
   }
+  if (StringUtils.trimToNull(getRemarks()) != null) {
+    element.setAttribute("remarks",getRemarks());
+  }
   if (isAutoIncrement() != null && isAutoIncrement()) {
     element.setAttribute("autoIncrement","true");
   }

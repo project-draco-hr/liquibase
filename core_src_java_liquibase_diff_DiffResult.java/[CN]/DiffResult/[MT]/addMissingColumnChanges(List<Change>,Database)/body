@@ -10,6 +10,9 @@
     String dataType=column.getDataTypeString(database);
     columnConfig.setType(dataType);
     columnConfig.setDefaultValue(database.convertJavaObjectToString(column.getDefaultValue()));
+    if (column.getRemarks() != null) {
+      columnConfig.setRemarks(column.getRemarks());
+    }
     change.addColumn(columnConfig);
     changes.add(change);
   }
