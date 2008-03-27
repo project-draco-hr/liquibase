@@ -1,5 +1,5 @@
 {
-  if (schemaName == null) {
+  if (schemaName != null) {
     schemaName=convertRequestedSchemaToSchema(schemaName);
   }
   String definition=(String)this.getJdbcTemplate().queryForObject(getViewDefinitionSql(schemaName,viewName),String.class);
