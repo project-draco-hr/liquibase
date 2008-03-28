@@ -20,6 +20,10 @@
     String dbPassword=emptyPassword || password == null ? "" : password;
     database=CommandLineUtils.createDatabaseObject(artifactClassLoader,url,username,dbPassword,driver,defaultSchemaName,null);
     liquibase=createLiquibase(getFileOpener(artifactClassLoader),database);
+    if (clearCheckSums) {
+      getLog().info("Clearing the Liquibase Checksums on the database");
+      liquibase.clearCheckSums();
+    }
     getLog().info("Executing on Database: " + url);
     if (isPromptOnNonLocalDatabase()) {
       if (!liquibase.isSafeToRunMigration()) {
