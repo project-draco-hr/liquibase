@@ -1,9 +1,0 @@
-{
-  super.cleanup(c);
-  try {
-    outputWriter.close();
-  }
- catch (  IOException e) {
-    getLog().error(e);
-  }
-}

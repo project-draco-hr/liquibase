@@ -1,6 +1,0 @@
-String url
-String username
-String password
-String driver
-String defaultSchemaName
-String databaseClass

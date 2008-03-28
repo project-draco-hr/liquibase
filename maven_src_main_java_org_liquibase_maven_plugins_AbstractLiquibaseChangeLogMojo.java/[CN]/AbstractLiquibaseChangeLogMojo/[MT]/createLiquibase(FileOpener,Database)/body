@@ -1,0 +1,4 @@
+{
+  String changeLog=changeLogFile == null ? "" : changeLogFile.trim();
+  return new Liquibase(changeLog,fo,db);
+}

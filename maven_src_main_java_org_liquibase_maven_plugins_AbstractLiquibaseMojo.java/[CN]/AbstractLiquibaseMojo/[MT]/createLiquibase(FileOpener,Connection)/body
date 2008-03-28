@@ -1,8 +1,0 @@
-{
-  try {
-    return new Liquibase("",fo,DatabaseFactory.getInstance().findCorrectDatabaseImplementation(conn));
-  }
- catch (  JDBCException e) {
-    throw new MojoExecutionException(e.getMessage());
-  }
-}

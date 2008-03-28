@@ -24,8 +24,5 @@
       defaultSchemaName=value;
     }
   }
-  if (driver == null) {
-    driver=DatabaseFactory.getInstance().findDefaultDriver(url);
-  }
-  return createDatabaseObject(url,username,password,driver,defaultSchemaName,null);
+  return CommandLineUtils.createDatabaseObject(classLoader,url,username,password,driver,defaultSchemaName,null);
 }

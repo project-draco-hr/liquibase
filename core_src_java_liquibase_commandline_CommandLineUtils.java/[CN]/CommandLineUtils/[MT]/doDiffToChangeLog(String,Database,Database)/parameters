@@ -1,0 +1,3 @@
+String changeLogFile
+Database baseDatabase
+Database targetDatabase

@@ -11,19 +11,19 @@
   }
   FileSystemFileOpener fsOpener=new FileSystemFileOpener();
   CommandLineFileOpener clOpener=new CommandLineFileOpener(classLoader);
-  Database database=createDatabaseObject(this.url,this.username,this.password,this.driver,this.defaultSchemaName,this.databaseClass);
+  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultSchemaName,this.databaseClass);
   try {
     CompositeFileOpener fileOpener=new CompositeFileOpener(fsOpener,clOpener);
     if ("diff".equalsIgnoreCase(command)) {
-      doDiff(database,createDatabaseFromCommandParams(commandParams));
+      CommandLineUtils.doDiff(database,createDatabaseFromCommandParams(commandParams));
       return;
     }
  else     if ("diffChangeLog".equalsIgnoreCase(command)) {
-      doDiffToChangeLog(database,createDatabaseFromCommandParams(commandParams));
+      CommandLineUtils.doDiffToChangeLog(changeLogFile,database,createDatabaseFromCommandParams(commandParams));
       return;
     }
  else     if ("generateChangeLog".equalsIgnoreCase(command)) {
-      doGenerateChangeLog(database);
+      CommandLineUtils.doGenerateChangeLog(changeLogFile,database,defaultSchemaName);
       return;
     }
     Liquibase liquibase=new Liquibase(changeLogFile,fileOpener,database);

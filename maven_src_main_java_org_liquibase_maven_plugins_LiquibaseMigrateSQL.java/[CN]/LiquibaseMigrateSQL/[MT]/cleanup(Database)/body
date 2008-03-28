@@ -1,0 +1,9 @@
+{
+  super.cleanup(db);
+  try {
+    outputWriter.close();
+  }
+ catch (  IOException e) {
+    getLog().error(e);
+  }
+}
