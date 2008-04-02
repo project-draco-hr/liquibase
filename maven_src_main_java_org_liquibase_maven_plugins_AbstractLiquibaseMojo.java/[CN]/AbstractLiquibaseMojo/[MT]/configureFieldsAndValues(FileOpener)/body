@@ -1,9 +1,9 @@
 {
-  if (propertiesFile != null) {
+  if (propertyFile != null) {
     getLog().info("Parsing Liquibase Properties File");
-    getLog().info("  File: " + propertiesFile);
+    getLog().info("  File: " + propertyFile);
     try {
-      InputStream is=fo.getResourceAsStream(propertiesFile);
+      InputStream is=fo.getResourceAsStream(propertyFile);
       if (is == null) {
         throw new MojoFailureException("Failed to resolve the properties file.");
       }

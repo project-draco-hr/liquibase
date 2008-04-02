@@ -1,0 +1,8 @@
+{
+  LiquibaseUpdate mojo=createUpdateMojo();
+  super.setVariableValueToObject(mojo,"propertyFile",null);
+  super.setVariableValueToObject(mojo,"propertyFileWillOverride",false);
+  loadPropertiesFileIfPresent(mojo);
+  Map values=super.getVariablesAndValuesFromObject(mojo);
+  checkValues(DEFAULT_PROPERTIES,values);
+}
