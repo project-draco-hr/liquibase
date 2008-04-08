@@ -19,6 +19,9 @@
  else     if (database instanceof MSSQLDatabase && translatedTypeName.equals("uniqueidentifier")) {
       return translatedTypeName;
     }
+ else     if (database instanceof MySQLDatabase && (translatedTypeName.startsWith("enum(") || translatedTypeName.startsWith("set("))) {
+      return translatedTypeName;
+    }
     dataType=translatedTypeName + "(" + this.getColumnSize()+ ")";
   }
  else   if (twoParams.contains(this.getDataType())) {

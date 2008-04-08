@@ -32,13 +32,6 @@
     columnInfo.setDataType(rs.getInt("DATA_TYPE"));
     columnInfo.setColumnSize(rs.getInt("COLUMN_SIZE"));
     columnInfo.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
-    Object defaultValue=rs.getObject("COLUMN_DEF");
-    try {
-      columnInfo.setDefaultValue(database.convertDatabaseValueToJavaObject(defaultValue,columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits()));
-    }
- catch (    ParseException e) {
-      throw new JDBCException(e);
-    }
     int nullable=rs.getInt("NULLABLE");
     if (nullable == DatabaseMetaData.columnNoNulls) {
       columnInfo.setNullable(false);
@@ -48,7 +41,7 @@
     }
     columnInfo.setPrimaryKey(isPrimaryKey(columnInfo));
     columnInfo.setAutoIncrement(database.isColumnAutoIncrement(schema,tableName,columnName));
-    columnInfo.setTypeName(database.getColumnType(rs.getString("TYPE_NAME"),columnInfo.isAutoIncrement()));
+    getColumnTypeAndDefValue(columnInfo,rs);
     columnInfo.setRemarks(remarks);
     columnsMap.put(tableName + "." + columnName,columnInfo);
   }
