@@ -17,6 +17,7 @@
   }
   Liquibase liquibase=createLiquibase(tempFile.getName());
   liquibase.dropAll(getSchemasToDrop());
+  DatabaseSnapshot emptySnapshot=database.createDatabaseSnapshot(null,null);
   liquibase=createLiquibase(tempFile.getName());
   try {
     liquibase.update(this.contexts);
@@ -26,8 +27,8 @@
     throw e;
   }
   tempFile.deleteOnExit();
-  DatabaseSnapshot finalSnapshot=database.createDatabaseSnapshot(null,null);
-  DiffResult finalDiffResult=new Diff(originalSnapshot,finalSnapshot).compare();
+  DatabaseSnapshot migratedSnapshot=database.createDatabaseSnapshot(null,null);
+  DiffResult finalDiffResult=new Diff(originalSnapshot,migratedSnapshot).compare();
   assertEquals(0,finalDiffResult.getMissingColumns().size());
   assertEquals(0,finalDiffResult.getMissingForeignKeys().size());
   assertEquals(0,finalDiffResult.getMissingIndexes().size());
@@ -42,4 +43,19 @@
   assertEquals(0,finalDiffResult.getUnexpectedSequences().size());
   assertEquals(0,finalDiffResult.getUnexpectedTables().size());
   assertEquals(0,finalDiffResult.getUnexpectedViews().size());
+  Diff emptyDiff=new Diff(emptySnapshot,migratedSnapshot);
+  DiffResult emptyDiffResult=emptyDiff.compare();
+  output=new FileOutputStream(tempFile);
+  try {
+    emptyDiffResult.printChangeLog(new PrintStream(output),database);
+    output.flush();
+  }
+  finally {
+    output.close();
+  }
+  liquibase=createLiquibase(tempFile.getName());
+  liquibase.update(this.contexts);
+  DatabaseSnapshot emptyAgainSnapshot=database.createDatabaseSnapshot(null,null);
+  assertEquals(0,emptyAgainSnapshot.getTables().size());
+  assertEquals(0,emptyAgainSnapshot.getViews().size());
 }

@@ -10,7 +10,6 @@
   doc.appendChild(changeLogElement);
   List<Change> changes=new ArrayList<Change>();
   addMissingTableChanges(changes,targetDatabase);
-  addUnexpectedTableChanges(changes);
   addMissingColumnChanges(changes,targetDatabase);
   addUnexpectedColumnChanges(changes);
   addChangedColumnChanges(changes);
@@ -24,6 +23,7 @@
   addUnexpectedSequenceChanges(changes);
   addMissingViewChanges(changes);
   addUnexpectedViewChanges(changes);
+  addUnexpectedTableChanges(changes);
   for (  Change change : changes) {
     Element changeSet=doc.createElement("changeSet");
     changeSet.setAttribute("author",getAuthor());

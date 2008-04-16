@@ -1,8 +1,10 @@
 {
   for (  PrimaryKey pk : getUnexpectedPrimaryKeys()) {
-    DropPrimaryKeyChange change=new DropPrimaryKeyChange();
-    change.setTableName(pk.getTable().getName());
-    change.setConstraintName(pk.getName());
-    changes.add(change);
+    if (!getUnexpectedTables().contains(pk.getTable())) {
+      DropPrimaryKeyChange change=new DropPrimaryKeyChange();
+      change.setTableName(pk.getTable().getName());
+      change.setConstraintName(pk.getName());
+      changes.add(change);
+    }
   }
 }
