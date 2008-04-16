@@ -1,8 +1,7 @@
 {
-  LiquibaseUpdate mojo=createUpdateMojo();
+  LiquibaseRollback mojo=createUpdateMojo(COUNT_CONFIG_FILE);
   setVariableValueToObject(mojo,"propertyFile",null);
   setVariableValueToObject(mojo,"propertyFileWillOverride",false);
-  loadPropertiesFileIfPresent(mojo);
   Map values=getVariablesAndValuesFromObject(mojo);
-  checkValues(DEFAULT_PROPERTIES,values);
+  checkValues(COUNT_DEFAULT_PROPERTIES,values);
 }

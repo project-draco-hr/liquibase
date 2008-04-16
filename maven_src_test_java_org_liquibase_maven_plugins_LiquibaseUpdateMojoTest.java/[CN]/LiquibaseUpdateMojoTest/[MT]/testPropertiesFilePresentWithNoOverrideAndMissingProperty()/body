@@ -6,8 +6,8 @@
   props.setProperty("changeLogFile","properties_changeLogFile_value");
   createPropertiesFile("update/test.properties",props);
   LiquibaseUpdate mojo=createUpdateMojo();
-  super.setVariableValueToObject(mojo,"propertyFile","update/test.properties");
-  super.setVariableValueToObject(mojo,"propertyFileWillOverride",false);
+  setVariableValueToObject(mojo,"propertyFile","update/test.properties");
+  setVariableValueToObject(mojo,"propertyFileWillOverride",false);
   loadPropertiesFileIfPresent(mojo);
   Map values=super.getVariablesAndValuesFromObject(mojo);
   Map expected=new HashMap<String,Object>(DEFAULT_PROPERTIES);
