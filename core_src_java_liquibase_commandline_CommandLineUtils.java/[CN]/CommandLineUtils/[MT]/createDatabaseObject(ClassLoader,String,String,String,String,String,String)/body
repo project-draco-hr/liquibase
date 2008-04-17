@@ -4,7 +4,12 @@
   }
   try {
     if (url.startsWith("hibernate:")) {
-      return (Database)Class.forName(HibernateDatabase.class.getName(),true,classLoader).getConstructor(String.class).newInstance(url.substring("hibernate:".length()));
+      try {
+        return (Database)Class.forName(HibernateDatabase.class.getName(),true,classLoader).getConstructor(String.class).newInstance(url.substring("hibernate:".length()));
+      }
+ catch (      NoClassDefFoundError e) {
+        throw new MigrationFailedException(null,"Class " + e.getMessage() + " not found.  Make sure all required Hibernate and JDBC libraries are in your classpath");
+      }
     }
     Driver driverObject;
     DatabaseFactory databaseFactory=DatabaseFactory.getInstance();
