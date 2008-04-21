@@ -4,7 +4,12 @@
     return;
   }
   try {
-    LogFactory.setLoggingLevel(logLevel);
+    if (null != logFile) {
+      LogFactory.setLoggingLevel(logLevel,logFile);
+    }
+ else {
+      LogFactory.setLoggingLevel(logLevel);
+    }
   }
  catch (  IllegalArgumentException e) {
     throw new CommandLineParsingException(e.getMessage(),e);

@@ -1,0 +1,7 @@
+{
+  Object[] arrHandlers=handList.toArray();
+  for (int i=0; i < arrHandlers.length; i++) {
+    Handler h=(Handler)arrHandlers[i];
+    h.setFormatter(customFormatter);
+  }
+}

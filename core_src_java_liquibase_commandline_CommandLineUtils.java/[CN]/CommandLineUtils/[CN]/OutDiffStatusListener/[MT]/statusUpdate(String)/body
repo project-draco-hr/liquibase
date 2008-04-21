@@ -1,3 +1,6 @@
 {
-  System.err.println(message);
+  prepareHandlers();
+  setCustomFormatter();
+  LogFactory.getLogger().info(message);
+  restoreSimpleFormatter();
 }
