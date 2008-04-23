@@ -40,6 +40,6 @@
     columnInfo.setDefaultValue(tableSchema.get(columnName).get(1));
   }
  else {
-    super.getColumnTypeAndDefValue(columnInfo,rs);
+    super.getColumnTypeAndDefValue(columnInfo,rs,database);
   }
 }

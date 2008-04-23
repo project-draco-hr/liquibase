@@ -41,7 +41,7 @@
     }
     columnInfo.setPrimaryKey(isPrimaryKey(columnInfo));
     columnInfo.setAutoIncrement(database.isColumnAutoIncrement(schema,tableName,columnName));
-    getColumnTypeAndDefValue(columnInfo,rs);
+    getColumnTypeAndDefValue(columnInfo,rs,database);
     columnInfo.setRemarks(remarks);
     columnsMap.put(tableName + "." + columnName,columnInfo);
   }
