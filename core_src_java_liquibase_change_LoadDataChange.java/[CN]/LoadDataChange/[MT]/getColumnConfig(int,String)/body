@@ -1,0 +1,11 @@
+{
+  for (  LoadDataColumnConfig config : columns) {
+    if (config.getIndex() != null && config.getIndex().equals(index)) {
+      return config;
+    }
+    if (config.getHeader() != null && config.getHeader().equals(header)) {
+      return config;
+    }
+  }
+  return null;
+}

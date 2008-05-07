@@ -1,0 +1,12 @@
+{
+  Element node=currentChangeLogDOM.createElement("loadData");
+  if (getSchemaName() != null) {
+    node.setAttribute("schemaName",getSchemaName());
+  }
+  node.setAttribute("file",getFile());
+  node.setAttribute("tableName",getTableName());
+  if (getEncoding() != null) {
+    node.setAttribute("encoding",getEncoding());
+  }
+  return node;
+}

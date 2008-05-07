@@ -4,7 +4,12 @@
   }
  else {
     if (valueNumeric.matches("\\d+\\.?\\d*")) {
-      this.valueNumeric=NumberFormat.getInstance().parse(valueNumeric);
+      try {
+        this.valueNumeric=NumberFormat.getInstance().parse(valueNumeric);
+      }
+ catch (      ParseException e) {
+        throw new RuntimeException(e);
+      }
     }
  else {
       this.valueNumeric=new ComputedNumericValue(valueNumeric);

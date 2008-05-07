@@ -2,6 +2,7 @@
   new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws Exception {
       try {
+        LockHandler.getInstance(database).reset();
         new JdbcTemplate(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false));
       }
  catch (      JDBCException e) {

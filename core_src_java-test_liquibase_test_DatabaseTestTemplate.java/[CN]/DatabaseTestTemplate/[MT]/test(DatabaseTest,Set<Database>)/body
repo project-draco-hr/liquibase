@@ -1,5 +1,9 @@
 {
   for (  Database database : databasesToTestOn) {
+    LockHandler.getInstance(database).reset();
+    if (database.getConnection() != null) {
+      LockHandler.getInstance(database).forceReleaseLock();
+    }
     try {
       test.performTest(database);
     }

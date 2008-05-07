@@ -1,3 +1,4 @@
 {
   new Liquibase(null,null,database).dropAll();
+  LockHandler.getInstance(database).reset();
 }

@@ -1,6 +1,7 @@
 {
   new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws Exception {
+      LockHandler.getInstance(database).reset();
       try {
         new JdbcTemplate(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false));
       }
@@ -14,15 +15,13 @@
         ;
       }
       database.commit();
-      Database clearDatabase=database.getClass().newInstance();
-      clearDatabase.setConnection(database.getConnection());
-      JdbcTemplate originalTemplate=clearDatabase.getJdbcTemplate();
-      clearDatabase.setJdbcTemplate(new JdbcOutputTemplate(new StringWriter(),clearDatabase));
-      LockHandler lockHandler=LockHandler.getInstance(clearDatabase);
+      JdbcTemplate originalTemplate=database.getJdbcTemplate();
+      database.setJdbcTemplate(new JdbcOutputTemplate(new StringWriter(),database));
+      LockHandler lockHandler=LockHandler.getInstance(database);
       lockHandler.waitForLock();
-      clearDatabase.setJdbcTemplate(originalTemplate);
+      database.setJdbcTemplate(originalTemplate);
       lockHandler.waitForLock();
-      clearDatabase.getJdbcTemplate().execute(clearDatabase.getSelectChangeLogLockSQL());
+      database.getJdbcTemplate().execute(database.getSelectChangeLogLockSQL());
     }
   }
 );

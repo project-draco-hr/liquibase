@@ -1,0 +1,3 @@
+{
+  return "Data loaded from " + getFile() + " into "+ getTableName();
+}
