@@ -31,7 +31,6 @@
     fileReader.close();
     fileReader=new BufferedReader(new FileReader(file));
     fileReader.skip(offset);
-    System.out.println("line:" + fileReader.readLine());
     fileReader.close();
     RandomAccessFile randomAccessFile=new RandomAccessFile(file,"rw");
     randomAccessFile.seek(offset);

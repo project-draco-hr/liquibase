@@ -17,6 +17,9 @@
   addUnexpectedPrimaryKeyChanges(changes);
   addMissingIndexChanges(changes);
   addUnexpectedIndexChanges(changes);
+  if (diffData) {
+    addInsertDataChanges(changes,dataDir);
+  }
   addMissingForeignKeyChanges(changes);
   addUnexpectedForeignKeyChanges(changes);
   addMissingSequenceChanges(changes);
@@ -26,8 +29,11 @@
   addUnexpectedTableChanges(changes);
   for (  Change change : changes) {
     Element changeSet=doc.createElement("changeSet");
-    changeSet.setAttribute("author",getAuthor());
+    changeSet.setAttribute("author",getChangeSetAuthor());
     changeSet.setAttribute("id",generateId());
+    if (getChangeSetContext() != null) {
+      changeSet.setAttribute("context",getChangeSetContext());
+    }
     changeSet.appendChild(change.createNode(doc));
     doc.getDocumentElement().appendChild(changeSet);
   }

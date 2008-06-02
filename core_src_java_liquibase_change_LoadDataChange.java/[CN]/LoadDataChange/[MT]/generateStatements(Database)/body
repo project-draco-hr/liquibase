@@ -26,10 +26,13 @@
         ColumnConfig columnConfig=getColumnConfig(i,headers[i]);
         if (columnConfig != null) {
           columnName=columnConfig.getName();
-          if (columnConfig.getType() != null) {
+          if (value.toString().equalsIgnoreCase("NULL")) {
+            value="NULL";
+          }
+ else           if (columnConfig.getType() != null) {
             ColumnConfig valueConfig=new ColumnConfig();
             if (columnConfig.getType().equalsIgnoreCase("BOOLEAN")) {
-              valueConfig.setValueBoolean(Boolean.parseBoolean(value.toString()));
+              valueConfig.setValueBoolean(Boolean.parseBoolean(value.toString().toLowerCase()));
             }
  else             if (columnConfig.getType().equalsIgnoreCase("NUMERIC")) {
               valueConfig.setValueNumeric(value.toString());

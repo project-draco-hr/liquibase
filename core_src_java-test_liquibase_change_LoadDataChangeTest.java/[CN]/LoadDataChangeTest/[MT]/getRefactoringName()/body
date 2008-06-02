@@ -1,0 +1,3 @@
+{
+  assertEquals("Load Data",new LoadDataChange().getChangeName());
+}

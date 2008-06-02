@@ -5,4 +5,5 @@
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getFilePath()));
   this.getJdbcTemplate().execute(new RawSqlStatement(sql));
   commit();
+  getRanChangeSetList().remove(new RanChangeSet(changeSet));
 }

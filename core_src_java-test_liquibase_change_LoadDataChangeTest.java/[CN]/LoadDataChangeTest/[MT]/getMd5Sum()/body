@@ -1,0 +1,12 @@
+{
+  LoadDataChange refactoring=new LoadDataChange();
+  refactoring.setSchemaName("SCHEMA_NAME");
+  refactoring.setTableName("TABLE_NAME");
+  refactoring.setFile("changelogs/sample.data1.csv");
+  refactoring.setFileOpener(new JUnitFileOpener());
+  String md5sum1=refactoring.getMD5Sum();
+  refactoring.setFile("changelogs/sample.data2.csv");
+  String md5sum2=refactoring.getMD5Sum();
+  assertTrue(!md5sum1.equals(md5sum2));
+  assertTrue(md5sum2.equals(refactoring.getMD5Sum()));
+}

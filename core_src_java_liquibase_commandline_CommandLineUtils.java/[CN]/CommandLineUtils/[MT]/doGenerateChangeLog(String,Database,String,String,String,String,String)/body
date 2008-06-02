@@ -1,7 +1,11 @@
 {
   Diff diff=new Diff(originalDatabase,defaultSchemaName);
+  diff.setDiffTypes(diffTypes);
   diff.addStatusListener(new OutDiffStatusListener());
   DiffResult diffResult=diff.compare();
+  diffResult.setChangeSetAuthor(author);
+  diffResult.setChangeSetContext(context);
+  diffResult.setDataDir(dataDir);
   PrintStream outputStream=System.out;
   if (StringUtils.trimToNull(changeLogFile) != null) {
     File changeFile=new File(changeLogFile);

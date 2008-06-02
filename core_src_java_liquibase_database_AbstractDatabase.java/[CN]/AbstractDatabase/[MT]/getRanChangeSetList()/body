@@ -1,7 +1,10 @@
 {
+  if (this.ranChangeSetList != null) {
+    return this.ranChangeSetList;
+  }
   try {
     String databaseChangeLogTableName=escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName());
-    List<RanChangeSet> ranChangeSetList=new ArrayList<RanChangeSet>();
+    ranChangeSetList=new ArrayList<RanChangeSet>();
     if (doesChangeLogTableExist()) {
       log.info("Reading from " + databaseChangeLogTableName);
       String sql="SELECT * FROM " + databaseChangeLogTableName + " ORDER BY DATEEXECUTED ASC".toUpperCase();

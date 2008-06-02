@@ -12,12 +12,27 @@
   }
   DiffResult diffResult=new DiffResult(baseSnapshot,targetSnapshot);
   checkVersionInfo(diffResult);
-  checkTables(diffResult);
-  checkViews(diffResult);
-  checkColumns(diffResult);
-  checkForeignKeys(diffResult);
-  checkPrimaryKeys(diffResult);
-  checkIndexes(diffResult);
-  checkSequences(diffResult);
+  if (shouldDiffTables()) {
+    checkTables(diffResult);
+  }
+  if (shouldDiffViews()) {
+    checkViews(diffResult);
+  }
+  if (shouldDiffColumns()) {
+    checkColumns(diffResult);
+  }
+  if (shouldDiffForeignKeys()) {
+    checkForeignKeys(diffResult);
+  }
+  if (shouldDiffPrimaryKeys()) {
+    checkPrimaryKeys(diffResult);
+  }
+  if (shouldDiffIndexes()) {
+    checkIndexes(diffResult);
+  }
+  if (shouldDiffSequences()) {
+    checkSequences(diffResult);
+  }
+  diffResult.setDiffData(shouldDiffData());
   return diffResult;
 }

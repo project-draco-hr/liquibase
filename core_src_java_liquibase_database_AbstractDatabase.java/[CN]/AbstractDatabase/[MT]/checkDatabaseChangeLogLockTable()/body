@@ -11,7 +11,7 @@
         getJdbcTemplate().comment("Create Database Lock Table");
         this.getJdbcTemplate().execute(createTableStatement);
         this.commit();
-        log.info("Created database lock table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
+        log.finest("Created database lock table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
         changeLogLockTableExists=true;
         knowMustInsertIntoLockTable=true;
       }
@@ -29,7 +29,7 @@
       if (knowMustInsertIntoLockTable || rows == 0) {
         this.getJdbcTemplate().update(getChangeLogLockInsertSQL());
         this.commit();
-        log.info("Inserted lock row into: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
+        log.fine("Inserted lock row into: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
         rs.close();
       }
     }

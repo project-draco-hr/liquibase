@@ -1,0 +1,4 @@
+{
+  List<Integer> validTypes=Arrays.asList(Types.DATE,Types.TIME,Types.TIMESTAMP);
+  return validTypes.contains(dataType);
+}

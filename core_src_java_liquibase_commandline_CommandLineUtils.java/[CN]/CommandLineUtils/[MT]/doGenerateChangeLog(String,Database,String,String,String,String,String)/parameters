@@ -1,3 +1,7 @@
 String changeLogFile
 Database originalDatabase
 String defaultSchemaName
+String diffTypes
+String author
+String context
+String dataDir

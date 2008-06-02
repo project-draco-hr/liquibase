@@ -21,7 +21,7 @@
         driver=databaseFactory.findDefaultDriver(url);
       }
       if (driver == null) {
-        throw new RuntimeException("Driver class was not specified and could not be determined from the url");
+        throw new RuntimeException("Driver class was not specified and could not be determined from the url (" + url + ")");
       }
       driverObject=(Driver)Class.forName(driver,true,classLoader).newInstance();
     }

@@ -1,0 +1,31 @@
+{
+  LoadDataChange refactoring=new LoadDataChange();
+  refactoring.setSchemaName("SCHEMA_NAME");
+  refactoring.setTableName("TABLE_NAME");
+  refactoring.setFile("changelogs/sample.data1-excel.csv");
+  refactoring.setFileOpener(new JUnitFileOpener());
+  LoadDataColumnConfig ageConfig=new LoadDataColumnConfig();
+  ageConfig.setHeader("age");
+  ageConfig.setType("NUMERIC");
+  refactoring.addColumn(ageConfig);
+  LoadDataColumnConfig activeConfig=new LoadDataColumnConfig();
+  activeConfig.setHeader("active");
+  activeConfig.setType("BOOLEAN");
+  refactoring.addColumn(activeConfig);
+  SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
+  assertEquals(2,sqlStatements.length);
+  assertTrue(sqlStatements[0] instanceof InsertStatement);
+  assertTrue(sqlStatements[1] instanceof InsertStatement);
+  assertEquals("SCHEMA_NAME",((InsertStatement)sqlStatements[0]).getSchemaName());
+  assertEquals("TABLE_NAME",((InsertStatement)sqlStatements[0]).getTableName());
+  assertEquals("Bob Johnson",((InsertStatement)sqlStatements[0]).getColumnValue("name"));
+  assertEquals("bjohnson",((InsertStatement)sqlStatements[0]).getColumnValue("username"));
+  assertEquals("15",((InsertStatement)sqlStatements[0]).getColumnValue("age").toString());
+  assertEquals(Boolean.TRUE,((InsertStatement)sqlStatements[0]).getColumnValue("active"));
+  assertEquals("SCHEMA_NAME",((InsertStatement)sqlStatements[1]).getSchemaName());
+  assertEquals("TABLE_NAME",((InsertStatement)sqlStatements[1]).getTableName());
+  assertEquals("John Doe",((InsertStatement)sqlStatements[1]).getColumnValue("name"));
+  assertEquals("jdoe",((InsertStatement)sqlStatements[1]).getColumnValue("username"));
+  assertEquals("21",((InsertStatement)sqlStatements[1]).getColumnValue("age").toString());
+  assertEquals(Boolean.FALSE,((InsertStatement)sqlStatements[1]).getColumnValue("active"));
+}

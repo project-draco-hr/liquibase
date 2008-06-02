@@ -13,7 +13,13 @@
     System.out.println("LiquiBase Version: " + LiquibaseUtil.getBuildVersion() + StreamUtil.getLineSeparator());
     return;
   }
-  main.parseOptions(args);
+  try {
+    main.parseOptions(args);
+  }
+ catch (  CommandLineParsingException e) {
+    main.printHelp(System.out);
+    throw e;
+  }
   File propertiesFile=new File(main.defaultsFile);
   if (propertiesFile.exists()) {
     main.parsePropertiesFile(new FileInputStream(propertiesFile));

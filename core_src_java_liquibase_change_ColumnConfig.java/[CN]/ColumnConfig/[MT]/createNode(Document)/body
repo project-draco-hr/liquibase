@@ -1,6 +1,8 @@
 {
   Element element=document.createElement("column");
-  element.setAttribute("name",getName());
+  if (getName() != null) {
+    element.setAttribute("name",getName());
+  }
   if (getType() != null) {
     element.setAttribute("type",getType());
   }

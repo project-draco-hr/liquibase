@@ -1,3 +1,8 @@
 {
-  return super.getDefaultDatabaseSchemaName().replaceFirst("\\@.*","");
+  try {
+    return getConnection().getCatalog();
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
 }

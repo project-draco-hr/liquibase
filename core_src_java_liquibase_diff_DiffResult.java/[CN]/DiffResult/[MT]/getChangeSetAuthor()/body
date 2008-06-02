@@ -1,4 +1,7 @@
 {
+  if (changeSetAuthor != null) {
+    return changeSetAuthor;
+  }
   String author=System.getProperty("user.name");
   if (StringUtils.trimToNull(author) == null) {
     return "diff-generated";

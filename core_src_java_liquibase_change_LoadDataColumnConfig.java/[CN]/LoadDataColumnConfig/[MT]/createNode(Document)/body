@@ -1,0 +1,10 @@
+{
+  Element element=super.createNode(document);
+  if (getIndex() != null) {
+    element.setAttribute("index",getIndex().toString());
+  }
+  if (getHeader() != null) {
+    element.setAttribute("header",getHeader());
+  }
+  return element;
+}

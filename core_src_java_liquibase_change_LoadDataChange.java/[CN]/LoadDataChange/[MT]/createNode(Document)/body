@@ -8,5 +8,8 @@
   if (getEncoding() != null) {
     node.setAttribute("encoding",getEncoding());
   }
+  for (  LoadDataColumnConfig column : columns) {
+    node.appendChild(column.createNode(currentChangeLogDOM));
+  }
   return node;
 }

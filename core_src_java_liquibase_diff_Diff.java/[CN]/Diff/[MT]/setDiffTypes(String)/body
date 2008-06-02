@@ -1,0 +1,13 @@
+{
+  if (StringUtils.trimToNull(diffTypes) != null) {
+    Set<String> types=new HashSet<String>(Arrays.asList(diffTypes.toLowerCase().split("\\s*,\\s*")));
+    diffTables=types.contains("tables");
+    diffColumns=types.contains("columns");
+    diffViews=types.contains("views");
+    diffPrimaryKeys=types.contains("primaryKeys");
+    diffIndexes=types.contains("indexes");
+    diffForeignKeys=types.contains("foreignKeys");
+    diffSequences=types.contains("sequences");
+    diffData=types.contains("data");
+  }
+}

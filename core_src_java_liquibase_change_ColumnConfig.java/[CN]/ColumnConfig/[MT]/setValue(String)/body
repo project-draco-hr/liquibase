@@ -1,5 +1,5 @@
 {
-  if (StringUtils.trimToNull(value) != null) {
+  if (value != null) {
     this.value=value;
   }
 }
