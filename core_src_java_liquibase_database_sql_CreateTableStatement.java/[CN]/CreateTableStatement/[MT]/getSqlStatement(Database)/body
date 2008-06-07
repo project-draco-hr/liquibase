@@ -6,7 +6,7 @@
   while (columnIterator.hasNext()) {
     String column=columnIterator.next();
     boolean isAutoIncrement=autoIncrementColumns.contains(column);
-    buffer.append(database.escapeColumnName(column));
+    buffer.append(database.escapeColumnName(getSchemaName(),getTableName(),column));
     buffer.append(" ").append(database.getColumnType(columnTypes.get(column),isAutoIncrement));
     if (getDefaultValue(column) != null) {
       if (database instanceof MSSQLDatabase) {
@@ -44,7 +44,7 @@
     buffer.append(",");
   }
   for (  ForeignKeyConstraint fkConstraint : getForeignKeyConstraints()) {
-    buffer.append(" CONSTRAINT ").append(fkConstraint.getForeignKeyName()).append(" FOREIGN KEY (").append(database.escapeColumnName(fkConstraint.getColumn())).append(") REFERENCES ").append(fkConstraint.getReferences());
+    buffer.append(" CONSTRAINT ").append(fkConstraint.getForeignKeyName()).append(" FOREIGN KEY (").append(database.escapeColumnName(getSchemaName(),getTableName(),fkConstraint.getColumn())).append(") REFERENCES ").append(fkConstraint.getReferences());
     if (fkConstraint.isDeleteCascade()) {
       buffer.append(" ON DELETE CASCADE");
     }

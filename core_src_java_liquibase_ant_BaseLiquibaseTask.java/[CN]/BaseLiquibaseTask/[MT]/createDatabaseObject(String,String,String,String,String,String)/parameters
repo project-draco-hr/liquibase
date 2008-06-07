@@ -3,3 +3,4 @@ String databaseUrl
 String username
 String password
 String defaultSchemaName
+String databaseClass

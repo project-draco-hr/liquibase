@@ -14,6 +14,14 @@
   if (databaseUrl.startsWith("hibernate:")) {
     return new HibernateDatabase(databaseUrl.substring("hibernate:".length()));
   }
+  if (databaseClass != null) {
+    try {
+      DatabaseFactory.getInstance().addDatabaseImplementation((Database)Class.forName(databaseClass,true,loader).newInstance());
+    }
+ catch (    ClassCastException e) {
+      DatabaseFactory.getInstance().addDatabaseImplementation((Database)Class.forName(databaseClass).newInstance());
+    }
+  }
   if (driverClassName == null) {
     driverClassName=DatabaseFactory.getInstance().findDefaultDriver(databaseUrl);
   }
