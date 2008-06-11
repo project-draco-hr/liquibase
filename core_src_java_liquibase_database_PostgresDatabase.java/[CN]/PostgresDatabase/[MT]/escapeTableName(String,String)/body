@@ -1,0 +1,6 @@
+{
+  if (StringUtils.trimToNull(tableName) != null && (hasCaseProblems(tableName) || isReservedWord(tableName))) {
+    return super.escapeTableName(schemaName,"\"" + tableName + "\"");
+  }
+  return super.escapeTableName(schemaName,tableName);
+}

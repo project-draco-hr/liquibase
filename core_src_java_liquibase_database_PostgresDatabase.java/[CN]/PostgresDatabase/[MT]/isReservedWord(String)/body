@@ -1,0 +1,4 @@
+{
+  for (int i=0; i != this.reservedWords.length; i++)   if (this.reservedWords[i].toLowerCase().equalsIgnoreCase(tableName))   return true;
+  return false;
+}

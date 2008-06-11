@@ -1,0 +1,4 @@
+{
+  if (hasCaseProblems(columnName) || isReservedWord(columnName))   return "\"" + columnName + "\"";
+  return columnName;
+}
