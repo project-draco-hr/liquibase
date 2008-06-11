@@ -1,7 +1,8 @@
 {
+  Database selectedDatabase=null;
   try {
+    selectedDatabase=getSelectedDatabase();
     DatabaseObject selectedDatabaseObject=getSelectedDatabaseObject();
-    Database selectedDatabase=getSelectedDatabase();
     if (action instanceof BaseRefactorAction) {
       IntellijRefactorWizard wizard=new IntellijRefactorWizard(((BaseRefactorAction)action).createRefactorWizard(selectedDatabaseObject),selectedDatabaseObject,selectedDatabase,((BaseRefactorAction)action));
       wizard.setup();
@@ -11,11 +12,23 @@
  else     if (action instanceof MigratorAction) {
       ((MigratorAction)action).actionPerform(selectedDatabase,ideFacade);
     }
-    if (action.needsRefresh()) {
-      refresh();
+    if (!selectedDatabase.getAutoCommitMode()) {
+      selectedDatabase.commit();
     }
   }
  catch (  LiquibaseException e) {
     ideFacade.showError("Error Executing Change",e);
+  }
+ finally {
+    if (selectedDatabase != null) {
+      try {
+        selectedDatabase.close();
+      }
+ catch (      JDBCException e) {
+      }
+    }
+  }
+  if (action.needsRefresh()) {
+    refresh();
   }
 }
