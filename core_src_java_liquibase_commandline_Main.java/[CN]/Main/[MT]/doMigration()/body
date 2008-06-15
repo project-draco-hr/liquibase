@@ -95,6 +95,12 @@
  else       if ("changelogSyncSQL".equalsIgnoreCase(command)) {
         liquibase.changeLogSync(contexts,getOutputWriter());
       }
+ else       if ("markNextChangeSetRan".equalsIgnoreCase(command)) {
+        liquibase.markNextChangeSetRan(contexts);
+      }
+ else       if ("markNextChangeSetRanSQL".equalsIgnoreCase(command)) {
+        liquibase.markNextChangeSetRan(contexts,getOutputWriter());
+      }
  else       if ("updateCount".equalsIgnoreCase(command)) {
         liquibase.update(Integer.parseInt(commandParams.iterator().next()),contexts);
       }
