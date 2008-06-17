@@ -1,0 +1,3 @@
+{
+  assertEquals("A Simple String",handler.expandExpressions("A Simple String"));
+}

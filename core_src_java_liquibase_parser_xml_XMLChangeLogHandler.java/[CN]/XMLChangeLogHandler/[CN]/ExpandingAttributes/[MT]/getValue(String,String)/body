@@ -1,0 +1,3 @@
+{
+  return expandExpressions(attributes.getValue(uri,localName));
+}

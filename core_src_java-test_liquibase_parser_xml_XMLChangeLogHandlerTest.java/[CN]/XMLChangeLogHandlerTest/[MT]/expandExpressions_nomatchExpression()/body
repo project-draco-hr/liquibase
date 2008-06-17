@@ -1,0 +1,4 @@
+{
+  assertEquals("A string no expressions ${notset} set",handler.expandExpressions("A string no expressions ${notset} set"));
+  assertEquals("A string no expressions ${notset.orParams} set",handler.expandExpressions("A string no expressions ${notset.orParams} set"));
+}

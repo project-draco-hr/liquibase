@@ -1,13 +1,13 @@
 {
   if (object instanceof CustomChangeWrapper) {
     if (attributeName.equals("class")) {
-      ((CustomChangeWrapper)object).setClass(attributeValue);
+      ((CustomChangeWrapper)object).setClass(expandExpressions(attributeValue));
     }
  else {
-      ((CustomChangeWrapper)object).setParam(attributeName,attributeValue);
+      ((CustomChangeWrapper)object).setParam(attributeName,expandExpressions(attributeValue));
     }
   }
  else {
-    ObjectUtil.setProperty(object,attributeName,attributeValue);
+    ObjectUtil.setProperty(object,attributeName,expandExpressions(attributeValue));
   }
 }
