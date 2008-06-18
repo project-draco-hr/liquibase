@@ -32,6 +32,9 @@
       return;
     }
     Liquibase liquibase=new Liquibase(changeLogFile,fileOpener,database);
+    for (    Map.Entry<String,Object> entry : changeLogParameters.entrySet()) {
+      liquibase.setChangeLogParameterValue(entry.getKey(),entry.getValue());
+    }
     if ("listLocks".equalsIgnoreCase(command)) {
       liquibase.reportLocks(System.out);
       return;

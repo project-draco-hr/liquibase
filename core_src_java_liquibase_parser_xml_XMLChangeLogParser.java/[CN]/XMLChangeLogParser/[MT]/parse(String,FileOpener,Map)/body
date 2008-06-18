@@ -41,7 +41,7 @@ catch (    SAXNotSupportedException e) {
     if (inputStream == null) {
       throw new ChangeLogParseException(physicalChangeLogLocation + " does not exist");
     }
-    XMLChangeLogHandler contentHandler=new XMLChangeLogHandler(physicalChangeLogLocation,fileOpener);
+    XMLChangeLogHandler contentHandler=new XMLChangeLogHandler(physicalChangeLogLocation,fileOpener,changeLogProperties);
     xmlReader.setContentHandler(contentHandler);
     xmlReader.parse(new InputSource(inputStream));
     return contentHandler.getDatabaseChangeLog();

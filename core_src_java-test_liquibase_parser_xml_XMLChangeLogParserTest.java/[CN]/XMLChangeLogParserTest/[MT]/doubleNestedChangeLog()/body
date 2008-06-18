@@ -1,5 +1,5 @@
 {
-  DatabaseChangeLog changeLog=new XMLChangeLogParser().parse("liquibase/parser/xml/doubleNestedChangeLog.xml",new JUnitFileOpener());
+  DatabaseChangeLog changeLog=new XMLChangeLogParser().parse("liquibase/parser/xml/doubleNestedChangeLog.xml",new JUnitFileOpener(),new HashMap<String,Object>());
   assertEquals("liquibase/parser/xml/doubleNestedChangeLog.xml",changeLog.getLogicalFilePath());
   assertEquals("liquibase/parser/xml/doubleNestedChangeLog.xml",changeLog.getPhysicalFilePath());
   assertNull(changeLog.getPreconditions());

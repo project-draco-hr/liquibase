@@ -1,6 +1,6 @@
 {
   try {
-    DatabaseChangeLog changeLog=new XMLChangeLogParser().parse("liquibase/parser/xml/malformedChangeLog.xml",new JUnitFileOpener());
+    DatabaseChangeLog changeLog=new XMLChangeLogParser().parse("liquibase/parser/xml/malformedChangeLog.xml",new JUnitFileOpener(),new HashMap<String,Object>());
   }
  catch (  Exception e) {
     assertTrue(e instanceof ChangeLogParseException);

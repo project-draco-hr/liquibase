@@ -1,6 +1,0 @@
-{
-  log=LogFactory.getLogger();
-  this.fileOpener=fileOpener;
-  databaseChangeLog=new DatabaseChangeLog(physicalChangeLogLocation);
-  databaseChangeLog.setPhysicalFilePath(physicalChangeLogLocation);
-}

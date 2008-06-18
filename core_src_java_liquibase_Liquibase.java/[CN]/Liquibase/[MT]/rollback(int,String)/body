@@ -3,7 +3,7 @@
   lockHandler.waitForLock();
   try {
     database.checkDatabaseChangeLogTable();
-    DatabaseChangeLog changeLog=new ChangeLogParser().parse(changeLogFile,fileOpener);
+    DatabaseChangeLog changeLog=new ChangeLogParser(changeLogParameters).parse(changeLogFile,fileOpener);
     changeLog.validate(database);
     ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new AlreadyRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database),new CountChangeSetFilter(changesToRollback));
     logIterator.run(new RollbackVisitor(database));

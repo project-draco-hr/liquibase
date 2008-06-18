@@ -32,6 +32,12 @@
         throw new CommandLineParsingException("Unknown parameter: '" + attributeName + "'");
       }
     }
+ else     if (arg.startsWith("-D")) {
+      String[] splitArg=splitArg(arg);
+      String attributeName=splitArg[0].replaceFirst("^-D","");
+      String value=splitArg[1];
+      changeLogParameters.put(attributeName,value);
+    }
  else {
       throw new CommandLineParsingException("Unexpected value " + arg + ": parameters must start with a '--'");
     }

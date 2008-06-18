@@ -1,4 +1,4 @@
 {
-  DatabaseChangeLog changeLog=new ChangeLogParser().parse(changeLogFile,fileOpener);
+  DatabaseChangeLog changeLog=new ChangeLogParser(changeLogParameters).parse(changeLogFile,fileOpener);
   changeLog.validate(database);
 }
