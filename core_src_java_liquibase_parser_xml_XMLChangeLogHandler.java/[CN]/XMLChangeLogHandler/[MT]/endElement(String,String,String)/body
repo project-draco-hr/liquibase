@@ -6,8 +6,13 @@
   try {
     if (rootPrecondition != null) {
       if ("preConditions".equals(qName)) {
-        databaseChangeLog.setPreconditions(rootPrecondition);
-        handlePreCondition(rootPrecondition);
+        if (changeSet == null) {
+          databaseChangeLog.setPreconditions(rootPrecondition);
+          handlePreCondition(rootPrecondition);
+        }
+ else {
+          changeSet.setPreconditions(rootPrecondition);
+        }
         rootPrecondition=null;
       }
  else       if ("and".equals(qName)) {

@@ -11,6 +11,20 @@
       }
       database.getJdbcTemplate().comment(StringUtils.join(Arrays.asList(lines),"\n"));
     }
+    if (database.getJdbcTemplate().executesStatements() && rootPrecondition != null) {
+      try {
+        rootPrecondition.check(database,null);
+      }
+ catch (      PreconditionFailedException e) {
+        StringBuffer message=new StringBuffer();
+        message.append(StreamUtil.getLineSeparator());
+        for (        FailedPrecondition invalid : e.getFailedPreconditions()) {
+          message.append("          ").append(invalid.toString());
+          message.append(StreamUtil.getLineSeparator());
+        }
+        throw new MigrationFailedException(this,message.toString());
+      }
+    }
     for (    Change change : changes) {
       try {
         change.setUp();
@@ -39,7 +53,12 @@
       log.log(Level.INFO,"Change set " + toString(false) + " failed, but failOnError was false",e);
     }
  else {
-      throw new MigrationFailedException(this,e);
+      if (e instanceof MigrationFailedException) {
+        throw ((MigrationFailedException)e);
+      }
+ else {
+        throw new MigrationFailedException(this,e);
+      }
     }
   }
 }
