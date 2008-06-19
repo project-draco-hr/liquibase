@@ -1,0 +1,8 @@
+{
+  for (  ChangeSet changeSet : changeSets) {
+    if (changeSet.getFilePath().equals(path) && changeSet.getAuthor().equals(author) && changeSet.getId().equals(id)) {
+      return changeSet;
+    }
+  }
+  return null;
+}
