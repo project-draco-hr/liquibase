@@ -85,6 +85,10 @@
       changeSet.addChange(change);
       change=null;
     }
+ else     if (changeSet != null && "validCheckSum".equals(qName)) {
+      changeSet.addValidCheckSum(text.toString());
+      text=null;
+    }
   }
  catch (  Exception e) {
     log.log(Level.SEVERE,"Error thrown as a SAXException: " + e.getMessage(),e);

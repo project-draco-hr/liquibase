@@ -1,0 +1,15 @@
+{
+  String currentMd5Sum=getMd5sum();
+  if (currentMd5Sum == null) {
+    return true;
+  }
+  if (currentMd5Sum.equals(storedCheckSum)) {
+    return true;
+  }
+  for (  String validCheckSum : validCheckSums) {
+    if (currentMd5Sum.equals(validCheckSum)) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -4,6 +4,9 @@
     if ("comment".equals(qName)) {
       text=new StringBuffer();
     }
+ else     if ("validCheckSum".equals(qName)) {
+      text=new StringBuffer();
+    }
  else     if ("databaseChangeLog".equals(qName)) {
       String version=uri.substring(uri.lastIndexOf("/") + 1);
       if (!version.equals(XMLChangeLogParser.getSchemaVersion())) {
