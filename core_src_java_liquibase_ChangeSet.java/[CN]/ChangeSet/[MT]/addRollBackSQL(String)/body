@@ -1,8 +1,8 @@
 {
-  if (sql == null) {
+  if (StringUtils.trimToNull(sql) == null) {
     return;
   }
   for (  String statment : StringUtils.splitSQL(sql)) {
-    rollBackStatements.add(new RawSqlStatement(statment.trim()));
+    rollBackChanges.add(new RawSQLChange(statment.trim()));
   }
 }

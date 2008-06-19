@@ -29,6 +29,7 @@
     }
  else     if (changeSet != null && "rollback".equals(qName)) {
       changeSet.addRollBackSQL(textString);
+      inRollback=false;
     }
  else     if (change != null && change instanceof RawSQLChange && "comment".equals(qName)) {
       ((RawSQLChange)change).setComments(textString);
@@ -82,7 +83,12 @@
         }
       }
       text=null;
-      changeSet.addChange(change);
+      if (inRollback) {
+        changeSet.addRollbackChange(change);
+      }
+ else {
+        changeSet.addChange(change);
+      }
       change=null;
     }
  else     if (changeSet != null && "validCheckSum".equals(qName)) {

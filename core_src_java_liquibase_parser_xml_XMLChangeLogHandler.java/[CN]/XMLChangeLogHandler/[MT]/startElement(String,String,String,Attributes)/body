@@ -34,6 +34,7 @@
     }
  else     if (changeSet != null && "rollback".equals(qName)) {
       text=new StringBuffer();
+      inRollback=true;
     }
  else     if (changeSet != null && change == null) {
       change=ChangeFactory.getInstance().create(qName);

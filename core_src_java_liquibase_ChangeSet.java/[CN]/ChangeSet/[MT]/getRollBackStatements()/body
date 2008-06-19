@@ -1,3 +1,0 @@
-{
-  return rollBackStatements.toArray(new SqlStatement[rollBackStatements.size()]);
-}

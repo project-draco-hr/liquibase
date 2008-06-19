@@ -1,13 +1,15 @@
 {
   try {
     database.getJdbcTemplate().comment("Rolling Back ChangeSet: " + toString());
-    if (rollBackStatements != null && rollBackStatements.size() > 0) {
-      for (      SqlStatement rollback : rollBackStatements) {
-        try {
-          database.getJdbcTemplate().execute(rollback);
-        }
- catch (        JDBCException e) {
-          throw new RollbackFailedException("Error executing custom SQL [" + rollback.getSqlStatement(database) + "]",e);
+    if (rollBackChanges != null && rollBackChanges.size() > 0) {
+      for (      Change rollback : rollBackChanges) {
+        for (        SqlStatement statement : rollback.generateStatements(database)) {
+          try {
+            database.getJdbcTemplate().execute(statement);
+          }
+ catch (          JDBCException e) {
+            throw new RollbackFailedException("Error executing custom SQL [" + statement + "]",e);
+          }
         }
       }
     }
