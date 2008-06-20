@@ -1,0 +1,20 @@
+{
+  CustomPrecondition customPrecondition;
+  try {
+    try {
+      customPrecondition=(CustomPrecondition)Class.forName(className,true,classLoader).newInstance();
+    }
+ catch (    ClassCastException e) {
+      customPrecondition=(CustomPrecondition)Class.forName(className).newInstance();
+    }
+  }
+ catch (  Exception e) {
+    throw new PreconditionFailedException("Could not open custom precondition class " + className,changeLog,this);
+  }
+  try {
+    customPrecondition.check(database);
+  }
+ catch (  CustomPreconditionFailedException e) {
+    throw new PreconditionFailedException(new FailedPrecondition("Custom Precondition Failed: " + e.getMessage(),changeLog,this));
+  }
+}
