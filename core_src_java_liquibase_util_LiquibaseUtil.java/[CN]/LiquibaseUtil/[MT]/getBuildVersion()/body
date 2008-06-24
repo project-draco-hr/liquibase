@@ -4,7 +4,6 @@
   URL buildInfoFile=classLoader.getResource("buildinfo.properties");
   try {
     if (buildInfoFile == null) {
-      System.out.println("buildinfo not found");
       return "UNKNOWN";
     }
  else {
@@ -12,7 +11,6 @@
       buildInfo.load(in);
       String o=(String)buildInfo.get("build.version");
       if (o == null) {
-        System.out.println("buildversion not found");
         return "UNKNOWN";
       }
  else {
