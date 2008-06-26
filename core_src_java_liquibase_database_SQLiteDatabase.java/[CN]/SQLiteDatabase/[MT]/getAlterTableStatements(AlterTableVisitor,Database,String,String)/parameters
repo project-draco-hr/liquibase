@@ -1,0 +1,4 @@
+AlterTableVisitor alterTableVisitor
+Database database
+String schemaName
+String tableName

@@ -1,0 +1,11 @@
+{
+  updateListeners("Reading sequences for " + database.toString() + " ...");
+  if (database.supportsSequences()) {
+    List<String> sequenceNamess=(List<String>)database.getJdbcTemplate().queryForList(database.createFindSequencesSQL(schema),String.class);
+    for (    String sequenceName : sequenceNamess) {
+      Sequence seq=new Sequence();
+      seq.setName(sequenceName.trim());
+      sequences.add(seq);
+    }
+  }
+}

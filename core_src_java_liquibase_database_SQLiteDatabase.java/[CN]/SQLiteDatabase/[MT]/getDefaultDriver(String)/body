@@ -1,0 +1,6 @@
+{
+  if (url.startsWith("jdbc:sqlite:")) {
+    return "SQLite.JDBCDriver";
+  }
+  return null;
+}

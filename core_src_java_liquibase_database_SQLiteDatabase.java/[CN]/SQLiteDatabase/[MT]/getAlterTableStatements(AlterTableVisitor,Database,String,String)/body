@@ -1,0 +1,6 @@
+{
+  Collection<SqlStatement> statements=new Vector<SqlStatement>();
+  DatabaseSnapshot snapshot=new SQLiteDatabaseSnapshot(database);
+  Table table=snapshot.getTable(tableName);
+  return statements;
+}

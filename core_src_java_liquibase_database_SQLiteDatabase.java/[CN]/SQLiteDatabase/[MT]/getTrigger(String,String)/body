@@ -1,0 +1,3 @@
+{
+  return "CREATE TRIGGER insert_" + table + "_timeEnter AFTER  INSERT ON "+ table+ " BEGIN"+ " UPDATE "+ table+ " SET "+ column+ " = DATETIME('NOW')"+ " WHERE rowid = new.rowid END ";
+}

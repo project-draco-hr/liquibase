@@ -1,0 +1,3 @@
+{
+  return getDateLiteral(new ISODateFormat().format(date).replaceFirst("^'","").replaceFirst("'$",""));
+}
