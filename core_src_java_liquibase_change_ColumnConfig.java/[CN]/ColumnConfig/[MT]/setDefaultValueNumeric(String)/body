@@ -7,7 +7,7 @@
       setAutoIncrement(true);
     }
  else {
-      this.defaultValueNumeric=NumberFormat.getInstance().parse(defaultValueNumeric);
+      this.defaultValueNumeric=NumberFormat.getInstance(Locale.US).parse(defaultValueNumeric);
     }
   }
 }

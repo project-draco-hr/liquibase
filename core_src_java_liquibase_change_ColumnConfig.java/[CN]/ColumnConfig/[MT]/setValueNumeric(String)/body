@@ -5,7 +5,7 @@
  else {
     if (valueNumeric.matches("\\d+\\.?\\d*")) {
       try {
-        this.valueNumeric=NumberFormat.getInstance().parse(valueNumeric);
+        this.valueNumeric=NumberFormat.getInstance(Locale.US).parse(valueNumeric);
       }
  catch (      ParseException e) {
         throw new RuntimeException(e);

@@ -8,7 +8,7 @@
   }
  else   if (getDefaultValueNumeric() != null) {
     try {
-      defaultValue=NumberFormat.getInstance().parse(getDefaultValueNumeric());
+      defaultValue=NumberFormat.getInstance(Locale.US).parse(getDefaultValueNumeric());
     }
  catch (    ParseException e) {
       defaultValue=new ComputedNumericValue(getDefaultValueNumeric());
