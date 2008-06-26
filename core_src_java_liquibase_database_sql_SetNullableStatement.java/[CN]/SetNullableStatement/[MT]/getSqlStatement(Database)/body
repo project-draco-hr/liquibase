@@ -1,4 +1,7 @@
 {
+  if (!supportsDatabase(database)) {
+    throw new StatementNotSupportedOnDatabaseException(this,database);
+  }
   String nullableString;
   if (isNullable()) {
     nullableString=" NULL";

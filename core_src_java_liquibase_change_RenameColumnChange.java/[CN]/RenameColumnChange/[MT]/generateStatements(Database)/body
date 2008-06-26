@@ -1,29 +1,29 @@
 {
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
   if (database instanceof SQLiteDatabase) {
-    try {
-      AlterTableVisitor rename_alter_visitor=new AlterTableVisitor(){
-        public ColumnConfig[] getColumnsToAdd(){
-          return new ColumnConfig[0];
-        }
-        public boolean copyThisColumn(        ColumnConfig column){
-          return true;
-        }
-        public boolean createThisColumn(        ColumnConfig column){
-          if (column.getName().equals(getOldColumnName())) {
-            column.setName(getNewColumnName());
-          }
-          return true;
-        }
-        public boolean createThisIndex(        Index index){
-          if (index.getColumns().contains(getOldColumnName())) {
-            index.getColumns().remove(getOldColumnName());
-            index.getColumns().add(getNewColumnName());
-          }
-          return true;
-        }
+    AlterTableVisitor rename_alter_visitor=new AlterTableVisitor(){
+      public ColumnConfig[] getColumnsToAdd(){
+        return new ColumnConfig[0];
       }
+      public boolean copyThisColumn(      ColumnConfig column){
+        return true;
+      }
+      public boolean createThisColumn(      ColumnConfig column){
+        if (column.getName().equals(getOldColumnName())) {
+          column.setName(getNewColumnName());
+        }
+        return true;
+      }
+      public boolean createThisIndex(      Index index){
+        if (index.getColumns().contains(getOldColumnName())) {
+          index.getColumns().remove(getOldColumnName());
+          index.getColumns().add(getNewColumnName());
+        }
+        return true;
+      }
+    }
 ;
+    try {
       statements.addAll(SQLiteDatabase.getAlterTableStatements(rename_alter_visitor,database,getSchemaName(),getTableName()));
     }
  catch (    JDBCException e) {
