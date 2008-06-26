@@ -1,0 +1,13 @@
+{
+  setName(column.getName());
+  setType(column.getType());
+  setDefaultValue(column.getDefaultValue());
+  setAutoIncrement(column.isAutoIncrement());
+  if (column.getConstraints() != null) {
+    ConstraintsConfig constraints=new ConstraintsConfig();
+    constraints.setNullable(column.getConstraints().isNullable());
+    constraints.setPrimaryKey(column.getConstraints().isPrimaryKey());
+    constraints.setUnique(column.getConstraints().isUnique());
+  }
+  setConstraints(constraints);
+}

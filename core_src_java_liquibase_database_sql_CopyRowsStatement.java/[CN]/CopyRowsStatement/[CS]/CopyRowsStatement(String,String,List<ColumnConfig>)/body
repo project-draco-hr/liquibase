@@ -1,0 +1,5 @@
+{
+  this.sourceTable=sourceTable;
+  this.targetTable=targetTable;
+  this.copyColumns=copyColumns;
+}

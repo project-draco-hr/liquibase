@@ -1,0 +1,13 @@
+{
+  setName(columnStructure.getName());
+  setType(columnStructure.getTypeName());
+  if (columnStructure.getDefaultValue() != null) {
+    setDefaultValue(columnStructure.getDefaultValue().toString());
+  }
+  setAutoIncrement(new Boolean(columnStructure.isAutoIncrement()));
+  ConstraintsConfig constraints=new ConstraintsConfig();
+  constraints.setNullable(columnStructure.isNullable());
+  constraints.setPrimaryKey(columnStructure.isPrimaryKey());
+  constraints.setUnique(columnStructure.isUnique());
+  setConstraints(constraints);
+}
