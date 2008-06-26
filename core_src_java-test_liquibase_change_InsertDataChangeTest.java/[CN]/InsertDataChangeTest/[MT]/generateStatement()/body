@@ -5,4 +5,5 @@
   assertEquals("123",((InsertStatement)sqlStatements[0]).getColumnValue("id").toString());
   assertEquals("Andrew",((InsertStatement)sqlStatements[0]).getColumnValue("name").toString());
   assertEquals("21",((InsertStatement)sqlStatements[0]).getColumnValue("age").toString());
+  assertEquals("1.78",((InsertStatement)sqlStatements[0]).getColumnValue("height").toString());
 }

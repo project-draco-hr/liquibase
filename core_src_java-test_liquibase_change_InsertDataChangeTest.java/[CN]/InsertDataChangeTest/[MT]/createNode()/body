@@ -4,7 +4,7 @@
   assertEquals("insert",node.getTagName());
   assertEquals("TABLE_NAME",node.getAttribute("tableName"));
   NodeList columns=node.getChildNodes();
-  assertEquals(3,columns.getLength());
+  assertEquals(4,columns.getLength());
   assertEquals("column",((Element)columns.item(0)).getTagName());
   assertEquals("id",((Element)columns.item(0)).getAttribute("name"));
   assertEquals("123",((Element)columns.item(0)).getAttribute("valueNumeric"));
@@ -14,4 +14,7 @@
   assertEquals("column",((Element)columns.item(2)).getTagName());
   assertEquals("age",((Element)columns.item(2)).getAttribute("name"));
   assertEquals("21",((Element)columns.item(2)).getAttribute("valueNumeric"));
+  assertEquals("column",((Element)columns.item(3)).getTagName());
+  assertEquals("height",((Element)columns.item(3)).getAttribute("name"));
+  assertEquals("1.78",((Element)columns.item(3)).getAttribute("valueNumeric"));
 }

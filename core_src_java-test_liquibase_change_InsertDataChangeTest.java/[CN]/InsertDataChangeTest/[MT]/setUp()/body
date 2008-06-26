@@ -10,7 +10,11 @@
   ColumnConfig col3=new ColumnConfig();
   col3.setName("age");
   col3.setValueNumeric("21");
+  ColumnConfig col4=new ColumnConfig();
+  col4.setName("height");
+  col4.setValueNumeric("1.78");
   refactoring.addColumn(col1);
   refactoring.addColumn(col2);
   refactoring.addColumn(col3);
+  refactoring.addColumn(col4);
 }
