@@ -1,5 +1,5 @@
 {
-  if (isPrimaryKey() && (database instanceof CacheDatabase || database instanceof H2Database || database instanceof DB2Database|| database instanceof DerbyDatabase)) {
+  if (isPrimaryKey() && (database instanceof CacheDatabase || database instanceof H2Database || database instanceof DB2Database|| database instanceof DerbyDatabase|| database instanceof SQLiteDatabase)) {
     throw new StatementNotSupportedOnDatabaseException("Adding primary key columns is not supported",this,database);
   }
   String alterTable="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD "+ database.escapeColumnName(getSchemaName(),getTableName(),getColumnName())+ " "+ database.getColumnType(getColumnType(),isAutoIncrement());

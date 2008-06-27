@@ -1,9 +1,5 @@
 {
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
-  String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();
-  if (defaultNullValue != null) {
-    statements.add(new UpdateStatement(schemaName,getTableName()).addNewColumnValue(getColumnName(),getDefaultNullValue()).setWhereClause(getColumnName() + " IS NULL"));
-  }
   AlterTableVisitor rename_alter_visitor=new AlterTableVisitor(){
     public ColumnConfig[] getColumnsToAdd(){
       return new ColumnConfig[0];
@@ -12,8 +8,11 @@
       return true;
     }
     public boolean createThisColumn(    ColumnConfig column){
-      if (column.getName().equals(getColumnName())) {
-        column.getConstraints().setNullable(false);
+      for (      ColumnConfig cur_column : columns) {
+        if (cur_column.getName().equals(column.getName())) {
+          column.setType(cur_column.getType());
+          break;
+        }
       }
       return true;
     }
@@ -26,6 +25,7 @@
     statements.addAll(SQLiteDatabase.getAlterTableStatements(rename_alter_visitor,database,getSchemaName(),getTableName()));
   }
  catch (  JDBCException e) {
+    System.err.println(e);
     e.printStackTrace();
   }
   return statements.toArray(new SqlStatement[statements.size()]);

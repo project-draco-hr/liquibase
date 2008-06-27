@@ -1,9 +1,5 @@
 {
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
-  String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();
-  if (defaultNullValue != null) {
-    statements.add(new UpdateStatement(schemaName,getTableName()).addNewColumnValue(getColumnName(),getDefaultNullValue()).setWhereClause(getColumnName() + " IS NULL"));
-  }
   AlterTableVisitor rename_alter_visitor=new AlterTableVisitor(){
     public ColumnConfig[] getColumnsToAdd(){
       return new ColumnConfig[0];
@@ -13,7 +9,23 @@
     }
     public boolean createThisColumn(    ColumnConfig column){
       if (column.getName().equals(getColumnName())) {
-        column.getConstraints().setNullable(false);
+        try {
+          if (getDefaultValue() != null) {
+            column.setDefaultValue(getDefaultValue());
+          }
+          if (getDefaultValueBoolean() != null) {
+            column.setDefaultValueBoolean(getDefaultValueBoolean());
+          }
+          if (getDefaultValueDate() != null) {
+            column.setDefaultValueDate(getDefaultValueDate());
+          }
+          if (getDefaultValueNumeric() != null) {
+            column.setDefaultValueNumeric(getDefaultValueNumeric());
+          }
+        }
+ catch (        ParseException e) {
+          e.printStackTrace();
+        }
       }
       return true;
     }

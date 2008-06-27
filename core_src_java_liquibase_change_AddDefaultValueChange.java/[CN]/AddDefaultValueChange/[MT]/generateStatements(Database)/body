@@ -22,5 +22,8 @@
       defaultValue=new ComputedDateValue(getDefaultValueDate());
     }
   }
+  if (database instanceof SQLiteDatabase) {
+    return generateStatementsForSQLiteDatabase(database,defaultValue);
+  }
   return new SqlStatement[]{new AddDefaultValueStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getColumnName(),defaultValue)};
 }

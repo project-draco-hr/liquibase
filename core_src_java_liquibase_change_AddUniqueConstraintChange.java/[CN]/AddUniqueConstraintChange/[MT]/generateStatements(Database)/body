@@ -1,4 +1,7 @@
 {
+  if (database instanceof SQLiteDatabase) {
+    return generateStatementsForSQLiteDatabase(database);
+  }
   AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getColumnNames(),getConstraintName());
   statement.setTablespace(getTablespace());
   return new SqlStatement[]{statement};

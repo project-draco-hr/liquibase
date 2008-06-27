@@ -1,4 +1,7 @@
 {
+  if (!supportsDatabase(database)) {
+    throw new StatementNotSupportedOnDatabaseException(this,database);
+  }
   if (database instanceof SybaseDatabase) {
     return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " REPLACE "+ database.escapeColumnName(getSchemaName(),getTableName(),getColumnName())+ " DEFAULT "+ database.convertJavaObjectToString(getDefaultValue());
   }

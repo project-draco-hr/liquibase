@@ -1,9 +1,5 @@
 {
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
-  String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();
-  if (defaultNullValue != null) {
-    statements.add(new UpdateStatement(schemaName,getTableName()).addNewColumnValue(getColumnName(),getDefaultNullValue()).setWhereClause(getColumnName() + " IS NULL"));
-  }
   AlterTableVisitor rename_alter_visitor=new AlterTableVisitor(){
     public ColumnConfig[] getColumnsToAdd(){
       return new ColumnConfig[0];
@@ -12,8 +8,8 @@
       return true;
     }
     public boolean createThisColumn(    ColumnConfig column){
-      if (column.getName().equals(getColumnName())) {
-        column.getConstraints().setNullable(false);
+      if (column.getName().equals(getConstraintName())) {
+        column.getConstraints().setPrimaryKey(false);
       }
       return true;
     }

@@ -1,4 +1,7 @@
 {
+  if (!supportsDatabase(database)) {
+    throw new StatementNotSupportedOnDatabaseException(this,database);
+  }
   if (database instanceof MSSQLDatabase) {
     return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP CONSTRAINT "+ ((MSSQLDatabase)database).generateDefaultConstraintName(getTableName(),getColumnName());
   }

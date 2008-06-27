@@ -1,4 +1,7 @@
 {
+  if (database instanceof SQLiteDatabase) {
+    return generateStatementsForSQLiteDatabase(database);
+  }
   List<SqlStatement> sql=new ArrayList<SqlStatement>();
   for (  ColumnConfig aColumn : columns) {
     String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();

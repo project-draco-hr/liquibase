@@ -1,4 +1,7 @@
 {
+  if (!supportsDatabase(database)) {
+    throw new StatementNotSupportedOnDatabaseException(this,database);
+  }
   if (getConstraintName() == null) {
     if (database instanceof MSSQLDatabase || database instanceof PostgresDatabase || database instanceof FirebirdDatabase) {
       throw new StatementNotSupportedOnDatabaseException("Database requires a constraint name to drop the primary key",this,database);
