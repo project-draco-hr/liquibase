@@ -1,4 +1,8 @@
 {
+  String osName=System.getProperty("os.name");
+  if (osName != null && osName.toLowerCase().contains("windows")) {
+    return InetAddress.getLocalHost();
+  }
   InetAddress lch=null;
   Enumeration<NetworkInterface> e=NetworkInterface.getNetworkInterfaces();
   while (e.hasMoreElements()) {
