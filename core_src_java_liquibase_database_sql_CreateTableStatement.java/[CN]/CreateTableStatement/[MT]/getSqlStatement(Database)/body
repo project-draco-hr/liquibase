@@ -8,6 +8,15 @@
     boolean isAutoIncrement=autoIncrementColumns.contains(column);
     buffer.append(database.escapeColumnName(getSchemaName(),getTableName(),column));
     buffer.append(" ").append(database.getColumnType(columnTypes.get(column),isAutoIncrement));
+    if ((database instanceof SQLiteDatabase) && (getPrimaryKeyConstraint() != null) && (getPrimaryKeyConstraint().getColumns().size() == 1)&& (getPrimaryKeyConstraint().getColumns().contains(column))&& isAutoIncrement) {
+      String pkName=StringUtils.trimToNull(getPrimaryKeyConstraint().getConstraintName());
+      if (pkName == null) {
+        pkName=database.generatePrimaryKeyName(getTableName());
+      }
+      buffer.append(" CONSTRAINT ");
+      buffer.append(pkName);
+      buffer.append(" PRIMARY KEY AUTOINCREMENT");
+    }
     if (getDefaultValue(column) != null) {
       if (database instanceof MSSQLDatabase) {
         buffer.append(" CONSTRAINT ").append(((MSSQLDatabase)database).generateDefaultConstraintName(tableName,column));
@@ -15,7 +24,7 @@
       buffer.append(" DEFAULT ");
       buffer.append(getDefaultValue(column));
     }
-    if (isAutoIncrement) {
+    if (isAutoIncrement && (database.getAutoIncrementClause() != null) && (!database.getAutoIncrementClause().equals(""))) {
       buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
     }
     if (getNotNullColumns().contains(column)) {
@@ -31,17 +40,19 @@
     }
   }
   buffer.append(",");
-  if (getPrimaryKeyConstraint() != null && getPrimaryKeyConstraint().getColumns().size() > 0) {
-    String pkName=StringUtils.trimToNull(getPrimaryKeyConstraint().getConstraintName());
-    if (pkName == null) {
-      pkName=database.generatePrimaryKeyName(getTableName());
+  if (!((database instanceof SQLiteDatabase) && (getPrimaryKeyConstraint() != null) && (getPrimaryKeyConstraint().getColumns().size() == 1)&& autoIncrementColumns.contains(getPrimaryKeyConstraint().getColumns().get(0)))) {
+    if (getPrimaryKeyConstraint() != null && getPrimaryKeyConstraint().getColumns().size() > 0) {
+      String pkName=StringUtils.trimToNull(getPrimaryKeyConstraint().getConstraintName());
+      if (pkName == null) {
+        pkName=database.generatePrimaryKeyName(getTableName());
+      }
+      buffer.append(" CONSTRAINT ");
+      buffer.append(pkName);
+      buffer.append(" PRIMARY KEY (");
+      buffer.append(database.escapeColumnNameList(StringUtils.join(getPrimaryKeyConstraint().getColumns(),", ")));
+      buffer.append(")");
+      buffer.append(",");
     }
-    buffer.append(" CONSTRAINT ");
-    buffer.append(pkName);
-    buffer.append(" PRIMARY KEY (");
-    buffer.append(database.escapeColumnNameList(StringUtils.join(getPrimaryKeyConstraint().getColumns(),", ")));
-    buffer.append(")");
-    buffer.append(",");
   }
   for (  ForeignKeyConstraint fkConstraint : getForeignKeyConstraints()) {
     buffer.append(" CONSTRAINT ").append(fkConstraint.getForeignKeyName()).append(" FOREIGN KEY (").append(database.escapeColumnName(getSchemaName(),getTableName(),fkConstraint.getColumn())).append(") REFERENCES ").append(fkConstraint.getReferences());

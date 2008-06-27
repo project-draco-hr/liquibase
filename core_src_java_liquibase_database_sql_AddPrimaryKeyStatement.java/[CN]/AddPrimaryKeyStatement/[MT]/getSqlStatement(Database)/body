@@ -1,4 +1,7 @@
 {
+  if (!supportsDatabase(database)) {
+    throw new StatementNotSupportedOnDatabaseException(this,database);
+  }
   String sql;
   if (getConstraintName() == null || database instanceof MySQLDatabase) {
     sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD PRIMARY KEY ("+ database.escapeColumnNameList(getColumnNames())+ ")";

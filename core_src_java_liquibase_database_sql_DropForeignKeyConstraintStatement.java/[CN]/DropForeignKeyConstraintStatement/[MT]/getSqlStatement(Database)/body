@@ -1,4 +1,7 @@
 {
+  if (!supportsDatabase(database)) {
+    throw new StatementNotSupportedOnDatabaseException("SQLite " + "database does not support a drop foreign key statement",this,database);
+  }
   if (getBaseTableSchemaName() != null && !database.supportsSchemas()) {
     throw new StatementNotSupportedOnDatabaseException("Database does not support schemas",this,database);
   }

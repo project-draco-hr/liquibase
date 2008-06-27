@@ -1,3 +1,6 @@
 {
+  if (database instanceof SQLiteDatabase) {
+    return generateStatementsForSQLiteDatabase(database);
+  }
   return new SqlStatement[]{new DropForeignKeyConstraintStatement(getBaseTableSchemaName() == null ? database.getDefaultSchemaName() : getBaseTableSchemaName(),getBaseTableName(),getConstraintName())};
 }

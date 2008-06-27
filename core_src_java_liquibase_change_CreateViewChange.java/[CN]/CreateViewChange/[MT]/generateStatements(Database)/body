@@ -1,7 +1,15 @@
 {
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
   boolean replaceIfExists=false;
   if (getReplaceIfExists() != null && getReplaceIfExists()) {
     replaceIfExists=true;
   }
-  return new SqlStatement[]{new CreateViewStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getViewName(),getSelectQuery(),replaceIfExists)};
+  if (!supportsReplaceIfExistsOption(database) && replaceIfExists) {
+    statements.add(new DropViewStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getViewName()));
+    statements.add(new CreateViewStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getViewName(),getSelectQuery(),false));
+  }
+ else {
+    statements.add(new CreateViewStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getViewName(),getSelectQuery(),replaceIfExists));
+  }
+  return statements.toArray(new SqlStatement[statements.size()]);
 }
