@@ -1,7 +1,18 @@
 {
   try {
-    output.write(sql.getSqlStatement(database));
-    output.write(";");
+    String statement=sql.getSqlStatement(database);
+    output.write(statement);
+    if (!statement.endsWith(";")) {
+      output.write(";");
+    }
+    if (database instanceof MSSQLDatabase) {
+      output.write(StreamUtil.getLineSeparator());
+      output.write("GO");
+    }
+ else     if (database instanceof OracleDatabase) {
+      output.write(StreamUtil.getLineSeparator());
+      output.write("/");
+    }
     output.write(StreamUtil.getLineSeparator());
     output.write(StreamUtil.getLineSeparator());
   }
