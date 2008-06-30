@@ -1,0 +1,15 @@
+{
+  if (database == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(completeChangeLog);
+  liquibase.checkDatabaseChangeLogTable();
+  try {
+    liquibase.tag("empty");
+  }
+ catch (  JDBCException e) {
+    assertEquals("liquibase.exception.JDBCException: Cannot tag an empty database",e.getMessage());
+  }
+}

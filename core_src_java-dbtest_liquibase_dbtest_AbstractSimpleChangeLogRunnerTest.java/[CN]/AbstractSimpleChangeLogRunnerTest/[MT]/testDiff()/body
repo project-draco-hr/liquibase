@@ -1,0 +1,24 @@
+{
+  if (database == null) {
+    return;
+  }
+  runCompleteChangeLog();
+  Diff diff=new Diff(database,database);
+  DiffResult diffResult=diff.compare();
+  assertEquals(0,diffResult.getMissingColumns().size());
+  assertEquals(0,diffResult.getMissingForeignKeys().size());
+  assertEquals(0,diffResult.getMissingIndexes().size());
+  assertEquals(0,diffResult.getMissingPrimaryKeys().size());
+  assertEquals(0,diffResult.getMissingSequences().size());
+  assertEquals(0,diffResult.getMissingColumns().size());
+  assertEquals(0,diffResult.getMissingTables().size());
+  assertEquals(0,diffResult.getMissingViews().size());
+  assertEquals(0,diffResult.getUnexpectedColumns().size());
+  assertEquals(0,diffResult.getUnexpectedForeignKeys().size());
+  assertEquals(0,diffResult.getUnexpectedIndexes().size());
+  assertEquals(0,diffResult.getUnexpectedPrimaryKeys().size());
+  assertEquals(0,diffResult.getUnexpectedSequences().size());
+  assertEquals(0,diffResult.getUnexpectedColumns().size());
+  assertEquals(0,diffResult.getUnexpectedTables().size());
+  assertEquals(0,diffResult.getUnexpectedViews().size());
+}

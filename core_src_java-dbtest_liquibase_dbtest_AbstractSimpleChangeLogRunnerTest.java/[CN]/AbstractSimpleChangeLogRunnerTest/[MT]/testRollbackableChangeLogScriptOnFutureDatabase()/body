@@ -1,0 +1,10 @@
+{
+  if (database == null) {
+    return;
+  }
+  StringWriter writer=new StringWriter();
+  Liquibase liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.futureRollbackSQL(this.contexts,writer);
+}

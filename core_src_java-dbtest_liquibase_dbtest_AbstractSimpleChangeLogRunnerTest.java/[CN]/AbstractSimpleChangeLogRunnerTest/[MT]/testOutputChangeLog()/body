@@ -1,0 +1,10 @@
+{
+  if (database == null) {
+    return;
+  }
+  StringWriter output=new StringWriter();
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(completeChangeLog);
+  liquibase.update(this.contexts,output);
+}
