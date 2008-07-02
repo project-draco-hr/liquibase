@@ -1,5 +1,6 @@
 {
   DropSequenceChange inverse=new DropSequenceChange();
   inverse.setSequenceName(getSequenceName());
+  inverse.setSchemaName(getSchemaName());
   return new Change[]{inverse};
 }
