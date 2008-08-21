@@ -15,10 +15,8 @@
       parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaLanguage","http://www.w3.org/2001/XMLSchema");
     }
  catch (    SAXNotRecognizedException e) {
-      ;
     }
 catch (    SAXNotSupportedException e) {
-      ;
     }
     XMLReader xmlReader=parser.getXMLReader();
     xmlReader.setEntityResolver(new LiquibaseSchemaResolver());
@@ -87,7 +85,6 @@ catch (  Exception e) {
         inputStream.close();
       }
  catch (      IOException e) {
-        ;
       }
     }
   }
