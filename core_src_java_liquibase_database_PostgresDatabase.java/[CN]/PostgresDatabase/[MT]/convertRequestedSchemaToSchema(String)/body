@@ -1,6 +1,6 @@
 {
   if (requestedSchema == null) {
-    return "public";
+    return getDefaultCatalogName();
   }
  else {
     return StringUtils.trimToNull(requestedSchema).toLowerCase();

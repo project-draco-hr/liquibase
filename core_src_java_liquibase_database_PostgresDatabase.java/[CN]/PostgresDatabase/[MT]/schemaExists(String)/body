@@ -1,0 +1,8 @@
+{
+  if (schemaName != null) {
+    return runExistsQuery("select count(*) from information_schema.schemata where schema_name='" + schemaName + "'");
+  }
+ else {
+    return false;
+  }
+}

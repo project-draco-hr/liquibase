@@ -1,0 +1,10 @@
+{
+  Set<DatabaseObject> databaseObjects=null;
+  if (childDropChanges != null) {
+    databaseObjects=new HashSet<DatabaseObject>();
+    for (    DropForeignKeyConstraintChange change : childDropChanges) {
+      databaseObjects.addAll(change.getAffectedDatabaseObjects());
+    }
+  }
+  return databaseObjects;
+}

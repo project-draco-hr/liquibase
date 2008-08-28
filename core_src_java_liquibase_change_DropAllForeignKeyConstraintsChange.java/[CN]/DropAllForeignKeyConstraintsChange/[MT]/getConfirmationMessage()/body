@@ -1,0 +1,3 @@
+{
+  return "Foreign keys on base table " + getBaseTableName() + " dropped";
+}

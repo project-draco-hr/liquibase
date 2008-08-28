@@ -1,0 +1,3 @@
+{
+  super("dropAllForeignKeyConstraints","Drop All Foreign Key Constraints");
+}

@@ -1,3 +1,25 @@
 {
-  return null;
+  if (defaultDatabaseSchemaName == null) {
+    try {
+      List<String> searchPaths=getSearchPaths();
+      if (searchPaths != null && searchPaths.size() > 0) {
+        for (        String searchPath : searchPaths) {
+          if (searchPath != null && searchPath.length() > 0) {
+            defaultDatabaseSchemaName=searchPath;
+            if (defaultDatabaseSchemaName.equals("$user") && getConnectionUsername() != null) {
+              if (!schemaExists(getConnectionUsername())) {
+                defaultDatabaseSchemaName=null;
+              }
+            }
+            if (defaultDatabaseSchemaName != null)             break;
+          }
+        }
+      }
+    }
+ catch (    Exception e) {
+      e.printStackTrace();
+      log.log(Level.SEVERE,"Failed to get default catalog name from postgres",e);
+    }
+  }
+  return defaultDatabaseSchemaName;
 }

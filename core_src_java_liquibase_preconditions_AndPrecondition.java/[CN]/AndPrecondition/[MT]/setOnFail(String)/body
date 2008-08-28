@@ -1,0 +1,3 @@
+{
+  this.onFail=onFail;
+}
