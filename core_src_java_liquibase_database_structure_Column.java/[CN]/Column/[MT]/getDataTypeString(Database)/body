@@ -36,7 +36,8 @@
     }
   }
  else {
-    throw new RuntimeException("Unknown Data Type: " + this.getDataType() + " ("+ this.getTypeName()+ ")");
+    LogFactory.getLogger().warning("Unknown Data Type: " + this.getDataType() + " ("+ this.getTypeName()+ ").  Assuming it does not take parameters");
+    dataType=this.getTypeName();
   }
   return dataType;
 }
