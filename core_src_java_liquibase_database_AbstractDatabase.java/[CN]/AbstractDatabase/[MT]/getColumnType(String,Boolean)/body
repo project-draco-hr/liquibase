@@ -87,6 +87,9 @@
  else   if (columnType.toUpperCase().startsWith("DOUBLE(")) {
     return "DOUBLE";
   }
+ else   if ("bigint".equalsIgnoreCase(columnType)) {
+    return getBigIntType();
+  }
  else {
     return columnType;
   }
