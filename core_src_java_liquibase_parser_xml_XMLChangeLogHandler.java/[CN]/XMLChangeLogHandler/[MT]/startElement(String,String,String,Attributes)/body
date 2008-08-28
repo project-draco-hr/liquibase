@@ -55,7 +55,7 @@
     }
  else     if ("preConditions".equals(qName)) {
       rootPrecondition=new AndPrecondition();
-      rootPrecondition.setSkipOnFail(Boolean.parseBoolean(atts.getValue("skipOnFail")));
+      rootPrecondition.setOnFail(StringUtils.trimToNull(atts.getValue("skipOnFail")));
       preconditionLogicStack.push(rootPrecondition);
     }
  else     if (rootPrecondition != null) {
