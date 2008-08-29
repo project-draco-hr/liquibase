@@ -17,8 +17,43 @@
   if (getInitiallyDeferred() != null) {
     node.setAttribute("initiallyDeferred",getInitiallyDeferred().toString());
   }
-  if (getDeleteCascade() != null) {
-    node.setAttribute("deleteCascade",getDeleteCascade().toString());
-  }
-  return node;
+  if (getUpdateRule() != null) {
+switch (getUpdateRule()) {
+case DatabaseMetaData.importedKeyCascade:
+      node.setAttribute("onUpdate","CASCADE");
+    break;
+case DatabaseMetaData.importedKeySetNull:
+  node.setAttribute("onUpdate","SET NULL");
+break;
+case DatabaseMetaData.importedKeySetDefault:
+node.setAttribute("onUpdate","SET DEFAULT");
+break;
+case DatabaseMetaData.importedKeyRestrict:
+node.setAttribute("onUpdate","RESTRICT");
+break;
+default :
+node.setAttribute("onUpdate","NO ACTION");
+break;
+}
+}
+if (getDeleteRule() != null) {
+switch (getDeleteRule()) {
+case DatabaseMetaData.importedKeyCascade:
+node.setAttribute("onDelete","CASCADE");
+break;
+case DatabaseMetaData.importedKeySetNull:
+node.setAttribute("onDelete","SET NULL");
+break;
+case DatabaseMetaData.importedKeySetDefault:
+node.setAttribute("onDelete","SET DEFAULT");
+break;
+case DatabaseMetaData.importedKeyRestrict:
+node.setAttribute("onDelete","RESTRICT");
+break;
+default :
+node.setAttribute("onDelete","NO ACTION");
+break;
+}
+}
+return node;
 }

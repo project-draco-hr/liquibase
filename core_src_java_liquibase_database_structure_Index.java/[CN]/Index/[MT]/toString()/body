@@ -1,6 +1,10 @@
 {
   StringBuffer stringBuffer=new StringBuffer();
-  stringBuffer.append(getName()).append(" on ").append(table.getName()).append("(");
+  stringBuffer.append(getName());
+  if (!this.unique.booleanValue()) {
+    stringBuffer.append(" unique ");
+  }
+  stringBuffer.append(" on ").append(table.getName()).append("(");
   for (  String column : columns) {
     stringBuffer.append(column).append(", ");
   }

@@ -3,6 +3,9 @@
   if (primaryKeyTable != null) {
     result=primaryKeyTable.hashCode();
   }
+  if (this.name != null) {
+    result=31 * result + this.name.toUpperCase().hashCode();
+  }
   if (primaryKeyColumns != null) {
     result=31 * result + primaryKeyColumns.toUpperCase().hashCode();
   }
@@ -12,5 +15,7 @@
   if (foreignKeyColumns != null) {
     result=31 * result + foreignKeyColumns.toUpperCase().hashCode();
   }
+  if (this.updateRule != null)   result=31 * result + this.updateRule.hashCode();
+  if (this.deleteRule != null)   result=31 * result + this.deleteRule.hashCode();
   return result;
 }

@@ -1,3 +1,5 @@
 {
-  this.deleteCascade=deleteCascade;
+  if (deleteCascade != null && deleteCascade) {
+    setOnDelete("CASCADE");
+  }
 }

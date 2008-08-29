@@ -2,5 +2,6 @@
   int result;
   result=table.getName().toUpperCase().hashCode();
   result=31 * result + columns.hashCode();
+  result=31 * result + (this.unique.booleanValue() ? 1 : 0);
   return result;
 }

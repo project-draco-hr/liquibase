@@ -27,6 +27,15 @@
       fkInfo.setForeignKeyTable(fkTable);
       fkInfo.addForeignKeyColumn(fkColumn);
       fkInfo.setName(rs.getString("FK_NAME"));
+      Integer updateRule, deleteRule;
+      updateRule=new Integer(rs.getInt("UPDATE_RULE"));
+      if (rs.wasNull())       updateRule=null;
+      deleteRule=new Integer(rs.getInt("DELETE_RULE"));
+      if (rs.wasNull()) {
+        deleteRule=null;
+      }
+      fkInfo.setUpdateRule(updateRule);
+      fkInfo.setDeleteRule(deleteRule);
       if (database.supportsInitiallyDeferrableColumns()) {
         short deferrablility=rs.getShort("DEFERRABILITY");
         if (deferrablility == DatabaseMetaData.importedKeyInitiallyDeferred) {

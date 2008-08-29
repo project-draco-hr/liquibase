@@ -1,5 +1,5 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new CreateIndexStatement(INDEX_NAME,TestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME)){
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(TestContext.ALT_SCHEMA,new CreateIndexStatement(INDEX_NAME,TestContext.ALT_SCHEMA,TABLE_NAME,IS_UNIQUE,COLUMN_NAME)){
     protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getIndex(INDEX_NAME));
     }

@@ -1,6 +1,10 @@
 {
   StringBuffer buffer=new StringBuffer();
-  buffer.append("CREATE INDEX ");
+  buffer.append("CREATE ");
+  if (unique != null && unique) {
+    buffer.append("UNIQUE ");
+  }
+  buffer.append("INDEX ");
   buffer.append(getIndexName()).append(" ON ");
   buffer.append(database.escapeTableName(getTableSchemaName(),getTableName())).append("(");
   Iterator<String> iterator=Arrays.asList(getColumns()).iterator();

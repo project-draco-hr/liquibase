@@ -3,6 +3,7 @@
     CreateIndexChange change=new CreateIndexChange();
     change.setTableName(index.getTable().getName());
     change.setIndexName(index.getName());
+    change.setUnique(index.isUnique());
     for (    String columnName : index.getColumns()) {
       ColumnConfig column=new ColumnConfig();
       column.setName(columnName);

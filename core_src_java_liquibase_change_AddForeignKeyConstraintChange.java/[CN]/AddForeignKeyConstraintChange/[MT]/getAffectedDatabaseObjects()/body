@@ -22,6 +22,8 @@
   fk.setForeignKeyColumns(baseColumnNames);
   fk.setPrimaryKeyTable(referencedTable);
   fk.setPrimaryKeyColumns(referencedColumnNames);
+  fk.setDeleteRule(this.deleteRule);
+  fk.setUpdateRule(this.updateRule);
   returnSet.add(fk);
   return returnSet;
 }

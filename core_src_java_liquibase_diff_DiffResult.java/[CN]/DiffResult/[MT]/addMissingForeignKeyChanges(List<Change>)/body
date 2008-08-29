@@ -8,6 +8,8 @@
     change.setBaseColumnNames(fk.getForeignKeyColumns());
     change.setDeferrable(fk.isDeferrable());
     change.setInitiallyDeferred(fk.isInitiallyDeferred());
+    change.setUpdateRule(fk.getUpdateRule());
+    change.setDeleteRule(fk.getDeleteRule());
     changes.add(change);
   }
 }

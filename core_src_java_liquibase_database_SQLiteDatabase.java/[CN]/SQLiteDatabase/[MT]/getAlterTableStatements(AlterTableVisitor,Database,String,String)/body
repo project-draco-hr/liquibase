@@ -42,14 +42,12 @@
   for (  ColumnConfig column : createColumns) {
     ct_change_tmp.addColumn(column);
   }
-  for (  SqlStatement statement : ct_change_tmp.generateStatements(database)) {
-    statements.add(statement);
-  }
+  statements.addAll(Arrays.asList(ct_change_tmp.generateStatements(database)));
   statements.add(new CopyRowsStatement(temp_table_name,tableName,copyColumns));
   statements.add(new DropTableStatement(schemaName,temp_table_name,false));
   statements.add(new ReindexStatement(schemaName,tableName));
   for (  Index index_config : newIndices) {
-    statements.add(new CreateIndexStatement(index_config.getName(),schemaName,tableName,index_config.getColumns().toArray(new String[index_config.getColumns().size()])));
+    statements.add(new CreateIndexStatement(index_config.getName(),schemaName,tableName,index_config.isUnique(),index_config.getColumns().toArray(new String[index_config.getColumns().size()])));
   }
   return statements;
 }

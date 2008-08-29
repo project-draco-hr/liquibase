@@ -1,0 +1,20 @@
+{
+  if (onUpdate != null && onUpdate.equalsIgnoreCase("CASCADE")) {
+    setUpdateRule(DatabaseMetaData.importedKeyCascade);
+  }
+ else   if (onUpdate != null && onUpdate.equalsIgnoreCase("SET NULL")) {
+    setUpdateRule(DatabaseMetaData.importedKeySetNull);
+  }
+ else   if (onUpdate != null && onUpdate.equalsIgnoreCase("SET DEFAULT")) {
+    setUpdateRule(DatabaseMetaData.importedKeySetDefault);
+  }
+ else   if (onUpdate != null && onUpdate.equalsIgnoreCase("RESTRICT")) {
+    setUpdateRule(DatabaseMetaData.importedKeyRestrict);
+  }
+ else   if (StringUtils.trimToNull(onUpdate) == null) {
+    setUpdateRule(DatabaseMetaData.importedKeyNoAction);
+  }
+ else {
+    throw new RuntimeException("Unknown onUpdate action: " + onUpdate);
+  }
+}

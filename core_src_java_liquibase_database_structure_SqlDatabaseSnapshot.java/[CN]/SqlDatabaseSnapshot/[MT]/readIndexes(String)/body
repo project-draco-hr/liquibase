@@ -15,6 +15,7 @@
     while (rs.next()) {
       String indexName=rs.getString("INDEX_NAME");
       short type=rs.getShort("TYPE");
+      boolean nonUnique=rs.getBoolean("NON_UNIQUE");
       String columnName=rs.getString("COLUMN_NAME");
       short position=rs.getShort("ORDINAL_POSITION");
       String filterCondition=rs.getString("FILTER_CONDITION");
@@ -32,6 +33,7 @@
         indexInformation=new Index();
         indexInformation.setTable(table);
         indexInformation.setName(indexName);
+        indexInformation.setUnique(new Boolean(!nonUnique));
         indexInformation.setFilterCondition(filterCondition);
         indexMap.put(indexName,indexInformation);
       }
