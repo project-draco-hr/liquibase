@@ -1,5 +1,8 @@
 {
   for (  Database database : databasesToTestOn) {
+    if (database instanceof SQLiteDatabase) {
+      continue;
+    }
     LockHandler.getInstance(database).reset();
     if (database.getConnection() != null) {
       LockHandler.getInstance(database).forceReleaseLock();
