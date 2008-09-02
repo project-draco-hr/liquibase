@@ -1,31 +1,3 @@
 {
-  if (defaultCatalogName == null) {
-    try {
-      List<String> searchPaths=getSearchPaths();
-      if (searchPaths != null && searchPaths.size() > 0) {
-        for (        String searchPath : searchPaths) {
-          if (searchPath != null && searchPath.length() > 0) {
-            defaultCatalogName=searchPath;
-            if (defaultCatalogName.equals("$user") && getConnectionUsername() != null) {
-              if (!catalogExists(getConnectionUsername())) {
-                defaultCatalogName=null;
-              }
- else {
-                defaultCatalogName=getConnectionUsername();
-              }
-            }
-            if (defaultCatalogName != null)             break;
-          }
-        }
-      }
-    }
- catch (    Exception e) {
-      e.printStackTrace();
-      log.log(Level.SEVERE,"Failed to get default catalog name from postgres",e);
-    }
-    if (defaultCatalogName == null) {
-      defaultCatalogName="PUBLIC";
-    }
-  }
-  return defaultCatalogName;
+  return super.getDefaultCatalogName();
 }

@@ -10,6 +10,9 @@
               if (!schemaExists(getConnectionUsername())) {
                 defaultDatabaseSchemaName=null;
               }
+ else {
+                defaultDatabaseSchemaName=getConnectionUsername();
+              }
             }
             if (defaultDatabaseSchemaName != null)             break;
           }
