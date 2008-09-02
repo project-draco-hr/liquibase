@@ -18,7 +18,7 @@
         PrimaryKey primaryKey=new PrimaryKey();
         primaryKey.setTable(table);
         primaryKey.addColumnName(position - 1,columnName);
-        primaryKey.setName(rs.getString("PK_NAME"));
+        primaryKey.setName(convertPrimaryKeyName(rs.getString("PK_NAME")));
         foundPKs.add(primaryKey);
       }
     }

@@ -32,7 +32,6 @@ case DatabaseMetaData.importedKeyRestrict:
 node.setAttribute("onUpdate","RESTRICT");
 break;
 default :
-node.setAttribute("onUpdate","NO ACTION");
 break;
 }
 }
@@ -51,7 +50,6 @@ case DatabaseMetaData.importedKeyRestrict:
 node.setAttribute("onDelete","RESTRICT");
 break;
 default :
-node.setAttribute("onDelete","NO ACTION");
 break;
 }
 }

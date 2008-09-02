@@ -11,7 +11,7 @@
  else   if (onDelete != null && onDelete.equalsIgnoreCase("RESTRICT")) {
     setDeleteRule(DatabaseMetaData.importedKeyRestrict);
   }
- else   if (StringUtils.trimToNull(onDelete) == null) {
+ else   if (onDelete == null || onDelete.equalsIgnoreCase("NO ACTION")) {
     setDeleteRule(DatabaseMetaData.importedKeyNoAction);
   }
  else {

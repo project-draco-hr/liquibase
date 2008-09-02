@@ -11,7 +11,7 @@
  else   if (onUpdate != null && onUpdate.equalsIgnoreCase("RESTRICT")) {
     setUpdateRule(DatabaseMetaData.importedKeyRestrict);
   }
- else   if (StringUtils.trimToNull(onUpdate) == null) {
+ else   if (onUpdate == null || onUpdate.equalsIgnoreCase("NO ACTION")) {
     setUpdateRule(DatabaseMetaData.importedKeyNoAction);
   }
  else {

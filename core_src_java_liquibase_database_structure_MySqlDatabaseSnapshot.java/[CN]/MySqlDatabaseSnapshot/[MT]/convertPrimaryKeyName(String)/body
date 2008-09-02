@@ -1,0 +1,8 @@
+{
+  if (pkName.equals("PRIMARY")) {
+    return null;
+  }
+ else {
+    return pkName;
+  }
+}
