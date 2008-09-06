@@ -1,0 +1,8 @@
+{
+  if (changeLog == null) {
+    return cause.getMessage();
+  }
+ else {
+    return changeLog.toString() + " : " + getCause().getMessage();
+  }
+}

@@ -54,8 +54,9 @@
       inRollback=true;
     }
  else     if ("preConditions".equals(qName)) {
-      rootPrecondition=new AndPrecondition();
-      rootPrecondition.setOnFail(StringUtils.trimToNull(atts.getValue("skipOnFail")));
+      rootPrecondition=new Preconditions();
+      rootPrecondition.setOnFail(StringUtils.trimToNull(atts.getValue("onFail")));
+      rootPrecondition.setOnError(StringUtils.trimToNull(atts.getValue("onError")));
       preconditionLogicStack.push(rootPrecondition);
     }
  else     if (rootPrecondition != null) {

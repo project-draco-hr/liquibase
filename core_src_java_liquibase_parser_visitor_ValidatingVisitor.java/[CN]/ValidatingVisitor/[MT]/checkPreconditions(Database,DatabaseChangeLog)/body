@@ -9,4 +9,7 @@
  catch (  PreconditionFailedException e) {
     failedPreconditions.addAll(e.getFailedPreconditions());
   }
+catch (  PreconditionErrorException e) {
+    errorPreconditions.addAll(e.getErrorPreconditions());
+  }
 }

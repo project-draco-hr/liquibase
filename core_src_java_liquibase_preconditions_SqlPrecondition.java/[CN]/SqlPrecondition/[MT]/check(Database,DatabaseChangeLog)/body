@@ -16,7 +16,7 @@
     }
   }
  catch (  SQLException e) {
-    throw new PreconditionFailedException("Error executing SQL precondition: " + e.getMessage(),changeLog,this);
+    throw new PreconditionErrorException(e,changeLog,this);
   }
  finally {
     try {

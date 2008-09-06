@@ -1,0 +1,18 @@
+{
+  if (onFail == null) {
+    this.onFail=FailOption.HALT;
+  }
+ else {
+    for (    FailOption option : FailOption.values()) {
+      if (option.key.equalsIgnoreCase(onFail)) {
+        this.onFail=option;
+        return;
+      }
+    }
+    List<String> possibleOptions=new ArrayList<String>();
+    for (    FailOption option : FailOption.values()) {
+      possibleOptions.add(option.key);
+    }
+    throw new RuntimeException("Unknown onFail attribute value '" + onFail + "'.  Possible values: "+ StringUtils.join(possibleOptions,", "));
+  }
+}

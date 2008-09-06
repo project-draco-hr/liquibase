@@ -1,0 +1,18 @@
+{
+  if (onError == null) {
+    this.onError=ErrorOption.HALT;
+  }
+ else {
+    for (    ErrorOption option : ErrorOption.values()) {
+      if (option.key.equalsIgnoreCase(onError)) {
+        this.onError=option;
+        return;
+      }
+    }
+    List<String> possibleOptions=new ArrayList<String>();
+    for (    ErrorOption option : ErrorOption.values()) {
+      possibleOptions.add(option.key);
+    }
+    throw new RuntimeException("Unknown onError attribute value '" + onError + "'.  Possible values: "+ StringUtils.join(possibleOptions,", "));
+  }
+}

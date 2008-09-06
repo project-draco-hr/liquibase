@@ -1,0 +1,4 @@
+{
+  super("Precondition Error");
+  this.erroredPreconditions=errorPreconditions;
+}

@@ -9,6 +9,6 @@
     }
   }
  catch (  SQLException e) {
-    throw new RuntimeException("Cannot determine username",e);
+    throw new PreconditionErrorException(e,changeLog,this);
   }
 }

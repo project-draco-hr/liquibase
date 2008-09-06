@@ -1,0 +1,5 @@
+{
+  this.cause=exception;
+  this.changeLog=changeLog;
+  this.precondition=precondition;
+}

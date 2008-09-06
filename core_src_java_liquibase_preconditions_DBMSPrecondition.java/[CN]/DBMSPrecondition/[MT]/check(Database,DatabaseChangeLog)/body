@@ -1,6 +1,14 @@
 {
-  String dbType=database.getTypeName();
-  if (!type.equals(dbType)) {
-    throw new PreconditionFailedException("DBMS Precondition failed: expected " + type + ", got "+ dbType,changeLog,this);
+  try {
+    String dbType=database.getTypeName();
+    if (!type.equals(dbType)) {
+      throw new PreconditionFailedException("DBMS Precondition failed: expected " + type + ", got "+ dbType,changeLog,this);
+    }
+  }
+ catch (  PreconditionFailedException e) {
+    throw e;
+  }
+catch (  Exception e) {
+    throw new PreconditionErrorException(e,changeLog,this);
   }
 }
