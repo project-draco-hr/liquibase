@@ -1,11 +1,12 @@
 {
   log.finer("Running Changeset:" + changeSet);
-  changeSet.execute(database);
-  if (database.getRunStatus(changeSet).equals(ChangeSet.RunStatus.NOT_RAN)) {
-    database.markChangeSetAsRan(changeSet);
-  }
+  if (changeSet.execute(database)) {
+    if (database.getRunStatus(changeSet).equals(ChangeSet.RunStatus.NOT_RAN)) {
+      database.markChangeSetAsRan(changeSet);
+    }
  else {
-    database.markChangeSetAsReRan(changeSet);
+      database.markChangeSetAsReRan(changeSet);
+    }
   }
   database.commit();
 }
