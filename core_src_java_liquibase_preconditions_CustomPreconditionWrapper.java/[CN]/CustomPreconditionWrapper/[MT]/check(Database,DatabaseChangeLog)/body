@@ -11,6 +11,14 @@
  catch (  Exception e) {
     throw new PreconditionFailedException("Could not open custom precondition class " + className,changeLog,this);
   }
+  for (  String param : params) {
+    try {
+      ObjectUtil.setProperty(customPrecondition,param,paramValues.get(param));
+    }
+ catch (    Exception e) {
+      throw new PreconditionFailedException("error setting parameter " + param + " on custom precondition "+ className,changeLog,this);
+    }
+  }
   try {
     customPrecondition.check(database);
   }
