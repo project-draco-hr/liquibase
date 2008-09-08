@@ -8,7 +8,8 @@
   change.setReferencedTableName("REF_TABLE_NAME");
   change.setReferencedColumnNames("REF_COL_NAME");
   change.setDeferrable(true);
-  change.setDeleteCascade(true);
+  change.setDeleteRule(DatabaseMetaData.importedKeyCascade);
+  change.setUpdateRule(DatabaseMetaData.importedKeyCascade);
   change.setInitiallyDeferred(true);
   Element node=change.createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
   assertEquals("addForeignKeyConstraint",node.getTagName());
@@ -21,5 +22,6 @@
   assertEquals("REF_COL_NAME",node.getAttribute("referencedColumnNames"));
   assertEquals("true",node.getAttribute("deferrable"));
   assertEquals("true",node.getAttribute("initiallyDeferred"));
-  assertEquals("true",node.getAttribute("deleteCascade"));
+  assertEquals("CASCADE",node.getAttribute("onDelete"));
+  assertEquals("CASCADE",node.getAttribute("onUpdate"));
 }

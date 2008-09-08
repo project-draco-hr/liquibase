@@ -1,10 +1,6 @@
 {
   if (this.jdbcTemplate != null && !this.jdbcTemplate.executesStatements() && template.executesStatements()) {
     LockHandler.getInstance(this).reset();
-    changeLogTableExists=false;
-    changeLogLockTableExists=false;
-    changeLogCreateAttempted=false;
-    changeLogLockCreateAttempted=false;
   }
   this.jdbcTemplate=template;
 }

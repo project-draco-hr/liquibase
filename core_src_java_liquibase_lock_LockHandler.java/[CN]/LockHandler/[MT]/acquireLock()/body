@@ -1,8 +1,6 @@
 {
-  if (!database.doesChangeLogLockTableExist()) {
-    throw new LockException("Could not acquire lock, table does not exist");
-  }
   try {
+    database.checkDatabaseChangeLogLockTable();
     Boolean locked;
     try {
       locked=(Boolean)database.getJdbcTemplate().queryForObject(database.getSelectChangeLogLockSQL(),Boolean.class);

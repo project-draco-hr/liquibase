@@ -1,5 +1,5 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddForeignKeyConstraintStatement(FK_NAME,null,BASE_TABLE_NAME,BASE_COLUMN_NAME,null,REF_TABLE_NAME,REF_COL_NAME).setDeleteCascade(true)){
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddForeignKeyConstraintStatement(FK_NAME,null,BASE_TABLE_NAME,BASE_COLUMN_NAME,null,REF_TABLE_NAME,REF_COL_NAME).setDeleteRule(DatabaseMetaData.importedKeyCascade)){
     protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getForeignKey(FK_NAME));
     }

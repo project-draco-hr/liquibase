@@ -22,5 +22,5 @@
   assertEquals("REF_COL_NAME",statement.getReferencedColumnNames());
   assertEquals(true,statement.isDeferrable());
   assertEquals(true,statement.isInitiallyDeferred());
-  assertEquals(true,statement.isDeleteCascade());
+  assertEquals(DatabaseMetaData.importedKeyCascade,statement.getDeleteRule());
 }

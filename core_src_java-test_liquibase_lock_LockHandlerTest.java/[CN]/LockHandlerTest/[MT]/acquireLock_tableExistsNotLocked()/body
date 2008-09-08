@@ -3,11 +3,12 @@
   JdbcTemplate template=createMock(JdbcTemplate.class);
   RawSqlStatement selectLockStatement=new RawSqlStatement("SELECT LOCK");
   expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
-  expect(database.doesChangeLogLockTableExist()).andReturn(true);
   expect(database.getSelectChangeLogLockSQL()).andReturn(selectLockStatement);
   expect(database.getDatabaseChangeLogLockTableName()).andReturn("LOCK_TABLE").anyTimes();
   expect(database.getDatabaseChangeLogTableName()).andReturn("DATABASECHANGELOG").anyTimes();
   expect(database.getDefaultSchemaName()).andReturn(null).anyTimes();
+  database.checkDatabaseChangeLogLockTable();
+  expectLastCall();
   database.commit();
   expectLastCall();
   expect(template.queryForObject(selectLockStatement,Boolean.class)).andReturn(Boolean.FALSE);

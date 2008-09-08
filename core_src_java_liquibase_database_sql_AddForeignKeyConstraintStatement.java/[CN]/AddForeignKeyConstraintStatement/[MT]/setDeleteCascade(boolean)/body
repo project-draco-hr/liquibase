@@ -1,4 +1,0 @@
-{
-  this.deleteCascade=deleteCascade;
-  return this;
-}

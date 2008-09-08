@@ -1,6 +1,6 @@
 {
-  if (database.doesChangeLogLockTableExist()) {
-    try {
+  try {
+    if (database.doesChangeLogLockTableExist()) {
       UpdateStatement releaseStatement=new UpdateStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName());
       releaseStatement.addNewColumnValue("LOCKED",false);
       releaseStatement.addNewColumnValue("LOCKGRANTED",null);
@@ -18,8 +18,8 @@
       instances.remove(this.database);
       LogFactory.getLogger().info("Successfully released change log lock");
     }
- catch (    Exception e) {
-      throw new LockException(e);
-    }
+  }
+ catch (  Exception e) {
+    throw new LockException(e);
   }
 }

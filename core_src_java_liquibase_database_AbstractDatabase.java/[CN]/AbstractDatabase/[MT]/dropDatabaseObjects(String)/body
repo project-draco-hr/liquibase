@@ -29,11 +29,9 @@
         dropChanges.add(dropChange);
       }
     }
-    if (this.changeLogTableExists) {
-      RawSQLChange clearChangeLogChange=new RawSQLChange();
-      clearChangeLogChange.setSql("DELETE FROM " + escapeTableName(convertRequestedSchemaToSchema(getDefaultSchemaName()),getDatabaseChangeLogTableName()));
-      dropChanges.add(clearChangeLogChange);
-    }
+    RawSQLChange clearChangeLogChange=new RawSQLChange();
+    clearChangeLogChange.setSql("DELETE FROM " + escapeTableName(convertRequestedSchemaToSchema(getDefaultSchemaName()),getDatabaseChangeLogTableName()));
+    dropChanges.add(clearChangeLogChange);
     try {
       for (      Change change : dropChanges) {
         for (        SqlStatement statement : change.generateStatements(this)) {

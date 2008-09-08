@@ -1,19 +1,23 @@
 {
   Database database=createMock(Database.class);
   JdbcTemplate template=createMock(JdbcTemplate.class);
+  RawSqlStatement selectLockStatement=new RawSqlStatement("SELECT LOCK");
   expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
-  expect(database.doesChangeLogLockTableExist()).andReturn(false);
+  expect(database.getSelectChangeLogLockSQL()).andReturn(selectLockStatement);
+  expect(database.getDefaultSchemaName()).andReturn("DEF");
+  expect(database.getDatabaseChangeLogLockTableName()).andReturn("LOCK_TAB");
+  template.comment("Lock Database");
+  expectLastCall();
+  expect(template.queryForObject(selectLockStatement,Boolean.class)).andReturn(Boolean.FALSE);
+  database.checkDatabaseChangeLogLockTable();
+  expectLastCall();
+  expect(template.update(isA(UpdateStatement.class))).andReturn(1);
+  database.commit();
   expectLastCall();
   replay(database);
   replay(template);
   LockHandler handler=LockHandler.getInstance(database);
-  try {
-    handler.acquireLock();
-    fail("did not throw exception");
-  }
- catch (  LockException e) {
-    assertEquals("Could not acquire lock, table does not exist",e.getMessage());
-  }
+  assertTrue(handler.acquireLock());
   verify(database);
   verify(template);
 }
