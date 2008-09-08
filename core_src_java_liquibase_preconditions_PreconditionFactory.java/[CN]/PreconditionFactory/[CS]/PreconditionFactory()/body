@@ -1,6 +1,6 @@
 {
   tagToClassMap=new HashMap<String,Class>();
-  Class[] preconditions=new Class[]{AndPrecondition.class,OrPrecondition.class,NotPrecondition.class,DBMSPrecondition.class,RunningAsPrecondition.class,ChangeSetRanPrecondition.class,TableExistsPrecondition.class,ColumnExistsPrecondition.class,SequenceExistsPrecondition.class,ForeignKeyExistsPrecondition.class,IndexExistsPrecondition.class,PrimaryKeyExistsPrecondition.class,ViewExistsPrecondition.class,SqlPrecondition.class,CustomPreconditionWrapper.class};
+  Class[] preconditions=new Class[]{AndPrecondition.class,OrPrecondition.class,NotPrecondition.class,DBMSPrecondition.class,RunningAsPrecondition.class,ChangeSetExecutedPrecondition.class,TableExistsPrecondition.class,ColumnExistsPrecondition.class,SequenceExistsPrecondition.class,ForeignKeyExistsPrecondition.class,IndexExistsPrecondition.class,PrimaryKeyExistsPrecondition.class,ViewExistsPrecondition.class,SqlPrecondition.class,CustomPreconditionWrapper.class};
   try {
     for (    Class<Precondition> preconditionClass : preconditions) {
       Precondition precondition=preconditionClass.newInstance();
