@@ -16,5 +16,8 @@
  else   if (database instanceof FirebirdDatabase) {
     return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP CONSTRAINT "+ getConstraintName();
   }
+ else   if (database instanceof OracleDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP PRIMARY KEY DROP INDEX";
+  }
   return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP PRIMARY KEY";
 }
