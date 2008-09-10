@@ -1,0 +1,5 @@
+{
+  if (StringUtils.trimToNull(baseTableName) == null) {
+    throw new InvalidChangeDefinitionException("baseTableName is required",this);
+  }
+}

@@ -1,0 +1,13 @@
+{
+  if (getColumns().size() == 0) {
+    throw new InvalidChangeDefinitionException("No columns defined",this);
+  }
+  for (  ColumnConfig column : getColumns()) {
+    if (StringUtils.trimToNull(column.getName()) == null) {
+      throw new InvalidChangeDefinitionException("Column name is required",this);
+    }
+    if (StringUtils.trimToNull(column.getType()) == null) {
+      throw new InvalidChangeDefinitionException("Column type is required",this);
+    }
+  }
+}

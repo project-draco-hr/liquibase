@@ -1,0 +1,5 @@
+{
+  if (StringUtils.trimToNull(indexName) == null) {
+    throw new InvalidChangeDefinitionException("indexName is required",this);
+  }
+}

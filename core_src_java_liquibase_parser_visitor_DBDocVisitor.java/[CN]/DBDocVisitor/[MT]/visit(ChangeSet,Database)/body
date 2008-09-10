@@ -1,0 +1,44 @@
+{
+  ChangeSet.RunStatus runStatus=this.database.getRunStatus(changeSet);
+  if (rootChangeLog == null) {
+    rootChangeLog=changeSet.getFilePath();
+  }
+  if (!changesByAuthor.containsKey(changeSet.getAuthor())) {
+    changesByAuthor.put(changeSet.getAuthor(),new ArrayList<Change>());
+  }
+  if (!changesToRunByAuthor.containsKey(changeSet.getAuthor())) {
+    changesToRunByAuthor.put(changeSet.getAuthor(),new ArrayList<Change>());
+  }
+  boolean toRun=runStatus.equals(ChangeSet.RunStatus.NOT_RAN) || runStatus.equals(ChangeSet.RunStatus.RUN_AGAIN);
+  for (  Change change : changeSet.getChanges()) {
+    if (toRun) {
+      changesToRunByAuthor.get(changeSet.getAuthor()).add(change);
+      changesToRun.add(change);
+    }
+ else {
+      changesByAuthor.get(changeSet.getAuthor()).add(change);
+      recentChanges.add(0,change);
+    }
+  }
+  ChangeLogInfo changeLogInfo=new ChangeLogInfo(changeSet.getFilePath(),changeSet.getPhysicalFilePath());
+  if (!changeLogs.contains(changeLogInfo)) {
+    changeLogs.add(changeLogInfo);
+  }
+  for (  Change change : changeSet.getChanges()) {
+    Set<DatabaseObject> affectedDatabaseObjects=change.getAffectedDatabaseObjects();
+    if (affectedDatabaseObjects != null) {
+      for (      DatabaseObject dbObject : affectedDatabaseObjects) {
+        if (toRun) {
+          if (!changesToRunByObject.containsKey(dbObject)) {
+            changesToRunByObject.put(dbObject,new ArrayList<Change>());
+          }
+          changesToRunByObject.get(dbObject).add(change);
+        }
+        if (!changesByObject.containsKey(dbObject)) {
+          changesByObject.put(dbObject,new ArrayList<Change>());
+        }
+        changesByObject.get(dbObject).add(change);
+      }
+    }
+  }
+}

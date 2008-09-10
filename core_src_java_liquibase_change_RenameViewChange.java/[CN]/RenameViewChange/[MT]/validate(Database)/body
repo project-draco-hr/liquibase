@@ -1,0 +1,8 @@
+{
+  if (StringUtils.trimToNull(oldViewName) == null) {
+    throw new InvalidChangeDefinitionException("oldViewName is required",this);
+  }
+  if (StringUtils.trimToNull(newViewName) == null) {
+    throw new InvalidChangeDefinitionException("newViewName is required",this);
+  }
+}

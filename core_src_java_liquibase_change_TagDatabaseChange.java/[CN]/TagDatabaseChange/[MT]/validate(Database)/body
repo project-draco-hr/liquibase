@@ -1,0 +1,5 @@
+{
+  if (StringUtils.trimToNull(tag) == null) {
+    throw new InvalidChangeDefinitionException("tag is required",this);
+  }
+}

@@ -1,0 +1,5 @@
+{
+  if (StringUtils.trimToNull(columnName) == null) {
+    throw new InvalidChangeDefinitionException("columnName is required",this);
+  }
+}

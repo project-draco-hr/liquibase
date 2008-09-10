@@ -1,0 +1,5 @@
+{
+  if (StringUtils.trimToNull(procedureBody) == null) {
+    throw new InvalidChangeDefinitionException("procedure text is required",this);
+  }
+}

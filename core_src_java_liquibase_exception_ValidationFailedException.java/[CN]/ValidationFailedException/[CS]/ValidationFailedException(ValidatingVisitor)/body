@@ -3,4 +3,5 @@
   this.failedPreconditions=changeLogHandler.getFailedPreconditions();
   this.duplicateChangeSets=changeLogHandler.getDuplicateChangeSets();
   this.setupExceptions=changeLogHandler.getSetupExceptions();
+  this.changeValidationExceptions=changeLogHandler.getChangeValidationExceptions();
 }

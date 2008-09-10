@@ -8,7 +8,7 @@
     changeLog.validate(database);
     ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new DbmsChangeSetFilter(database));
     DBDocVisitor visitor=new DBDocVisitor(database);
-    logIterator.run(visitor);
+    logIterator.run(visitor,database);
     visitor.writeHTML(new File(outputDirectory),fileOpener);
   }
  catch (  IOException e) {

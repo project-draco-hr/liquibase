@@ -1,6 +1,6 @@
 {
   TestChangeSetVisitor testChangeLogVisitor=new TestChangeSetVisitor();
   ChangeLogIterator iterator=new ChangeLogIterator(changeLog);
-  iterator.run(testChangeLogVisitor);
+  iterator.run(testChangeLogVisitor,null);
   assertEquals(6,testChangeLogVisitor.visitedChangeSets.size());
 }

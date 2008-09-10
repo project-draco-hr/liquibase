@@ -33,5 +33,12 @@
       message.append(StreamUtil.getLineSeparator());
     }
   }
+  if (changeValidationExceptions.size() > 0) {
+    message.append("     ").append(changeValidationExceptions.size()).append(" changes have validation failures").append(StreamUtil.getLineSeparator());
+    for (    InvalidChangeDefinitionException invalid : changeValidationExceptions) {
+      message.append("          ").append(invalid.toString());
+      message.append(StreamUtil.getLineSeparator());
+    }
+  }
   return message.toString();
 }

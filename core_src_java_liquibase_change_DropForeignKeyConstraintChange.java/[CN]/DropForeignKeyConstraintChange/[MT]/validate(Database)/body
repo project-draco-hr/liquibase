@@ -1,0 +1,8 @@
+{
+  if (StringUtils.trimToNull(baseTableName) == null) {
+    throw new InvalidChangeDefinitionException("baseTableName is required",this);
+  }
+  if (StringUtils.trimToNull(constraintName) == null) {
+    throw new InvalidChangeDefinitionException("constraintName is required",this);
+  }
+}
