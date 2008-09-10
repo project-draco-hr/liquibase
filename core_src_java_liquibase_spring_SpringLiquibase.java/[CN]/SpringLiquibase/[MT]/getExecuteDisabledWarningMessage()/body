@@ -1,3 +1,0 @@
-{
-  return "\n\nYou have set " + getBeanName() + ".executeEnabled=false, but there are \n"+ "database change sets that need to be run in order to bring the database up to date.\n"+ "The application may not behave properly until these changes are run.\n\n";
-}

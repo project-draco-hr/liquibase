@@ -3,15 +3,7 @@
   try {
     c=getDataSource().getConnection();
     Liquibase liquibase=createLiquibase(c);
-    if (isWriteSqlFileEnabled() && getSqlOutputDir() != null) {
-      if ((!isExecuteEnabled()) && liquibase.listUnrunChangeSets(getContexts()).size() > 0) {
-        log.log(Level.WARNING,getExecuteDisabledWarningMessage());
-      }
-      writeSqlFile(liquibase);
-    }
-    if (isExecuteEnabled()) {
-      executeSql(liquibase);
-    }
+    liquibase.update(getContexts());
   }
  catch (  SQLException e) {
     throw new JDBCException(e);
@@ -23,7 +15,6 @@
         c.close();
       }
  catch (      SQLException e) {
-        ;
       }
     }
   }
