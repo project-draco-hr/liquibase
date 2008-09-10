@@ -3,6 +3,8 @@
     this.valueNumeric=null;
   }
  else {
+    valueNumeric=valueNumeric.replaceFirst("^\\(","");
+    valueNumeric=valueNumeric.replaceFirst("\\)$","");
     if (valueNumeric.matches("\\d+\\.?\\d*")) {
       try {
         this.valueNumeric=NumberFormat.getInstance(Locale.US).parse(valueNumeric);
