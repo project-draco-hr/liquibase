@@ -1,4 +1,0 @@
-{
-  String s=super.getColumnType(columnType,autoIncrement);
-  return s.replaceAll("VARCHAR2","VARCHAR");
-}
