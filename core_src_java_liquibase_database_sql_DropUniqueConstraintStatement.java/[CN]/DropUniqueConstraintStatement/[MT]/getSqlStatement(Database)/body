@@ -8,5 +8,8 @@
  else   if (database instanceof MaxDBDatabase) {
     return "DROP INDEX " + getConstraintName() + " ON "+ database.escapeTableName(getSchemaName(),getTableName());
   }
+ else   if (database instanceof OracleDatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP CONSTRAINT "+ getConstraintName()+ " DROP INDEX";
+  }
   return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP CONSTRAINT "+ getConstraintName();
 }
