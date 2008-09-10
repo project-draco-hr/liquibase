@@ -1,6 +1,6 @@
 {
   String sqlString;
-  if (newValue == null) {
+  if (newValue == null || newValue.toString().equalsIgnoreCase("NULL")) {
     sqlString="NULL";
   }
  else   if (newValue instanceof String && database.shouldQuoteValue(((String)newValue))) {
