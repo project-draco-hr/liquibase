@@ -21,6 +21,7 @@
       buffer.append(" ON ").append(getTablespace());
     }
  else     if (database instanceof DB2Database) {
+      buffer.append(" IN ").append(getTablespace());
     }
  else {
       buffer.append(" TABLESPACE ").append(getTablespace());
