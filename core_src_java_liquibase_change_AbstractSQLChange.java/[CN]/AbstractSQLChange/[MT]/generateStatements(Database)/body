@@ -4,11 +4,11 @@
   if (isSplittingStatements()) {
     String[] statements=StringUtils.splitSQL(processedSQL);
     for (    String statement : statements) {
-      returnStatements.add(new RawSqlStatement(statement));
+      returnStatements.add(new RawSqlStatement(statement,getEndDelimiter()));
     }
   }
  else {
-    returnStatements.add(new RawSqlStatement(processedSQL));
+    returnStatements.add(new RawSqlStatement(processedSQL,getEndDelimiter()));
   }
   return returnStatements.toArray(new SqlStatement[returnStatements.size()]);
 }
