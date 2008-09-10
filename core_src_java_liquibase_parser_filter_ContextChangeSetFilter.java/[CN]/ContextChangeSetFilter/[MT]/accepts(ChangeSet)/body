@@ -6,7 +6,7 @@
     return true;
   }
   for (  String context : changeSet.getContexts()) {
-    if (contexts.contains(context)) {
+    if (contexts.contains(context.toLowerCase())) {
       return true;
     }
   }
