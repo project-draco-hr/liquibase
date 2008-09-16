@@ -1,3 +1,5 @@
 {
-  con.rollback();
+  if (!con.getAutoCommit()) {
+    con.rollback();
+  }
 }
