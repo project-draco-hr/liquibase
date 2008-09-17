@@ -1,5 +1,4 @@
 {
-  List<SqlStatement> statements=new ArrayList<SqlStatement>();
   if (database instanceof SQLiteDatabase) {
     return generateStatementsForSQLiteDatabase(database);
   }
