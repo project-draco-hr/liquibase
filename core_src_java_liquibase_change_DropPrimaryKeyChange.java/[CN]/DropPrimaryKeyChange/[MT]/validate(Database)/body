@@ -1,5 +1,2 @@
 {
-  if (StringUtils.trimToNull(constraintName) == null) {
-    throw new InvalidChangeDefinitionException("constraintName is required",this);
-  }
 }
