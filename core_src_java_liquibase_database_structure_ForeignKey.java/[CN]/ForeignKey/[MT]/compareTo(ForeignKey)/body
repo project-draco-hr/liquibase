@@ -4,16 +4,16 @@
     returnValue=this.getForeignKeyTable().compareTo(o.getForeignKeyTable());
   }
   if (returnValue == 0 && this.getForeignKeyColumns() != null && o.getForeignKeyColumns() != null) {
-    returnValue=this.getForeignKeyColumns().compareTo(o.getForeignKeyColumns());
+    returnValue=this.getForeignKeyColumns().compareToIgnoreCase(o.getForeignKeyColumns());
   }
   if (returnValue == 0 && this.getName() != null && o.getName() != null) {
-    returnValue=this.getName().compareTo(o.getName());
+    returnValue=this.getName().compareToIgnoreCase(o.getName());
   }
   if (returnValue == 0 && this.getPrimaryKeyTable() != null && o.getPrimaryKeyTable() != null) {
     returnValue=this.getPrimaryKeyTable().compareTo(o.getPrimaryKeyTable());
   }
   if (returnValue == 0 && this.getPrimaryKeyColumns() != null && o.getPrimaryKeyColumns() != null) {
-    returnValue=this.getPrimaryKeyColumns().compareTo(o.getPrimaryKeyColumns());
+    returnValue=this.getPrimaryKeyColumns().compareToIgnoreCase(o.getPrimaryKeyColumns());
   }
   if (returnValue == 0 && this.updateRule != null && o.getUpdateRule() != null)   returnValue=this.updateRule.compareTo(o.getUpdateRule());
   if (returnValue == 0 && this.deleteRule != null && o.getDeleteRule() != null)   returnValue=this.deleteRule.compareTo(o.getDeleteRule());

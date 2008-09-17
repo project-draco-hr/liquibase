@@ -8,7 +8,10 @@
       equals=false;
     }
   }
-  if (!this.unique.equals(index.isUnique())) {
+  if (this.unique == null && index.isUnique() != null) {
+    equals=false;
+  }
+ else   if (!this.unique.equals(index.isUnique())) {
     equals=false;
   }
   return equals || table.getName().equalsIgnoreCase(index.table.getName());

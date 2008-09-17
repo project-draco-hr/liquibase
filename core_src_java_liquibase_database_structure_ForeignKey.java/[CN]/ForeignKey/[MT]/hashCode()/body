@@ -3,9 +3,6 @@
   if (primaryKeyTable != null) {
     result=primaryKeyTable.hashCode();
   }
-  if (this.name != null) {
-    result=31 * result + this.name.toUpperCase().hashCode();
-  }
   if (primaryKeyColumns != null) {
     result=31 * result + primaryKeyColumns.toUpperCase().hashCode();
   }
