@@ -1,0 +1,6 @@
+{
+  if (StringUtils.trimToNull(sequenceName) != null && (hasCaseProblems(sequenceName) || isReservedWord(sequenceName))) {
+    return super.escapeSequenceName(schemaName,"\"" + sequenceName + "\"");
+  }
+  return super.escapeSequenceName(schemaName,sequenceName);
+}

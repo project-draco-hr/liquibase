@@ -1,0 +1,11 @@
+{
+  if (constraintName == null) {
+    return null;
+  }
+  if (hasCaseProblems(constraintName) || isReservedWord(constraintName)) {
+    return "\"" + constraintName + "\"";
+  }
+ else {
+    return super.escapeConstraintName(constraintName);
+  }
+}

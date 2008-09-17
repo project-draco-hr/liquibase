@@ -5,5 +5,10 @@
       database.rollback();
     }
     LockHandler.getInstance(database).forceReleaseLock();
+    if (database.supportsSchemas()) {
+      database.dropDatabaseObjects(TestContext.ALT_SCHEMA);
+    }
+    database.dropDatabaseObjects(null);
+    database.commit();
   }
 }

@@ -1,4 +1,3 @@
 {
-  if (tableName.matches(".*[A-Z].*") && tableName.matches(".*[a-z].*"))   return true;
-  return false;
+  return tableName.matches(".*[A-Z].*") && tableName.matches(".*[a-z].*");
 }

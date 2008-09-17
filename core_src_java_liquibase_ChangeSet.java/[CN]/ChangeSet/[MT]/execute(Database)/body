@@ -70,6 +70,7 @@ catch (      PreconditionErrorException e) {
  else {
           throw new MigrationFailedException(this,"Unexpected precondition onError attribute: " + rootPrecondition.getOnError());
         }
+        database.rollback();
       }
     }
     if (!skipChange) {

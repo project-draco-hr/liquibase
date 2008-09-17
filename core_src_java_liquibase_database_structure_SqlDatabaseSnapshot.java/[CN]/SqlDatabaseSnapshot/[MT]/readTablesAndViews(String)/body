@@ -3,11 +3,14 @@
   ResultSet rs=databaseMetaData.getTables(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),null,new String[]{"TABLE","VIEW"});
   while (rs.next()) {
     String type=rs.getString("TABLE_TYPE");
-    String name=rs.getString("TABLE_NAME");
-    String schemaName=rs.getString("TABLE_SCHEM");
-    String catalogName=rs.getString("TABLE_CAT");
+    String name=convertFromDatabaseName(rs.getString("TABLE_NAME"));
+    String schemaName=convertFromDatabaseName(rs.getString("TABLE_SCHEM"));
+    String catalogName=convertFromDatabaseName(rs.getString("TABLE_CAT"));
     String remarks=rs.getString("REMARKS");
     if (database.isSystemTable(catalogName,schemaName,name) || database.isLiquibaseTable(name) || database.isSystemView(catalogName,schemaName,name)) {
+      if (name.equalsIgnoreCase(database.getDatabaseChangeLogTableName())) {
+        hasDatabaseChangeLogTable=true;
+      }
       continue;
     }
     if ("TABLE".equals(type)) {

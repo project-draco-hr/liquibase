@@ -1,0 +1,14 @@
+{
+  StringBuffer sb=new StringBuffer();
+  for (  String columnName : columnNames.split(",")) {
+    if (sb.length() > 0) {
+      sb.append(", ");
+    }
+    String name=columnName.trim();
+    if (hasCaseProblems(name) || isReservedWord(name)) {
+      name="\"" + name + "\"";
+    }
+    sb.append(name);
+  }
+  return sb.toString();
+}

@@ -6,8 +6,8 @@
     ResultSet rs=databaseMetaData.getExportedKeys(dbCatalog,dbSchema,table.getName());
     ForeignKey fkInfo=null;
     while (rs.next()) {
-      String pkTableName=rs.getString("PKTABLE_NAME");
-      String pkColumn=rs.getString("PKCOLUMN_NAME");
+      String pkTableName=convertFromDatabaseName(rs.getString("PKTABLE_NAME"));
+      String pkColumn=convertFromDatabaseName(rs.getString("PKCOLUMN_NAME"));
       Table pkTable=tablesMap.get(pkTableName);
       if (pkTable == null) {
         throw new JDBCException("Could not find table " + pkTableName + " for column "+ pkColumn);
@@ -18,15 +18,15 @@
       }
       fkInfo.setPrimaryKeyTable(pkTable);
       fkInfo.addPrimaryKeyColumn(pkColumn);
-      String fkTableName=rs.getString("FKTABLE_NAME");
-      String fkColumn=rs.getString("FKCOLUMN_NAME");
+      String fkTableName=convertFromDatabaseName(rs.getString("FKTABLE_NAME"));
+      String fkColumn=convertFromDatabaseName(rs.getString("FKCOLUMN_NAME"));
       Table fkTable=tablesMap.get(fkTableName);
       if (fkTable == null) {
         throw new JDBCException("Could not find table " + fkTableName + " for column "+ fkColumn);
       }
       fkInfo.setForeignKeyTable(fkTable);
       fkInfo.addForeignKeyColumn(fkColumn);
-      fkInfo.setName(rs.getString("FK_NAME"));
+      fkInfo.setName(convertFromDatabaseName(rs.getString("FK_NAME")));
       Integer updateRule, deleteRule;
       updateRule=rs.getInt("UPDATE_RULE");
       if (rs.wasNull())       updateRule=null;

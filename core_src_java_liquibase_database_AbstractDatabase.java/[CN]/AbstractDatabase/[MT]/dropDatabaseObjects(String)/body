@@ -2,6 +2,12 @@
   try {
     DatabaseSnapshot snapshot=createDatabaseSnapshot(schema,new HashSet<DiffStatusListener>());
     List<Change> dropChanges=new ArrayList<Change>();
+    for (    View view : snapshot.getViews()) {
+      DropViewChange dropChange=new DropViewChange();
+      dropChange.setViewName(view.getName());
+      dropChange.setSchemaName(schema);
+      dropChanges.add(dropChange);
+    }
     for (    ForeignKey fk : snapshot.getForeignKeys()) {
       DropForeignKeyConstraintChange dropFK=new DropForeignKeyConstraintChange();
       dropFK.setBaseTableSchemaName(schema);
@@ -9,16 +15,11 @@
       dropFK.setConstraintName(fk.getName());
       dropChanges.add(dropFK);
     }
-    for (    View view : snapshot.getViews()) {
-      DropViewChange dropChange=new DropViewChange();
-      dropChange.setViewName(view.getName());
-      dropChange.setSchemaName(schema);
-      dropChanges.add(dropChange);
-    }
     for (    Table table : snapshot.getTables()) {
       DropTableChange dropChange=new DropTableChange();
       dropChange.setSchemaName(schema);
       dropChange.setTableName(table.getName());
+      dropChange.setCascadeConstraints(true);
       dropChanges.add(dropChange);
     }
     if (this.supportsSequences()) {
@@ -29,9 +30,11 @@
         dropChanges.add(dropChange);
       }
     }
-    RawSQLChange clearChangeLogChange=new RawSQLChange();
-    clearChangeLogChange.setSql("DELETE FROM " + escapeTableName(convertRequestedSchemaToSchema(getDefaultSchemaName()),getDatabaseChangeLogTableName()));
-    dropChanges.add(clearChangeLogChange);
+    if (snapshot.hasDatabaseChangeLogTable()) {
+      RawSQLChange clearChangeLogChange=new RawSQLChange();
+      clearChangeLogChange.setSql("DELETE FROM " + escapeTableName(convertRequestedSchemaToSchema(schema),getDatabaseChangeLogTableName()));
+      dropChanges.add(clearChangeLogChange);
+    }
     try {
       for (      Change change : dropChanges) {
         for (        SqlStatement statement : change.generateStatements(this)) {

@@ -25,6 +25,12 @@
     log.finest("ChangeSet " + toString() + " has been successfully rolled back.");
   }
  catch (  Exception e) {
+    try {
+      database.rollback();
+    }
+ catch (    JDBCException e1) {
+      ;
+    }
     throw new RollbackFailedException(e);
   }
 }

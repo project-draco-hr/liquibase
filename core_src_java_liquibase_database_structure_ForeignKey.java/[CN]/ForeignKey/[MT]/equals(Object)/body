@@ -2,5 +2,5 @@
   if (this == o)   return true;
   if (o == null || getClass() != o.getClass())   return false;
   ForeignKey that=(ForeignKey)o;
-  return getForeignKeyColumns().equalsIgnoreCase(that.getForeignKeyColumns()) && foreignKeyTable.equals(that.foreignKeyTable) && this.name.equalsIgnoreCase(that.getName())&& getPrimaryKeyColumns().equalsIgnoreCase(that.getPrimaryKeyColumns())&& primaryKeyTable.equals(that.primaryKeyTable)&& this.updateRule.equals(that.getUpdateRule())&& this.deleteRule.equals(that.getDeleteRule());
+  return getForeignKeyColumns().equalsIgnoreCase(that.getForeignKeyColumns()) && foreignKeyTable.equals(that.foreignKeyTable) && this.name.equalsIgnoreCase(that.getName())&& getPrimaryKeyColumns().equalsIgnoreCase(that.getPrimaryKeyColumns())&& primaryKeyTable.equals(that.primaryKeyTable);
 }

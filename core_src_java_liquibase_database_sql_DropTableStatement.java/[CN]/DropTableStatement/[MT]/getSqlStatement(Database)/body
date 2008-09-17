@@ -2,10 +2,10 @@
   StringBuffer buffer=new StringBuffer();
   buffer.append("DROP TABLE ").append(database.escapeTableName(getSchemaName(),getTableName()));
   if (isCascadeConstraints()) {
-    if (database instanceof DerbyDatabase || database instanceof DB2Database || database instanceof MSSQLDatabase|| database instanceof FirebirdDatabase) {
-      throw new StatementNotSupportedOnDatabaseException("Database does not support drop with cascade",this,database);
+    if (database instanceof DerbyDatabase || database instanceof DB2Database || database instanceof MSSQLDatabase|| database instanceof FirebirdDatabase|| database instanceof SQLiteDatabase) {
+      LogFactory.getLogger().info("Database does not support drop with cascade");
     }
-    if (database instanceof OracleDatabase) {
+ else     if (database instanceof OracleDatabase) {
       buffer.append(" CASCADE CONSTRAINTS");
     }
  else {

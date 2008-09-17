@@ -13,10 +13,15 @@
     }
     Map<String,Index> indexMap=new HashMap<String,Index>();
     while (rs.next()) {
-      String indexName=rs.getString("INDEX_NAME");
+      String indexName=convertFromDatabaseName(rs.getString("INDEX_NAME"));
       short type=rs.getShort("TYPE");
-      boolean nonUnique=rs.getBoolean("NON_UNIQUE");
-      String columnName=rs.getString("COLUMN_NAME");
+      boolean nonUnique=true;
+      try {
+        nonUnique=rs.getBoolean("NON_UNIQUE");
+      }
+ catch (      SQLException e) {
+      }
+      String columnName=convertFromDatabaseName(rs.getString("COLUMN_NAME"));
       short position=rs.getShort("ORDINAL_POSITION");
       String filterCondition=rs.getString("FILTER_CONDITION");
       if (type == DatabaseMetaData.tableIndexStatistic) {
@@ -33,7 +38,7 @@
         indexInformation=new Index();
         indexInformation.setTable(table);
         indexInformation.setName(indexName);
-        indexInformation.setUnique(new Boolean(!nonUnique));
+        indexInformation.setUnique(!nonUnique);
         indexInformation.setFilterCondition(filterCondition);
         indexMap.put(indexName,indexInformation);
       }

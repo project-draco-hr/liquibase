@@ -1,8 +1,9 @@
 {
   Statement statement=null;
   ResultSet resultSet=null;
+  DatabaseConnection connection=database.getConnection();
   try {
-    statement=database.getConnection().createStatement();
+    statement=connection.createStatement();
     resultSet=statement.executeQuery(getSql());
     if (!resultSet.next()) {
       throw new PreconditionFailedException("No rows returned from SQL Precondition",changeLog,this);
