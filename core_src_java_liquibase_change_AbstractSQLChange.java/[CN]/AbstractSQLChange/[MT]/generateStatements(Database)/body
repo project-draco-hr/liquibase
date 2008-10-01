@@ -1,6 +1,7 @@
 {
   List<SqlStatement> returnStatements=new ArrayList<SqlStatement>();
   String processedSQL=isStrippingComments() ? StringUtils.stripComments(getSql()) : getSql();
+  processedSQL=processedSQL.replaceAll("\r\n","\n").replaceAll("\r","\n");
   if (isSplittingStatements()) {
     String[] statements=StringUtils.splitSQL(processedSQL);
     for (    String statement : statements) {
