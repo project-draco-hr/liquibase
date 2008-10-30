@@ -41,6 +41,12 @@
  else       if (dataTypeName.equalsIgnoreCase("TIME")) {
         return getTimeType();
       }
+ else       if (dataTypeName.equalsIgnoreCase("CHAR")) {
+        return getCharType();
+      }
+ else       if (dataTypeName.equalsIgnoreCase("VARCHAR")) {
+        return getVarcharType();
+      }
       throw new RuntimeException("Could not find java.sql.Types value for " + dataTypeName);
     }
  catch (    Exception e) {
@@ -89,6 +95,24 @@
   }
  else   if ("bigint".equalsIgnoreCase(columnType)) {
     return getBigIntType();
+  }
+ else   if (columnType.toUpperCase().startsWith("CHAR(")) {
+    if (columnType.indexOf("(") >= 0) {
+      String precision=columnType.substring(columnType.indexOf("(") + 1,columnType.indexOf(")"));
+      return getCharType() + "(" + precision+ ")";
+    }
+ else {
+      return getCharType();
+    }
+  }
+ else   if (columnType.toUpperCase().startsWith("VARCHAR(")) {
+    if (columnType.indexOf("(") >= 0) {
+      String precision=columnType.substring(columnType.indexOf("(") + 1,columnType.indexOf(")"));
+      return getVarcharType() + "(" + precision+ ")";
+    }
+ else {
+      return getVarcharType();
+    }
   }
  else {
     return columnType;
