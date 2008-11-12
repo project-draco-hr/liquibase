@@ -1,0 +1,6 @@
+{
+  String s="abc";
+  StringInputStream is=new StringInputStream(s);
+  String hexString=MD5Util.computeMD5(is);
+  assertEquals("90150983cd24fb0d6963f7d28e17f72",hexString);
+}
