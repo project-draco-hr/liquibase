@@ -1,0 +1,31 @@
+{
+  ResultSet resultSet=null;
+  try {
+    Integer requestedType=(Integer)Class.forName("java.sql.Types").getDeclaredField(dataTypeName).get(null);
+    DatabaseConnection connection=getConnection();
+    if (connection == null) {
+      throw new RuntimeException("Cannot evaluate java.sql.Types without a connection");
+    }
+    resultSet=connection.getMetaData().getTypeInfo();
+    while (resultSet.next()) {
+      String typeName=resultSet.getString("TYPE_NAME");
+      int dataType=resultSet.getInt("DATA_TYPE");
+      if (requestedType == dataType) {
+        return typeName;
+      }
+    }
+    return null;
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+ finally {
+    if (resultSet != null) {
+      try {
+        resultSet.close();
+      }
+ catch (      SQLException e) {
+      }
+    }
+  }
+}
