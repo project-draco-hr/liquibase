@@ -5,6 +5,6 @@
   allConstraints.addAll(Arrays.asList(constraints));
   allConstraints.add(new NotNullConstraint(columnName));
   allConstraints.add(pkConstraint);
-  addColumn(columnName,columnType,allConstraints.toArray(new ColumnConstraint[allConstraints.size()]));
+  addColumn(columnName,columnType,defaultValue,allConstraints.toArray(new ColumnConstraint[allConstraints.size()]));
   return this;
 }

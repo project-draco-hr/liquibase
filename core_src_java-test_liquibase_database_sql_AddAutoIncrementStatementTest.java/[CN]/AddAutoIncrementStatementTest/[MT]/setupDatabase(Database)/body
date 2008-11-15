@@ -1,4 +1,4 @@
 {
-  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn(COLUMN_NAME,COLUMN_TYPE,null).addColumn("otherColumn","varchar(50)"),database);
-  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn(COLUMN_NAME,COLUMN_TYPE,null).addColumn("otherColumn","varchar(50)"),database);
+  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn(COLUMN_NAME,COLUMN_TYPE,null,null).addColumn("otherColumn","varchar(50)"),database);
+  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn(COLUMN_NAME,COLUMN_TYPE,null,null).addColumn("otherColumn","varchar(50)"),database);
 }

@@ -1,4 +1,4 @@
 {
-  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int",null).addColumn(COL_NAME,DATA_TYPE),database);
-  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn("id","int",null).addColumn(COL_NAME,DATA_TYPE),database);
+  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int",null,null).addColumn(COL_NAME,DATA_TYPE),database);
+  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn("id","int",null,null).addColumn(COL_NAME,DATA_TYPE),database);
 }

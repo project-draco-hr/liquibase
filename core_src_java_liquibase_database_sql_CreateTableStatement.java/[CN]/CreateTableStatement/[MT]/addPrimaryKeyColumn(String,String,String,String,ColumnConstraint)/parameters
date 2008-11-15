@@ -1,4 +1,5 @@
 String columnName
 String columnType
+String defaultValue
 String keyName
 ColumnConstraint constraints

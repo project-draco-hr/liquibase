@@ -1,6 +1,6 @@
 {
   final String foreignKeyName="fk_test_parent";
-  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int",null).addColumn("name","varchar(255)").addColumn("parent_id","int",new ForeignKeyConstraint(foreignKeyName,TABLE_NAME + "(id)"))){
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int",null,null).addColumn("name","varchar(255)").addColumn("parent_id","int",new ForeignKeyConstraint(foreignKeyName,TABLE_NAME + "(id)"))){
     protected void preExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getTable(TABLE_NAME));
     }

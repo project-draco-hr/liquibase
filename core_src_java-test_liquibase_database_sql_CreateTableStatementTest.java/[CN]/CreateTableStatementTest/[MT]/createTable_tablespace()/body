@@ -1,5 +1,5 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int",null).addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'").setTablespace("liquibase2")){
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int",null,null).addColumn("name","varchar(255)").addColumn("username","varchar(255)","'NEWUSER'").setTablespace("liquibase2")){
     protected boolean expectedException(    Database database,    JDBCException exception){
       return !database.supportsTablespaces();
     }

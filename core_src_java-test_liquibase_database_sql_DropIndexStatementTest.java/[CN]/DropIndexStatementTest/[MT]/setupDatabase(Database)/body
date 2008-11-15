@@ -1,7 +1,7 @@
 {
-  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int",null).addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()),database);
+  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addPrimaryKeyColumn("id","int",null,null).addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()),database);
   new JdbcTemplate(database).execute(new CreateIndexStatement(IDX_NAME,null,TABLE_NAME,IS_UNIQUE,COLUMN_NAME));
-  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn("id","int",null).addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()),database);
+  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addPrimaryKeyColumn("id","int",null,null).addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()),database);
   if (database.supportsSchemas()) {
     new JdbcTemplate(database).execute(new CreateIndexStatement(ALT_IDX_NAME,TestContext.ALT_SCHEMA,TABLE_NAME,IS_UNIQUE,COLUMN_NAME));
   }
