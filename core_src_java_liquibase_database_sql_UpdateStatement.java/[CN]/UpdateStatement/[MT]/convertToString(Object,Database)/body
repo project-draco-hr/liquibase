@@ -4,7 +4,7 @@
     sqlString="NULL";
   }
  else   if (newValue instanceof String && database.shouldQuoteValue(((String)newValue))) {
-    sqlString="'" + newValue + "'";
+    sqlString="'" + database.escapeStringForDatabase(newValue.toString()) + "'";
   }
  else   if (newValue instanceof Date) {
     sqlString=database.getDateLiteral(((Date)newValue));
