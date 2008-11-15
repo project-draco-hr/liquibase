@@ -1,0 +1,13 @@
+{
+  int result=0;
+  if (this.table != null) {
+    result=this.table.hashCode();
+  }
+  if (this.name != null) {
+    result=31 * result + this.name.toUpperCase().hashCode();
+  }
+  if (getColumnNames() != null) {
+    result=31 * result + getColumnNames().hashCode();
+  }
+  return result;
+}

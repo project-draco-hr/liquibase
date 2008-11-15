@@ -15,6 +15,8 @@
   addChangedColumnChanges(changes);
   addMissingPrimaryKeyChanges(changes);
   addUnexpectedPrimaryKeyChanges(changes);
+  addMissingUniqueConstraintChanges(changes);
+  addUnexpectedUniqueConstraintChanges(changes);
   addMissingIndexChanges(changes);
   addUnexpectedIndexChanges(changes);
   if (diffData) {

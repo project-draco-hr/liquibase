@@ -1,2 +1,19 @@
 {
+  String schemaName=getTableSchemaName();
+  if (schemaName != null && !database.supportsSchemas()) {
+    throw new StatementNotSupportedOnDatabaseException("Database does not support schemas",this,database);
+  }
+  if (database instanceof MySQLDatabase) {
+    if (getTableName() == null) {
+      throw new StatementNotSupportedOnDatabaseException("tableName is required",this,database);
+    }
+    return "DROP INDEX " + database.escapeIndexName(null,getIndexName()) + " ON "+ database.escapeTableName(schemaName,getTableName());
+  }
+ else   if (database instanceof MSSQLDatabase) {
+    if (getTableName() == null) {
+      throw new StatementNotSupportedOnDatabaseException("tableName is required",this,database);
+    }
+    return "DROP INDEX " + database.escapeTableName(schemaName,getTableName()) + "."+ database.escapeIndexName(null,getIndexName());
+  }
+  return "DROP INDEX " + database.escapeIndexName(null,getIndexName());
 }

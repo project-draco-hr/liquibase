@@ -1,5 +1,0 @@
-{
-  this.name=name;
-  this.table=table;
-  this.columns.addAll(Arrays.asList(columns));
-}

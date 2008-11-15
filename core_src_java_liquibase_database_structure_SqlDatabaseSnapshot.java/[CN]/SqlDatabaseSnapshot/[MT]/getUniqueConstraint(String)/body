@@ -1,0 +1,8 @@
+{
+  for (  UniqueConstraint uc : getUniqueConstraints()) {
+    if (uc.getName().equalsIgnoreCase(ucName)) {
+      return uc;
+    }
+  }
+  return null;
+}

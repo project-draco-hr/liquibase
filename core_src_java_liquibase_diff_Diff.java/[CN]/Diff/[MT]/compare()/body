@@ -27,6 +27,9 @@
   if (shouldDiffPrimaryKeys()) {
     checkPrimaryKeys(diffResult);
   }
+  if (shouldDiffUniqueConstraints()) {
+    checkUniqueConstraints(diffResult);
+  }
   if (shouldDiffIndexes()) {
     checkIndexes(diffResult);
   }

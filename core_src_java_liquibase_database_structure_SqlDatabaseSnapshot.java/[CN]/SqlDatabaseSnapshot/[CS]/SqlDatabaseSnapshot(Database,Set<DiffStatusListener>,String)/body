@@ -8,6 +8,7 @@
     readForeignKeyInformation(requestedSchema);
     readPrimaryKeys(requestedSchema);
     readColumns(requestedSchema);
+    readUniqueConstraints(requestedSchema);
     readIndexes(requestedSchema);
     readSequences(requestedSchema);
     this.tables=new HashSet<Table>(tablesMap.values());

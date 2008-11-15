@@ -5,6 +5,7 @@
     diffColumns=types.contains("columns");
     diffViews=types.contains("views");
     diffPrimaryKeys=types.contains("primaryKeys");
+    diffUniqueConstraints=types.contains("uniqueConstraints");
     diffIndexes=types.contains("indexes");
     diffForeignKeys=types.contains("foreignKeys");
     diffSequences=types.contains("sequences");

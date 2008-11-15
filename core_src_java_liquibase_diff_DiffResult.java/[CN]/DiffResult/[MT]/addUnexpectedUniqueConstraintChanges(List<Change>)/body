@@ -1,0 +1,10 @@
+{
+  for (  UniqueConstraint uc : getUnexpectedUniqueConstraints()) {
+    if (!getUnexpectedTables().contains(uc.getTable())) {
+      DropUniqueConstraintChange change=new DropUniqueConstraintChange();
+      change.setTableName(uc.getTable().getName());
+      change.setConstraintName(uc.getName());
+      changes.add(change);
+    }
+  }
+}
