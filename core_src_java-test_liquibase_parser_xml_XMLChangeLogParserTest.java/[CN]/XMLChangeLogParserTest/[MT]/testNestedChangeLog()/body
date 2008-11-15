@@ -1,34 +1,5 @@
 {
+  final String nestedFileName="liquibase/parser/xml/nestedChangeLog.xml";
   DatabaseChangeLog changeLog=new XMLChangeLogParser().parse("liquibase/parser/xml/nestedChangeLog.xml",new JUnitFileOpener(),new HashMap<String,Object>());
-  assertEquals("liquibase/parser/xml/nestedChangeLog.xml",changeLog.getLogicalFilePath());
-  assertEquals("liquibase/parser/xml/nestedChangeLog.xml",changeLog.getPhysicalFilePath());
-  assertNull(changeLog.getPreconditions());
-  assertEquals(3,changeLog.getChangeSets().size());
-  ChangeSet changeSet=changeLog.getChangeSets().get(0);
-  assertEquals("nvoxland",changeSet.getAuthor());
-  assertEquals("1",changeSet.getId());
-  assertEquals(1,changeSet.getChanges().size());
-  assertEquals("liquibase/parser/xml/nestedChangeLog.xml",changeSet.getFilePath());
-  Change change=changeSet.getChanges().get(0);
-  assertEquals("createTable",change.getTagName());
-  assertTrue(change instanceof CreateTableChange);
-  assertEquals("employee",((CreateTableChange)change).getTableName());
-  changeSet=changeLog.getChangeSets().get(1);
-  assertEquals("nvoxland",changeSet.getAuthor());
-  assertEquals("1",changeSet.getId());
-  assertEquals(1,changeSet.getChanges().size());
-  assertEquals("liquibase/parser/xml/simpleChangeLog.xml",changeSet.getFilePath());
-  change=changeSet.getChanges().get(0);
-  assertEquals("createTable",change.getTagName());
-  assertTrue(change instanceof CreateTableChange);
-  assertEquals("person",((CreateTableChange)change).getTableName());
-  changeSet=changeLog.getChangeSets().get(2);
-  assertEquals("nvoxland",changeSet.getAuthor());
-  assertEquals("2",changeSet.getId());
-  assertEquals(1,changeSet.getChanges().size());
-  assertEquals("liquibase/parser/xml/nestedChangeLog.xml",changeSet.getFilePath());
-  change=changeSet.getChanges().get(0);
-  assertEquals("addColumn",change.getTagName());
-  assertTrue(change instanceof AddColumnChange);
-  assertEquals("employee",((AddColumnChange)change).getTableName());
+  nestedFileAssertions(changeLog,nestedFileName);
 }

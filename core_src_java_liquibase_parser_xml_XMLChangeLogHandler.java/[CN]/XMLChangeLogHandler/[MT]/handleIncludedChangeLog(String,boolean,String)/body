@@ -1,4 +1,8 @@
 {
+  if (isRelativePath) {
+    String path=searchPath(relativeBaseFileName);
+    fileName=new StringBuilder(path).append(fileName).toString();
+  }
   DatabaseChangeLog changeLog=new ChangeLogParser(changeLogParameters).parse(fileName,fileOpener);
   AndPrecondition preconditions=changeLog.getPreconditions();
   if (preconditions != null) {

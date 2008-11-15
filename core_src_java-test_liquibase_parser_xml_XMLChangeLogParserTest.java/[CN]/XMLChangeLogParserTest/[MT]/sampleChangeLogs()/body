@@ -10,5 +10,6 @@
   new XMLChangeLogParser().parse("changelogs/oracle/complete/root.changelog.xml",new JUnitFileOpener(),new HashMap<String,Object>());
   new XMLChangeLogParser().parse("changelogs/pgsql/complete/root.changelog.xml",new JUnitFileOpener(),new HashMap<String,Object>());
   new XMLChangeLogParser().parse("changelogs/sybase/complete/root.changelog.xml",new JUnitFileOpener(),new HashMap<String,Object>());
+  new XMLChangeLogParser().parse("changelogs/asany/complete/root.changelog.xml",new JUnitFileOpener(),new HashMap<String,Object>());
   new XMLChangeLogParser().parse("changelogs/unsupported/complete/root.changelog.xml",new JUnitFileOpener(),new HashMap<String,Object>());
 }
