@@ -59,6 +59,11 @@
       ((CreateProcedureChange)change).setComments(textString);
       text=new StringBuffer();
     }
+ else     if (change != null && change instanceof CustomChangeWrapper && paramName != null && "param".equals(qName)) {
+      ((CustomChangeWrapper)change).setParam(paramName,textString);
+      text=new StringBuffer();
+      paramName=null;
+    }
  else     if (changeSet != null && "comment".equals(qName)) {
       changeSet.setComments(textString);
       text=new StringBuffer();

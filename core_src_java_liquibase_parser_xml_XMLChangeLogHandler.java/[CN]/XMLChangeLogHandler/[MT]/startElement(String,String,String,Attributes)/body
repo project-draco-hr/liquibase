@@ -140,7 +140,13 @@
     }
  else     if ("param".equals(qName)) {
       if (change instanceof CustomChangeWrapper) {
-        ((CustomChangeWrapper)change).setParam(atts.getValue("name"),atts.getValue("value"));
+        if (atts.getValue("value") == null) {
+          paramName=atts.getValue("name");
+          text=new StringBuffer();
+        }
+ else {
+          ((CustomChangeWrapper)change).setParam(atts.getValue("name"),atts.getValue("value"));
+        }
       }
  else {
         throw new MigrationFailedException(changeSet,"'param' unexpected in " + qName);
