@@ -8,7 +8,7 @@
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
     }
     protected void postExecuteAssert(    DatabaseSnapshot snapshot){
-      if (snapshot.getDatabase() instanceof MySQLDatabase || snapshot.getDatabase() instanceof MSSQLDatabase) {
+      if (snapshot.getDatabase() instanceof MySQLDatabase || snapshot.getDatabase() instanceof MSSQLDatabase || snapshot.getDatabase() instanceof SybaseASADatabase) {
         assertEquals("true",snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue().toString().toLowerCase());
       }
  else {

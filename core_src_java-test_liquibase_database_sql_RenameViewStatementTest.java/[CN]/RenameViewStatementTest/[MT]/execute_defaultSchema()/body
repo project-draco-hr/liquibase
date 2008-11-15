@@ -4,6 +4,9 @@
       assertNotNull(snapshot.getView(VIEW_NAME));
       assertNull(snapshot.getView(NEW_VIEW_NAME));
     }
+    @Override protected boolean supportsTest(    Database database){
+      return !(database instanceof SybaseASADatabase);
+    }
     protected void postExecuteAssert(    DatabaseSnapshot snapshot){
       assertNull(snapshot.getView(VIEW_NAME));
       assertNotNull(snapshot.getView(NEW_VIEW_NAME));

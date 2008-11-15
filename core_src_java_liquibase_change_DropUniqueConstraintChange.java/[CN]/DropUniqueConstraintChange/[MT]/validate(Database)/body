@@ -1,5 +1,10 @@
 {
-  if (StringUtils.trimToNull(constraintName) == null) {
+  if (database instanceof SybaseASADatabase) {
+    if (StringUtils.trimToNull(constraintName) == null && StringUtils.trimToNull(constraintName) == null) {
+      throw new InvalidChangeDefinitionException("either constraintName or uniqueNames is required",this);
+    }
+  }
+ else   if (StringUtils.trimToNull(constraintName) == null) {
     throw new InvalidChangeDefinitionException("constraintName is required",this);
   }
 }

@@ -38,7 +38,9 @@
   }
   Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
   final DatabaseConnection databaseConnection=database.getConnection();
-  databaseConnection.setAutoCommit(false);
+  if (databaseConnection.getAutoCommit()) {
+    databaseConnection.setAutoCommit(false);
+  }
   try {
     if (url.startsWith("jdbc:hsql")) {
       databaseConnection.createStatement().execute("CREATE SCHEMA " + ALT_SCHEMA + " AUTHORIZATION DBA");

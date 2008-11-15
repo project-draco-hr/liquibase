@@ -8,7 +8,7 @@
       assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
     }
     protected void postExecuteAssert(    DatabaseSnapshot snapshot){
-      assertEquals(42.56f,new Float(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue().toString()));
+      assertEquals(new Float(42.56f),new Float(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue().toString()));
     }
   }
 );

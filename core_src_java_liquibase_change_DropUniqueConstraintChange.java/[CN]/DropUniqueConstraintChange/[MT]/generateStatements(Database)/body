@@ -2,5 +2,9 @@
   if (database instanceof SQLiteDatabase) {
     return generateStatementsForSQLiteDatabase(database);
   }
-  return new SqlStatement[]{new DropUniqueConstraintStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getConstraintName())};
+  DropUniqueConstraintStatement statement=new DropUniqueConstraintStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getConstraintName());
+  if (database instanceof SybaseASADatabase) {
+    statement.setUniqueColumns(uniqueColumns);
+  }
+  return new SqlStatement[]{statement};
 }

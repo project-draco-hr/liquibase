@@ -11,5 +11,8 @@
  else   if (database instanceof OracleDatabase) {
     return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP CONSTRAINT "+ database.escapeConstraintName(getConstraintName())+ " DROP INDEX";
   }
+ else   if (database instanceof SybaseASADatabase) {
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP UNIQUE ("+ getUniqueColumns()+ ")";
+  }
   return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " DROP CONSTRAINT "+ database.escapeConstraintName(getConstraintName());
 }

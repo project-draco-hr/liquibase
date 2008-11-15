@@ -3,17 +3,17 @@
     throw new StatementNotSupportedOnDatabaseException(this,database);
   }
   String sql;
-  if (getConstraintName() == null || database instanceof MySQLDatabase) {
+  if (getConstraintName() == null || database instanceof MySQLDatabase || database instanceof SybaseASADatabase) {
     sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD PRIMARY KEY ("+ database.escapeColumnNameList(getColumnNames())+ ")";
   }
  else {
-    sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD CONSTRAINT "+ getConstraintName()+ " PRIMARY KEY ("+ database.escapeColumnNameList(getColumnNames())+ ")";
+    sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD CONSTRAINT "+ database.escapeConstraintName(getConstraintName())+ " PRIMARY KEY ("+ database.escapeColumnNameList(getColumnNames())+ ")";
   }
   if (StringUtils.trimToNull(getTablespace()) != null && database.supportsTablespaces()) {
     if (database instanceof MSSQLDatabase) {
       sql+=" ON " + getTablespace();
     }
- else     if (database instanceof DB2Database) {
+ else     if (database instanceof DB2Database || database instanceof SybaseASADatabase) {
       ;
     }
  else {

@@ -18,6 +18,9 @@
   if (database instanceof MSSQLDatabase) {
     createTablesSQL=new SqlStatement[]{new RawSqlStatement("SELECT DISTINCT " + getExistingColumnName() + " AS "+ getNewColumnName()+ " INTO "+ database.escapeTableName(newTableSchemaName,getNewTableName())+ " FROM "+ database.escapeTableName(existingTableSchemaName,getExistingTableName())+ " WHERE "+ getExistingColumnName()+ " IS NOT NULL")};
   }
+ else   if (database instanceof SybaseASADatabase) {
+    createTablesSQL=new SqlStatement[]{new RawSqlStatement("SELECT DISTINCT " + getExistingColumnName() + " AS "+ getNewColumnName()+ " INTO "+ database.escapeTableName(newTableSchemaName,getNewTableName())+ " FROM "+ database.escapeTableName(existingTableSchemaName,getExistingTableName())+ " WHERE "+ getExistingColumnName()+ " IS NOT NULL")};
+  }
  else   if (database instanceof DB2Database) {
     createTablesSQL=new SqlStatement[]{new RawSqlStatement("CREATE TABLE " + database.escapeTableName(newTableSchemaName,getNewTableName()) + " AS (SELECT "+ getExistingColumnName()+ " AS "+ getNewColumnName()+ " FROM "+ database.escapeTableName(existingTableSchemaName,getExistingTableName())+ ") WITH NO DATA"),new RawSqlStatement("INSERT INTO " + database.escapeTableName(newTableSchemaName,getNewTableName()) + " SELECT DISTINCT "+ getExistingColumnName()+ " FROM "+ database.escapeTableName(existingTableSchemaName,getExistingTableName())+ " WHERE "+ getExistingColumnName()+ " IS NOT NULL")};
   }

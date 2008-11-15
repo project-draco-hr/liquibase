@@ -1,7 +1,7 @@
 {
   new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws Exception {
-      if (database instanceof OracleDatabase || database instanceof MSSQLDatabase || database instanceof PostgresDatabase|| database instanceof DerbyDatabase|| database instanceof CacheDatabase|| database instanceof H2Database|| database instanceof FirebirdDatabase) {
+      if (database instanceof OracleDatabase || database instanceof MSSQLDatabase || database instanceof PostgresDatabase|| database instanceof DerbyDatabase|| database instanceof CacheDatabase|| database instanceof H2Database|| database instanceof FirebirdDatabase|| database instanceof SybaseASADatabase) {
         assertFalse(generateTestStatement().supportsDatabase(database));
       }
  else {

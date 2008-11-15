@@ -1,6 +1,6 @@
 {
   String createClause;
-  if (database instanceof HsqlDatabase || database instanceof DB2Database || database instanceof CacheDatabase|| database instanceof MSSQLDatabase|| database instanceof DerbyDatabase) {
+  if (database instanceof HsqlDatabase || database instanceof DB2Database || database instanceof CacheDatabase|| database instanceof MSSQLDatabase|| database instanceof DerbyDatabase|| database instanceof SybaseASADatabase) {
     if (replaceIfExists) {
       throw new StatementNotSupportedOnDatabaseException("replaceIfExists not supported",this,database);
     }
@@ -12,6 +12,9 @@
  else {
       createClause="RECREATE VIEW";
     }
+  }
+ else   if (database instanceof SybaseASADatabase && getSelectQuery().toLowerCase().startsWith("create view")) {
+    return getSelectQuery();
   }
  else {
     createClause="CREATE " + (replaceIfExists ? "OR REPLACE " : "") + "VIEW";
