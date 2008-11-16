@@ -1,3 +1,15 @@
 {
+  if (facade == null) {
+    System.out.println("XXX - Loaded UIFacade");
+    ClassLoader cl=UIFacade.class.getClassLoader();
+    try {
+      Class<UIFacade> swingUIClazz=(Class<UIFacade>)cl.loadClass(UI_IMPL_CLASSNAME);
+      Constructor<UIFacade> con=swingUIClazz.getConstructor(new Class[0]);
+      facade=con.newInstance(new Object[0]);
+    }
+ catch (    Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
   return facade;
 }
