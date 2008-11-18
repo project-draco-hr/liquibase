@@ -9,10 +9,6 @@
       output.write(StreamUtil.getLineSeparator());
       output.write("GO");
     }
- else     if (database instanceof OracleDatabase) {
-      output.write(StreamUtil.getLineSeparator());
-      output.write("/");
-    }
     output.write(StreamUtil.getLineSeparator());
     output.write(StreamUtil.getLineSeparator());
   }
