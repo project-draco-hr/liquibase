@@ -6,5 +6,5 @@
   if (definition == null) {
     return null;
   }
-  return definition.replaceFirst("^CREATE VIEW [\\S]+ AS","");
+  return CREATE_VIEW_AS_PATTERN.matcher(definition).replaceFirst("");
 }

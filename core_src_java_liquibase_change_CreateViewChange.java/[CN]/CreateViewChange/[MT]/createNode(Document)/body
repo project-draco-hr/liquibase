@@ -4,6 +4,6 @@
     element.setAttribute("schemaName",getSchemaName());
   }
   element.setAttribute("viewName",getViewName());
-  element.appendChild(currentChangeLogFileDOM.createTextNode(getSelectQuery()));
+  element.appendChild(currentChangeLogFileDOM.createCDATASection(getSelectQuery()));
   return element;
 }
