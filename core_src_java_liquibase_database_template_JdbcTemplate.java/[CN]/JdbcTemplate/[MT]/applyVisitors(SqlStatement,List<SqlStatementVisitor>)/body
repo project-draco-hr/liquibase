@@ -1,0 +1,7 @@
+{
+  String returnSql=sql.getSqlStatement(database);
+  for (  SqlStatementVisitor visitor : sqlVisitors) {
+    returnSql=visitor.modifySql(returnSql);
+  }
+  return returnSql;
+}

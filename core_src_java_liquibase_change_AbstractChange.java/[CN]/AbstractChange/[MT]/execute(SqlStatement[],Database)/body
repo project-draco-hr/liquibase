@@ -1,6 +1,0 @@
-{
-  for (  SqlStatement statement : statements) {
-    LogFactory.getLogger().finest("Executing Statement: " + statement);
-    database.getJdbcTemplate().execute(statement);
-  }
-}

@@ -1,4 +1,4 @@
 {
-  int count=this.getJdbcTemplate().queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " WHERE TAG='"+ tag+ "'"));
+  int count=this.getJdbcTemplate().queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " WHERE TAG='"+ tag+ "'"),new ArrayList<SqlStatementVisitor>());
   return count > 0;
 }

@@ -1,4 +1,3 @@
 {
-  Number number=(Number)queryForObject(sql,Integer.class);
-  return (number != null ? number.intValue() : 0);
+  return queryForInt(sql,new ArrayList());
 }

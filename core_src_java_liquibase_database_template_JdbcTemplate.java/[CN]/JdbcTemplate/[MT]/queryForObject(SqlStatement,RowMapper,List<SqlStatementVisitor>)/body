@@ -1,0 +1,4 @@
+{
+  List results=query(sql,rowMapper,sqlVisitors);
+  return JdbcUtils.requiredSingleResult(results);
+}

@@ -9,6 +9,6 @@
   statement.addColumnValue("DESCRIPTION",limitSize(changeSet.getDescription()));
   statement.addColumnValue("COMMENTS",limitSize(StringUtils.trimToEmpty(changeSet.getComments())));
   statement.addColumnValue("LIQUIBASE",LiquibaseUtil.getBuildVersion());
-  this.getJdbcTemplate().execute(statement);
+  this.getJdbcTemplate().execute(statement,new ArrayList<SqlStatementVisitor>());
   getRanChangeSetList().add(new RanChangeSet(changeSet));
 }

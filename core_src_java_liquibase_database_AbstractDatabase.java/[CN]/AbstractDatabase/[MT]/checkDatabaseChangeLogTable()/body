@@ -48,7 +48,7 @@
       log.info("Creating database history table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()));
     }
     for (    SqlStatement sql : statementsToExecute) {
-      this.getJdbcTemplate().execute(sql);
+      this.getJdbcTemplate().execute(sql,new ArrayList<SqlStatementVisitor>());
       this.commit();
     }
   }

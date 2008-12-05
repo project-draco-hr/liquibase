@@ -5,7 +5,7 @@
       for (      Change rollback : rollBackChanges) {
         for (        SqlStatement statement : rollback.generateStatements(database)) {
           try {
-            database.getJdbcTemplate().execute(statement);
+            database.getJdbcTemplate().execute(statement,sqlVisitors);
           }
  catch (          JDBCException e) {
             throw new RollbackFailedException("Error executing custom SQL [" + statement + "]",e);
@@ -17,7 +17,7 @@
       List<Change> changes=getChanges();
       for (int i=changes.size() - 1; i >= 0; i--) {
         Change change=changes.get(i);
-        change.executeRollbackStatements(database);
+        change.executeRollbackStatements(database,sqlVisitors);
         log.finest(change.getConfirmationMessage());
       }
     }

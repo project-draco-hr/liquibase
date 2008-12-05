@@ -38,7 +38,7 @@
     try {
       for (      Change change : dropChanges) {
         for (        SqlStatement statement : change.generateStatements(this)) {
-          this.getJdbcTemplate().execute(statement);
+          this.getJdbcTemplate().execute(statement,new ArrayList<SqlStatementVisitor>());
         }
       }
     }

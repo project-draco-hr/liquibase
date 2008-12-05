@@ -3,7 +3,7 @@
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getId()));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getAuthor()));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getFilePath()));
-  this.getJdbcTemplate().execute(new RawSqlStatement(sql));
+  this.getJdbcTemplate().execute(new RawSqlStatement(sql),new ArrayList<SqlStatementVisitor>());
   commit();
   getRanChangeSetList().remove(new RanChangeSet(changeSet));
 }

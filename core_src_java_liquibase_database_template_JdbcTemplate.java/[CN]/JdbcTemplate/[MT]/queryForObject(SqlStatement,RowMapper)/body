@@ -1,4 +1,3 @@
 {
-  List results=query(sql,rowMapper);
-  return JdbcUtils.requiredSingleResult(results);
+  return queryForObject(sql,rowMapper,new ArrayList());
 }

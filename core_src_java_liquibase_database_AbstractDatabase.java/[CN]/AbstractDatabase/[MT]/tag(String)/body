@@ -1,10 +1,10 @@
 {
   try {
-    int totalRows=this.getJdbcTemplate().queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName())));
+    int totalRows=this.getJdbcTemplate().queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName())),new ArrayList<SqlStatementVisitor>());
     if (totalRows == 0) {
       throw new JDBCException("Cannot tag an empty database");
     }
-    int rowsUpdated=this.getJdbcTemplate().update(new TagDatabaseStatement(tagString));
+    int rowsUpdated=this.getJdbcTemplate().update(new TagDatabaseStatement(tagString),new ArrayList<SqlStatementVisitor>());
     if (rowsUpdated == 0) {
       throw new JDBCException("Did not tag database change log correctly");
     }

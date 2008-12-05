@@ -1,0 +1,4 @@
+{
+  SqlStatement[] statements=generateRollbackStatements(database);
+  execute(statements,sqlVisitors,database);
+}
