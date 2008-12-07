@@ -3,7 +3,7 @@
     database.checkDatabaseChangeLogLockTable();
     Boolean locked;
     try {
-      locked=(Boolean)database.getJdbcTemplate().queryForObject(database.getSelectChangeLogLockSQL(),Boolean.class,new ArrayList<SqlStatementVisitor>());
+      locked=(Boolean)database.getJdbcTemplate().queryForObject(database.getSelectChangeLogLockSQL(),Boolean.class,new ArrayList<SqlVisitor>());
     }
  catch (    JDBCException e) {
       if (!database.getJdbcTemplate().executesStatements()) {
@@ -24,7 +24,7 @@
       updateStatement.addNewColumnValue("LOCKEDBY",localHost.getHostName() + " (" + localHost.getHostAddress()+ ")");
       updateStatement.setWhereClause("ID  = 1");
       database.getJdbcTemplate().comment("Lock Database");
-      int rowsUpdated=database.getJdbcTemplate().update(updateStatement,new ArrayList<SqlStatementVisitor>());
+      int rowsUpdated=database.getJdbcTemplate().update(updateStatement,new ArrayList<SqlVisitor>());
       if (rowsUpdated != 1) {
         if (!database.getJdbcTemplate().executesStatements()) {
         }

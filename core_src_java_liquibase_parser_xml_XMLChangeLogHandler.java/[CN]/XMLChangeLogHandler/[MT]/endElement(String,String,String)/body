@@ -108,6 +108,10 @@
       changeSet.addValidCheckSum(text.toString());
       text=null;
     }
+ else     if ("modifySql".equals(qName)) {
+      inModifySql=false;
+      modifySqlDbmsList=null;
+    }
   }
  catch (  Exception e) {
     log.log(Level.SEVERE,"Error thrown as a SAXException: " + e.getMessage(),e);

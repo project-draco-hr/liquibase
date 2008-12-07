@@ -78,8 +78,21 @@
         text=new StringBuffer();
       }
     }
- else     if ("replaceSql".equals(qName)) {
-      changeSet.addReplaceSql(atts.getValue("pattern"),atts.getValue("with"));
+ else     if ("modifySql".equals(qName)) {
+      inModifySql=true;
+      if (StringUtils.trimToNull(atts.getValue("dbms")) != null) {
+        modifySqlDbmsList=StringUtils.splitAndTrim(atts.getValue("dbms"),",");
+      }
+    }
+ else     if (inModifySql) {
+      SqlVisitor sqlVisitor=SqlVisitorFactory.getInstance().create(qName);
+      for (int i=0; i < atts.getLength(); i++) {
+        String attributeName=atts.getQName(i);
+        String attributeValue=atts.getValue(i);
+        setProperty(sqlVisitor,attributeName,attributeValue);
+      }
+      sqlVisitor.setApplicableDbms(modifySqlDbmsList);
+      changeSet.addSqlVisitor(sqlVisitor);
     }
  else     if (changeSet != null && change == null) {
       change=ChangeFactory.getInstance().create(qName);

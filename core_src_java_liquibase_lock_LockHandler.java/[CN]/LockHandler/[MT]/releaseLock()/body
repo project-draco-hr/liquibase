@@ -7,7 +7,7 @@
       releaseStatement.addNewColumnValue("LOCKEDBY",null);
       releaseStatement.setWhereClause(" ID = 1");
       database.getJdbcTemplate().comment("Release Database Lock");
-      int updatedRows=database.getJdbcTemplate().update(releaseStatement,new ArrayList<SqlStatementVisitor>());
+      int updatedRows=database.getJdbcTemplate().update(releaseStatement,new ArrayList<SqlVisitor>());
       if (updatedRows != 1) {
         if (database.getJdbcTemplate().executesStatements()) {
           throw new LockException("Did not update change log lock correctly.\n\n" + releaseStatement + " updated "+ updatedRows+ " instead of the expected 1 row.");

@@ -3,7 +3,7 @@
   if (!doesChangeLogLockTableExist()) {
     SqlStatement createTableStatement=getCreateChangeLogLockSQL();
     getJdbcTemplate().comment("Create Database Lock Table");
-    this.getJdbcTemplate().execute(createTableStatement,new ArrayList<SqlStatementVisitor>());
+    this.getJdbcTemplate().execute(createTableStatement,new ArrayList<SqlVisitor>());
     this.commit();
     log.finest("Created database lock table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
     knowMustInsertIntoLockTable=true;
@@ -11,10 +11,10 @@
   int rows=-1;
   if (!knowMustInsertIntoLockTable) {
     RawSqlStatement selectStatement=new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()) + " WHERE ID=1");
-    rows=this.getJdbcTemplate().queryForInt(selectStatement,new ArrayList<SqlStatementVisitor>());
+    rows=this.getJdbcTemplate().queryForInt(selectStatement,new ArrayList<SqlVisitor>());
   }
   if (knowMustInsertIntoLockTable || rows == 0) {
-    this.getJdbcTemplate().update(getChangeLogLockInsertSQL(),new ArrayList<SqlStatementVisitor>());
+    this.getJdbcTemplate().update(getChangeLogLockInsertSQL(),new ArrayList<SqlVisitor>());
     this.commit();
     log.fine("Inserted lock row into: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
   }

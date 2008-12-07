@@ -1,3 +1,0 @@
-CallableSqlStatement csc
-List declaredParameters
-List<SqlStatementVisitor> sqlVisitors

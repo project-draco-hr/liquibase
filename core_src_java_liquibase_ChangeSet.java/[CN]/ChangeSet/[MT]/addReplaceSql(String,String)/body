@@ -1,3 +1,0 @@
-{
-  sqlVisitors.add(new RegExpReplaceSqlStatementVisitor(pattern,with));
-}

@@ -5,6 +5,6 @@
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getId()));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getAuthor()));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getFilePath()));
-  this.getJdbcTemplate().execute(new RawSqlStatement(sql),new ArrayList<SqlStatementVisitor>());
+  this.getJdbcTemplate().execute(new RawSqlStatement(sql),new ArrayList<SqlVisitor>());
   this.commit();
 }

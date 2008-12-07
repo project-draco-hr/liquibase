@@ -1,0 +1,13 @@
+{
+  tagToClassMap=new HashMap<String,Class>();
+  Class[] visitors=new Class[]{PrependSqlVisitor.class,AppendSqlVisitor.class,RegExpReplaceSqlVisitor.class,ReplaceSqlVisitor.class};
+  try {
+    for (    Class<SqlVisitor> visitorClass : visitors) {
+      SqlVisitor visitor=visitorClass.newInstance();
+      tagToClassMap.put(visitor.getTagName(),visitorClass);
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

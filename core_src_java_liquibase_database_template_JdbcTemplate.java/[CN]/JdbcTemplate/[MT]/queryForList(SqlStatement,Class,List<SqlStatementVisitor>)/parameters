@@ -1,3 +1,0 @@
-SqlStatement sql
-Class elementType
-List<SqlStatementVisitor> sqlVisitors

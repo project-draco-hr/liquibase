@@ -27,7 +27,7 @@
   replay(statement);
   OracleDatabase database=new OracleDatabase();
   database.setConnection(conn);
-  change.executeStatements(database,new ArrayList<SqlStatementVisitor>());
+  change.executeStatements(database,new ArrayList<SqlVisitor>());
   verify(conn);
   verify(statement);
 }

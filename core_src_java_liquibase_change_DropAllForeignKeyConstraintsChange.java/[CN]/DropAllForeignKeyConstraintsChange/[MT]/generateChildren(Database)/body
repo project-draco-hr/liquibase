@@ -3,7 +3,7 @@
   JdbcTemplate jdbc=database.getJdbcTemplate();
   FindForeignKeyConstraintsStatement sql=new FindForeignKeyConstraintsStatement(getBaseTableSchemaName(),getBaseTableName());
   try {
-    List<Map> results=jdbc.queryForList(sql,new ArrayList<SqlStatementVisitor>());
+    List<Map> results=jdbc.queryForList(sql,new ArrayList<SqlVisitor>());
     if (results != null && results.size() > 0) {
       for (      Map result : results) {
         String baseTableName=(String)result.get(FindForeignKeyConstraintsStatement.RESULT_COLUMN_BASE_TABLE_NAME);

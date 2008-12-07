@@ -5,7 +5,7 @@
     }
     List<DatabaseChangeLogLock> allLocks=new ArrayList<DatabaseChangeLogLock>();
     RawSqlStatement sqlStatement=new RawSqlStatement((("SELECT ID, LOCKED, LOCKGRANTED, LOCKEDBY FROM " + database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName()))));
-    List<Map> rows=database.getJdbcTemplate().queryForList(sqlStatement,new ArrayList<SqlStatementVisitor>());
+    List<Map> rows=database.getJdbcTemplate().queryForList(sqlStatement,new ArrayList<SqlVisitor>());
     for (    Map columnMap : rows) {
       Object lockedValue=columnMap.get("LOCKED");
       Boolean locked;
