@@ -82,7 +82,8 @@
       return "!!!!!! LIQUIBASE CANNOT OUTPUT BLOB VALUES !!!!!!";
     }
  else {
-      throw new RuntimeException("Cannot convert type: " + dataType);
+      log.warning("Do not know how to convert type " + dataType);
+      return value;
     }
   }
  catch (  DateParseException e) {
