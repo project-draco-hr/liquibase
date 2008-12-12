@@ -4,46 +4,89 @@
     Statement stmt=baseSnapshot.getDatabase().getConnection().createStatement();
     for (    Table table : baseSnapshot.getTables()) {
       ResultSet rs=stmt.executeQuery("SELECT * FROM " + baseSnapshot.getDatabase().escapeTableName(schema,table.getName()));
-      String fileName=table.getName() + ".csv";
-      if (dataDir != null) {
-        fileName=dataDir + "/" + fileName;
-      }
-      File parentDir=new File(dataDir);
-      if (!parentDir.exists()) {
-        parentDir.mkdirs();
-      }
-      if (!parentDir.isDirectory()) {
-        throw new RuntimeException(parentDir + " is not a directory");
-      }
-      CSVWriter outputFile=new CSVWriter(new FileWriter(fileName));
-      outputFile.writeAll(rs,true);
-      outputFile.flush();
-      outputFile.close();
-      LoadDataChange change=new LoadDataChange();
-      change.setFile(fileName);
-      change.setEncoding("UTF-8");
-      change.setSchemaName(schema);
-      change.setTableName(table.getName());
       ResultSetMetaData columnData=rs.getMetaData();
-      for (int col=1; col <= columnData.getColumnCount(); col++) {
-        String colName=columnData.getColumnName(col);
-        int dataType=columnData.getColumnType(col);
-        String typeString="STRING";
-        if (SqlUtil.isNumeric(dataType)) {
-          typeString="NUMERIC";
+      int columnCount=columnData.getColumnCount();
+      if (dataDir != null) {
+        String fileName=table.getName() + ".csv";
+        if (dataDir != null) {
+          fileName=dataDir + "/" + fileName;
         }
- else         if (SqlUtil.isBoolean(dataType)) {
-          typeString="BOOLEAN";
+        File parentDir=new File(dataDir);
+        if (!parentDir.exists()) {
+          parentDir.mkdirs();
         }
- else         if (SqlUtil.isDate(dataType)) {
-          typeString="DATE";
+        if (!parentDir.isDirectory()) {
+          throw new RuntimeException(parentDir + " is not a directory");
         }
-        LoadDataColumnConfig columnConfig=new LoadDataColumnConfig();
-        columnConfig.setHeader(colName);
-        columnConfig.setType(typeString);
-        change.addColumn(columnConfig);
+        CSVWriter outputFile=new CSVWriter(new FileWriter(fileName));
+        outputFile.writeAll(rs,true);
+        outputFile.flush();
+        outputFile.close();
+        LoadDataChange change=new LoadDataChange();
+        change.setFile(fileName);
+        change.setEncoding("UTF-8");
+        change.setSchemaName(schema);
+        change.setTableName(table.getName());
+        for (int col=1; col <= columnCount; col++) {
+          String colName=columnData.getColumnName(col);
+          int dataType=columnData.getColumnType(col);
+          String typeString="STRING";
+          if (SqlUtil.isNumeric(dataType)) {
+            typeString="NUMERIC";
+          }
+ else           if (SqlUtil.isBoolean(dataType)) {
+            typeString="BOOLEAN";
+          }
+ else           if (SqlUtil.isDate(dataType)) {
+            typeString="DATE";
+          }
+          LoadDataColumnConfig columnConfig=new LoadDataColumnConfig();
+          columnConfig.setHeader(colName);
+          columnConfig.setType(typeString);
+          change.addColumn(columnConfig);
+        }
+        changes.add(change);
       }
-      changes.add(change);
+ else {
+        while (rs.next()) {
+          InsertDataChange change=new InsertDataChange();
+          change.setSchemaName(schema);
+          change.setTableName(table.getName());
+          for (int col=1; col <= columnCount; col++) {
+            ColumnConfig column=new ColumnConfig();
+            column.setName(columnData.getColumnName(col));
+            int dataType=columnData.getColumnType(col);
+            if (SqlUtil.isNumeric(dataType)) {
+              String columnValue=rs.getString(col);
+              if (columnValue == null) {
+                column.setValueNumeric((Number)null);
+              }
+ else {
+                if (dataType == Types.DOUBLE || dataType == Types.NUMERIC || dataType == Types.DECIMAL) {
+                  column.setValueNumeric(new Double(columnValue));
+                }
+ else                 if (dataType == Types.FLOAT || dataType == Types.REAL) {
+                  column.setValueNumeric(new Float(columnValue));
+                }
+ else {
+                  column.setValueNumeric(new Integer(columnValue));
+                }
+              }
+            }
+ else             if (SqlUtil.isBoolean(dataType)) {
+              column.setValueBoolean(rs.getBoolean(col));
+            }
+ else             if (SqlUtil.isDate(dataType)) {
+              column.setValueDate(rs.getDate(col));
+            }
+ else {
+              column.setValue(rs.getString(col));
+            }
+            change.addColumn(column);
+          }
+          changes.add(change);
+        }
+      }
     }
   }
  catch (  Exception e) {
