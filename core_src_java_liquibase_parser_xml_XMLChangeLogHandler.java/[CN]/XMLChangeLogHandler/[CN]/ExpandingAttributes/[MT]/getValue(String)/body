@@ -1,3 +1,3 @@
 {
-  return expandExpressions(attributes.getValue(qName));
+  return new ExpressionExpander(changeLogParameters).expandExpressions(attributes.getValue(qName));
 }

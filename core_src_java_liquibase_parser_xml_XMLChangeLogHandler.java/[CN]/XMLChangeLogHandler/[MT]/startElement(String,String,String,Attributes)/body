@@ -28,12 +28,13 @@
         if (!dir.exists()) {
           throw new SAXException("includeAll path " + pathName + " could not be found.  Tried in "+ dir.toString());
         }
-        for (        File file : dir.listFiles(new FilenameFilter(){
+        File[] files=dir.listFiles(new FilenameFilter(){
           public boolean accept(          File dir,          String name){
-            return name.endsWith(".xml");
+            return name.endsWith(".xml") || name.endsWith(".sql");
           }
         }
-)) {
+);
+        for (        File file : files) {
           handleIncludedChangeLog(pathName + file.getName(),false,databaseChangeLog.getPhysicalFilePath());
         }
       }

@@ -1,2 +1,2 @@
-String physicalChangeLogLocation
+String physicalSqlFileLocation
 FileOpener fileOpener

@@ -1,3 +1,6 @@
 {
-  return new XMLChangeLogParser().parse(physicalChangeLogLocation,fileOpener,changeLogParameters);
+  if (physicalSqlFileLocation.endsWith("sql")) {
+    return new SqlChangeLogGenerator().generate(physicalSqlFileLocation,fileOpener,changeLogParameters);
+  }
+  return new XMLChangeLogParser().parse(physicalSqlFileLocation,fileOpener,changeLogParameters);
 }

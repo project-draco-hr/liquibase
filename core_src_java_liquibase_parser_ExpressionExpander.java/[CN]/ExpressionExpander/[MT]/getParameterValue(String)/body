@@ -1,0 +1,3 @@
+{
+  return changeLogParameters.get(paramter);
+}

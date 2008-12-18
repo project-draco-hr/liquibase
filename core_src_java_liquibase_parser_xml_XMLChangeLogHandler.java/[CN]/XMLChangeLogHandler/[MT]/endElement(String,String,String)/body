@@ -1,7 +1,7 @@
 {
   String textString=null;
   if (text != null && text.length() > 0) {
-    textString=expandExpressions(StringUtils.trimToNull(text.toString()));
+    textString=new ExpressionExpander(changeLogParameters).expandExpressions(StringUtils.trimToNull(text.toString()));
   }
   try {
     if (rootPrecondition != null) {
