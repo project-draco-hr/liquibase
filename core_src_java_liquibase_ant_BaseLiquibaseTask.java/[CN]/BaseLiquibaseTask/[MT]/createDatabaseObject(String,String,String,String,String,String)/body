@@ -11,7 +11,7 @@
     }
   }
 );
-  Database database=null;
+  Database database;
   if (databaseUrl.startsWith("hibernate:")) {
     database=new HibernateDatabase(databaseUrl.substring("hibernate:".length()));
   }
