@@ -1,0 +1,25 @@
+{
+  this.changes=new ArrayList<Change>();
+  log=LogFactory.getLogger();
+  this.id=id;
+  this.author=author;
+  this.filePath=filePath;
+  this.physicalFilePath=physicalFilePath;
+  this.alwaysRun=alwaysRun;
+  this.runOnChange=runOnChange;
+  this.autocommit=autocommit;
+  if (StringUtils.trimToNull(contextList) != null) {
+    String[] strings=contextList.toLowerCase().split(",");
+    contexts=new HashSet<String>();
+    for (    String string : strings) {
+      contexts.add(string.trim().toLowerCase());
+    }
+  }
+  if (StringUtils.trimToNull(dbmsList) != null) {
+    String[] strings=dbmsList.toLowerCase().split(",");
+    dbmsSet=new HashSet<String>();
+    for (    String string : strings) {
+      dbmsSet.add(string.trim().toLowerCase());
+    }
+  }
+}
