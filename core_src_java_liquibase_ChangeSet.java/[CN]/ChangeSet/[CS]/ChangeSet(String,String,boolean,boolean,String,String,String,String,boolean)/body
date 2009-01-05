@@ -7,7 +7,7 @@
   this.physicalFilePath=physicalFilePath;
   this.alwaysRun=alwaysRun;
   this.runOnChange=runOnChange;
-  this.autocommit=autocommit;
+  this.runInTransaction=runInTransaction;
   if (StringUtils.trimToNull(contextList) != null) {
     String[] strings=contextList.toLowerCase().split(",");
     contexts=new HashSet<String>();

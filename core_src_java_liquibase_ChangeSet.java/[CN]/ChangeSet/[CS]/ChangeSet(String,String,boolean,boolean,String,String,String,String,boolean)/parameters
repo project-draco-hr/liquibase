@@ -6,4 +6,4 @@ String filePath
 String physicalFilePath
 String contextList
 String dbmsList
-boolean autocommit
+boolean runInTransaction

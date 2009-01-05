@@ -2,8 +2,8 @@
   boolean skipChange=false;
   boolean markRan=true;
   try {
-    if (autocommit) {
-      database.setAutoCommit(true);
+    if (runInTransaction) {
+      database.setAutoCommit(false);
     }
     database.getJdbcTemplate().comment("Changeset " + toString());
     if (StringUtils.trimToNull(getComments()) != null) {
@@ -90,7 +90,7 @@ catch (      PreconditionErrorException e) {
         change.executeStatements(database,sqlVisitors);
         log.finest(change.getConfirmationMessage());
       }
-      if (!autocommit) {
+      if (!runInTransaction) {
         database.commit();
       }
       log.finest("ChangeSet " + toString() + " has been successfully run.");
@@ -120,9 +120,9 @@ catch (      PreconditionErrorException e) {
     }
   }
  finally {
-    if (autocommit) {
+    if (runInTransaction) {
       try {
-        database.setAutoCommit(false);
+        database.setAutoCommit(true);
       }
  catch (      JDBCException e) {
         throw new MigrationFailedException(this,"Could not reset autocommit");
