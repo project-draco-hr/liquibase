@@ -7,4 +7,9 @@
   liquibase.dropAll(getSchemasToDrop());
   liquibase=createLiquibase(completeChangeLog);
   liquibase.update(this.contexts,output);
+  String outputResult=output.getBuffer().toString();
+  assertNotNull(outputResult);
+  assertTrue(outputResult.length() > 100);
+  DatabaseSnapshot snapshot=database.createDatabaseSnapshot(null,null);
+  assertEquals(0,snapshot.getTables().size());
 }
