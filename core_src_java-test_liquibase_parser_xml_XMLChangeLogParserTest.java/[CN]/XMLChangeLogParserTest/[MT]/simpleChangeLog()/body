@@ -2,7 +2,7 @@
   DatabaseChangeLog changeLog=new XMLChangeLogParser().parse("liquibase/parser/xml/simpleChangeLog.xml",new JUnitFileOpener(),new HashMap<String,Object>());
   assertEquals("liquibase/parser/xml/simpleChangeLog.xml",changeLog.getLogicalFilePath());
   assertEquals("liquibase/parser/xml/simpleChangeLog.xml",changeLog.getPhysicalFilePath());
-  assertNull(changeLog.getPreconditions());
+  assertEquals(0,changeLog.getPreconditions().getNestedPreconditions().size());
   assertEquals(1,changeLog.getChangeSets().size());
   ChangeSet changeSet=changeLog.getChangeSets().get(0);
   assertEquals("nvoxland",changeSet.getAuthor());

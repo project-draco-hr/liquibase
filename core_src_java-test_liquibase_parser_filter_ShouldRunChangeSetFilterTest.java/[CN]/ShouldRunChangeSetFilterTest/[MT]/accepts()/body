@@ -8,7 +8,7 @@
   expect(database.getDefaultSchemaName()).andReturn(null).anyTimes();
   JdbcTemplate template=createMock(JdbcTemplate.class);
   expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
-  expect(template.update(isA(UpdateStatement.class))).andReturn(1).anyTimes();
+  expect(template.update(isA(UpdateStatement.class),isA(List.class))).andReturn(1).anyTimes();
   replay(database);
   replay(template);
   ShouldRunChangeSetFilter filter=new ShouldRunChangeSetFilter(database);
