@@ -8,7 +8,7 @@
   expectLastCall();
   expect(database.escapeTableName("default_schema","lock_table")).andReturn("default_schema.lock_table");
   List<Map> locksList=new ArrayList<Map>();
-  expect(template.queryForList(isA(SqlStatement.class))).andReturn(locksList);
+  expect(template.queryForList(isA(SqlStatement.class),isA(List.class))).andReturn(locksList);
   replay(database);
   replay(template);
   LockHandler handler=LockHandler.getInstance(database);

@@ -9,7 +9,7 @@
   expect(database.getDefaultSchemaName()).andReturn(null).anyTimes();
   expect(database.getDatabaseChangeLogLockTableName()).andReturn("lock_table").anyTimes();
   expectLastCall();
-  expect(template.update(isA(UpdateStatement.class))).andReturn(1);
+  expect(template.update(isA(UpdateStatement.class),isA(List.class))).andReturn(1);
   template.comment("Lock Database");
   expectLastCall().anyTimes();
   template.comment("Release Database Lock");

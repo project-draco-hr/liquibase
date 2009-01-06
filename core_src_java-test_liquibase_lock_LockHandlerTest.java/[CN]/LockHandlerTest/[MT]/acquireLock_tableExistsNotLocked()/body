@@ -11,8 +11,8 @@
   expectLastCall();
   database.commit();
   expectLastCall();
-  expect(template.queryForObject(selectLockStatement,Boolean.class)).andReturn(Boolean.FALSE);
-  expect(template.update(isA(UpdateStatement.class))).andReturn(1);
+  expect(template.queryForObject(eq(selectLockStatement),eq(Boolean.class),isA(List.class))).andReturn(Boolean.FALSE);
+  expect(template.update(isA(UpdateStatement.class),isA(List.class))).andReturn(1);
   template.comment("Lock Database");
   expectLastCall();
   replay(database);

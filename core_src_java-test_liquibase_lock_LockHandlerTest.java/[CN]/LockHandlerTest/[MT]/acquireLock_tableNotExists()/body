@@ -8,10 +8,10 @@
   expect(database.getDatabaseChangeLogLockTableName()).andReturn("LOCK_TAB");
   template.comment("Lock Database");
   expectLastCall();
-  expect(template.queryForObject(selectLockStatement,Boolean.class)).andReturn(Boolean.FALSE);
+  expect(template.queryForObject(eq(selectLockStatement),eq(Boolean.class),isA(List.class))).andReturn(Boolean.FALSE);
   database.checkDatabaseChangeLogLockTable();
   expectLastCall();
-  expect(template.update(isA(UpdateStatement.class))).andReturn(1);
+  expect(template.update(isA(UpdateStatement.class),isA(List.class))).andReturn(1);
   database.commit();
   expectLastCall();
   replay(database);

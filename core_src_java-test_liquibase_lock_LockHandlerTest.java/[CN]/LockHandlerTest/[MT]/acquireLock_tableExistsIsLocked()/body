@@ -7,7 +7,7 @@
   expectLastCall();
   expect(database.getSelectChangeLogLockSQL()).andReturn(selectLockStatement);
   expectLastCall();
-  expect(template.queryForObject(selectLockStatement,Boolean.class)).andReturn(Boolean.TRUE);
+  expect(template.queryForObject(eq(selectLockStatement),eq(Boolean.class),isA(List.class))).andReturn(Boolean.TRUE);
   replay(database);
   replay(template);
   LockHandler handler=LockHandler.getInstance(database);

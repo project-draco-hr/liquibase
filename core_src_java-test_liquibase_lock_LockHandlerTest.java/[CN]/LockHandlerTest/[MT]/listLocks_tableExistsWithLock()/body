@@ -14,7 +14,7 @@
   lock.put("LOCKED",Boolean.TRUE);
   lock.put("LOCKEDBY","127.0.0.1");
   locksList.add(lock);
-  expect(template.queryForList(isA(SqlStatement.class))).andReturn(locksList);
+  expect(template.queryForList(isA(SqlStatement.class),isA(List.class))).andReturn(locksList);
   replay(database);
   replay(template);
   LockHandler handler=LockHandler.getInstance(database);

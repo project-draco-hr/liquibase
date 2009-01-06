@@ -1,11 +1,13 @@
 {
   updateListeners("Reading sequences for " + database.toString() + " ...");
   if (database.supportsSequences()) {
-    List<String> sequenceNamess=(List<String>)database.getJdbcTemplate().queryForList(database.createFindSequencesSQL(schema),String.class,new ArrayList<SqlVisitor>());
-    for (    String sequenceName : sequenceNamess) {
-      Sequence seq=new Sequence();
-      seq.setName(sequenceName.trim());
-      sequences.add(seq);
+    List<String> sequenceNames=(List<String>)database.getJdbcTemplate().queryForList(database.createFindSequencesSQL(schema),String.class,new ArrayList<SqlVisitor>());
+    if (sequenceNames != null) {
+      for (      String sequenceName : sequenceNames) {
+        Sequence seq=new Sequence();
+        seq.setName(sequenceName.trim());
+        sequences.add(seq);
+      }
     }
   }
 }

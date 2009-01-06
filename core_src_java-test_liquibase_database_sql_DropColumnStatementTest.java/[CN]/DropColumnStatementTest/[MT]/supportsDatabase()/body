@@ -1,7 +1,7 @@
 {
   new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws Exception {
-      if (database instanceof DerbyDatabase) {
+      if (database instanceof SQLiteDatabase) {
         assertFalse(generateTestStatement().supportsDatabase(database));
       }
  else {
