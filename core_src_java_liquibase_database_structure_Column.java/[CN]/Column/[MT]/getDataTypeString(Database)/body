@@ -8,6 +8,11 @@
       translatedTypeName="char";
     }
   }
+  if (database instanceof H2Database) {
+    if (this.getDataType() == Types.FLOAT || this.getDataType() == Types.DOUBLE) {
+      return "float";
+    }
+  }
   String dataType;
   if (noParens.contains(this.getDataType())) {
     dataType=translatedTypeName;
