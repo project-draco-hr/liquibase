@@ -5,9 +5,6 @@
   if (database instanceof MSSQLDatabase) {
     return "exec sp_rename '" + database.escapeTableName(getSchemaName(),getTableName()) + "."+ database.escapeColumnName(getSchemaName(),getTableName(),getOldColumnName())+ "', '"+ database.escapeColumnName(getSchemaName(),getTableName(),getNewColumnName())+ "'";
   }
- else   if (database instanceof SybaseASADatabase) {
-    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " RENAME "+ database.escapeColumnName(getSchemaName(),getTableName(),getOldColumnName())+ " TO "+ database.escapeColumnName(getSchemaName(),getTableName(),getNewColumnName());
-  }
  else   if (database instanceof MySQLDatabase) {
     if (getColumnDataType() == null) {
       throw new StatementNotSupportedOnDatabaseException("columnDataType is required to rename columns",this,database);
@@ -20,7 +17,7 @@
  else   if (database instanceof FirebirdDatabase) {
     return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ database.escapeColumnName(getSchemaName(),getTableName(),getOldColumnName())+ " TO "+ database.escapeColumnName(getSchemaName(),getTableName(),getNewColumnName());
   }
- else   if (database instanceof MaxDBDatabase) {
+ else   if ((database instanceof MaxDBDatabase) || (database instanceof DerbyDatabase)) {
     return "RENAME COLUMN " + database.escapeTableName(getSchemaName(),getTableName()) + "."+ database.escapeColumnName(getSchemaName(),getTableName(),getOldColumnName())+ " TO "+ database.escapeColumnName(getSchemaName(),getTableName(),getNewColumnName());
   }
   return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " RENAME COLUMN "+ database.escapeColumnName(getSchemaName(),getTableName(),getOldColumnName())+ " TO "+ database.escapeColumnName(getSchemaName(),getTableName(),getNewColumnName());
