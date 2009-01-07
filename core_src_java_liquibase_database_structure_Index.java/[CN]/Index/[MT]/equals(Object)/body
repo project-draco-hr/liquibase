@@ -8,7 +8,12 @@
       equals=false;
     }
   }
-  if (this.unique == null && index.isUnique() != null) {
+  if (this.unique == null && index.isUnique() == null) {
+  }
+ else   if (this.unique == null && index.isUnique() != null) {
+    equals=false;
+  }
+ else   if (this.unique != null && index.isUnique() == null) {
     equals=false;
   }
  else   if (!this.unique.equals(index.isUnique())) {
