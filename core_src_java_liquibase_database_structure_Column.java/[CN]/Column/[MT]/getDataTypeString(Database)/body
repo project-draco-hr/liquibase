@@ -1,7 +1,7 @@
 {
   List<Integer> noParens=Arrays.asList(Types.ARRAY,Types.BIGINT,Types.BINARY,Types.BIT,Types.BLOB,Types.BOOLEAN,Types.CLOB,Types.DATALINK,Types.DATE,Types.DISTINCT,Types.INTEGER,Types.JAVA_OBJECT,Types.LONGVARBINARY,Types.NULL,Types.OTHER,Types.REF,Types.SMALLINT,Types.STRUCT,Types.TIME,Types.TIMESTAMP,Types.TINYINT,Types.LONGVARCHAR);
-  List<Integer> oneParam=Arrays.asList(Types.CHAR,Types.VARCHAR,Types.VARBINARY);
-  List<Integer> twoParams=Arrays.asList(Types.DECIMAL,Types.DOUBLE,Types.FLOAT,Types.NUMERIC,Types.REAL);
+  List<Integer> oneParam=Arrays.asList(Types.CHAR,Types.VARCHAR,Types.VARBINARY,Types.DOUBLE,Types.FLOAT);
+  List<Integer> twoParams=Arrays.asList(Types.DECIMAL,Types.NUMERIC,Types.REAL);
   String translatedTypeName=this.getTypeName();
   if (database instanceof PostgresDatabase) {
     if ("bpchar".equals(translatedTypeName)) {
