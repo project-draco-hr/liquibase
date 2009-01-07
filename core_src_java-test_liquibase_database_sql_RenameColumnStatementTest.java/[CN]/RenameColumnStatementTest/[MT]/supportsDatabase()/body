@@ -1,7 +1,7 @@
 {
   new DatabaseTestTemplate().testOnAllDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws Exception {
-      if (database instanceof DB2Database || database instanceof CacheDatabase || database instanceof DerbyDatabase) {
+      if (database instanceof DB2Database || database instanceof CacheDatabase) {
         assertFalse(generateTestStatement().supportsDatabase(database));
       }
  else {
