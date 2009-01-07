@@ -1,5 +1,5 @@
 {
-  if (defaultValueNumeric == null) {
+  if (defaultValueNumeric == null || defaultValueNumeric.equalsIgnoreCase("null")) {
     this.defaultValueNumeric=null;
   }
  else {

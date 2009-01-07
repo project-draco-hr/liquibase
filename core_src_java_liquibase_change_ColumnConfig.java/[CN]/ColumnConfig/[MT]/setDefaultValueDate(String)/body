@@ -1,4 +1,7 @@
 {
+  if (defaultValueDate == null || defaultValueDate.equalsIgnoreCase("null")) {
+    this.defaultValueDate=null;
+  }
   try {
     this.defaultValueDate=new ISODateFormat().parse(defaultValueDate);
   }
