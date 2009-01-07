@@ -1,6 +1,14 @@
 {
   boolean knowMustInsertIntoLockTable=false;
   if (!doesChangeLogLockTableExist()) {
+    if (!this.getJdbcTemplate().executesStatements()) {
+      if (((JdbcOutputTemplate)this.getJdbcTemplate()).alreadyCreatedChangeLockTable()) {
+        return;
+      }
+ else {
+        ((JdbcOutputTemplate)this.getJdbcTemplate()).setAlreadyCreatedChangeLockTable(true);
+      }
+    }
     SqlStatement createTableStatement=getCreateChangeLogLockSQL();
     getJdbcTemplate().comment("Create Database Lock Table");
     this.getJdbcTemplate().execute(createTableStatement,new ArrayList<SqlVisitor>());

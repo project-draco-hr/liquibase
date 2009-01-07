@@ -1,4 +1,12 @@
 {
+  if (!this.getJdbcTemplate().executesStatements()) {
+    if (((JdbcOutputTemplate)this.getJdbcTemplate()).alreadyCreatedChangeTable()) {
+      return;
+    }
+ else {
+      ((JdbcOutputTemplate)this.getJdbcTemplate()).setAlreadyCreatedChangeTable(true);
+    }
+  }
   DatabaseConnection connection=getConnection();
   ResultSet checkColumnsRS=null;
   List<SqlStatement> statementsToExecute=new ArrayList<SqlStatement>();
