@@ -1,8 +1,8 @@
 {
   if (StringUtils.trimToNull(schemaName) == null || !supportsSchemas()) {
-    return sequenceName;
+    return getObjectEscapeCharacter() + sequenceName + getObjectEscapeCharacter();
   }
  else {
-    return schemaName + "." + sequenceName;
+    return getObjectEscapeCharacter() + schemaName + getObjectEscapeCharacter()+ "."+ getObjectEscapeCharacter()+ sequenceName+ getObjectEscapeCharacter();
   }
 }

@@ -1,8 +1,8 @@
 {
   if (StringUtils.trimToNull(schemaName) == null || !supportsSchemas()) {
-    return tableName;
+    return getObjectEscapeCharacter() + tableName + getObjectEscapeCharacter();
   }
  else {
-    return schemaName + "." + tableName;
+    return getObjectEscapeCharacter() + schemaName + getObjectEscapeCharacter()+ "."+ getObjectEscapeCharacter()+ tableName+ getObjectEscapeCharacter();
   }
 }
