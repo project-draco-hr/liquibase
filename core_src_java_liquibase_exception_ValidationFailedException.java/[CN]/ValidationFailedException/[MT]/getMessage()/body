@@ -19,6 +19,13 @@
       message.append(StreamUtil.getLineSeparator());
     }
   }
+  if (errorPreconditions.size() > 0) {
+    message.append("     ").append(errorPreconditions.size()).append(" preconditions generated an error").append(StreamUtil.getLineSeparator());
+    for (    ErrorPrecondition invalid : errorPreconditions) {
+      message.append("     ").append(invalid.toString());
+      message.append(StreamUtil.getLineSeparator());
+    }
+  }
   if (duplicateChangeSets.size() > 0) {
     message.append("     ").append(duplicateChangeSets.size()).append(" change sets had duplicate identifiers").append(StreamUtil.getLineSeparator());
     for (    ChangeSet invalid : duplicateChangeSets) {

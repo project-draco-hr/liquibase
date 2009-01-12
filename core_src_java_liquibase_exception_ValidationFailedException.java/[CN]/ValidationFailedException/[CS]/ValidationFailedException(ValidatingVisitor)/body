@@ -1,6 +1,7 @@
 {
   this.invalidMD5Sums=changeLogHandler.getInvalidMD5Sums();
   this.failedPreconditions=changeLogHandler.getFailedPreconditions();
+  this.errorPreconditions=changeLogHandler.getErrorPreconditions();
   this.duplicateChangeSets=changeLogHandler.getDuplicateChangeSets();
   this.setupExceptions=changeLogHandler.getSetupExceptions();
   this.changeValidationExceptions=changeLogHandler.getChangeValidationExceptions();
