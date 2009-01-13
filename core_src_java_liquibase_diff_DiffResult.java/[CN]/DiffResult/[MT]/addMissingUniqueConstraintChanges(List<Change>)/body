@@ -2,6 +2,7 @@
   for (  UniqueConstraint uc : getMissingUniqueConstraints()) {
     AddUniqueConstraintChange change=new AddUniqueConstraintChange();
     change.setTableName(uc.getTable().getName());
+    change.setSchemaName(uc.getTable().getSchema());
     change.setConstraintName(uc.getName());
     change.setColumnNames(uc.getColumnNames());
     changes.add(change);

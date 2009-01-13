@@ -2,6 +2,7 @@
   for (  Sequence sequence : getMissingSequences()) {
     CreateSequenceChange change=new CreateSequenceChange();
     change.setSequenceName(sequence.getName());
+    change.setSchemaName(sequence.getSchema());
     changes.add(change);
   }
 }

@@ -28,7 +28,7 @@
       return;
     }
  else     if ("generateChangeLog".equalsIgnoreCase(command)) {
-      CommandLineUtils.doGenerateChangeLog(changeLogFile,database,defaultSchemaName,StringUtils.trimToNull(getCommandParam("diffTypes")),StringUtils.trimToNull(getCommandParam("changeSetAuthor")),StringUtils.trimToNull(getCommandParam("changeSetContext")),StringUtils.trimToNull(getCommandParam("dataDir")));
+      CommandLineUtils.doGenerateChangeLog(changeLogFile,database,defaultSchemaName,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataDir));
       return;
     }
     Liquibase liquibase=new Liquibase(changeLogFile,fileOpener,database);

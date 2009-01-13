@@ -1,0 +1,4 @@
+{
+  Database database=getDatabase();
+  assertEquals("`tableName`",database.escapeTableName(null,"tableName"));
+}

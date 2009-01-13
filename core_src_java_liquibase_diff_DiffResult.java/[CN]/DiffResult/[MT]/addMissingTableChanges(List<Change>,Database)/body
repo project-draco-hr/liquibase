@@ -5,6 +5,7 @@
     }
     CreateTableChange change=new CreateTableChange();
     change.setTableName(missingTable.getName());
+    change.setSchemaName(missingTable.getSchema());
     if (missingTable.getRemarks() != null) {
       change.setRemarks(missingTable.getRemarks());
     }
