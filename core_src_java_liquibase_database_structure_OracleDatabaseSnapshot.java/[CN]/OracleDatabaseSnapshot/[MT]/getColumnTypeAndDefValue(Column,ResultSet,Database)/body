@@ -1,0 +1,14 @@
+{
+  super.getColumnTypeAndDefValue(columnInfo,rs,database);
+  String columnTypeName=rs.getString("TYPE_NAME");
+  if ("VARCHAR2".equals(columnTypeName)) {
+    int charOctetLength=rs.getInt("CHAR_OCTET_LENGTH");
+    int columnSize=rs.getInt("COLUMN_SIZE");
+    if (columnSize == charOctetLength) {
+      columnInfo.setLengthSemantics(Column.LengthSemantics.BYTE);
+    }
+ else {
+      columnInfo.setLengthSemantics(Column.LengthSemantics.CHAR);
+    }
+  }
+}

@@ -27,6 +27,9 @@
  else     if (database instanceof MySQLDatabase && (translatedTypeName.startsWith("enum(") || translatedTypeName.startsWith("set("))) {
       return translatedTypeName;
     }
+ else     if (database instanceof OracleDatabase && (translatedTypeName.equals("VARCHAR2"))) {
+      return translatedTypeName + "(" + this.getColumnSize()+ " "+ lengthSemantics+ ")";
+    }
     dataType=translatedTypeName + "(" + this.getColumnSize()+ ")";
   }
  else   if (twoParams.contains(this.getDataType())) {
