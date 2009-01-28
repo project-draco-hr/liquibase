@@ -1,0 +1,5 @@
+{
+  if (b || super.isAutoCommit()) {
+    super.setAutoCommit(b);
+  }
+}
