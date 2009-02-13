@@ -1,3 +1,0 @@
-{
-  realDialect=(Dialect)Class.forName(dialectClass).newInstance();
-}

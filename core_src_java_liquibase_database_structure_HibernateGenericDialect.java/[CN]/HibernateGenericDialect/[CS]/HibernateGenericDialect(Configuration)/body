@@ -1,0 +1,7 @@
+{
+  String dialectClass=cfg.getProperty("hibernate.dialect");
+  if (dialectClass == null) {
+    dialectClass=cfg.getProperty("dialect");
+  }
+  realDialect=(Dialect)Class.forName(dialectClass).newInstance();
+}

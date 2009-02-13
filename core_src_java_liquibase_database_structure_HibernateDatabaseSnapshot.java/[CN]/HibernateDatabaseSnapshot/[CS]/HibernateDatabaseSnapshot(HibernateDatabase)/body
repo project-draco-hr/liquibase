@@ -3,7 +3,7 @@
     Configuration cfg=database.createConfiguration();
     cfg.configure(database.getConfigFile());
     this.database=database;
-    Dialect dialect=new HibernateGenericDialect(cfg.getProperty("dialect"));
+    Dialect dialect=new HibernateGenericDialect(cfg);
     cfg.buildMappings();
     Mapping mapping=cfg.buildMapping();
     Iterator tableMappings=cfg.getTableMappings();
