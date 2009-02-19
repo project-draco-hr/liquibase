@@ -1,4 +1,7 @@
 {
+  if (requestedSchema == null) {
+    requestedSchema=database.getDefaultSchemaName();
+  }
   try {
     this.schema=requestedSchema;
     this.database=database;
