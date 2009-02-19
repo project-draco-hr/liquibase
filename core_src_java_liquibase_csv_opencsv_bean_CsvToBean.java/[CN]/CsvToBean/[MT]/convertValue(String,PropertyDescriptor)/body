@@ -1,0 +1,9 @@
+{
+  PropertyEditor editor=getPropertyEditor(prop);
+  Object obj=value;
+  if (null != editor) {
+    editor.setAsText(value);
+    obj=editor.getValue();
+  }
+  return obj;
+}

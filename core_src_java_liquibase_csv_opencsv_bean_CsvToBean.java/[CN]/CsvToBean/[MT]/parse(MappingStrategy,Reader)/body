@@ -1,0 +1,16 @@
+{
+  try {
+    CSVReader csv=new CSVReader(reader);
+    mapper.captureHeader(csv);
+    String[] line;
+    List list=new ArrayList();
+    while (null != (line=csv.readNext())) {
+      Object obj=processLine(mapper,line);
+      list.add(obj);
+    }
+    return list;
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Error parsing CSV!",e);
+  }
+}

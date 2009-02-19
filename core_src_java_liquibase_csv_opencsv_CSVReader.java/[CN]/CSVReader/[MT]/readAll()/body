@@ -1,0 +1,8 @@
+{
+  List allElements=new ArrayList();
+  while (hasNext) {
+    String[] nextLineAsTokens=readNext();
+    if (nextLineAsTokens != null)     allElements.add(nextLineAsTokens);
+  }
+  return allElements;
+}

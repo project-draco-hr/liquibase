@@ -1,0 +1,4 @@
+{
+  BeanInfo beanInfo=Introspector.getBeanInfo(cls);
+  return beanInfo.getPropertyDescriptors();
+}

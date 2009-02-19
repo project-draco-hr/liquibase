@@ -1,0 +1,3 @@
+{
+  return (null != columnMapping && col < columnMapping.length) ? columnMapping[col] : null;
+}
