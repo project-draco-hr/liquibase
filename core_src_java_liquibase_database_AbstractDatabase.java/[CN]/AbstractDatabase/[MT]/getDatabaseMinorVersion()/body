@@ -1,0 +1,8 @@
+{
+  try {
+    return connection.getMetaData().getDatabaseMinorVersion();
+  }
+ catch (  SQLException e) {
+    throw new JDBCException(e);
+  }
+}
