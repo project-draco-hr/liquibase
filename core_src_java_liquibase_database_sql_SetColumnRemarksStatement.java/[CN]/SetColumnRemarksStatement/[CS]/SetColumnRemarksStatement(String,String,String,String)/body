@@ -1,0 +1,6 @@
+{
+  this.schemaName=schemaName;
+  this.tableName=tableName;
+  this.columnName=columnName;
+  this.remarks=remarks;
+}
