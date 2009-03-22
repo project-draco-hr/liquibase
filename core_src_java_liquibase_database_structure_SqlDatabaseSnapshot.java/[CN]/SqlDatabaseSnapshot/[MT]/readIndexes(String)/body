@@ -42,7 +42,10 @@
         indexInformation.setFilterCondition(filterCondition);
         indexMap.put(indexName,indexInformation);
       }
-      indexInformation.getColumns().add(position - 1,columnName);
+      final int columnsBefore=indexInformation.getColumns().size() + 1;
+      for (int i=position; i > columnsBefore; --i) {
+        indexInformation.getColumns().add(null);
+      }
     }
     for (    Map.Entry<String,Index> entry : indexMap.entrySet()) {
       indexes.add(entry.getValue());
