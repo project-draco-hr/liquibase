@@ -28,6 +28,7 @@
       return new BigInteger(value);
     }
  else     if (dataType == Types.BIT) {
+      value=value.replaceFirst("b'","");
       if (value.equalsIgnoreCase("true")) {
         return Boolean.TRUE;
       }
