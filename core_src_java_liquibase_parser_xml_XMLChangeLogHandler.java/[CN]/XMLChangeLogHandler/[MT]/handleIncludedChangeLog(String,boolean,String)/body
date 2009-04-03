@@ -1,4 +1,8 @@
 {
+  if (!(fileName.endsWith(".xml") || fileName.endsWith(".sql"))) {
+    log.finest(relativeBaseFileName + "/" + fileName+ " is not a recognized file type");
+    return false;
+  }
   if (isRelativePath) {
     String path=searchPath(relativeBaseFileName);
     fileName=new StringBuilder(path).append(fileName).toString();
@@ -11,4 +15,5 @@
   for (  ChangeSet changeSet : changeLog.getChangeSets()) {
     databaseChangeLog.addChangeSet(changeSet);
   }
+  return true;
 }

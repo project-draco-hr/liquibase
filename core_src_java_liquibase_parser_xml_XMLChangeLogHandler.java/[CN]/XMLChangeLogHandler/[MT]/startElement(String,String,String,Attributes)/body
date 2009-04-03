@@ -34,21 +34,24 @@
           log.finest(fileUrl.toExternalForm() + " is not a file path");
           continue;
         }
-        File file=new File(fileUrl.toExternalForm().replaceFirst("file://",""));
+        File file=new File(fileUrl.toURI());
         log.finest("includeAll using path " + file.getCanonicalPath());
         if (!file.exists()) {
           throw new SAXException("includeAll path " + pathName + " could not be found.  Tried in "+ file.toString());
         }
         if (file.isDirectory()) {
           log.finest(file.getCanonicalPath() + " is a directory");
-          continue;
+          for (          File childFile : file.listFiles()) {
+            if (handleIncludedChangeLog(pathName + childFile.getName(),false,databaseChangeLog.getPhysicalFilePath())) {
+              foundResource=true;
+            }
+          }
         }
-        foundResource=true;
-        if (!(file.getName().endsWith(".xml") || file.getName().endsWith(".sql"))) {
-          log.finest(file.getCanonicalPath() + " is not a recognized file type");
-          continue;
+ else {
+          if (handleIncludedChangeLog(pathName + file.getName(),false,databaseChangeLog.getPhysicalFilePath())) {
+            foundResource=true;
+          }
         }
-        handleIncludedChangeLog(pathName + file.getName(),false,databaseChangeLog.getPhysicalFilePath());
       }
       if (!foundResource) {
         throw new SAXException("Could not find directory " + pathName);
