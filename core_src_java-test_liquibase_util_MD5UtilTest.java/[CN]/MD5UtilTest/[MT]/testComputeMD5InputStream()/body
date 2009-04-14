@@ -1,6 +1,5 @@
 {
-  String s="abc";
-  StringInputStream is=new StringInputStream(s);
-  String hexString=MD5Util.computeMD5(is);
-  assertEquals("90150983cd24fb0d6963f7d28e17f72",hexString);
+  ByteArrayInputStream bais=new ByteArrayInputStream(TEST_STRING.getBytes());
+  String hexString=MD5Util.computeMD5(bais);
+  assertEquals(TEST_STRING_MD5_HASH,hexString);
 }
