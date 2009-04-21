@@ -1,15 +1,5 @@
 {
-  SortedSet<SqlGenerator> validGenerators=new TreeSet<SqlGenerator>(new Comparator<SqlGenerator>(){
-    public int compare(    SqlGenerator o1,    SqlGenerator o2){
-      return -1 * new Integer(o1.getApplicability(statement,database)).compareTo(o2.getApplicability(statement,database));
-    }
-  }
-);
-  for (  SqlGenerator generator : getGenerators()) {
-    if (generator.getApplicability(statement,database) >= 0) {
-      validGenerators.add(generator);
-    }
-  }
+  SortedSet<SqlGenerator> validGenerators=getAllGenerators(statement,database);
   if (validGenerators.size() == 0) {
     return new NotImplementedGenerator();
   }

@@ -1,3 +1,3 @@
 Class<? extends SqlStatement> createTableStatementClass
 Class<? extends Database> sqlDatabaseClass
-int applicability
+int level

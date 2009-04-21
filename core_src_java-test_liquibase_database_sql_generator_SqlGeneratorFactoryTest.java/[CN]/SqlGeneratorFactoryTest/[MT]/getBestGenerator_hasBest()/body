@@ -1,4 +1,5 @@
 {
+  SqlGeneratorFactory.getInstance().getGenerators().clear();
   SqlGenerator mysqlIncorrectGenerator=addGenerator(CreateTableStatement.class,MySQLDatabase.class,1);
   SqlGenerator oracleIncorrectGenerator=addGenerator(CreateTableStatement.class,OracleDatabase.class,1);
   SqlGenerator mysqlBetterGenerator=addGenerator(AddAutoIncrementStatement.class,MySQLDatabase.class,2);

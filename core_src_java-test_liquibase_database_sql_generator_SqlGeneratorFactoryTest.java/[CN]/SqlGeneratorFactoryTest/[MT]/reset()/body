@@ -1,0 +1,5 @@
+{
+  SqlGeneratorFactory instance1=SqlGeneratorFactory.getInstance();
+  SqlGeneratorFactory.reset();
+  assertFalse(instance1 == SqlGeneratorFactory.getInstance());
+}

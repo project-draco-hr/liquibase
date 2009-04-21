@@ -1,0 +1,3 @@
+{
+  return new String[]{"ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ statement.getColumnDataType()+ " AUTO_INCREMENT"};
+}

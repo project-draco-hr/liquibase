@@ -1,0 +1,4 @@
+{
+  List<SqlGenerator> generators=SqlGeneratorFactory.getInstance().getGenerators();
+  assertTrue(generators.size() > 0);
+}

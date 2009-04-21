@@ -1,4 +1,0 @@
-{
-  AddAutoIncrementStatement statement=(AddAutoIncrementStatement)sqlStatement;
-  return new String[]{"ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " SET GENERATED ALWAYS AS IDENTITY"};
-}
