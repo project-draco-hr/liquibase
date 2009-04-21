@@ -1,0 +1,3 @@
+{
+  return super.escapeStringForDatabase(string).replace('\n',' ');
+}

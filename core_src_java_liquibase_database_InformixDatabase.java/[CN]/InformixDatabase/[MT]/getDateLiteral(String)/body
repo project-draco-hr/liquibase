@@ -1,0 +1,11 @@
+{
+  if (isTimeOnly(isoDate)) {
+    return "INTERVAL (" + super.getDateLiteral(isoDate).replaceAll("'","") + ") "+ INTERVAL_FIELD_QUALIFIER;
+  }
+ else   if (isDateOnly(isoDate)) {
+    return super.getDateLiteral(isoDate);
+  }
+ else {
+    return "DATETIME (" + super.getDateLiteral(isoDate).replaceAll("'","") + ") "+ DATETIME_FIELD_QUALIFIER;
+  }
+}

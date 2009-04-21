@@ -1,0 +1,10 @@
+{
+  SqlGenerator mysqlIncorrectGenerator=addGenerator(CreateTableStatement.class,MySQLDatabase.class,1);
+  SqlGenerator oracleIncorrectGenerator=addGenerator(CreateTableStatement.class,OracleDatabase.class,1);
+  SqlGenerator mysqlBetterGenerator=addGenerator(AddAutoIncrementStatement.class,MySQLDatabase.class,2);
+  SqlGenerator mysqlCorrectGenerator=addGenerator(AddAutoIncrementStatement.class,MySQLDatabase.class,1);
+  SqlGenerator oracleCorrectGenerator=addGenerator(AddAutoIncrementStatement.class,OracleDatabase.class,1);
+  SqlGenerator bestSqlGenerator=SqlGeneratorFactory.getInstance().getBestGenerator(new AddAutoIncrementStatement(null,"person","name","varchar(255)"),new MySQLDatabase());
+  assertNotNull(bestSqlGenerator);
+  assertTrue(mysqlBetterGenerator == bestSqlGenerator);
+}

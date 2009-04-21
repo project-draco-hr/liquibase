@@ -1,3 +1,3 @@
 {
-  return database instanceof OracleDatabase || database instanceof HsqlDatabase || database instanceof DerbyDatabase|| database instanceof DB2Database|| database instanceof FirebirdDatabase;
+  return database instanceof OracleDatabase || database instanceof HsqlDatabase || database instanceof DerbyDatabase|| database instanceof DB2Database|| database instanceof FirebirdDatabase|| database instanceof InformixDatabase;
 }

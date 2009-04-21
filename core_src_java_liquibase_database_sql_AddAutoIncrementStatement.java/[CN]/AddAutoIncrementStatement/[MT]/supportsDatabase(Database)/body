@@ -1,3 +1,3 @@
 {
-  return !(database instanceof OracleDatabase || database instanceof MSSQLDatabase || database instanceof DerbyDatabase|| database instanceof CacheDatabase|| database instanceof FirebirdDatabase|| database instanceof H2Database|| database instanceof PostgresDatabase|| database instanceof SQLiteDatabase|| database instanceof SybaseASADatabase);
+  return !(database instanceof OracleDatabase || database instanceof MSSQLDatabase || database instanceof DerbyDatabase|| database instanceof CacheDatabase|| database instanceof FirebirdDatabase|| database instanceof H2Database|| database instanceof PostgresDatabase|| database instanceof SQLiteDatabase|| database instanceof SybaseASADatabase|| database instanceof InformixDatabase);
 }

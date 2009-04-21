@@ -13,6 +13,11 @@
       return "float";
     }
   }
+  if (database instanceof InformixDatabase) {
+    if (translatedTypeName.toUpperCase().startsWith("INTERVAL")) {
+      return translatedTypeName;
+    }
+  }
   String dataType;
   if (noParens.contains(this.getDataType())) {
     dataType=translatedTypeName;

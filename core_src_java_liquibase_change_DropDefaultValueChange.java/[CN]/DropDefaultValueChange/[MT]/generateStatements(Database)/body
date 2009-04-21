@@ -2,5 +2,5 @@
   if (database instanceof SQLiteDatabase) {
     return generateStatementsForSQLiteDatabase(database);
   }
-  return new SqlStatement[]{new DropDefaultValueStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getColumnName())};
+  return new SqlStatement[]{new DropDefaultValueStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getColumnName(),getColumnDataType())};
 }

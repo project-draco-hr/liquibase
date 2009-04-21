@@ -5,6 +5,9 @@
   }
   node.setAttribute("tableName",getTableName());
   node.setAttribute("columnName",getColumnName());
+  if (getColumnDataType() != null) {
+    node.setAttribute("columnDataType",getColumnDataType());
+  }
   if (getDefaultValue() != null) {
     node.setAttribute("defaultValue",getDefaultValue());
   }

@@ -1,0 +1,3 @@
+{
+  return "CURRENT " + DATETIME_FIELD_QUALIFIER;
+}

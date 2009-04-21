@@ -3,5 +3,6 @@
   inverse.setSchemaName(getSchemaName());
   inverse.setTableName(getTableName());
   inverse.setColumnName(getColumnName());
+  inverse.setColumnDataType(getColumnDataType());
   return new Change[]{inverse};
 }

@@ -40,19 +40,24 @@
         buffer.append(" NULL");
       }
     }
+    if ((database instanceof InformixDatabase) && (getPrimaryKeyConstraint() != null) && (getPrimaryKeyConstraint().getColumns().size() == 1)&& (getPrimaryKeyConstraint().getColumns().contains(column))) {
+      buffer.append(" PRIMARY KEY");
+    }
     if (columnIterator.hasNext()) {
       buffer.append(", ");
     }
   }
   buffer.append(",");
-  if (!((database instanceof SQLiteDatabase) && (getPrimaryKeyConstraint() != null) && (getPrimaryKeyConstraint().getColumns().size() == 1)&& autoIncrementColumns.contains(getPrimaryKeyConstraint().getColumns().get(0)))) {
+  if (!((database instanceof SQLiteDatabase) && (getPrimaryKeyConstraint() != null) && (getPrimaryKeyConstraint().getColumns().size() == 1)&& autoIncrementColumns.contains(getPrimaryKeyConstraint().getColumns().get(0))) && !((database instanceof InformixDatabase) && (getPrimaryKeyConstraint() != null) && (getPrimaryKeyConstraint().getColumns().size() == 1))) {
     if (getPrimaryKeyConstraint() != null && getPrimaryKeyConstraint().getColumns().size() > 0) {
-      String pkName=StringUtils.trimToNull(getPrimaryKeyConstraint().getConstraintName());
-      if (pkName == null) {
-        pkName=database.generatePrimaryKeyName(getTableName());
+      if (!(database instanceof InformixDatabase)) {
+        String pkName=StringUtils.trimToNull(getPrimaryKeyConstraint().getConstraintName());
+        if (pkName == null) {
+          pkName=database.generatePrimaryKeyName(getTableName());
+        }
+        buffer.append(" CONSTRAINT ");
+        buffer.append(database.escapeConstraintName(pkName));
       }
-      buffer.append(" CONSTRAINT ");
-      buffer.append(database.escapeConstraintName(pkName));
       buffer.append(" PRIMARY KEY (");
       buffer.append(database.escapeColumnNameList(StringUtils.join(getPrimaryKeyConstraint().getColumns(),", ")));
       buffer.append(")");
@@ -60,9 +65,17 @@
     }
   }
   for (  ForeignKeyConstraint fkConstraint : getForeignKeyConstraints()) {
-    buffer.append(" CONSTRAINT ").append(database.escapeConstraintName(fkConstraint.getForeignKeyName())).append(" FOREIGN KEY (").append(database.escapeColumnName(getSchemaName(),getTableName(),fkConstraint.getColumn())).append(") REFERENCES ").append(fkConstraint.getReferences());
+    if (!(database instanceof InformixDatabase)) {
+      buffer.append(" CONSTRAINT ");
+      buffer.append(database.escapeConstraintName(fkConstraint.getForeignKeyName()));
+    }
+    buffer.append(" FOREIGN KEY (").append(database.escapeColumnName(getSchemaName(),getTableName(),fkConstraint.getColumn())).append(") REFERENCES ").append(fkConstraint.getReferences());
     if (fkConstraint.isDeleteCascade()) {
       buffer.append(" ON DELETE CASCADE");
+    }
+    if ((database instanceof InformixDatabase)) {
+      buffer.append(" CONSTRAINT ");
+      buffer.append(database.escapeConstraintName(fkConstraint.getForeignKeyName()));
     }
     if (fkConstraint.isInitiallyDeferred()) {
       buffer.append(" INITIALLY DEFERRED");
@@ -73,13 +86,18 @@
     buffer.append(",");
   }
   for (  UniqueConstraint uniqueConstraint : getUniqueConstraints()) {
-    if (uniqueConstraint.getConstraintName() != null) {
+    if (uniqueConstraint.getConstraintName() != null && !constraintNameAfterUnique(database)) {
       buffer.append(" CONSTRAINT ");
       buffer.append(database.escapeConstraintName(uniqueConstraint.getConstraintName()));
     }
     buffer.append(" UNIQUE (");
     buffer.append(database.escapeColumnNameList(StringUtils.join(uniqueConstraint.getColumns(),", ")));
-    buffer.append("),");
+    buffer.append(")");
+    if (uniqueConstraint.getConstraintName() != null && constraintNameAfterUnique(database)) {
+      buffer.append(" CONSTRAINT ");
+      buffer.append(database.escapeConstraintName(uniqueConstraint.getConstraintName()));
+    }
+    buffer.append(",");
   }
   String sql=buffer.toString().replaceFirst(",\\s*$","") + ")";
   if (getTablespace() != null && database.supportsTablespaces()) {

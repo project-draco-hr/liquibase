@@ -1,0 +1,6 @@
+{
+  if (url.startsWith("jdbc:informix")) {
+    return "com.informix.jdbc.IfxDriver";
+  }
+  return null;
+}

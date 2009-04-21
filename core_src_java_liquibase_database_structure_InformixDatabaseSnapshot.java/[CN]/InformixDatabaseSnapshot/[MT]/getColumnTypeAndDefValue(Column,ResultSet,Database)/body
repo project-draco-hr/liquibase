@@ -1,0 +1,16 @@
+{
+  String typeName=rs.getString("TYPE_NAME").toUpperCase();
+  if ("DATETIME".equals(typeName) || "INTERVAL".equals(typeName)) {
+    int collength=columnInfo.getColumnSize();
+    int firstQualifierType=(collength % 256) / 16;
+    int lastQualifierType=(collength % 256) % 16;
+    String type="DATETIME".equals(typeName) ? "DATETIME" : "INTERVAL";
+    String firstQualifier=qualifiers.get(firstQualifierType);
+    String lastQualifier=qualifiers.get(lastQualifierType);
+    columnInfo.setTypeName(type + " " + firstQualifier+ " TO "+ lastQualifier);
+    columnInfo.setLengthSemantics(Column.LengthSemantics.BYTE);
+  }
+ else {
+    super.getColumnTypeAndDefValue(columnInfo,rs,database);
+  }
+}

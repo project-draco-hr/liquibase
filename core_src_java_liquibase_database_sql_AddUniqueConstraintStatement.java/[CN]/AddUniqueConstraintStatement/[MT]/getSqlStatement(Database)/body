@@ -3,6 +3,9 @@
     throw new StatementNotSupportedOnDatabaseException(this,database);
   }
   String sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD CONSTRAINT "+ database.escapeConstraintName(getConstraintName())+ " UNIQUE ("+ database.escapeColumnNameList(getColumnNames())+ ")";
+  if (database instanceof InformixDatabase) {
+    sql="ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ADD CONSTRAINT UNIQUE ("+ database.escapeColumnNameList(getColumnNames())+ ") CONSTRAINT "+ database.escapeConstraintName(getConstraintName());
+  }
   if (StringUtils.trimToNull(getTablespace()) != null && database.supportsTablespaces()) {
     if (database instanceof MSSQLDatabase) {
       sql+=" ON " + getTablespace();

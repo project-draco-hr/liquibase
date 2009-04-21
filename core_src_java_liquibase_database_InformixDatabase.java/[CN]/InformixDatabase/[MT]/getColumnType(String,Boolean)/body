@@ -1,0 +1,15 @@
+{
+  String type=super.getColumnType(columnType,autoIncrement);
+  if (autoIncrement != null && autoIncrement) {
+    if ("integer".equals(type.toLowerCase())) {
+      return "serial(1)";
+    }
+ else     if ("bigint".equals(type.toLowerCase()) || "bigserial".equals(type.toLowerCase())) {
+      return "bigserial";
+    }
+ else {
+      return "serial(1)";
+    }
+  }
+  return type;
+}

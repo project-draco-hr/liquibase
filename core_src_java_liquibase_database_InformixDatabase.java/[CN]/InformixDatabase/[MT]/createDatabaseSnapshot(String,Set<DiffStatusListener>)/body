@@ -1,0 +1,3 @@
+{
+  return new InformixDatabaseSnapshot(this,statusListeners,schema);
+}

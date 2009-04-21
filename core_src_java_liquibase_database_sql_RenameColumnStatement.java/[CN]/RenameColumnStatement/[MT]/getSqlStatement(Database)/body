@@ -17,7 +17,7 @@
  else   if (database instanceof FirebirdDatabase) {
     return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN "+ database.escapeColumnName(getSchemaName(),getTableName(),getOldColumnName())+ " TO "+ database.escapeColumnName(getSchemaName(),getTableName(),getNewColumnName());
   }
- else   if ((database instanceof MaxDBDatabase) || (database instanceof DerbyDatabase)) {
+ else   if ((database instanceof MaxDBDatabase) || (database instanceof DerbyDatabase) || (database instanceof InformixDatabase)) {
     return "RENAME COLUMN " + database.escapeTableName(getSchemaName(),getTableName()) + "."+ database.escapeColumnName(getSchemaName(),getTableName(),getOldColumnName())+ " TO "+ database.escapeColumnName(getSchemaName(),getTableName(),getNewColumnName());
   }
   return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " RENAME COLUMN "+ database.escapeColumnName(getSchemaName(),getTableName(),getOldColumnName())+ " TO "+ database.escapeColumnName(getSchemaName(),getTableName(),getNewColumnName());

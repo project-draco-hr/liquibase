@@ -1,0 +1,18 @@
+{
+  SqlGenerator generator=new SqlGenerator(){
+    public int getApplicability(    SqlStatement statement,    Database database){
+      if (createTableStatementClass.isAssignableFrom(statement.getClass()) && sqlDatabaseClass.isAssignableFrom(database.getClass())) {
+        return applicability;
+      }
+ else {
+        return -1;
+      }
+    }
+    public String[] generateSql(    SqlStatement statement,    Database database){
+      return new String[0];
+    }
+  }
+;
+  SqlGeneratorFactory.getInstance().register(generator);
+  return generator;
+}

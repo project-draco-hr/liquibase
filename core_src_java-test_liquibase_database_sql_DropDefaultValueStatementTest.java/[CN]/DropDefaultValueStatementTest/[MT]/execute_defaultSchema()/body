@@ -1,5 +1,5 @@
 {
-  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new DropDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME)){
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new DropDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,null)){
     protected boolean supportsTest(    Database database){
       return !(database instanceof DerbyDatabase);
     }

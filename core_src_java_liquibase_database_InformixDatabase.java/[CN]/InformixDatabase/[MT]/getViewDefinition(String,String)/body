@@ -1,0 +1,9 @@
+{
+  List<Map> retList=this.getJdbcTemplate().queryForList(getViewDefinitionSql(schemaName,viewName));
+  StringBuilder sb=new StringBuilder();
+  for (  Map rowMap : retList) {
+    String s=(String)rowMap.get("viewtext");
+    sb.append(s);
+  }
+  return CREATE_VIEW_AS_PATTERN.matcher(sb.toString()).replaceFirst("");
+}

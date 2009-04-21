@@ -1,0 +1,3 @@
+{
+  return new DataType("DECIMAL(19,4)",true);
+}

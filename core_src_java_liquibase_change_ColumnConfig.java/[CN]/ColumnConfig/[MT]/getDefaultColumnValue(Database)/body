@@ -25,6 +25,9 @@
       return returnValue;
     }
  else {
+      if (database instanceof InformixDatabase) {
+        return returnValue;
+      }
       return "'" + returnValue + "'";
     }
   }

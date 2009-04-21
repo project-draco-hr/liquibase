@@ -1,0 +1,7 @@
+{
+  this.schemaName=schemaName;
+  this.tableName=tableName;
+  this.columnName=columnName;
+  this.columnDataType=columnDataType;
+  this.defaultValue=defaultValue;
+}

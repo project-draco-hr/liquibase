@@ -1,0 +1,4 @@
+{
+  assertNotNull(SqlGeneratorFactory.getInstance());
+  assertTrue(SqlGeneratorFactory.getInstance() == SqlGeneratorFactory.getInstance());
+}

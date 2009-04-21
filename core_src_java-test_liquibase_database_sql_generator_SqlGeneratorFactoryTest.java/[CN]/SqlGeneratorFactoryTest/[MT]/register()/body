@@ -1,0 +1,13 @@
+{
+  assertEquals(0,SqlGeneratorFactory.getInstance().getGenerators().size());
+  SqlGeneratorFactory.getInstance().register(new SqlGenerator(){
+    public int getApplicability(    SqlStatement statement,    Database database){
+      return 0;
+    }
+    public String[] generateSql(    SqlStatement statement,    Database database){
+      return new String[0];
+    }
+  }
+);
+  assertEquals(1,SqlGeneratorFactory.getInstance().getGenerators().size());
+}

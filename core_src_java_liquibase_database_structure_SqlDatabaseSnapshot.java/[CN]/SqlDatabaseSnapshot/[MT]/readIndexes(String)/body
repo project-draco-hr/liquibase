@@ -14,6 +14,9 @@
     Map<String,Index> indexMap=new HashMap<String,Index>();
     while (rs.next()) {
       String indexName=convertFromDatabaseName(rs.getString("INDEX_NAME"));
+      if (database instanceof InformixDatabase && indexName.startsWith(" ")) {
+        indexName="_generated_index_" + indexName.substring(1);
+      }
       short type=rs.getShort("TYPE");
       boolean nonUnique=true;
       try {
@@ -23,6 +26,9 @@
       }
       String columnName=convertFromDatabaseName(rs.getString("COLUMN_NAME"));
       short position=rs.getShort("ORDINAL_POSITION");
+      if (database instanceof InformixDatabase && type != DatabaseMetaData.tableIndexStatistic && position == 0) {
+        System.out.println(this.getClass().getName() + ": corrected position to " + ++position);
+      }
       String filterCondition=rs.getString("FILTER_CONDITION");
       if (type == DatabaseMetaData.tableIndexStatistic) {
         continue;

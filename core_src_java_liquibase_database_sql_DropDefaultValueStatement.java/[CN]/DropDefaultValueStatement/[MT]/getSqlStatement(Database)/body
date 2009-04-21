@@ -30,5 +30,11 @@
  else   if (database instanceof MaxDBDatabase) {
     return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " COLUMN  "+ database.escapeColumnName(getSchemaName(),getTableName(),getColumnName())+ " DROP DEFAULT";
   }
+ else   if (database instanceof InformixDatabase) {
+    if (getColumnDataType() == null) {
+      throw new StatementNotSupportedOnDatabaseException("Database requires columnDataType parameter",this,database);
+    }
+    return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " MODIFY ("+ database.escapeColumnName(getSchemaName(),getTableName(),getColumnName())+ " "+ getColumnDataType()+ ")";
+  }
   return "ALTER TABLE " + database.escapeTableName(getSchemaName(),getTableName()) + " ALTER COLUMN  "+ database.escapeColumnName(getSchemaName(),getTableName(),getColumnName())+ " SET DEFAULT NULL";
 }

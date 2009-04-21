@@ -1,0 +1,11 @@
+{
+  if (!(statement instanceof AddAutoIncrementStatement)) {
+    return APPLICABILITY_NOT;
+  }
+  if (database.supportsAutoIncrement()) {
+    return APPLICABILITY_DATABASE_SPECIFIC;
+  }
+ else {
+    return APPLICABILITY_NOT;
+  }
+}

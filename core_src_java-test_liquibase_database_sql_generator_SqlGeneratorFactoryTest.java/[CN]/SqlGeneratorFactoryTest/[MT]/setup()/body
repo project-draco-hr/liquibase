@@ -1,0 +1,3 @@
+{
+  SqlGeneratorFactory.getInstance().getGenerators().clear();
+}
