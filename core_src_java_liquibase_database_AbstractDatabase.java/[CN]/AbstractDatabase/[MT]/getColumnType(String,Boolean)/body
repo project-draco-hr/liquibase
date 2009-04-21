@@ -15,73 +15,79 @@
  else {
     dataTypeName=columnType;
   }
-  String returnTypeName=null;
-  if (columnType.startsWith("java.sql.Types")) {
-    returnTypeName=getTypeFromMetaData(dataTypeName);
+  DataType returnTypeName=null;
+  if (dataTypeName.equalsIgnoreCase("BIGINT")) {
+    returnTypeName=getBigIntType();
   }
-  if (returnTypeName == null) {
-    if (dataTypeName.equalsIgnoreCase("BIGINT")) {
-      returnTypeName=getBigIntType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("BLOB")) {
-      returnTypeName=getBlobType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("BOOLEAN")) {
-      returnTypeName=getBooleanType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("CHAR")) {
-      returnTypeName=getCharType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("CLOB")) {
-      returnTypeName=getClobType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("CURRENCY")) {
-      returnTypeName=getCurrencyType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("DATE")) {
-      returnTypeName=getDateType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("DATETIME")) {
-      returnTypeName=getDateTimeType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("DOUBLE")) {
-      returnTypeName=getDoubleType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("FLOAT")) {
-      returnTypeName=getFloatType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("INT")) {
-      returnTypeName=getIntType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("LONGVARBINARY")) {
-      returnTypeName=getBlobType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("LONGVARCHAR")) {
-      returnTypeName=getClobType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("TEXT")) {
-      returnTypeName=getClobType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("TIME")) {
-      returnTypeName=getTimeType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("TINYINT")) {
-      returnTypeName=getTinyIntType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("UUID")) {
-      returnTypeName=getUUIDType();
-    }
- else     if (dataTypeName.equalsIgnoreCase("VARCHAR")) {
-      returnTypeName=getVarcharType();
+ else   if (dataTypeName.equalsIgnoreCase("BLOB")) {
+    returnTypeName=getBlobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("BOOLEAN")) {
+    returnTypeName=getBooleanType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("CHAR")) {
+    returnTypeName=getCharType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("CLOB")) {
+    returnTypeName=getClobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("CURRENCY")) {
+    returnTypeName=getCurrencyType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("DATE")) {
+    returnTypeName=getDateType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("DATETIME")) {
+    returnTypeName=getDateTimeType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("DOUBLE")) {
+    returnTypeName=getDoubleType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("FLOAT")) {
+    returnTypeName=getFloatType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("INT")) {
+    returnTypeName=getIntType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("INTEGER")) {
+    returnTypeName=getIntType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("LONGVARBINARY")) {
+    returnTypeName=getBlobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("LONGVARCHAR")) {
+    returnTypeName=getClobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("TEXT")) {
+    returnTypeName=getClobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("TIME")) {
+    returnTypeName=getTimeType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("TIMESTAMP")) {
+    returnTypeName=getDateTimeType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("TINYINT")) {
+    returnTypeName=getTinyIntType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("UUID")) {
+    returnTypeName=getUUIDType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("VARCHAR")) {
+    returnTypeName=getVarcharType();
+  }
+ else {
+    if (columnType.startsWith("java.sql.Types")) {
+      returnTypeName=getTypeFromMetaData(dataTypeName);
     }
  else {
       return columnType;
     }
   }
-  if (precision == null) {
-    return returnTypeName;
+  if (precision != null && returnTypeName.getSupportsPrecision()) {
+    return returnTypeName.getDataTypeName() + "(" + precision+ ")";
   }
  else {
-    return returnTypeName + "(" + precision+ ")";
+    return returnTypeName.getDataTypeName();
   }
 }

@@ -1,3 +1,3 @@
 {
-  return "BLOB SUB_TYPE TEXT";
+  return CLOB_TYPE;
 }

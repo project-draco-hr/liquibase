@@ -1,3 +1,3 @@
 {
-  assertEquals("MONEY",getDatabase().getCurrencyType());
+  assertEquals(new DataType("MONEY",false),getDatabase().getCurrencyType());
 }

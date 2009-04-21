@@ -1,3 +1,3 @@
 {
-  assertEquals("CHAR(36)",database.getUUIDType());
+  assertEquals(new DataType("CHAR(36)",false),database.getUUIDType());
 }

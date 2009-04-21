@@ -1,3 +1,3 @@
 {
-  return "MONEY";
+  return CURRENCY_TYPE;
 }

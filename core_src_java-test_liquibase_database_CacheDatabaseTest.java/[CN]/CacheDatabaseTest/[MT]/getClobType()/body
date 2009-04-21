@@ -1,3 +1,3 @@
 {
-  assertEquals("LONGVARCHAR",database.getClobType());
+  assertEquals(new DataType("LONGVARCHAR",true),database.getClobType());
 }

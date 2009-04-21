@@ -9,8 +9,8 @@
  else   if (value instanceof java.sql.Time) {
     return ISO_DATE_FORMAT.format((java.sql.Time)value);
   }
- else   if (value instanceof Timestamp) {
-    return ISO_DATE_FORMAT.format((Timestamp)value);
+ else   if (value instanceof java.sql.Timestamp) {
+    return ISO_DATE_FORMAT.format((java.sql.Timestamp)value);
   }
  else {
     return value.toString();

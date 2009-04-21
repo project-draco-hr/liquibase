@@ -2,7 +2,7 @@
   final java.sql.Date date=new java.sql.Date(new Date().getTime());
   new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,date)){
     protected void setup(    Database database) throws Exception {
-      new JdbcTemplate(database).execute(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getDateType()));
+      new JdbcTemplate(database).execute(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getDateType().getDataTypeName()));
       super.setup(database);
     }
     protected void preExecuteAssert(    DatabaseSnapshot snapshot){

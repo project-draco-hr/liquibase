@@ -4,7 +4,7 @@
   }
   String type=super.getColumnType(columnType,autoIncrement);
   if (type.startsWith("TEXT(")) {
-    return getClobType();
+    return getClobType().getDataTypeName();
   }
  else   if (type.toLowerCase().startsWith("float8")) {
     return "FLOAT8";
