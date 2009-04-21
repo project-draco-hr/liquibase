@@ -18,5 +18,5 @@
     alterTable+=" PRIMARY KEY";
   }
   alterTable+=getDefaultClause(statement,database);
-  return new String[]{alterTable};
+  return new Sql[]{new UnparsedSql(alterTable)};
 }

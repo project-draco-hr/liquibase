@@ -20,5 +20,5 @@
       alterTable+=" PRIMARY KEY";
     }
   }
-  return new String[]{alterTable};
+  return new Sql[]{new UnparsedSql(alterTable)};
 }

@@ -12,6 +12,11 @@
           validGenerators.add(generator);
         }
       }
+ else       if (type.equals(SqlGenerator.class)) {
+        if (generator.isValid(statement,database)) {
+          validGenerators.add(generator);
+        }
+      }
     }
   }
   return validGenerators;

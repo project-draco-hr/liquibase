@@ -6,8 +6,8 @@
     public boolean isValid(    SqlStatement statement,    Database database){
       return createTableStatementClass.isAssignableFrom(statement.getClass()) && sqlDatabaseClass.isAssignableFrom(database.getClass());
     }
-    public String[] generateSql(    SqlStatement statement,    Database database){
-      return new String[0];
+    public Sql[] generateSql(    SqlStatement statement,    Database database){
+      return new Sql[0];
     }
   }
 ;
