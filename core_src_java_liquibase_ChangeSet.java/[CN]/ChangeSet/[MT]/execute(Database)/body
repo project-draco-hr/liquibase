@@ -85,7 +85,7 @@ catch (      PreconditionErrorException e) {
       }
       log.finest("Reading ChangeSet: " + toString());
       for (      Change change : getChanges()) {
-        change.executeStatements(database,sqlVisitors);
+        database.executeStatements(change,sqlVisitors);
         log.finest(change.getConfirmationMessage());
       }
       if (runInTransaction) {

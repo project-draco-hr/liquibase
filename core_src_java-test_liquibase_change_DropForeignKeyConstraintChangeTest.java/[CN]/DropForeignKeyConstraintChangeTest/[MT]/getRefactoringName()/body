@@ -1,3 +1,3 @@
 {
-  assertEquals("Drop Foreign Key Constraint",new DropForeignKeyConstraintChange().getChangeName());
+  assertEquals("Drop Foreign Key Constraint",new DropForeignKeyConstraintChange().getDescription());
 }

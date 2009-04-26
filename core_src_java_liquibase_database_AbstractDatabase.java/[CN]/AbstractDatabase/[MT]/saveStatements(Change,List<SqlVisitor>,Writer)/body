@@ -1,7 +1,7 @@
 {
-  SqlStatement[] statements=generateStatements(database);
+  SqlStatement[] statements=change.generateStatements(this);
   for (  SqlStatement statement : statements) {
-    for (    Sql sql : SqlGeneratorFactory.getInstance().generateSql(statement,database)) {
+    for (    Sql sql : SqlGeneratorFactory.getInstance().generateSql(statement,this)) {
       writer.append(sql.toSql()).append(sql.getEndDelimiter()).append(StreamUtil.getLineSeparator()).append(StreamUtil.getLineSeparator());
     }
   }

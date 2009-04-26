@@ -1,0 +1,8 @@
+{
+  SqlStatement[] statements=change.generateRollbackStatements(this);
+  for (  SqlStatement statement : statements) {
+    for (    Sql sql : SqlGeneratorFactory.getInstance().generateSql(statement,this)) {
+      writer.append(sql.toSql()).append(sql.getEndDelimiter()).append("\n\n");
+    }
+  }
+}

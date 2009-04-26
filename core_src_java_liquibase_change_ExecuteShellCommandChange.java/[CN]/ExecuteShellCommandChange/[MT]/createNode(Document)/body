@@ -1,5 +1,5 @@
 {
-  Element root=currentChangeLogDOM.createElement(getTagName());
+  Element root=currentChangeLogDOM.createElement(getName());
   root.setAttribute("executable",getExecutable());
   for (  String arg : args) {
     Element argElement=currentChangeLogDOM.createElement("arg");

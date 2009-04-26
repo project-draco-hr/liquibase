@@ -17,7 +17,7 @@
       List<Change> changes=getChanges();
       for (int i=changes.size() - 1; i >= 0; i--) {
         Change change=changes.get(i);
-        change.executeRollbackStatements(database,sqlVisitors);
+        database.executeRollbackStatements(change,sqlVisitors);
         log.finest(change.getConfirmationMessage());
       }
     }

@@ -1,3 +1,2 @@
 SqlStatement[] statements
 List<SqlVisitor> sqlVisitors
-Database database

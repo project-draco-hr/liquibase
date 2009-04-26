@@ -1,0 +1,4 @@
+{
+  SqlStatement[] statements=change.generateRollbackStatements(this);
+  execute(statements,sqlVisitors);
+}

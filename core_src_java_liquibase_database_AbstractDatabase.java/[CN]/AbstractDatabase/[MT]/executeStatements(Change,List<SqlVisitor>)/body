@@ -1,0 +1,4 @@
+{
+  SqlStatement[] statements=change.generateStatements(this);
+  execute(statements,sqlVisitors);
+}

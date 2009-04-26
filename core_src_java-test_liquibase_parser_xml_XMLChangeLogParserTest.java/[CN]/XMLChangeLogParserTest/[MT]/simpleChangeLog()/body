@@ -11,6 +11,6 @@
   assertEquals("liquibase/parser/xml/simpleChangeLog.xml",changeSet.getFilePath());
   assertEquals("Some comments go here",changeSet.getComments());
   Change change=changeSet.getChanges().get(0);
-  assertEquals("createTable",change.getTagName());
+  assertEquals("createTable",change.getName());
   assertTrue(change instanceof CreateTableChange);
 }

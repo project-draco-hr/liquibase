@@ -1,5 +1,5 @@
 {
-  Element node=currentChangeLogFileDOM.createElement(getTagName());
+  Element node=currentChangeLogFileDOM.createElement(getName());
   if (getExistingTableSchemaName() != null) {
     node.setAttribute("newTableSchemaName",getExistingTableSchemaName());
   }

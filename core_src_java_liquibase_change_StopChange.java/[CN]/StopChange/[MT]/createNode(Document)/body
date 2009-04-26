@@ -1,5 +1,5 @@
 {
-  Element element=currentChangeLogDOM.createElement(getTagName());
+  Element element=currentChangeLogDOM.createElement(getName());
   if (getMessage() != null) {
     element.setTextContent(getMessage());
   }

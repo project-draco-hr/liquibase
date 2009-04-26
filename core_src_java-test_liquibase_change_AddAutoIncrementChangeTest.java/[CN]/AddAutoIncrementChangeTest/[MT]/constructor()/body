@@ -1,5 +1,5 @@
 {
   AddAutoIncrementChange change=new AddAutoIncrementChange();
-  assertEquals("addAutoIncrement",change.getTagName());
-  assertEquals("Set Column as Auto-Increment",change.getChangeName());
+  assertEquals("addAutoIncrement",change.getName());
+  assertEquals("Set Column as Auto-Increment",change.getDescription());
 }

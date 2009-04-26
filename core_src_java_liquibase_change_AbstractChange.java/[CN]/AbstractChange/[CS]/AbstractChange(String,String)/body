@@ -1,4 +1,4 @@
 {
-  this.tagName=tagName;
-  this.changeName=changeName;
+  this.name=name;
+  this.description=description;
 }

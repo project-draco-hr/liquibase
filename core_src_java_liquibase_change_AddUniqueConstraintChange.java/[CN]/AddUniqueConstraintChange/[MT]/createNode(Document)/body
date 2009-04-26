@@ -1,5 +1,5 @@
 {
-  Element element=currentChangeLogFileDOM.createElement(getTagName());
+  Element element=currentChangeLogFileDOM.createElement(getName());
   if (getSchemaName() != null) {
     element.setAttribute("schemaName",getSchemaName());
   }

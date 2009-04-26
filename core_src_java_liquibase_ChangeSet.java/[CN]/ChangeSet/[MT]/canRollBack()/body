@@ -3,7 +3,7 @@
     return true;
   }
   for (  Change change : getChanges()) {
-    if (!change.canRollBack()) {
+    if (!change.supportsRollback()) {
       return false;
     }
   }
