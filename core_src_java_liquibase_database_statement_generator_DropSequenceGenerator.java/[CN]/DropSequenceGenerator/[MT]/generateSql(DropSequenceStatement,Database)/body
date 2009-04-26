@@ -1,0 +1,7 @@
+{
+  String sql="DROP SEQUENCE " + database.escapeSequenceName(statement.getSchemaName(),statement.getSequenceName());
+  if (database instanceof PostgresDatabase) {
+    sql+=" CASCADE";
+  }
+  return new Sql[]{new UnparsedSql(sql)};
+}

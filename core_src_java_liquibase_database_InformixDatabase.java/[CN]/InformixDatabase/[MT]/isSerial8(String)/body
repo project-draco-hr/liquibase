@@ -1,0 +1,3 @@
+{
+  return INTEGER8_PATTERN.matcher(type).matches() || SERIAL8_PATTERN.matcher(type).matches() || "BIGINT".equals(type.toUpperCase());
+}

@@ -1,0 +1,4 @@
+{
+  String sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ database.getColumnType(statement.getColumnDataType(),true)+ " AUTO_INCREMENT";
+  return new Sql[]{new UnparsedSql(sql)};
+}

@@ -1,3 +1,10 @@
 {
-  return columnNames;
+  StringBuffer sb=new StringBuffer();
+  for (  String columnName : columnNames.split(",")) {
+    if (sb.length() > 0) {
+      sb.append(", ");
+    }
+    sb.append(escapeDatabaseObject(columnName.trim()));
+  }
+  return sb.toString();
 }

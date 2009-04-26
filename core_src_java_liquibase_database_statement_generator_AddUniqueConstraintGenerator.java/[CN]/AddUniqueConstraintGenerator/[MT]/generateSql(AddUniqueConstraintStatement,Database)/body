@@ -1,0 +1,18 @@
+{
+  String sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ADD CONSTRAINT "+ database.escapeConstraintName(statement.getConstraintName())+ " UNIQUE ("+ database.escapeColumnNameList(statement.getColumnNames())+ ")";
+  if (database instanceof InformixDatabase) {
+    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ADD CONSTRAINT UNIQUE ("+ database.escapeColumnNameList(statement.getColumnNames())+ ") CONSTRAINT "+ database.escapeConstraintName(statement.getConstraintName());
+  }
+  if (StringUtils.trimToNull(statement.getTablespace()) != null && database.supportsTablespaces()) {
+    if (database instanceof MSSQLDatabase) {
+      sql+=" ON " + statement.getTablespace();
+    }
+ else     if (database instanceof DB2Database || database instanceof SybaseASADatabase || database instanceof InformixDatabase) {
+      ;
+    }
+ else {
+      sql+=" USING INDEX TABLESPACE " + statement.getTablespace();
+    }
+  }
+  return new Sql[]{new UnparsedSql(sql)};
+}

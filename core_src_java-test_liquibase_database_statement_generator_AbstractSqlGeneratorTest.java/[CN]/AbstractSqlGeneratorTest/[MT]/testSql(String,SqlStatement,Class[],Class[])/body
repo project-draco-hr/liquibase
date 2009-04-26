@@ -1,0 +1,28 @@
+{
+  if (expectedSql != null) {
+    for (    Database database : TestContext.getInstance().getAllDatabases()) {
+      if (shouldTestDatabase(sqlStatement,database,includeDatabases,excludeDatabases)) {
+        String convertedSql=replaceEscaping(expectedSql,database);
+        convertedSql=replaceDatabaseClauses(convertedSql,database);
+        convertedSql=replaceStandardTypes(convertedSql,database);
+        Sql[] sql=generatorUnderTest.generateSql(sqlStatement,database);
+        assertEquals(1,sql.length);
+        assertEquals("Incorrect SQL for " + database,convertedSql.toLowerCase(),sql[0].toSql().toLowerCase());
+      }
+    }
+  }
+  setupAvailableDatabases();
+  for (  Database availableDatabase : TestContext.getInstance().getAvailableDatabases()) {
+    Statement statement=availableDatabase.getConnection().createStatement();
+    if (shouldTestDatabase(sqlStatement,availableDatabase,includeDatabases,excludeDatabases)) {
+      String sqlToRun=generatorUnderTest.generateSql(sqlStatement,availableDatabase)[0].toSql();
+      try {
+        statement.execute(sqlToRun);
+      }
+ catch (      Exception e) {
+        System.out.println("Failed to execute against " + availableDatabase.getProductName() + ": "+ sqlToRun);
+        throw e;
+      }
+    }
+  }
+}

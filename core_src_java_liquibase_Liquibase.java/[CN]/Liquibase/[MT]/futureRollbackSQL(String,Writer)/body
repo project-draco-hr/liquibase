@@ -1,6 +1,6 @@
 {
   JdbcOutputTemplate outputTemplate=new JdbcOutputTemplate(output,database);
-  JdbcTemplate oldTemplate=database.getJdbcTemplate();
+  Executor oldTemplate=database.getJdbcTemplate();
   database.setJdbcTemplate(outputTemplate);
   outputHeader("SQL to roll back currently unexecuted changes");
   LockHandler lockHandler=LockHandler.getInstance(database);

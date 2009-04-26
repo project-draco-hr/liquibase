@@ -1,0 +1,8 @@
+{
+  StringBuffer string=new StringBuffer();
+  string.append("exec (").append(statement.getProcedureName());
+  for (  String param : statement.getParameters()) {
+    string.append(" ").append(param).append(",");
+  }
+  return new Sql[]{new UnparsedSql(string.toString().replaceFirst(",$",")"))};
+}

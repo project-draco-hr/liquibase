@@ -1,0 +1,13 @@
+{
+  try {
+    if (database.getDatabaseMajorVersion() >= 9) {
+      return new Sql[]{new UnparsedSql("CALL SYSPROC.ADMIN_CMD ('REORG TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + "')")};
+    }
+ else {
+      return null;
+    }
+  }
+ catch (  JDBCException e) {
+    throw new RuntimeException(e);
+  }
+}

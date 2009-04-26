@@ -1,0 +1,5 @@
+{
+  for (  Database database : TestContext.getInstance().getAllDatabases()) {
+    assertFalse("isValid failed against " + database,generatorUnderTest.validate(createSampleSqlStatement(),database).hasErrors());
+  }
+}

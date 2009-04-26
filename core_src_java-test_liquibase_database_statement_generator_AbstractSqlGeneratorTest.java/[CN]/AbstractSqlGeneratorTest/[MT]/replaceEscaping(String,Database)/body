@@ -1,0 +1,10 @@
+{
+  String convertedSql=expectedSql;
+  int lastIndex=0;
+  while ((lastIndex=convertedSql.indexOf("[",lastIndex)) >= 0) {
+    String objectName=convertedSql.substring(lastIndex + 1,convertedSql.indexOf("]",lastIndex));
+    convertedSql=convertedSql.replace("[" + objectName + "]",database.escapeDatabaseObject(objectName));
+    lastIndex++;
+  }
+  return convertedSql;
+}

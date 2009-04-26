@@ -1,0 +1,3 @@
+{
+  return database.supportsAutoIncrement() && !(database instanceof DerbyDatabase) && !(database instanceof HsqlDatabase);
+}

@@ -1,7 +1,4 @@
 {
-  if (statement.isPrimaryKey() && (database instanceof H2Database || database instanceof DB2Database || database instanceof DerbyDatabase)) {
-    throw new StatementNotSupportedOnDatabaseException("Adding primary key columns is not supported",statement,database);
-  }
   String alterTable="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ADD "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ database.getColumnType(statement.getColumnType(),statement.isAutoIncrement());
   alterTable+=getDefaultClause(statement,database);
   if (primaryKeyBeforeNotNull(database)) {

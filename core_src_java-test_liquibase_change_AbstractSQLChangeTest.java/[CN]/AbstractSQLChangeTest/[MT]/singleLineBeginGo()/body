@@ -1,8 +1,0 @@
-{
-  SQLFileChange change2=new SQLFileChange();
-  change2.setSql("goSELECT * FROM customer\ngo");
-  MSSQLDatabase database=new MSSQLDatabase();
-  SqlStatement[] statements=change2.generateStatements(database);
-  assertEquals(1,statements.length);
-  assertEquals("goSELECT * FROM customer",statements[0].getSqlStatement(database));
-}

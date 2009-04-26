@@ -1,0 +1,17 @@
+{
+  StringBuffer sql=new StringBuffer("UPDATE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " SET");
+  for (  String column : statement.getNewColumnValues().keySet()) {
+    sql.append(" ").append(database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),column)).append(" = ");
+    sql.append(convertToString(statement.getNewColumnValues().get(column),database));
+    sql.append(",");
+  }
+  sql.deleteCharAt(sql.lastIndexOf(","));
+  if (statement.getWhereClause() != null) {
+    String fixedWhereClause="WHERE " + statement.getWhereClause();
+    for (    Object param : statement.getWhereParameters()) {
+      fixedWhereClause=fixedWhereClause.replaceFirst("\\?",convertToString(param,database));
+    }
+    sql.append(" ").append(fixedWhereClause);
+  }
+  return new Sql[]{new UnparsedSql(sql.toString())};
+}

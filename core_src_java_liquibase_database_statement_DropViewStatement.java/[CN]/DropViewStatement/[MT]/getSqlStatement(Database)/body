@@ -1,3 +1,0 @@
-{
-  return "DROP VIEW " + database.escapeViewName(getSchemaName(),getViewName());
-}

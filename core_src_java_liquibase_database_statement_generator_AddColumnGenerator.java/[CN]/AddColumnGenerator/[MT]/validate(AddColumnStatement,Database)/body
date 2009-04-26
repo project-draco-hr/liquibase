@@ -1,0 +1,10 @@
+{
+  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  if (statement.isPrimaryKey() && (database instanceof CacheDatabase || database instanceof H2Database || database instanceof DB2Database|| database instanceof DerbyDatabase|| database instanceof SQLiteDatabase)) {
+    validationErrors.addError("Cannot add a primary key column");
+  }
+  if (database instanceof MySQLDatabase && statement.isAutoIncrement() && !statement.isPrimaryKey()) {
+    validationErrors.addError("Cannot add a non-primary key identity column");
+  }
+  return validationErrors;
+}

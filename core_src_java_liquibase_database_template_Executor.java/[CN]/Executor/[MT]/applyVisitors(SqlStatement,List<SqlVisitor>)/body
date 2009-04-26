@@ -1,0 +1,13 @@
+{
+  Sql[] sql=SqlGeneratorFactory.getInstance().generateSql(statement,database);
+  String[] returnSql=new String[sql.length];
+  for (int i=0; i < sql.length; i++) {
+    returnSql[i]=sql[i].toSql();
+    for (    SqlVisitor visitor : sqlVisitors) {
+      if (visitor.isApplicable(database)) {
+        returnSql[i]=visitor.modifySql(returnSql[i],database);
+      }
+    }
+  }
+  return returnSql;
+}

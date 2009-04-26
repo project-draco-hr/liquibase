@@ -1,0 +1,4 @@
+{
+  this.sql=sql.trim();
+  this.endDelimiter=endDelimiter;
+}

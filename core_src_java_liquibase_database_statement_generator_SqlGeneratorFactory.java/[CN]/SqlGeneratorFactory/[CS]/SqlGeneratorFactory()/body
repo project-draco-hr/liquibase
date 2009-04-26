@@ -3,7 +3,7 @@
   try {
     classes=getClasses("liquibase.database.statement.generator");
     for (    Class clazz : classes) {
-      if (SqlGenerator.class.isAssignableFrom(clazz)) {
+      if (SqlGenerator.class.isAssignableFrom(clazz) || SqlGenerator.class.isAssignableFrom(clazz.getSuperclass())) {
         register((SqlGenerator)clazz.getConstructor().newInstance());
       }
     }

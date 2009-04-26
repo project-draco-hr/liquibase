@@ -1,0 +1,3 @@
+{
+  return new Sql[]{new UnparsedSql("ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN  "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " WITH DEFAULT "+ database.convertJavaObjectToString(statement.getDefaultValue()))};
+}

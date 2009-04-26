@@ -1,5 +1,5 @@
 {
-  JdbcTemplate oldTemplate=database.getJdbcTemplate();
+  Executor oldTemplate=database.getJdbcTemplate();
   JdbcOutputTemplate outputTemplate=new JdbcOutputTemplate(output,database);
   database.setJdbcTemplate(outputTemplate);
   outputHeader("Update Database Script");

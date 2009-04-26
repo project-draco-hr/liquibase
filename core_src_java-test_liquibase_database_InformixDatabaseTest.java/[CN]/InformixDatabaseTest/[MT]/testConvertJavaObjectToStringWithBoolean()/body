@@ -1,0 +1,7 @@
+{
+  String s;
+  s=database.convertJavaObjectToString(Boolean.TRUE);
+  assertEquals("'t'",s);
+  s=database.convertJavaObjectToString(Boolean.FALSE);
+  assertEquals("'f'",s);
+}

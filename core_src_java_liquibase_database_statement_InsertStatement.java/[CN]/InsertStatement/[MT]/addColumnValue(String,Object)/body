@@ -1,4 +1,4 @@
 {
-  newColumnValues.put(columnName,newValue);
+  columnValues.put(columnName,newValue);
   return this;
 }

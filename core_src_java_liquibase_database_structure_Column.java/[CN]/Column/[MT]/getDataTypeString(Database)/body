@@ -17,6 +17,9 @@
     if (translatedTypeName.toUpperCase().startsWith("INTERVAL")) {
       return translatedTypeName;
     }
+    if (this.getDataType() == Types.REAL) {
+      return "SMALLFLOAT";
+    }
   }
   String dataType;
   if (noParens.contains(this.getDataType())) {

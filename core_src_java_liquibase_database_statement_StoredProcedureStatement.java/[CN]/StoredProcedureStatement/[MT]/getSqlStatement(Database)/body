@@ -1,8 +1,0 @@
-{
-  StringBuffer string=new StringBuffer();
-  string.append("exec (").append(procedureName);
-  for (  String param : getParameters()) {
-    string.append(" ").append(param).append(",");
-  }
-  return string.toString().replaceFirst(",$",")");
-}

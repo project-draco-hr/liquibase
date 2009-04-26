@@ -1,0 +1,11 @@
+{
+  for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
+    if (database.supportsSchemas()) {
+      database.dropDatabaseObjects(TestContext.ALT_SCHEMA);
+    }
+    database.dropDatabaseObjects(null);
+    for (    SqlStatement statement : setupStatements) {
+      new Executor(database).execute(statement);
+    }
+  }
+}

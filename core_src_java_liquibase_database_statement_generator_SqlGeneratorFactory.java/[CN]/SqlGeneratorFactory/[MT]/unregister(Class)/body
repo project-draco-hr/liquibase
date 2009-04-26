@@ -1,0 +1,9 @@
+{
+  SqlGenerator toRemove=null;
+  for (  SqlGenerator existingGenerator : generators) {
+    if (existingGenerator.getClass().equals(generatorClass)) {
+      toRemove=existingGenerator;
+    }
+  }
+  unregister(toRemove);
+}

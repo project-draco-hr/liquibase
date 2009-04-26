@@ -1,0 +1,3 @@
+{
+  return super.isSystemTable(catalogName,schemaName,tableName) || schemaName.equals("sys");
+}

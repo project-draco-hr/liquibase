@@ -1,6 +1,6 @@
 {
   JdbcOutputTemplate outputTemplate=new JdbcOutputTemplate(output,database);
-  JdbcTemplate oldTemplate=database.getJdbcTemplate();
+  Executor oldTemplate=database.getJdbcTemplate();
   database.setJdbcTemplate(outputTemplate);
   outputHeader("SQL to add all changesets to database history table");
   markNextChangeSetRan(contexts);

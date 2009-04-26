@@ -1,0 +1,11 @@
+{
+  SqlGeneratorFactory factory=SqlGeneratorFactory.getInstance();
+  factory.getGenerators().clear();
+  assertEquals(0,factory.getGenerators().size());
+  factory.register(new AddAutoIncrementGenerator());
+  factory.register(new AddAutoIncrementGeneratorH2());
+  factory.register(new AddAutoIncrementGeneratorDB2());
+  assertEquals(3,factory.getGenerators().size());
+  factory.unregister(AddColumnGenerator.class);
+  assertEquals(3,factory.getGenerators().size());
+}

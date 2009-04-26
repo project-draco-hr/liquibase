@@ -1,6 +1,0 @@
-{
-  assertEquals(fileName,change.getPath());
-  OracleDatabase database=new OracleDatabase();
-  assertEquals("TESTDATA",change.generateStatements(database)[0].getSqlStatement(database));
-  assertEquals(MD5Util.computeMD5(change.getSql()),change.getMD5Sum());
-}

@@ -1,9 +1,6 @@
 {
   String clause="";
   if (statement.getDefaultValue() != null) {
-    if (database instanceof MSSQLDatabase) {
-      clause+=" CONSTRAINT " + ((MSSQLDatabase)database).generateDefaultConstraintName(statement.getTableName(),statement.getColumnName());
-    }
     clause+=" DEFAULT " + database.convertJavaObjectToString(statement.getDefaultValue());
   }
   return clause;

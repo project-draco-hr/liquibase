@@ -1,0 +1,3 @@
+{
+  return errorMessages.size() > 0;
+}

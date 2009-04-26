@@ -1,8 +1,0 @@
-{
-  if (database instanceof OracleDatabase) {
-    return "COMMENT ON TABLE " + database.escapeTableName(schemaName,tableName) + " IS '"+ remarks+ "'";
-  }
- else {
-    return "ALTER TABLE " + database.escapeTableName(schemaName,tableName) + " COMMENT = '"+ remarks+ "'";
-  }
-}

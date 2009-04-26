@@ -1,0 +1,11 @@
+{
+  if (objectName == null) {
+    return null;
+  }
+  if (hasCaseProblems(objectName) || isReservedWord(objectName)) {
+    return "\"" + objectName + "\"";
+  }
+ else {
+    return super.escapeDatabaseObject(objectName);
+  }
+}

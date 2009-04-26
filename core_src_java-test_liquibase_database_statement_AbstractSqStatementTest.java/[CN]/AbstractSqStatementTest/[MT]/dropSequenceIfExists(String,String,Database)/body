@@ -1,0 +1,22 @@
+{
+  if (schemaName != null && !database.supportsSchemas()) {
+    return;
+  }
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
+  }
+  try {
+    new Executor(database).execute(new DropSequenceStatement(schemaName,sequenceName));
+    if (!database.getAutoCommitMode()) {
+      database.getConnection().commit();
+    }
+  }
+ catch (  JDBCException e) {
+    if (!database.getConnection().getAutoCommit()) {
+      database.getConnection().rollback();
+    }
+  }
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
+  }
+}

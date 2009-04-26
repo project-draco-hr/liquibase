@@ -4,13 +4,13 @@
       LockHandler.getInstance(database).reset();
       ;
       try {
-        new JdbcTemplate(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false));
+        new Executor(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false));
       }
  catch (      JDBCException e) {
         ;
       }
       try {
-        new JdbcTemplate(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false));
+        new Executor(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false));
       }
  catch (      JDBCException e) {
         ;

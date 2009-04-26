@@ -1,0 +1,4 @@
+{
+  assertTrue(generatorUnderTest.validate(new AddAutoIncrementStatement(null,null,null,null),new InformixDatabase()).getErrorMessages().contains("columnDataType is required"));
+  assertFalse(generatorUnderTest.validate(new AddAutoIncrementStatement(null,null,null,"int"),new InformixDatabase()).hasErrors());
+}

@@ -1,0 +1,15 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,null,42)){
+    protected void setup(    Database database) throws Exception {
+      new Executor(database).execute(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"int"));
+      super.setup(database);
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+      assertEquals(new Integer(42),new Integer(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue().toString()));
+    }
+  }
+);
+}

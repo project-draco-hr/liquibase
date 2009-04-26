@@ -1,0 +1,3 @@
+{
+  assertEquals(this.getClass().getName().replaceFirst("Test$",""),generatorUnderTest.getClass().getName());
+}

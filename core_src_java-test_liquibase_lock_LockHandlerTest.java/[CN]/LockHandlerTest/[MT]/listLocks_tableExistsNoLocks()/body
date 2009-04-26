@@ -1,6 +1,6 @@
 {
   Database database=createMock(Database.class);
-  JdbcTemplate template=createMock(JdbcTemplate.class);
+  Executor template=createMock(Executor.class);
   expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
   expect(database.doesChangeLogLockTableExist()).andReturn(true);
   expect(database.getDefaultSchemaName()).andReturn("default_schema");

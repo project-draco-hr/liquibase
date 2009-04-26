@@ -1,6 +1,0 @@
-{
-  if (keywords.contains(name.toUpperCase())) {
-    return "\"" + name + "\"";
-  }
-  return name;
-}

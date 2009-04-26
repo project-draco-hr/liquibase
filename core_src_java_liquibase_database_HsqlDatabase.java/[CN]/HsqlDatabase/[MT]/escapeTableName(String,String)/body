@@ -1,8 +1,0 @@
-{
-  if (StringUtils.trimToNull(schemaName) == null || !supportsSchemas()) {
-    return escapeObjectName(tableName);
-  }
- else {
-    return escapeObjectName(schemaName + "." + escapeObjectName(tableName));
-  }
-}

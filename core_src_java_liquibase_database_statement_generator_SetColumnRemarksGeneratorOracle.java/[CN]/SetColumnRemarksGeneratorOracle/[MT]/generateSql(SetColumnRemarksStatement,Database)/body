@@ -1,0 +1,3 @@
+{
+  return new Sql[]{new UnparsedSql("COMMENT ON COLUMN " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + "."+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " IS '"+ statement.getRemarks()+ "'")};
+}

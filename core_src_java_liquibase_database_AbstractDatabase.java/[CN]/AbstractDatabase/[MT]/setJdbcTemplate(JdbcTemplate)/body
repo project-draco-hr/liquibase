@@ -1,6 +1,0 @@
-{
-  if (this.jdbcTemplate != null && !this.jdbcTemplate.executesStatements() && template.executesStatements()) {
-    LockHandler.getInstance(this).reset();
-  }
-  this.jdbcTemplate=template;
-}

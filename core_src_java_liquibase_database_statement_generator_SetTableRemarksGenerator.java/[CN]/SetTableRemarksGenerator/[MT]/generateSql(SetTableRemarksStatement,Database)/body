@@ -1,0 +1,10 @@
+{
+  String sql;
+  if (database instanceof OracleDatabase) {
+    sql="COMMENT ON TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " IS '"+ statement.getRemarks()+ "'";
+  }
+ else {
+    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " COMMENT = '"+ statement.getRemarks()+ "'";
+  }
+  return new Sql[]{new UnparsedSql(sql)};
+}

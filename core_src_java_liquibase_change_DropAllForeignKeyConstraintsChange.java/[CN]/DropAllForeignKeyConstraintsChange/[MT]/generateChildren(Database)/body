@@ -1,6 +1,6 @@
 {
   childDropChanges=new ArrayList<DropForeignKeyConstraintChange>();
-  JdbcTemplate jdbc=database.getJdbcTemplate();
+  Executor jdbc=database.getJdbcTemplate();
   FindForeignKeyConstraintsStatement sql=new FindForeignKeyConstraintsStatement(getBaseTableSchemaName(),getBaseTableName());
   try {
     List<Map> results=jdbc.queryForList(sql,new ArrayList<SqlVisitor>());

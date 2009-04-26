@@ -1,0 +1,19 @@
+{
+  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ADD "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ database.getColumnType(statement.getColumnType(),statement.isAutoIncrement());
+  if (statement.isAutoIncrement()) {
+    alterTable+=" " + database.getAutoIncrementClause();
+  }
+  if (!statement.isNullable()) {
+    alterTable+=" NOT NULL";
+  }
+ else {
+    if (database instanceof SybaseDatabase || database instanceof SybaseASADatabase) {
+      alterTable+=" NULL";
+    }
+  }
+  if (statement.isPrimaryKey()) {
+    alterTable+=" PRIMARY KEY";
+  }
+  alterTable+=getDefaultClause(statement,database);
+  return new Sql[]{new UnparsedSql(alterTable)};
+}

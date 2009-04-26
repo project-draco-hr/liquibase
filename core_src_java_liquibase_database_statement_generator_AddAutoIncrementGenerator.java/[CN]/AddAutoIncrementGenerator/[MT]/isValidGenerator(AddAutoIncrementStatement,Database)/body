@@ -1,0 +1,3 @@
+{
+  return database instanceof H2Database || (database.supportsAutoIncrement() && !(database instanceof DerbyDatabase) && !(database instanceof HsqlDatabase));
+}

@@ -3,19 +3,19 @@
     public void performTest(    Database database) throws Exception {
       LockHandler.getInstance(database).reset();
       try {
-        new JdbcTemplate(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false));
+        new Executor(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false));
       }
  catch (      JDBCException e) {
         ;
       }
       try {
-        new JdbcTemplate(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false));
+        new Executor(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false));
       }
  catch (      JDBCException e) {
         ;
       }
       database.commit();
-      JdbcTemplate originalTemplate=database.getJdbcTemplate();
+      Executor originalTemplate=database.getJdbcTemplate();
       database.setJdbcTemplate(new JdbcOutputTemplate(new StringWriter(),database));
       LockHandler lockHandler=LockHandler.getInstance(database);
       lockHandler.waitForLock();

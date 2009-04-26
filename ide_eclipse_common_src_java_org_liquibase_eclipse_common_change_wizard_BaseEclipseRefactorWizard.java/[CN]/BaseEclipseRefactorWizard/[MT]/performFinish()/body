@@ -20,8 +20,10 @@
           liquibase.database.Database liquibaseDatabase=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
           Statement statement=connection.createStatement();
           for (          Change change : changeSet.getChanges()) {
-            for (            SqlStatement sql : change.generateStatements(liquibaseDatabase)) {
-              statement.execute(sql.getSqlStatement(liquibaseDatabase));
+            for (            SqlStatement sqlStatement : change.generateStatements(liquibaseDatabase)) {
+              for (              Sql sql : SqlGeneratorFactory.getInstance().generateSql(sqlStatement,liquibaseDatabase)) {
+                statement.execute(sql.toSql());
+              }
             }
           }
           statement.close();

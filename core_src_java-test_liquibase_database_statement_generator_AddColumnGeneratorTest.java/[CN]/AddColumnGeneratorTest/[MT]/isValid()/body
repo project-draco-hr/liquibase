@@ -1,0 +1,12 @@
+{
+  super.isValid();
+  AddColumnStatement addPKColumn=new AddColumnStatement(null,null,null,null,null,new PrimaryKeyConstraint("pk_name"));
+  assertFalse(generatorUnderTest.validate(addPKColumn,new OracleDatabase()).hasErrors());
+  assertTrue(generatorUnderTest.validate(addPKColumn,new CacheDatabase()).getErrorMessages().contains("Cannot add a primary key column"));
+  assertTrue(generatorUnderTest.validate(addPKColumn,new H2Database()).getErrorMessages().contains("Cannot add a primary key column"));
+  assertTrue(generatorUnderTest.validate(addPKColumn,new DB2Database()).getErrorMessages().contains("Cannot add a primary key column"));
+  assertTrue(generatorUnderTest.validate(addPKColumn,new DerbyDatabase()).getErrorMessages().contains("Cannot add a primary key column"));
+  assertTrue(generatorUnderTest.validate(addPKColumn,new SQLiteDatabase()).getErrorMessages().contains("Cannot add a primary key column"));
+  assertTrue(generatorUnderTest.validate(new AddColumnStatement(null,null,null,null,null,new AutoIncrementConstraint()),new MySQLDatabase()).getErrorMessages().contains("Cannot add a non-primary key identity column"));
+  assertTrue(generatorUnderTest.validate(new AddColumnStatement(null,null,null,null,null,new AutoIncrementConstraint()),new MySQLDatabase()).getErrorMessages().contains("Cannot add a non-primary key identity column"));
+}

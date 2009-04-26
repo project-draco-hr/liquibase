@@ -1,3 +1,0 @@
-{
-  new NotImplementedGenerator().generateSql(new AddDefaultValueStatement(null,"table","name","N/A"),new OracleDatabase());
-}

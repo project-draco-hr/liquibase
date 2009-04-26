@@ -1,14 +1,14 @@
 {
   String type=super.getColumnType(columnType,autoIncrement);
   if (autoIncrement != null && autoIncrement) {
-    if ("integer".equals(type.toLowerCase())) {
-      return "serial(1)";
+    if (isSerial(type)) {
+      return "SERIAL";
     }
- else     if ("bigint".equals(type.toLowerCase()) || "bigserial".equals(type.toLowerCase())) {
-      return "bigserial";
+ else     if (isSerial8(type)) {
+      return "SERIAL8";
     }
  else {
-      return "serial(1)";
+      throw new IllegalArgumentException("Unknown autoincrement type: " + columnType);
     }
   }
   return type;

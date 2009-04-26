@@ -1,3 +1,24 @@
 {
+  systemTablesAndViews.add("syscolumns");
+  systemTablesAndViews.add("syscomments");
+  systemTablesAndViews.add("sysdepends");
+  systemTablesAndViews.add("sysfilegroups");
+  systemTablesAndViews.add("sysfiles");
+  systemTablesAndViews.add("sysfiles1");
+  systemTablesAndViews.add("sysforeignkeys");
+  systemTablesAndViews.add("sysfulltextcatalogs");
+  systemTablesAndViews.add("sysfulltextnotify");
+  systemTablesAndViews.add("sysindexes");
+  systemTablesAndViews.add("sysindexkeys");
+  systemTablesAndViews.add("sysmembers");
+  systemTablesAndViews.add("sysobjects");
+  systemTablesAndViews.add("syspermissions");
+  systemTablesAndViews.add("sysproperties");
+  systemTablesAndViews.add("sysprotects");
+  systemTablesAndViews.add("sysreferences");
+  systemTablesAndViews.add("systypes");
+  systemTablesAndViews.add("sysusers");
+  systemTablesAndViews.add("syssegments");
+  systemTablesAndViews.add("sysconstraints");
   systemTablesAndViews.add("sysquerymetrics");
 }

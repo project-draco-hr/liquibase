@@ -1,0 +1,6 @@
+{
+  new Executor(database).execute(statement);
+  if (!database.getAutoCommitMode()) {
+    database.getConnection().commit();
+  }
+}

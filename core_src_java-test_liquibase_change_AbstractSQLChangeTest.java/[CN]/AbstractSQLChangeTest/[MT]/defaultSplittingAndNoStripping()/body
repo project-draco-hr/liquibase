@@ -1,9 +1,0 @@
-{
-  SQLFileChange change2=new SQLFileChange();
-  change2.setSql("SELECT * FROM x;\n/*A Comment*/SELECT * FROM x;");
-  MSSQLDatabase database=new MSSQLDatabase();
-  SqlStatement[] statements=change2.generateStatements(database);
-  assertEquals(2,statements.length);
-  assertEquals("SELECT * FROM x",statements[0].getSqlStatement(database));
-  assertEquals("/*A Comment*/SELECT * FROM x",statements[1].getSqlStatement(database));
-}

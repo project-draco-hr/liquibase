@@ -1,0 +1,3 @@
+{
+  return !(getBestGenerator(statement,database) instanceof NotImplementedGenerator);
+}

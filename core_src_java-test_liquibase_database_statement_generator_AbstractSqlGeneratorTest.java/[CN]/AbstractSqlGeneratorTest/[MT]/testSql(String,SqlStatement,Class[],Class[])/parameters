@@ -1,0 +1,4 @@
+String expectedSql
+SqlStatement sqlStatement
+Class[] includeDatabases
+Class[] excludeDatabases

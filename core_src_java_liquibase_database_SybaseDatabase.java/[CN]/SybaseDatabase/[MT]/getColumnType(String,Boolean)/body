@@ -1,0 +1,7 @@
+{
+  String type=super.getColumnType(columnType,autoIncrement);
+  if (autoIncrement != null && autoIncrement) {
+    type=type.replaceFirst(" identity$","");
+  }
+  return type;
+}

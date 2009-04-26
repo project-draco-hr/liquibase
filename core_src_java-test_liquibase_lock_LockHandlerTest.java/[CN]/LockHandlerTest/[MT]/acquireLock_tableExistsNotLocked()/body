@@ -1,6 +1,6 @@
 {
   Database database=createMock(Database.class);
-  JdbcTemplate template=createMock(JdbcTemplate.class);
+  Executor template=createMock(Executor.class);
   RawSqlStatement selectLockStatement=new RawSqlStatement("SELECT LOCK");
   expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
   expect(database.getSelectChangeLogLockSQL()).andReturn(selectLockStatement);

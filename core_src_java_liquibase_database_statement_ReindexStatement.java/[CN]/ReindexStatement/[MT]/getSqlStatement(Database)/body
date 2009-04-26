@@ -1,6 +1,0 @@
-{
-  if (!supportsDatabase(database)) {
-    throw new StatementNotSupportedOnDatabaseException(this,database);
-  }
-  return "REINDEX " + database.escapeTableName(getSchemaName(),getTableName());
-}

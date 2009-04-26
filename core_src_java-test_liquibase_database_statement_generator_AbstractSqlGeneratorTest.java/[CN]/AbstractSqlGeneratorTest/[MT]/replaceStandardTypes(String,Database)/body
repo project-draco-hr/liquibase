@@ -1,0 +1,3 @@
+{
+  return convertedSql.replaceAll(" int "," " + database.getColumnType("int",false) + " ");
+}

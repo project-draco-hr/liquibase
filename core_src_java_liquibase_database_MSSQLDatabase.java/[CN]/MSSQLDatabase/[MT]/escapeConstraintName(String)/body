@@ -1,6 +1,0 @@
-{
-  if (constraintName == null) {
-    return null;
-  }
-  return "[" + constraintName + "]";
-}

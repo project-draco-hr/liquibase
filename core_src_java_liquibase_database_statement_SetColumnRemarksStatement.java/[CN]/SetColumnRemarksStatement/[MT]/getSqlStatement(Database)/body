@@ -1,3 +1,0 @@
-{
-  return "COMMENT ON COLUMN " + database.escapeTableName(schemaName,tableName) + "."+ database.escapeColumnName(schemaName,tableName,columnName)+ " IS '"+ remarks+ "'";
-}

@@ -1,5 +1,5 @@
 {
-  if (url.startsWith("jdbc:informix")) {
+  if (url.startsWith("jdbc:informix-sqli")) {
     return "com.informix.jdbc.IfxDriver";
   }
   return null;

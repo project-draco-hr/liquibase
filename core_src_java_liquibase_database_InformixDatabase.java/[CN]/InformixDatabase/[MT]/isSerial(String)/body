@@ -1,0 +1,3 @@
+{
+  return INTEGER_PATTERN.matcher(type).matches() || SERIAL_PATTERN.matcher(type).matches();
+}

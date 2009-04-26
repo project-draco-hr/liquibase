@@ -1,0 +1,13 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new InsertStatement(null,TABLE_NAME).addColumnValue(VARCHAR_COL_NAME,"new value")){
+    private int oldCount;
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot) throws Exception {
+      oldCount=new Executor(snapshot.getDatabase()).queryForInt(new RawSqlStatement("select count(*) from " + TABLE_NAME));
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot) throws Exception {
+      int newCount=new Executor(snapshot.getDatabase()).queryForInt(new RawSqlStatement("select count(*) from " + TABLE_NAME));
+      assertEquals(oldCount + 1,newCount);
+    }
+  }
+);
+}

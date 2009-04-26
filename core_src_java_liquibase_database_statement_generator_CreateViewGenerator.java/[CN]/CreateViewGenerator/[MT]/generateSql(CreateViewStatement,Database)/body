@@ -1,0 +1,23 @@
+{
+  String createClause;
+  if (database instanceof HsqlDatabase || database instanceof DB2Database || database instanceof CacheDatabase|| database instanceof MSSQLDatabase|| database instanceof DerbyDatabase|| database instanceof SybaseASADatabase|| database instanceof InformixDatabase) {
+    if (statement.isReplaceIfExists()) {
+      throw new StatementNotSupportedOnDatabaseException("replaceIfExists not supported",statement,database);
+    }
+  }
+  if (database instanceof FirebirdDatabase) {
+    if (statement.isReplaceIfExists()) {
+      createClause="RECREATE VIEW";
+    }
+ else {
+      createClause="RECREATE VIEW";
+    }
+  }
+ else   if (database instanceof SybaseASADatabase && statement.getSelectQuery().toLowerCase().startsWith("create view")) {
+    return new Sql[]{new UnparsedSql(statement.getSelectQuery())};
+  }
+ else {
+    createClause="CREATE " + (statement.isReplaceIfExists() ? "OR REPLACE " : "") + "VIEW";
+  }
+  return new Sql[]{new UnparsedSql(createClause + " " + database.escapeViewName(statement.getSchemaName(),statement.getViewName())+ " AS "+ statement.getSelectQuery())};
+}

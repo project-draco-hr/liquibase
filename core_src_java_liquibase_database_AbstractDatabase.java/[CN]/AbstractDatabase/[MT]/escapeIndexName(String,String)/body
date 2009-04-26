@@ -1,3 +1,8 @@
 {
-  return escapeTableName(schemaName,indexName);
+  if (StringUtils.trimToNull(schemaName) == null || !supportsSchemas()) {
+    return escapeDatabaseObject(indexName);
+  }
+ else {
+    return escapeDatabaseObject(schemaName) + "." + escapeDatabaseObject(indexName);
+  }
 }

@@ -42,7 +42,7 @@
   statements.add(statement);
   if (StringUtils.trimToNull(remarks) != null) {
     SetTableRemarksStatement remarksStatement=new SetTableRemarksStatement(schemaName,tableName,remarks);
-    if (remarksStatement.supportsDatabase(database)) {
+    if (SqlGeneratorFactory.getInstance().statementSupported(remarksStatement,database)) {
       statements.add(remarksStatement);
     }
   }
@@ -50,7 +50,7 @@
     String columnRemarks=StringUtils.trimToNull(column.getRemarks());
     if (columnRemarks != null) {
       SetColumnRemarksStatement remarksStatement=new SetColumnRemarksStatement(schemaName,tableName,column.getName(),columnRemarks);
-      if (remarksStatement.supportsDatabase(database)) {
+      if (SqlGeneratorFactory.getInstance().statementSupported(remarksStatement,database)) {
         statements.add(remarksStatement);
       }
     }

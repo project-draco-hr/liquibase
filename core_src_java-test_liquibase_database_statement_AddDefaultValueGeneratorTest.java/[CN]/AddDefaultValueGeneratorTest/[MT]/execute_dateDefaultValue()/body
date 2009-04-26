@@ -1,0 +1,28 @@
+{
+  final java.sql.Date date=new java.sql.Date(new Date().getTime());
+  new DatabaseTestTemplate().testOnAvailableDatabases(new SqlStatementDatabaseTest(null,new AddDefaultValueStatement(null,TABLE_NAME,COLUMN_NAME,null,date)){
+    protected void setup(    Database database) throws Exception {
+      new Executor(database).execute(new CreateTableStatement(null,TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,database.getDateType().getDataTypeName()));
+      super.setup(database);
+    }
+    protected void preExecuteAssert(    DatabaseSnapshot snapshot){
+      assertNull(snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue());
+    }
+    protected void postExecuteAssert(    DatabaseSnapshot snapshot){
+      Object defaultValue=snapshot.getTable(TABLE_NAME).getColumn(COLUMN_NAME).getDefaultValue();
+      if (defaultValue instanceof java.sql.Date) {
+        assertEquals(new ISODateFormat().format(date),new ISODateFormat().format(((java.sql.Date)defaultValue)));
+      }
+ else {
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MILLISECOND,0);
+        assertEquals(new ISODateFormat().format(new java.sql.Date(cal.getTimeInMillis())),new ISODateFormat().format(new java.sql.Date(((java.sql.Timestamp)defaultValue).getTime())));
+      }
+    }
+  }
+);
+}
