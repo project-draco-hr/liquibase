@@ -1,11 +1,9 @@
 {
   Class[] classes;
   try {
-    classes=getClasses("liquibase.database.statement.generator");
+    classes=PluginUtil.getClasses("liquibase.database.statement.generator",SqlGenerator.class);
     for (    Class clazz : classes) {
-      if (SqlGenerator.class.isAssignableFrom(clazz) || SqlGenerator.class.isAssignableFrom(clazz.getSuperclass())) {
-        register((SqlGenerator)clazz.getConstructor().newInstance());
-      }
+      register((SqlGenerator)clazz.getConstructor().newInstance());
     }
   }
  catch (  Exception e) {

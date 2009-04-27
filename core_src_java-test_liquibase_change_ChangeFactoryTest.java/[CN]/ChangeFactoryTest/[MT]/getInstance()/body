@@ -1,0 +1,4 @@
+{
+  assertNotNull(ChangeFactory.getInstance());
+  assertTrue(ChangeFactory.getInstance() == ChangeFactory.getInstance());
+}

@@ -1,4 +1,0 @@
-{
-  Change createTableChange=factory.create("createTable");
-  assertEquals(CreateTableChange.class,createTableChange.getClass());
-}

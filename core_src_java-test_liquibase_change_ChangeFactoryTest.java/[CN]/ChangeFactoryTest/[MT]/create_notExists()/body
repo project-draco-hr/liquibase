@@ -1,0 +1,4 @@
+{
+  Change change=ChangeFactory.getInstance().create("badChangeName");
+  assertNull(change);
+}

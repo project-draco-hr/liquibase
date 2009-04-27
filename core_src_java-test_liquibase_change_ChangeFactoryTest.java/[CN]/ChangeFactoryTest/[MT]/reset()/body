@@ -1,0 +1,5 @@
+{
+  ChangeFactory instance1=ChangeFactory.getInstance();
+  ChangeFactory.reset();
+  assertFalse(instance1 == ChangeFactory.getInstance());
+}

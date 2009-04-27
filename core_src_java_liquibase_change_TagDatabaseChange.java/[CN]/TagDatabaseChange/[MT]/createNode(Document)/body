@@ -1,5 +1,5 @@
 {
-  Element sqlElement=currentChangeLogDOM.createElement(getName());
+  Element sqlElement=currentChangeLogDOM.createElement(getChangeName());
   sqlElement.setAttribute("tag",getTag());
   return sqlElement;
 }

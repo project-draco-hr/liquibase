@@ -1,4 +1,4 @@
 {
   AddColumnChange refactoring=new AddColumnChange();
-  assertEquals("Add Column",refactoring.getDescription());
+  assertEquals("Add Column",refactoring.getChangeDescription());
 }

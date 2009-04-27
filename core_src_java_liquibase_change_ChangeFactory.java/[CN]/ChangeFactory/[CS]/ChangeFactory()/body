@@ -1,10 +1,11 @@
 {
-  tagToClassMap=new HashMap<String,Class>();
-  Class[] changes=new Class[]{AddColumnChange.class,AlterSequenceChange.class,CreateIndexChange.class,CreateSequenceChange.class,CreateTableChange.class,DropColumnChange.class,DropIndexChange.class,DropSequenceChange.class,DropTableChange.class,InsertDataChange.class,ModifyColumnChange.class,RawSQLChange.class,RenameColumnChange.class,RenameTableChange.class,AddNotNullConstraintChange.class,DropNotNullConstraintChange.class,CreateViewChange.class,DropViewChange.class,MergeColumnChange.class,RenameViewChange.class,AddForeignKeyConstraintChange.class,DropForeignKeyConstraintChange.class,AddLookupTableChange.class,AddPrimaryKeyChange.class,DropPrimaryKeyChange.class,AddAutoIncrementChange.class,AddDefaultValueChange.class,DropDefaultValueChange.class,AddUniqueConstraintChange.class,DropUniqueConstraintChange.class,SQLFileChange.class,CustomChangeWrapper.class,CreateProcedureChange.class,ExecuteShellCommandChange.class,UpdateDataChange.class,DeleteDataChange.class,TagDatabaseChange.class,LoadDataChange.class,DropAllForeignKeyConstraintsChange.class,StopChange.class};
+  Class[] classes;
   try {
-    for (    Class<Change> changeClass : changes) {
-      Change change=changeClass.newInstance();
-      tagToClassMap.put(change.getName(),changeClass);
+    classes=PluginUtil.getClasses("liquibase.change",Change.class);
+    for (    Class clazz : classes) {
+      if (Change.class.isAssignableFrom(clazz) || Change.class.isAssignableFrom(clazz.getSuperclass())) {
+        register(clazz);
+      }
     }
   }
  catch (  Exception e) {

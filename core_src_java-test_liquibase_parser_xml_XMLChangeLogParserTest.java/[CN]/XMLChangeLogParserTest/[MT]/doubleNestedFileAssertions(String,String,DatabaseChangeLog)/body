@@ -12,7 +12,7 @@
   assertEquals(1,changeSet.getChanges().size());
   assertEquals(doubleNestedFileName,changeSet.getFilePath());
   Change change=changeSet.getChanges().get(0);
-  assertEquals("createTable",change.getName());
+  assertEquals("createTable",change.getChangeName());
   assertTrue(change instanceof CreateTableChange);
   assertEquals("partner",((CreateTableChange)change).getTableName());
   changeSet=changeLog.getChangeSets().get(1);
@@ -21,7 +21,7 @@
   assertEquals(1,changeSet.getChanges().size());
   assertEquals(nestedFileName,changeSet.getFilePath());
   change=changeSet.getChanges().get(0);
-  assertEquals("createTable",change.getName());
+  assertEquals("createTable",change.getChangeName());
   assertTrue(change instanceof CreateTableChange);
   assertEquals("employee",((CreateTableChange)change).getTableName());
   changeSet=changeLog.getChangeSets().get(2);
@@ -30,7 +30,7 @@
   assertEquals(1,changeSet.getChanges().size());
   assertEquals("liquibase/parser/xml/simpleChangeLog.xml",changeSet.getFilePath());
   change=changeSet.getChanges().get(0);
-  assertEquals("createTable",change.getName());
+  assertEquals("createTable",change.getChangeName());
   assertTrue(change instanceof CreateTableChange);
   assertEquals("person",((CreateTableChange)change).getTableName());
   changeSet=changeLog.getChangeSets().get(3);
@@ -39,7 +39,7 @@
   assertEquals(1,changeSet.getChanges().size());
   assertEquals(nestedFileName,changeSet.getFilePath());
   change=changeSet.getChanges().get(0);
-  assertEquals("addColumn",change.getName());
+  assertEquals("addColumn",change.getChangeName());
   assertTrue(change instanceof AddColumnChange);
   assertEquals("employee",((AddColumnChange)change).getTableName());
 }

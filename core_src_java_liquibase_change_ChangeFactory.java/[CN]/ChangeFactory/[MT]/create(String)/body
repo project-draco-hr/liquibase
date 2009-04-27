@@ -1,12 +1,12 @@
 {
-  Class<?> aClass=tagToClassMap.get(tagName);
+  Class<? extends Change> aClass=registry.get(name);
   if (aClass == null) {
-    throw new RuntimeException("Unknown tag: " + tagName);
+    return null;
   }
   try {
-    return (Change)aClass.newInstance();
+    return aClass.newInstance();
   }
  catch (  Exception e) {
-    throw new RuntimeException(e);
+    throw new UnexpectedLiquibaseException(e);
   }
 }
