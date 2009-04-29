@@ -1,0 +1,36 @@
+{
+  List<Sql> statements=new ArrayList<Sql>();
+  SQLiteDatabase.AlterTableVisitor rename_alter_visitor=new SQLiteDatabase.AlterTableVisitor(){
+    public ColumnConfig[] getColumnsToAdd(){
+      return new ColumnConfig[0];
+    }
+    public boolean copyThisColumn(    ColumnConfig column){
+      return true;
+    }
+    public boolean createThisColumn(    ColumnConfig column){
+      if (column.getName().equals(statement.getColumnName())) {
+        column.setAutoIncrement(true);
+        column.setType("INTEGER");
+      }
+      return true;
+    }
+    public boolean createThisIndex(    Index index){
+      return true;
+    }
+  }
+;
+  try {
+    for (    SqlStatement generatedStatement : SQLiteDatabase.getAlterTableStatements(rename_alter_visitor,database,statement.getSchemaName(),statement.getTableName())) {
+      for (      SqlGenerator generator : Arrays.asList(SqlGeneratorFactory.getInstance().getBestGenerator(generatedStatement,database))) {
+        statements.addAll(Arrays.asList(generator.generateSql(generatedStatement,database)));
+      }
+    }
+  }
+ catch (  JDBCException e) {
+    e.printStackTrace();
+  }
+catch (  UnsupportedChangeException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  return statements.toArray(new Sql[statements.size()]);
+}

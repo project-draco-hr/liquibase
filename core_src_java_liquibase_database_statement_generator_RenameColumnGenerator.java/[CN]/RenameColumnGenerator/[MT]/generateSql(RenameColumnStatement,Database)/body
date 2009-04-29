@@ -4,9 +4,6 @@
     sql="exec sp_rename '" + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + "."+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getOldColumnName())+ "', '"+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getNewColumnName())+ "'";
   }
  else   if (database instanceof MySQLDatabase) {
-    if (statement.getColumnDataType() == null) {
-      throw new StatementNotSupportedOnDatabaseException("columnDataType is required to rename columns",statement,database);
-    }
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " CHANGE "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getOldColumnName())+ " "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getNewColumnName())+ " "+ statement.getColumnDataType();
   }
  else   if (database instanceof HsqlDatabase) {

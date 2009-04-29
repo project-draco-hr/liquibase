@@ -1,0 +1,13 @@
+{
+  try {
+    for (    SqlStatement statement : generateStatements(database)) {
+      GeneratorValidationErrors validationErrors=SqlGeneratorFactory.getInstance().getBestGenerator(statement,database).validate(statement,database);
+      if (validationErrors.hasErrors()) {
+        throw new InvalidChangeDefinitionException("Change is invalid for " + database + ": "+ StringUtils.join(validationErrors.getErrorMessages(),", "),this);
+      }
+    }
+  }
+ catch (  UnsupportedChangeException e) {
+    throw new InvalidChangeDefinitionException("Change is invalid for " + database + ": "+ e.getMessage(),this);
+  }
+}

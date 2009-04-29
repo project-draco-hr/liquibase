@@ -15,5 +15,5 @@
     alterTable+=" PRIMARY KEY";
   }
   alterTable+=getDefaultClause(statement,database);
-  return new Sql[]{new UnparsedSql(alterTable)};
+  return new Sql[]{new UnparsedSql(alterTable,new Column().setTable(new Table(statement.getTableName()).setSchema(statement.getSchemaName())).setName(statement.getColumnName()))};
 }

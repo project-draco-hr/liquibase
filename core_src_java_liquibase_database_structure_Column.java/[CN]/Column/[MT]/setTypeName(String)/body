@@ -1,3 +1,4 @@
 {
   this.typeName=typeName;
+  return this;
 }

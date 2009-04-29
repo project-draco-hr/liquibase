@@ -1,7 +1,0 @@
-{
-  Column column=new Column();
-  Table table=new Table(getTableName());
-  column.setTable(table);
-  column.setName(columnName);
-  return new HashSet<DatabaseObject>(Arrays.asList(table,column));
-}

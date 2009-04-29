@@ -1,3 +1,7 @@
 {
-  return new GeneratorValidationErrors();
+  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  if (database instanceof InformixDatabase) {
+    validationErrors.checkRequiredField("columnDataType",dropDefaultValueStatement.getColumnDataType());
+  }
+  return validationErrors;
 }

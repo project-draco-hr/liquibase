@@ -50,9 +50,6 @@ break;
 }
 }
 if (statement.isDeferrable() || statement.isInitiallyDeferred()) {
-if (!database.supportsInitiallyDeferrableColumns()) {
-throw new StatementNotSupportedOnDatabaseException("Database does not support deferrable foreign keys",statement,database);
-}
 if (statement.isDeferrable()) {
 sb.append(" DEFERRABLE");
 }

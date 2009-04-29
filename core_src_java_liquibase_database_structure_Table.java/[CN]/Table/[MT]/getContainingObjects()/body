@@ -1,0 +1,8 @@
+{
+  if (getSchema() == null) {
+    return new DatabaseObject[]{getDatabase()};
+  }
+ else {
+    return new DatabaseObject[]{new Schema(getSchema())};
+  }
+}

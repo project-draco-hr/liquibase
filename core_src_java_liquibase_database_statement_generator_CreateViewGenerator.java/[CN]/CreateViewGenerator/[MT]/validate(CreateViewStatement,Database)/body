@@ -1,3 +1,9 @@
 {
-  return new GeneratorValidationErrors();
+  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  if (database instanceof HsqlDatabase || database instanceof DB2Database || database instanceof CacheDatabase|| database instanceof MSSQLDatabase|| database instanceof DerbyDatabase|| database instanceof SybaseASADatabase|| database instanceof InformixDatabase) {
+    if (createViewStatement.isReplaceIfExists()) {
+      validationErrors.checkDisallowedField("replaceIfExists",createViewStatement.isReplaceIfExists());
+    }
+  }
+  return validationErrors;
 }

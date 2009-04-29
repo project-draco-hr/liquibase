@@ -1,3 +1,7 @@
 {
-  return new GeneratorValidationErrors();
+  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  if (insertStatement.getSchemaName() != null && !database.supportsSchemas()) {
+    validationErrors.addError("Database does not support schemas");
+  }
+  return validationErrors;
 }

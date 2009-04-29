@@ -1,10 +1,5 @@
 {
   String createClause;
-  if (database instanceof HsqlDatabase || database instanceof DB2Database || database instanceof CacheDatabase|| database instanceof MSSQLDatabase|| database instanceof DerbyDatabase|| database instanceof SybaseASADatabase|| database instanceof InformixDatabase) {
-    if (statement.isReplaceIfExists()) {
-      throw new StatementNotSupportedOnDatabaseException("replaceIfExists not supported",statement,database);
-    }
-  }
   if (database instanceof FirebirdDatabase) {
     if (statement.isReplaceIfExists()) {
       createClause="RECREATE VIEW";

@@ -1,3 +1,8 @@
 {
-  return new GeneratorValidationErrors();
+  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  if (!database.supportsInitiallyDeferrableColumns()) {
+    validationErrors.checkDisallowedField("initiallyDeferred",addForeignKeyConstraintStatement.isInitiallyDeferred());
+    validationErrors.checkDisallowedField("deferrable",addForeignKeyConstraintStatement.isDeferrable());
+  }
+  return validationErrors;
 }

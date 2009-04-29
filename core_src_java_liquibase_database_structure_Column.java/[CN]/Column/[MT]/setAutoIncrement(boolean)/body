@@ -1,3 +1,4 @@
 {
   this.autoIncrement=autoIncrement;
+  return this;
 }

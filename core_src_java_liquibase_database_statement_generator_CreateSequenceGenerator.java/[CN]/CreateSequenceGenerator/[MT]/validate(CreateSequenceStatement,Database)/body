@@ -1,3 +1,18 @@
 {
-  return new GeneratorValidationErrors();
+  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  if (database instanceof FirebirdDatabase) {
+    validationErrors.checkDisallowedField("startValue",statement.getStartValue());
+    validationErrors.checkDisallowedField("incrementBy",statement.getIncrementBy());
+  }
+  if (database instanceof FirebirdDatabase || database instanceof HsqlDatabase) {
+    validationErrors.checkDisallowedField("minValue",statement.getMinValue());
+    validationErrors.checkDisallowedField("maxValue",statement.getMaxValue());
+  }
+  if (database instanceof FirebirdDatabase || database instanceof HsqlDatabase) {
+    validationErrors.addError("Database does not support creating sequences with maxValue");
+  }
+  if (statement.getOrdered() != null && !(database instanceof OracleDatabase || database instanceof DB2Database || database instanceof MaxDBDatabase)) {
+    validationErrors.checkDisallowedField("ordered",statement.getOrdered());
+  }
+  return validationErrors;
 }

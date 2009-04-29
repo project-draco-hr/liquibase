@@ -1,3 +1,0 @@
-{
-  throw new StatementNotSupportedOnDatabaseException(statement,database);
-}

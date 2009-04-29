@@ -3,12 +3,10 @@
   try {
     classes=PluginUtil.getClasses("liquibase.change",Change.class);
     for (    Class clazz : classes) {
-      if (Change.class.isAssignableFrom(clazz) || Change.class.isAssignableFrom(clazz.getSuperclass())) {
-        register(clazz);
-      }
+      register(clazz);
     }
   }
  catch (  Exception e) {
-    throw new RuntimeException(e);
+    throw new UnexpectedLiquibaseException(e);
   }
 }

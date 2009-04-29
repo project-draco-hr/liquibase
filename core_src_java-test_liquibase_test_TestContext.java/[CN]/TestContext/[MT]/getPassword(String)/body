@@ -1,5 +1,5 @@
 {
-  if (url.startsWith("jdbc:hsqldb")) {
+  if (url.startsWith("jdbc:hsqldb") || url.indexOf(":jtds:") != -1) {
     return "";
   }
   return "liquibase";

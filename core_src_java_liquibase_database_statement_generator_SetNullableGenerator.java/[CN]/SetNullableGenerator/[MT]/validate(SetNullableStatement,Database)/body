@@ -1,3 +1,7 @@
 {
-  return new GeneratorValidationErrors();
+  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  if (database instanceof MSSQLDatabase || database instanceof MySQLDatabase || database instanceof InformixDatabase) {
+    validationErrors.checkRequiredField("columnDataType",setNullableStatement.getColumnDataType());
+  }
+  return validationErrors;
 }

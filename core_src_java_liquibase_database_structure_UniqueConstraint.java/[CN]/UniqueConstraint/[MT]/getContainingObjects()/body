@@ -1,0 +1,7 @@
+{
+  List<DatabaseObject> columns=new ArrayList<DatabaseObject>();
+  for (  String column : this.columns) {
+    columns.add(new Column().setName(column).setTable(table));
+  }
+  return columns.toArray(new DatabaseObject[columns.size()]);
+}

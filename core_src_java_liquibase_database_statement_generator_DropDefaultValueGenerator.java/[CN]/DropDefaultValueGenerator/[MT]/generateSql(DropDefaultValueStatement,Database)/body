@@ -1,7 +1,14 @@
 {
   String sql;
   if (database instanceof MSSQLDatabase) {
-    if (database.getDatabaseProductVersion().startsWith("9")) {
+    String productVersion=null;
+    try {
+      productVersion=database.getDatabaseProductVersion();
+    }
+ catch (    JDBCException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+    if (productVersion.startsWith("9")) {
       String query="DECLARE @default sysname\n";
       query+="SELECT @default = object_name(default_object_id) FROM sys.columns WHERE object_id=object_id('" + statement.getSchemaName() + "."+ statement.getTableName()+ "') AND name='"+ statement.getColumnName()+ "'\n";
       query+="EXEC ('ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " DROP CONSTRAINT ' + @default)";
@@ -24,9 +31,6 @@
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " COLUMN  "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " DROP DEFAULT";
   }
  else   if (database instanceof InformixDatabase) {
-    if (statement.getColumnDataType() == null) {
-      throw new StatementNotSupportedOnDatabaseException("Database requires columnDataType parameter",statement,database);
-    }
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY ("+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ statement.getColumnDataType()+ ")";
   }
  else {

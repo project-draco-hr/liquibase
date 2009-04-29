@@ -1,3 +1,7 @@
 {
-  return new GeneratorValidationErrors();
+  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  if (database instanceof MySQLDatabase) {
+    validationErrors.checkRequiredField("columnDataType",renameColumnStatement.getColumnDataType());
+  }
+  return validationErrors;
 }

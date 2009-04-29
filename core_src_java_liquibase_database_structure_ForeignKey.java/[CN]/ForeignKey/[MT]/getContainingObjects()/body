@@ -1,0 +1,3 @@
+{
+  return new DatabaseObject[]{new liquibase.database.structure.Column().setName(getPrimaryKeyColumns()).setTable(getPrimaryKeyTable()),new liquibase.database.structure.Column().setName(getForeignKeyColumns()).setTable(getForeignKeyTable())};
+}

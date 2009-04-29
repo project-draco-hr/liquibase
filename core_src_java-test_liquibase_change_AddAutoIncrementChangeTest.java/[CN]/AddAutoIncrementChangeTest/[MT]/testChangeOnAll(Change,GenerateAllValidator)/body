@@ -1,0 +1,13 @@
+{
+  for (  Database database : TestContext.getInstance().getAllDatabases()) {
+    SqlStatement[] sqlStatements=change.generateStatements(database);
+    try {
+      validator.validate(sqlStatements);
+    }
+ catch (    AssertionError e) {
+      AssertionError error=new AssertionError("GenerateAllValidator failed for " + database.getProductName() + ": "+ e.getMessage());
+      error.setStackTrace(e.getStackTrace());
+      throw error;
+    }
+  }
+}

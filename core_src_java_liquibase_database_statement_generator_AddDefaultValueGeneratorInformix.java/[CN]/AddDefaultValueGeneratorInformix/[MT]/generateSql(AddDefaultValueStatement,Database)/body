@@ -1,6 +1,3 @@
 {
-  if (statement.getColumnDataType() == null) {
-    throw new StatementNotSupportedOnDatabaseException("Database requires columnDataType parameter",statement,database);
-  }
-  return new Sql[]{new UnparsedSql("ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY ("+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ database.getColumnType(statement.getColumnDataType(),false)+ " DEFAULT "+ database.convertJavaObjectToString(statement.getDefaultValue())+ ")")};
+  return new Sql[]{new UnparsedSql("ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY ("+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ database.getColumnType(statement.getColumnDataType(),false)+ " DEFAULT "+ database.convertJavaObjectToString(statement.getDefaultValue())+ ")",new Column().setTable(new Table(statement.getTableName()).setSchema(statement.getSchemaName())).setName(statement.getColumnName()))};
 }

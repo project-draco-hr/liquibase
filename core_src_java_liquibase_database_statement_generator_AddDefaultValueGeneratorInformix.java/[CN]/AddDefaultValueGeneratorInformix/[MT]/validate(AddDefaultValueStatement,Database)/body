@@ -1,0 +1,7 @@
+{
+  GeneratorValidationErrors validationErrors=super.validate(addDefaultValueStatement,database);
+  if (addDefaultValueStatement.getColumnDataType() == null) {
+    validationErrors.checkRequiredField("columnDataType",addDefaultValueStatement.getColumnDataType());
+  }
+  return validationErrors;
+}
