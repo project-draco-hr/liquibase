@@ -1,9 +1,0 @@
-{
-  Element element=currentChangeLogFileDOM.createElement("dropColumn");
-  if (getSchemaName() != null) {
-    element.setAttribute("schemaName",getSchemaName());
-  }
-  element.setAttribute("tableName",getTableName());
-  element.setAttribute("columnName",getColumnName());
-  return element;
-}

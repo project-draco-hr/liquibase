@@ -1,0 +1,57 @@
+{
+  Element node=currentChangeLogFileDOM.createElement(change.getChangeMetaData().getName());
+  if (change.getBaseTableSchemaName() != null) {
+    node.setAttribute("baseTableSchemaName",change.getBaseTableSchemaName());
+  }
+  node.setAttribute("baseTableName",change.getBaseTableName());
+  node.setAttribute("baseColumnNames",change.getBaseColumnNames());
+  node.setAttribute("constraintName",change.getConstraintName());
+  if (change.getReferencedTableSchemaName() != null) {
+    node.setAttribute("referencedTableSchemaName",change.getReferencedTableSchemaName());
+  }
+  node.setAttribute("referencedTableName",change.getReferencedTableName());
+  node.setAttribute("referencedColumnNames",change.getReferencedColumnNames());
+  if (change.getDeferrable() != null) {
+    node.setAttribute("deferrable",change.getDeferrable().toString());
+  }
+  if (change.getInitiallyDeferred() != null) {
+    node.setAttribute("initiallyDeferred",change.getInitiallyDeferred().toString());
+  }
+  if (change.getUpdateRule() != null) {
+switch (change.getUpdateRule()) {
+case DatabaseMetaData.importedKeyCascade:
+      node.setAttribute("onUpdate","CASCADE");
+    break;
+case DatabaseMetaData.importedKeySetNull:
+  node.setAttribute("onUpdate","SET NULL");
+break;
+case DatabaseMetaData.importedKeySetDefault:
+node.setAttribute("onUpdate","SET DEFAULT");
+break;
+case DatabaseMetaData.importedKeyRestrict:
+node.setAttribute("onUpdate","RESTRICT");
+break;
+default :
+break;
+}
+}
+if (change.getDeleteRule() != null) {
+switch (change.getDeleteRule()) {
+case DatabaseMetaData.importedKeyCascade:
+node.setAttribute("onDelete","CASCADE");
+break;
+case DatabaseMetaData.importedKeySetNull:
+node.setAttribute("onDelete","SET NULL");
+break;
+case DatabaseMetaData.importedKeySetDefault:
+node.setAttribute("onDelete","SET DEFAULT");
+break;
+case DatabaseMetaData.importedKeyRestrict:
+node.setAttribute("onDelete","RESTRICT");
+break;
+default :
+break;
+}
+}
+return node;
+}

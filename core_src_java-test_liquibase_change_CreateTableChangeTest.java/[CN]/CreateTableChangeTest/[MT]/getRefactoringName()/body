@@ -1,3 +1,3 @@
 {
-  assertEquals("Create Table",change.getChangeDescription());
+  assertEquals("Create Table",change.getChangeMetaData().getDescription());
 }

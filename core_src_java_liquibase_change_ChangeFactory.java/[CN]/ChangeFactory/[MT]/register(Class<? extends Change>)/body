@@ -1,6 +1,6 @@
 {
   try {
-    registry.put(changeClass.newInstance().getChangeName(),changeClass);
+    registry.put(changeClass.newInstance().getChangeMetaData().getName(),changeClass);
   }
  catch (  Exception e) {
     throw new UnexpectedLiquibaseException(e);

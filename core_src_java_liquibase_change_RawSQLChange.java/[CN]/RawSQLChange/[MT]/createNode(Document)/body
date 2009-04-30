@@ -1,5 +1,0 @@
-{
-  Element sqlElement=currentChangeLogFileDOM.createElement("sql");
-  sqlElement.appendChild(currentChangeLogFileDOM.createTextNode(getSql()));
-  return sqlElement;
-}

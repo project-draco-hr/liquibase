@@ -1,8 +1,0 @@
-{
-  change.setSchemaName(null);
-  Element element=change.createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
-  assertEquals("dropUniqueConstraint",element.getTagName());
-  assertEquals("TAB_NAME",element.getAttribute("tableName"));
-  assertEquals("UQ_CONSTRAINT",element.getAttribute("constraintName"));
-  assertFalse(element.hasAttribute("schemaName"));
-}

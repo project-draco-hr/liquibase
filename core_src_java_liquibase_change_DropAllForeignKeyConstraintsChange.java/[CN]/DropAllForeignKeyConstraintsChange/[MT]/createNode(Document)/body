@@ -1,8 +1,0 @@
-{
-  Element node=currentChangeLogFileDOM.createElement(getChangeName());
-  if (getBaseTableSchemaName() != null) {
-    node.setAttribute("baseTableSchemaName",getBaseTableSchemaName());
-  }
-  node.setAttribute("baseTableName",getBaseTableName());
-  return node;
-}

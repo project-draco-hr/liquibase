@@ -1,7 +1,0 @@
-{
-  Element element=change.createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
-  assertEquals("dropTable",element.getTagName());
-  assertEquals("TAB_NAME",element.getAttribute("tableName"));
-  assertEquals("true",element.getAttribute("cascadeConstraints"));
-  assertTrue(element.hasAttribute("schemaName"));
-}

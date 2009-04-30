@@ -1,0 +1,38 @@
+{
+  Element node=currentChangeLogFileDOM.createElement("changeSet");
+  node.setAttribute("id",changeSet.getId());
+  node.setAttribute("author",changeSet.getAuthor());
+  if (changeSet.isAlwaysRun()) {
+    node.setAttribute("alwaysRun","true");
+  }
+  if (changeSet.isRunOnChange()) {
+    node.setAttribute("runOnChange","true");
+  }
+  if (changeSet.getFailOnError() != null) {
+    node.setAttribute("failOnError",changeSet.getFailOnError().toString());
+  }
+  if (changeSet.getContexts() != null && changeSet.getContexts().size() > 0) {
+    StringBuffer contextString=new StringBuffer();
+    for (    String context : changeSet.getContexts()) {
+      contextString.append(context).append(",");
+    }
+    node.setAttribute("context",contextString.toString().replaceFirst(",$",""));
+  }
+  if (changeSet.getDbmsSet() != null && changeSet.getDbmsSet().size() > 0) {
+    StringBuffer dbmsString=new StringBuffer();
+    for (    String dbms : changeSet.getDbmsSet()) {
+      dbmsString.append(dbms).append(",");
+    }
+    node.setAttribute("dbms",dbmsString.toString().replaceFirst(",$",""));
+  }
+  if (StringUtils.trimToNull(changeSet.getComments()) != null) {
+    Element commentsElement=currentChangeLogFileDOM.createElement("comment");
+    Text commentsText=currentChangeLogFileDOM.createTextNode(changeSet.getComments());
+    commentsElement.appendChild(commentsText);
+    node.appendChild(commentsElement);
+  }
+  for (  Change change : changeSet.getChanges()) {
+    node.appendChild(createNode(change));
+  }
+  return node;
+}

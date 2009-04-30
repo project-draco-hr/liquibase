@@ -29,6 +29,7 @@
   addUnexpectedSequenceChanges(changes);
   addMissingViewChanges(changes);
   addUnexpectedTableChanges(changes);
+  ChangeLogSerializer changeLogSerializer=new ChangeLogSerializer(doc);
   for (  Change change : changes) {
     Element changeSet=doc.createElement("changeSet");
     changeSet.setAttribute("author",getChangeSetAuthor());
@@ -36,7 +37,7 @@
     if (getChangeSetContext() != null) {
       changeSet.setAttribute("context",getChangeSetContext());
     }
-    changeSet.appendChild(change.createNode(doc));
+    changeSet.appendChild(changeLogSerializer.createNode(change));
     doc.getDocumentElement().appendChild(changeSet);
   }
   xmlWriter.write(doc,out);

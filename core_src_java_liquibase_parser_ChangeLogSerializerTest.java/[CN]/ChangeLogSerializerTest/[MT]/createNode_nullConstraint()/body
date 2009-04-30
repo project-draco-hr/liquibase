@@ -1,0 +1,9 @@
+{
+  DropTableChange change=new DropTableChange();
+  change.setSchemaName("SCHEMA_NAME");
+  change.setTableName("TAB_NAME");
+  change.setCascadeConstraints(null);
+  Element element=new ChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(change);
+  assertEquals("dropTable",element.getTagName());
+  assertFalse(element.hasAttribute("cascadeConstraints"));
+}

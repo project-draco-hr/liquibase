@@ -1,3 +1,3 @@
 {
-  assertEquals("SQL From File",change.getChangeDescription());
+  assertEquals("SQL From File",change.getChangeMetaData().getDescription());
 }

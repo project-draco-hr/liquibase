@@ -1,9 +1,0 @@
-{
-  Element node=currentChangeLogFileDOM.createElement(getChangeName());
-  if (getSchemaName() != null) {
-    node.setAttribute("schemaName",getSchemaName());
-  }
-  node.setAttribute("tableName",getTableName());
-  node.setAttribute("constraintName",constraintName);
-  return node;
-}

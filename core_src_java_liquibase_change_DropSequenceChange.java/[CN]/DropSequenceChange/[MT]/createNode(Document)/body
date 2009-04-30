@@ -1,8 +1,0 @@
-{
-  Element element=currentChangeLogFileDOM.createElement("dropSequence");
-  if (getSchemaName() != null) {
-    element.setAttribute("schemaName",getSchemaName());
-  }
-  element.setAttribute("sequenceName",getSequenceName());
-  return element;
-}

@@ -1,0 +1,37 @@
+{
+  Element node=currentChangeLogFileDOM.createElement(change.getChangeMetaData().getName());
+  try {
+    for (    Method method : change.getClass().getMethods()) {
+      String methodName=method.getName();
+      if (!methodName.equals("getConfirmationMessage") && !methodName.equals("getChangeMetaData") && !methodName.equals("getSpecializationLevel")&& !methodName.equals("getClass")&& !methodName.equals("getAffectedDatabaseObjects")&& !methodName.equals("getLastColumn")&& !methodName.equals("getChangeSet")&& !methodName.equals("getMd5sum")&& (methodName.startsWith("get") || methodName.startsWith("is"))&& method.getParameterTypes().length == 0) {
+        String propertyName=methodName.replaceFirst("^is","").replaceFirst("^get","");
+        propertyName=propertyName.substring(0,1).toLowerCase() + propertyName.substring(1);
+        if (method.getReturnType().equals(ColumnConfig.class)) {
+          node.appendChild(createNode((ColumnConfig)method.invoke(change)));
+        }
+ else         if (Collection.class.isAssignableFrom(method.getReturnType())) {
+          for (          Object object : (Collection)method.invoke(change)) {
+            if (object instanceof ColumnConfig) {
+              node.appendChild(createNode((ColumnConfig)object));
+            }
+          }
+        }
+ else {
+          Object value=method.invoke(change);
+          if (value != null) {
+            if (propertyName.equals("procedureBody") || propertyName.equals("sql") || propertyName.equals("selectQuery")) {
+              node.setTextContent(value.toString());
+            }
+ else {
+              node.setAttribute(propertyName,value.toString());
+            }
+          }
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  return node;
+}

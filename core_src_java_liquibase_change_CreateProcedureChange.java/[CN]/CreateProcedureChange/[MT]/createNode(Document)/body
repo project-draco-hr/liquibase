@@ -1,5 +1,0 @@
-{
-  Element sqlElement=currentChangeLogFileDOM.createElement(getChangeName());
-  sqlElement.appendChild(currentChangeLogFileDOM.createTextNode(getProcedureBody()));
-  return sqlElement;
-}

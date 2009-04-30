@@ -1,3 +1,3 @@
 {
-  assertEquals("Add Primary Key",new AddPrimaryKeyChange().getChangeDescription());
+  assertEquals("Add Primary Key",new AddPrimaryKeyChange().getChangeMetaData().getDescription());
 }

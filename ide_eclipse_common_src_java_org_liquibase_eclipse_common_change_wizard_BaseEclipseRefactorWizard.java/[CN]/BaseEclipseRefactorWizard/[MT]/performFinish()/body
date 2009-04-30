@@ -48,7 +48,7 @@
  else {
             doc=documentBuilder.parse(file);
           }
-          doc.getDocumentElement().appendChild(changeSet.createNode(doc));
+          doc.getDocumentElement().appendChild(new ChangeLogSerializer(doc).createNode(changeSet));
           FileOutputStream out=new FileOutputStream(file);
           new DefaultXmlWriter().write(doc,out);
           monitor.done();

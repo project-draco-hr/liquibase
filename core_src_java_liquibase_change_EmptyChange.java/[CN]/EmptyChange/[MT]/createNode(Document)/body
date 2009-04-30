@@ -1,3 +1,0 @@
-{
-  return currentChangeLogDOM.createElement("empty");
-}

@@ -1,0 +1,11 @@
+{
+  Element customElement=currentChangeLogFileDOM.createElement("custom");
+  customElement.setAttribute("class",change.getClassName());
+  for (  String param : change.getParams()) {
+    Element paramElement=currentChangeLogFileDOM.createElement("param");
+    paramElement.setAttribute("name",param);
+    paramElement.setAttribute("value",change.getParamValues().get(param));
+    customElement.appendChild(paramElement);
+  }
+  return customElement;
+}

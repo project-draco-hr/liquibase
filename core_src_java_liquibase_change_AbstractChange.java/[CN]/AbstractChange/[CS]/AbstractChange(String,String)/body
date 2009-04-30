@@ -1,4 +1,3 @@
 {
-  this.changeName=changeName;
-  this.changeDescription=changeDescription;
+  this.changeMetaData=new ChangeMetaData(changeName,changeDescription);
 }

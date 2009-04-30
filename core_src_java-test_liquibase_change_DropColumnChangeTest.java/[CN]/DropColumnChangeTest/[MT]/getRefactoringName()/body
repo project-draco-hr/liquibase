@@ -1,3 +1,3 @@
 {
-  assertEquals("Drop Column",new DropColumnChange().getChangeDescription());
+  assertEquals("Drop Column",new DropColumnChange().getChangeMetaData().getDescription());
 }

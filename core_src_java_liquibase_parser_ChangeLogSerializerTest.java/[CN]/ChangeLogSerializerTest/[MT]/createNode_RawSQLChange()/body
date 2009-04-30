@@ -1,0 +1,7 @@
+{
+  RawSQLChange refactoring=new RawSQLChange();
+  refactoring.setSql("SOME SQL HERE");
+  Element element=new ChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(refactoring);
+  assertEquals("sql",element.getTagName());
+  assertEquals("SOME SQL HERE",element.getTextContent());
+}

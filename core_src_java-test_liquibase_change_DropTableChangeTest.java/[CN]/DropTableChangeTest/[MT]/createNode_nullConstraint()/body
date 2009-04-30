@@ -1,6 +1,0 @@
-{
-  change.setCascadeConstraints(null);
-  Element element=change.createNode(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
-  assertEquals("dropTable",element.getTagName());
-  assertFalse(element.hasAttribute("cascadeConstraints"));
-}

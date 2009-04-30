@@ -1,8 +1,0 @@
-{
-  Element element=currentChangeLogFileDOM.createElement("dropView");
-  if (getSchemaName() != null) {
-    element.setAttribute("schemaName",getSchemaName());
-  }
-  element.setAttribute("viewName",getViewName());
-  return element;
-}

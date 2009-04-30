@@ -1,3 +1,3 @@
 {
-  assertEquals("Drop Unique Constraint",change.getChangeDescription());
+  assertEquals("Drop Unique Constraint",change.getChangeMetaData().getDescription());
 }

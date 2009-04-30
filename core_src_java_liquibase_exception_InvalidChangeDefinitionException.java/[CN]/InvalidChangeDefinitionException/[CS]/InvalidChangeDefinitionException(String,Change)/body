@@ -1,3 +1,3 @@
 {
-  super(change.getChangeName() + " in '" + change.getChangeSet().toString(false)+ "' is invalid: "+ message);
+  super(change.getChangeMetaData().getName() + " in '" + change.getChangeSet().toString(false)+ "' is invalid: "+ message);
 }

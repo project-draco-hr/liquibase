@@ -1,0 +1,7 @@
+{
+  TagDatabaseChange refactoring=new TagDatabaseChange();
+  refactoring.setTag("TAG_NAME");
+  Element node=new ChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(refactoring);
+  assertEquals("tagDatabase",node.getTagName());
+  assertEquals("TAG_NAME",node.getAttribute("tag"));
+}
