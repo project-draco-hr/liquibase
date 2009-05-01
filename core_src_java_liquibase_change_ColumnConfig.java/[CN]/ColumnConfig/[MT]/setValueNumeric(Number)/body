@@ -1,3 +1,4 @@
 {
   this.valueNumeric=valueNumeric;
+  return this;
 }

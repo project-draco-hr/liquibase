@@ -1,0 +1,13 @@
+{
+  for (  Database database : TestContext.getInstance().getAllDatabases()) {
+    Change[] inverses=change.createInverses();
+    try {
+      validator.validate(inverses);
+    }
+ catch (    AssertionError e) {
+      AssertionError error=new AssertionError("InverseValidator failed for " + database.getProductName() + ": "+ e.getMessage());
+      error.setStackTrace(e.getStackTrace());
+      throw error;
+    }
+  }
+}

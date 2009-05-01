@@ -1,5 +1,0 @@
-{
-  View dbObject=new View();
-  dbObject.setName(viewName);
-  return new HashSet<DatabaseObject>(Arrays.asList(dbObject));
-}

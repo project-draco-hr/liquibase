@@ -1,3 +1,4 @@
 {
   this.defaultValueBoolean=defaultValueBoolean;
+  return this;
 }

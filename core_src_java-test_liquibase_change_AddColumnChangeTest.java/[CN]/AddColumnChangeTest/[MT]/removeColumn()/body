@@ -1,0 +1,14 @@
+{
+  ColumnConfig columnA=new ColumnConfig().setName("a");
+  ColumnConfig columnB=new ColumnConfig().setName("b");
+  AddColumnChange change=new AddColumnChange();
+  assertEquals(0,change.getColumns().size());
+  change.removeColumn(columnA);
+  assertEquals(0,change.getColumns().size());
+  change.addColumn(columnA);
+  assertEquals(1,change.getColumns().size());
+  change.removeColumn(columnB);
+  assertEquals(1,change.getColumns().size());
+  change.removeColumn(columnA);
+  assertEquals(0,change.getColumns().size());
+}

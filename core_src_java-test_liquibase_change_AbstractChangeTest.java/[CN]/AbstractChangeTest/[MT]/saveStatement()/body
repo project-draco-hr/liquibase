@@ -6,12 +6,6 @@
     public String getConfirmationMessage(){
       return null;
     }
-    public Element createNode(    Document changeLogFileDOM){
-      return null;
-    }
-    public Set<DatabaseObject> getAffectedDatabaseObjects(){
-      return null;
-    }
     public void validate(    Database database) throws InvalidChangeDefinitionException {
     }
   }

@@ -9,13 +9,24 @@
   constraints.setNullable(Boolean.FALSE);
   column.setConstraints(constraints);
   refactoring.addColumn(column);
-  SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
-  assertEquals(1,sqlStatements.length);
-  assertTrue(sqlStatements[0] instanceof AddColumnStatement);
-  assertEquals("SCHEMA",((AddColumnStatement)sqlStatements[0]).getSchemaName());
-  assertEquals("TAB",((AddColumnStatement)sqlStatements[0]).getTableName());
-  assertEquals("NEWCOL",((AddColumnStatement)sqlStatements[0]).getColumnName());
-  assertEquals("TYP",((AddColumnStatement)sqlStatements[0]).getColumnType());
-  assertFalse(((AddColumnStatement)sqlStatements[0]).isPrimaryKey());
-  assertFalse(((AddColumnStatement)sqlStatements[0]).isNullable());
+  testChangeOnAll(refactoring,new GenerateAllValidator(){
+    public void validate(    SqlStatement[] sqlStatements,    Database database){
+      if (database instanceof DB2Database) {
+        assertEquals(2,sqlStatements.length);
+        assertTrue(sqlStatements[0] instanceof AddColumnStatement);
+        assertTrue(sqlStatements[1] instanceof ReorganizeTableStatement);
+      }
+ else {
+        assertEquals(1,sqlStatements.length);
+        assertTrue(sqlStatements[0] instanceof AddColumnStatement);
+      }
+      assertEquals("SCHEMA",((AddColumnStatement)sqlStatements[0]).getSchemaName());
+      assertEquals("TAB",((AddColumnStatement)sqlStatements[0]).getTableName());
+      assertEquals("NEWCOL",((AddColumnStatement)sqlStatements[0]).getColumnName());
+      assertEquals("TYP",((AddColumnStatement)sqlStatements[0]).getColumnType());
+      assertFalse(((AddColumnStatement)sqlStatements[0]).isPrimaryKey());
+      assertFalse(((AddColumnStatement)sqlStatements[0]).isNullable());
+    }
+  }
+);
 }

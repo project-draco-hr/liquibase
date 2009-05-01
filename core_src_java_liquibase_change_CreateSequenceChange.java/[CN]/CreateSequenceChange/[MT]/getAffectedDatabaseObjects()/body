@@ -1,5 +1,0 @@
-{
-  Sequence dbObject=new Sequence();
-  dbObject.setName(sequenceName);
-  return new HashSet<DatabaseObject>(Arrays.asList(dbObject));
-}

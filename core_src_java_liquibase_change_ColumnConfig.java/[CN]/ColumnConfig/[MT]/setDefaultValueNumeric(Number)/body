@@ -1,3 +1,4 @@
 {
   this.defaultValueNumeric=defaultValueNumeric;
+  return this;
 }

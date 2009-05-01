@@ -14,19 +14,40 @@
   column.setType("TYP2");
   column.setConstraints(new ConstraintsConfig());
   refactoring.addColumn(column);
-  SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
-  assertEquals(2,sqlStatements.length);
-  assertTrue(sqlStatements[0] instanceof AddColumnStatement);
-  assertTrue(sqlStatements[1] instanceof AddColumnStatement);
-  assertEquals("SCHEMA",((AddColumnStatement)sqlStatements[0]).getSchemaName());
-  assertEquals("TAB",((AddColumnStatement)sqlStatements[0]).getTableName());
-  assertEquals("NEWCOL",((AddColumnStatement)sqlStatements[0]).getColumnName());
-  assertEquals("TYP",((AddColumnStatement)sqlStatements[0]).getColumnType());
-  assertFalse(((AddColumnStatement)sqlStatements[0]).isPrimaryKey());
-  assertFalse(((AddColumnStatement)sqlStatements[0]).isNullable());
-  assertEquals("SCHEMA",((AddColumnStatement)sqlStatements[1]).getSchemaName());
-  assertEquals("TAB",((AddColumnStatement)sqlStatements[1]).getTableName());
-  assertEquals("NEWCOL2",((AddColumnStatement)sqlStatements[1]).getColumnName());
-  assertEquals("TYP2",((AddColumnStatement)sqlStatements[1]).getColumnType());
-  assertTrue(((AddColumnStatement)sqlStatements[1]).isNullable());
+  testChangeOnAll(refactoring,new GenerateAllValidator(){
+    public void validate(    SqlStatement[] sqlStatements,    Database database){
+      if (database instanceof DB2Database) {
+        assertEquals(4,sqlStatements.length);
+        assertTrue(sqlStatements[0] instanceof AddColumnStatement);
+        assertTrue(sqlStatements[1] instanceof ReorganizeTableStatement);
+        assertTrue(sqlStatements[2] instanceof AddColumnStatement);
+        assertTrue(sqlStatements[3] instanceof ReorganizeTableStatement);
+      }
+ else {
+        assertEquals(2,sqlStatements.length);
+        assertTrue(sqlStatements[0] instanceof AddColumnStatement);
+        assertTrue(sqlStatements[1] instanceof AddColumnStatement);
+      }
+      AddColumnStatement firstAddColumnStatement=(AddColumnStatement)sqlStatements[0];
+      AddColumnStatement secondAddColumnStatement=null;
+      if (database instanceof DB2Database) {
+        secondAddColumnStatement=(AddColumnStatement)sqlStatements[2];
+      }
+ else {
+        secondAddColumnStatement=(AddColumnStatement)sqlStatements[1];
+      }
+      assertEquals("SCHEMA",firstAddColumnStatement.getSchemaName());
+      assertEquals("TAB",firstAddColumnStatement.getTableName());
+      assertEquals("NEWCOL",firstAddColumnStatement.getColumnName());
+      assertEquals("TYP",firstAddColumnStatement.getColumnType());
+      assertFalse(firstAddColumnStatement.isPrimaryKey());
+      assertFalse(firstAddColumnStatement.isNullable());
+      assertEquals("SCHEMA",secondAddColumnStatement.getSchemaName());
+      assertEquals("TAB",secondAddColumnStatement.getTableName());
+      assertEquals("NEWCOL2",secondAddColumnStatement.getColumnName());
+      assertEquals("TYP2",secondAddColumnStatement.getColumnType());
+      assertTrue(secondAddColumnStatement.isNullable());
+    }
+  }
+);
 }

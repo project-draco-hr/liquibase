@@ -8,4 +8,5 @@
  catch (  ParseException e) {
     this.defaultValueDate=new ComputedDateValue(defaultValueDate);
   }
+  return this;
 }

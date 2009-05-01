@@ -1,7 +1,6 @@
 {
   List<SqlStatement> sql=new ArrayList<SqlStatement>();
-  String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();
-  for (  ColumnConfig aColumn : columns) {
+  for (  ColumnConfig aColumn : getColumns()) {
     Set<ColumnConstraint> constraints=new HashSet<ColumnConstraint>();
     if (aColumn.getConstraints() != null) {
       if (aColumn.getConstraints().isNullable() != null && !aColumn.getConstraints().isNullable()) {
@@ -14,16 +13,16 @@
     if (aColumn.isAutoIncrement() != null && aColumn.isAutoIncrement()) {
       constraints.add(new AutoIncrementConstraint(aColumn.getName()));
     }
-    AddColumnStatement addColumnStatement=new AddColumnStatement(schemaName,getTableName(),aColumn.getName(),aColumn.getType(),aColumn.getDefaultValueObject(),constraints.toArray(new ColumnConstraint[constraints.size()]));
+    AddColumnStatement addColumnStatement=new AddColumnStatement(getSchemaName(),getTableName(),aColumn.getName(),aColumn.getType(),aColumn.getDefaultValueObject(),constraints.toArray(new ColumnConstraint[constraints.size()]));
     sql.add(addColumnStatement);
+    if (database instanceof DB2Database) {
+      sql.add(new ReorganizeTableStatement(getSchemaName(),getTableName()));
+    }
     if (aColumn.getValueObject() != null) {
-      UpdateStatement updateStatement=new UpdateStatement(schemaName,getTableName());
+      UpdateStatement updateStatement=new UpdateStatement(getSchemaName(),getTableName());
       updateStatement.addNewColumnValue(aColumn.getName(),aColumn.getValueObject());
       sql.add(updateStatement);
     }
-  }
-  if (database instanceof DB2Database) {
-    sql.add(new ReorganizeTableStatement(schemaName,getTableName()));
   }
   return sql.toArray(new SqlStatement[sql.size()]);
 }

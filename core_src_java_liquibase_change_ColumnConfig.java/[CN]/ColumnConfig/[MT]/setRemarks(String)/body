@@ -1,3 +1,4 @@
 {
   this.remarks=remarks;
+  return this;
 }

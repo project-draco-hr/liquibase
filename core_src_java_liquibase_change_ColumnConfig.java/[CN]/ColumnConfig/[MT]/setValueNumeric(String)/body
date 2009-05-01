@@ -17,4 +17,5 @@
       this.valueNumeric=new ComputedNumericValue(valueNumeric);
     }
   }
+  return this;
 }

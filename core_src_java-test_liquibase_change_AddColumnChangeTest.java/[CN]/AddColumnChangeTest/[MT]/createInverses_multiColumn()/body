@@ -1,0 +1,28 @@
+{
+  AddColumnChange refactoring=new AddColumnChange();
+  refactoring.setSchemaName("SCHEMA");
+  refactoring.setTableName("TAB");
+  ColumnConfig column=new ColumnConfig();
+  column.setName("NEWCOL");
+  column.setType("TYP");
+  ConstraintsConfig constraints=new ConstraintsConfig();
+  constraints.setNullable(Boolean.FALSE);
+  constraints.setPrimaryKey(Boolean.TRUE);
+  column.setAutoIncrement(Boolean.TRUE);
+  column.setConstraints(constraints);
+  refactoring.addColumn(column);
+  column=new ColumnConfig();
+  column.setName("NEWCOL2");
+  column.setType("TYP");
+  refactoring.addColumn(column);
+  testInverseOnAll(refactoring,new InverseValidator(){
+    public void validate(    Change[] changes){
+      assertEquals(2,changes.length);
+      assertTrue(changes[0] instanceof DropColumnChange);
+      assertEquals("NEWCOL",((DropColumnChange)changes[0]).getColumnName());
+      assertTrue(changes[1] instanceof DropColumnChange);
+      assertEquals("NEWCOL2",((DropColumnChange)changes[1]).getColumnName());
+    }
+  }
+);
+}
