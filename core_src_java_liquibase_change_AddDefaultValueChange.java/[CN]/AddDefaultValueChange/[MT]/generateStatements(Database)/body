@@ -22,5 +22,5 @@
       defaultValue=new ComputedDateValue(getDefaultValueDate());
     }
   }
-  return new SqlStatement[]{new AddDefaultValueStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getColumnName(),getColumnDataType(),defaultValue)};
+  return new SqlStatement[]{new AddDefaultValueStatement(getSchemaName(),getTableName(),getColumnName(),getColumnDataType(),defaultValue)};
 }

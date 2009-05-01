@@ -2,13 +2,12 @@
   AddDefaultValueChange change=new AddDefaultValueChange();
   change.setTableName("TABLE_NAME");
   change.setColumnName("COLUMN_NAME");
-  change.setDefaultValue("New default value");
-  change.setColumnDataType("VARCHAR(255)");
+  change.setDefaultValueNumeric("Math.random()");
   SqlStatement[] statements=change.generateStatements(new MockDatabase());
   assertEquals(1,statements.length);
   AddDefaultValueStatement statement=(AddDefaultValueStatement)statements[0];
   assertEquals("TABLE_NAME",statement.getTableName());
   assertEquals("COLUMN_NAME",statement.getColumnName());
-  assertEquals("New default value",statement.getDefaultValue());
-  assertEquals("VARCHAR(255)",statement.getColumnDataType());
+  assertTrue(statement.getDefaultValue() instanceof ComputedNumericValue);
+  assertEquals("Math.random()",statement.getDefaultValue().toString());
 }
