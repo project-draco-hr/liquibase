@@ -1,0 +1,13 @@
+{
+  LoadDataChange refactoring=new LoadDataChange();
+  refactoring.setSchemaName("SCHEMA_NAME");
+  refactoring.setTableName("TABLE_NAME");
+  refactoring.setFile("FILE_NAME");
+  refactoring.setEncoding("UTF-8");
+  Element node=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(refactoring);
+  assertEquals("loadData",node.getNodeName());
+  assertEquals("SCHEMA_NAME",node.getAttribute("schemaName"));
+  assertEquals("TABLE_NAME",node.getAttribute("tableName"));
+  assertEquals("FILE_NAME",node.getAttribute("file"));
+  assertEquals("UTF-8",node.getAttribute("encoding"));
+}

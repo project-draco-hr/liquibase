@@ -1,0 +1,6 @@
+{
+  ChangeLogParserFactory.getInstance().getParsers().clear();
+  assertEquals(0,ChangeLogParserFactory.getInstance().getParsers().size());
+  ChangeLogParserFactory.getInstance().register(new MockChangeLogParser());
+  assertEquals(1,ChangeLogParserFactory.getInstance().getParsers().size());
+}

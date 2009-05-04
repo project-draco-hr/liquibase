@@ -1,3 +1,0 @@
-{
-  this.changeLogParameters=new HashMap<String,Object>();
-}

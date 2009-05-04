@@ -1,3 +1,0 @@
-String physicalChangeLogLocation
-FileOpener fileOpener
-Map<String,Object> changeLogProperties

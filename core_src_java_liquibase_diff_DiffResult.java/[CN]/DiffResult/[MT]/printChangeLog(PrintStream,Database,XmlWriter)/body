@@ -29,7 +29,7 @@
   addUnexpectedSequenceChanges(changes);
   addMissingViewChanges(changes);
   addUnexpectedTableChanges(changes);
-  ChangeLogSerializer changeLogSerializer=new ChangeLogSerializer(doc);
+  XMLChangeLogSerializer changeLogSerializer=new XMLChangeLogSerializer(doc);
   for (  Change change : changes) {
     Element changeSet=doc.createElement("changeSet");
     changeSet.setAttribute("author",getChangeSetAuthor());

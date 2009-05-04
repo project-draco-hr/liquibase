@@ -1,0 +1,5 @@
+{
+  ChangeLogParserFactory instance1=ChangeLogParserFactory.getInstance();
+  ChangeLogParserFactory.reset();
+  assertFalse(instance1 == ChangeLogParserFactory.getInstance());
+}

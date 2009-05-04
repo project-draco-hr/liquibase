@@ -1,0 +1,5 @@
+{
+  for (  String extension : changeLogParser.getValidFileExtensions()) {
+    parsers.put(extension,changeLogParser);
+  }
+}

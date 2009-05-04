@@ -1,0 +1,4 @@
+{
+  fileNameOrExtension=fileNameOrExtension.replaceAll(".*\\.","");
+  return parsers.get(fileNameOrExtension);
+}

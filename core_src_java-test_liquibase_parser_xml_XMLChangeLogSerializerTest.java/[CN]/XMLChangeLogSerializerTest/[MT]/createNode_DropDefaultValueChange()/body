@@ -1,0 +1,10 @@
+{
+  DropDefaultValueChange change=new DropDefaultValueChange();
+  change.setTableName("TABLE_NAME");
+  change.setColumnName("COL_NAME");
+  Element node=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(change);
+  assertEquals("dropDefaultValue",node.getTagName());
+  assertFalse(node.hasAttribute("schemaName"));
+  assertEquals("TABLE_NAME",node.getAttribute("tableName"));
+  assertEquals("COL_NAME",node.getAttribute("columnName"));
+}

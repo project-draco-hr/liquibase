@@ -1,0 +1,9 @@
+{
+  ChangeLogParserFactory.getInstance().getParsers().clear();
+  XMLChangeLogParser xmlChangeLogParser=new XMLChangeLogParser();
+  ChangeLogParserFactory.getInstance().register(xmlChangeLogParser);
+  ChangeLogParserFactory.getInstance().register(new SqlChangeLogParser());
+  ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser("xml");
+  assertNotNull(parser);
+  assertTrue(xmlChangeLogParser == parser);
+}
