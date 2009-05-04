@@ -1,0 +1,8 @@
+{
+  DatabaseChangeLog changeLog=new XMLChangeLogParser().parse("liquibase/changelog/parser/xml/logicalPathChangeLog.xml",new HashMap<String,Object>(),new JUnitFileOpener());
+  assertEquals("liquibase/parser-logical/xml/logicalPathChangeLog.xml",changeLog.getLogicalFilePath());
+  assertEquals("liquibase/changelog/parser/xml/logicalPathChangeLog.xml",changeLog.getPhysicalFilePath());
+  assertEquals(0,changeLog.getPreconditions().getNestedPreconditions().size());
+  assertEquals(1,changeLog.getChangeSets().size());
+  assertEquals("liquibase/parser-logical/xml/logicalPathChangeLog.xml",changeLog.getChangeSets().get(0).getFilePath());
+}
