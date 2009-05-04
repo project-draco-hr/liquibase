@@ -1,0 +1,5 @@
+{
+  AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,null);
+  testSqlOnAllExcept("alter table [adduqtest] add unique ([coltomakeuq])",statement,MSSQLDatabase.class);
+  testSqlOn("alter table [dbo].[adduqtest] add unique ([coltomakeuq])",statement,MSSQLDatabase.class);
+}

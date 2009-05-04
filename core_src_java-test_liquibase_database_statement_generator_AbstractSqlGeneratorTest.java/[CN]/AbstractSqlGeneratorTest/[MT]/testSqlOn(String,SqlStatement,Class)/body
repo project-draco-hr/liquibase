@@ -1,3 +1,0 @@
-{
-  testSql(expectedSql,sqlStatement,includeDatabases,new Class[0]);
-}

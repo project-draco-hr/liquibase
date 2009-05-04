@@ -1,0 +1,6 @@
+{
+  AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME);
+  testSqlOn("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",statement,SybaseDatabase.class);
+  testSqlOn("alter table [dbo].[adduqtest] add constraint [uq_test] unique ([coltomakeuq])",statement,MSSQLDatabase.class);
+  testSqlOn("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",statement,SybaseASADatabase.class);
+}

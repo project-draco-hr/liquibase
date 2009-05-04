@@ -7,7 +7,8 @@
       return new GeneratorValidationErrors();
     }
     public boolean isValidGenerator(    SqlStatement statement,    Database database){
-      return createTableStatementClass.isAssignableFrom(statement.getClass()) && sqlDatabaseClass.isAssignableFrom(database.getClass());
+      boolean ret=sqlStatementClass.isAssignableFrom(statement.getClass()) && sqlDatabaseClass.isAssignableFrom(database.getClass());
+      return ret;
     }
     public Sql[] generateSql(    SqlStatement statement,    Database database){
       return new Sql[0];

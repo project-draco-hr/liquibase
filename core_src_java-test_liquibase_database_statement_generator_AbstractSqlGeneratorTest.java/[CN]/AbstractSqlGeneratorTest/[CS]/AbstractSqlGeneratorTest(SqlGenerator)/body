@@ -1,4 +1,6 @@
 {
   this.generatorUnderTest=generatorUnderTest;
-  this.setupStatements=setupStatements();
+  for (  Database database : TestContext.getInstance().getAvailableDatabases()) {
+    this.setupStatements=setupStatements(database);
+  }
 }

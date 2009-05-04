@@ -2,10 +2,10 @@
   for (  Database database : TestContext.getInstance().getAllDatabases()) {
     boolean isImpl=generatorUnderTest.isValidGenerator(createSampleSqlStatement(),database);
     if (shouldBeImplementation(database)) {
-      assertTrue("Unexpected true isValidGenerator for " + database.getProductName(),isImpl);
+      assertTrue("Unexpected false isValidGenerator for " + database.getProductName(),isImpl);
     }
  else {
-      assertFalse("Unexpected false isValidGenerator for " + database.getProductName(),isImpl);
+      assertFalse("Unexpected true isValidGenerator for " + database.getProductName(),isImpl);
     }
   }
 }

@@ -1,11 +1,10 @@
 {
   SqlGeneratorFactory.getInstance().getGenerators().clear();
-  SqlGenerator mysqlIncorrectGenerator=addGenerator(CreateTableStatement.class,MySQLDatabase.class,1);
-  SqlGenerator oracleIncorrectGenerator=addGenerator(CreateTableStatement.class,OracleDatabase.class,1);
-  SqlGenerator mysqlBetterGenerator=addGenerator(AddAutoIncrementStatement.class,MySQLDatabase.class,2);
-  SqlGenerator mysqlCorrectGenerator=addGenerator(AddAutoIncrementStatement.class,MySQLDatabase.class,1);
-  SqlGenerator oracleCorrectGenerator=addGenerator(AddAutoIncrementStatement.class,OracleDatabase.class,1);
-  SqlGenerator bestSqlGenerator=SqlGeneratorFactory.getInstance().getBestGenerator(new AddDefaultValueStatement(null,"person","name","N/A"),new MySQLDatabase());
-  assertNotNull(bestSqlGenerator);
+  SqlGenerator<CreateTableStatement> mysqlIncorrectGenerator=addGenerator(CreateTableStatement.class,MySQLDatabase.class,1);
+  SqlGenerator<CreateTableStatement> oracleIncorrectGenerator=addGenerator(CreateTableStatement.class,OracleDatabase.class,1);
+  SqlGenerator<AddAutoIncrementStatement> mysqlBetterGenerator=addGenerator(AddAutoIncrementStatement.class,MySQLDatabase.class,2);
+  SqlGenerator<AddAutoIncrementStatement> mysqlCorrectGenerator=addGenerator(AddAutoIncrementStatement.class,MySQLDatabase.class,1);
+  SqlGenerator<AddAutoIncrementStatement> oracleCorrectGenerator=addGenerator(AddAutoIncrementStatement.class,OracleDatabase.class,1);
+  SqlGenerator<AddDefaultValueStatement> bestSqlGenerator=SqlGeneratorFactory.getInstance().getBestGenerator(new AddDefaultValueStatement(null,"person","name","N/A"),new MySQLDatabase());
   assertNull(bestSqlGenerator);
 }

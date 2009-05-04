@@ -1,0 +1,4 @@
+{
+  AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(TestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME);
+  testSqlOnAll("alter table [liquibaseb].[adduqtest] add constraint [uq_test] unique ([coltomakeuq])",statement);
+}

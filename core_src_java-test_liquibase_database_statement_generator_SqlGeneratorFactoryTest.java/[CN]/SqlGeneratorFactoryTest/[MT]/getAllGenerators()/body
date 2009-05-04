@@ -1,5 +1,5 @@
 {
   SortedSet<SqlGenerator> allGenerators=SqlGeneratorFactory.getInstance().getAllGenerators(new AddAutoIncrementStatement(null,"person","name","varchar(255)"),new H2Database());
   assertNotNull(allGenerators);
-  assertEquals(2,allGenerators.size());
+  assertEquals(1,allGenerators.size());
 }
