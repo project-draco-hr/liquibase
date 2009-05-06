@@ -1,17 +1,12 @@
 {
   Set<DatabaseObject> affectedObjects=new HashSet<DatabaseObject>();
-  try {
-    for (    SqlStatement statement : generateStatements(database)) {
-      SqlGenerator sqlGenerator=SqlGeneratorFactory.getInstance().getBestGenerator(statement,database);
-      if (sqlGenerator != null) {
-        for (        Sql sql : sqlGenerator.generateSql(statement,database)) {
-          affectedObjects.addAll(sql.getAffectedDatabaseObjects());
-        }
+  for (  SqlStatement statement : generateStatements(database)) {
+    SqlGenerator sqlGenerator=SqlGeneratorFactory.getInstance().getBestGenerator(statement,database);
+    if (sqlGenerator != null) {
+      for (      Sql sql : sqlGenerator.generateSql(statement,database)) {
+        affectedObjects.addAll(sql.getAffectedDatabaseObjects());
       }
     }
-    return affectedObjects;
   }
- catch (  UnsupportedChangeException e) {
-    return new HashSet<DatabaseObject>();
-  }
+  return affectedObjects;
 }

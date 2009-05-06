@@ -1,13 +1,7 @@
 {
-  try {
-    for (    SqlStatement statement : generateStatements(database)) {
-      GeneratorValidationErrors validationErrors=SqlGeneratorFactory.getInstance().getBestGenerator(statement,database).validate(statement,database);
-      if (validationErrors.hasErrors()) {
-        throw new InvalidChangeDefinitionException("Change is invalid for " + database + ": "+ StringUtils.join(validationErrors.getErrorMessages(),", "),this);
-      }
-    }
+  ValidationErrors changeValidationErrors=new ValidationErrors();
+  for (  SqlStatement statement : generateStatements(database)) {
+    changeValidationErrors.addAll(SqlGeneratorFactory.getInstance().getBestGenerator(statement,database).validate(statement,database));
   }
- catch (  UnsupportedChangeException e) {
-    throw new InvalidChangeDefinitionException("Change is invalid for " + database + ": "+ e.getMessage(),this);
-  }
+  return changeValidationErrors;
 }

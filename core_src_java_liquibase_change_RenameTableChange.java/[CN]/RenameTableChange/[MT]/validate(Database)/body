@@ -1,8 +1,0 @@
-{
-  if (StringUtils.trimToNull(oldTableName) == null) {
-    throw new InvalidChangeDefinitionException("oldTableName is required",this);
-  }
-  if (StringUtils.trimToNull(newTableName) == null) {
-    throw new InvalidChangeDefinitionException("newTableName is required",this);
-  }
-}

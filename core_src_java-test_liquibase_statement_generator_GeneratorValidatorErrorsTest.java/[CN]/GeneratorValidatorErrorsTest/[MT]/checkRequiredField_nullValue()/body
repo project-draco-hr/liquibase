@@ -1,7 +1,0 @@
-{
-  GeneratorValidationErrors errors=new GeneratorValidationErrors();
-  assertFalse(errors.hasErrors());
-  errors.checkRequiredField("testField",null);
-  assertTrue(errors.hasErrors());
-  assertTrue(errors.getErrorMessages().contains("testField is required"));
-}

@@ -22,6 +22,6 @@
     }
   }
  catch (  JDBCException e) {
-    throw new UnsupportedChangeException("Failed to find foreign keys for table: " + getBaseTableName(),e);
+    throw new UnexpectedLiquibaseException("Failed to find foreign keys for table: " + getBaseTableName(),e);
   }
 }

@@ -3,8 +3,8 @@
     public int getSpecializationLevel(){
       return level;
     }
-    public GeneratorValidationErrors validate(    SqlStatement sqlStatement,    Database database){
-      return new GeneratorValidationErrors();
+    public ValidationErrors validate(    SqlStatement sqlStatement,    Database database){
+      return new ValidationErrors();
     }
     public boolean isValidGenerator(    SqlStatement statement,    Database database){
       boolean ret=sqlStatementClass.isAssignableFrom(statement.getClass()) && sqlDatabaseClass.isAssignableFrom(database.getClass());

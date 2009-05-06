@@ -9,7 +9,7 @@
     try {
       change.validate(database);
     }
- catch (    InvalidChangeDefinitionException e) {
+ catch (    Throwable e) {
       changeValidationExceptions.add(e);
     }
   }

@@ -1,7 +1,0 @@
-{
-  int digit=Character.digit(ch,16);
-  if (digit == -1) {
-    throw new UnexpectedLiquibaseException("Illegal hexadecimal charcter " + ch + " at index "+ index);
-  }
-  return digit;
-}

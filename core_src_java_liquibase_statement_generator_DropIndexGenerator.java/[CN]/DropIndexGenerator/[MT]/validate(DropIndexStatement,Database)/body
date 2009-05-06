@@ -1,5 +1,5 @@
 {
-  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  ValidationErrors validationErrors=new ValidationErrors();
   if (database instanceof MySQLDatabase || database instanceof MSSQLDatabase) {
     validationErrors.checkRequiredField("tableName",statement.getTableName());
   }

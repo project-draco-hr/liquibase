@@ -35,7 +35,7 @@
     try {
       statements.addAll(SQLiteDatabase.getAlterTableStatements(rename_alter_visitor,database,getSchemaName(),getTableName()));
     }
- catch (    JDBCException e) {
+ catch (    Exception e) {
       e.printStackTrace();
     }
   }

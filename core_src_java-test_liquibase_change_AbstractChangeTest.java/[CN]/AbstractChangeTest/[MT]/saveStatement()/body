@@ -6,8 +6,6 @@
     public String getConfirmationMessage(){
       return null;
     }
-    public void validate(    Database database) throws InvalidChangeDefinitionException {
-    }
   }
 ;
   StringWriter stringWriter=new StringWriter();

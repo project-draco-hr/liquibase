@@ -1,5 +1,5 @@
 {
-  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  ValidationErrors validationErrors=new ValidationErrors();
   if (database instanceof FirebirdDatabase || database instanceof HsqlDatabase) {
     validationErrors.checkDisallowedField("incrementBy",alterSequenceStatement.getIncrementBy());
     validationErrors.checkDisallowedField("maxValue",alterSequenceStatement.getMaxValue());

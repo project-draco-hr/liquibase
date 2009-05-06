@@ -33,7 +33,7 @@
       }
     }
  catch (    IOException e) {
-      throw new UnsupportedChangeException("Error executing command: " + e);
+      throw new UnexpectedLiquibaseException("Error executing command: " + e);
     }
   }
   return new SqlStatement[0];

@@ -1,5 +1,5 @@
 {
-  GeneratorValidationErrors validationErrors=super.validate(addAutoIncrementStatement,database);
+  ValidationErrors validationErrors=super.validate(addAutoIncrementStatement,database);
   validationErrors.checkRequiredField("columnDataType",addAutoIncrementStatement.getColumnDataType());
   return validationErrors;
 }

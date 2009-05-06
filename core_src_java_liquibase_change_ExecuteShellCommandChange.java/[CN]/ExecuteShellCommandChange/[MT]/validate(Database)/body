@@ -1,5 +1,0 @@
-{
-  if (StringUtils.trimToNull(executable) == null) {
-    throw new InvalidChangeDefinitionException("executable is required",this);
-  }
-}

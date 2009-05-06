@@ -1,6 +1,3 @@
 {
-  if (!database.supportsSequences()) {
-    throw new UnsupportedChangeException("Sequences do not exist in " + database.getProductName());
-  }
   return new SqlStatement[]{new AlterSequenceStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getSequenceName()).setIncrementBy(getIncrementBy()).setMaxValue(getMaxValue()).setMinValue(getMinValue()).setOrdered(isOrdered())};
 }

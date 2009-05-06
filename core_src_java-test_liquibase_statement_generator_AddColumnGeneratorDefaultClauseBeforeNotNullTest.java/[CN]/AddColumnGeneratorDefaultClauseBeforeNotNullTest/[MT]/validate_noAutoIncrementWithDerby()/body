@@ -1,4 +1,4 @@
 {
-  GeneratorValidationErrors validationErrors=generatorUnderTest.validate(new AddColumnStatement(null,"table_name","column_name","int",null,new AutoIncrementConstraint("column_name")),new DerbyDatabase());
+  ValidationErrors validationErrors=generatorUnderTest.validate(new AddColumnStatement(null,"table_name","column_name","int",null,new AutoIncrementConstraint("column_name")),new DerbyDatabase());
   assertTrue(validationErrors.getErrorMessages().contains("Cannot add an identity column to a database"));
 }

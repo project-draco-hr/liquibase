@@ -1,6 +1,0 @@
-{
-  GeneratorValidationErrors errors=new GeneratorValidationErrors();
-  assertFalse(errors.hasErrors());
-  errors.addError("test message");
-  assertTrue(errors.hasErrors());
-}

@@ -1,5 +1,5 @@
 {
-  GeneratorValidationErrors validationErrors=new GeneratorValidationErrors();
+  ValidationErrors validationErrors=new ValidationErrors();
   if (dropPrimaryKeyStatement.getConstraintName() == null) {
     if (database instanceof MSSQLDatabase || database instanceof PostgresDatabase || database instanceof FirebirdDatabase) {
       validationErrors.checkDisallowedField("constraintName",dropPrimaryKeyStatement.getConstraintName());

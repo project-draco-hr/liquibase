@@ -1,5 +1,0 @@
-{
-  if (StringUtils.trimToNull(sequenceName) == null) {
-    throw new InvalidChangeDefinitionException("sequenceName is required",this);
-  }
-}

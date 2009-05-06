@@ -1,0 +1,6 @@
+{
+  ValidationErrors errors=new ValidationErrors();
+  assertFalse(errors.hasErrors());
+  errors.addError("test message");
+  assertTrue(errors.hasErrors());
+}
