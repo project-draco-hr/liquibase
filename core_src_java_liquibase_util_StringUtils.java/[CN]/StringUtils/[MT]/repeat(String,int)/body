@@ -1,0 +1,7 @@
+{
+  String returnString="";
+  for (int i=0; i < times; i++) {
+    returnString+=string;
+  }
+  return returnString;
+}

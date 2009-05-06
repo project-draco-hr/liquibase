@@ -1,0 +1,38 @@
+{
+  try {
+    StringBuffer buffer=new StringBuffer();
+    buffer.append("[");
+    SortedSet<String> values=new TreeSet<String>();
+    for (    Field field : objectToSerialize.getClass().getDeclaredFields()) {
+      field.setAccessible(true);
+      if (field.getAnnotation(ChangeMetaDataField.class) != null) {
+        continue;
+      }
+      String propertyName=field.getName();
+      Object value=field.get(objectToSerialize);
+      if (value instanceof ColumnConfig) {
+        values.add(indent(indent) + serializeColumnConfig((ColumnConfig)field.get(objectToSerialize),indent + 1));
+      }
+ else {
+        if (value != null) {
+          if (value instanceof Collection) {
+            values.add(indent(indent) + propertyName + "="+ serializeObject((Collection)value,indent + 1));
+          }
+ else {
+            values.add(indent(indent) + propertyName + "=\""+ value.toString()+ "\"");
+          }
+        }
+      }
+    }
+    if (values.size() > 0) {
+      buffer.append("\n");
+      buffer.append(StringUtils.join(values,"\n"));
+      buffer.append("\n");
+    }
+    buffer.append(indent(indent - 1)).append("]");
+    return buffer.toString();
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

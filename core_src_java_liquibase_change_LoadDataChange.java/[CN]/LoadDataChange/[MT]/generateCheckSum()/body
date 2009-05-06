@@ -5,7 +5,7 @@
     if (stream == null) {
       throw new RuntimeException(getFile() + " could not be found");
     }
-    return MD5Util.computeMD5(stream);
+    return new CheckSum(stream);
   }
  catch (  IOException e) {
     throw new RuntimeException(e);

@@ -1,0 +1,3 @@
+{
+  return change.getChangeMetaData().getName() + ":" + serializeObject(change,1);
+}

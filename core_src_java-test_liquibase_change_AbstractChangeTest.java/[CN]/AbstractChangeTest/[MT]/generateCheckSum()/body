@@ -1,0 +1,50 @@
+{
+  String className=getClass().getName().replaceAll("Test$","");
+  if (className.indexOf("Abstract") > 0) {
+    return;
+  }
+  Change change=(Change)Class.forName(className).getConstructor().newInstance();
+  CheckSum checkSum=change.generateCheckSum();
+  assertNotNull(checkSum);
+  assertEquals(2,checkSum.getVersion());
+  assertTrue(checkSum.toString().startsWith("2:"));
+  Map<String,String> seenCheckSums=new HashMap<String,String>();
+  for (  Field field : change.getClass().getDeclaredFields()) {
+    field.setAccessible(true);
+    if (field.getName().startsWith("$VR") || field.getName().equals("serialVersionUID")) {
+    }
+ else     if (String.class.isAssignableFrom(field.getType())) {
+      field.set(change,"asdghasdgasdg");
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+      field.set(change,"gsgasdgasdggasdg sdg a");
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+    }
+ else     if (Boolean.class.isAssignableFrom(field.getType())) {
+      field.set(change,Boolean.TRUE);
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+      field.set(change,Boolean.FALSE);
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+    }
+ else     if (Integer.class.isAssignableFrom(field.getType())) {
+      field.set(change,6532);
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+      field.set(change,-52352);
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+    }
+ else     if (List.class.isAssignableFrom(field.getType())) {
+      ColumnConfig column1=new ColumnConfig();
+      ((List)field.get(change)).add(column1);
+      column1.setName("ghsdgasdg");
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+      column1.setType("gasdgasdg");
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+      ColumnConfig column2=new ColumnConfig();
+      ((List)field.get(change)).add(column2);
+      column2.setName("87682346asgasdg");
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+    }
+ else {
+      throw new RuntimeException("Unknown field type: " + field.getType() + " for "+ field.getName());
+    }
+  }
+}

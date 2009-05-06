@@ -1,9 +1,3 @@
 {
-  try {
-    String string=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).serialize(this);
-    return MD5Util.computeMD5(string);
-  }
- catch (  ParserConfigurationException e) {
-    throw new RuntimeException(e);
-  }
+  return new CheckSum(new StringChangeLogSerializer().serialize(this));
 }

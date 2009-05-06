@@ -1,0 +1,8 @@
+{
+  String serialized=new StringChangeLogSerializer().serialize(change);
+  CheckSum newCheckSum=change.generateCheckSum();
+  if (seenCheckSums.containsKey(newCheckSum.toString())) {
+    fail("generated duplicate checksum channging " + field.getName() + "\n"+ serialized+ "\nmatches\n"+ seenCheckSums.get(newCheckSum.toString()));
+  }
+  seenCheckSums.put(newCheckSum.toString(),serialized);
+}
