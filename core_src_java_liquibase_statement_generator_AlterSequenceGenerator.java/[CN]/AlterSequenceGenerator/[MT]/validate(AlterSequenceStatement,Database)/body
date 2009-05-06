@@ -8,5 +8,6 @@
   if (!(database instanceof OracleDatabase || database instanceof DB2Database || database instanceof MaxDBDatabase)) {
     validationErrors.checkDisallowedField("ordered",alterSequenceStatement.getOrdered());
   }
+  validationErrors.checkRequiredField("sequenceName",alterSequenceStatement.getSequenceName());
   return validationErrors;
 }

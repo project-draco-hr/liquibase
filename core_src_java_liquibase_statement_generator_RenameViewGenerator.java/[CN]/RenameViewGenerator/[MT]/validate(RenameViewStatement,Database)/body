@@ -1,5 +1,7 @@
 {
   ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("oldViewName",renameViewStatement.getOldViewName());
+  validationErrors.checkRequiredField("newViewName",renameViewStatement.getNewViewName());
   if (database instanceof OracleDatabase) {
     validationErrors.checkDisallowedField("schemaName",renameViewStatement.getSchemaName());
   }

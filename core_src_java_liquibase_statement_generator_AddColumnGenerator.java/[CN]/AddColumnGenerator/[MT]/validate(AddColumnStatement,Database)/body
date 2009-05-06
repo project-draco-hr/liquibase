@@ -1,5 +1,8 @@
 {
   ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("columnName",statement.getColumnName());
+  validationErrors.checkRequiredField("columnType",statement.getColumnType());
+  validationErrors.checkRequiredField("tableName",statement.getTableName());
   if (statement.isPrimaryKey() && (database instanceof CacheDatabase || database instanceof H2Database || database instanceof DB2Database|| database instanceof DerbyDatabase|| database instanceof SQLiteDatabase)) {
     validationErrors.addError("Cannot add a primary key column");
   }

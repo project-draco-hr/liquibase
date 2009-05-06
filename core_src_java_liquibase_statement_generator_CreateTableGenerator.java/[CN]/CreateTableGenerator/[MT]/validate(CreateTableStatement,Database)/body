@@ -1,3 +1,6 @@
 {
-  return new ValidationErrors();
+  ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("tableName",createTableStatement.getTableName());
+  validationErrors.checkRequiredField("columns",createTableStatement.getColumns());
+  return validationErrors;
 }

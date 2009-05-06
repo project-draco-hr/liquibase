@@ -1,0 +1,7 @@
+{
+  String className=getClass().getName().replaceAll("Test$","");
+  if (className.indexOf("Abstract") > 0) {
+    return null;
+  }
+  return (Change)Class.forName(className).getConstructor().newInstance();
+}

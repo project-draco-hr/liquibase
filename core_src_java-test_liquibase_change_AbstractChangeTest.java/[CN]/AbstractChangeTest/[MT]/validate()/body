@@ -1,0 +1,12 @@
+{
+  Change change=createClassUnderTest();
+  if (change == null) {
+    return;
+  }
+  for (  Database database : TestContext.getInstance().getAllDatabases()) {
+    if (change.isAvailable(database)) {
+      ValidationErrors validationErrors=change.validate(database);
+      assertTrue("no errors found for " + database.getProductName(),validationErrors.hasErrors());
+    }
+  }
+}

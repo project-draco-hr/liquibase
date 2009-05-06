@@ -1,5 +1,7 @@
 {
   ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("viewName",createViewStatement.getViewName());
+  validationErrors.checkRequiredField("selectQuery",createViewStatement.getSelectQuery());
   if (database instanceof HsqlDatabase || database instanceof DB2Database || database instanceof CacheDatabase|| database instanceof MSSQLDatabase|| database instanceof DerbyDatabase|| database instanceof SybaseASADatabase|| database instanceof InformixDatabase) {
     if (createViewStatement.isReplaceIfExists()) {
       validationErrors.checkDisallowedField("replaceIfExists",createViewStatement.isReplaceIfExists());

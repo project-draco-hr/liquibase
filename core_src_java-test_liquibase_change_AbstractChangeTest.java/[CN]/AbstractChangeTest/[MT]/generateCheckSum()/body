@@ -1,9 +1,8 @@
 {
-  String className=getClass().getName().replaceAll("Test$","");
-  if (className.indexOf("Abstract") > 0) {
+  Change change=createClassUnderTest();
+  if (change == null) {
     return;
   }
-  Change change=(Change)Class.forName(className).getConstructor().newInstance();
   CheckSum checkSum=change.generateCheckSum();
   assertNotNull(checkSum);
   assertEquals(2,checkSum.getVersion());

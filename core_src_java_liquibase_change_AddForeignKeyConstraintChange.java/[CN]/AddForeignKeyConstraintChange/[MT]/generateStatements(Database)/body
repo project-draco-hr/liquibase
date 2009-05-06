@@ -1,7 +1,4 @@
 {
-  if (database instanceof SQLiteDatabase) {
-    return generateStatementsForSQLiteDatabase(database);
-  }
   boolean deferrable=false;
   if (getDeferrable() != null) {
     deferrable=getDeferrable();

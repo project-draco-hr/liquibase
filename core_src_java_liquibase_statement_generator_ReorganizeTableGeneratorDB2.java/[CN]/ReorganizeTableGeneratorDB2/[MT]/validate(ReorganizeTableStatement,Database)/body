@@ -1,3 +1,5 @@
 {
-  return new ValidationErrors();
+  ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("tableName",reorganizeTableStatement.getTableName());
+  return validationErrors;
 }

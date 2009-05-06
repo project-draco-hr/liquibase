@@ -1,3 +1,7 @@
 {
-  return new ValidationErrors();
+  ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("schemaName",renameTableStatement.getSchemaName());
+  validationErrors.checkRequiredField("newTableName",renameTableStatement.getNewTableName());
+  validationErrors.checkRequiredField("oldTableName",renameTableStatement.getOldTableName());
+  return validationErrors;
 }

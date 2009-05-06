@@ -4,5 +4,9 @@
     validationErrors.checkDisallowedField("initiallyDeferred",addForeignKeyConstraintStatement.isInitiallyDeferred());
     validationErrors.checkDisallowedField("deferrable",addForeignKeyConstraintStatement.isDeferrable());
   }
+  validationErrors.checkRequiredField("baseColumnNames",addForeignKeyConstraintStatement.getBaseColumnNames());
+  validationErrors.checkRequiredField("baseTableNames",addForeignKeyConstraintStatement.getBaseTableName());
+  validationErrors.checkRequiredField("referencedColumnNames",addForeignKeyConstraintStatement.getReferencedColumnNames());
+  validationErrors.checkRequiredField("referencedTableName",addForeignKeyConstraintStatement.getReferencedTableName());
   return validationErrors;
 }

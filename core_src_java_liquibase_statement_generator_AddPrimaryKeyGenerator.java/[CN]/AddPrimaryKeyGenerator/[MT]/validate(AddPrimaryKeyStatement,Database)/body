@@ -1,3 +1,6 @@
 {
-  return new ValidationErrors();
+  ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("columnNames",addPrimaryKeyStatement.getColumnNames());
+  validationErrors.checkRequiredField("tableName",addPrimaryKeyStatement.getTableName());
+  return validationErrors;
 }
