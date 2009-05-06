@@ -5,12 +5,8 @@
     digest.update(input.getBytes("UTF-8"));
   }
  catch (  Exception e) {
-    throw new RuntimeException(e);
+    throw new UnexpectedLiquibaseException(e);
   }
   byte[] digestBytes=digest.digest();
-  StringBuffer hexString=new StringBuffer();
-  for (  byte digestByte : digestBytes) {
-    hexString.append(Integer.toHexString(0xFF & digestByte));
-  }
-  return hexString.toString();
+  return new String(encodeHex(digestBytes));
 }

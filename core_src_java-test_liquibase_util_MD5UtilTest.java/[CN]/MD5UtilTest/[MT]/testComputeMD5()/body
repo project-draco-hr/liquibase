@@ -1,4 +1,6 @@
 {
   String hash=MD5Util.computeMD5(TEST_STRING);
   assertEquals(TEST_STRING_MD5_HASH,hash);
+  String hash2=MD5Util.computeMD5(TEST_STRING2);
+  assertEquals(TEST_STRING2_MD5_HASH,hash2);
 }
