@@ -1,0 +1,3 @@
+{
+  return database instanceof SybaseASADatabase || database instanceof InformixDatabase || database instanceof DerbyDatabase|| database instanceof HsqlDatabase|| database instanceof DB2Database|| database instanceof CacheDatabase|| database instanceof FirebirdDatabase;
+}

@@ -4,7 +4,7 @@
     return;
   }
   for (  Database database : TestContext.getInstance().getAllDatabases()) {
-    if (change.isAvailable(database)) {
+    if (change.isSupported(database)) {
       ValidationErrors validationErrors=change.validate(database);
       assertTrue("no errors found for " + database.getProductName(),validationErrors.hasErrors());
     }

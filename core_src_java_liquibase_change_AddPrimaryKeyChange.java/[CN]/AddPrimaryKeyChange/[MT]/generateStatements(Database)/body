@@ -5,8 +5,5 @@
   if (database instanceof DB2Database) {
     return new SqlStatement[]{statement,new ReorganizeTableStatement(schemaName,getTableName())};
   }
- else   if (database instanceof SQLiteDatabase) {
-    return generateStatementsForSQLiteDatabase(database);
-  }
   return new SqlStatement[]{statement};
 }

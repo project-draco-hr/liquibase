@@ -1,6 +1,3 @@
 {
-  if (database instanceof SQLiteDatabase) {
-    return generateStatementsForSQLiteDatabase(database);
-  }
   return new SqlStatement[]{new DropPrimaryKeyStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getConstraintName())};
 }

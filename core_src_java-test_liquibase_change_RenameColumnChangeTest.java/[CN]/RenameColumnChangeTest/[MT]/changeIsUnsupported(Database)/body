@@ -1,0 +1,3 @@
+{
+  return database instanceof DB2Database || database instanceof CacheDatabase || database instanceof SQLiteDatabase;
+}
