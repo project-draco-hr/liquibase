@@ -1,6 +1,0 @@
-{
-  AddAutoIncrementStatement statement=new AddAutoIncrementStatement(null,"table_name","id","int");
-  testSqlOnAllExcept("ALTER TABLE [table_name] MODIFY [id] int AUTO_INCREMENT",(T)statement,PostgresDatabase.class,MySQLDatabase.class);
-  testSqlOn("alter table [table_name] modify id serial auto_increment",(T)statement,PostgresDatabase.class);
-  testSqlOn("alter table `table_name` modify `id` int auto_increment",(T)statement,MySQLDatabase.class);
-}

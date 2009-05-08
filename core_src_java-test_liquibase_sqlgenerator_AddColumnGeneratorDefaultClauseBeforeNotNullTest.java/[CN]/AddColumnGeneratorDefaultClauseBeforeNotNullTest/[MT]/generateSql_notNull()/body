@@ -1,3 +1,0 @@
-{
-  testSqlOnAll("ALTER TABLE [table_name] ADD [column_name] int DEFAULT 42 NOT NULL",new AddColumnStatement(null,"table_name","column_name","int",42,new NotNullConstraint()));
-}

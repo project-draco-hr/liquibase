@@ -1,3 +1,0 @@
-String expectedSql
-T sqlStatement
-Class<? extends Database> excludedDatabases

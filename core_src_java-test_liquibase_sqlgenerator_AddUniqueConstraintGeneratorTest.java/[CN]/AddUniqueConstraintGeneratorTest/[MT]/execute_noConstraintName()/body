@@ -1,3 +1,0 @@
-{
-  AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,null);
-}

@@ -1,8 +1,0 @@
-{
-  AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(TestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME);
-  testSqlOnAllExcept("alter table liquibaseb.[adduqtest] add constraint [uq_test] unique ([coltomakeuq])",statement,MySQLDatabase.class,InformixDatabase.class,OracleDatabase.class,PostgresDatabase.class,DerbyDatabase.class,FirebirdDatabase.class);
-  testSqlOn("alter table liquibaseb.adduqtest add constraint unique (coltomakeuq) constraint uq_test",statement,InformixDatabase.class);
-  testSqlOn("alter table liquibaseb.adduqtest add constraint uq_test unique (coltomakeuq)",statement,OracleDatabase.class);
-  testSqlOn("alter table liquibaseb.\"adduqtest\" add constraint uq_test unique (\"coltomakeuq\")",statement,PostgresDatabase.class);
-  testSqlOn("alter table liquibaseb.adduqtest add constraint uq_test unique (coltomakeuq)",statement,DerbyDatabase.class);
-}

@@ -1,3 +1,0 @@
-{
-  testSqlOnAll(null,new AddAutoIncrementStatement(null,"table_name","id","int"));
-}

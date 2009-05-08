@@ -1,5 +1,0 @@
-{
-  SelectFromDatabaseChangeLogLockStatement statement=new SelectFromDatabaseChangeLogLockStatement("LOCKED");
-  testSqlOnAllExcept("select locked from [databasechangeloglock] where [id]=1",(T)statement,MSSQLDatabase.class);
-  testSqlOn("select locked from [dbo].[databasechangeloglock] where [id]=1",(T)statement,MSSQLDatabase.class);
-}

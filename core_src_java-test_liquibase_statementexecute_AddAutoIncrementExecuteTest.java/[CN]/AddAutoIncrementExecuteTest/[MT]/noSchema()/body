@@ -1,0 +1,8 @@
+{
+  this.statementUnderTest=new AddAutoIncrementStatement(null,"table_name","id","int");
+  assertCorrect("alter table [table_name] modify id serial auto_increment",PostgresDatabase.class);
+  assertCorrect("alter table `table_name` modify `id` int auto_increment",MySQLDatabase.class);
+  assertCorrect("ALTER TABLE [table_name] ALTER COLUMN [column_name] SET GENERATED ALWAYS AS IDENTITY",DB2Database.class);
+  assertCorrect("ALTER TABLE [table_name] MODIFY [column_name] serial",InformixDatabase.class);
+  assertCorrect("ALTER TABLE [table_name] MODIFY [id] int AUTO_INCREMENT");
+}

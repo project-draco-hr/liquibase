@@ -1,9 +1,0 @@
-{
-  AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME);
-  testSqlOnAllExcept("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",statement,MySQLDatabase.class,InformixDatabase.class,OracleDatabase.class,PostgresDatabase.class,DerbyDatabase.class);
-  testSqlOn("alter table `adduqtest` add constraint `uq_test` unique (`coltomakeuq`)",statement,MySQLDatabase.class);
-  testSqlOn("alter table adduqtest add constraint unique (coltomakeuq) constraint uq_test",statement,InformixDatabase.class);
-  testSqlOn("alter table adduqtest add constraint uq_test unique (coltomakeuq)",statement,OracleDatabase.class);
-  testSqlOn("alter table \"adduqtest\" add constraint uq_test unique (\"coltomakeuq\")",statement,PostgresDatabase.class);
-  testSqlOn("alter table adduqtest add constraint uq_test unique (coltomakeuq)",statement,DerbyDatabase.class);
-}

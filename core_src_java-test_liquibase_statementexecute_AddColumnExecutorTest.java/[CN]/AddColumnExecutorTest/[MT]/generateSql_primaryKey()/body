@@ -1,0 +1,5 @@
+{
+  this.statementUnderTest=new AddColumnStatement(null,"table_name","column_name","int",null,new PrimaryKeyConstraint());
+  assertCorrect("ALTER TABLE [table_name] ADD [column_name] INT NOT NULL PRIMARY KEY",HsqlDatabase.class);
+  assertCorrect("ALTER TABLE [table_name] ADD [column_name] int PRIMARY KEY NOT NULL");
+}

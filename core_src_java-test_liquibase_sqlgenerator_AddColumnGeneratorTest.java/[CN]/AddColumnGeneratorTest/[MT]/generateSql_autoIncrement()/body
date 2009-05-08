@@ -1,8 +1,0 @@
-{
-  AddColumnStatement statement=new AddColumnStatement(null,"table_name","column_name","int",null,new AutoIncrementConstraint());
-  testSqlOnAllExcept("ALTER TABLE [table_name] ADD [column_name] int auto_increment_clause",statement,SybaseASADatabase.class,SybaseDatabase.class,PostgresDatabase.class,MSSQLDatabase.class);
-  testSqlOn("ALTER TABLE [dbo].[table_name] ADD [column_name] int auto_increment_clause",statement,MSSQLDatabase.class);
-  testSqlOn("alter table [table_name] add [column_name] int default autoincrement null",statement,SybaseASADatabase.class);
-  testSqlOn("alter table [table_name] add [column_name] int identity null",statement,SybaseDatabase.class);
-  testSqlOn("alter table [table_name] add [column_name] serial",statement,PostgresDatabase.class);
-}

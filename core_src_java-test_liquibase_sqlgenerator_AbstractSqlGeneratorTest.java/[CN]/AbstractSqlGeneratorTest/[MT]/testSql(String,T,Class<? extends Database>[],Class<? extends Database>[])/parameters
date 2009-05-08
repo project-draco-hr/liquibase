@@ -1,4 +1,0 @@
-String expectedSql
-T sqlStatement
-Class<? extends Database>[] includeDatabases
-Class<? extends Database>[] excludeDatabases
