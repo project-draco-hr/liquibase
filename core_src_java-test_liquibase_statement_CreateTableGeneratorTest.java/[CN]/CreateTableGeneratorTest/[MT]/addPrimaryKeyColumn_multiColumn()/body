@@ -1,6 +1,0 @@
-{
-  CreateTableStatement statement=new CreateTableStatement(null,"tableName");
-  statement.addPrimaryKeyColumn("id1","int",null,null);
-  statement.addPrimaryKeyColumn("id2","int",null,null);
-  assertEquals(2,statement.getPrimaryKeyConstraint().getColumns().size());
-}

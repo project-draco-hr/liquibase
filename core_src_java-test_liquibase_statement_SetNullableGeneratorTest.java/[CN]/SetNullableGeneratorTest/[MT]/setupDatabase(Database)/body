@@ -1,6 +1,0 @@
-{
-  dropAndCreateTable(new CreateTableStatement(null,NOTNULL_TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)"),database);
-  dropAndCreateTable(new CreateTableStatement(null,NULLABLE_TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()),database);
-  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,NOTNULL_TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)"),database);
-  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,NULLABLE_TABLE_NAME).addColumn("id","int").addColumn(COLUMN_NAME,"varchar(50)",new NotNullConstraint()),database);
-}

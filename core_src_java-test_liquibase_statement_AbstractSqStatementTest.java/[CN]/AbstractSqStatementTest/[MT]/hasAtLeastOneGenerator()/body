@@ -1,0 +1,9 @@
+{
+  for (  Database database : TestContext.getInstance().getAllDatabases()) {
+    if (SqlGeneratorFactory.getInstance().getBestGenerator(createStatementUnderTest(),database) != null) {
+      return;
+    }
+    ;
+  }
+  fail("did not find a generator");
+}

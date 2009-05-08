@@ -1,3 +1,0 @@
-{
-  dropTableIfExists(null,TABLE_NAME,database);
-}

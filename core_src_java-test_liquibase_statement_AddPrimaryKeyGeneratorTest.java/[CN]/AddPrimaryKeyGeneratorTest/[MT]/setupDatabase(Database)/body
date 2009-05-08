@@ -1,4 +1,0 @@
-{
-  dropAndCreateTable(new CreateTableStatement(null,TABLE_NAME).addColumn(COLUMN_NAME,"int",new NotNullConstraint()).addColumn(COLUMN2_NAME,"int",new NotNullConstraint()),database);
-  dropAndCreateTable(new CreateTableStatement(TestContext.ALT_SCHEMA,TABLE_NAME).addColumn(COLUMN_NAME,"int",new NotNullConstraint()).addColumn(COLUMN2_NAME,"int",new NotNullConstraint()),database);
-}

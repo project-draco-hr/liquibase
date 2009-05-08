@@ -1,4 +1,0 @@
-{
-  dropSequenceIfExists(null,SEQ_NAME,database);
-  dropSequenceIfExists(TestContext.ALT_SCHEMA,SEQ_NAME,database);
-}

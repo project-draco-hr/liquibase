@@ -1,5 +1,0 @@
-{
-  dropTableIfExists(null,FK_TABLE_NAME,database);
-  dropTableIfExists(null,TABLE_NAME,database);
-  dropTableIfExists(TestContext.ALT_SCHEMA,TABLE_NAME,database);
-}
