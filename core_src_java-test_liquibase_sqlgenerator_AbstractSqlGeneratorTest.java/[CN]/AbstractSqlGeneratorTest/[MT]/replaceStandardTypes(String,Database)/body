@@ -1,3 +1,6 @@
 {
-  return convertedSql.replaceAll(" int "," " + database.getColumnType("int",false) + " ");
+  convertedSql=replaceType("int",convertedSql,database);
+  convertedSql=replaceType("datetime",convertedSql,database);
+  convertedSql=replaceType("boolean",convertedSql,database);
+  return convertedSql;
 }

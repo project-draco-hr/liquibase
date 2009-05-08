@@ -1,0 +1,4 @@
+{
+  CreateTableStatement createTableStatement=new CreateTableStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName()).addPrimaryKeyColumn("ID","INT",null,null,new NotNullConstraint()).addColumn("LOCKED","BOOLEAN",new NotNullConstraint()).addColumn("LOCKGRANTED","DATETIME").addColumn("LOCKEDBY","VARCHAR(255)");
+  return SqlGeneratorFactory.getInstance().generateSql(createTableStatement,database);
+}
