@@ -1,3 +1,3 @@
 {
-  super("dropDefaultValue","Drop Default Value");
+  super("dropDefaultValue","Drop Default Value",ChangeMetaData.PRIORITY_DEFAULT);
 }

@@ -1,0 +1,3 @@
+{
+  assertEquals("Add Lookup Table",new AddLookupTableChange().getChangeMetaData().getDescription());
+}

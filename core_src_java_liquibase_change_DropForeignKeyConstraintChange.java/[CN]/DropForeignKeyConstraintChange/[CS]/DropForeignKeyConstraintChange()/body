@@ -1,3 +1,3 @@
 {
-  super("dropForeignKeyConstraint","Drop Foreign Key Constraint");
+  super("dropForeignKeyConstraint","Drop Foreign Key Constraint",ChangeMetaData.PRIORITY_DEFAULT);
 }

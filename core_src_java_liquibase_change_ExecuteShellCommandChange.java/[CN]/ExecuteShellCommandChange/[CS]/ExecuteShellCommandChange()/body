@@ -1,3 +1,3 @@
 {
-  super("executeCommand","Execute Shell Command");
+  super("executeCommand","Execute Shell Command",ChangeMetaData.PRIORITY_DEFAULT);
 }

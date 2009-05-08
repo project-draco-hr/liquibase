@@ -1,6 +1,6 @@
 {
   for (  Database database : TestContext.getInstance().getAllDatabases()) {
-    if (SqlGeneratorFactory.getInstance().getBestGenerator(createStatementUnderTest(),database) != null) {
+    if (SqlGeneratorFactory.getInstance().supports(createStatementUnderTest(),database)) {
       return;
     }
     ;

@@ -1,12 +1,12 @@
 {
   SqlGenerator generator=new SqlGenerator(){
-    public int getSpecializationLevel(){
+    public int getPriority(){
       return level;
     }
     public ValidationErrors validate(    SqlStatement sqlStatement,    Database database){
       return new ValidationErrors();
     }
-    public boolean isValidGenerator(    SqlStatement statement,    Database database){
+    public boolean supports(    SqlStatement statement,    Database database){
       boolean ret=sqlStatementClass.isAssignableFrom(statement.getClass()) && sqlDatabaseClass.isAssignableFrom(database.getClass());
       return ret;
     }

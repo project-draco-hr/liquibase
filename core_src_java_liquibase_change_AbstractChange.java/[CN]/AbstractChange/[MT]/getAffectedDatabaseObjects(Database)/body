@@ -1,12 +1,7 @@
 {
   Set<DatabaseObject> affectedObjects=new HashSet<DatabaseObject>();
   for (  SqlStatement statement : generateStatements(database)) {
-    SqlGenerator sqlGenerator=SqlGeneratorFactory.getInstance().getBestGenerator(statement,database);
-    if (sqlGenerator != null) {
-      for (      Sql sql : sqlGenerator.generateSql(statement,database)) {
-        affectedObjects.addAll(sql.getAffectedDatabaseObjects());
-      }
-    }
+    affectedObjects.addAll(SqlGeneratorFactory.getInstance().getAffectedDatabaseObjects(statement,database));
   }
   return affectedObjects;
 }

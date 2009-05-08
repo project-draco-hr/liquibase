@@ -77,7 +77,7 @@ catch (      PreconditionErrorException e) {
     if (!skipChange) {
       for (      Change change : changes) {
         try {
-          change.setUp();
+          change.init();
         }
  catch (        SetupException se) {
           throw new MigrationFailedException(this,se);

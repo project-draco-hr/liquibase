@@ -1,12 +1,11 @@
 {
   ValidationErrors changeValidationErrors=new ValidationErrors();
   for (  SqlStatement statement : generateStatements(database)) {
-    SqlGenerator sqlGenerator=SqlGeneratorFactory.getInstance().getBestGenerator(statement,database);
-    if (sqlGenerator == null) {
+    if (!SqlGeneratorFactory.getInstance().supports(statement,database)) {
       changeValidationErrors.addError(getChangeMetaData().getName() + " is not supported on " + database.getProductName());
     }
  else {
-      changeValidationErrors.addAll(sqlGenerator.validate(statement,database));
+      changeValidationErrors.addAll(SqlGeneratorFactory.getInstance().validate(statement,database));
     }
   }
   return changeValidationErrors;

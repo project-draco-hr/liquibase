@@ -1,9 +1,0 @@
-{
-  for (  SqlStatement statement : generateStatements(database)) {
-    SqlGenerator sqlGenerator=SqlGeneratorFactory.getInstance().getBestGenerator(statement,database);
-    if (sqlGenerator == null) {
-      return false;
-    }
-  }
-  return true;
-}

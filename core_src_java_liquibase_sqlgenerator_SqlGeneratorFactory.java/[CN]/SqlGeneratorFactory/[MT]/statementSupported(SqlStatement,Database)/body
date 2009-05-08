@@ -1,3 +1,0 @@
-{
-  return getBestGenerator(statement,database) != null;
-}

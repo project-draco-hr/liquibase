@@ -1,6 +1,6 @@
 {
-  SqlGenerator<T> generator=SqlGeneratorFactory.getInstance().getBestGenerator(sqlStatement,database);
-  if (!generatorUnderTest.isValidGenerator(sqlStatement,database) || generatorUnderTest.validate(sqlStatement,database).hasErrors() || generator == null || !generator.getClass().equals(generatorUnderTest.getClass())) {
+  SqlGenerator<T> generator=SqlGeneratorFactory.getInstance().getGenerator(sqlStatement,database);
+  if (!generatorUnderTest.supports(sqlStatement,database) || generatorUnderTest.validate(sqlStatement,database).hasErrors() || generator == null || !generator.getClass().equals(generatorUnderTest.getClass())) {
     return false;
   }
   boolean shouldInclude=true;

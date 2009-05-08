@@ -1,7 +1,7 @@
 {
   for (  Change change : changeSet.getChanges()) {
     try {
-      change.setUp();
+      change.init();
     }
  catch (    SetupException se) {
       setupExceptions.add(se);

@@ -5,7 +5,7 @@
   SqlGenerator<AddAutoIncrementStatement> mysqlBetterGenerator=addGenerator(AddAutoIncrementStatement.class,MySQLDatabase.class,2);
   SqlGenerator<AddAutoIncrementStatement> mysqlCorrectGenerator=addGenerator(AddAutoIncrementStatement.class,MySQLDatabase.class,1);
   SqlGenerator<AddAutoIncrementStatement> oracleCorrectGenerator=addGenerator(AddAutoIncrementStatement.class,OracleDatabase.class,1);
-  SqlGenerator<AddAutoIncrementStatement> bestSqlGenerator=SqlGeneratorFactory.getInstance().getBestGenerator(new AddAutoIncrementStatement(null,"person","name","varchar(255)"),new MySQLDatabase());
+  SqlGenerator<AddAutoIncrementStatement> bestSqlGenerator=SqlGeneratorFactory.getInstance().getGenerator(new AddAutoIncrementStatement(null,"person","name","varchar(255)"),new MySQLDatabase());
   assertNotNull(bestSqlGenerator);
   assertTrue(mysqlBetterGenerator == bestSqlGenerator);
 }

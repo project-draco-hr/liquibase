@@ -1,5 +1,5 @@
 {
-  Change change=new AbstractChange("test","Test Refactorign"){
+  Change change=new AbstractChange("test","Test Refactorign",ChangeMetaData.PRIORITY_DEFAULT){
     public SqlStatement[] generateStatements(    Database database){
       return new SqlStatement[]{new RawSqlStatement("GENERATED STATEMENT;")};
     }

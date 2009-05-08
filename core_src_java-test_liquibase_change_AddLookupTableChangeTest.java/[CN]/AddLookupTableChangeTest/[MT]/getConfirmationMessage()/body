@@ -1,0 +1,6 @@
+{
+  AddLookupTableChange change=new AddLookupTableChange();
+  change.setExistingTableName("OLD_TABLE_NAME");
+  change.setExistingColumnName("OLD_COLUMN_NAME");
+  assertEquals("Lookup table added for OLD_TABLE_NAME.OLD_COLUMN_NAME",change.getConfirmationMessage());
+}

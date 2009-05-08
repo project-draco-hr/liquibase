@@ -1,11 +1,11 @@
 {
   for (  Database database : TestContext.getInstance().getAllDatabases()) {
-    boolean isImpl=generatorUnderTest.isValidGenerator(createSampleSqlStatement(),database);
+    boolean isImpl=generatorUnderTest.supports(createSampleSqlStatement(),database);
     if (shouldBeImplementation(database)) {
-      assertTrue("Unexpected false isValidGenerator for " + database.getProductName(),isImpl);
+      assertTrue("Unexpected false supports for " + database.getProductName(),isImpl);
     }
  else {
-      assertFalse("Unexpected true isValidGenerator for " + database.getProductName(),isImpl);
+      assertFalse("Unexpected true supports for " + database.getProductName(),isImpl);
     }
   }
 }

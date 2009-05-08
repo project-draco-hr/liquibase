@@ -1,6 +1,0 @@
-{
-  super(tagName,changeName);
-  stripComments=false;
-  splitStatements=true;
-  endDelimiter=";";
-}

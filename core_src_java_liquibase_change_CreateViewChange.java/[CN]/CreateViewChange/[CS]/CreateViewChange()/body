@@ -1,3 +1,3 @@
 {
-  super("createView","Create View");
+  super("createView","Create View",ChangeMetaData.PRIORITY_DEFAULT);
 }

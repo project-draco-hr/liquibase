@@ -1,4 +1,4 @@
 {
-  super("insert","Insert Row");
+  super("insert","Insert Row",ChangeMetaData.PRIORITY_DEFAULT);
   columns=new ArrayList<ColumnConfig>();
 }

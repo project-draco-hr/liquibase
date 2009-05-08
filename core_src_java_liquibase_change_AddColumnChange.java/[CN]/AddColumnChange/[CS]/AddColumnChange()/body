@@ -1,4 +1,4 @@
 {
-  super("addColumn","Add Column");
+  super("addColumn","Add Column",ChangeMetaData.PRIORITY_DEFAULT);
   columns=new ArrayList<ColumnConfig>();
 }

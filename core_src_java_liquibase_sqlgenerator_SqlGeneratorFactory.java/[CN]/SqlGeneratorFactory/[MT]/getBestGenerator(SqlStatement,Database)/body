@@ -1,9 +1,0 @@
-{
-  SortedSet<SqlGenerator> validGenerators=getAllGenerators(statement,database);
-  if (validGenerators.size() == 0) {
-    return null;
-  }
- else {
-    return validGenerators.first();
-  }
-}

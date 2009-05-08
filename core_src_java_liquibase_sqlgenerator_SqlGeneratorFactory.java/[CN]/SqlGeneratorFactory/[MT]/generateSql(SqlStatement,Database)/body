@@ -1,3 +1,7 @@
 {
-  return getBestGenerator(statement,database).generateSql(statement,database);
+  SqlGenerator sqlGenerator=getGenerator(statement,database);
+  if (sqlGenerator == null) {
+    return null;
+  }
+  return sqlGenerator.generateSql(statement,database);
 }

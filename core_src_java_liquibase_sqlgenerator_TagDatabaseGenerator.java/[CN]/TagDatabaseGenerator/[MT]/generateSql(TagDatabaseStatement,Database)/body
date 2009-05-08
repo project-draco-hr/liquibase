@@ -16,5 +16,5 @@
  else {
     updateStatement.setWhereClause("DATEEXECUTED = (SELECT MAX(DATEEXECUTED) FROM " + database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogTableName()) + ")");
   }
-  return SqlGeneratorFactory.getInstance().getBestGenerator(updateStatement,database).generateSql(updateStatement,database);
+  return SqlGeneratorFactory.getInstance().getGenerator(updateStatement,database).generateSql(updateStatement,database);
 }

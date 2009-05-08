@@ -1,0 +1,3 @@
+{
+  return getGenerator(statement,database).validate(statement,database);
+}

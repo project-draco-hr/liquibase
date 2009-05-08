@@ -4,5 +4,5 @@
   ClassLoaderFileOpener opener=new ClassLoaderFileOpener();
   change.setFileOpener(opener);
   change.setPath(fileName);
-  change.setUp();
+  change.init();
 }

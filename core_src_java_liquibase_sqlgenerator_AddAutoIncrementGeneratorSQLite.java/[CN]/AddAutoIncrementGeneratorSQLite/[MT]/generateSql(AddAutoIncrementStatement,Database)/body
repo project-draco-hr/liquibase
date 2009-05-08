@@ -21,7 +21,7 @@
 ;
   try {
     for (    SqlStatement generatedStatement : SQLiteDatabase.getAlterTableStatements(rename_alter_visitor,database,statement.getSchemaName(),statement.getTableName())) {
-      for (      SqlGenerator generator : Arrays.asList(SqlGeneratorFactory.getInstance().getBestGenerator(generatedStatement,database))) {
+      for (      SqlGenerator generator : Arrays.asList(SqlGeneratorFactory.getInstance().getGenerator(generatedStatement,database))) {
         statements.addAll(Arrays.asList(generator.generateSql(generatedStatement,database)));
       }
     }
