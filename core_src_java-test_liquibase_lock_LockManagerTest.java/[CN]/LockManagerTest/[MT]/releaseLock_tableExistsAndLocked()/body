@@ -1,0 +1,23 @@
+{
+  Database database=createMock(Database.class);
+  Executor template=createMock(Executor.class);
+  expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
+  expect(database.doesChangeLogLockTableExist()).andReturn(true);
+  expect(database.getDatabaseChangeLogTableName()).andReturn("DATABASECHANGELOG").anyTimes();
+  database.commit();
+  expectLastCall().atLeastOnce();
+  expect(database.getDefaultSchemaName()).andReturn(null).anyTimes();
+  expect(database.getDatabaseChangeLogLockTableName()).andReturn("lock_table").anyTimes();
+  expectLastCall();
+  expect(template.update(isA(UpdateStatement.class),isA(List.class))).andReturn(1);
+  template.comment("Lock Database");
+  expectLastCall().anyTimes();
+  template.comment("Release Database Lock");
+  expectLastCall().anyTimes();
+  replay(database);
+  replay(template);
+  LockManager manager=LockManager.getInstance(database);
+  manager.releaseLock();
+  verify(database);
+  verify(template);
+}

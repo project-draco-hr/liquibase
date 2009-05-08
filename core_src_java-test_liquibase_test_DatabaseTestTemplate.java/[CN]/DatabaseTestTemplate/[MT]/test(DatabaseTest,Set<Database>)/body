@@ -4,9 +4,9 @@
       continue;
     }
     database.setJdbcTemplate(new Executor(database));
-    LockHandler.getInstance(database).reset();
+    LockManager.getInstance(database).reset();
     if (database.getConnection() != null) {
-      LockHandler.getInstance(database).forceReleaseLock();
+      LockManager.getInstance(database).forceReleaseLock();
     }
     try {
       test.performTest(database);

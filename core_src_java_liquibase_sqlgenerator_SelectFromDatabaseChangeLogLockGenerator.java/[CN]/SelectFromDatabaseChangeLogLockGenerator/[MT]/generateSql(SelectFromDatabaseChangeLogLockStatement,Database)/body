@@ -1,0 +1,3 @@
+{
+  return new Sql[]{new UnparsedSql("SELECT LOCKED FROM " + database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName()) + " WHERE "+ database.escapeColumnName(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName(),"ID")+ "=1")};
+}

@@ -1,4 +1,4 @@
 {
   checkDatabaseChangeLogTable();
-  return LockHandler.getInstance(getDatabase()).listLocks();
+  return LockManager.getInstance(getDatabase()).listLocks();
 }

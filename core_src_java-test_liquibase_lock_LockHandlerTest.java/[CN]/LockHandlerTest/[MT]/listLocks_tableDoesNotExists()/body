@@ -1,9 +1,0 @@
-{
-  Database database=createMock(Database.class);
-  expect(database.doesChangeLogLockTableExist()).andReturn(false);
-  replay(database);
-  LockHandler handler=LockHandler.getInstance(database);
-  DatabaseChangeLogLock[] locks=handler.listLocks();
-  assertEquals(0,locks.length);
-  verify(database);
-}

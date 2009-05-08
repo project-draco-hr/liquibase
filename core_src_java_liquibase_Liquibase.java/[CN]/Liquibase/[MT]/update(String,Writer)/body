@@ -3,8 +3,8 @@
   JdbcOutputTemplate outputTemplate=new JdbcOutputTemplate(output,database);
   database.setJdbcTemplate(outputTemplate);
   outputHeader("Update Database Script");
-  LockHandler lockHandler=LockHandler.getInstance(database);
-  lockHandler.waitForLock();
+  LockManager lockManager=LockManager.getInstance(database);
+  lockManager.waitForLock();
   try {
     update(contexts);
     output.flush();
@@ -13,7 +13,7 @@
     throw new LiquibaseException(e);
   }
  finally {
-    lockHandler.releaseLock();
+    lockManager.releaseLock();
   }
   database.setJdbcTemplate(oldTemplate);
 }

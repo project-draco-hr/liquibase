@@ -3,8 +3,8 @@
   Executor oldTemplate=database.getJdbcTemplate();
   database.setJdbcTemplate(outputTemplate);
   outputHeader("SQL to roll back currently unexecuted changes");
-  LockHandler lockHandler=LockHandler.getInstance(database);
-  lockHandler.waitForLock();
+  LockManager lockManager=LockManager.getInstance(database);
+  lockManager.waitForLock();
   try {
     database.checkDatabaseChangeLogTable();
     DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile).parse(changeLogFile,changeLogParameters,fileOpener);
@@ -14,7 +14,7 @@
   }
   finally {
     database.setJdbcTemplate(oldTemplate);
-    lockHandler.releaseLock();
+    lockManager.releaseLock();
   }
   try {
     output.flush();

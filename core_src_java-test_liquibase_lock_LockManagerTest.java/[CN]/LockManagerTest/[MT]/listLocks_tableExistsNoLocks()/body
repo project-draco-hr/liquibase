@@ -1,0 +1,19 @@
+{
+  Database database=createMock(Database.class);
+  Executor template=createMock(Executor.class);
+  expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
+  expect(database.doesChangeLogLockTableExist()).andReturn(true);
+  expect(database.getDefaultSchemaName()).andReturn("default_schema");
+  expect(database.getDatabaseChangeLogLockTableName()).andReturn("lock_table");
+  expectLastCall();
+  expect(database.escapeTableName("default_schema","lock_table")).andReturn("default_schema.lock_table");
+  List<Map> locksList=new ArrayList<Map>();
+  expect(template.queryForList(isA(SqlStatement.class),isA(List.class))).andReturn(locksList);
+  replay(database);
+  replay(template);
+  LockManager manager=LockManager.getInstance(database);
+  DatabaseChangeLogLock[] locks=manager.listLocks();
+  assertEquals(0,locks.length);
+  verify(database);
+  verify(template);
+}

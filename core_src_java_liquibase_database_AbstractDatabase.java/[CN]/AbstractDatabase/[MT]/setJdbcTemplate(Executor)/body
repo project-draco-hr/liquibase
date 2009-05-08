@@ -1,6 +1,6 @@
 {
   if (this.executor != null && !this.executor.executesStatements() && template.executesStatements()) {
-    LockHandler.getInstance(this).reset();
+    LockManager.getInstance(this).reset();
   }
   this.executor=template;
 }

@@ -1,0 +1,28 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      LockManager.getInstance(database).reset();
+      try {
+        new Executor(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false));
+      }
+ catch (      JDBCException e) {
+        ;
+      }
+      try {
+        new Executor(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false));
+      }
+ catch (      JDBCException e) {
+        ;
+      }
+      database.commit();
+      Executor originalTemplate=database.getJdbcTemplate();
+      database.setJdbcTemplate(new JdbcOutputTemplate(new StringWriter(),database));
+      LockManager lockManager=LockManager.getInstance(database);
+      lockManager.waitForLock();
+      database.setJdbcTemplate(originalTemplate);
+      lockManager.waitForLock();
+      database.getJdbcTemplate().execute(database.getSelectChangeLogLockSQL());
+    }
+  }
+);
+}
