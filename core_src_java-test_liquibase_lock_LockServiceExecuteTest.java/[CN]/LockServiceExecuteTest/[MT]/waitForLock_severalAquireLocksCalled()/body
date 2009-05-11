@@ -1,0 +1,11 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      assertTrue(LockService.getInstance(database).acquireLock());
+      assertTrue(LockService.getInstance(database).acquireLock());
+      assertTrue(LockService.getInstance(database).acquireLock());
+      assertTrue(LockService.getInstance(database).acquireLock());
+    }
+  }
+);
+}

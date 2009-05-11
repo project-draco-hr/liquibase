@@ -1,7 +1,7 @@
 {
   log.info("Clearing database change log checksums");
-  LockManager lockManager=LockManager.getInstance(database);
-  lockManager.waitForLock();
+  LockService lockService=LockService.getInstance(database);
+  lockService.waitForLock();
   try {
     database.checkDatabaseChangeLogTable();
     UpdateStatement updateStatement=new UpdateStatement(getDatabase().getDefaultSchemaName(),getDatabase().getDatabaseChangeLogTableName());
@@ -10,6 +10,6 @@
     getDatabase().commit();
   }
   finally {
-    lockManager.releaseLock();
+    lockService.releaseLock();
   }
 }

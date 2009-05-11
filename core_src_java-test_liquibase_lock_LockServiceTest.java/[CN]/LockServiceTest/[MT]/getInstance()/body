@@ -1,0 +1,28 @@
+{
+  final Database oracle1=new OracleDatabase(){
+    @Override public boolean equals(    Object o){
+      return o == this;
+    }
+  }
+;
+  final Database oracle2=new OracleDatabase(){
+    @Override public boolean equals(    Object o){
+      return o == this;
+    }
+  }
+;
+  final Database mysql=new MySQLDatabase(){
+    @Override public boolean equals(    Object o){
+      return o == this;
+    }
+  }
+;
+  assertNotNull(LockService.getInstance(oracle1));
+  assertNotNull(LockService.getInstance(oracle2));
+  assertNotNull(LockService.getInstance(mysql));
+  assertTrue(LockService.getInstance(oracle1) == LockService.getInstance(oracle1));
+  assertTrue(LockService.getInstance(oracle2) == LockService.getInstance(oracle2));
+  assertTrue(LockService.getInstance(mysql) == LockService.getInstance(mysql));
+  assertTrue(LockService.getInstance(oracle1) != LockService.getInstance(oracle2));
+  assertTrue(LockService.getInstance(oracle1) != LockService.getInstance(mysql));
+}

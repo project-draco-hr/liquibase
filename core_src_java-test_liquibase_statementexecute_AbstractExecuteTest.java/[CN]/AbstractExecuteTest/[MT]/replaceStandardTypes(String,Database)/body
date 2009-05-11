@@ -2,5 +2,7 @@
   convertedSql=replaceType("int",convertedSql,database);
   convertedSql=replaceType("datetime",convertedSql,database);
   convertedSql=replaceType("boolean",convertedSql,database);
+  convertedSql=convertedSql.replaceAll("FALSE",database.getFalseBooleanValue());
+  convertedSql=convertedSql.replaceAll("TRUE",database.getFalseBooleanValue());
   return convertedSql;
 }

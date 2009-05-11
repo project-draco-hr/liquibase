@@ -1,4 +1,4 @@
 {
-  LockManager.getInstance(database).releaseLock();
+  LockService.getInstance(database).releaseLock();
   ideFacade.showMessage("Result","All locks released successfully");
 }

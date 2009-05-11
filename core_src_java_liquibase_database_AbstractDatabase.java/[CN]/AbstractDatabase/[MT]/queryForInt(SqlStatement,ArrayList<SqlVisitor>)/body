@@ -1,0 +1,3 @@
+{
+  return getExecutor().queryForInt(selectStatement,sqlVisitors);
+}

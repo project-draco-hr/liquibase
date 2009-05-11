@@ -1,6 +1,6 @@
 {
-  LockManager lockManager=LockManager.getInstance(database);
-  lockManager.waitForLock();
+  LockService lockService=LockService.getInstance(database);
+  lockService.waitForLock();
   try {
     database.checkDatabaseChangeLogTable();
     DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile).parse(changeLogFile,changeLogParameters,fileOpener);
@@ -11,6 +11,6 @@
     return visitor.getSeenChangeSets();
   }
   finally {
-    lockManager.releaseLock();
+    lockService.releaseLock();
   }
 }

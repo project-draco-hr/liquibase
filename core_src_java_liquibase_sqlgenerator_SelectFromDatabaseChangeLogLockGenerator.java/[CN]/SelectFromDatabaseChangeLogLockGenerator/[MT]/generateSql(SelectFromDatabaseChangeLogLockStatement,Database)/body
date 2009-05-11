@@ -1,5 +1,5 @@
 {
-  String sql="SELECT LOCKED FROM " + database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName()) + " WHERE "+ database.escapeColumnName(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName(),"ID")+ "=1";
+  String sql="SELECT " + StringUtils.join(statement.getColumnsToSelect(),",") + " FROM "+ database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName())+ " WHERE "+ database.escapeColumnName(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName(),"ID")+ "=1";
   if (database instanceof OracleDatabase) {
     sql+=" for update";
   }

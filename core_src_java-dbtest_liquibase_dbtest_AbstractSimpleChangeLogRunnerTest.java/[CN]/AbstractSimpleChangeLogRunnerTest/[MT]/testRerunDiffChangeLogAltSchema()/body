@@ -8,7 +8,7 @@
   Liquibase liquibase=createLiquibase(includedChangeLog);
   liquibase.dropAll(getSchemasToDrop());
   database.setDefaultSchemaName("liquibaseb");
-  LockManager.getInstance(database).forceReleaseLock();
+  LockService.getInstance(database).forceReleaseLock();
   liquibase.update(includedChangeLog);
   DatabaseSnapshot originalSnapshot=database.createDatabaseSnapshot(null,null);
   Diff diff=new Diff(database,"liquibaseb");

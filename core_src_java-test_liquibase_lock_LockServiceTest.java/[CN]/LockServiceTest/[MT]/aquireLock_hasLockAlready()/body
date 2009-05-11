@@ -1,0 +1,11 @@
+{
+  Database database=createMock(Database.class);
+  replay(database);
+  LockService lockService=LockService.getInstance(database);
+  assertFalse(lockService.hasChangeLogLock());
+  Field field=lockService.getClass().getDeclaredField("hasChangeLogLock");
+  field.setAccessible(true);
+  field.set(lockService,true);
+  assertTrue(lockService.hasChangeLogLock());
+  assertTrue(lockService.acquireLock());
+}

@@ -1,0 +1,5 @@
+{
+  for (  Map.Entry<Database,LockService> entity : instances.entrySet()) {
+    entity.getValue().reset();
+  }
+}

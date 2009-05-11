@@ -1,0 +1,17 @@
+{
+  Database database=createMock(Database.class);
+  database.checkDatabaseChangeLogLockTable();
+  expectLastCall();
+  database.rollback();
+  expectLastCall().anyTimes();
+  expect(database.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(false);
+  database.comment("Lock Database");
+  expectLastCall();
+  expect(database.update(isA(LockDatabaseChangeLogStatement.class),isA(ArrayList.class))).andReturn(1);
+  database.commit();
+  expectLastCall();
+  replay(database);
+  LockService service=LockService.getInstance(database);
+  service.waitForLock();
+  verify(database);
+}

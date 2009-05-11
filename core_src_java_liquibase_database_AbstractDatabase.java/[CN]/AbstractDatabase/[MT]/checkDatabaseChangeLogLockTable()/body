@@ -18,9 +18,16 @@
   }
   int rows=-1;
   if (!knowMustInsertIntoLockTable) {
-    RawSqlStatement selectStatement=new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()) + " WHERE ID=1");
+    SqlStatement selectStatement=new SelectFromDatabaseChangeLogLockStatement("COUNT(*)");
     try {
-      rows=this.getExecutor().queryForInt(selectStatement,new ArrayList<SqlVisitor>());
+      List<Map> returnList=this.getExecutor().queryForList(selectStatement,new ArrayList<SqlVisitor>());
+      if (returnList == null || returnList.size() == 0) {
+        rows=0;
+      }
+ else {
+        Map map=returnList.get(0);
+        rows=Integer.parseInt(map.values().iterator().next().toString());
+      }
     }
  catch (    JDBCException e) {
       throw e;

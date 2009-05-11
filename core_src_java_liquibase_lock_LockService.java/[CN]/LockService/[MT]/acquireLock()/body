@@ -1,0 +1,50 @@
+{
+  if (hasChangeLogLock) {
+    return true;
+  }
+  try {
+    database.rollback();
+    database.checkDatabaseChangeLogLockTable();
+    Boolean locked;
+    try {
+      locked=(Boolean)database.queryForObject(new SelectFromDatabaseChangeLogLockStatement("locked"),Boolean.class,new ArrayList<SqlVisitor>());
+    }
+ catch (    JDBCException e) {
+      if (!database.getExecutor().executesStatements()) {
+        locked=false;
+      }
+ else {
+        throw new LockException("Error checking database lock status",e);
+      }
+    }
+    if (locked) {
+      return false;
+    }
+ else {
+      database.comment("Lock Database");
+      int rowsUpdated=database.update(new LockDatabaseChangeLogStatement(),new ArrayList<SqlVisitor>());
+      if (rowsUpdated != 1) {
+        if (!database.getExecutor().executesStatements()) {
+        }
+ else {
+          throw new LockException("Did not update change log lock correctly");
+        }
+      }
+      database.commit();
+      LogFactory.getLogger().info("Successfully acquired change log lock");
+      hasChangeLogLock=true;
+      return true;
+    }
+  }
+ catch (  Exception e) {
+    throw new LockException(e);
+  }
+ finally {
+    try {
+      database.rollback();
+    }
+ catch (    JDBCException e) {
+      ;
+    }
+  }
+}

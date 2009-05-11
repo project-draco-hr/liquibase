@@ -1,0 +1,5 @@
+{
+  this.statementUnderTest=new UnlockDatabaseChangeLogStatement();
+  assertCorrect("update [dbo].[databasechangeloglock] set [locked] = FALSE, [lockedby] = null, [lockgranted] = null where  id = 1",MSSQLDatabase.class);
+  assertCorrectOnRest("update [databasechangeloglock] set [locked] = FALSE, [lockedby] = null, [lockgranted] = null where  id = 1");
+}
