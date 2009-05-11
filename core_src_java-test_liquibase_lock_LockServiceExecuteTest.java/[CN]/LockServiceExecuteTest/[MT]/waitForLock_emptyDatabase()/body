@@ -1,15 +1,16 @@
 {
   new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws Exception {
+      Executor executor=ExecutorService.getExecutor(database);
       try {
         LockService.getInstance(database).reset();
-        database.execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false),new ArrayList<SqlVisitor>());
+        executor.execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false),new ArrayList<SqlVisitor>());
       }
  catch (      JDBCException e) {
         ;
       }
       try {
-        database.execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false),new ArrayList<SqlVisitor>());
+        executor.execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false),new ArrayList<SqlVisitor>());
       }
  catch (      JDBCException e) {
         ;

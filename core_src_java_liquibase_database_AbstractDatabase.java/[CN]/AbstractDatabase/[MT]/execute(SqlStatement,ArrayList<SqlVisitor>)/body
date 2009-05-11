@@ -1,3 +1,0 @@
-{
-  getExecutor().execute(statement,sqlVisitors);
-}

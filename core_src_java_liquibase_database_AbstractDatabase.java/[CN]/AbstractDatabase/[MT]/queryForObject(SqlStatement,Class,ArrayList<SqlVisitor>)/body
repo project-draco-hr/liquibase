@@ -1,3 +1,0 @@
-{
-  return getExecutor().queryForObject(sqlStatement,returnClass,sqlVisitors);
-}

@@ -1,17 +1,18 @@
 {
   boolean knowMustInsertIntoLockTable=false;
+  Executor executor=ExecutorService.getExecutor(this);
   if (!doesChangeLogLockTableExist()) {
-    if (!this.getExecutor().executesStatements()) {
-      if (((JdbcOutputTemplate)this.getExecutor()).alreadyCreatedChangeLockTable()) {
+    if (!executor.executesStatements()) {
+      if (((LoggingExecutor)executor).alreadyCreatedChangeLockTable()) {
         return;
       }
  else {
-        ((JdbcOutputTemplate)this.getExecutor()).setAlreadyCreatedChangeLockTable(true);
+        ((LoggingExecutor)executor).setAlreadyCreatedChangeLockTable(true);
       }
     }
     SqlStatement createTableStatement=getCreateChangeLogLockSQL();
-    getExecutor().comment("Create Database Lock Table");
-    this.getExecutor().execute(createTableStatement,new ArrayList<SqlVisitor>());
+    executor.comment("Create Database Lock Table");
+    executor.execute(createTableStatement,new ArrayList<SqlVisitor>());
     this.commit();
     log.finest("Created database lock table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
     knowMustInsertIntoLockTable=true;
@@ -20,7 +21,7 @@
   if (!knowMustInsertIntoLockTable) {
     SqlStatement selectStatement=new SelectFromDatabaseChangeLogLockStatement("COUNT(*)");
     try {
-      List<Map> returnList=this.getExecutor().queryForList(selectStatement,new ArrayList<SqlVisitor>());
+      List<Map> returnList=executor.queryForList(selectStatement,new ArrayList<SqlVisitor>());
       if (returnList == null || returnList.size() == 0) {
         rows=0;
       }
@@ -34,7 +35,7 @@
     }
   }
   if (knowMustInsertIntoLockTable || rows == 0) {
-    this.getExecutor().update(getChangeLogLockInsertSQL(),new ArrayList<SqlVisitor>());
+    executor.update(getChangeLogLockInsertSQL(),new ArrayList<SqlVisitor>());
     this.commit();
     log.fine("Inserted lock row into: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
   }

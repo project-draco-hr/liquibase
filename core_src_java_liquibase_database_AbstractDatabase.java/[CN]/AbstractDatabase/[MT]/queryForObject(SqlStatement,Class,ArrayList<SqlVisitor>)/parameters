@@ -1,3 +1,0 @@
-SqlStatement sqlStatement
-Class returnClass
-ArrayList<SqlVisitor> sqlVisitors

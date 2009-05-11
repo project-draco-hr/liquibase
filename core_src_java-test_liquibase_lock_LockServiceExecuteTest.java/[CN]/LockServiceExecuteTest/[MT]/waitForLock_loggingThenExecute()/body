@@ -3,23 +3,23 @@
     public void performTest(    Database database) throws Exception {
       LockService.getInstance(database).reset();
       try {
-        database.execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false),new ArrayList<SqlVisitor>());
+        ExecutorService.getExecutor(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false),new ArrayList<SqlVisitor>());
       }
  catch (      JDBCException e) {
         ;
       }
       try {
-        database.execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false),new ArrayList<SqlVisitor>());
+        ExecutorService.getExecutor(database).execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false),new ArrayList<SqlVisitor>());
       }
  catch (      JDBCException e) {
         ;
       }
       database.commit();
-      Executor originalTemplate=database.getExecutor();
-      database.setJdbcTemplate(new JdbcOutputTemplate(new StringWriter(),database));
+      Executor originalTemplate=ExecutorService.getExecutor(database);
+      ExecutorService.setExecutor(database,new LoggingExecutor(new StringWriter(),database));
       LockService lockManager=LockService.getInstance(database);
       lockManager.waitForLock();
-      database.setJdbcTemplate(originalTemplate);
+      ExecutorService.setExecutor(database,originalTemplate);
       lockManager.waitForLock();
     }
   }

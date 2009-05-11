@@ -37,7 +37,7 @@
     }
     for (    Change change : dropChanges) {
       for (      SqlStatement statement : change.generateStatements(this)) {
-        this.getExecutor().execute(statement,new ArrayList<SqlVisitor>());
+        ExecutorService.getExecutor(this).execute(statement,new ArrayList<SqlVisitor>());
       }
     }
   }

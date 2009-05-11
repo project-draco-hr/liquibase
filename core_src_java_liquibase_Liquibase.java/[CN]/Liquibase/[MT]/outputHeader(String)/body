@@ -1,10 +1,11 @@
 {
-  database.getExecutor().comment("*********************************************************************");
-  database.getExecutor().comment(message);
-  database.getExecutor().comment("*********************************************************************");
-  database.getExecutor().comment("Change Log: " + changeLogFile);
-  database.getExecutor().comment("Ran at: " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date()));
-  database.getExecutor().comment("Against: " + getDatabase().getConnectionUsername() + "@"+ getDatabase().getConnectionURL());
-  database.getExecutor().comment("LiquiBase version: " + LiquibaseUtil.getBuildVersion());
-  database.getExecutor().comment("*********************************************************************" + StreamUtil.getLineSeparator());
+  Executor executor=ExecutorService.getExecutor(database);
+  executor.comment("*********************************************************************");
+  executor.comment(message);
+  executor.comment("*********************************************************************");
+  executor.comment("Change Log: " + changeLogFile);
+  executor.comment("Ran at: " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date()));
+  executor.comment("Against: " + getDatabase().getConnectionUsername() + "@"+ getDatabase().getConnectionURL());
+  executor.comment("LiquiBase version: " + LiquibaseUtil.getBuildVersion());
+  executor.comment("*********************************************************************" + StreamUtil.getLineSeparator());
 }

@@ -1,5 +1,5 @@
 {
-  List<Map> retList=this.getExecutor().queryForList(getViewDefinitionSql(schemaName,viewName));
+  List<Map> retList=ExecutorService.getExecutor(this).queryForList(getViewDefinitionSql(schemaName,viewName));
   StringBuilder sb=new StringBuilder();
   for (  Map rowMap : retList) {
     String s=(String)rowMap.get("viewtext");

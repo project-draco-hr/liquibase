@@ -1,2 +1,0 @@
-SqlStatement selectStatement
-ArrayList<SqlVisitor> sqlVisitors

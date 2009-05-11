@@ -1,14 +1,17 @@
 {
   Database database=createMock(Database.class);
-  expect(database.update(isA(UnlockDatabaseChangeLogStatement.class),isA(ArrayList.class))).andReturn(1);
+  Executor executor=createMock(Executor.class);
+  expect(executor.update(isA(UnlockDatabaseChangeLogStatement.class),isA(ArrayList.class))).andReturn(1);
   expect(database.doesChangeLogLockTableExist()).andReturn(true);
   database.commit();
   expectLastCall().atLeastOnce();
-  database.comment("Release Database Lock");
+  executor.comment("Release Database Lock");
   expectLastCall().anyTimes();
   database.rollback();
   expectLastCall().anyTimes();
   replay(database);
+  replay(executor);
+  ExecutorService.setExecutor(database,executor);
   LockService service=LockService.getInstance(database);
   service.releaseLock();
   verify(database);

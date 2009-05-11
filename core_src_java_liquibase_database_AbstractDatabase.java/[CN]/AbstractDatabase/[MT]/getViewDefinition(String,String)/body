@@ -2,7 +2,7 @@
   if (schemaName == null) {
     schemaName=convertRequestedSchemaToSchema(null);
   }
-  String definition=(String)this.getExecutor().queryForObject(getViewDefinitionSql(schemaName,viewName),String.class,new ArrayList<SqlVisitor>());
+  String definition=(String)ExecutorService.getExecutor(this).queryForObject(getViewDefinitionSql(schemaName,viewName),String.class,new ArrayList<SqlVisitor>());
   if (definition == null) {
     return null;
   }

@@ -1,7 +1,7 @@
 {
-  Executor oldTemplate=database.getExecutor();
-  JdbcOutputTemplate outputTemplate=new JdbcOutputTemplate(output,database);
-  database.setJdbcTemplate(outputTemplate);
+  Executor oldTemplate=ExecutorService.getExecutor(database);
+  LoggingExecutor loggingExecutor=new LoggingExecutor(output,database);
+  ExecutorService.setExecutor(database,loggingExecutor);
   outputHeader("Update Database Script");
   LockService lockService=LockService.getInstance(database);
   lockService.waitForLock();
@@ -15,5 +15,5 @@
  finally {
     lockService.releaseLock();
   }
-  database.setJdbcTemplate(oldTemplate);
+  ExecutorService.setExecutor(database,oldTemplate);
 }

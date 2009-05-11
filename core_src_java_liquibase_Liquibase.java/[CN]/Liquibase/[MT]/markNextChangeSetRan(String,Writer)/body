@@ -1,7 +1,7 @@
 {
-  JdbcOutputTemplate outputTemplate=new JdbcOutputTemplate(output,database);
-  Executor oldTemplate=database.getExecutor();
-  database.setJdbcTemplate(outputTemplate);
+  LoggingExecutor outputTemplate=new LoggingExecutor(output,database);
+  Executor oldTemplate=ExecutorService.getExecutor(database);
+  ExecutorService.setExecutor(database,outputTemplate);
   outputHeader("SQL to add all changesets to database history table");
   markNextChangeSetRan(contexts);
   try {
@@ -10,5 +10,5 @@
  catch (  IOException e) {
     throw new LiquibaseException(e);
   }
-  database.setJdbcTemplate(oldTemplate);
+  ExecutorService.setExecutor(database,oldTemplate);
 }

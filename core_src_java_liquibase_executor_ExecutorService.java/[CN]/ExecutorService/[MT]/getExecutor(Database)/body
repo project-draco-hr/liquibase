@@ -1,0 +1,6 @@
+{
+  if (!instances.containsKey(database)) {
+    instances.put(database,new Executor(database));
+  }
+  return instances.get(database);
+}

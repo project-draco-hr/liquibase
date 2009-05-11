@@ -1,11 +1,12 @@
 {
+  Executor executor=ExecutorService.getExecutor(database);
   try {
     if (database.doesChangeLogLockTableExist()) {
-      database.comment("Release Database Lock");
+      executor.comment("Release Database Lock");
       database.rollback();
-      int updatedRows=database.update(new UnlockDatabaseChangeLogStatement(),new ArrayList<SqlVisitor>());
+      int updatedRows=executor.update(new UnlockDatabaseChangeLogStatement(),new ArrayList<SqlVisitor>());
       if (updatedRows != 1) {
-        if (database.getExecutor().executesStatements()) {
+        if (executor.executesStatements()) {
           throw new LockException("Did not update change log lock correctly.\n\n" + updatedRows + "rows were updated instead of the expected 1 row.");
         }
       }

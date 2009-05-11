@@ -1,7 +1,7 @@
 {
-  Executor oldTemplate=database.getExecutor();
-  JdbcOutputTemplate outputTemplate=new JdbcOutputTemplate(output,database);
-  database.setJdbcTemplate(outputTemplate);
+  Executor oldTemplate=ExecutorService.getExecutor(database);
+  LoggingExecutor loggingExecutor=new LoggingExecutor(output,database);
+  ExecutorService.setExecutor(database,loggingExecutor);
   outputHeader("Update " + changesToApply + " Change Sets Database Script");
   update(changesToApply,contexts);
   try {
@@ -10,5 +10,5 @@
  catch (  IOException e) {
     throw new LiquibaseException(e);
   }
-  database.setJdbcTemplate(oldTemplate);
+  ExecutorService.setExecutor(database,oldTemplate);
 }

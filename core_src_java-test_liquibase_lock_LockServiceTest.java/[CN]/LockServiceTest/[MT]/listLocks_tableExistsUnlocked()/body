@@ -1,12 +1,15 @@
 {
   Database database=createMock(Database.class);
+  Executor executor=createMock(Executor.class);
   database.checkDatabaseChangeLogLockTable();
   expectLastCall().anyTimes();
-  expect(database.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(true).anyTimes();
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(true).anyTimes();
   expect(database.doesChangeLogLockTableExist()).andReturn(true);
   List<Map> resultList=new ArrayList<Map>();
-  expect(database.queryForList(isA(SelectFromDatabaseChangeLogLockStatement.class),isA(ArrayList.class))).andReturn(resultList);
+  expect(executor.queryForList(isA(SelectFromDatabaseChangeLogLockStatement.class),isA(ArrayList.class))).andReturn(resultList);
   replay(database);
+  replay(executor);
+  ExecutorService.setExecutor(database,executor);
   LockService service=LockService.getInstance(database);
   DatabaseChangeLogLock[] locks=service.listLocks();
   assertEquals(0,locks.length);
