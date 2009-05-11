@@ -1,16 +1,11 @@
 {
   try {
-    if (database.doesChangeLogLockTableExist() || !database.getJdbcTemplate().executesStatements()) {
-      UpdateStatement releaseStatement=new UpdateStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName());
-      releaseStatement.addNewColumnValue("LOCKED",false);
-      releaseStatement.addNewColumnValue("LOCKGRANTED",null);
-      releaseStatement.addNewColumnValue("LOCKEDBY",null);
-      releaseStatement.setWhereClause(" ID = 1");
-      database.getJdbcTemplate().comment("Release Database Lock");
-      int updatedRows=database.getJdbcTemplate().update(releaseStatement,new ArrayList<SqlVisitor>());
+    if (database.doesChangeLogLockTableExist()) {
+      database.comment("Release Database Lock");
+      int updatedRows=database.update(new UnlockDatabaseChangeLogStatement(),new ArrayList<SqlVisitor>());
       if (updatedRows != 1) {
-        if (database.getJdbcTemplate().executesStatements()) {
-          throw new LockException("Did not update change log lock correctly.\n\n" + releaseStatement + " updated "+ updatedRows+ " instead of the expected 1 row.");
+        if (database.getExecutor().executesStatements()) {
+          throw new LockException("Did not update change log lock correctly.\n\n" + updatedRows + "rows were updated instead of the expected 1 row.");
         }
       }
       database.commit();

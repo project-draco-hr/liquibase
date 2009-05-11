@@ -1,24 +1,15 @@
 {
   Database database=createMock(Database.class);
-  Executor template=createMock(Executor.class);
-  RawSqlStatement selectLockStatement=new RawSqlStatement("SELECT LOCK");
-  expect(database.getJdbcTemplate()).andReturn(template).anyTimes();
-  expect(database.getSelectChangeLogLockSQL()).andReturn(selectLockStatement);
-  expect(database.getDatabaseChangeLogLockTableName()).andReturn("LOCK_TABLE").anyTimes();
-  expect(database.getDatabaseChangeLogTableName()).andReturn("DATABASECHANGELOG").anyTimes();
-  expect(database.getDefaultSchemaName()).andReturn(null).anyTimes();
   database.checkDatabaseChangeLogLockTable();
   expectLastCall();
+  expect(database.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(false);
+  database.comment("Lock Database");
+  expectLastCall();
+  expect(database.update(isA(LockDatabaseChangeLogStatement.class),isA(ArrayList.class))).andReturn(1);
   database.commit();
   expectLastCall();
-  expect(template.queryForObject(eq(selectLockStatement),eq(Boolean.class),isA(List.class))).andReturn(Boolean.FALSE);
-  expect(template.update(isA(UpdateStatement.class),isA(List.class))).andReturn(1);
-  template.comment("Lock Database");
-  expectLastCall();
   replay(database);
-  replay(template);
   LockManager manager=LockManager.getInstance(database);
-  manager.acquireLock();
+  assertTrue(manager.acquireLock());
   verify(database);
-  verify(template);
 }

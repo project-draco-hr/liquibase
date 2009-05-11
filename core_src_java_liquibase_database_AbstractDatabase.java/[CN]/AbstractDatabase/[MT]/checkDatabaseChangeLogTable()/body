@@ -1,10 +1,10 @@
 {
-  if (!this.getJdbcTemplate().executesStatements()) {
-    if (((JdbcOutputTemplate)this.getJdbcTemplate()).alreadyCreatedChangeTable()) {
+  if (!this.getExecutor().executesStatements()) {
+    if (((JdbcOutputTemplate)this.getExecutor()).alreadyCreatedChangeTable()) {
       return;
     }
  else {
-      ((JdbcOutputTemplate)this.getJdbcTemplate()).setAlreadyCreatedChangeTable(true);
+      ((JdbcOutputTemplate)this.getExecutor()).setAlreadyCreatedChangeTable(true);
     }
   }
   DatabaseConnection connection=getConnection();
@@ -47,7 +47,7 @@
       }
     }
  else     if (!changeLogCreateAttempted) {
-      getJdbcTemplate().comment("Create Database Change Log Table");
+      getExecutor().comment("Create Database Change Log Table");
       SqlStatement createTableStatement=getCreateChangeLogSQL();
       if (!canCreateChangeLogTable()) {
         throw new JDBCException("Cannot create " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " table for your database.\n\n"+ "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n"+ createTableStatement);
@@ -56,7 +56,7 @@
       log.info("Creating database history table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()));
     }
     for (    SqlStatement sql : statementsToExecute) {
-      this.getJdbcTemplate().execute(sql,new ArrayList<SqlVisitor>());
+      this.getExecutor().execute(sql,new ArrayList<SqlVisitor>());
       this.commit();
     }
   }

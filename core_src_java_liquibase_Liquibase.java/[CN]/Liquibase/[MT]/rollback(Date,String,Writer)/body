@@ -1,5 +1,5 @@
 {
-  Executor oldTemplate=database.getJdbcTemplate();
+  Executor oldTemplate=database.getExecutor();
   database.setJdbcTemplate(new JdbcOutputTemplate(output,database));
   outputHeader("Rollback to " + dateToRollBackTo + " Script");
   rollback(dateToRollBackTo,contexts);

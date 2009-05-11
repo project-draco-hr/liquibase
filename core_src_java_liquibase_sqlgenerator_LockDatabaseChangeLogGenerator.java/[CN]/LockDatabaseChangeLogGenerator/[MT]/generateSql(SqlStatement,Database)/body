@@ -1,0 +1,15 @@
+{
+  InetAddress localHost;
+  try {
+    localHost=NetUtil.getLocalHost();
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  UpdateStatement updateStatement=new UpdateStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName());
+  updateStatement.addNewColumnValue("LOCKED",true);
+  updateStatement.addNewColumnValue("LOCKGRANTED",new Timestamp(new java.util.Date().getTime()));
+  updateStatement.addNewColumnValue("LOCKEDBY",localHost.getHostName() + " (" + localHost.getHostAddress()+ ")");
+  updateStatement.setWhereClause("ID  = 1");
+  return SqlGeneratorFactory.getInstance().generateSql(updateStatement,database);
+}

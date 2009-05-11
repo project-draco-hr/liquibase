@@ -1,0 +1,28 @@
+{
+  Database database=createMock(Database.class);
+  database.checkDatabaseChangeLogLockTable();
+  expectLastCall().anyTimes();
+  expect(database.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(true).anyTimes();
+  expect(database.doesChangeLogLockTableExist()).andReturn(true);
+  List<Map> resultList=new ArrayList<Map>();
+  Map<String,Object> result=new HashMap<String,Object>();
+  result.put("ID",1);
+  result.put("LOCKED",true);
+  Date lockDate=new Date();
+  result.put("LOCKGRANTED",lockDate);
+  result.put("LOCKEDBY","Locker");
+  resultList.add(result);
+  expect(database.queryForList(isA(SelectFromDatabaseChangeLogLockStatement.class),isA(ArrayList.class))).andReturn(resultList);
+  replay(database);
+  LockManager manager=LockManager.getInstance(database);
+  manager.setChangeLogLockWaitTime(10);
+  manager.setChangeLogLockRecheckTime(5);
+  try {
+    manager.waitForLock();
+    fail("Should have thrown exception");
+  }
+ catch (  LockException e) {
+    assertEquals("Could not acquire change log lock.  Currently locked by Locker since " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(lockDate),e.getMessage());
+  }
+  verify(database);
+}

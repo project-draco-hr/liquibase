@@ -1,17 +1,17 @@
 {
   boolean knowMustInsertIntoLockTable=false;
   if (!doesChangeLogLockTableExist()) {
-    if (!this.getJdbcTemplate().executesStatements()) {
-      if (((JdbcOutputTemplate)this.getJdbcTemplate()).alreadyCreatedChangeLockTable()) {
+    if (!this.getExecutor().executesStatements()) {
+      if (((JdbcOutputTemplate)this.getExecutor()).alreadyCreatedChangeLockTable()) {
         return;
       }
  else {
-        ((JdbcOutputTemplate)this.getJdbcTemplate()).setAlreadyCreatedChangeLockTable(true);
+        ((JdbcOutputTemplate)this.getExecutor()).setAlreadyCreatedChangeLockTable(true);
       }
     }
     SqlStatement createTableStatement=getCreateChangeLogLockSQL();
-    getJdbcTemplate().comment("Create Database Lock Table");
-    this.getJdbcTemplate().execute(createTableStatement,new ArrayList<SqlVisitor>());
+    getExecutor().comment("Create Database Lock Table");
+    this.getExecutor().execute(createTableStatement,new ArrayList<SqlVisitor>());
     this.commit();
     log.finest("Created database lock table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
     knowMustInsertIntoLockTable=true;
@@ -20,14 +20,14 @@
   if (!knowMustInsertIntoLockTable) {
     RawSqlStatement selectStatement=new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()) + " WHERE ID=1");
     try {
-      rows=this.getJdbcTemplate().queryForInt(selectStatement,new ArrayList<SqlVisitor>());
+      rows=this.getExecutor().queryForInt(selectStatement,new ArrayList<SqlVisitor>());
     }
  catch (    JDBCException e) {
       throw e;
     }
   }
   if (knowMustInsertIntoLockTable || rows == 0) {
-    this.getJdbcTemplate().update(getChangeLogLockInsertSQL(),new ArrayList<SqlVisitor>());
+    this.getExecutor().update(getChangeLogLockInsertSQL(),new ArrayList<SqlVisitor>());
     this.commit();
     log.fine("Inserted lock row into: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
   }

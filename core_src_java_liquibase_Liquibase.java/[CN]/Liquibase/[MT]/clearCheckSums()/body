@@ -6,7 +6,7 @@
     database.checkDatabaseChangeLogTable();
     UpdateStatement updateStatement=new UpdateStatement(getDatabase().getDefaultSchemaName(),getDatabase().getDatabaseChangeLogTableName());
     updateStatement.addNewColumnValue("MD5SUM",null);
-    getDatabase().getJdbcTemplate().execute(updateStatement,new ArrayList<SqlVisitor>());
+    getDatabase().getExecutor().execute(updateStatement,new ArrayList<SqlVisitor>());
     getDatabase().commit();
   }
   finally {

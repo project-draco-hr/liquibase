@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement(("SELECT LOCKED FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()) + " WHERE "+ escapeColumnName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName(),"ID")+ "=1"));
-}

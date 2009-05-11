@@ -1,11 +1,11 @@
 {
   try {
-    database.getJdbcTemplate().comment("Rolling Back ChangeSet: " + toString());
+    database.getExecutor().comment("Rolling Back ChangeSet: " + toString());
     if (rollBackChanges != null && rollBackChanges.size() > 0) {
       for (      Change rollback : rollBackChanges) {
         for (        SqlStatement statement : rollback.generateStatements(database)) {
           try {
-            database.getJdbcTemplate().execute(statement,sqlVisitors);
+            database.getExecutor().execute(statement,sqlVisitors);
           }
  catch (          JDBCException e) {
             throw new RollbackFailedException("Error executing custom SQL [" + statement + "]",e);

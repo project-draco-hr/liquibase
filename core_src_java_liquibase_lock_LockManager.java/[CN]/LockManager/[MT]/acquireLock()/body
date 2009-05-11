@@ -1,12 +1,15 @@
 {
+  if (hasChangeLogLock) {
+    return true;
+  }
   try {
     database.checkDatabaseChangeLogLockTable();
     Boolean locked;
     try {
-      locked=(Boolean)database.getJdbcTemplate().queryForObject(database.getSelectChangeLogLockSQL(),Boolean.class,new ArrayList<SqlVisitor>());
+      locked=(Boolean)database.queryForObject(new SelectFromDatabaseChangeLogLockStatement("locked"),Boolean.class,new ArrayList<SqlVisitor>());
     }
  catch (    JDBCException e) {
-      if (!database.getJdbcTemplate().executesStatements()) {
+      if (!database.getExecutor().executesStatements()) {
         locked=false;
       }
  else {
@@ -17,16 +20,10 @@
       return false;
     }
  else {
-      UpdateStatement updateStatement=new UpdateStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName());
-      updateStatement.addNewColumnValue("LOCKED",true);
-      updateStatement.addNewColumnValue("LOCKGRANTED",new Timestamp(new java.util.Date().getTime()));
-      InetAddress localHost=NetUtil.getLocalHost();
-      updateStatement.addNewColumnValue("LOCKEDBY",localHost.getHostName() + " (" + localHost.getHostAddress()+ ")");
-      updateStatement.setWhereClause("ID  = 1");
-      database.getJdbcTemplate().comment("Lock Database");
-      int rowsUpdated=database.getJdbcTemplate().update(updateStatement,new ArrayList<SqlVisitor>());
+      database.comment("Lock Database");
+      int rowsUpdated=database.update(new LockDatabaseChangeLogStatement(),new ArrayList<SqlVisitor>());
       if (rowsUpdated != 1) {
-        if (!database.getJdbcTemplate().executesStatements()) {
+        if (!database.getExecutor().executesStatements()) {
         }
  else {
           throw new LockException("Did not update change log lock correctly");

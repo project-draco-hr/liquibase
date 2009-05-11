@@ -26,7 +26,7 @@
     return ranChangeSetList;
   }
  catch (  SQLException e) {
-    if (!getJdbcTemplate().executesStatements()) {
+    if (!getExecutor().executesStatements()) {
       return new ArrayList<RanChangeSet>();
     }
  else {

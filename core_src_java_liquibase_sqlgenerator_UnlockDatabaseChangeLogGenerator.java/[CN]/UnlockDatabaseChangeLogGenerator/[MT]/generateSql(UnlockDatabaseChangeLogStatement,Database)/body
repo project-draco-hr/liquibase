@@ -1,0 +1,8 @@
+{
+  UpdateStatement releaseStatement=new UpdateStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName());
+  releaseStatement.addNewColumnValue("LOCKED",false);
+  releaseStatement.addNewColumnValue("LOCKGRANTED",null);
+  releaseStatement.addNewColumnValue("LOCKEDBY",null);
+  releaseStatement.setWhereClause(" ID = 1");
+  return SqlGeneratorFactory.getInstance().generateSql(statement,database);
+}

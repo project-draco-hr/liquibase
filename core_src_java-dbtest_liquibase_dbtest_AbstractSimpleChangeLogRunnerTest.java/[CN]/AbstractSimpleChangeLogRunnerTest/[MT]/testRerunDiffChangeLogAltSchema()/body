@@ -24,8 +24,8 @@
   }
   liquibase=createLiquibase(tempFile.getName());
   liquibase.dropAll(getSchemasToDrop());
-  database.getJdbcTemplate().execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogTableName(),false));
-  database.getJdbcTemplate().execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogLockTableName(),false));
+  database.getExecutor().execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogTableName(),false));
+  database.getExecutor().execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogLockTableName(),false));
   database.commit();
   DatabaseConnection connection=TestContext.getInstance().getConnection(url);
   database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);

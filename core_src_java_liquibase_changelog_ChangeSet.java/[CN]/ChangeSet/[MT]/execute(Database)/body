@@ -3,7 +3,7 @@
   boolean markRan=true;
   try {
     database.setAutoCommit(!runInTransaction);
-    database.getJdbcTemplate().comment("Changeset " + toString());
+    database.getExecutor().comment("Changeset " + toString());
     if (StringUtils.trimToNull(getComments()) != null) {
       String comments=getComments();
       String[] lines=comments.split("\n");
@@ -12,9 +12,9 @@
           lines[i]=database.getLineComment() + " " + lines[i];
         }
       }
-      database.getJdbcTemplate().comment(StringUtils.join(Arrays.asList(lines),"\n"));
+      database.getExecutor().comment(StringUtils.join(Arrays.asList(lines),"\n"));
     }
-    if (database.getJdbcTemplate().executesStatements() && rootPrecondition != null) {
+    if (database.getExecutor().executesStatements() && rootPrecondition != null) {
       try {
         rootPrecondition.check(database,null);
       }

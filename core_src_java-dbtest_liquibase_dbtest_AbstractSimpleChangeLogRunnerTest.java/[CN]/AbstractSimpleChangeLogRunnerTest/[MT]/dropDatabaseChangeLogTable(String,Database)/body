@@ -1,6 +1,6 @@
 {
   try {
-    database.getJdbcTemplate().execute(new DropTableStatement(schema,database.getDatabaseChangeLogTableName(),false));
+    database.getExecutor().execute(new DropTableStatement(schema,database.getDatabaseChangeLogTableName(),false));
   }
  catch (  JDBCException e) {
     ;
