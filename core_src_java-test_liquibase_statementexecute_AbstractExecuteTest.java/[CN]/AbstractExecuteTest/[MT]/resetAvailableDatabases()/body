@@ -38,7 +38,7 @@
     List<? extends SqlStatement> setupStatements=setupStatements(database);
     if (setupStatements != null) {
       for (      SqlStatement statement : setupStatements) {
-        new Executor(database).execute(statement);
+        ExecutorService.getInstance().getWriteExecutor(database).execute(statement);
       }
     }
     connectionStatement.close();

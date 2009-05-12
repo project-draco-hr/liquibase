@@ -2,7 +2,7 @@
   updateListeners("Reading sequences for " + database.toString() + " ...");
   String convertedSchemaName=database.convertRequestedSchemaToSchema(schema);
   if (database.supportsSequences()) {
-    List<String> sequenceNames=(List<String>)ExecutorService.getExecutor(database).queryForList(database.createFindSequencesSQL(schema),String.class,new ArrayList<SqlVisitor>());
+    List<String> sequenceNames=(List<String>)ExecutorService.getInstance().getReadExecutor(database).queryForList(database.createFindSequencesSQL(schema),String.class,new ArrayList<SqlVisitor>());
     if (sequenceNames != null) {
       for (      String sequenceName : sequenceNames) {
         Sequence seq=new Sequence();

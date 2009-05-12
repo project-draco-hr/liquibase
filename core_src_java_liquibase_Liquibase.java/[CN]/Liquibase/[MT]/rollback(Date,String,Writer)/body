@@ -1,6 +1,6 @@
 {
-  Executor oldTemplate=ExecutorService.getExecutor(database);
-  ExecutorService.setExecutor(database,new LoggingExecutor(output,database));
+  WriteExecutor oldTemplate=ExecutorService.getInstance().getWriteExecutor(database);
+  ExecutorService.getInstance().setWriteExecutor(database,new LoggingExecutor(output,database));
   outputHeader("Rollback to " + dateToRollBackTo + " Script");
   rollback(dateToRollBackTo,contexts);
   try {
@@ -9,5 +9,5 @@
  catch (  IOException e) {
     throw new LiquibaseException(e);
   }
-  ExecutorService.setExecutor(database,oldTemplate);
+  ExecutorService.getInstance().setWriteExecutor(database,oldTemplate);
 }

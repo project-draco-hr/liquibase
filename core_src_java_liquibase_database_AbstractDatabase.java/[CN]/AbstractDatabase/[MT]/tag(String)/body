@@ -1,11 +1,11 @@
 {
-  Executor executor=ExecutorService.getExecutor(this);
+  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(this);
   try {
-    int totalRows=executor.queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName())),new ArrayList<SqlVisitor>());
+    int totalRows=ExecutorService.getInstance().getReadExecutor(this).queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName())),new ArrayList<SqlVisitor>());
     if (totalRows == 0) {
       throw new JDBCException("Cannot tag an empty database");
     }
-    int rowsUpdated=executor.update(new TagDatabaseStatement(tagString),new ArrayList<SqlVisitor>());
+    int rowsUpdated=writeExecutor.update(new TagDatabaseStatement(tagString),new ArrayList<SqlVisitor>());
     if (rowsUpdated == 0) {
       throw new JDBCException("Did not tag database change log correctly");
     }

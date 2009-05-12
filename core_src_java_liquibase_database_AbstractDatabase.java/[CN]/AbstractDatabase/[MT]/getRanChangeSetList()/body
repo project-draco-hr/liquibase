@@ -26,7 +26,7 @@
     return ranChangeSetList;
   }
  catch (  SQLException e) {
-    if (!ExecutorService.getExecutor(this).executesStatements()) {
+    if (!ExecutorService.getInstance().getWriteExecutor(this).executesStatements()) {
       return new ArrayList<RanChangeSet>();
     }
  else {

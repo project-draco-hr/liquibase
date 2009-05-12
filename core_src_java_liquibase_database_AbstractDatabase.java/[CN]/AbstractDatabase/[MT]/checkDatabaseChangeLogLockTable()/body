@@ -1,18 +1,18 @@
 {
   boolean knowMustInsertIntoLockTable=false;
-  Executor executor=ExecutorService.getExecutor(this);
+  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(this);
   if (!doesChangeLogLockTableExist()) {
-    if (!executor.executesStatements()) {
-      if (((LoggingExecutor)executor).alreadyCreatedChangeLockTable()) {
+    if (!writeExecutor.executesStatements()) {
+      if (((LoggingExecutor)writeExecutor).alreadyCreatedChangeLockTable()) {
         return;
       }
  else {
-        ((LoggingExecutor)executor).setAlreadyCreatedChangeLockTable(true);
+        ((LoggingExecutor)writeExecutor).setAlreadyCreatedChangeLockTable(true);
       }
     }
     SqlStatement createTableStatement=getCreateChangeLogLockSQL();
-    executor.comment("Create Database Lock Table");
-    executor.execute(createTableStatement,new ArrayList<SqlVisitor>());
+    writeExecutor.comment("Create Database Lock Table");
+    writeExecutor.execute(createTableStatement,new ArrayList<SqlVisitor>());
     this.commit();
     log.finest("Created database lock table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
     knowMustInsertIntoLockTable=true;
@@ -21,7 +21,7 @@
   if (!knowMustInsertIntoLockTable) {
     SqlStatement selectStatement=new SelectFromDatabaseChangeLogLockStatement("COUNT(*)");
     try {
-      List<Map> returnList=executor.queryForList(selectStatement,new ArrayList<SqlVisitor>());
+      List<Map> returnList=ExecutorService.getInstance().getReadExecutor(this).queryForList(selectStatement,new ArrayList<SqlVisitor>());
       if (returnList == null || returnList.size() == 0) {
         rows=0;
       }
@@ -35,7 +35,7 @@
     }
   }
   if (knowMustInsertIntoLockTable || rows == 0) {
-    executor.update(getChangeLogLockInsertSQL(),new ArrayList<SqlVisitor>());
+    writeExecutor.update(getChangeLogLockInsertSQL(),new ArrayList<SqlVisitor>());
     this.commit();
     log.fine("Inserted lock row into: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
   }

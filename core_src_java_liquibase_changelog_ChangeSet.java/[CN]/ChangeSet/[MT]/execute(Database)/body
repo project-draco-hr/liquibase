@@ -1,10 +1,10 @@
 {
   boolean skipChange=false;
   boolean markRan=true;
-  Executor executor=ExecutorService.getExecutor(database);
+  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
   try {
     database.setAutoCommit(!runInTransaction);
-    executor.comment("Changeset " + toString());
+    writeExecutor.comment("Changeset " + toString());
     if (StringUtils.trimToNull(getComments()) != null) {
       String comments=getComments();
       String[] lines=comments.split("\n");
@@ -13,9 +13,9 @@
           lines[i]=database.getLineComment() + " " + lines[i];
         }
       }
-      executor.comment(StringUtils.join(Arrays.asList(lines),"\n"));
+      writeExecutor.comment(StringUtils.join(Arrays.asList(lines),"\n"));
     }
-    if (executor.executesStatements() && rootPrecondition != null) {
+    if (writeExecutor.executesStatements() && rootPrecondition != null) {
       try {
         rootPrecondition.check(database,null);
       }

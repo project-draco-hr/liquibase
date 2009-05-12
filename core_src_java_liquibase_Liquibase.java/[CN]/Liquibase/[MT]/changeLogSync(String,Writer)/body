@@ -1,7 +1,7 @@
 {
   LoggingExecutor outputTemplate=new LoggingExecutor(output,database);
-  Executor oldTemplate=ExecutorService.getExecutor(database);
-  ExecutorService.setExecutor(database,outputTemplate);
+  WriteExecutor oldTemplate=ExecutorService.getInstance().getWriteExecutor(database);
+  ExecutorService.getInstance().setWriteExecutor(database,outputTemplate);
   outputHeader("SQL to add all changesets to database history table");
   changeLogSync(contexts);
   try {
@@ -10,5 +10,5 @@
  catch (  IOException e) {
     throw new LiquibaseException(e);
   }
-  ExecutorService.setExecutor(database,oldTemplate);
+  ExecutorService.getInstance().setWriteExecutor(database,oldTemplate);
 }

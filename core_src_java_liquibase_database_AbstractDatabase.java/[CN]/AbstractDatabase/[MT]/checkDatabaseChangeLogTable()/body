@@ -1,11 +1,11 @@
 {
-  Executor executor=ExecutorService.getExecutor(this);
-  if (!executor.executesStatements()) {
-    if (((LoggingExecutor)executor).alreadyCreatedChangeTable()) {
+  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(this);
+  if (!writeExecutor.executesStatements()) {
+    if (((LoggingExecutor)writeExecutor).alreadyCreatedChangeTable()) {
       return;
     }
  else {
-      ((LoggingExecutor)executor).setAlreadyCreatedChangeTable(true);
+      ((LoggingExecutor)writeExecutor).setAlreadyCreatedChangeTable(true);
     }
   }
   DatabaseConnection connection=getConnection();
@@ -48,7 +48,7 @@
       }
     }
  else     if (!changeLogCreateAttempted) {
-      executor.comment("Create Database Change Log Table");
+      writeExecutor.comment("Create Database Change Log Table");
       SqlStatement createTableStatement=getCreateChangeLogSQL();
       if (!canCreateChangeLogTable()) {
         throw new JDBCException("Cannot create " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " table for your database.\n\n"+ "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n"+ createTableStatement);
@@ -57,7 +57,7 @@
       log.info("Creating database history table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()));
     }
     for (    SqlStatement sql : statementsToExecute) {
-      executor.execute(sql,new ArrayList<SqlVisitor>());
+      writeExecutor.execute(sql,new ArrayList<SqlVisitor>());
       this.commit();
     }
   }

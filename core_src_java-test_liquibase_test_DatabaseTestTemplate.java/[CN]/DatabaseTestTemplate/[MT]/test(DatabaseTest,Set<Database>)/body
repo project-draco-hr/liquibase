@@ -3,7 +3,7 @@
     if (database instanceof SQLiteDatabase) {
       continue;
     }
-    ExecutorService.setExecutor(database,new Executor(database));
+    ExecutorService.getInstance().setWriteExecutor(database,new DefaultExecutor(database));
     LockService.getInstance(database).reset();
     if (database.getConnection() != null) {
       LockService.getInstance(database).forceReleaseLock();

@@ -1,0 +1,6 @@
+{
+  if (!readExecutors.containsKey(database)) {
+    readExecutors.put(database,new DefaultExecutor(database));
+  }
+  return readExecutors.get(database);
+}

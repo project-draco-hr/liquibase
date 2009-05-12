@@ -1,0 +1,6 @@
+{
+  if (!writeExecutors.containsKey(database)) {
+    writeExecutors.put(database,new DefaultExecutor(database));
+  }
+  return writeExecutors.get(database);
+}
