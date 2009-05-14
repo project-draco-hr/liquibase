@@ -13,9 +13,18 @@
       if (value instanceof ColumnConfig) {
         values.add(indent(indent) + serializeColumnConfig((ColumnConfig)field.get(objectToSerialize),indent + 1));
       }
+ else       if (value instanceof ConstraintsConfig) {
+        values.add(indent(indent) + serializeConstraintsConfig((ConstraintsConfig)field.get(objectToSerialize),indent + 1));
+      }
+ else       if (value instanceof CustomChange) {
+        values.add(indent(indent) + serializeCustomChange((CustomChange)field.get(objectToSerialize),indent + 1));
+      }
  else {
         if (value != null) {
-          if (value instanceof Collection) {
+          if (value instanceof Map) {
+            values.add(indent(indent) + propertyName + "="+ serializeObject((Map)value,indent + 1));
+          }
+ else           if (value instanceof Collection) {
             values.add(indent(indent) + propertyName + "="+ serializeObject((Collection)value,indent + 1));
           }
  else {

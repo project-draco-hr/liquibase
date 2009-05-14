@@ -1,0 +1,12 @@
+{
+  if (collection.size() == 0) {
+    return "[]";
+  }
+  String returnString="{\n";
+  for (  Object key : new TreeSet(collection.keySet())) {
+    returnString+=indent(indent) + key.toString() + "=\""+ collection.get(key)+ "\",\n";
+  }
+  returnString=returnString.replaceFirst(",$","");
+  returnString+=indent(indent - 1) + "}";
+  return returnString;
+}

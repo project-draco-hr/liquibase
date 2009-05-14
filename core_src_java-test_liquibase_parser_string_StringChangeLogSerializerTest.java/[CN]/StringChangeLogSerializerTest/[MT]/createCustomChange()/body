@@ -1,0 +1,5 @@
+{
+  CustomSqlChange config=new ExampleCustomSqlChange();
+  setFields(config);
+  return config;
+}

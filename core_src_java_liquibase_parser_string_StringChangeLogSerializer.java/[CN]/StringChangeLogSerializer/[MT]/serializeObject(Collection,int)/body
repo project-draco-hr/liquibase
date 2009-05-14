@@ -8,7 +8,7 @@
       returnString+=indent(indent) + serializeColumnConfig((ColumnConfig)object,indent + 1) + ",\n";
     }
  else {
-      returnString+=indent(indent) + "[" + object.toString()+ "],\n";
+      returnString+=indent(indent) + object.toString() + ",\n";
     }
   }
   returnString=returnString.replaceFirst(",$","");

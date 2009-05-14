@@ -1,0 +1,83 @@
+{
+  Class clazz=object.getClass();
+  for (  Field field : clazz.getDeclaredFields()) {
+    field.setAccessible(true);
+    if (field.getType().equals(Logger.class)) {
+    }
+ else     if (field.getType().equals(FileOpener.class)) {
+    }
+ else     if (field.getType().equals(ClassLoader.class)) {
+    }
+ else     if (field.getType().equals(String.class)) {
+      field.set(object,createString());
+    }
+ else     if (field.getType().equals(Number.class)) {
+      field.set(object,createNumber());
+    }
+ else     if (field.getType().equals(Integer.class)) {
+      field.set(object,createInteger());
+    }
+ else     if (field.getType().equals(Date.class)) {
+      field.set(object,createDate());
+    }
+ else     if (field.getType().equals(Boolean.class)) {
+      field.set(object,createBoolean());
+    }
+ else     if (field.getType().equals(ColumnConfig.class)) {
+      field.set(object,createColumnConfig());
+    }
+ else     if (field.getType().equals(ConstraintsConfig.class)) {
+      field.set(object,createConstraintsConfig());
+    }
+ else     if (field.getType().getName().equals("liquibase.change.custom.CustomChange")) {
+      field.set(object,createCustomChange());
+    }
+ else     if (field.getType().equals(Map.class)) {
+      field.set(object,createMap());
+    }
+ else     if (Collection.class.isAssignableFrom(field.getType())) {
+      Type genericType=field.getGenericType();
+      if (genericType instanceof ParameterizedType) {
+        int genericsLength=((ParameterizedType)genericType).getActualTypeArguments().length;
+        if (genericsLength == 1) {
+          Class typeToCreate=(Class)((ParameterizedType)genericType).getActualTypeArguments()[0];
+          Collection collection;
+          if (field.getType().equals(List.class)) {
+            collection=new ArrayList();
+          }
+ else           if (field.getType().equals(SortedSet.class)) {
+            collection=new TreeSet();
+          }
+ else {
+            throw new RuntimeException("Unknow collection type: " + field.getType().getName());
+          }
+          if (typeToCreate.equals(ColumnConfig.class)) {
+            collection.add(createColumnConfig());
+            collection.add(createColumnConfig());
+          }
+ else           if (typeToCreate.equals(LoadDataColumnConfig.class)) {
+            collection.add(createLoadDataColumnConfig());
+            collection.add(createLoadDataColumnConfig());
+          }
+ else           if (typeToCreate.equals(String.class)) {
+            collection.add(createString());
+            collection.add(createString());
+          }
+ else {
+            throw new RuntimeException("Unknown generic type for " + clazz.getName() + "."+ field.getName()+ ": "+ typeToCreate.getName());
+          }
+          field.set(object,collection);
+        }
+ else {
+          throw new RuntimeException("Found " + genericsLength + " generics for "+ clazz.getName()+ "."+ field.getName());
+        }
+      }
+ else {
+        fail("List not generic");
+      }
+    }
+ else {
+      fail("Unknown field type in " + clazz.getName() + ": "+ field.getType().getName());
+    }
+  }
+}
