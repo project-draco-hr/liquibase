@@ -5,7 +5,7 @@
   statement.addColumnValue("AUTHOR",changeSet.getAuthor());
   statement.addColumnValue("FILENAME",changeSet.getFilePath());
   statement.addColumnValue("DATEEXECUTED",new ComputedDateValue(dateValue));
-  statement.addColumnValue("MD5SUM",changeSet.getMd5sum());
+  statement.addColumnValue("MD5SUM",changeSet.generateCheckSum().toString());
   statement.addColumnValue("DESCRIPTION",limitSize(changeSet.getDescription()));
   statement.addColumnValue("COMMENTS",limitSize(StringUtils.trimToEmpty(changeSet.getComments())));
   statement.addColumnValue("LIQUIBASE",LiquibaseUtil.getBuildVersion());

@@ -7,12 +7,12 @@
     return ChangeSet.RunStatus.NOT_RAN;
   }
  else {
-    if (foundRan.getMd5sum() == null) {
+    if (foundRan.getLastCheckSum() == null) {
       try {
         log.info("Updating NULL md5sum for " + changeSet.toString());
         DatabaseConnection connection=getConnection();
         PreparedStatement updatePstmt=connection.prepareStatement("UPDATE " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " SET MD5SUM=? WHERE ID=? AND AUTHOR=? AND FILENAME=?");
-        updatePstmt.setString(1,changeSet.getMd5sum());
+        updatePstmt.setString(1,changeSet.generateCheckSum().toString());
         updatePstmt.setString(2,changeSet.getId());
         updatePstmt.setString(3,changeSet.getAuthor());
         updatePstmt.setString(4,changeSet.getFilePath());
@@ -26,7 +26,7 @@
       return ChangeSet.RunStatus.ALREADY_RAN;
     }
  else {
-      if (foundRan.getMd5sum().equals(changeSet.getMd5sum())) {
+      if (foundRan.getLastCheckSum().equals(changeSet.generateCheckSum())) {
         return ChangeSet.RunStatus.ALREADY_RAN;
       }
  else {

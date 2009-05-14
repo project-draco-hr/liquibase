@@ -1,0 +1,4 @@
+{
+  this.checksum=checksum;
+  this.version=version;
+}

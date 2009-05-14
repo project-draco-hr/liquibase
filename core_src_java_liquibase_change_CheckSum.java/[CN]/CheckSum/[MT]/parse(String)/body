@@ -1,0 +1,8 @@
+{
+  if (checksumValue.startsWith("2:")) {
+    return new CheckSum(checksumValue.substring(2),2);
+  }
+ else {
+    return new CheckSum(checksumValue,1);
+  }
+}

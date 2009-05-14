@@ -1,0 +1,13 @@
+{
+  this.changeLog=changeLog;
+  this.id=id;
+  this.author=author;
+  this.lastCheckSum=lastCheckSum;
+  if (dateExecuted == null) {
+    this.dateExecuted=null;
+  }
+ else {
+    this.dateExecuted=new Date(dateExecuted.getTime());
+  }
+  this.tag=tag;
+}

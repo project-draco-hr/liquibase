@@ -1,0 +1,6 @@
+{
+  String valueToHash="asdf";
+  CheckSum checkSum=CheckSum.compute(valueToHash);
+  assertEquals(2,checkSum.getVersion());
+  assertFalse(checkSum.toString().equals(valueToHash));
+}

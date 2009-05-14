@@ -1,3 +1,0 @@
-{
-  this.checksum=MD5Util.computeMD5(stream);
-}

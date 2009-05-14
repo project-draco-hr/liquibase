@@ -1,0 +1,6 @@
+{
+  String checksumString="asdf";
+  CheckSum checkSum=CheckSum.parse(checksumString);
+  assertEquals(1,checkSum.getVersion());
+  assertEquals("1:asdf",checkSum.toString());
+}

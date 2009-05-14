@@ -1,7 +1,7 @@
 {
   String dateValue=getCurrentDateTimeFunction();
   String sql="UPDATE " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " SET DATEEXECUTED="+ dateValue+ ", MD5SUM='?' WHERE ID='?' AND AUTHOR='?' AND FILENAME='?'";
-  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getMd5sum()));
+  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.generateCheckSum().toString()));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getId()));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getAuthor()));
   sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getFilePath()));

@@ -1,0 +1,18 @@
+{
+  CheckSum currentMd5Sum=generateCheckSum();
+  if (currentMd5Sum == null) {
+    return true;
+  }
+  if (storedCheckSum == null) {
+    return true;
+  }
+  if (currentMd5Sum.equals(storedCheckSum)) {
+    return true;
+  }
+  for (  CheckSum validCheckSum : validCheckSums) {
+    if (currentMd5Sum.equals(validCheckSum)) {
+      return true;
+    }
+  }
+  return false;
+}

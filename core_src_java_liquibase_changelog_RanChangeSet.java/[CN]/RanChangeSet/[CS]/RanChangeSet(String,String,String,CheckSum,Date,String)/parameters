@@ -1,0 +1,6 @@
+String changeLog
+String id
+String author
+CheckSum lastCheckSum
+Date dateExecuted
+String tag

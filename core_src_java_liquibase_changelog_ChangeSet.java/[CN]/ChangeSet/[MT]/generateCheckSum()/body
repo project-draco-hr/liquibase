@@ -1,0 +1,7 @@
+{
+  StringBuffer stringToMD5=new StringBuffer();
+  for (  Change change : getChanges()) {
+    stringToMD5.append(change.generateCheckSum()).append(":");
+  }
+  return CheckSum.compute(stringToMD5.toString());
+}
