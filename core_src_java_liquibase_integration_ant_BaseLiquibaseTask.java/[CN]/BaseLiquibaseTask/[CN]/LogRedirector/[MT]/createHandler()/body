@@ -1,6 +1,6 @@
 {
   return new Handler(){
-    public void publish(    LogRecord logRecord){
+    @Override public void publish(    LogRecord logRecord){
       task.log(logRecord.getMessage(),mapLevelToAntLevel(logRecord.getLevel()));
     }
     @Override public void close() throws SecurityException {

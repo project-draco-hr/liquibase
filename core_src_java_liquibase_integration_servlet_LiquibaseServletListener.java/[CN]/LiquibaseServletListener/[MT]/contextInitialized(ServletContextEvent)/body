@@ -1,11 +1,11 @@
 {
   LogFactory.getLogger().addHandler(new Handler(){
-    public synchronized void publish(    LogRecord record){
+    @Override public synchronized void publish(    LogRecord record){
       LiquibaseStatusServlet.logMessage(record);
     }
-    public void flush(){
+    @Override public void flush(){
     }
-    public void close() throws SecurityException {
+    @Override public void close() throws SecurityException {
     }
   }
 );

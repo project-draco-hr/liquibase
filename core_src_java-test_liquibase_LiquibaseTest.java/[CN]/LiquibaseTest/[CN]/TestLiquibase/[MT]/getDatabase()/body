@@ -1,10 +1,10 @@
 {
   if (database == null) {
     database=new OracleDatabase(){
-      public String getConnectionURL(){
+      @Override public String getConnectionURL(){
         return url;
       }
-      public String getConnectionUsername(){
+      @Override public String getConnectionUsername(){
         return "testUser";
       }
     }
