@@ -1,6 +1,3 @@
 {
-  if (requestedSchema == null) {
-    return "dbo";
-  }
   return requestedSchema;
 }

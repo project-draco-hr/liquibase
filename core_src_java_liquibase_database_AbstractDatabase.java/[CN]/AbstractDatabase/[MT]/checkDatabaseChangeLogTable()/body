@@ -14,7 +14,7 @@
   boolean changeLogCreateAttempted=false;
   try {
     if (doesChangeLogTableExist()) {
-      checkColumnsRS=connection.getMetaData().getColumns(convertRequestedSchemaToCatalog(getDefaultSchemaName()),convertRequestedSchemaToSchema(getDefaultSchemaName()),getDatabaseChangeLogTableName(),null);
+      checkColumnsRS=connection.getMetaData().getColumns(convertRequestedSchemaToCatalog(getLiquibaseSchemaName()),convertRequestedSchemaToSchema(getLiquibaseSchemaName()),getDatabaseChangeLogTableName(),null);
       boolean hasDescription=false;
       boolean hasComments=false;
       boolean hasTag=false;
@@ -35,16 +35,16 @@
         }
       }
       if (!hasDescription) {
-        statementsToExecute.add(new AddColumnStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName(),"DESCRIPTION","VARCHAR(255)",null));
+        statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"DESCRIPTION","VARCHAR(255)",null));
       }
       if (!hasTag) {
-        statementsToExecute.add(new AddColumnStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName(),"TAG","VARCHAR(255)",null));
+        statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"TAG","VARCHAR(255)",null));
       }
       if (!hasComments) {
-        statementsToExecute.add(new AddColumnStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName(),"COMMENTS","VARCHAR(255)",null));
+        statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"COMMENTS","VARCHAR(255)",null));
       }
       if (!hasLiquibase) {
-        statementsToExecute.add(new AddColumnStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName(),"LIQUIBASE","VARCHAR(255)",null));
+        statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"LIQUIBASE","VARCHAR(255)",null));
       }
     }
  else     if (!changeLogCreateAttempted) {

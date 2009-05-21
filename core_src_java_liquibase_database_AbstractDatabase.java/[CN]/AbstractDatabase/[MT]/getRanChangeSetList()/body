@@ -3,7 +3,7 @@
     return this.ranChangeSetList;
   }
   try {
-    String databaseChangeLogTableName=escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName());
+    String databaseChangeLogTableName=escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
     ranChangeSetList=new ArrayList<RanChangeSet>();
     if (doesChangeLogTableExist()) {
       log.info("Reading from " + databaseChangeLogTableName);

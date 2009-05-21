@@ -1,5 +1,12 @@
 {
-  String sql="SELECT " + StringUtils.join(statement.getColumnsToSelect(),",") + " FROM "+ database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName())+ " WHERE "+ database.escapeColumnName(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName(),"ID")+ "=1";
+  String liquibaseSchema=null;
+  try {
+    liquibaseSchema=database.getLiquibaseSchemaName();
+  }
+ catch (  JDBCException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  String sql="SELECT " + StringUtils.join(statement.getColumnsToSelect(),",") + " FROM "+ database.escapeTableName(liquibaseSchema,database.getDatabaseChangeLogLockTableName())+ " WHERE "+ database.escapeColumnName(liquibaseSchema,database.getDatabaseChangeLogLockTableName(),"ID")+ "=1";
   if (database instanceof OracleDatabase) {
     sql+=" for update";
   }

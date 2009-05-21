@@ -1,6 +1,6 @@
 {
   String dateValue=getCurrentDateTimeFunction();
-  InsertStatement statement=new InsertStatement(getDefaultSchemaName(),getDatabaseChangeLogTableName());
+  InsertStatement statement=new InsertStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
   statement.addColumnValue("ID",escapeStringForDatabase(changeSet.getId()));
   statement.addColumnValue("AUTHOR",changeSet.getAuthor());
   statement.addColumnValue("FILENAME",changeSet.getFilePath());

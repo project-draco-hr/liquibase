@@ -1,4 +1,7 @@
 {
   CreateTableStatement createTableStatement=new CreateTableStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName()).addPrimaryKeyColumn("ID","INT",null,null,new NotNullConstraint()).addColumn("LOCKED","BOOLEAN",new NotNullConstraint()).addColumn("LOCKGRANTED","DATETIME").addColumn("LOCKEDBY","VARCHAR(255)");
+  if (database instanceof MSSQLDatabase) {
+    createTableStatement.setSchemaName("dbo");
+  }
   return SqlGeneratorFactory.getInstance().generateSql(createTableStatement,database);
 }

@@ -1,0 +1,5 @@
+{
+  CreateTableStatement ret=(CreateTableStatement)super.getCreateChangeLogSQL();
+  ret.setSchemaName("dbo");
+  return ret;
+}

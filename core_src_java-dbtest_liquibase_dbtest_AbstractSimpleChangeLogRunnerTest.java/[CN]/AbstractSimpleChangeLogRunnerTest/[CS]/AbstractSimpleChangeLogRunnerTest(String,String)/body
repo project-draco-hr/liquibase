@@ -4,7 +4,7 @@
   this.includedChangeLog="changelogs/" + changelogDir + "/complete/included.changelog.xml";
   this.url=url;
   DatabaseConnection connection=TestContext.getInstance().getConnection(url);
-  LogFactory.getLogger().setLevel(Level.SEVERE);
+  LogFactory.getLogger().setLevel(Level.FINER);
   if (connection != null) {
     database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
   }

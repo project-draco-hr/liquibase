@@ -2,7 +2,7 @@
   DatabaseConnection connection=getConnection();
   ResultSet rs=null;
   try {
-    rs=connection.getMetaData().getTables(convertRequestedSchemaToCatalog(getDefaultSchemaName()),convertRequestedSchemaToSchema(getDefaultSchemaName()),getDatabaseChangeLogLockTableName(),new String[]{"TABLE"});
+    rs=connection.getMetaData().getTables(convertRequestedSchemaToCatalog(getLiquibaseSchemaName()),convertRequestedSchemaToSchema(getLiquibaseSchemaName()),getDatabaseChangeLogLockTableName(),new String[]{"TABLE"});
     return rs.next();
   }
  catch (  Exception e) {

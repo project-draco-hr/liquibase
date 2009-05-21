@@ -14,7 +14,7 @@
     writeExecutor.comment("Create Database Lock Table");
     writeExecutor.execute(createTableStatement,new ArrayList<SqlVisitor>());
     this.commit();
-    log.finest("Created database lock table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
+    log.finest("Created database lock table with name: " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()));
     knowMustInsertIntoLockTable=true;
   }
   int rows=-1;
@@ -37,6 +37,6 @@
   if (knowMustInsertIntoLockTable || rows == 0) {
     writeExecutor.update(getChangeLogLockInsertSQL(),new ArrayList<SqlVisitor>());
     this.commit();
-    log.fine("Inserted lock row into: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogLockTableName()));
+    log.fine("Inserted lock row into: " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()));
   }
 }

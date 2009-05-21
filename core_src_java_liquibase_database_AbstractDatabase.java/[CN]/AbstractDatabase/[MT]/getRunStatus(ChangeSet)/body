@@ -11,7 +11,7 @@
       try {
         log.info("Updating NULL md5sum for " + changeSet.toString());
         DatabaseConnection connection=getConnection();
-        PreparedStatement updatePstmt=connection.prepareStatement("UPDATE " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " SET MD5SUM=? WHERE ID=? AND AUTHOR=? AND FILENAME=?");
+        PreparedStatement updatePstmt=connection.prepareStatement("UPDATE " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " SET MD5SUM=? WHERE ID=? AND AUTHOR=? AND FILENAME=?");
         updatePstmt.setString(1,changeSet.generateCheckSum().toString());
         updatePstmt.setString(2,changeSet.getId());
         updatePstmt.setString(3,changeSet.getAuthor());
