@@ -1,3 +1,3 @@
 {
-  return !(database instanceof SQLiteDatabase) && !(database instanceof MSSQLDatabase) && !(database instanceof SybaseDatabase)&& !(database instanceof SybaseASADatabase);
+  return !(database instanceof SQLiteDatabase) && !(database instanceof MSSQLDatabase) && !(database instanceof SybaseDatabase)&& !(database instanceof SybaseASADatabase)&& !(database instanceof InformixDatabase);
 }

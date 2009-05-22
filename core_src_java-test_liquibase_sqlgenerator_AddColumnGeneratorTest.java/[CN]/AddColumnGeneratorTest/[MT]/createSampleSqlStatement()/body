@@ -1,3 +1,3 @@
 {
-  return new AddColumnStatement(null,null,null,null,null);
+  return new AddColumnStatement(null,"table_name","column_name","column_type",null);
 }
