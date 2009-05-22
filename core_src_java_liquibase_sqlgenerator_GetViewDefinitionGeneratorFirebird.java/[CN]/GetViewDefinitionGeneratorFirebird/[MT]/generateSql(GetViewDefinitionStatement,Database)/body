@@ -1,0 +1,3 @@
+{
+  return new Sql[]{new UnparsedSql("select rdb$view_source from rdb$relations where upper(rdb$relation_name)='" + statement.getViewName() + "'")};
+}

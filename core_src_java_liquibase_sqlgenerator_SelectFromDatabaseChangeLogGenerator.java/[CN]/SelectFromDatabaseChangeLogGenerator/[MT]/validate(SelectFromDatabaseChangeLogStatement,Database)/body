@@ -1,0 +1,5 @@
+{
+  ValidationErrors errors=new ValidationErrors();
+  errors.checkRequiredField("columnToSelect",statement.getColumnsToSelect());
+  return errors;
+}

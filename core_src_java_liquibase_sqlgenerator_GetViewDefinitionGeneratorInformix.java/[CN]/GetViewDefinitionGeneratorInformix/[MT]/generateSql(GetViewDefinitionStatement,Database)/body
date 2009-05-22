@@ -1,0 +1,3 @@
+{
+  return new Sql[]{new UnparsedSql("select v.viewtext from sysviews v, systables t where t.tabname = '" + statement.getViewName() + "' and v.tabid = t.tabid and t.tabtype = 'V' order by v.seqno")};
+}

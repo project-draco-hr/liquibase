@@ -1,0 +1,4 @@
+{
+  this.columnsToSelect=columnsToSelect;
+  this.whereClause=whereClause;
+}

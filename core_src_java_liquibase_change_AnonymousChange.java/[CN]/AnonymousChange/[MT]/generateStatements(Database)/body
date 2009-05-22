@@ -1,0 +1,3 @@
+{
+  return statements.toArray(new SqlStatement[statements.size()]);
+}

@@ -1,0 +1,8 @@
+{
+  try {
+    return new Sql[]{new UnparsedSql("DELETE FROM " + database.escapeTableName(database.convertRequestedSchemaToSchema(null),database.getDatabaseChangeLogTableName()))};
+  }
+ catch (  JDBCException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

@@ -1,7 +1,7 @@
 {
   WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(this);
   try {
-    int totalRows=ExecutorService.getInstance().getReadExecutor(this).queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogTableName())),new ArrayList<SqlVisitor>());
+    int totalRows=ExecutorService.getInstance().getReadExecutor(this).queryForInt(new SelectFromDatabaseChangeLogStatement("COUNT(*)"),new ArrayList<SqlVisitor>());
     if (totalRows == 0) {
       throw new JDBCException("Cannot tag an empty database");
     }

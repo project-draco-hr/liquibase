@@ -31,9 +31,7 @@
       }
     }
     if (snapshot.hasDatabaseChangeLogTable()) {
-      RawSQLChange clearChangeLogChange=new RawSQLChange();
-      clearChangeLogChange.setSql("DELETE FROM " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogTableName()));
-      dropChanges.add(clearChangeLogChange);
+      dropChanges.add(new AnonymousChange(new ClearDatabaseChangeLogTableStatement()));
     }
     for (    Change change : dropChanges) {
       for (      SqlStatement statement : change.generateStatements(this)) {

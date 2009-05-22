@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement("SELECT VIEW_DEFINITION FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = '" + name + "' AND TABLE_SCHEMA='"+ convertRequestedSchemaToSchema(schemaName)+ "'");
-}

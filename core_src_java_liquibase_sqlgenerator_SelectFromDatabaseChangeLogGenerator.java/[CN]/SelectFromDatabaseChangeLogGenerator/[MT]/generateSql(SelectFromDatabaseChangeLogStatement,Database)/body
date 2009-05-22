@@ -1,0 +1,13 @@
+{
+  String sql="SELECT " + StringUtils.join(statement.getColumnsToSelect(),",") + " FROM "+ database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogTableName());
+  SelectFromDatabaseChangeLogStatement.WhereClause whereClause=statement.getWhereClause();
+  if (whereClause != null) {
+    if (whereClause instanceof SelectFromDatabaseChangeLogStatement.ByTag) {
+      sql+=" WHERE tag='" + ((SelectFromDatabaseChangeLogStatement.ByTag)whereClause).getTagName() + "'";
+    }
+ else {
+      throw new UnexpectedLiquibaseException("Unknown where clause type: " + whereClause.getClass().getName());
+    }
+  }
+  return new Sql[]{new UnparsedSql(sql)};
+}

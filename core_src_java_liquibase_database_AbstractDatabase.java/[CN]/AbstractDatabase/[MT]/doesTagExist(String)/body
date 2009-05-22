@@ -1,4 +1,4 @@
 {
-  int count=ExecutorService.getInstance().getReadExecutor(this).queryForInt(new RawSqlStatement("SELECT COUNT(*) FROM " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " WHERE TAG='"+ tag+ "'"),new ArrayList<SqlVisitor>());
+  int count=ExecutorService.getInstance().getReadExecutor(this).queryForInt(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByTag("tag"),"COUNT(*)"),new ArrayList<SqlVisitor>());
   return count > 0;
 }
