@@ -1,3 +1,6 @@
 {
+  if (requestedSchema == null && getConnection() != null) {
+    return getDefaultCatalogName();
+  }
   return requestedSchema;
 }
