@@ -1,0 +1,8 @@
+{
+  try {
+    return new Sql[]{new UnparsedSql("SELECT SEQUENCE_NAME FROM INFORMATION_SCHEMA.SYSTEM_SEQUENCES WHERE SEQUENCE_SCHEMA = '" + database.convertRequestedSchemaToSchema(statement.getSchemaName()) + "'")};
+  }
+ catch (  JDBCException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

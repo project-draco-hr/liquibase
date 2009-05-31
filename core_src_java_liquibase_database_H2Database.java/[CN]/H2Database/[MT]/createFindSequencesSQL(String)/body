@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement("SELECT SEQUENCE_NAME FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_SCHEMA = '" + convertRequestedSchemaToSchema(schema) + "' AND IS_GENERATED=FALSE");
-}

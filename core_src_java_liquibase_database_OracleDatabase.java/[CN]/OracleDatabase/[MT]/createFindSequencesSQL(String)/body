@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement("SELECT SEQUENCE_NAME FROM ALL_SEQUENCES WHERE SEQUENCE_OWNER = '" + convertRequestedSchemaToSchema(schema) + "'");
-}

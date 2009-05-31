@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement("SELECT SEQUENCE_NAME FROM DOMAIN.SEQUENCES WHERE OWNER = '" + convertRequestedSchemaToSchema(schema) + "'");
-}

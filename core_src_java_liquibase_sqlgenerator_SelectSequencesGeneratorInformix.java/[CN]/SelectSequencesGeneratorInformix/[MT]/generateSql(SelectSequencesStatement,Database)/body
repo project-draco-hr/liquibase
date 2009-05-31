@@ -1,0 +1,3 @@
+{
+  return new Sql[]{new UnparsedSql("SELECT tabname FROM systables t, syssequences s WHERE s.tabid = t.tabid")};
+}
