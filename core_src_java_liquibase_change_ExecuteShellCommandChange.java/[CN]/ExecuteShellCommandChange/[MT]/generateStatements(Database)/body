@@ -7,7 +7,12 @@
       LogFactory.getLogger().info("Not executing on os " + currentOS + " when "+ os+ " was specified");
     }
   }
-  if (shouldRun) {
+  boolean nonExecutedMode=false;
+  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
+  if (writeExecutor instanceof LoggingExecutor) {
+    nonExecutedMode=true;
+  }
+  if (shouldRun && !nonExecutedMode) {
     List<String> commandArray=new ArrayList<String>();
     commandArray.add(executable);
     commandArray.addAll(args);
@@ -35,6 +40,9 @@
  catch (    IOException e) {
       throw new UnexpectedLiquibaseException("Error executing command: " + e);
     }
+  }
+  if (nonExecutedMode) {
+    return new SqlStatement[]{new CommentStatement(getCommandString())};
   }
   return new SqlStatement[0];
 }

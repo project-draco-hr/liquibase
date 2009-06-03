@@ -1,3 +1,3 @@
 {
-  return (T)new SelectFromDatabaseChangeLogStatement("ID");
+  return new SelectFromDatabaseChangeLogStatement("ID");
 }
