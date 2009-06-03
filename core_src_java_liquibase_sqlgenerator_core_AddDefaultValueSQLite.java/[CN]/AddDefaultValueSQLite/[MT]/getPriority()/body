@@ -1,0 +1,3 @@
+{
+  return SqlGenerator.PRIORITY_DATABASE;
+}
