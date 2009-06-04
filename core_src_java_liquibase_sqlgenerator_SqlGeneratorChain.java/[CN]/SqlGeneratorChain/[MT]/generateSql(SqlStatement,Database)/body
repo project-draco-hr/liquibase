@@ -1,0 +1,9 @@
+{
+  if (sqlGenerators == null) {
+    return null;
+  }
+  if (!sqlGenerators.hasNext()) {
+    return new Sql[0];
+  }
+  return sqlGenerators.next().generateSql(statement,database,this);
+}

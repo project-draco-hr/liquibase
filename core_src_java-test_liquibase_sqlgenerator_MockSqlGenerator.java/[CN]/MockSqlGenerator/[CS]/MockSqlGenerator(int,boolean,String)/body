@@ -1,0 +1,5 @@
+{
+  this.priority=priority;
+  this.supports=supports;
+  this.returnSql=returnSql;
+}

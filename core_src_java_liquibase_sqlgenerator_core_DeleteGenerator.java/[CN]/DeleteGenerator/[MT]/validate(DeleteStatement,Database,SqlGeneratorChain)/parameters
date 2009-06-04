@@ -1,0 +1,3 @@
+DeleteStatement deleteStatement
+Database database
+SqlGeneratorChain sqlGeneratorChain

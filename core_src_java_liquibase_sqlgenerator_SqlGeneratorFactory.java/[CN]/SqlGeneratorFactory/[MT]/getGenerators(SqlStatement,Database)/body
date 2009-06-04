@@ -1,10 +1,5 @@
 {
-  SortedSet<SqlGenerator> validGenerators=new TreeSet<SqlGenerator>(new Comparator<SqlGenerator>(){
-    public int compare(    SqlGenerator o1,    SqlGenerator o2){
-      return -1 * new Integer(o1.getPriority()).compareTo(o2.getPriority());
-    }
-  }
-);
+  SortedSet<SqlGenerator> validGenerators=new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
   for (  SqlGenerator generator : getGenerators()) {
     Class clazz=generator.getClass();
     while (clazz != null) {

@@ -1,6 +1,6 @@
 {
   SqlGeneratorFactory.getInstance().getGenerators().clear();
   assertEquals(0,SqlGeneratorFactory.getInstance().getGenerators().size());
-  SqlGeneratorFactory.getInstance().register(new MockSqlGenerator<SqlStatement>());
+  SqlGeneratorFactory.getInstance().register(new MockSqlGenerator(1,"A1"));
   assertEquals(1,SqlGeneratorFactory.getInstance().getGenerators().size());
 }

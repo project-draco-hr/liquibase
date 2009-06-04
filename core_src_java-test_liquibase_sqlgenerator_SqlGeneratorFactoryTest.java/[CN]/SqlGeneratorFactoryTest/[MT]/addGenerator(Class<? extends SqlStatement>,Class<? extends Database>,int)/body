@@ -3,14 +3,14 @@
     public int getPriority(){
       return level;
     }
-    public ValidationErrors validate(    SqlStatement sqlStatement,    Database database){
+    public ValidationErrors validate(    SqlStatement sqlStatement,    Database database,    SqlGeneratorChain sqlGeneratorChain){
       return new ValidationErrors();
     }
     public boolean supports(    SqlStatement statement,    Database database){
       boolean ret=sqlStatementClass.isAssignableFrom(statement.getClass()) && sqlDatabaseClass.isAssignableFrom(database.getClass());
       return ret;
     }
-    public Sql[] generateSql(    SqlStatement statement,    Database database){
+    public Sql[] generateSql(    SqlStatement statement,    Database database,    SqlGeneratorChain sqlGeneratorChain){
       return new Sql[0];
     }
   }

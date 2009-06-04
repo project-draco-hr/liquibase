@@ -1,0 +1,6 @@
+{
+  if (sqlGenerators == null || !sqlGenerators.hasNext()) {
+    return new ValidationErrors();
+  }
+  return sqlGenerators.next().validate(statement,database,this);
+}

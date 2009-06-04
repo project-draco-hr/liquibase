@@ -1,0 +1,8 @@
+{
+  SortedSet<SqlGenerator> generators=new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+  generators.add(new MockSqlGenerator(2,"B1","B2").addValidationError("E1"));
+  generators.add(new MockSqlGenerator(1,"A1","A2"));
+  SqlGeneratorChain chain=new SqlGeneratorChain(generators);
+  ValidationErrors validationErrors=chain.validate(new MockSqlStatement(),new MockDatabase());
+  assertTrue(validationErrors.hasErrors());
+}

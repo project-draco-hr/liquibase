@@ -1,0 +1,7 @@
+{
+  ValidationErrors validationErrors=super.validate(statement,database,sqlGeneratorChain);
+  if (database instanceof DerbyDatabase && statement.isAutoIncrement()) {
+    validationErrors.addError("Cannot add an identity column to a database");
+  }
+  return validationErrors;
+}

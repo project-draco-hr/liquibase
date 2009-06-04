@@ -1,0 +1,3 @@
+ClearDatabaseChangeLogTableStatement statement
+Database database
+SqlGeneratorChain sqlGeneratorChain

@@ -1,0 +1,4 @@
+{
+  SqlGeneratorChain chain=new SqlGeneratorChain(null);
+  assertNull(chain.generateSql(new MockSqlStatement(),new MockDatabase()));
+}

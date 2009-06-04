@@ -1,0 +1,3 @@
+SelectFromDatabaseChangeLogStatement statement
+Database database
+SqlGeneratorChain sqlGeneratorChain

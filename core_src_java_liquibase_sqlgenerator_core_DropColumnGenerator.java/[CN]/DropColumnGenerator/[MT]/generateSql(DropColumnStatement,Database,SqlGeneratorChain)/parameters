@@ -1,0 +1,3 @@
+DropColumnStatement statement
+Database database
+SqlGeneratorChain sqlGeneratorChain

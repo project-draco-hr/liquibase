@@ -1,0 +1,5 @@
+{
+  SqlGeneratorChain chain=new SqlGeneratorChain(null);
+  ValidationErrors validationErrors=chain.validate(new MockSqlStatement(),new MockDatabase());
+  assertFalse(validationErrors.hasErrors());
+}

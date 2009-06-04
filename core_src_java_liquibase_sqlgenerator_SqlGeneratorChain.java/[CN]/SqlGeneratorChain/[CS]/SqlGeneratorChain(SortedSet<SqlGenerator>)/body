@@ -1,0 +1,5 @@
+{
+  if (sqlGenerators != null) {
+    this.sqlGenerators=sqlGenerators.iterator();
+  }
+}

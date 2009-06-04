@@ -1,0 +1,3 @@
+CreateDatabaseChangeLogLockTableStatement createDatabaseChangeLogLockTableStatement
+Database database
+SqlGeneratorChain sqlGeneratorChain

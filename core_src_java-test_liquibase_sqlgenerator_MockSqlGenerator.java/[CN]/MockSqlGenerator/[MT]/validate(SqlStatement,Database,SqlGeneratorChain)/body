@@ -1,0 +1,5 @@
+{
+  ValidationErrors validationErrors=sqlGeneratorChain.validate(statement,database);
+  validationErrors.addAll(errors);
+  return validationErrors;
+}

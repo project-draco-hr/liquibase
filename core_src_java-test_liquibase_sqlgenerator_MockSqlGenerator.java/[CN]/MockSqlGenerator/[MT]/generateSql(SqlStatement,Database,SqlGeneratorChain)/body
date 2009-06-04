@@ -1,0 +1,8 @@
+{
+  List<Sql> sql=new ArrayList<Sql>();
+  for (  String returnSql : this.returnSql) {
+    sql.add(new UnparsedSql(returnSql));
+  }
+  sql.addAll(Arrays.asList(sqlGeneratorChain.generateSql(statement,database)));
+  return sql.toArray(new Sql[sql.size()]);
+}
