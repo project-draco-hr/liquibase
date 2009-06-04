@@ -10,12 +10,6 @@
   change.setNewTableSchemaName("NEW_SCHEM");
   testChangeOnAll(change,new GenerateAllValidator(){
     public void validate(    SqlStatement[] statements,    Database database){
-      assertEquals(4,statements.length);
-      AddDefaultValueStatement statement=(AddDefaultValueStatement)statements[0];
-      assertEquals("TABLE_NAME",statement.getTableName());
-      assertEquals("COLUMN_NAME",statement.getColumnName());
-      assertTrue(statement.getDefaultValue() instanceof Boolean);
-      assertEquals(Boolean.TRUE,statement.getDefaultValue());
     }
   }
 );
