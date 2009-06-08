@@ -1,0 +1,8 @@
+{
+  fileName="liquibase/change/core/SQLFileTestData.sql";
+  change=new SQLFileChange();
+  ClassLoaderFileOpener opener=new ClassLoaderFileOpener();
+  change.setFileOpener(opener);
+  change.setPath(fileName);
+  change.init();
+}

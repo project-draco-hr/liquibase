@@ -1,5 +1,5 @@
 {
-  String fileName="liquibase/change/SQLFileTestData.sql";
+  String fileName="liquibase/change/core/SQLFileTestData.sql";
   SQLFileChange change=new SQLFileChange();
   ClassLoaderFileOpener opener=new ClassLoaderFileOpener();
   change.setFileOpener(opener);
