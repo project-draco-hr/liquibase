@@ -5,7 +5,8 @@
     SortedSet<String> values=new TreeSet<String>();
     for (    Field field : objectToSerialize.getClass().getDeclaredFields()) {
       field.setAccessible(true);
-      if (field.getAnnotation(ChangeMetaDataField.class) != null) {
+      ChangeProperty changePropertyAnnotation=field.getAnnotation(ChangeProperty.class);
+      if (changePropertyAnnotation != null && !changePropertyAnnotation.includeInSerialization()) {
         continue;
       }
       String propertyName=field.getName();
