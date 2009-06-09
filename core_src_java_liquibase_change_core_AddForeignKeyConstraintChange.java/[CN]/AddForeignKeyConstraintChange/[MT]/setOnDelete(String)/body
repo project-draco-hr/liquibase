@@ -1,20 +1,3 @@
 {
-  if (onDelete != null && onDelete.equalsIgnoreCase("CASCADE")) {
-    setDeleteRule(DatabaseMetaData.importedKeyCascade);
-  }
- else   if (onDelete != null && onDelete.equalsIgnoreCase("SET NULL")) {
-    setDeleteRule(DatabaseMetaData.importedKeySetNull);
-  }
- else   if (onDelete != null && onDelete.equalsIgnoreCase("SET DEFAULT")) {
-    setDeleteRule(DatabaseMetaData.importedKeySetDefault);
-  }
- else   if (onDelete != null && onDelete.equalsIgnoreCase("RESTRICT")) {
-    setDeleteRule(DatabaseMetaData.importedKeyRestrict);
-  }
- else   if (onDelete == null || onDelete.equalsIgnoreCase("NO ACTION")) {
-    setDeleteRule(DatabaseMetaData.importedKeyNoAction);
-  }
- else {
-    throw new RuntimeException("Unknown onDelete action: " + onDelete);
-  }
+  this.onDelete=onDelete;
 }

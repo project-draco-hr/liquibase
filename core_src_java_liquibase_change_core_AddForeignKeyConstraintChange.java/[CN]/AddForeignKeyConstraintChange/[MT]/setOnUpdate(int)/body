@@ -1,0 +1,20 @@
+{
+  if (rule == DatabaseMetaData.importedKeyCascade) {
+    setOnUpdate("CASCADE");
+  }
+ else   if (rule == DatabaseMetaData.importedKeySetNull) {
+    setOnUpdate("SET NULL");
+  }
+ else   if (rule == DatabaseMetaData.importedKeySetDefault) {
+    setOnUpdate("SET DEFAULT");
+  }
+ else   if (rule == DatabaseMetaData.importedKeyRestrict) {
+    setOnUpdate("RESTRICT");
+  }
+ else   if (rule == DatabaseMetaData.importedKeyNoAction) {
+    setOnUpdate("NO ACTION");
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown onUpdate action: " + onUpdate);
+  }
+}

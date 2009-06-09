@@ -1,0 +1,20 @@
+{
+  if (rule == DatabaseMetaData.importedKeyCascade) {
+    setOnDelete("CASCADE");
+  }
+ else   if (rule == DatabaseMetaData.importedKeySetNull) {
+    setOnDelete("SET NULL");
+  }
+ else   if (rule == DatabaseMetaData.importedKeySetDefault) {
+    setOnDelete("SET DEFAULT");
+  }
+ else   if (rule == DatabaseMetaData.importedKeyRestrict) {
+    setOnDelete("RESTRICT");
+  }
+ else   if (rule == DatabaseMetaData.importedKeyNoAction) {
+    setOnDelete("NO ACTION");
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown onDelete action: " + rule);
+  }
+}

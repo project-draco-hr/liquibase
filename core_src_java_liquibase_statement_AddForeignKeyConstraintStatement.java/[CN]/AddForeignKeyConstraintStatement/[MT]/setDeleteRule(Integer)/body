@@ -1,4 +1,0 @@
-{
-  this.deleteRule=deleteRule;
-  return this;
-}
