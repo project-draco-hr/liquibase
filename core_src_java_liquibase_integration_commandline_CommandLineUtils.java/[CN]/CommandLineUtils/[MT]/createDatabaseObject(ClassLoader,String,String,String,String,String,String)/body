@@ -19,7 +19,7 @@
     Driver driverObject;
     DatabaseFactory databaseFactory=DatabaseFactory.getInstance();
     if (databaseClass != null) {
-      databaseFactory.addDatabaseImplementation((Database)Class.forName(databaseClass,true,classLoader).newInstance());
+      databaseFactory.register((Database)Class.forName(databaseClass,true,classLoader).newInstance());
     }
     try {
       if (driver == null) {

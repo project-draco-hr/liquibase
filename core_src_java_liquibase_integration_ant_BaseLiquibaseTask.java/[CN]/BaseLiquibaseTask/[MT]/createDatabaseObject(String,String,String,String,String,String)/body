@@ -18,10 +18,10 @@
  else {
     if (databaseClass != null) {
       try {
-        DatabaseFactory.getInstance().addDatabaseImplementation((Database)Class.forName(databaseClass,true,loader).newInstance());
+        DatabaseFactory.getInstance().register((Database)Class.forName(databaseClass,true,loader).newInstance());
       }
  catch (      ClassCastException e) {
-        DatabaseFactory.getInstance().addDatabaseImplementation((Database)Class.forName(databaseClass).newInstance());
+        DatabaseFactory.getInstance().register((Database)Class.forName(databaseClass).newInstance());
       }
     }
     if (driverClassName == null) {

@@ -1,4 +1,4 @@
 {
-  super(statement.getClass().getName() + " is not supported on " + database.getProductName()+ ": "+ reason);
+  super(statement.getClass().getName() + " is not supported on " + database.getTypeName()+ ": "+ reason);
   this.reason=reason;
 }

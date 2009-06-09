@@ -1,2 +1,11 @@
 {
+  try {
+    Class[] classes=PluginUtil.getClasses("liquibase.database",Database.class);
+    for (    Class clazz : classes) {
+      register((Database)clazz.getConstructor().newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
 }

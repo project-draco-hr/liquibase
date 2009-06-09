@@ -1,6 +1,6 @@
 {
   if (getConnection() == null) {
-    return getProductName() + " Database";
+    return getTypeName() + " Database";
   }
   try {
     return getConnectionUsername() + " @ " + getConnectionURL()+ (getDefaultSchemaName() == null ? "" : " (Default Schema: " + getDefaultSchemaName() + ")");

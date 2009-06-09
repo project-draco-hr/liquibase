@@ -29,7 +29,7 @@
         buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
       }
  else {
-        LogFactory.getLogger().log(Level.WARNING,database.getProductName() + " does not support autoincrement columns as request for " + (database.escapeTableName(statement.getSchemaName(),statement.getTableName())));
+        LogFactory.getLogger().log(Level.WARNING,database.getTypeName() + " does not support autoincrement columns as request for " + (database.escapeTableName(statement.getSchemaName(),statement.getTableName())));
       }
     }
     if (statement.getNotNullColumns().contains(column)) {

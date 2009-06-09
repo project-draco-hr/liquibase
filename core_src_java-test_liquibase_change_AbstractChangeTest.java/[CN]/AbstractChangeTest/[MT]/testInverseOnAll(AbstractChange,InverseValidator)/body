@@ -5,7 +5,7 @@
       validator.validate(inverses);
     }
  catch (    AssertionError e) {
-      AssertionError error=new AssertionError("InverseValidator failed for " + database.getProductName() + ": "+ e.getMessage());
+      AssertionError error=new AssertionError("InverseValidator failed for " + database.getTypeName() + ": "+ e.getMessage());
       error.setStackTrace(e.getStackTrace());
       throw error;
     }
