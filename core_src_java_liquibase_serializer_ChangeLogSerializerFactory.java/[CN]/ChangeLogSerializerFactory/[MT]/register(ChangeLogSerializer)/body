@@ -1,0 +1,5 @@
+{
+  for (  String extension : changeLogSerializer.getValidFileExtensions()) {
+    serializers.put(extension,changeLogSerializer);
+  }
+}

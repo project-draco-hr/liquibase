@@ -3,7 +3,7 @@
   factory.getParsers().clear();
   assertEquals(0,factory.getParsers().size());
   ChangeLogParser mockChangeLogParser=new MockChangeLogParser();
-  factory.register(new XMLChangeLogParser());
+  factory.register(new XMLChangeLogSAXParser());
   factory.register(mockChangeLogParser);
   factory.register(new SqlChangeLogParser());
   assertEquals(3,factory.getParsers().size());

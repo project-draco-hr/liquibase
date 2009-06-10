@@ -1,9 +1,0 @@
-{
-  DropViewChange change=new DropViewChange();
-  change.setSchemaName("SCHEMA_NAME");
-  change.setViewName("VIEW_NAME");
-  Element node=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(change);
-  assertEquals("dropView",node.getTagName());
-  assertEquals("SCHEMA_NAME",node.getAttribute("schemaName"));
-  assertEquals("VIEW_NAME",node.getAttribute("viewName"));
-}

@@ -1,9 +1,0 @@
-{
-  DropNotNullConstraintChange change=new DropNotNullConstraintChange();
-  change.setTableName("TABLE_NAME");
-  change.setColumnName("COL_HERE");
-  Element node=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(change);
-  assertEquals("dropNotNullConstraint",node.getTagName());
-  assertEquals("TABLE_NAME",node.getAttribute("tableName"));
-  assertEquals("COL_HERE",node.getAttribute("columnName"));
-}

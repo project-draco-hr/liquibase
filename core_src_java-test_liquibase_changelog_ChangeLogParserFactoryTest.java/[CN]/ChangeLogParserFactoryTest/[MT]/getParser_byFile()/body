@@ -1,6 +1,6 @@
 {
   ChangeLogParserFactory.getInstance().getParsers().clear();
-  XMLChangeLogParser xmlChangeLogParser=new XMLChangeLogParser();
+  XMLChangeLogSAXParser xmlChangeLogParser=new XMLChangeLogSAXParser();
   ChangeLogParserFactory.getInstance().register(xmlChangeLogParser);
   ChangeLogParserFactory.getInstance().register(new SqlChangeLogParser());
   ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser("path/to/a/file.xml");

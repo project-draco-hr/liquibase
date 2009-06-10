@@ -1,0 +1,4 @@
+{
+  Map<String,ChangeLogParser> generators=ChangeLogParserFactory.getInstance().getParsers();
+  assertEquals(2,generators.size());
+}

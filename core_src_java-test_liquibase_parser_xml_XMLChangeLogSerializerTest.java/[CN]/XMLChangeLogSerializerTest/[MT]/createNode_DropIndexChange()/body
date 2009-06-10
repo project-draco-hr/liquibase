@@ -1,7 +1,0 @@
-{
-  DropIndexChange refactoring=new DropIndexChange();
-  refactoring.setIndexName("IDX_NAME");
-  Element element=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(refactoring);
-  assertEquals("dropIndex",element.getTagName());
-  assertEquals("IDX_NAME",element.getAttribute("indexName"));
-}

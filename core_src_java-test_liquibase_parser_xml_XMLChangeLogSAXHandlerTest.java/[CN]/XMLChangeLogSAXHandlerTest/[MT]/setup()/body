@@ -1,0 +1,3 @@
+{
+  handler=new XMLChangeLogSAXHandler(null,null,new HashMap<String,Object>());
+}

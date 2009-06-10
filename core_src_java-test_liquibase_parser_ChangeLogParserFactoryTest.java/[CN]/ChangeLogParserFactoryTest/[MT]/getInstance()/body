@@ -1,0 +1,4 @@
+{
+  assertNotNull(ChangeLogParserFactory.getInstance());
+  assertTrue(ChangeLogParserFactory.getInstance() == ChangeLogParserFactory.getInstance());
+}

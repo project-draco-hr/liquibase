@@ -1,0 +1,11 @@
+{
+  ChangeLogSerializerFactory factory=ChangeLogSerializerFactory.getInstance();
+  factory.getSerializers().clear();
+  assertEquals(0,factory.getSerializers().size());
+  XMLChangeLogSerializer changeLogSerializer=new XMLChangeLogSerializer();
+  factory.register(new StringChangeLogSerializer());
+  factory.register(changeLogSerializer);
+  assertEquals(2,factory.getSerializers().size());
+  factory.unregister(changeLogSerializer);
+  assertEquals(1,factory.getSerializers().size());
+}

@@ -1,0 +1,4 @@
+{
+  assertNotNull(ChangeLogSerializerFactory.getInstance());
+  assertTrue(ChangeLogSerializerFactory.getInstance() == ChangeLogSerializerFactory.getInstance());
+}

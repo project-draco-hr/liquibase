@@ -12,7 +12,9 @@
           createEmptyChangeLog(file.getOutputStream(null));
         }
         doc=documentBuilder.parse(file.getInputStream());
-        doc.getDocumentElement().appendChild(new XMLChangeLogSerializer(doc).createNode(changeSet));
+        XMLChangeLogSerializer xmlChangeLogSerializer=new XMLChangeLogSerializer();
+        xmlChangeLogSerializer.setCurrentChangeLogFileDOM(doc);
+        doc.getDocumentElement().appendChild(xmlChangeLogSerializer.createNode(changeSet));
         OutputStream outputStream=file.getOutputStream(null);
         serializeXML(doc,outputStream);
         outputStream.flush();

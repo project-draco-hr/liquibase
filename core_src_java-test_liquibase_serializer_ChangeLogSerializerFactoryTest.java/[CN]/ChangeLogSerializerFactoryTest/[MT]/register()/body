@@ -1,0 +1,6 @@
+{
+  ChangeLogSerializerFactory.getInstance().getSerializers().clear();
+  assertEquals(0,ChangeLogSerializerFactory.getInstance().getSerializers().size());
+  ChangeLogSerializerFactory.getInstance().register(new MockChangeLogSerializer("mock"));
+  assertEquals(1,ChangeLogSerializerFactory.getInstance().getSerializers().size());
+}

@@ -1,0 +1,5 @@
+{
+  ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser("xml");
+  assertNotNull(parser);
+  assertTrue(parser instanceof XMLChangeLogSAXParser);
+}

@@ -1,0 +1,5 @@
+{
+  ChangeLogSerializer serializer=ChangeLogSerializerFactory.getInstance().getSerializer("xml");
+  assertNotNull(serializer);
+  assertTrue(serializer instanceof XMLChangeLogSerializer);
+}

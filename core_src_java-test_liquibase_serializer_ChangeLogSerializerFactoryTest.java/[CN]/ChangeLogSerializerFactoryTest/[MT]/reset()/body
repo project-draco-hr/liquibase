@@ -1,0 +1,5 @@
+{
+  ChangeLogSerializerFactory instance1=ChangeLogSerializerFactory.getInstance();
+  ChangeLogSerializerFactory.reset();
+  assertFalse(instance1 == ChangeLogSerializerFactory.getInstance());
+}
