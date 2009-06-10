@@ -1,8 +1,0 @@
-{
-  try {
-    return new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
-  }
- catch (  ParserConfigurationException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
-}
