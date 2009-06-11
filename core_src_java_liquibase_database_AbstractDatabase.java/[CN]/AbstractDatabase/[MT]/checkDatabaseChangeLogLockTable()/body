@@ -10,7 +10,7 @@
         ((LoggingExecutor)writeExecutor).setAlreadyCreatedChangeLockTable(true);
       }
     }
-    SqlStatement createTableStatement=getCreateChangeLogLockSQL();
+    SqlStatement createTableStatement=new CreateDatabaseChangeLogLockTableStatement();
     writeExecutor.comment("Create Database Lock Table");
     writeExecutor.execute(createTableStatement,new ArrayList<SqlVisitor>());
     this.commit();
