@@ -11,7 +11,7 @@
   AndPrecondition preconditions=changeLog.getPreconditions();
   if (preconditions != null) {
     if (null == databaseChangeLog.getPreconditions()) {
-      databaseChangeLog.setPreconditions(new Preconditions());
+      databaseChangeLog.setPreconditions(new PreconditionContainer());
     }
     databaseChangeLog.getPreconditions().addNestedPrecondition(preconditions);
   }

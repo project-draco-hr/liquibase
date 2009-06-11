@@ -1,0 +1,6 @@
+{
+  PreconditionFactory.getInstance().getPreconditions().clear();
+  assertEquals(0,PreconditionFactory.getInstance().getPreconditions().size());
+  PreconditionFactory.getInstance().register(MockPrecondition.class);
+  assertEquals(1,PreconditionFactory.getInstance().getPreconditions().size());
+}

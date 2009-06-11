@@ -1,7 +1,7 @@
 {
-  Class<?> aClass=tagToClassMap.get(tagName);
+  Class<?> aClass=preconditions.get(tagName);
   if (aClass == null) {
-    throw new RuntimeException("Unknown tag: " + tagName);
+    throw new UnexpectedLiquibaseException("Unknown tag: " + tagName);
   }
   try {
     return (Precondition)aClass.newInstance();

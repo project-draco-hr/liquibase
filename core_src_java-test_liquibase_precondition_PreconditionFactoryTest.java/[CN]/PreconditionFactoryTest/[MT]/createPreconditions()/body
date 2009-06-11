@@ -1,0 +1,5 @@
+{
+  Precondition precondtion=PreconditionFactory.getInstance().create("and");
+  assertNotNull(precondtion);
+  assertTrue(precondtion instanceof AndPrecondition);
+}

@@ -1,0 +1,4 @@
+{
+  assertNotNull(PreconditionFactory.getInstance());
+  assertTrue(PreconditionFactory.getInstance() == PreconditionFactory.getInstance());
+}

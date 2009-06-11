@@ -93,7 +93,7 @@
       inRollback=true;
     }
  else     if ("preConditions".equals(qName)) {
-      rootPrecondition=new Preconditions();
+      rootPrecondition=new PreconditionContainer();
       rootPrecondition.setOnFail(StringUtils.trimToNull(atts.getValue("onFail")));
       rootPrecondition.setOnError(StringUtils.trimToNull(atts.getValue("onError")));
       preconditionLogicStack.push(rootPrecondition);

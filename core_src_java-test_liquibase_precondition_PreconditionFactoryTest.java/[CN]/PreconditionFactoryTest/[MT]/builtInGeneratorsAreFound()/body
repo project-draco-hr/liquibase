@@ -1,0 +1,4 @@
+{
+  Map<String,Class<? extends Precondition>> generators=PreconditionFactory.getInstance().getPreconditions();
+  assertTrue(generators.size() > 5);
+}

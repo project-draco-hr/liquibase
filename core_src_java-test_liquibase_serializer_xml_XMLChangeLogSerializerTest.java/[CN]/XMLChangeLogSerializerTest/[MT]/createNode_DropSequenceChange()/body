@@ -1,0 +1,7 @@
+{
+  DropSequenceChange change=new DropSequenceChange();
+  change.setSequenceName("SEQ_NAME");
+  Element element=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(change);
+  assertEquals("dropSequence",element.getTagName());
+  assertEquals("SEQ_NAME",element.getAttribute("sequenceName"));
+}

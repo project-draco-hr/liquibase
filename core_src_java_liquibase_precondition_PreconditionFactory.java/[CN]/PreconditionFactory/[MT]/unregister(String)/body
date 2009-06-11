@@ -1,0 +1,3 @@
+{
+  preconditions.remove(name);
+}

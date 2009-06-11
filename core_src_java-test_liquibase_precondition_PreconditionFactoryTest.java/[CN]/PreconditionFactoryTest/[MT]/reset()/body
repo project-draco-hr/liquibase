@@ -1,0 +1,5 @@
+{
+  PreconditionFactory instance1=PreconditionFactory.getInstance();
+  PreconditionFactory.reset();
+  assertFalse(instance1 == PreconditionFactory.getInstance());
+}

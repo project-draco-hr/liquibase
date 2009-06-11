@@ -1,0 +1,11 @@
+{
+  DropColumnChange change=new DropColumnChange();
+  change.setSchemaName("SCHEMA_NAME");
+  change.setTableName("TABLE_NAME");
+  change.setColumnName("COL_NAME");
+  Element node=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(change);
+  assertEquals("dropColumn",node.getTagName());
+  assertEquals("SCHEMA_NAME",node.getAttribute("schemaName"));
+  assertEquals("TABLE_NAME",node.getAttribute("tableName"));
+  assertEquals("COL_NAME",node.getAttribute("columnName"));
+}

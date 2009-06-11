@@ -2,7 +2,7 @@
   assertEquals(nestedFileName,changeLog.getLogicalFilePath());
   assertEquals(nestedFileName,changeLog.getPhysicalFilePath());
   assertEquals(1,changeLog.getPreconditions().getNestedPreconditions().size());
-  assertEquals(0,((Preconditions)changeLog.getPreconditions().getNestedPreconditions().get(0)).getNestedPreconditions().size());
+  assertEquals(0,((PreconditionContainer)changeLog.getPreconditions().getNestedPreconditions().get(0)).getNestedPreconditions().size());
   assertEquals(3,changeLog.getChangeSets().size());
   ChangeSet changeSet=changeLog.getChangeSets().get(0);
   assertEquals("nvoxland",changeSet.getAuthor());

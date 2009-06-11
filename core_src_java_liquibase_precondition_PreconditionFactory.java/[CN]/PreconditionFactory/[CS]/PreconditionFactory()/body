@@ -1,13 +1,13 @@
 {
-  tagToClassMap=new HashMap<String,Class>();
-  Class[] preconditions=new Class[]{AndPrecondition.class,OrPrecondition.class,NotPrecondition.class,DBMSPrecondition.class,RunningAsPrecondition.class,ChangeSetExecutedPrecondition.class,TableExistsPrecondition.class,ColumnExistsPrecondition.class,SequenceExistsPrecondition.class,ForeignKeyExistsPrecondition.class,IndexExistsPrecondition.class,PrimaryKeyExistsPrecondition.class,ViewExistsPrecondition.class,SqlPrecondition.class,CustomPreconditionWrapper.class};
+  preconditions=new HashMap<String,Class<? extends Precondition>>();
+  Class[] classes;
   try {
-    for (    Class<Precondition> preconditionClass : preconditions) {
-      Precondition precondition=preconditionClass.newInstance();
-      tagToClassMap.put(precondition.getTagName(),preconditionClass);
+    classes=PluginUtil.getClasses("liquibase.precondition",Precondition.class);
+    for (    Class<? extends Precondition> clazz : classes) {
+      register(clazz);
     }
   }
  catch (  Exception e) {
-    throw new RuntimeException(e);
+    throw new UnexpectedLiquibaseException(e);
   }
 }
