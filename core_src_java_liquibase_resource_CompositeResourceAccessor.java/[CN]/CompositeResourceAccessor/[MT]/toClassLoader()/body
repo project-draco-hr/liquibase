@@ -1,0 +1,7 @@
+{
+  List<ClassLoader> classLoaders=new ArrayList<ClassLoader>();
+  for (  ResourceAccessor fo : openers) {
+    classLoaders.add(fo.toClassLoader());
+  }
+  return new CompositeClassLoader(classLoaders.toArray(new ClassLoader[classLoaders.size()]));
+}

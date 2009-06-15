@@ -32,7 +32,7 @@
         currentPrecondition=null;
       }
  else       if (qName.equals("customPrecondition")) {
-        ((CustomPreconditionWrapper)currentPrecondition).setClassLoader(fileOpener.toClassLoader());
+        ((CustomPreconditionWrapper)currentPrecondition).setClassLoader(resourceAccessor.toClassLoader());
       }
     }
  else     if (changeSet != null && "rollback".equals(qName)) {

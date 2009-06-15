@@ -25,8 +25,8 @@
         pathName=pathName + "/";
       }
       log.finest("includeAll for " + pathName);
-      log.finest("Using file opener for includeAll: " + fileOpener.getClass().getName());
-      Enumeration<URL> resources=fileOpener.getResources(pathName);
+      log.finest("Using file opener for includeAll: " + resourceAccessor.getClass().getName());
+      Enumeration<URL> resources=resourceAccessor.getResources(pathName);
       boolean foundResource=false;
       while (resources.hasMoreElements()) {
         URL fileUrl=resources.nextElement();
@@ -139,9 +139,9 @@
       if (change == null) {
         throw new MigrationFailedException(changeSet,"Unknown change: " + qName);
       }
-      change.setFileOpener(fileOpener);
+      change.setFileOpener(resourceAccessor);
       if (change instanceof CustomChangeWrapper) {
-        ((CustomChangeWrapper)change).setClassLoader(fileOpener.toClassLoader());
+        ((CustomChangeWrapper)change).setClassLoader(resourceAccessor.toClassLoader());
       }
       for (int i=0; i < atts.getLength(); i++) {
         String attributeName=atts.getQName(i);
@@ -215,7 +215,7 @@
       }
  else {
         Properties props=new Properties();
-        InputStream propertiesStream=fileOpener.getResourceAsStream(atts.getValue("file"));
+        InputStream propertiesStream=resourceAccessor.getResourceAsStream(atts.getValue("file"));
         if (propertiesStream == null) {
           log.info("Could not open properties file " + atts.getValue("file"));
         }

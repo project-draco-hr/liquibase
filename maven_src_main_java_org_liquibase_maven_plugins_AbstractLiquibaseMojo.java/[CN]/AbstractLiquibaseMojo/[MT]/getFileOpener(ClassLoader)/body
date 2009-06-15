@@ -1,5 +1,5 @@
 {
-  FileOpener mFO=new MavenFileOpener(cl);
-  FileOpener fsFO=new FileSystemFileOpener(project.getBasedir().getAbsolutePath());
-  return new CompositeFileOpener(mFO,fsFO);
+  ResourceAccessor mFO=new MavenResourceAccessor(cl);
+  ResourceAccessor fsFO=new FileSystemResourceAccessor(project.getBasedir().getAbsolutePath());
+  return new CompositeResourceAccessor(mFO,fsFO);
 }

@@ -1,0 +1,7 @@
+{
+  for (  ResourceAccessor o : openers) {
+    Enumeration<URL> e=o.getResources(packageName);
+    if (e.hasMoreElements())     return e;
+  }
+  return new Vector<URL>().elements();
+}

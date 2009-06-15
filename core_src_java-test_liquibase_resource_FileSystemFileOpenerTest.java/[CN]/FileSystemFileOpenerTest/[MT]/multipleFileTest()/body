@@ -3,7 +3,7 @@
   boolean found=false;
   while (files.hasMoreElements()) {
     URL u=files.nextElement();
-    found|=u.getFile().lastIndexOf("FileSystemFileOpener") > -1;
+    found|=u.getFile().lastIndexOf("FileSystemResourceAccessor") > -1;
   }
   assertTrue(found);
 }

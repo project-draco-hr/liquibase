@@ -66,9 +66,9 @@
       ic=new InitialContext();
       DataSource dataSource=(DataSource)ic.lookup(this.dataSource);
       connection=dataSource.getConnection();
-      FileOpener clFO=new ClassLoaderFileOpener();
-      FileOpener fsFO=new FileSystemFileOpener();
-      Liquibase liquibase=new Liquibase(getChangeLogFile(),new CompositeFileOpener(clFO,fsFO),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
+      ResourceAccessor clFO=new ClassLoaderResourceAccessor();
+      ResourceAccessor fsFO=new FileSystemResourceAccessor();
+      Liquibase liquibase=new Liquibase(getChangeLogFile(),new CompositeResourceAccessor(clFO,fsFO),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection));
       liquibase.update(getContexts());
     }
   finally {

@@ -1,7 +1,7 @@
 {
   String fileName="liquibase/change/core/SQLFileTestData.sql";
   SQLFileChange change=new SQLFileChange();
-  ClassLoaderFileOpener opener=new ClassLoaderFileOpener();
+  ClassLoaderResourceAccessor opener=new ClassLoaderResourceAccessor();
   change.setFileOpener(opener);
   change.setPath(fileName);
   Element element=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(change);

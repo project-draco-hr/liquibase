@@ -1,6 +1,6 @@
 {
   try {
-    FileOpener opener=getFileOpener();
+    ResourceAccessor opener=getFileOpener();
     if (opener == null) {
       throw new UnexpectedLiquibaseException("No file opener specified for " + getFile());
     }

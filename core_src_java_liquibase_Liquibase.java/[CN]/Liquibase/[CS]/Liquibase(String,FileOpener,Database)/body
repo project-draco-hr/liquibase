@@ -1,8 +1,0 @@
-{
-  log=LogFactory.getLogger();
-  if (changeLogFile != null) {
-    this.changeLogFile=changeLogFile.replace('\\','/');
-  }
-  this.fileOpener=fileOpener;
-  this.database=database;
-}

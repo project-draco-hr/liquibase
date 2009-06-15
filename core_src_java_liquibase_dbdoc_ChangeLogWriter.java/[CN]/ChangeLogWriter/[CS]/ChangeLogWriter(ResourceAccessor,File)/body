@@ -1,0 +1,4 @@
+{
+  this.outputDir=new File(rootOutputDir,"changelogs");
+  this.resourceAccessor=resourceAccessor;
+}

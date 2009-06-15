@@ -1,6 +1,6 @@
 {
   try {
-    @SuppressWarnings("unused") DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/changelog/parser/xml/missingChangeLog.xml",new HashMap<String,Object>(),new JUnitFileOpener());
+    @SuppressWarnings("unused") DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/changelog/parser/xml/missingChangeLog.xml",new HashMap<String,Object>(),new JUnitResourceAccessor());
   }
  catch (  Exception e) {
     assertTrue(e instanceof ChangeLogParseException);

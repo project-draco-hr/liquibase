@@ -2,7 +2,7 @@
   if (database == null) {
     return;
   }
-  Enumeration<URL> urls=new JUnitFileOpener().getResources(includedChangeLog);
+  Enumeration<URL> urls=new JUnitResourceAccessor().getResources(includedChangeLog);
   URL completeChangeLogURL=urls.nextElement();
   String absolutePathOfChangeLog=completeChangeLogURL.toExternalForm();
   absolutePathOfChangeLog=absolutePathOfChangeLog.replaceFirst("file:\\/","");
@@ -12,7 +12,7 @@
  else {
     absolutePathOfChangeLog="/" + absolutePathOfChangeLog;
   }
-  Liquibase liquibase=createLiquibase(absolutePathOfChangeLog,new FileSystemFileOpener());
+  Liquibase liquibase=createLiquibase(absolutePathOfChangeLog,new FileSystemResourceAccessor());
   liquibase.dropAll(getSchemasToDrop());
   liquibase.update(this.contexts);
   liquibase.update(this.contexts);

@@ -1,5 +1,5 @@
 {
-  return new FileOpener(){
+  return new ResourceAccessor(){
     public InputStream getResourceAsStream(    String file){
       return inputStream;
     }

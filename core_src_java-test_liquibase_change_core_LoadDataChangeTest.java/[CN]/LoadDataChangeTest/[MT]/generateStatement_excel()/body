@@ -3,7 +3,7 @@
   refactoring.setSchemaName("SCHEMA_NAME");
   refactoring.setTableName("TABLE_NAME");
   refactoring.setFile("changelogs/sample.data1-excel.csv");
-  refactoring.setFileOpener(new JUnitFileOpener());
+  refactoring.setFileOpener(new JUnitResourceAccessor());
   LoadDataColumnConfig ageConfig=new LoadDataColumnConfig();
   ageConfig.setHeader("age");
   ageConfig.setType("NUMERIC");

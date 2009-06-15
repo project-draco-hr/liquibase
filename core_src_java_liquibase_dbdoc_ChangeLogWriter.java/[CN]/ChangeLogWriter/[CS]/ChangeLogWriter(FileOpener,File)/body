@@ -1,4 +1,0 @@
-{
-  this.outputDir=new File(rootOutputDir,"changelogs");
-  this.fileOpener=fileOpener;
-}

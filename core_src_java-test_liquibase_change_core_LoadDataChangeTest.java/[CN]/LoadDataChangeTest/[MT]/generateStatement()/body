@@ -3,7 +3,7 @@
   refactoring.setSchemaName("SCHEMA_NAME");
   refactoring.setTableName("TABLE_NAME");
   refactoring.setFile("changelogs/sample.data1.csv");
-  refactoring.setFileOpener(new JUnitFileOpener());
+  refactoring.setFileOpener(new JUnitResourceAccessor());
   SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
   assertEquals(2,sqlStatements.length);
   assertTrue(sqlStatements[0] instanceof InsertStatement);

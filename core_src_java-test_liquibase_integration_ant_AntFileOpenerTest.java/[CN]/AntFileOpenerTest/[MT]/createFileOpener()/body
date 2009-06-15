@@ -1,4 +1,4 @@
 {
   Project project=new Project();
-  return new AntFileOpener(project,new Path(project));
+  return new AntResourceAccessor(project,new Path(project));
 }

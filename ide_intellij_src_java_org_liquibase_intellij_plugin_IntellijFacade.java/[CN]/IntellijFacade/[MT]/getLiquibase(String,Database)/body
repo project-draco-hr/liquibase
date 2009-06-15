@@ -3,7 +3,7 @@
   if (changeLogFile == null) {
     changeLogFile=liquibaseProjectComponent.getRootChangeLogFile();
   }
-  Liquibase liquibase=new Liquibase(changeLogFile,new CompositeFileOpener(new IntellijFileOpener(),new FileSystemFileOpener()),database);
+  Liquibase liquibase=new Liquibase(changeLogFile,new CompositeResourceAccessor(new IntellijResourceAccessor(),new FileSystemResourceAccessor()),database);
   try {
     liquibase.checkDatabaseChangeLogTable();
   }

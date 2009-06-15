@@ -5,7 +5,7 @@
       public void run(      IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
         monitor.beginTask("Refactoring Database",100);
         try {
-          Liquibase liquibase=new Liquibase(LiquibasePreferences.getCurrentChangeLog(),new EclipseFileOpener(),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(getConnection()));
+          Liquibase liquibase=new Liquibase(LiquibasePreferences.getCurrentChangeLog(),new EclipseResourceAccessor(),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(getConnection()));
           monitor.subTask("Checking Control Tables");
           liquibase.getDatabase().checkDatabaseChangeLogTable();
           liquibase.getDatabase().checkDatabaseChangeLogLockTable();

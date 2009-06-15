@@ -1,7 +1,0 @@
-{
-  for (  FileOpener o : openers) {
-    InputStream is=o.getResourceAsStream(file);
-    if (is != null)     return is;
-  }
-  return null;
-}

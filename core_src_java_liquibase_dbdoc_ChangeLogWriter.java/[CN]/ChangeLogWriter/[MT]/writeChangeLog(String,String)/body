@@ -1,5 +1,5 @@
 {
-  InputStream stylesheet=fileOpener.getResourceAsStream(physicalFilePath);
+  InputStream stylesheet=resourceAccessor.getResourceAsStream(physicalFilePath);
   if (stylesheet == null) {
     throw new IOException("Can not find " + changeLog);
   }

@@ -1,0 +1,3 @@
+String physicalChangeLogLocation
+ResourceAccessor resourceAccessor
+Map<String,Object> properties

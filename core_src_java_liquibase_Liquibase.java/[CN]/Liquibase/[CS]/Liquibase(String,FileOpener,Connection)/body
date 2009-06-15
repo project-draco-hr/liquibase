@@ -1,3 +1,0 @@
-{
-  this(changeLogFile,fileOpener,DatabaseFactory.getInstance().findCorrectDatabaseImplementation(conn));
-}
