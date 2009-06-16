@@ -1,7 +1,7 @@
 {
   Class[] classes;
   try {
-    classes=PluginUtil.getClasses("liquibase.sqlgenerator",SqlGenerator.class);
+    classes=ClassPathScanner.getInstance().getClasses("liquibase.sqlgenerator",SqlGenerator.class);
     for (    Class clazz : classes) {
       register((SqlGenerator)clazz.getConstructor().newInstance());
     }

@@ -1,7 +1,7 @@
 {
   Class[] classes;
   try {
-    classes=PluginUtil.getClasses("liquibase.serializer",ChangeLogSerializer.class);
+    classes=ClassPathScanner.getInstance().getClasses("liquibase.serializer",ChangeLogSerializer.class);
     for (    Class clazz : classes) {
       register((ChangeLogSerializer)clazz.getConstructor().newInstance());
     }

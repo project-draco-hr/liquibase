@@ -1,0 +1,5 @@
+{
+  ChangeSet changeSet=new ChangeSet("1","2",false,false,"/test.xml","/test.xml",null,null);
+  CheckSum checkSum=changeSet.generateCheckSum();
+  assertTrue(changeSet.isCheckSumValid(checkSum));
+}
