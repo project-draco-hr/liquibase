@@ -84,6 +84,9 @@
       return columnType;
     }
   }
+  if (returnTypeName == null) {
+    throw new UnexpectedLiquibaseException("Could not determine " + dataTypeName + " for "+ this.getClass().getName());
+  }
   if (precision != null && returnTypeName.getSupportsPrecision()) {
     return returnTypeName.getDataTypeName() + "(" + precision+ ")";
   }

@@ -2,6 +2,13 @@
   if (allDatabases == null) {
     allDatabases=new HashSet<Database>();
     allDatabases.addAll(DatabaseFactory.getInstance().getImplementedDatabases());
+    List<Database> toRemove=new ArrayList<Database>();
+    for (    Database database : allDatabases) {
+      if (database instanceof SQLiteDatabase || database instanceof MockDatabase || database instanceof ExampleCustomDatabase) {
+        toRemove.add(database);
+      }
+    }
+    allDatabases.removeAll(toRemove);
   }
   return allDatabases;
 }

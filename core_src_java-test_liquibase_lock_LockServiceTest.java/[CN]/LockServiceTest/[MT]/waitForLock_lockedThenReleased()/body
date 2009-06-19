@@ -18,6 +18,7 @@
   replay(database);
   replay(writeExecutor);
   replay(readExecutor);
+  ExecutorService.getInstance().setReadExecutor(database,readExecutor);
   ExecutorService.getInstance().setWriteExecutor(database,writeExecutor);
   LockService service=LockService.getInstance(database);
   service.setChangeLogLockRecheckTime(1);

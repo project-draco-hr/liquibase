@@ -1,4 +1,7 @@
 {
+  if (database instanceof MockDatabase || database instanceof ExampleCustomDatabase || database instanceof UnsupportedDatabase) {
+    return false;
+  }
   if (!SqlGeneratorFactory.getInstance().supports(statementUnderTest,database) || SqlGeneratorFactory.getInstance().validate(statementUnderTest,database).hasErrors()) {
     return false;
   }

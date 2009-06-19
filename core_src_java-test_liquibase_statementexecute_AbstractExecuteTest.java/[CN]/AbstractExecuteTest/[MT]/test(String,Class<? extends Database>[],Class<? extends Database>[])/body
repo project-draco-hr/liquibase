@@ -9,7 +9,7 @@
         Sql[] sql=SqlGeneratorFactory.getInstance().generateSql(statementUnderTest,database);
         assertNotNull("Null SQL for " + database,sql);
         assertEquals("Unexpected number of  SQL statements for " + database,1,sql.length);
-        assertEquals("Incorrect SQL for " + database,convertedSql.toLowerCase(),sql[0].toSql().toLowerCase());
+        assertEquals("Incorrect SQL for " + database.getClass().getName(),convertedSql.toLowerCase(),sql[0].toSql().toLowerCase());
       }
     }
   }
