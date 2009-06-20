@@ -9,6 +9,12 @@
       if (changePropertyAnnotation != null && !changePropertyAnnotation.includeInSerialization()) {
         continue;
       }
+      if (field.getName().equals("serialVersionUID")) {
+        continue;
+      }
+      if (field.getName().equals("$VRc")) {
+        continue;
+      }
       String propertyName=field.getName();
       Object value=field.get(objectToSerialize);
       if (value instanceof ColumnConfig) {

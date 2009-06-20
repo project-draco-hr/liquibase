@@ -2,11 +2,18 @@
   Class clazz=object.getClass();
   for (  Field field : clazz.getDeclaredFields()) {
     field.setAccessible(true);
-    if (field.getType().equals(Logger.class)) {
+    if (field.getType().getName().equals("[[Z")) {
+    }
+ else     if (field.getName().equals("serialVersionUID")) {
+    }
+ else     if (field.getType().equals(Logger.class)) {
     }
  else     if (field.getType().equals(ResourceAccessor.class)) {
     }
  else     if (field.getType().equals(ClassLoader.class)) {
+    }
+ else     if (field.getType().equals(long.class)) {
+      field.set(object,createInteger().longValue());
     }
  else     if (field.getType().equals(String.class)) {
       field.set(object,createString());
