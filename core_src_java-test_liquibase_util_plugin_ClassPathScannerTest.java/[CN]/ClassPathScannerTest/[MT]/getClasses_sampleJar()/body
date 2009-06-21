@@ -1,0 +1,10 @@
+{
+  Class[] classes=ClassPathScanner.getInstance().getClasses("liquibase.sqlgenerator",SqlGenerator.class);
+  for (  Class clazz : classes) {
+    if (clazz.getName().equals("liquibase.sqlgenerator.ext.sample1.Sample1UpdateGenerator")) {
+      return;
+    }
+    System.out.println(clazz.getName());
+  }
+  fail("Did not find Sample1UpdateGenerator");
+}

@@ -1,5 +1,4 @@
 {
-  File thisClassFile=new File(new URI(this.getClass().getClassLoader().getResource("liquibase/test/JUnitResourceAccessor.class").toExternalForm()));
-  File srcDir=new File(thisClassFile.getParentFile().getParentFile().getParentFile().getParent(),"src");
+  File srcDir=new File(TestContext.getInstance().findProjectRoot(),"src");
   classLoader=new URLClassLoader(new URL[]{new File(srcDir,"samples").toURL(),new File(srcDir,"java-test").toURL(),new File(System.getProperty("java.io.tmpdir")).toURL()});
 }

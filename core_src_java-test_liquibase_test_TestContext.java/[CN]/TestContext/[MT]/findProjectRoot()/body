@@ -1,0 +1,4 @@
+{
+  File thisClassFile=new File(new URI(this.getClass().getClassLoader().getResource("liquibase/test/TestContext.class").toExternalForm()));
+  return new File(thisClassFile.getParentFile().getParentFile().getParentFile().getParent());
+}

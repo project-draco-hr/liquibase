@@ -1,0 +1,5 @@
+{
+  ClassPathScanner instance1=ClassPathScanner.getInstance();
+  ClassPathScanner.reset();
+  assertFalse(instance1 == ClassPathScanner.getInstance());
+}

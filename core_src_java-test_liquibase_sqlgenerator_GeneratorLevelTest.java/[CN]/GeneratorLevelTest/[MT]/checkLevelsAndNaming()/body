@@ -2,7 +2,9 @@
   for (  SqlGenerator generator : SqlGeneratorFactory.getInstance().getGenerators()) {
     int specializationlevel=generator.getPriority();
     String className=generator.getClass().getName();
-    if (className.endsWith("Generator")) {
+    if (className.contains(".ext.")) {
+    }
+ else     if (className.endsWith("Generator")) {
       assertEquals("Incorrect level/naming convention for " + className,SqlGenerator.PRIORITY_DEFAULT,specializationlevel);
     }
  else {
