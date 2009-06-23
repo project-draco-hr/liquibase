@@ -1,0 +1,15 @@
+{
+  Class.forName(requiredInterface.getName());
+  if (!classesBySuperclass.containsKey(requiredInterface)) {
+    classesBySuperclass.put(requiredInterface,new ArrayList<Class>());
+    for (    String packageName : packagesToScan) {
+      String path=packageName.replace('.','/');
+      Enumeration<URL> resources=resourceAccessor.getResources(path);
+      while (resources.hasMoreElements()) {
+        classesBySuperclass.get(requiredInterface).addAll(findClasses(resources.nextElement(),packageName,requiredInterface));
+      }
+    }
+  }
+  List<Class> classes=classesBySuperclass.get(requiredInterface);
+  return classes.toArray(new Class[classes.size()]);
+}

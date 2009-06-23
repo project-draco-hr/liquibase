@@ -1,0 +1,3 @@
+{
+  this(new SqlStatement[0]);
+}

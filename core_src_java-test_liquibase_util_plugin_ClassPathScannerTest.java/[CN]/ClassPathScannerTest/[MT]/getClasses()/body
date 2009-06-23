@@ -1,4 +1,4 @@
 {
-  Class[] classes=classPathScanner.getClasses("liquibase.parser",ChangeLogParser.class);
+  Class[] classes=classPathScanner.getClasses(ChangeLogParser.class);
   assertTrue(classes.length > 0);
 }
