@@ -1,0 +1,24 @@
+{
+  if (database == null) {
+    return;
+  }
+  CompositeResourceAccessor resourceAccessor=new CompositeResourceAccessor(new ClassLoaderResourceAccessor(),new ClassLoaderResourceAccessor(new URLClassLoader(new URL[]{new File(TestContext.getInstance().findProjectRoot(),"/lib-test/liquibase-samples.jar").toURL()})));
+  ;
+  ClassPathScanner.getInstance().setResourceAccessor(resourceAccessor);
+  try {
+    String extChangelog="changelogs/common/ext.changelog.xml";
+    Liquibase liquibase=createLiquibase(extChangelog);
+    liquibase.dropAll(getSchemasToDrop());
+    liquibase=createLiquibase(extChangelog);
+    try {
+      liquibase.update(this.contexts);
+    }
+ catch (    ValidationFailedException e) {
+      e.printDescriptiveError(System.out);
+      throw e;
+    }
+  }
+  finally {
+    ClassPathScanner.reset();
+  }
+}

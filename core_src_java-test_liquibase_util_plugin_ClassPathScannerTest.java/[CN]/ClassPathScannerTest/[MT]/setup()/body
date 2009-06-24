@@ -1,5 +1,5 @@
 {
-  CompositeResourceAccessor resourceAccessor=new CompositeResourceAccessor(new ClassLoaderResourceAccessor(),new ClassLoaderResourceAccessor(new URLClassLoader(new URL[]{new File(TestContext.getInstance().findProjectRoot(),"/lib-test/liquibase-samples.jar").toURL()})));
+  CompositeResourceAccessor resourceAccessor=new CompositeResourceAccessor(new ClassLoaderResourceAccessor(),new ClassLoaderResourceAccessor(new URLClassLoader(new URL[]{new File(TestContext.getInstance().findProjectRoot(),"/lib-test/liquibase-sample1.jar").toURL()})));
   ;
   classPathScanner=ClassPathScanner.getInstance();
   classPathScanner.setResourceAccessor(resourceAccessor);

@@ -1,6 +1,9 @@
 {
   Class clazz=object.getClass();
   for (  Field field : clazz.getDeclaredFields()) {
+    if (field.getAnnotation(ChangeProperty.class) != null && !field.getAnnotation(ChangeProperty.class).includeInSerialization()) {
+      continue;
+    }
     field.setAccessible(true);
     if (field.getType().getName().equals("[[Z")) {
     }

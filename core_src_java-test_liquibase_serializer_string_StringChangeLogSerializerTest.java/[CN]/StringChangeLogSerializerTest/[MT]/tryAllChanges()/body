@@ -1,9 +1,6 @@
 {
   for (  Class<? extends Change> changeClass : ChangeFactory.getInstance().getRegistry().values()) {
     Change change=changeClass.getConstructor().newInstance();
-    if (change instanceof DropAllForeignKeyConstraintsChange) {
-      continue;
-    }
     setFields(change);
     String string=new StringChangeLogSerializer().serialize(change);
     System.out.println(string);
