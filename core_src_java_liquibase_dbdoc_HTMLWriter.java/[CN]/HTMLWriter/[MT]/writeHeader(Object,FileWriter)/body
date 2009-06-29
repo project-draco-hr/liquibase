@@ -1,4 +1,4 @@
 {
   String title=createTitle(object);
-  fileWriter.append("<head>").append("<title>").append(title).append("</title>").append("<LINK REL =\"stylesheet\" TYPE=\"text/css\" HREF=\"../../stylesheet.css\" TITLE=\"Style\">").append("<SCRIPT type=\"text/javascript\">").append("function windowTitle()").append("{").append("    parent.document.title=\"").append(title).append("\";").append("}").append("</SCRIPT>").append("</head>");
+  fileWriter.append("<head>").append("<title>").append(title).append("</title>").append("<LINK REL =\"stylesheet\" TYPE=\"text/css\" HREF=\"../../stylesheet.css\" TITLE=\"Style\">").append("<SCRIPT type=\"text/javascript\">").append("function windowTitle()").append("{").append("    parent.document.title=\"").append(title.replaceAll("\"","'")).append("\";").append("}").append("</SCRIPT>").append("</head>");
 }
