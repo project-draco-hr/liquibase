@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement("SELECT DEFINITION FROM DOMAIN.VIEWDEFS WHERE upper(VIEWNAME)='" + name.toUpperCase() + "' AND OWNER='"+ convertRequestedSchemaToSchema(schemaName)+ "'");
-}

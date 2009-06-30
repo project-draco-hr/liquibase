@@ -1,0 +1,11 @@
+{
+  try {
+    String sql="select view_definition from INFORMATION_SCHEMA.VIEWS where upper(table_name)='" + statement.getViewName().toUpperCase() + "'";
+    sql+=" and table_schema='" + database.convertRequestedSchemaToSchema(statement.getSchemaName()) + "'";
+    sql+=" and table_catalog='" + database.getDefaultCatalogName() + "'";
+    return new Sql[]{new UnparsedSql(sql)};
+  }
+ catch (  JDBCException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

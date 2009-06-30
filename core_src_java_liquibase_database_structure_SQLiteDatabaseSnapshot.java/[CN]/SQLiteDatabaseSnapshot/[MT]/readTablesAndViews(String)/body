@@ -25,7 +25,7 @@
         view.setDefinition(database.getViewDefinition(schema,name));
       }
  catch (      JDBCException e) {
-        System.out.println("Error getting view with " + ((AbstractDatabase)database).getViewDefinitionSql(schema,name));
+        System.out.println("Error getting view with " + new GetViewDefinitionStatement(schema,name));
         throw e;
       }
       viewsMap.put(name,view);

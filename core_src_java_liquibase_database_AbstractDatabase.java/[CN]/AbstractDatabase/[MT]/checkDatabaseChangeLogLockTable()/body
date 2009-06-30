@@ -1,5 +1,4 @@
 {
-  boolean knowMustInsertIntoLockTable=false;
   WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(this);
   if (!doesChangeLogLockTableExist()) {
     if (!writeExecutor.executesStatements()) {
@@ -10,33 +9,9 @@
         ((LoggingExecutor)writeExecutor).setAlreadyCreatedChangeLockTable(true);
       }
     }
-    SqlStatement createTableStatement=new CreateDatabaseChangeLogLockTableStatement();
     writeExecutor.comment("Create Database Lock Table");
-    writeExecutor.execute(createTableStatement,new ArrayList<SqlVisitor>());
+    writeExecutor.execute(new CreateDatabaseChangeLogLockTableStatement(),new ArrayList<SqlVisitor>());
     this.commit();
     log.finest("Created database lock table with name: " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()));
-    knowMustInsertIntoLockTable=true;
-  }
-  int rows=-1;
-  if (!knowMustInsertIntoLockTable) {
-    SqlStatement selectStatement=new SelectFromDatabaseChangeLogLockStatement("COUNT(*)");
-    try {
-      List<Map> returnList=ExecutorService.getInstance().getReadExecutor(this).queryForList(selectStatement,new ArrayList<SqlVisitor>());
-      if (returnList == null || returnList.size() == 0) {
-        rows=0;
-      }
- else {
-        Map map=returnList.get(0);
-        rows=Integer.parseInt(map.values().iterator().next().toString());
-      }
-    }
- catch (    JDBCException e) {
-      throw e;
-    }
-  }
-  if (knowMustInsertIntoLockTable || rows == 0) {
-    writeExecutor.update(getChangeLogLockInsertSQL(),new ArrayList<SqlVisitor>());
-    this.commit();
-    log.fine("Inserted lock row into: " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()));
   }
 }

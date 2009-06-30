@@ -1,3 +1,4 @@
 {
   this.whereParameters.add(value);
+  return this;
 }

@@ -1,10 +1,4 @@
 {
-  String dateValue=getCurrentDateTimeFunction();
-  String sql="UPDATE " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " SET DATEEXECUTED="+ dateValue+ ", MD5SUM='?' WHERE ID='?' AND AUTHOR='?' AND FILENAME='?'";
-  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.generateCheckSum().toString()));
-  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getId()));
-  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getAuthor()));
-  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getFilePath()));
-  ExecutorService.getInstance().getWriteExecutor(this).execute(new RawSqlStatement(sql),new ArrayList<SqlVisitor>());
+  ExecutorService.getInstance().getWriteExecutor(this).execute(new MarkChangeSetRanStatement(changeSet,true),new ArrayList<SqlVisitor>());
   this.commit();
 }

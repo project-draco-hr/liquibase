@@ -1,3 +1,0 @@
-{
-  return new InsertStatement(getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()).addColumnValue("ID",1).addColumnValue("LOCKED",Boolean.FALSE);
-}

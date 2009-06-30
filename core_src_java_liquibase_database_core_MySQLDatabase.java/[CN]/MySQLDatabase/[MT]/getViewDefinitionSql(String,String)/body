@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement("select view_definition from information_schema.views where table_name='" + viewName + "' AND table_schema='"+ schemaName+ "'");
-}

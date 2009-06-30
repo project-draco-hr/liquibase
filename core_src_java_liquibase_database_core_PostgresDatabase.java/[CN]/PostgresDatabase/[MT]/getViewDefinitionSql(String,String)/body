@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement("select definition from pg_views where viewname='" + name + "' AND schemaname='"+ convertRequestedSchemaToSchema(schemaName)+ "'");
-}

@@ -1,0 +1,3 @@
+{
+  return new Sql[]{new UnparsedSql("select viewtext from sysviews where upper(viewname)='" + statement.getViewName().toUpperCase() + "' and upper(vcreator) = '"+ statement.getSchemaName().toUpperCase()+ '\'')};
+}

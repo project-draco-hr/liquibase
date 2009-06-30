@@ -1,4 +1,4 @@
 {
-  ExecutorService.getInstance().getWriteExecutor(this).execute(new MarkChangeSetRanStatement(changeSet),new ArrayList<SqlVisitor>());
+  ExecutorService.getInstance().getWriteExecutor(this).execute(new MarkChangeSetRanStatement(changeSet,false),new ArrayList<SqlVisitor>());
   getRanChangeSetList().add(new RanChangeSet(changeSet));
 }

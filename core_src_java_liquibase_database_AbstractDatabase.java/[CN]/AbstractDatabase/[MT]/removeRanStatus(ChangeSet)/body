@@ -1,9 +1,5 @@
 {
-  String sql="DELETE FROM " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " WHERE ID='?' AND AUTHOR='?' AND FILENAME='?'";
-  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getId()));
-  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getAuthor()));
-  sql=sql.replaceFirst("\\?",escapeStringForDatabase(changeSet.getFilePath()));
-  ExecutorService.getInstance().getWriteExecutor(this).execute(new RawSqlStatement(sql),new ArrayList<SqlVisitor>());
+  ExecutorService.getInstance().getWriteExecutor(this).execute(new RemoveChangeSetRanStatusStatement(changeSet),new ArrayList<SqlVisitor>());
   commit();
   getRanChangeSetList().remove(new RanChangeSet(changeSet));
 }

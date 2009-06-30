@@ -1,7 +1,8 @@
 {
-  CreateTableStatement createTableStatement=new CreateTableStatement(database.getDefaultSchemaName(),database.getDatabaseChangeLogLockTableName()).addPrimaryKeyColumn("ID","INT",null,null,new NotNullConstraint()).addColumn("LOCKED","BOOLEAN",new NotNullConstraint()).addColumn("LOCKGRANTED","DATETIME").addColumn("LOCKEDBY","VARCHAR(255)");
-  if (database instanceof MSSQLDatabase) {
-    createTableStatement.setSchemaName("dbo");
-  }
-  return SqlGeneratorFactory.getInstance().generateSql(createTableStatement,database);
+  CreateTableStatement createTableStatement=new CreateTableStatement(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()).addPrimaryKeyColumn("ID","INT",null,null,new NotNullConstraint()).addColumn("LOCKED","BOOLEAN",new NotNullConstraint()).addColumn("LOCKGRANTED","DATETIME").addColumn("LOCKEDBY","VARCHAR(255)");
+  InsertStatement insertStatement=new InsertStatement(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()).addColumnValue("ID",1).addColumnValue("LOCKED",Boolean.FALSE);
+  List<Sql> sql=new ArrayList<Sql>();
+  sql.addAll(Arrays.asList(SqlGeneratorFactory.getInstance().generateSql(createTableStatement,database)));
+  sql.addAll(Arrays.asList(SqlGeneratorFactory.getInstance().generateSql(insertStatement,database)));
+  return sql.toArray(new Sql[sql.size()]);
 }

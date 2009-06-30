@@ -1,3 +1,0 @@
-{
-  return new RawSqlStatement("SELECT TEXT FROM ALL_VIEWS WHERE upper(VIEW_NAME)='" + name.toUpperCase() + "' AND OWNER='"+ convertRequestedSchemaToSchema(schemaName)+ "'");
-}
