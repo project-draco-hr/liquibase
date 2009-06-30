@@ -1,0 +1,21 @@
+{
+  String dateValue=database.getCurrentDateTimeFunction();
+  ChangeSet changeSet=statement.getChangeSet();
+  InsertStatement insertStatement;
+  try {
+    insertStatement=new InsertStatement(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName());
+    insertStatement.addColumnValue("ID",database.escapeStringForDatabase(changeSet.getId()));
+    insertStatement.addColumnValue("AUTHOR",changeSet.getAuthor());
+    insertStatement.addColumnValue("FILENAME",changeSet.getFilePath());
+    insertStatement.addColumnValue("DATEEXECUTED",new ComputedDateValue(dateValue));
+    insertStatement.addColumnValue("ORDEREXECUTED",database.getNextChangeSetSequenceValue());
+    insertStatement.addColumnValue("MD5SUM",changeSet.generateCheckSum().toString());
+    insertStatement.addColumnValue("DESCRIPTION",limitSize(changeSet.getDescription()));
+    insertStatement.addColumnValue("COMMENTS",limitSize(StringUtils.trimToEmpty(changeSet.getComments())));
+    insertStatement.addColumnValue("LIQUIBASE",LiquibaseUtil.getBuildVersion());
+  }
+ catch (  LiquibaseException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  return SqlGeneratorFactory.getInstance().generateSql(insertStatement,database);
+}

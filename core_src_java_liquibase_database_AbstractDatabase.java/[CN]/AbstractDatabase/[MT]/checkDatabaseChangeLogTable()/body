@@ -49,7 +49,7 @@
     }
  else     if (!changeLogCreateAttempted) {
       writeExecutor.comment("Create Database Change Log Table");
-      SqlStatement createTableStatement=getCreateChangeLogSQL();
+      SqlStatement createTableStatement=new CreateDatabaseChangeLogTableStatement();
       if (!canCreateChangeLogTable()) {
         throw new JDBCException("Cannot create " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " table for your database.\n\n"+ "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n"+ createTableStatement);
       }

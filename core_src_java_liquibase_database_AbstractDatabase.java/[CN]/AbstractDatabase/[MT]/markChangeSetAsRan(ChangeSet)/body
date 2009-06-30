@@ -1,14 +1,4 @@
 {
-  String dateValue=getCurrentDateTimeFunction();
-  InsertStatement statement=new InsertStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
-  statement.addColumnValue("ID",escapeStringForDatabase(changeSet.getId()));
-  statement.addColumnValue("AUTHOR",changeSet.getAuthor());
-  statement.addColumnValue("FILENAME",changeSet.getFilePath());
-  statement.addColumnValue("DATEEXECUTED",new ComputedDateValue(dateValue));
-  statement.addColumnValue("MD5SUM",changeSet.generateCheckSum().toString());
-  statement.addColumnValue("DESCRIPTION",limitSize(changeSet.getDescription()));
-  statement.addColumnValue("COMMENTS",limitSize(StringUtils.trimToEmpty(changeSet.getComments())));
-  statement.addColumnValue("LIQUIBASE",LiquibaseUtil.getBuildVersion());
-  ExecutorService.getInstance().getWriteExecutor(this).execute(statement,new ArrayList<SqlVisitor>());
+  ExecutorService.getInstance().getWriteExecutor(this).execute(new MarkChangeSetRanStatement(changeSet),new ArrayList<SqlVisitor>());
   getRanChangeSetList().add(new RanChangeSet(changeSet));
 }

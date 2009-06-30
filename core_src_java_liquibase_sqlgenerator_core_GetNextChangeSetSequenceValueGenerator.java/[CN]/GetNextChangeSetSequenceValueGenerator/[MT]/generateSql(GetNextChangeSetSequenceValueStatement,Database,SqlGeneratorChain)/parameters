@@ -1,0 +1,3 @@
+GetNextChangeSetSequenceValueStatement statement
+Database database
+SqlGeneratorChain sqlGeneratorChain

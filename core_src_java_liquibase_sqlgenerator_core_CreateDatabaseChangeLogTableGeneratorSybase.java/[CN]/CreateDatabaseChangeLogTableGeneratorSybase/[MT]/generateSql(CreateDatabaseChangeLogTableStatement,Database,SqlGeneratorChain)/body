@@ -1,0 +1,3 @@
+{
+  return new Sql[]{new UnparsedSql("CREATE TABLE " + database.escapeTableName(database.getDefaultSchemaName(),database.getDatabaseChangeLogTableName()) + " (ID VARCHAR(150) NOT NULL, "+ "AUTHOR VARCHAR(150) NOT NULL, "+ "FILENAME VARCHAR(255) NOT NULL, "+ "DATEEXECUTED "+ database.getDateTimeType()+ " NOT NULL, "+ "ORDEREXECUTED NOT NULL UNIQUE, "+ "MD5SUM VARCHAR(32) NULL, "+ "DESCRIPTION VARCHAR(255) NULL, "+ "COMMENTS VARCHAR(255) NULL, "+ "TAG VARCHAR(255) NULL, "+ "LIQUIBASE VARCHAR(10) NULL, "+ "PRIMARY KEY(ID, AUTHOR, FILENAME))")};
+}
