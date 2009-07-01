@@ -2,9 +2,10 @@
   if (value == null) {
     addError(requiredFieldName + " is required");
   }
- else {
-    if (value instanceof Collection && ((Collection)value).size() == 0) {
-      addError(requiredFieldName + " is empty");
-    }
+ else   if (value instanceof Collection && ((Collection)value).size() == 0) {
+    addError(requiredFieldName + " is empty");
+  }
+ else   if (value instanceof Object[] && ((Object[])value).length == 0) {
+    addError(requiredFieldName + " is empty");
   }
 }

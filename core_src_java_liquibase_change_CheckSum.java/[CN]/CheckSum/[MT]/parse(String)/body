@@ -1,6 +1,6 @@
 {
-  if (checksumValue.startsWith("2:")) {
-    return new CheckSum(checksumValue.substring(2),2);
+  if (checksumValue.startsWith(CheckSum.getCurrentVersion() + ":")) {
+    return new CheckSum(checksumValue.substring(2),getCurrentVersion());
   }
  else {
     return new CheckSum(checksumValue,1);

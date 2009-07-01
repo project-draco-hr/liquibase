@@ -1,6 +1,6 @@
 {
-  List<SqlStatement> statements=new ArrayList<SqlStatement>();
-  AlterTableVisitor rename_alter_visitor=new AlterTableVisitor(){
+  List<Sql> statements=new ArrayList<Sql>();
+  SQLiteDatabase.AlterTableVisitor rename_alter_visitor=new SQLiteDatabase.AlterTableVisitor(){
     public ColumnConfig[] getColumnsToAdd(){
       return new ColumnConfig[0];
     }
@@ -8,7 +8,7 @@
       return true;
     }
     public boolean createThisColumn(    ColumnConfig column){
-      for (      ColumnConfig cur_column : columns) {
+      for (      ColumnConfig cur_column : statement.getColumns()) {
         if (cur_column.getName().equals(column.getName())) {
           column.setType(cur_column.getType());
           break;
@@ -22,11 +22,13 @@
   }
 ;
   try {
-    statements.addAll(SQLiteDatabase.getAlterTableStatements(rename_alter_visitor,database,getSchemaName(),getTableName()));
+    for (    SqlStatement alterStatement : SQLiteDatabase.getAlterTableStatements(rename_alter_visitor,database,statement.getSchemaName(),statement.getTableName())) {
+      statements.addAll(Arrays.asList(SqlGeneratorFactory.getInstance().generateSql(alterStatement,database)));
+    }
   }
  catch (  Exception e) {
     System.err.println(e);
     e.printStackTrace();
   }
-  return statements.toArray(new SqlStatement[statements.size()]);
+  return statements.toArray(new Sql[statements.size()]);
 }

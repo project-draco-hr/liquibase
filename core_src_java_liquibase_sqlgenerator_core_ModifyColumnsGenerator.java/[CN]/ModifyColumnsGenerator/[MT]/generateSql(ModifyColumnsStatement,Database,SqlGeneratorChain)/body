@@ -1,0 +1,38 @@
+{
+  if (database instanceof SQLiteDatabase) {
+    return generateStatementsForSQLiteDatabase(statement,database);
+  }
+  List<Sql> sql=new ArrayList<Sql>();
+  for (  ColumnConfig aColumn : statement.getColumns()) {
+    String schemaName=statement.getSchemaName() == null ? database.getDefaultSchemaName() : statement.getSchemaName();
+    if (database instanceof SybaseASADatabase || database instanceof SybaseDatabase) {
+      sql.add(new UnparsedSql("ALTER TABLE " + database.escapeTableName(schemaName,statement.getTableName()) + " MODIFY "+ aColumn.getName()+ " "+ database.getColumnType(aColumn.getType(),false)));
+    }
+ else     if (database instanceof MSSQLDatabase) {
+      sql.add(new UnparsedSql("ALTER TABLE " + database.escapeTableName(schemaName,statement.getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " "+ database.getColumnType(aColumn.getType(),false)));
+    }
+ else     if (database instanceof MySQLDatabase) {
+      sql.add(new UnparsedSql("ALTER TABLE " + database.escapeTableName(schemaName,statement.getTableName()) + " MODIFY COLUMN "+ aColumn.getName()+ " "+ database.getColumnType(aColumn.getType(),false)));
+    }
+ else     if (database instanceof OracleDatabase || database instanceof MaxDBDatabase || database instanceof InformixDatabase) {
+      sql.add(new UnparsedSql("ALTER TABLE " + database.escapeTableName(schemaName,statement.getTableName()) + " MODIFY ("+ aColumn.getName()+ " "+ database.getColumnType(aColumn.getType(),false)+ ")"));
+    }
+ else     if (database instanceof DerbyDatabase) {
+      sql.add(new UnparsedSql("ALTER TABLE " + database.escapeTableName(schemaName,statement.getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " SET DATA TYPE "+ database.getColumnType(aColumn.getType(),false)));
+    }
+ else     if (database instanceof HsqlDatabase) {
+      sql.add(new UnparsedSql("ALTER TABLE " + database.escapeTableName(schemaName,statement.getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " "+ database.getColumnType(aColumn.getType(),false)));
+    }
+ else     if (database instanceof CacheDatabase) {
+      sql.add(new UnparsedSql("ALTER TABLE " + database.escapeTableName(schemaName,statement.getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " "+ database.getColumnType(aColumn.getType(),false)));
+    }
+ else     if (database instanceof DB2Database) {
+      sql.add(new UnparsedSql("ALTER TABLE " + database.escapeTableName(schemaName,statement.getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " SET DATA TYPE "+ database.getColumnType(aColumn.getType(),false)));
+      sql.addAll(Arrays.asList(SqlGeneratorFactory.getInstance().generateSql(new ReorganizeTableStatement(schemaName,statement.getTableName()),database)));
+    }
+ else {
+      sql.add(new UnparsedSql("ALTER TABLE " + database.escapeTableName(schemaName,statement.getTableName()) + " ALTER COLUMN "+ aColumn.getName()+ " TYPE "+ database.getColumnType(aColumn.getType(),false)));
+    }
+  }
+  return sql.toArray(new Sql[sql.size()]);
+}
