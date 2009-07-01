@@ -9,7 +9,7 @@
       throw new UnexpectedLiquibaseException("Unknown where clause type: " + whereClause.getClass().getName());
     }
   }
-  if (statement.getOrderByColumns().length > 0) {
+  if (statement.getOrderByColumns() != null && statement.getOrderByColumns().length > 0) {
     sql+=" ORDER BY " + StringUtils.join(statement.getOrderByColumns(),", ");
   }
   return new Sql[]{new UnparsedSql(sql)};

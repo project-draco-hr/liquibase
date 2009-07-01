@@ -9,11 +9,11 @@
   assertFalse(node.hasAttribute("minValue"));
   assertFalse(node.hasAttribute("ordered"));
   assertFalse(node.hasAttribute("startValue"));
-  change.setIncrementBy(1);
-  change.setMaxValue(2);
-  change.setMinValue(3);
+  change.setIncrementBy(new BigInteger("1"));
+  change.setMaxValue(new BigInteger("2"));
+  change.setMinValue(new BigInteger("3"));
   change.setOrdered(true);
-  change.setStartValue(4);
+  change.setStartValue(new BigInteger("4"));
   node=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(change);
   assertEquals("createSequence",node.getNodeName());
   assertEquals("SEQ_NAME",node.getAttribute("sequenceName"));
