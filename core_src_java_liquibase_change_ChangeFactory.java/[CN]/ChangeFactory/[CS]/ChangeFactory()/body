@@ -1,8 +1,8 @@
 {
-  Class[] classes;
+  Class<? extends Change>[] classes;
   try {
     classes=ClassPathScanner.getInstance().getClasses(Change.class);
-    for (    Class clazz : classes) {
+    for (    Class<? extends Change> clazz : classes) {
       register(clazz);
     }
   }
