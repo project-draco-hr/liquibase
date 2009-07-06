@@ -1,4 +1,7 @@
 {
+  if (checksumValue == null) {
+    return null;
+  }
   if (checksumValue.startsWith(CheckSum.getCurrentVersion() + ":")) {
     return new CheckSum(checksumValue.substring(2),getCurrentVersion());
   }

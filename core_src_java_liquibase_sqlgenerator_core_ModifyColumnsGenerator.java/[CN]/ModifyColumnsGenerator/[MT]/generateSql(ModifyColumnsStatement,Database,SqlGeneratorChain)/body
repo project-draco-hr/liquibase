@@ -19,7 +19,7 @@
         }
       }
       alterTable+=getDefaultClause(column,database);
-      if (column.isAutoIncrement()) {
+      if (column.isAutoIncrement() != null && column.isAutoIncrement()) {
         alterTable+=" " + database.getAutoIncrementClause();
       }
       if (column.isPrimaryKey()) {

@@ -1,3 +1,8 @@
 {
-  return customChange.validate(database);
+  try {
+    return customChange.validate(database);
+  }
+ catch (  AbstractMethodError e) {
+    return new ValidationErrors();
+  }
 }

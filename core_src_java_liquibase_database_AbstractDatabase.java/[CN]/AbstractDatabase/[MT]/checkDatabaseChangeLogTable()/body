@@ -62,7 +62,7 @@
         writeExecutor.comment("Adding missing databasechangelog.orderexecuted column");
         statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"ORDEREXECUTED","BIGINT",null,new NotNullConstraint(),new UniqueConstraint()));
       }
-      if (!checksumNotRightSize) {
+      if (checksumNotRightSize) {
         writeExecutor.comment("Modifying size of databasechangelog.md5sum column");
         ColumnConfig checksumColumn=new ColumnConfig();
         checksumColumn.setName("MD5SUM");
