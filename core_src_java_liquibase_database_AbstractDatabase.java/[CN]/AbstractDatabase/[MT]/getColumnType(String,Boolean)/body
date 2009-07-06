@@ -19,6 +19,9 @@
   if (dataTypeName.equalsIgnoreCase("BIGINT")) {
     returnTypeName=getBigIntType();
   }
+ else   if (dataTypeName.equalsIgnoreCase("NUMBER")) {
+    returnTypeName=getNumberType();
+  }
  else   if (dataTypeName.equalsIgnoreCase("BLOB")) {
     returnTypeName=getBlobType();
   }
