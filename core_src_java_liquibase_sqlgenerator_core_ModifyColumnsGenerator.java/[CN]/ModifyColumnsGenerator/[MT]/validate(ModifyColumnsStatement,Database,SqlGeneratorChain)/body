@@ -2,5 +2,10 @@
   ValidationErrors validationErrors=new ValidationErrors();
   validationErrors.checkRequiredField("tableName",statement.getTableName());
   validationErrors.checkRequiredField("columns",statement.getColumns());
+  for (  ColumnConfig column : statement.getColumns()) {
+    if (column.isPrimaryKey() && (database instanceof CacheDatabase || database instanceof H2Database || database instanceof DB2Database|| database instanceof DerbyDatabase|| database instanceof SQLiteDatabase)) {
+      validationErrors.addError("Adding primary key columns is not supported on " + database.getTypeName());
+    }
+  }
   return validationErrors;
 }

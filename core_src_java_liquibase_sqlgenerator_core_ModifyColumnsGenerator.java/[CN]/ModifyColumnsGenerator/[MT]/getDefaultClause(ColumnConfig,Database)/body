@@ -1,0 +1,9 @@
+{
+  String clause="";
+  if (column.getDefaultValue() != null) {
+    if (database instanceof MySQLDatabase) {
+      clause+=" DEFAULT " + database.convertJavaObjectToString(column.getDefaultValue());
+    }
+  }
+  return clause;
+}
