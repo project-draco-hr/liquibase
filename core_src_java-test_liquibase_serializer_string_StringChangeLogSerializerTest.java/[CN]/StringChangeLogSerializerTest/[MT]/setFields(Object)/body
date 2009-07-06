@@ -27,6 +27,9 @@
  else     if (field.getType().equals(Integer.class)) {
       field.set(object,createInteger());
     }
+ else     if (field.getType().equals(BigInteger.class)) {
+      field.set(object,createBigInteger());
+    }
  else     if (field.getType().equals(Date.class)) {
       field.set(object,createDate());
     }
