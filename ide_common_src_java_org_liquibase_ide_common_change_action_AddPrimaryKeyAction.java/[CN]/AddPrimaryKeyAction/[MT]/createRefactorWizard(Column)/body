@@ -1,3 +1,0 @@
-{
-  return new RefactorWizard("Make " + selectedColumn + " primary key",new SingleValueWizardPageImpl("Constraint Name"));
-}

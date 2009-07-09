@@ -1,9 +1,0 @@
-{
-  List<?> selectedObjects=((TreeSelection)selection).toList();
-  for (  Object object : selectedObjects) {
-    if (object instanceof Table) {
-      return (Table)object;
-    }
-  }
-  return null;
-}

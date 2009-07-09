@@ -1,3 +1,0 @@
-{
-  return new RefactorWizard("Add not null constraint to " + selectedColumn,new SingleValueWizardPageImpl("Set Existing Null Values To"));
-}

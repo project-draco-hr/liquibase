@@ -1,4 +1,0 @@
-{
-  WizardDialog dialog=new WizardDialog(getWindow().getShell(),new RollbackWizard(getSelectedDatabase(getSelection()),getSelectedConnection(getSelection())));
-  dialog.open();
-}

@@ -1,7 +1,0 @@
-{
-  AddDefaultValueChange change=new AddDefaultValueChange();
-  change.setTableName(column.getTable().getName());
-  change.setColumnName(column.getName());
-  change.setDefaultValue(page1.getDefaultValue());
-  return new Change[]{change};
-}

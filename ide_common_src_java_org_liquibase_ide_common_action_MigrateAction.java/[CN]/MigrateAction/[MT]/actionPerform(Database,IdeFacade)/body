@@ -1,7 +1,0 @@
-{
-  String changeLogFile=ideFacade.promptForChangeLogFile();
-  if (changeLogFile == null) {
-    return;
-  }
-  ideFacade.getLiquibase(changeLogFile,database).update(null);
-}

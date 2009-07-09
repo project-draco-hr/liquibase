@@ -1,3 +1,0 @@
-{
-  return new DropViewWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedView(selection));
-}

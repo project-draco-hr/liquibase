@@ -1,3 +1,0 @@
-{
-  return new RefactorWizard("Drop default value on " + selectedColumn);
-}

@@ -1,8 +1,0 @@
-{
-  if (outputChangeLogFile == null) {
-    return null;
-  }
- else {
-    return outputChangeLogFile;
-  }
-}

@@ -1,3 +1,0 @@
-{
-  return new RefactorWizard("Rename " + selectedView,new SingleValueWizardPageImpl("New View Name",selectedView.getName()));
-}

@@ -1,8 +1,0 @@
-{
-  Object userData=getUserData();
-  if (userData instanceof JTree) {
-    TreePath selectionPath=((DBTree)userData).getSelectionModel().getLeadSelectionPath();
-    return selectionPath.getLastPathComponent();
-  }
-  return userData;
-}

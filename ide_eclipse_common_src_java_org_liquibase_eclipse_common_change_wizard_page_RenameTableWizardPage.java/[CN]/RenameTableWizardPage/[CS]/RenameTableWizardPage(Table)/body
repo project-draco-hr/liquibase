@@ -1,6 +1,0 @@
-{
-  super("renameTable");
-  setTitle("Rename Table");
-  setDescription("Rename table " + table.getName());
-  this.table=table;
-}

@@ -1,3 +1,0 @@
-{
-  return new DropColumnWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedColumn(selection));
-}

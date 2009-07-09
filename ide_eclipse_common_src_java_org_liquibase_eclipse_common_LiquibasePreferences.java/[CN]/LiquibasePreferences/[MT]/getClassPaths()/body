@@ -1,4 +1,0 @@
-{
-  IEclipsePreferences preferences=new InstanceScope().getNode(PREFERENCES_ID);
-  return preferences.get(LiquibasePreferences.CLASSPATHS,null);
-}

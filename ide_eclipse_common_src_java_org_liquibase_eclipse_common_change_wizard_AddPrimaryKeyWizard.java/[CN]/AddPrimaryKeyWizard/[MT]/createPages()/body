@@ -1,4 +1,0 @@
-{
-  this.page1=new AddPrimaryKeyWizardPage(column);
-  return new IWizardPage[]{page1};
-}

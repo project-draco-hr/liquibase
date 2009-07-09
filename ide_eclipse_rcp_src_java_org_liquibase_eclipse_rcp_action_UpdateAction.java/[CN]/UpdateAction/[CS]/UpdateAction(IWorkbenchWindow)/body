@@ -1,8 +1,0 @@
-{
-  this.window=window;
-  setId("org.liquibase.rcp.newUpdates");
-  setText("&Update...");
-  setToolTipText("Search for updates to LiquiBase");
-  setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID,"icons/usearch_obj.gif"));
-  window.getWorkbench().getHelpSystem().setHelp(this,"org.liquibase.rcp.updates");
-}

@@ -1,3 +1,0 @@
-{
-  return objectType.equals(View.class);
-}

@@ -1,6 +1,0 @@
-{
-  super("addUniqueConstraint");
-  setTitle("Add Unique Constraint");
-  setDescription("Add unique constraint to " + column.getTable().getName() + "."+ column.getName());
-  this.column=column;
-}

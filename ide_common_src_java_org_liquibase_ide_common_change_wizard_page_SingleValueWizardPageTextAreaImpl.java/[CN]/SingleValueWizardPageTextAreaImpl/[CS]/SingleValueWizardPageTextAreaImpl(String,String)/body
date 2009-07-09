@@ -1,4 +1,0 @@
-{
-  this.label.setText(label);
-  this.value.setText(defaultValue);
-}

@@ -1,4 +1,0 @@
-{
-  super(database,connection);
-  this.index=index;
-}

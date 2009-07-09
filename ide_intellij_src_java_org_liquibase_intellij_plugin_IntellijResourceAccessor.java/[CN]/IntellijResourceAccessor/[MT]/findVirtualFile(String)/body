@@ -1,5 +1,0 @@
-{
-  WriteAction action=new WriteAction(file);
-  ApplicationManager.getApplication().runWriteAction(action);
-  return action.returnValue;
-}

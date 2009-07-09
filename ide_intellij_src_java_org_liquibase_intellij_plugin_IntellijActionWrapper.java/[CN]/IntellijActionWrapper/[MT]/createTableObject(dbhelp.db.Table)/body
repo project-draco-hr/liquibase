@@ -1,5 +1,0 @@
-{
-  Table table=new Table(selectedTable.getName());
-  table.setDatabase(getSelectedDatabase());
-  return table;
-}

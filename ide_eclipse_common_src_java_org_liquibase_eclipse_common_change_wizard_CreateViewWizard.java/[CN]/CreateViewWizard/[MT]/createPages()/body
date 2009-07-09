@@ -1,4 +1,0 @@
-{
-  page1=new CreateViewWizardPage(schema);
-  return new IWizardPage[]{page1};
-}

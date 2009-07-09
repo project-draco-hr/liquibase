@@ -1,3 +1,0 @@
-{
-  return new AddNotNullConstraintWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedColumn(selection));
-}

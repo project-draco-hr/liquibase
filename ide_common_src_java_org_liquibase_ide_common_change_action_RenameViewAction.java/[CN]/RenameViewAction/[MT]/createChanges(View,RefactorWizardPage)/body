@@ -1,6 +1,0 @@
-{
-  RenameViewChange change=new RenameViewChange();
-  change.setOldViewName(view.getName());
-  change.setNewViewName(((SingleValueWizardPage)pages[0]).getValue());
-  return new Change[]{change};
-}

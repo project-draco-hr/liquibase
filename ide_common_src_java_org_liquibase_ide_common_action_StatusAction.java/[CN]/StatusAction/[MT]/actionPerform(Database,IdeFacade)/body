@@ -1,9 +1,0 @@
-{
-  ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
-  String changeLogFile=ideFacade.promptForChangeLogFile();
-  if (changeLogFile == null) {
-    return;
-  }
-  ideFacade.getLiquibase(changeLogFile,database).reportStatus(true,null,new PrintWriter(new PrintStream(byteArrayOutputStream)));
-  ideFacade.showOutput("Check Change Log Status",byteArrayOutputStream.toString());
-}

@@ -1,6 +1,0 @@
-{
-  super("renameView");
-  setTitle("Rename View");
-  setDescription("Rename view " + view.getName());
-  this.view=view;
-}

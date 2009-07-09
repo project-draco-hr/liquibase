@@ -1,5 +1,0 @@
-{
-  super("addLookupTable");
-  setTitle("Create Lookup Table");
-  setDescription("Create lookup table from  to " + column.getTable().getName() + "."+ column.getName());
-}

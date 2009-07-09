@@ -1,3 +1,0 @@
-{
-  return new RefactorWizard("Create index on " + selectedColumn,new SingleValueWizardPageImpl("Index Name"));
-}

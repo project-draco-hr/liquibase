@@ -1,6 +1,0 @@
-{
-  PreferenceDialog dialog=PreferencesUtil.createPreferenceDialogOn(changeLogLabel.getShell(),LiquibasePreferences.PREFERENCES_ID,null,null);
-  if (dialog.open() == Dialog.OK) {
-    changeLogLabel.setText(LiquibasePreferences.getCurrentChangeLog());
-  }
-}

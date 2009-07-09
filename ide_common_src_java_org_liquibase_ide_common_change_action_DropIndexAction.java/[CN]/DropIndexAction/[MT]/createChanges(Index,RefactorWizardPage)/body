@@ -1,6 +1,0 @@
-{
-  DropIndexChange change=new DropIndexChange();
-  change.setIndexName(selectedIndex.getName());
-  change.setTableName(selectedIndex.getTable().getName());
-  return new Change[]{change};
-}

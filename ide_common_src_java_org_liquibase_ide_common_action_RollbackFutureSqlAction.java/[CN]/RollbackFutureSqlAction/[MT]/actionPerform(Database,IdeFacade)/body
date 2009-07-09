@@ -1,9 +1,0 @@
-{
-  StringWriter writer=new StringWriter();
-  String changeLogFile=ideFacade.promptForChangeLogFile();
-  if (changeLogFile == null) {
-    return;
-  }
-  ideFacade.getLiquibase(changeLogFile,database).futureRollbackSQL(null,writer);
-  ideFacade.showOutput("Rollback SQL",writer.toString());
-}

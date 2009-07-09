@@ -1,4 +1,0 @@
-{
-  page1=new AddLookupTableWizardPage(column);
-  return new IWizardPage[]{page1};
-}

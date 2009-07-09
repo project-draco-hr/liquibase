@@ -1,3 +1,0 @@
-{
-  return new RefactorWizard("Drop not null constraint on " + selectedColumn);
-}

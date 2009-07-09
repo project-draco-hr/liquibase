@@ -1,3 +1,0 @@
-{
-  return new AddForeignKeyWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedColumn(selection));
-}

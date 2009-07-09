@@ -1,3 +1,0 @@
-{
-  return new RefactorWizard("Add foreign key constraint to " + selectedColumn,new AddForeignKeyConstraintWizardPageImpl());
-}

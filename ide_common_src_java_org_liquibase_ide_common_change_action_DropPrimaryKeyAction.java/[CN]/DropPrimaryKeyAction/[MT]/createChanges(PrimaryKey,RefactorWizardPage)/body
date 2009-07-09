@@ -1,6 +1,0 @@
-{
-  DropPrimaryKeyChange change=new DropPrimaryKeyChange();
-  change.setConstraintName(selectedPK.getName());
-  change.setTableName(selectedPK.getTable().getName());
-  return new Change[]{change};
-}

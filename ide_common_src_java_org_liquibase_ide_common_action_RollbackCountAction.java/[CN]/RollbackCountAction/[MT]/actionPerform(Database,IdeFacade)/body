@@ -1,6 +1,0 @@
-{
-  Integer input=ideFacade.promptForInteger(getTitle(),"Enter number of changes to rollback",1);
-  if (input != null) {
-    ideFacade.getLiquibase(null,database).rollback(input,null);
-  }
-}

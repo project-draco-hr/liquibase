@@ -1,6 +1,0 @@
-{
-  super(database,connection);
-  this.table=SQLTablesFactory.eINSTANCE.createPersistentTable();
-  this.table.setName("New Table");
-  this.table.setSchema(schema);
-}

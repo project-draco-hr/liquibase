@@ -1,9 +1,0 @@
-{
-  String changeLogFile=ideFacade.promptForChangeLogFile();
-  try {
-    ideFacade.getChangeLogWriter().createEmptyChangeLog(changeLogFile);
-  }
- catch (  Exception e) {
-    ideFacade.showError(e);
-  }
-}

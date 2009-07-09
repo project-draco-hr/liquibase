@@ -1,6 +1,0 @@
-{
-  CreateViewChange change=new CreateViewChange();
-  change.setViewName(((CreateViewWizardPageImpl)pages[0]).getViewName());
-  change.setSelectQuery(((CreateViewWizardPageImpl)pages[0]).getViewDefinition());
-  return new Change[]{change};
-}

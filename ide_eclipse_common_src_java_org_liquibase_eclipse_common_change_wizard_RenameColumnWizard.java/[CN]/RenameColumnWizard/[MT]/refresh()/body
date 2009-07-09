@@ -1,3 +1,0 @@
-{
-  ((ICatalogObject)column.getTable()).refresh();
-}

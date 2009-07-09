@@ -1,5 +1,0 @@
-{
-  Label auhorLabel=new Label(composite,SWT.NONE);
-  auhorLabel.setText(labelText);
-  auhorLabel.setLayoutData(new GridData(GridData.END,GridData.BEGINNING,false,false));
-}

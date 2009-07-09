@@ -1,4 +1,0 @@
-{
-  this.page1=new RenameTableWizardPage(table);
-  return new IWizardPage[]{page1};
-}

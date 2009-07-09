@@ -1,3 +1,0 @@
-{
-  return new RenameColumnWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedColumn(selection));
-}

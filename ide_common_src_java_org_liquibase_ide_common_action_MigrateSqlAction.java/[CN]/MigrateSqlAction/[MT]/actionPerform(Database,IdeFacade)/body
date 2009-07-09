@@ -1,9 +1,0 @@
-{
-  StringWriter stringWriter=new StringWriter();
-  String changeLogFile=ideFacade.promptForChangeLogFile();
-  if (changeLogFile == null) {
-    return;
-  }
-  ideFacade.getLiquibase(changeLogFile,database).update(null,stringWriter);
-  ideFacade.showOutput("Migration SQL",stringWriter.toString());
-}

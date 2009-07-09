@@ -1,6 +1,0 @@
-{
-  super("addColumn");
-  setTitle("Add Default Value");
-  setDescription("Add default value to " + column.getTable().getName() + "."+ column.getName());
-  this.column=column;
-}

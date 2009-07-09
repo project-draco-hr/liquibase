@@ -1,4 +1,0 @@
-{
-  _context.put(project,this);
-  addActions();
-}

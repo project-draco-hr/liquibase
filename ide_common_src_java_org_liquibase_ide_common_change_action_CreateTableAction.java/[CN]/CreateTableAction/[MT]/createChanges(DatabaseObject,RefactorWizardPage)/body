@@ -1,9 +1,0 @@
-{
-  AddTableWizardPage wizardPage=(AddTableWizardPage)pages[0];
-  CreateTableChange change=new CreateTableChange();
-  change.setTableName(wizardPage.getTableName());
-  for (  ColumnConfig columnConfig : wizardPage.getColumns()) {
-    change.addColumn(columnConfig);
-  }
-  return new Change[]{change};
-}

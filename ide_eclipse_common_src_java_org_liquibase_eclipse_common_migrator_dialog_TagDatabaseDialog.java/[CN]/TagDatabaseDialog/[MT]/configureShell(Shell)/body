@@ -1,4 +1,0 @@
-{
-  super.configureShell(newShell);
-  newShell.setText("Tag Database");
-}

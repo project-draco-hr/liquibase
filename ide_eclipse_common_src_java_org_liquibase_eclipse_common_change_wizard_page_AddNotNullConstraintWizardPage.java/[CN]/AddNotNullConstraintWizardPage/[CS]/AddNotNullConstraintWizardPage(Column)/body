@@ -1,5 +1,0 @@
-{
-  super("addNotNullConstraint");
-  setTitle("Add Not Null Constraint");
-  setDescription("Add not null constraint to " + column.getTable().getName() + "."+ column.getName());
-}

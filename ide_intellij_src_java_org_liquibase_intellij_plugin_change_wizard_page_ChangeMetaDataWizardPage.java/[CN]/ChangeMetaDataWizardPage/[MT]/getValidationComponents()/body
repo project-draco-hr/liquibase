@@ -1,3 +1,0 @@
-{
-  return new JComponent[]{idTextField,changeLogFile.getTextField(),authorTextField};
-}

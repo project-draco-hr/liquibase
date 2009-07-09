@@ -1,4 +1,0 @@
-{
-  ((ICatalogObject)baseTable).refresh();
-  ((ICatalogObject)referencedTable).refresh();
-}

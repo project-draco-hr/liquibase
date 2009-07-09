@@ -1,4 +1,0 @@
-{
-  VirtualFileManager virtualFileManager=VirtualFileManager.getInstance();
-  return virtualFileManager.refreshAndFindFileByUrl(VirtualFileManager.constructUrl(LocalFileSystem.PROTOCOL,getOutputChangeLogFile()));
-}

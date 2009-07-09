@@ -1,3 +1,0 @@
-{
-  return new AddPrimaryKeyWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedColumn(selection));
-}

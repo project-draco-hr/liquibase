@@ -1,3 +1,0 @@
-{
-  return new CreateViewWizard(getSelectedDatabase(selection),getSelectedSchema(selection),getSelectedConnection(selection));
-}

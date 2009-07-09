@@ -1,6 +1,0 @@
-{
-  TableFormModel model=new DefaultTableFormModel(this.table);
-  page1=new GenericColumnsPage("org.eclipse.datatools.sqltools.tablewizard.ui.GenericColumnPage",model.getPersistentTable());
-  page2=new GenericPrimaryKeyPage("org.eclipse.datatools.sqltools.tablewizard.ui.GenericPrimaryKeyPage",model.getPersistentTable());
-  return new IWizardPage[]{page1,page2};
-}

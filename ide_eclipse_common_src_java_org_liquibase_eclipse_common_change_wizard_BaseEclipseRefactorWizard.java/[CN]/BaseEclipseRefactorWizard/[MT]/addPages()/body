@@ -1,6 +1,0 @@
-{
-  for (  IWizardPage page : createPages()) {
-    addPage(page);
-  }
-  addPage(metaDataPage);
-}

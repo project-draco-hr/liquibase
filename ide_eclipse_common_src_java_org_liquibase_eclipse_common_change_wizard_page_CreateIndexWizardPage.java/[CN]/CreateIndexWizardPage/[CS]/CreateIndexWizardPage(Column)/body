@@ -1,6 +1,0 @@
-{
-  super("createIndex");
-  setTitle("Create Index");
-  setDescription("Create index on " + column.getTable().getName() + "."+ column.getName());
-  this.column=column;
-}

@@ -1,5 +1,0 @@
-{
-  super("metaData");
-  setTitle("Change Set Information");
-  setDescription("Set Additional Change Information");
-}

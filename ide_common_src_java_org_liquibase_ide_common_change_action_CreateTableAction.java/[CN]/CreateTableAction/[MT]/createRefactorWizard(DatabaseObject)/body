@@ -1,3 +1,0 @@
-{
-  return new RefactorWizard("Create New Table",new AddTableWizardPageImpl());
-}

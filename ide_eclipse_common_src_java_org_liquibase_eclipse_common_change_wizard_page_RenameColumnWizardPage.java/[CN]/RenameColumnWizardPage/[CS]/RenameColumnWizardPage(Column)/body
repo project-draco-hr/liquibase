@@ -1,6 +1,0 @@
-{
-  super("renameColumn");
-  setTitle("Rename Column");
-  setDescription("Rename column " + column.getTable().getName() + "."+ column.getName());
-  this.column=column;
-}

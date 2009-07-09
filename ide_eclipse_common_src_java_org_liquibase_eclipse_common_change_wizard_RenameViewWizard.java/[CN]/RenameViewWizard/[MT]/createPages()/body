@@ -1,4 +1,0 @@
-{
-  this.page1=new RenameViewWizardPage(view);
-  return new IWizardPage[]{page1};
-}

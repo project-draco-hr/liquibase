@@ -1,4 +1,0 @@
-{
-  this.page1=new AddNotNullConstraintWizardPage(column);
-  return new IWizardPage[]{page1};
-}

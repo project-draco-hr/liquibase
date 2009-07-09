@@ -1,7 +1,0 @@
-{
-  RenameColumnChange change=new RenameColumnChange();
-  change.setTableName(column.getTable().getName());
-  change.setOldColumnName(column.getName());
-  change.setNewColumnName(page1.getNewColumnName());
-  return new Change[]{change};
-}

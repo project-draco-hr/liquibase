@@ -1,4 +1,0 @@
-{
-  ideFacade.getLiquibase(null,database).clearCheckSums();
-  ideFacade.showMessage("Result","Checksums cleared");
-}

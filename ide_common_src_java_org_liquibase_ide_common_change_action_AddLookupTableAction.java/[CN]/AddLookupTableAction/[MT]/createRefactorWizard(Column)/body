@@ -1,3 +1,0 @@
-{
-  return new RefactorWizard("Add lookup table for " + selectedColumn,new AddLookupTableWizardPageImpl());
-}

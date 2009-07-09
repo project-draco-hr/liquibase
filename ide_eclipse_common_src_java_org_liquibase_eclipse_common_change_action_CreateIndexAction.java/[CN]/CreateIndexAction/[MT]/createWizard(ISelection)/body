@@ -1,3 +1,0 @@
-{
-  return new CreateIndexWizard(getSelectedDatabase(selection),getSelectedConnection(selection),getSelectedColumn(selection));
-}

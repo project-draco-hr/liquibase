@@ -1,6 +1,0 @@
-{
-  RenameTableChange change=new RenameTableChange();
-  change.setOldTableName(table.getName());
-  change.setNewTableName(page1.getNewTableName());
-  return new Change[]{change};
-}
