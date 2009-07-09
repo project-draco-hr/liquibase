@@ -1,8 +1,0 @@
-{
-  try {
-    ExecutorService.getInstance().getWriteExecutor(database).execute(new DropTableStatement(schema,database.getDatabaseChangeLogTableName(),false));
-  }
- catch (  JDBCException e) {
-    ;
-  }
-}

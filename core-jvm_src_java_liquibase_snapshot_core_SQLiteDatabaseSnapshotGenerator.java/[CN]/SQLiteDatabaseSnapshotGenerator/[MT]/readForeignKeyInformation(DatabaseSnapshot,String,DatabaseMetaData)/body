@@ -1,0 +1,3 @@
+{
+  updateListeners("Reading foreign keys for " + snapshot.getDatabase().toString() + " ...");
+}

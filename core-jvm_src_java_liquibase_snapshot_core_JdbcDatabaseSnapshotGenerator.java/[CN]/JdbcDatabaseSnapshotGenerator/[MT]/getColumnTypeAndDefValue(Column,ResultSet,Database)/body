@@ -1,0 +1,10 @@
+{
+  Object defaultValue=rs.getObject("COLUMN_DEF");
+  try {
+    columnInfo.setDefaultValue(database.convertDatabaseValueToJavaObject(defaultValue,columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits()));
+  }
+ catch (  ParseException e) {
+    throw new DatabaseException(e);
+  }
+  columnInfo.setTypeName(database.getColumnType(rs.getString("TYPE_NAME"),columnInfo.isAutoIncrement()));
+}

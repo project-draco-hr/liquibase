@@ -1,0 +1,14 @@
+{
+  CallableStatement cs=null;
+  try {
+    cs=createCallableStatement(((StoredProcedureStatement)csc),database);
+    CallableStatement csToUse=cs;
+    return action.doInCallableStatement(csToUse);
+  }
+ catch (  SQLException ex) {
+    throw new DatabaseException("Error executing callable statement",ex);
+  }
+ finally {
+    JdbcUtils.closeStatement(cs);
+  }
+}

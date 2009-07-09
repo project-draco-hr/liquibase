@@ -6,6 +6,6 @@
     output.write(StreamUtil.getLineSeparator());
   }
  catch (  IOException e) {
-    throw new JDBCException(e);
+    throw new DatabaseException(e);
   }
 }

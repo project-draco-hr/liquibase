@@ -9,7 +9,7 @@
 catch (    IOException e) {
       getLog().error(e.getMessage(),e);
     }
-catch (    JDBCException e) {
+catch (    DatabaseException e) {
       getLog().error(e.getMessage(),e);
     }
   }
@@ -18,7 +18,7 @@ catch (    JDBCException e) {
       db.rollback();
       db.close();
     }
- catch (    JDBCException e) {
+ catch (    DatabaseException e) {
       getLog().error("Failed to close open connection to database.",e);
     }
   }

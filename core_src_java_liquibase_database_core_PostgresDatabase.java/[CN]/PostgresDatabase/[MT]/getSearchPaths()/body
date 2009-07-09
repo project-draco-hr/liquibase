@@ -3,20 +3,16 @@
   try {
     DatabaseConnection con=getConnection();
     if (con != null) {
-      Statement stmt=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-      ResultSet searchPathQry=stmt.executeQuery("SHOW search_path");
-      if (searchPathQry.next()) {
-        String searchPathResult=searchPathQry.getString(1);
-        if (searchPathResult != null) {
-          String dirtySearchPaths[]=searchPathResult.split("\\,");
-          searchPaths=new ArrayList<String>();
-          for (          String searchPath : dirtySearchPaths) {
-            searchPath=searchPath.trim();
-            if (searchPath.equals("\"$user\"")) {
-              searchPath="$user";
-            }
-            searchPaths.add(searchPath);
+      String searchPathResult=(String)ExecutorService.getInstance().getReadExecutor(this).queryForObject(new RawSqlStatement("SHOW search_path"),String.class);
+      if (searchPathResult != null) {
+        String dirtySearchPaths[]=searchPathResult.split("\\,");
+        searchPaths=new ArrayList<String>();
+        for (        String searchPath : dirtySearchPaths) {
+          searchPath=searchPath.trim();
+          if (searchPath.equals("\"$user\"")) {
+            searchPath="$user";
           }
+          searchPaths.add(searchPath);
         }
       }
     }

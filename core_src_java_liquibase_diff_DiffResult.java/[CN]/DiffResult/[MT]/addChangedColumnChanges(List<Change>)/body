@@ -4,7 +4,7 @@
       continue;
     }
     boolean foundDifference=false;
-    Column baseColumn=baseSnapshot.getColumn(column);
+    Column baseColumn=baseSnapshot.getColumn(column.getTable().getName(),column.getName());
     if (column.isDataTypeDifferent(baseColumn)) {
       ColumnConfig columnConfig=new ColumnConfig();
       columnConfig.setName(column.getName());

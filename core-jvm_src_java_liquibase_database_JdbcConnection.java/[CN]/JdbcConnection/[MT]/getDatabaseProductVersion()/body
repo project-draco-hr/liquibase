@@ -1,0 +1,8 @@
+{
+  try {
+    return con.getMetaData().getDatabaseProductVersion();
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

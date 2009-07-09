@@ -1,4 +1,0 @@
-{
-  outputStatement(action.getStatement(),sqlVisitors);
-  return null;
-}

@@ -1,0 +1,4 @@
+{
+  Database database=snapshot.getDatabase();
+  updateListeners("Reading unique constraints for " + database.toString() + " ...");
+}

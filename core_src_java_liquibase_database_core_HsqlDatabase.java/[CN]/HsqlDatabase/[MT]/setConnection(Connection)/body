@@ -1,3 +1,0 @@
-{
-  super.setConnection(new HsqlConnectionDelegate(conn));
-}

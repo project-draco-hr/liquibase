@@ -1,2 +1,3 @@
 {
+  outputStatement(sql,new ArrayList<SqlVisitor>());
 }

@@ -1,12 +1,12 @@
 {
-  DatabaseSnapshot databaseSnapshot;
+  DatabaseSnapshot snapshot;
   try {
-    databaseSnapshot=database.createDatabaseSnapshot(getSchemaName(),null);
+    snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,getSchemaName(),null);
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new PreconditionErrorException(e,changeLog,this);
   }
-  if (databaseSnapshot.getView(getViewName()) == null) {
+  if (snapshot.getView(getViewName()) == null) {
     throw new PreconditionFailedException("View " + database.escapeStringForDatabase(getViewName()) + " does not exist",changeLog,this);
   }
 }

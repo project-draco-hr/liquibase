@@ -1,6 +1,13 @@
 {
   if (!readExecutors.containsKey(database)) {
-    readExecutors.put(database,new DefaultExecutor(database));
+    try {
+      ReadExecutor readExecutor=(ReadExecutor)ClassPathScanner.getInstance().getClasses(ReadExecutor.class)[0].newInstance();
+      readExecutor.setDatabase(database);
+      readExecutors.put(database,readExecutor);
+    }
+ catch (    Exception e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
   }
   return readExecutors.get(database);
 }

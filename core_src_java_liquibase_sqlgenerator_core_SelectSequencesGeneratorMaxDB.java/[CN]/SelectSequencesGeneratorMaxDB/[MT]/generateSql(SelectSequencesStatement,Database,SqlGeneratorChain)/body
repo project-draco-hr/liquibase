@@ -2,7 +2,7 @@
   try {
     return new Sql[]{new UnparsedSql("SELECT SEQUENCE_NAME FROM DOMAIN.SEQUENCES WHERE OWNER = '" + database.convertRequestedSchemaToSchema(statement.getSchemaName()) + "'")};
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException(e);
   }
 }

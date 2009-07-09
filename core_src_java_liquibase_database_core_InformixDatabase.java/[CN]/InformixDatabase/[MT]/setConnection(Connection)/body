@@ -1,9 +1,0 @@
-{
-  super.setConnection(connection);
-  try {
-    connection.createStatement().execute("EXECUTE PROCEDURE IFX_ALLOW_NEWLINE('T');");
-  }
- catch (  SQLException e) {
-    new RuntimeException("Could not allow newline characters in quoted strings with IFX_ALLOW_NEWLINE");
-  }
-}

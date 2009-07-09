@@ -1,37 +1,3 @@
 {
-  ResultSet resultSet=null;
-  try {
-    Integer requestedType=(Integer)Class.forName("java.sql.Types").getDeclaredField(dataTypeName).get(null);
-    DatabaseConnection connection=getConnection();
-    if (connection == null) {
-      throw new RuntimeException("Cannot evaluate java.sql.Types without a connection");
-    }
-    resultSet=connection.getMetaData().getTypeInfo();
-    while (resultSet.next()) {
-      String typeName=resultSet.getString("TYPE_NAME");
-      int dataType=resultSet.getInt("DATA_TYPE");
-      int maxPrecision=resultSet.getInt("PRECISION");
-      if (requestedType == dataType) {
-        if (maxPrecision > 0) {
-          return new DataType(typeName,true);
-        }
- else {
-          return new DataType(typeName,false);
-        }
-      }
-    }
-    return null;
-  }
- catch (  Exception e) {
-    throw new RuntimeException(e);
-  }
- finally {
-    if (resultSet != null) {
-      try {
-        resultSet.close();
-      }
- catch (      SQLException e) {
-      }
-    }
-  }
+  return new DataType(dataTypeName,false);
 }

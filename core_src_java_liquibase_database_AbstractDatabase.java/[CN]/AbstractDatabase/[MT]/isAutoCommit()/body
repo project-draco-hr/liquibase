@@ -2,7 +2,7 @@
   try {
     return getConnection().getAutoCommit();
   }
- catch (  SQLException e) {
-    throw new JDBCException(e);
+ catch (  DatabaseException e) {
+    throw new DatabaseException(e);
   }
 }

@@ -1,0 +1,8 @@
+{
+  try {
+    con.setCatalog(catalog);
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

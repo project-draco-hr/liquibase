@@ -8,7 +8,7 @@
           try {
             writeExecutor.execute(statement,sqlVisitors);
           }
- catch (          JDBCException e) {
+ catch (          DatabaseException e) {
             throw new RollbackFailedException("Error executing custom SQL [" + statement + "]",e);
           }
         }
@@ -29,7 +29,7 @@
     try {
       database.rollback();
     }
- catch (    JDBCException e1) {
+ catch (    DatabaseException e1) {
       ;
     }
     throw new RollbackFailedException(e);

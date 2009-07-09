@@ -10,7 +10,7 @@
     try {
       locked=(Boolean)ExecutorService.getInstance().getReadExecutor(database).queryForObject(new SelectFromDatabaseChangeLogLockStatement("locked"),Boolean.class,new ArrayList<SqlVisitor>());
     }
- catch (    JDBCException e) {
+ catch (    DatabaseException e) {
       if (!writeExecutor.executesStatements()) {
         locked=false;
       }
@@ -44,7 +44,7 @@
     try {
       database.rollback();
     }
- catch (    JDBCException e) {
+ catch (    DatabaseException e) {
       ;
     }
   }

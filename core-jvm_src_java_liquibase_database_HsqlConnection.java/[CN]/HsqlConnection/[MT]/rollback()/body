@@ -1,0 +1,21 @@
+{
+  super.rollback();
+  Statement st=null;
+  try {
+    st=createStatement();
+    st.execute("CHECKPOINT");
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (st != null) {
+      try {
+        st.close();
+      }
+ catch (      SQLException e) {
+        ;
+      }
+    }
+  }
+}

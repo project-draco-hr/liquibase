@@ -1,12 +1,12 @@
 {
-  DatabaseSnapshot databaseSnapshot;
+  DatabaseSnapshot snapshot;
   try {
-    databaseSnapshot=database.createDatabaseSnapshot(getSchemaName(),null);
+    snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,getSchemaName(),null);
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new PreconditionErrorException(e,changeLog,this);
   }
-  if (databaseSnapshot.getIndex(getIndexName()) == null) {
+  if (snapshot.getIndex(getIndexName()) == null) {
     throw new PreconditionFailedException("Index " + database.escapeStringForDatabase(getIndexName()) + " does not exist",changeLog,this);
   }
 }

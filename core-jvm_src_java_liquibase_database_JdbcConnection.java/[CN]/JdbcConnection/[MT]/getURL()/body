@@ -1,0 +1,8 @@
+{
+  try {
+    return con.getMetaData().getURL();
+  }
+ catch (  SQLException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

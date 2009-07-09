@@ -11,7 +11,7 @@
         try {
           ExecutorService.getInstance().getWriteExecutor(database).update(md5sumUpdateStatement,new ArrayList<SqlVisitor>());
         }
- catch (        JDBCException e) {
+ catch (        DatabaseException e) {
           throw new RuntimeException(e);
         }
       }

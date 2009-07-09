@@ -1,2 +1,2 @@
-DatabaseSnapshot baseDatabase
-DatabaseSnapshot targetDatabase
+DatabaseSnapshot baseDatabaseSnapshot
+DatabaseSnapshot targetDatabaseSnapshot

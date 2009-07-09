@@ -19,10 +19,10 @@
       return new java.sql.Date(parseDate(value).getTime());
     }
  else     if (dataType == Types.TIMESTAMP) {
-      return new Timestamp(parseDate(value).getTime());
+      return new java.sql.Timestamp(parseDate(value).getTime());
     }
  else     if (dataType == Types.TIME) {
-      return new Time(parseDate(value).getTime());
+      return new java.sql.Time(parseDate(value).getTime());
     }
  else     if (dataType == Types.BIGINT) {
       return new BigInteger(value);

@@ -1,8 +1,0 @@
-{
-  for (  View view : getViews()) {
-    if (view.getName().equalsIgnoreCase(viewName)) {
-      return view;
-    }
-  }
-  return null;
-}

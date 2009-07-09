@@ -3,9 +3,9 @@
     List<ChangeSet> unrunChangeSets=listUnrunChangeSets(contexts);
     out.append(String.valueOf(unrunChangeSets.size()));
     out.append(" change sets have not been applied to ");
-    out.append(getDatabase().getConnectionUsername());
+    out.append(getDatabase().getConnection().getConnectionUserName());
     out.append("@");
-    out.append(getDatabase().getConnectionURL());
+    out.append(getDatabase().getConnection().getURL());
     out.append(StreamUtil.getLineSeparator());
     if (verbose) {
       for (      ChangeSet changeSet : unrunChangeSets) {

@@ -1,4 +1,4 @@
 {
-  this.baseSnapshot=baseDatabaseSnapshot;
+  this.baseSnapshot=baseSnapshot;
   this.targetSnapshot=targetDatabaseSnapshot;
 }

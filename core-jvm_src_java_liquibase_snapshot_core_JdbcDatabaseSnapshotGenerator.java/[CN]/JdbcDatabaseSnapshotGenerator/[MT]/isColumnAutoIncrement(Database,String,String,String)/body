@@ -1,0 +1,18 @@
+{
+  if (!database.supportsAutoIncrement()) {
+    return false;
+  }
+  boolean autoIncrement=false;
+  ResultSet selectRS=null;
+  try {
+    selectRS=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().executeQuery("SELECT " + database.escapeColumnName(schemaName,tableName,columnName) + " FROM "+ database.escapeTableName(schemaName,tableName)+ " WHERE 1 = 0");
+    ResultSetMetaData meta=selectRS.getMetaData();
+    autoIncrement=meta.isAutoIncrement(1);
+  }
+  finally {
+    if (selectRS != null) {
+      selectRS.close();
+    }
+  }
+  return autoIncrement;
+}

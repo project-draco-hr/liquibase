@@ -2,7 +2,7 @@
   try {
     return new Sql[]{new UnparsedSql("SELECT SEQNAME AS SEQUENCE_NAME FROM SYSCAT.SEQUENCES WHERE SEQTYPE='S' AND SEQSCHEMA = '" + database.convertRequestedSchemaToSchema(statement.getSchemaName()) + "'")};
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException(e);
   }
 }

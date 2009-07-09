@@ -2,7 +2,7 @@
   try {
     return new Sql[]{new UnparsedSql("SELECT VIEW_DEFINITION FROM INFORMATION_SCHEMA.SYSTEM_VIEWS WHERE TABLE_NAME = '" + statement.getViewName() + "' AND TABLE_SCHEMA='"+ database.convertRequestedSchemaToSchema(statement.getSchemaName())+ "'")};
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException(e);
   }
 }

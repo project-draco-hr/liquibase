@@ -1,12 +1,12 @@
 {
-  DatabaseSnapshot databaseSnapshot;
+  DatabaseSnapshot snapshot;
   try {
-    databaseSnapshot=database.createDatabaseSnapshot(getSchemaName(),null);
+    snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,getSchemaName(),null);
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new PreconditionErrorException(e,changeLog,this);
   }
-  if (databaseSnapshot.getForeignKey(getForeignKeyName()) == null) {
+  if (snapshot.getForeignKey(getForeignKeyName()) == null) {
     throw new PreconditionFailedException("Foreign Key " + database.escapeStringForDatabase(getForeignKeyName()) + " does not exist",changeLog,this);
   }
 }

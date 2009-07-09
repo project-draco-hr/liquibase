@@ -7,13 +7,13 @@
     out.println();
     for (    Column column : changedColumns) {
       out.println("     " + column);
-      Column baseColumn=baseSnapshot.getColumn(column);
+      Column baseColumn=baseSnapshot.getColumn(column.getTable().getName(),column.getName());
       if (baseColumn != null) {
         if (baseColumn.isDataTypeDifferent(column)) {
-          out.println("           from " + baseColumn.getDataTypeString(baseDatabase) + " to "+ targetSnapshot.getColumn(column).getDataTypeString(targetDatabase));
+          out.println("           from " + baseColumn.getDataTypeString(baseDatabase) + " to "+ targetSnapshot.getColumn(column.getTable().getName(),column.getName()).getDataTypeString(targetDatabase));
         }
         if (baseColumn.isNullabilityDifferent(column)) {
-          Boolean nowNullable=targetSnapshot.getColumn(column).isNullable();
+          Boolean nowNullable=targetSnapshot.getColumn(column.getTable().getName(),column.getName()).isNullable();
           if (nowNullable == null) {
             nowNullable=Boolean.TRUE;
           }

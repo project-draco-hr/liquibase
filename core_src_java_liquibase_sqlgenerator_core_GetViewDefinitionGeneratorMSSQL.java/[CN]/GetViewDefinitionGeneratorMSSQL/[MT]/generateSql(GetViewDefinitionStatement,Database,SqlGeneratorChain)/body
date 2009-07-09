@@ -5,7 +5,7 @@
     sql+=" and table_catalog='" + database.getDefaultCatalogName() + "'";
     return new Sql[]{new UnparsedSql(sql)};
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException(e);
   }
 }

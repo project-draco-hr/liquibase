@@ -1,8 +1,8 @@
 {
   try {
-    return connection.getMetaData().getDatabaseProductName();
+    return connection.getDatabaseProductName();
   }
- catch (  SQLException e) {
+ catch (  DatabaseException e) {
     throw new RuntimeException("Cannot get database name");
   }
 }

@@ -1,25 +1,3 @@
 {
-  ResultSet typeInfo=null;
-  try {
-    typeInfo=getConnection().getMetaData().getTypeInfo();
-    while (typeInfo.next()) {
-      if (typeInfo.getInt("DATA_TYPE") == Types.TIMESTAMP) {
-        return typeInfo.getString("TYPE_NAME");
-      }
-    }
-  }
- catch (  SQLException e) {
-    throw new RuntimeException(e);
-  }
- finally {
-    if (typeInfo != null) {
-      try {
-        typeInfo.close();
-      }
- catch (      SQLException e) {
-        ;
-      }
-    }
-  }
   return "DATETIME";
 }

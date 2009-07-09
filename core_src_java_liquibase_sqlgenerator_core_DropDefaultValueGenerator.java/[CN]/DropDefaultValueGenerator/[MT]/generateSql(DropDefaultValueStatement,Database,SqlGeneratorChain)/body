@@ -5,7 +5,7 @@
     try {
       productVersion=database.getDatabaseProductVersion();
     }
- catch (    JDBCException e) {
+ catch (    DatabaseException e) {
       throw new UnexpectedLiquibaseException(e);
     }
     if (productVersion.startsWith("9")) {

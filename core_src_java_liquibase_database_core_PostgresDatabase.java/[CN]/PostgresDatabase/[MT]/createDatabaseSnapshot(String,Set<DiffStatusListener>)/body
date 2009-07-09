@@ -1,3 +1,0 @@
-{
-  return new PostgresDatabaseSnapshot(this,statusListeners,schema);
-}

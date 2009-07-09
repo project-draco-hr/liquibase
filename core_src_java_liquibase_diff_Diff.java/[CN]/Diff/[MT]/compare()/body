@@ -1,13 +1,13 @@
 {
   if (baseSnapshot == null) {
-    baseSnapshot=baseDatabase.createDatabaseSnapshot(null,statusListeners);
+    baseSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(baseDatabase,null,statusListeners);
   }
   if (targetSnapshot == null) {
     if (targetDatabase == null) {
-      targetSnapshot=new UnsupportedDatabaseSnapshot();
+      targetSnapshot=null;
     }
  else {
-      targetSnapshot=targetDatabase.createDatabaseSnapshot(null,statusListeners);
+      targetSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(targetDatabase,null,statusListeners);
     }
   }
   DiffResult diffResult=new DiffResult(baseSnapshot,targetSnapshot);

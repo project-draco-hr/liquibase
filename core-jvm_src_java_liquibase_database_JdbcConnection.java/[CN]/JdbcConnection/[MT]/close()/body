@@ -1,0 +1,9 @@
+{
+  rollback();
+  try {
+    con.close();
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

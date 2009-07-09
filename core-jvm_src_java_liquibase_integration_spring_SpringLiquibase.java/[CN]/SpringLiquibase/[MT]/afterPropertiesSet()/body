@@ -1,0 +1,26 @@
+{
+  String shouldRunProperty=System.getProperty(Liquibase.SHOULD_RUN_SYSTEM_PROPERTY);
+  if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
+    System.out.println("LiquiBase did not run because '" + Liquibase.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
+    return;
+  }
+  Connection c=null;
+  try {
+    c=getDataSource().getConnection();
+    Liquibase liquibase=createLiquibase(c);
+    liquibase.update(getContexts());
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (c != null) {
+      try {
+        c.rollback();
+        c.close();
+      }
+ catch (      SQLException e) {
+      }
+    }
+  }
+}

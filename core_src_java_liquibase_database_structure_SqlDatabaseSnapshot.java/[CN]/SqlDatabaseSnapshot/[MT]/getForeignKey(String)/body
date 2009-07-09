@@ -1,8 +1,0 @@
-{
-  for (  ForeignKey fk : getForeignKeys()) {
-    if (fk.getName().equalsIgnoreCase(foreignKeyName)) {
-      return fk;
-    }
-  }
-  return null;
-}

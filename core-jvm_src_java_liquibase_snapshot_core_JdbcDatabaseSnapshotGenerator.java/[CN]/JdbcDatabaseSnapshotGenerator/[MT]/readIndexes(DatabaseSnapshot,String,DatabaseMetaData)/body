@@ -1,0 +1,84 @@
+{
+  Database database=snapshot.getDatabase();
+  updateListeners("Reading indexes for " + database.toString() + " ...");
+  for (  Table table : snapshot.getTables()) {
+    ResultSet rs;
+    Statement statement=null;
+    if (database instanceof OracleDatabase) {
+      statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+      String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + database.convertRequestedSchemaToSchema(schema) + "' AND TABLE_NAME='"+ table.getName()+ "' ORDER BY INDEX_NAME, ORDINAL_POSITION";
+      rs=statement.executeQuery(sql);
+    }
+ else {
+      rs=databaseMetaData.getIndexInfo(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),table.getName(),false,true);
+    }
+    Map<String,Index> indexMap=new HashMap<String,Index>();
+    while (rs.next()) {
+      String indexName=convertFromDatabaseName(rs.getString("INDEX_NAME"));
+      if (database instanceof InformixDatabase && indexName.startsWith(" ")) {
+        indexName="_generated_index_" + indexName.substring(1);
+      }
+      short type=rs.getShort("TYPE");
+      boolean nonUnique=true;
+      try {
+        nonUnique=rs.getBoolean("NON_UNIQUE");
+      }
+ catch (      SQLException e) {
+      }
+      String columnName=convertFromDatabaseName(rs.getString("COLUMN_NAME"));
+      short position=rs.getShort("ORDINAL_POSITION");
+      if (database instanceof InformixDatabase && type != DatabaseMetaData.tableIndexStatistic && position == 0) {
+        System.out.println(this.getClass().getName() + ": corrected position to " + ++position);
+      }
+      String filterCondition=rs.getString("FILTER_CONDITION");
+      if (type == DatabaseMetaData.tableIndexStatistic) {
+        continue;
+      }
+      if (columnName == null) {
+        continue;
+      }
+      Index indexInformation;
+      if (indexMap.containsKey(indexName)) {
+        indexInformation=indexMap.get(indexName);
+      }
+ else {
+        indexInformation=new Index();
+        indexInformation.setTable(table);
+        indexInformation.setName(indexName);
+        indexInformation.setUnique(!nonUnique);
+        indexInformation.setFilterCondition(filterCondition);
+        indexMap.put(indexName,indexInformation);
+      }
+      for (int i=indexInformation.getColumns().size(); i < position; i++) {
+        indexInformation.getColumns().add(null);
+      }
+      indexInformation.getColumns().set(position - 1,columnName);
+    }
+    for (    Map.Entry<String,Index> entry : indexMap.entrySet()) {
+      snapshot.getIndexes().add(entry.getValue());
+    }
+    rs.close();
+    if (statement != null) {
+      statement.close();
+    }
+  }
+  Set<Index> indexesToRemove=new HashSet<Index>();
+  for (  Index index : snapshot.getIndexes()) {
+    for (    PrimaryKey pk : snapshot.getPrimaryKeys()) {
+      if (index.getTable().getName().equalsIgnoreCase(pk.getTable().getName()) && index.getColumnNames().equals(pk.getColumnNames())) {
+        indexesToRemove.add(index);
+      }
+    }
+    for (    ForeignKey fk : snapshot.getForeignKeys()) {
+      if (index.getTable().getName().equalsIgnoreCase(fk.getForeignKeyTable().getName()) && index.getColumnNames().equals(fk.getForeignKeyColumns())) {
+        indexesToRemove.add(index);
+      }
+    }
+    for (    UniqueConstraint uc : snapshot.getUniqueConstraints()) {
+      if (index.getTable().getName().equalsIgnoreCase(uc.getTable().getName()) && index.getColumnNames().equals(uc.getColumnNames())) {
+        indexesToRemove.add(index);
+      }
+    }
+  }
+  snapshot.getIndexes().removeAll(indexesToRemove);
+}

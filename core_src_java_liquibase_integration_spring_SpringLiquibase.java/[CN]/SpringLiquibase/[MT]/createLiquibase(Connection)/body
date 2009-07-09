@@ -1,3 +1,0 @@
-{
-  return new Liquibase(getChangeLog(),new SpringResourceOpener(getChangeLog()),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(c));
-}

@@ -1,3 +1,0 @@
-{
-  updateListeners("Reading unique constraints for " + database.toString() + " ...");
-}

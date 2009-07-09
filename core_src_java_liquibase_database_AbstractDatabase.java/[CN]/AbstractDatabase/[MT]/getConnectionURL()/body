@@ -1,8 +1,0 @@
-{
-  try {
-    return connection.getMetaData().getURL();
-  }
- catch (  SQLException e) {
-    throw new JDBCException(e);
-  }
-}

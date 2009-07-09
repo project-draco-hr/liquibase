@@ -1,10 +1,10 @@
 {
   int size=(results != null ? results.size() : 0);
   if (size == 0) {
-    throw new JDBCException("Empty result set, expected one row");
+    throw new DatabaseException("Empty result set, expected one row");
   }
   if (results.size() > 1) {
-    throw new JDBCException("Result set larger than one row");
+    throw new DatabaseException("Result set larger than one row");
   }
   return results.iterator().next();
 }

@@ -21,7 +21,7 @@
   try {
     sb.append("AND BASE.OWNER = '").append(database.convertRequestedSchemaToSchema(null)).append("'");
   }
- catch (  liquibase.exception.JDBCException e) {
+ catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException(e);
   }
   sb.append("AND ROWNUM <= 1");

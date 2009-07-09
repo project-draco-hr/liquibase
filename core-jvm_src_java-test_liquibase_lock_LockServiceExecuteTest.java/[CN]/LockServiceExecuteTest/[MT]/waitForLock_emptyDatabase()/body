@@ -1,0 +1,25 @@
+{
+  new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
+    public void performTest(    Database database) throws Exception {
+      WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
+      try {
+        LockService.getInstance(database).reset();
+        writeExecutor.execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false),new ArrayList<SqlVisitor>());
+      }
+ catch (      DatabaseException e) {
+        ;
+      }
+      try {
+        writeExecutor.execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false),new ArrayList<SqlVisitor>());
+      }
+ catch (      DatabaseException e) {
+        ;
+      }
+      database.commit();
+      LockService lockManager=LockService.getInstance(database);
+      lockManager.waitForLock();
+      lockManager.waitForLock();
+    }
+  }
+);
+}

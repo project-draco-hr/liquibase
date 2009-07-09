@@ -1,0 +1,47 @@
+{
+  String[] strings=classpath.list();
+  final List<URL> taskClassPath=new ArrayList<URL>();
+  for (  String string : strings) {
+    URL url=new File(string).toURL();
+    taskClassPath.add(url);
+  }
+  URLClassLoader loader=AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>(){
+    public URLClassLoader run(){
+      return new URLClassLoader(taskClassPath.toArray(new URL[taskClassPath.size()]));
+    }
+  }
+);
+  Database database;
+  if (databaseUrl.startsWith("hibernate:")) {
+    database=new HibernateDatabase(databaseUrl.substring("hibernate:".length()));
+  }
+ else {
+    if (databaseClass != null) {
+      try {
+        DatabaseFactory.getInstance().register((Database)Class.forName(databaseClass,true,loader).newInstance());
+      }
+ catch (      ClassCastException e) {
+        DatabaseFactory.getInstance().register((Database)Class.forName(databaseClass).newInstance());
+      }
+    }
+    if (driverClassName == null) {
+      driverClassName=DatabaseFactory.getInstance().findDefaultDriver(databaseUrl);
+    }
+    if (driverClassName == null) {
+      throw new DatabaseException("driver not specified and no default could be found for " + databaseUrl);
+    }
+    Driver driver=(Driver)Class.forName(driverClassName,true,loader).newInstance();
+    Properties info=new Properties();
+    info.put("user",username);
+    info.put("password",password);
+    Connection connection=driver.connect(databaseUrl,info);
+    if (connection == null) {
+      throw new DatabaseException("Connection could not be created to " + databaseUrl + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
+    }
+    database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+    database.setDefaultSchemaName(defaultSchemaName);
+  }
+  if (getDatabaseChangeLogTableName() != null)   database.setDatabaseChangeLogTableName(getDatabaseChangeLogTableName());
+  if (getDatabaseChangeLogLockTableName() != null)   database.setDatabaseChangeLogLockTableName(getDatabaseChangeLogLockTableName());
+  return database;
+}

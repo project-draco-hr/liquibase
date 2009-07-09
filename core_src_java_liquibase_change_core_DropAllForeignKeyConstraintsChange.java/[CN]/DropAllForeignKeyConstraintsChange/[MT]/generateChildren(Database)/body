@@ -21,7 +21,7 @@
       }
     }
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException("Failed to find foreign keys for table: " + getBaseTableName(),e);
   }
 }

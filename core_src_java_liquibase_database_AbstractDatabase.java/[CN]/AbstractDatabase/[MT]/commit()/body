@@ -2,7 +2,7 @@
   try {
     getConnection().commit();
   }
- catch (  SQLException e) {
-    throw new JDBCException(e);
+ catch (  DatabaseException e) {
+    throw new DatabaseException(e);
   }
 }

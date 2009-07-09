@@ -1,0 +1,67 @@
+{
+  Database database=snapshot.getDatabase();
+  updateListeners("Reading foreign keys for " + database.toString() + " ...");
+  for (  Table table : snapshot.getTables()) {
+    String dbCatalog=database.convertRequestedSchemaToCatalog(schema);
+    String dbSchema=database.convertRequestedSchemaToSchema(schema);
+    ResultSet rs=databaseMetaData.getExportedKeys(dbCatalog,dbSchema,table.getName());
+    ForeignKey fkInfo=null;
+    while (rs.next()) {
+      String fkName=convertFromDatabaseName(rs.getString("FK_NAME"));
+      String pkTableName=convertFromDatabaseName(rs.getString("PKTABLE_NAME"));
+      String pkColumn=convertFromDatabaseName(rs.getString("PKCOLUMN_NAME"));
+      Table pkTable=snapshot.getTable(pkTableName);
+      if (pkTable == null) {
+        log.warning("Foreign key " + fkName + " references table "+ pkTableName+ ", which we cannot find.  Ignoring.");
+        continue;
+      }
+      int keySeq=rs.getInt("KEY_SEQ");
+      if (keySeq == 1) {
+        fkInfo=new ForeignKey();
+      }
+      fkInfo.setPrimaryKeyTable(pkTable);
+      fkInfo.addPrimaryKeyColumn(pkColumn);
+      String fkTableName=convertFromDatabaseName(rs.getString("FKTABLE_NAME"));
+      String fkSchema=convertFromDatabaseName(rs.getString("FKTABLE_SCHEM"));
+      String fkColumn=convertFromDatabaseName(rs.getString("FKCOLUMN_NAME"));
+      Table fkTable=snapshot.getTable(fkTableName);
+      if (fkTable == null) {
+        fkTable=new Table(fkTableName);
+        fkTable.setDatabase(database);
+        fkTable.setSchema(fkSchema);
+        log.warning("Foreign key " + fkName + " is in table "+ fkTableName+ ", which is in a different schema.  Retaining FK in diff, but table will not be diffed.");
+      }
+      fkInfo.setForeignKeyTable(fkTable);
+      fkInfo.addForeignKeyColumn(fkColumn);
+      fkInfo.setName(fkName);
+      ForeignKeyConstraintType updateRule, deleteRule;
+      updateRule=convertToForeignKeyConstraintType(rs.getInt("UPDATE_RULE"));
+      if (rs.wasNull())       updateRule=null;
+      deleteRule=convertToForeignKeyConstraintType(rs.getInt("DELETE_RULE"));
+      if (rs.wasNull()) {
+        deleteRule=null;
+      }
+      fkInfo.setUpdateRule(updateRule);
+      fkInfo.setDeleteRule(deleteRule);
+      if (database.supportsInitiallyDeferrableColumns()) {
+        short deferrablility=rs.getShort("DEFERRABILITY");
+        if (deferrablility == DatabaseMetaData.importedKeyInitiallyDeferred) {
+          fkInfo.setDeferrable(Boolean.TRUE);
+          fkInfo.setInitiallyDeferred(Boolean.TRUE);
+        }
+ else         if (deferrablility == DatabaseMetaData.importedKeyInitiallyImmediate) {
+          fkInfo.setDeferrable(Boolean.TRUE);
+          fkInfo.setInitiallyDeferred(Boolean.FALSE);
+        }
+ else         if (deferrablility == DatabaseMetaData.importedKeyNotDeferrable) {
+          fkInfo.setDeferrable(Boolean.FALSE);
+          fkInfo.setInitiallyDeferred(Boolean.FALSE);
+        }
+      }
+      if (keySeq == 1) {
+        snapshot.getForeignKeys().add(fkInfo);
+      }
+    }
+    rs.close();
+  }
+}

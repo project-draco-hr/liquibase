@@ -1,4 +1,8 @@
 {
-  String url=getConnectionURL();
+  DatabaseConnection connection=getConnection();
+  if (connection == null) {
+    return true;
+  }
+  String url=connection.getURL();
   return (url.indexOf("localhost") >= 0) || (url.indexOf("127.0.0.1") >= 0);
 }

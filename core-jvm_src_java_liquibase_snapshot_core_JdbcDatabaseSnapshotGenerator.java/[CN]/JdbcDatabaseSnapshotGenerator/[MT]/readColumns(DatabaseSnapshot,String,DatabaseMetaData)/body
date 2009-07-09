@@ -1,0 +1,61 @@
+{
+  Database database=snapshot.getDatabase();
+  updateListeners("Reading columns for " + database.toString() + " ...");
+  Statement selectStatement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+  ResultSet rs=databaseMetaData.getColumns(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),null,null);
+  while (rs.next()) {
+    Column columnInfo=new Column();
+    String tableName=convertFromDatabaseName(rs.getString("TABLE_NAME"));
+    String columnName=convertFromDatabaseName(rs.getString("COLUMN_NAME"));
+    String schemaName=convertFromDatabaseName(rs.getString("TABLE_SCHEM"));
+    String catalogName=convertFromDatabaseName(rs.getString("TABLE_CAT"));
+    String remarks=rs.getString("REMARKS");
+    Table table;
+    if (database.isSystemTable(catalogName,schemaName,tableName) || database.isLiquibaseTable(tableName)) {
+      if (tableName.equalsIgnoreCase(database.getDatabaseChangeLogTableName())) {
+        table=snapshot.getDatabaseChangeLogTable();
+      }
+ else       if (tableName.equalsIgnoreCase(database.getDatabaseChangeLogLockTableName())) {
+        table=snapshot.getDatabaseChangeLogLockTable();
+      }
+ else {
+        continue;
+      }
+    }
+ else {
+      table=snapshot.getTable(tableName);
+    }
+    if (table == null) {
+      View view=snapshot.getView(tableName);
+      if (view == null) {
+        log.info("Could not find table or view " + tableName + " for column "+ columnName);
+        continue;
+      }
+ else {
+        columnInfo.setView(view);
+        view.getColumns().add(columnInfo);
+      }
+    }
+ else {
+      columnInfo.setTable(table);
+      table.getColumns().add(columnInfo);
+    }
+    columnInfo.setName(columnName);
+    columnInfo.setDataType(rs.getInt("DATA_TYPE"));
+    columnInfo.setColumnSize(rs.getInt("COLUMN_SIZE"));
+    columnInfo.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
+    int nullable=rs.getInt("NULLABLE");
+    if (nullable == DatabaseMetaData.columnNoNulls) {
+      columnInfo.setNullable(false);
+    }
+ else     if (nullable == DatabaseMetaData.columnNullable) {
+      columnInfo.setNullable(true);
+    }
+    columnInfo.setPrimaryKey(snapshot.isPrimaryKey(columnInfo));
+    columnInfo.setAutoIncrement(isColumnAutoIncrement(database,schema,tableName,columnName));
+    getColumnTypeAndDefValue(columnInfo,rs,database);
+    columnInfo.setRemarks(remarks);
+  }
+  rs.close();
+  selectStatement.close();
+}

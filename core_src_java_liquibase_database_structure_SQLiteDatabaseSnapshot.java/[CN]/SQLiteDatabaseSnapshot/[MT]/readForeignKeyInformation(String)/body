@@ -1,3 +1,0 @@
-{
-  updateListeners("Reading foreign keys for " + database.toString() + " ...");
-}

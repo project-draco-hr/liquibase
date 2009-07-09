@@ -1,3 +1,0 @@
-CallableSqlStatement csc
-CallableStatementCallback action
-List<SqlVisitor> sqlVisitors

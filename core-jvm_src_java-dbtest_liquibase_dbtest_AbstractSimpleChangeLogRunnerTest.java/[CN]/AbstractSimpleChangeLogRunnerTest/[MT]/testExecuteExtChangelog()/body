@@ -1,0 +1,26 @@
+{
+  if (database == null) {
+    return;
+  }
+  File samples1=new File(TestContext.getInstance().findCoreJvmProjectRoot(),"/lib-test/liquibase-sample1.jar");
+  File samples2=new File(TestContext.getInstance().findCoreJvmProjectRoot(),"/lib-test/liquibase-sample2.jar");
+  CompositeResourceAccessor resourceAccessor=new CompositeResourceAccessor(new ClassLoaderResourceAccessor(),new ClassLoaderResourceAccessor(new URLClassLoader(new URL[]{samples1.toURL(),samples2.toURL()})));
+  ;
+  ClassPathScanner.getInstance().setResourceAccessor(resourceAccessor);
+  try {
+    String extChangelog="changelogs/common/ext.changelog.xml";
+    Liquibase liquibase=createLiquibase(extChangelog);
+    liquibase.dropAll(getSchemasToDrop());
+    liquibase=createLiquibase(extChangelog);
+    try {
+      liquibase.update(this.contexts);
+    }
+ catch (    ValidationFailedException e) {
+      e.printDescriptiveError(System.out);
+      throw e;
+    }
+  }
+  finally {
+    ClassPathScanner.reset();
+  }
+}

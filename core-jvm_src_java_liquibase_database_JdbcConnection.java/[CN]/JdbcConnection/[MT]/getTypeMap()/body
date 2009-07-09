@@ -1,0 +1,8 @@
+{
+  try {
+    return con.getTypeMap();
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

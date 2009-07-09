@@ -1,0 +1,3 @@
+DatabaseSnapshot snapshot
+String schema
+ResultSet rs

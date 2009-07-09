@@ -1,8 +1,0 @@
-{
-  if (column.getTable() == null) {
-    return getColumn(column.getView().getName(),column.getName());
-  }
- else {
-    return getColumn(column.getTable().getName(),column.getName());
-  }
-}

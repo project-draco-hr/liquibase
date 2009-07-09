@@ -15,7 +15,7 @@
   try {
     sb.append("AND RC.CONSTRAINT_SCHEMA = '").append(database.convertRequestedSchemaToSchema(null)).append("'");
   }
- catch (  liquibase.exception.JDBCException e) {
+ catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException(e);
   }
   sb.append("LIMIT 1");

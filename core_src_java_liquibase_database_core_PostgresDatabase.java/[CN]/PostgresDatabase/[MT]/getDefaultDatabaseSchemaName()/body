@@ -6,12 +6,12 @@
         for (        String searchPath : searchPaths) {
           if (searchPath != null && searchPath.length() > 0) {
             defaultDatabaseSchemaName=searchPath;
-            if (defaultDatabaseSchemaName.equals("$user") && getConnectionUsername() != null) {
-              if (!schemaExists(getConnectionUsername())) {
+            if (defaultDatabaseSchemaName.equals("$user") && getConnection().getConnectionUserName() != null) {
+              if (!schemaExists(getConnection().getConnectionUserName())) {
                 defaultDatabaseSchemaName=null;
               }
  else {
-                defaultDatabaseSchemaName=getConnectionUsername();
+                defaultDatabaseSchemaName=getConnection().getConnectionUserName();
               }
             }
             if (defaultDatabaseSchemaName != null)             break;

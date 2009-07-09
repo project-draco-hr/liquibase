@@ -3,15 +3,15 @@
   try {
     int totalRows=ExecutorService.getInstance().getReadExecutor(this).queryForInt(new SelectFromDatabaseChangeLogStatement("COUNT(*)"),new ArrayList<SqlVisitor>());
     if (totalRows == 0) {
-      throw new JDBCException("Cannot tag an empty database");
+      throw new DatabaseException("Cannot tag an empty database");
     }
     int rowsUpdated=writeExecutor.update(new TagDatabaseStatement(tagString),new ArrayList<SqlVisitor>());
     if (rowsUpdated == 0) {
-      throw new JDBCException("Did not tag database change log correctly");
+      throw new DatabaseException("Did not tag database change log correctly");
     }
     this.commit();
   }
  catch (  Exception e) {
-    throw new JDBCException(e);
+    throw new DatabaseException(e);
   }
 }

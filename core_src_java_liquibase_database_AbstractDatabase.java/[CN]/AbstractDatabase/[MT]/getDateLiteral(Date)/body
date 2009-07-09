@@ -5,8 +5,8 @@
  else   if (date instanceof java.sql.Time) {
     return getDateLiteral(((java.sql.Time)date));
   }
- else   if (date instanceof Timestamp) {
-    return getDateLiteral(((Timestamp)date));
+ else   if (date instanceof java.sql.Timestamp) {
+    return getDateLiteral(((java.sql.Timestamp)date));
   }
  else   if (date instanceof ComputedDateValue) {
     return date.toString();

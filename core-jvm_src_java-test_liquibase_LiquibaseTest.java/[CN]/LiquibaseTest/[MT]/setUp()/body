@@ -1,0 +1,13 @@
+{
+  if (connectionForConstructor != null) {
+    reset(connectionForConstructor);
+  }
+  connectionForConstructor=createMock(DatabaseConnection.class);
+  connectionForConstructor.setAutoCommit(false);
+  expectLastCall().atLeastOnce();
+  DatabaseMetaData metaData=createMock(DatabaseMetaData.class);
+  expect(metaData.getDatabaseProductName()).andReturn("Oracle");
+  replay(metaData);
+  replay(connectionForConstructor);
+  testLiquibase=new TestLiquibase();
+}

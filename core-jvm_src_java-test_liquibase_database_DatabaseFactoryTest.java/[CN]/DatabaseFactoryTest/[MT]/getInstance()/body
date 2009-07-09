@@ -1,0 +1,3 @@
+{
+  assertNotNull(DatabaseFactory.getInstance());
+}

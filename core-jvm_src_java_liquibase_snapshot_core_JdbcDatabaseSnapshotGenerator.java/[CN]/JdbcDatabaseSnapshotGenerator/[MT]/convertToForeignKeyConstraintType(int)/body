@@ -1,0 +1,20 @@
+{
+  if (jdbcType == DatabaseMetaData.importedKeyCascade) {
+    return ForeignKeyConstraintType.importedKeyCascade;
+  }
+ else   if (jdbcType == DatabaseMetaData.importedKeyNoAction) {
+    return ForeignKeyConstraintType.importedKeyNoAction;
+  }
+ else   if (jdbcType == DatabaseMetaData.importedKeyRestrict) {
+    return ForeignKeyConstraintType.importedKeyRestrict;
+  }
+ else   if (jdbcType == DatabaseMetaData.importedKeySetDefault) {
+    return ForeignKeyConstraintType.importedKeySetDefault;
+  }
+ else   if (jdbcType == DatabaseMetaData.importedKeySetNull) {
+    return ForeignKeyConstraintType.importedKeySetNull;
+  }
+ else {
+    throw new DatabaseException("Unknown constraint type: " + jdbcType);
+  }
+}

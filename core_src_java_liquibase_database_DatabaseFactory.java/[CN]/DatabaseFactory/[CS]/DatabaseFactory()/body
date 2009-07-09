@@ -2,7 +2,7 @@
   try {
     Class[] classes=ClassPathScanner.getInstance().getClasses(Database.class);
     for (    Class<? extends Database> clazz : classes) {
-      register((Database)clazz.getConstructor().newInstance());
+      register(clazz.getConstructor().newInstance());
     }
   }
  catch (  Exception e) {

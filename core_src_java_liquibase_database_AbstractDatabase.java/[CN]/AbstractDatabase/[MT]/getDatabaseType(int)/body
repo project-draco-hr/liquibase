@@ -1,9 +1,9 @@
 {
   int returnType=type;
-  if (returnType == Types.BOOLEAN) {
+  if (returnType == java.sql.Types.BOOLEAN) {
     String booleanType=getBooleanType().getDataTypeName();
     if (!booleanType.equalsIgnoreCase("boolean")) {
-      returnType=Types.TINYINT;
+      returnType=java.sql.Types.TINYINT;
     }
   }
   return returnType;

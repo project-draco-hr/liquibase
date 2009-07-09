@@ -9,7 +9,7 @@
     }
     return new Sql[]{new UnparsedSql(sql)};
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException(e);
   }
 }

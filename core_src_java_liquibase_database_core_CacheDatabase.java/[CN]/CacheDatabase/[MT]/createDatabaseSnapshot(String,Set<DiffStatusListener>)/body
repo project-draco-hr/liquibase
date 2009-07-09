@@ -1,3 +1,0 @@
-{
-  return new CacheDatabaseSnapshot(this,statusListeners,schema);
-}

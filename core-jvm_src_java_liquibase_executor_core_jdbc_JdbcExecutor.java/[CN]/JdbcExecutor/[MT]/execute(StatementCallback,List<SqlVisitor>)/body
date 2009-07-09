@@ -1,0 +1,17 @@
+{
+  DatabaseConnection con=database.getConnection();
+  Statement stmt=null;
+  try {
+    stmt=((JdbcConnection)con).getUnderlyingConnection().createStatement();
+    Statement stmtToUse=stmt;
+    return action.doInStatement(stmtToUse);
+  }
+ catch (  SQLException ex) {
+    JdbcUtils.closeStatement(stmt);
+    stmt=null;
+    throw new DatabaseException("Error executing SQL " + StringUtils.join(applyVisitors(action.getStatement(),sqlVisitors),", "),ex);
+  }
+ finally {
+    JdbcUtils.closeStatement(stmt);
+  }
+}

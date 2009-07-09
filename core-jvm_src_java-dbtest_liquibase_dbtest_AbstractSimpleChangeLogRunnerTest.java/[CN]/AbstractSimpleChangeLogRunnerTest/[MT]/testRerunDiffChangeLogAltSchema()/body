@@ -1,0 +1,61 @@
+{
+  if (database == null) {
+    return;
+  }
+  if (!database.supportsSchemas()) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase(includedChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  database.setDefaultSchemaName("liquibaseb");
+  LockService.getInstance(database).forceReleaseLock();
+  liquibase.update(includedChangeLog);
+  DatabaseSnapshot originalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
+  Diff diff=new Diff(database,"liquibaseb");
+  DiffResult diffResult=diff.compare();
+  File tempFile=File.createTempFile("liquibase-test",".xml");
+  FileOutputStream output=new FileOutputStream(tempFile);
+  try {
+    diffResult.printChangeLog(new PrintStream(output),database);
+    output.flush();
+  }
+  finally {
+    output.close();
+  }
+  liquibase=createLiquibase(tempFile.getName());
+  liquibase.dropAll(getSchemasToDrop());
+  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
+  if (!database.isPeculiarLiquibaseSchema()) {
+    writeExecutor.execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogTableName(),false));
+    writeExecutor.execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogLockTableName(),false));
+    database.commit();
+  }
+  DatabaseConnection connection=TestContext.getInstance().getConnection(url);
+  database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+  database.setDefaultSchemaName("liquibaseb");
+  liquibase=createLiquibase(tempFile.getName());
+  try {
+    liquibase.update(this.contexts);
+  }
+ catch (  ValidationFailedException e) {
+    e.printDescriptiveError(System.out);
+    throw e;
+  }
+  tempFile.deleteOnExit();
+  DatabaseSnapshot finalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
+  DiffResult finalDiffResult=new Diff(originalSnapshot,finalSnapshot).compare();
+  assertEquals(0,finalDiffResult.getMissingColumns().size());
+  assertEquals(0,finalDiffResult.getMissingForeignKeys().size());
+  assertEquals(0,finalDiffResult.getMissingIndexes().size());
+  assertEquals(0,finalDiffResult.getMissingPrimaryKeys().size());
+  assertEquals(0,finalDiffResult.getMissingSequences().size());
+  assertEquals(0,finalDiffResult.getMissingTables().size());
+  assertEquals(0,finalDiffResult.getMissingViews().size());
+  assertEquals(0,finalDiffResult.getUnexpectedColumns().size());
+  assertEquals(0,finalDiffResult.getUnexpectedForeignKeys().size());
+  assertEquals(0,finalDiffResult.getUnexpectedIndexes().size());
+  assertEquals(0,finalDiffResult.getUnexpectedPrimaryKeys().size());
+  assertEquals(0,finalDiffResult.getUnexpectedSequences().size());
+  assertEquals(0,finalDiffResult.getUnexpectedTables().size());
+  assertEquals(0,finalDiffResult.getUnexpectedViews().size());
+}

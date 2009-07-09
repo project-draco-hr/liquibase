@@ -23,7 +23,7 @@
     try {
       database.rollback();
     }
- catch (    JDBCException e) {
+ catch (    DatabaseException e) {
       ;
     }
   }

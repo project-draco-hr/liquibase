@@ -1,3 +1,0 @@
-{
-  throw new JDBCException("Do not know how to output callable statement");
-}

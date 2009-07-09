@@ -3,7 +3,7 @@
   try {
     connection.setAutoCommit(getAutoCommitMode());
   }
- catch (  SQLException sqle) {
+ catch (  DatabaseException sqle) {
     log.warning("Can not set auto commit to " + getAutoCommitMode() + " on connection");
   }
 }

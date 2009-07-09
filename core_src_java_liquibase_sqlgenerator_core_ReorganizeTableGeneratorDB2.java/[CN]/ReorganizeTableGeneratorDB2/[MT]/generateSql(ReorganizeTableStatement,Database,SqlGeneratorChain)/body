@@ -7,7 +7,7 @@
       return null;
     }
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new RuntimeException(e);
   }
 }

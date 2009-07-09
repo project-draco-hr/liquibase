@@ -1,0 +1,3 @@
+Database database
+String schema
+Set<DiffStatusListener> listeners

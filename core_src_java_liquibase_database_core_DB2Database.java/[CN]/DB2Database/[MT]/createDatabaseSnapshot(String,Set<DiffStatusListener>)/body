@@ -1,3 +1,0 @@
-{
-  return new DB2DatabaseSnapshot(this,statusListeners,schema);
-}

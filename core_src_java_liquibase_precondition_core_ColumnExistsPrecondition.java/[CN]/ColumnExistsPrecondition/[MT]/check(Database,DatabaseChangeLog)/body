@@ -1,9 +1,9 @@
 {
   DatabaseSnapshot databaseSnapshot;
   try {
-    databaseSnapshot=database.createDatabaseSnapshot(getSchemaName(),null);
+    databaseSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,getSchemaName(),null);
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new PreconditionErrorException(e,changeLog,this);
   }
   if (databaseSnapshot.getColumn(getTableName(),getColumnName()) == null) {

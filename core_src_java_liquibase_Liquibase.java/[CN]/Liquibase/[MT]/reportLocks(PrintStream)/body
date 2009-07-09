@@ -1,6 +1,6 @@
 {
   DatabaseChangeLogLock[] locks=listLocks();
-  out.println("Database change log locks for " + getDatabase().getConnectionUsername() + "@"+ getDatabase().getConnectionURL());
+  out.println("Database change log locks for " + getDatabase().getConnection().getConnectionUserName() + "@"+ getDatabase().getConnection().getURL());
   if (locks.length == 0) {
     out.println(" - No locks");
   }

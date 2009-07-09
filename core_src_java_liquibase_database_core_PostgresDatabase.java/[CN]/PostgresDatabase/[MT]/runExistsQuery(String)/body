@@ -1,12 +1,4 @@
 {
-  DatabaseConnection con=getConnection();
-  Statement stmt=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-  ResultSet existsQry=stmt.executeQuery(query);
-  if (existsQry.next()) {
-    Integer count=existsQry.getInt(1);
-    if (count != null && count > 0) {
-      return true;
-    }
-  }
-  return false;
+  Long count=ExecutorService.getInstance().getReadExecutor(this).queryForLong(new RawSqlStatement(query));
+  return count != null && count > 0;
 }

@@ -1,0 +1,8 @@
+{
+  try {
+    return con.setSavepoint(name);
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

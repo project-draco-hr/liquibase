@@ -1,0 +1,12 @@
+{
+  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/preconditionsChangeLog.xml",new HashMap<String,Object>(),new JUnitResourceAccessor());
+  assertEquals("liquibase/parser/core/xml/preconditionsChangeLog.xml",changeLog.getLogicalFilePath());
+  assertEquals("liquibase/parser/core/xml/preconditionsChangeLog.xml",changeLog.getPhysicalFilePath());
+  assertNotNull(changeLog.getPreconditions());
+  assertEquals(2,changeLog.getPreconditions().getNestedPreconditions().size());
+  assertEquals("runningAs",changeLog.getPreconditions().getNestedPreconditions().get(0).getName());
+  assertEquals("or",changeLog.getPreconditions().getNestedPreconditions().get(1).getName());
+  assertEquals("dbms",((OrPrecondition)changeLog.getPreconditions().getNestedPreconditions().get(1)).getNestedPreconditions().get(0).getName());
+  assertEquals("dbms",((OrPrecondition)changeLog.getPreconditions().getNestedPreconditions().get(1)).getNestedPreconditions().get(1).getName());
+  assertEquals(1,changeLog.getChangeSets().size());
+}

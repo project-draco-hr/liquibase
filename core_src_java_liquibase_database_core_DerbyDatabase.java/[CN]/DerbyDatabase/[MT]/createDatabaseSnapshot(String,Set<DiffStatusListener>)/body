@@ -1,3 +1,0 @@
-{
-  return new DerbyDatabaseSnapshot(this,statusListeners,schema);
-}

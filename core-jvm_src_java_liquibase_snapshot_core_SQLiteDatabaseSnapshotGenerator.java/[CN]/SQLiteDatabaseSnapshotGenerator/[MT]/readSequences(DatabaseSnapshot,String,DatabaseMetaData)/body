@@ -1,0 +1,14 @@
+{
+  Database database=snapshot.getDatabase();
+  updateListeners("Reading sequences for " + database.toString() + " ...");
+  String convertedSchemaName=database.convertRequestedSchemaToSchema(schema);
+  if (database.supportsSequences()) {
+    List<String> sequenceNamess=(List<String>)ExecutorService.getInstance().getReadExecutor(database).queryForList(new SelectSequencesStatement(schema),String.class,new ArrayList<SqlVisitor>());
+    for (    String sequenceName : sequenceNamess) {
+      Sequence seq=new Sequence();
+      seq.setName(sequenceName.trim());
+      seq.setName(convertedSchemaName);
+      snapshot.getSequences().add(seq);
+    }
+  }
+}

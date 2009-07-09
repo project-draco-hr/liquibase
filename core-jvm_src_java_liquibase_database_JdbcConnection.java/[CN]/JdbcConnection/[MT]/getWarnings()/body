@@ -1,0 +1,8 @@
+{
+  try {
+    return con.getWarnings();
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

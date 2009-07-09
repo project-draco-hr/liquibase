@@ -1,0 +1,8 @@
+{
+  try {
+    return con.getTransactionIsolation();
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

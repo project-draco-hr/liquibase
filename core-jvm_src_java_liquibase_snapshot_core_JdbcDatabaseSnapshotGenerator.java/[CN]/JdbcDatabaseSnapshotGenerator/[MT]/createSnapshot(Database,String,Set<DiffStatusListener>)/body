@@ -1,0 +1,24 @@
+{
+  if (requestedSchema == null) {
+    requestedSchema=database.getDefaultSchemaName();
+  }
+  try {
+    DatabaseMetaData databaseMetaData=null;
+    if (database.getConnection() != null) {
+      databaseMetaData=((JdbcConnection)database.getConnection()).getUnderlyingConnection().getMetaData();
+    }
+    this.statusListeners=listeners;
+    DatabaseSnapshot snapshot=new DatabaseSnapshot(database,requestedSchema);
+    readTablesAndViews(snapshot,requestedSchema,databaseMetaData);
+    readForeignKeyInformation(snapshot,requestedSchema,databaseMetaData);
+    readPrimaryKeys(snapshot,requestedSchema,databaseMetaData);
+    readColumns(snapshot,requestedSchema,databaseMetaData);
+    readUniqueConstraints(snapshot,requestedSchema,databaseMetaData);
+    readIndexes(snapshot,requestedSchema,databaseMetaData);
+    readSequences(snapshot,requestedSchema,databaseMetaData);
+    return snapshot;
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

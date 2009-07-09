@@ -1,0 +1,8 @@
+{
+  try {
+    return con.prepareStatement(sql,resultSetType,resultSetConcurrency);
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

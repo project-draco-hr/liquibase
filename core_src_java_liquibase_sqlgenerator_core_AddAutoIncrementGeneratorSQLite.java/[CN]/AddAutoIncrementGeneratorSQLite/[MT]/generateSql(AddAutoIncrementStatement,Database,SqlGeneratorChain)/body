@@ -24,7 +24,7 @@
       statements.addAll(Arrays.asList(SqlGeneratorFactory.getInstance().generateSql(generatedStatement,database)));
     }
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     e.printStackTrace();
   }
 catch (  UnsupportedChangeException e) {

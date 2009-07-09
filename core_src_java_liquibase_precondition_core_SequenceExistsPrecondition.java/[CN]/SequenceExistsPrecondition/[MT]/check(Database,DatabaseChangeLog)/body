@@ -1,12 +1,12 @@
 {
-  DatabaseSnapshot databaseSnapshot;
+  DatabaseSnapshot snapshot;
   try {
-    databaseSnapshot=database.createDatabaseSnapshot(getSchemaName(),null);
+    snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,getSchemaName(),null);
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw new PreconditionErrorException(e,changeLog,this);
   }
-  if (databaseSnapshot.getSequence(getSequenceName()) == null) {
+  if (snapshot.getSequence(getSequenceName()) == null) {
     throw new PreconditionFailedException("Sequence " + database.escapeSequenceName(getSchemaName(),getSequenceName()) + " does not exist",changeLog,this);
   }
 }

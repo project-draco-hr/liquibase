@@ -1,3 +1,0 @@
-{
-  return new SybaseASADatabaseSnapshot(this,statusListeners,schema);
-}

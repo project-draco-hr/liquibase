@@ -1,0 +1,29 @@
+{
+  Database database=snapshot.getDatabase();
+  updateListeners("Reading columns for " + database.toString() + " ...");
+  if (database instanceof SQLiteDatabase) {
+    for (    Table cur_table : snapshot.getTables()) {
+      Statement selectStatement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+      ResultSet rs=databaseMetaData.getColumns(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),cur_table.getName(),null);
+      if (rs == null) {
+        rs=databaseMetaData.getColumns(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),cur_table.getName(),null);
+      }
+      while ((rs != null) && rs.next()) {
+        readColumnInfo(snapshot,schema,rs);
+      }
+      if (rs != null) {
+        rs.close();
+      }
+      selectStatement.close();
+    }
+  }
+ else {
+    Statement selectStatement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+    ResultSet rs=databaseMetaData.getColumns(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),null,null);
+    while (rs.next()) {
+      readColumnInfo(snapshot,schema,rs);
+    }
+    rs.close();
+    selectStatement.close();
+  }
+}

@@ -1,8 +1,0 @@
-{
-  for (  Sequence sequence : getSequences()) {
-    if (sequence.getName().equalsIgnoreCase(sequenceName)) {
-      return sequence;
-    }
-  }
-  return null;
-}

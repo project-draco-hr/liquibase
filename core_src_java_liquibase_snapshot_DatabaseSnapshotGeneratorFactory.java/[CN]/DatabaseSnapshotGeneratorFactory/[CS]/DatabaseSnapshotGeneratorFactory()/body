@@ -1,0 +1,11 @@
+{
+  try {
+    Class[] classes=ClassPathScanner.getInstance().getClasses(DatabaseSnapshotGenerator.class);
+    for (    Class<? extends DatabaseSnapshotGenerator> clazz : classes) {
+      register(clazz.getConstructor().newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

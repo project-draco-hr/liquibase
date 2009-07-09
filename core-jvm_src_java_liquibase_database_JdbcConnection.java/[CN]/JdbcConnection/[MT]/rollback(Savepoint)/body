@@ -1,0 +1,10 @@
+{
+  try {
+    if (!con.getAutoCommit()) {
+      con.rollback(savepoint);
+    }
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

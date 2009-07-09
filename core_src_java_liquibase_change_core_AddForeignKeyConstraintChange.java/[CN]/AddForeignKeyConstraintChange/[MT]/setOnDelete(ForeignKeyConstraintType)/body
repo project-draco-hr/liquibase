@@ -1,0 +1,20 @@
+{
+  if (rule == ForeignKeyConstraintType.importedKeyCascade) {
+    setOnDelete("CASCADE");
+  }
+ else   if (rule == ForeignKeyConstraintType.importedKeySetNull) {
+    setOnDelete("SET NULL");
+  }
+ else   if (rule == ForeignKeyConstraintType.importedKeySetDefault) {
+    setOnDelete("SET DEFAULT");
+  }
+ else   if (rule == ForeignKeyConstraintType.importedKeyRestrict) {
+    setOnDelete("RESTRICT");
+  }
+ else   if (rule == ForeignKeyConstraintType.importedKeyNoAction) {
+    setOnDelete("NO ACTION");
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown onDelete action: " + rule);
+  }
+}

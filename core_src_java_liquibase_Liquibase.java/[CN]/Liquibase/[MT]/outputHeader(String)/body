@@ -5,7 +5,7 @@
   writeExecutor.comment("*********************************************************************");
   writeExecutor.comment("Change Log: " + changeLogFile);
   writeExecutor.comment("Ran at: " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date()));
-  writeExecutor.comment("Against: " + getDatabase().getConnectionUsername() + "@"+ getDatabase().getConnectionURL());
+  writeExecutor.comment("Against: " + getDatabase().getConnection().getConnectionUserName() + "@"+ getDatabase().getConnection().getURL());
   writeExecutor.comment("LiquiBase version: " + LiquibaseUtil.getBuildVersion());
   writeExecutor.comment("*********************************************************************" + StreamUtil.getLineSeparator());
 }

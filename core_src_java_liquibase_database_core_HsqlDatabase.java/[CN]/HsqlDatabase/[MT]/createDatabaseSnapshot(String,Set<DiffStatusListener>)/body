@@ -1,3 +1,0 @@
-{
-  return new HsqlDatabaseSnapshot(this,statusListeners,schema);
-}

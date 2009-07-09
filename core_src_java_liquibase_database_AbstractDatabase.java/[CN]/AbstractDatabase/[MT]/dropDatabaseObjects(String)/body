@@ -1,6 +1,6 @@
 {
   try {
-    DatabaseSnapshot snapshot=createDatabaseSnapshot(schema,new HashSet<DiffStatusListener>());
+    DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(this,schema,new HashSet<DiffStatusListener>());
     List<Change> dropChanges=new ArrayList<Change>();
     for (    View view : snapshot.getViews()) {
       DropViewChange dropChange=new DropViewChange();

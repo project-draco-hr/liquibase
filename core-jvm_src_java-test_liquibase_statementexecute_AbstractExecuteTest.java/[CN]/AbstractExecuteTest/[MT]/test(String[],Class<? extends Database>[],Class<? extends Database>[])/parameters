@@ -1,0 +1,3 @@
+String[] expectedSql
+Class<? extends Database>[] includeDatabases
+Class<? extends Database>[] excludeDatabases

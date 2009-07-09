@@ -1,8 +1,8 @@
 {
   try {
-    return connection.getMetaData().getDatabaseProductVersion();
+    return connection.getDatabaseProductVersion();
   }
- catch (  SQLException e) {
-    throw new JDBCException(e);
+ catch (  DatabaseException e) {
+    throw new DatabaseException(e);
   }
 }

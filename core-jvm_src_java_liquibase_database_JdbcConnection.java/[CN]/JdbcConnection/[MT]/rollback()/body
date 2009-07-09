@@ -1,0 +1,10 @@
+{
+  try {
+    if (!con.getAutoCommit()) {
+      con.rollback();
+    }
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

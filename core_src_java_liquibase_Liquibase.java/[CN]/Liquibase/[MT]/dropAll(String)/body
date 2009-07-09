@@ -9,11 +9,11 @@
       log.finest("Objects dropped successfully");
     }
   }
- catch (  JDBCException e) {
+ catch (  DatabaseException e) {
     throw e;
   }
 catch (  Exception e) {
-    throw new JDBCException(e);
+    throw new DatabaseException(e);
   }
  finally {
     try {

@@ -1,6 +1,13 @@
 {
   if (!writeExecutors.containsKey(database)) {
-    writeExecutors.put(database,new DefaultExecutor(database));
+    try {
+      WriteExecutor writeExecutor=(WriteExecutor)ClassPathScanner.getInstance().getClasses(WriteExecutor.class)[0].newInstance();
+      writeExecutor.setDatabase(database);
+      writeExecutors.put(database,writeExecutor);
+    }
+ catch (    Exception e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
   }
   return writeExecutors.get(database);
 }

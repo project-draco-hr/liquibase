@@ -1,0 +1,9 @@
+{
+  Set<Column> returnSet=new HashSet<Column>();
+  for (  Table table : getTables()) {
+    for (    Column column : table.getColumns()) {
+      returnSet.add(column);
+    }
+  }
+  return returnSet;
+}

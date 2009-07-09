@@ -1,3 +1,0 @@
-{
-  return new MaxDBDatabaseSnapshot(this,statusListeners,schema);
-}

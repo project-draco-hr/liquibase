@@ -1,21 +1,3 @@
 {
-  DatabaseConnection connection=getConnection();
-  ResultSet rs=null;
-  try {
-    rs=connection.getMetaData().getTables(convertRequestedSchemaToCatalog(getDefaultSchemaName()),convertRequestedSchemaToSchema(getLiquibaseSchemaName()),getDatabaseChangeLogTableName(),new String[]{"TABLE"});
-    return rs.next();
-  }
- catch (  Exception e) {
-    throw new JDBCException(e);
-  }
- finally {
-    if (rs != null) {
-      try {
-        rs.close();
-      }
- catch (      SQLException e) {
-        log.warning("Error closing result set: " + e.getMessage());
-      }
-    }
-  }
+  return DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(this,getLiquibaseSchemaName(),null).hasDatabaseChangeLogTable();
 }

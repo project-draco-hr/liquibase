@@ -1,0 +1,8 @@
+{
+  try {
+    con.setHoldability(holdability);
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

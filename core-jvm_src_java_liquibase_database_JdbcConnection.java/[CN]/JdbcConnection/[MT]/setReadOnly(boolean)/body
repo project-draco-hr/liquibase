@@ -1,0 +1,8 @@
+{
+  try {
+    con.setReadOnly(readOnly);
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

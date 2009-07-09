@@ -2,10 +2,5 @@
   if (getConnection() == null) {
     return getTypeName() + " Database";
   }
-  try {
-    return getConnectionUsername() + " @ " + getConnectionURL()+ (getDefaultSchemaName() == null ? "" : " (Default Schema: " + getDefaultSchemaName() + ")");
-  }
- catch (  JDBCException e) {
-    return super.toString();
-  }
+  return getConnection().getConnectionUserName() + " @ " + getConnection().getURL()+ (getDefaultSchemaName() == null ? "" : " (Default Schema: " + getDefaultSchemaName() + ")");
 }
