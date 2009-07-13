@@ -1,4 +1,0 @@
-{
-  Class[] classes=classPathScanner.getClasses(ChangeLogParser.class);
-  assertTrue(classes.length > 0);
-}

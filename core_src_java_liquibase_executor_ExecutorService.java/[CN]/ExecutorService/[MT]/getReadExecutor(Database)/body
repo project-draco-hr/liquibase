@@ -1,7 +1,7 @@
 {
   if (!readExecutors.containsKey(database)) {
     try {
-      ReadExecutor readExecutor=(ReadExecutor)ClassPathScanner.getInstance().getClasses(ReadExecutor.class)[0].newInstance();
+      ReadExecutor readExecutor=(ReadExecutor)ServiceLocator.getInstance().getClasses(ReadExecutor.class)[0].newInstance();
       readExecutor.setDatabase(database);
       readExecutors.put(database,readExecutor);
     }

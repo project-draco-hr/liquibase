@@ -1,5 +1,5 @@
 {
-  Class[] classes=ClassPathScanner.getInstance().getClasses(SqlGenerator.class);
+  Class[] classes=ServiceLocator.getInstance().getClasses(SqlGenerator.class);
   for (  Class clazz : classes) {
     if (clazz.getName().equals("liquibase.sqlgenerator.ext.sample1.Sample1UpdateGenerator")) {
       return;

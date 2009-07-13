@@ -1,7 +1,7 @@
 {
   if (!writeExecutors.containsKey(database)) {
     try {
-      WriteExecutor writeExecutor=(WriteExecutor)ClassPathScanner.getInstance().getClasses(WriteExecutor.class)[0].newInstance();
+      WriteExecutor writeExecutor=(WriteExecutor)ServiceLocator.getInstance().getClasses(WriteExecutor.class)[0].newInstance();
       writeExecutor.setDatabase(database);
       writeExecutors.put(database,writeExecutor);
     }

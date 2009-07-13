@@ -1,7 +1,7 @@
 {
   Class<? extends ChangeLogSerializer>[] classes;
   try {
-    classes=ClassPathScanner.getInstance().getClasses(ChangeLogSerializer.class);
+    classes=ServiceLocator.getInstance().getClasses(ChangeLogSerializer.class);
     for (    Class<? extends ChangeLogSerializer> clazz : classes) {
       register((ChangeLogSerializer)clazz.getConstructor().newInstance());
     }

@@ -1,6 +1,6 @@
 {
   try {
-    Class[] classes=ClassPathScanner.getInstance().getClasses(DatabaseSnapshotGenerator.class);
+    Class[] classes=ServiceLocator.getInstance().getClasses(DatabaseSnapshotGenerator.class);
     for (    Class<? extends DatabaseSnapshotGenerator> clazz : classes) {
       register(clazz.getConstructor().newInstance());
     }

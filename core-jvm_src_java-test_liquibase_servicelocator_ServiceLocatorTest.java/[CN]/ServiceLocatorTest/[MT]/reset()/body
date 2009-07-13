@@ -1,0 +1,5 @@
+{
+  ServiceLocator instance1=ServiceLocator.getInstance();
+  ServiceLocator.reset();
+  assertFalse(instance1 == ServiceLocator.getInstance());
+}

@@ -1,5 +1,6 @@
 {
   super.setUp();
+  ServiceLocator.getInstance().setResourceAccessor(TestContext.getInstance().getTestResourceAccessor());
   if (database != null) {
     if (!database.getConnection().getAutoCommit()) {
       database.rollback();
