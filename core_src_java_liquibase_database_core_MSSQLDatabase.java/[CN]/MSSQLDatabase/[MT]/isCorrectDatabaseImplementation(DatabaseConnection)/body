@@ -1,3 +1,4 @@
 {
-  return PRODUCT_NAME.equalsIgnoreCase(getDatabaseProductName(conn));
+  String databaseProductName=conn.getDatabaseProductName();
+  return PRODUCT_NAME.equalsIgnoreCase(databaseProductName) || "SQLOLEDB".equalsIgnoreCase(databaseProductName);
 }

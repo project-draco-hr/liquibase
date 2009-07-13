@@ -1,8 +1,0 @@
-{
-  try {
-    return conn.getDatabaseProductName();
-  }
- catch (  DatabaseException e) {
-    throw new DatabaseException(e);
-  }
-}

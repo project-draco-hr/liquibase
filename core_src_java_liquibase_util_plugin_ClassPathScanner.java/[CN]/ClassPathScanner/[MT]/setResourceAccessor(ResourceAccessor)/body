@@ -12,7 +12,7 @@
       String attributes=StringUtils.trimToNull(manifest.getMainAttributes().getValue("LiquiBase-Package"));
       if (attributes != null) {
         for (        Object value : attributes.split(",")) {
-          packagesToScan.add(value.toString());
+          addPackageToScan(value.toString());
         }
       }
       is.close();

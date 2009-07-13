@@ -1,3 +1,3 @@
 {
-  return "H2".equals(getDatabaseProductName(conn));
+  return "H2".equals(conn.getDatabaseProductName());
 }

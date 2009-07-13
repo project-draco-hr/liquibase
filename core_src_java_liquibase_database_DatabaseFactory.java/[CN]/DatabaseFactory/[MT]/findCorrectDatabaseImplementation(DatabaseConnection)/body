@@ -1,0 +1,24 @@
+{
+  Database database=null;
+  boolean foundImplementation=false;
+  for (  Database implementedDatabase : getImplementedDatabases()) {
+    database=implementedDatabase;
+    if (database.isCorrectDatabaseImplementation(connection)) {
+      foundImplementation=true;
+      break;
+    }
+  }
+  if (!foundImplementation) {
+    log.warning("Unknown database: " + connection.getDatabaseProductName());
+    database=new UnsupportedDatabase();
+  }
+  Database returnDatabase;
+  try {
+    returnDatabase=database.getClass().newInstance();
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  returnDatabase.setConnection(connection);
+  return returnDatabase;
+}
