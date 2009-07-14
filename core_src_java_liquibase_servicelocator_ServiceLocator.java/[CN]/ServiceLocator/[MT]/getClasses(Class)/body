@@ -1,4 +1,5 @@
 {
+  Class.forName(requiredInterface.getName());
   if (!classesBySuperclass.containsKey(requiredInterface)) {
     classesBySuperclass.put(requiredInterface,new ArrayList<Class>());
     for (    String packageName : packagesToScan) {

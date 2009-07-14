@@ -3,6 +3,7 @@
   this.rollbackChangeLog="changelogs/" + changelogDir + "/rollback/rollbackable.changelog.xml";
   this.includedChangeLog="changelogs/" + changelogDir + "/complete/included.changelog.xml";
   this.url=url;
+  ServiceLocator.getInstance().setResourceAccessor(TestContext.getInstance().getTestResourceAccessor());
   DatabaseConnection connection=TestContext.getInstance().getConnection(url);
   LogFactory.getLogger().setLevel(Level.FINER);
   if (connection != null) {
