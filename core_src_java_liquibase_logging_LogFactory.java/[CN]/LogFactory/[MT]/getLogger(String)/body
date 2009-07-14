@@ -1,0 +1,15 @@
+{
+  if (!loggers.containsKey(name)) {
+    Logger value=null;
+    try {
+      value=(Logger)Class.forName("liquibase.logging.JavaUtilLogger").newInstance();
+    }
+ catch (    Exception e) {
+      throw new ServiceNotFoundException(e);
+    }
+    value.setName(name);
+    value.setLogLevel(defaultLoggingLevel);
+    loggers.put(name,value);
+  }
+  return loggers.get(name);
+}

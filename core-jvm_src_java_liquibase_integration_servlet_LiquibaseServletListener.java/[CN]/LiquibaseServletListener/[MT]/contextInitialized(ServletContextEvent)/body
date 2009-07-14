@@ -1,14 +1,4 @@
 {
-  LogFactory.getLogger().addHandler(new Handler(){
-    @Override public synchronized void publish(    LogRecord record){
-      LiquibaseStatusServlet.logMessage(record);
-    }
-    @Override public void flush(){
-    }
-    @Override public void close() throws SecurityException {
-    }
-  }
-);
   String hostName;
   try {
     hostName=NetUtil.getLocalHost().getHostName();

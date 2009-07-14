@@ -2,7 +2,7 @@
   if (this.statusListeners == null) {
     return;
   }
-  log.finest(message);
+  log.debug(message);
   for (  DiffStatusListener listener : this.statusListeners) {
     listener.statusUpdate(message);
   }

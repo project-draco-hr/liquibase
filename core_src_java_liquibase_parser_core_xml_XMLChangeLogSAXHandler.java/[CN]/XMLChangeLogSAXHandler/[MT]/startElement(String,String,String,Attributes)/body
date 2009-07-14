@@ -24,23 +24,23 @@
       if (!(pathName.endsWith("/") || pathName.endsWith("\\"))) {
         pathName=pathName + "/";
       }
-      log.finest("includeAll for " + pathName);
-      log.finest("Using file opener for includeAll: " + resourceAccessor.getClass().getName());
+      log.debug("includeAll for " + pathName);
+      log.debug("Using file opener for includeAll: " + resourceAccessor.getClass().getName());
       Enumeration<URL> resources=resourceAccessor.getResources(pathName);
       boolean foundResource=false;
       while (resources.hasMoreElements()) {
         URL fileUrl=resources.nextElement();
         if (!fileUrl.toExternalForm().startsWith("file:")) {
-          log.finest(fileUrl.toExternalForm() + " is not a file path");
+          log.debug(fileUrl.toExternalForm() + " is not a file path");
           continue;
         }
         File file=new File(fileUrl.toURI());
-        log.finest("includeAll using path " + file.getCanonicalPath());
+        log.debug("includeAll using path " + file.getCanonicalPath());
         if (!file.exists()) {
           throw new SAXException("includeAll path " + pathName + " could not be found.  Tried in "+ file.toString());
         }
         if (file.isDirectory()) {
-          log.finest(file.getCanonicalPath() + " is a directory");
+          log.debug(file.getCanonicalPath() + " is a directory");
           for (          File childFile : file.listFiles()) {
             if (handleIncludedChangeLog(pathName + childFile.getName(),false,databaseChangeLog.getPhysicalFilePath())) {
               foundResource=true;
@@ -238,7 +238,7 @@
     }
   }
  catch (  Exception e) {
-    log.log(Level.SEVERE,"Error thrown as a SAXException: " + e.getMessage(),e);
+    log.severe("Error thrown as a SAXException: " + e.getMessage(),e);
     e.printStackTrace();
     throw new SAXException(e);
   }

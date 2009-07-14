@@ -33,14 +33,14 @@
  else         if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.CONTINUE)) {
           skipChange=true;
           markRan=false;
-          log.log(Level.INFO,"Continuing past ChangeSet: " + toString() + " due to precondition failure: "+ message);
+          log.info("Continuing past ChangeSet: " + toString() + " due to precondition failure: "+ message);
         }
  else         if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.MARK_RAN)) {
           skipChange=true;
-          log.log(Level.INFO,"Marking ChangeSet: " + toString() + " ran due to precondition failure: "+ message);
+          log.info("Marking ChangeSet: " + toString() + " ran due to precondition failure: "+ message);
         }
  else         if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.WARN)) {
-          log.log(Level.WARNING,"Running change set despite failed precondition.  ChangeSet: " + toString() + ": "+ message);
+          log.warning("Running change set despite failed precondition.  ChangeSet: " + toString() + ": "+ message);
         }
  else {
           throw new MigrationFailedException(this,"Unexpected precondition onFail attribute: " + preconditions.getOnFail());
@@ -59,15 +59,15 @@ catch (      PreconditionErrorException e) {
  else         if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.CONTINUE)) {
           skipChange=true;
           markRan=false;
-          log.log(Level.INFO,"Continuing past ChangeSet: " + toString() + " due to precondition error: "+ message);
+          log.info("Continuing past ChangeSet: " + toString() + " due to precondition error: "+ message);
         }
  else         if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.MARK_RAN)) {
           skipChange=true;
           markRan=true;
-          log.log(Level.INFO,"Marking ChangeSet: " + toString() + " due ran to precondition error: "+ message);
+          log.info("Marking ChangeSet: " + toString() + " due ran to precondition error: "+ message);
         }
  else         if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.WARN)) {
-          log.log(Level.WARNING,"Running change set despite errored precondition.  ChangeSet: " + toString() + ": "+ message);
+          log.warning("Running change set despite errored precondition.  ChangeSet: " + toString() + ": "+ message);
         }
  else {
           throw new MigrationFailedException(this,"Unexpected precondition onError attribute: " + preconditions.getOnError());
@@ -84,18 +84,18 @@ catch (      PreconditionErrorException e) {
           throw new MigrationFailedException(this,se);
         }
       }
-      log.finest("Reading ChangeSet: " + toString());
+      log.debug("Reading ChangeSet: " + toString());
       for (      Change change : getChanges()) {
         database.executeStatements(change,sqlVisitors);
-        log.finest(change.getConfirmationMessage());
+        log.debug(change.getConfirmationMessage());
       }
       if (runInTransaction) {
         database.commit();
       }
-      log.finest("ChangeSet " + toString() + " has been successfully run.");
+      log.debug("ChangeSet " + toString() + " has been successfully run.");
     }
  else {
-      log.finest("Skipping ChangeSet: " + toString());
+      log.debug("Skipping ChangeSet: " + toString());
     }
   }
  catch (  Exception e) {
@@ -106,7 +106,7 @@ catch (      PreconditionErrorException e) {
       throw new MigrationFailedException(this,e);
     }
     if (getFailOnError() != null && !getFailOnError()) {
-      log.log(Level.INFO,"Change set " + toString(false) + " failed, but failOnError was false",e);
+      log.info("Change set " + toString(false) + " failed, but failOnError was false",e);
     }
  else {
       if (e instanceof MigrationFailedException) {

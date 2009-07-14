@@ -5,10 +5,10 @@
   }
   try {
     if (null != logFile) {
-      LogFactory.setLoggingLevel(logLevel,logFile);
+      LogFactory.getLogger().setLogLevel(logLevel,logFile);
     }
  else {
-      LogFactory.setLoggingLevel(logLevel);
+      LogFactory.getLogger().setLogLevel(logLevel);
     }
   }
  catch (  IllegalArgumentException e) {
@@ -163,7 +163,7 @@
       database.close();
     }
  catch (    DatabaseException e) {
-      LogFactory.getLogger().log(Level.WARNING,"problem closing connection",e);
+      LogFactory.getLogger().warning("problem closing connection",e);
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   Logger logger=LogFactory.getLogger();
-  if (logger == null || logger.getLevel() == null || (logger.getLevel().equals(Level.OFF))) {
+  if (logger == null || logger.getLogLevel() == null || (logger.getLogLevel().equals(LogLevel.OFF))) {
     return "";
   }
  else {

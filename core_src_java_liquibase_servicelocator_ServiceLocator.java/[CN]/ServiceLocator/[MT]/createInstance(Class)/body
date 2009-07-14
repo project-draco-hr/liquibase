@@ -1,0 +1,12 @@
+{
+  Class[] classes=getClasses(requiredInterface);
+  if (classes.length != 1) {
+    throw new ServiceNotFoundException("Expected 1 implementation of " + requiredInterface.getName() + ", got "+ classes.length);
+  }
+  try {
+    return classes[0].newInstance();
+  }
+ catch (  Exception e) {
+    throw new ServiceNotFoundException(e);
+  }
+}

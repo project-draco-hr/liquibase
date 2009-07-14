@@ -1,5 +1,5 @@
 {
-  log.finer("Running Changeset:" + changeSet);
+  log.debug("Running Changeset:" + changeSet);
   if (changeSet.execute(this.database)) {
     if (this.database.getRunStatus(changeSet).equals(ChangeSet.RunStatus.NOT_RAN)) {
       this.database.markChangeSetAsRan(changeSet);

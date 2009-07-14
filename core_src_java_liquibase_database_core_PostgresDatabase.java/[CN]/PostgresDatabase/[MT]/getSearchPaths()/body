@@ -19,7 +19,7 @@
   }
  catch (  Exception e) {
     e.printStackTrace();
-    log.log(Level.SEVERE,"Failed to get default catalog name from postgres",e);
+    log.severe("Failed to get default catalog name from postgres",e);
   }
   return searchPaths;
 }

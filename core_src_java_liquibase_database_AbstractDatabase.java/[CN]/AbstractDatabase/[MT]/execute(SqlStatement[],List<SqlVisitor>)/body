@@ -1,6 +1,6 @@
 {
   for (  SqlStatement statement : statements) {
-    LogFactory.getLogger().finest("Executing Statement: " + statement);
+    LogFactory.getLogger().debug("Executing Statement: " + statement);
     ExecutorService.getInstance().getWriteExecutor(this).execute(statement,sqlVisitors);
   }
 }

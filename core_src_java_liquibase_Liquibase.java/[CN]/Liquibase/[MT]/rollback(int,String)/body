@@ -13,7 +13,7 @@
       lockService.releaseLock();
     }
  catch (    LockException e) {
-      log.log(Level.SEVERE,"Error releasing lock",e);
+      log.severe("Error releasing lock",e);
     }
   }
 }

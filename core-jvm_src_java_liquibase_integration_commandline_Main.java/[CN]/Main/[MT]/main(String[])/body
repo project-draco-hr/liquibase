@@ -48,7 +48,7 @@
       }
  else {
         System.out.println("Migration Failed: " + message + generateLogLevelWarningMessage());
-        LogFactory.getLogger().log(Level.SEVERE,message,e);
+        LogFactory.getLogger().severe(message,e);
       }
       System.exit(-1);
     }
@@ -62,7 +62,7 @@
  catch (  Throwable e) {
     String message="Unexpected error running LiquiBase: " + e.getMessage();
     System.out.println(message);
-    LogFactory.getLogger().log(Level.SEVERE,message,e);
+    LogFactory.getLogger().severe(message,e);
     System.exit(-3);
   }
 }

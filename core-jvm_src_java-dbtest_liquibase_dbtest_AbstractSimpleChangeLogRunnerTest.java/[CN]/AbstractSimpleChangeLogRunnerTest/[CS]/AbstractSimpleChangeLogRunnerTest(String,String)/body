@@ -5,7 +5,7 @@
   this.url=url;
   ServiceLocator.getInstance().setResourceAccessor(TestContext.getInstance().getTestResourceAccessor());
   DatabaseConnection connection=TestContext.getInstance().getConnection(url);
-  LogFactory.getLogger().setLevel(Level.FINER);
+  LogFactory.getLogger().setLogLevel(LogLevel.DEBUG);
   if (connection != null) {
     database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
   }

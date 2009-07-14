@@ -6,7 +6,7 @@
       checkDatabaseChangeLogTable();
       getDatabase().dropDatabaseObjects(schema);
       checkDatabaseChangeLogTable();
-      log.finest("Objects dropped successfully");
+      log.debug("Objects dropped successfully");
     }
   }
  catch (  DatabaseException e) {

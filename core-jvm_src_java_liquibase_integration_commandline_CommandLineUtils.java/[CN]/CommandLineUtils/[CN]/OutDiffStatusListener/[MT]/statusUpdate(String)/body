@@ -1,6 +1,3 @@
 {
-  prepareHandlers();
-  setCustomFormatter();
   LogFactory.getLogger().info(message);
-  restoreSimpleFormatter();
 }

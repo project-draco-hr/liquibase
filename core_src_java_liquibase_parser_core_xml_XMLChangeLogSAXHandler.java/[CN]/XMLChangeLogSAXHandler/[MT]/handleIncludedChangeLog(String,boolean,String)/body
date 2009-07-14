@@ -1,6 +1,6 @@
 {
   if (!(fileName.endsWith(".xml") || fileName.endsWith(".sql"))) {
-    log.finest(relativeBaseFileName + "/" + fileName+ " is not a recognized file type");
+    log.debug(relativeBaseFileName + "/" + fileName+ " is not a recognized file type");
     return false;
   }
   if (isRelativePath) {
