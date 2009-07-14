@@ -15,9 +15,9 @@
       }
       writeExecutor.comment(StringUtils.join(Arrays.asList(lines),"\n"));
     }
-    if (writeExecutor.executesStatements() && rootPrecondition != null) {
+    if (writeExecutor.executesStatements() && preconditions != null) {
       try {
-        rootPrecondition.check(database,null);
+        preconditions.check(database,null);
       }
  catch (      PreconditionFailedException e) {
         StringBuffer message=new StringBuffer();
@@ -26,24 +26,24 @@
           message.append("          ").append(invalid.toString());
           message.append(StreamUtil.getLineSeparator());
         }
-        if (rootPrecondition.getOnFail().equals(PreconditionContainer.FailOption.HALT)) {
+        if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.HALT)) {
           e.printStackTrace();
           throw new MigrationFailedException(this,message.toString());
         }
- else         if (rootPrecondition.getOnFail().equals(PreconditionContainer.FailOption.CONTINUE)) {
+ else         if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.CONTINUE)) {
           skipChange=true;
           markRan=false;
           log.log(Level.INFO,"Continuing past ChangeSet: " + toString() + " due to precondition failure: "+ message);
         }
- else         if (rootPrecondition.getOnFail().equals(PreconditionContainer.FailOption.MARK_RAN)) {
+ else         if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.MARK_RAN)) {
           skipChange=true;
           log.log(Level.INFO,"Marking ChangeSet: " + toString() + " ran due to precondition failure: "+ message);
         }
- else         if (rootPrecondition.getOnFail().equals(PreconditionContainer.FailOption.WARN)) {
+ else         if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.WARN)) {
           log.log(Level.WARNING,"Running change set despite failed precondition.  ChangeSet: " + toString() + ": "+ message);
         }
  else {
-          throw new MigrationFailedException(this,"Unexpected precondition onFail attribute: " + rootPrecondition.getOnFail());
+          throw new MigrationFailedException(this,"Unexpected precondition onFail attribute: " + preconditions.getOnFail());
         }
       }
 catch (      PreconditionErrorException e) {
@@ -53,24 +53,24 @@ catch (      PreconditionErrorException e) {
           message.append("          ").append(invalid.toString());
           message.append(StreamUtil.getLineSeparator());
         }
-        if (rootPrecondition.getOnError().equals(PreconditionContainer.ErrorOption.HALT)) {
+        if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.HALT)) {
           throw new MigrationFailedException(this,message.toString());
         }
- else         if (rootPrecondition.getOnError().equals(PreconditionContainer.ErrorOption.CONTINUE)) {
+ else         if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.CONTINUE)) {
           skipChange=true;
           markRan=false;
           log.log(Level.INFO,"Continuing past ChangeSet: " + toString() + " due to precondition error: "+ message);
         }
- else         if (rootPrecondition.getOnError().equals(PreconditionContainer.ErrorOption.MARK_RAN)) {
+ else         if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.MARK_RAN)) {
           skipChange=true;
           markRan=true;
           log.log(Level.INFO,"Marking ChangeSet: " + toString() + " due ran to precondition error: "+ message);
         }
- else         if (rootPrecondition.getOnError().equals(PreconditionContainer.ErrorOption.WARN)) {
+ else         if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.WARN)) {
           log.log(Level.WARNING,"Running change set despite errored precondition.  ChangeSet: " + toString() + ": "+ message);
         }
  else {
-          throw new MigrationFailedException(this,"Unexpected precondition onError attribute: " + rootPrecondition.getOnError());
+          throw new MigrationFailedException(this,"Unexpected precondition onError attribute: " + preconditions.getOnError());
         }
         database.rollback();
       }

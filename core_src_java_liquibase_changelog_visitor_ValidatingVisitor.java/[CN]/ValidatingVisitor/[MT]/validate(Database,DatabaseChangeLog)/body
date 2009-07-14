@@ -1,6 +1,6 @@
 {
   try {
-    AndPrecondition precondition=changeLog.getPreconditions();
+    PreconditionContainer precondition=changeLog.getPreconditions();
     if (precondition == null) {
       return;
     }
