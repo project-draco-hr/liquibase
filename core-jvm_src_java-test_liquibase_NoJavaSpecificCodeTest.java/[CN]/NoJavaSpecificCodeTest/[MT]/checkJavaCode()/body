@@ -1,3 +1,0 @@
-{
-  checkJavaClasses(new File(TestContext.getInstance().findCoreProjectRoot(),"src/java"));
-}
