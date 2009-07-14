@@ -1,6 +1,6 @@
 {
-  out.println("Base Database: " + targetDatabase.getConnection().getConnectionUserName() + " "+ targetDatabase.getConnection().getURL());
-  out.println("Target Database: " + baseDatabase.getConnection().getConnectionUserName() + " "+ baseDatabase.getConnection().getURL());
+  out.println("Base Database: " + targetSnapshot.getDatabase());
+  out.println("Target Database: " + baseSnapshot.getDatabase());
   printComparision("Product Name",productName,out);
   printComparision("Product Version",productVersion,out);
   printSetComparison("Missing Tables",getMissingTables(),out);

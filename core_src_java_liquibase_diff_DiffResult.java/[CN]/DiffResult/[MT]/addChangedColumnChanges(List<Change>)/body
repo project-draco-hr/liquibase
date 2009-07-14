@@ -8,7 +8,7 @@
     if (column.isDataTypeDifferent(baseColumn)) {
       ColumnConfig columnConfig=new ColumnConfig();
       columnConfig.setName(column.getName());
-      columnConfig.setType(baseColumn.getDataTypeString(targetDatabase));
+      columnConfig.setType(baseColumn.getDataTypeString(targetSnapshot.getDatabase()));
       ModifyColumnChange change=new ModifyColumnChange();
       change.setTableName(column.getTable().getName());
       change.setSchemaName(column.getTable().getSchema());
@@ -22,7 +22,7 @@
         change.setTableName(column.getTable().getName());
         change.setSchemaName(column.getTable().getSchema());
         change.setColumnName(column.getName());
-        change.setColumnDataType(baseColumn.getDataTypeString(targetDatabase));
+        change.setColumnDataType(baseColumn.getDataTypeString(targetSnapshot.getDatabase()));
         changes.add(change);
         foundDifference=true;
       }
@@ -31,7 +31,7 @@
         change.setTableName(column.getTable().getName());
         change.setSchemaName(column.getTable().getSchema());
         change.setColumnName(column.getName());
-        change.setColumnDataType(baseColumn.getDataTypeString(targetDatabase));
+        change.setColumnDataType(baseColumn.getDataTypeString(targetSnapshot.getDatabase()));
         changes.add(change);
         foundDifference=true;
       }
