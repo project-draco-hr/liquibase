@@ -1,7 +1,7 @@
 {
-  LoggingExecutor outputTemplate=new LoggingExecutor(output,database);
-  WriteExecutor oldTemplate=ExecutorService.getInstance().getWriteExecutor(database);
-  ExecutorService.getInstance().setWriteExecutor(database,outputTemplate);
+  LoggingExecutor outputTemplate=new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database);
+  Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
+  ExecutorService.getInstance().setExecutor(database,outputTemplate);
   outputHeader("SQL to roll back currently unexecuted changes");
   LockService lockService=LockService.getInstance(database);
   lockService.waitForLock();
@@ -13,7 +13,7 @@
     logIterator.run(new RollbackVisitor(database),database);
   }
   finally {
-    ExecutorService.getInstance().setWriteExecutor(database,oldTemplate);
+    ExecutorService.getInstance().setExecutor(database,oldTemplate);
     lockService.releaseLock();
   }
   try {

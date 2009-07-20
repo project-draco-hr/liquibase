@@ -8,8 +8,8 @@
     }
   }
   boolean nonExecutedMode=false;
-  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
-  if (writeExecutor instanceof LoggingExecutor) {
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
+  if (executor instanceof LoggingExecutor) {
     nonExecutedMode=true;
   }
   if (shouldRun && !nonExecutedMode) {

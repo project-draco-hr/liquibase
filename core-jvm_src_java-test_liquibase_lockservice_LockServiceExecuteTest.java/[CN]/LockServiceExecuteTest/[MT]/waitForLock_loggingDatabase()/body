@@ -2,21 +2,21 @@
   new DatabaseTestTemplate().testOnAvailableDatabases(new DatabaseTest(){
     public void performTest(    Database database) throws Exception {
       LockService.getInstance(database).reset();
-      WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
+      Executor executor=ExecutorService.getInstance().getExecutor(database);
       try {
-        writeExecutor.execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false),new ArrayList<SqlVisitor>());
+        executor.execute(new DropTableStatement(null,database.getDatabaseChangeLogTableName(),false),new ArrayList<SqlVisitor>());
       }
  catch (      DatabaseException e) {
         ;
       }
       try {
-        writeExecutor.execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false),new ArrayList<SqlVisitor>());
+        executor.execute(new DropTableStatement(null,database.getDatabaseChangeLogLockTableName(),false),new ArrayList<SqlVisitor>());
       }
  catch (      DatabaseException e) {
         ;
       }
       database.commit();
-      ExecutorService.getInstance().setWriteExecutor(database,(new LoggingExecutor(new StringWriter(),database)));
+      ExecutorService.getInstance().setExecutor(database,(new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),new StringWriter(),database)));
       LockService lockManager=LockService.getInstance(database);
       lockManager.waitForLock();
     }

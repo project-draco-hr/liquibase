@@ -1,12 +1,12 @@
 {
-  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(this);
+  Executor executor=ExecutorService.getInstance().getExecutor(this);
   try {
-    int totalRows=ExecutorService.getInstance().getReadExecutor(this).queryForInt(new SelectFromDatabaseChangeLogStatement("COUNT(*)"),new ArrayList<SqlVisitor>());
+    int totalRows=ExecutorService.getInstance().getExecutor(this).queryForInt(new SelectFromDatabaseChangeLogStatement("COUNT(*)"),new ArrayList<SqlVisitor>());
     if (totalRows == 0) {
       ChangeSet emptyChangeSet=new ChangeSet(String.valueOf(new Date().getTime()),"liquibase",false,false,"liquibase-internal","liquibase-internal",null,null);
       this.markChangeSetAsRan(emptyChangeSet);
     }
-    int rowsUpdated=writeExecutor.update(new TagDatabaseStatement(tagString),new ArrayList<SqlVisitor>());
+    int rowsUpdated=executor.update(new TagDatabaseStatement(tagString),new ArrayList<SqlVisitor>());
     if (rowsUpdated == 0) {
       throw new DatabaseException("Did not tag database change log correctly");
     }

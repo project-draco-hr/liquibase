@@ -16,7 +16,7 @@
     output.close();
   }
   Liquibase liquibase=createLiquibase(tempFile.getName());
-  liquibase.dropAll(getSchemasToDrop());
+  clearDatabase(liquibase);
   DatabaseSnapshot emptySnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
   liquibase=createLiquibase(tempFile.getName());
   try {

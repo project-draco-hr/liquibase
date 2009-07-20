@@ -3,7 +3,7 @@
   try {
     DatabaseConnection con=getConnection();
     if (con != null) {
-      String searchPathResult=(String)ExecutorService.getInstance().getReadExecutor(this).queryForObject(new RawSqlStatement("SHOW search_path"),String.class);
+      String searchPathResult=(String)ExecutorService.getInstance().getExecutor(this).queryForObject(new RawSqlStatement("SHOW search_path"),String.class);
       if (searchPathResult != null) {
         String dirtySearchPaths[]=searchPathResult.split("\\,");
         searchPaths=new ArrayList<String>();

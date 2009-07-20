@@ -1,4 +1,7 @@
 {
   outputStatement(sql,sqlVisitors);
+  if (sql instanceof LockDatabaseChangeLogStatement) {
+    return 1;
+  }
   return 0;
 }

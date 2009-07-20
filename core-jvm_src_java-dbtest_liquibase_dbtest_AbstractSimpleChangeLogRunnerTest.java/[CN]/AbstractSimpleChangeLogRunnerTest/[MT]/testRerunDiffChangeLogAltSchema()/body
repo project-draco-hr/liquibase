@@ -6,7 +6,7 @@
     return;
   }
   Liquibase liquibase=createLiquibase(includedChangeLog);
-  liquibase.dropAll(getSchemasToDrop());
+  clearDatabase(liquibase);
   database.setDefaultSchemaName("liquibaseb");
   LockService.getInstance(database).forceReleaseLock();
   liquibase.update(includedChangeLog);
@@ -23,11 +23,11 @@
     output.close();
   }
   liquibase=createLiquibase(tempFile.getName());
-  liquibase.dropAll(getSchemasToDrop());
-  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
+  clearDatabase(liquibase);
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
   if (!database.isPeculiarLiquibaseSchema()) {
-    writeExecutor.execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogTableName(),false));
-    writeExecutor.execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogLockTableName(),false));
+    executor.execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogTableName(),false));
+    executor.execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogLockTableName(),false));
     database.commit();
   }
   DatabaseConnection connection=TestContext.getInstance().getConnection(url);

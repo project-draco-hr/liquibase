@@ -1,3 +1,4 @@
 {
+  ExecutorService.getInstance().clearExecutor(database);
   return new Liquibase(changeLogFile,resourceAccessor,database);
 }

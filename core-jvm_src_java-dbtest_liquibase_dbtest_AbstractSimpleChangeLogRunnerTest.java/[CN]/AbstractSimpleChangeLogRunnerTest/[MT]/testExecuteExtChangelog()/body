@@ -5,7 +5,7 @@
   try {
     String extChangelog="changelogs/common/ext.changelog.xml";
     Liquibase liquibase=createLiquibase(extChangelog);
-    liquibase.dropAll(getSchemasToDrop());
+    clearDatabase(liquibase);
     liquibase=createLiquibase(extChangelog);
     try {
       liquibase.update(this.contexts);

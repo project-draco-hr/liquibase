@@ -3,7 +3,7 @@
     return;
   }
   Liquibase liquibase=createLiquibase(completeChangeLog);
-  liquibase.dropAll(getSchemasToDrop());
+  clearDatabase(liquibase);
   liquibase=createLiquibase(completeChangeLog);
   List<ChangeSet> list=liquibase.listUnrunChangeSets(this.contexts);
   assertTrue(list.size() > 0);

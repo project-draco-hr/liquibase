@@ -1,12 +1,12 @@
 {
   try {
-    WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
-    writeExecutor.comment("Rolling Back ChangeSet: " + toString());
+    Executor executor=ExecutorService.getInstance().getExecutor(database);
+    executor.comment("Rolling Back ChangeSet: " + toString());
     if (rollBackChanges != null && rollBackChanges.size() > 0) {
       for (      Change rollback : rollBackChanges) {
         for (        SqlStatement statement : rollback.generateStatements(database)) {
           try {
-            writeExecutor.execute(statement,sqlVisitors);
+            executor.execute(statement,sqlVisitors);
           }
  catch (          DatabaseException e) {
             throw new RollbackFailedException("Error executing custom SQL [" + statement + "]",e);

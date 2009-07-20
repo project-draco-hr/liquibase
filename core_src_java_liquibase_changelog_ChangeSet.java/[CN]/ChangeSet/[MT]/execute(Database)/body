@@ -1,10 +1,10 @@
 {
   boolean skipChange=false;
   boolean markRan=true;
-  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
     database.setAutoCommit(!runInTransaction);
-    writeExecutor.comment("Changeset " + toString());
+    executor.comment("Changeset " + toString());
     if (StringUtils.trimToNull(getComments()) != null) {
       String comments=getComments();
       String[] lines=comments.split("\n");
@@ -13,9 +13,9 @@
           lines[i]=database.getLineComment() + " " + lines[i];
         }
       }
-      writeExecutor.comment(StringUtils.join(Arrays.asList(lines),"\n"));
+      executor.comment(StringUtils.join(Arrays.asList(lines),"\n"));
     }
-    if (writeExecutor.executesStatements() && preconditions != null) {
+    if (preconditions != null) {
       try {
         preconditions.check(database,null);
       }
@@ -54,7 +54,7 @@ catch (      PreconditionErrorException e) {
           message.append(StreamUtil.getLineSeparator());
         }
         if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.HALT)) {
-          throw new MigrationFailedException(this,message.toString());
+          throw new MigrationFailedException(this,message.toString(),e);
         }
  else         if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.CONTINUE)) {
           skipChange=true;

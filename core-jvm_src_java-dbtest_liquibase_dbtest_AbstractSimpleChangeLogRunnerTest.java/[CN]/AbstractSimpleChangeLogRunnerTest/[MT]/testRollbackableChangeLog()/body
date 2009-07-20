@@ -3,7 +3,7 @@
     return;
   }
   Liquibase liquibase=createLiquibase(rollbackChangeLog);
-  liquibase.dropAll(getSchemasToDrop());
+  clearDatabase(liquibase);
   liquibase=createLiquibase(rollbackChangeLog);
   liquibase.update(this.contexts);
   liquibase=createLiquibase(rollbackChangeLog);

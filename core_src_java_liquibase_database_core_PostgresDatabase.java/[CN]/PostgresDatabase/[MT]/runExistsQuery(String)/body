@@ -1,4 +1,4 @@
 {
-  Long count=ExecutorService.getInstance().getReadExecutor(this).queryForLong(new RawSqlStatement(query));
+  Long count=ExecutorService.getInstance().getExecutor(this).queryForLong(new RawSqlStatement(query));
   return count != null && count > 0;
 }

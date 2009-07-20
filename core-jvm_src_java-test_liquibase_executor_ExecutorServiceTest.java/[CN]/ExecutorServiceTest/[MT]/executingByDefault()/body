@@ -1,3 +1,0 @@
-{
-  assertTrue(ExecutorService.getInstance().getWriteExecutor(new OracleDatabase()).executesStatements());
-}

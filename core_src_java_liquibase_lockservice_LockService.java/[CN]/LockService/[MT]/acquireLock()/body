@@ -2,34 +2,19 @@
   if (hasChangeLogLock) {
     return true;
   }
-  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
     database.rollback();
     database.checkDatabaseChangeLogLockTable();
-    Boolean locked;
-    try {
-      locked=(Boolean)ExecutorService.getInstance().getReadExecutor(database).queryForObject(new SelectFromDatabaseChangeLogLockStatement("locked"),Boolean.class,new ArrayList<SqlVisitor>());
-    }
- catch (    DatabaseException e) {
-      if (!writeExecutor.executesStatements()) {
-        locked=false;
-      }
- else {
-        throw new LockException("Error checking database lock status",e);
-      }
-    }
+    Boolean locked=(Boolean)ExecutorService.getInstance().getExecutor(database).queryForObject(new SelectFromDatabaseChangeLogLockStatement("locked"),Boolean.class,new ArrayList<SqlVisitor>());
     if (locked) {
       return false;
     }
  else {
-      writeExecutor.comment("Lock Database");
-      int rowsUpdated=writeExecutor.update(new LockDatabaseChangeLogStatement(),new ArrayList<SqlVisitor>());
+      executor.comment("Lock Database");
+      int rowsUpdated=executor.update(new LockDatabaseChangeLogStatement(),new ArrayList<SqlVisitor>());
       if (rowsUpdated != 1) {
-        if (!writeExecutor.executesStatements()) {
-        }
- else {
-          throw new LockException("Did not update change log lock correctly");
-        }
+        throw new LockException("Did not update change log lock correctly");
       }
       database.commit();
       LogFactory.getLogger().info("Successfully acquired change log lock");

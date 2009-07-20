@@ -4,12 +4,13 @@
   }
   StringWriter output=new StringWriter();
   Liquibase liquibase=createLiquibase(completeChangeLog);
-  liquibase.dropAll(getSchemasToDrop());
+  clearDatabase(liquibase);
   liquibase=createLiquibase(completeChangeLog);
   liquibase.update(this.contexts,output);
   String outputResult=output.getBuffer().toString();
   assertNotNull(outputResult);
   assertTrue(outputResult.length() > 100);
+  assertTrue("create databasechangelog command not found",outputResult.contains("CREATE TABLE DATABASECHANGELOG"));
   DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
   assertEquals(0,snapshot.getTables().size());
 }

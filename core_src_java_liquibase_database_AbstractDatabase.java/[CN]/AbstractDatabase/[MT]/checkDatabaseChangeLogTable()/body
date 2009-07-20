@@ -1,13 +1,5 @@
 {
-  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(this);
-  if (!writeExecutor.executesStatements()) {
-    if (((LoggingExecutor)writeExecutor).alreadyCreatedChangeTable()) {
-      return;
-    }
- else {
-      ((LoggingExecutor)writeExecutor).setAlreadyCreatedChangeTable(true);
-    }
-  }
+  Executor executor=ExecutorService.getInstance().getExecutor(this);
   DatabaseSnapshot snapShot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(this,getLiquibaseSchemaName(),null);
   Table changeLogTable=snapShot.getDatabaseChangeLogTable();
   List<SqlStatement> statementsToExecute=new ArrayList<SqlStatement>();
@@ -20,43 +12,43 @@
     boolean hasOrderExecuted=changeLogTable.getColumn("ORDEREXECUTED") != null;
     boolean checksumNotRightSize=changeLogTable.getColumn("MD5SUM").getColumnSize() != 35;
     if (!hasDescription) {
-      writeExecutor.comment("Adding missing databasechangelog.description column");
+      executor.comment("Adding missing databasechangelog.description column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"DESCRIPTION","VARCHAR(255)",null));
     }
     if (!hasTag) {
-      writeExecutor.comment("Adding missing databasechangelog.tag column");
+      executor.comment("Adding missing databasechangelog.tag column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"TAG","VARCHAR(255)",null));
     }
     if (!hasComments) {
-      writeExecutor.comment("Adding missing databasechangelog.comments column");
+      executor.comment("Adding missing databasechangelog.comments column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"COMMENTS","VARCHAR(255)",null));
     }
     if (!hasLiquibase) {
-      writeExecutor.comment("Adding missing databasechangelog.liquibase column");
+      executor.comment("Adding missing databasechangelog.liquibase column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"LIQUIBASE","VARCHAR(255)",null));
     }
     if (!hasOrderExecuted) {
-      writeExecutor.comment("Adding missing databasechangelog.orderexecuted column");
+      executor.comment("Adding missing databasechangelog.orderexecuted column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"ORDEREXECUTED","BIGINT",null,new NotNullConstraint(),new UniqueConstraint()));
     }
     if (checksumNotRightSize) {
-      writeExecutor.comment("Modifying size of databasechangelog.md5sum column");
+      executor.comment("Modifying size of databasechangelog.md5sum column");
       ColumnConfig checksumColumn=new ColumnConfig();
       checksumColumn.setName("MD5SUM");
       checksumColumn.setType("VARCHAR(35)");
       statementsToExecute.add(new ModifyColumnsStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),checksumColumn));
     }
-    List<Map> md5sumRS=ExecutorService.getInstance().getReadExecutor(this).queryForList(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum(),"MD5SUM"));
+    List<Map> md5sumRS=ExecutorService.getInstance().getExecutor(this).queryForList(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum(),"MD5SUM"));
     if (md5sumRS.size() > 0) {
       String md5sum=md5sumRS.get(0).get("MD5SUM").toString();
       if (!md5sum.startsWith(CheckSum.getCurrentVersion() + ":")) {
-        writeExecutor.comment("DatabaseChangeLog checksums are an incompatible version.  Setting them to null so they will be updated on next database update");
+        executor.comment("DatabaseChangeLog checksums are an incompatible version.  Setting them to null so they will be updated on next database update");
         statementsToExecute.add(new RawSqlStatement("UPDATE " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " SET MD5SUM=null"));
       }
     }
   }
  else   if (!changeLogCreateAttempted) {
-    writeExecutor.comment("Create Database Change Log Table");
+    executor.comment("Create Database Change Log Table");
     SqlStatement createTableStatement=new CreateDatabaseChangeLogTableStatement();
     if (!canCreateChangeLogTable()) {
       throw new DatabaseException("Cannot create " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()) + " table for your database.\n\n"+ "Please construct it manually using the following SQL as a base and re-run LiquiBase:\n\n"+ createTableStatement);
@@ -65,7 +57,7 @@
     log.info("Creating database history table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()));
   }
   for (  SqlStatement sql : statementsToExecute) {
-    writeExecutor.execute(sql,new ArrayList<SqlVisitor>());
+    executor.execute(sql,new ArrayList<SqlVisitor>());
     this.commit();
   }
 }

@@ -1,3 +1,0 @@
-{
-  writeExecutors.put(database,writeExecutor);
-}

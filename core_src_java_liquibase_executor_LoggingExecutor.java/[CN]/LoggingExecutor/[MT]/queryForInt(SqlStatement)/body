@@ -1,0 +1,11 @@
+{
+  try {
+    return delegatedReadExecutor.queryForInt(sql);
+  }
+ catch (  DatabaseException e) {
+    if (sql instanceof GetNextChangeSetSequenceValueStatement) {
+      return 1;
+    }
+    throw e;
+  }
+}

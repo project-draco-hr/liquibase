@@ -1,11 +1,11 @@
 {
-  WriteExecutor writeExecutor=ExecutorService.getInstance().getWriteExecutor(database);
-  writeExecutor.comment("*********************************************************************");
-  writeExecutor.comment(message);
-  writeExecutor.comment("*********************************************************************");
-  writeExecutor.comment("Change Log: " + changeLogFile);
-  writeExecutor.comment("Ran at: " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date()));
-  writeExecutor.comment("Against: " + getDatabase().getConnection().getConnectionUserName() + "@"+ getDatabase().getConnection().getURL());
-  writeExecutor.comment("LiquiBase version: " + LiquibaseUtil.getBuildVersion());
-  writeExecutor.comment("*********************************************************************" + StreamUtil.getLineSeparator());
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
+  executor.comment("*********************************************************************");
+  executor.comment(message);
+  executor.comment("*********************************************************************");
+  executor.comment("Change Log: " + changeLogFile);
+  executor.comment("Ran at: " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date()));
+  executor.comment("Against: " + getDatabase().getConnection().getConnectionUserName() + "@"+ getDatabase().getConnection().getURL());
+  executor.comment("LiquiBase version: " + LiquibaseUtil.getBuildVersion());
+  executor.comment("*********************************************************************" + StreamUtil.getLineSeparator());
 }

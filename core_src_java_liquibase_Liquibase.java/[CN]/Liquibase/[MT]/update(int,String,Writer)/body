@@ -1,7 +1,7 @@
 {
-  WriteExecutor oldTemplate=ExecutorService.getInstance().getWriteExecutor(database);
-  LoggingExecutor loggingExecutor=new LoggingExecutor(output,database);
-  ExecutorService.getInstance().setWriteExecutor(database,loggingExecutor);
+  Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
+  LoggingExecutor loggingExecutor=new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database);
+  ExecutorService.getInstance().setExecutor(database,loggingExecutor);
   outputHeader("Update " + changesToApply + " Change Sets Database Script");
   update(changesToApply,contexts);
   try {
@@ -10,5 +10,5 @@
  catch (  IOException e) {
     throw new LiquibaseException(e);
   }
-  ExecutorService.getInstance().setWriteExecutor(database,oldTemplate);
+  ExecutorService.getInstance().setExecutor(database,oldTemplate);
 }

@@ -1,0 +1,3 @@
+{
+  return delegatedReadExecutor.queryForInt(sql,sqlVisitors);
+}

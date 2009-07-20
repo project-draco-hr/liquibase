@@ -1,7 +1,7 @@
 {
   DatabaseConnection connection=database.getConnection();
   try {
-    String result=(String)ExecutorService.getInstance().getReadExecutor(database).queryForObject(new RawSqlStatement(getSql()),String.class);
+    String result=(String)ExecutorService.getInstance().getExecutor(database).queryForObject(new RawSqlStatement(getSql()),String.class);
     if (result == null) {
       throw new PreconditionFailedException("No rows returned from SQL Precondition",changeLog,this);
     }

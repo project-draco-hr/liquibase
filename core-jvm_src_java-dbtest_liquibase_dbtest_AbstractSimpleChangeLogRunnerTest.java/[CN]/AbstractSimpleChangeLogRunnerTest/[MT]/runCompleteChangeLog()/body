@@ -1,6 +1,6 @@
 {
   Liquibase liquibase=createLiquibase(completeChangeLog);
-  liquibase.dropAll(getSchemasToDrop());
+  clearDatabase(liquibase);
   liquibase=createLiquibase(completeChangeLog);
   try {
     liquibase.update(this.contexts);

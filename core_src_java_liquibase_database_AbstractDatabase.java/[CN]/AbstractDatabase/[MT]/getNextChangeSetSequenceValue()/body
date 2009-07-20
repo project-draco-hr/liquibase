@@ -1,6 +1,6 @@
 {
   if (lastChangeSetSequenceValue == null) {
-    lastChangeSetSequenceValue=ExecutorService.getInstance().getReadExecutor(this).queryForInt(new GetNextChangeSetSequenceValueStatement());
+    lastChangeSetSequenceValue=ExecutorService.getInstance().getExecutor(this).queryForInt(new GetNextChangeSetSequenceValueStatement());
   }
   return ++lastChangeSetSequenceValue;
 }

@@ -13,8 +13,8 @@
     absolutePathOfChangeLog="/" + absolutePathOfChangeLog;
   }
   Liquibase liquibase=createLiquibase(absolutePathOfChangeLog,new FileSystemResourceAccessor());
-  liquibase.dropAll(getSchemasToDrop());
+  clearDatabase(liquibase);
   liquibase.update(this.contexts);
   liquibase.update(this.contexts);
-  liquibase.dropAll(getSchemasToDrop());
+  clearDatabase(liquibase);
 }

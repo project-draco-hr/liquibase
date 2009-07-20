@@ -1,14 +1,14 @@
 {
   Database database=createMock(Database.class);
-  ReadExecutor readExecutor=createMock(ReadExecutor.class);
+  Executor executor=createMock(Executor.class);
   database.checkDatabaseChangeLogLockTable();
   expectLastCall();
   database.rollback();
   expectLastCall().anyTimes();
-  expect(readExecutor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(true);
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(true);
   replay(database);
-  replay(readExecutor);
-  ExecutorService.getInstance().setReadExecutor(database,readExecutor);
+  replay(executor);
+  ExecutorService.getInstance().setExecutor(database,executor);
   LockService service=LockService.getInstance(database);
   assertFalse(service.acquireLock());
   verify(database);
