@@ -3,6 +3,7 @@
     if (shouldRollBack()) {
       database.rollback();
     }
+    ExecutorService.getInstance().clearExecutor(database);
     database.setDefaultSchemaName(null);
   }
   super.tearDown();
