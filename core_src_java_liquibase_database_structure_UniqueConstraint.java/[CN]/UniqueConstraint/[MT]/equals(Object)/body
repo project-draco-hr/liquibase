@@ -1,0 +1,6 @@
+{
+  if (this == o)   return true;
+  if (o == null || getClass() != o.getClass())   return false;
+  UniqueConstraint that=(UniqueConstraint)o;
+  return !(getColumnNames() != null ? !getColumnNames().equalsIgnoreCase(that.getColumnNames()) : that.getColumnNames() != null) && !(getTable().getName() != null ? !getTable().getName().equalsIgnoreCase(that.getTable().getName()) : that.getTable().getName() != null) && isDeferrable() == that.isDeferrable() && isInitiallyDeferred() == that.isInitiallyDeferred() && isDisabled() == that.isDisabled();
+}

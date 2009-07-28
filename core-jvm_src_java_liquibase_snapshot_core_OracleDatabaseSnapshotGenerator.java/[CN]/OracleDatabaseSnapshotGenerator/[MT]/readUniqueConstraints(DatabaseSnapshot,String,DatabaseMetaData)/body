@@ -1,0 +1,37 @@
+{
+  Database database=snapshot.getDatabase();
+  updateListeners("Reading unique constraints for " + database.toString() + " ...");
+  List<UniqueConstraint> foundUC=new ArrayList<UniqueConstraint>();
+  Connection jdbcConnection=((JdbcConnection)database.getConnection()).getUnderlyingConnection();
+  PreparedStatement statement=null;
+  ResultSet rs=null;
+  try {
+    statement=jdbcConnection.prepareStatement("select constraint_name, table_name, status, deferrable, deferred " + "from user_constraints where constraint_type='U'");
+    rs=statement.executeQuery();
+    while (rs.next()) {
+      String constraintName=rs.getString("constraint_name");
+      String tableName=rs.getString("table_name");
+      String status=rs.getString("status");
+      String deferrable=rs.getString("deferrable");
+      String deferred=rs.getString("deferred");
+      UniqueConstraint constraintInformation=new UniqueConstraint();
+      constraintInformation.setName(constraintName);
+      Table table=snapshot.getTable(tableName);
+      constraintInformation.setTable(table);
+      constraintInformation.setDisabled("DISABLED".equals(status));
+      if ("DEFERRABLE".equals(deferrable)) {
+        constraintInformation.setDeferrable(true);
+        constraintInformation.setInitiallyDeferred("DEFERRED".equals(deferred));
+      }
+      getColumnsForUniqueConstraint(jdbcConnection,constraintInformation);
+      foundUC.add(constraintInformation);
+    }
+    snapshot.getUniqueConstraints().addAll(foundUC);
+  }
+  finally {
+    rs.close();
+    if (statement != null) {
+      statement.close();
+    }
+  }
+}

@@ -1,5 +1,17 @@
 {
+  boolean deferrable=false;
+  if (getDeferrable() != null) {
+    deferrable=getDeferrable();
+  }
+  boolean initiallyDeferred=false;
+  if (getInitiallyDeferred() != null) {
+    initiallyDeferred=getInitiallyDeferred();
+  }
+  boolean disabled=false;
+  if (getDisabled() != null) {
+    disabled=getDisabled();
+  }
   AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),getColumnNames(),getConstraintName());
-  statement.setTablespace(getTablespace());
+  statement.setTablespace(getTablespace()).setDeferrable(deferrable).setInitiallyDeferred(initiallyDeferred).setDisabled(disabled);
   return new SqlStatement[]{statement};
 }
