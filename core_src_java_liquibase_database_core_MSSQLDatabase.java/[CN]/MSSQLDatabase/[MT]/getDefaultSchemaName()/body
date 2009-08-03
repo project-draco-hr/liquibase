@@ -1,11 +1,3 @@
 {
-  try {
-    DatabaseConnection connection=getConnection();
-    return connection == null ? null : connection.getCatalog();
-  }
- catch (  DatabaseException e) {
-    log.severe(e.getMessage());
-    e.printStackTrace();
-    return null;
-  }
+  return "dbo";
 }
