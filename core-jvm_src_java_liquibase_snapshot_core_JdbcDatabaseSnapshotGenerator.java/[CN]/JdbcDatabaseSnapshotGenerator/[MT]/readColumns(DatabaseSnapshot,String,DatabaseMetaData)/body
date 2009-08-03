@@ -33,11 +33,13 @@
       }
  else {
         columnInfo.setView(view);
+        columnInfo.setAutoIncrement(false);
         view.getColumns().add(columnInfo);
       }
     }
  else {
       columnInfo.setTable(table);
+      columnInfo.setAutoIncrement(isColumnAutoIncrement(database,schema,tableName,columnName));
       table.getColumns().add(columnInfo);
     }
     columnInfo.setName(columnName);
@@ -52,7 +54,6 @@
       columnInfo.setNullable(true);
     }
     columnInfo.setPrimaryKey(snapshot.isPrimaryKey(columnInfo));
-    columnInfo.setAutoIncrement(isColumnAutoIncrement(database,schema,tableName,columnName));
     getColumnTypeAndDefValue(columnInfo,rs,database);
     columnInfo.setRemarks(remarks);
   }
