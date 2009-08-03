@@ -16,12 +16,7 @@
         continue;
       }
       int keySeq=rs.getInt("KEY_SEQ");
-      if (keySeq == 1) {
-        fkInfo=new ForeignKey();
-      }
-      if (fkInfo == null || ((fkInfo != null) && (fkInfo.getPrimaryKeyTable().getName() != pkTableName))) {
-        fkInfo=new ForeignKey();
-      }
+      fkInfo=new ForeignKey();
       fkInfo.setPrimaryKeyTable(pkTable);
       fkInfo.addPrimaryKeyColumn(pkColumn);
       String fkTableName=convertFromDatabaseName(rs.getString("FKTABLE_NAME"));
