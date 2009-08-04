@@ -1,7 +1,7 @@
 {
   Class<? extends ChangeLogParser>[] classes;
   try {
-    classes=ServiceLocator.getInstance().getClasses(ChangeLogParser.class);
+    classes=ServiceLocator.getInstance().findClasses(ChangeLogParser.class);
     for (    Class<? extends ChangeLogParser> clazz : classes) {
       register((ChangeLogParser)clazz.getConstructor().newInstance());
     }

@@ -4,6 +4,6 @@
     connection.setAutoCommit(getAutoCommitMode());
   }
  catch (  DatabaseException sqle) {
-    log.warning("Can not set auto commit to " + getAutoCommitMode() + " on connection");
+    LogFactory.getLogger().warning("Can not set auto commit to " + getAutoCommitMode() + " on connection");
   }
 }

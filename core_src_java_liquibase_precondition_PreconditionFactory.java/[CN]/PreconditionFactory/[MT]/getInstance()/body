@@ -1,3 +1,6 @@
 {
+  if (instance == null) {
+    instance=new PreconditionFactory();
+  }
   return instance;
 }

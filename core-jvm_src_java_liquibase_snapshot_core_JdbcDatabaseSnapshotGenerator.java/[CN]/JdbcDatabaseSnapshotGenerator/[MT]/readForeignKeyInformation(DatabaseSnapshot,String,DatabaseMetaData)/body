@@ -12,7 +12,7 @@
       String pkColumn=convertFromDatabaseName(rs.getString("PKCOLUMN_NAME"));
       Table pkTable=snapshot.getTable(pkTableName);
       if (pkTable == null) {
-        log.warning("Foreign key " + fkName + " references table "+ pkTableName+ ", which we cannot find.  Ignoring.");
+        LogFactory.getLogger().warning("Foreign key " + fkName + " references table "+ pkTableName+ ", which we cannot find.  Ignoring.");
         continue;
       }
       int keySeq=rs.getInt("KEY_SEQ");
@@ -27,7 +27,7 @@
         fkTable=new Table(fkTableName);
         fkTable.setDatabase(database);
         fkTable.setSchema(fkSchema);
-        log.warning("Foreign key " + fkName + " is in table "+ fkTableName+ ", which is in a different schema.  Retaining FK in diff, but table will not be diffed.");
+        LogFactory.getLogger().warning("Foreign key " + fkName + " is in table "+ fkTableName+ ", which is in a different schema.  Retaining FK in diff, but table will not be diffed.");
       }
       fkInfo.setForeignKeyTable(fkTable);
       fkInfo.addForeignKeyColumn(fkColumn);

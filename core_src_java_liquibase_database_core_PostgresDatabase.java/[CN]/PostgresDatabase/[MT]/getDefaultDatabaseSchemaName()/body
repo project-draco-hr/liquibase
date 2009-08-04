@@ -21,7 +21,7 @@
     }
  catch (    Exception e) {
       e.printStackTrace();
-      log.severe("Failed to get default catalog name from postgres",e);
+      LogFactory.getLogger().severe("Failed to get default catalog name from postgres",e);
     }
   }
   return defaultDatabaseSchemaName;

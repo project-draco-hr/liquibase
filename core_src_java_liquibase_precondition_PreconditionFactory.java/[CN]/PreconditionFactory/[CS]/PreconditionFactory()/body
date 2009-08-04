@@ -2,7 +2,7 @@
   preconditions=new HashMap<String,Class<? extends Precondition>>();
   Class[] classes;
   try {
-    classes=ServiceLocator.getInstance().getClasses(Precondition.class);
+    classes=ServiceLocator.getInstance().findClasses(Precondition.class);
     for (    Class<? extends Precondition> clazz : classes) {
       register(clazz);
     }

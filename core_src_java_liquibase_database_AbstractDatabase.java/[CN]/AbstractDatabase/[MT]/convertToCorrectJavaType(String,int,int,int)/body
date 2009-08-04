@@ -83,7 +83,7 @@
       return "!!!!!! LIQUIBASE CANNOT OUTPUT BLOB VALUES !!!!!!";
     }
  else {
-      log.warning("Do not know how to convert type " + dataType);
+      LogFactory.getLogger().warning("Do not know how to convert type " + dataType);
       return value;
     }
   }

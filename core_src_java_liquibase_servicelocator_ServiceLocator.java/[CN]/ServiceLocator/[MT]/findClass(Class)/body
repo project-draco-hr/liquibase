@@ -1,0 +1,7 @@
+{
+  Class[] classes=findClasses(requiredInterface);
+  if (classes.length != 1) {
+    throw new ServiceNotFoundException("Could not find unique implementation of " + requiredInterface.getName() + ".  Found "+ classes.length+ " implementations");
+  }
+  return classes[0];
+}

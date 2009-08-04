@@ -1,7 +1,7 @@
 {
   Class<? extends Change>[] classes;
   try {
-    classes=ServiceLocator.getInstance().getClasses(Change.class);
+    classes=ServiceLocator.getInstance().findClasses(Change.class);
     for (    Class<? extends Change> clazz : classes) {
       register(clazz);
     }

@@ -9,7 +9,7 @@
     }
   }
   if (!foundImplementation) {
-    log.warning("Unknown database: " + connection.getDatabaseProductName());
+    LogFactory.getLogger().warning("Unknown database: " + connection.getDatabaseProductName());
     database=new UnsupportedDatabase();
   }
   Database returnDatabase;

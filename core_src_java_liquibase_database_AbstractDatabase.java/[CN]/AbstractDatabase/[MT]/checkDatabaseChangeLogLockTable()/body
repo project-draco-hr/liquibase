@@ -4,6 +4,6 @@
     executor.comment("Create Database Lock Table");
     executor.execute(new CreateDatabaseChangeLogLockTableStatement(),new ArrayList<SqlVisitor>());
     this.commit();
-    log.debug("Created database lock table with name: " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()));
+    LogFactory.getLogger().debug("Created database lock table with name: " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()));
   }
 }

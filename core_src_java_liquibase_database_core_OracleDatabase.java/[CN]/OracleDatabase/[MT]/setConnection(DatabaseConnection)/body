@@ -5,7 +5,7 @@
     method.invoke(conn,true);
   }
  catch (  Exception e) {
-    log.info("Could not set remarks reporting on OracleDatabase: " + e.getMessage());
+    LogFactory.getLogger().info("Could not set remarks reporting on OracleDatabase: " + e.getMessage());
     ;
   }
   super.setConnection(conn);

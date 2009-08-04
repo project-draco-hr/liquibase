@@ -1,4 +1,4 @@
 {
-  Class[] classes=serviceLocator.getClasses(ChangeLogParser.class);
+  Class[] classes=serviceLocator.findClasses(ChangeLogParser.class);
   assertTrue(classes.length > 0);
 }

@@ -1,3 +1,6 @@
 {
+  if (instance == null) {
+    instance=new DatabaseSnapshotGeneratorFactory();
+  }
   return instance;
 }
