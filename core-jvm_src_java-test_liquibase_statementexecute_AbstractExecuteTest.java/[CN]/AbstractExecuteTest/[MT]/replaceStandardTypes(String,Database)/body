@@ -4,5 +4,6 @@
   convertedSql=replaceType("boolean",convertedSql,database);
   convertedSql=convertedSql.replaceAll("FALSE",database.getFalseBooleanValue());
   convertedSql=convertedSql.replaceAll("TRUE",database.getFalseBooleanValue());
+  convertedSql=convertedSql.replaceAll("NOW\\(\\)",database.getCurrentDateTimeFunction());
   return convertedSql;
 }

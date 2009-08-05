@@ -3,6 +3,10 @@
     for (    Database database : TestContext.getInstance().getAllDatabases()) {
       if (shouldTestDatabase(database,includeDatabases,excludeDatabases)) {
         testedDatabases.add(database.getClass());
+        if (database.getConnection() != null) {
+          database.checkDatabaseChangeLogTable();
+          database.checkDatabaseChangeLogLockTable();
+        }
         Sql[] sql=SqlGeneratorFactory.getInstance().generateSql(statementUnderTest,database);
         assertNotNull("Null SQL for " + database,sql);
         assertEquals("Unexpected number of  SQL statements for " + database,expectedSql.length,sql.length);
