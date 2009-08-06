@@ -1,8 +1,0 @@
-{
-  LiquibaseUpdate mojo=createUpdateMojo();
-  setVariableValueToObject(mojo,"propertyFile",null);
-  setVariableValueToObject(mojo,"propertyFileWillOverride",false);
-  loadPropertiesFileIfPresent(mojo);
-  Map values=getVariablesAndValuesFromObject(mojo);
-  checkValues(DEFAULT_PROPERTIES,values);
-}

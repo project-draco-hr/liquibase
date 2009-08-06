@@ -1,6 +1,0 @@
-{
-  super.checkRequiredParametersAreSpecified();
-  if (changeLogFile == null) {
-    throw new MojoFailureException("The changeLogFile must be specified.");
-  }
-}

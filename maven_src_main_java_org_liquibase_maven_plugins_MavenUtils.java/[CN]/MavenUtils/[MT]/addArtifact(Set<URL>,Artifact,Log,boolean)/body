@@ -1,9 +1,0 @@
-{
-  File f=artifact.getFile();
-  if (f == null) {
-    log.warn("Artifact with no actual file, '" + artifact.getGroupId() + ":"+ artifact.getArtifactId()+ "'");
-  }
- else {
-    addFile(urls,f,log,verbose);
-  }
-}

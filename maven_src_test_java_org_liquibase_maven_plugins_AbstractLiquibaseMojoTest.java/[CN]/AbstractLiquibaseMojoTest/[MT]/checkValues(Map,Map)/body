@@ -1,7 +1,0 @@
-{
-  for (  Object key : expected.keySet()) {
-    Object expectedValue=expected.get(key);
-    Object actualValue=values.get(key);
-    assertEquals("The values do not match for property '" + key + "'",expectedValue,actualValue);
-  }
-}

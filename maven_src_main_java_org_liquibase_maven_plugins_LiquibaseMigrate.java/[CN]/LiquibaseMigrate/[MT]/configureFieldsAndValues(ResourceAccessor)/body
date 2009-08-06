@@ -1,4 +1,0 @@
-{
-  getLog().warn("This plugin goal is DEPRICATED and will be removed in a future " + "release, please use \"update\" instead of \"migrate\".");
-  super.configureFieldsAndValues(fo);
-}

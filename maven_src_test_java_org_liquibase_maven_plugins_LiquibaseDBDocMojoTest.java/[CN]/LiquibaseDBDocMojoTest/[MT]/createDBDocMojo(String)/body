@@ -1,6 +1,0 @@
-{
-  LiquibaseDBDocMojo mojo=new LiquibaseDBDocMojo();
-  PlexusConfiguration config=loadConfiguration(configFileName);
-  configureMojo(mojo,config);
-  return mojo;
-}

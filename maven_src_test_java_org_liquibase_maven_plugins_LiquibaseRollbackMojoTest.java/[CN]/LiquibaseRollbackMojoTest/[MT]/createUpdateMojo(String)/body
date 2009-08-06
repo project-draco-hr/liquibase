@@ -1,6 +1,0 @@
-{
-  LiquibaseRollback mojo=new LiquibaseRollback();
-  PlexusConfiguration config=loadConfiguration(configFileName);
-  configureMojo(mojo,config);
-  return mojo;
-}

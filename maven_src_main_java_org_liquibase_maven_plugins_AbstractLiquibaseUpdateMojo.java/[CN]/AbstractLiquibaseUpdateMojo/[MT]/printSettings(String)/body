@@ -1,4 +1,0 @@
-{
-  super.printSettings(indent);
-  getLog().info(indent + "number of changes to apply: " + changesToApply);
-}

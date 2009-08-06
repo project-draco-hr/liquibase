@@ -1,5 +1,0 @@
-{
-  File rootDir=new File(getBasedir(),"target/test-classes");
-  ResourceAccessor fo=new FileSystemResourceAccessor(rootDir.getAbsolutePath());
-  mojo.configureFieldsAndValues(fo);
-}

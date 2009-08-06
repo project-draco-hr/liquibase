@@ -1,4 +1,0 @@
-{
-  super.performLiquibaseTask(liquibase);
-  doUpdate(liquibase);
-}

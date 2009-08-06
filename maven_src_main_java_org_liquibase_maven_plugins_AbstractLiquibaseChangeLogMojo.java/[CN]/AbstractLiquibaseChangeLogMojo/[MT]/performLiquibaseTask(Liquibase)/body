@@ -1,5 +1,0 @@
-{
-  if (dropFirst) {
-    liquibase.dropAll();
-  }
-}

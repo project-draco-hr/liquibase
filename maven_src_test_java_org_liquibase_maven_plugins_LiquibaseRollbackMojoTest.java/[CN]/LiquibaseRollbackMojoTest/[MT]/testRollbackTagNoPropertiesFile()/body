@@ -1,7 +1,0 @@
-{
-  LiquibaseRollback mojo=createUpdateMojo(TAG_CONFIG_FILE);
-  setVariableValueToObject(mojo,"propertyFile",null);
-  setVariableValueToObject(mojo,"propertyFileWillOverride",false);
-  Map values=getVariablesAndValuesFromObject(mojo);
-  checkValues(TAG_DEFAULT_PROPERTIES,values);
-}

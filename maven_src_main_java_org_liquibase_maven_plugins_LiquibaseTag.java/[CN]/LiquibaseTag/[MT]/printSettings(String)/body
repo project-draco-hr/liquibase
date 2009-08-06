@@ -1,4 +1,0 @@
-{
-  super.printSettings(indent);
-  getLog().info(indent + "tag: " + tag);
-}

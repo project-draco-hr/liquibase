@@ -1,4 +1,0 @@
-{
-  LiquibaseDBDocMojo mojo=createDBDocMojo(CONFIG_FILE);
-  assertEquals("target/liquibase/myOutputDirectory",mojo.getOutputDirectory());
-}
