@@ -1,0 +1,4 @@
+{
+  getLog().warn("This plugin goal is DEPRICATED and will bre removed in a future " + "release, please use \"updateSQL\" instead of \"migrateSQL\".");
+  super.configureFieldsAndValues(fo);
+}

@@ -1,0 +1,7 @@
+{
+  if (verbose) {
+    getLog().info("Settings----------------------------");
+    printSettings("    ");
+    getLog().info(MavenUtils.LOG_SEPARATOR);
+  }
+}

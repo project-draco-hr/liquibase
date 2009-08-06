@@ -1,0 +1,7 @@
+{
+  LiquibaseRollback mojo=createUpdateMojo(DATE_CONFIG_FILE);
+  setVariableValueToObject(mojo,"propertyFile",null);
+  setVariableValueToObject(mojo,"propertyFileWillOverride",false);
+  Map values=getVariablesAndValuesFromObject(mojo);
+  checkValues(DATE_DEFAULT_PROPERTIES,values);
+}

@@ -1,0 +1,25 @@
+{
+  if (getLiquibase() != null) {
+    try {
+      getLiquibase().forceReleaseLocks();
+    }
+ catch (    LockException e) {
+      getLog().error(e.getMessage(),e);
+    }
+catch (    IOException e) {
+      getLog().error(e.getMessage(),e);
+    }
+catch (    DatabaseException e) {
+      getLog().error(e.getMessage(),e);
+    }
+  }
+  if (db != null) {
+    try {
+      db.rollback();
+      db.close();
+    }
+ catch (    DatabaseException e) {
+      getLog().error("Failed to close open connection to database.",e);
+    }
+  }
+}

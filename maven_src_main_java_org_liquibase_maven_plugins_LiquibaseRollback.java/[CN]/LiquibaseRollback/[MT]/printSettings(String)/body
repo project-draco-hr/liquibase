@@ -1,0 +1,6 @@
+{
+  super.printSettings(indent);
+  getLog().info(indent + "rollback Count: " + rollbackCount);
+  getLog().info(indent + "rollback Date: " + rollbackDate);
+  getLog().info(indent + "rollback Tag: " + rollbackTag);
+}

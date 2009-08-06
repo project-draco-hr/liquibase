@@ -1,0 +1,14 @@
+{
+  if (indent == null) {
+    indent="";
+  }
+  getLog().info(indent + "driver: " + driver);
+  getLog().info(indent + "url: " + url);
+  getLog().info(indent + "username: " + username);
+  getLog().info(indent + "password: " + password);
+  getLog().info(indent + "use empty password: " + emptyPassword);
+  getLog().info(indent + "properties file: " + propertyFile);
+  getLog().info(indent + "properties file will override? " + propertyFileWillOverride);
+  getLog().info(indent + "prompt on non-local database? " + promptOnNonLocalDatabase);
+  getLog().info(indent + "clear checksums? " + clearCheckSums);
+}

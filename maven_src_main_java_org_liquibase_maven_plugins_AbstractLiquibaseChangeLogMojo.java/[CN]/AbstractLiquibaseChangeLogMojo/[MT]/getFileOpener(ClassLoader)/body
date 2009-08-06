@@ -1,0 +1,5 @@
+{
+  ResourceAccessor mFO=new MavenResourceAccessor(cl);
+  ResourceAccessor fsFO=new FileSystemResourceAccessor(project.getBasedir().getAbsolutePath());
+  return new CompositeResourceAccessor(mFO,fsFO);
+}

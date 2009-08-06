@@ -1,0 +1,15 @@
+{
+  Field f=getField(clazz,fieldName);
+  if (f == null) {
+    Class parent=clazz.getSuperclass();
+    if (parent != null) {
+      return getDeclaredField(parent,fieldName);
+    }
+ else {
+      throw new NoSuchFieldException("The field '" + fieldName + "' could not be "+ "found in the class of any of its parent "+ "classes.");
+    }
+  }
+ else {
+    return f;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  Object currentValue=f.get(this);
+  if (currentValue == null) {
+    return false;
+  }
+  Object defaultValue=getDefaultValue(f);
+  if (defaultValue == null) {
+    return currentValue != null;
+  }
+ else {
+    return !defaultValue.equals(f.get(this));
+  }
+}

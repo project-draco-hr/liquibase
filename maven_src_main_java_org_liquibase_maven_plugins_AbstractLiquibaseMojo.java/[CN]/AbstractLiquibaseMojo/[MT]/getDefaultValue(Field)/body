@@ -1,0 +1,12 @@
+{
+  List<Field> allFields=new ArrayList<Field>();
+  allFields.addAll(Arrays.asList(getClass().getDeclaredFields()));
+  allFields.addAll(Arrays.asList(AbstractLiquibaseMojo.class.getDeclaredFields()));
+  for (  Field f : allFields) {
+    if (f.getName().equals(field.getName() + DEFAULT_FIELD_SUFFIX)) {
+      f.setAccessible(true);
+      return f.get(this);
+    }
+  }
+  return null;
+}

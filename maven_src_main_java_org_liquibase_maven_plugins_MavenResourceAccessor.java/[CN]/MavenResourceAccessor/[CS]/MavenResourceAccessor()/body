@@ -1,0 +1,3 @@
+{
+  this(MavenResourceAccessor.class.getClassLoader());
+}

@@ -1,0 +1,8 @@
+{
+  if (changesToApply > 0) {
+    liquibase.update(changesToApply,contexts);
+  }
+ else {
+    liquibase.update(contexts);
+  }
+}

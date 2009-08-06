@@ -1,0 +1,4 @@
+Set<URL> urls
+Artifact artifact
+Log log
+boolean verbose
