@@ -1,3 +1,0 @@
-{
-  super("pgsql","jdbc:postgresql://localhost/liquibase");
-}

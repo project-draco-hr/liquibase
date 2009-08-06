@@ -1,3 +1,0 @@
-{
-  super("asany","jdbc:sybase:Tds:localhost:9810/servicename=prior");
-}

@@ -1,3 +1,0 @@
-{
-  super("maxdb","jdbc:sapdb://localhost/liquibas");
-}

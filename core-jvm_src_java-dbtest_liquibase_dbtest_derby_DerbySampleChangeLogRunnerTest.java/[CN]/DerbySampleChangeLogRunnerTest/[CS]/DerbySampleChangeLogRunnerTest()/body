@@ -1,3 +1,0 @@
-{
-  super("derby","jdbc:derby:liquibase;create=true");
-}

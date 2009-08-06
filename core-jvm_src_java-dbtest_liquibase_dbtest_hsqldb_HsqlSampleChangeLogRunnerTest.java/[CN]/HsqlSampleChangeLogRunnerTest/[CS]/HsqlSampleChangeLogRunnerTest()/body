@@ -1,3 +1,0 @@
-{
-  super("hsqldb","jdbc:hsqldb:mem:liquibase");
-}

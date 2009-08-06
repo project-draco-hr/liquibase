@@ -1,4 +1,0 @@
-{
-  JUnitResourceAccessor fileOpener=new JUnitResourceAccessor();
-  return createLiquibase(changeLogFile,fileOpener);
-}
