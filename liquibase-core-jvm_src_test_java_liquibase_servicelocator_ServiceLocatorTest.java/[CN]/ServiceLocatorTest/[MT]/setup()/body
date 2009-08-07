@@ -1,7 +1,0 @@
-{
-  File sample1=new File(TestContext.getInstance().findCoreJvmProjectRoot(),"/lib-test/liquibase-sample1.jar");
-  File sample2=new File(TestContext.getInstance().findCoreJvmProjectRoot(),"/lib-test/liquibase-sample2.jar");
-  CompositeResourceAccessor resourceAccessor=new CompositeResourceAccessor(new ClassLoaderResourceAccessor(),new ClassLoaderResourceAccessor(new URLClassLoader(new URL[]{sample1.toURL(),sample2.toURL()})));
-  serviceLocator=ServiceLocator.getInstance();
-  serviceLocator.setResourceAccessor(resourceAccessor);
-}

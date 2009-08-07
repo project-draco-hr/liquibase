@@ -1,8 +1,0 @@
-{
-  if (schema != null && !database.supportsSchemas()) {
-    if (exception instanceof StatementNotSupportedOnDatabaseException) {
-      return true;
-    }
-  }
-  return false;
-}

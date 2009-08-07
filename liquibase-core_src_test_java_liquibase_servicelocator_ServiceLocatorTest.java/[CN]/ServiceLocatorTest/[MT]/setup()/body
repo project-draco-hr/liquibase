@@ -1,0 +1,5 @@
+{
+  CompositeResourceAccessor resourceAccessor=new CompositeResourceAccessor(new ClassLoaderResourceAccessor(),TestContext.getInstance().getTestResourceAccessor());
+  serviceLocator=ServiceLocator.getInstance();
+  serviceLocator.setResourceAccessor(resourceAccessor);
+}

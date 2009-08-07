@@ -1,4 +1,0 @@
-{
-  this.schema=schema;
-  this.statement=statement;
-}
