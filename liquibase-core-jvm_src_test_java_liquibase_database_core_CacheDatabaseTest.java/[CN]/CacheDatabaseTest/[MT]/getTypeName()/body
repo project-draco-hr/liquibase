@@ -1,3 +1,0 @@
-{
-  assertEquals("cache",database.getTypeName());
-}

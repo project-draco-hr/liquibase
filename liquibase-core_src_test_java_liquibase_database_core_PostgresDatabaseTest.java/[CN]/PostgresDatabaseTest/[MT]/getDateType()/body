@@ -1,0 +1,3 @@
+{
+  Assert.assertEquals(new DataType("DATE",false),getDatabase().getDateType());
+}

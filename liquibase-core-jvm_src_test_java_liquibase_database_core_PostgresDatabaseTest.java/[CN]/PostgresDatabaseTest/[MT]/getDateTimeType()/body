@@ -1,3 +1,0 @@
-{
-  assertEquals(new DataType("TIMESTAMP WITH TIME ZONE",false),getDatabase().getDateTimeType());
-}

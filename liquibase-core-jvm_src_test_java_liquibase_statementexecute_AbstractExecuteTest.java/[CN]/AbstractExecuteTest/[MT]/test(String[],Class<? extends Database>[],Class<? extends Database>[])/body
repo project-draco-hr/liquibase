@@ -22,7 +22,7 @@
     }
   }
   resetAvailableDatabases();
-  for (  Database availableDatabase : TestContext.getInstance().getAvailableDatabases()) {
+  for (  Database availableDatabase : DatabaseTestContext.getInstance().getAvailableDatabases()) {
     Statement statement=((JdbcConnection)availableDatabase.getConnection()).getUnderlyingConnection().createStatement();
     if (shouldTestDatabase(availableDatabase,includeDatabases,excludeDatabases)) {
       String sqlToRun=SqlGeneratorFactory.getInstance().generateSql(statementUnderTest,availableDatabase)[0].toSql();

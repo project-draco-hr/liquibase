@@ -1,8 +1,0 @@
-{
-  this.database=database;
-  TestContext context=TestContext.getInstance();
-  DatabaseConnection connection=context.getConnection(context.getTestUrl(database));
-  if (connection != null) {
-    database.setConnection(connection);
-  }
-}

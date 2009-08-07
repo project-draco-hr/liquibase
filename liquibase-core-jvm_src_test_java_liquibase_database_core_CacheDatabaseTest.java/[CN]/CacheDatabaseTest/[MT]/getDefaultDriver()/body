@@ -1,3 +1,0 @@
-{
-  assertEquals("com.intersys.jdbc.CacheDriver",database.getDefaultDriver("jdbc:Cache://127.0.0.1:56773/TESTMIGRATE"));
-}

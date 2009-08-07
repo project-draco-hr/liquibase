@@ -1,3 +1,0 @@
-{
-  assertEquals(new DataType("NUMBER(1)",false),getDatabase().getBooleanType());
-}
