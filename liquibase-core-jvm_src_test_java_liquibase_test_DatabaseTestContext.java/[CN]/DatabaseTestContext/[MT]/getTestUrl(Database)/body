@@ -1,8 +1,0 @@
-{
-  for (  String url : getTestUrls()) {
-    if (database.getDefaultDriver(url) != null) {
-      return url;
-    }
-  }
-  throw new RuntimeException("Could not find url for " + database);
-}

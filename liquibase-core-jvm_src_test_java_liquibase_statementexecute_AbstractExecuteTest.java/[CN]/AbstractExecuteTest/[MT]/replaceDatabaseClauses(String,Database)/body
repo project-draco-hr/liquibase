@@ -1,3 +1,0 @@
-{
-  return convertedSql.replaceFirst("auto_increment_clause",database.getAutoIncrementClause());
-}

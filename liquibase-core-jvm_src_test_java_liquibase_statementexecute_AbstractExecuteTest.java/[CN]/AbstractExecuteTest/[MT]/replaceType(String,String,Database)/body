@@ -1,3 +1,0 @@
-{
-  return baseString.replaceAll(" " + type + " "," " + database.getColumnType(type,false) + " ").replaceAll(" " + type + ","," " + database.getColumnType(type,false) + ",");
-}

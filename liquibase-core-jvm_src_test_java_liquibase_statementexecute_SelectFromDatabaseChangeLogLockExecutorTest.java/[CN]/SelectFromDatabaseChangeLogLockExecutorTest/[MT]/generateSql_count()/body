@@ -1,6 +1,0 @@
-{
-  this.statementUnderTest=new SelectFromDatabaseChangeLogLockStatement("COUNT(*)");
-  assertCorrect("select count(*) from [dbo].[databasechangeloglock] where [id]=1",MSSQLDatabase.class);
-  assertCorrect("select count(*) from [databasechangeloglock] where [id]=1 for update",OracleDatabase.class);
-  assertCorrectOnRest("select count(*) from [databasechangeloglock] where [id]=1");
-}

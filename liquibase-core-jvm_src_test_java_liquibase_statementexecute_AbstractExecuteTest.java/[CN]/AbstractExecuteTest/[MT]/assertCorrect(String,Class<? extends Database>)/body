@@ -1,3 +1,0 @@
-{
-  assertCorrect(new String[]{expectedSql},includeDatabases);
-}

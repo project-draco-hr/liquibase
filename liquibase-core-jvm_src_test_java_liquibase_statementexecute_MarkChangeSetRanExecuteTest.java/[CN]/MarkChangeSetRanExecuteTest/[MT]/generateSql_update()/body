@@ -1,5 +1,0 @@
-{
-  this.statementUnderTest=new MarkChangeSetRanStatement(new ChangeSet("a","b",false,false,"c","d","e","f"),true);
-  assertCorrect("update [dbo].[databasechangelog] set [dateexecuted] = NOW(), [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",MSSQLDatabase.class);
-  assertCorrectOnRest("update [databasechangelog] set [dateexecuted] = NOW(), [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'");
-}

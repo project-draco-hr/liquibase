@@ -1,6 +1,0 @@
-{
-  if (url.startsWith("jdbc:hsqldb")) {
-    return "";
-  }
-  return "liquibase";
-}

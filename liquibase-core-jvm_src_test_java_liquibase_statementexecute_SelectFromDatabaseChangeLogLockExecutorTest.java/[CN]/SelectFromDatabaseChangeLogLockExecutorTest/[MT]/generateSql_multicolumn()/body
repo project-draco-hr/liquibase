@@ -1,6 +1,0 @@
-{
-  this.statementUnderTest=new SelectFromDatabaseChangeLogLockStatement("LOCKED","LOCKEDBY");
-  assertCorrect("select locked,lockedby from [dbo].[databasechangeloglock] where [id]=1",MSSQLDatabase.class);
-  assertCorrect("select locked,lockedby from [databasechangeloglock] where [id]=1 for update",OracleDatabase.class);
-  assertCorrectOnRest("select locked,lockedby from [databasechangeloglock] where [id]=1");
-}

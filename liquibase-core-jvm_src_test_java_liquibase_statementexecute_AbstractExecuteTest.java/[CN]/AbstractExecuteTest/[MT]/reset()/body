@@ -1,4 +1,0 @@
-{
-  testedDatabases=new HashSet<Class<? extends Database>>();
-  this.statementUnderTest=null;
-}
