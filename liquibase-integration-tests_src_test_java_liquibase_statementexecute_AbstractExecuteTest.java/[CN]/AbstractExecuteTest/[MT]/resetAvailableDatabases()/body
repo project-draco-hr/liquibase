@@ -1,0 +1,50 @@
+{
+  for (  Database database : DatabaseTestContext.getInstance().getAvailableDatabases()) {
+    DatabaseConnection connection=database.getConnection();
+    Statement connectionStatement=((JdbcConnection)connection).getUnderlyingConnection().createStatement();
+    if (database.supportsSchemas()) {
+      database.dropDatabaseObjects(DatabaseTestContext.ALT_SCHEMA);
+      connection.commit();
+      if (!database.isPeculiarLiquibaseSchema()) {
+        try {
+          connectionStatement.executeUpdate("drop table " + database.escapeTableName(DatabaseTestContext.ALT_SCHEMA,database.getDatabaseChangeLogLockTableName()));
+        }
+ catch (        SQLException e) {
+          ;
+        }
+        connection.commit();
+      }
+      if (!database.isPeculiarLiquibaseSchema()) {
+        try {
+          connectionStatement.executeUpdate("drop table " + database.escapeTableName(DatabaseTestContext.ALT_SCHEMA,database.getDatabaseChangeLogTableName()));
+        }
+ catch (        SQLException e) {
+          ;
+        }
+        connection.commit();
+      }
+    }
+    database.dropDatabaseObjects(database.convertRequestedSchemaToSchema(null));
+    try {
+      connectionStatement.executeUpdate("drop table " + database.escapeTableName(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()));
+    }
+ catch (    SQLException e) {
+      ;
+    }
+    connection.commit();
+    try {
+      connectionStatement.executeUpdate("drop table " + database.escapeTableName(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()));
+    }
+ catch (    SQLException e) {
+      ;
+    }
+    connection.commit();
+    List<? extends SqlStatement> setupStatements=setupStatements(database);
+    if (setupStatements != null) {
+      for (      SqlStatement statement : setupStatements) {
+        ExecutorService.getInstance().getExecutor(database).execute(statement);
+      }
+    }
+    connectionStatement.close();
+  }
+}

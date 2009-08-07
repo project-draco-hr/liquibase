@@ -1,0 +1,8 @@
+{
+  if (availableDatabases.size() == 0) {
+    for (    DatabaseConnection conn : getAvailableConnections()) {
+      availableDatabases.add(DatabaseFactory.getInstance().findCorrectDatabaseImplementation(conn));
+    }
+  }
+  return availableDatabases;
+}
