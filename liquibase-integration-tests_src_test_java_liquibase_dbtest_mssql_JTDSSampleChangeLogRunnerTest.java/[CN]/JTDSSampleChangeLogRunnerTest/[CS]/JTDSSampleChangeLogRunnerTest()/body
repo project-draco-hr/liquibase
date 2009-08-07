@@ -1,0 +1,3 @@
+{
+  super("mssql","jdbc:jtds:sqlserver://localhost;databaseName=liquibase");
+}

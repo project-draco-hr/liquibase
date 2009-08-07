@@ -1,13 +1,17 @@
 {
+  logger.debug("ServiceLocator.findClasses for " + requiredInterface.getName());
   try {
     Class.forName(requiredInterface.getName());
     if (!classesBySuperclass.containsKey(requiredInterface)) {
       classesBySuperclass.put(requiredInterface,new ArrayList<Class>());
       for (      String packageName : packagesToScan) {
+        logger.debug("ServiceLocator scanning " + packageName + " with resoureAccessor "+ resourceAccessor.getClass().getName());
         String path=packageName.replace('.','/');
         Enumeration<URL> resources=resourceAccessor.getResources(path);
         while (resources.hasMoreElements()) {
-          classesBySuperclass.get(requiredInterface).addAll(findClasses(resources.nextElement(),packageName,requiredInterface));
+          URL resource=resources.nextElement();
+          logger.debug("Found " + packageName + " in "+ resource.toExternalForm());
+          classesBySuperclass.get(requiredInterface).addAll(findClasses(resource,packageName,requiredInterface));
         }
       }
     }

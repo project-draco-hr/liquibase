@@ -1,0 +1,5 @@
+{
+  StringBuffer buf=new StringBuffer().append(firstName).append(' ');
+  if (initial != null)   buf.append(initial).append(' ');
+  return buf.append(lastName).toString();
+}

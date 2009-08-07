@@ -1,0 +1,9 @@
+{
+  String passedLevel=System.getProperty("liquibase.default.logger.level");
+  if (passedLevel == null) {
+    setLogLevel(LogLevel.SEVERE);
+  }
+ else {
+    setLogLevel(passedLevel);
+  }
+}

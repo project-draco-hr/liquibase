@@ -1,0 +1,3 @@
+{
+  super("mysql","jdbc:mysql://localhost/liquibase");
+}

@@ -1,0 +1,3 @@
+{
+  super("sqlite","jdbc:sqlite:/liquibase.db");
+}

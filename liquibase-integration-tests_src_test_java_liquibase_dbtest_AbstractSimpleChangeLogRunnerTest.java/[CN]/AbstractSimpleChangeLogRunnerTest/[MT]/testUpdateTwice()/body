@@ -1,0 +1,10 @@
+{
+  if (database == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  clearDatabase(liquibase);
+  liquibase=createLiquibase(completeChangeLog);
+  liquibase.update(this.contexts);
+  liquibase.update(this.contexts);
+}

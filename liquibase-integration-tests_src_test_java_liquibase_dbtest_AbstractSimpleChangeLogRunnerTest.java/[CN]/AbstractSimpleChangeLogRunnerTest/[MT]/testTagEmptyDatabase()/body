@@ -1,0 +1,13 @@
+{
+  if (database == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  clearDatabase(liquibase);
+  liquibase=createLiquibase(completeChangeLog);
+  liquibase.checkDatabaseChangeLogTable();
+  liquibase.tag("empty");
+  liquibase=createLiquibase(rollbackChangeLog);
+  liquibase.update(null);
+  liquibase.rollback("empty",null);
+}

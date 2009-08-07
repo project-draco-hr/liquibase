@@ -1,0 +1,5 @@
+{
+  if (getLogLevel().compareTo(LogLevel.WARNING) <= 0) {
+    print(message);
+  }
+}

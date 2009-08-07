@@ -1,0 +1,5 @@
+{
+  if (getLogLevel().compareTo(LogLevel.SEVERE) <= 0) {
+    print(message);
+  }
+}

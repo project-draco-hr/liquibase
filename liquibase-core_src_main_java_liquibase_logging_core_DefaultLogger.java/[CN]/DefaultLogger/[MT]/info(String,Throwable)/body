@@ -1,0 +1,6 @@
+{
+  if (getLogLevel().compareTo(LogLevel.INFO) <= 0) {
+    print(message);
+    e.printStackTrace();
+  }
+}

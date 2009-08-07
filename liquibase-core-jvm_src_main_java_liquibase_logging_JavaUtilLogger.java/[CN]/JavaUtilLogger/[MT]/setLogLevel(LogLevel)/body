@@ -17,5 +17,5 @@
  else {
     throw new UnexpectedLiquibaseException("Unknown log level: " + logLevel);
   }
-  this.logLevel=logLevel;
+  super.setLogLevel(logLevel);
 }
