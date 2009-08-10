@@ -1,6 +1,8 @@
 {
   CompositeResourceAccessor compositeResourceAccessor=new CompositeResourceAccessor(new JUnitResourceAccessor(),new ExtensionResourceAccessor());
+  ServiceLocator.reset();
   ServiceLocator.getInstance().setResourceAccessor(compositeResourceAccessor);
+  ChangeFactory.reset();
   DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("changelogs/common/ext.changelog.xml",new HashMap<String,Object>(),compositeResourceAccessor);
   assertEquals("changelogs/common/ext.changelog.xml",changeLog.getLogicalFilePath());
   assertEquals(2,changeLog.getChangeSets().size());
@@ -21,4 +23,5 @@
   assertNotNull(child2);
   assertEquals("second",child1.getClass().getMethod("getName").invoke(child2));
   ServiceLocator.reset();
+  ChangeFactory.reset();
 }
