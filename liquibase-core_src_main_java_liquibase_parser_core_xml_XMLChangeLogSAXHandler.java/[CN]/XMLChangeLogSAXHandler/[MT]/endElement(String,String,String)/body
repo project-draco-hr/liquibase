@@ -4,7 +4,10 @@
     textString=new ExpressionExpander(changeLogParameters).expandExpressions(StringUtils.trimToNull(text.toString()));
   }
   try {
-    if (rootPrecondition != null) {
+    if (changeSubObjects.size() > 0) {
+      changeSubObjects.pop();
+    }
+ else     if (rootPrecondition != null) {
       if ("preConditions".equals(qName)) {
         if (changeSet == null) {
           databaseChangeLog.setPreconditions(rootPrecondition);
