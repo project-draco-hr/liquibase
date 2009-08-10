@@ -1,0 +1,3 @@
+{
+  super("sample3","Sample 3",15);
+}
