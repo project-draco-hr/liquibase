@@ -1,0 +1,8 @@
+{
+  return new UUIDType(){
+    @Override public String getDataTypeName(){
+      return "VARCHAR(36)";
+    }
+  }
+;
+}

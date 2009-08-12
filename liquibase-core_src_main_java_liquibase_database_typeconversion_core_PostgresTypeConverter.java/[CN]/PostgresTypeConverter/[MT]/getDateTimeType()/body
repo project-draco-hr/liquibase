@@ -1,3 +1,8 @@
 {
-  return DATETIME_TYPE;
+  return new DateTimeType(){
+    @Override public String getDataTypeName(){
+      return "TIMESTAMP WITH TIME ZONE";
+    }
+  }
+;
 }

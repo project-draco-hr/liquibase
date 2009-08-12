@@ -1,3 +1,8 @@
 {
-  return DATE_TYPE;
+  return new DateType(){
+    @Override public String getDataTypeName(){
+      return "SMALLDATETIME";
+    }
+  }
+;
 }

@@ -1,3 +1,3 @@
 {
-  Assert.assertEquals(new DataType("MONEY",true),new CacheTypeConverter().getCurrencyType());
+  assertTypesEqual(new UnknownType("MONEY",true),new CacheTypeConverter().getCurrencyType());
 }

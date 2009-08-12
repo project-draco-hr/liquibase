@@ -1,3 +1,3 @@
 {
-  Assert.assertEquals(new DataType("TIMESTAMP",false),new H2TypeConverter().getDateTimeType());
+  assertTypesEqual(new UnknownType("TIMESTAMP",false),new H2TypeConverter().getDateTimeType());
 }

@@ -1,3 +1,3 @@
 {
-  Assert.assertEquals(new DataType("TEXT",true),new MySQLTypeConverter().getClobType());
+  assertTypesEqual(new UnknownType("TEXT",true),new MySQLTypeConverter().getClobType());
 }

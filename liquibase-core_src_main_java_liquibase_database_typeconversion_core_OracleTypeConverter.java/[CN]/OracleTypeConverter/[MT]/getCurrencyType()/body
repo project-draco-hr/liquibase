@@ -1,3 +1,8 @@
 {
-  return CURRENCY_TYPE;
+  return new CurrencyType(){
+    @Override public String getDataTypeName(){
+      return "NUMBER(15, 2)";
+    }
+  }
+;
 }

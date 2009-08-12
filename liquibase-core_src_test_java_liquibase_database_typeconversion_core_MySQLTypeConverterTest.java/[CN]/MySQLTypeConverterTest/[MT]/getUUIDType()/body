@@ -1,3 +1,3 @@
 {
-  Assert.assertEquals(new DataType("CHAR(36)",false),new MySQLTypeConverter().getUUIDType());
+  assertTypesEqual(new UnknownType("CHAR(36)",false),new MySQLTypeConverter().getUUIDType());
 }

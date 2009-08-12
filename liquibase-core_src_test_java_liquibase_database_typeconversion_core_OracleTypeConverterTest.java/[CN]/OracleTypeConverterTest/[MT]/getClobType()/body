@@ -1,3 +1,3 @@
 {
-  Assert.assertEquals(new DataType("CLOB",false),new OracleTypeConverter().getClobType());
+  assertTypesEqual(new UnknownType("CLOB",false),new OracleTypeConverter().getClobType());
 }

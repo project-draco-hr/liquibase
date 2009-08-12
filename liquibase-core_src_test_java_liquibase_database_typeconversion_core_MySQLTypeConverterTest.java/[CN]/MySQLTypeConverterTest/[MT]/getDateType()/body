@@ -1,3 +1,3 @@
 {
-  Assert.assertEquals(new DataType("DATE",false),new MySQLTypeConverter().getDateType());
+  assertTypesEqual(new UnknownType("DATE",false),new MySQLTypeConverter().getDateType());
 }

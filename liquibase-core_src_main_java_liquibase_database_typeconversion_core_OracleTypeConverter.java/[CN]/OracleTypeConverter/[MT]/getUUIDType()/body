@@ -1,3 +1,8 @@
 {
-  return UUID_TYPE;
+  return new UUIDType(){
+    @Override public String getDataTypeName(){
+      return "RAW(16)";
+    }
+  }
+;
 }

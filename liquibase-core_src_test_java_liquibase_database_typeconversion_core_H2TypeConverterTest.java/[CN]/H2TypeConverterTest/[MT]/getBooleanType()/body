@@ -1,3 +1,3 @@
 {
-  Assert.assertEquals(new DataType("BOOLEAN",false),new H2TypeConverter().getBooleanType());
+  assertTypesEqual(new UnknownType("BOOLEAN",false),new H2TypeConverter().getBooleanType());
 }

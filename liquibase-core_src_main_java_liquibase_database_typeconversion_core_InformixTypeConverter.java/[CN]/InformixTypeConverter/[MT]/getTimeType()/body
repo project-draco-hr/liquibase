@@ -1,3 +1,8 @@
 {
-  return TIME_TYPE;
+  return new TimeType(){
+    @Override public String getDataTypeName(){
+      return "INTERVAL " + INTERVAL_FIELD_QUALIFIER;
+    }
+  }
+;
 }

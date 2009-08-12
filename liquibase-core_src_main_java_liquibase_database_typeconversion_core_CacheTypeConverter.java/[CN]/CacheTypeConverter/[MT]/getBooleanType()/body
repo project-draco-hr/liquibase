@@ -1,3 +1,8 @@
 {
-  return BOOLEAN_TYPE;
+  return new BooleanType(){
+    @Override public String getDataTypeName(){
+      return "INTEGER";
+    }
+  }
+;
 }

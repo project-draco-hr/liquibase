@@ -1,3 +1,8 @@
 {
-  return CURRENCY_TYPE;
+  return new CurrencyType(){
+    @Override public String getDataTypeName(){
+      return "DECIMAL(19,4)";
+    }
+  }
+;
 }

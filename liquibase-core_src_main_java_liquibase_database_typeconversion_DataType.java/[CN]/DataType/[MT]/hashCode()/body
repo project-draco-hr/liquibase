@@ -1,6 +1,0 @@
-{
-  int result;
-  result=dataTypeName.hashCode();
-  result=31 * result + supportsPrecision.hashCode();
-  return result;
-}
