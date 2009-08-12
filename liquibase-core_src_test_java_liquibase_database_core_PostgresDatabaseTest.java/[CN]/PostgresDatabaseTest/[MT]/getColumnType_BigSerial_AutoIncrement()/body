@@ -1,3 +1,0 @@
-{
-  Assert.assertEquals("bigserial",getDatabase().getColumnType("bigserial",Boolean.TRUE));
-}

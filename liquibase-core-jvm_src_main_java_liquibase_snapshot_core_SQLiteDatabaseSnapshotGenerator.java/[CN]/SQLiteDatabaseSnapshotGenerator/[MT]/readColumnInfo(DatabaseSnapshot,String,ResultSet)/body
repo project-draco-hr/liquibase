@@ -31,7 +31,7 @@
   columnInfo.setDecimalDigits(rs.getInt("DECIMAL_POINTS"));
   Object defaultValue=rs.getObject("COLUMN_DEF");
   try {
-    columnInfo.setDefaultValue(database.convertDatabaseValueToJavaObject(defaultValue,columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits()));
+    columnInfo.setDefaultValue(TypeConverterFactory.getInstance().findTypeConverter(database).convertDatabaseValueToJavaObject(defaultValue,columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits(),database));
   }
  catch (  ParseException e) {
     throw new DatabaseException(e);
@@ -45,6 +45,6 @@
   }
   columnInfo.setPrimaryKey(snapshot.isPrimaryKey(columnInfo));
   columnInfo.setAutoIncrement(isColumnAutoIncrement(database,schema,tableName,columnName));
-  columnInfo.setTypeName(database.getColumnType(rs.getString("TYPE_NAME"),columnInfo.isAutoIncrement()));
+  columnInfo.setTypeName(TypeConverterFactory.getInstance().findTypeConverter(database).getColumnType(rs.getString("TYPE_NAME"),columnInfo.isAutoIncrement()));
   return columnInfo;
 }

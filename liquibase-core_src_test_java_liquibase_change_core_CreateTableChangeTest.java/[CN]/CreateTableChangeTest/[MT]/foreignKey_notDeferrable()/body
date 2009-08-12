@@ -2,6 +2,7 @@
   CreateTableChange change=new CreateTableChange();
   ColumnConfig columnConfig=new ColumnConfig();
   columnConfig.setName("id");
+  columnConfig.setType("int");
   ConstraintsConfig constraints=new ConstraintsConfig();
   constraints.setForeignKeyName("fk_test");
   constraints.setReferences("test(id)");

@@ -1,0 +1,3 @@
+{
+  Assert.assertEquals(new DataType("DATETIME",false),new CacheTypeConverter().getDateTimeType());
+}

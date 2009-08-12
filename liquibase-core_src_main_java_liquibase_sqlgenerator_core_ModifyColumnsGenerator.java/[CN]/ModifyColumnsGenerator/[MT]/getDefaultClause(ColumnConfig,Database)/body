@@ -2,7 +2,7 @@
   String clause="";
   if (column.getDefaultValue() != null) {
     if (database instanceof MySQLDatabase) {
-      clause+=" DEFAULT " + database.convertJavaObjectToString(column.getDefaultValue());
+      clause+=" DEFAULT " + TypeConverterFactory.getInstance().findTypeConverter(database).convertJavaObjectToString(column.getDefaultValue(),database);
     }
   }
   return clause;

@@ -1,0 +1,9 @@
+{
+  Object returnValue=super.convertToCorrectJavaType(value,dataType,columnSize,decimalDigits,database);
+  if (returnValue != null && returnValue instanceof String) {
+    if (((String)returnValue).startsWith("NULL::")) {
+      return null;
+    }
+  }
+  return returnValue;
+}

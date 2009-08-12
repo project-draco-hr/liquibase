@@ -1,3 +1,0 @@
-{
-  Assert.assertEquals(new DataType("TINYINT(1)",false),getDatabase().getBooleanType());
-}

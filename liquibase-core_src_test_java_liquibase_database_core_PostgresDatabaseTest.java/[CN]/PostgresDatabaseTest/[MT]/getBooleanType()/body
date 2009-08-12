@@ -1,3 +1,0 @@
-{
-  Assert.assertEquals(new DataType("BOOLEAN",false),getDatabase().getBooleanType());
-}

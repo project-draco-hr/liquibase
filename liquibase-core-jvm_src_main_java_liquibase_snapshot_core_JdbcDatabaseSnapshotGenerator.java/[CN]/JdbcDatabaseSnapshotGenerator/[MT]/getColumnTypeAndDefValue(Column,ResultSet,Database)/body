@@ -1,10 +1,10 @@
 {
   Object defaultValue=rs.getObject("COLUMN_DEF");
   try {
-    columnInfo.setDefaultValue(database.convertDatabaseValueToJavaObject(defaultValue,columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits()));
+    columnInfo.setDefaultValue(TypeConverterFactory.getInstance().findTypeConverter(database).convertDatabaseValueToJavaObject(defaultValue,columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits(),database));
   }
  catch (  ParseException e) {
     throw new DatabaseException(e);
   }
-  columnInfo.setTypeName(database.getColumnType(rs.getString("TYPE_NAME"),columnInfo.isAutoIncrement()));
+  columnInfo.setTypeName(TypeConverterFactory.getInstance().findTypeConverter(database).getColumnType(rs.getString("TYPE_NAME"),columnInfo.isAutoIncrement()));
 }

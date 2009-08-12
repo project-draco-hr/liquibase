@@ -2,6 +2,7 @@
   CreateTableChange change=new CreateTableChange();
   ColumnConfig columnConfig=new ColumnConfig();
   columnConfig.setName("id");
+  columnConfig.setType("date");
   columnConfig.setDefaultValueDate("2007-01-02");
   change.addColumn(columnConfig);
   CreateTableStatement statement=(CreateTableStatement)change.generateStatements(new MockDatabase())[0];

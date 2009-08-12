@@ -1,0 +1,3 @@
+{
+  Assert.assertEquals(new DataType("DECIMAL",true),new MySQLTypeConverter().getCurrencyType());
+}

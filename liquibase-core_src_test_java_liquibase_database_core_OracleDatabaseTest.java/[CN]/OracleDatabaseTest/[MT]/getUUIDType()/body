@@ -1,3 +1,0 @@
-{
-  Assert.assertEquals(new DataType("RAW(16)",false),getDatabase().getUUIDType());
-}

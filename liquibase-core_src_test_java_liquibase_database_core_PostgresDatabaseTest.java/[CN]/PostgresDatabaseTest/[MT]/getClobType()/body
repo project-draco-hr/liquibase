@@ -1,3 +1,0 @@
-{
-  Assert.assertEquals(new DataType("TEXT",true),getDatabase().getClobType());
-}

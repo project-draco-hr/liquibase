@@ -1,0 +1,3 @@
+{
+  Assert.assertEquals(new DataType("NUMBER(15, 2)",false),new OracleTypeConverter().getCurrencyType());
+}

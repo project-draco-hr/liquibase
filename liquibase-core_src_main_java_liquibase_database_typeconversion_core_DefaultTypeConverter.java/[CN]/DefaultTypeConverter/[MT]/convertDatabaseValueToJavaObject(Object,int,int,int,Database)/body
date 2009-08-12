@@ -1,0 +1,11 @@
+{
+  if (defaultValue == null) {
+    return null;
+  }
+ else   if (defaultValue instanceof String) {
+    return convertToCorrectJavaType(((String)defaultValue).replaceFirst("^'","").replaceFirst("'$",""),dataType,columnSize,decimalDigits,database);
+  }
+ else {
+    return defaultValue;
+  }
+}

@@ -16,10 +16,10 @@
  else   if (this.getDefaultValueBoolean() != null) {
     String returnValue;
     if (this.getDefaultValueBoolean()) {
-      returnValue=database.getTrueBooleanValue();
+      returnValue=TypeConverterFactory.getInstance().findTypeConverter(database).getTrueBooleanValue();
     }
  else {
-      returnValue=database.getFalseBooleanValue();
+      returnValue=TypeConverterFactory.getInstance().findTypeConverter(database).getFalseBooleanValue();
     }
     if (returnValue.matches("\\d+")) {
       return returnValue;

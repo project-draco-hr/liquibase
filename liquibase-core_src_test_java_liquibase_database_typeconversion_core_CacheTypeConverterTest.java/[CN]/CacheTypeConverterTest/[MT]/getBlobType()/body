@@ -1,0 +1,3 @@
+{
+  Assert.assertEquals(new DataType("LONGVARBINARY",true),new CacheTypeConverter().getBlobType());
+}

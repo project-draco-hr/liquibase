@@ -14,6 +14,7 @@
   change.addColumn(column2);
   ColumnConfig column3=new ColumnConfig();
   column3.setName("state_id");
+  column3.setType("int");
   ConstraintsConfig column3constraints=new ConstraintsConfig();
   column3constraints.setNullable(false);
   column3constraints.setInitiallyDeferred(true);

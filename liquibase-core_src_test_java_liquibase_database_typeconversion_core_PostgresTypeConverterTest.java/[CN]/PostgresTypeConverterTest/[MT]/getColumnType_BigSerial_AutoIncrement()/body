@@ -1,0 +1,3 @@
+{
+  Assert.assertEquals("bigserial",new PostgresTypeConverter().getColumnType("bigserial",Boolean.TRUE));
+}

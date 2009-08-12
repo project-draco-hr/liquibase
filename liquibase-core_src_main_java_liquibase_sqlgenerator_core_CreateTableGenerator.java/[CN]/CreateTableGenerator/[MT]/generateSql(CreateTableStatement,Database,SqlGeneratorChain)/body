@@ -7,7 +7,7 @@
     String column=columnIterator.next();
     boolean isAutoIncrement=statement.getAutoIncrementColumns().contains(column);
     buffer.append(database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),column));
-    buffer.append(" ").append(database.getColumnType(statement.getColumnTypes().get(column),isAutoIncrement));
+    buffer.append(" ").append(TypeConverterFactory.getInstance().findTypeConverter(database).getColumnType(statement.getColumnTypes().get(column),isAutoIncrement));
     if ((database instanceof SQLiteDatabase) && (statement.getPrimaryKeyConstraint() != null) && (statement.getPrimaryKeyConstraint().getColumns().size() == 1)&& (statement.getPrimaryKeyConstraint().getColumns().contains(column))&& isAutoIncrement) {
       String pkName=StringUtils.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
       if (pkName == null) {

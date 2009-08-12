@@ -10,7 +10,7 @@
     columnConfig.setName(column.getName());
     String dataType=column.getDataTypeString(database);
     columnConfig.setType(dataType);
-    String defaultValueString=database.convertJavaObjectToString(column.getDefaultValue());
+    String defaultValueString=TypeConverterFactory.getInstance().findTypeConverter(database).convertJavaObjectToString(column.getDefaultValue(),database);
     if (defaultValueString != null) {
       defaultValueString=defaultValueString.replaceFirst("'","").replaceAll("'$","");
     }
