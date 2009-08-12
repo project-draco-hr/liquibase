@@ -1,0 +1,3 @@
+{
+  return getGenerators(database).iterator().next();
+}
