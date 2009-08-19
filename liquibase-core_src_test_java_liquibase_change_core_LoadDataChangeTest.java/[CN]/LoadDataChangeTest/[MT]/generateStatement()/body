@@ -2,7 +2,7 @@
   LoadDataChange refactoring=new LoadDataChange();
   refactoring.setSchemaName("SCHEMA_NAME");
   refactoring.setTableName("TABLE_NAME");
-  refactoring.setFile("changelogs/sample.data1.csv");
+  refactoring.setFile("liquibase/change/core/sample.data1.csv");
   refactoring.setFileOpener(new JUnitResourceAccessor());
   SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
   assertEquals(2,sqlStatements.length);

@@ -2,7 +2,7 @@
   LoadDataChange refactoring=new LoadDataChange();
   refactoring.setSchemaName("SCHEMA_NAME");
   refactoring.setTableName("TABLE_NAME");
-  refactoring.setFile("changelogs/sample.data1-excel.csv");
+  refactoring.setFile("liquibase/change/core/sample.data1-excel.csv");
   refactoring.setFileOpener(new JUnitResourceAccessor());
   LoadDataColumnConfig ageConfig=new LoadDataColumnConfig();
   ageConfig.setHeader("age");
