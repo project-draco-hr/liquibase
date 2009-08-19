@@ -1,0 +1,12 @@
+{
+  String file=resource.getFile();
+  String path=file.split("!")[0];
+  if (path.matches("file:\\/[A-Za-z]:\\/.*")) {
+    path=path.replaceFirst("file:\\/","");
+  }
+ else {
+    path=path.replaceFirst("file:","");
+  }
+  File zipfile=new File(path);
+  return zipfile;
+}
