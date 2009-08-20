@@ -1,0 +1,8 @@
+{
+  return new VarcharType(){
+    @Override public String getDataTypeName(){
+      return "VARCHAR2";
+    }
+  }
+;
+}
