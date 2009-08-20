@@ -3,7 +3,7 @@
   refactoring.setSchemaName("SCHEMA_NAME");
   refactoring.setTableName("TABLE_NAME");
   refactoring.setFile("liquibase/change/core/sample.data1.csv");
-  refactoring.setFileOpener(new JUnitResourceAccessor());
+  refactoring.setFileOpener(new ClassLoaderResourceAccessor());
   SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
   assertEquals(2,sqlStatements.length);
   assertTrue(sqlStatements[0] instanceof InsertStatement);
