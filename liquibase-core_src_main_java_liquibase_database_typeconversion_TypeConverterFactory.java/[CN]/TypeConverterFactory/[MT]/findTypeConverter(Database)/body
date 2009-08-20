@@ -1,24 +1,48 @@
 {
-  if (database instanceof OracleDatabase) {
-    return new OracleTypeConverter();
+  if (database instanceof CacheDatabase) {
+    return new CacheTypeConverter();
+  }
+  if (database instanceof DB2Database) {
+    return new DB2TypeConverter();
+  }
+  if (database instanceof DerbyDatabase) {
+    return new DerbyTypeConverter();
+  }
+  if (database instanceof FirebirdDatabase) {
+    return new FirebirdTypeConverter();
+  }
+  if (database instanceof HsqlDatabase) {
+    return new HsqlTypeConverter();
+  }
+  if (database instanceof H2Database) {
+    return new H2TypeConverter();
   }
   if (database instanceof InformixDatabase) {
     return new InformixTypeConverter();
   }
+  if (database instanceof MaxDBDatabase) {
+    return new MaxDBTypeConverter();
+  }
+  if (database instanceof MSSQLDatabase) {
+    return new MSSQLTypeConverter();
+  }
+  if (database instanceof MySQLDatabase) {
+    return new MySQLTypeConverter();
+  }
+  if (database instanceof OracleDatabase) {
+    return new OracleTypeConverter();
+  }
   if (database instanceof PostgresDatabase) {
     return new PostgresTypeConverter();
   }
-  if (database instanceof MySQLDatabase) {
-    return new MSSQLTypeConverter();
-  }
-  if (database instanceof SybaseDatabase) {
-    return new SybaseTypeConverter();
+  if (database instanceof SQLiteDatabase) {
+    return new SQLiteTypeConverter();
   }
   if (database instanceof SybaseASADatabase) {
     return new SybaseASATypeConverter();
   }
-  if (database instanceof DerbyDatabase) {
-    return new DerbyTypeConverter();
+  if (database instanceof SybaseDatabase) {
+    return new SybaseTypeConverter();
   }
   return new DefaultTypeConverter();
 }
