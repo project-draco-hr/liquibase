@@ -1,3 +1,24 @@
 {
+  if (database instanceof OracleDatabase) {
+    return new OracleTypeConverter();
+  }
+  if (database instanceof InformixDatabase) {
+    return new InformixTypeConverter();
+  }
+  if (database instanceof PostgresDatabase) {
+    return new PostgresTypeConverter();
+  }
+  if (database instanceof MySQLDatabase) {
+    return new MSSQLTypeConverter();
+  }
+  if (database instanceof SybaseDatabase) {
+    return new SybaseTypeConverter();
+  }
+  if (database instanceof SybaseASADatabase) {
+    return new SybaseASATypeConverter();
+  }
+  if (database instanceof DerbyDatabase) {
+    return new DerbyTypeConverter();
+  }
   return new DefaultTypeConverter();
 }
