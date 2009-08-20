@@ -90,6 +90,9 @@
   if (returnTypeName == null) {
     throw new UnexpectedLiquibaseException("Could not determine " + dataTypeName + " for "+ this.getClass().getName());
   }
+  if (precision != null && !returnTypeName.getSupportsPrecision()) {
+    throw new UnexpectedLiquibaseException("Type " + returnTypeName.getClass() + " doesn't support precision but precision was specified: "+ columnType);
+  }
   if (precision != null && returnTypeName.getSupportsPrecision()) {
     return returnTypeName.getDataTypeName() + "(" + precision+ ")";
   }
