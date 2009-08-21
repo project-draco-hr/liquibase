@@ -7,6 +7,7 @@
  else {
     path=path.replaceFirst("file:","");
   }
+  path=URLDecoder.decode(path);
   File zipfile=new File(path);
   return zipfile;
 }

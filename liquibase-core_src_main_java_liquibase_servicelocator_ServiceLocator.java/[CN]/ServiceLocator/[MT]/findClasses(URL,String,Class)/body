@@ -1,2 +1,69 @@
 {
+  logger.debug("ServiceLocator finding " + packageName + " classes in "+ resource.toExternalForm()+ " matching interface "+ requiredInterface.getName());
+  List<Class> classes=new ArrayList<Class>();
+  List<String> potentialClassNames=new ArrayList<String>();
+  if (resource.getProtocol().equals("jar")) {
+    File zipfile=extractZipFile(resource);
+    try {
+      JarFile jarFile=new JarFile(zipfile);
+      Enumeration<JarEntry> entries=jarFile.entries();
+      while (entries.hasMoreElements()) {
+        JarEntry entry=entries.nextElement();
+        if (entry.getName().startsWith(packageName.replaceAll("\\.","/")) && entry.getName().endsWith(".class")) {
+          potentialClassNames.add(entry.getName().replaceAll("\\/",".").substring(0,entry.getName().length() - ".class".length()));
+        }
+      }
+    }
+ catch (    ZipException e) {
+      throw (ZipException)new ZipException(e.getMessage() + " for " + zipfile).initCause(e);
+    }
+  }
+ else   if (resource.getProtocol().equals("file")) {
+    File directory=new File(resource.getFile().replace("%20"," "));
+    if (!directory.exists()) {
+      return classes;
+    }
+    for (    File file : directory.listFiles()) {
+      if (file.isDirectory()) {
+        if (file.getName().contains(".")) {
+          throw new IllegalStateException("Find . in directory name: " + file);
+        }
+        classes.addAll(findClasses(file.toURL(),packageName + "." + file.getName(),requiredInterface));
+      }
+ else       if (file.getName().endsWith(".class")) {
+        potentialClassNames.add(packageName + '.' + file.getName().substring(0,file.getName().length() - ".class".length()));
+      }
+    }
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Cannot read plugin classes from protocol " + resource.getProtocol());
+  }
+  for (  String potentialClassName : potentialClassNames) {
+    Class<?> clazz=null;
+    try {
+      clazz=Class.forName(potentialClassName,true,resourceAccessor.toClassLoader());
+    }
+ catch (    NoClassDefFoundError e) {
+      logger.warning("Could not configure extension class " + potentialClassName + ": Missing dependency "+ e.getMessage());
+      continue;
+    }
+catch (    Throwable e) {
+      logger.warning("Could not configure extension class " + potentialClassName + ": "+ e.getMessage());
+      continue;
+    }
+    if (!clazz.isInterface() && !Modifier.isAbstract(clazz.getModifiers()) && isCorrectType(clazz,requiredInterface)) {
+      logger.debug(potentialClassName + " matches " + requiredInterface.getName());
+      try {
+        clazz.getConstructor();
+        classes.add(clazz);
+      }
+ catch (      NoSuchMethodException e) {
+        URL classAsUrl=resourceAccessor.toClassLoader().getResource(clazz.getName().replaceAll("\\.","/") + ".class");
+        if (!clazz.getName().equals("liquibase.database.core.HibernateDatabase") && !clazz.getName().equals("liquibase.executor.LoggingExecutor") && (classAsUrl != null && !classAsUrl.toExternalForm().contains("build-test/liquibase/"))) {
+          logger.warning("Class " + clazz.getName() + " does not have a public no-arg constructor, so it can't be used as a "+ requiredInterface.getName()+ " service");
+        }
+      }
+    }
+  }
+  return classes;
 }
