@@ -1,0 +1,6 @@
+{
+  if (values == null) {
+    return null;
+  }
+  return getConcatSql(Arrays.asList(values));
+}

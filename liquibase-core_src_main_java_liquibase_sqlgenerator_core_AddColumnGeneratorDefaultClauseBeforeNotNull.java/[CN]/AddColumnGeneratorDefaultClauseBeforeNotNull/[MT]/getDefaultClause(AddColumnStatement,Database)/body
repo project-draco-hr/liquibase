@@ -1,7 +1,8 @@
 {
   String clause="";
-  if (statement.getDefaultValue() != null) {
-    clause+=" DEFAULT " + TypeConverterFactory.getInstance().findTypeConverter(database).convertJavaObjectToString(statement.getDefaultValue(),database);
+  Object defaultValue=statement.getDefaultValue();
+  if (defaultValue != null) {
+    clause+=" DEFAULT " + TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(defaultValue).convertObjectToString(defaultValue,database);
   }
   return clause;
 }

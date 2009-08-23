@@ -1,0 +1,8 @@
+{
+  return new ClobType(){
+    @Override public String getDataTypeName(){
+      return "LONGVARCHAR";
+    }
+  }
+;
+}

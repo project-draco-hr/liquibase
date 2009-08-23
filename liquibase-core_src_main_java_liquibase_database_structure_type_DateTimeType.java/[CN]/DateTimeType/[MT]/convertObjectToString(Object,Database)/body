@@ -1,0 +1,9 @@
+{
+  if (value == null) {
+    return null;
+  }
+ else   if (value instanceof ComputedDateValue) {
+    return ((ComputedDateValue)value).getValue();
+  }
+  return database.getDateTimeLiteral(((java.sql.Timestamp)value));
+}

@@ -2,11 +2,11 @@
   SqlGeneratorFactory factory=SqlGeneratorFactory.getInstance();
   factory.getGenerators().clear();
   assertEquals(0,factory.getGenerators().size());
-  AddAutoIncrementGeneratorHsql sqlGenerator=new AddAutoIncrementGeneratorHsql();
+  AddAutoIncrementGeneratorHsqlH2l sqlGenerator=new AddAutoIncrementGeneratorHsqlH2l();
   factory.register(new AddAutoIncrementGenerator());
   factory.register(sqlGenerator);
   factory.register(new AddAutoIncrementGeneratorDB2());
   assertEquals(3,factory.getGenerators().size());
-  factory.unregister(AddAutoIncrementGeneratorHsql.class);
+  factory.unregister(AddAutoIncrementGeneratorHsqlH2l.class);
   assertEquals(2,factory.getGenerators().size());
 }

@@ -20,7 +20,7 @@
   if (columnTypeName.toLowerCase().startsWith("enum") || columnTypeName.toLowerCase().startsWith("set")) {
     columnInfo.setTypeName(tableSchema.get(columnName).get(0));
     try {
-      String tmpDefaultValue=(String)TypeConverterFactory.getInstance().findTypeConverter(database).convertDatabaseValueToJavaObject(tableSchema.get(columnName).get(1),columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits(),database);
+      String tmpDefaultValue=(String)TypeConverterFactory.getInstance().findTypeConverter(database).convertDatabaseValueToObject(tableSchema.get(columnName).get(1),columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits(),database);
       if ("".equals(tmpDefaultValue)) {
         columnInfo.setDefaultValue(null);
       }

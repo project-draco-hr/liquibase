@@ -1,6 +1,6 @@
 {
   ValidationErrors validationErrors=new ValidationErrors();
-  if (database instanceof FirebirdDatabase || database instanceof HsqlDatabase) {
+  if (database instanceof FirebirdDatabase || database instanceof HsqlDatabase || database instanceof H2Database) {
     validationErrors.checkDisallowedField("incrementBy",alterSequenceStatement.getIncrementBy());
     validationErrors.checkDisallowedField("maxValue",alterSequenceStatement.getMaxValue());
     validationErrors.checkDisallowedField("minValue",alterSequenceStatement.getMinValue());

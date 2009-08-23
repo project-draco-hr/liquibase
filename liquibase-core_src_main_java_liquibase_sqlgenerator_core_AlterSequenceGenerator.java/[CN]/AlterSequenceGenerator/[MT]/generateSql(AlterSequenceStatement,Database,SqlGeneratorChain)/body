@@ -6,7 +6,7 @@
     buffer.append(" INCREMENT BY ").append(statement.getIncrementBy());
   }
   if (statement.getMinValue() != null) {
-    if (database instanceof FirebirdDatabase || database instanceof HsqlDatabase) {
+    if (database instanceof FirebirdDatabase || database instanceof HsqlDatabase || database instanceof H2Database) {
       buffer.append(" RESTART WITH ").append(statement.getMinValue());
     }
  else {

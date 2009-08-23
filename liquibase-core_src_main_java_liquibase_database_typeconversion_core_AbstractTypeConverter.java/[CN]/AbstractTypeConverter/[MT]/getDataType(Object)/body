@@ -1,0 +1,38 @@
+{
+  if (object instanceof BigInteger) {
+    return getBigIntType();
+  }
+ else   if (object instanceof Boolean) {
+    return getBooleanType();
+  }
+ else   if (object instanceof String) {
+    return getVarcharType();
+  }
+ else   if (object instanceof java.sql.Date) {
+    return getDateType();
+  }
+ else   if (object instanceof java.sql.Timestamp) {
+    return getDateTimeType();
+  }
+ else   if (object instanceof java.sql.Time) {
+    return getTimeType();
+  }
+ else   if (object instanceof java.util.Date) {
+    return getDateTimeType();
+  }
+ else   if (object instanceof Double) {
+    return getDoubleType();
+  }
+ else   if (object instanceof Float) {
+    return getFloatType();
+  }
+ else   if (object instanceof Integer) {
+    return getIntType();
+  }
+ else   if (object instanceof Long) {
+    return getBigIntType();
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown object type " + object.getClass().getName());
+  }
+}
