@@ -1,7 +1,7 @@
 {
   this.statementUnderTest=new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME);
   assertCorrect("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",SybaseDatabase.class);
-  assertCorrect("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",MSSQLDatabase.class);
+  assertCorrect("alter table [dbo].[adduqtest] add constraint [uq_test] unique ([coltomakeuq])",MSSQLDatabase.class);
   assertCorrect("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",SybaseASADatabase.class);
   assertCorrect("alter table `adduqtest` add constraint `uq_test` unique (`coltomakeuq`)",MySQLDatabase.class);
   assertCorrect("alter table adduqtest add constraint unique (coltomakeuq) constraint uq_test",InformixDatabase.class);

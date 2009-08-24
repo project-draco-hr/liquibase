@@ -6,6 +6,6 @@
   assertCorrect("alter table \"adduqtest\" add unique (\"coltomakeuq\")",PostgresDatabase.class);
   assertCorrect("alter table adduqtest add unique (coltomakeuq)",DerbyDatabase.class);
   assertCorrect("alter table [adduqtest] add unique ([coltomakeuq])",SybaseASADatabase.class,SybaseDatabase.class);
-  assertCorrect("alter table [adduqtest] add unique ([coltomakeuq])",MSSQLDatabase.class);
+  assertCorrect("alter table [dbo].[adduqtest] add unique ([coltomakeuq])",MSSQLDatabase.class);
   assertCorrect("alter table [adduqtest] add unique ([coltomakeuq])");
 }

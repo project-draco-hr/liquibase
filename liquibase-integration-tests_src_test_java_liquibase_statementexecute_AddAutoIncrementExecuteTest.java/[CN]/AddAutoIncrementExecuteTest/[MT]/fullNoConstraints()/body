@@ -1,7 +1,7 @@
 {
   this.statementUnderTest=new AddColumnStatement(null,"table_name",TABLE_NAME,COLUMN_NAME,42);
   assertCorrect("alter table [table_name] add [table_name] column_name null default 42",SybaseDatabase.class);
-  assertCorrect("alter table [table_name] add [table_name] column_name constraint df_table_name_table_name default 42",MSSQLDatabase.class);
+  assertCorrect("alter table [dbo].[table_name] add [table_name] column_name constraint df_table_name_table_name default 42",MSSQLDatabase.class);
   assertCorrect("not supported. fixme!!",SQLiteDatabase.class);
   assertCorrect("alter table table_name add table_name column_name default 42",PostgresDatabase.class,InformixDatabase.class,OracleDatabase.class,DerbyDatabase.class,HsqlDatabase.class,DB2Database.class,H2Database.class,CacheDatabase.class,FirebirdDatabase.class,MaxDBDatabase.class);
   assertCorrect("alter table [table_name] add [table_name] column_name null default 42",SybaseASADatabase.class);
