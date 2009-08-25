@@ -1,4 +1,4 @@
 {
-  this.dataTypeName=dataTypeName;
+  super(dataTypeName);
   this.supportsPrecision=supportsPrecision;
 }

@@ -1,8 +1,3 @@
 {
-  return new BigIntType(){
-    @Override public String getDataTypeName(){
-      return "INT8";
-    }
-  }
-;
+  return new BigIntType("INT8");
 }

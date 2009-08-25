@@ -1,0 +1,11 @@
+{
+  return new BooleanType(){
+    @Override public String getTrueBooleanValue(){
+      return "'t'";
+    }
+    @Override public String getFalseBooleanValue(){
+      return "'f'";
+    }
+  }
+;
+}

@@ -1,8 +1,3 @@
 {
-  return new BlobType(){
-    @Override public String getDataTypeName(){
-      return "IMAGE";
-    }
-  }
-;
+  return new BlobType("IMAGE");
 }

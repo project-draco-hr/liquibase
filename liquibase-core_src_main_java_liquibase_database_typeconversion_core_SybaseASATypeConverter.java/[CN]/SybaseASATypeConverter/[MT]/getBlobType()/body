@@ -1,8 +1,3 @@
 {
-  return new BlobType(){
-    @Override public String getDataTypeName(){
-      return "LONG BINARY";
-    }
-  }
-;
+  return new BlobType("LONG BINARY");
 }

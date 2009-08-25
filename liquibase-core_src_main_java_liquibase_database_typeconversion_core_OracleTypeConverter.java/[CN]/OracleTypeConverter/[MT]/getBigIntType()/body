@@ -1,8 +1,3 @@
 {
-  return new BigIntType(){
-    @Override public String getDataTypeName(){
-      return "NUMBER(19,0)";
-    }
-  }
-;
+  return new BigIntType("NUMBER(19,0)");
 }

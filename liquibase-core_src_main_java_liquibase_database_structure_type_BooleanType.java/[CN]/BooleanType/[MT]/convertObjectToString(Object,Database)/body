@@ -5,10 +5,10 @@
   String returnValue;
   TypeConverter converter=TypeConverterFactory.getInstance().findTypeConverter(database);
   if (((Boolean)value)) {
-    returnValue=converter.getTrueBooleanValue();
+    returnValue=converter.getBooleanType().getTrueBooleanValue();
   }
  else {
-    returnValue=converter.getFalseBooleanValue();
+    returnValue=converter.getBooleanType().getFalseBooleanValue();
   }
   if (returnValue.matches("\\d+")) {
     return returnValue;

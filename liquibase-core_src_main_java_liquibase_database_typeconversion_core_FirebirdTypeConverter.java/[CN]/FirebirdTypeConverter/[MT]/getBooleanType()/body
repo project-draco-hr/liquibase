@@ -1,8 +1,3 @@
 {
-  return new BooleanType(){
-    @Override public String getDataTypeName(){
-      return "SMALLINT";
-    }
-  }
-;
+  return new BooleanType.NumericBooleanType("SMALLINT");
 }

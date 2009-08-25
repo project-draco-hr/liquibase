@@ -1,8 +1,3 @@
 {
-  return new DateTimeType(){
-    @Override public String getDataTypeName(){
-      return "DATETIME " + DATETIME_FIELD_QUALIFIER;
-    }
-  }
-;
+  return new DateTimeType("DATETIME " + DATETIME_FIELD_QUALIFIER);
 }

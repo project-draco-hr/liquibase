@@ -16,20 +16,12 @@
  else   if (this.getDefaultValueBoolean() != null) {
     String returnValue;
     if (this.getDefaultValueBoolean()) {
-      returnValue=TypeConverterFactory.getInstance().findTypeConverter(database).getTrueBooleanValue();
+      returnValue=TypeConverterFactory.getInstance().findTypeConverter(database).getBooleanType().getTrueBooleanValue();
     }
  else {
-      returnValue=TypeConverterFactory.getInstance().findTypeConverter(database).getFalseBooleanValue();
+      returnValue=TypeConverterFactory.getInstance().findTypeConverter(database).getBooleanType().getFalseBooleanValue();
     }
-    if (returnValue.matches("\\d+")) {
-      return returnValue;
-    }
- else {
-      if (database instanceof InformixDatabase) {
-        return returnValue;
-      }
-      return "'" + returnValue + "'";
-    }
+    return returnValue;
   }
  else   if (this.getDefaultValueDate() != null) {
     Date defaultDateValue=this.getDefaultValueDate();

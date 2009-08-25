@@ -1,8 +1,3 @@
 {
-  return new UUIDType(){
-    @Override public String getDataTypeName(){
-      return "UNIQUEIDENTIFIER";
-    }
-  }
-;
+  return new UUIDType("UNIQUEIDENTIFIER");
 }
