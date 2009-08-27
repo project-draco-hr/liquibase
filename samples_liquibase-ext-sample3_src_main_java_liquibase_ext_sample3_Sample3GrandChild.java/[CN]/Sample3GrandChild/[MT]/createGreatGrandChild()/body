@@ -1,3 +1,0 @@
-{
-  return new Sample3Child();
-}

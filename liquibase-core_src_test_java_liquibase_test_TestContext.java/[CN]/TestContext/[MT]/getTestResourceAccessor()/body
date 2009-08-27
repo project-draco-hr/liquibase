@@ -1,7 +1,7 @@
 {
   if (resourceAccessor == null) {
     File integrationJarsDir=new File(TestContext.getInstance().findIntegrationTestProjectRoot(),"src/test/resources/ext/jars");
-    resourceAccessor=new ClassLoaderResourceAccessor(new URLClassLoader(new URL[]{new File(TestContext.getInstance().findCoreJvmProjectRoot(),"/target/classe").toURL(),new File(TestContext.getInstance().findCoreProjectRoot(),"/target/classe").toURL()}));
+    resourceAccessor=new ClassLoaderResourceAccessor(new URLClassLoader(new URL[]{new File(TestContext.getInstance().findCoreJvmProjectRoot(),"/target/classes").toURL(),new File(TestContext.getInstance().findCoreProjectRoot(),"/target/classes").toURL()}));
   }
   return resourceAccessor;
 }

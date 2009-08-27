@@ -1,0 +1,4 @@
+{
+  child=new SampleChild();
+  return child;
+}

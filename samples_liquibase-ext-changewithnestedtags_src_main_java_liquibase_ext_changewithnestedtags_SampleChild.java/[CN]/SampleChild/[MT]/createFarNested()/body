@@ -1,0 +1,4 @@
+{
+  grandChild=new SampleGrandChild();
+  return grandChild;
+}

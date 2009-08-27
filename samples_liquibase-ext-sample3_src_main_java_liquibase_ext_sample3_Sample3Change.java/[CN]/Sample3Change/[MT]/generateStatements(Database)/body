@@ -1,3 +1,0 @@
-{
-  return new SqlStatement[]{new CreateTableStatement(null,"sample3").addColumn("id","int").addColumn("name","varchar(5)")};
-}
