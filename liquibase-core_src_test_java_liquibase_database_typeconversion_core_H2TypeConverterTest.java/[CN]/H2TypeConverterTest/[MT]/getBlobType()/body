@@ -1,3 +1,3 @@
 {
-  assertTypesEqual(new UnknownType("LONGVARBINARY",true),new H2TypeConverter().getBlobType());
+  assertEquals("LONGVARBINARY",new H2TypeConverter().getBlobType().toString());
 }

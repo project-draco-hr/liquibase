@@ -1,3 +1,3 @@
 {
-  super("TIME");
+  super("TIME",0,0);
 }

@@ -1,3 +1,3 @@
 {
-  assertTypesEqual(new UnknownType("CHAR(36)",false),new CacheTypeConverter().getUUIDType());
+  assertEquals("CHAR(36)",new CacheTypeConverter().getUUIDType().toString());
 }

@@ -1,0 +1,24 @@
+{
+  DataType type=super.getDataType(columnTypeString,autoIncrement);
+  if (type.getDataTypeName().startsWith("TEXT(")) {
+    type=getClobType();
+  }
+ else   if (type.getDataTypeName().toLowerCase().startsWith("float8")) {
+    type.setDataTypeName("FLOAT8");
+  }
+ else   if (type.getDataTypeName().toLowerCase().startsWith("float4")) {
+    type.setDataTypeName("FLOAT4");
+  }
+  if (autoIncrement != null && autoIncrement) {
+    if ("integer".equals(type.getDataTypeName().toLowerCase())) {
+      type.setDataTypeName("serial");
+    }
+ else     if ("bigint".equals(type.getDataTypeName().toLowerCase()) || "bigserial".equals(type.getDataTypeName().toLowerCase())) {
+      type.setDataTypeName("bigserial");
+    }
+ else {
+      type.setDataTypeName("serial");
+    }
+  }
+  return type;
+}

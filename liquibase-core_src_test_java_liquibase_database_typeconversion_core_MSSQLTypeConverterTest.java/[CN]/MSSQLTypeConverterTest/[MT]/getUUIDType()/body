@@ -1,3 +1,3 @@
 {
-  assertTypesEqual(new UnknownType("UNIQUEIDENTIFIER",false),new MSSQLTypeConverter().getUUIDType());
+  assertEquals("UNIQUEIDENTIFIER",new MSSQLTypeConverter().getUUIDType().toString());
 }

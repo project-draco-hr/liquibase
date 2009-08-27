@@ -1,3 +1,0 @@
-{
-  assertEquals(type1.getDataTypeName(),type2.getDataTypeName());
-}

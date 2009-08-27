@@ -1,0 +1,6 @@
+{
+  if (maxParameters < 2) {
+    throw new UnexpectedLiquibaseException("Type " + getClass() + " doesn't support second parameters but one was specified");
+  }
+  this.secondParameter=secondParameter;
+}

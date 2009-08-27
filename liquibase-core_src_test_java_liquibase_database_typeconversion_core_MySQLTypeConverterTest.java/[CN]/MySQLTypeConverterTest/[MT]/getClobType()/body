@@ -1,3 +1,3 @@
 {
-  assertTypesEqual(new UnknownType("TEXT",true),new MySQLTypeConverter().getClobType());
+  assertEquals("TEXT",new MySQLTypeConverter().getClobType().toString());
 }

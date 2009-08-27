@@ -1,0 +1,5 @@
+{
+  this.dataTypeName=dataTypeName;
+  this.minParameters=minParameters;
+  this.maxParameters=maxParameters;
+}

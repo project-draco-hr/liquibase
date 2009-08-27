@@ -1,3 +1,3 @@
 {
-  assertTypesEqual(new UnknownType("DATETIME",false),new MySQLTypeConverter().getDateTimeType());
+  assertEquals("DATETIME",new MySQLTypeConverter().getDateTimeType().toString());
 }

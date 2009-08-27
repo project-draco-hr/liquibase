@@ -8,7 +8,7 @@
     alterTable+=" " + getModifyString(database) + " ";
     alterTable+=database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),column.getName());
     alterTable+=getPreDataTypeString(database);
-    alterTable+=TypeConverterFactory.getInstance().findTypeConverter(database).getColumnType(column.getType(),false);
+    alterTable+=TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(column.getType(),false);
     if (supportsExtraMetaData(database)) {
       if (!column.isNullable()) {
         alterTable+=" NOT NULL";

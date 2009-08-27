@@ -1,5 +1,3 @@
 {
-  int result;
-  result=getDataTypeName().hashCode();
-  return result;
+  return toString().hashCode();
 }

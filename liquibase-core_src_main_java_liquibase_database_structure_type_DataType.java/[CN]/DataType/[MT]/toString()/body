@@ -1,0 +1,11 @@
+{
+  String returnString=getDataTypeName();
+  if (getFirstParameter() != null) {
+    returnString+="(" + getFirstParameter();
+    if (getSecondParameter() != null) {
+      returnString+="," + getSecondParameter();
+    }
+    returnString+=")";
+  }
+  return returnString;
+}

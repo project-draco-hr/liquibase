@@ -1,3 +1,3 @@
 {
-  assertTypesEqual(new UnknownType("DECIMAL",true),new MySQLTypeConverter().getCurrencyType());
+  assertEquals("DECIMAL",new MySQLTypeConverter().getCurrencyType().toString());
 }

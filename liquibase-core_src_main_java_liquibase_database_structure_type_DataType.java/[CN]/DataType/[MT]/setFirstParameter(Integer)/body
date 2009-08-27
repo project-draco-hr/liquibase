@@ -1,0 +1,6 @@
+{
+  if (maxParameters < 1) {
+    throw new UnexpectedLiquibaseException("Type " + getClass() + " doesn't support precision but precision was specified");
+  }
+  this.firstParameter=firstParameter;
+}

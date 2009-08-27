@@ -1,3 +1,3 @@
 {
-  assertTypesEqual(new UnknownType("DATETIME",false),new CacheTypeConverter().getDateTimeType());
+  assertEquals("DATETIME",new CacheTypeConverter().getDateTimeType().toString());
 }

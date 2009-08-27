@@ -1,3 +1,3 @@
 {
-  assertTypesEqual(new UnknownType("TIMESTAMP WITH TIME ZONE",false),new PostgresTypeConverter().getDateTimeType());
+  assertEquals("TIMESTAMP WITH TIME ZONE",new PostgresTypeConverter().getDateTimeType().toString());
 }

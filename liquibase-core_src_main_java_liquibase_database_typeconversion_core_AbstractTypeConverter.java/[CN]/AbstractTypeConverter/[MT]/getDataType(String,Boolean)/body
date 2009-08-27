@@ -1,0 +1,97 @@
+{
+  String dataTypeName=null;
+  String precision=null;
+  if (columnTypeString.startsWith("java.sql.Types") && columnTypeString.contains("(")) {
+    precision=columnTypeString.substring(columnTypeString.indexOf("(") + 1,columnTypeString.indexOf(")"));
+    dataTypeName=columnTypeString.substring(columnTypeString.lastIndexOf(".") + 1,columnTypeString.indexOf("("));
+  }
+ else   if (columnTypeString.startsWith("java.sql.Types")) {
+    dataTypeName=columnTypeString.substring(columnTypeString.lastIndexOf(".") + 1);
+  }
+ else   if (columnTypeString.contains("(")) {
+    precision=columnTypeString.substring(columnTypeString.indexOf("(") + 1,columnTypeString.indexOf(")"));
+    dataTypeName=columnTypeString.substring(0,columnTypeString.indexOf("("));
+  }
+ else {
+    dataTypeName=columnTypeString;
+  }
+  DataType returnTypeName=null;
+  if (dataTypeName.equalsIgnoreCase("BIGINT")) {
+    returnTypeName=getBigIntType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("NUMBER")) {
+    returnTypeName=getNumberType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("BLOB")) {
+    returnTypeName=getBlobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("BOOLEAN")) {
+    returnTypeName=getBooleanType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("CHAR")) {
+    returnTypeName=getCharType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("CLOB")) {
+    returnTypeName=getClobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("CURRENCY")) {
+    returnTypeName=getCurrencyType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("DATE")) {
+    returnTypeName=getDateType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("DATETIME")) {
+    returnTypeName=getDateTimeType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("DOUBLE")) {
+    returnTypeName=getDoubleType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("FLOAT")) {
+    returnTypeName=getFloatType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("INT")) {
+    returnTypeName=getIntType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("INTEGER")) {
+    returnTypeName=getIntType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("LONGVARBINARY")) {
+    returnTypeName=getBlobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("LONGVARCHAR")) {
+    returnTypeName=getClobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("TEXT")) {
+    returnTypeName=getClobType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("TIME")) {
+    returnTypeName=getTimeType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("TIMESTAMP")) {
+    returnTypeName=getDateTimeType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("TINYINT")) {
+    returnTypeName=getTinyIntType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("UUID")) {
+    returnTypeName=getUUIDType();
+  }
+ else   if (dataTypeName.equalsIgnoreCase("VARCHAR")) {
+    returnTypeName=getVarcharType();
+  }
+ else {
+    if (columnTypeString.startsWith("java.sql.Types")) {
+      returnTypeName=getTypeFromMetaData(dataTypeName);
+    }
+ else {
+      return new CustomType(columnTypeString,0,2);
+    }
+  }
+  if (returnTypeName == null) {
+    throw new UnexpectedLiquibaseException("Could not determine " + dataTypeName + " for "+ this.getClass().getName());
+  }
+  if (precision != null) {
+    returnTypeName.setFirstParameter(Integer.parseInt(precision));
+  }
+  return returnTypeName;
+}

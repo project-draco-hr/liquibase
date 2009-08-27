@@ -1,3 +1,3 @@
 {
-  assertTypesEqual(new UnknownType("BIT",false),new MSSQLTypeConverter().getBooleanType());
+  assertEquals("BIT",new MSSQLTypeConverter().getBooleanType().toString());
 }

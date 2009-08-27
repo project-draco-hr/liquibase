@@ -1,0 +1,9 @@
+{
+  DataType type=super.getDataType(columnTypeString,autoIncrement);
+  if (type.getDataTypeName().startsWith("BLOB SUB_TYPE <0")) {
+    return getBlobType();
+  }
+ else {
+    return type;
+  }
+}
