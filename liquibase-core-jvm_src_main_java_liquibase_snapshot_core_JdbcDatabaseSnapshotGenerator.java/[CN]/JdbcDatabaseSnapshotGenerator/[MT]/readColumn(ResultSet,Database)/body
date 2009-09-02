@@ -1,0 +1,28 @@
+{
+  Column column=new Column();
+  String tableName=convertFromDatabaseName(rs.getString("TABLE_NAME"));
+  String columnName=convertFromDatabaseName(rs.getString("COLUMN_NAME"));
+  String schemaName=convertFromDatabaseName(rs.getString("TABLE_SCHEM"));
+  String catalogName=convertFromDatabaseName(rs.getString("TABLE_CAT"));
+  String remarks=rs.getString("REMARKS");
+  if (database.isSystemTable(catalogName,schemaName,tableName) || database.isSystemView(catalogName,schemaName,tableName)) {
+    return null;
+  }
+  column.setName(columnName);
+  column.setDataType(rs.getInt("DATA_TYPE"));
+  column.setColumnSize(rs.getInt("COLUMN_SIZE"));
+  column.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
+  int nullable=rs.getInt("NULLABLE");
+  if (nullable == DatabaseMetaData.columnNoNulls) {
+    column.setNullable(false);
+  }
+ else   if (nullable == DatabaseMetaData.columnNullable) {
+    column.setNullable(true);
+  }
+  Table table=new Table(tableName);
+  table.setSchema(schemaName);
+  column.setTable(table);
+  getColumnTypeAndDefValue(column,rs,database);
+  column.setRemarks(remarks);
+  return column;
+}

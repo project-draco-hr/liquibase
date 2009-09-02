@@ -1,0 +1,22 @@
+{
+  ResultSet rs=null;
+  try {
+    rs=getMetaData(database).getColumns(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),tableName,columnName);
+    if (!rs.next()) {
+      return null;
+    }
+    return readColumn(rs,database);
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (rs != null) {
+      try {
+        rs.close();
+      }
+ catch (      SQLException e) {
+      }
+    }
+  }
+}

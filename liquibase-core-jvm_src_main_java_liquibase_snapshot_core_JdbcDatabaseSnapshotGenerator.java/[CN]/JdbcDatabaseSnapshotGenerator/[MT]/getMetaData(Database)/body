@@ -1,0 +1,7 @@
+{
+  DatabaseMetaData databaseMetaData=null;
+  if (database.getConnection() != null) {
+    databaseMetaData=((JdbcConnection)database.getConnection()).getUnderlyingConnection().getMetaData();
+  }
+  return databaseMetaData;
+}

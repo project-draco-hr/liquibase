@@ -4,58 +4,45 @@
   Statement selectStatement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
   ResultSet rs=databaseMetaData.getColumns(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),null,null);
   while (rs.next()) {
-    Column columnInfo=new Column();
-    String tableName=convertFromDatabaseName(rs.getString("TABLE_NAME"));
-    String columnName=convertFromDatabaseName(rs.getString("COLUMN_NAME"));
-    String schemaName=convertFromDatabaseName(rs.getString("TABLE_SCHEM"));
-    String catalogName=convertFromDatabaseName(rs.getString("TABLE_CAT"));
-    String remarks=rs.getString("REMARKS");
+    Column column=readColumn(rs,database);
+    if (column == null) {
+      continue;
+    }
+    Table tempTable=column.getTable();
+    column.setTable(null);
     Table table;
-    if (database.isSystemTable(catalogName,schemaName,tableName) || database.isLiquibaseTable(tableName)) {
-      if (tableName.equalsIgnoreCase(database.getDatabaseChangeLogTableName())) {
+    if (database.isLiquibaseTable(tempTable.getName())) {
+      if (tempTable.getName().equalsIgnoreCase(database.getDatabaseChangeLogTableName())) {
         table=snapshot.getDatabaseChangeLogTable();
       }
- else       if (tableName.equalsIgnoreCase(database.getDatabaseChangeLogLockTableName())) {
+ else       if (tempTable.getName().equalsIgnoreCase(database.getDatabaseChangeLogLockTableName())) {
         table=snapshot.getDatabaseChangeLogLockTable();
       }
  else {
-        continue;
+        throw new UnexpectedLiquibaseException("Unknown liquibase table: " + tempTable.getName());
       }
     }
  else {
-      table=snapshot.getTable(tableName);
+      table=snapshot.getTable(tempTable.getName());
     }
     if (table == null) {
-      View view=snapshot.getView(tableName);
+      View view=snapshot.getView(tempTable.getName());
       if (view == null) {
-        LogFactory.getLogger().info("Could not find table or view " + tableName + " for column "+ columnName);
+        LogFactory.getLogger().info("Could not find table or view " + tempTable.getName() + " for column "+ column.getName());
         continue;
       }
  else {
-        columnInfo.setView(view);
-        columnInfo.setAutoIncrement(false);
-        view.getColumns().add(columnInfo);
+        column.setView(view);
+        column.setAutoIncrement(false);
+        view.getColumns().add(column);
       }
     }
  else {
-      columnInfo.setTable(table);
-      columnInfo.setAutoIncrement(isColumnAutoIncrement(database,schema,tableName,columnName));
-      table.getColumns().add(columnInfo);
+      column.setTable(table);
+      column.setAutoIncrement(isColumnAutoIncrement(database,schema,table.getName(),column.getName()));
+      table.getColumns().add(column);
     }
-    columnInfo.setName(columnName);
-    columnInfo.setDataType(rs.getInt("DATA_TYPE"));
-    columnInfo.setColumnSize(rs.getInt("COLUMN_SIZE"));
-    columnInfo.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
-    int nullable=rs.getInt("NULLABLE");
-    if (nullable == DatabaseMetaData.columnNoNulls) {
-      columnInfo.setNullable(false);
-    }
- else     if (nullable == DatabaseMetaData.columnNullable) {
-      columnInfo.setNullable(true);
-    }
-    columnInfo.setPrimaryKey(snapshot.isPrimaryKey(columnInfo));
-    getColumnTypeAndDefValue(columnInfo,rs,database);
-    columnInfo.setRemarks(remarks);
+    column.setPrimaryKey(snapshot.isPrimaryKey(column));
   }
   rs.close();
   selectStatement.close();

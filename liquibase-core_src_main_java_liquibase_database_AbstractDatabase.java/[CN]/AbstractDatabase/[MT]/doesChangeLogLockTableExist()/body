@@ -1,3 +1,3 @@
 {
-  return DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(this,getLiquibaseSchemaName(),null).hasDatabaseChangeLogLockTable();
+  return DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).hasDatabaseChangeLogLockTable(this);
 }

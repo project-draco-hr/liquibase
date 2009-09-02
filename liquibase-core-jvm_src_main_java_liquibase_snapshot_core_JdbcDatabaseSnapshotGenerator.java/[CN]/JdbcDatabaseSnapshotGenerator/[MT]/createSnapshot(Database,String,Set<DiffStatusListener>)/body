@@ -3,13 +3,11 @@
     requestedSchema=database.getDefaultSchemaName();
   }
   try {
-    DatabaseMetaData databaseMetaData=null;
-    if (database.getConnection() != null) {
-      databaseMetaData=((JdbcConnection)database.getConnection()).getUnderlyingConnection().getMetaData();
-    }
+    DatabaseMetaData databaseMetaData=getMetaData(database);
     this.statusListeners=listeners;
     DatabaseSnapshot snapshot=new DatabaseSnapshot(database,requestedSchema);
-    readTablesAndViews(snapshot,requestedSchema,databaseMetaData);
+    readTables(snapshot,requestedSchema,databaseMetaData);
+    readViews(snapshot,requestedSchema,databaseMetaData);
     readForeignKeyInformation(snapshot,requestedSchema,databaseMetaData);
     readPrimaryKeys(snapshot,requestedSchema,databaseMetaData);
     readColumns(snapshot,requestedSchema,databaseMetaData);

@@ -1,0 +1,16 @@
+{
+  String name=convertFromDatabaseName(rs.getString("TABLE_NAME"));
+  String schemaName=convertFromDatabaseName(rs.getString("TABLE_SCHEM"));
+  View view=new View();
+  view.setName(name);
+  view.setSchema(schemaName);
+  view.setRawSchemaName(rs.getString("TABLE_SCHEM"));
+  view.setRawCatalogName(rs.getString("TABLE_CAT"));
+  try {
+    view.setDefinition(database.getViewDefinition(rs.getString("TABLE_SCHEM"),name));
+  }
+ catch (  DatabaseException e) {
+    throw new DatabaseException("Error getting " + database.getConnection().getURL() + " view with "+ new GetViewDefinitionStatement(view.getSchema(),name),e);
+  }
+  return view;
+}

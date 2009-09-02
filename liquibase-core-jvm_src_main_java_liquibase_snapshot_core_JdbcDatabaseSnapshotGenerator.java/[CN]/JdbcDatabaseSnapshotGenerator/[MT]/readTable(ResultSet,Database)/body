@@ -1,0 +1,12 @@
+{
+  String name=convertFromDatabaseName(rs.getString("TABLE_NAME"));
+  String schemaName=convertFromDatabaseName(rs.getString("TABLE_SCHEM"));
+  String remarks=rs.getString("REMARKS");
+  Table table=new Table(name);
+  table.setRemarks(StringUtils.trimToNull(remarks));
+  table.setDatabase(database);
+  table.setSchema(schemaName);
+  table.setRawSchemaName(rs.getString("TABLE_SCHEM"));
+  table.setRawCatalogName(rs.getString("TABLE_CAT"));
+  return table;
+}
