@@ -11,7 +11,7 @@
   assertEquals("2",changeSet.getId());
   assertEquals(1,changeSet.getChanges().size());
   Change change=changeSet.getChanges().get(0);
-  assertEquals("sample2",change.getChangeMetaData().getName());
+  assertEquals("changesample",change.getChangeMetaData().getName());
   changeSet=changeLog.getChangeSets().get(2);
   change=changeSet.getChanges().get(0);
   assertEquals(1,changeSet.getChanges().size());
