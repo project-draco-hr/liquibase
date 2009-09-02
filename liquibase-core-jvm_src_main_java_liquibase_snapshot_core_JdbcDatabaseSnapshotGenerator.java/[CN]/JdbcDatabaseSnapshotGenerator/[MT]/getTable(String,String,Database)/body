@@ -1,11 +1,18 @@
 {
   ResultSet rs=null;
   try {
-    rs=getMetaData(database).getTables(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),tableName,new String[]{"TABLE"});
+    DatabaseMetaData metaData=getMetaData(database);
+    rs=metaData.getTables(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),tableName,new String[]{"TABLE"});
     if (!rs.next()) {
       return null;
     }
-    return readTable(rs,database);
+    Table table=readTable(rs,database);
+    rs.close();
+    rs=metaData.getColumns(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),tableName,null);
+    while (rs.next()) {
+      table.getColumns().add(readColumn(rs,database));
+    }
+    return table;
   }
  catch (  Exception e) {
     throw new DatabaseException(e);

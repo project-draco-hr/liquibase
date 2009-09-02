@@ -1,3 +1,0 @@
-{
-  return getTable(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName(),database) != null;
-}

@@ -1,10 +1,9 @@
 {
   Executor executor=ExecutorService.getInstance().getExecutor(this);
-  DatabaseSnapshot snapShot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(this,getLiquibaseSchemaName(),null);
-  Table changeLogTable=snapShot.getDatabaseChangeLogTable();
+  Table changeLogTable=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).getDatabaseChangeLogTable(this);
   List<SqlStatement> statementsToExecute=new ArrayList<SqlStatement>();
   boolean changeLogCreateAttempted=false;
-  if (snapShot.hasDatabaseChangeLogTable()) {
+  if (changeLogTable != null) {
     boolean hasDescription=changeLogTable.getColumn("DESCRIPTION") != null;
     boolean hasComments=changeLogTable.getColumn("COMMENTS") != null;
     boolean hasTag=changeLogTable.getColumn("TAG") != null;
