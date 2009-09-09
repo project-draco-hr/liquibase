@@ -1,0 +1,3 @@
+{
+  return new TinyIntType("NUMBER(3)");
+}
