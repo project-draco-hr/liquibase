@@ -1,0 +1,3 @@
+{
+  return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(c));
+}
