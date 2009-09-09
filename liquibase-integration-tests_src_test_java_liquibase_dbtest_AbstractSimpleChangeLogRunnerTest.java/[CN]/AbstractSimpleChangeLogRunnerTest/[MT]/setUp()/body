@@ -1,5 +1,4 @@
 {
-  super.setUp();
   if (database != null) {
     if (!database.getConnection().getAutoCommit()) {
       database.rollback();

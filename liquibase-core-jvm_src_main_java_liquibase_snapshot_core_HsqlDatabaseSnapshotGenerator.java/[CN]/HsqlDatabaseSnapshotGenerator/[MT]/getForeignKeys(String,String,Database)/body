@@ -1,0 +1,3 @@
+{
+  return super.getForeignKeys(schemaName,tableName.toUpperCase(),database);
+}

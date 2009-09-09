@@ -1,5 +1,8 @@
 {
   Class clazz=object.getClass();
+  if (clazz.getName().indexOf(".ext.") > 0) {
+    return;
+  }
   for (  Field field : clazz.getDeclaredFields()) {
     if (field.getAnnotation(ChangeProperty.class) != null && !field.getAnnotation(ChangeProperty.class).includeInSerialization()) {
       continue;

@@ -1,6 +1,5 @@
 {
-  String liquibaseSchema=null;
-  liquibaseSchema=database.getLiquibaseSchemaName();
+  String liquibaseSchema=database.getLiquibaseSchemaName();
   UpdateStatement releaseStatement=new UpdateStatement(liquibaseSchema,database.getDatabaseChangeLogLockTableName());
   releaseStatement.addNewColumnValue("LOCKED",false);
   releaseStatement.addNewColumnValue("LOCKGRANTED",null);

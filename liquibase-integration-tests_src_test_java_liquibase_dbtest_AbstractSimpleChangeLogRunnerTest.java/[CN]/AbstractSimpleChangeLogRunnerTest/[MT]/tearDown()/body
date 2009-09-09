@@ -6,5 +6,4 @@
     ExecutorService.getInstance().clearExecutor(database);
     database.setDefaultSchemaName(null);
   }
-  super.tearDown();
 }

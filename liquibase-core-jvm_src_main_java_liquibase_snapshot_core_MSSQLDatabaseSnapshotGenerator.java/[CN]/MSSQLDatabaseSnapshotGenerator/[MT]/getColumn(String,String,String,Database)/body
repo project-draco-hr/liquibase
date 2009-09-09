@@ -1,0 +1,3 @@
+{
+  return super.getColumn(schemaName,tableName,columnName.toUpperCase(),database);
+}

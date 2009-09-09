@@ -3,8 +3,6 @@
     Change change=changeClass.getConstructor().newInstance();
     setFields(change);
     String string=new StringChangeLogSerializer().serialize(change);
-    System.out.println(string);
-    System.out.println("-------------");
     assertTrue("@ in string.  Probably poorly serialzed object reference." + string,string.indexOf("@") < 0);
   }
 }
