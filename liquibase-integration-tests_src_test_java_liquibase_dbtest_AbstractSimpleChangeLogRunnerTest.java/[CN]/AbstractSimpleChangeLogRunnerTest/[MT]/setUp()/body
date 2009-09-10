@@ -5,12 +5,12 @@
     }
     ExecutorService.getInstance().reset();
     LockService.resetAll();
+    database.checkDatabaseChangeLogLockTable();
     LockService.getInstance(database).forceReleaseLock();
     if (database.supportsSchemas()) {
       database.dropDatabaseObjects(DatabaseTestContext.ALT_SCHEMA);
     }
     database.dropDatabaseObjects(null);
     database.commit();
-    database.checkDatabaseChangeLogLockTable();
   }
 }
