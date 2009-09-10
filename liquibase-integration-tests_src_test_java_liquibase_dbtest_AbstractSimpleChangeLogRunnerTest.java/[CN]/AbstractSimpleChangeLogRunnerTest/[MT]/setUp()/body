@@ -11,4 +11,5 @@
     database.commit();
   }
   ExecutorService.getInstance().reset();
+  LockService.resetAll();
 }
