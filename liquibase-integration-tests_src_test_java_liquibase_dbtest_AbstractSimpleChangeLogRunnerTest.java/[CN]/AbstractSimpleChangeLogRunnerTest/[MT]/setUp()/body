@@ -10,4 +10,5 @@
     database.dropDatabaseObjects(null);
     database.commit();
   }
+  ExecutorService.getInstance().reset();
 }
