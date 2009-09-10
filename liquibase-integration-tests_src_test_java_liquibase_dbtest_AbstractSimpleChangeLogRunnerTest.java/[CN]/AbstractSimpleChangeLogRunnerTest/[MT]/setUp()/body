@@ -3,6 +3,8 @@
     if (!database.getConnection().getAutoCommit()) {
       database.rollback();
     }
+    ExecutorService.getInstance().reset();
+    LockService.resetAll();
     LockService.getInstance(database).forceReleaseLock();
     if (database.supportsSchemas()) {
       database.dropDatabaseObjects(DatabaseTestContext.ALT_SCHEMA);
@@ -10,6 +12,4 @@
     database.dropDatabaseObjects(null);
     database.commit();
   }
-  ExecutorService.getInstance().reset();
-  LockService.resetAll();
 }
