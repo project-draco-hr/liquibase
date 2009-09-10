@@ -1,15 +1,22 @@
 {
   liquibase.dropAll(getSchemasToDrop());
+  Statement statement=null;
   try {
-    ((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().execute("drop table " + database.escapeTableName(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()));
+    statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+    try {
+      statement.execute("drop table " + database.escapeTableName(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()));
+    }
+ catch (    Exception e) {
+    }
+    try {
+      statement.execute("drop table " + database.escapeTableName(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()));
+    }
+ catch (    Exception e) {
+    }
+    statement.close();
+    database.commit();
   }
- catch (  Exception e) {
-    e.printStackTrace();
-  }
-  try {
-    ((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().execute("drop table " + database.escapeTableName(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()));
-  }
- catch (  Exception e) {
-    e.printStackTrace();
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
   }
 }
