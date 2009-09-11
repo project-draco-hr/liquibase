@@ -3,14 +3,20 @@
     if (database.getConnection() != null) {
       database.checkDatabaseChangeLogLockTable();
       try {
-        if (database.getConnection() != null) {
-          ((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().executeUpdate("drop table " + database.getDatabaseChangeLogLockTableName());
-          database.commit();
+        Connection connection=((JdbcConnection)database.getConnection()).getUnderlyingConnection();
+        connection.createStatement().executeUpdate("drop table " + database.getDatabaseChangeLogLockTableName());
+        database.commit();
+        LockService.getInstance(database).forceReleaseLock();
+        ResultSet rs=connection.createStatement().executeQuery("select count(*) from " + database.getDatabaseChangeLogLockTableName());
+        rs.next();
+        int count=rs.getInt(1);
+        System.out.println("There are " + count + " rows in databasechangeloglock for "+ database.getTypeName());
+        if (count == 0) {
+          connection.createStatement().executeUpdate(new InsertGenerator().generateSql(new InsertStatement(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()).addColumnValue("ID",1).addColumnValue("LOCKED",Boolean.FALSE),database,new SqlGeneratorChain(new TreeSet<SqlGenerator>()))[0].toSql());
         }
       }
  catch (      SQLException e) {
       }
-      LockService.getInstance(database).forceReleaseLock();
     }
   }
 }
