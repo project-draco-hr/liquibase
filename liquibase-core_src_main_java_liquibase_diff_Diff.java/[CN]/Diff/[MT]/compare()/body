@@ -1,16 +1,16 @@
 {
-  if (baseSnapshot == null) {
-    baseSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(baseDatabase,null,statusListeners);
+  if (referenceSnapshot == null) {
+    referenceSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase,null,statusListeners);
   }
   if (targetSnapshot == null) {
     if (targetDatabase == null) {
-      targetSnapshot=new DatabaseSnapshot(baseDatabase,null);
+      targetSnapshot=new DatabaseSnapshot(referenceDatabase,null);
     }
  else {
       targetSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(targetDatabase,null,statusListeners);
     }
   }
-  DiffResult diffResult=new DiffResult(baseSnapshot,targetSnapshot);
+  DiffResult diffResult=new DiffResult(referenceSnapshot,targetSnapshot);
   checkVersionInfo(diffResult);
   if (shouldDiffTables()) {
     checkTables(diffResult);

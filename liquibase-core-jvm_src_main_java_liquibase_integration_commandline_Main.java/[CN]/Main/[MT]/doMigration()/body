@@ -20,11 +20,11 @@
   try {
     CompositeResourceAccessor fileOpener=new CompositeResourceAccessor(fsOpener,clOpener);
     if ("diff".equalsIgnoreCase(command)) {
-      CommandLineUtils.doDiff(database,createDatabaseFromCommandParams(commandParams));
+      CommandLineUtils.doDiff(createReferenceDatabaseFromCommandParams(commandParams),database);
       return;
     }
  else     if ("diffChangeLog".equalsIgnoreCase(command)) {
-      CommandLineUtils.doDiffToChangeLog(changeLogFile,database,createDatabaseFromCommandParams(commandParams));
+      CommandLineUtils.doDiffToChangeLog(changeLogFile,createReferenceDatabaseFromCommandParams(commandParams),database);
       return;
     }
  else     if ("generateChangeLog".equalsIgnoreCase(command)) {

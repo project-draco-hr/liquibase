@@ -1,11 +1,11 @@
 {
-  for (  PrimaryKey basePrimaryKey : baseSnapshot.getPrimaryKeys()) {
+  for (  PrimaryKey basePrimaryKey : referenceSnapshot.getPrimaryKeys()) {
     if (!targetSnapshot.getPrimaryKeys().contains(basePrimaryKey)) {
       diffResult.addMissingPrimaryKey(basePrimaryKey);
     }
   }
   for (  PrimaryKey targetPrimaryKey : targetSnapshot.getPrimaryKeys()) {
-    if (!baseSnapshot.getPrimaryKeys().contains(targetPrimaryKey)) {
+    if (!referenceSnapshot.getPrimaryKeys().contains(targetPrimaryKey)) {
       diffResult.addUnexpectedPrimaryKey(targetPrimaryKey);
     }
   }

@@ -1,3 +1,3 @@
 {
-  return baseId.toString() + "-" + changeNumber++;
+  return idRoot.toString() + "-" + changeNumber++;
 }

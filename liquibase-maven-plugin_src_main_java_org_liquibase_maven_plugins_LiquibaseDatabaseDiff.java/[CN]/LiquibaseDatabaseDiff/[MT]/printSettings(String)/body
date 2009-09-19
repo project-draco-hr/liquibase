@@ -1,9 +1,9 @@
 {
   super.printSettings(indent);
-  getLog().info(indent + "baseDriver: " + baseDriver);
-  getLog().info(indent + "baseUrl: " + baseUrl);
-  getLog().info(indent + "baseUsername: " + baseUsername);
-  getLog().info(indent + "basePassword: " + basePassword);
-  getLog().info(indent + "baseDefaultSchema: " + baseDefaultSchemaName);
+  getLog().info(indent + "referenceDriver: " + referenceDriver);
+  getLog().info(indent + "referenceUrl: " + referenceUrl);
+  getLog().info(indent + "referenceUsername: " + referenceUsername);
+  getLog().info(indent + "referencePassword: " + referencePassword);
+  getLog().info(indent + "referenceDefaultSchema: " + referenceDefaultSchemaName);
   getLog().info(indent + "diffChangeLogFile: " + diffChangeLogFile);
 }

@@ -1,5 +1,5 @@
 {
-  Diff diff=new Diff(baseDatabase,targetDatabase);
+  Diff diff=new Diff(referenceDatabase,targetDatabase);
   diff.addStatusListener(new OutDiffStatusListener());
   DiffResult diffResult=diff.compare();
   System.out.println("");

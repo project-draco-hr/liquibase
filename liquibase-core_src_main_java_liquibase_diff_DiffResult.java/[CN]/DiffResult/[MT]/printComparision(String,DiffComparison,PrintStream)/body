@@ -5,7 +5,7 @@
   }
  else {
     out.println();
-    out.println("     Base:   '" + comparison.getBaseVersion() + "'");
+    out.println("     Reference:   '" + comparison.getReferenceVersion() + "'");
     out.println("     Target: '" + comparison.getTargetVersion() + "'");
   }
 }

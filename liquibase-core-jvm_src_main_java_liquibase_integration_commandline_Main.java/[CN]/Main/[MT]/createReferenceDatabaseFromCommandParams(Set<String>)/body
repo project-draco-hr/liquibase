@@ -1,0 +1,28 @@
+{
+  String driver=null;
+  String url=null;
+  String username=null;
+  String password=null;
+  String defaultSchemaName=this.defaultSchemaName;
+  for (  String param : commandParams) {
+    String[] splitArg=splitArg(param);
+    String attributeName=splitArg[0];
+    String value=splitArg[1];
+    if ("referenceDriver".equalsIgnoreCase(attributeName)) {
+      driver=value;
+    }
+ else     if ("referenceUrl".equalsIgnoreCase(attributeName)) {
+      url=value;
+    }
+ else     if ("referenceUsername".equalsIgnoreCase(attributeName)) {
+      username=value;
+    }
+ else     if ("referencePassword".equalsIgnoreCase(attributeName)) {
+      password=value;
+    }
+ else     if ("referenceDefaultSchemaName".equalsIgnoreCase(attributeName)) {
+      defaultSchemaName=value;
+    }
+  }
+  return CommandLineUtils.createDatabaseObject(classLoader,url,username,password,driver,defaultSchemaName,null);
+}

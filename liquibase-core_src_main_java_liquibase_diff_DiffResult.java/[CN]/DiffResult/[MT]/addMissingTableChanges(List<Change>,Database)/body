@@ -1,6 +1,6 @@
 {
   for (  Table missingTable : getMissingTables()) {
-    if (baseSnapshot.getDatabase().isLiquibaseTable(missingTable.getName())) {
+    if (referenceSnapshot.getDatabase().isLiquibaseTable(missingTable.getName())) {
       continue;
     }
     CreateTableChange change=new CreateTableChange();

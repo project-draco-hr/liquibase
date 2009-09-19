@@ -1,16 +1,16 @@
 {
   super.checkRequiredParametersAreSpecified();
-  if (baseUrl == null) {
-    throw new MojoFailureException("A base database or hibernate configuration file " + "must be provided to perform a diff.");
+  if (referenceUrl == null) {
+    throw new MojoFailureException("A reference database or hibernate configuration file " + "must be provided to perform a diff.");
   }
-  if (baseUrl.startsWith("hibernate:")) {
+  if (referenceUrl.startsWith("hibernate:")) {
   }
  else {
-    if (baseUsername == null) {
-      throw new MojoFailureException("The username cannot be null for the base " + "database when not using hibernate.");
+    if (referenceUsername == null) {
+      throw new MojoFailureException("The username cannot be null for the reference " + "database when not using hibernate.");
     }
-    if (basePassword == null) {
-      basePassword="";
+    if (referencePassword == null) {
+      referencePassword="";
     }
   }
 }

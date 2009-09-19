@@ -1,11 +1,11 @@
 {
-  for (  Table baseTable : baseSnapshot.getTables()) {
+  for (  Table baseTable : referenceSnapshot.getTables()) {
     if (!targetSnapshot.getTables().contains(baseTable)) {
       diffResult.addMissingTable(baseTable);
     }
   }
   for (  Table targetTable : targetSnapshot.getTables()) {
-    if (!baseSnapshot.getTables().contains(targetTable)) {
+    if (!referenceSnapshot.getTables().contains(targetTable)) {
       diffResult.addUnexpectedTable(targetTable);
     }
   }

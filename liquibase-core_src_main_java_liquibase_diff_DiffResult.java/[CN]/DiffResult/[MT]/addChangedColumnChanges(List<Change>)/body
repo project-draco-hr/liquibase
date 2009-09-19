@@ -4,11 +4,11 @@
       continue;
     }
     boolean foundDifference=false;
-    Column baseColumn=baseSnapshot.getColumn(column.getTable().getName(),column.getName());
-    if (column.isDataTypeDifferent(baseColumn)) {
+    Column referenceColumn=referenceSnapshot.getColumn(column.getTable().getName(),column.getName());
+    if (column.isDataTypeDifferent(referenceColumn)) {
       ColumnConfig columnConfig=new ColumnConfig();
       columnConfig.setName(column.getName());
-      columnConfig.setType(baseColumn.getDataTypeString(targetSnapshot.getDatabase()));
+      columnConfig.setType(referenceColumn.getDataTypeString(targetSnapshot.getDatabase()));
       ModifyColumnChange change=new ModifyColumnChange();
       change.setTableName(column.getTable().getName());
       change.setSchemaName(column.getTable().getSchema());
@@ -16,13 +16,13 @@
       changes.add(change);
       foundDifference=true;
     }
-    if (column.isNullabilityDifferent(baseColumn)) {
-      if (baseColumn.isNullable() == null || baseColumn.isNullable()) {
+    if (column.isNullabilityDifferent(referenceColumn)) {
+      if (referenceColumn.isNullable() == null || referenceColumn.isNullable()) {
         DropNotNullConstraintChange change=new DropNotNullConstraintChange();
         change.setTableName(column.getTable().getName());
         change.setSchemaName(column.getTable().getSchema());
         change.setColumnName(column.getName());
-        change.setColumnDataType(baseColumn.getDataTypeString(targetSnapshot.getDatabase()));
+        change.setColumnDataType(referenceColumn.getDataTypeString(targetSnapshot.getDatabase()));
         changes.add(change);
         foundDifference=true;
       }
@@ -31,7 +31,7 @@
         change.setTableName(column.getTable().getName());
         change.setSchemaName(column.getTable().getSchema());
         change.setColumnName(column.getName());
-        change.setColumnDataType(baseColumn.getDataTypeString(targetSnapshot.getDatabase()));
+        change.setColumnDataType(referenceColumn.getDataTypeString(targetSnapshot.getDatabase()));
         changes.add(change);
         foundDifference=true;
       }

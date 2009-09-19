@@ -1,3 +1,3 @@
 {
-  super("maxdb","jdbc:sapdb://localhost/liquibas");
+  super("maxdb","jdbc:sapdb://" + DATABASE_SERVER_HOSTNAME + "/liquibas");
 }

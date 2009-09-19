@@ -7,11 +7,11 @@
     throw new LiquibaseException("Could not create the class loader, " + e,e);
   }
   Database db=liquibase.getDatabase();
-  Database baseDatabase=CommandLineUtils.createDatabaseObject(cl,baseUrl,baseUsername,basePassword,baseDriver,baseDefaultSchemaName,null);
+  Database referenceDatabase=CommandLineUtils.createDatabaseObject(cl,referenceUrl,referenceUsername,referencePassword,referenceDriver,referenceDefaultSchemaName,null);
   getLog().info("Performing Diff on database " + db.toString());
   if (diffChangeLogFile != null) {
     try {
-      CommandLineUtils.doDiffToChangeLog(diffChangeLogFile,baseDatabase,db);
+      CommandLineUtils.doDiffToChangeLog(diffChangeLogFile,referenceDatabase,db);
       getLog().info("Differences written to Change Log File, " + diffChangeLogFile);
     }
  catch (    IOException e) {
@@ -22,6 +22,6 @@ catch (    ParserConfigurationException e) {
     }
   }
  else {
-    CommandLineUtils.doDiff(baseDatabase,db);
+    CommandLineUtils.doDiff(referenceDatabase,db);
   }
 }

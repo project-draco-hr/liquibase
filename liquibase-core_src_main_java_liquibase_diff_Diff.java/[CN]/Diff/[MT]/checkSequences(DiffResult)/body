@@ -1,11 +1,11 @@
 {
-  for (  Sequence baseSequence : baseSnapshot.getSequences()) {
+  for (  Sequence baseSequence : referenceSnapshot.getSequences()) {
     if (!targetSnapshot.getSequences().contains(baseSequence)) {
       diffResult.addMissingSequence(baseSequence);
     }
   }
   for (  Sequence targetSequence : targetSnapshot.getSequences()) {
-    if (!baseSnapshot.getSequences().contains(targetSequence)) {
+    if (!referenceSnapshot.getSequences().contains(targetSequence)) {
       diffResult.addUnexpectedSequence(targetSequence);
     }
   }

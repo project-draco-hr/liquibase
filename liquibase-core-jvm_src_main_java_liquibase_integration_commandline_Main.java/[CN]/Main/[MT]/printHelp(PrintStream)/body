@@ -34,8 +34,8 @@
   stream.println(" diff [diff parameters]          Writes description of differences");
   stream.println("                                 to standard out");
   stream.println(" diffChangeLog [diff parameters] Writes Change Log XML to update");
-  stream.println("                                 the base database");
-  stream.println("                                 to the target database to standard out");
+  stream.println("                                 the database");
+  stream.println("                                 to the reference database to standard out");
   stream.println("");
   stream.println("Documentation Commands");
   stream.println(" dbDoc <outputDirectory>         Generates Javadoc-like documentation");
@@ -91,12 +91,12 @@
   stream.println(" --version                                  Prints this version information");
   stream.println("");
   stream.println("Required Diff Parameters:");
-  stream.println(" --baseUsername=<value>                     Base Database username");
-  stream.println(" --basePassword=<value>                     Base Database password");
-  stream.println(" --baseUrl=<value>                          Base Database URL");
+  stream.println(" --referenceUsername=<value>                Reference Database username");
+  stream.println(" --referencePassword=<value>                Reference Database password");
+  stream.println(" --referenceUrl=<value>                     Reference Database URL");
   stream.println("");
   stream.println("Optional Diff Parameters:");
-  stream.println(" --baseDriver=<jdbc.driver.ClassName>       Base Database driver class name");
+  stream.println(" --referenceDriver=<jdbc.driver.ClassName>  Reference Database driver class name");
   stream.println("");
   stream.println("Change Log Properties:");
   stream.println(" -D<property.name>=<property.value>         Pass a name/value pair for");

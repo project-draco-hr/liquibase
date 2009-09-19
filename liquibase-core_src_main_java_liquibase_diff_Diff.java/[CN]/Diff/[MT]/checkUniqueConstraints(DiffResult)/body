@@ -1,11 +1,11 @@
 {
-  for (  UniqueConstraint baseIndex : baseSnapshot.getUniqueConstraints()) {
+  for (  UniqueConstraint baseIndex : referenceSnapshot.getUniqueConstraints()) {
     if (!targetSnapshot.getUniqueConstraints().contains(baseIndex)) {
       diffResult.addMissingUniqueConstraint(baseIndex);
     }
   }
   for (  UniqueConstraint targetIndex : targetSnapshot.getUniqueConstraints()) {
-    if (!baseSnapshot.getUniqueConstraints().contains(targetIndex)) {
+    if (!referenceSnapshot.getUniqueConstraints().contains(targetIndex)) {
       diffResult.addUnexpectedUniqueConstraint(targetIndex);
     }
   }

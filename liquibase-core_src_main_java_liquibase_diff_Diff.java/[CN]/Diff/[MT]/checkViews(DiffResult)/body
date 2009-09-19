@@ -1,11 +1,11 @@
 {
-  for (  View baseView : baseSnapshot.getViews()) {
+  for (  View baseView : referenceSnapshot.getViews()) {
     if (!targetSnapshot.getViews().contains(baseView)) {
       diffResult.addMissingView(baseView);
     }
   }
   for (  View targetView : targetSnapshot.getViews()) {
-    if (!baseSnapshot.getViews().contains(targetView)) {
+    if (!referenceSnapshot.getViews().contains(targetView)) {
       diffResult.addUnexpectedView(targetView);
     }
   }

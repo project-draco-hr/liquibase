@@ -1,11 +1,11 @@
 {
-  for (  Index baseIndex : baseSnapshot.getIndexes()) {
+  for (  Index baseIndex : referenceSnapshot.getIndexes()) {
     if (!targetSnapshot.getIndexes().contains(baseIndex)) {
       diffResult.addMissingIndex(baseIndex);
     }
   }
   for (  Index targetIndex : targetSnapshot.getIndexes()) {
-    if (!baseSnapshot.getIndexes().contains(targetIndex)) {
+    if (!referenceSnapshot.getIndexes().contains(targetIndex)) {
       diffResult.addUnexpectedIndex(targetIndex);
     }
   }

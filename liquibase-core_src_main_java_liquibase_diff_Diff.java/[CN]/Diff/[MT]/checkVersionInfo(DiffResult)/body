@@ -1,6 +1,6 @@
 {
   if (targetDatabase != null) {
-    diffResult.setProductName(new DiffComparison(baseDatabase.getDatabaseProductName(),targetDatabase.getDatabaseProductName()));
-    diffResult.setProductVersion(new DiffComparison(baseDatabase.getDatabaseProductVersion(),targetDatabase.getDatabaseProductVersion()));
+    diffResult.setProductName(new DiffComparison(referenceDatabase.getDatabaseProductName(),targetDatabase.getDatabaseProductName()));
+    diffResult.setProductVersion(new DiffComparison(referenceDatabase.getDatabaseProductVersion(),targetDatabase.getDatabaseProductVersion()));
   }
 }
