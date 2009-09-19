@@ -121,6 +121,9 @@
       if (StringUtils.trimToNull(atts.getValue("dbms")) != null) {
         modifySqlDbmsList=StringUtils.splitAndTrim(atts.getValue("dbms"),",");
       }
+      if (StringUtils.trimToNull(atts.getValue("appliedOnRollback")) != null) {
+        modifySqlAppliedOnRollback=Boolean.valueOf(atts.getValue("appliedOnRollback"));
+      }
     }
  else     if (inModifySql) {
       SqlVisitor sqlVisitor=SqlVisitorFactory.getInstance().create(qName);
@@ -130,6 +133,7 @@
         setProperty(sqlVisitor,attributeName,attributeValue);
       }
       sqlVisitor.setApplicableDbms(modifySqlDbmsList);
+      sqlVisitor.setAppliedOnRollback(modifySqlAppliedOnRollback);
       changeSet.addSqlVisitor(sqlVisitor);
     }
  else     if (changeSet != null && change == null) {
