@@ -3,7 +3,7 @@
   try {
     String dbCatalog=database.convertRequestedSchemaToCatalog(schemaName);
     String dbSchema=database.convertRequestedSchemaToSchema(schemaName);
-    ResultSet rs=getMetaData(database).getImportedKeys(dbCatalog,dbSchema,foreignKeyTableName);
+    ResultSet rs=getMetaData(database).getImportedKeys(dbCatalog,dbSchema,convertTableNameToDatabaseTableName(foreignKeyTableName));
     while (rs.next()) {
       String fkName=convertFromDatabaseName(rs.getString("FK_NAME"));
       String pkTableName=convertFromDatabaseName(rs.getString("PKTABLE_NAME"));

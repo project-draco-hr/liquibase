@@ -2,13 +2,13 @@
   ResultSet rs=null;
   try {
     DatabaseMetaData metaData=getMetaData(database);
-    rs=metaData.getTables(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),tableName,new String[]{"TABLE"});
+    rs=metaData.getTables(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),convertTableNameToDatabaseTableName(tableName),new String[]{"TABLE"});
     if (!rs.next()) {
       return null;
     }
     Table table=readTable(rs,database);
     rs.close();
-    rs=metaData.getColumns(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),tableName,null);
+    rs=metaData.getColumns(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),convertTableNameToDatabaseTableName(tableName),null);
     while (rs.next()) {
       table.getColumns().add(readColumn(rs,database));
     }

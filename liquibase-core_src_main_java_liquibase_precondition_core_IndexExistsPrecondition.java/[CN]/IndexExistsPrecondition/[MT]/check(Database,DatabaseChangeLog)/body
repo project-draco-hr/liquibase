@@ -1,12 +1,10 @@
 {
-  DatabaseSnapshot snapshot;
   try {
-    snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,getSchemaName(),null);
+    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasIndex(getSchemaName(),getIndexName(),database)) {
+      throw new PreconditionFailedException("Index " + database.escapeStringForDatabase(getIndexName()) + " does not exist",changeLog,this);
+    }
   }
  catch (  DatabaseException e) {
     throw new PreconditionErrorException(e,changeLog,this);
-  }
-  if (snapshot.getIndex(getIndexName()) == null) {
-    throw new PreconditionFailedException("Index " + database.escapeStringForDatabase(getIndexName()) + " does not exist",changeLog,this);
   }
 }

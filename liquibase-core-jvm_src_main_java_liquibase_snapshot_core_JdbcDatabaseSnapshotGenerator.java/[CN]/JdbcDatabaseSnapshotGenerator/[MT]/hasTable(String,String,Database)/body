@@ -1,0 +1,14 @@
+{
+  try {
+    ResultSet rs=getMetaData(database).getTables(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),convertTableNameToDatabaseTableName(tableName),new String[]{"TABLE"});
+    try {
+      return rs.next();
+    }
+  finally {
+      rs.close();
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

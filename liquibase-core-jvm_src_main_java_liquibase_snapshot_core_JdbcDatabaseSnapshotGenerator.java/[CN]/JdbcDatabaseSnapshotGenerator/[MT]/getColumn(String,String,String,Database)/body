@@ -1,7 +1,7 @@
 {
   ResultSet rs=null;
   try {
-    rs=getMetaData(database).getColumns(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),tableName,columnName);
+    rs=getMetaData(database).getColumns(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),convertTableNameToDatabaseTableName(tableName),convertColumnNameToDatabaseTableName(columnName));
     if (!rs.next()) {
       return null;
     }

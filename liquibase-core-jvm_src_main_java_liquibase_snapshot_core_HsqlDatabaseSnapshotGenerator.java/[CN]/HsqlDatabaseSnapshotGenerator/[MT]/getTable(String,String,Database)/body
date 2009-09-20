@@ -1,3 +1,0 @@
-{
-  return super.getTable(schemaName,tableName.toUpperCase(),database);
-}
