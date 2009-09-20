@@ -1,3 +1,7 @@
 {
-  return hasTable(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName(),database);
+  if (hasDatabaseChangeLogLockTable) {
+    return true;
+  }
+  hasDatabaseChangeLogLockTable=hasTable(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName(),database);
+  return hasDatabaseChangeLogLockTable;
 }

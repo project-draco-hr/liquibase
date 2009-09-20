@@ -3,6 +3,7 @@
     if (!database.getConnection().getAutoCommit()) {
       database.rollback();
     }
+    DatabaseSnapshotGeneratorFactory.resetAll();
     ExecutorService.getInstance().reset();
     LockService.resetAll();
     database.checkDatabaseChangeLogLockTable();
@@ -10,11 +11,13 @@
       ((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().executeUpdate("drop table " + database.getDatabaseChangeLogLockTableName());
       database.commit();
     }
+    DatabaseSnapshotGeneratorFactory.resetAll();
     LockService.getInstance(database).forceReleaseLock();
     if (database.supportsSchemas()) {
       database.dropDatabaseObjects(DatabaseTestContext.ALT_SCHEMA);
     }
     database.dropDatabaseObjects(null);
     database.commit();
+    DatabaseSnapshotGeneratorFactory.resetAll();
   }
 }
