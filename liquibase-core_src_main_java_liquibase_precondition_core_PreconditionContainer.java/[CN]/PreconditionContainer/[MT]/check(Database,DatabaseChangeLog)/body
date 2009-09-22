@@ -1,0 +1,21 @@
+{
+  try {
+    super.check(database,changeLog);
+  }
+ catch (  PreconditionFailedException e) {
+    if (getOnFailMessage() == null) {
+      throw e;
+    }
+ else {
+      throw new PreconditionFailedException(getOnFailMessage(),changeLog,this);
+    }
+  }
+catch (  PreconditionErrorException e) {
+    if (getOnErrorMessage() == null) {
+      throw e;
+    }
+ else {
+      throw new PreconditionErrorException(getOnErrorMessage(),e.getErrorPreconditions());
+    }
+  }
+}
