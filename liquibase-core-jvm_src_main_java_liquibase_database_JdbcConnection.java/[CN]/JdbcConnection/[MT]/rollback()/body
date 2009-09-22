@@ -1,6 +1,6 @@
 {
   try {
-    if (!con.getAutoCommit()) {
+    if (!con.getAutoCommit() && !con.isClosed()) {
       con.rollback();
     }
   }

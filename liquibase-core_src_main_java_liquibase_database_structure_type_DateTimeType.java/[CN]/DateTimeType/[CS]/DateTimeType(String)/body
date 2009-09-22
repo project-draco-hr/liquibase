@@ -1,3 +1,3 @@
 {
-  super(dataTypeName,0,0);
+  super(dataTypeName,0,1);
 }

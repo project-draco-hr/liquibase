@@ -1,5 +1,7 @@
 {
-  if (rule == ForeignKeyConstraintType.importedKeyCascade) {
+  if (rule == null) {
+  }
+ else   if (rule == ForeignKeyConstraintType.importedKeyCascade) {
     setOnUpdate("CASCADE");
   }
  else   if (rule == ForeignKeyConstraintType.importedKeySetNull) {
