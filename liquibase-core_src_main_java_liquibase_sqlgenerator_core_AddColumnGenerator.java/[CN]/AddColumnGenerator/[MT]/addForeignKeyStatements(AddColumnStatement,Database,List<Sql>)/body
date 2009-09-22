@@ -1,0 +1,20 @@
+{
+  for (  ColumnConstraint constraint : statement.getConstraints()) {
+    if (constraint instanceof ForeignKeyConstraint) {
+      ForeignKeyConstraint fkConstraint=(ForeignKeyConstraint)constraint;
+      Matcher referencesMatcher=Pattern.compile("([\\w\\._]+)\\(([\\w_]+)\\)").matcher(fkConstraint.getReferences());
+      if (!referencesMatcher.matches()) {
+        throw new UnexpectedLiquibaseException("Don't know how to find table and column names from " + fkConstraint.getReferences());
+      }
+      String refSchemaName=null;
+      String refTableName=referencesMatcher.group(1);
+      if (refTableName.indexOf(".") > 0) {
+        refSchemaName=refTableName.split(".")[0];
+        refTableName=refTableName.split(".")[0];
+      }
+      String refColName=referencesMatcher.group(2);
+      AddForeignKeyConstraintStatement addForeignKeyConstraintStatement=new AddForeignKeyConstraintStatement(fkConstraint.getForeignKeyName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName(),refSchemaName,refTableName,refColName);
+      returnSql.addAll(Arrays.asList(SqlGeneratorFactory.getInstance().generateSql(addForeignKeyConstraintStatement,database)));
+    }
+  }
+}
