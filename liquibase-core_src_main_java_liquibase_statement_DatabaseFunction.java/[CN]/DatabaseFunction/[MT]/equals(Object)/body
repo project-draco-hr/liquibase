@@ -1,0 +1,8 @@
+{
+  if (obj instanceof DatabaseFunction) {
+    return this.toString().equals(obj.toString());
+  }
+ else {
+    return super.equals(obj);
+  }
+}

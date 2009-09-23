@@ -2,8 +2,8 @@
   if (value == null) {
     return null;
   }
- else   if (value instanceof ComputedDateValue) {
-    return ((ComputedDateValue)value).getValue();
+ else   if (value instanceof DatabaseFunction) {
+    return ((DatabaseFunction)value).getValue();
   }
   return database.getDateLiteral(((java.sql.Date)value));
 }

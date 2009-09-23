@@ -1,3 +1,0 @@
-{
-  return addColumn(columnName,columnType,defaultValue,new ColumnConstraint[0]);
-}

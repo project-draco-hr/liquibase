@@ -8,6 +8,6 @@
   AddDefaultValueStatement statement=(AddDefaultValueStatement)statements[0];
   assertEquals("TABLE_NAME",statement.getTableName());
   assertEquals("COLUMN_NAME",statement.getColumnName());
-  assertTrue(statement.getDefaultValue() instanceof ComputedNumericValue);
+  assertTrue(statement.getDefaultValue() instanceof DatabaseFunction);
   assertEquals("Math.random()",statement.getDefaultValue().toString());
 }

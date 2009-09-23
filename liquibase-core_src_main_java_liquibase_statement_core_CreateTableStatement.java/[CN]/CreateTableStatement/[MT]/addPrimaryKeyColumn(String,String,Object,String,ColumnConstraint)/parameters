@@ -1,0 +1,5 @@
+String columnName
+String columnType
+Object defaultValue
+String keyName
+ColumnConstraint constraints

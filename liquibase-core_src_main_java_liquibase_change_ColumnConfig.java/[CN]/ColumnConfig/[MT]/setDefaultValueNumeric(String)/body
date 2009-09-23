@@ -13,7 +13,7 @@
         this.defaultValueNumeric=NumberFormat.getInstance(Locale.US).parse(defaultValueNumeric);
       }
  catch (      ParseException e) {
-        this.defaultValueNumeric=new ComputedNumericValue(defaultValueNumeric);
+        this.defaultValueComputed=new DatabaseFunction(defaultValueNumeric);
       }
     }
   }

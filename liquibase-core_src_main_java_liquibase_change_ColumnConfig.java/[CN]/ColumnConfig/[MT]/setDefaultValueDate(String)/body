@@ -6,7 +6,7 @@
     this.defaultValueDate=new ISODateFormat().parse(defaultValueDate);
   }
  catch (  ParseException e) {
-    this.defaultValueDate=new ComputedDateValue(defaultValueDate);
+    this.defaultValueComputed=new DatabaseFunction(defaultValueDate);
   }
   return this;
 }

@@ -29,8 +29,12 @@
           method.invoke(object,new BigInteger(propertyValue));
           return;
         }
+ else         if (parameterType.equals(DatabaseFunction.class)) {
+          method.invoke(object,new DatabaseFunction(propertyValue));
+          return;
+        }
       }
     }
   }
-  throw new RuntimeException("Property not found: " + propertyName);
+  throw new RuntimeException("Property '" + propertyName + "' not found on object type "+ object.getClass().getName());
 }

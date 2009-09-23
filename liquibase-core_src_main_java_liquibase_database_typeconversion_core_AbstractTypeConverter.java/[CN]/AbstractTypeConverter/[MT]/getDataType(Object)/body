@@ -32,6 +32,9 @@
  else   if (object instanceof Long) {
     return getBigIntType();
   }
+ else   if (object instanceof DatabaseFunction) {
+    return new DatabaseFunctionType();
+  }
  else {
     throw new UnexpectedLiquibaseException("Unknown object type " + object.getClass().getName());
   }

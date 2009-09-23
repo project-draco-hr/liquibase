@@ -42,6 +42,9 @@
  else     if (field.getType().equals(ColumnConfig.class)) {
       field.set(object,createColumnConfig());
     }
+ else     if (field.getType().equals(DatabaseFunction.class)) {
+      field.set(object,createDatabaseFunction());
+    }
  else     if (field.getType().equals(ConstraintsConfig.class)) {
       field.set(object,createConstraintsConfig());
     }

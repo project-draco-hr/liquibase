@@ -6,5 +6,5 @@
   columnConfig.setDefaultValueNumeric("42");
   change.addColumn(columnConfig);
   CreateTableStatement statement=(CreateTableStatement)change.generateStatements(new MockDatabase())[0];
-  assertEquals("42",statement.getDefaultValue("id"));
+  assertEquals(42L,statement.getDefaultValue("id"));
 }

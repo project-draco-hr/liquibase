@@ -11,5 +11,8 @@
  else   if (getValueDate() != null) {
     return getValueDate();
   }
+ else   if (getValueComputed() != null) {
+    return getValueComputed();
+  }
   return null;
 }

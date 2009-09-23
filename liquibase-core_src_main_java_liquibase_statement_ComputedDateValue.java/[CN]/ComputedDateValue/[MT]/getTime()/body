@@ -1,3 +1,0 @@
-{
-  throw new RuntimeException("Date computed by database");
-}

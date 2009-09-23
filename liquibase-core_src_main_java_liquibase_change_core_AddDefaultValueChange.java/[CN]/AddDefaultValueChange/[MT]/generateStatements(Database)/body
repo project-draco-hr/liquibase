@@ -11,7 +11,7 @@
       defaultValue=NumberFormat.getInstance(Locale.US).parse(getDefaultValueNumeric());
     }
  catch (    ParseException e) {
-      defaultValue=new ComputedNumericValue(getDefaultValueNumeric());
+      defaultValue=new DatabaseFunction(getDefaultValueNumeric());
     }
   }
  else   if (getDefaultValueDate() != null) {
@@ -19,8 +19,11 @@
       defaultValue=new ISODateFormat().parse(getDefaultValueDate());
     }
  catch (    ParseException e) {
-      defaultValue=new ComputedDateValue(getDefaultValueDate());
+      defaultValue=new DatabaseFunction(getDefaultValueDate());
     }
+  }
+ else   if (getDefaultValueComputed() != null) {
+    defaultValue=getDefaultValueComputed();
   }
   return new SqlStatement[]{new AddDefaultValueStatement(getSchemaName(),getTableName(),getColumnName(),getColumnDataType(),defaultValue)};
 }

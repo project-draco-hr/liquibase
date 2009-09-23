@@ -6,5 +6,5 @@
   columnConfig.setDefaultValueBoolean(Boolean.TRUE);
   change.addColumn(columnConfig);
   CreateTableStatement statement=(CreateTableStatement)change.generateStatements(new MockDatabase())[0];
-  assertEquals(new DefaultTypeConverter().getBooleanType().getTrueBooleanValue(),statement.getDefaultValue("id"));
+  assertEquals(true,statement.getDefaultValue("id"));
 }

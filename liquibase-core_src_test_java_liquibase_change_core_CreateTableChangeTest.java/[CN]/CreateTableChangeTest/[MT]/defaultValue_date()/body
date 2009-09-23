@@ -6,5 +6,5 @@
   columnConfig.setDefaultValueDate("2007-01-02");
   change.addColumn(columnConfig);
   CreateTableStatement statement=(CreateTableStatement)change.generateStatements(new MockDatabase())[0];
-  assertEquals("2007-01-02",statement.getDefaultValue("id"));
+  assertEquals(columnConfig.getDefaultValueDate(),statement.getDefaultValue("id"));
 }

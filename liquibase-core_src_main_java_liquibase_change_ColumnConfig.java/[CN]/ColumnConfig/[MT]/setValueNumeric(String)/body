@@ -14,7 +14,7 @@
       }
     }
  else {
-      this.valueNumeric=new ComputedNumericValue(valueNumeric);
+      this.valueComputed=new DatabaseFunction(valueNumeric);
     }
   }
   return this;

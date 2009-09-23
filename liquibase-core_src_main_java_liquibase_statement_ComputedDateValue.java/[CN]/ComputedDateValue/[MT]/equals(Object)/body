@@ -1,8 +1,0 @@
-{
-  if (obj instanceof ComputedDateValue) {
-    return this.toString().equals(obj.toString());
-  }
- else {
-    return super.equals(obj);
-  }
-}

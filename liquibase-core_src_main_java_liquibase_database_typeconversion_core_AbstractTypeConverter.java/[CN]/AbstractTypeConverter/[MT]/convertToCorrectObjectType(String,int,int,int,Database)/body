@@ -88,9 +88,9 @@
     }
   }
  catch (  DateParseException e) {
-    return new ComputedDateValue(value);
+    return new DatabaseFunction(value);
   }
 catch (  NumberFormatException e) {
-    return new ComputedNumericValue(value);
+    return new DatabaseFunction(value);
   }
 }

@@ -11,5 +11,8 @@
  else   if (getDefaultValueDate() != null) {
     return getDefaultValueDate();
   }
+ else   if (getDefaultValueComputed() != null) {
+    return getDefaultValueComputed();
+  }
   return null;
 }
