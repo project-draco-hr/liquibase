@@ -1,3 +1,0 @@
-{
-  super("oracle","jdbc:oracle:thin:@" + DATABASE_SERVER_HOSTNAME + "/XE");
-}

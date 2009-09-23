@@ -1,3 +1,0 @@
-{
-  super("firebird","jdbc:firebirdsql:" + DATABASE_SERVER_HOSTNAME + "/3050:c:\\firebird\\liquibase.fdb");
-}

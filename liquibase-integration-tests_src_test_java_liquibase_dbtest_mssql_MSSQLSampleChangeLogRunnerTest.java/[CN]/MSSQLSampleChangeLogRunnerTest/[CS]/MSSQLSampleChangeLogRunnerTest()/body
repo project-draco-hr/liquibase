@@ -1,3 +1,0 @@
-{
-  super("mssql","jdbc:sqlserver://" + DATABASE_SERVER_HOSTNAME + ";instanceName=SQL2005;databaseName=liquibase");
-}

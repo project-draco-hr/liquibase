@@ -1,3 +1,0 @@
-{
-  super("informix","jdbc:informix-sqli://" + DATABASE_SERVER_HOSTNAME + ":9088/liquibase:informixserver=ol_ids_1150_1");
-}

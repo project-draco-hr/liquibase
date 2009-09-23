@@ -1,0 +1,3 @@
+{
+  super("firebird","jdbc:firebirdsql:" + getDatabaseServerHostname() + "/3050:c:\\firebird\\liquibase.fdb");
+}

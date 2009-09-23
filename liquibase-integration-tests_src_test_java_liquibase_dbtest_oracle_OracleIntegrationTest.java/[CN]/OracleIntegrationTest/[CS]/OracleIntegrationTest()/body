@@ -1,0 +1,3 @@
+{
+  super("oracle","jdbc:oracle:thin:@" + getDatabaseServerHostname() + "/XE");
+}
