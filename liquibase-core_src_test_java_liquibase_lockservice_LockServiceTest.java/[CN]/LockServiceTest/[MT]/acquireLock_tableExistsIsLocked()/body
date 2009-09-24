@@ -5,7 +5,7 @@
   expectLastCall();
   database.rollback();
   expectLastCall().anyTimes();
-  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(true);
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(true);
   replay(database);
   replay(executor);
   ExecutorService.getInstance().setExecutor(database,executor);

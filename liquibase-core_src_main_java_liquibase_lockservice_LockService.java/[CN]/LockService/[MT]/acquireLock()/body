@@ -6,13 +6,13 @@
   try {
     database.rollback();
     database.checkDatabaseChangeLogLockTable();
-    Boolean locked=(Boolean)ExecutorService.getInstance().getExecutor(database).queryForObject(new SelectFromDatabaseChangeLogLockStatement("locked"),Boolean.class,new ArrayList<SqlVisitor>());
+    Boolean locked=(Boolean)ExecutorService.getInstance().getExecutor(database).queryForObject(new SelectFromDatabaseChangeLogLockStatement("locked"),Boolean.class);
     if (locked) {
       return false;
     }
  else {
       executor.comment("Lock Database");
-      int rowsUpdated=executor.update(new LockDatabaseChangeLogStatement(),new ArrayList<SqlVisitor>());
+      int rowsUpdated=executor.update(new LockDatabaseChangeLogStatement());
       if (rowsUpdated != 1) {
         throw new LockException("Did not update change log lock correctly");
       }

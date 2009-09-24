@@ -1,5 +1,5 @@
 {
-  ExecutorService.getInstance().getExecutor(this).execute(new RemoveChangeSetRanStatusStatement(changeSet),new ArrayList<SqlVisitor>());
+  ExecutorService.getInstance().getExecutor(this).execute(new RemoveChangeSetRanStatusStatement(changeSet));
   commit();
   getRanChangeSetList().remove(new RanChangeSet(changeSet));
 }

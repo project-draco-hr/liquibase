@@ -56,7 +56,7 @@
     LogFactory.getLogger().info("Creating database history table with name: " + escapeTableName(getDefaultSchemaName(),getDatabaseChangeLogTableName()));
   }
   for (  SqlStatement sql : statementsToExecute) {
-    executor.execute(sql,new ArrayList<SqlVisitor>());
+    executor.execute(sql);
     this.commit();
   }
 }

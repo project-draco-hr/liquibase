@@ -121,7 +121,10 @@
  else     if ("modifySql".equals(qName)) {
       inModifySql=true;
       if (StringUtils.trimToNull(atts.getValue("dbms")) != null) {
-        modifySqlDbmsList=StringUtils.splitAndTrim(atts.getValue("dbms"),",");
+        modifySqlDbmsList=new HashSet<String>(StringUtils.splitAndTrim(atts.getValue("dbms"),","));
+      }
+      if (StringUtils.trimToNull(atts.getValue("context")) != null) {
+        modifySqlContexts=new HashSet<String>(StringUtils.splitAndTrim(atts.getValue("context"),","));
       }
       if (StringUtils.trimToNull(atts.getValue("applyToRollback")) != null) {
         modifySqlAppliedOnRollback=Boolean.valueOf(atts.getValue("applyToRollback"));
@@ -136,6 +139,7 @@
       }
       sqlVisitor.setApplicableDbms(modifySqlDbmsList);
       sqlVisitor.setApplyToRollback(modifySqlAppliedOnRollback);
+      sqlVisitor.setContexts(modifySqlContexts);
       changeSet.addSqlVisitor(sqlVisitor);
     }
  else     if (changeSet != null && change == null) {

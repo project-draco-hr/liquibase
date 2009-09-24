@@ -1,3 +1,0 @@
-{
-  return applicableDbms == null || applicableDbms.contains(database.getTypeName());
-}

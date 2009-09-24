@@ -2,7 +2,7 @@
   Executor executor=ExecutorService.getInstance().getExecutor(this);
   if (!doesChangeLogLockTableExist()) {
     executor.comment("Create Database Lock Table");
-    executor.execute(new CreateDatabaseChangeLogLockTableStatement(),new ArrayList<SqlVisitor>());
+    executor.execute(new CreateDatabaseChangeLogLockTableStatement());
     this.commit();
     LogFactory.getLogger().debug("Created database lock table with name: " + escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()));
   }

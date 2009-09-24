@@ -5,10 +5,10 @@
   expectLastCall();
   database.rollback();
   expectLastCall().anyTimes();
-  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(false);
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(false);
   executor.comment("Lock Database");
   expectLastCall();
-  expect(executor.update(isA(LockDatabaseChangeLogStatement.class),isA(ArrayList.class))).andReturn(1);
+  expect(executor.update(isA(LockDatabaseChangeLogStatement.class))).andReturn(1);
   database.commit();
   expectLastCall();
   replay(executor);

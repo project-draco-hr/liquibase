@@ -123,6 +123,8 @@
  else     if ("modifySql".equals(qName)) {
       inModifySql=false;
       modifySqlDbmsList=null;
+      modifySqlContexts=null;
+      modifySqlAppliedOnRollback=true;
     }
   }
  catch (  Exception e) {

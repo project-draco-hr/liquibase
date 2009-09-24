@@ -3,7 +3,7 @@
   Executor executor=createMock(Executor.class);
   database.checkDatabaseChangeLogLockTable();
   expectLastCall().anyTimes();
-  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class),isA(ArrayList.class))).andReturn(true).anyTimes();
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(true).anyTimes();
   expect(database.doesChangeLogLockTableExist()).andReturn(true);
   List<Map> resultList=new ArrayList<Map>();
   Map<String,Object> result=new HashMap<String,Object>();
@@ -13,7 +13,7 @@
   result.put("LOCKGRANTED",lockDate);
   result.put("LOCKEDBY","Locker");
   resultList.add(result);
-  expect(executor.queryForList(isA(SelectFromDatabaseChangeLogLockStatement.class),isA(ArrayList.class))).andReturn(resultList);
+  expect(executor.queryForList(isA(SelectFromDatabaseChangeLogLockStatement.class))).andReturn(resultList);
   replay(database);
   replay(executor);
   ExecutorService.getInstance().setExecutor(database,executor);

@@ -1,4 +1,4 @@
 {
-  ExecutorService.getInstance().getExecutor(this).execute(new MarkChangeSetRanStatement(changeSet,true),new ArrayList<SqlVisitor>());
+  ExecutorService.getInstance().getExecutor(this).execute(new MarkChangeSetRanStatement(changeSet,true));
   this.commit();
 }

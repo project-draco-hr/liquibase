@@ -1,6 +1,3 @@
 {
-  if (sql instanceof SelectFromDatabaseChangeLogLockStatement) {
-    return false;
-  }
   return delegatedReadExecutor.queryForObject(sql,requiredType,sqlVisitors);
 }
