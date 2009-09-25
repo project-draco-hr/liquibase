@@ -1,5 +1,5 @@
 {
-  System.out.println("ServiceLocator finding " + packageName + " classes in "+ resource.toExternalForm()+ " matching interface "+ requiredInterface.getName());
+  logger.debug("ServiceLocator finding " + packageName + " classes in "+ resource.toExternalForm()+ " matching interface "+ requiredInterface.getName());
   List<Class> classes=new ArrayList<Class>();
   List<String> potentialClassNames=new ArrayList<String>();
   if (resource.getProtocol().equals("jar")) {
@@ -55,7 +55,7 @@ catch (    Throwable e) {
       continue;
     }
     if (!clazz.isInterface() && !Modifier.isAbstract(clazz.getModifiers()) && isCorrectType(clazz,requiredInterface)) {
-      System.out.println(potentialClassName + " matches " + requiredInterface.getName());
+      logger.debug(potentialClassName + " matches " + requiredInterface.getName());
       try {
         clazz.getConstructor();
         classes.add(clazz);
