@@ -1,0 +1,3 @@
+{
+  return new IntType("NUMBER(10,0)");
+}
