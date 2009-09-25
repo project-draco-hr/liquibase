@@ -1,4 +1,9 @@
 {
-  Resource resource=getResource(file);
-  return resource.getInputStream();
+  try {
+    Resource resource=getResource(file);
+    return resource.getInputStream();
+  }
+ catch (  FileNotFoundException ex) {
+    return null;
+  }
 }
