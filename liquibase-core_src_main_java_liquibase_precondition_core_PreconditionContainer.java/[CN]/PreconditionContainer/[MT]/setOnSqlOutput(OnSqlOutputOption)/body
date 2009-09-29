@@ -1,0 +1,8 @@
+{
+  if (onSqlOutput == null) {
+    this.onSqlOutput=OnSqlOutputOption.IGNORE;
+  }
+ else {
+    this.onSqlOutput=onSqlOutput;
+  }
+}

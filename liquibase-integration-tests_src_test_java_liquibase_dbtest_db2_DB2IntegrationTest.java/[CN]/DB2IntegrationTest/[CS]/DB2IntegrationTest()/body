@@ -1,3 +1,3 @@
 {
-  super("db2","jdbc:db2://" + getDatabaseServerHostname() + ":50000/liquibas");
+  super("db2","jdbc:db2://" + getDatabaseServerHostname() + ":50000/lqbase");
 }

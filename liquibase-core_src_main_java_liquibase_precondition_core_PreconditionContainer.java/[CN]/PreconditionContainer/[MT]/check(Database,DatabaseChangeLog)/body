@@ -1,6 +1,24 @@
 {
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
-    super.check(database,changeLog);
+    boolean testPrecondition=false;
+    if (executor.updatesDatabase()) {
+      testPrecondition=true;
+    }
+ else {
+      if (this.getOnSqlOutput().equals(PreconditionContainer.OnSqlOutputOption.TEST)) {
+        testPrecondition=true;
+      }
+ else       if (this.getOnSqlOutput().equals(PreconditionContainer.OnSqlOutputOption.FAIL)) {
+        throw new PreconditionFailedException("Unexpected precondition in updateSQL mode with onUpdateSQL value: " + this.getOnSqlOutput(),changeLog,this);
+      }
+ else       if (this.getOnSqlOutput().equals(PreconditionContainer.OnSqlOutputOption.IGNORE)) {
+        testPrecondition=false;
+      }
+    }
+    if (testPrecondition) {
+      super.check(database,changeLog);
+    }
   }
  catch (  PreconditionFailedException e) {
     if (getOnFailMessage() == null) {

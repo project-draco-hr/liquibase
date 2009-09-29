@@ -30,7 +30,6 @@
       database.rollback();
     }
  catch (    DatabaseException e1) {
-      ;
     }
     throw new RollbackFailedException(e);
   }

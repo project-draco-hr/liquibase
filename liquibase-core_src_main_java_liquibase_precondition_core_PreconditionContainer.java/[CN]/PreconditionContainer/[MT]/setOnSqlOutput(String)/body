@@ -1,0 +1,17 @@
+{
+  if (onSqlOutput == null) {
+    setOnSqlOutput((OnSqlOutputOption)null);
+    return;
+  }
+  for (  OnSqlOutputOption option : OnSqlOutputOption.values()) {
+    if (option.key.equalsIgnoreCase(onSqlOutput)) {
+      setOnSqlOutput(option);
+      return;
+    }
+  }
+  List<String> possibleOptions=new ArrayList<String>();
+  for (  OnSqlOutputOption option : OnSqlOutputOption.values()) {
+    possibleOptions.add(option.key);
+  }
+  throw new RuntimeException("Unknown onSqlOutput attribute value '" + onSqlOutput + "'.  Possible values: "+ StringUtils.join(possibleOptions,", "));
+}
