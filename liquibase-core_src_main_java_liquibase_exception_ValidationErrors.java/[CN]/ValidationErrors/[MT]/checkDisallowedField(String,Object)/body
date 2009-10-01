@@ -1,5 +1,0 @@
-{
-  if (value != null) {
-    addError(disallowedFieldName + " is not allowed");
-  }
-}

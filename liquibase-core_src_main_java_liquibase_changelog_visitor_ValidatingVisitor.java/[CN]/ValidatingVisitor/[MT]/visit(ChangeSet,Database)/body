@@ -7,7 +7,7 @@
       setupExceptions.add(se);
     }
     try {
-      change.validate(database);
+      validationErrors.addAll(change.validate(database),changeSet);
     }
  catch (    Throwable e) {
       changeValidationExceptions.add(e);

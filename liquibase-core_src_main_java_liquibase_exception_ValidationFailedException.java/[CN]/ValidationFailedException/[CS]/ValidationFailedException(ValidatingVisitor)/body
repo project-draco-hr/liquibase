@@ -5,4 +5,5 @@
   this.duplicateChangeSets=changeLogHandler.getDuplicateChangeSets();
   this.setupExceptions=changeLogHandler.getSetupExceptions();
   this.changeValidationExceptions=changeLogHandler.getChangeValidationExceptions();
+  this.validationErrors=changeLogHandler.getValidationErrors();
 }

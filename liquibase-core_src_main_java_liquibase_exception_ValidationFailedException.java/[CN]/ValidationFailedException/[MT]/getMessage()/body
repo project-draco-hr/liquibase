@@ -41,9 +41,16 @@
     }
   }
   if (changeValidationExceptions.size() > 0) {
-    message.append("     ").append(changeValidationExceptions.size()).append(" changes have validation failures").append(StreamUtil.getLineSeparator());
+    message.append("     ").append(changeValidationExceptions.size()).append(" changes have validation errors").append(StreamUtil.getLineSeparator());
     for (    Throwable invalid : changeValidationExceptions) {
       message.append("          ").append(invalid.toString());
+      message.append(StreamUtil.getLineSeparator());
+    }
+  }
+  if (validationErrors.hasErrors()) {
+    message.append("     ").append(validationErrors.getErrorMessages().size()).append(" changes have validation failures").append(StreamUtil.getLineSeparator());
+    for (    String invalid : validationErrors.getErrorMessages()) {
+      message.append("          ").append(invalid);
       message.append(StreamUtil.getLineSeparator());
     }
   }

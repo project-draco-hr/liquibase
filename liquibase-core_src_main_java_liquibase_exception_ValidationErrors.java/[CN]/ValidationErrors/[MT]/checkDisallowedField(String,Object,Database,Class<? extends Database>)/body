@@ -1,0 +1,16 @@
+{
+  boolean isDisallowed=false;
+  if (disallowedDatabases == null || disallowedDatabases.length == 0) {
+    isDisallowed=true;
+  }
+ else {
+    for (    Class<? extends Database> databaseClass : disallowedDatabases) {
+      if (databaseClass.isAssignableFrom(database.getClass())) {
+        isDisallowed=true;
+      }
+    }
+  }
+  if (isDisallowed && value != null) {
+    addError(disallowedFieldName + " is not allowed on " + database.getTypeName());
+  }
+}
