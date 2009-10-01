@@ -1,5 +1,3 @@
 {
-  if (!changeLogParameters.containsKey(paramter)) {
-    changeLogParameters.put(paramter,value);
-  }
+  changeLogParameters.add(new ChangeLogParameter(paramter,value));
 }

@@ -1,5 +1,5 @@
 {
-  handler.setParameterValue("doubleSet","originalValue");
-  handler.setParameterValue("doubleSet","newValue");
+  handler.setParameter("doubleSet","originalValue",null);
+  handler.setParameter("doubleSet","newValue",null);
   assertEquals("re-setting a param should not overwrite the value (like how ant works)","originalValue",handler.getParameterValue("doubleSet"));
 }

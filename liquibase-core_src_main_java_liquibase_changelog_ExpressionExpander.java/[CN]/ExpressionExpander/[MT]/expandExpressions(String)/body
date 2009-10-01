@@ -9,9 +9,9 @@
     String expressionString=originalText.substring(matcher.start(),matcher.end());
     String valueTolookup=expressionString.replaceFirst("\\$\\{","").replaceFirst("\\}$","");
     int dotIndex=valueTolookup.indexOf('.');
-    Object value=getParameterValue(valueTolookup);
+    ChangeLogParameter value=getParameterValue(valueTolookup);
     if (value != null) {
-      text=text.replace(expressionString,value.toString());
+      text=text.replace(expressionString,value.getValue().toString());
     }
   }
   return text;

@@ -224,8 +224,9 @@
       text=new StringBuffer();
     }
  else     if ("property".equals(qName)) {
+      String dbms=StringUtils.trimToNull(atts.getValue("dbms"));
       if (StringUtils.trimToNull(atts.getValue("file")) == null) {
-        this.setParameterValue(atts.getValue("name"),atts.getValue("value"));
+        this.setParameter(atts.getValue("name"),atts.getValue("value"),dbms);
       }
  else {
         Properties props=new Properties();
@@ -236,7 +237,7 @@
  else {
           props.load(propertiesStream);
           for (          Map.Entry entry : props.entrySet()) {
-            this.setParameterValue(entry.getKey().toString(),entry.getValue().toString());
+            this.setParameter(entry.getKey().toString(),entry.getValue().toString(),dbms);
           }
         }
       }

@@ -1,3 +1,3 @@
 {
-  this.handler=new ExpressionExpander(new HashMap<String,Object>());
+  this.handler=new ExpressionExpander(new ArrayList<ChangeLogParameter>());
 }

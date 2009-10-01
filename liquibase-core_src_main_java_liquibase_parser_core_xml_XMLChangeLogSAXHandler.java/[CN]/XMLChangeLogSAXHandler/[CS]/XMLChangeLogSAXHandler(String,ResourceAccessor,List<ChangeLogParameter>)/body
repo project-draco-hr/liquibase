@@ -4,9 +4,7 @@
   databaseChangeLog=new DatabaseChangeLog(physicalChangeLogLocation);
   databaseChangeLog.setPhysicalFilePath(physicalChangeLogLocation);
   for (  Map.Entry entry : System.getProperties().entrySet()) {
-    changeLogParameters.put(entry.getKey().toString(),entry.getValue());
+    changeLogParameters.add(new ChangeLogParameter(entry.getKey().toString(),entry.getValue()));
   }
-  for (  Map.Entry entry : properties.entrySet()) {
-    changeLogParameters.put(entry.getKey().toString(),entry.getValue());
-  }
+  changeLogParameters.addAll(properties);
 }

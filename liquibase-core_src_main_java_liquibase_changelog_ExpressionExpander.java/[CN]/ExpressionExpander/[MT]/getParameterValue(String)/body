@@ -1,3 +1,8 @@
 {
-  return changeLogParameters.get(paramter);
+  for (  ChangeLogParameter param : changeLogParameters) {
+    if (param.getKey().equalsIgnoreCase(key)) {
+      return param;
+    }
+  }
+  return null;
 }
