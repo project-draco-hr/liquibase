@@ -1,0 +1,17 @@
+{
+  boolean allPassed=true;
+  List<FailedPrecondition> failures=new ArrayList<FailedPrecondition>();
+  for (  Precondition precondition : getNestedPreconditions()) {
+    try {
+      precondition.check(database,changeLog,changeSet);
+    }
+ catch (    PreconditionFailedException e) {
+      failures.addAll(e.getFailedPreconditions());
+      allPassed=false;
+      break;
+    }
+  }
+  if (!allPassed) {
+    throw new PreconditionFailedException(failures);
+  }
+}

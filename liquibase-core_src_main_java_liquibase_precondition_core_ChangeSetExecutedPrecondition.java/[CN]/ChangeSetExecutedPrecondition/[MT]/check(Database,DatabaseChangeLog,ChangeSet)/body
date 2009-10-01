@@ -1,0 +1,13 @@
+{
+  ChangeSet interestedChangeSet=new ChangeSet(getId(),getAuthor(),false,false,getChangeLogFile(),getChangeLogFile(),null,null,false);
+  RanChangeSet ranChangeSet;
+  try {
+    ranChangeSet=database.getRanChangeSet(interestedChangeSet);
+  }
+ catch (  Exception e) {
+    throw new PreconditionErrorException(e,changeLog,this);
+  }
+  if (ranChangeSet == null) {
+    throw new PreconditionFailedException("Change Set '" + interestedChangeSet.toString(false) + "' has not been run",changeLog,this);
+  }
+}

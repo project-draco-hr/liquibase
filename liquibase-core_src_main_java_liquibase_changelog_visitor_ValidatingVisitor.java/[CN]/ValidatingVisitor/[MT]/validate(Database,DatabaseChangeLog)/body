@@ -1,10 +1,10 @@
 {
+  PreconditionContainer preconditions=changeLog.getPreconditions();
   try {
-    PreconditionContainer precondition=changeLog.getPreconditions();
-    if (precondition == null) {
+    if (preconditions == null) {
       return;
     }
-    precondition.check(database,changeLog);
+    preconditions.check(database,changeLog,null);
   }
  catch (  PreconditionFailedException e) {
     failedPreconditions.addAll(e.getFailedPreconditions());

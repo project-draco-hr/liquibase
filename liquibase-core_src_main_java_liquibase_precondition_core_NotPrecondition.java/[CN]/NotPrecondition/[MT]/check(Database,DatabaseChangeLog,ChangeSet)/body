@@ -1,0 +1,15 @@
+{
+  for (  Precondition precondition : getNestedPreconditions()) {
+    boolean threwException=false;
+    try {
+      precondition.check(database,changeLog,changeSet);
+    }
+ catch (    PreconditionFailedException e) {
+      ;
+      threwException=true;
+    }
+    if (!threwException) {
+      throw new PreconditionFailedException("Not precondition failed",changeLog,this);
+    }
+  }
+}
