@@ -149,6 +149,9 @@
  else       if ("futureRollbackSQL".equalsIgnoreCase(command)) {
         liquibase.futureRollbackSQL(contexts,getOutputWriter());
       }
+ else       if ("updateTestingRollback".equalsIgnoreCase(command)) {
+        liquibase.updateTestingRollback(contexts);
+      }
  else {
         throw new CommandLineParsingException("Unknown command: " + command);
       }
