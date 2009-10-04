@@ -1,3 +1,4 @@
 {
-  this.handler=new ExpressionExpander(new ArrayList<ChangeLogParameter>());
+  changeLogParameters=new ChangeLogParameters();
+  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters);
 }

@@ -1,6 +1,7 @@
 {
   LockService lockService=LockService.getInstance(database);
   lockService.waitForLock();
+  changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
   try {
     database.checkDatabaseChangeLogTable();
     DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile).parse(changeLogFile,changeLogParameters,resourceAccessor);

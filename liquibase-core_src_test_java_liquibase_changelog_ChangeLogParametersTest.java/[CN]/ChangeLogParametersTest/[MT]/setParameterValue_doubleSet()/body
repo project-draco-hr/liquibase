@@ -1,0 +1,6 @@
+{
+  ChangeLogParameters changeLogParameters=new ChangeLogParameters();
+  changeLogParameters.set("doubleSet","originalValue");
+  changeLogParameters.set("doubleSet","newValue");
+  assertEquals("re-setting a param should not overwrite the value (like how ant works)","originalValue",changeLogParameters.getValue("doubleSet"));
+}

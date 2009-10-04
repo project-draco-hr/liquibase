@@ -1,0 +1,6 @@
+{
+  ChangeLogParameters changeLogParameters=new ChangeLogParameters(new H2Database());
+  changeLogParameters.setContexts(Arrays.asList("junit"));
+  changeLogParameters.set("doubleSet","originalValue","anotherContext","baddb, h2");
+  assertNull(changeLogParameters.getValue("doubleSet"));
+}

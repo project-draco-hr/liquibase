@@ -1,3 +1,0 @@
-{
-  assertEquals(System.getProperty("user.name"),handler.getParameterValue("user.name"));
-}

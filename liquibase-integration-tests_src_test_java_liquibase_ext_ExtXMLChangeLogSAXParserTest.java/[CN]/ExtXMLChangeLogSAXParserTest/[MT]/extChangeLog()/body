@@ -3,7 +3,7 @@
   ClassLoaderResourceAccessor resourceAccessor=new ClassLoaderResourceAccessor();
   ServiceLocator.getInstance().setResourceAccessor(resourceAccessor);
   ChangeFactory.reset();
-  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("changelogs/common/ext.changelog.xml",new ArrayList<ChangeLogParameter>(),resourceAccessor);
+  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("changelogs/common/ext.changelog.xml",new ChangeLogParameters(),resourceAccessor);
   assertEquals("changelogs/common/ext.changelog.xml",changeLog.getLogicalFilePath());
   assertEquals(4,changeLog.getChangeSets().size());
   ChangeSet changeSet=changeLog.getChangeSets().get(1);

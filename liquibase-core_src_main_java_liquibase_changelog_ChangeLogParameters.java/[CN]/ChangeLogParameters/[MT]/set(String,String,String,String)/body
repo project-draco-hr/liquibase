@@ -1,0 +1,3 @@
+{
+  changeLogParameters.add(new ChangeLogParameter(key,value,contexts,databases));
+}

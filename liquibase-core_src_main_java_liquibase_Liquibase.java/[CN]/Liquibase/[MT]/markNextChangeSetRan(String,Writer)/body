@@ -1,4 +1,5 @@
 {
+  changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
   LoggingExecutor outputTemplate=new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database);
   Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
   ExecutorService.getInstance().setExecutor(database,outputTemplate);

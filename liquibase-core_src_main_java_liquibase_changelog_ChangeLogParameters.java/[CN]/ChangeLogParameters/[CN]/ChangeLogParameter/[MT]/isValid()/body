@@ -1,0 +1,17 @@
+{
+  boolean isValid=true;
+  if (validContexts != null && validContexts.size() > 0) {
+    if (ChangeLogParameters.this.currentContexts != null && ChangeLogParameters.this.currentContexts.size() > 0) {
+      isValid=false;
+      for (      String currentContext : ChangeLogParameters.this.currentContexts) {
+        if (validContexts.contains(currentContext)) {
+          isValid=true;
+        }
+      }
+    }
+  }
+  if (isValid && validDatabases != null && validDatabases.size() > 0) {
+    isValid=validDatabases.contains(currentDatabase.getTypeName());
+  }
+  return isValid;
+}

@@ -1,4 +1,5 @@
 {
+  changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
   try {
     List<ChangeSet> unrunChangeSets=listUnrunChangeSets(contexts);
     if (unrunChangeSets.size() == 0) {

@@ -1,0 +1,6 @@
+{
+  this.currentContexts=new ArrayList<String>();
+  if (contexts != null) {
+    this.currentContexts.addAll(contexts);
+  }
+}

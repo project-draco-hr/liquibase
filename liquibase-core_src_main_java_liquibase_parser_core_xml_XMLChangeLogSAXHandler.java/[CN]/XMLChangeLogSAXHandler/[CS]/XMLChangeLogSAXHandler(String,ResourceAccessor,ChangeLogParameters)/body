@@ -1,0 +1,7 @@
+{
+  log=LogFactory.getLogger();
+  this.resourceAccessor=resourceAccessor;
+  databaseChangeLog=new DatabaseChangeLog(physicalChangeLogLocation);
+  databaseChangeLog.setPhysicalFilePath(physicalChangeLogLocation);
+  this.changeLogParameters=changeLogParameters;
+}

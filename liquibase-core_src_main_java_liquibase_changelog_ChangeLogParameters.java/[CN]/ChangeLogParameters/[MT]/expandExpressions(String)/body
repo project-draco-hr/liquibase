@@ -1,0 +1,3 @@
+{
+  return expressionExpander.expandExpressions(string);
+}

@@ -1,0 +1,3 @@
+{
+  this.currentContexts.add(context);
+}

@@ -1,3 +1,0 @@
-{
-  handler=new XMLChangeLogSAXHandler(null,null,new ArrayList<ChangeLogParameter>());
-}

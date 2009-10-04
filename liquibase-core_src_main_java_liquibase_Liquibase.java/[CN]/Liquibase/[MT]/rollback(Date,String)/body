@@ -1,4 +1,5 @@
 {
+  changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
   LockService lockService=LockService.getInstance(database);
   lockService.waitForLock();
   try {

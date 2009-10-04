@@ -1,14 +1,13 @@
 {
-  ExpressionExpander expressionExpander=new ExpressionExpander(changeLogParameters);
   if (object instanceof CustomChangeWrapper) {
     if (attributeName.equals("class")) {
-      ((CustomChangeWrapper)object).setClass(expressionExpander.expandExpressions(attributeValue));
+      ((CustomChangeWrapper)object).setClass(changeLogParameters.expandExpressions(attributeValue));
     }
  else {
-      ((CustomChangeWrapper)object).setParam(attributeName,expressionExpander.expandExpressions(attributeValue));
+      ((CustomChangeWrapper)object).setParam(attributeName,changeLogParameters.expandExpressions(attributeValue));
     }
   }
  else {
-    ObjectUtil.setProperty(object,attributeName,expressionExpander.expandExpressions(attributeValue));
+    ObjectUtil.setProperty(object,attributeName,changeLogParameters.expandExpressions(attributeValue));
   }
 }

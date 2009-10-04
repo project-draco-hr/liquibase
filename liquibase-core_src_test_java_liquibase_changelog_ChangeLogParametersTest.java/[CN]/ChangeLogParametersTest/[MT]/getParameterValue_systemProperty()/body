@@ -1,0 +1,4 @@
+{
+  ChangeLogParameters changeLogParameters=new ChangeLogParameters();
+  assertEquals(System.getProperty("user.name"),changeLogParameters.getValue("user.name"));
+}

@@ -1,4 +1,5 @@
 {
+  changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
   Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
   ExecutorService.getInstance().setExecutor(database,new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database));
   outputHeader("Rollback to '" + tagToRollBackTo + "' Script");

@@ -5,4 +5,5 @@
   }
   this.resourceAccessor=resourceAccessor;
   this.database=database;
+  changeLogParameters=new ChangeLogParameters(database);
 }
