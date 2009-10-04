@@ -1,6 +1,0 @@
-{
-  if (database instanceof MSSQLDatabase || database instanceof MySQLDatabase) {
-    return true;
-  }
-  return false;
-}

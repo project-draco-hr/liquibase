@@ -1,0 +1,3 @@
+{
+  return tableName + "." + columnName+ " datatype was changed to "+ newDataType;
+}

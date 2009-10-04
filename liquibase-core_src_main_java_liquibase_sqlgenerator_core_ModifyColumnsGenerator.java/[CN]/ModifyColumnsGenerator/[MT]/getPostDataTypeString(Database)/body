@@ -1,8 +1,0 @@
-{
-  if (database instanceof OracleDatabase || database instanceof MaxDBDatabase) {
-    return " )";
-  }
- else {
-    return "";
-  }
-}

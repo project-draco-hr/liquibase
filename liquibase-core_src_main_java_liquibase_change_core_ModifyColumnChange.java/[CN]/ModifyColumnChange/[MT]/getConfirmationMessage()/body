@@ -1,7 +1,0 @@
-{
-  List<String> names=new ArrayList<String>(columns.size());
-  for (  ColumnConfig col : columns) {
-    names.add(col.getName() + "(" + col.getType()+ ")");
-  }
-  return "Columns " + StringUtils.join(names,",") + " of "+ getTableName()+ " modified";
-}

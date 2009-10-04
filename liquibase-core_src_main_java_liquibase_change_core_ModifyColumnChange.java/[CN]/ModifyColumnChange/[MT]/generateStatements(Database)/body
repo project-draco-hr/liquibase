@@ -1,3 +1,0 @@
-{
-  return new SqlStatement[]{new ModifyColumnsStatement(getSchemaName(),getTableName(),getColumns().toArray(new ColumnConfig[getColumns().size()]))};
-}

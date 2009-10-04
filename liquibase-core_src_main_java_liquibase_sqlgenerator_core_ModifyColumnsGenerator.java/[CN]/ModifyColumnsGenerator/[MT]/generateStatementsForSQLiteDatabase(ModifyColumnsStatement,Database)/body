@@ -1,4 +1,0 @@
-{
-  List<Sql> statements=new ArrayList<Sql>();
-  return statements.toArray(new Sql[statements.size()]);
-}

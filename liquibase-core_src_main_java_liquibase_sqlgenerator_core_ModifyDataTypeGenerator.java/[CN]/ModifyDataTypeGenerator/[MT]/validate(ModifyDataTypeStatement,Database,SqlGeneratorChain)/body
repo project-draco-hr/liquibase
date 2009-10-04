@@ -1,0 +1,7 @@
+{
+  ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("tableName",statement.getTableName());
+  validationErrors.checkRequiredField("columnName",statement.getColumnName());
+  validationErrors.checkRequiredField("newDataType",statement.getNewDataType());
+  return validationErrors;
+}

@@ -1,3 +1,0 @@
-{
-  assertEquals("Modify Column",change.getChangeMetaData().getDescription());
-}

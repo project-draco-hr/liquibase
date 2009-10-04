@@ -1,0 +1,18 @@
+{
+  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName());
+  alterTable+=" " + getModifyString(database) + " ";
+  alterTable+=database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName());
+  alterTable+=getPreDataTypeString(database);
+  alterTable+=TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(statement.getNewDataType(),false);
+  if (statement.isNullable() != null) {
+    if (statement.isNullable()) {
+      if (database instanceof SybaseDatabase || database instanceof SybaseASADatabase) {
+        alterTable+=" NULL";
+      }
+    }
+ else {
+      alterTable+=" NOT NULL";
+    }
+  }
+  return new Sql[]{new UnparsedSql(alterTable)};
+}

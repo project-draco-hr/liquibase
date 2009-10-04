@@ -1,3 +1,0 @@
-{
-  assertEquals("Columns NAME(integer(3)) of TABLE_NAME modified",change.getConfirmationMessage());
-}

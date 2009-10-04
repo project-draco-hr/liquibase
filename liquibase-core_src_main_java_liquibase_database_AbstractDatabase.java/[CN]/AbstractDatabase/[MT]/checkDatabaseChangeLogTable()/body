@@ -32,10 +32,7 @@
     }
     if (checksumNotRightSize) {
       executor.comment("Modifying size of databasechangelog.md5sum column");
-      ColumnConfig checksumColumn=new ColumnConfig();
-      checksumColumn.setName("MD5SUM");
-      checksumColumn.setType("VARCHAR(35)");
-      statementsToExecute.add(new ModifyColumnsStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),checksumColumn));
+      statementsToExecute.add(new ModifyDataTypeStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"MD5SUM","VARCHAR(35)",true));
     }
     List<Map> md5sumRS=ExecutorService.getInstance().getExecutor(this).queryForList(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum(),"MD5SUM"));
     if (md5sumRS.size() > 0) {
