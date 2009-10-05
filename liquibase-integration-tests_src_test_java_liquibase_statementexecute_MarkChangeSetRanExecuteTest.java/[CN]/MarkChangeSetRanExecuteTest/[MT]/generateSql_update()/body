@@ -1,5 +1,5 @@
 {
-  this.statementUnderTest=new MarkChangeSetRanStatement(new ChangeSet("a","b",false,false,"c","d","e","f"),true);
+  this.statementUnderTest=new MarkChangeSetRanStatement(new ChangeSet("a","b",false,false,"c","d","e","f"),ChangeSet.ExecType.EXECUTED);
   assertCorrect("update [dbo].[databasechangelog] set [dateexecuted] = NOW(), [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",MSSQLDatabase.class);
   assertCorrect("update [databasechangelog] set [dateexecuted] = timestamp, [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",MaxDBDatabase.class);
   assertCorrect("update [databasechangelog] set [dateexecuted] = sysdate, [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",OracleDatabase.class,CacheDatabase.class);

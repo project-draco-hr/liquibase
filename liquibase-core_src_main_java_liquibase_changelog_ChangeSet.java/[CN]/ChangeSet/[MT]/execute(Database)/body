@@ -1,6 +1,6 @@
 {
+  ExecType execType=null;
   boolean skipChange=false;
-  boolean markRan=true;
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
     database.setAutoCommit(!runInTransaction);
@@ -32,13 +32,15 @@
       }
  else       if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.CONTINUE)) {
         skipChange=true;
-        markRan=false;
+        execType=ExecType.SKIPPED;
       }
  else       if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.MARK_RAN)) {
+        execType=ExecType.MARK_RAN;
         skipChange=true;
         log.info("Marking ChangeSet: " + toString() + " ran despite precondition failure: "+ message);
       }
  else       if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.WARN)) {
+        execType=null;
       }
  else {
         throw new UnexpectedLiquibaseException("Unexpected precondition onFail attribute: " + preconditions.getOnFail(),e);
@@ -56,14 +58,15 @@ catch (    PreconditionErrorException e) {
       }
  else       if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.CONTINUE)) {
         skipChange=true;
-        markRan=false;
+        execType=ExecType.SKIPPED;
       }
  else       if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.MARK_RAN)) {
+        execType=ExecType.MARK_RAN;
         skipChange=true;
-        markRan=true;
         log.info("Marking ChangeSet: " + toString() + " ran despite precondition error: "+ message);
       }
  else       if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.WARN)) {
+        execType=null;
       }
  else {
         throw new UnexpectedLiquibaseException("Unexpected precondition onError attribute: " + preconditions.getOnError(),e);
@@ -88,9 +91,13 @@ catch (    PreconditionErrorException e) {
         database.commit();
       }
       log.debug("ChangeSet " + toString() + " has been successfully run.");
+      if (execType == null) {
+        execType=ExecType.EXECUTED;
+      }
     }
  else {
       log.debug("Skipping ChangeSet: " + toString());
+      execType=ExecType.SKIPPED;
     }
   }
  catch (  Exception e) {
@@ -102,6 +109,7 @@ catch (    PreconditionErrorException e) {
     }
     if (getFailOnError() != null && !getFailOnError()) {
       log.info("Change set " + toString(false) + " failed, but failOnError was false",e);
+      execType=ExecType.FAILED;
     }
  else {
       if (e instanceof MigrationFailedException) {
@@ -122,5 +130,8 @@ catch (    PreconditionErrorException e) {
       }
     }
   }
-  return markRan;
+  if (execType == null) {
+    System.out.println("asdf");
+  }
+  return execType;
 }

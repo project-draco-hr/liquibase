@@ -10,6 +10,7 @@
     boolean hasLiquibase=changeLogTable.getColumn("LIQUIBASE") != null;
     boolean hasOrderExecuted=changeLogTable.getColumn("ORDEREXECUTED") != null;
     boolean checksumNotRightSize=changeLogTable.getColumn("MD5SUM").getColumnSize() != 35;
+    boolean hasExecTypeColumn=changeLogTable.getColumn("EXECTYPE") != null;
     if (!hasDescription) {
       executor.comment("Adding missing databasechangelog.description column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"DESCRIPTION","VARCHAR(255)",null));
@@ -33,6 +34,12 @@
     if (checksumNotRightSize) {
       executor.comment("Modifying size of databasechangelog.md5sum column");
       statementsToExecute.add(new ModifyDataTypeStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"MD5SUM","VARCHAR(35)",true));
+    }
+    if (!hasExecTypeColumn) {
+      executor.comment("Adding missing databasechangelog.exectype column");
+      statementsToExecute.add(new AddColumnStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"EXECTYPE","VARCHAR(10)",null,new NotNullConstraint(),new UniqueConstraint()));
+      statementsToExecute.add(new UpdateStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName()).addNewColumnValue("EXECTYPE","EXECUTED"));
+      statementsToExecute.add(new SetNullableStatement(getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"EXECTYPE","VARCHAR(10)",false));
     }
     List<Map> md5sumRS=ExecutorService.getInstance().getExecutor(this).queryForList(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum(),"MD5SUM"));
     if (md5sumRS.size() > 0) {
