@@ -1,12 +1,3 @@
 {
-  if (!(obj instanceof JdbcConnection)) {
-    return false;
-  }
-  JdbcConnection otherObj=(JdbcConnection)obj;
-  try {
-    return this.getUnderlyingConnection().getMetaData().getURL().equals(otherObj.getUnderlyingConnection().getMetaData().getURL()) && this.getUnderlyingConnection().getMetaData().getUserName().equals(otherObj.getUnderlyingConnection().getMetaData().getUserName());
-  }
- catch (  SQLException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
+  return obj instanceof JdbcConnection && this.getUnderlyingConnection().equals(((JdbcConnection)obj).getUnderlyingConnection());
 }
