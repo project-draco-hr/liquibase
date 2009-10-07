@@ -1,9 +1,0 @@
-{
-  log.debug("Running Changeset:" + changeSet);
-  ChangeSet.ExecType execType=changeSet.execute(this.database);
-  if (!this.database.getRunStatus(changeSet).equals(ChangeSet.RunStatus.NOT_RAN)) {
-    execType=ChangeSet.ExecType.RERAN;
-  }
-  this.database.markChangeSetExecStatus(changeSet,execType);
-  this.database.commit();
-}

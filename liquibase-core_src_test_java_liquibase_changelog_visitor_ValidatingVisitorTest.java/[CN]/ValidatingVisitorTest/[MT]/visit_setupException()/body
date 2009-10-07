@@ -6,7 +6,7 @@
   }
 );
   ValidatingVisitor handler=new ValidatingVisitor(new ArrayList<RanChangeSet>());
-  handler.visit(changeSet1,null);
+  handler.visit(changeSet1,new DatabaseChangeLog("test"),null);
   assertEquals(1,handler.getSetupExceptions().size());
   assertEquals("Test message",handler.getSetupExceptions().get(0).getMessage());
   assertFalse(handler.validationPassed());
