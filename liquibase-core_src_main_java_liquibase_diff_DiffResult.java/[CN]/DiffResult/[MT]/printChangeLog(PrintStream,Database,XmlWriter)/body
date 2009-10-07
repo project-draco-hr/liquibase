@@ -8,38 +8,31 @@
   changeLogElement.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
   changeLogElement.setAttribute("xsi:schemaLocation","http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-" + XMLChangeLogSAXParser.getSchemaVersion() + ".xsd");
   doc.appendChild(changeLogElement);
-  List<Change> changes=new ArrayList<Change>();
-  addUnexpectedViewChanges(changes);
-  addMissingTableChanges(changes,targetDatabase);
-  addMissingColumnChanges(changes,targetDatabase);
-  addChangedColumnChanges(changes);
-  addMissingPrimaryKeyChanges(changes);
-  addUnexpectedPrimaryKeyChanges(changes);
-  addMissingUniqueConstraintChanges(changes);
-  addUnexpectedUniqueConstraintChanges(changes);
+  List<ChangeSet> changeSets=new ArrayList<ChangeSet>();
+  addUnexpectedViewChanges(changeSets);
+  addMissingTableChanges(changeSets,targetDatabase);
+  addMissingColumnChanges(changeSets,targetDatabase);
+  addChangedColumnChanges(changeSets);
+  addMissingPrimaryKeyChanges(changeSets);
+  addUnexpectedPrimaryKeyChanges(changeSets);
+  addMissingUniqueConstraintChanges(changeSets);
+  addUnexpectedUniqueConstraintChanges(changeSets);
   if (diffData) {
-    addInsertDataChanges(changes,dataDir);
+    addInsertDataChanges(changeSets,dataDir);
   }
-  addMissingForeignKeyChanges(changes);
-  addUnexpectedForeignKeyChanges(changes);
-  addMissingIndexChanges(changes);
-  addUnexpectedIndexChanges(changes);
-  addUnexpectedColumnChanges(changes);
-  addMissingSequenceChanges(changes);
-  addUnexpectedSequenceChanges(changes);
-  addMissingViewChanges(changes);
-  addUnexpectedTableChanges(changes);
+  addMissingForeignKeyChanges(changeSets);
+  addUnexpectedForeignKeyChanges(changeSets);
+  addMissingIndexChanges(changeSets);
+  addUnexpectedIndexChanges(changeSets);
+  addUnexpectedColumnChanges(changeSets);
+  addMissingSequenceChanges(changeSets);
+  addUnexpectedSequenceChanges(changeSets);
+  addMissingViewChanges(changeSets);
+  addUnexpectedTableChanges(changeSets);
   XMLChangeLogSerializer changeLogSerializer=new XMLChangeLogSerializer();
   changeLogSerializer.setCurrentChangeLogFileDOM(doc);
-  for (  Change change : changes) {
-    Element changeSet=doc.createElement("changeSet");
-    changeSet.setAttribute("author",getChangeSetAuthor());
-    changeSet.setAttribute("id",generateId());
-    if (getChangeSetContext() != null) {
-      changeSet.setAttribute("context",getChangeSetContext());
-    }
-    changeSet.appendChild(changeLogSerializer.createNode(change));
-    doc.getDocumentElement().appendChild(changeSet);
+  for (  ChangeSet changeSet : changeSets) {
+    doc.getDocumentElement().appendChild(changeLogSerializer.createNode(changeSet));
   }
   xmlWriter.write(doc,out);
   out.flush();

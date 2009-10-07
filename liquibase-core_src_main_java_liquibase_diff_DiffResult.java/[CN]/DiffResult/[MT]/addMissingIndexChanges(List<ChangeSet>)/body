@@ -1,0 +1,15 @@
+{
+  for (  Index index : getMissingIndexes()) {
+    CreateIndexChange change=new CreateIndexChange();
+    change.setTableName(index.getTable().getName());
+    change.setSchemaName(index.getTable().getSchema());
+    change.setIndexName(index.getName());
+    change.setUnique(index.isUnique());
+    for (    String columnName : index.getColumns()) {
+      ColumnConfig column=new ColumnConfig();
+      column.setName(columnName);
+      change.addColumn(column);
+    }
+    changes.add(generateChangeSet(change));
+  }
+}

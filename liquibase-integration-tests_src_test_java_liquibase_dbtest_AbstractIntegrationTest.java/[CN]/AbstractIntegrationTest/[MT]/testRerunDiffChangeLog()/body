@@ -3,7 +3,7 @@
     return;
   }
   for (int run=0; run < 2; run++) {
-    boolean outputCsv=run == 0;
+    boolean outputCsv=run == 1;
     runCompleteChangeLog();
     DatabaseSnapshot originalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
     Diff diff=new Diff(database,(String)null);

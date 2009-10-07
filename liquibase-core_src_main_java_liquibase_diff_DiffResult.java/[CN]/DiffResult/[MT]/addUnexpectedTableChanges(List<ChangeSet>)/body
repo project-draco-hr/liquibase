@@ -1,0 +1,8 @@
+{
+  for (  Table unexpectedTable : getUnexpectedTables()) {
+    DropTableChange change=new DropTableChange();
+    change.setTableName(unexpectedTable.getName());
+    change.setSchemaName(unexpectedTable.getSchema());
+    changes.add(generateChangeSet(change));
+  }
+}
