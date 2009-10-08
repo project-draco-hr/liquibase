@@ -1,10 +1,3 @@
 {
   Logger logger=LogFactory.getLogger();
-  if (logger instanceof JavaUtilLogger) {
-    for (    Handler handler : ((JavaUtilLogger)logger).getHandlers()) {
-      ((JavaUtilLogger)logger).removeHandler(handler);
-    }
-    ((JavaUtilLogger)logger).addHandler(theHandler);
-    ((JavaUtilLogger)logger).setUseParentHandlers(false);
-  }
 }
