@@ -19,6 +19,7 @@
       database.commit();
       LogFactory.getLogger().info("Successfully acquired change log lock");
       hasChangeLogLock=true;
+      database.setCanCacheLiquibaseTableInfo(true);
       return true;
     }
   }

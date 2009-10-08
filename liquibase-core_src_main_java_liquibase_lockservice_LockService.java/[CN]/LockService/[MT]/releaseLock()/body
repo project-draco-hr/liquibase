@@ -1,7 +1,7 @@
 {
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
-    if (database.doesChangeLogLockTableExist()) {
+    if (database.hasDatabaseChangeLogLockTable()) {
       executor.comment("Release Database Lock");
       database.rollback();
       int updatedRows=executor.update(new UnlockDatabaseChangeLogStatement());
@@ -11,6 +11,7 @@
       database.commit();
       hasChangeLogLock=false;
       instances.remove(this.database);
+      database.setCanCacheLiquibaseTableInfo(false);
       LogFactory.getLogger().info("Successfully released change log lock");
     }
   }

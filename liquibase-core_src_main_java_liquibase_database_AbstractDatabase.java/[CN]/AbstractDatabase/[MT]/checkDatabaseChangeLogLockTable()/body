@@ -1,6 +1,6 @@
 {
   Executor executor=ExecutorService.getInstance().getExecutor(this);
-  if (!doesChangeLogLockTableExist()) {
+  if (!hasDatabaseChangeLogLockTable()) {
     executor.comment("Create Database Lock Table");
     executor.execute(new CreateDatabaseChangeLogLockTableStatement());
     this.commit();

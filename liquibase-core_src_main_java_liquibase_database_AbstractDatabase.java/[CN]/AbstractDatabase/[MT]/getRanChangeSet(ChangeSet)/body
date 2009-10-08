@@ -1,5 +1,5 @@
 {
-  if (!doesChangeLogTableExist()) {
+  if (!hasDatabaseChangeLogTable()) {
     throw new DatabaseHistoryException("Database change table does not exist");
   }
   RanChangeSet foundRan=null;

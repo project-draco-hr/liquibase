@@ -2,7 +2,7 @@
   Database database=createMock(Database.class);
   Executor executor=createMock(Executor.class);
   expect(executor.update(isA(UnlockDatabaseChangeLogStatement.class))).andReturn(1);
-  expect(database.doesChangeLogLockTableExist()).andReturn(true);
+  expect(database.hasDatabaseChangeLogLockTable()).andReturn(true);
   database.commit();
   expectLastCall().atLeastOnce();
   executor.comment("Release Database Lock");

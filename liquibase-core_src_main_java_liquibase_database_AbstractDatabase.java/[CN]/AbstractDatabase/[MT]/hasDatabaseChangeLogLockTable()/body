@@ -1,0 +1,10 @@
+{
+  if (hasDatabaseChangeLogLockTable) {
+    return true;
+  }
+  boolean hasTable=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).hasDatabaseChangeLogLockTable(this);
+  if (canCacheLiquibaseTableInfo) {
+    hasDatabaseChangeLogLockTable=hasTable;
+  }
+  return hasTable;
+}

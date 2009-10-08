@@ -1,5 +1,5 @@
 {
-  if (!doesChangeLogTableExist()) {
+  if (!hasDatabaseChangeLogTable()) {
     return ChangeSet.RunStatus.NOT_RAN;
   }
   RanChangeSet foundRan=getRanChangeSet(changeSet);

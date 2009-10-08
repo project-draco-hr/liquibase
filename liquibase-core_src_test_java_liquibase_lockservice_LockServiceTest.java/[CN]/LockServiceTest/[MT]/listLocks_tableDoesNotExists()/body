@@ -1,6 +1,6 @@
 {
   Database database=createMock(Database.class);
-  expect(database.doesChangeLogLockTableExist()).andReturn(false);
+  expect(database.hasDatabaseChangeLogLockTable()).andReturn(false);
   replay(database);
   LockService service=LockService.getInstance(database);
   DatabaseChangeLogLock[] locks=service.listLocks();

@@ -1,0 +1,5 @@
+{
+  this.canCacheLiquibaseTableInfo=canCacheLiquibaseTableInfo;
+  hasDatabaseChangeLogTable=false;
+  hasDatabaseChangeLogLockTable=false;
+}
