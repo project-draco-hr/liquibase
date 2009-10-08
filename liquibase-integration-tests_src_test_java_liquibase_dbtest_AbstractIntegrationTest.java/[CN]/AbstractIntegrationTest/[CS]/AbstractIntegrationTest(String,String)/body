@@ -5,8 +5,4 @@
   this.includedChangeLog="changelogs/" + changelogDir + "/complete/included.changelog.xml";
   this.url=url;
   ServiceLocator.getInstance().setResourceAccessor(TestContext.getInstance().getTestResourceAccessor());
-  DatabaseConnection connection=DatabaseTestContext.getInstance().getConnection(url);
-  if (connection != null) {
-    database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
-  }
 }

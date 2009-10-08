@@ -1,0 +1,6 @@
+{
+  DatabaseConnection connection=DatabaseTestContext.getInstance().getConnection(url);
+  if (connection != null) {
+    database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+  }
+}

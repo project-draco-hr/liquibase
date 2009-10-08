@@ -1,0 +1,19 @@
+{
+  String url=getConnection().getURL();
+  String driverName=getDefaultDriver(url);
+  super.close();
+  if (driverName.toLowerCase().contains("embedded")) {
+    try {
+      if (url.contains(";")) {
+        url=url.substring(0,url.indexOf(";")) + ";shutdown=true";
+      }
+ else {
+        url+=";shutdown=true";
+      }
+      LogFactory.getLogger().info("Shutting down derby connection: " + url);
+      ((Driver)Class.forName(driverName).newInstance()).connect(url,null);
+    }
+ catch (    Exception e) {
+    }
+  }
+}

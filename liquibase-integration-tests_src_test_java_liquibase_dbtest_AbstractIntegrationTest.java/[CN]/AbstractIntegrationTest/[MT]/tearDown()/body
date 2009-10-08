@@ -5,6 +5,9 @@
     }
     ExecutorService.getInstance().clearExecutor(database);
     database.setDefaultSchemaName(null);
+    database.close();
   }
+  ServiceLocator.reset();
   DatabaseSnapshotGeneratorFactory.resetAll();
+  DatabaseFactory.reset();
 }

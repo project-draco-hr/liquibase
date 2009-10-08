@@ -1,4 +1,5 @@
 {
+  openConnection(url);
   if (database != null) {
     if (!database.getConnection().getAutoCommit()) {
       database.rollback();
