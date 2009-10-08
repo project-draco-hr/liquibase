@@ -5,6 +5,8 @@
   expectLastCall();
   database.rollback();
   expectLastCall().anyTimes();
+  database.setCanCacheLiquibaseTableInfo(true);
+  expectLastCall();
   expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(false);
   executor.comment("Lock Database");
   expectLastCall();

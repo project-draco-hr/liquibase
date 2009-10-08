@@ -3,6 +3,8 @@
   Executor executor=createMock(Executor.class);
   database.checkDatabaseChangeLogLockTable();
   expectLastCall();
+  database.setCanCacheLiquibaseTableInfo(true);
+  expectLastCall();
   database.rollback();
   expectLastCall().anyTimes();
   expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(false);

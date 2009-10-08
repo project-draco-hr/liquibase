@@ -5,6 +5,8 @@
   expect(database.hasDatabaseChangeLogLockTable()).andReturn(true);
   database.commit();
   expectLastCall().atLeastOnce();
+  database.setCanCacheLiquibaseTableInfo(false);
+  expectLastCall();
   executor.comment("Release Database Lock");
   expectLastCall().anyTimes();
   database.rollback();
