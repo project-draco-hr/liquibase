@@ -1,6 +1,9 @@
 {
   try {
     for (    String statement : applyVisitors(sql,sqlVisitors)) {
+      if (statement == null) {
+        continue;
+      }
       output.write(statement);
       if (database instanceof MSSQLDatabase) {
         output.write(StreamUtil.getLineSeparator());
