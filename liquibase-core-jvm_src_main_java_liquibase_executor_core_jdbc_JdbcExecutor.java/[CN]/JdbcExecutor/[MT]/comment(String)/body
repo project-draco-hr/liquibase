@@ -1,3 +1,3 @@
 {
-  LogFactory.getLogger().info(message);
+  LogFactory.getLogger().debug(message);
 }

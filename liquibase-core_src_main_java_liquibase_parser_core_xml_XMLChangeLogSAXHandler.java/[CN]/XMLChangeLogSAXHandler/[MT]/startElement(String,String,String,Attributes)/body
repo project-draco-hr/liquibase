@@ -8,9 +8,15 @@
       text=new StringBuffer();
     }
  else     if ("databaseChangeLog".equals(qName)) {
-      String version=uri.substring(uri.lastIndexOf("/") + 1);
-      if (!version.equals(XMLChangeLogSAXParser.getSchemaVersion())) {
-        log.warning(databaseChangeLog.getPhysicalFilePath() + " is using schema version " + version+ " rather than version "+ XMLChangeLogSAXParser.getSchemaVersion());
+      String schemaLocation=atts.getValue("xsi:schemaLocation");
+      if (schemaLocation != null) {
+        Matcher matcher=Pattern.compile(".*dbchangelog-(\\d+\\.\\d+).xsd").matcher(schemaLocation);
+        if (matcher.matches()) {
+          String version=matcher.group(1);
+          if (!version.equals(XMLChangeLogSAXParser.getSchemaVersion())) {
+            log.warning(databaseChangeLog.getPhysicalFilePath() + " is using schema version " + version+ " rather than version "+ XMLChangeLogSAXParser.getSchemaVersion());
+          }
+        }
       }
       databaseChangeLog.setLogicalFilePath(atts.getValue("logicalFilePath"));
     }

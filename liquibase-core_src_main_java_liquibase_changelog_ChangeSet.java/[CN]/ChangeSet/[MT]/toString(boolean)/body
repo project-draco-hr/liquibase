@@ -1,3 +1,3 @@
 {
-  return filePath + "::" + getId()+ "::"+ getAuthor()+ (includeMD5Sum ? ("::(MD5Sum: " + generateCheckSum() + ")") : "");
+  return filePath + "::" + getId()+ "::"+ getAuthor()+ (includeMD5Sum ? ("::(Checksum: " + generateCheckSum() + ")") : "");
 }

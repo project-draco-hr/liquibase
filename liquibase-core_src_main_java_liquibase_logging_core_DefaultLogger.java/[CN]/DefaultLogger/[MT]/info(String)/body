@@ -1,5 +1,5 @@
 {
   if (getLogLevel().compareTo(LogLevel.INFO) <= 0) {
-    print(message);
+    print(LogLevel.INFO,message);
   }
 }
