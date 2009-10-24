@@ -11,7 +11,7 @@
       throw new DatabaseException("Did not tag database change log correctly");
     }
     this.commit();
-    ranChangeSetList.get(ranChangeSetList.size() - 1).setTag(tagString);
+    getRanChangeSetList().get(getRanChangeSetList().size() - 1).setTag(tagString);
   }
  catch (  Exception e) {
     throw new DatabaseException(e);

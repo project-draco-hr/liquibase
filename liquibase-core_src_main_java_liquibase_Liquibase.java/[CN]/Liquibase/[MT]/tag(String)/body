@@ -1,3 +1,11 @@
 {
-  getDatabase().tag(tagString);
+  LockService lockService=LockService.getInstance(database);
+  lockService.waitForLock();
+  try {
+    database.checkDatabaseChangeLogTable();
+    getDatabase().tag(tagString);
+  }
+  finally {
+    lockService.releaseLock();
+  }
 }
