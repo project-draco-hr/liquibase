@@ -1,5 +1,6 @@
 MavenProject project
 boolean includeArtifact
+boolean includeTestOutputDirectory
 Class clazz
 Log log
 boolean verbose

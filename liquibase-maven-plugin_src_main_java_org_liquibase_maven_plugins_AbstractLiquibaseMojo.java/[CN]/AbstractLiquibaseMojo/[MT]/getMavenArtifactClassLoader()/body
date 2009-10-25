@@ -1,6 +1,6 @@
 {
   try {
-    return MavenUtils.getArtifactClassloader(project,includeArtifact,getClass(),getLog(),verbose);
+    return MavenUtils.getArtifactClassloader(project,includeArtifact,includeTestOutputDirectory,getClass(),getLog(),verbose);
   }
  catch (  MalformedURLException e) {
     throw new MojoExecutionException("Failed to create artifact classloader",e);

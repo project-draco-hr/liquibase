@@ -21,6 +21,9 @@
       addFile(urls,new File(project.getBuild().getOutputDirectory()),log,verbose);
     }
   }
+  if (includeTestOutputDirectory) {
+    addFile(urls,new File(project.getBuild().getTestOutputDirectory()),log,verbose);
+  }
   if (verbose) {
     log.info(LOG_SEPARATOR);
   }

@@ -72,7 +72,11 @@
       if ("true".equalsIgnoreCase(atts.getValue("runOnChange"))) {
         runOnChange=true;
       }
-      changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,databaseChangeLog.getFilePath(),databaseChangeLog.getPhysicalFilePath(),atts.getValue("context"),atts.getValue("dbms"),Boolean.valueOf(atts.getValue("runInTransaction")));
+      String filePath=atts.getValue("movedFromPath");
+      if (filePath == null || "".equals(filePath)) {
+        filePath=databaseChangeLog.getFilePath();
+      }
+      changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,filePath,databaseChangeLog.getPhysicalFilePath(),atts.getValue("context"),atts.getValue("dbms"),Boolean.valueOf(atts.getValue("runInTransaction")));
       if (StringUtils.trimToNull(atts.getValue("failOnError")) != null) {
         changeSet.setFailOnError(Boolean.parseBoolean(atts.getValue("failOnError")));
       }
