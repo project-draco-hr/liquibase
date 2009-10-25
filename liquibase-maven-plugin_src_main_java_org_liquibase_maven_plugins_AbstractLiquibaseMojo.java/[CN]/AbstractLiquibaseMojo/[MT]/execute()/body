@@ -20,6 +20,20 @@
     String dbPassword=emptyPassword || password == null ? "" : password;
     database=CommandLineUtils.createDatabaseObject(artifactClassLoader,url,username,dbPassword,driver,defaultSchemaName,null);
     liquibase=createLiquibase(getFileOpener(artifactClassLoader),database);
+    getLog().debug("expressionVars = " + String.valueOf(expressionVars));
+    if (expressionVars != null) {
+      for (      Map.Entry<Object,Object> var : expressionVars.entrySet()) {
+        this.liquibase.setChangeLogParameter(var.getKey().toString(),var.getValue());
+      }
+    }
+    getLog().debug("expressionVariables = " + String.valueOf(expressionVariables));
+    if (expressionVariables != null) {
+      for (      Map.Entry var : (Set<Map.Entry>)expressionVariables.entrySet()) {
+        if (var.getValue() != null) {
+          this.liquibase.setChangeLogParameter(var.getKey().toString(),var.getValue());
+        }
+      }
+    }
     if (clearCheckSums) {
       getLog().info("Clearing the Liquibase Checksums on the database");
       liquibase.clearCheckSums();
