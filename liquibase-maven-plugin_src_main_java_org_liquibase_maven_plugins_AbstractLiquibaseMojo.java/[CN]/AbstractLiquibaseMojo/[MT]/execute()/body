@@ -5,6 +5,10 @@
     getLog().warn("LiquiBase did not run because '" + Liquibase.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
     return;
   }
+  if (skip) {
+    getLog().warn("LiquiBase skipped due to maven configuration");
+    return;
+  }
   ClassLoader artifactClassLoader=getMavenArtifactClassLoader();
   configureFieldsAndValues(getFileOpener(artifactClassLoader));
   try {
