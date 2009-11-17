@@ -5,7 +5,12 @@
       customChange=(CustomChange)Class.forName(className,true,classLoader).newInstance();
     }
  catch (    ClassCastException e) {
-      customChange=(CustomChange)Class.forName(className).newInstance();
+      try {
+        customChange=(CustomChange)Thread.currentThread().getContextClassLoader().loadClass(className).newInstance();
+      }
+ catch (      ClassNotFoundException e1) {
+        customChange=(CustomChange)Class.forName(className).newInstance();
+      }
     }
   }
  catch (  Exception e) {
