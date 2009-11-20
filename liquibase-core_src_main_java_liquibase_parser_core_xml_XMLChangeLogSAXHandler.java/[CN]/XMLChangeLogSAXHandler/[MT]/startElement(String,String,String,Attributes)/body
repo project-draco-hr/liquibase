@@ -32,6 +32,15 @@
       }
       log.debug("includeAll for " + pathName);
       log.debug("Using file opener for includeAll: " + resourceAccessor.getClass().getName());
+      File pathFile=new File(pathName);
+      if (!pathFile.isAbsolute()) {
+        File changeLogFile=new File(databaseChangeLog.getPhysicalFilePath());
+        File resourceBase=new File(changeLogFile.getParent(),pathName);
+        if (!resourceBase.exists()) {
+          throw new SAXException("Resource directory for includeAll does not exist [" + resourceBase.getAbsolutePath() + "]");
+        }
+        pathName=resourceBase.getAbsolutePath() + "/";
+      }
       Enumeration<URL> resources=resourceAccessor.getResources(pathName);
       boolean foundResource=false;
       while (resources.hasMoreElements()) {
