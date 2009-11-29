@@ -9,7 +9,7 @@
  catch (  SQLException ex) {
     JdbcUtils.closeStatement(stmt);
     stmt=null;
-    throw new DatabaseException("Error executing SQL " + StringUtils.join(applyVisitors(action.getStatement(),sqlVisitors),", "),ex);
+    throw new DatabaseException("Error executing SQL " + StringUtils.join(applyVisitors(action.getStatement(),sqlVisitors),"; "),ex);
   }
  finally {
     JdbcUtils.closeStatement(stmt);
