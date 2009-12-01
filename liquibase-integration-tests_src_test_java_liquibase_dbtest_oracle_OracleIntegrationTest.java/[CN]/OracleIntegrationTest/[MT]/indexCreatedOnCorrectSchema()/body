@@ -13,4 +13,11 @@
   assertTrue(indexOwner.next());
   String owner=indexOwner.getString("owner");
   assertEquals("LIQUIBASEB",owner);
+  try {
+    liquibase.rollback(new Date(0),this.contexts);
+  }
+ catch (  ValidationFailedException e) {
+    e.printDescriptiveError(System.out);
+    throw e;
+  }
 }
