@@ -1,4 +1,7 @@
 {
+  if (this.getDatabase() == null) {
+    return;
+  }
   Liquibase liquibase=createLiquibase(this.indexOnSchemaChangeLog);
   clearDatabase(liquibase);
   try {
