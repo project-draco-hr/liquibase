@@ -1,3 +1,7 @@
 {
-  return indexName;
+  String escapedIndexName=indexName;
+  if (schemaName != null) {
+    escapedIndexName=schemaName + "." + escapedIndexName;
+  }
+  return escapedIndexName;
 }

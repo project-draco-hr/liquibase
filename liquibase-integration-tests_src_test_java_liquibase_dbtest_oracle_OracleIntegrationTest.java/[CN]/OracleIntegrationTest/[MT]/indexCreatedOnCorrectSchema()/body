@@ -1,0 +1,16 @@
+{
+  Liquibase liquibase=createLiquibase(this.indexOnSchemaChangeLog);
+  clearDatabase(liquibase);
+  try {
+    liquibase.update(this.contexts);
+  }
+ catch (  ValidationFailedException e) {
+    e.printDescriptiveError(System.out);
+    throw e;
+  }
+  Statement queryIndex=((JdbcConnection)this.getDatabase().getConnection()).getUnderlyingConnection().createStatement();
+  ResultSet indexOwner=queryIndex.executeQuery("SELECT owner FROM ALL_INDEXES WHERE index_name = 'IDX_BOOK_ID'");
+  assertTrue(indexOwner.next());
+  String owner=indexOwner.getString("owner");
+  assertEquals("LIQUIBASEB",owner);
+}
