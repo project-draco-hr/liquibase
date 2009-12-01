@@ -1,5 +1,6 @@
 {
   DropViewChange inverse=new DropViewChange();
   inverse.setViewName(getViewName());
+  inverse.setSchemaName(getSchemaName());
   return new Change[]{inverse};
 }
