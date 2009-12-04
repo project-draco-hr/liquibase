@@ -1,6 +1,6 @@
 {
   if (primaryKey == null) {
-    throw new InvalidArgumentException(new String[]{"primaryKey cannot be null."});
+    throw new LiquibaseException("primaryKey cannot be null.");
   }
   this.primaryKey=primaryKey;
 }
