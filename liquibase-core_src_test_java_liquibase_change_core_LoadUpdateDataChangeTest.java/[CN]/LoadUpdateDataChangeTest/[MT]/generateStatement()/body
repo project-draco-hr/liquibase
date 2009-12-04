@@ -1,0 +1,16 @@
+{
+  MockDatabase database=new MockDatabase();
+  LoadUpdateDataChange change=new LoadUpdateDataChange();
+  change.setSchemaName("SCHEMA_NAME");
+  change.setTableName("TABLE_NAME");
+  change.setPrimaryKey("name");
+  change.setFile("liquibase/change/core/sample.data1.csv");
+  change.setFileOpener(new ClassLoaderResourceAccessor());
+  SqlStatement[] statements=change.generateStatements(database);
+  SqlStatement[] sqlStatements=change.generateStatements(new MockDatabase());
+  assertEquals(2,sqlStatements.length);
+  assertTrue(sqlStatements[0] instanceof InsertOrUpdateStatement);
+  assertEquals("SCHEMA_NAME",((InsertOrUpdateStatement)sqlStatements[0]).getSchemaName());
+  assertEquals("TABLE_NAME",((InsertOrUpdateStatement)sqlStatements[0]).getTableName());
+  assertEquals("name",((InsertOrUpdateStatement)sqlStatements[0]).getPrimaryKey());
+}

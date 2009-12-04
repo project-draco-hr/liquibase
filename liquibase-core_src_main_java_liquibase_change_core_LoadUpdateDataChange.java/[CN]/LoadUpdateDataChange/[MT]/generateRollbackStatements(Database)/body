@@ -1,0 +1,11 @@
+{
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
+  SqlStatement[] forward=this.generateStatements(database);
+  for (  SqlStatement thisForward : forward) {
+    InsertOrUpdateStatement thisInsert=(InsertOrUpdateStatement)thisForward;
+    DeleteStatement delete=new DeleteStatement(getSchemaName(),getTableName());
+    delete.setWhereClause(getWhereClause(thisInsert,database));
+    statements.add(delete);
+  }
+  return statements.toArray(new SqlStatement[statements.size()]);
+}

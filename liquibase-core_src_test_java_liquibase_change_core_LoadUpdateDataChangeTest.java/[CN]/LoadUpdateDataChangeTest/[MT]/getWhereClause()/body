@@ -1,0 +1,18 @@
+{
+  MockDatabase database=new MockDatabase();
+  LoadUpdateDataChange change=new LoadUpdateDataChange();
+  change.setSchemaName("SCHEMA_NAME");
+  change.setTableName("TABLE_NAME");
+  change.setFile("liquibase/change/core/sample.data1.csv");
+  change.setFileOpener(new ClassLoaderResourceAccessor());
+  change.setPrimaryKey("name");
+  SqlStatement[] statements=change.generateStatements(database);
+  Object[] args;
+  String result;
+  args=new Object[]{statements[0],database};
+  result=(String)invokePrivateMethod(change,"getWhereClause",args);
+  assertEquals("name = 'Bob Johnson'",result.trim());
+  args=new Object[]{statements[1],database};
+  result=(String)invokePrivateMethod(change,"getWhereClause",args);
+  assertEquals("name = 'John Doe'",result.trim());
+}

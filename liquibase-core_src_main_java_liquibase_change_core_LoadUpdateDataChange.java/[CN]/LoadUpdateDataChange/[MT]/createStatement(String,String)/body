@@ -1,0 +1,3 @@
+{
+  return new InsertOrUpdateStatement(schemaName,tableName,this.primaryKey);
+}

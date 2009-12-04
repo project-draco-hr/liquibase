@@ -1,0 +1,35 @@
+{
+  StringBuffer completeSql=new StringBuffer();
+  String whereClause=getWhereClause(insertOrUpdateStatement,database);
+  completeSql.append("DECLARE\n");
+  completeSql.append("\tv_reccount NUMBER := 0;\n");
+  completeSql.append("BEGIN\n");
+  completeSql.append("\tSELECT COUNT(*) INTO v_reccount FROM " + database.escapeTableName(insertOrUpdateStatement.getSchemaName(),insertOrUpdateStatement.getTableName()) + " WHERE ");
+  completeSql.append(whereClause);
+  completeSql.append(";\n");
+  completeSql.append("\tIF v_reccount = 0 THEN\n");
+  InsertGenerator insert=new InsertGenerator();
+  Sql[] insertSql=insert.generateSql(insertOrUpdateStatement,database,sqlGeneratorChain);
+  for (  Sql s : insertSql) {
+    completeSql.append(s.toSql());
+    completeSql.append(";");
+  }
+  completeSql.append("\n");
+  completeSql.append("\tELSIF v_reccount = 1 THEN\n");
+  UpdateGenerator update=new UpdateGenerator();
+  UpdateStatement updateStatement=new UpdateStatement(insertOrUpdateStatement.getSchemaName(),insertOrUpdateStatement.getTableName());
+  updateStatement.setWhereClause(whereClause + ";\n");
+  for (  String columnKey : insertOrUpdateStatement.getColumnValues().keySet()) {
+    updateStatement.addNewColumnValue(columnKey,insertOrUpdateStatement.getColumnValue(columnKey));
+  }
+  Sql[] updateSql=update.generateSql(updateStatement,database,sqlGeneratorChain);
+  for (  Sql s : updateSql) {
+    completeSql.append(s.toSql());
+    completeSql.append(";");
+  }
+  completeSql.deleteCharAt(completeSql.lastIndexOf(";"));
+  completeSql.append("\n");
+  completeSql.append("END IF;\n");
+  completeSql.append("END;\n");
+  return new Sql[]{new UnparsedSql(completeSql.toString())};
+}

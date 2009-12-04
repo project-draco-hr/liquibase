@@ -1,0 +1,21 @@
+{
+  if (this.getDatabase() == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase("changelogs/oracle/complete/smartDataLoad.changelog.xml");
+  clearDatabase(liquibase);
+  try {
+    liquibase.update(this.contexts);
+  }
+ catch (  ValidationFailedException e) {
+    e.printDescriptiveError(System.out);
+    throw e;
+  }
+  try {
+    liquibase.rollback(new Date(0),this.contexts);
+  }
+ catch (  ValidationFailedException e) {
+    e.printDescriptiveError(System.out);
+    throw e;
+  }
+}

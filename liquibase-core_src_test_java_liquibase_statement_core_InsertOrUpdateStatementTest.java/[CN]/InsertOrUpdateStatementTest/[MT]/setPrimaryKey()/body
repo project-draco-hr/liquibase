@@ -1,0 +1,5 @@
+{
+  String primaryKey="PRIMARYKEY";
+  InsertOrUpdateStatement statement=new InsertOrUpdateStatement("SCHEMA","TABLE",primaryKey);
+  assertEquals(primaryKey,statement.getPrimaryKey());
+}

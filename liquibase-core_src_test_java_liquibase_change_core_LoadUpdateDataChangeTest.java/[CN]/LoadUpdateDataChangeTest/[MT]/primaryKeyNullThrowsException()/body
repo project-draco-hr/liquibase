@@ -1,0 +1,9 @@
+{
+  LoadUpdateDataChange change=new LoadUpdateDataChange();
+  try {
+    change.setPrimaryKey(null);
+    fail("setPrimaryKey did not throw InvalidArgumentException as expected.");
+  }
+ catch (  InvalidArgumentException e) {
+  }
+}
