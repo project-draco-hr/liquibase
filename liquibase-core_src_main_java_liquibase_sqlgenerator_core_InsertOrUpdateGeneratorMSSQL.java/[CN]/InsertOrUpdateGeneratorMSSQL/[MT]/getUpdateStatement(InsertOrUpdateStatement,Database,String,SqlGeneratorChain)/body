@@ -1,0 +1,7 @@
+{
+  StringBuffer updateBlock=new StringBuffer();
+  updateBlock.append("BEGIN\n");
+  updateBlock.append(super.getUpdateStatement(insertOrUpdateStatement,database,whereClause,sqlGeneratorChain));
+  updateBlock.append("END\n");
+  return updateBlock.toString();
+}

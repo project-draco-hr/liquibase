@@ -1,0 +1,7 @@
+{
+  StringBuffer insertBlock=new StringBuffer();
+  insertBlock.append("BEGIN\n");
+  insertBlock.append(super.getInsertStatement(insertOrUpdateStatement,database,sqlGeneratorChain));
+  insertBlock.append("END\n");
+  return insertBlock.toString();
+}

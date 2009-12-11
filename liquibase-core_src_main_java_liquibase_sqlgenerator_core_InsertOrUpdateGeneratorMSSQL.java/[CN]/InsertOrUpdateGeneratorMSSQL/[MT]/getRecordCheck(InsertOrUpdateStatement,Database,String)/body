@@ -1,0 +1,11 @@
+{
+  StringBuffer recordCheck=new StringBuffer();
+  recordCheck.append("DECLARE @@reccount integer\n");
+  recordCheck.append("SELECT @@reccount = count(*) FROM ");
+  recordCheck.append(database.escapeTableName(insertOrUpdateStatement.getSchemaName(),insertOrUpdateStatement.getTableName()));
+  recordCheck.append(" WHERE ");
+  recordCheck.append(whereClause);
+  recordCheck.append("\n");
+  recordCheck.append("IF @@reccount = 0\n");
+  return recordCheck.toString();
+}

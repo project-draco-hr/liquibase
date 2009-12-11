@@ -1,0 +1,11 @@
+{
+  StringBuffer insertBuffer=new StringBuffer();
+  InsertGenerator insert=new InsertGenerator();
+  Sql[] insertSql=insert.generateSql(insertOrUpdateStatement,database,sqlGeneratorChain);
+  for (  Sql s : insertSql) {
+    insertBuffer.append(s.toSql());
+    insertBuffer.append(";");
+  }
+  insertBuffer.append("\n");
+  return insertBuffer.toString();
+}

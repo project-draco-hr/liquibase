@@ -1,0 +1,3 @@
+{
+  return super.escapeIndexName(null,indexName);
+}

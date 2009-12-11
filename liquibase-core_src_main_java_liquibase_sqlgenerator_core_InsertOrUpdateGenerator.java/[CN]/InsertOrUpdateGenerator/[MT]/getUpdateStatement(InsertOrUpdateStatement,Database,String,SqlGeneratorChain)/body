@@ -1,0 +1,17 @@
+{
+  StringBuffer updateSqlString=new StringBuffer();
+  UpdateGenerator update=new UpdateGenerator();
+  UpdateStatement updateStatement=new UpdateStatement(insertOrUpdateStatement.getSchemaName(),insertOrUpdateStatement.getTableName());
+  updateStatement.setWhereClause(whereClause + ";\n");
+  for (  String columnKey : insertOrUpdateStatement.getColumnValues().keySet()) {
+    updateStatement.addNewColumnValue(columnKey,insertOrUpdateStatement.getColumnValue(columnKey));
+  }
+  Sql[] updateSql=update.generateSql(updateStatement,database,sqlGeneratorChain);
+  for (  Sql s : updateSql) {
+    updateSqlString.append(s.toSql());
+    updateSqlString.append(";");
+  }
+  updateSqlString.deleteCharAt(updateSqlString.lastIndexOf(";"));
+  updateSqlString.append("\n");
+  return updateSqlString.toString();
+}
