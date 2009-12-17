@@ -9,6 +9,7 @@
     getLog().warn("LiquiBase skipped due to maven configuration");
     return;
   }
+  processSystemProperties();
   ClassLoader artifactClassLoader=getMavenArtifactClassLoader();
   configureFieldsAndValues(getFileOpener(artifactClassLoader));
   try {

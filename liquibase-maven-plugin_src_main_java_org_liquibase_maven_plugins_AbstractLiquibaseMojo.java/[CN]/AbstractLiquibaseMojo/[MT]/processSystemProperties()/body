@@ -1,0 +1,11 @@
+{
+  if (systemProperties == null) {
+    systemProperties=new Properties();
+  }
+  Iterator iter=systemProperties.keySet().iterator();
+  while (iter.hasNext()) {
+    String key=(String)iter.next();
+    String value=systemProperties.getProperty(key);
+    System.setProperty(key,value);
+  }
+}
