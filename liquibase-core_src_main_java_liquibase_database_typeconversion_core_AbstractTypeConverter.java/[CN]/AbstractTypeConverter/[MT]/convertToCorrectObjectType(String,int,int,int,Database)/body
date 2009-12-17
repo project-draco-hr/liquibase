@@ -56,10 +56,10 @@
       if (decimalDigits == 0) {
         return new Integer(value);
       }
-      return new Double(value);
+      return new BigDecimal(value);
     }
  else     if (dataType == Types.DOUBLE || dataType == Types.NUMERIC) {
-      return new Double(value);
+      return new BigDecimal(value);
     }
  else     if (dataType == Types.FLOAT) {
       return new Float(value);
