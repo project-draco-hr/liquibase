@@ -98,7 +98,6 @@ catch (    PreconditionErrorException e) {
     }
  else {
       log.debug("Skipping ChangeSet: " + toString());
-      execType=ExecType.SKIPPED;
     }
   }
  catch (  Exception e) {
