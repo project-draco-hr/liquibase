@@ -1,0 +1,3 @@
+{
+  changedViews.add(viewName);
+}

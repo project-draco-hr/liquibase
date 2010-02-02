@@ -1,13 +1,15 @@
 {
   for (  UniqueConstraint uc : getMissingUniqueConstraints()) {
-    AddUniqueConstraintChange change=new AddUniqueConstraintChange();
-    change.setTableName(uc.getTable().getName());
-    change.setSchemaName(uc.getTable().getSchema());
-    change.setConstraintName(uc.getName());
-    change.setColumnNames(uc.getColumnNames());
-    change.setDeferrable(uc.isDeferrable());
-    change.setInitiallyDeferred(uc.isInitiallyDeferred());
-    change.setDisabled(uc.isDisabled());
-    changes.add(generateChangeSet(change));
+    if (null != uc)     if (null != uc.getTable()) {
+      AddUniqueConstraintChange change=new AddUniqueConstraintChange();
+      change.setTableName(uc.getTable().getName());
+      change.setSchemaName(uc.getTable().getSchema());
+      change.setConstraintName(uc.getName());
+      change.setColumnNames(uc.getColumnNames());
+      change.setDeferrable(uc.isDeferrable());
+      change.setInitiallyDeferred(uc.isInitiallyDeferred());
+      change.setDisabled(uc.isDisabled());
+      changes.add(generateChangeSet(change));
+    }
   }
 }

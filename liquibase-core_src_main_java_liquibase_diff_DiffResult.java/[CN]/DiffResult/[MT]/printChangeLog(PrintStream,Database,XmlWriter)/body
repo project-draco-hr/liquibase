@@ -9,7 +9,6 @@
   changeLogElement.setAttribute("xsi:schemaLocation","http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-" + XMLChangeLogSAXParser.getSchemaVersion() + ".xsd");
   doc.appendChild(changeLogElement);
   List<ChangeSet> changeSets=new ArrayList<ChangeSet>();
-  addUnexpectedViewChanges(changeSets);
   addMissingTableChanges(changeSets,targetDatabase);
   addMissingColumnChanges(changeSets,targetDatabase);
   addChangedColumnChanges(changeSets);
@@ -28,6 +27,8 @@
   addMissingSequenceChanges(changeSets);
   addUnexpectedSequenceChanges(changeSets);
   addMissingViewChanges(changeSets);
+  addUnexpectedViewChanges(changeSets);
+  addChangedViewChanges(changeSets);
   addUnexpectedTableChanges(changeSets);
   XMLChangeLogSerializer changeLogSerializer=new XMLChangeLogSerializer();
   changeLogSerializer.setCurrentChangeLogFileDOM(doc);
