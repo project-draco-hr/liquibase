@@ -1,6 +1,20 @@
 {
   if (this == o)   return true;
   if (o == null || getClass() != o.getClass())   return false;
+  if (null == this.getColumnNames())   return false;
   UniqueConstraint that=(UniqueConstraint)o;
-  return !(getColumnNames() != null ? !getColumnNames().equalsIgnoreCase(that.getColumnNames()) : that.getColumnNames() != null) && !(getTable().getName() != null ? !getTable().getName().equalsIgnoreCase(that.getTable().getName()) : that.getTable().getName() != null) && isDeferrable() == that.isDeferrable() && isInitiallyDeferred() == that.isInitiallyDeferred() && isDisabled() == that.isDisabled();
+  boolean result=false;
+  result=!(getColumnNames() != null ? !getColumnNames().equalsIgnoreCase(that.getColumnNames()) : that.getColumnNames() != null) && isDeferrable() == that.isDeferrable() && isInitiallyDeferred() == that.isInitiallyDeferred() && isDisabled() == that.isDisabled();
+  if (result) {
+    if (null == this.getTable()) {
+      result=null == that.getTable();
+    }
+ else     if (null == this.getTable()) {
+      result=false;
+    }
+ else {
+      result=this.getTable().getName().equals(that.getTable().getName());
+    }
+  }
+  return result;
 }

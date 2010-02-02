@@ -1,5 +1,9 @@
 {
-  int returnValue=this.getTable().getName().compareTo(o.getTable().getName());
+  String thisTableName;
+  String thatTableName;
+  thisTableName=null == this.getTable() ? "" : this.getTable().getName();
+  thatTableName=null == o.getTable() ? "" : o.getTable().getName();
+  int returnValue=thisTableName.compareTo(thatTableName);
   if (returnValue == 0) {
     returnValue=this.getName().compareTo(o.getName());
   }
