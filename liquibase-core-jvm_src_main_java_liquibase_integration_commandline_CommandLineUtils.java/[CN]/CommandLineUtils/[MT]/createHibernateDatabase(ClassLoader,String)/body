@@ -1,3 +1,0 @@
-{
-  return (Database)Class.forName(HibernateDatabase.class.getName(),true,classLoader).getConstructor(String.class).newInstance(url.substring("hibernate:".length()));
-}

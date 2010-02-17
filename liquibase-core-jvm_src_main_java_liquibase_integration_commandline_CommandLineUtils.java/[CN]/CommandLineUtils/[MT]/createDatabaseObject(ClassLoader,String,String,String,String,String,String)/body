@@ -3,19 +3,6 @@
     driver=DatabaseFactory.getInstance().findDefaultDriver(url);
   }
   try {
-    if (url.startsWith("hibernate:")) {
-      try {
-        return createHibernateDatabase(classLoader,url);
-      }
- catch (      NoClassDefFoundError e) {
-        try {
-          return createHibernateDatabase(Thread.currentThread().getContextClassLoader(),url);
-        }
- catch (        NoClassDefFoundError e1) {
-          throw new MigrationFailedException(null,"Class " + e1.getMessage() + " not found.  Make sure all required Hibernate and JDBC libraries are in your classpath");
-        }
-      }
-    }
     Driver driverObject;
     DatabaseFactory databaseFactory=DatabaseFactory.getInstance();
     if (databaseClass != null) {

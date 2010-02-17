@@ -1,2 +1,0 @@
-SqlStatement[] statements
-List<SqlVisitor> sqlVisitors

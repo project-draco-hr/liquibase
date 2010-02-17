@@ -3,14 +3,7 @@
   if (referenceUrl == null) {
     throw new MojoFailureException("A reference database or hibernate configuration file " + "must be provided to perform a diff.");
   }
-  if (referenceUrl.startsWith("hibernate:")) {
-  }
- else {
-    if (referenceUsername == null) {
-      throw new MojoFailureException("The username cannot be null for the reference " + "database when not using hibernate.");
-    }
-    if (referencePassword == null) {
-      referencePassword="";
-    }
+  if (referencePassword == null) {
+    referencePassword="";
   }
 }
