@@ -11,7 +11,13 @@
     liquibase=createLiquibase();
     Database referenceDatabase=createDatabaseObject(getReferenceDriver(),getReferenceUrl(),getReferenceUsername(),getReferencePassword(),getReferenceDefaultSchemaName(),getDatabaseClass());
     Diff diff=new Diff(referenceDatabase,liquibase.getDatabase());
+    if (getDiffTypes() != null) {
+      diff.setDiffTypes(getDiffTypes());
+    }
     DiffResult diffResult=diff.compare();
+    if (getDataDir() != null) {
+      diffResult.setDataDir(getDataDir());
+    }
     outputDiff(writer,diffResult,liquibase.getDatabase());
     if (writer != null) {
       writer.flush();
