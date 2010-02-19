@@ -1,6 +1,6 @@
 {
-  for (  Class<? extends Change> changeClass : ChangeFactory.getInstance().getRegistry().values()) {
-    Change change=changeClass.getConstructor().newInstance();
+  for (  SortedSet<Class<? extends Change>> changeClassSet : ChangeFactory.getInstance().getRegistry().values()) {
+    Change change=changeClassSet.iterator().next().getConstructor().newInstance();
     setFields(change);
     String string=new StringChangeLogSerializer().serialize(change);
     assertTrue("@ in string.  Probably poorly serialzed object reference." + string,string.indexOf("@") < 0);

@@ -1,10 +1,10 @@
 {
-  Class<? extends Change> aClass=registry.get(name);
-  if (aClass == null) {
+  SortedSet<Class<? extends Change>> classes=registry.get(name);
+  if (classes == null) {
     return null;
   }
   try {
-    return aClass.newInstance();
+    return classes.iterator().next().newInstance();
   }
  catch (  Exception e) {
     throw new UnexpectedLiquibaseException(e);

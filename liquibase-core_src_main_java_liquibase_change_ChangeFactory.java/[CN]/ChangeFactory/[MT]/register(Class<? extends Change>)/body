@@ -1,6 +1,20 @@
 {
   try {
-    registry.put(changeClass.newInstance().getChangeMetaData().getName(),changeClass);
+    String name=changeClass.newInstance().getChangeMetaData().getName();
+    if (registry.get(name) == null) {
+      registry.put(name,new TreeSet<Class<? extends Change>>(new Comparator<Class<? extends Change>>(){
+        public int compare(        Class<? extends Change> o1,        Class<? extends Change> o2){
+          try {
+            return -1 * new Integer(o1.newInstance().getChangeMetaData().getPriority()).compareTo(o2.newInstance().getChangeMetaData().getPriority());
+          }
+ catch (          Exception e) {
+            throw new UnexpectedLiquibaseException(e);
+          }
+        }
+      }
+));
+    }
+    registry.get(name).add(changeClass);
   }
  catch (  Exception e) {
     throw new UnexpectedLiquibaseException(e);
