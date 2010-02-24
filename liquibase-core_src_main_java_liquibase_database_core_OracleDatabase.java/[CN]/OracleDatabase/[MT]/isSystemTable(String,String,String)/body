@@ -11,7 +11,7 @@
  else   if (tableName.startsWith("DR$")) {
     return true;
   }
- else   if (tableName.startsWith("SYS_")) {
+ else   if (tableName.startsWith("SYS_IOT_OVER")) {
     return true;
   }
   return false;
