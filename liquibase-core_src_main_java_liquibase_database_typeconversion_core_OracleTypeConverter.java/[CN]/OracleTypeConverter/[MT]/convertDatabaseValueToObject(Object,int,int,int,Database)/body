@@ -12,6 +12,9 @@
           defaultValue=((String)defaultValue).replaceFirst("^to_date\\('","").replaceFirst("', 'HH24:MI:SS'\\)$","");
         }
       }
+ else       if (dataType == Types.BIGINT || dataType == Types.NUMERIC || dataType == Types.BIT || dataType == Types.SMALLINT || dataType == Types.DECIMAL || dataType == Types.INTEGER || dataType == Types.TINYINT || dataType == Types.FLOAT || dataType == Types.REAL) {
+        defaultValue=((String)defaultValue).replaceFirst("\\(","").replaceFirst("\\)","");
+      }
       defaultValue=((String)defaultValue).replaceFirst("'\\s*$","'");
     }
   }
