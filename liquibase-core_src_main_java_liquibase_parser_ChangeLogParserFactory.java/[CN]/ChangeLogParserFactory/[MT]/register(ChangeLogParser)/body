@@ -1,5 +1,13 @@
 {
   for (  String extension : changeLogParser.getValidFileExtensions()) {
-    parsers.put(extension,changeLogParser);
+    if (!parsers.containsKey(extension)) {
+      parsers.put(extension,new TreeSet<ChangeLogParser>(new Comparator<ChangeLogParser>(){
+        public int compare(        ChangeLogParser o1,        ChangeLogParser o2){
+          return Integer.valueOf(o2.getPriority()).compareTo(o1.getPriority());
+        }
+      }
+));
+    }
+    parsers.get(extension).add(changeLogParser);
   }
 }

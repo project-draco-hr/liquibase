@@ -7,5 +7,5 @@
   factory.register(changeLogParser);
   assertEquals(2,factory.getParsers().size());
   factory.unregister(changeLogParser);
-  assertEquals(1,factory.getParsers().size());
+  assertEquals(0,factory.getParsers().get(changeLogParser.getValidFileExtensions()[0]).size());
 }
