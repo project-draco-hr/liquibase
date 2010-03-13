@@ -5,6 +5,9 @@
     if (getSecondParameter() != null) {
       returnString+="," + getSecondParameter();
     }
+    if (getUnit() != null) {
+      returnString+=" " + getUnit();
+    }
     returnString+=")";
   }
   return returnString;

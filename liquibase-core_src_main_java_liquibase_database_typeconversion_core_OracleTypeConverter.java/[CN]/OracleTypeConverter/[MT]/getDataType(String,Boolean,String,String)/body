@@ -1,0 +1,16 @@
+{
+  DataType returnTypeName=super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision);
+  if (returnTypeName instanceof CustomType) {
+    if (columnTypeString.startsWith("VARCHAR2")) {
+      returnTypeName=getVarcharType();
+      if (precision != null) {
+        String[] typeParams=precision.split(" ");
+        returnTypeName.setFirstParameter(Integer.parseInt(typeParams[0].trim()));
+        if (typeParams.length > 1) {
+          returnTypeName.setUnit(typeParams[1]);
+        }
+      }
+    }
+  }
+  return returnTypeName;
+}

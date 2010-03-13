@@ -1,0 +1,5 @@
+{
+  databaseFunctions=new ArrayList<DatabaseFunction>();
+  databaseFunctions.add(new DatabaseFunction("SYSDATE"));
+  databaseFunctions.add(new DatabaseFunction("SYSTIMESTAMP"));
+}
