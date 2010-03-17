@@ -22,13 +22,16 @@
     }
  else     if ("include".equals(qName)) {
       String fileName=atts.getValue("file");
+      fileName=fileName.replace('\\','/');
       boolean isRelativeToChangelogFile=Boolean.parseBoolean(atts.getValue("relativeToChangelogFile"));
       handleIncludedChangeLog(fileName,isRelativeToChangelogFile,databaseChangeLog.getPhysicalFilePath());
     }
  else     if ("includeAll".equals(qName)) {
       String pathName=atts.getValue("path");
-      if (!(pathName.endsWith("/") || pathName.endsWith("\\"))) {
-        pathName=pathName + "/";
+      String resourceBasePath=null;
+      pathName=pathName.replace('\\','/');
+      if (!(pathName.endsWith("/"))) {
+        pathName=pathName + '/';
       }
       log.debug("includeAll for " + pathName);
       log.debug("Using file opener for includeAll: " + resourceAccessor.getClass().getName());
@@ -37,10 +40,13 @@
         File changeLogFile=new File(databaseChangeLog.getPhysicalFilePath());
         File resourceBase=new File(changeLogFile.getParent(),pathName);
         if (!resourceBase.exists()) {
-          throw new SAXException("Resource directory for includeAll does not exist [" + resourceBase.getAbsolutePath() + "]");
+          throw new SAXException("Resource directory for includeAll does not exist [" + resourceBase.getPath() + "]");
         }
-        pathName=resourceBase.getAbsolutePath() + "/";
+        pathName=resourceBase.getPath() + '/';
+        pathName=pathName.replace('\\','/');
+        resourceBasePath=resourceBase.getAbsolutePath();
       }
+ else       resourceBasePath=pathName;
       Enumeration<URL> resources=resourceAccessor.getResources(pathName);
       boolean foundResource=false;
       while (resources.hasMoreElements()) {
@@ -55,10 +61,12 @@
           throw new SAXException("includeAll path " + pathName + " could not be found.  Tried in "+ file.toString());
         }
         if (file.isDirectory()) {
-          log.debug(file.getCanonicalPath() + " is a directory");
-          for (          File childFile : file.listFiles()) {
-            if (handleIncludedChangeLog(pathName + childFile.getName(),false,databaseChangeLog.getPhysicalFilePath())) {
-              foundResource=true;
+          if (!file.getAbsolutePath().equals(resourceBasePath)) {
+            log.debug(file.getCanonicalPath() + " is a directory");
+            for (            File childFile : file.listFiles()) {
+              if (handleIncludedChangeLog(pathName + file.getName() + "/"+ childFile.getName(),false,databaseChangeLog.getPhysicalFilePath())) {
+                foundResource=true;
+              }
             }
           }
         }
