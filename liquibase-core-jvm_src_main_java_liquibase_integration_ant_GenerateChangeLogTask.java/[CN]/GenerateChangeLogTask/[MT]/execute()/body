@@ -8,6 +8,9 @@
     liquibase=createLiquibase();
     Database database=liquibase.getDatabase();
     Diff diff=new Diff(database,getDefaultSchemaName());
+    if (getDiffTypes() != null) {
+      diff.setDiffTypes(getDiffTypes());
+    }
     DiffResult diffResult=diff.compare();
     if (getChangeLogFile() == null) {
       diffResult.printChangeLog(writer,database);
