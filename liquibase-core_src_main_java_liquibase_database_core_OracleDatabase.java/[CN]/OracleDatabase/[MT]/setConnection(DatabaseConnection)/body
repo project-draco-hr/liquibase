@@ -1,8 +1,11 @@
 {
   try {
-    Method method=conn.getClass().getMethod("setRemarksReporting",Boolean.TYPE);
+    Method wrappedConn=conn.getClass().getMethod("getWrappedConnection");
+    wrappedConn.setAccessible(true);
+    Connection sqlConn=(Connection)wrappedConn.invoke(conn);
+    Method method=sqlConn.getClass().getMethod("setRemarksReporting",Boolean.TYPE);
     method.setAccessible(true);
-    method.invoke(conn,true);
+    method.invoke(sqlConn,true);
   }
  catch (  Exception e) {
     LogFactory.getLogger().info("Could not set remarks reporting on OracleDatabase: " + e.getMessage());
