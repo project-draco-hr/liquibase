@@ -5,6 +5,7 @@
   Connection jdbcConnection=((JdbcConnection)database.getConnection()).getUnderlyingConnection();
   PreparedStatement statement=null;
   ResultSet rs=null;
+  if (schema == null)   schema=database.convertRequestedSchemaToSchema(schema);
   try {
     statement=jdbcConnection.prepareStatement("select constraint_name, table_name, status, deferrable, deferred " + "from all_constraints where constraint_type='U' and owner='" + schema + "'");
     rs=statement.executeQuery();
