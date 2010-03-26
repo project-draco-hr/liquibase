@@ -5,7 +5,7 @@
  else   if (value instanceof DatabaseFunction) {
     return ((DatabaseFunction)value).getValue();
   }
- else   if (database.getDatabaseFunctions().contains(new DatabaseFunction(value.toString()))) {
+ else   if (database.getDatabaseFunctions() != null && database.getDatabaseFunctions().contains(new DatabaseFunction(value.toString()))) {
     return value.toString();
   }
   return database.getDateTimeLiteral(((java.sql.Timestamp)value));
