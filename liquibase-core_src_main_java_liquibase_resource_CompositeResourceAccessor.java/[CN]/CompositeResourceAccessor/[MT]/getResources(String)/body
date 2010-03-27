@@ -5,6 +5,7 @@
     while (e.hasMoreElements()) {
       urls.add(e.nextElement());
     }
+    if (!urls.isEmpty())     break;
   }
   return urls.elements();
 }

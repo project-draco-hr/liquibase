@@ -28,7 +28,6 @@
     }
  else     if ("includeAll".equals(qName)) {
       String pathName=atts.getValue("path");
-      String resourceBasePath=null;
       pathName=pathName.replace('\\','/');
       if (!(pathName.endsWith("/"))) {
         pathName=pathName + '/';
@@ -44,9 +43,7 @@
         }
         pathName=resourceBase.getPath() + '/';
         pathName=pathName.replace('\\','/');
-        resourceBasePath=resourceBase.getAbsolutePath();
       }
- else       resourceBasePath=pathName;
       Enumeration<URL> resources=resourceAccessor.getResources(pathName);
       boolean foundResource=false;
       while (resources.hasMoreElements()) {
@@ -61,12 +58,10 @@
           throw new SAXException("includeAll path " + pathName + " could not be found.  Tried in "+ file.toString());
         }
         if (file.isDirectory()) {
-          if (!file.getAbsolutePath().equals(resourceBasePath)) {
-            log.debug(file.getCanonicalPath() + " is a directory");
-            for (            File childFile : file.listFiles()) {
-              if (handleIncludedChangeLog(pathName + file.getName() + "/"+ childFile.getName(),false,databaseChangeLog.getPhysicalFilePath())) {
-                foundResource=true;
-              }
+          log.debug(file.getCanonicalPath() + " is a directory");
+          for (          File childFile : file.listFiles()) {
+            if (handleIncludedChangeLog(pathName + childFile.getName(),false,databaseChangeLog.getPhysicalFilePath())) {
+              foundResource=true;
             }
           }
         }
