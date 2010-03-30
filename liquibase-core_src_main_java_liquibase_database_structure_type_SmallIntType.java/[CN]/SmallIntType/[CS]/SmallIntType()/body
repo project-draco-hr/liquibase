@@ -1,0 +1,3 @@
+{
+  super("SMALLINT",0,1);
+}

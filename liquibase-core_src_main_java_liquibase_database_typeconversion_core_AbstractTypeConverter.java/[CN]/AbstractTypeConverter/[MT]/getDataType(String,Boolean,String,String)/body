@@ -45,6 +45,9 @@
  else   if (dataTypeName.equalsIgnoreCase("LONGVARCHAR")) {
     returnTypeName=getClobType();
   }
+ else   if (dataTypeName.equalsIgnoreCase("SMALLINT")) {
+    returnTypeName=getSmallIntType();
+  }
  else   if (dataTypeName.equalsIgnoreCase("TEXT")) {
     returnTypeName=getClobType();
   }
