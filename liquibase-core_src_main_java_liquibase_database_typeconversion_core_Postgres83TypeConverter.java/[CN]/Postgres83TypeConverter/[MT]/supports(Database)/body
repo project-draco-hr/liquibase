@@ -1,4 +1,7 @@
 {
+  if (database.getConnection() == null) {
+    return false;
+  }
   try {
     return super.supports(database) && database.getDatabaseMajorVersion() >= 8 && database.getDatabaseMinorVersion() >= 3;
   }

@@ -1,0 +1,3 @@
+{
+  this.databaseFunctions.add(new DatabaseFunction("CURRENT_TIMESTAMP()"));
+}

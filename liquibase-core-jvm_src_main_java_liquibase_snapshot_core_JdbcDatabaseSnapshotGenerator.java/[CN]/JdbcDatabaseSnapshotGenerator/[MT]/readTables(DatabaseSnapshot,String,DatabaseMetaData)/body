@@ -5,6 +5,7 @@
   try {
     while (rs.next()) {
       Table table=readTable(rs,database);
+      table.setSchema(schema);
       if (database.isLiquibaseTable(table.getName())) {
         if (table.getName().equalsIgnoreCase(database.getDatabaseChangeLogTableName())) {
           snapshot.setDatabaseChangeLogTable(table);
