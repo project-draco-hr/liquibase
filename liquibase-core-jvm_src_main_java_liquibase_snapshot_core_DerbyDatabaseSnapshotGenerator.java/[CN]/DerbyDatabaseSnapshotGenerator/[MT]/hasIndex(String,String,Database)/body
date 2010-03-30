@@ -1,6 +1,6 @@
 {
   try {
-    ResultSet rs=getMetaData(database).getIndexInfo(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),null,false,true);
+    ResultSet rs=getMetaData(database).getIndexInfo(database.convertRequestedSchemaToCatalog(schemaName),database.convertRequestedSchemaToSchema(schemaName),"%",false,true);
     while (rs.next()) {
       if (rs.getString("INDEX_NAME").equalsIgnoreCase(indexName)) {
         return true;
