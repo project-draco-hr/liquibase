@@ -56,6 +56,9 @@
  else       if (defaultValue instanceof Number) {
         columnConfig.setDefaultValueNumeric(((Number)defaultValue));
       }
+ else       if (defaultValue instanceof DatabaseFunction) {
+        columnConfig.setDefaultValueComputed((DatabaseFunction)defaultValue);
+      }
  else {
         columnConfig.setDefaultValue(defaultValue.toString());
       }

@@ -20,7 +20,7 @@
           }
         }
         if (fkInfo == null) {
-          throw new DatabaseException("Database returned out of sequence foreign key column for " + fkInfo.getName());
+          throw new DatabaseException("Database returned out of sequence foreign key column for " + fkName);
         }
       }
       fkInfo.setPrimaryKeyTable(new Table(pkTableName));

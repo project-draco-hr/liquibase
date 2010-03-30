@@ -14,10 +14,5 @@
  else   if (value instanceof String) {
     return (String)value;
   }
-  try {
-    return database.getDateTimeLiteral(((java.sql.Timestamp)value));
-  }
- catch (  Exception e) {
-    throw new RuntimeException();
-  }
+  return database.getDateTimeLiteral(((java.sql.Timestamp)value));
 }
