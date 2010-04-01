@@ -51,7 +51,10 @@
       dataType=translatedTypeName.toUpperCase();
     }
  else {
-      dataType=translatedTypeName + "(" + this.getColumnSize()+ ","+ this.getDecimalDigits()+ ")";
+      dataType=translatedTypeName;
+      if (initPrecision) {
+        dataType+="(" + this.getColumnSize() + ","+ this.getDecimalDigits()+ ")";
+      }
     }
   }
  else {

@@ -66,17 +66,17 @@
   for (  Index index : snapshot.getIndexes()) {
     for (    PrimaryKey pk : snapshot.getPrimaryKeys()) {
       if (index.getTable().getName().equalsIgnoreCase(pk.getTable().getName()) && index.getColumnNames().equals(pk.getColumnNames())) {
-        indexesToRemove.add(index);
+        index.addAssociatedWith(Index.MARK_PRIMARY_KEY);
       }
     }
     for (    ForeignKey fk : snapshot.getForeignKeys()) {
       if (index.getTable().getName().equalsIgnoreCase(fk.getForeignKeyTable().getName()) && index.getColumnNames().equals(fk.getForeignKeyColumns())) {
-        indexesToRemove.add(index);
+        index.addAssociatedWith(Index.MARK_FOREIGN_KEY);
       }
     }
     for (    UniqueConstraint uc : snapshot.getUniqueConstraints()) {
       if (index.getTable().getName().equalsIgnoreCase(uc.getTable().getName()) && index.getColumnNames().equals(uc.getColumnNames())) {
-        indexesToRemove.add(index);
+        index.addAssociatedWith(Index.MARK_UNIQUE_CONSTRAINT);
       }
     }
   }

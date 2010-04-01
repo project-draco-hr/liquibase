@@ -47,7 +47,7 @@
   statements.add(new DropTableStatement(schemaName,temp_table_name,false));
   statements.add(new ReindexStatement(schemaName,tableName));
   for (  Index index_config : newIndices) {
-    statements.add(new CreateIndexStatement(index_config.getName(),schemaName,tableName,index_config.isUnique(),index_config.getColumns().toArray(new String[index_config.getColumns().size()])));
+    statements.add(new CreateIndexStatement(index_config.getName(),schemaName,tableName,index_config.isUnique(),index_config.getAssociatedWithAsString(),index_config.getColumns().toArray(new String[index_config.getColumns().size()])));
   }
   return statements;
 }

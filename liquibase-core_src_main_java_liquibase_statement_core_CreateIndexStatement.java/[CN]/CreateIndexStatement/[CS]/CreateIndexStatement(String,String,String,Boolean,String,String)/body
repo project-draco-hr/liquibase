@@ -4,4 +4,5 @@
   this.tableName=tableName;
   this.columns=columns;
   this.unique=isUnique;
+  this.associatedWith=associatedWith;
 }

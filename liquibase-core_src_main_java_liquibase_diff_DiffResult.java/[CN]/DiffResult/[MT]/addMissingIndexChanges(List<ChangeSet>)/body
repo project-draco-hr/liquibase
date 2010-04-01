@@ -5,6 +5,7 @@
     change.setSchemaName(index.getTable().getSchema());
     change.setIndexName(index.getName());
     change.setUnique(index.isUnique());
+    change.setAssociatedWith(index.getAssociatedWithAsString());
     for (    String columnName : index.getColumns()) {
       ColumnConfig column=new ColumnConfig();
       column.setName(columnName);
