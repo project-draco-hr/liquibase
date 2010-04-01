@@ -1,7 +1,12 @@
 {
   try {
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasIndex(getSchemaName(),getIndexName(),database)) {
-      throw new PreconditionFailedException("Index " + database.escapeStringForDatabase(getIndexName()) + " does not exist",changeLog,this);
+    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasIndex(getSchemaName(),getTableName(),getIndexName(),database)) {
+      String name="";
+      if (StringUtils.trimToNull(getTableName()) != null) {
+        name+=database.escapeStringForDatabase(getTableName()) + ".";
+      }
+      name+=database.escapeStringForDatabase(getIndexName());
+      throw new PreconditionFailedException("Index " + name + " does not exist",changeLog,this);
     }
   }
  catch (  DatabaseException e) {
