@@ -32,6 +32,7 @@
       e.printDescriptiveError(System.out);
       throw e;
     }
+    tempFile.deleteOnExit();
     DatabaseSnapshot migratedSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
     DiffResult finalDiffResult=new Diff(originalSnapshot,migratedSnapshot).compare();
     assertEquals(0,finalDiffResult.getMissingColumns().size());
