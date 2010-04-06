@@ -1,0 +1,11 @@
+{
+  Database database=snapshot.getDatabase();
+  Statement statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+  ResultSet integerListRS=statement.executeQuery("select * from user_tab_columns where data_precision is null and data_scale = 0 and data_type = 'NUMBER'");
+  while (integerListRS.next()) {
+    integerList.add(integerListRS.getString("TABLE_NAME") + "." + integerListRS.getString("COLUMN_NAME"));
+  }
+  JdbcUtils.closeResultSet(integerListRS);
+  JdbcUtils.closeStatement(statement);
+  return integerList;
+}

@@ -9,10 +9,10 @@
     return null;
   }
   column.setName(columnName);
-  column.setDataType(rs.getInt("DATA_TYPE"));
-  column.setColumnSize(rs.getInt("COLUMN_SIZE"));
-  column.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
-  column.setInitPrecision(!((column.getDataType() == Types.DECIMAL || column.getDataType() == Types.NUMERIC || column.getDataType() == Types.REAL) && rs.getString("DECIMAL_DIGITS") == null));
+  Table table=new Table(tableName);
+  table.setSchema(schemaName);
+  column.setTable(table);
+  configureColumnType(column,rs);
   int nullable=rs.getInt("NULLABLE");
   if (nullable == DatabaseMetaData.columnNoNulls) {
     column.setNullable(false);
@@ -20,9 +20,6 @@
  else   if (nullable == DatabaseMetaData.columnNullable) {
     column.setNullable(true);
   }
-  Table table=new Table(tableName);
-  table.setSchema(schemaName);
-  column.setTable(table);
   getColumnTypeAndDefValue(column,rs,database);
   column.setRemarks(remarks);
   return column;

@@ -1,0 +1,4 @@
+{
+  findIntegerColumns(snapshot);
+  super.readColumns(snapshot,schema,databaseMetaData);
+}

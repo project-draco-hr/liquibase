@@ -1,5 +1,8 @@
 {
   super.getColumnTypeAndDefValue(columnInfo,rs,database);
+  if (columnInfo.getDataType() == Types.INTEGER) {
+    columnInfo.setTypeName("INTEGER");
+  }
   String columnTypeName=rs.getString("TYPE_NAME");
   if ("VARCHAR2".equals(columnTypeName)) {
     int charOctetLength=rs.getInt("CHAR_OCTET_LENGTH");
