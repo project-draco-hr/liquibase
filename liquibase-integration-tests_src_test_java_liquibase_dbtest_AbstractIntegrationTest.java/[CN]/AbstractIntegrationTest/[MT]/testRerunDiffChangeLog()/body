@@ -32,7 +32,6 @@
       e.printDescriptiveError(System.out);
       throw e;
     }
-    tempFile.deleteOnExit();
     DatabaseSnapshot migratedSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
     DiffResult finalDiffResult=new Diff(originalSnapshot,migratedSnapshot).compare();
     assertEquals(0,finalDiffResult.getMissingColumns().size());
@@ -60,6 +59,7 @@
       output.close();
     }
     liquibase=createLiquibase(tempFile.getName());
+    System.out.println("updating from " + tempFile.getCanonicalPath());
     liquibase.update(this.contexts);
     DatabaseSnapshot emptyAgainSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
     assertEquals(0,emptyAgainSnapshot.getTables().size());
