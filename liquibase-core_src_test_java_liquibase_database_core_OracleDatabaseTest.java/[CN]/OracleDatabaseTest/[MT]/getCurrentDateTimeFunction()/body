@@ -1,3 +1,3 @@
 {
-  Assert.assertEquals("SYSDATE",getDatabase().getCurrentDateTimeFunction());
+  Assert.assertEquals("CURRENT_TIMESTAMP",getDatabase().getCurrentDateTimeFunction());
 }
