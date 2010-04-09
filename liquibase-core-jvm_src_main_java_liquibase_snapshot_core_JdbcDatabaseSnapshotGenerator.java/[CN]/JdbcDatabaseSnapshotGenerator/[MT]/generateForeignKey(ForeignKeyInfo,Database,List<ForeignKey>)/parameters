@@ -1,0 +1,3 @@
+ForeignKeyInfo fkInfo
+Database database
+List<ForeignKey> fkList

@@ -1,6 +1,8 @@
 {
   Database database=snapshot.getDatabase();
   updateListeners("Reading foreign keys for " + database.toString() + " ...");
+  String dbSchema=database.convertRequestedSchemaToSchema(schema);
+  snapshot.getForeignKeys().addAll(getAdditionalForeignKeys(dbSchema,database));
   for (  Table table : snapshot.getTables()) {
     for (    ForeignKey fk : getForeignKeys(schema,table.getName(),snapshot.getDatabase())) {
       Table tempPKTable=fk.getPrimaryKeyTable();

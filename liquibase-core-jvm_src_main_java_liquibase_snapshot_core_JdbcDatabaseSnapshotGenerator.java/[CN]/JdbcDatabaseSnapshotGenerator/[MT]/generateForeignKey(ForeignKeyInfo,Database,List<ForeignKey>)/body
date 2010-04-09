@@ -1,0 +1,41 @@
+{
+  ForeignKey foreignKey=null;
+  if (fkInfo.getKeySeq() == 1 || (!fkInfo.isReferencedToPrimary() && fkInfo.getKeySeq() == 0)) {
+    foreignKey=new ForeignKey();
+  }
+ else {
+    for (    ForeignKey foundFK : fkList) {
+      if (foundFK.getName().equalsIgnoreCase(fkInfo.getFkName())) {
+        foreignKey=foundFK;
+      }
+    }
+    if (foreignKey == null) {
+      throw new DatabaseException("Database returned out of sequence foreign key column for " + fkInfo.getFkName());
+    }
+  }
+  foreignKey.setName(fkInfo.getFkName());
+  foreignKey.setPrimaryKeyTable(new Table(fkInfo.getPkTableName()));
+  foreignKey.addPrimaryKeyColumn(fkInfo.getPkColumn());
+  Table fkTable=new Table(fkInfo.getFkTableName());
+  fkTable.setSchema(fkInfo.getFkSchema());
+  foreignKey.setForeignKeyTable(fkTable);
+  foreignKey.addForeignKeyColumn(fkInfo.getFkColumn());
+  foreignKey.setUpdateRule(fkInfo.getUpdateRule());
+  foreignKey.setDeleteRule(fkInfo.getDeleteRule());
+  foreignKey.setReferencedToPrimary(fkInfo.isReferencedToPrimary());
+  if (database.supportsInitiallyDeferrableColumns()) {
+    if (fkInfo.getDeferrablility() == DatabaseMetaData.importedKeyInitiallyDeferred) {
+      foreignKey.setDeferrable(Boolean.TRUE);
+      foreignKey.setInitiallyDeferred(Boolean.TRUE);
+    }
+ else     if (fkInfo.getDeferrablility() == DatabaseMetaData.importedKeyInitiallyImmediate) {
+      foreignKey.setDeferrable(Boolean.TRUE);
+      foreignKey.setInitiallyDeferred(Boolean.FALSE);
+    }
+ else     if (fkInfo.getDeferrablility() == DatabaseMetaData.importedKeyNotDeferrable) {
+      foreignKey.setDeferrable(Boolean.FALSE);
+      foreignKey.setInitiallyDeferred(Boolean.FALSE);
+    }
+  }
+  return foreignKey;
+}

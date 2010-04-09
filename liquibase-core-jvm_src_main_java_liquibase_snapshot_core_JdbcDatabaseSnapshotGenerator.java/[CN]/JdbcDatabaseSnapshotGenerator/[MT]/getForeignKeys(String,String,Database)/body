@@ -5,61 +5,26 @@
     String dbSchema=database.convertRequestedSchemaToSchema(schemaName);
     ResultSet rs=getMetaData(database).getImportedKeys(dbCatalog,dbSchema,convertTableNameToDatabaseTableName(foreignKeyTableName));
     while (rs.next()) {
-      String fkName=convertFromDatabaseName(rs.getString("FK_NAME"));
-      String pkTableName=convertFromDatabaseName(rs.getString("PKTABLE_NAME"));
-      String pkColumn=convertFromDatabaseName(rs.getString("PKCOLUMN_NAME"));
-      int keySeq=rs.getInt("KEY_SEQ");
-      ForeignKey fkInfo=null;
-      if (keySeq == 1) {
-        fkInfo=new ForeignKey();
-      }
- else {
-        for (        ForeignKey foundFK : fkList) {
-          if (foundFK.getName().equalsIgnoreCase(fkName)) {
-            fkInfo=foundFK;
-          }
-        }
-        if (fkInfo == null) {
-          throw new DatabaseException("Database returned out of sequence foreign key column for " + fkName);
-        }
-      }
-      fkInfo.setPrimaryKeyTable(new Table(pkTableName));
-      fkInfo.addPrimaryKeyColumn(pkColumn);
-      String fkTableName=convertFromDatabaseName(rs.getString("FKTABLE_NAME"));
-      String fkSchema=convertFromDatabaseName(rs.getString("FKTABLE_SCHEM"));
-      String fkColumn=convertFromDatabaseName(rs.getString("FKCOLUMN_NAME"));
-      Table fkTable=new Table(fkTableName);
-      fkTable.setSchema(fkSchema);
-      fkInfo.setForeignKeyTable(fkTable);
-      fkInfo.addForeignKeyColumn(fkColumn);
-      fkInfo.setName(fkName);
-      ForeignKeyConstraintType updateRule, deleteRule;
-      updateRule=convertToForeignKeyConstraintType(rs.getInt("UPDATE_RULE"));
+      ForeignKeyInfo fkInfo=new ForeignKeyInfo();
+      fkInfo.setFkName(convertFromDatabaseName(rs.getString("FK_NAME")));
+      fkInfo.setFkSchema(convertFromDatabaseName(rs.getString("FKTABLE_SCHEM")));
+      fkInfo.setFkTableName(convertFromDatabaseName(rs.getString("FKTABLE_NAME")));
+      fkInfo.setFkColumn(convertFromDatabaseName(rs.getString("FKCOLUMN_NAME")));
+      fkInfo.setPkTableName(convertFromDatabaseName(rs.getString("PKTABLE_NAME")));
+      fkInfo.setPkColumn(convertFromDatabaseName(rs.getString("PKCOLUMN_NAME")));
+      fkInfo.setKeySeq(rs.getInt("KEY_SEQ"));
+      ForeignKeyConstraintType updateRule=convertToForeignKeyConstraintType(rs.getInt("UPDATE_RULE"));
       if (rs.wasNull()) {
         updateRule=null;
       }
-      deleteRule=convertToForeignKeyConstraintType(rs.getInt("DELETE_RULE"));
+      fkInfo.setUpdateRule(updateRule);
+      ForeignKeyConstraintType deleteRule=convertToForeignKeyConstraintType(rs.getInt("DELETE_RULE"));
       if (rs.wasNull()) {
         deleteRule=null;
       }
-      fkInfo.setUpdateRule(updateRule);
       fkInfo.setDeleteRule(deleteRule);
-      if (database.supportsInitiallyDeferrableColumns()) {
-        short deferrablility=rs.getShort("DEFERRABILITY");
-        if (deferrablility == DatabaseMetaData.importedKeyInitiallyDeferred) {
-          fkInfo.setDeferrable(Boolean.TRUE);
-          fkInfo.setInitiallyDeferred(Boolean.TRUE);
-        }
- else         if (deferrablility == DatabaseMetaData.importedKeyInitiallyImmediate) {
-          fkInfo.setDeferrable(Boolean.TRUE);
-          fkInfo.setInitiallyDeferred(Boolean.FALSE);
-        }
- else         if (deferrablility == DatabaseMetaData.importedKeyNotDeferrable) {
-          fkInfo.setDeferrable(Boolean.FALSE);
-          fkInfo.setInitiallyDeferred(Boolean.FALSE);
-        }
-      }
-      fkList.add(fkInfo);
+      fkInfo.setDeferrablility(rs.getShort("DEFERRABILITY"));
+      fkList.add(generateForeignKey(fkInfo,database,fkList));
     }
     rs.close();
     return fkList;

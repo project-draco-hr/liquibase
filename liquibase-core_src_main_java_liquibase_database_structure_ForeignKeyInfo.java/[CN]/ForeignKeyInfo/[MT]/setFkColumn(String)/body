@@ -1,0 +1,3 @@
+{
+  this.fkColumn=fkColumn;
+}

@@ -1,4 +1,7 @@
 {
+  if (!statement.isReferencedToPrimary() && !(database instanceof OracleDatabase)) {
+    return new Sql[0];
+  }
   StringBuilder sb=new StringBuilder();
   sb.append("ALTER TABLE ").append(database.escapeTableName(statement.getBaseTableSchemaName(),statement.getBaseTableName())).append(" ADD CONSTRAINT ");
   if (!(database instanceof InformixDatabase)) {
@@ -13,7 +16,7 @@
     }
   }
   if (statement.getOnDelete() != null) {
-    if ((database instanceof OracleDatabase) && statement.getOnDelete().equalsIgnoreCase("RESTRICT")) {
+    if ((database instanceof OracleDatabase) && (statement.getOnDelete().equalsIgnoreCase("RESTRICT") || statement.getOnDelete().equalsIgnoreCase("NO ACTION"))) {
     }
  else {
       sb.append(" ON DELETE ").append(statement.getOnDelete());
