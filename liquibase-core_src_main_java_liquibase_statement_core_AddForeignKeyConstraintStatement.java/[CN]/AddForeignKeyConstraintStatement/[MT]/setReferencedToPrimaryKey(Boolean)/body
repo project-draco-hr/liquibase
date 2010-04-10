@@ -1,6 +1,0 @@
-{
-  if (referencedToPrimaryKey != null) {
-    this.referencedToPrimaryKey=referencedToPrimaryKey;
-  }
-  return this;
-}

@@ -1,3 +1,6 @@
 {
+  if (!statement.isReferencesPrimaryKey() && !(database instanceof OracleDatabase)) {
+    return false;
+  }
   return (!(database instanceof SQLiteDatabase));
 }

@@ -1,7 +1,4 @@
 {
-  if (!statement.isReferencedToPrimaryKey() && !(database instanceof OracleDatabase)) {
-    return new Sql[0];
-  }
   StringBuilder sb=new StringBuilder();
   sb.append("ALTER TABLE ").append(database.escapeTableName(statement.getBaseTableSchemaName(),statement.getBaseTableName())).append(" ADD CONSTRAINT ");
   if (!(database instanceof InformixDatabase)) {

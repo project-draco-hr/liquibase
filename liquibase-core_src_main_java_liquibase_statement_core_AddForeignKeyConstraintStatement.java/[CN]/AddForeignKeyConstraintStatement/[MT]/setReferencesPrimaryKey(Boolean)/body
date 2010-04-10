@@ -1,0 +1,6 @@
+{
+  if (referencesPrimaryKey != null) {
+    this.referencesPrimaryKey=referencesPrimaryKey;
+  }
+  return this;
+}

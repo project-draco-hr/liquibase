@@ -22,7 +22,7 @@
   foreignKey.addForeignKeyColumn(fkInfo.getFkColumn());
   foreignKey.setUpdateRule(fkInfo.getUpdateRule());
   foreignKey.setDeleteRule(fkInfo.getDeleteRule());
-  foreignKey.setReferencedToPrimary(fkInfo.isReferencedToPrimary());
+  foreignKey.setReferencesPrimaryKey(fkInfo.isReferencedToPrimary());
   if (database.supportsInitiallyDeferrableColumns()) {
     if (fkInfo.getDeferrablility() == DatabaseMetaData.importedKeyInitiallyDeferred) {
       foreignKey.setDeferrable(Boolean.TRUE);

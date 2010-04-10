@@ -10,7 +10,7 @@
   change.setDeferrable(true);
   change.setDeleteCascade(true);
   change.setInitiallyDeferred(true);
-  change.setReferencedToPrimary(true);
+  change.setReferencesPrimaryKey(true);
   SqlStatement[] statements=change.generateStatements(new MockDatabase());
   assertEquals(1,statements.length);
   AddForeignKeyConstraintStatement statement=(AddForeignKeyConstraintStatement)statements[0];
@@ -23,6 +23,6 @@
   assertEquals("REF_COL_NAME",statement.getReferencedColumnNames());
   assertEquals(true,statement.isDeferrable());
   assertEquals(true,statement.isInitiallyDeferred());
-  assertEquals(true,statement.isReferencedToPrimaryKey());
+  assertEquals(true,statement.isReferencesPrimaryKey());
   assertEquals("CASCADE",statement.getOnDelete());
 }
