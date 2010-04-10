@@ -6,7 +6,7 @@
     ResultSet rs=statement.executeQuery(query);
     while (rs.next()) {
       ForeignKeyInfo fkInfo=new ForeignKeyInfo();
-      fkInfo.setReferencedToPrimary(false);
+      fkInfo.setReferencesUniqueColumn(true);
       fkInfo.setFkName(convertFromDatabaseName(rs.getString("FK_NAME")));
       fkInfo.setFkSchema(convertFromDatabaseName(rs.getString("FKTABLE_SCHEM")));
       fkInfo.setFkTableName(convertFromDatabaseName(rs.getString("FKTABLE_NAME")));

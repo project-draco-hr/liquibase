@@ -1,6 +1,6 @@
 {
   ForeignKey foreignKey=null;
-  if (fkInfo.getKeySeq() == 1 || (!fkInfo.isReferencedToPrimary() && fkInfo.getKeySeq() == 0)) {
+  if (fkInfo.getKeySeq() == 1 || (fkInfo.getReferencesUniqueColumn() && fkInfo.getKeySeq() == 0)) {
     foreignKey=new ForeignKey();
   }
  else {
@@ -22,7 +22,7 @@
   foreignKey.addForeignKeyColumn(fkInfo.getFkColumn());
   foreignKey.setUpdateRule(fkInfo.getUpdateRule());
   foreignKey.setDeleteRule(fkInfo.getDeleteRule());
-  foreignKey.setReferencesPrimaryKey(fkInfo.isReferencedToPrimary());
+  foreignKey.setReferencesUniqueColumn(fkInfo.getReferencesUniqueColumn());
   if (database.supportsInitiallyDeferrableColumns()) {
     if (fkInfo.getDeferrablility() == DatabaseMetaData.importedKeyInitiallyDeferred) {
       foreignKey.setDeferrable(Boolean.TRUE);
