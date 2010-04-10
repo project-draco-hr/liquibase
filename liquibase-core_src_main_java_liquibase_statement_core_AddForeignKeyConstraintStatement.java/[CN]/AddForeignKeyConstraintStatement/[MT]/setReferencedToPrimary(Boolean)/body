@@ -1,4 +1,0 @@
-{
-  this.referencedToPrimary=referencedToPrimary;
-  return this;
-}
