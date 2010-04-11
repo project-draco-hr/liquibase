@@ -23,6 +23,6 @@
   assertEquals("REF_COL_NAME",statement.getReferencedColumnNames());
   assertEquals(true,statement.isDeferrable());
   assertEquals(true,statement.isInitiallyDeferred());
-  assertEquals(true,statement.getReferencesUniqueColumn());
+  assertEquals(false,statement.getReferencesUniqueColumn());
   assertEquals("CASCADE",statement.getOnDelete());
 }

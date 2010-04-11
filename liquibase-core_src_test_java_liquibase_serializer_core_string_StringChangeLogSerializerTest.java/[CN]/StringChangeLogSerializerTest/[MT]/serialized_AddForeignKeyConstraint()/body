@@ -14,5 +14,5 @@
   change.setReferencedTableName("REF_TABLE");
   change.setReferencedColumnNames("COLA, COLB");
   change.setReferencedTableSchemaName("REF_SCHEM");
-  assertEquals("addForeignKeyConstraint:[\n" + "    baseColumnNames=\"COL1, COL2\"\n" + "    baseTableName=\"TABLE_NAME\"\n"+ "    baseTableSchemaName=\"BASE_SCHEM\"\n"+ "    constraintName=\"FK_TEST\"\n"+ "    deferrable=\"true\"\n"+ "    initiallyDeferred=\"true\"\n"+ "    onDelete=\"SET NULL\"\n"+ "    onUpdate=\"NO ACTION\"\n"+ "    referencedColumnNames=\"COLA, COLB\"\n"+ "    referencedTableName=\"REF_TABLE\"\n"+ "    referencedTableSchemaName=\"REF_SCHEM\"\n"+ "    referencedToPrimary=\"true\"\n"+ "]",new StringChangeLogSerializer().serialize(change));
+  assertEquals("addForeignKeyConstraint:[\n" + "    baseColumnNames=\"COL1, COL2\"\n" + "    baseTableName=\"TABLE_NAME\"\n"+ "    baseTableSchemaName=\"BASE_SCHEM\"\n"+ "    constraintName=\"FK_TEST\"\n"+ "    deferrable=\"true\"\n"+ "    initiallyDeferred=\"true\"\n"+ "    onDelete=\"SET NULL\"\n"+ "    onUpdate=\"NO ACTION\"\n"+ "    referencedColumnNames=\"COLA, COLB\"\n"+ "    referencedTableName=\"REF_TABLE\"\n"+ "    referencedTableSchemaName=\"REF_SCHEM\"\n"+ "    referencesUniqueColumn=\"true\"\n"+ "]",new StringChangeLogSerializer().serialize(change));
 }
