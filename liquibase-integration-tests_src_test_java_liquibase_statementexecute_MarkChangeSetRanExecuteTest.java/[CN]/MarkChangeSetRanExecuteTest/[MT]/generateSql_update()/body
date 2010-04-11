@@ -3,7 +3,7 @@
   assertCorrect("update [dbo].[databasechangelog] set [dateexecuted] = NOW(), [exectype] = 'reran', [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",MSSQLDatabase.class);
   assertCorrect("update [databasechangelog] set [dateexecuted] = timestamp, [exectype] = 'reran', [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",MaxDBDatabase.class);
   assertCorrect("update [databasechangelog] set [dateexecuted] = sysdate, [exectype] = 'reran', [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",CacheDatabase.class);
-  assertCorrect("update [databasechangelog] set [dateexecuted] = current_timestamp, [exectype] = 'reran', [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",OracleDatabase.class);
+  assertCorrect("update [databasechangelog] set [dateexecuted] = SYSTIMESTAMP, [exectype] = 'reran', [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",OracleDatabase.class);
   assertCorrect("update [databasechangelog] set [dateexecuted] = getdate(), [exectype] = 'reran', [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",SybaseDatabase.class);
   assertCorrect("update [databasechangelog] set [dateexecuted] = current year to fraction(5), [exectype] = 'reran', [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",InformixDatabase.class);
   assertCorrect("update [databasechangelog] set [dateexecuted] = current timestamp, [exectype] = 'reran', [md5sum] = '2:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",DB2Database.class);
