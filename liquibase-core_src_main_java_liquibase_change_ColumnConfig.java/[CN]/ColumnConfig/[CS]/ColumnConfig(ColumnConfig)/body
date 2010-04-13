@@ -7,6 +7,7 @@
     ConstraintsConfig constraints=new ConstraintsConfig();
     constraints.setNullable(column.getConstraints().isNullable());
     constraints.setPrimaryKey(column.getConstraints().isPrimaryKey());
+    constraints.setTablespace(column.getConstraints().getTablespace());
     constraints.setUnique(column.getConstraints().isUnique());
   }
   setConstraints(constraints);

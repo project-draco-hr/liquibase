@@ -1,4 +1,12 @@
 {
   findIntegerColumns(snapshot);
   super.readColumns(snapshot,schema,databaseMetaData);
+  Database database=snapshot.getDatabase();
+  Statement statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+  String query="select ui.tablespace_name TABLESPACE, ucc.table_name TABLE_NAME, ucc.column_name COLUMN_NAME FROM user_indexes ui , user_constraints uc , user_cons_columns ucc where uc.constraint_type = 'P' and ucc.constraint_name = uc.constraint_name and uc.index_name = ui.index_name";
+  ResultSet rs=statement.executeQuery(query);
+  while (rs.next()) {
+    Column column=snapshot.getColumn(rs.getString("TABLE_NAME"),rs.getString("COLUMN_NAME"));
+    column.setTablespace(rs.getString("TABLESPACE"));
+  }
 }

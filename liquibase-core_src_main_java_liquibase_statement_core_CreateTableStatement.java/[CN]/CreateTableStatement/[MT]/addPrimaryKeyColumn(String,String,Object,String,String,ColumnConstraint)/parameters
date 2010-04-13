@@ -2,4 +2,5 @@ String columnName
 String columnType
 Object defaultValue
 String keyName
+String tablespace
 ColumnConstraint constraints
