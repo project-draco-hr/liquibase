@@ -5,6 +5,7 @@
     change.setSchemaName(pk.getTable().getSchema());
     change.setConstraintName(pk.getName());
     change.setColumnNames(pk.getColumnNames());
+    change.setTablespace(pk.getTablespace());
     changes.add(generateChangeSet(change));
   }
 }

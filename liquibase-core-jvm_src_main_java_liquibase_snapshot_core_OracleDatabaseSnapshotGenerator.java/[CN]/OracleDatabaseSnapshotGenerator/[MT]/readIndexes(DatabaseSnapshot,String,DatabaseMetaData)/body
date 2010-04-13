@@ -4,6 +4,7 @@
   String query="select aic.index_name, 3 AS TYPE, aic.table_name, aic.column_name, aic.column_position AS ORDINAL_POSITION, null AS FILTER_CONDITION, ai.tablespace_name AS TABLESPACE FROM all_ind_columns aic, all_indexes ai WHERE aic.table_owner='" + database.convertRequestedSchemaToSchema(schema) + "' and aic.index_name = ai.index_name ORDER BY INDEX_NAME, ORDINAL_POSITION";
   Statement statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
   ResultSet rs=statement.executeQuery(query);
+  Map<String,Index> indexMap=new HashMap<String,Index>();
   while (rs.next()) {
     String indexName=convertFromDatabaseName(rs.getString("INDEX_NAME"));
     String tableName=rs.getString("TABLE_NAME");
@@ -25,20 +26,28 @@
       continue;
     }
     Index index;
-    index=new Index();
-    index.setTable(snapshot.getTable(tableName));
-    index.setTablespace(tableSpace);
-    index.setName(indexName);
-    index.setUnique(!nonUnique);
-    index.setFilterCondition(filterCondition);
+    if (indexMap.containsKey(indexName)) {
+      index=indexMap.get(indexName);
+    }
+ else {
+      index=new Index();
+      index.setTable(snapshot.getTable(tableName));
+      index.setTablespace(tableSpace);
+      index.setName(indexName);
+      index.setUnique(!nonUnique);
+      index.setFilterCondition(filterCondition);
+      indexMap.put(indexName,index);
+    }
     for (int i=index.getColumns().size(); i < position; i++) {
       index.getColumns().add(null);
     }
     index.getColumns().set(position - 1,columnName);
-    snapshot.getIndexes().add(index);
   }
   JdbcUtils.closeResultSet(rs);
   JdbcUtils.closeStatement(statement);
+  for (  Map.Entry<String,Index> entry : indexMap.entrySet()) {
+    snapshot.getIndexes().add(entry.getValue());
+  }
   for (  Index index : snapshot.getIndexes()) {
     for (    PrimaryKey pk : snapshot.getPrimaryKeys()) {
       if (index.getTable().getName().equalsIgnoreCase(pk.getTable().getName()) && index.getColumnNames().equals(pk.getColumnNames())) {
