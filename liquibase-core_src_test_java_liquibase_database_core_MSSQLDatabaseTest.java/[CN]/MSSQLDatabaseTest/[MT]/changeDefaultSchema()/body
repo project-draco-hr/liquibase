@@ -1,0 +1,6 @@
+{
+  Database database=new MSSQLDatabase();
+  assertEquals("dbo",database.getDefaultSchemaName());
+  database.setDefaultSchemaName("myschema");
+  assertEquals("myschema",database.getDefaultSchemaName());
+}
