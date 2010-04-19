@@ -1,0 +1,5 @@
+{
+  CreateTableStatement statement=new CreateTableStatement(SCHEMA_NAME,TABLE_NAME);
+  statement.addColumn(COLUMN_NAME1,"int");
+  return statement;
+}
