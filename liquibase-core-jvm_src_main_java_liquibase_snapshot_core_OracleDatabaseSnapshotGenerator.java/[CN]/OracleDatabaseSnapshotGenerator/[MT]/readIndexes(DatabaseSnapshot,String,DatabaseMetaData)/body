@@ -31,7 +31,11 @@
     }
  else {
       index=new Index();
-      index.setTable(snapshot.getTable(tableName));
+      Table table=snapshot.getTable(tableName);
+      if (table == null) {
+        continue;
+      }
+      index.setTable(table);
       index.setTablespace(tableSpace);
       index.setName(indexName);
       index.setUnique(!nonUnique);

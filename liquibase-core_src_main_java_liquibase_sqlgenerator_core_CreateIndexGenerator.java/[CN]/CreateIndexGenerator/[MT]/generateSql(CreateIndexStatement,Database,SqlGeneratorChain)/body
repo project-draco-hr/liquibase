@@ -18,7 +18,7 @@
   }
   buffer.append("INDEX ");
   if (statement.getIndexName() != null) {
-    buffer.append(statement.getIndexName()).append(" ");
+    buffer.append(database.escapeIndexName(statement.getTableSchemaName(),statement.getIndexName())).append(" ");
   }
   buffer.append("ON ");
   buffer.append(database.escapeTableName(statement.getTableSchemaName(),statement.getTableName())).append("(");

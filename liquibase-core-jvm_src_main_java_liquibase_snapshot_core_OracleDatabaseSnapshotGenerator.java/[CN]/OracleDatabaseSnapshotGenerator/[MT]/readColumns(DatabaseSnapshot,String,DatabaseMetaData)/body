@@ -7,6 +7,9 @@
   ResultSet rs=statement.executeQuery(query);
   while (rs.next()) {
     Column column=snapshot.getColumn(rs.getString("TABLE_NAME"),rs.getString("COLUMN_NAME"));
+    if (column == null) {
+      continue;
+    }
     column.setTablespace(rs.getString("TABLESPACE"));
   }
 }

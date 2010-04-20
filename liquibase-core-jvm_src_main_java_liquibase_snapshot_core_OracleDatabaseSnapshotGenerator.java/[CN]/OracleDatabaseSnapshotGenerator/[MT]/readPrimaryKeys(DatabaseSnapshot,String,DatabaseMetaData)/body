@@ -17,10 +17,14 @@
         foundExistingPK=true;
       }
     }
-    if (!foundExistingPK) {
+    if (!foundExistingPK && !database.isLiquibaseTable(tableName)) {
       PrimaryKey primaryKey=new PrimaryKey();
       primaryKey.setTablespace(tablespace);
-      primaryKey.setTable(snapshot.getTable(tableName));
+      Table table=snapshot.getTable(tableName);
+      if (table == null) {
+        continue;
+      }
+      primaryKey.setTable(table);
       primaryKey.addColumnName(position - 1,columnName);
       primaryKey.setName(convertPrimaryKeyName(rs.getString("PK_NAME")));
       foundPKs.add(primaryKey);

@@ -23,7 +23,7 @@
       if (!database.isSystemTable(null,schema,tableName) && !database.isLiquibaseTable(tableName)) {
         Table table=snapshot.getTable(tableName);
         if (table == null) {
-          throw new IllegalStateException("Cannot find table for " + tableName);
+          continue;
         }
         constraintInformation.setTable(table);
         constraintInformation.setDisabled("DISABLED".equals(status));
