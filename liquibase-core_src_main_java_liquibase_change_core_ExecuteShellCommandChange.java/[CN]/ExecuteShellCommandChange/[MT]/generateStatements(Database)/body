@@ -13,33 +13,39 @@
     nonExecutedMode=true;
   }
   if (shouldRun && !nonExecutedMode) {
-    List<String> commandArray=new ArrayList<String>();
-    commandArray.add(executable);
-    commandArray.addAll(args);
-    try {
-      ProcessBuilder pb=new ProcessBuilder(commandArray);
-      pb.redirectErrorStream(true);
-      Process p=pb.start();
-      int returnCode=0;
-      try {
-        returnCode=p.waitFor();
-      }
- catch (      InterruptedException e) {
-        ;
-      }
-      ByteArrayOutputStream errorStream=new ByteArrayOutputStream();
-      ByteArrayOutputStream inputStream=new ByteArrayOutputStream();
-      StreamUtil.copy(p.getErrorStream(),errorStream);
-      StreamUtil.copy(p.getInputStream(),inputStream);
-      LogFactory.getLogger().info(errorStream.toString());
-      LogFactory.getLogger().info(inputStream.toString());
-      if (returnCode != 0) {
-        throw new RuntimeException(getCommandString() + " returned an code of " + returnCode);
+    return new SqlStatement[]{new RuntimeStatement(){
+      @Override public Sql[] generate(      Database database){
+        List<String> commandArray=new ArrayList<String>();
+        commandArray.add(executable);
+        commandArray.addAll(args);
+        try {
+          ProcessBuilder pb=new ProcessBuilder(commandArray);
+          pb.redirectErrorStream(true);
+          Process p=pb.start();
+          int returnCode=0;
+          try {
+            returnCode=p.waitFor();
+          }
+ catch (          InterruptedException e) {
+            ;
+          }
+          ByteArrayOutputStream errorStream=new ByteArrayOutputStream();
+          ByteArrayOutputStream inputStream=new ByteArrayOutputStream();
+          StreamUtil.copy(p.getErrorStream(),errorStream);
+          StreamUtil.copy(p.getInputStream(),inputStream);
+          LogFactory.getLogger().severe(errorStream.toString());
+          LogFactory.getLogger().info(inputStream.toString());
+          if (returnCode != 0) {
+            throw new RuntimeException(getCommandString() + " returned an code of " + returnCode);
+          }
+        }
+ catch (        IOException e) {
+          throw new UnexpectedLiquibaseException("Error executing command: " + e);
+        }
+        return null;
       }
     }
- catch (    IOException e) {
-      throw new UnexpectedLiquibaseException("Error executing command: " + e);
-    }
+};
   }
   if (nonExecutedMode) {
     return new SqlStatement[]{new CommentStatement(getCommandString())};
