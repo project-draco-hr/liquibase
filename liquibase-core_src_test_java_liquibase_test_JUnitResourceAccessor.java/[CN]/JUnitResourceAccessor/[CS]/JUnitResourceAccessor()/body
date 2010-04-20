@@ -2,5 +2,5 @@
   File srcDir=new File(TestContext.getInstance().findCoreProjectRoot(),"src");
   File integrationClassesDir=new File(TestContext.getInstance().findIntegrationTestProjectRoot(),"target/classes");
   File integrationTestClassesDir=new File(TestContext.getInstance().findIntegrationTestProjectRoot(),"target/test-classes");
-  classLoader=new URLClassLoader(new URL[]{new File(System.getProperty("java.io.tmpdir")).toURL()});
+  classLoader=new URLClassLoader(new URL[]{new File(TestContext.getInstance().findIntegrationTestProjectRoot(),"src/test/resources/packaged-changelog.jar").toURL(),new File(System.getProperty("java.io.tmpdir")).toURL()});
 }

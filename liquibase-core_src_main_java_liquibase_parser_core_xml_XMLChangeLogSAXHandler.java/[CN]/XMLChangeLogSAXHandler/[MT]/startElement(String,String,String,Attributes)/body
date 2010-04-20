@@ -49,8 +49,14 @@
       while (resources.hasMoreElements()) {
         URL fileUrl=resources.nextElement();
         if (!fileUrl.toExternalForm().startsWith("file:")) {
-          log.debug(fileUrl.toExternalForm() + " is not a file path");
-          continue;
+          if (fileUrl.toExternalForm().startsWith("jar:file:")) {
+            File zipFileDir=extractZipFile(fileUrl);
+            fileUrl=new File(zipFileDir,pathName).toURL();
+          }
+ else {
+            log.debug(fileUrl.toExternalForm() + " is not a file path");
+            continue;
+          }
         }
         File file=new File(fileUrl.toURI());
         log.debug("includeAll using path " + file.getCanonicalPath());
