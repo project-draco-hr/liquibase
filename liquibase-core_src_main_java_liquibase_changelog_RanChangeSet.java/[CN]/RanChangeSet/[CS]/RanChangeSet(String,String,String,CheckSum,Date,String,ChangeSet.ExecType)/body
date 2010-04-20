@@ -10,4 +10,5 @@
     this.dateExecuted=new Date(dateExecuted.getTime());
   }
   this.tag=tag;
+  this.execType=execType;
 }

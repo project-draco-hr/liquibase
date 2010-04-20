@@ -1,0 +1,4 @@
+{
+  RanChangeSet ranChangeSet=getRanChangeSet(changeSet);
+  return ranChangeSet != null && (ranChangeSet.getExecType().equals(ChangeSet.ExecType.EXECUTED) || ranChangeSet.getExecType().equals(ChangeSet.ExecType.RERAN));
+}
