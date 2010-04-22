@@ -1,0 +1,14 @@
+{
+  if (jdbcType == 0) {
+    return ForeignKeyConstraintType.importedKeyCascade;
+  }
+ else   if (jdbcType == 1) {
+    return ForeignKeyConstraintType.importedKeyNoAction;
+  }
+ else   if (jdbcType == 2) {
+    return ForeignKeyConstraintType.importedKeySetNull;
+  }
+ else {
+    throw new DatabaseException("Unknown constraint type: " + jdbcType);
+  }
+}
