@@ -1,3 +1,8 @@
 {
-  return super.getViewDefinition(schemaName,name).replaceFirst(".*?\n","");
+  String definition=super.getViewDefinition(schemaName,name);
+  if (!definition.startsWith("SELECT")) {
+    definition=definition.replaceFirst(".*?\n","");
+  }
+  definition=definition.replaceFirst("/\\*.*","");
+  return definition;
 }
