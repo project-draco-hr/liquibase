@@ -1,4 +1,7 @@
 {
+  if (validationFailed) {
+    return ExecType.MARK_RAN;
+  }
   long startTime=new Date().getTime();
   ExecType execType=null;
   boolean skipChange=false;

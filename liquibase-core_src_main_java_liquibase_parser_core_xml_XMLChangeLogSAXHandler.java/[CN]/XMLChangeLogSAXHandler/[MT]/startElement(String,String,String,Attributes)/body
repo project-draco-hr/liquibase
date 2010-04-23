@@ -98,6 +98,9 @@
       if (StringUtils.trimToNull(atts.getValue("failOnError")) != null) {
         changeSet.setFailOnError(Boolean.parseBoolean(atts.getValue("failOnError")));
       }
+      if (StringUtils.trimToNull(atts.getValue("onValidationFail")) != null) {
+        changeSet.setOnValidationFail(ChangeSet.ValidationFailOption.valueOf(atts.getValue("onValidationFail")));
+      }
     }
  else     if (changeSet != null && "rollback".equals(qName)) {
       text=new StringBuffer();

@@ -7,7 +7,16 @@
       setupExceptions.add(se);
     }
     try {
-      validationErrors.addAll(change.validate(database),changeSet);
+      ValidationErrors foundErrors=change.validate(database);
+      if (foundErrors.hasErrors()) {
+        if (changeSet.getOnValidationFail().equals(ChangeSet.ValidationFailOption.MARK_RAN)) {
+          LogFactory.getLogger().info("Skipping changeSet " + changeSet + " due to validation error(s): "+ StringUtils.join(foundErrors.getErrorMessages(),", "));
+          changeSet.setValidationFailed(true);
+        }
+ else {
+          validationErrors.addAll(foundErrors,changeSet);
+        }
+      }
     }
  catch (    Throwable e) {
       changeValidationExceptions.add(e);
