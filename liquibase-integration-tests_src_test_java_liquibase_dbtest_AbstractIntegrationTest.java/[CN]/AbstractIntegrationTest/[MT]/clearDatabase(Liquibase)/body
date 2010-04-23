@@ -20,4 +20,5 @@
     throw new DatabaseException(e);
   }
   DatabaseSnapshotGeneratorFactory.resetAll();
+  DatabaseFactory.reset();
 }

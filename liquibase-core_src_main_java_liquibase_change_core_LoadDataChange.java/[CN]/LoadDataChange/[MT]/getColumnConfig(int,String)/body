@@ -3,7 +3,10 @@
     if (config.getIndex() != null && config.getIndex().equals(index)) {
       return config;
     }
-    if (config.getHeader() != null && config.getHeader().equals(header)) {
+    if (config.getHeader() != null && config.getHeader().equalsIgnoreCase(header)) {
+      return config;
+    }
+    if (config.getName() != null && config.getName().equalsIgnoreCase(header)) {
       return config;
     }
   }

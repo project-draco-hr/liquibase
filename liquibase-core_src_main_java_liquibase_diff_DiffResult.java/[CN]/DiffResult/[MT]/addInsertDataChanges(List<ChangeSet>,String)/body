@@ -49,7 +49,12 @@
               line[i]="NULL";
             }
  else {
-              line[i]=value.toString();
+              if (value instanceof Date) {
+                line[i]=new ISODateFormat().format(((Date)value));
+              }
+ else {
+                line[i]=value.toString();
+              }
             }
           }
           outputFile.writeNext(line);

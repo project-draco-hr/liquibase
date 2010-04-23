@@ -26,7 +26,7 @@
  else             if (columnConfig.getType().equalsIgnoreCase("NUMERIC")) {
               valueConfig.setValueNumeric(value.toString());
             }
- else             if (columnConfig.getType().equalsIgnoreCase("DATE")) {
+ else             if (columnConfig.getType().toLowerCase().contains("date") || columnConfig.getType().toLowerCase().contains("time")) {
               valueConfig.setValueDate(value.toString());
             }
  else             if (columnConfig.getType().equalsIgnoreCase("STRING")) {
