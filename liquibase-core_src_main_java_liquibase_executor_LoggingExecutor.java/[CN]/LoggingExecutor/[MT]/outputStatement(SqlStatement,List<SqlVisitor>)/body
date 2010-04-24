@@ -10,8 +10,12 @@
         output.write("GO");
       }
  else {
-        if (!statement.endsWith(";")) {
-          output.write(";");
+        String endDelimiter=";";
+        if (sql instanceof RawSqlStatement) {
+          endDelimiter=((RawSqlStatement)sql).getEndDelimiter();
+        }
+        if (!statement.endsWith(endDelimiter)) {
+          output.write(endDelimiter);
         }
       }
       output.write(StreamUtil.getLineSeparator());
