@@ -1,4 +1,3 @@
 String columnName
-String columnType
-Object defaultValue
+DataType columnType
 ColumnConstraint constraints
