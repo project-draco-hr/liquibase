@@ -7,7 +7,10 @@
       if (rs.size() == 0) {
         continue;
       }
-      List<String> columnNames=new ArrayList(rs.iterator().next().keySet());
+      List<String> columnNames=new ArrayList<String>();
+      for (      Column column : table.getColumns()) {
+        columnNames.add(column.getName());
+      }
       if (dataDir != null) {
         String fileName=table.getName().toLowerCase() + ".csv";
         if (dataDir != null) {
@@ -30,7 +33,7 @@
         for (        Map row : rs) {
           line=new String[columnNames.size()];
           for (int i=0; i < columnNames.size(); i++) {
-            Object value=row.get(columnNames.get(i));
+            Object value=row.get(columnNames.get(i).toUpperCase());
             if (dataTypes[i] == null && value != null) {
               if (value instanceof Number) {
                 dataTypes[i]="NUMERIC";
@@ -84,7 +87,7 @@
           for (int i=0; i < columnNames.size(); i++) {
             ColumnConfig column=new ColumnConfig();
             column.setName(columnNames.get(i));
-            Object value=row.get(columnNames.get(i));
+            Object value=row.get(columnNames.get(i).toUpperCase());
             if (value == null) {
               column.setValue(null);
             }

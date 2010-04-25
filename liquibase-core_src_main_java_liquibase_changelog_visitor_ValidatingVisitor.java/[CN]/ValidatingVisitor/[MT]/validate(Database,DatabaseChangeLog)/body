@@ -14,4 +14,12 @@ catch (  PreconditionErrorException e) {
     LogFactory.getLogger().debug("Precondition Error: " + e.getMessage(),e);
     errorPreconditions.addAll(e.getErrorPreconditions());
   }
+ finally {
+    try {
+      database.rollback();
+    }
+ catch (    DatabaseException e) {
+      LogFactory.getLogger().warning("Error rolling back after precondition check",e);
+    }
+  }
 }
