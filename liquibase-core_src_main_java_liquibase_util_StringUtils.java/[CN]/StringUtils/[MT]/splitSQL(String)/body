@@ -1,3 +1,0 @@
-{
-  return multiLineSQL.split(";\\s*\n|;$|\n[gG][oO]\\s*\n|\n[Gg][oO]$");
-}

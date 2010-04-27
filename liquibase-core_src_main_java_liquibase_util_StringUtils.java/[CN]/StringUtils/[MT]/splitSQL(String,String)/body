@@ -1,0 +1,6 @@
+{
+  if (endDelimiter == null) {
+    endDelimiter=";\\s*\n|;$|\n[gG][oO]\\s*\n|\n[Gg][oO]$";
+  }
+  return multiLineSQL.split(endDelimiter);
+}

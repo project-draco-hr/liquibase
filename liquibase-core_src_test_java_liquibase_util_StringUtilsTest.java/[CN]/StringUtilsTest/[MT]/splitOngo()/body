@@ -1,6 +1,6 @@
 {
   String sql="some sql\ngo\nmore sql";
-  String[] result=StringUtils.splitSQL(sql);
+  String[] result=StringUtils.splitSQL(sql,null);
   assertEquals(2,result.length);
   assertEquals("some sql",result[0]);
   assertEquals("more sql",result[1]);

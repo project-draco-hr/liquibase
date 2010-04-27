@@ -1,2 +1,3 @@
 String multiLineSQL
 boolean stripComments
+String endDelimiter
