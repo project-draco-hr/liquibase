@@ -1,3 +1,8 @@
 {
-  throw new StopChangeException(getMessage());
+  return new SqlStatement[]{new RuntimeStatement(){
+    @Override public Sql[] generate(    Database database){
+      throw new StopChangeException(getMessage());
+    }
+  }
+};
 }
