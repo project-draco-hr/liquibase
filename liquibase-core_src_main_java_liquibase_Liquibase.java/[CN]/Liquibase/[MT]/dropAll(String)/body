@@ -3,9 +3,9 @@
     LockService.getInstance(database).waitForLock();
     for (    String schema : schemas) {
       log.info("Dropping Database Objects in schema: " + database.convertRequestedSchemaToSchema(schema));
-      checkDatabaseChangeLogTable();
+      checkDatabaseChangeLogTable(false,null);
       getDatabase().dropDatabaseObjects(schema);
-      checkDatabaseChangeLogTable();
+      checkDatabaseChangeLogTable(false,null);
       log.debug("Objects dropped successfully");
     }
   }

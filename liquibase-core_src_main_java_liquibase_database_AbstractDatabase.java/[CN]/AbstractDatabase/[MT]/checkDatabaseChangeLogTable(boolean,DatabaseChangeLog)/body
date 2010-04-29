@@ -70,4 +70,16 @@
     executor.execute(sql);
     this.commit();
   }
+  if (updateExistingNullChecksums) {
+    for (    RanChangeSet ranChangeSet : this.getRanChangeSetList()) {
+      if (ranChangeSet.getLastCheckSum() == null) {
+        ChangeSet changeSet=databaseChangeLog.getChangeSet(ranChangeSet);
+        if (changeSet != null) {
+          LogFactory.getLogger().info("Setting null checksum on changeSet " + changeSet + " to correct value");
+          executor.execute(new UpdateChangeSetChecksumStatement(changeSet));
+        }
+      }
+    }
+    commit();
+  }
 }

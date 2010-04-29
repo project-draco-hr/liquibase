@@ -1,0 +1,3 @@
+{
+  return getChangeSet(ranChangeSet.getChangeLog(),ranChangeSet.getAuthor(),ranChangeSet.getId());
+}

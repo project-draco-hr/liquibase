@@ -10,6 +10,7 @@ class QueryStatementCallback implements StatementCallback {
         if (sqlToExecute.length != 1) {
           throw new DatabaseException("Can only query with statements that return one sql statement");
         }
+        log.debug("Executing QUERY database command: " + sqlToExecute[0]);
         rs=stmt.executeQuery(sqlToExecute[0]);
         ResultSet rsToUse=rs;
         return rse.extractData(rsToUse);

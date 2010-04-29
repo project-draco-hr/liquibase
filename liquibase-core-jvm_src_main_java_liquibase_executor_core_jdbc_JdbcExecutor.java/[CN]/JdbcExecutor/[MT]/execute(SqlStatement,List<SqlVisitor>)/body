@@ -6,6 +6,7 @@
 class ExecuteStatementCallback implements StatementCallback {
     public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
       for (      String statement : applyVisitors(sql,sqlVisitors)) {
+        log.debug("Executing EXECUTE database command: " + statement);
         stmt.execute(statement);
       }
       return null;

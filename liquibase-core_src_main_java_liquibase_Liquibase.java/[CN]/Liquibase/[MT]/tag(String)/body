@@ -2,7 +2,7 @@
   LockService lockService=LockService.getInstance(database);
   lockService.waitForLock();
   try {
-    database.checkDatabaseChangeLogTable();
+    checkDatabaseChangeLogTable(false,null);
     getDatabase().tag(tagString);
   }
   finally {
