@@ -43,6 +43,7 @@
   setDataSource(servletContextEvent.getServletContext().getInitParameter("LIQUIBASE_DATA_SOURCE"));
   setChangeLogFile(servletContextEvent.getServletContext().getInitParameter("LIQUIBASE_CHANGELOG"));
   setContexts(servletContextEvent.getServletContext().getInitParameter("LIQUIBASE_CONTEXTS"));
+  this.defaultSchema=StringUtils.trimToNull(servletContextEvent.getServletContext().getInitParameter("LIQUIBASE_DEFAULT_SCHEMA"));
   if (getChangeLogFile() == null) {
     throw new RuntimeException("Cannot run LiquiBase, LIQUIBASE_CHANGELOG is not set");
   }
@@ -58,7 +59,9 @@
       connection=dataSource.getConnection();
       ResourceAccessor clFO=new ClassLoaderResourceAccessor();
       ResourceAccessor fsFO=new FileSystemResourceAccessor();
-      Liquibase liquibase=new Liquibase(getChangeLogFile(),new CompositeResourceAccessor(clFO,fsFO),DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection)));
+      Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+      database.setDefaultSchemaName(this.defaultSchema);
+      Liquibase liquibase=new Liquibase(getChangeLogFile(),new CompositeResourceAccessor(clFO,fsFO),database);
       liquibase.update(getContexts());
     }
   finally {
