@@ -1,0 +1,7 @@
+{
+  List<String> openerStrings=new ArrayList<String>();
+  for (  ResourceAccessor opener : openers) {
+    openerStrings.add(opener.toString());
+  }
+  return getClass().getName() + "(" + StringUtils.join(openerStrings,",")+ ")";
+}

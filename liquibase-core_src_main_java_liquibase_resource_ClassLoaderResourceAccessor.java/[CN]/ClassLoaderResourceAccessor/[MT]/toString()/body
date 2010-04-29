@@ -1,0 +1,14 @@
+{
+  String description;
+  if (classLoader instanceof URLClassLoader) {
+    List<String> urls=new ArrayList<String>();
+    for (    URL url : ((URLClassLoader)classLoader).getURLs()) {
+      urls.add(url.toExternalForm());
+    }
+    description=StringUtils.join(urls,",");
+  }
+ else {
+    description=classLoader.getClass().getName();
+  }
+  return getClass().getName() + "(" + description+ ")";
+}
