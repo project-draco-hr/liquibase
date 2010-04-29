@@ -8,12 +8,14 @@
       dropChange.setSchemaName(schema);
       dropChanges.add(dropChange);
     }
-    for (    ForeignKey fk : snapshot.getForeignKeys()) {
-      DropForeignKeyConstraintChange dropFK=new DropForeignKeyConstraintChange();
-      dropFK.setBaseTableSchemaName(schema);
-      dropFK.setBaseTableName(fk.getForeignKeyTable().getName());
-      dropFK.setConstraintName(fk.getName());
-      dropChanges.add(dropFK);
+    if (!supportsForeignKeyDisable()) {
+      for (      ForeignKey fk : snapshot.getForeignKeys()) {
+        DropForeignKeyConstraintChange dropFK=new DropForeignKeyConstraintChange();
+        dropFK.setBaseTableSchemaName(schema);
+        dropFK.setBaseTableName(fk.getForeignKeyTable().getName());
+        dropFK.setConstraintName(fk.getName());
+        dropChanges.add(dropFK);
+      }
     }
     for (    Table table : snapshot.getTables()) {
       DropTableChange dropChange=new DropTableChange();
@@ -33,9 +35,17 @@
     if (snapshot.hasDatabaseChangeLogTable()) {
       dropChanges.add(new AnonymousChange(new ClearDatabaseChangeLogTableStatement(schema)));
     }
-    for (    Change change : dropChanges) {
-      for (      SqlStatement statement : change.generateStatements(this)) {
-        ExecutorService.getInstance().getExecutor(this).execute(statement);
+    final boolean reEnableFK=supportsForeignKeyDisable() && disableForeignKeyChecks();
+    try {
+      for (      Change change : dropChanges) {
+        for (        SqlStatement statement : change.generateStatements(this)) {
+          ExecutorService.getInstance().getExecutor(this).execute(statement);
+        }
+      }
+    }
+  finally {
+      if (reEnableFK) {
+        enableForeignKeyChecks();
       }
     }
   }

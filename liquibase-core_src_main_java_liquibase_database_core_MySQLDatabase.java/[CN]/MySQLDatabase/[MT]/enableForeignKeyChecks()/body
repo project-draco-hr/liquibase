@@ -1,0 +1,3 @@
+{
+  ExecutorService.getInstance().getExecutor(this).execute(new RawSqlStatement("SET FOREIGN_KEY_CHECKS=1"));
+}
