@@ -1,16 +1,8 @@
 {
-  List<URL> urls=new ArrayList<URL>();
-  List<ClassLoader> unknownClassLoaders=new ArrayList<ClassLoader>();
+  ClassLoader[] loaders=new ClassLoader[openers.size()];
+  int i=0;
   for (  ResourceAccessor fo : openers) {
-    ClassLoader classLoader=fo.toClassLoader();
-    if (classLoader instanceof URLClassLoader) {
-      urls.addAll(Arrays.asList(((URLClassLoader)classLoader).getURLs()));
-    }
- else {
-      System.out.println("Unknown classloader type: " + classLoader.getClass().getName());
-      unknownClassLoaders.add(fo.toClassLoader());
-    }
+    loaders[i++]=fo.toClassLoader();
   }
-  unknownClassLoaders.add(0,new URLClassLoader(urls.toArray(new URL[urls.size()])));
-  return new CompositeClassLoader(unknownClassLoaders.toArray(new ClassLoader[unknownClassLoaders.size()]));
+  return new CompositeClassLoader(loaders);
 }

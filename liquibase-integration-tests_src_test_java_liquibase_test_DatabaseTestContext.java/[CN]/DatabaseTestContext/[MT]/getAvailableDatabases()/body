@@ -4,5 +4,10 @@
       availableDatabases.add(DatabaseFactory.getInstance().findCorrectDatabaseImplementation(conn));
     }
   }
+  Iterator<Database> iter=availableDatabases.iterator();
+  while (iter.hasNext()) {
+    Database database=iter.next();
+    if (database.getConnection().isClosed())     iter.remove();
+  }
   return availableDatabases;
 }

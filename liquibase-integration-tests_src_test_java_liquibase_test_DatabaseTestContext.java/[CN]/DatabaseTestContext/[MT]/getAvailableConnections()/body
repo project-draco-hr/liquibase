@@ -8,5 +8,10 @@
       }
     }
   }
+  Iterator<DatabaseConnection> iter=availableConnections.iterator();
+  while (iter.hasNext()) {
+    DatabaseConnection connection=iter.next();
+    if (connection.isClosed())     iter.remove();
+  }
   return availableConnections;
 }

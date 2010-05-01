@@ -1,0 +1,8 @@
+{
+  DatabaseConnection connection=DatabaseTestContext.getInstance().getConnection(URL);
+  assertNotNull(connection);
+  Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+  database.dropDatabaseObjects("liquibase");
+  database.close();
+  DatabaseFactory.reset();
+}

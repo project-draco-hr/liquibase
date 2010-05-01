@@ -1,0 +1,10 @@
+{
+  File testDir=ResourceExtractor.simpleExtractResources(getClass(),"/maven");
+  Verifier verifier;
+  verifier=new Verifier(testDir.getAbsolutePath());
+  verifier.deleteArtifact("org.liquibase","liquibase-maven-integration-tests","1.0-SNAPSHOT","jar");
+  verifier.executeGoal("clean");
+  verifier.executeGoal("install");
+  verifier.verifyErrorFreeLog();
+  verifier.resetStreams();
+}
