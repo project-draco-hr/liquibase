@@ -1,0 +1,10 @@
+{
+  AbstractSQLChange change2=new SQLFileChange();
+  String insertWithSemicolon="insert into table ( col ) values (' value with; semicolon ');";
+  change2.setSql(insertWithSemicolon);
+  Database database=new MockDatabase();
+  SqlStatement[] statements=change2.generateStatements(database);
+  assertEquals("Unexpected amount of statements returned",1,statements.length);
+  String insertWithoutTrailingSemicolon=insertWithSemicolon.substring(0,insertWithSemicolon.length() - 1);
+  assertEquals("unexpected SQL statement returned",insertWithoutTrailingSemicolon,statements[0].toString());
+}

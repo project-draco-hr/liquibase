@@ -1,0 +1,15 @@
+{
+  if (database == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  liquibase.dropAll(getSchemasToDrop());
+  liquibase=createLiquibase(completeChangeLog);
+  liquibase.update(this.contexts);
+  File outputDir=File.createTempFile("liquibase-dbdoctest","dir");
+  outputDir.delete();
+  outputDir.mkdir();
+  outputDir.deleteOnExit();
+  liquibase=createLiquibase(completeChangeLog);
+  liquibase.generateDocumentation(outputDir.getAbsolutePath());
+}
