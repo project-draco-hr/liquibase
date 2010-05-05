@@ -2,5 +2,4 @@
   super(tagName,changeName,priority);
   stripComments=false;
   splitStatements=true;
-  endDelimiter=";";
 }
