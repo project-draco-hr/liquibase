@@ -1,4 +1,6 @@
 {
   this(sql);
-  this.endDelimiter=endDelimiter;
+  if (endDelimiter != null) {
+    this.endDelimiter=endDelimiter;
+  }
 }
