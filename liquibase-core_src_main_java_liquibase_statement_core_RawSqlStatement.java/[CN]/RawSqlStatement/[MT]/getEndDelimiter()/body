@@ -1,3 +1,6 @@
 {
+  if (endDelimiter == null) {
+    return null;
+  }
   return endDelimiter.replace("\\r","\r").replace("\\n","\n");
 }
