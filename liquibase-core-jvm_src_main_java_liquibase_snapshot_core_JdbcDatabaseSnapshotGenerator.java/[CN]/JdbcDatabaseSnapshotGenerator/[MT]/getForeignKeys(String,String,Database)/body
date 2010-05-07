@@ -10,6 +10,7 @@
       fkInfo.setFkSchema(convertFromDatabaseName(rs.getString("FKTABLE_SCHEM")));
       fkInfo.setFkTableName(convertFromDatabaseName(rs.getString("FKTABLE_NAME")));
       fkInfo.setFkColumn(convertFromDatabaseName(rs.getString("FKCOLUMN_NAME")));
+      fkInfo.setPkTableSchema(rs.getString("PKTABLE_SCHEM"));
       fkInfo.setPkTableName(convertFromDatabaseName(rs.getString("PKTABLE_NAME")));
       fkInfo.setPkColumn(convertFromDatabaseName(rs.getString("PKCOLUMN_NAME")));
       fkInfo.setKeySeq(rs.getInt("KEY_SEQ"));
