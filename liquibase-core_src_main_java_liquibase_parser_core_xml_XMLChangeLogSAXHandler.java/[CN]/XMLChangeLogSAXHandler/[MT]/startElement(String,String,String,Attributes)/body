@@ -46,6 +46,7 @@
       }
       Enumeration<URL> resources=resourceAccessor.getResources(pathName);
       boolean foundResource=false;
+      Set<URL> seenUrls=new HashSet<URL>();
       while (resources.hasMoreElements()) {
         URL fileUrl=resources.nextElement();
         if (!fileUrl.toExternalForm().startsWith("file:")) {
@@ -57,6 +58,9 @@
             log.debug(fileUrl.toExternalForm() + " is not a file path");
             continue;
           }
+        }
+        if (!seenUrls.add(fileUrl)) {
+          continue;
         }
         File file=new File(fileUrl.toURI());
         log.debug("includeAll using path " + file.getCanonicalPath());
