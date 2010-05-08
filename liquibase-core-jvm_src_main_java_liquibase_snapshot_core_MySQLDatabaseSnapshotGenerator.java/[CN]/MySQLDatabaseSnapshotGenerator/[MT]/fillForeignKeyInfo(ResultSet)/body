@@ -1,0 +1,6 @@
+{
+  ForeignKeyInfo fkinfo=super.fillForeignKeyInfo(rs);
+  fkinfo.setPkTableSchema(convertFromDatabaseName(rs.getString("PKTABLE_CAT")));
+  fkinfo.setFkSchema(convertFromDatabaseName(rs.getString("FKTABLE_CAT")));
+  return fkinfo;
+}

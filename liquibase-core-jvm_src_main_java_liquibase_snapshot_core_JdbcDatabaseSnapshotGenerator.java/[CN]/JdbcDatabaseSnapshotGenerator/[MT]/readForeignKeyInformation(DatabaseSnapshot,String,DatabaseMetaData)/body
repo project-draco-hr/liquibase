@@ -8,13 +8,13 @@
       Table tempPKTable=fk.getPrimaryKeyTable();
       Table pkTable=snapshot.getTable(tempPKTable.getName());
       if (pkTable == null) {
-        LogFactory.getLogger().warning("Foreign key " + fk.getName() + " references table "+ tempPKTable+ ", which we cannot find.  Ignoring.");
-        continue;
+        LogFactory.getLogger().warning("Foreign key " + fk.getName() + " references table "+ tempPKTable+ ", which is in a different schema. Retaining FK in diff, but table will not be diffed.");
       }
       Table tempFkTable=fk.getForeignKeyTable();
       Table fkTable=snapshot.getTable(tempFkTable.getName());
       if (fkTable == null) {
-        LogFactory.getLogger().warning("Foreign key " + fk.getName() + " is in table "+ tempFkTable+ ", which is in a different schema.  Retaining FK in diff, but table will not be diffed.");
+        LogFactory.getLogger().warning("Foreign key " + fk.getName() + " is in table "+ tempFkTable+ ", which we cannot find. Ignoring.");
+        continue;
       }
       snapshot.getForeignKeys().add(fk);
     }
