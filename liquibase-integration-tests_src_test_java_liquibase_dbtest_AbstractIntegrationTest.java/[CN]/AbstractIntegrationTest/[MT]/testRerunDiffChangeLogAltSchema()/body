@@ -50,18 +50,5 @@
   tempFile.deleteOnExit();
   DatabaseSnapshot finalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
   DiffResult finalDiffResult=new Diff(originalSnapshot,finalSnapshot).compare();
-  assertEquals(0,finalDiffResult.getMissingColumns().size());
-  assertEquals(0,finalDiffResult.getMissingForeignKeys().size());
-  assertEquals(0,finalDiffResult.getMissingIndexes().size());
-  assertEquals(0,finalDiffResult.getMissingPrimaryKeys().size());
-  assertEquals(0,finalDiffResult.getMissingSequences().size());
-  assertEquals(0,finalDiffResult.getMissingTables().size());
-  assertEquals(0,finalDiffResult.getMissingViews().size());
-  assertEquals(0,finalDiffResult.getUnexpectedColumns().size());
-  assertEquals(0,finalDiffResult.getUnexpectedForeignKeys().size());
-  assertEquals(0,finalDiffResult.getUnexpectedIndexes().size());
-  assertEquals(0,finalDiffResult.getUnexpectedPrimaryKeys().size());
-  assertEquals(0,finalDiffResult.getUnexpectedSequences().size());
-  assertEquals(0,finalDiffResult.getUnexpectedTables().size());
-  assertEquals(0,finalDiffResult.getUnexpectedViews().size());
+  assertFalse(finalDiffResult.differencesFound());
 }

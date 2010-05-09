@@ -1,0 +1,3 @@
+{
+  matcher=new RegexMatcher(text,new String[]{"a(j"});
+}

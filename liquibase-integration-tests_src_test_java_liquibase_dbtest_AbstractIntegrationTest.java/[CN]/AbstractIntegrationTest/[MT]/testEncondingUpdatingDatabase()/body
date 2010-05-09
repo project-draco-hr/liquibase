@@ -1,0 +1,23 @@
+{
+  if (database == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase(encodingChangeLog);
+  liquibase.update(this.contexts);
+  DatabaseSnapshot utf8Snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
+  DatabaseSnapshot iso88951Snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,DatabaseTestContext.ALT_SCHEMA,null);
+  Diff[] diffs=new Diff[2];
+  diffs[0]=new Diff(utf8Snapshot,iso88951Snapshot);
+  diffs[0].setDiffData(true);
+  diffs[1]=new Diff(iso88951Snapshot,utf8Snapshot);
+  diffs[1].setDiffData(true);
+  for (  Diff diff : diffs) {
+    File tempFile=File.createTempFile("liquibase-test",".xml");
+    tempFile.deleteOnExit();
+    FileOutputStream output=new FileOutputStream(tempFile);
+    diff.compare().printChangeLog(new PrintStream(output,false,"UTF-8"),database);
+    output.close();
+    String diffOutput=StreamUtil.getStreamContents(new FileInputStream(tempFile),"UTF-8");
+    assertTrue("Update to SQL preserves encoding",new RegexMatcher(diffOutput,new String[]{"value=\"??????????????????????????????\"","value=\"???\""}).allMatchedInSequentialOrder());
+  }
+}
