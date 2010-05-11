@@ -1,6 +1,6 @@
 {
   SQLFileChange change=new SQLFileChange();
-  assertEquals("sqlFile:[]",new StringChangeLogSerializer().serialize(change));
+  assertEquals("sqlFile:[\n" + "    splitStatements=\"true\"\n" + "    stripComments=\"false\"\n]",new StringChangeLogSerializer().serialize(change));
   change.setPath("PATH/TO/File.txt");
-  assertEquals("sqlFile:[\n" + "    path=\"PATH/TO/File.txt\"\n" + "]",new StringChangeLogSerializer().serialize(change));
+  assertEquals("sqlFile:[\n" + "    path=\"PATH/TO/File.txt\"\n" + "    splitStatements=\"true\"\n"+ "    stripComments=\"false\"\n"+ "]",new StringChangeLogSerializer().serialize(change));
 }

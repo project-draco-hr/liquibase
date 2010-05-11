@@ -1,4 +1,5 @@
 {
+  LogFactory.getLogger().debug("Connected to " + conn.getConnectionUserName() + "@"+ conn.getURL());
   this.connection=conn;
   try {
     connection.setAutoCommit(getAutoCommitMode());
