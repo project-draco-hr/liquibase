@@ -8,5 +8,10 @@
  else   if (value.toString().equals("CURRENT_TIMESTAMP()")) {
     return database.getCurrentDateTimeFunction();
   }
-  return database.getTimeLiteral(((java.sql.Time)value));
+ else   if (value instanceof java.sql.Time) {
+    return database.getTimeLiteral(((java.sql.Time)value));
+  }
+ else {
+    return "'" + ((String)value).replaceAll("'","''") + "'";
+  }
 }
