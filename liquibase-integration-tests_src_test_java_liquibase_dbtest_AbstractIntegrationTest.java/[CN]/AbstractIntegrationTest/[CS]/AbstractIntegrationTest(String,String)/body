@@ -4,6 +4,7 @@
   this.rollbackChangeLog="changelogs/" + changelogDir + "/rollback/rollbackable.changelog.xml";
   this.includedChangeLog="changelogs/" + changelogDir + "/complete/included.changelog.xml";
   this.encodingChangeLog="changelogs/common/encoding.changelog.xml";
+  this.externalfkInitChangeLog="changelogs/common/externalfk.init.changelog.xml";
   this.url=url;
   ServiceLocator.getInstance().setResourceAccessor(TestContext.getInstance().getTestResourceAccessor());
 }

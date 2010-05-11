@@ -1,0 +1,5 @@
+{
+  DiffResultAssert da=new DiffResultAssert();
+  da.diff=diffResult;
+  return da;
+}
