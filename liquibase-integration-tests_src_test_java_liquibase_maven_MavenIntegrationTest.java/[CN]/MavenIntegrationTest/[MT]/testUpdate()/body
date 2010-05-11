@@ -1,4 +1,7 @@
 {
+  if (StringUtils.trimToEmpty(System.getProperty("liquibase.buildserver")).equalsIgnoreCase("true")) {
+    return;
+  }
   File testDir=ResourceExtractor.simpleExtractResources(getClass(),"/maven");
   Verifier verifier;
   verifier=new Verifier(testDir.getAbsolutePath());
