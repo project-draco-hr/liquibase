@@ -1,0 +1,7 @@
+{
+  String endDelimiter=null;
+  if (matcher.matches()) {
+    endDelimiter=matcher.group(1);
+  }
+  return endDelimiter;
+}
