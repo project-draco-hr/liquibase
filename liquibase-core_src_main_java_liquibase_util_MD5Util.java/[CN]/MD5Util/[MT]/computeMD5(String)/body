@@ -1,4 +1,7 @@
 {
+  if (input == null) {
+    return null;
+  }
   MessageDigest digest;
   try {
     digest=MessageDigest.getInstance("MD5");
