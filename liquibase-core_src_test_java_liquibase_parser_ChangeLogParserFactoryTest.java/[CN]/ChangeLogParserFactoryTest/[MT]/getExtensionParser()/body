@@ -1,6 +1,6 @@
 {
   ChangeLogParserFactory parserFactory=ChangeLogParserFactory.getInstance();
-  ChangeLogParser defaultParser=parserFactory.getParser("xml");
+  ChangeLogParser defaultParser=parserFactory.getParser("asdf.xml",new JUnitResourceAccessor());
   assertNotNull(defaultParser);
   assertTrue(defaultParser instanceof XMLChangeLogSAXParser);
   ChangeLogParser otherXmlParser=new XMLChangeLogSAXParser(){
@@ -11,8 +11,8 @@
 ;
   parserFactory.register(otherXmlParser);
   try {
-    assertTrue(otherXmlParser == parserFactory.getParser("xml"));
-    assertFalse(defaultParser == parserFactory.getParser("xml"));
+    assertTrue(otherXmlParser == parserFactory.getParser("asdf.xml",new JUnitResourceAccessor()));
+    assertFalse(defaultParser == parserFactory.getParser("asdf.xml",new JUnitResourceAccessor()));
   }
   finally {
     parserFactory.unregister(otherXmlParser);

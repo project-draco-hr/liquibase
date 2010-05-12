@@ -1,8 +1,0 @@
-{
-  fileNameOrExtension=fileNameOrExtension.replaceAll(".*\\.","");
-  SortedSet<ChangeLogParser> parseres=parsers.get(fileNameOrExtension);
-  if (parseres == null || parseres.size() == 0) {
-    return null;
-  }
-  return parseres.iterator().next();
-}

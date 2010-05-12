@@ -1,0 +1,36 @@
+{
+  DatabaseChangeLog changeLog=new DatabaseChangeLog(physicalChangeLogLocation);
+  BufferedReader reader=null;
+  try {
+    reader=new BufferedReader(new InputStreamReader(openChangeLogFile(physicalChangeLogLocation,resourceAccessor)));
+    StringBuffer currentSql=new StringBuffer();
+    ChangeSet changeSet=null;
+    Pattern pattern=Pattern.compile("--changeset (\\w+):(\\w+)",Pattern.CASE_INSENSITIVE);
+    String line;
+    while ((line=reader.readLine()) != null) {
+      Matcher matcher=pattern.matcher(line);
+      if (matcher.matches()) {
+        String finalCurrentSql=StringUtils.trimToNull(currentSql.toString());
+        if (changeSet != null) {
+          changeSet.addChange(createChange(finalCurrentSql,changeSet,resourceAccessor));
+          changeLog.addChangeSet(changeSet);
+        }
+        changeSet=new ChangeSet(matcher.group(2),matcher.group(1),false,false,physicalChangeLogLocation,physicalChangeLogLocation,null,null,true);
+        currentSql=new StringBuffer();
+      }
+ else {
+        if (changeSet != null) {
+          currentSql.append(line).append("\n");
+        }
+      }
+    }
+    if (changeSet != null) {
+      changeSet.addChange(createChange(StringUtils.trimToNull(currentSql.toString()),changeSet,resourceAccessor));
+      changeLog.addChangeSet(changeSet);
+    }
+  }
+ catch (  IOException e) {
+    throw new ChangeLogParseException(e);
+  }
+  return changeLog;
+}

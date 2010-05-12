@@ -1,12 +1,3 @@
 {
-  for (  String extension : changeLogParser.getValidFileExtensions()) {
-    if (parsers.containsKey(extension)) {
-      Iterator<ChangeLogParser> iterator=parsers.get(extension).iterator();
-      while (iterator.hasNext()) {
-        ChangeLogParser changeLogParserElem=iterator.next();
-        if (changeLogParser.equals(changeLogParserElem))         iterator.remove();
-      }
-      if (parsers.get(extension).isEmpty())       parsers.remove(extension);
-    }
-  }
+  parsers.remove(changeLogParser);
 }

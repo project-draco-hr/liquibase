@@ -1,4 +1,4 @@
 {
-  Map<String,SortedSet<ChangeLogParser>> generators=ChangeLogParserFactory.getInstance().getParsers();
+  List<ChangeLogParser> generators=ChangeLogParserFactory.getInstance().getParsers();
   assertEquals(2,generators.size());
 }

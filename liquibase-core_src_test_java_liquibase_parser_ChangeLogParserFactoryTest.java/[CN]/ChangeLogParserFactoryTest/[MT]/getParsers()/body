@@ -1,5 +1,5 @@
 {
-  ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser("xml");
+  ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser("asdf.xml",new JUnitResourceAccessor());
   assertNotNull(parser);
   assertTrue(parser instanceof XMLChangeLogSAXParser);
 }

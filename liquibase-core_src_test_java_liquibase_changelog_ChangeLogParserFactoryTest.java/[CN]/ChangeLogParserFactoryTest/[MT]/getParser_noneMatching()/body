@@ -4,6 +4,6 @@
   XMLChangeLogSAXParser xmlChangeLogParser=new XMLChangeLogSAXParser();
   ChangeLogParserFactory.getInstance().register(xmlChangeLogParser);
   ChangeLogParserFactory.getInstance().register(new SqlChangeLogParser());
-  ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser("badextension");
+  ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser("badextension",new JUnitResourceAccessor());
   assertNull(parser);
 }

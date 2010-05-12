@@ -1,4 +1,4 @@
 {
-  Map parsers=ChangeLogParserFactory.getInstance().getParsers();
+  List parsers=ChangeLogParserFactory.getInstance().getParsers();
   assertTrue(parsers.size() > 0);
 }

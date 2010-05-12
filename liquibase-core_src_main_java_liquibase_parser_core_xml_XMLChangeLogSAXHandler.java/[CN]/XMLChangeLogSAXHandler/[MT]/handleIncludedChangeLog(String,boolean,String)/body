@@ -10,7 +10,7 @@
     String path=searchPath(relativeBaseFileName);
     fileName=new StringBuilder(path).append(fileName).toString();
   }
-  DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(fileName).parse(fileName,changeLogParameters,resourceAccessor);
+  DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor).parse(fileName,changeLogParameters,resourceAccessor);
   PreconditionContainer preconditions=changeLog.getPreconditions();
   if (preconditions != null) {
     if (null == databaseChangeLog.getPreconditions()) {

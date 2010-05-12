@@ -1,0 +1,8 @@
+{
+  for (  ChangeLogParser parser : parsers) {
+    if (parser.supports(fileNameOrExtension,resourceAccessor)) {
+      return parser;
+    }
+  }
+  throw new LiquibaseException("Cannot find parser that supports " + fileNameOrExtension);
+}

@@ -3,7 +3,7 @@
   LockService lockService=LockService.getInstance(database);
   lockService.waitForLock();
   try {
-    DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile).parse(changeLogFile,changeLogParameters,resourceAccessor);
+    DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
     checkDatabaseChangeLogTable(false,changeLog);
     changeLog.validate(database);
     List<RanChangeSet> ranChangeSetList=database.getRanChangeSetList();

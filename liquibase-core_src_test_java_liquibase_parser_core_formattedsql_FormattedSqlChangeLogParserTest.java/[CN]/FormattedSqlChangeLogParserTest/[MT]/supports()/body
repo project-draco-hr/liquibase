@@ -1,0 +1,4 @@
+{
+  assertTrue(new MockFormattedSqlChangeLogParser(VALID_CHANGELOG).supports("asdf.sql",new JUnitResourceAccessor()));
+  assertFalse(new MockFormattedSqlChangeLogParser(INVALID_CHANGELOG).supports("asdf.sql",new JUnitResourceAccessor()));
+}

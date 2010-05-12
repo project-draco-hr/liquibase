@@ -1,0 +1,26 @@
+{
+  BufferedReader reader=null;
+  try {
+    if (changeLogFile.endsWith(".sql")) {
+      reader=new BufferedReader(new InputStreamReader(openChangeLogFile(changeLogFile,resourceAccessor)));
+      return reader.readLine().startsWith("--liquibase formatted");
+    }
+ else {
+      return false;
+    }
+  }
+ catch (  IOException e) {
+    LogFactory.getLogger().debug("Exception reading " + changeLogFile,e);
+    return false;
+  }
+ finally {
+    if (reader != null) {
+      try {
+        reader.close();
+      }
+ catch (      IOException e) {
+        LogFactory.getLogger().debug("Exception closing " + changeLogFile,e);
+      }
+    }
+  }
+}

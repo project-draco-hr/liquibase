@@ -1,0 +1,17 @@
+{
+  DatabaseChangeLog changeLog=new MockFormattedSqlChangeLogParser(VALID_CHANGELOG).parse("asdf.sql",new ChangeLogParameters(),new JUnitResourceAccessor());
+  assertEquals("asdf.sql",changeLog.getLogicalFilePath());
+  assertEquals(3,changeLog.getChangeSets().size());
+  assertEquals("nvoxland",changeLog.getChangeSets().get(0).getAuthor());
+  assertEquals("1",changeLog.getChangeSets().get(0).getId());
+  assertEquals(1,changeLog.getChangeSets().get(0).getChanges().size());
+  assertEquals("select * from table1;",((RawSQLChange)changeLog.getChangeSets().get(0).getChanges().get(0)).getSql());
+  assertEquals("nvoxland",changeLog.getChangeSets().get(1).getAuthor());
+  assertEquals("2",changeLog.getChangeSets().get(1).getId());
+  assertEquals(1,changeLog.getChangeSets().get(1).getChanges().size());
+  assertEquals("create table table1 (\n" + "  id int primary key\n" + ");",((RawSQLChange)changeLog.getChangeSets().get(1).getChanges().get(0)).getSql());
+  assertEquals("nvoxland",changeLog.getChangeSets().get(2).getAuthor());
+  assertEquals("3",changeLog.getChangeSets().get(2).getId());
+  assertEquals(1,changeLog.getChangeSets().get(2).getChanges().size());
+  assertEquals("create table table2 (\n" + "  id int primary key\n" + ");\n"+ "create table table3 (\n"+ "  id int primary key\n"+ ");",((RawSQLChange)changeLog.getChangeSets().get(2).getChanges().get(0)).getSql());
+}
