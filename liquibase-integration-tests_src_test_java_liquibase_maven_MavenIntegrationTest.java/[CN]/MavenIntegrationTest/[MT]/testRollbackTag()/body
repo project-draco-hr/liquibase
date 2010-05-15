@@ -1,0 +1,10 @@
+{
+  Verifier verifier=createVerifier();
+  verifier.executeGoal("clean");
+  verifier.executeGoal("liquibase:tag");
+  verifier.executeGoal("package");
+  verifier.executeGoal("liquibase:rollback");
+  verifier.executeGoal("liquibase:update");
+  verifier.verifyErrorFreeLog();
+  verifier.resetStreams();
+}
