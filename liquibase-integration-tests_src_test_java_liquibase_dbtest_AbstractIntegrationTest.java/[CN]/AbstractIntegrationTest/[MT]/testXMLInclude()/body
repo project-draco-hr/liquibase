@@ -1,0 +1,9 @@
+{
+  if (database == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase(externalEntityChangeLog);
+  liquibase.update(contexts);
+  liquibase=createLiquibase(externalEntityChangeLog2);
+  liquibase.update(contexts);
+}
