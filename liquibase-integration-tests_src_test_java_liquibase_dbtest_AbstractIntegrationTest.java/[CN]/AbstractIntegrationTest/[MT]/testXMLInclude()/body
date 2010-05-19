@@ -1,6 +1,6 @@
 {
   if (database == null) {
-    return;
+    throw new ChangeLogParseException("Database not present");
   }
   Liquibase liquibase=createLiquibase(externalEntityChangeLog);
   liquibase.update(contexts);

@@ -6,7 +6,7 @@
   this.encodingChangeLog="changelogs/common/encoding.changelog.xml";
   this.externalfkInitChangeLog="changelogs/common/externalfk.init.changelog.xml";
   this.externalEntityChangeLog="changelogs/common/externalEntity.changelog.xml";
-  this.externalEntityChangeLog2="com/example/packaged/externalEntity.changelog.xml";
+  this.externalEntityChangeLog2="com/example/nonIncluded/externalEntity.changelog.xml";
   this.url=url;
   ServiceLocator.getInstance().setResourceAccessor(TestContext.getInstance().getTestResourceAccessor());
 }
