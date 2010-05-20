@@ -1,0 +1,4 @@
+String filename1
+String filename2
+boolean normalized
+IOCase caseSensitivity

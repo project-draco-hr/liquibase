@@ -1,0 +1,4 @@
+{
+  log.warning("Current XML parsers seems to not support EntityResolver2. External entities won't be correctly loaded");
+  return tryResolveLiquibaseSchema(systemId,publicId);
+}

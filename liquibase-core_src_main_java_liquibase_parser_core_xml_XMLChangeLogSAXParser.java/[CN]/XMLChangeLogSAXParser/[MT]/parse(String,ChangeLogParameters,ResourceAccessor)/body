@@ -10,7 +10,9 @@
 catch (    SAXNotSupportedException e) {
     }
     XMLReader xmlReader=parser.getXMLReader();
-    xmlReader.setEntityResolver(new LiquibaseSchemaResolver());
+    LiquibaseEntityResolver resolver=new LiquibaseEntityResolver();
+    resolver.useResoureAccessor(resourceAccessor,FilenameUtils.getFullPath(physicalChangeLogLocation));
+    xmlReader.setEntityResolver(resolver);
     xmlReader.setErrorHandler(new ErrorHandler(){
       public void warning(      SAXParseException exception) throws SAXException {
         LogFactory.getLogger().warning(exception.getMessage());

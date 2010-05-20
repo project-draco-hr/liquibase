@@ -1,0 +1,15 @@
+{
+  if (filename == null) {
+    return false;
+  }
+  if (extensions == null || extensions.length == 0) {
+    return (indexOfExtension(filename) == -1);
+  }
+  String fileExt=getExtension(filename);
+  for (int i=0; i < extensions.length; i++) {
+    if (fileExt.equals(extensions[i])) {
+      return true;
+    }
+  }
+  return false;
+}

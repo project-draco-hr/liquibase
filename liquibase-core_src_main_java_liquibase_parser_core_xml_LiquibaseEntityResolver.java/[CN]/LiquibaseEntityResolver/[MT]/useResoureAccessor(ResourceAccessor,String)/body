@@ -1,0 +1,4 @@
+{
+  this.resourceAccessor=resourceAccessor;
+  this.basePath=basePath;
+}

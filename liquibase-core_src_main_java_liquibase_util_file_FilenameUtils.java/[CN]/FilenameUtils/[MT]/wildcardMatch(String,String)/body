@@ -1,0 +1,3 @@
+{
+  return wildcardMatch(filename,wildcardMatcher,IOCase.SENSITIVE);
+}

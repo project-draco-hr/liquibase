@@ -1,0 +1,3 @@
+{
+  return removeExtension(getName(filename));
+}

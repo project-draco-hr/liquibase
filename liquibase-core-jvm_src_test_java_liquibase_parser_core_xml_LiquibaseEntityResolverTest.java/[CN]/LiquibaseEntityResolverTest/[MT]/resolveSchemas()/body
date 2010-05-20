@@ -1,0 +1,5 @@
+{
+  LiquibaseEntityResolver liquibaseSchemaResolver=new LiquibaseEntityResolver();
+  assertNotNull(liquibaseSchemaResolver.resolveEntity(null,null,null,"http://www.liquibase.org/xml/ns/migrator/dbchangelog-1.0.xsd"));
+  assertNull(liquibaseSchemaResolver.resolveEntity(null,null,null,"http://www.liquibase.org/xml/ns/migrator/invalid.xsd"));
+}

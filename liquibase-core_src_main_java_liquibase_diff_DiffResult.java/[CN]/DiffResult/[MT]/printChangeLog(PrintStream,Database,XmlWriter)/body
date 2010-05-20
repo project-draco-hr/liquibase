@@ -1,7 +1,7 @@
 {
   DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
   DocumentBuilder documentBuilder=factory.newDocumentBuilder();
-  documentBuilder.setEntityResolver(new LiquibaseSchemaResolver());
+  documentBuilder.setEntityResolver(new LiquibaseEntityResolver());
   Document doc=documentBuilder.newDocument();
   Element changeLogElement=doc.createElement("databaseChangeLog");
   changeLogElement.setAttribute("xmlns","http://www.liquibase.org/xml/ns/dbchangelog");
