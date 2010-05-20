@@ -1,4 +1,4 @@
 {
   String dbProductName=conn.getDatabaseProductName();
-  return "Sybase SQL Server".equals(dbProductName) || "sql server".equals(dbProductName) || "ASE".equals(dbProductName);
+  return isSybaseProductName(dbProductName);
 }

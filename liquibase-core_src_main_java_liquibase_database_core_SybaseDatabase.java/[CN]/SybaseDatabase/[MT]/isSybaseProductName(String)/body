@@ -1,0 +1,3 @@
+{
+  return "Adaptive Server Enterprise".equals(dbProductName) || "Sybase SQL Server".equals(dbProductName) || "sql server".equals(dbProductName)|| "ASE".equals(dbProductName);
+}
