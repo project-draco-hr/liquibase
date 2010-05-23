@@ -1,0 +1,11 @@
+{
+  try {
+    database.commit();
+    expectLastCall().anyTimes();
+    database.rollback();
+    expectLastCall().anyTimes();
+  }
+ catch (  DatabaseException e) {
+    throw new RuntimeException(e);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  Database database=createMock(Database.class);
+  expect(database.supportsDDLInTransaction()).andStubReturn(false);
+  expect(database.getAutoCommitMode()).andStubReturn(true);
+  return database;
+}

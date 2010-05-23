@@ -1,0 +1,9 @@
+{
+  Database database=createMockDatabaseThatDoesNotSupportDdlInTran();
+  ExecutorService.getInstance().setExecutor(database,createMockExecutor());
+  trainToAcceptAnyNumberOfCommitsOrRollbacks(database);
+  replay(database);
+  ChangeSet changeSet=createTestChangeSet(true);
+  changeSet.execute(new DatabaseChangeLog("test.xml"),database);
+  verify(database);
+}

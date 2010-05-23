@@ -7,7 +7,9 @@
   boolean skipChange=false;
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
-    database.setAutoCommit(!runInTransaction);
+    if (database.supportsDDLInTransaction()) {
+      database.setAutoCommit(!runInTransaction);
+    }
     executor.comment("Changeset " + toString());
     if (StringUtils.trimToNull(getComments()) != null) {
       String comments=getComments();
@@ -128,7 +130,7 @@ catch (    PreconditionErrorException e) {
     }
   }
  finally {
-    if (!runInTransaction && !database.getAutoCommitMode()) {
+    if (!runInTransaction && database.supportsDDLInTransaction()) {
       try {
         database.setAutoCommit(false);
       }
