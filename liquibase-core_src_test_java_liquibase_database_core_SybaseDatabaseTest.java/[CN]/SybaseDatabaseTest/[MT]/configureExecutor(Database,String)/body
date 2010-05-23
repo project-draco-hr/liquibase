@@ -1,0 +1,12 @@
+{
+  Executor executor=createNiceMock(Executor.class);
+  try {
+    @SuppressWarnings("unchecked") Class<String> stringClassMatcher=(Class<String>)anyObject();
+    expect(executor.queryForList((SqlStatement)anyObject(),stringClassMatcher)).andReturn(asList(viewInfoRows));
+  }
+ catch (  DatabaseException e) {
+    throw new RuntimeException(e);
+  }
+  replay(executor);
+  ExecutorService.getInstance().setExecutor(database,executor);
+}

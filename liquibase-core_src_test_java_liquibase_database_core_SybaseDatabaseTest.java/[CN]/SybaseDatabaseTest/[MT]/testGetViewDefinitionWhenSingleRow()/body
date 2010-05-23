@@ -1,0 +1,5 @@
+{
+  SybaseDatabase database=new SybaseDatabase();
+  configureExecutor(database,"foo");
+  assertEquals("foo",database.getViewDefinition("dbo","view_name"));
+}
