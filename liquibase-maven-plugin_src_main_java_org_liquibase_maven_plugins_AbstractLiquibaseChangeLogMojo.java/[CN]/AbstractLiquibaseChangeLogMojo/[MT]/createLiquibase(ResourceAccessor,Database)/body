@@ -1,4 +1,9 @@
 {
-  String changeLog=changeLogFile == null ? "" : changeLogFile.trim();
-  return new Liquibase(changeLog,fo,db);
+  try {
+    String changeLog=changeLogFile == null ? "" : changeLogFile.trim();
+    return new Liquibase(changeLog,fo,db);
+  }
+ catch (  DatabaseException ex) {
+    throw new MojoExecutionException("Error creating liquibase: " + ex.getMessage(),ex);
+  }
 }

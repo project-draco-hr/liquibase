@@ -4,6 +4,6 @@
     this.changeLogFile=changeLogFile.replace('\\','/');
   }
   this.resourceAccessor=resourceAccessor;
-  this.database=database;
   changeLogParameters=new ChangeLogParameters(database);
+  setDatabase(database);
 }

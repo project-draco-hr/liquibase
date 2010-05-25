@@ -1,3 +1,8 @@
 {
-  return new Liquibase("",fo,db);
+  try {
+    return new Liquibase("",fo,db);
+  }
+ catch (  DatabaseException ex) {
+    throw new MojoExecutionException("Error creating liquibase: " + ex.getMessage(),ex);
+  }
 }
