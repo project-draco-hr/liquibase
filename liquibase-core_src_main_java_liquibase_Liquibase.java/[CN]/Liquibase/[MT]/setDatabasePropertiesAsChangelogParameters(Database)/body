@@ -12,7 +12,7 @@
   setChangeLogParameter("database.lineComment",database.getLineComment());
   setChangeLogParameter("database.liquibaseSchemaName",database.getLiquibaseSchemaName());
   setChangeLogParameter("database.typeName",database.getTypeName());
-  setChangeLogParameter("database.localDatabase",database.isLocalDatabase());
+  setChangeLogParameter("database.isLocalDatabase",database.isLocalDatabase());
   setChangeLogParameter("database.requiresPassword",database.requiresPassword());
   setChangeLogParameter("database.requiresUsername",database.requiresUsername());
   setChangeLogParameter("database.supportsForeignKeyDisable",database.supportsForeignKeyDisable());
