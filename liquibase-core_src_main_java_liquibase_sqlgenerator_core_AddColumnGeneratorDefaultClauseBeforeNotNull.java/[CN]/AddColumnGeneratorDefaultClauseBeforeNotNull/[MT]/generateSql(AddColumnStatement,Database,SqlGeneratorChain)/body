@@ -20,7 +20,6 @@
   if (statement.isUnique()) {
     alterTable+=" UNIQUE ";
   }
-  alterTable+=getDefaultClause(statement,database);
   List<Sql> returnSql=new ArrayList<Sql>();
   returnSql.add(new UnparsedSql(alterTable,new Column().setTable(new Table(statement.getTableName()).setSchema(statement.getSchemaName())).setName(statement.getColumnName())));
   addForeignKeyStatements(statement,database,returnSql);

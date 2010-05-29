@@ -2,7 +2,7 @@
   if (availableConnections == null) {
     availableConnections=new HashSet<DatabaseConnection>();
     for (    String url : getTestUrls()) {
-      DatabaseConnection connection=openConnection(url);
+      DatabaseConnection connection=openConnection(url.replaceAll("localhost",AbstractIntegrationTest.getDatabaseServerHostname()));
       if (connection != null) {
         availableConnections.add(connection);
       }

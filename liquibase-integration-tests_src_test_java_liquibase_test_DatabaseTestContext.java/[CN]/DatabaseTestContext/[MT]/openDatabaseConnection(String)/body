@@ -6,7 +6,7 @@
   try {
     driver=(Driver)Class.forName(DatabaseFactory.getInstance().findDefaultDriver(url),true,jdbcDriverLoader).newInstance();
   }
- catch (  ClassNotFoundException e) {
+ catch (  Exception e) {
     System.out.println("Could not connect to " + url + ": Will not test against.  "+ e.getMessage());
     return null;
   }
