@@ -1,4 +1,7 @@
 {
+  if (dropFirst) {
+    liquibase.dropAll();
+  }
   if (changesToApply > 0) {
     liquibase.update(changesToApply,contexts);
   }
