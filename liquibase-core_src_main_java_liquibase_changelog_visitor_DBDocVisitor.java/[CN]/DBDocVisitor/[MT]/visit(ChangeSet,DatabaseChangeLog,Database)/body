@@ -1,7 +1,10 @@
 {
   ChangeSet.RunStatus runStatus=this.database.getRunStatus(changeSet);
+  if (rootChangeLogName == null) {
+    rootChangeLogName=changeSet.getFilePath();
+  }
   if (rootChangeLog == null) {
-    rootChangeLog=changeSet.getFilePath();
+    this.rootChangeLog=databaseChangeLog;
   }
   if (!changesByAuthor.containsKey(changeSet.getAuthor())) {
     changesByAuthor.put(changeSet.getAuthor(),new ArrayList<Change>());

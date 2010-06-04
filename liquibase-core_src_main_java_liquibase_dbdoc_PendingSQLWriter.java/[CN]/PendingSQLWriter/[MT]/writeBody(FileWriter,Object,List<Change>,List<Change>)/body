@@ -13,7 +13,7 @@
     String anchor=thisChangeSet.toString(false).replaceAll("\\W","_");
     fileWriter.append("<a name='").append(anchor).append("'/>");
     try {
-      thisChangeSet.execute(databaseChangeLog,liquibase.getDatabase());
+      thisChangeSet.execute(databaseChangeLog,this.database);
     }
  catch (    MigrationFailedException e) {
       fileWriter.append("EXECUTION ERROR: ").append(change.getChangeMetaData().getDescription()).append(": ").append(e.getMessage()).append("\n\n");
