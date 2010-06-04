@@ -1,0 +1,12 @@
+{
+  for (  Type typeClass : ((ParameterizedType)type).getActualTypeArguments()) {
+    if (typeClass instanceof TypeVariable) {
+      typeClass=((TypeVariable)typeClass).getBounds()[0];
+    }
+    if (((Class)typeClass).equals(statement.getClass())) {
+      if (generator.supports(statement,database)) {
+        validGenerators.add(generator);
+      }
+    }
+  }
+}

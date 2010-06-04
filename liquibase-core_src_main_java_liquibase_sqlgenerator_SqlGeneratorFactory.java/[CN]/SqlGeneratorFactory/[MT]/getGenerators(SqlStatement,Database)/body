@@ -2,16 +2,14 @@
   SortedSet<SqlGenerator> validGenerators=new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
   for (  SqlGenerator generator : getGenerators()) {
     Class clazz=generator.getClass();
+    Type classType=null;
     while (clazz != null) {
+      if (classType instanceof ParameterizedType) {
+        checkType(classType,statement,generator,database,validGenerators);
+      }
       for (      Type type : clazz.getGenericInterfaces()) {
         if (type instanceof ParameterizedType) {
-          for (          Type typeClass : ((ParameterizedType)type).getActualTypeArguments()) {
-            if (((Class)typeClass).isAssignableFrom(statement.getClass())) {
-              if (generator.supports(statement,database)) {
-                validGenerators.add(generator);
-              }
-            }
-          }
+          checkType(type,statement,generator,database,validGenerators);
         }
  else         if (type.equals(SqlGenerator.class)) {
           if (generator.supports(statement,database)) {
@@ -19,6 +17,7 @@
           }
         }
       }
+      classType=clazz.getGenericSuperclass();
       clazz=clazz.getSuperclass();
     }
   }
