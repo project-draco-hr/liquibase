@@ -1,0 +1,9 @@
+{
+  Warnings warnings=new Warnings();
+  for (  SqlStatement statement : generateStatements(database)) {
+    if (SqlGeneratorFactory.getInstance().supports(statement,database)) {
+      warnings.addAll(SqlGeneratorFactory.getInstance().warn(statement,database));
+    }
+  }
+  return warnings;
+}

@@ -1,0 +1,3 @@
+{
+  return createGeneratorChain(statement,database).warn(statement,database);
+}

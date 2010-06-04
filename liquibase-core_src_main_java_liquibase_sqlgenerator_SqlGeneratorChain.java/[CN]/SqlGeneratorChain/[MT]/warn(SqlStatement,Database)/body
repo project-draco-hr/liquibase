@@ -1,0 +1,6 @@
+{
+  if (sqlGenerators == null || !sqlGenerators.hasNext()) {
+    return new Warnings();
+  }
+  return sqlGenerators.next().warn(statement,database,this);
+}

@@ -6,6 +6,7 @@
  catch (    SetupException se) {
       setupExceptions.add(se);
     }
+    warnings.addAll(change.warn(database));
     try {
       ValidationErrors foundErrors=change.validate(database);
       if (foundErrors.hasErrors()) {

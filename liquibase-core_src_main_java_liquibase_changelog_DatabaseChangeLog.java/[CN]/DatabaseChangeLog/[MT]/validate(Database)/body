@@ -3,6 +3,9 @@
   ValidatingVisitor validatingVisitor=new ValidatingVisitor(database.getRanChangeSetList());
   validatingVisitor.validate(database,this);
   logIterator.run(validatingVisitor,database);
+  for (  String message : validatingVisitor.getWarnings().getMessages()) {
+    LogFactory.getLogger().warning(message);
+  }
   if (!validatingVisitor.validationPassed()) {
     throw new ValidationFailedException(validatingVisitor);
   }

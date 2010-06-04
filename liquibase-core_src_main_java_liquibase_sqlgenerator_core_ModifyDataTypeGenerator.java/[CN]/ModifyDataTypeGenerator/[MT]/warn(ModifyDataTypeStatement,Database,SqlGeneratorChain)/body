@@ -1,0 +1,10 @@
+{
+  Warnings warnings=super.warn(modifyDataTypeStatement,database,sqlGeneratorChain);
+  if (modifyDataTypeStatement.getAutoIncrement() == null && !modifyDataTypeStatement.getNewDataType().toLowerCase().contains("varchar")) {
+    warnings.addWarning("modifyDataType will lose settings for some databases.  Use the autoIncrement=true|false parameter to ensure that the information is updated correctly");
+  }
+  if (modifyDataTypeStatement.isNullable() == null) {
+    warnings.addWarning("modifyDataType will lose settings for some databases.  Use the nullable=true|false parameter to ensure that the information is updated correctly");
+  }
+  return warnings;
+}
