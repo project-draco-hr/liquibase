@@ -1,3 +1,3 @@
 {
-  super("pgsql","jdbc:postgresql://" + getDatabaseServerHostname() + "/liquibase");
+  super("pgsql","jdbc:postgresql://" + getDatabaseServerHostname("PostgreSQL") + "/liquibase");
 }

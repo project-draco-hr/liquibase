@@ -1,0 +1,6 @@
+{
+  if (getDatabase() == null) {
+    throw new MigrationFailedException();
+  }
+  super.testRerunDiffChangeLog();
+}

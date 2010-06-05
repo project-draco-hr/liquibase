@@ -1,5 +1,6 @@
 {
-  for (  String url : getTestUrls()) {
+  for (  DatabaseTestURL turl : getTestUrls()) {
+    String url=adaptTestURLWithConfiguredHost(turl);
     if (database.getDefaultDriver(url) != null) {
       return url;
     }
