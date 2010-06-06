@@ -1,0 +1,16 @@
+{
+  DataType returnTypeName=super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision);
+  if (returnTypeName instanceof CustomType) {
+    boolean returnTypeChanged=false;
+    if (columnTypeString.toUpperCase().startsWith("NVARCHAR")) {
+      returnTypeName=new VarcharType("NVARCHAR");
+      returnTypeChanged=true;
+    }
+ else     if (columnTypeString.toUpperCase().startsWith("NCHAR")) {
+      returnTypeName=new CharType("NCHAR");
+      returnTypeChanged=true;
+    }
+    if (returnTypeChanged)     addPrecisionToType(precision,returnTypeName);
+  }
+  return returnTypeName;
+}

@@ -1,7 +1,7 @@
 {
   DataType returnTypeName=super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision);
   if (returnTypeName instanceof CustomType) {
-    if (columnTypeString.startsWith("VARCHAR2")) {
+    if (columnTypeString.toUpperCase().startsWith("VARCHAR2")) {
       returnTypeName=getVarcharType();
       if (precision != null) {
         String[] typeParams=precision.split(" ");

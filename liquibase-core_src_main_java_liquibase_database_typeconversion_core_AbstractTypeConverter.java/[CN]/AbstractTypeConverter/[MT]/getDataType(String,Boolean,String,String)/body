@@ -77,12 +77,6 @@
   if (returnTypeName == null) {
     throw new UnexpectedLiquibaseException("Could not determine " + dataTypeName + " for "+ this.getClass().getName());
   }
-  if (precision != null) {
-    String[] params=precision.split(",");
-    returnTypeName.setFirstParameter(Integer.parseInt(params[0].trim()));
-    if (params.length > 1) {
-      returnTypeName.setSecondParameter(Integer.parseInt(params[1].trim()));
-    }
-  }
+  addPrecisionToType(precision,returnTypeName);
   return returnTypeName;
 }
