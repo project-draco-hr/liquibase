@@ -1,0 +1,9 @@
+{
+  try {
+    return System.getProperty(property);
+  }
+ catch (  SecurityException ex) {
+    System.err.println("Caught a SecurityException reading the system property '" + property + "'; the SystemUtils property value will default to null.");
+    return null;
+  }
+}

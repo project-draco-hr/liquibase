@@ -1,0 +1,3 @@
+{
+  return JAVA_VERSION_INT >= requiredVersion;
+}

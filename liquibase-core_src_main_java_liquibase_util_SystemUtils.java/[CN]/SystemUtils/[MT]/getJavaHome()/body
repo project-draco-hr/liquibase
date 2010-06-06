@@ -1,0 +1,3 @@
+{
+  return new File(System.getProperty(JAVA_HOME_KEY));
+}
