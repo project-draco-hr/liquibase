@@ -2,6 +2,9 @@
   if (value == null) {
     return null;
   }
+ else   if (value.toString().equalsIgnoreCase("null")) {
+    return "null";
+  }
  else   if (value.toString().equals("CURRENT_TIMESTAMP()")) {
     return database.getCurrentDateTimeFunction();
   }

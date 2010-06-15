@@ -2,6 +2,9 @@
   if (value == null) {
     return null;
   }
+ else   if (value.toString().equalsIgnoreCase("null")) {
+    return "null";
+  }
   String returnValue;
   TypeConverter converter=TypeConverterFactory.getInstance().findTypeConverter(database);
   if (((Boolean)value)) {

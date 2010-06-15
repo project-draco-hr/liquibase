@@ -2,6 +2,9 @@
   if (value == null) {
     return null;
   }
+ else   if (value.toString().equalsIgnoreCase("null")) {
+    return "null";
+  }
   if (value instanceof Boolean)   return Boolean.TRUE.equals(value) ? "1" : "0";
  else   return value.toString();
 }
