@@ -2,6 +2,3 @@ String schemaName
 String tableName
 String columnName
 String newDataType
-Boolean nullable
-Boolean primaryKey
-Boolean autoIncrement

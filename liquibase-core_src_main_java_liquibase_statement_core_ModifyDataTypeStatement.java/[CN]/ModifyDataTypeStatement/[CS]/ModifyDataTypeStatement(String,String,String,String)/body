@@ -3,7 +3,4 @@
   this.tableName=tableName;
   this.columnName=columnName;
   this.newDataType=newDataType;
-  this.nullable=nullable;
-  this.primaryKey=primaryKey;
-  this.autoIncrement=autoIncrement;
 }
