@@ -1,0 +1,8 @@
+{
+  DatabaseConnection connection=createNiceMock(DatabaseConnection.class);
+  expect(connection.getDatabaseMajorVersion()).andReturn(15);
+  replay(connection);
+  SybaseDatabase database=new SybaseDatabase();
+  database.setConnection(connection);
+  assertEquals(15,database.getDatabaseMajorVersion());
+}
