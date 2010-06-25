@@ -9,7 +9,7 @@
       URL url=manifests.nextElement();
       InputStream is=url.openStream();
       Manifest manifest=new Manifest(is);
-      String attributes=StringUtils.trimToNull(manifest.getMainAttributes().getValue("LiquiBase-Package"));
+      String attributes=StringUtils.trimToNull(manifest.getMainAttributes().getValue("Liquibase-Package"));
       if (attributes != null) {
         for (        Object value : attributes.split(",")) {
           addPackageToScan(value.toString());

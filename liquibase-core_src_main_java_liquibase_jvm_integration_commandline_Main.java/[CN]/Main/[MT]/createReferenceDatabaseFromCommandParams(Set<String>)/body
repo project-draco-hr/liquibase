@@ -23,6 +23,9 @@
  else     if ("referenceDefaultSchemaName".equalsIgnoreCase(attributeName)) {
       defaultSchemaName=value;
     }
+ else     if ("dataOutputDirectory".equalsIgnoreCase(attributeName)) {
+      dataDir=value;
+    }
   }
   if (url == null) {
     throw new CommandLineParsingException("referenceUrl parameter missing");
