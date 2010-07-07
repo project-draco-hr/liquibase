@@ -1,4 +1,5 @@
 {
+  if (requestedSchema == null)   requestedSchema=getDefaultSchemaName();
   if (requestedSchema == null) {
     return getDefaultCatalogName();
   }
