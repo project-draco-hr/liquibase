@@ -124,7 +124,7 @@
       inModifySql=false;
       modifySqlDbmsList=null;
       modifySqlContexts=null;
-      modifySqlAppliedOnRollback=true;
+      modifySqlAppliedOnRollback=false;
     }
   }
  catch (  Exception e) {
