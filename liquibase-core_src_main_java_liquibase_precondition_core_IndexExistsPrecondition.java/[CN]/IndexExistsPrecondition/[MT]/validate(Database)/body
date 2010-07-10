@@ -1,3 +1,7 @@
 {
-  return new ValidationErrors();
+  ValidationErrors validationErrors=new ValidationErrors();
+  if (getIndexName() == null && getTableName() == null && getColumnNames() == null) {
+    validationErrors.addError("indexName OR tableName and columnNames is required");
+  }
+  return validationErrors;
 }
