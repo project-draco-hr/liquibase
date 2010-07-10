@@ -1,0 +1,14 @@
+{
+  try {
+    final Class sysinfoClass=getClass().forName("org.apache.derby.tools.sysinfo");
+    final Method majorVersionGetter=sysinfoClass.getMethod("getMajorVersion");
+    final Method minorVersionGetter=sysinfoClass.getMethod("getMinorVersion");
+    driverVersionMajor=((Integer)majorVersionGetter.invoke(null)).intValue();
+    driverVersionMinor=((Integer)minorVersionGetter.invoke(null)).intValue();
+  }
+ catch (  Exception e) {
+    log.warning("Unable to load/access Apache Derby driver class " + "org.apache.derby.tools.sysinfo to check version: " + e.getMessage());
+    driverVersionMajor=-1;
+    driverVersionMinor=-1;
+  }
+}
