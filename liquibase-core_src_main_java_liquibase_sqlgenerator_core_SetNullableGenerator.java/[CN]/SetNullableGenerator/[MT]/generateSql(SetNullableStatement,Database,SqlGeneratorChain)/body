@@ -19,7 +19,10 @@
  else   if (database instanceof DerbyDatabase || database instanceof CacheDatabase) {
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN  "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ nullableString;
   }
- else   if (database instanceof HsqlDatabase || database instanceof H2Database) {
+ else   if (database instanceof HsqlDatabase) {
+    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " SET"+ nullableString;
+  }
+ else   if (database instanceof H2Database) {
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN  "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ statement.getColumnDataType()+ nullableString;
   }
  else   if (database instanceof MaxDBDatabase) {
