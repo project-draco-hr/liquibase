@@ -1,0 +1,12 @@
+{
+  DatabaseSnapshot databaseSnapshot=createSnapshot(database,schemaName,null);
+  if (databaseSnapshot.getIndex(indexName) != null) {
+    return true;
+  }
+  for (  Index index : databaseSnapshot.getIndexes()) {
+    if (index.getColumnNames().replaceAll("\\s+","").equalsIgnoreCase(columnNames)) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -2,3 +2,4 @@ String schemaName
 String tableName
 String indexName
 Database database
+String columnNames

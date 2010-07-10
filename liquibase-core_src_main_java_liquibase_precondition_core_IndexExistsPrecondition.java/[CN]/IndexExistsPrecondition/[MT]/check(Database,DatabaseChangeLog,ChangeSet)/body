@@ -1,6 +1,6 @@
 {
   try {
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasIndex(getSchemaName(),getTableName(),getIndexName(),database)) {
+    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasIndex(getSchemaName(),getTableName(),getIndexName(),database,getColumnNames())) {
       String name="";
       if (StringUtils.trimToNull(getTableName()) != null) {
         name+=database.escapeStringForDatabase(getTableName()) + ".";
