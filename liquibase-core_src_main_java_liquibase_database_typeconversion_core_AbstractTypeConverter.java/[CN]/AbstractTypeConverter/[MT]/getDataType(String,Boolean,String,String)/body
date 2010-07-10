@@ -66,6 +66,9 @@
  else   if (dataTypeName.equalsIgnoreCase("VARCHAR")) {
     returnTypeName=getVarcharType();
   }
+ else   if (dataTypeName.equalsIgnoreCase("NVARCHAR")) {
+    returnTypeName=getNVarcharType();
+  }
  else {
     if (columnTypeString.startsWith("java.sql.Types")) {
       returnTypeName=getTypeFromMetaData(dataTypeName);
