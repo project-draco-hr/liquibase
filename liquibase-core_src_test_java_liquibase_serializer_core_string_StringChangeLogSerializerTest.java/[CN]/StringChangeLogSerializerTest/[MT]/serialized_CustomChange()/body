@@ -1,7 +1,7 @@
 {
   String expectedString="customChange:[\n" + "    className=\"liquibase.change.custom.ExampleCustomSqlChange\"\n" + "    paramValues={\n"+ "        columnName=\"column_name\",\n"+ "        newValue=\"new_value\",\n"+ "        tableName=\"table_name\"\n"+ "    }\n"+ "]";
   CustomChangeWrapper wrapper=new CustomChangeWrapper();
-  wrapper.setFileOpener(new ClassLoaderResourceAccessor());
+  wrapper.setResourceAccessor(new ClassLoaderResourceAccessor());
   wrapper.setClassLoader(getClass().getClassLoader());
   wrapper.setClass("liquibase.change.custom.ExampleCustomSqlChange");
   wrapper.setParam("columnName","column_name");

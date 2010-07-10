@@ -50,7 +50,7 @@
         changeLog.addChangeSet(changeSet);
         change=new RawSQLChange();
         change.setSql(finalCurrentSql);
-        change.setFileOpener(resourceAccessor);
+        change.setResourceAccessor(resourceAccessor);
         change.setSplitStatements(splitStatements);
         change.setStripComments(stripComments);
         change.setEndDelimiter(endDelimiter);

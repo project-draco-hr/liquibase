@@ -4,7 +4,7 @@
   change.setSchemaName("SCHEMA_NAME");
   change.setTableName("TABLE_NAME");
   change.setFile("liquibase/change/core/sample.data1.csv");
-  change.setFileOpener(new ClassLoaderResourceAccessor());
+  change.setResourceAccessor(new ClassLoaderResourceAccessor());
   SqlStatement[] statements=change.generateStatements(database);
   assertNotNull(statements);
   assertEquals(InsertOrUpdateStatement.class,statements[0].getClass());

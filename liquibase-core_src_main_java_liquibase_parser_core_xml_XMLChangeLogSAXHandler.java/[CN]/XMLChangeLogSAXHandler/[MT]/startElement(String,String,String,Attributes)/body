@@ -195,7 +195,7 @@
       if (change == null) {
         throw new MigrationFailedException(changeSet,"Unknown change: " + localName);
       }
-      change.setFileOpener(resourceAccessor);
+      change.setResourceAccessor(resourceAccessor);
       if (change instanceof CustomChangeWrapper) {
         ((CustomChangeWrapper)change).setClassLoader(resourceAccessor.toClassLoader());
       }

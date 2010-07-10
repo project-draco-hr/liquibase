@@ -5,7 +5,7 @@
   change.setTableName("TABLE_NAME");
   change.setPrimaryKey("name");
   change.setFile("liquibase/change/core/sample.data1.csv");
-  change.setFileOpener(new ClassLoaderResourceAccessor());
+  change.setResourceAccessor(new ClassLoaderResourceAccessor());
   SqlStatement[] statements=change.generateStatements(database);
   SqlStatement[] sqlStatements=change.generateStatements(new MockDatabase());
   assertEquals(2,sqlStatements.length);

@@ -36,6 +36,7 @@
       }
  else       if (qName.equals("customPrecondition")) {
         ((CustomPreconditionWrapper)currentPrecondition).setClassLoader(resourceAccessor.toClassLoader());
+        currentPrecondition=null;
       }
     }
  else     if (changeSet != null && "rollback".equals(qName)) {

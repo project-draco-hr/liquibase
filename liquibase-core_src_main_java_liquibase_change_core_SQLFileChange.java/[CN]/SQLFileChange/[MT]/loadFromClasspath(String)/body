@@ -1,7 +1,7 @@
 {
   InputStream in=null;
   try {
-    ResourceAccessor fo=getFileOpener();
+    ResourceAccessor fo=getResourceAccessor();
     if (fo == null) {
       return false;
     }

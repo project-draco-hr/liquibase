@@ -3,7 +3,7 @@
   refactoring.setSchemaName("SCHEMA_NAME");
   refactoring.setTableName("TABLE_NAME");
   refactoring.setFile("liquibase/change/core/sample.data1.csv");
-  refactoring.setFileOpener(new ClassLoaderResourceAccessor());
+  refactoring.setResourceAccessor(new ClassLoaderResourceAccessor());
   String md5sum1=refactoring.generateCheckSum().toString();
   refactoring.setFile("liquibase/change/core/sample.data2.csv");
   String md5sum2=refactoring.generateCheckSum().toString();

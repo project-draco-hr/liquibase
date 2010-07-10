@@ -8,7 +8,7 @@
  catch (  IOException e) {
     throw new ChangeLogParseException(e);
   }
-  change.setFileOpener(resourceAccessor);
+  change.setResourceAccessor(resourceAccessor);
   change.setSplitStatements(false);
   change.setStripComments(false);
   ChangeSet changeSet=new ChangeSet("raw","includeAll",false,false,physicalChangeLogLocation,physicalChangeLogLocation,null,null,true);
