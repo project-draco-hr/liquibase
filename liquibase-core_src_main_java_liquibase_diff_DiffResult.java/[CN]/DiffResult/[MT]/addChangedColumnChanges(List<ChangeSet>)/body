@@ -3,6 +3,7 @@
     if (!shouldModifyColumn(column)) {
       continue;
     }
+    TypeConverter targetTypeConverter=TypeConverterFactory.getInstance().findTypeConverter(targetSnapshot.getDatabase());
     boolean foundDifference=false;
     Column referenceColumn=referenceSnapshot.getColumn(column.getTable().getName(),column.getName());
     if (column.isDataTypeDifferent(referenceColumn)) {
@@ -10,7 +11,7 @@
       change.setTableName(column.getTable().getName());
       change.setSchemaName(column.getTable().getSchema());
       change.setColumnName(column.getName());
-      change.setNewDataType(referenceColumn.getDataTypeString(targetSnapshot.getDatabase()));
+      change.setNewDataType(targetTypeConverter.convertToDatabaseTypeString(referenceColumn,targetSnapshot.getDatabase()));
       changes.add(generateChangeSet(change));
       foundDifference=true;
     }
@@ -20,7 +21,7 @@
         change.setTableName(column.getTable().getName());
         change.setSchemaName(column.getTable().getSchema());
         change.setColumnName(column.getName());
-        change.setColumnDataType(referenceColumn.getDataTypeString(targetSnapshot.getDatabase()));
+        change.setColumnDataType(targetTypeConverter.convertToDatabaseTypeString(referenceColumn,targetSnapshot.getDatabase()));
         changes.add(generateChangeSet(change));
         foundDifference=true;
       }
@@ -29,7 +30,7 @@
         change.setTableName(column.getTable().getName());
         change.setSchemaName(column.getTable().getSchema());
         change.setColumnName(column.getName());
-        change.setColumnDataType(referenceColumn.getDataTypeString(targetSnapshot.getDatabase()));
+        change.setColumnDataType(targetTypeConverter.convertToDatabaseTypeString(referenceColumn,targetSnapshot.getDatabase()));
         changes.add(generateChangeSet(change));
         foundDifference=true;
       }

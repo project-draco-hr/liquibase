@@ -12,7 +12,7 @@
     for (    Column column : missingTable.getColumns()) {
       ColumnConfig columnConfig=new ColumnConfig();
       columnConfig.setName(column.getName());
-      columnConfig.setType(column.getDataTypeString(database));
+      columnConfig.setType(TypeConverterFactory.getInstance().findTypeConverter(database).convertToDatabaseTypeString(column,database));
       ConstraintsConfig constraintsConfig=null;
       if (column.isPrimaryKey()) {
         PrimaryKey primaryKey=null;

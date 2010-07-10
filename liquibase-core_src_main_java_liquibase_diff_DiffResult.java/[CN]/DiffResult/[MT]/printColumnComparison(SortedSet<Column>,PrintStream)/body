@@ -10,7 +10,7 @@
       Column baseColumn=referenceSnapshot.getColumn(column.getTable().getName(),column.getName());
       if (baseColumn != null) {
         if (baseColumn.isDataTypeDifferent(column)) {
-          out.println("           from " + baseColumn.getDataTypeString(referenceSnapshot.getDatabase()) + " to "+ targetSnapshot.getColumn(column.getTable().getName(),column.getName()).getDataTypeString(targetSnapshot.getDatabase()));
+          out.println("           from " + TypeConverterFactory.getInstance().findTypeConverter(referenceSnapshot.getDatabase()).convertToDatabaseTypeString(baseColumn,referenceSnapshot.getDatabase()) + " to "+ TypeConverterFactory.getInstance().findTypeConverter(targetSnapshot.getDatabase()).convertToDatabaseTypeString(targetSnapshot.getColumn(column.getTable().getName(),column.getName()),targetSnapshot.getDatabase()));
         }
         if (baseColumn.isNullabilityDifferent(column)) {
           Boolean nowNullable=targetSnapshot.getColumn(column.getTable().getName(),column.getName()).isNullable();

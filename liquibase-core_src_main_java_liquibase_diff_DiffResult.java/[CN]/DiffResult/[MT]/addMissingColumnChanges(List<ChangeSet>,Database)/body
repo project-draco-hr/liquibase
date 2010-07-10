@@ -8,7 +8,7 @@
     change.setSchemaName(column.getTable().getSchema());
     ColumnConfig columnConfig=new ColumnConfig();
     columnConfig.setName(column.getName());
-    String dataType=column.getDataTypeString(database);
+    String dataType=TypeConverterFactory.getInstance().findTypeConverter(database).convertToDatabaseTypeString(column,database);
     columnConfig.setType(dataType);
     Object defaultValue=column.getDefaultValue();
     if (defaultValue != null) {
