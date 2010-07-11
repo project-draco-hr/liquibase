@@ -1,5 +1,9 @@
 {
   out.print(title + ":");
+  if (comparison == null) {
+    out.print("NULL");
+    return;
+  }
   if (comparison.areTheSame()) {
     out.println(" EQUAL");
   }

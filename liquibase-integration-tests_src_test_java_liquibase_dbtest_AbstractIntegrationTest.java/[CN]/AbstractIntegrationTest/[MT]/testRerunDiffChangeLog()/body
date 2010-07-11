@@ -35,7 +35,13 @@
     tempFile.deleteOnExit();
     DatabaseSnapshot migratedSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
     DiffResult finalDiffResult=new Diff(originalSnapshot,migratedSnapshot).compare();
-    assertFalse(finalDiffResult.differencesFound());
+    try {
+      assertFalse(finalDiffResult.differencesFound());
+    }
+ catch (    AssertionError e) {
+      finalDiffResult.printResult(System.out);
+      throw e;
+    }
     Diff emptyDiff=new Diff(emptySnapshot,migratedSnapshot);
     DiffResult emptyDiffResult=emptyDiff.compare();
     output=new FileOutputStream(tempFile);
