@@ -1,5 +1,8 @@
 {
   if (requestedSchema == null) {
+    requestedSchema=getDefaultDatabaseSchemaName();
+  }
+  if (requestedSchema == null) {
     return "DBA";
   }
   return requestedSchema;
