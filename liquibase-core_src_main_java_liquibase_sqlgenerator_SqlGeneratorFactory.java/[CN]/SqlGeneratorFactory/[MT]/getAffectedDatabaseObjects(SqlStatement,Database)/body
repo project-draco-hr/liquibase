@@ -2,8 +2,11 @@
   Set<DatabaseObject> affectedObjects=new HashSet<DatabaseObject>();
   SqlGeneratorChain sqlGeneratorChain=createGeneratorChain(statement,database);
   if (sqlGeneratorChain != null) {
-    for (    Sql sql : sqlGeneratorChain.generateSql(statement,database)) {
-      affectedObjects.addAll(sql.getAffectedDatabaseObjects());
+    Sql[] sqls=sqlGeneratorChain.generateSql(statement,database);
+    if (sqls != null) {
+      for (      Sql sql : sqls) {
+        affectedObjects.addAll(sql.getAffectedDatabaseObjects());
+      }
     }
   }
   return affectedObjects;

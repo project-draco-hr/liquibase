@@ -3,7 +3,10 @@
     if (typeClass instanceof TypeVariable) {
       typeClass=((TypeVariable)typeClass).getBounds()[0];
     }
-    if (((Class)typeClass).equals(statement.getClass())) {
+    if (typeClass.equals(SqlStatement.class)) {
+      return;
+    }
+    if (((Class)typeClass).isAssignableFrom(statement.getClass())) {
       if (generator.supports(statement,database)) {
         validGenerators.add(generator);
       }
