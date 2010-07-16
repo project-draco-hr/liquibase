@@ -13,6 +13,5 @@
     }
   }
   sql.deleteCharAt(sql.lastIndexOf(","));
-  System.out.println("SQL :" + sql.toString());
   return sql.toString();
 }
