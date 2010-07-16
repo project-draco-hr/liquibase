@@ -2,7 +2,7 @@
   if (objectName == null) {
     return null;
   }
-  if (objectName.contains("-") || hasCaseProblems(objectName) || isReservedWord(objectName)) {
+  if (objectName.contains("-") || hasCaseProblems(objectName) || startsWithNumeric(objectName)|| isReservedWord(objectName)) {
     return "\"" + objectName + "\"";
   }
  else {
