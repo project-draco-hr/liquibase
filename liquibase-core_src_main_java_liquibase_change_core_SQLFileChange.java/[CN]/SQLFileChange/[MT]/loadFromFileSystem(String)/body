@@ -1,7 +1,13 @@
 {
-  FileInputStream fis=null;
+  if (relativeToChangelogFile) {
+    file=getChangeSet().getFilePath().replaceFirst("/[^/]*$","") + "/" + file;
+  }
+  InputStream fis=null;
   try {
-    fis=new FileInputStream(file);
+    fis=getResourceAccessor().getResourceAsStream(file);
+    if (fis == null) {
+      throw new SetupException("<sqlfile path=" + file + "> -Unable to read file");
+    }
     setSql(StreamUtil.getStreamContents(fis,encoding));
     return true;
   }
