@@ -1,4 +1,7 @@
 {
+  if (relativeToChangelogFile != null && relativeToChangelogFile) {
+    file=getChangeSet().getFilePath().replaceFirst("/[^/]*$","") + "/" + file;
+  }
   InputStream in=null;
   try {
     ResourceAccessor fo=getResourceAccessor();
@@ -13,7 +16,7 @@
     return true;
   }
  catch (  IOException ioe) {
-    throw new SetupException("<sqlfile path=" + file + "> -Unable to read file",ioe);
+    return false;
   }
  finally {
     if (in != null) {
