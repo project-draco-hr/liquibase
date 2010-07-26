@@ -6,4 +6,5 @@
   this.setupExceptions=changeLogHandler.getSetupExceptions();
   this.changeValidationExceptions=changeLogHandler.getChangeValidationExceptions();
   this.validationErrors=changeLogHandler.getValidationErrors();
+  this.database=changeLogHandler.getDatabase();
 }

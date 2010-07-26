@@ -1,4 +1,5 @@
 {
+  this.database=database;
   PreconditionContainer preconditions=changeLog.getPreconditions();
   try {
     if (preconditions == null) {
