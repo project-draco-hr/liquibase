@@ -3,5 +3,8 @@
   for (  Change change : getChanges()) {
     stringToMD5.append(change.generateCheckSum()).append(":");
   }
+  for (  SqlVisitor visitor : this.getSqlVisitors()) {
+    stringToMD5.append(visitor.generateCheckSum()).append(";");
+  }
   return CheckSum.compute(stringToMD5.toString());
 }

@@ -1,0 +1,33 @@
+{
+  Element node=currentChangeLogFileDOM.createElement(visitor.getName());
+  try {
+    List<Field> allFields=new ArrayList<Field>();
+    Class classToExtractFieldsFrom=visitor.getClass();
+    while (!classToExtractFieldsFrom.equals(Object.class)) {
+      allFields.addAll(Arrays.asList(classToExtractFieldsFrom.getDeclaredFields()));
+      classToExtractFieldsFrom=classToExtractFieldsFrom.getSuperclass();
+    }
+    for (    Field field : allFields) {
+      field.setAccessible(true);
+      ChangeProperty changePropertyAnnotation=field.getAnnotation(ChangeProperty.class);
+      if (changePropertyAnnotation != null && !changePropertyAnnotation.includeInSerialization()) {
+        continue;
+      }
+      if (field.getName().equals("serialVersionUID")) {
+        continue;
+      }
+      if (field.getName().equals("$VRc")) {
+        continue;
+      }
+      String propertyName=field.getName();
+      Object value=field.get(visitor);
+      if (value != null) {
+        node.setAttribute(propertyName,value.toString());
+      }
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  return node;
+}

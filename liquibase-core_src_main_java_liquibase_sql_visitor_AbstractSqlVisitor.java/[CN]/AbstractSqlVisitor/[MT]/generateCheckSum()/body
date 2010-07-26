@@ -1,0 +1,3 @@
+{
+  return CheckSum.compute(new StringChangeLogSerializer().serialize(this));
+}
