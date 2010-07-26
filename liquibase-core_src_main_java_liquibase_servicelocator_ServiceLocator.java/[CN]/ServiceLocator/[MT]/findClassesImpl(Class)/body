@@ -1,0 +1,19 @@
+{
+  logger.debug("ServiceLocator finding classes matching interface " + requiredInterface.getName());
+  List<Class> classes=new ArrayList<Class>();
+  ResolverUtil resolverUtil=new ResolverUtil();
+  resolverUtil.setClassLoader(resourceAccessor.toClassLoader());
+  for (  Class clazz : (Set<Class>)resolverUtil.findImplementations(requiredInterface,packagesToScan.toArray(new String[packagesToScan.size()])).getClasses()) {
+    if (!Modifier.isAbstract(clazz.getModifiers()) && !Modifier.isInterface(clazz.getModifiers()) && Modifier.isPublic(clazz.getModifiers())) {
+      try {
+        clazz.getConstructor();
+        logger.debug(clazz.getName() + " matches " + requiredInterface.getName());
+        classes.add(clazz);
+      }
+ catch (      NoSuchMethodException e) {
+        logger.info("Can not use " + clazz + " as a Liquibase service because it does not have a default constructor");
+      }
+    }
+  }
+  return classes;
+}

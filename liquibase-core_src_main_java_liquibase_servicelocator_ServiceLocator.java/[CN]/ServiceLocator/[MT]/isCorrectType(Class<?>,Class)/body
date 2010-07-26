@@ -1,3 +1,0 @@
-{
-  return !clazz.equals(Object.class) && (requiredInterface.isAssignableFrom(clazz) || isCorrectType(clazz.getSuperclass(),requiredInterface));
-}
