@@ -2,5 +2,15 @@
   if (this == o)   return true;
   if (o == null || getClass() != o.getClass())   return false;
   AbstractDatabase that=(AbstractDatabase)o;
-  return !(connection != null ? !connection.equals(that.connection) : that.connection != null);
+  if (connection == null) {
+    if (that.connection == null) {
+      return this == that;
+    }
+ else {
+      return false;
+    }
+  }
+ else {
+    return connection.equals(that.connection);
+  }
 }

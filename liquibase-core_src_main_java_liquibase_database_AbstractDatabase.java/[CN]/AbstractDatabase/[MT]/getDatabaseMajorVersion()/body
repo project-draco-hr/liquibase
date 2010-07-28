@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return -1;
+  }
   try {
     return connection.getDatabaseMajorVersion();
   }

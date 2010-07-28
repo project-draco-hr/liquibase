@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return null;
+  }
   try {
     return connection.getDatabaseProductVersion();
   }
