@@ -3,7 +3,10 @@
     String externalName=fqn.substring(0,fqn.indexOf('.')).replace('/','.');
     ClassLoader loader=getClassLoader();
     log.debug("Checking to see if class " + externalName + " matches criteria ["+ test+ "]");
-    Class type=loader.loadClass(externalName);
+    if (!loadedClassesByName.containsKey(externalName)) {
+      loadedClassesByName.put(externalName,loader.loadClass(externalName));
+    }
+    Class type=loadedClassesByName.get(externalName);
     if (test.matches(type)) {
       matches.add((Class<T>)type);
     }

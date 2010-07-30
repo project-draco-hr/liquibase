@@ -1,4 +1,7 @@
 {
+  if (pathsByUrl.containsKey(url)) {
+    return pathsByUrl.get(url);
+  }
   log.debug("Listing classes in " + url);
   InputStream is=null;
   try {
@@ -63,6 +66,7 @@
         }
       }
     }
+    pathsByUrl.put(url,resources);
     return resources;
   }
   finally {
