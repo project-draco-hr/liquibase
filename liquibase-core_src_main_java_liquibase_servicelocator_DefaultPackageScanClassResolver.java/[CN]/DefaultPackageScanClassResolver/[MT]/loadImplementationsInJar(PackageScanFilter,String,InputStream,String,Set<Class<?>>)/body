@@ -1,0 +1,26 @@
+{
+  JarInputStream jarStream=null;
+  try {
+    jarStream=new JarInputStream(stream);
+    JarEntry entry;
+    while ((entry=jarStream.getNextJarEntry()) != null) {
+      String name=entry.getName();
+      if (name != null) {
+        name=name.trim();
+        if (!entry.isDirectory() && name.startsWith(parent) && name.endsWith(".class")) {
+          addIfMatching(test,name,classes);
+        }
+      }
+    }
+  }
+ catch (  IOException ioe) {
+    log.warning("Cannot search jar file '" + urlPath + "' for classes matching criteria: "+ test+ " due to an IOException: "+ ioe.getMessage(),ioe);
+  }
+ finally {
+    try {
+      jarStream.close();
+    }
+ catch (    IOException ignore) {
+    }
+  }
+}

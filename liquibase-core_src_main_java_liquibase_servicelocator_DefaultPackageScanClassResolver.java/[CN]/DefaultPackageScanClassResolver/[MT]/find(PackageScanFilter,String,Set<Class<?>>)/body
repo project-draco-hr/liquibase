@@ -1,0 +1,7 @@
+{
+  packageName=packageName.replace('.','/');
+  Set<ClassLoader> set=getClassLoaders();
+  for (  ClassLoader classLoader : set) {
+    find(test,packageName,classLoader,classes);
+  }
+}

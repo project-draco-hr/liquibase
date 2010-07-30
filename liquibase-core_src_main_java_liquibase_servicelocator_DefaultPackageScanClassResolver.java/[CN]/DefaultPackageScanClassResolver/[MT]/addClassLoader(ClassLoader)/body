@@ -1,0 +1,7 @@
+{
+  try {
+    getClassLoaders().add(classLoader);
+  }
+ catch (  UnsupportedOperationException ex) {
+  }
+}

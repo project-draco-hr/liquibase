@@ -1,6 +1,3 @@
 {
-  if (!packageName.endsWith(".")) {
-    packageName=packageName + ".";
-  }
   packagesToScan.add(packageName);
 }

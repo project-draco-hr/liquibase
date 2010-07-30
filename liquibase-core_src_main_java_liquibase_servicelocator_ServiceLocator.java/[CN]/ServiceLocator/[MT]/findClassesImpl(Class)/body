@@ -1,9 +1,8 @@
 {
   logger.debug("ServiceLocator finding classes matching interface " + requiredInterface.getName());
   List<Class> classes=new ArrayList<Class>();
-  ResolverUtil resolverUtil=new ResolverUtil();
-  resolverUtil.setClassLoader(resourceAccessor.toClassLoader());
-  for (  Class clazz : (Set<Class>)resolverUtil.findImplementations(requiredInterface,packagesToScan.toArray(new String[packagesToScan.size()])).getClasses()) {
+  classResolver.addClassLoader(resourceAccessor.toClassLoader());
+  for (  Class clazz : classResolver.findImplementations(requiredInterface,packagesToScan.toArray(new String[packagesToScan.size()]))) {
     if (!Modifier.isAbstract(clazz.getModifiers()) && !Modifier.isInterface(clazz.getModifiers()) && Modifier.isPublic(clazz.getModifiers())) {
       try {
         clazz.getConstructor();

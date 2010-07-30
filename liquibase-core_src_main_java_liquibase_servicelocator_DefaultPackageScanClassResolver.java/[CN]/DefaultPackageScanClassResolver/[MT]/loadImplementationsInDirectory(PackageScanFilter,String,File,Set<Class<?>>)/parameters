@@ -1,0 +1,4 @@
+PackageScanFilter test
+String parent
+File location
+Set<Class<?>> classes

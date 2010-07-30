@@ -1,0 +1,7 @@
+{
+  log.debug("Getting resource URL for package: " + packageName + " with classloader: "+ loader);
+  if (!packageName.endsWith("/")) {
+    packageName=packageName + "/";
+  }
+  return loader.getResources(packageName);
+}

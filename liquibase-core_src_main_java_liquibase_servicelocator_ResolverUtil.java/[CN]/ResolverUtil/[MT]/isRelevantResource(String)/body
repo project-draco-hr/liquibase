@@ -1,3 +1,0 @@
-{
-  return resourceName != null && (resourceName.endsWith(".class") || JAVA_IDENTIFIER_PATTERN.matcher(resourceName).matches());
-}

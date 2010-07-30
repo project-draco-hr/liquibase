@@ -1,0 +1,5 @@
+PackageScanFilter test
+String parent
+InputStream stream
+String urlPath
+Set<Class<?>> classes

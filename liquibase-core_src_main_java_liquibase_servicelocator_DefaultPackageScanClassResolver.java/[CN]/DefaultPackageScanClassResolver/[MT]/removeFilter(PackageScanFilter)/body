@@ -1,0 +1,5 @@
+{
+  if (scanFilters != null) {
+    scanFilters.remove(filter);
+  }
+}

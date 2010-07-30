@@ -1,0 +1,8 @@
+{
+  for (  PackageScanFilter filter : filters) {
+    if (!filter.matches(type)) {
+      return false;
+    }
+  }
+  return true;
+}

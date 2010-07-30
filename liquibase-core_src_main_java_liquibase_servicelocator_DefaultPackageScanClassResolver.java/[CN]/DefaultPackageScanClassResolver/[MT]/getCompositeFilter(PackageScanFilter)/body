@@ -1,0 +1,8 @@
+{
+  if (scanFilters != null) {
+    CompositePackageScanFilter composite=new CompositePackageScanFilter(scanFilters);
+    composite.addFilter(filter);
+    return composite;
+  }
+  return filter;
+}

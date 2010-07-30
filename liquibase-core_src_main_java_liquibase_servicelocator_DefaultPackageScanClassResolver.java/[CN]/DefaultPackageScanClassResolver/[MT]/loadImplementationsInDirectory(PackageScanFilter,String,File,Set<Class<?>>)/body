@@ -1,0 +1,19 @@
+{
+  File[] files=location.listFiles();
+  StringBuilder builder=null;
+  for (  File file : files) {
+    builder=new StringBuilder(100);
+    String name=file.getName();
+    if (name != null) {
+      name=name.trim();
+      builder.append(parent).append("/").append(name);
+      String packageOrClass=parent == null ? name : builder.toString();
+      if (file.isDirectory()) {
+        loadImplementationsInDirectory(test,packageOrClass,file,classes);
+      }
+ else       if (name.endsWith(".class")) {
+        addIfMatching(test,packageOrClass,classes);
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (scanFilters == null) {
+    scanFilters=new LinkedHashSet<PackageScanFilter>();
+  }
+  scanFilters.add(filter);
+}

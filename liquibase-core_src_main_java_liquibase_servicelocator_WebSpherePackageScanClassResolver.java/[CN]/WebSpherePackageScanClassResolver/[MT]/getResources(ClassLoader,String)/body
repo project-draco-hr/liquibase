@@ -1,0 +1,8 @@
+{
+  Enumeration<URL> enumeration=super.getResources(loader,packageName);
+  if (!enumeration.hasMoreElements()) {
+    log.debug("Using WebSphere workaround to load the camel jars with the annotated converters.");
+    enumeration=loader.getResources(resourcePath);
+  }
+  return enumeration;
+}

@@ -1,0 +1,12 @@
+{
+  if (classLoaders == null) {
+    classLoaders=new HashSet<ClassLoader>();
+    ClassLoader ccl=Thread.currentThread().getContextClassLoader();
+    if (ccl != null) {
+      log.debug("The thread context class loader: " + ccl + "  is used to load the class");
+      classLoaders.add(ccl);
+    }
+    classLoaders.add(DefaultPackageScanClassResolver.class.getClassLoader());
+  }
+  return classLoaders;
+}
