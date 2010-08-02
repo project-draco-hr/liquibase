@@ -1,5 +1,5 @@
 {
-  ValidationErrors validationErrors=super.validate(database);
+  ValidationErrors validationErrors=new ValidationErrors();
   if (StringUtils.trimToNull(getPath()) == null) {
     validationErrors.addError("'path' is required");
   }
