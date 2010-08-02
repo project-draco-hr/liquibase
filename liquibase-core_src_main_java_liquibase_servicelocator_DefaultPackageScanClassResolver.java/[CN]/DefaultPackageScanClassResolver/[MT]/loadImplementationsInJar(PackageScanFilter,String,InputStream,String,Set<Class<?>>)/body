@@ -1,16 +1,23 @@
 {
   JarInputStream jarStream=null;
   try {
-    jarStream=new JarInputStream(stream);
-    JarEntry entry;
-    while ((entry=jarStream.getNextJarEntry()) != null) {
-      String name=entry.getName();
-      if (name != null) {
-        name=name.trim();
-        if (!entry.isDirectory() && name.startsWith(parent) && name.endsWith(".class")) {
-          addIfMatching(test,name,classes);
+    if (!classesByJarUrl.containsKey(urlPath)) {
+      Set<String> names=new HashSet<String>();
+      jarStream=new JarInputStream(stream);
+      JarEntry entry;
+      while ((entry=jarStream.getNextJarEntry()) != null) {
+        String name=entry.getName();
+        if (name != null) {
+          name=name.trim();
+          if (!entry.isDirectory() && name.startsWith(parent) && name.endsWith(".class")) {
+            names.add(name);
+          }
         }
       }
+      classesByJarUrl.put(urlPath,names);
+    }
+    for (    String name : classesByJarUrl.get(urlPath)) {
+      addIfMatching(test,name,classes);
     }
   }
  catch (  IOException ioe) {
@@ -18,7 +25,9 @@
   }
  finally {
     try {
-      jarStream.close();
+      if (jarStream != null) {
+        jarStream.close();
+      }
     }
  catch (    IOException ignore) {
     }
