@@ -8,6 +8,7 @@
  else {
     this.classResolver=new DefaultPackageScanClassResolver();
   }
+  this.classResolver.setClassLoaders(new HashSet<ClassLoader>(Arrays.asList(new ClassLoader[]{resourceAccessor.toClassLoader()})));
   packagesToScan=new ArrayList<String>();
   String packagesToScanSystemProp=System.getProperty("liquibase.scan.packages");
   if ((packagesToScanSystemProp != null) && ((packagesToScanSystemProp=StringUtils.trimToNull(packagesToScanSystemProp)) != null)) {

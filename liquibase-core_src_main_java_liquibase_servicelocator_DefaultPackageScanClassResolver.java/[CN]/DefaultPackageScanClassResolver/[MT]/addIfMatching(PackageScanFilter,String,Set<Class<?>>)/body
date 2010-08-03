@@ -4,7 +4,7 @@
     Set<ClassLoader> set=getClassLoaders();
     boolean found=false;
     for (    ClassLoader classLoader : set) {
-      log.debug("Testing for class " + externalName + " matches criteria ["+ test+ "] using classloader:"+ classLoader);
+      log.debug("Testing that class " + externalName + " matches criteria ["+ test+ "] using classloader:"+ classLoader);
       try {
         Class<?> type=classLoader.loadClass(externalName);
         log.debug("Loaded the class: " + type + " in classloader: "+ classLoader);
