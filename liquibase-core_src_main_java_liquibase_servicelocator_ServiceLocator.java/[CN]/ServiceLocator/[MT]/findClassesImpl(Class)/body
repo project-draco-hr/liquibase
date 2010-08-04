@@ -2,7 +2,10 @@
   logger.debug("ServiceLocator finding classes matching interface " + requiredInterface.getName());
   List<Class> classes=new ArrayList<Class>();
   classResolver.addClassLoader(resourceAccessor.toClassLoader());
-  for (  Class clazz : classResolver.findImplementations(requiredInterface,packagesToScan.toArray(new String[packagesToScan.size()]))) {
+  for (  Class<?> clazz : classResolver.findImplementations(requiredInterface,packagesToScan.toArray(new String[packagesToScan.size()]))) {
+    if (clazz.getAnnotation(LiquibaseService.class) != null && clazz.getAnnotation(LiquibaseService.class).skip()) {
+      continue;
+    }
     if (!Modifier.isAbstract(clazz.getModifiers()) && !Modifier.isInterface(clazz.getModifiers()) && Modifier.isPublic(clazz.getModifiers())) {
       try {
         clazz.getConstructor();
