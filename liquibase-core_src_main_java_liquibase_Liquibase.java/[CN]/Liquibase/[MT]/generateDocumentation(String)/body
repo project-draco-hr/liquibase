@@ -5,7 +5,7 @@
   try {
     DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
     checkDatabaseChangeLogTable(false,changeLog);
-    changeLog.validate(getStandardChangelogIterator(null,changeLog),database);
+    changeLog.validate(database);
     ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new DbmsChangeSetFilter(database));
     DBDocVisitor visitor=new DBDocVisitor(database);
     logIterator.run(visitor,database);

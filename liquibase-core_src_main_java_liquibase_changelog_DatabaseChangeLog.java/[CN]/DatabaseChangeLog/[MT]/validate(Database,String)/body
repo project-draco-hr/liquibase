@@ -1,4 +1,5 @@
 {
+  ChangeLogIterator logIterator=new ChangeLogIterator(this,new DbmsChangeSetFilter(database),new ContextChangeSetFilter(contexts));
   ValidatingVisitor validatingVisitor=new ValidatingVisitor(database.getRanChangeSetList());
   validatingVisitor.validate(database,this);
   logIterator.run(validatingVisitor,database);
