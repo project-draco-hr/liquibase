@@ -15,6 +15,6 @@
     setLogLevel(LogLevel.OFF);
   }
  else {
-    throw new UnexpectedLiquibaseException("Unknown log level: " + logLevel + ".  Valid levels are: off, debug, info, warning, severe");
+    throw new UnexpectedLiquibaseException("Unknown log level: " + logLevel + ".  Valid levels are: debug, info, warning, severe, off");
   }
 }
