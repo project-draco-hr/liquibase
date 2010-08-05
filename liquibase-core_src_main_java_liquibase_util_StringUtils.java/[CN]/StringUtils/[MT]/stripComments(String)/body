@@ -1,4 +1,4 @@
 {
-  String strippedSingleLines=multiLineSQL.replaceAll("\\s--\\s.*","");
-  return strippedSingleLines.replaceAll("/\\*[\n\\S\\s]*?\\*/","\n");
+  String strippedSingleLines=Pattern.compile("--.*").matcher(multiLineSQL).replaceAll("");
+  return Pattern.compile("/\\*.*?\\*/",Pattern.MULTILINE).matcher(strippedSingleLines).replaceAll("");
 }

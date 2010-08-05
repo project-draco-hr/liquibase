@@ -1,0 +1,11 @@
+{
+  if (updateExistingNullChecksums && databaseChangeLog == null) {
+    throw new LiquibaseException("changeLog parameter is required if updating existing checksums");
+  }
+  String[] splitContexts=null;
+  if (StringUtils.trimToNull(contexts) != null) {
+    splitContexts=contexts.split(",");
+  }
+  getDatabase().checkDatabaseChangeLogTable(updateExistingNullChecksums,databaseChangeLog,splitContexts);
+  getDatabase().checkDatabaseChangeLogLockTable();
+}

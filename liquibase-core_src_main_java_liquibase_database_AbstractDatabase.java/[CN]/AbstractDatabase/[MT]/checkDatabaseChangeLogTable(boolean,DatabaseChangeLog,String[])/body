@@ -74,7 +74,7 @@
     for (    RanChangeSet ranChangeSet : this.getRanChangeSetList()) {
       if (ranChangeSet.getLastCheckSum() == null) {
         ChangeSet changeSet=databaseChangeLog.getChangeSet(ranChangeSet);
-        if (changeSet != null) {
+        if (changeSet != null && new ContextChangeSetFilter(contexts).accepts(changeSet)) {
           LogFactory.getLogger().info("Setting null checksum on changeSet " + changeSet + " to correct value");
           executor.execute(new UpdateChangeSetChecksumStatement(changeSet));
         }

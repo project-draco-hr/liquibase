@@ -3,7 +3,7 @@
   LockService lockService=LockService.getInstance(database);
   lockService.waitForLock();
   try {
-    checkDatabaseChangeLogTable(false,null);
+    checkDatabaseChangeLogTable(false,null,null);
     UpdateStatement updateStatement=new UpdateStatement(getDatabase().getLiquibaseSchemaName(),getDatabase().getDatabaseChangeLogTableName());
     updateStatement.addNewColumnValue("MD5SUM",null);
     ExecutorService.getInstance().getExecutor(database).execute(updateStatement);
