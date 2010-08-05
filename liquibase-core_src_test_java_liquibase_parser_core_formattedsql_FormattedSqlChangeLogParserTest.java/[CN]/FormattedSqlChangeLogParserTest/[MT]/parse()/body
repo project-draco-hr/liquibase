@@ -29,6 +29,7 @@
   assertFalse(changeLog.getChangeSets().get(1).isRunInTransaction());
   assertEquals("y",StringUtils.join(changeLog.getChangeSets().get(1).getContexts(),","));
   assertEquals("mysql",StringUtils.join(changeLog.getChangeSets().get(1).getDbmsSet(),","));
+  assertEquals(1,changeLog.getChangeSets().get(1).getRollBackChanges().length);
   assertEquals("nvoxland",changeLog.getChangeSets().get(2).getAuthor());
   assertEquals("3",changeLog.getChangeSets().get(2).getId());
   assertEquals(1,changeLog.getChangeSets().get(2).getChanges().size());
@@ -36,4 +37,5 @@
   assertNull(((RawSQLChange)changeLog.getChangeSets().get(2).getChanges().get(0)).getEndDelimiter());
   assertTrue(((RawSQLChange)changeLog.getChangeSets().get(2).getChanges().get(0)).isSplittingStatements());
   assertTrue(((RawSQLChange)changeLog.getChangeSets().get(2).getChanges().get(0)).isStrippingComments());
+  assertEquals(1,changeLog.getChangeSets().get(2).getRollBackChanges().length);
 }

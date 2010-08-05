@@ -4,9 +4,11 @@
   try {
     reader=new BufferedReader(new InputStreamReader(openChangeLogFile(physicalChangeLogLocation,resourceAccessor)));
     StringBuffer currentSql=new StringBuffer();
+    StringBuffer currentRollbackSql=new StringBuffer();
     ChangeSet changeSet=null;
     RawSQLChange change=null;
     Pattern changeSetPattern=Pattern.compile("--changeset (\\w+):(\\w+).*",Pattern.CASE_INSENSITIVE);
+    Pattern rollbackPattern=Pattern.compile("--rollback changeSet.*",Pattern.CASE_INSENSITIVE);
     Pattern stripCommentsPattern=Pattern.compile(".*stripComments:(\\w+).*",Pattern.CASE_INSENSITIVE);
     Pattern splitStatementsPattern=Pattern.compile(".*splitStatements:(\\w+).*",Pattern.CASE_INSENSITIVE);
     Pattern endDelimiterPattern=Pattern.compile(".*endDelimiter:(\\w+).*",Pattern.CASE_INSENSITIVE);
@@ -17,6 +19,7 @@
     Pattern dbmsPattern=Pattern.compile(".*dbms:(\\w+).*",Pattern.CASE_INSENSITIVE);
     Pattern failOnErrorPattern=Pattern.compile(".*failOnError:(\\w+).*",Pattern.CASE_INSENSITIVE);
     String line;
+    boolean inRollback=false;
     while ((line=reader.readLine()) != null) {
       Matcher changeSetPatternMatcher=changeSetPattern.matcher(line);
       if (changeSetPatternMatcher.matches()) {
@@ -26,6 +29,16 @@
             throw new ChangeLogParseException("No SQL for changeset " + changeSet.toString(false));
           }
           change.setSql(finalCurrentSql);
+          if (StringUtils.trimToNull(currentRollbackSql.toString()) != null) {
+            RawSQLChange rollbackChange=new RawSQLChange();
+            rollbackChange.setSql(currentRollbackSql.toString());
+            try {
+              changeSet.addRollbackChange(rollbackChange);
+            }
+ catch (            UnsupportedChangeException e) {
+              throw new RuntimeException(e);
+            }
+          }
         }
         Matcher stripCommentsPatternMatcher=stripCommentsPattern.matcher(line);
         Matcher splitStatementsPatternMatcher=splitStatementsPattern.matcher(line);
@@ -56,15 +69,35 @@
         change.setEndDelimiter(endDelimiter);
         changeSet.addChange(change);
         currentSql=new StringBuffer();
+        currentRollbackSql=new StringBuffer();
+        inRollback=false;
+      }
+ else       if (rollbackPattern.matcher(line).matches()) {
+        inRollback=true;
       }
  else {
         if (changeSet != null) {
-          currentSql.append(line).append("\n");
+          if (inRollback) {
+            currentRollbackSql.append(line).append("\n");
+          }
+ else {
+            currentSql.append(line).append("\n");
+          }
         }
       }
     }
     if (changeSet != null) {
       change.setSql(StringUtils.trimToNull(currentSql.toString()));
+      if (StringUtils.trimToNull(currentRollbackSql.toString()) != null) {
+        RawSQLChange rollbackChange=new RawSQLChange();
+        rollbackChange.setSql(currentRollbackSql.toString());
+        try {
+          changeSet.addRollbackChange(rollbackChange);
+        }
+ catch (        UnsupportedChangeException e) {
+          throw new RuntimeException(e);
+        }
+      }
     }
   }
  catch (  IOException e) {
