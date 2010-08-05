@@ -3,5 +3,5 @@
   String comment=" -- with comment\n";
   String totalLine=sql + comment;
   String result=StringUtils.stripComments(totalLine);
-  assertEquals(sql + "\n",result);
+  assertEquals(sql.trim(),result);
 }

@@ -4,5 +4,5 @@
   String total=sql + comment + sql;
   String[] result=StringUtils.processMutliLineSQL(total,true,null);
   assertEquals(1,result.length);
-  assertEquals(sql + "\n" + sql,result[0]);
+  assertEquals(sql + sql,result[0]);
 }

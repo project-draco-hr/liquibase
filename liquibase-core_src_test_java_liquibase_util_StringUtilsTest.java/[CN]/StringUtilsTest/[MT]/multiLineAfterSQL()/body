@@ -3,5 +3,5 @@
   String comment="/*Some text\nmore text*/";
   String total=sql + comment;
   String result=StringUtils.stripComments(total);
-  assertEquals(sql + "\n",result);
+  assertEquals(sql.trim(),result);
 }

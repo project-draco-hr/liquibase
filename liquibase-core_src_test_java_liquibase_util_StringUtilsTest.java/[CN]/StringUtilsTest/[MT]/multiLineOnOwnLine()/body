@@ -1,5 +1,5 @@
 {
   String sql="/*Some text\nmore text*/";
   String result=StringUtils.stripComments(sql);
-  assertEquals("\n",result);
+  assertEquals("",result);
 }
