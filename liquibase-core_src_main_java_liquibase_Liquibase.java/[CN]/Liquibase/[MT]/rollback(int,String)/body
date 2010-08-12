@@ -6,7 +6,7 @@
     DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
     checkDatabaseChangeLogTable(false,changeLog,contexts);
     changeLog.validate(database,contexts);
-    ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new ActuallyExecutedChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database),new CountChangeSetFilter(changesToRollback));
+    ChangeLogIterator logIterator=new ChangeLogIterator(database.getRanChangeSetList(),changeLog,new AlreadyRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database),new CountChangeSetFilter(changesToRollback));
     logIterator.run(new RollbackVisitor(database),database);
   }
   finally {

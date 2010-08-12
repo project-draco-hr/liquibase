@@ -1,0 +1,13 @@
+{
+  final List<ChangeSet> changeSets=new ArrayList<ChangeSet>();
+  for (  RanChangeSet ranChangeSet : changeSetList) {
+    changeSets.add(changeLog.getChangeSet(ranChangeSet));
+  }
+  this.databaseChangeLog=(new DatabaseChangeLog(null){
+    @Override public List<ChangeSet> getChangeSets(){
+      return changeSets;
+    }
+  }
+);
+  this.changeSetFilters=Arrays.asList(changeSetFilters);
+}
