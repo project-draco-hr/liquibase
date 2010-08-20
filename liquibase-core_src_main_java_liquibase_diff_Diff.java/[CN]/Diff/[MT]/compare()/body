@@ -37,5 +37,9 @@
     checkSequences(diffResult);
   }
   diffResult.setDiffData(shouldDiffData());
+  removeDuplicateIndexes(diffResult.getMissingIndexes());
+  removeDuplicateIndexes(diffResult.getUnexpectedIndexes());
+  removeDuplicateUniqueConstraints(diffResult.getMissingUniqueConstraints());
+  removeDuplicateUniqueConstraints(diffResult.getUnexpectedUniqueConstraints());
   return diffResult;
 }

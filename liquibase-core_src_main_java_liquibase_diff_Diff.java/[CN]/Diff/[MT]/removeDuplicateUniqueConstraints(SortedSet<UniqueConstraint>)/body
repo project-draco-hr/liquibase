@@ -1,0 +1,31 @@
+{
+  SortedSet<UniqueConstraint> combinedConstraints=new TreeSet<UniqueConstraint>();
+  SortedSet<UniqueConstraint> constraintsToRemove=new TreeSet<UniqueConstraint>();
+  for (  UniqueConstraint uc1 : uniqueConstraints) {
+    if (!combinedConstraints.contains(uc1)) {
+      for (      UniqueConstraint uc2 : uniqueConstraints.tailSet(uc1)) {
+        if (uc1 == uc2) {
+          continue;
+        }
+        if (uc1.getName().equalsIgnoreCase(uc2.getName()) && uc1.getTable().getName().equalsIgnoreCase(uc2.getTable().getName())) {
+          for (          String column : uc2.getColumns()) {
+            if (!uc1.getColumns().contains(column)) {
+              uc1.getColumns().add(column);
+            }
+          }
+          constraintsToRemove.add(uc2);
+        }
+      }
+      combinedConstraints.add(uc1);
+    }
+  }
+  Set<String> sortedColumns=new TreeSet<String>();
+  for (  UniqueConstraint uc : combinedConstraints) {
+    List<String> columns=uc.getColumns();
+    sortedColumns.clear();
+    sortedColumns.addAll(columns);
+    columns.clear();
+    columns.addAll(sortedColumns);
+  }
+  uniqueConstraints.removeAll(constraintsToRemove);
+}

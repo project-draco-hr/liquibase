@@ -1,0 +1,31 @@
+{
+  SortedSet<Index> combinedIndexes=new TreeSet<Index>();
+  SortedSet<Index> indexesToRemove=new TreeSet<Index>();
+  for (  Index idx1 : indexes) {
+    if (!combinedIndexes.contains(idx1)) {
+      for (      Index idx2 : indexes.tailSet(idx1)) {
+        if (idx1 == idx2) {
+          continue;
+        }
+        if (idx1.getName().equalsIgnoreCase(idx2.getName()) && idx1.getTable().getName().equalsIgnoreCase(idx2.getTable().getName())) {
+          for (          String column : idx2.getColumns()) {
+            if (!idx1.getColumns().contains(column)) {
+              idx1.getColumns().add(column);
+            }
+          }
+          indexesToRemove.add(idx2);
+        }
+      }
+      combinedIndexes.add(idx1);
+    }
+  }
+  Set<String> sortedColumns=new TreeSet<String>();
+  for (  Index idx : combinedIndexes) {
+    List<String> columns=idx.getColumns();
+    sortedColumns.clear();
+    sortedColumns.addAll(columns);
+    columns.clear();
+    columns.addAll(sortedColumns);
+  }
+  indexes.removeAll(indexesToRemove);
+}
