@@ -1,5 +1,6 @@
 {
   String sql;
+  TypeConverter typeConverter=TypeConverterFactory.getInstance().findTypeConverter(database);
   String nullableString;
   if (statement.isNullable()) {
     nullableString=" NULL";
@@ -11,10 +12,10 @@
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ nullableString;
   }
  else   if (database instanceof MSSQLDatabase) {
-    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ statement.getColumnDataType()+ nullableString;
+    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ typeConverter.getDataType(statement.getColumnDataType(),false)+ nullableString;
   }
  else   if (database instanceof MySQLDatabase) {
-    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ statement.getColumnDataType()+ nullableString;
+    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ typeConverter.getDataType(statement.getColumnDataType(),false)+ nullableString;
   }
  else   if (database instanceof DerbyDatabase || database instanceof CacheDatabase) {
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN  "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ nullableString;
@@ -23,7 +24,7 @@
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " SET"+ nullableString;
   }
  else   if (database instanceof H2Database) {
-    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN  "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ statement.getColumnDataType()+ nullableString;
+    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN  "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ typeConverter.getDataType(statement.getColumnDataType(),false)+ nullableString;
   }
  else   if (database instanceof MaxDBDatabase) {
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " COLUMN  "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ (statement.isNullable() ? " DEFAULT NULL" : " NOT NULL");
@@ -32,7 +33,7 @@
     if (statement.isNullable()) {
       nullableString="";
     }
-    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY ("+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ statement.getColumnDataType()+ nullableString+ ")";
+    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY ("+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ typeConverter.getDataType(statement.getColumnDataType(),false)+ nullableString+ ")";
   }
  else {
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN  "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ (statement.isNullable() ? " DROP NOT NULL" : " SET NOT NULL");
