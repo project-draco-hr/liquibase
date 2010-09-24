@@ -1,0 +1,9 @@
+{
+  String stripped=stripComments ? stripComments(multiLineSQL) : multiLineSQL;
+  if (splitStatements) {
+    return splitSQL(stripped,endDelimiter);
+  }
+ else {
+    return new String[]{stripped};
+  }
+}

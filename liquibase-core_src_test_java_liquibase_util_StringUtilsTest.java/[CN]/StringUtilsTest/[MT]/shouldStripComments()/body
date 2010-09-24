@@ -2,7 +2,7 @@
   String sql="some sql";
   String comment="/*Some text\nmore text*/";
   String total=sql + comment + sql;
-  String[] result=StringUtils.processMutliLineSQL(total,true,null);
+  String[] result=StringUtils.processMutliLineSQL(total,true,false,null);
   assertEquals(1,result.length);
   assertEquals(sql + sql,result[0]);
 }
