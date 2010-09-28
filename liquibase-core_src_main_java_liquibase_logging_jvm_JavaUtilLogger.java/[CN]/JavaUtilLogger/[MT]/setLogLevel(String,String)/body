@@ -8,7 +8,7 @@
   }
   fH.setFormatter(new Formatter(){
     @Override public String format(    LogRecord record){
-      return record.getLoggerName() + ":" + record.getLevel().getName()+ ": "+ record.getMessage();
+      return record.getLoggerName() + ":" + record.getLevel().getName()+ ": "+ record.getMessage()+ System.getProperty("line.separator");
     }
   }
 );
