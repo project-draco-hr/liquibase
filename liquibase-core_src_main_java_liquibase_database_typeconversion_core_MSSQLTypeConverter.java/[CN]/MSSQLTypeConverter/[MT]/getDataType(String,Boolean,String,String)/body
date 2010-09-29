@@ -1,4 +1,11 @@
 {
+  if (columnTypeString.endsWith(" identity")) {
+    columnTypeString=columnTypeString.replaceFirst(" identity$","");
+    autoIncrement=true;
+  }
+  if (columnTypeString.equalsIgnoreCase("varbinary") && Long.valueOf(precision) > 8000) {
+    precision="max";
+  }
   DataType returnTypeName=super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision);
   if (returnTypeName instanceof CustomType) {
     boolean returnTypeChanged=false;
