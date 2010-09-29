@@ -1,0 +1,10 @@
+{
+  String original="--\r\n" + "-- This is a comment\r\n" + "UPDATE tablename SET column = 1;\r\n"+ "GO";
+  SQLFileChange change=new SQLFileChange();
+  change.setSql(original);
+  change.setSplitStatements(true);
+  change.setStripComments(true);
+  SqlStatement[] out=change.generateStatements(new MockDatabase());
+  assertEquals(2,out.length);
+  assertEquals("UPDATE tablename SET column = 1;",out[0]);
+}
