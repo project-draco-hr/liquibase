@@ -3,7 +3,7 @@
   node.setAttribute("id",changeSet.getId());
   node.setAttribute("author",changeSet.getAuthor());
   if (changeSet.isAlwaysRun()) {
-    node.setAttribute("alwaysRun","true");
+    node.setAttribute("runAlways","true");
   }
   if (changeSet.isRunOnChange()) {
     node.setAttribute("runOnChange","true");
