@@ -1,0 +1,12 @@
+{
+  String translatedTypeName=referenceColumn.getTypeName();
+  if ("NVARCHAR2".equals(translatedTypeName)) {
+    translatedTypeName=translatedTypeName + "(" + referenceColumn.getColumnSize()+ ")";
+  }
+ else   if ("BINARY_FLOAT".equals(translatedTypeName) || "BINARY_DOUBLE".equals(translatedTypeName)) {
+  }
+ else {
+    translatedTypeName=super.convertToDatabaseTypeString(referenceColumn,database);
+  }
+  return translatedTypeName;
+}
