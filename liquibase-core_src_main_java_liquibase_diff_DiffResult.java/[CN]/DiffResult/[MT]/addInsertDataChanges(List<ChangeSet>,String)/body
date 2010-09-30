@@ -101,7 +101,7 @@
               column.setValueDate((Date)value);
             }
  else {
-              column.setValue(value.toString());
+              column.setValue(value.toString().replace("\\","\\\\"));
             }
             change.addColumn(column);
           }
