@@ -12,6 +12,8 @@
     field.setAccessible(true);
     if (field.getName().startsWith("$VR") || field.getName().equals("serialVersionUID")) {
     }
+ else     if (field.getName().equals("associatedWith")) {
+    }
  else     if (String.class.isAssignableFrom(field.getType())) {
       field.set(change,"asdghasdgasdg");
       checkThatChecksumIsNew(change,seenCheckSums,field);
