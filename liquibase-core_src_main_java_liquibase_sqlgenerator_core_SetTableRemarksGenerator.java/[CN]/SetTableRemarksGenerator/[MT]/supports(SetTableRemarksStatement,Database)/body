@@ -1,3 +1,3 @@
 {
-  return database instanceof MySQLDatabase || database instanceof OracleDatabase;
+  return database instanceof MySQLDatabase || database instanceof OracleDatabase || database instanceof PostgresDatabase;
 }

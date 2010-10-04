@@ -1,11 +1,11 @@
 {
   String sql;
   String remarks=database.escapeStringForDatabase(statement.getRemarks());
-  if (database instanceof OracleDatabase) {
-    sql="COMMENT ON TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " IS '"+ remarks+ "'";
+  if (database instanceof MySQLDatabase) {
+    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " COMMENT = '"+ remarks+ "'";
   }
  else {
-    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " COMMENT = '"+ remarks+ "'";
+    sql="COMMENT ON TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " IS '"+ remarks+ "'";
   }
   return new Sql[]{new UnparsedSql(sql)};
 }
