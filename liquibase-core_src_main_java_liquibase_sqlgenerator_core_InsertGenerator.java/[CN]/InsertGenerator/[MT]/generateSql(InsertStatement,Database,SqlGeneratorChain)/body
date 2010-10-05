@@ -8,7 +8,7 @@
   sql.append(") VALUES (");
   for (  String column : statement.getColumnValues().keySet()) {
     Object newValue=statement.getColumnValues().get(column);
-    if (newValue == null || newValue.toString().equals("") || newValue.toString().equalsIgnoreCase("NULL")) {
+    if (newValue == null || newValue.toString().equalsIgnoreCase("NULL")) {
       sql.append("NULL");
     }
  else     if (newValue instanceof String && database.shouldQuoteValue(((String)newValue))) {
