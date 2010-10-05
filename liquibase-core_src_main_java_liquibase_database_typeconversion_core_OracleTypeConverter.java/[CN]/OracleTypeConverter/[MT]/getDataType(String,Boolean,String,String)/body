@@ -11,6 +11,16 @@
         }
       }
     }
+ else     if (columnTypeString.toUpperCase().startsWith("NVARCHAR2")) {
+      returnTypeName=getNVarcharType();
+      if (precision != null) {
+        String[] typeParams=precision.split(" ");
+        returnTypeName.setFirstParameter(typeParams[0].trim());
+        if (typeParams.length > 1) {
+          returnTypeName.setUnit(typeParams[1]);
+        }
+      }
+    }
   }
   return returnTypeName;
 }
