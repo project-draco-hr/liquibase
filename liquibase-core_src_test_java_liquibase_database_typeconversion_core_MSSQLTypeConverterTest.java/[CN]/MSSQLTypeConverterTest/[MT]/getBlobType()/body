@@ -1,3 +1,3 @@
 {
-  assertEquals("IMAGE",new MSSQLTypeConverter().getBlobType().toString());
+  assertEquals("VARBINARY(MAX)",new MSSQLTypeConverter().getBlobType().toString());
 }

@@ -1,3 +1,8 @@
 {
-  return "\"" + objectName + "\"";
+  if (objectName != null && objectName.matches("^[\\d\\W]")) {
+    return "\"" + objectName + "\"";
+  }
+ else {
+    return objectName;
+  }
 }
