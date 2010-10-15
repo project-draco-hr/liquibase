@@ -1,8 +1,8 @@
 {
-  String driver=null;
-  String url=null;
-  String username=null;
-  String password=null;
+  String driver=referenceDriver;
+  String url=referenceUrl;
+  String username=referenceUsername;
+  String password=referencePassword;
   String defaultSchemaName=this.defaultSchemaName;
   for (  String param : commandParams) {
     String[] splitArg=splitArg(param);
