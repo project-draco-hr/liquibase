@@ -1,6 +1,6 @@
 {
   try {
-    final Class sysinfoClass=getClass().forName("org.apache.derby.tools.sysinfo");
+    @SuppressWarnings("rawtypes") final Class sysinfoClass=getClass().forName("org.apache.derby.tools.sysinfo");
     final Method majorVersionGetter=sysinfoClass.getMethod("getMajorVersion");
     final Method minorVersionGetter=sysinfoClass.getMethod("getMinorVersion");
     driverVersionMajor=((Integer)majorVersionGetter.invoke(null)).intValue();
