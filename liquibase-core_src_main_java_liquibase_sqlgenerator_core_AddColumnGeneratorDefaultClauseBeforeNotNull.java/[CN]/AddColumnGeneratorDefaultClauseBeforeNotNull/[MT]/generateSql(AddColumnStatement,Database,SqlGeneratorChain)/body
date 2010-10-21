@@ -12,6 +12,9 @@
   if (!statement.isNullable()) {
     alterTable+=" NOT NULL";
   }
+ else   if (database instanceof SybaseDatabase || database instanceof SybaseASADatabase) {
+    alterTable+=" NULL";
+  }
   if (!primaryKeyBeforeNotNull(database)) {
     if (statement.isPrimaryKey()) {
       alterTable+=" PRIMARY KEY";

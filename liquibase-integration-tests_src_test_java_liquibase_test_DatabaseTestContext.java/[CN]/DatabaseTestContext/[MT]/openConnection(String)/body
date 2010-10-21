@@ -50,7 +50,16 @@
     ;
   }
  finally {
-    databaseConnection.rollback();
+    try {
+      databaseConnection.rollback();
+    }
+ catch (    DatabaseException e) {
+      if (database instanceof DB2Database) {
+      }
+ else {
+        throw e;
+      }
+    }
   }
   connectionsByUrl.put(url,databaseConnection);
   Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
