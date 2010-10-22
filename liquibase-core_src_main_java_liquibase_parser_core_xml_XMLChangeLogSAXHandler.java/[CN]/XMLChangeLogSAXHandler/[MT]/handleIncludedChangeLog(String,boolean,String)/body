@@ -7,7 +7,13 @@
     return false;
   }
   if (isRelativePath) {
-    fileName=FilenameUtils.concat(FilenameUtils.getFullPath(relativeBaseFileName),fileName);
+    String tempFile=FilenameUtils.concat(FilenameUtils.getFullPath(relativeBaseFileName),fileName);
+    if (tempFile != null && new File(tempFile).exists() == true) {
+      fileName=tempFile;
+    }
+ else {
+      fileName=FilenameUtils.getFullPath(relativeBaseFileName) + fileName;
+    }
   }
   DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor).parse(fileName,changeLogParameters,resourceAccessor);
   PreconditionContainer preconditions=changeLog.getPreconditions();
