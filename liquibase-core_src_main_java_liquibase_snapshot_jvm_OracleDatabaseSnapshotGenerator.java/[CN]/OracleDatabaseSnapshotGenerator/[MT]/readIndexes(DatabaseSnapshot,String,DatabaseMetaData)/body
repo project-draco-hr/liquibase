@@ -14,7 +14,14 @@
       continue;
     }
     short type=rs.getShort("TYPE");
-    boolean nonUnique=true;
+    boolean nonUnique;
+    String uniqueness=rs.getString("UNIQUENESS");
+    if ("UNIQUE".equals(uniqueness)) {
+      nonUnique=false;
+    }
+ else {
+      nonUnique=true;
+    }
     short position=rs.getShort("ORDINAL_POSITION");
     String filterCondition=rs.getString("FILTER_CONDITION");
     if (type == DatabaseMetaData.tableIndexStatistic) {
