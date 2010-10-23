@@ -2,7 +2,8 @@
   Database database=snapshot.getDatabase();
   updateListeners("Reading primary keys for " + database.toString() + " ...");
   List<PrimaryKey> foundPKs=new ArrayList<PrimaryKey>();
-  String query="select uc.table_name TABLE_NAME,ucc.column_name COLUMN_NAME,ucc.position KEY_SEQ,uc.constraint_name PK_NAME,ui.tablespace_name TABLESPACE from user_constraints uc,user_indexes ui,user_cons_columns ucc where uc.constraint_type = 'P' and uc.index_name = ui.index_name and uc.constraint_name = ucc.constraint_name";
+  if (schema == null)   schema=database.convertRequestedSchemaToSchema(schema);
+  String query="select uc.table_name TABLE_NAME,ucc.column_name COLUMN_NAME,ucc.position KEY_SEQ,uc.constraint_name PK_NAME,ui.tablespace_name TABLESPACE from all_constraints uc,all_indexes ui,all_cons_columns ucc where uc.constraint_type = 'P' and uc.index_name = ui.index_name and uc.constraint_name = ucc.constraint_name and uc.owner = '" + schema + "' and ui.table_owner = '"+ schema+ "' and ucc.owner = '"+ schema+ "'";
   Statement statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
   ResultSet rs=statement.executeQuery(query);
   while (rs.next()) {

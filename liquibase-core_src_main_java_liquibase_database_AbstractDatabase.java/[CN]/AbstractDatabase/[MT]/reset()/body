@@ -1,3 +1,4 @@
 {
   this.ranChangeSetList=null;
+  this.hasDatabaseChangeLogLockTable=false;
 }

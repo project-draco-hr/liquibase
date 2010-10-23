@@ -1,7 +1,7 @@
 {
   Database database=snapshot.getDatabase();
   updateListeners("Reading indexes for " + database.toString() + " ...");
-  String query="select aic.index_name, 3 AS TYPE, aic.table_name, aic.column_name, aic.column_position AS ORDINAL_POSITION, null AS FILTER_CONDITION, ai.tablespace_name AS TABLESPACE FROM all_ind_columns aic, all_indexes ai WHERE aic.table_owner='" + database.convertRequestedSchemaToSchema(schema) + "' and aic.index_name = ai.index_name ORDER BY INDEX_NAME, ORDINAL_POSITION";
+  String query="select aic.index_name, 3 AS TYPE, aic.table_name, aic.column_name, aic.column_position AS ORDINAL_POSITION, null AS FILTER_CONDITION, ai.tablespace_name AS TABLESPACE, ai.uniqueness FROM all_ind_columns aic, all_indexes ai WHERE aic.table_owner='" + database.convertRequestedSchemaToSchema(schema) + "' and aic.index_name = ai.index_name ORDER BY INDEX_NAME, ORDINAL_POSITION";
   Statement statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
   ResultSet rs=statement.executeQuery(query);
   Map<String,Index> indexMap=new HashMap<String,Index>();
