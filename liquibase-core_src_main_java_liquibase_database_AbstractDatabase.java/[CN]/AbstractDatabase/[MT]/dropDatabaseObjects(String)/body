@@ -21,7 +21,9 @@
       DropTableChange dropChange=new DropTableChange();
       dropChange.setSchemaName(schema);
       dropChange.setTableName(table.getName());
-      dropChange.setCascadeConstraints(true);
+      if (supportsDropTableCascadeConstraints()) {
+        dropChange.setCascadeConstraints(true);
+      }
       dropChanges.add(dropChange);
     }
     if (this.supportsSequences()) {
