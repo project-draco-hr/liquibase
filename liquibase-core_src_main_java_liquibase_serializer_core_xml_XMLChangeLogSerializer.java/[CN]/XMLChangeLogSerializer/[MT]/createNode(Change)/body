@@ -19,6 +19,12 @@
       if (field.getName().equals("$VRc")) {
         continue;
       }
+      TextNode textNodeAnnotation=field.getAnnotation(TextNode.class);
+      if (textNodeAnnotation != null) {
+        String textNodeContent=(String)field.get(change);
+        node.appendChild(createNode(textNodeAnnotation.nodeName(),textNodeContent));
+        continue;
+      }
       String propertyName=field.getName();
       if (field.getType().equals(ColumnConfig.class)) {
         node.appendChild(createNode((ColumnConfig)field.get(change)));

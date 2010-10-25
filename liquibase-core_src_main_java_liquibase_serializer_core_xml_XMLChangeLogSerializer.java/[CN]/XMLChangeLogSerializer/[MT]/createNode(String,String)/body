@@ -1,0 +1,5 @@
+{
+  Element element=currentChangeLogFileDOM.createElement(nodeName);
+  element.setTextContent(nodeContent);
+  return element;
+}
