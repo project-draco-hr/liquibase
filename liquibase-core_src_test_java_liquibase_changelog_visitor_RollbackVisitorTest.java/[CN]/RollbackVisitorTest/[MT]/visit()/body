@@ -1,7 +1,7 @@
 {
   Database database=createMock(Database.class);
   ChangeSet changeSet=createMock(ChangeSet.class);
-  changeSet.rolback(database);
+  changeSet.rollback(database);
   expectLastCall();
   database.removeRanStatus(changeSet);
   expectLastCall();
