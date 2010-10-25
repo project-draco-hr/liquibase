@@ -15,6 +15,8 @@
   if (statement.getOnDelete() != null) {
     if ((database instanceof OracleDatabase) && (statement.getOnDelete().equalsIgnoreCase("RESTRICT") || statement.getOnDelete().equalsIgnoreCase("NO ACTION"))) {
     }
+ else     if ((database instanceof MSSQLDatabase) && statement.getOnDelete().equalsIgnoreCase("RESTRICT")) {
+    }
  else {
       sb.append(" ON DELETE ").append(statement.getOnDelete());
     }
