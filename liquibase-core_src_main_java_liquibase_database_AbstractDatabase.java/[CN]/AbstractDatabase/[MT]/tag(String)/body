@@ -6,10 +6,7 @@
       ChangeSet emptyChangeSet=new ChangeSet(String.valueOf(new Date().getTime()),"liquibase",false,false,"liquibase-internal","liquibase-internal",null,null);
       this.markChangeSetExecStatus(emptyChangeSet,ChangeSet.ExecType.EXECUTED);
     }
-    int rowsUpdated=executor.update(new TagDatabaseStatement(tagString));
-    if (rowsUpdated == 0) {
-      throw new DatabaseException("Did not tag database change log correctly");
-    }
+    executor.execute(new TagDatabaseStatement(tagString));
     this.commit();
     getRanChangeSetList().get(getRanChangeSetList().size() - 1).setTag(tagString);
   }
