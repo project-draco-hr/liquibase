@@ -1,0 +1,29 @@
+{
+  PreconditionContainer preCondition=new PreconditionContainer();
+  preCondition.setOnFail(PreconditionContainer.FailOption.MARK_RAN.toString());
+  DBMSPrecondition dbmsPrecondition=new DBMSPrecondition();
+  dbmsPrecondition.setType("oracle");
+  preCondition.addNestedPrecondition(dbmsPrecondition);
+  changeSet1.setPreconditions(preCondition);
+  MSSQLDatabase mssqlDb=new MSSQLDatabase(){
+    @Override public List<RanChangeSet> getRanChangeSetList() throws DatabaseException {
+      return new ArrayList<RanChangeSet>();
+    }
+    @Override public void rollback() throws DatabaseException {
+    }
+  }
+;
+  boolean failedExceptionThrown=false;
+  boolean errorExceptionThrown=false;
+  try {
+    preCondition.check(mssqlDb,changeLog,changeSet1);
+  }
+ catch (  PreconditionFailedException ex) {
+    failedExceptionThrown=true;
+  }
+catch (  PreconditionErrorException ex) {
+    errorExceptionThrown=true;
+  }
+  assertTrue(failedExceptionThrown);
+  assertFalse(errorExceptionThrown);
+}

@@ -1,0 +1,9 @@
+{
+  changeLog=new DatabaseChangeLog(null);
+  changeSet1=new ChangeSet("1","testAuthor",false,false,"path/changelog",null,null,null);
+  changeLog.addChangeSet(changeSet1);
+  CreateSequenceChange change1=new CreateSequenceChange();
+  change1.setSequenceName("seq_test");
+  change1.setStartValue(BigInteger.ZERO);
+  changeSet1.addChange(change1);
+}

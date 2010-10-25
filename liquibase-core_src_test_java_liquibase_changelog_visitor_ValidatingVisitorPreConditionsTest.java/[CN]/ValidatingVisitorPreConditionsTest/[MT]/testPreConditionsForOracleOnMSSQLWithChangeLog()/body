@@ -1,0 +1,26 @@
+{
+  PreconditionContainer preCondition=new PreconditionContainer();
+  preCondition.setOnFail(PreconditionContainer.FailOption.MARK_RAN.toString());
+  DBMSPrecondition dbmsPrecondition=new DBMSPrecondition();
+  dbmsPrecondition.setType("oracle");
+  preCondition.addNestedPrecondition(dbmsPrecondition);
+  changeSet1.setPreconditions(preCondition);
+  MSSQLDatabase mssqlDb=new MSSQLDatabase(){
+    @Override public List<RanChangeSet> getRanChangeSetList() throws DatabaseException {
+      return new ArrayList<RanChangeSet>();
+    }
+    @Override public void rollback() throws DatabaseException {
+    }
+  }
+;
+  String[] empty={};
+  boolean exceptionThrown=false;
+  try {
+    changeLog.validate(mssqlDb,empty);
+  }
+ catch (  LiquibaseException ex) {
+    System.out.println(ex.getMessage());
+    exceptionThrown=true;
+  }
+  assertFalse(exceptionThrown);
+}
