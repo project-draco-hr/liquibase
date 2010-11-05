@@ -1,0 +1,11 @@
+{
+  allConverters=new HashSet<TypeConverter>();
+  try {
+    for (    Class<? extends TypeConverter> converterClass : ServiceLocator.getInstance().findClasses(TypeConverter.class)) {
+      register(converterClass.newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

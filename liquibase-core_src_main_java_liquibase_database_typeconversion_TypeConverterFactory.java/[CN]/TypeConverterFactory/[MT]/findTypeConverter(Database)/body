@@ -5,15 +5,9 @@
     }
   }
 );
-  for (  Class<TypeConverter> converterClass : ServiceLocator.getInstance().findClasses(TypeConverter.class)) {
-    try {
-      TypeConverter converter=converterClass.newInstance();
-      if (converter.supports(database)) {
-        converters.add(converter);
-      }
-    }
- catch (    Exception e) {
-      throw new UnexpectedLiquibaseException(e);
+  for (  TypeConverter converter : allConverters) {
+    if (converter.supports(database)) {
+      converters.add(converter);
     }
   }
   return converters.last();
