@@ -39,6 +39,9 @@
  else   if (dataTypeName.equalsIgnoreCase("INTEGER")) {
     returnTypeName=getIntType();
   }
+ else   if (dataTypeName.equalsIgnoreCase("LONGBLOB")) {
+    returnTypeName=getLongBlobType();
+  }
  else   if (dataTypeName.equalsIgnoreCase("LONGVARBINARY")) {
     returnTypeName=getBlobType();
   }
