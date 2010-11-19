@@ -10,6 +10,7 @@ class ExecuteStatementCallback implements StatementCallback {
           statement=statement.replaceFirst("/\\s*/\\s*$","");
         }
         log.debug("Executing EXECUTE database command: " + statement);
+        stmt.setEscapeProcessing(false);
         stmt.execute(statement);
       }
       return null;
