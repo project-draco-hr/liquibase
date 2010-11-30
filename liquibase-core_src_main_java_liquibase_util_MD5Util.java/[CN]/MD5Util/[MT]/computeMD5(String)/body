@@ -11,5 +11,7 @@
     throw new UnexpectedLiquibaseException(e);
   }
   byte[] digestBytes=digest.digest();
-  return new String(encodeHex(digestBytes));
+  String returnString=new String(encodeHex(digestBytes));
+  LogFactory.getLogger().debug("Computed checksum for " + input + " as "+ returnString);
+  return returnString;
 }

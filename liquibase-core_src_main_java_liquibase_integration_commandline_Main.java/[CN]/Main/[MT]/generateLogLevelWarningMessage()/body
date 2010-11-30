@@ -4,6 +4,6 @@
     return "";
   }
  else {
-    return ".  For more information, use the --logLevel flag)";
+    return "\n\nFor more information, use the --logLevel flag)";
   }
 }

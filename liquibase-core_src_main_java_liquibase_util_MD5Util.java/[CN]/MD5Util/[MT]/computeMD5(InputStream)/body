@@ -11,5 +11,7 @@
     throw new RuntimeException(e);
   }
   byte[] digestBytes=digest.digest();
-  return new String(encodeHex(digestBytes));
+  String returnString=new String(encodeHex(digestBytes));
+  LogFactory.getLogger().debug("Computed checksum for " + returnString + " as "+ returnString);
+  return returnString;
 }
