@@ -1,5 +1,5 @@
 {
-  Element element=currentChangeLogFileDOM.createElement("column");
+  Element element=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),"column");
   if (columnConfig.getName() != null) {
     element.setAttribute("name",columnConfig.getName());
   }
@@ -38,7 +38,7 @@
   }
   ConstraintsConfig constraints=columnConfig.getConstraints();
   if (constraints != null) {
-    Element constraintsElement=currentChangeLogFileDOM.createElement("constraints");
+    Element constraintsElement=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),"constraints");
     if (constraints.getCheck() != null) {
       constraintsElement.setAttribute("check",constraints.getCheck());
     }

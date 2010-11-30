@@ -1,5 +1,5 @@
 {
-  Element node=currentChangeLogFileDOM.createElement(visitor.getName());
+  Element node=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),visitor.getName());
   try {
     List<Field> allFields=new ArrayList<Field>();
     Class classToExtractFieldsFrom=visitor.getClass();

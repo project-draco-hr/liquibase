@@ -1,5 +1,5 @@
 {
-  Element node=currentChangeLogFileDOM.createElement("changeSet");
+  Element node=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),"changeSet");
   node.setAttribute("id",changeSet.getId());
   node.setAttribute("author",changeSet.getAuthor());
   if (changeSet.isAlwaysRun()) {
@@ -26,7 +26,7 @@
     node.setAttribute("dbms",dbmsString.toString().replaceFirst(",$",""));
   }
   if (StringUtils.trimToNull(changeSet.getComments()) != null) {
-    Element commentsElement=currentChangeLogFileDOM.createElement("comment");
+    Element commentsElement=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),"comment");
     Text commentsText=currentChangeLogFileDOM.createTextNode(changeSet.getComments());
     commentsElement.appendChild(commentsText);
     node.appendChild(commentsElement);

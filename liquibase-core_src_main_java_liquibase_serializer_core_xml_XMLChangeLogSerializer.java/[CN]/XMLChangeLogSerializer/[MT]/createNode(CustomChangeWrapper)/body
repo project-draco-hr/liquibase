@@ -1,8 +1,8 @@
 {
-  Element customElement=currentChangeLogFileDOM.createElement("custom");
+  Element customElement=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),"custom");
   customElement.setAttribute("class",change.getClassName());
   for (  String param : change.getParams()) {
-    Element paramElement=currentChangeLogFileDOM.createElement("param");
+    Element paramElement=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),"param");
     paramElement.setAttribute("name",param);
     paramElement.setAttribute("value",change.getParamValues().get(param));
     customElement.appendChild(paramElement);
