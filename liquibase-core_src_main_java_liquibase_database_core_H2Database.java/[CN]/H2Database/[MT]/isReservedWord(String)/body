@@ -1,0 +1,3 @@
+{
+  return keywords.contains(objectName.toUpperCase());
+}

@@ -1,0 +1,3 @@
+{
+  return reservedWords.contains(objectName.toUpperCase());
+}

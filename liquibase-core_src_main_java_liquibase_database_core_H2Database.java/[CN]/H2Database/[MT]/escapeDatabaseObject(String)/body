@@ -1,6 +1,6 @@
 {
   if (objectName != null) {
-    if (keywords.contains(objectName.toUpperCase())) {
+    if (isReservedWord(objectName)) {
       return "\"" + objectName + "\"";
     }
   }

@@ -1,5 +1,5 @@
 {
-  if (objectName != null && (Pattern.compile("\\W").matcher(objectName).find() || reservedWords.contains(objectName.toUpperCase()))) {
+  if (objectName != null && (Pattern.compile("\\W").matcher(objectName).find() || isReservedWord(objectName))) {
     return "\"" + objectName + "\"";
   }
  else {
