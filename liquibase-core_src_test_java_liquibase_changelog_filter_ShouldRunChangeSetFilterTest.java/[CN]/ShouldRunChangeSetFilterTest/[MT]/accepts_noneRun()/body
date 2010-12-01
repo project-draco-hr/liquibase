@@ -3,5 +3,5 @@
   expect(database.getRanChangeSetList()).andReturn(new ArrayList<RanChangeSet>());
   replay(database);
   ShouldRunChangeSetFilter filter=new ShouldRunChangeSetFilter(database);
-  assertTrue(filter.accepts(new ChangeSet("1","testAuthor",false,false,"path/changelog",null,null,null)));
+  assertTrue(filter.accepts(new ChangeSet("1","testAuthor",false,false,"path/changelog",null,null)));
 }

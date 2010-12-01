@@ -1,5 +1,5 @@
 {
-  ChangeSet interestedChangeSet=new ChangeSet(getId(),getAuthor(),false,false,getChangeLogFile(),getChangeLogFile(),null,null,false);
+  ChangeSet interestedChangeSet=new ChangeSet(getId(),getAuthor(),false,false,getChangeLogFile(),null,null,false);
   RanChangeSet ranChangeSet;
   try {
     ranChangeSet=database.getRanChangeSet(interestedChangeSet);

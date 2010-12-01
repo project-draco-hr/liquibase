@@ -1,5 +1,5 @@
 {
   CountChangeSetFilter filter=new CountChangeSetFilter(1);
-  assertTrue(filter.accepts(new ChangeSet("a1","b1",false,false,"c1",null,null,null)));
-  assertFalse(filter.accepts(new ChangeSet("a2","b2",false,false,"c2",null,null,null)));
+  assertTrue(filter.accepts(new ChangeSet("a1","b1",false,false,"c1",null,null)));
+  assertFalse(filter.accepts(new ChangeSet("a2","b2",false,false,"c2",null,null)));
 }

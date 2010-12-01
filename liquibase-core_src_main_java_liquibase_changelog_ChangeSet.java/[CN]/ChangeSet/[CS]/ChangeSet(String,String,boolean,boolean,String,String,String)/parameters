@@ -3,7 +3,5 @@ String author
 boolean alwaysRun
 boolean runOnChange
 String filePath
-String physicalFilePath
 String contextList
 String dbmsList
-boolean runInTransaction

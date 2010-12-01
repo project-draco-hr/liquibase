@@ -1,3 +1,0 @@
-{
-  this(id,author,alwaysRun,runOnChange,filePath,physicalFilePath,contextList,dbmsList,true);
-}
