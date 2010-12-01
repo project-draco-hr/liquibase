@@ -1,4 +1,10 @@
 {
+  if (logger.getHandlers().length == 0) {
+    ConsoleHandler consoleHandler=new ConsoleHandler();
+    consoleHandler.setFormatter(getFormatter());
+    logger.addHandler(consoleHandler);
+    logger.setUseParentHandlers(false);
+  }
   if (logLevel == LogLevel.DEBUG) {
     logger.setLevel(Level.FINEST);
   }
