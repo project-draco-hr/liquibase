@@ -1,0 +1,15 @@
+{
+  boolean shouldSetHandler;
+  Logger loggerToCheckForHandlers=logger;
+  do {
+    shouldSetHandler=loggerToCheckForHandlers.getHandlers().length == 0;
+    loggerToCheckForHandlers=loggerToCheckForHandlers.getParent();
+  }
+ while (!shouldSetHandler && loggerToCheckForHandlers != null);
+  if (shouldSetHandler) {
+    ConsoleHandler consoleHandler=new ConsoleHandler();
+    consoleHandler.setFormatter(createFormatter());
+    logger.addHandler(consoleHandler);
+    logger.setUseParentHandlers(false);
+  }
+}
