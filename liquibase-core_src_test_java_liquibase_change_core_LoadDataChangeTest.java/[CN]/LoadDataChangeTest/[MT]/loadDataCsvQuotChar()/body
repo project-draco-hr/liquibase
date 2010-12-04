@@ -2,7 +2,9 @@
   LoadDataChange refactoring=new LoadDataChange();
   refactoring.setSchemaName("SCHEMA_NAME");
   refactoring.setTableName("TABLE_NAME");
-  refactoring.setFile("liquibase/change/core/sample.data1.csv");
+  refactoring.setFile("liquibase/change/core/sample.quotchar.tsv");
+  refactoring.setSeparator("\t");
+  refactoring.setQuotchar("\'");
   refactoring.setResourceAccessor(new ClassLoaderResourceAccessor());
   SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
   stdAssertOfLoaded(sqlStatements);

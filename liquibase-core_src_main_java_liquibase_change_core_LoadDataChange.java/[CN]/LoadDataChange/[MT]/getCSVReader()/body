@@ -14,6 +14,13 @@
  else {
     streamReader=new InputStreamReader(stream,getEncoding());
   }
-  CSVReader reader=new CSVReader(streamReader);
+  char quotchar;
+  if (0 == this.quotchar.length()) {
+    quotchar='\1';
+  }
+ else {
+    quotchar=this.quotchar.charAt(0);
+  }
+  CSVReader reader=new CSVReader(streamReader,separator.charAt(0),quotchar);
   return reader;
 }
