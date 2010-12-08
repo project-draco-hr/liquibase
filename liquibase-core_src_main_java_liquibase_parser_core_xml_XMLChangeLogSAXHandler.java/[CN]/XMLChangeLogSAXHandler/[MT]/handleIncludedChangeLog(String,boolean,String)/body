@@ -24,7 +24,7 @@
     databaseChangeLog.getPreconditions().addNestedPrecondition(preconditions);
   }
   for (  ChangeSet changeSet : changeLog.getChangeSets()) {
-    databaseChangeLog.addChangeSet(changeSet);
+    handleChangeSet(changeSet);
   }
   return true;
 }
