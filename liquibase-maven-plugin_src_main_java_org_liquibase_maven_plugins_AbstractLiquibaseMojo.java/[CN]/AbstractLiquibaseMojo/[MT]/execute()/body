@@ -1,5 +1,10 @@
 {
   getLog().info(MavenUtils.LOG_SEPARATOR);
+  AuthenticationInfo info=wagonManager.getAuthenticationInfo(server);
+  if (info != null) {
+    username=info.getUserName();
+    password=info.getPassword();
+  }
   String shouldRunProperty=System.getProperty(Liquibase.SHOULD_RUN_SYSTEM_PROPERTY);
   if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
     getLog().warn("Liquibase did not run because '" + Liquibase.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
