@@ -1,7 +1,7 @@
 {
   ValidationErrors validationErrors=new ValidationErrors();
   validationErrors.checkRequiredField("tableName",dropPrimaryKeyStatement.getTableName());
-  if (database instanceof PostgresDatabase || database instanceof FirebirdDatabase || database instanceof InformixDatabase) {
+  if (database instanceof FirebirdDatabase || database instanceof InformixDatabase) {
     validationErrors.checkRequiredField("constraintName",dropPrimaryKeyStatement.getConstraintName());
   }
   return validationErrors;
