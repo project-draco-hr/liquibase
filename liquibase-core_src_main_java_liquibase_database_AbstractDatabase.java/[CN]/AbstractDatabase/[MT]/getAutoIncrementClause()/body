@@ -1,3 +1,6 @@
 {
+  if (!supportsAutoIncrement()) {
+    return "";
+  }
   return "AUTO_INCREMENT";
 }
