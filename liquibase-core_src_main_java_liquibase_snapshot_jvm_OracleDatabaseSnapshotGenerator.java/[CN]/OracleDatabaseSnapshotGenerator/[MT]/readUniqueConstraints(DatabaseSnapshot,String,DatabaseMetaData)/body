@@ -38,7 +38,11 @@
     snapshot.getUniqueConstraints().addAll(foundUC);
   }
   finally {
-    rs.close();
+    try {
+      rs.close();
+    }
+ catch (    SQLException ignored) {
+    }
     if (statement != null) {
       statement.close();
     }

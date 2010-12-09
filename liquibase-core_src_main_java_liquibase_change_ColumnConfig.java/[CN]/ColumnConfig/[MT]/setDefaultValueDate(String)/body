@@ -2,11 +2,13 @@
   if (defaultValueDate == null || defaultValueDate.equalsIgnoreCase("null")) {
     this.defaultValueDate=null;
   }
-  try {
-    this.defaultValueDate=new ISODateFormat().parse(defaultValueDate);
-  }
- catch (  ParseException e) {
-    this.defaultValueComputed=new DatabaseFunction(defaultValueDate);
+ else {
+    try {
+      this.defaultValueDate=new ISODateFormat().parse(defaultValueDate);
+    }
+ catch (    ParseException e) {
+      this.defaultValueComputed=new DatabaseFunction(defaultValueDate);
+    }
   }
   return this;
 }

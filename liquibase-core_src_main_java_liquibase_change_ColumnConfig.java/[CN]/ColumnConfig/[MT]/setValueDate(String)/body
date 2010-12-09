@@ -2,11 +2,13 @@
   if (valueDate == null || valueDate.equalsIgnoreCase("null")) {
     this.valueDate=null;
   }
-  try {
-    this.valueDate=new ISODateFormat().parse(valueDate);
-  }
- catch (  ParseException e) {
-    this.valueComputed=new DatabaseFunction(valueDate);
+ else {
+    try {
+      this.valueDate=new ISODateFormat().parse(valueDate);
+    }
+ catch (    ParseException e) {
+      this.valueComputed=new DatabaseFunction(valueDate);
+    }
   }
   return this;
 }

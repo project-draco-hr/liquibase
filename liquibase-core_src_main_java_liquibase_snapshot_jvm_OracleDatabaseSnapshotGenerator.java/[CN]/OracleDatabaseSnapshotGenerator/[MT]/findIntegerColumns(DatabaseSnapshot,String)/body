@@ -4,11 +4,28 @@
     schema=database.convertRequestedSchemaToSchema(schema);
   }
   Statement statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
-  ResultSet integerListRS=statement.executeQuery("select TABLE_NAME, COLUMN_NAME from all_tab_columns where data_precision is null and data_scale = 0 and data_type = 'NUMBER' and owner = '" + schema + "'");
-  while (integerListRS.next()) {
-    integerList.add(integerListRS.getString("TABLE_NAME") + "." + integerListRS.getString("COLUMN_NAME"));
+  ResultSet integerListRS=null;
+  try {
+    integerListRS=statement.executeQuery("select TABLE_NAME, COLUMN_NAME from all_tab_columns where data_precision is null and data_scale = 0 and data_type = 'NUMBER' and owner = '" + schema + "'");
+    while (integerListRS.next()) {
+      integerList.add(integerListRS.getString("TABLE_NAME") + "." + integerListRS.getString("COLUMN_NAME"));
+    }
   }
-  JdbcUtils.closeResultSet(integerListRS);
-  JdbcUtils.closeStatement(statement);
+  finally {
+    if (integerListRS != null) {
+      try {
+        integerListRS.close();
+      }
+ catch (      SQLException ignore) {
+      }
+    }
+    if (statement != null) {
+      try {
+        statement.close();
+      }
+ catch (      SQLException ignore) {
+      }
+    }
+  }
   return integerList;
 }

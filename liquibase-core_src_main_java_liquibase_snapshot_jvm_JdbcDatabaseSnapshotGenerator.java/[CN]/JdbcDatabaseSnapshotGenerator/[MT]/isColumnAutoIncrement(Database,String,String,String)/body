@@ -13,10 +13,18 @@
   }
   finally {
     if (selectRS != null) {
-      selectRS.close();
+      try {
+        selectRS.close();
+      }
+ catch (      SQLException ignored) {
+      }
     }
     if (statement != null) {
-      statement.close();
+      try {
+        statement.close();
+      }
+ catch (      SQLException ignored) {
+      }
     }
   }
   return autoIncrement;

@@ -16,7 +16,13 @@
     }
   }
   finally {
-    rs.close();
+    if (rs != null) {
+      try {
+        rs.close();
+      }
+ catch (      SQLException ignored) {
+      }
+    }
     if (stmt != null)     stmt.close();
   }
 }

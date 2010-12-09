@@ -1,49 +1,67 @@
 {
   Database database=snapshot.getDatabase();
   updateListeners("Reading columns for " + database.toString() + " ...");
-  Statement selectStatement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
-  ResultSet rs=databaseMetaData.getColumns(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),null,null);
-  while (rs.next()) {
-    Column column=readColumn(rs,database);
-    if (column == null) {
-      continue;
-    }
-    Table tempTable=column.getTable();
-    column.setTable(null);
-    Table table;
-    if (database.isLiquibaseTable(tempTable.getName())) {
-      if (tempTable.getName().equalsIgnoreCase(database.getDatabaseChangeLogTableName())) {
-        table=snapshot.getDatabaseChangeLogTable();
-      }
- else       if (tempTable.getName().equalsIgnoreCase(database.getDatabaseChangeLogLockTableName())) {
-        table=snapshot.getDatabaseChangeLogLockTable();
-      }
- else {
-        throw new UnexpectedLiquibaseException("Unknown liquibase table: " + tempTable.getName());
-      }
-    }
- else {
-      table=snapshot.getTable(tempTable.getName());
-    }
-    if (table == null) {
-      View view=snapshot.getView(tempTable.getName());
-      if (view == null) {
-        LogFactory.getLogger().debug("Could not find table or view " + tempTable.getName() + " for column "+ column.getName());
+  Statement selectStatement=null;
+  ResultSet rs=null;
+  try {
+    selectStatement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+    rs=databaseMetaData.getColumns(database.convertRequestedSchemaToCatalog(schema),database.convertRequestedSchemaToSchema(schema),null,null);
+    while (rs.next()) {
+      Column column=readColumn(rs,database);
+      if (column == null) {
         continue;
       }
+      Table tempTable=column.getTable();
+      column.setTable(null);
+      Table table;
+      if (database.isLiquibaseTable(tempTable.getName())) {
+        if (tempTable.getName().equalsIgnoreCase(database.getDatabaseChangeLogTableName())) {
+          table=snapshot.getDatabaseChangeLogTable();
+        }
+ else         if (tempTable.getName().equalsIgnoreCase(database.getDatabaseChangeLogLockTableName())) {
+          table=snapshot.getDatabaseChangeLogLockTable();
+        }
  else {
-        column.setView(view);
-        column.setAutoIncrement(false);
-        view.getColumns().add(column);
+          throw new UnexpectedLiquibaseException("Unknown liquibase table: " + tempTable.getName());
+        }
+      }
+ else {
+        table=snapshot.getTable(tempTable.getName());
+      }
+      if (table == null) {
+        View view=snapshot.getView(tempTable.getName());
+        if (view == null) {
+          LogFactory.getLogger().debug("Could not find table or view " + tempTable.getName() + " for column "+ column.getName());
+          continue;
+        }
+ else {
+          column.setView(view);
+          column.setAutoIncrement(false);
+          view.getColumns().add(column);
+        }
+      }
+ else {
+        column.setTable(table);
+        column.setAutoIncrement(isColumnAutoIncrement(database,table.getSchema(),table.getName(),column.getName()));
+        table.getColumns().add(column);
+      }
+      column.setPrimaryKey(snapshot.isPrimaryKey(column));
+    }
+  }
+  finally {
+    if (rs != null) {
+      try {
+        rs.close();
+      }
+ catch (      SQLException ignored) {
       }
     }
- else {
-      column.setTable(table);
-      column.setAutoIncrement(isColumnAutoIncrement(database,table.getSchema(),table.getName(),column.getName()));
-      table.getColumns().add(column);
+    if (selectStatement != null) {
+      try {
+        selectStatement.close();
+      }
+ catch (      SQLException ignored) {
+      }
     }
-    column.setPrimaryKey(snapshot.isPrimaryKey(column));
   }
-  rs.close();
-  selectStatement.close();
 }

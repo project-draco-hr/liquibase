@@ -12,6 +12,10 @@
     }
   }
   finally {
-    rs.close();
+    try {
+      rs.close();
+    }
+ catch (    SQLException ignore) {
+    }
   }
 }
