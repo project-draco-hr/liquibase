@@ -2,6 +2,7 @@
   if (StringUtils.trimToNull(getOutputDirectory()) == null) {
     throw new BuildException("dbDoc requires outputDirectory to be set");
   }
+  super.execute();
   Liquibase liquibase=null;
   try {
     liquibase=createLiquibase();

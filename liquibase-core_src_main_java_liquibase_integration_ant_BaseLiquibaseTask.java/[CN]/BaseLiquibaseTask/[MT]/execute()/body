@@ -1,0 +1,6 @@
+{
+  super.execute();
+  AntClassLoader loader=getProject().createClassLoader(classpath);
+  loader.setParent(this.getClass().getClassLoader());
+  loader.setThreadContextLoader();
+}

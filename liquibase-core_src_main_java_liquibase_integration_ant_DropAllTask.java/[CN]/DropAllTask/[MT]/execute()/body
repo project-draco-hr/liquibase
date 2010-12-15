@@ -1,4 +1,8 @@
 {
+  super.execute();
+  if (!shouldRun()) {
+    return;
+  }
   Liquibase liquibase=null;
   try {
     liquibase=createLiquibase();
