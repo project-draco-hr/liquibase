@@ -7,7 +7,9 @@
         if (idx1 == idx2) {
           continue;
         }
-        if (idx1.getName().equalsIgnoreCase(idx2.getName()) && idx1.getTable().getName().equalsIgnoreCase(idx2.getTable().getName())) {
+        String index1Name=StringUtils.trimToEmpty(idx1.getName());
+        String index2Name=StringUtils.trimToEmpty(idx2.getName());
+        if (index1Name.equalsIgnoreCase(index2Name) && idx1.getTable().getName().equalsIgnoreCase(idx2.getTable().getName())) {
           for (          String column : idx2.getColumns()) {
             if (!idx1.getColumns().contains(column)) {
               idx1.getColumns().add(column);

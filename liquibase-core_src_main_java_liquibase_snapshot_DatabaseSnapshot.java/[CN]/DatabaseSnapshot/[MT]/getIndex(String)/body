@@ -1,6 +1,6 @@
 {
   for (  Index index : getIndexes()) {
-    if (index.getName().equalsIgnoreCase(indexName)) {
+    if (StringUtils.trimToEmpty(index.getName()).equalsIgnoreCase(indexName)) {
       return index;
     }
   }
