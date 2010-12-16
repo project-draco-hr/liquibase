@@ -1,17 +1,9 @@
 {
   changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
-  LockService lockService=LockService.getInstance(database);
-  lockService.waitForLock();
-  try {
-    DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
-    checkDatabaseChangeLogTable(false,changeLog,null);
-    changeLog.validate(database,contexts);
-    ChangeLogIterator logIterator=getStandardChangelogIterator(contexts,changeLog);
-    ListVisitor visitor=new ListVisitor();
-    logIterator.run(visitor,database);
-    return visitor.getSeenChangeSets();
-  }
-  finally {
-    lockService.releaseLock();
-  }
+  DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
+  changeLog.validate(database,contexts);
+  ChangeLogIterator logIterator=getStandardChangelogIterator(contexts,changeLog);
+  ListVisitor visitor=new ListVisitor();
+  logIterator.run(visitor,database);
+  return visitor.getSeenChangeSets();
 }
