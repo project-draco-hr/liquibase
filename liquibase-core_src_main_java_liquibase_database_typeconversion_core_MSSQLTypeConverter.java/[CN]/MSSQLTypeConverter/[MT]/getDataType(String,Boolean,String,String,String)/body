@@ -6,7 +6,7 @@
   if (columnTypeString.equalsIgnoreCase("varbinary") && (precision == null || Long.valueOf(precision) > 8000)) {
     precision="max";
   }
-  DataType returnTypeName=super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision);
+  DataType returnTypeName=super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision,additionalInformation);
   if (returnTypeName instanceof CustomType) {
     boolean returnTypeChanged=false;
     if (columnTypeString.toUpperCase().startsWith("NVARCHAR")) {

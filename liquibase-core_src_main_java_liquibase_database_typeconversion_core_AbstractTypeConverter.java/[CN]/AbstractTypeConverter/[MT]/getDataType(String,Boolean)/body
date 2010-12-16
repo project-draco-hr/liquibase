@@ -1,6 +1,7 @@
 {
   String dataTypeName=null;
   String precision=null;
+  String additionalInformation=null;
   if (columnTypeString.startsWith("java.sql.Types") && columnTypeString.contains("(")) {
     precision=columnTypeString.substring(columnTypeString.indexOf("(") + 1,columnTypeString.indexOf(")"));
     dataTypeName=columnTypeString.substring(columnTypeString.lastIndexOf(".") + 1,columnTypeString.indexOf("("));
@@ -15,5 +16,6 @@
  else {
     dataTypeName=columnTypeString;
   }
-  return getDataType(columnTypeString,autoIncrement,dataTypeName,precision);
+  additionalInformation=StringUtils.trimToNull(columnTypeString.replaceFirst(".*\\)",""));
+  return getDataType(columnTypeString,autoIncrement,dataTypeName,precision,additionalInformation);
 }

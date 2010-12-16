@@ -84,5 +84,6 @@
     throw new UnexpectedLiquibaseException("Could not determine " + dataTypeName + " for "+ this.getClass().getName());
   }
   addPrecisionToType(precision,returnTypeName);
+  returnTypeName.setAdditionalInformation(additionalInformation);
   return returnTypeName;
 }

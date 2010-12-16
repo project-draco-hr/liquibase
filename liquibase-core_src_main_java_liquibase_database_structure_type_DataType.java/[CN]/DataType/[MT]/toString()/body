@@ -10,5 +10,6 @@
     }
     returnString+=")";
   }
-  return returnString;
+  returnString+=" " + StringUtils.trimToEmpty(additionalInformation);
+  return returnString.trim();
 }

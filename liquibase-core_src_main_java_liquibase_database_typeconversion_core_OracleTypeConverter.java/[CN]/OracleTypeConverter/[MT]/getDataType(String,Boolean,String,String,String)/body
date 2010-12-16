@@ -1,5 +1,5 @@
 {
-  DataType returnTypeName=super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision);
+  DataType returnTypeName=super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision,additionalInformation);
   if (returnTypeName instanceof CustomType) {
     if (columnTypeString.toUpperCase().startsWith("VARCHAR2")) {
       returnTypeName=getVarcharType();

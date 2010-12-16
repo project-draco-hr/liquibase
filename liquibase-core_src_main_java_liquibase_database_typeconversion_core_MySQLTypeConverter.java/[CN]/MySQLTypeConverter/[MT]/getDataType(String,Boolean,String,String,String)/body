@@ -2,5 +2,5 @@
   if (columnTypeString.equalsIgnoreCase("timestamp")) {
     return new DateTimeType("TIMESTAMP");
   }
-  return super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision);
+  return super.getDataType(columnTypeString,autoIncrement,dataTypeName,precision,additionalInformation);
 }

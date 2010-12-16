@@ -1,0 +1,9 @@
+{
+  for (  Database database : TestContext.getInstance().getAllDatabases()) {
+    CreateTableStatement statement=new CreateTableStatement(SCHEMA_NAME,TABLE_NAME);
+    statement.addColumn(COLUMN_NAME1,TypeConverterFactory.getInstance().findTypeConverter(database).getDataType("int(11) unsigned",false));
+    if (database instanceof MySQLDatabase) {
+      assertEquals("CREATE TABLE `SCHEMA_NAME`.`TABLE_NAME` (`COLUMN1_NAME` INT(11) unsigned)",this.generatorUnderTest.generateSql(statement,database,null)[0].toSql());
+    }
+  }
+}
