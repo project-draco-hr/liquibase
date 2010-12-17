@@ -1,5 +1,5 @@
 {
-  this.statementUnderTest=new MarkChangeSetRanStatement(new ChangeSet("a","b",false,false,"d","e","f"),ChangeSet.ExecType.EXECUTED);
+  this.statementUnderTest=new MarkChangeSetRanStatement(new ChangeSet("a","b",false,false,"c","e","f"),ChangeSet.ExecType.EXECUTED);
   String version=LiquibaseUtil.getBuildVersion().replaceAll("SNAPSHOT","SNP");
   assertCorrect("insert into [dbo].[databasechangelog] ([author], [comments], [dateexecuted], [description], [exectype], [filename], [id], [liquibase], [md5sum], [orderexecuted]) values ('b', '', getdate(), 'empty', 'executed', 'c', 'a', '" + version + "', '3:d41d8cd98f00b204e9800998ecf8427e', 1)",MSSQLDatabase.class);
   assertCorrect("insert into [databasechangelog] ([author], [comments], [dateexecuted], [description], [exectype], [filename], [id], [liquibase], [md5sum], [orderexecuted]) values ('b', '', timestamp, 'empty', 'executed', 'c', 'a', '" + version + "', '3:d41d8cd98f00b204e9800998ecf8427e', 1)",MaxDBDatabase.class);
