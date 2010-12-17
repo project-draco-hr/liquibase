@@ -1,0 +1,8 @@
+{
+  AuthenticationInfo info=wagonManager.getAuthenticationInfo(server);
+  if (info != null) {
+    username=info.getUserName();
+    password=info.getPassword();
+  }
+  super.execute();
+}
