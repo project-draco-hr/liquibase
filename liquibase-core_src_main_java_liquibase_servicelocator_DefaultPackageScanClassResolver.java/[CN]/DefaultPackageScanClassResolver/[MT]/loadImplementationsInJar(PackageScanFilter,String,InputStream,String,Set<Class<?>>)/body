@@ -3,7 +3,12 @@
   try {
     if (!classesByJarUrl.containsKey(urlPath)) {
       Set<String> names=new HashSet<String>();
-      jarStream=new JarInputStream(stream);
+      if (stream instanceof JarInputStream) {
+        jarStream=(JarInputStream)stream;
+      }
+ else {
+        jarStream=new JarInputStream(stream);
+      }
       JarEntry entry;
       while ((entry=jarStream.getNextJarEntry()) != null) {
         String name=entry.getName();

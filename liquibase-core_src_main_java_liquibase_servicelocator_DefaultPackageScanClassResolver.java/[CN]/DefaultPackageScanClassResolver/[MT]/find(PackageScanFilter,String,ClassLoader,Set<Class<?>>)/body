@@ -19,6 +19,9 @@
       url=customResourceLocator(url);
       String urlPath=url.getFile();
       urlPath=URLDecoder.decode(urlPath,"UTF-8");
+      if (url.getProtocol().equals("vfs") && !urlPath.startsWith("vfs")) {
+        urlPath="vfs:" + urlPath;
+      }
       log.debug("Decoded urlPath: " + urlPath + " with protocol: "+ url.getProtocol());
       if (urlPath.startsWith("file:")) {
         try {
@@ -34,6 +37,9 @@
         log.debug("It's a virtual osgi bundle, skipping");
         continue;
       }
+      if (urlPath.contains(".jar/")) {
+        urlPath=urlPath.replace(".jar/",".jar!/");
+      }
       if (urlPath.indexOf('!') > 0) {
         urlPath=urlPath.substring(0,urlPath.indexOf('!'));
       }
@@ -45,9 +51,9 @@
       }
  else {
         InputStream stream;
-        if (urlPath.startsWith("http:") || urlPath.startsWith("https:") || urlPath.startsWith("sonicfs:")) {
-          log.debug("Loading from jar using http/https: " + urlPath);
+        if (urlPath.startsWith("http:") || urlPath.startsWith("https:") || urlPath.startsWith("sonicfs:")|| urlPath.startsWith("vfs:")) {
           URL urlStream=new URL(urlPath);
+          log.debug("Loading from jar using " + urlStream.getProtocol() + ": "+ urlPath);
           URLConnection con=urlStream.openConnection();
           con.setUseCaches(false);
           stream=con.getInputStream();
