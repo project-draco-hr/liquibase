@@ -1,6 +1,11 @@
 {
   String methodName="set" + propertyName.substring(0,1).toUpperCase(Locale.ENGLISH) + propertyName.substring(1);
-  Method[] methods=object.getClass().getMethods();
+  Method[] methods;
+  methods=methodCache.get(object.getClass());
+  if (methods == null) {
+    methods=object.getClass().getMethods();
+    methodCache.put(object.getClass(),methods);
+  }
   for (  Method method : methods) {
     if (method.getName().equals(methodName)) {
       Class<?> parameterType=method.getParameterTypes()[0];
