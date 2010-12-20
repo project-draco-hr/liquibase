@@ -16,7 +16,7 @@
   }
   FileSystemResourceAccessor fsOpener=new FileSystemResourceAccessor();
   CommandLineResourceAccessor clOpener=new CommandLineResourceAccessor(classLoader);
-  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultSchemaName,this.databaseClass);
+  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultSchemaName,this.databaseClass,this.driverPropertiesFile);
   try {
     CompositeResourceAccessor fileOpener=new CompositeResourceAccessor(fsOpener,clOpener);
     if ("diff".equalsIgnoreCase(command)) {

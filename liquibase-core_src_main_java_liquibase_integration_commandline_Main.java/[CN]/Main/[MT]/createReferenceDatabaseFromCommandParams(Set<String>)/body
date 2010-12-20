@@ -30,5 +30,5 @@
   if (url == null) {
     throw new CommandLineParsingException("referenceUrl parameter missing");
   }
-  return CommandLineUtils.createDatabaseObject(classLoader,url,username,password,driver,defaultSchemaName,null);
+  return CommandLineUtils.createDatabaseObject(classLoader,url,username,password,driver,defaultSchemaName,null,null);
 }

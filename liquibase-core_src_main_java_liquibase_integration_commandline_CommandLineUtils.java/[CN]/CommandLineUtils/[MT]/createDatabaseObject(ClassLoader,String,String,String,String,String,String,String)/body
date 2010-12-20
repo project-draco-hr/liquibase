@@ -21,16 +21,25 @@
  catch (    Exception e) {
       throw new RuntimeException("Cannot find database driver: " + e.getMessage());
     }
-    Properties info=new Properties();
+    Properties driverProperties=new Properties();
     if (username != null) {
-      info.put("user",username);
+      driverProperties.put("user",username);
     }
     if (password != null) {
-      info.put("password",password);
+      driverProperties.put("password",password);
     }
-    Connection connection=driverObject.connect(url,info);
+    if (null != driverPropertiesFile) {
+      File propertiesFile=new File(driverPropertiesFile);
+      if (propertiesFile.exists()) {
+        driverProperties.load(new FileInputStream(propertiesFile));
+      }
+ else {
+        throw new RuntimeException("Can't open JDBC Driver specific properties from the file: '" + driverPropertiesFile + "'");
+      }
+    }
+    Connection connection=driverObject.connect(url,driverProperties);
     if (connection == null) {
-      throw new DatabaseException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
+      throw new DatabaseException("Connection could not be created to " + url + " with driver "+ driverObject.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
     }
     Database database=databaseFactory.findCorrectDatabaseImplementation(new JdbcConnection(connection));
     database.setDefaultSchemaName(StringUtils.trimToNull(defaultSchemaName));
