@@ -1,0 +1,3 @@
+{
+  super("Mssql","jdbc:sqlserver://" + getDatabaseServerHostname("Mssql") + ":1433;databaseName=LiquibaseCS");
+}
