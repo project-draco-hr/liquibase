@@ -1,4 +1,5 @@
 {
   this.value=value;
   this.ranBefore=ranBefore;
+  this.ran=ran;
 }
