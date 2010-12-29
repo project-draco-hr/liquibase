@@ -1,4 +1,4 @@
 {
-  System.out.println("gemnerating");
+  System.out.println("generating");
   return super.generateSql(insertOrUpdateStatement,database,sqlGeneratorChain);
 }
