@@ -1,0 +1,9 @@
+{
+  try {
+    return getConnection().getCatalog();
+  }
+ catch (  DatabaseException e) {
+    LogFactory.getLogger().info("Error getting connection catalog.  Using default value",e);
+  }
+  return super.getDefaultSchemaName();
+}

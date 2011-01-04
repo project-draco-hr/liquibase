@@ -33,10 +33,5 @@
  else {
     returnValue=booleanType.getFalseBooleanValue();
   }
-  if (returnValue.matches("\\d+")) {
-    return returnValue;
-  }
- else {
-    return "'" + returnValue + "'";
-  }
+  return returnValue;
 }

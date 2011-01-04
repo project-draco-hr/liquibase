@@ -8,6 +8,8 @@
   if (statement.getOnUpdate() != null) {
     if ((database instanceof OracleDatabase) && statement.getOnUpdate().equalsIgnoreCase("RESTRICT")) {
     }
+ else     if (database instanceof InformixDatabase) {
+    }
  else {
       sb.append(" ON UPDATE ").append(statement.getOnUpdate());
     }
@@ -16,6 +18,8 @@
     if ((database instanceof OracleDatabase) && (statement.getOnDelete().equalsIgnoreCase("RESTRICT") || statement.getOnDelete().equalsIgnoreCase("NO ACTION"))) {
     }
  else     if ((database instanceof MSSQLDatabase) && statement.getOnDelete().equalsIgnoreCase("RESTRICT")) {
+    }
+ else     if (database instanceof InformixDatabase && !(statement.getOnDelete().equalsIgnoreCase("CASCADE"))) {
     }
  else {
       sb.append(" ON DELETE ").append(statement.getOnDelete());
