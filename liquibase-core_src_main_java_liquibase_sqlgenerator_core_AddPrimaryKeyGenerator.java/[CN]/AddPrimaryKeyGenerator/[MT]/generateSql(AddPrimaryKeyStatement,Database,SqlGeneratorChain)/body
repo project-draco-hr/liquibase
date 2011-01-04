@@ -3,9 +3,6 @@
   if (statement.getConstraintName() == null || database instanceof MySQLDatabase || database instanceof SybaseASADatabase) {
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ADD PRIMARY KEY ("+ database.escapeColumnNameList(statement.getColumnNames())+ ")";
   }
- else   if (database instanceof InformixDatabase) {
-    sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ADD CONSTRAINT PRIMARY KEY ("+ database.escapeColumnNameList(statement.getColumnNames())+ ") CONSTRAINT "+ database.escapeConstraintName(statement.getConstraintName());
-  }
  else {
     sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ADD CONSTRAINT "+ database.escapeConstraintName(statement.getConstraintName())+ " PRIMARY KEY ("+ database.escapeColumnNameList(statement.getColumnNames())+ ")";
   }
