@@ -1,8 +1,8 @@
 {
   Database database=snapshot.getDatabase();
-  updateListeners("Reading sequences for " + database.toString() + " ...");
-  String convertedSchemaName=database.convertRequestedSchemaToSchema(schema);
   if (database.supportsSequences()) {
+    updateListeners("Reading sequences for " + database.toString() + " ...");
+    String convertedSchemaName=database.convertRequestedSchemaToSchema(schema);
     List<String> sequenceNames=(List<String>)ExecutorService.getInstance().getExecutor(database).queryForList(new SelectSequencesStatement(schema),String.class);
     if (sequenceNames != null) {
       for (      String sequenceName : sequenceNames) {
@@ -12,5 +12,8 @@
         snapshot.getSequences().add(seq);
       }
     }
+  }
+ else {
+    updateListeners("Sequences not supported for " + database.toString() + " ...");
   }
 }
