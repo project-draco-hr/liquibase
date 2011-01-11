@@ -1,12 +1,13 @@
 {
-  DatabaseSnapshot snapshot;
   try {
-    snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,getSchemaName(),null);
+    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasView(getSchemaName(),getViewName(),database)) {
+      throw new PreconditionFailedException("View " + database.escapeTableName(getSchemaName(),getViewName()) + " does not exist",changeLog,this);
+    }
   }
- catch (  DatabaseException e) {
+ catch (  PreconditionFailedException e) {
+    throw e;
+  }
+catch (  Exception e) {
     throw new PreconditionErrorException(e,changeLog,this);
-  }
-  if (snapshot.getView(getViewName()) == null) {
-    throw new PreconditionFailedException("View " + database.escapeStringForDatabase(getViewName()) + " does not exist",changeLog,this);
   }
 }
