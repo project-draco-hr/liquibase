@@ -2,10 +2,13 @@
   if (database == null) {
     return;
   }
-  Liquibase liquibase=createLiquibase(encodingChangeLog);
+  Liquibase liquibase=createLiquibase("changelogs/common/encoding.utf8.changelog.xml");
   liquibase.update(this.contexts);
   DatabaseSnapshot utf8Snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
-  DatabaseSnapshot iso88951Snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,DatabaseTestContext.ALT_SCHEMA,null);
+  clearDatabase(liquibase);
+  liquibase=createLiquibase("changelogs/common/encoding.latin1.changelog.xml");
+  liquibase.update(this.contexts);
+  DatabaseSnapshot iso88951Snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
   Diff[] diffs=new Diff[2];
   diffs[0]=new Diff(utf8Snapshot,iso88951Snapshot);
   diffs[0].setDiffData(true);
