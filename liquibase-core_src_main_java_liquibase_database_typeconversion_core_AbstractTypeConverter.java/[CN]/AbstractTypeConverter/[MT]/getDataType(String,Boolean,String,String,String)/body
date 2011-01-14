@@ -3,7 +3,7 @@
   if (dataTypeName.equalsIgnoreCase("BIGINT")) {
     returnTypeName=getBigIntType();
   }
- else   if (dataTypeName.equalsIgnoreCase("NUMBER")) {
+ else   if (dataTypeName.equalsIgnoreCase("NUMBER") || dataTypeName.equalsIgnoreCase("NUMERIC")) {
     returnTypeName=getNumberType();
   }
  else   if (dataTypeName.equalsIgnoreCase("BLOB")) {
@@ -73,12 +73,7 @@
     returnTypeName=getNVarcharType();
   }
  else {
-    if (columnTypeString.startsWith("java.sql.Types")) {
-      returnTypeName=getTypeFromMetaData(dataTypeName);
-    }
- else {
-      return new CustomType(columnTypeString,0,2);
-    }
+    return new CustomType(columnTypeString,0,2);
   }
   if (returnTypeName == null) {
     throw new UnexpectedLiquibaseException("Could not determine " + dataTypeName + " for "+ this.getClass().getName());
