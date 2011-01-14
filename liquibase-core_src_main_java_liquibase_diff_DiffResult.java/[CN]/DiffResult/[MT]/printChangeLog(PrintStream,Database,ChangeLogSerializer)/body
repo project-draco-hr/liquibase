@@ -1,0 +1,26 @@
+{
+  List<ChangeSet> changeSets=new ArrayList<ChangeSet>();
+  addMissingTableChanges(changeSets,targetDatabase);
+  addMissingColumnChanges(changeSets,targetDatabase);
+  addChangedColumnChanges(changeSets);
+  addMissingPrimaryKeyChanges(changeSets);
+  addUnexpectedPrimaryKeyChanges(changeSets);
+  addUnexpectedForeignKeyChanges(changeSets);
+  addMissingUniqueConstraintChanges(changeSets);
+  addMissingIndexChanges(changeSets);
+  addUnexpectedUniqueConstraintChanges(changeSets);
+  if (diffData) {
+    addInsertDataChanges(changeSets,dataDir);
+  }
+  addMissingForeignKeyChanges(changeSets);
+  addUnexpectedIndexChanges(changeSets);
+  addUnexpectedColumnChanges(changeSets);
+  addMissingSequenceChanges(changeSets);
+  addUnexpectedSequenceChanges(changeSets);
+  addMissingViewChanges(changeSets);
+  addUnexpectedViewChanges(changeSets);
+  addChangedViewChanges(changeSets);
+  addUnexpectedTableChanges(changeSets);
+  changeLogSerializer.write(changeSets,out);
+  out.flush();
+}

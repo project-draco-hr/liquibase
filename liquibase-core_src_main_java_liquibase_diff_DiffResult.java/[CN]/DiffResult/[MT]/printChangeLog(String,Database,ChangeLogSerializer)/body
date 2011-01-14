@@ -3,13 +3,13 @@
   if (!file.exists()) {
     LogFactory.getLogger().info(file + " does not exist, creating");
     FileOutputStream stream=new FileOutputStream(file);
-    printChangeLog(new PrintStream(stream),targetDatabase,xmlWriter);
+    printChangeLog(new PrintStream(stream),targetDatabase,changeLogSerializer);
     stream.close();
   }
  else {
     LogFactory.getLogger().info(file + " exists, appending");
     ByteArrayOutputStream out=new ByteArrayOutputStream();
-    printChangeLog(new PrintStream(out),targetDatabase,xmlWriter);
+    printChangeLog(new PrintStream(out),targetDatabase,changeLogSerializer);
     String xml=new String(out.toByteArray());
     xml=xml.replaceFirst("(?ms).*<databaseChangeLog[^>]*>","");
     xml=xml.replaceFirst("</databaseChangeLog>","");

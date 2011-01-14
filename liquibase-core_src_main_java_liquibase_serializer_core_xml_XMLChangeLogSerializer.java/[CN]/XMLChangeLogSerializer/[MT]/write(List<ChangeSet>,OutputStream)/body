@@ -1,0 +1,22 @@
+{
+  DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+  DocumentBuilder documentBuilder;
+  try {
+    documentBuilder=factory.newDocumentBuilder();
+  }
+ catch (  ParserConfigurationException e) {
+    throw new RuntimeException(e);
+  }
+  documentBuilder.setEntityResolver(new LiquibaseEntityResolver());
+  Document doc=documentBuilder.newDocument();
+  Element changeLogElement=doc.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),"databaseChangeLog");
+  changeLogElement.setAttribute("xmlns",XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace());
+  changeLogElement.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
+  changeLogElement.setAttribute("xsi:schemaLocation","http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-" + XMLChangeLogSAXParser.getSchemaVersion() + ".xsd");
+  doc.appendChild(changeLogElement);
+  setCurrentChangeLogFileDOM(doc);
+  for (  ChangeSet changeSet : changeSets) {
+    doc.getDocumentElement().appendChild(createNode(changeSet));
+  }
+  new DefaultXmlWriter().write(doc,out);
+}

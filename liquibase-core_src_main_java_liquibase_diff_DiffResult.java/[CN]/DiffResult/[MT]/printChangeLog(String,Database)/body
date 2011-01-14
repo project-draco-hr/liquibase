@@ -1,3 +1,4 @@
 {
-  this.printChangeLog(changeLogFile,targetDatabase,new DefaultXmlWriter());
+  ChangeLogSerializer changeLogSerializer=serializerFactory.getSerializer(changeLogFile);
+  this.printChangeLog(changeLogFile,targetDatabase,changeLogSerializer);
 }
