@@ -1,0 +1,3 @@
+{
+  liquibase.reportStatus(true,contexts,new OutputStreamWriter(System.out));
+}
