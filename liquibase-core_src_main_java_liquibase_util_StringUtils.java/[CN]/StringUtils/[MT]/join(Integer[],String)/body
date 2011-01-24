@@ -1,0 +1,10 @@
+{
+  if (array == null) {
+    return null;
+  }
+  int[] ints=new int[array.length];
+  for (int i=0; i < ints.length; i++) {
+    ints[i]=array[i];
+  }
+  return StringUtils.join(ints,delimiter);
+}
