@@ -8,7 +8,10 @@
   }
  else   if (newValue instanceof Date) {
     Date date=(Date)newValue;
-    sqlString=database.getDateLiteral(new java.sql.Timestamp(date.getTime()));
+    if (date.getClass().equals(java.util.Date.class)) {
+      date=new java.sql.Date(date.getTime());
+    }
+    sqlString=database.getDateLiteral(date);
   }
  else   if (newValue instanceof Boolean) {
     if (((Boolean)newValue)) {
