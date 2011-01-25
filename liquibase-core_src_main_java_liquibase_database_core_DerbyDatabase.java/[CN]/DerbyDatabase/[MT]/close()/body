@@ -14,6 +14,7 @@
       ((Driver)Class.forName(driverName).newInstance()).connect(url,null);
     }
  catch (    Exception e) {
+      LogFactory.getLogger().severe("Error closing derby cleanly",e);
     }
   }
 }
