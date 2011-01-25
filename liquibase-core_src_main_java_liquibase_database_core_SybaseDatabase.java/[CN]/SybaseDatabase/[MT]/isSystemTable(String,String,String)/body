@@ -1,3 +1,3 @@
 {
-  return super.isSystemTable(catalogName,schemaName,tableName) || schemaName.equals("sys") || schemaName.equals("sybfi");
+  return super.isSystemTable(catalogName,schemaName,tableName) || schemaName.equals("sys") || tableName.toLowerCase().startsWith("sybfi");
 }
