@@ -4,13 +4,14 @@
   }
   super.execute();
   Liquibase liquibase=null;
+  Database referenceDatabase=null;
   try {
     PrintStream writer=createPrintStream();
     if (writer == null && getChangeLogFile() == null) {
       throw new BuildException("diffDatabase requires outputFile or changeLogFile to be set");
     }
     liquibase=createLiquibase();
-    Database referenceDatabase=createDatabaseObject(getReferenceDriver(),getReferenceUrl(),getReferenceUsername(),getReferencePassword(),getReferenceDefaultSchemaName(),getDatabaseClass());
+    referenceDatabase=createDatabaseObject(getReferenceDriver(),getReferenceUrl(),getReferenceUsername(),getReferencePassword(),getReferenceDefaultSchemaName(),getDatabaseClass());
     Diff diff=new Diff(referenceDatabase,liquibase.getDatabase());
     if (getDiffTypes() != null) {
       diff.setDiffTypes(getDiffTypes());
@@ -29,6 +30,18 @@
     throw new BuildException(e);
   }
  finally {
-    closeDatabase(liquibase);
+    try {
+      closeDatabase(liquibase);
+    }
+  finally {
+      if (referenceDatabase != null && referenceDatabase.getConnection() != null) {
+        try {
+          referenceDatabase.close();
+        }
+ catch (        DatabaseException e) {
+          LogFactory.getLogger().severe("Error closing referenceDatabase",e);
+        }
+      }
+    }
   }
 }
