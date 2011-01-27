@@ -85,7 +85,7 @@
       if (changeLogFile == null) {
         throw new CommandLineParsingException("dbdoc requires a changeLog parameter");
       }
-      liquibase.generateDocumentation(commandParams.iterator().next());
+      liquibase.generateDocumentation(commandParams.iterator().next(),contexts);
       return;
     }
     DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
