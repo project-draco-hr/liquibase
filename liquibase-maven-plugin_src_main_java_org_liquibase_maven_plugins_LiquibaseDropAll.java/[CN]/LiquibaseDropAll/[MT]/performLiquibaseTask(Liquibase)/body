@@ -1,0 +1,8 @@
+{
+  if (null != schemas) {
+    liquibase.dropAll(schemas.split(","));
+  }
+ else {
+    liquibase.dropAll();
+  }
+}

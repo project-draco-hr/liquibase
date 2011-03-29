@@ -1,0 +1,6 @@
+{
+  LiquibaseDropAll mojo=new LiquibaseDropAll();
+  PlexusConfiguration config=loadConfiguration(CONFIG_FILE);
+  configureMojo(mojo,config);
+  return mojo;
+}

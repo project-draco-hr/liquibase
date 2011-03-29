@@ -1,0 +1,7 @@
+{
+  LiquibaseDropAll mojo=createDropAllMojo();
+  setVariableValueToObject(mojo,"schemas","1,2,3");
+  loadPropertiesFileIfPresent(mojo);
+  Map values=super.getVariablesAndValuesFromObject(mojo);
+  checkValues(SCHEMAS_DEFAULT_PROPERTIES,values);
+}
