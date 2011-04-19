@@ -17,7 +17,6 @@ class ExecuteStatementCallback implements StatementCallback {
           stmt.execute(statement);
         }
  catch (        SQLException e) {
-          log.severe("Error executing SQL " + statement,e);
           throw e;
         }
       }
