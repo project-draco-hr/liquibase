@@ -18,6 +18,7 @@
       log.debug("URL from classloader: " + url);
       url=customResourceLocator(url);
       String urlPath=url.getFile();
+      String host=null;
       urlPath=URLDecoder.decode(urlPath,"UTF-8");
       if (url.getProtocol().equals("vfs") && !urlPath.startsWith("vfs")) {
         urlPath="vfs:" + urlPath;
@@ -28,7 +29,9 @@
       log.debug("Decoded urlPath: " + urlPath + " with protocol: "+ url.getProtocol());
       if (urlPath.startsWith("file:")) {
         try {
-          urlPath=new URI(url.getFile()).getPath();
+          URI uri=new URI(url.getFile());
+          host=uri.getHost();
+          urlPath=uri.getPath();
         }
  catch (        URISyntaxException e) {
         }
@@ -45,6 +48,14 @@
       }
       if (urlPath.indexOf('!') > 0) {
         urlPath=urlPath.substring(0,urlPath.indexOf('!'));
+      }
+      if (host != null) {
+        if (urlPath.startsWith("/")) {
+          urlPath="//" + host + urlPath;
+        }
+ else {
+          urlPath="//" + host + "/"+ urlPath;
+        }
       }
       log.debug("Scanning for classes in [" + urlPath + "] matching criteria: "+ test);
       File file=new File(urlPath);
