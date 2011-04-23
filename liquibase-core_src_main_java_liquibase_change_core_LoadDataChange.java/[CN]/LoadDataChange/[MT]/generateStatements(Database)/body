@@ -1,6 +1,7 @@
 {
+  CSVReader reader=null;
   try {
-    CSVReader reader=getCSVReader();
+    reader=getCSVReader();
     String[] headers=reader.readNext();
     if (headers == null) {
       throw new UnexpectedLiquibaseException("Data file " + getFile() + " was empty");
@@ -60,5 +61,15 @@
   }
  catch (  IOException e) {
     throw new RuntimeException(e);
+  }
+ finally {
+    if (null != reader) {
+      try {
+        reader.close();
+      }
+ catch (      IOException e) {
+        ;
+      }
+    }
   }
 }
