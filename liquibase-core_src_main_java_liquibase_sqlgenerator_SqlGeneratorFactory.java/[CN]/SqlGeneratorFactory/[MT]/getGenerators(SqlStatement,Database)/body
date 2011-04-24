@@ -11,7 +11,7 @@
         if (type instanceof ParameterizedType) {
           checkType(type,statement,generator,database,validGenerators);
         }
- else         if (type.equals(SqlGenerator.class)) {
+ else         if (isTypeEqual(type,SqlGenerator.class)) {
           if (generator.supports(statement,database)) {
             validGenerators.add(generator);
           }

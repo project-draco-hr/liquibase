@@ -3,7 +3,7 @@
     if (typeClass instanceof TypeVariable) {
       typeClass=((TypeVariable)typeClass).getBounds()[0];
     }
-    if (typeClass.equals(SqlStatement.class)) {
+    if (isTypeEqual(typeClass,SqlStatement.class)) {
       return;
     }
     if (((Class)typeClass).isAssignableFrom(statement.getClass())) {
