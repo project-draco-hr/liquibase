@@ -9,7 +9,7 @@
     rs=statement.executeQuery();
     while (rs.next()) {
       String constraintName=rs.getString("conname");
-      int conrelid=rs.getInt("conrelid");
+      long conrelid=rs.getLong("conrelid");
       Array keys=rs.getArray("conkey");
       String tableName=rs.getString("relname");
       UniqueConstraint constraintInformation=new UniqueConstraint();

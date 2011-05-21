@@ -15,7 +15,7 @@
       throw new SQLException("Can't detect type of array " + arrays);
     }
     stmt=((JdbcConnection)database.getConnection()).getUnderlyingConnection().prepareStatement("select attname,attnum from pg_attribute where attrelid = ? and attnum in (" + str + ")");
-    stmt.setInt(1,conrelid);
+    stmt.setLong(1,conrelid);
     rs=stmt.executeQuery();
     while (rs.next()) {
       columns_map.put(rs.getInt("attnum"),rs.getString("attname"));

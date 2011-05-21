@@ -1,4 +1,4 @@
 Database database
-int conrelid
+long conrelid
 Array keys
 UniqueConstraint constraint
