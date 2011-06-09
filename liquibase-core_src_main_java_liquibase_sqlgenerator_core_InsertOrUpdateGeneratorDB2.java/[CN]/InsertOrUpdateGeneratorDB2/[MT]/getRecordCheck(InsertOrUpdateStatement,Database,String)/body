@@ -1,0 +1,10 @@
+{
+  StringBuffer recordCheckSql=new StringBuffer();
+  recordCheckSql.append("BEGIN ATOMIC\n");
+  recordCheckSql.append("\tDECLARE v_reccount INTEGER;\n");
+  recordCheckSql.append("\tSET v_reccount = (SELECT COUNT(*) FROM " + database.escapeTableName(insertOrUpdateStatement.getSchemaName(),insertOrUpdateStatement.getTableName()) + " WHERE ");
+  recordCheckSql.append(whereClause);
+  recordCheckSql.append(");\n");
+  recordCheckSql.append("\tIF v_reccount = 0 THEN\n");
+  return recordCheckSql.toString();
+}
