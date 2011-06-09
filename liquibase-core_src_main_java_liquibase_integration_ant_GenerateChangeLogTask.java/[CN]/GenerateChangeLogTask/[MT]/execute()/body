@@ -13,6 +13,7 @@
       diff.setDiffTypes(getDiffTypes());
     }
     DiffResult diffResult=diff.compare();
+    diffResult.setDataDir(getDataDir());
     if (getChangeLogFile() == null) {
       diffResult.printChangeLog(writer,database);
     }
