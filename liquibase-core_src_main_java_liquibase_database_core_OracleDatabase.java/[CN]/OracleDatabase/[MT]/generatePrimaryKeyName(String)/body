@@ -1,0 +1,8 @@
+{
+  if (tableName.length() > 27) {
+    return "PK_" + tableName.toUpperCase().substring(0,27);
+  }
+ else {
+    return "PK_" + tableName.toUpperCase();
+  }
+}
