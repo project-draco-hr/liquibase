@@ -10,6 +10,9 @@
       updateStatement.addNewColumnValue(columnKey,insertOrUpdateStatement.getColumnValue(columnKey));
     }
   }
+  if (updateStatement.getNewColumnValues().isEmpty()) {
+    throw new LiquibaseException("No fields to update in set clause");
+  }
   Sql[] updateSql=update.generateSql(updateStatement,database,sqlGeneratorChain);
   for (  Sql s : updateSql) {
     updateSqlString.append(s.toSql());

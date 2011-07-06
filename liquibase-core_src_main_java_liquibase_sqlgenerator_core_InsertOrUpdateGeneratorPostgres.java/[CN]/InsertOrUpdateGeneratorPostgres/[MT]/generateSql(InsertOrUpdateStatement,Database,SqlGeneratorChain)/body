@@ -3,7 +3,12 @@
   generatedSql.append("DO\n");
   generatedSql.append("$$\n");
   generatedSql.append("BEGIN\n");
-  generatedSql.append(getUpdateStatement(insertOrUpdateStatement,database,getWhereClause(insertOrUpdateStatement,database),sqlGeneratorChain));
+  try {
+    generatedSql.append(getUpdateStatement(insertOrUpdateStatement,database,getWhereClause(insertOrUpdateStatement,database),sqlGeneratorChain));
+  }
+ catch (  LiquibaseException e) {
+    generatedSql.append("select * from " + database.escapeTableName(insertOrUpdateStatement.getSchemaName(),insertOrUpdateStatement.getTableName()) + " WHERE "+ getWhereClause(insertOrUpdateStatement,database)+ "\n");
+  }
   generatedSql.append("IF not found THEN\n");
   generatedSql.append(getInsertStatement(insertOrUpdateStatement,database,sqlGeneratorChain));
   generatedSql.append("END IF;\n");

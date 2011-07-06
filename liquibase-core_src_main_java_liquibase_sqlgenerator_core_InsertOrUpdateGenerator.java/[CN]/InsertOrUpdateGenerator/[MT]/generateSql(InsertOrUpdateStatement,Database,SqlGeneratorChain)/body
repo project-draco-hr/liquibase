@@ -3,8 +3,13 @@
   String whereClause=getWhereClause(insertOrUpdateStatement,database);
   completeSql.append(getRecordCheck(insertOrUpdateStatement,database,whereClause));
   completeSql.append(getInsertStatement(insertOrUpdateStatement,database,sqlGeneratorChain));
-  completeSql.append(getElse(database));
-  completeSql.append(getUpdateStatement(insertOrUpdateStatement,database,whereClause,sqlGeneratorChain));
+  try {
+    String updateStatement=getUpdateStatement(insertOrUpdateStatement,database,whereClause,sqlGeneratorChain);
+    completeSql.append(getElse(database));
+    completeSql.append(updateStatement);
+  }
+ catch (  LiquibaseException e) {
+  }
   completeSql.append(getPostUpdateStatements());
   return new Sql[]{new UnparsedSql(completeSql.toString())};
 }
