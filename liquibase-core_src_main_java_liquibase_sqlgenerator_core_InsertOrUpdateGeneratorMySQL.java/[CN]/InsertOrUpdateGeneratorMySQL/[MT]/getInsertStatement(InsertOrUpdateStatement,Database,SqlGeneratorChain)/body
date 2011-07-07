@@ -13,8 +13,8 @@
       updateClause.append(",");
     }
   }
-  updateClause.deleteCharAt(updateClause.lastIndexOf(","));
   if (hasFields) {
+    updateClause.deleteCharAt(updateClause.lastIndexOf(","));
     sql.append(updateClause);
   }
  else {
