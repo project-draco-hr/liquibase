@@ -1,0 +1,37 @@
+{
+  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY ";
+  alterTable+=database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName()) + " ";
+  alterTable+=TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(statement.getNewDataType(),false);
+  DatabaseSnapshotGeneratorFactory factory=DatabaseSnapshotGeneratorFactory.getInstance();
+  DatabaseSnapshotGenerator generator=factory.getGenerator(database);
+  DatabaseSnapshot snapshot=null;
+  try {
+    snapshot=generator.createSnapshot(database,statement.getSchemaName(),new HashSet<DiffStatusListener>());
+  }
+ catch (  DatabaseException e) {
+    throw new UnexpectedLiquibaseException("Error retrieving database snapshot",e);
+  }
+  Column col=null;
+  try {
+    col=snapshot.getColumn(statement.getTableName(),statement.getColumnName());
+  }
+ catch (  NullPointerException e) {
+    throw new UnexpectedLiquibaseException("Error retrieving database snapshot",e);
+  }
+  if (!col.isNullable()) {
+    alterTable+=" NOT NULL";
+  }
+  if (col.getDefaultValue() != null) {
+    alterTable+=" DEFAULT " + col.getDefaultValue();
+  }
+  if (col.isAutoIncrement()) {
+    alterTable+=" AUTO INCREMENT";
+  }
+  if (col.isUnique()) {
+    alterTable+=" UNIQUE";
+  }
+  if (col.isPrimaryKey()) {
+    alterTable+=" PRIMARY KEY";
+  }
+  return new Sql[]{new UnparsedSql(alterTable)};
+}
