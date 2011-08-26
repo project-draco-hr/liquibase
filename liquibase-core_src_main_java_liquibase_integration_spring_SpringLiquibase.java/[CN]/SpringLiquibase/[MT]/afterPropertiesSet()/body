@@ -15,9 +15,6 @@
     throw new DatabaseException(e);
   }
  finally {
-    if (liquibase != null) {
-      liquibase.forceReleaseLocks();
-    }
     if (c != null) {
       try {
         c.rollback();
