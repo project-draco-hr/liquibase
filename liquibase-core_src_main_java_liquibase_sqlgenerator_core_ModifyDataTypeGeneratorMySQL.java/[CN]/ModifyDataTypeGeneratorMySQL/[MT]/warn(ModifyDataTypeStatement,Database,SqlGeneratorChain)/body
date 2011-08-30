@@ -1,0 +1,7 @@
+{
+  Warnings warnings=super.warn(modifyDataTypeStatement,database,sqlGeneratorChain);
+  if (database instanceof MySQLDatabase && !modifyDataTypeStatement.getNewDataType().toLowerCase().contains("varchar")) {
+    warnings.addWarning("modifyDataType will lose primary key/autoincrement/not null settings for MySQL in updateSQL mode.  Use <sql> and re-specify all configuration if this is the case");
+  }
+  return warnings;
+}

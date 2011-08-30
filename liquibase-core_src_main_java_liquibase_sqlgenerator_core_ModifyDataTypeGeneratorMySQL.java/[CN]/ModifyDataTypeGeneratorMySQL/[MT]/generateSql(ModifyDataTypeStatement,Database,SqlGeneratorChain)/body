@@ -4,16 +4,19 @@
   alterTable+=TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(statement.getNewDataType(),false);
   DatabaseSnapshotGeneratorFactory factory=DatabaseSnapshotGeneratorFactory.getInstance();
   DatabaseSnapshotGenerator generator=factory.getGenerator(database);
-  DatabaseSnapshot snapshot=null;
+  DatabaseSnapshot snapshot;
   try {
     snapshot=generator.createSnapshot(database,statement.getSchemaName(),new HashSet<DiffStatusListener>());
   }
  catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException("Error retrieving database snapshot",e);
   }
-  Column col=null;
+  Column col;
   try {
     col=snapshot.getColumn(statement.getTableName(),statement.getColumnName());
+    if (col == null) {
+      return new Sql[]{new UnparsedSql(alterTable)};
+    }
   }
  catch (  NullPointerException e) {
     throw new UnexpectedLiquibaseException("Error retrieving database snapshot",e);
