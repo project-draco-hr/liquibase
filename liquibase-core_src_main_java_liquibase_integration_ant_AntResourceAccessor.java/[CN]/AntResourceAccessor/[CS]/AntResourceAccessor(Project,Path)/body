@@ -1,8 +1,13 @@
 {
-  loader=AccessController.doPrivileged(new PrivilegedAction<AntClassLoader>(){
+  super(new ClassLoaderResourceAccessor(AccessController.doPrivileged(new PrivilegedAction<AntClassLoader>(){
     public AntClassLoader run(){
       return new AntClassLoader(project,classpath);
     }
   }
-);
+)),new ClassLoaderResourceAccessor(AccessController.doPrivileged(new PrivilegedAction<AntClassLoader>(){
+    public AntClassLoader run(){
+      return new AntClassLoader(project,new Path(project,"."));
+    }
+  }
+)));
 }

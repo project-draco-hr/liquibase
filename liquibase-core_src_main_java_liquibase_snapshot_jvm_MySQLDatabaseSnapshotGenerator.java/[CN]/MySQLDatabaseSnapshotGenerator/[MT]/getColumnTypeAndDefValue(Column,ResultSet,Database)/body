@@ -40,11 +40,14 @@
     columnInfo.setTypeName(tableSchema.get(columnName).get(0));
     try {
       String tmpDefaultValue=(String)TypeConverterFactory.getInstance().findTypeConverter(database).convertDatabaseValueToObject(tableSchema.get(columnName).get(1),columnInfo.getDataType(),columnInfo.getColumnSize(),columnInfo.getDecimalDigits(),database);
-      if ("".equals(tmpDefaultValue)) {
+      if (tmpDefaultValue == null && columnInfo.isNullable()) {
+        columnInfo.setDefaultValue("NULL");
+      }
+ else       if (tmpDefaultValue == null) {
         columnInfo.setDefaultValue(null);
       }
  else {
-        columnInfo.setDefaultValue(tmpDefaultValue);
+        columnInfo.setDefaultValue("'" + database.escapeStringForDatabase(tmpDefaultValue) + "'");
       }
     }
  catch (    ParseException e) {
