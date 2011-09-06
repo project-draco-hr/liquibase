@@ -1,0 +1,5 @@
+{
+  this(columnName);
+  setStartWith(startWith);
+  setIncrementBy(incrementBy);
+}

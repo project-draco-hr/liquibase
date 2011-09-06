@@ -2,13 +2,24 @@
   StringBuffer buffer=new StringBuffer();
   buffer.append("CREATE TABLE ").append(database.escapeTableName(statement.getSchemaName(),statement.getTableName())).append(" ");
   buffer.append("(");
+  boolean isSinglePrimaryKeyColumn=statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().size() == 1;
+  boolean isPrimaryKeyAutoIncrement=false;
   Iterator<String> columnIterator=statement.getColumns().iterator();
   while (columnIterator.hasNext()) {
     String column=columnIterator.next();
-    boolean isAutoIncrement=statement.getAutoIncrementColumns().contains(column);
     buffer.append(database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),column));
     buffer.append(" ").append(statement.getColumnTypes().get(column));
-    if ((database instanceof SQLiteDatabase) && (statement.getPrimaryKeyConstraint() != null) && (statement.getPrimaryKeyConstraint().getColumns().size() == 1)&& (statement.getPrimaryKeyConstraint().getColumns().contains(column))&& isAutoIncrement) {
+    AutoIncrementConstraint autoIncrementConstraint=null;
+    for (    AutoIncrementConstraint currentAutoIncrementConstraint : statement.getAutoIncrementConstraints()) {
+      if (column.equals(currentAutoIncrementConstraint.getColumnName())) {
+        autoIncrementConstraint=currentAutoIncrementConstraint;
+        break;
+      }
+    }
+    boolean isAutoIncrementColumn=autoIncrementConstraint != null;
+    boolean isPrimaryKeyColumn=statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().contains(column);
+    isPrimaryKeyAutoIncrement=isPrimaryKeyAutoIncrement || isPrimaryKeyColumn && isAutoIncrementColumn;
+    if ((database instanceof SQLiteDatabase) && isSinglePrimaryKeyColumn && isPrimaryKeyColumn&& isAutoIncrementColumn) {
       String pkName=StringUtils.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
       if (pkName == null) {
         pkName=database.generatePrimaryKeyName(statement.getTableName());
@@ -27,9 +38,12 @@
       buffer.append(" DEFAULT ");
       buffer.append(statement.getColumnTypes().get(column).convertObjectToString(defaultValue,database));
     }
-    if (isAutoIncrement && (database.getAutoIncrementClause() != null) && (!database.getAutoIncrementClause().equals(""))) {
+    if (isAutoIncrementColumn) {
       if (database.supportsAutoIncrement()) {
-        buffer.append(" ").append(database.getAutoIncrementClause()).append(" ");
+        String autoIncrementClause=database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(),autoIncrementConstraint.getIncrementBy());
+        if (!"".equals(autoIncrementClause)) {
+          buffer.append(" ").append(autoIncrementClause);
+        }
       }
  else {
         LogFactory.getLogger().warning(database.getTypeName() + " does not support autoincrement columns as request for " + (database.escapeTableName(statement.getSchemaName(),statement.getTableName())));
@@ -43,7 +57,7 @@
         buffer.append(" NULL");
       }
     }
-    if ((database instanceof InformixDatabase) && (statement.getPrimaryKeyConstraint() != null) && (statement.getPrimaryKeyConstraint().getColumns().size() == 1)&& (statement.getPrimaryKeyConstraint().getColumns().contains(column))) {
+    if (database instanceof InformixDatabase && isSinglePrimaryKeyColumn) {
       buffer.append(" PRIMARY KEY");
     }
     if (columnIterator.hasNext()) {
@@ -51,7 +65,7 @@
     }
   }
   buffer.append(",");
-  if (!((database instanceof SQLiteDatabase) && (statement.getPrimaryKeyConstraint() != null) && (statement.getPrimaryKeyConstraint().getColumns().size() == 1)&& statement.getAutoIncrementColumns().contains(statement.getPrimaryKeyConstraint().getColumns().get(0))) && !((database instanceof InformixDatabase) && (statement.getPrimaryKeyConstraint() != null) && (statement.getPrimaryKeyConstraint().getColumns().size() == 1))) {
+  if (!((database instanceof SQLiteDatabase) && isSinglePrimaryKeyColumn && isPrimaryKeyAutoIncrement) && !((database instanceof InformixDatabase) && isSinglePrimaryKeyColumn)) {
     if (statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().size() > 0) {
       if (!(database instanceof InformixDatabase)) {
         String pkName=StringUtils.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());

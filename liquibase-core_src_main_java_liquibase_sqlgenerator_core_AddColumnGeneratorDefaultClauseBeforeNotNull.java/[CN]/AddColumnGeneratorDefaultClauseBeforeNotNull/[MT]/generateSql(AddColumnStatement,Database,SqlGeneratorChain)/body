@@ -7,7 +7,7 @@
     }
   }
   if (statement.isAutoIncrement()) {
-    alterTable+=" " + database.getAutoIncrementClause();
+    alterTable+=" " + database.getAutoIncrementClause(null,null);
   }
   if (!statement.isNullable()) {
     alterTable+=" NOT NULL";

@@ -1,0 +1,6 @@
+String schemaName
+String tableName
+String columnName
+String columnDataType
+BigInteger startWith
+BigInteger incrementBy
