@@ -1,0 +1,4 @@
+{
+  AddAutoIncrementStatement statement=new AddAutoIncrementStatement(SCHEMA_NAME,TABLE_NAME,COLUMN_NAME,TypeConverterFactory.getInstance().findTypeConverter(database).getDataType("BIGINT",true).toString(),startWith,incrementBy);
+  return statement;
+}

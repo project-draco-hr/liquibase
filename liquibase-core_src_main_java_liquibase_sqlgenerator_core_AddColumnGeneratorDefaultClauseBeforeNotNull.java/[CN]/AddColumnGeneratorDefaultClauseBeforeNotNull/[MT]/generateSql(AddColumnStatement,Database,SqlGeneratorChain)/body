@@ -7,7 +7,8 @@
     }
   }
   if (statement.isAutoIncrement()) {
-    alterTable+=" " + database.getAutoIncrementClause();
+    AutoIncrementConstraint autoIncrementConstraint=statement.getAutoIncrementConstraint();
+    alterTable+=" " + database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(),autoIncrementConstraint.getIncrementBy());
   }
   if (!statement.isNullable()) {
     alterTable+=" NOT NULL";

@@ -5,6 +5,8 @@
     setDefaultValue(columnStructure.getDefaultValue().toString());
   }
   setAutoIncrement(columnStructure.isAutoIncrement());
+  setStartWith(columnStructure.getStartWith());
+  setIncrementBy(columnStructure.getIncrementBy());
   ConstraintsConfig constraints=new ConstraintsConfig();
   constraints.setNullable(columnStructure.isNullable());
   constraints.setPrimaryKey(columnStructure.isPrimaryKey());

@@ -1,0 +1,4 @@
+Database database
+BigInteger startWith
+BigInteger incrementBy
+String expectedSql

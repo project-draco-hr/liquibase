@@ -1,0 +1,3 @@
+{
+  return "AUTO_INCREMENT_CLAUSE" + startWith != null ? (" " + startWith) : "" + incrementBy != null ? (" " + incrementBy) : "";
+}

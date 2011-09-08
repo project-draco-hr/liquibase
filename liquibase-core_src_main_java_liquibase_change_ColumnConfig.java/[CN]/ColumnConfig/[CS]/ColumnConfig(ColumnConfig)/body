@@ -3,6 +3,8 @@
   setType(column.getType());
   setDefaultValue(column.getDefaultValue());
   setAutoIncrement(column.isAutoIncrement());
+  setStartWith(column.getStartWith());
+  setIncrementBy(column.getIncrementBy());
   if (column.getConstraints() != null) {
     ConstraintsConfig constraints=new ConstraintsConfig();
     constraints.setNullable(column.getConstraints().isNullable());

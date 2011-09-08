@@ -1,4 +1,4 @@
 {
-  autoIncrementColumns.add(autoIncrementConstraint.getColumnName());
+  getAutoIncrementConstraints().add(autoIncrementConstraint);
   return this;
 }

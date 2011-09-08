@@ -1,0 +1,10 @@
+{
+  AutoIncrementConstraint autoIncrementConstraint=null;
+  for (  ColumnConstraint constraint : getConstraints()) {
+    if (constraint instanceof AutoIncrementConstraint) {
+      autoIncrementConstraint=(AutoIncrementConstraint)constraint;
+      break;
+    }
+  }
+  return autoIncrementConstraint;
+}

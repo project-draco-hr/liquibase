@@ -17,7 +17,7 @@
       }
     }
     if (aColumn.isAutoIncrement() != null && aColumn.isAutoIncrement()) {
-      constraints.add(new AutoIncrementConstraint(aColumn.getName()));
+      constraints.add(new AutoIncrementConstraint(aColumn.getName(),aColumn.getStartWith(),aColumn.getIncrementBy()));
     }
     AddColumnStatement addColumnStatement=new AddColumnStatement(getSchemaName(),getTableName(),aColumn.getName(),aColumn.getType(),aColumn.getDefaultValueObject(),constraints.toArray(new ColumnConstraint[constraints.size()]));
     sql.add(addColumnStatement);
