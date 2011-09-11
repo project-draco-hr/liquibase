@@ -41,6 +41,9 @@
  else     if (database instanceof MySQLDatabase && translatedTypeName.equalsIgnoreCase("DOUBLE")) {
       return translatedTypeName;
     }
+ else     if (database instanceof MySQLDatabase && translatedTypeName.equalsIgnoreCase("DOUBLE PRECISION")) {
+      return translatedTypeName;
+    }
     dataType=translatedTypeName + "(" + referenceColumn.getColumnSize()+ ")";
   }
  else   if (twoParams.contains(referenceColumn.getDataType())) {
