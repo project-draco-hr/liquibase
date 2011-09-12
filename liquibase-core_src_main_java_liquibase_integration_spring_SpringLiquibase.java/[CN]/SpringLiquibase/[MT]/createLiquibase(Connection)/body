@@ -5,5 +5,8 @@
       liquibase.setChangeLogParameter(entry.getKey(),entry.getValue());
     }
   }
+  if (isDropFirst()) {
+    liquibase.dropAll();
+  }
   return liquibase;
 }

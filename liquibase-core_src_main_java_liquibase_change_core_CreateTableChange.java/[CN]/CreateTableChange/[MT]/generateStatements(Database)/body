@@ -31,7 +31,7 @@
       }
     }
     if (isAutoIncrement) {
-      statement.addColumnConstraint(new AutoIncrementConstraint(column.getName()));
+      statement.addColumnConstraint(new AutoIncrementConstraint(column.getName(),column.getStartWith(),column.getIncrementBy()));
     }
   }
   statement.setTablespace(StringUtils.trimToNull(getTablespace()));

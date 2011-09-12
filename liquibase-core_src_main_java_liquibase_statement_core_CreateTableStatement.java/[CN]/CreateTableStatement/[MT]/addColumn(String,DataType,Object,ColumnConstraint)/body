@@ -32,7 +32,7 @@
         getUniqueConstraints().add(((UniqueConstraint)constraint));
       }
  else       if (constraint instanceof AutoIncrementConstraint) {
-        autoIncrementColumns.add(columnName);
+        autoIncrementConstraints.add((AutoIncrementConstraint)constraint);
       }
  else {
         throw new RuntimeException("Unknown constraint type: " + constraint.getClass().getName());

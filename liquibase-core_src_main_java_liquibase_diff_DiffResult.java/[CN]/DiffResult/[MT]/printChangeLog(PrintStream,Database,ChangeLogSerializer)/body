@@ -7,13 +7,13 @@
   addUnexpectedPrimaryKeyChanges(changeSets);
   addUnexpectedForeignKeyChanges(changeSets);
   addMissingUniqueConstraintChanges(changeSets);
-  addMissingIndexChanges(changeSets);
   addUnexpectedUniqueConstraintChanges(changeSets);
   if (diffData) {
     addInsertDataChanges(changeSets,dataDir);
   }
   addMissingForeignKeyChanges(changeSets);
   addUnexpectedIndexChanges(changeSets);
+  addMissingIndexChanges(changeSets);
   addUnexpectedColumnChanges(changeSets);
   addMissingSequenceChanges(changeSets);
   addUnexpectedSequenceChanges(changeSets);

@@ -1,0 +1,22 @@
+{
+  if (!supportsAutoIncrement()) {
+    return "";
+  }
+  String autoIncrementClause=getAutoIncrementClause();
+  boolean generateStartWith=generateAutoIncrementStartWith(startWith);
+  boolean generateIncrementBy=generateAutoIncrementBy(incrementBy);
+  if (generateStartWith || generateIncrementBy) {
+    autoIncrementClause+=getAutoIncrementOpening();
+    if (generateStartWith) {
+      autoIncrementClause+=String.format(getAutoIncrementStartWithClause(),startWith);
+    }
+    if (generateIncrementBy) {
+      if (generateStartWith) {
+        autoIncrementClause+=", ";
+      }
+      autoIncrementClause+=String.format(getAutoIncrementByClause(),incrementBy);
+    }
+    autoIncrementClause+=getAutoIncrementClosing();
+  }
+  return autoIncrementClause;
+}

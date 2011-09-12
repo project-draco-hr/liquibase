@@ -1,0 +1,5 @@
+{
+  AddAutoIncrementStatement statement=createAddAutoIncrementStatement(database,startWith,incrementBy);
+  Sql[] generatedSql=this.generatorUnderTest.generateSql(statement,database,null);
+  assertEquals(expectedSql,generatedSql[0].toSql());
+}
