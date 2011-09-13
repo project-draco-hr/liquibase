@@ -1,0 +1,7 @@
+{
+  stream.println("Warnings:");
+  for (  String message : warningMessages) {
+    stream.println("  " + message);
+  }
+  stream.println();
+}

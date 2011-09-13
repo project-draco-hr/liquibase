@@ -1,0 +1,21 @@
+{
+  if ("updateCount".equalsIgnoreCase(command) || "updateCountSQL".equalsIgnoreCase(command) || "rollback".equalsIgnoreCase(command)|| "rollbackToDate".equalsIgnoreCase(command)|| "rollbackCount".equalsIgnoreCase(command)|| "rollbackSQL".equalsIgnoreCase(command)|| "rollbackToDateSQL".equalsIgnoreCase(command)|| "rollbackCountSQL".equalsIgnoreCase(command)|| "dbDoc".equalsIgnoreCase(command)|| "tag".equalsIgnoreCase(command)) {
+    if (commandParams.size() > 0 && commandParams.iterator().next().startsWith("-")) {
+      messages.add("unexpected command parameters: " + commandParams);
+    }
+  }
+ else   if ("status".equalsIgnoreCase(command)) {
+    if (commandParams.size() > 0 && !commandParams.iterator().next().equalsIgnoreCase("--verbose")) {
+      messages.add("unexpected command parameters: " + commandParams);
+    }
+  }
+ else   if ("diff".equalsIgnoreCase(command) || "diffChangeLog".equalsIgnoreCase(command)) {
+    if (commandParams.size() > 0) {
+      for (      String cmdParm : commandParams) {
+        if (!cmdParm.startsWith("--referenceUsername") && !cmdParm.startsWith("--referencePassword") && !cmdParm.startsWith("--referenceDriver")&& !cmdParm.startsWith("--referenceUrl")) {
+          messages.add("unexpected command parameters: " + commandParams);
+        }
+      }
+    }
+  }
+}

@@ -12,4 +12,54 @@
   assertTrue(cli.checkSetup().size() > 0);
   cli.command="migrate";
   assertEquals(0,cli.checkSetup().size());
+  String[] noArgCommand={"migrate","migrateSQL","update","updateSQL","futureRollbackSQL","updateTestingRollback","listLocks","dropAll","releaseLocks","validate","help","generateChangeLog","clearCheckSums","changelogSync","changelogSyncSQL","markNextChangeSetRan","markNextChangeSetRanSQL"};
+  cli.commandParams.clear();
+  cli.commandParams.add("--logLevel=debug");
+  for (int i=0; i < noArgCommand.length; i++) {
+    cli.command=noArgCommand[i];
+    assertEquals(1,cli.checkSetup().size());
+  }
+  cli.command="update";
+  cli.commandParams.clear();
+  cli.changeLogParameters.clear();
+  cli.changeLogParameters.put("engine","myisam");
+  assertEquals(0,cli.checkSetup().size());
+  cli.commandParams.clear();
+  for (int i=0; i < noArgCommand.length; i++) {
+    cli.command=noArgCommand[i];
+    assertEquals(0,cli.checkSetup().size());
+  }
+  String[] singleArgCommand={"updateCount","updateCountSQL","rollback","rollbackToDate","rollbackCount","rollbackSQL","rollbackToDateSQL","rollbackCountSQL","tag","dbDoc"};
+  cli.commandParams.add("--logLevel=debug");
+  for (int i=0; i < singleArgCommand.length; i++) {
+    cli.command=singleArgCommand[i];
+    assertEquals(1,cli.checkSetup().size());
+  }
+  cli.commandParams.clear();
+  cli.commandParams.add("someCommandValue");
+  for (int i=0; i < singleArgCommand.length; i++) {
+    cli.command=singleArgCommand[i];
+    assertEquals(0,cli.checkSetup().size());
+  }
+  cli.command="status";
+  cli.commandParams.clear();
+  assertEquals(0,cli.checkSetup().size());
+  cli.commandParams.add("--verbose");
+  assertEquals(0,cli.checkSetup().size());
+  cli.commandParams.clear();
+  cli.commandParams.add("--logLevel=debug");
+  assertEquals(1,cli.checkSetup().size());
+  String[] multiArgCommand={"diff","diffChangeLog"};
+  cli.commandParams.clear();
+  for (int i=0; i < multiArgCommand.length; i++) {
+    cli.command=multiArgCommand[i];
+    assertEquals(0,cli.checkSetup().size());
+  }
+  String[] cmdParms={"--referenceUsername=USERNAME","--referencePassword=PASSWORD","--referenceUrl=URL","--referenceDriver=DRIVER"};
+  for (  String param : cmdParms) {
+    cli.commandParams.add(param);
+  }
+  assertEquals(0,cli.checkSetup().size());
+  cli.commandParams.add("--logLevel=debug");
+  assertEquals(1,cli.checkSetup().size());
 }
