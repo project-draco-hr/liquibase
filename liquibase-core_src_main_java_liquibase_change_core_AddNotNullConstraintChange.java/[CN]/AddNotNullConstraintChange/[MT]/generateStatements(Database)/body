@@ -2,7 +2,8 @@
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
   String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();
   if (defaultNullValue != null) {
-    statements.add(new UpdateStatement(schemaName,getTableName()).addNewColumnValue(getColumnName(),getDefaultNullValue()).setWhereClause(getColumnName() + " IS NULL"));
+    String defaultValue=TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(getDefaultNullValue()).convertObjectToString(getDefaultNullValue(),database);
+    statements.add(new UpdateStatement(schemaName,getTableName()).addNewColumnValue(getColumnName(),defaultValue).setWhereClause(getColumnName() + " IS NULL"));
   }
   statements.add(new SetNullableStatement(schemaName,getTableName(),getColumnName(),getColumnDataType(),false));
   if (database instanceof DB2Database) {
