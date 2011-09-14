@@ -13,6 +13,12 @@
     if (isChangeLogRequired(command) && changeLogFile == null) {
       messages.add("--changeLog is required");
     }
+    if (isNoArgCommand(command) && !commandParams.isEmpty()) {
+      messages.add("unexpected command parameters: " + commandParams);
+    }
+ else {
+      checkForUnexpectedCommandParameter(messages);
+    }
   }
   return messages;
 }
