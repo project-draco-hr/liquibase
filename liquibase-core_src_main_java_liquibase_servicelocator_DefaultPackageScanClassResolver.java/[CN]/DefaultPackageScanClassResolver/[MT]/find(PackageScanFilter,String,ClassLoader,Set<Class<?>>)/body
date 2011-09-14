@@ -43,7 +43,7 @@
         log.debug("It's a virtual osgi bundle, skipping");
         continue;
       }
-      if (urlPath.contains(".jar/")) {
+      if (urlPath.contains(".jar/") && !urlPath.contains(".jar!/")) {
         urlPath=urlPath.replace(".jar/",".jar!/");
       }
       if (urlPath.indexOf('!') > 0) {
