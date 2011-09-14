@@ -1,0 +1,3 @@
+{
+  assertEquals("BYTEA",new PostgresTypeConverter().getDataType("BLOB",false).toString());
+}

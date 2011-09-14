@@ -1,0 +1,3 @@
+{
+  assertEquals("TEXT",new PostgresTypeConverter().getDataType("LONGTEXT",false).toString());
+}
