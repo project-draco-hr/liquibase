@@ -1,4 +1,8 @@
 {
+  if (columnTypeString.toLowerCase().endsWith("() identity")) {
+    columnTypeString=columnTypeString.replaceFirst("\\(\\) identity$","");
+    autoIncrement=true;
+  }
   if (columnTypeString.toLowerCase().endsWith(" identity")) {
     columnTypeString=columnTypeString.replaceFirst(" identity$","");
     autoIncrement=true;
