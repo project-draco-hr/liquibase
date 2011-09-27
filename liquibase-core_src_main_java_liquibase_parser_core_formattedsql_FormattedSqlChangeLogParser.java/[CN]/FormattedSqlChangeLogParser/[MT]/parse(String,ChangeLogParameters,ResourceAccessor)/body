@@ -23,7 +23,7 @@
     while ((line=reader.readLine()) != null) {
       Matcher changeSetPatternMatcher=changeSetPattern.matcher(line);
       if (changeSetPatternMatcher.matches()) {
-        String finalCurrentSql=StringUtils.trimToNull(currentSql.toString());
+        String finalCurrentSql=changeLogParameters.expandExpressions(StringUtils.trimToNull(currentSql.toString()));
         if (changeSet != null) {
           if (finalCurrentSql == null) {
             throw new ChangeLogParseException("No SQL for changeset " + changeSet.toString(false));
@@ -36,7 +36,7 @@
               }
  else {
                 RawSQLChange rollbackChange=new RawSQLChange();
-                rollbackChange.setSql(currentRollbackSql.toString());
+                rollbackChange.setSql(changeLogParameters.expandExpressions(currentRollbackSql.toString()));
                 changeSet.addRollbackChange(rollbackChange);
               }
             }
@@ -91,7 +91,7 @@
       }
     }
     if (changeSet != null) {
-      change.setSql(StringUtils.trimToNull(currentSql.toString()));
+      change.setSql(changeLogParameters.expandExpressions(StringUtils.trimToNull(currentSql.toString())));
       if (StringUtils.trimToNull(currentRollbackSql.toString()) != null) {
         try {
           if (currentRollbackSql.toString().trim().toLowerCase().matches("^not required.*")) {
@@ -99,7 +99,7 @@
           }
  else {
             RawSQLChange rollbackChange=new RawSQLChange();
-            rollbackChange.setSql(currentRollbackSql.toString());
+            rollbackChange.setSql(changeLogParameters.expandExpressions(currentRollbackSql.toString()));
             changeSet.addRollbackChange(rollbackChange);
           }
         }
