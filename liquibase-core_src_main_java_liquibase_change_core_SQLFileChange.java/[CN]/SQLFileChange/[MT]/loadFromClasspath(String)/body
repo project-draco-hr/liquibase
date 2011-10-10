@@ -1,6 +1,6 @@
 {
   if (relativeToChangelogFile != null && relativeToChangelogFile) {
-    file=getChangeSet().getFilePath().replaceFirst("/[^/]*$","") + "/" + file;
+    file=getChangeSet().getFilePath().replaceFirst("[^/]*$","") + file;
   }
   InputStream in=null;
   try {
