@@ -1,0 +1,10 @@
+{
+  LoadDataChange refactoring=new LoadDataChange();
+  refactoring.setSchemaName("SCHEMA_NAME");
+  refactoring.setTableName("TABLE_NAME");
+  refactoring.setFile("liquibase/change/core/empty.data.csv");
+  refactoring.setSeparator(",");
+  refactoring.setResourceAccessor(new ClassLoaderResourceAccessor());
+  SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
+  assertEquals(0,sqlStatements.length);
+}
