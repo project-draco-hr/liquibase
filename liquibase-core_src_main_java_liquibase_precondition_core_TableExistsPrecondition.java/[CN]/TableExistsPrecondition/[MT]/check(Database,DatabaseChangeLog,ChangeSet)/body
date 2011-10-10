@@ -1,7 +1,9 @@
 {
+  String currentSchemaName;
   try {
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasTable(getSchemaName(),getTableName(),database)) {
-      throw new PreconditionFailedException("Table " + database.escapeTableName(getSchemaName(),getTableName()) + " does not exist",changeLog,this);
+    currentSchemaName=getSchemaName() == null ? (database == null ? null : database.getDefaultSchemaName()) : getSchemaName();
+    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasTable(currentSchemaName,getTableName(),database)) {
+      throw new PreconditionFailedException("Table " + database.escapeTableName(currentSchemaName,getTableName()) + " does not exist",changeLog,this);
     }
   }
  catch (  PreconditionFailedException e) {
