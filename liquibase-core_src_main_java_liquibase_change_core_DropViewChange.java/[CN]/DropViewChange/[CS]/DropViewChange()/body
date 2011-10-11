@@ -1,3 +1,0 @@
-{
-  super("dropView","Drop View",ChangeMetaData.PRIORITY_DEFAULT);
-}

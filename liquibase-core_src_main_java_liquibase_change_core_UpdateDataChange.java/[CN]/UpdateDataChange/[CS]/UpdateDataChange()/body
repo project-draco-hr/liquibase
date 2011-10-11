@@ -1,4 +1,3 @@
 {
-  super("update","Update Data",ChangeMetaData.PRIORITY_DEFAULT);
   columns=new ArrayList<ColumnConfig>();
 }

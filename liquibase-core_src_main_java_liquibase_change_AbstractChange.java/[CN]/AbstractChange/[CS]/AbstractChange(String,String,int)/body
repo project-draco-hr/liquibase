@@ -1,3 +1,0 @@
-{
-  this.changeMetaData=new ChangeMetaData(changeName,changeDescription,priority);
-}

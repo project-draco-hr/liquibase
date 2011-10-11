@@ -1,3 +1,0 @@
-{
-  super("dropIndex","Drop Index",ChangeMetaData.PRIORITY_DEFAULT);
-}

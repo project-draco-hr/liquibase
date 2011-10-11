@@ -1,3 +1,0 @@
-{
-  super("empty","empty",ChangeMetaData.PRIORITY_DEFAULT);
-}

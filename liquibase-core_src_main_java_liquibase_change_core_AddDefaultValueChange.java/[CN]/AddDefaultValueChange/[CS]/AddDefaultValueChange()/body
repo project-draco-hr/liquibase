@@ -1,3 +1,0 @@
-{
-  super("addDefaultValue","Add Default Value",ChangeMetaData.PRIORITY_DEFAULT);
-}

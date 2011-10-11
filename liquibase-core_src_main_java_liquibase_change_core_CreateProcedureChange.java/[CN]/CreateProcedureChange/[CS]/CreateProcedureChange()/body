@@ -1,3 +1,0 @@
-{
-  super("createProcedure","Create Procedure",ChangeMetaData.PRIORITY_DEFAULT);
-}

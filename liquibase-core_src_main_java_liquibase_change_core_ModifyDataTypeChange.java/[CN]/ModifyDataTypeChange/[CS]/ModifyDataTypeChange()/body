@@ -1,3 +1,0 @@
-{
-  super("modifyDataType","Modify data type",ChangeMetaData.PRIORITY_DEFAULT);
-}

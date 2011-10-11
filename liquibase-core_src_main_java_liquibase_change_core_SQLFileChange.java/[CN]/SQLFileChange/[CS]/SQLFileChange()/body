@@ -1,3 +1,0 @@
-{
-  super("sqlFile","SQL From File",ChangeMetaData.PRIORITY_DEFAULT);
-}

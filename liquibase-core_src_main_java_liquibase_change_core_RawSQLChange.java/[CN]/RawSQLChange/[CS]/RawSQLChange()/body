@@ -1,3 +1,2 @@
 {
-  super("sql","Custom SQL",ChangeMetaData.PRIORITY_DEFAULT);
 }

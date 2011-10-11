@@ -1,3 +1,0 @@
-{
-  super("addForeignKeyConstraint","Add Foreign Key Constraint",ChangeMetaData.PRIORITY_DEFAULT);
-}

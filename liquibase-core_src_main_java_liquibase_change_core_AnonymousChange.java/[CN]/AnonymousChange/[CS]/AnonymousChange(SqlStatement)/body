@@ -1,4 +1,3 @@
 {
-  super("anonymous","Anonymous change",ChangeMetaData.PRIORITY_DEFAULT);
   this.statements.addAll(Arrays.asList(statement));
 }

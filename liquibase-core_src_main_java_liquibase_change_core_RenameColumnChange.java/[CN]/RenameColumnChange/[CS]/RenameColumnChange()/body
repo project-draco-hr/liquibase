@@ -1,3 +1,0 @@
-{
-  super("renameColumn","Rename Column",ChangeMetaData.PRIORITY_DEFAULT);
-}

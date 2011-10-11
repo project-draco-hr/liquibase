@@ -1,3 +1,0 @@
-{
-  super("addPrimaryKey","Add Primary Key",ChangeMetaData.PRIORITY_DEFAULT);
-}

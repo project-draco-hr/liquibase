@@ -1,3 +1,2 @@
 {
-  super("renameTable","Rename Table",ChangeMetaData.PRIORITY_DEFAULT);
 }

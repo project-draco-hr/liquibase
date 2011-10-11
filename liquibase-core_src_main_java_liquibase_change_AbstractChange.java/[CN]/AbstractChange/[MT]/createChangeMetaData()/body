@@ -1,0 +1,4 @@
+{
+  ChangeClass changeClass=this.getClass().getAnnotation(ChangeClass.class);
+  return new ChangeMetaData(changeClass.name(),changeClass.description(),changeClass.priority());
+}

@@ -1,3 +1,0 @@
-{
-  super("addNotNullConstraint","Add Not-Null Constraint",ChangeMetaData.PRIORITY_DEFAULT);
-}

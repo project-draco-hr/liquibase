@@ -1,3 +1,0 @@
-{
-  super("mergeColumns","Merge Column",ChangeMetaData.PRIORITY_DEFAULT);
-}

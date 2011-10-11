@@ -1,3 +1,0 @@
-{
-  super("dropNotNullConstraint","Drop Not-Null Constraint",ChangeMetaData.PRIORITY_DEFAULT);
-}
