@@ -1,3 +1,4 @@
 String parameterName
 String displayName
 String type
+String[] requiredForDatabase

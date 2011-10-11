@@ -1,0 +1,3 @@
+{
+  return requiredForDatabase.contains("all") || requiredForDatabase.contains(database.getTypeName());
+}

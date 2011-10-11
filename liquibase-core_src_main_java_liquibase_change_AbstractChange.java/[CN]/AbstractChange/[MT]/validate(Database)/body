@@ -1,5 +1,13 @@
 {
   ValidationErrors changeValidationErrors=new ValidationErrors();
+  for (  ChangeParameterMetaData param : getChangeMetaData().getParameters()) {
+    if (param.isRequiredFor(database) && param.getCurrentValue(this) == null) {
+      changeValidationErrors.addError(param.getParameterName() + " is required for " + getChangeMetaData().getName()+ " on "+ database.getTypeName());
+    }
+  }
+  if (changeValidationErrors.hasErrors()) {
+    return changeValidationErrors;
+  }
   for (  SqlStatement statement : generateStatements(database)) {
     boolean supported=SqlGeneratorFactory.getInstance().supports(statement,database);
     if (!supported) {
