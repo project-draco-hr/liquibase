@@ -3,4 +3,5 @@
   this.description=description;
   this.priority=priority;
   this.parameters=Collections.unmodifiableSet(parameters);
+  this.appliesTo=appliesTo;
 }

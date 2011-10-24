@@ -3,4 +3,5 @@
   this.displayName=displayName;
   this.type=type;
   this.requiredForDatabase=new HashSet<String>(Arrays.asList(requiredForDatabase));
+  this.mustApplyTo=mustApplyTo;
 }

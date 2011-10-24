@@ -16,7 +16,7 @@
         }
       }
     }
-    return new ChangeMetaData(changeClass.name(),changeClass.description(),changeClass.priority(),params);
+    return new ChangeMetaData(changeClass.name(),changeClass.description(),changeClass.priority(),changeClass.appliesTo(),params);
   }
  catch (  Throwable e) {
     throw new UnexpectedLiquibaseException(e);

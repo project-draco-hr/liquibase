@@ -14,11 +14,13 @@
   String type=property.getPropertyType().getSimpleName();
   ChangeProperty changePropertyAnnotation=property.getReadMethod().getAnnotation(ChangeProperty.class);
   String[] requiredForDatabase;
+  String mustApplyTo=null;
   if (changePropertyAnnotation == null) {
     requiredForDatabase=new String[]{"none"};
   }
  else {
     requiredForDatabase=changePropertyAnnotation.requiredForDatabase();
+    mustApplyTo=changePropertyAnnotation.mustApplyTo();
   }
-  return new ChangeParameterMetaData(propertyName,displayName,type,requiredForDatabase);
+  return new ChangeParameterMetaData(propertyName,displayName,type,requiredForDatabase,mustApplyTo);
 }
