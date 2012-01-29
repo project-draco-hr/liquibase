@@ -1,0 +1,8 @@
+{
+  try {
+    manager.getReference(instance,instance.getBeanClass(),manager.createCreationalContext(instance)).toString();
+  }
+ catch (  Exception ex) {
+    event.addDeploymentProblem(ex);
+  }
+}

@@ -1,0 +1,5 @@
+{
+  CDILiquibaseConfig config=new CDILiquibaseConfig();
+  config.setChangeLog("liquibase/parser/core/xml/simpleChangeLog.xml");
+  return config;
+}

@@ -1,0 +1,8 @@
+{
+  System.setProperty(Liquibase.SHOULD_RUN_SYSTEM_PROPERTY,"false");
+  WeldContainer weld=new Weld().initialize();
+  CDILiquibase cdiLiquibase=weld.instance().select(CDILiquibase.class).get();
+  assertNotNull(cdiLiquibase);
+  assertFalse(cdiLiquibase.isInitialized());
+  assertFalse(cdiLiquibase.isUpdateSuccessful());
+}

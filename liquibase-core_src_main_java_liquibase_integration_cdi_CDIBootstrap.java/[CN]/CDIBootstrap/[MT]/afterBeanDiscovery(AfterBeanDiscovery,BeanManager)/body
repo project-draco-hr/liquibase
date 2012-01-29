@@ -1,0 +1,56 @@
+{
+  AnnotatedType<CDILiquibase> at=bm.createAnnotatedType(CDILiquibase.class);
+  final InjectionTarget<CDILiquibase> it=bm.createInjectionTarget(at);
+  instance=new Bean<CDILiquibase>(){
+    public Set<Type> getTypes(){
+      Set<Type> types=new HashSet<Type>();
+      types.add(CDILiquibase.class);
+      types.add(Object.class);
+      return types;
+    }
+    public Set<Annotation> getQualifiers(){
+      Set<Annotation> qualifiers=new HashSet<Annotation>();
+      qualifiers.add(new AnnotationLiteral<Default>(){
+      }
+);
+      qualifiers.add(new AnnotationLiteral<Any>(){
+      }
+);
+      return qualifiers;
+    }
+    public Class<? extends Annotation> getScope(){
+      return ApplicationScoped.class;
+    }
+    public String getName(){
+      return "cdiLiquibase";
+    }
+    public Set<Class<? extends Annotation>> getStereotypes(){
+      return Collections.emptySet();
+    }
+    public Class<?> getBeanClass(){
+      return CDILiquibase.class;
+    }
+    public boolean isAlternative(){
+      return false;
+    }
+    public boolean isNullable(){
+      return false;
+    }
+    public Set<InjectionPoint> getInjectionPoints(){
+      return it.getInjectionPoints();
+    }
+    public CDILiquibase create(    CreationalContext<CDILiquibase> ctx){
+      CDILiquibase instance=it.produce(ctx);
+      it.inject(instance,ctx);
+      it.postConstruct(instance);
+      return instance;
+    }
+    public void destroy(    CDILiquibase instance,    CreationalContext<CDILiquibase> ctx){
+      it.preDestroy(instance);
+      it.dispose(instance);
+      ctx.release();
+    }
+  }
+;
+  abd.addBean(instance);
+}
