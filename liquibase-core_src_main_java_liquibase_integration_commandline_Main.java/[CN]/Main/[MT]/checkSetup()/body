@@ -17,7 +17,7 @@
       messages.add("unexpected command parameters: " + commandParams);
     }
  else {
-      checkForUnexpectedCommandParameter(messages);
+      validateCommandParameters(messages);
     }
   }
   return messages;

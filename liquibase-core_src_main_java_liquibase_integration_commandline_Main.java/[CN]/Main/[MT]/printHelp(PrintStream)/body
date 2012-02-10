@@ -48,6 +48,8 @@
   stream.println(" tag <tag string>          'Tags' the current database state for future rollback");
   stream.println(" status [--verbose]        Outputs count (list if --verbose) of unrun changesets");
   stream.println(" validate                  Checks changelog for errors");
+  stream.println(" calculateCheckSum <id>    Calculates and prints a checksum for the changeset");
+  stream.println("                           with the given id in the format filepath::id::author.");
   stream.println(" clearCheckSums            Removes all saved checksums from database log.");
   stream.println("                           Useful for 'MD5Sum Check Failed' errors");
   stream.println(" changelogSync             Mark all changes as executed in the database");
