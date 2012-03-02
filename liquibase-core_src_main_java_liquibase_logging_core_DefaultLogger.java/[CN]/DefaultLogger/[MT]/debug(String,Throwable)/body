@@ -1,6 +1,6 @@
 {
   if (getLogLevel().compareTo(LogLevel.DEBUG) <= 0) {
     print(LogLevel.DEBUG,message);
-    e.printStackTrace();
+    e.printStackTrace(err);
   }
 }
