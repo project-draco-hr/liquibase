@@ -5,17 +5,17 @@
   for (int run=0; run < 2; run++) {
     boolean outputCsv=run == 1;
     runCompleteChangeLog();
-    DatabaseSnapshot originalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
-    Diff diff=new Diff(database,(String)null);
-    diff.setDiffData(true);
-    DiffResult diffResult=diff.compare();
+    DatabaseSnapshot originalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl());
+    DiffControl diffControl=new DiffControl();
+    diffControl.setDiffData(true);
     File tempFile=File.createTempFile("liquibase-test",".xml");
+    if (outputCsv) {
+      diffControl.setDataDir(new File(tempFile.getParentFile(),"liquibase-data").getCanonicalPath().replaceFirst("\\w:",""));
+    }
+    DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,null,diffControl);
     FileOutputStream output=new FileOutputStream(tempFile);
     try {
-      if (outputCsv) {
-        diffResult.setDataDir(new File(tempFile.getParentFile(),"liquibase-data").getCanonicalPath().replaceFirst("\\w:",""));
-      }
-      diffResult.printChangeLog(new PrintStream(output),database);
+      new DiffToChangeLog(diffResult).print(new PrintStream(output));
       output.flush();
     }
   finally {
@@ -23,7 +23,7 @@
     }
     Liquibase liquibase=createLiquibase(tempFile.getName());
     clearDatabase(liquibase);
-    DatabaseSnapshot emptySnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
+    DatabaseSnapshot emptySnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl());
     liquibase=createLiquibase(tempFile.getName());
     try {
       liquibase.update(this.contexts);
@@ -32,21 +32,19 @@
       e.printDescriptiveError(System.out);
       throw e;
     }
-    tempFile.deleteOnExit();
-    DatabaseSnapshot migratedSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
-    DiffResult finalDiffResult=new Diff(originalSnapshot,migratedSnapshot).compare();
+    DatabaseSnapshot migratedSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl());
+    DiffResult finalDiffResult=DiffGeneratorFactory.getInstance().compare(originalSnapshot,migratedSnapshot,new DiffControl());
     try {
-      assertFalse(finalDiffResult.differencesFound());
+      assertTrue(finalDiffResult.areEqual());
     }
  catch (    AssertionError e) {
-      finalDiffResult.printResult(System.out);
+      new DiffToPrintStream(finalDiffResult,System.out).print();
       throw e;
     }
-    Diff emptyDiff=new Diff(emptySnapshot,migratedSnapshot);
-    DiffResult emptyDiffResult=emptyDiff.compare();
+    DiffResult emptyDiffResult=DiffGeneratorFactory.getInstance().compare(emptySnapshot,migratedSnapshot,new DiffControl());
     output=new FileOutputStream(tempFile);
     try {
-      emptyDiffResult.printChangeLog(new PrintStream(output),database);
+      new DiffToChangeLog(emptyDiffResult).print(new PrintStream(output));
       output.flush();
     }
   finally {
@@ -60,8 +58,8 @@
  catch (    LiquibaseException e) {
       throw e;
     }
-    DatabaseSnapshot emptyAgainSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
-    assertEquals(0,emptyAgainSnapshot.getTables().size());
-    assertEquals(0,emptyAgainSnapshot.getViews().size());
+    DatabaseSnapshot emptyAgainSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl());
+    assertEquals(0,emptyAgainSnapshot.getDatabaseObjects(migratedSnapshot.getSchemas().iterator().next(),Table.class).size());
+    assertEquals(0,emptyAgainSnapshot.getDatabaseObjects(migratedSnapshot.getSchemas().iterator().next(),View.class).size());
   }
 }

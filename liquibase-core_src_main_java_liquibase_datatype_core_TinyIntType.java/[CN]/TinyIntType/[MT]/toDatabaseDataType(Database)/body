@@ -1,0 +1,9 @@
+{
+  if (database instanceof DerbyDatabase || database instanceof PostgresDatabase) {
+    return new DatabaseDataType("SMALLINT");
+  }
+  if (database instanceof OracleDatabase) {
+    return new DatabaseDataType("NUMBER",3);
+  }
+  return super.toDatabaseDataType(database);
+}

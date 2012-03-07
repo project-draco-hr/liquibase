@@ -1,3 +1,0 @@
-{
-  super("renameView","Rename View",ChangeMetaData.PRIORITY_DEFAULT);
-}

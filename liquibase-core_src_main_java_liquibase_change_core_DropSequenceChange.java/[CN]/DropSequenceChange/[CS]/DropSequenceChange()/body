@@ -1,3 +1,0 @@
-{
-  super("dropSequence","Drop Sequence",ChangeMetaData.PRIORITY_DEFAULT);
-}

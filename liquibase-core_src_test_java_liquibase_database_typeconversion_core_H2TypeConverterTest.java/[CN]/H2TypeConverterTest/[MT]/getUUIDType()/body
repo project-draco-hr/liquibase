@@ -1,3 +1,0 @@
-{
-  assertEquals("UUID",new H2TypeConverter().getUUIDType().toString());
-}

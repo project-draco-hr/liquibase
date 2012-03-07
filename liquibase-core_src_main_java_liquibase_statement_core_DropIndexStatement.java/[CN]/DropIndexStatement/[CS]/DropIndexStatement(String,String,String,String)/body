@@ -1,6 +1,0 @@
-{
-  this.tableSchemaName=tableSchemaName;
-  this.indexName=indexName;
-  this.tableName=tableName;
-  this.associatedWith=associatedWith;
-}

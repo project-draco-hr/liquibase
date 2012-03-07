@@ -1,0 +1,8 @@
+{
+  try {
+    ExecutorService.getInstance().getExecutor(database).execute(new DropTableStatement(catalog,schema,database.getDatabaseChangeLogTableName(),false));
+  }
+ catch (  DatabaseException e) {
+    ;
+  }
+}

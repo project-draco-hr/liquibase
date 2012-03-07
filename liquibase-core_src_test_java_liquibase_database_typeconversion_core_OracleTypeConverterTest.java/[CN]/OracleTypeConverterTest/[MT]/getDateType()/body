@@ -1,3 +1,0 @@
-{
-  assertEquals("DATE",new OracleTypeConverter().getDateType().toString());
-}

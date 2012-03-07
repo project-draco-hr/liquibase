@@ -1,3 +1,0 @@
-{
-  super("alterSequence","Alter Sequence",ChangeMetaData.PRIORITY_DEFAULT);
-}

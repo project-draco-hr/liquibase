@@ -1,0 +1,13 @@
+{
+  for (  Column column : diffResult.getObjectDiff(Column.class).getUnexpected()) {
+    if (!shouldModifyColumn(column)) {
+      continue;
+    }
+    DropColumnChange change=new DropColumnChange();
+    change.setTableName(column.getRelation().getName());
+    change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+    change.setSchemaName(column.getRelation().getSchema().getName());
+    change.setColumnName(column.getName());
+    changes.add(generateChangeSet(change));
+  }
+}

@@ -1,6 +1,0 @@
-{
-  this.schemaName=schemaName;
-  this.tableName=tableName;
-  this.columnNames=columnNames;
-  this.constraintName=constraintName;
-}

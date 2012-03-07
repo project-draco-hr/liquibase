@@ -1,7 +1,6 @@
 {
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
   AddColumnChange addNewColumnChange=new AddColumnChange();
-  String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();
   addNewColumnChange.setSchemaName(schemaName);
   addNewColumnChange.setTableName(getTableName());
   ColumnConfig columnConfig=new ColumnConfig();
@@ -9,7 +8,7 @@
   columnConfig.setType(getFinalColumnType());
   addNewColumnChange.addColumn(columnConfig);
   statements.addAll(Arrays.asList(addNewColumnChange.generateStatements(database)));
-  String updateStatement="UPDATE " + database.escapeTableName(schemaName,getTableName()) + " SET "+ getFinalColumnName()+ " = "+ database.getConcatSql(getColumn1Name(),"'" + getJoinString() + "'",getColumn2Name());
+  String updateStatement="UPDATE " + database.escapeTableName(getCatalogName(),getSchemaName(),getTableName()) + " SET "+ getFinalColumnName()+ " = "+ database.getConcatSql(getColumn1Name(),"'" + getJoinString() + "'",getColumn2Name());
   statements.add(new RawSqlStatement(updateStatement));
   if (database instanceof SQLiteDatabase) {
     AlterTableVisitor rename_alter_visitor=new AlterTableVisitor(){
@@ -33,7 +32,7 @@
     }
 ;
     try {
-      statements.addAll(SQLiteDatabase.getAlterTableStatements(rename_alter_visitor,database,getSchemaName(),getTableName()));
+      statements.addAll(SQLiteDatabase.getAlterTableStatements(rename_alter_visitor,database,getCatalogName(),getSchemaName(),getTableName()));
     }
  catch (    Exception e) {
       e.printStackTrace();

@@ -1,8 +1,0 @@
-{
-  for (  ForeignKey fk : getForeignKeys(schemaName,foreignKeyTableName,database)) {
-    if (fk.getName().equalsIgnoreCase(fkName)) {
-      return fk;
-    }
-  }
-  return null;
-}

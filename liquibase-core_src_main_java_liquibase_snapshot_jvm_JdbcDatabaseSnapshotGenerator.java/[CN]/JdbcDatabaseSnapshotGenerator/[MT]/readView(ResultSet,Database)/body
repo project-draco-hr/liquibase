@@ -1,16 +1,19 @@
 {
-  String name=convertFromDatabaseName(rs.getString("TABLE_NAME"));
-  String schemaName=convertFromDatabaseName(rs.getString("TABLE_SCHEM"));
-  View view=new View();
-  view.setName(name);
-  view.setSchema(schemaName);
-  view.setRawSchemaName(rs.getString("TABLE_SCHEM"));
-  view.setRawCatalogName(rs.getString("TABLE_CAT"));
+  String rawViewName=viewMetadataResultSet.getString("TABLE_NAME");
+  String rawSchemaName=StringUtils.trimToNull(viewMetadataResultSet.getString("TABLE_SCHEM"));
+  String rawCatalogName=StringUtils.trimToNull(viewMetadataResultSet.getString("TABLE_CAT"));
+  String remarks=viewMetadataResultSet.getString("REMARKS");
+  View view=new View(cleanObjectNameFromDatabase(rawViewName));
+  view.setRemarks(remarks);
+  view.setDatabase(database);
+  view.setRawSchemaName(rawSchemaName);
+  view.setRawCatalogName(rawCatalogName);
+  view.setSchema(new Schema(rawCatalogName,rawSchemaName));
   try {
-    view.setDefinition(database.getViewDefinition(rs.getString("TABLE_SCHEM"),name));
+    view.setDefinition(database.getViewDefinition(view.getSchema(),view.getName()));
   }
  catch (  DatabaseException e) {
-    throw new DatabaseException("Error getting " + database.getConnection().getURL() + " view with "+ new GetViewDefinitionStatement(view.getSchema(),name),e);
+    throw new DatabaseException("Error getting " + database.getConnection().getURL() + " view with "+ new GetViewDefinitionStatement(view.getSchema().getCatalog().getName(),view.getSchema().getName(),rawViewName),e);
   }
   return view;
 }

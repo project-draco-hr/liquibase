@@ -1,3 +1,0 @@
-{
-  super("addAutoIncrement","Set Column as Auto-Increment",ChangeMetaData.PRIORITY_DEFAULT);
-}

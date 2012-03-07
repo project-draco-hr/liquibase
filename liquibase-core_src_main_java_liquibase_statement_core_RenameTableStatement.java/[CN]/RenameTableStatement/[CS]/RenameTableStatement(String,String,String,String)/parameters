@@ -1,0 +1,4 @@
+String catalogName
+String schemaName
+String oldTableName
+String newTableName

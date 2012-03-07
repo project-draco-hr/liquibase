@@ -1,0 +1,18 @@
+{
+  if (super.isSystemTable(schema,tableName)) {
+    return true;
+  }
+ else   if ("DOMAIN".equalsIgnoreCase(schema.getName(this))) {
+    return true;
+  }
+ else   if ("SYSINFO".equalsIgnoreCase(schema.getName(this))) {
+    return true;
+  }
+ else   if ("SYSLOADER".equalsIgnoreCase(schema.getName(this))) {
+    return true;
+  }
+ else   if ("SYSDBA".equalsIgnoreCase(schema.getName(this))) {
+    return true;
+  }
+  return false;
+}

@@ -1,9 +1,0 @@
-{
-  if (value == null) {
-    return null;
-  }
-  if ("null".equalsIgnoreCase(((String)value))) {
-    return null;
-  }
-  return "'" + ((String)value).replaceAll("'","''") + "'";
-}

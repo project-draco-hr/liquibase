@@ -9,7 +9,7 @@
     if (!hashPkFields.contains(columnKey)) {
       hasFields=true;
       updateClause.append(columnKey).append(" = ");
-      updateClause.append(convertToString(insertOrUpdateStatement.getColumnValue(columnKey),database));
+      updateClause.append(DataTypeFactory.getInstance().fromObject(insertOrUpdateStatement.getColumnValue(columnKey),database).objectToString(columnKey,database));
       updateClause.append(",");
     }
   }

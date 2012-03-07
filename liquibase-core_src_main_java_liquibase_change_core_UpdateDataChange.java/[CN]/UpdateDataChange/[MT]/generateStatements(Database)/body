@@ -1,5 +1,5 @@
 {
-  UpdateStatement statement=new UpdateStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName());
+  UpdateStatement statement=new UpdateStatement(getCatalogName(),getSchemaName(),getTableName());
   for (  ColumnConfig column : columns) {
     statement.addNewColumnValue(column.getName(),column.getValueObject());
   }

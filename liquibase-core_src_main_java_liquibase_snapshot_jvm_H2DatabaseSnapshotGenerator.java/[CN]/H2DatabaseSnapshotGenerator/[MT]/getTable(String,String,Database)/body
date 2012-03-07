@@ -1,3 +1,0 @@
-{
-  return super.getTable(schemaName,convertTableNameToDatabaseTableName(tableName),database);
-}

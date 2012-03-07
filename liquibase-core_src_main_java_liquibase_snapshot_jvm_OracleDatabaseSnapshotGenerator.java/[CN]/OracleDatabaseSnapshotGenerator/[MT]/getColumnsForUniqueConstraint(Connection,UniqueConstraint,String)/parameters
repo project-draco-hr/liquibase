@@ -1,3 +1,0 @@
-Connection jdbcConnection
-UniqueConstraint constraint
-String schema

@@ -1,0 +1,4 @@
+{
+  this.rawCatalogName=rawCatalogName;
+  return this;
+}

@@ -1,9 +1,8 @@
 {
-  String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();
-  AddPrimaryKeyStatement statement=new AddPrimaryKeyStatement(schemaName,getTableName(),getColumnNames(),getConstraintName());
+  AddPrimaryKeyStatement statement=new AddPrimaryKeyStatement(getCatalogName(),getSchemaName(),getTableName(),getColumnNames(),getConstraintName());
   statement.setTablespace(getTablespace());
   if (database instanceof DB2Database) {
-    return new SqlStatement[]{statement,new ReorganizeTableStatement(schemaName,getTableName())};
+    return new SqlStatement[]{statement,new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName())};
   }
   return new SqlStatement[]{statement};
 }

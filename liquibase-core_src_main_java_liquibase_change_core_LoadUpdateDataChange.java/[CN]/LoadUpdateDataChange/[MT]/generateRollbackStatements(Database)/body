@@ -3,7 +3,7 @@
   SqlStatement[] forward=this.generateStatements(database);
   for (  SqlStatement thisForward : forward) {
     InsertOrUpdateStatement thisInsert=(InsertOrUpdateStatement)thisForward;
-    DeleteStatement delete=new DeleteStatement(getSchemaName(),getTableName());
+    DeleteStatement delete=new DeleteStatement(getCatalogName(),getSchemaName(),getTableName());
     delete.setWhereClause(getWhereClause(thisInsert,database));
     statements.add(delete);
   }

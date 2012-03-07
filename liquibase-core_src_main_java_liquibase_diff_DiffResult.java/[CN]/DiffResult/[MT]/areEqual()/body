@@ -1,0 +1,11 @@
+{
+  for (  DatabaseObjectDiff diff : databaseObjectDiffs.values()) {
+    if (!diff.areEqual()) {
+      return false;
+    }
+  }
+  if (!data.isEqual()) {
+    return false;
+  }
+  return true;
+}

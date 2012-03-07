@@ -1,0 +1,21 @@
+{
+  Database database=snapshot.getDatabase();
+  updateListeners("Reading views for " + database.toString() + " ...");
+  ResultSet viewsMetadataRs=databaseMetaData.getTables(schema.getCatalogName(snapshot.getDatabase()),schema.getName(snapshot.getDatabase()),null,new String[]{"VIEW"});
+  try {
+    while (viewsMetadataRs.next()) {
+      View view=readView(viewsMetadataRs,database);
+      if (database.isSystemView(schema,view.getName())) {
+        continue;
+      }
+      snapshot.addDatabaseObjects(view);
+    }
+  }
+  finally {
+    try {
+      viewsMetadataRs.close();
+    }
+ catch (    SQLException ignore) {
+    }
+  }
+}

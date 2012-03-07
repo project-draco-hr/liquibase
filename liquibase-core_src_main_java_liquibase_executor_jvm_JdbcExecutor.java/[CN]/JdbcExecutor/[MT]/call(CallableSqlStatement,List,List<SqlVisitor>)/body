@@ -1,9 +1,0 @@
-{
-  return (Map)execute(csc,new CallableStatementCallback(){
-    public Object doInCallableStatement(    CallableStatement cs) throws SQLException {
-      cs.execute();
-      return new HashMap();
-    }
-  }
-,sqlVisitors);
-}

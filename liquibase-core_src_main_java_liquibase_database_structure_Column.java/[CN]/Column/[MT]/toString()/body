@@ -1,10 +1,4 @@
 {
-  String tableOrViewName;
-  if (table == null) {
-    tableOrViewName=view.getName();
-  }
- else {
-    tableOrViewName=table.getName();
-  }
+  String tableOrViewName=relation.getName();
   return tableOrViewName + "." + getName();
 }

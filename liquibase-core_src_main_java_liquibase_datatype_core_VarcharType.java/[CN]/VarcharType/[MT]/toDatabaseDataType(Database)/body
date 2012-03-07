@@ -1,0 +1,6 @@
+{
+  if (database instanceof OracleDatabase) {
+    return new DatabaseDataType("VARCHAR2",getParameters());
+  }
+  return super.toDatabaseDataType(database);
+}

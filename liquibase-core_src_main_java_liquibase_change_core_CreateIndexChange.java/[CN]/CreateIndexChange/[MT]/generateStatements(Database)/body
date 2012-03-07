@@ -3,5 +3,5 @@
   for (  ColumnConfig column : getColumns()) {
     columns.add(column.getName());
   }
-  return new SqlStatement[]{new CreateIndexStatement(getIndexName(),getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName(),this.isUnique(),getAssociatedWith(),columns.toArray(new String[getColumns().size()])).setTablespace(getTablespace())};
+  return new SqlStatement[]{new CreateIndexStatement(getIndexName(),getCatalogName(),getSchemaName(),getTableName(),this.isUnique(),getAssociatedWith(),columns.toArray(new String[getColumns().size()])).setTablespace(getTablespace())};
 }

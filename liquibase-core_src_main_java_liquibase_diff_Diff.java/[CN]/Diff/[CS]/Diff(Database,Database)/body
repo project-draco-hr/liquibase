@@ -1,4 +1,0 @@
-{
-  this.referenceDatabase=referenceDatabase;
-  this.targetDatabase=targetDatabase;
-}

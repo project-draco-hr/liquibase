@@ -1,0 +1,12 @@
+{
+  if (database instanceof MSSQLDatabase) {
+    return new DatabaseDataType("FLOAT");
+  }
+  if (database instanceof OracleDatabase) {
+    return new DatabaseDataType("FLOAT",24);
+  }
+  if (database instanceof PostgresDatabase) {
+    return new DatabaseDataType("DOUBLE PRECISION");
+  }
+  return super.toDatabaseDataType(database);
+}

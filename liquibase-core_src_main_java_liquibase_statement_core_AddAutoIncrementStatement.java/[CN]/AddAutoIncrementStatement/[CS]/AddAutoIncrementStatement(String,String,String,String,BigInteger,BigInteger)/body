@@ -1,8 +1,0 @@
-{
-  this.schemaName=schemaName;
-  this.tableName=tableName;
-  this.columnName=columnName;
-  this.columnDataType=columnDataType;
-  this.startWith=startWith;
-  this.incrementBy=incrementBy;
-}

@@ -1,0 +1,5 @@
+String referenceCatalogs
+String referenceSchemas
+String comparisonCatalogs
+String comparisonSchemas
+String diffTypes

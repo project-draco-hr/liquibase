@@ -1,0 +1,18 @@
+{
+  Database database=snapshot.getDatabase();
+  if (database.supportsSequences()) {
+    updateListeners("Reading sequences for " + database.toString() + " ...");
+    List<String> sequenceNames=(List<String>)ExecutorService.getInstance().getExecutor(database).queryForList(new SelectSequencesStatement(schema.getCatalogName(snapshot.getDatabase()),schema.getName(snapshot.getDatabase())),String.class);
+    if (sequenceNames != null) {
+      for (      String sequenceName : sequenceNames) {
+        Sequence seq=new Sequence();
+        seq.setName(sequenceName.trim());
+        seq.setSchema(new Schema(schema.getCatalogName(snapshot.getDatabase()),schema.getName(snapshot.getDatabase())));
+        snapshot.addDatabaseObjects(seq);
+      }
+    }
+  }
+ else {
+    updateListeners("Sequences not supported for " + database.toString() + " ...");
+  }
+}

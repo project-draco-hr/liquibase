@@ -1,3 +1,0 @@
-{
-  return new TextType("TEXT",0,0);
-}

@@ -1,3 +1,0 @@
-{
-  return SqlUtil.isNumeric(getDataType());
-}

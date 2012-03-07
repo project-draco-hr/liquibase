@@ -1,3 +1,3 @@
 {
-  return baseString.replaceAll(" " + type + " "," " + TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(type,false) + " ").replaceAll(" " + type + ","," " + TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(type,false) + ",");
+  return baseString.replaceAll(" " + type + " "," " + DataTypeFactory.getInstance().fromDescription(type) + " ").replaceAll(" " + type + ","," " + DataTypeFactory.getInstance().fromDescription(type) + ",");
 }

@@ -1,3 +1,3 @@
 {
-  return new ReorganizeTableStatement(null,null);
+  return new ReorganizeTableStatement(null,null,null);
 }

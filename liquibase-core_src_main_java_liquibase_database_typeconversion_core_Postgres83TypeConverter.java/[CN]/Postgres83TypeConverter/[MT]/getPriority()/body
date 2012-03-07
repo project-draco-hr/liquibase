@@ -1,3 +1,0 @@
-{
-  return super.getPriority() + 1;
-}

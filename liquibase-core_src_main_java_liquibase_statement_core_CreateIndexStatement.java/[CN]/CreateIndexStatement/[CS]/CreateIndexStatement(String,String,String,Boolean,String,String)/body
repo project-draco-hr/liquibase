@@ -1,8 +1,0 @@
-{
-  this.indexName=indexName;
-  this.tableSchemaName=tableSchemaName;
-  this.tableName=tableName;
-  this.columns=columns;
-  this.unique=isUnique;
-  this.associatedWith=associatedWith;
-}

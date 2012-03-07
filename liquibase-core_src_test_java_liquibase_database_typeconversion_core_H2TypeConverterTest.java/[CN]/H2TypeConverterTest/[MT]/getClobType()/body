@@ -1,3 +1,0 @@
-{
-  assertEquals("LONGVARCHAR",new H2TypeConverter().getClobType().toString());
-}

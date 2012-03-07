@@ -1,3 +1,0 @@
-{
-  assertEquals("bigserial",new PostgresTypeConverter().getDataType("bigint",true).toString());
-}

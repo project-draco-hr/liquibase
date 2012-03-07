@@ -1,3 +1,0 @@
-{
-  assertEquals("BLOB",new MySQLTypeConverter().getBlobType().toString());
-}

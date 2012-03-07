@@ -1,3 +1,0 @@
-{
-  super("delete","Delete Data",ChangeMetaData.PRIORITY_DEFAULT);
-}

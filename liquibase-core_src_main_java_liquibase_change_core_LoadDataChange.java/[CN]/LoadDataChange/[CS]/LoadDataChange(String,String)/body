@@ -1,3 +1,0 @@
-{
-  super(changeName,changeDescription,ChangeMetaData.PRIORITY_DEFAULT);
-}

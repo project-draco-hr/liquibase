@@ -1,3 +1,0 @@
-{
-  assertEquals("TIMESTAMP",new H2TypeConverter().getDateTimeType().toString());
-}

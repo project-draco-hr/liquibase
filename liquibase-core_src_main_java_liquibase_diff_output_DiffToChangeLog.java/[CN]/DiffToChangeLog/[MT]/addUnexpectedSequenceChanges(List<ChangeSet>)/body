@@ -1,0 +1,9 @@
+{
+  for (  Sequence sequence : diffResult.getObjectDiff(Sequence.class).getUnexpected()) {
+    DropSequenceChange change=new DropSequenceChange();
+    change.setSequenceName(sequence.getName());
+    change.setCatalogName(sequence.getSchema().getCatalog().getName());
+    change.setSchemaName(sequence.getSchema().getName());
+    changes.add(generateChangeSet(change));
+  }
+}

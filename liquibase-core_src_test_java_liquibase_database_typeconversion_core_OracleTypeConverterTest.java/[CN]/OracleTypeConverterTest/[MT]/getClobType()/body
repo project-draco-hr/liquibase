@@ -1,3 +1,0 @@
-{
-  assertEquals("CLOB",new OracleTypeConverter().getClobType().toString());
-}

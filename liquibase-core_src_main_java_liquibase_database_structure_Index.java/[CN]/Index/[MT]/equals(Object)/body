@@ -14,5 +14,5 @@
  else   if (!this.unique.equals(index.isUnique())) {
     equals=false;
   }
-  return equals && table.getName().equalsIgnoreCase(index.table.getName()) && getName().equals(index.getName());
+  return equals && table.getName().equalsIgnoreCase(index.table.getName());
 }

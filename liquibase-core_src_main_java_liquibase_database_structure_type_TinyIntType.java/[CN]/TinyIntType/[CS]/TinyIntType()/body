@@ -1,3 +1,0 @@
-{
-  super("TINYINT",0,1);
-}

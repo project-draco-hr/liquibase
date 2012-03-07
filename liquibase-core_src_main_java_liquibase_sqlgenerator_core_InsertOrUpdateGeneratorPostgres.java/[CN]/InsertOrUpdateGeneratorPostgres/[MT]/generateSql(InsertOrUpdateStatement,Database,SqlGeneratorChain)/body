@@ -7,7 +7,7 @@
     generatedSql.append(getUpdateStatement(insertOrUpdateStatement,database,getWhereClause(insertOrUpdateStatement,database),sqlGeneratorChain));
   }
  catch (  LiquibaseException e) {
-    generatedSql.append("select * from " + database.escapeTableName(insertOrUpdateStatement.getSchemaName(),insertOrUpdateStatement.getTableName()) + " WHERE "+ getWhereClause(insertOrUpdateStatement,database)+ "\n");
+    generatedSql.append("select * from " + database.escapeTableName(insertOrUpdateStatement.getCatalogName(),insertOrUpdateStatement.getSchemaName(),insertOrUpdateStatement.getTableName()) + " WHERE "+ getWhereClause(insertOrUpdateStatement,database)+ "\n");
   }
   generatedSql.append("IF not found THEN\n");
   generatedSql.append(getInsertStatement(insertOrUpdateStatement,database,sqlGeneratorChain));

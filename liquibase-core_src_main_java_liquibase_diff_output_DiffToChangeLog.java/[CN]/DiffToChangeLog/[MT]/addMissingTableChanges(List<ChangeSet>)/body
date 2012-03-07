@@ -1,0 +1,74 @@
+{
+  for (  Table missingTable : diffResult.getObjectDiff(Table.class).getMissing()) {
+    if (diffResult.getReferenceSnapshot().getDatabase().isLiquibaseTable(missingTable.getName())) {
+      continue;
+    }
+    CreateTableChange change=new CreateTableChange();
+    change.setTableName(missingTable.getName());
+    change.setCatalogName(missingTable.getSchema().getCatalog().getName());
+    change.setSchemaName(missingTable.getSchema().getName());
+    if (missingTable.getRemarks() != null) {
+      change.setRemarks(missingTable.getRemarks());
+    }
+    for (    Column column : missingTable.getColumns()) {
+      ColumnConfig columnConfig=new ColumnConfig();
+      columnConfig.setName(column.getName());
+      columnConfig.setType(column.getType().toString());
+      ConstraintsConfig constraintsConfig=null;
+      if (column.isPrimaryKey()) {
+        PrimaryKey primaryKey=null;
+        for (        PrimaryKey pk : diffResult.getObjectDiff(PrimaryKey.class).getMissing()) {
+          if (pk.getTable().getName().equalsIgnoreCase(missingTable.getName())) {
+            primaryKey=pk;
+          }
+        }
+        if (primaryKey == null || primaryKey.getColumnNamesAsList().size() == 1) {
+          constraintsConfig=new ConstraintsConfig();
+          constraintsConfig.setPrimaryKey(true);
+          constraintsConfig.setPrimaryKeyTablespace(column.getTablespace());
+          if (primaryKey != null) {
+            constraintsConfig.setPrimaryKeyName(primaryKey.getName());
+            diffResult.getObjectDiff(PrimaryKey.class).getMissing().remove(primaryKey);
+          }
+        }
+      }
+      if (column.getType().isAutoIncrement()) {
+        columnConfig.setAutoIncrement(true);
+      }
+      if (column.isNullable() != null && !column.isNullable()) {
+        if (constraintsConfig == null) {
+          constraintsConfig=new ConstraintsConfig();
+        }
+        constraintsConfig.setNullable(false);
+      }
+      if (constraintsConfig != null) {
+        columnConfig.setConstraints(constraintsConfig);
+      }
+      Object defaultValue=column.getDefaultValue();
+      if (defaultValue == null) {
+      }
+ else       if (column.getType().isAutoIncrement()) {
+      }
+ else       if (defaultValue instanceof Date) {
+        columnConfig.setDefaultValueDate((Date)defaultValue);
+      }
+ else       if (defaultValue instanceof Boolean) {
+        columnConfig.setDefaultValueBoolean(((Boolean)defaultValue));
+      }
+ else       if (defaultValue instanceof Number) {
+        columnConfig.setDefaultValueNumeric(((Number)defaultValue));
+      }
+ else       if (defaultValue instanceof DatabaseFunction) {
+        columnConfig.setDefaultValueComputed((DatabaseFunction)defaultValue);
+      }
+ else {
+        columnConfig.setDefaultValue(defaultValue.toString());
+      }
+      if (column.getRemarks() != null) {
+        columnConfig.setRemarks(column.getRemarks());
+      }
+      change.addColumn(columnConfig);
+    }
+    changes.add(generateChangeSet(change));
+  }
+}

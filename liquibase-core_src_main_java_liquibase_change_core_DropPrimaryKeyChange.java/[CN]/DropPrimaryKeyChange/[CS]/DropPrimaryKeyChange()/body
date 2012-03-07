@@ -1,3 +1,0 @@
-{
-  super("dropPrimaryKey","Drop Primary Key",ChangeMetaData.PRIORITY_DEFAULT);
-}

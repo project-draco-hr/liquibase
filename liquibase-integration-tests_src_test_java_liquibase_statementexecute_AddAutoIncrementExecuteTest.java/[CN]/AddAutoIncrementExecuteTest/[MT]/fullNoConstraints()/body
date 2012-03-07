@@ -1,5 +1,5 @@
 {
-  this.statementUnderTest=new AddColumnStatement(null,"table_name",TABLE_NAME,COLUMN_NAME,42);
+  this.statementUnderTest=new AddColumnStatement(null,null,"table_name",TABLE_NAME,COLUMN_NAME,42);
   assertCorrect("alter table [table_name] add [table_name] column_name default 42 null",SybaseDatabase.class);
   assertCorrect("alter table [dbo].[table_name] add [table_name] column_name constraint df_table_name_table_name default 42",MSSQLDatabase.class);
   assertCorrect("not supported. fixme!!",SQLiteDatabase.class);

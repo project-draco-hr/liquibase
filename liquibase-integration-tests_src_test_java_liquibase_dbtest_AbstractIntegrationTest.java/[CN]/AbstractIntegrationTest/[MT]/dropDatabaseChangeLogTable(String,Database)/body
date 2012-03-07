@@ -1,8 +1,0 @@
-{
-  try {
-    ExecutorService.getInstance().getExecutor(database).execute(new DropTableStatement(schema,database.getDatabaseChangeLogTableName(),false));
-  }
- catch (  DatabaseException e) {
-    ;
-  }
-}

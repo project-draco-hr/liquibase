@@ -1,0 +1,52 @@
+{
+  for (  Column column : diffResult.getObjectDiff(Column.class).getChanged()) {
+    if (!shouldModifyColumn(column)) {
+      continue;
+    }
+    boolean foundDifference=false;
+    Column referenceColumn=diffResult.getReferenceSnapshot().getColumn(column.getRelation().getSchema(),column.getRelation().getName(),column.getName());
+    if (column.isDataTypeDifferent(referenceColumn)) {
+      ModifyDataTypeChange change=new ModifyDataTypeChange();
+      change.setTableName(column.getRelation().getName());
+      change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+      change.setSchemaName(column.getRelation().getSchema().getName());
+      change.setColumnName(column.getName());
+      change.setNewDataType(referenceColumn.getType().toString());
+      changes.add(generateChangeSet(change));
+      foundDifference=true;
+    }
+    if (column.isNullabilityDifferent(referenceColumn)) {
+      if (referenceColumn.isNullable() == null || referenceColumn.isNullable()) {
+        DropNotNullConstraintChange change=new DropNotNullConstraintChange();
+        change.setTableName(column.getRelation().getName());
+        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+        change.setSchemaName(column.getRelation().getSchema().getName());
+        change.setColumnName(column.getName());
+        change.setColumnDataType(referenceColumn.getType().toString());
+        changes.add(generateChangeSet(change));
+        foundDifference=true;
+      }
+ else {
+        AddNotNullConstraintChange change=new AddNotNullConstraintChange();
+        change.setTableName(column.getRelation().getName());
+        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+        change.setSchemaName(column.getRelation().getSchema().getName());
+        change.setColumnName(column.getName());
+        change.setColumnDataType(referenceColumn.getType().toString());
+        Object defaultValue=column.getDefaultValue();
+        String defaultValueString;
+        if (defaultValue != null) {
+          defaultValueString=DataTypeFactory.getInstance().from(column.getType()).objectToString(defaultValue,diffResult.getComparisonSnapshot().getDatabase());
+          if (defaultValueString != null) {
+            change.setDefaultNullValue(defaultValueString);
+          }
+        }
+        changes.add(generateChangeSet(change));
+        foundDifference=true;
+      }
+    }
+    if (!foundDifference) {
+      throw new RuntimeException("Unknown difference");
+    }
+  }
+}

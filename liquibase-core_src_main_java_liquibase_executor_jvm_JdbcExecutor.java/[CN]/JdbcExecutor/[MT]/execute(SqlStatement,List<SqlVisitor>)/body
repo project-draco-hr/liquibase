@@ -1,8 +1,4 @@
 {
-  if (sql instanceof CallableSqlStatement) {
-    call(((CallableSqlStatement)sql),new ArrayList(),sqlVisitors);
-    return;
-  }
 class ExecuteStatementCallback implements StatementCallback {
     public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
       for (      String statement : applyVisitors(sql,sqlVisitors)) {

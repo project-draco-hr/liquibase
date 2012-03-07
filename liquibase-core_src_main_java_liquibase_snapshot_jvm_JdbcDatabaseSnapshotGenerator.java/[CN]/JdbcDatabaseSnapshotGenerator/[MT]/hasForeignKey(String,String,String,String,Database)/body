@@ -1,0 +1,23 @@
+{
+  try {
+    ResultSet rs=getMetaData(database).getImportedKeys(database.correctCatalogName(catalogName),database.correctSchemaName(schemaName),database.correctTableName(foreignKeyTableName));
+    try {
+      while (rs.next()) {
+        if (rs.getString("FK_NAME").equals(database.correctForeignKeyName(fkName))) {
+          return true;
+        }
+      }
+      return false;
+    }
+  finally {
+      try {
+        rs.close();
+      }
+ catch (      SQLException ignore) {
+      }
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

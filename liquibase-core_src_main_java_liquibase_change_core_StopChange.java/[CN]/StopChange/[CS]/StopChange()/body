@@ -1,3 +1,0 @@
-{
-  super("stop","Stop Execution",ChangeMetaData.PRIORITY_DEFAULT);
-}

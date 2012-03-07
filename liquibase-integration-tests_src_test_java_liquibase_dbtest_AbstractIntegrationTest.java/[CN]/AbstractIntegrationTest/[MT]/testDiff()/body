@@ -3,7 +3,6 @@
     return;
   }
   runCompleteChangeLog();
-  Diff diff=new Diff(database,database);
-  DiffResult diffResult=diff.compare();
-  assertFalse(diffResult.differencesFound());
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,database,new DiffControl());
+  assertTrue(diffResult.areEqual());
 }

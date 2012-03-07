@@ -1,0 +1,14 @@
+{
+  for (  View view : diffResult.getObjectDiff(View.class).getMissing()) {
+    CreateViewChange change=new CreateViewChange();
+    change.setViewName(view.getName());
+    change.setCatalogName(view.getSchema().getCatalog().getName());
+    change.setSchemaName(view.getSchema().getName());
+    String selectQuery=view.getDefinition();
+    if (selectQuery == null) {
+      selectQuery="COULD NOT DETERMINE VIEW QUERY";
+    }
+    change.setSelectQuery(selectQuery);
+    changes.add(generateChangeSet(change));
+  }
+}

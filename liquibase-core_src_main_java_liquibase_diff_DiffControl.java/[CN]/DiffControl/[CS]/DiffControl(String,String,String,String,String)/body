@@ -1,0 +1,42 @@
+{
+  String[] splitReferenceSchemas=referenceSchemas.split(",");
+  referenceDatabaseSchemas=new Schema[splitReferenceSchemas.length];
+  for (int i=0; i < splitReferenceSchemas.length; i++) {
+    Schema schema=new Schema(new Catalog(null),splitReferenceSchemas[i]);
+    referenceDatabaseSchemas[i]=schema;
+  }
+  String[] splitComparisonSchemas=comparisonSchemas.split(",");
+  comparisonDatabaseSchemas=new Schema[splitComparisonSchemas.length];
+  for (int i=0; i < splitComparisonSchemas.length; i++) {
+    Schema schema=new Schema(new Catalog(null),splitComparisonSchemas[i]);
+    comparisonDatabaseSchemas[i]=schema;
+  }
+  if (StringUtils.trimToNull(diffTypes) != null) {
+    Set<String> types=new HashSet<String>(Arrays.asList(diffTypes.toLowerCase().split("\\s*,\\s*")));
+    if (types.contains("tables")) {
+      objectTypesToDiff.add(Table.class);
+    }
+    if (types.contains("views")) {
+      objectTypesToDiff.add(View.class);
+    }
+    if (types.contains("columns")) {
+      objectTypesToDiff.add(Column.class);
+    }
+    if (types.contains("indexes")) {
+      objectTypesToDiff.add(Index.class);
+    }
+    if (types.contains("foreignkeys")) {
+      objectTypesToDiff.add(ForeignKey.class);
+    }
+    if (types.contains("primarykeys")) {
+      objectTypesToDiff.add(PrimaryKey.class);
+    }
+    if (types.contains("uniqueconstraints")) {
+      objectTypesToDiff.add(UniqueConstraint.class);
+    }
+    if (types.contains("sequences")) {
+      objectTypesToDiff.add(Sequence.class);
+    }
+    diffData=types.contains("data");
+  }
+}

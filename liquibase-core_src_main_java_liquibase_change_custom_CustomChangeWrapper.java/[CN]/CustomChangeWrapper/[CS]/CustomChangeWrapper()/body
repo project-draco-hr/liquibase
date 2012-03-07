@@ -1,3 +1,0 @@
-{
-  super("customChange","Custom Change",ChangeMetaData.PRIORITY_DEFAULT);
-}

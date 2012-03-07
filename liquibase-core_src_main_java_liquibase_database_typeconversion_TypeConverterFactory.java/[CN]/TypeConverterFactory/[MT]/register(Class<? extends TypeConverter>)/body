@@ -1,8 +1,0 @@
-{
-  try {
-    allConverters.add(typeConverterClass.newInstance());
-  }
- catch (  Exception e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
-}

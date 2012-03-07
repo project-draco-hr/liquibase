@@ -1,8 +1,0 @@
-{
-  for (  View view : getUnexpectedViews()) {
-    DropViewChange change=new DropViewChange();
-    change.setViewName(view.getName());
-    change.setSchemaName(view.getSchema());
-    changes.add(generateChangeSet(change));
-  }
-}

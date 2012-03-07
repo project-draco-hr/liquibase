@@ -1,0 +1,3 @@
+{
+  return liquibaseCatalogName == null ? getDefaultCatalogName() : liquibaseCatalogName;
+}

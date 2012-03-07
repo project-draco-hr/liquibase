@@ -1,3 +1,13 @@
 {
-  return null;
+  if (defaultCatalogName == null) {
+    if (connection != null) {
+      try {
+        defaultCatalogName=connection.getCatalog();
+      }
+ catch (      DatabaseException e) {
+        LogFactory.getLogger().info("Error getting default catalog",e);
+      }
+    }
+  }
+  return defaultCatalogName;
 }

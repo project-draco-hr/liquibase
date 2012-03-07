@@ -1,0 +1,5 @@
+String catalogName
+String schemaName
+String foreignKeyTableName
+String fkName
+Database database

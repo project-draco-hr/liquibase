@@ -1,3 +1,0 @@
-{
-  return new CurrencyType("NUMBER(15, 2)");
-}

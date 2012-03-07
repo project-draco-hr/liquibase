@@ -1,0 +1,5 @@
+{
+  AddAutoIncrementChange change=new AddAutoIncrementChange();
+  ChangeMetaData metaData=change.getChangeMetaData();
+  assertEquals("addAutoIncrement",metaData.getName());
+}

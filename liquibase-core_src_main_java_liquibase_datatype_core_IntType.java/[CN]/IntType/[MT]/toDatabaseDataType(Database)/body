@@ -1,0 +1,9 @@
+{
+  if (database instanceof InformixDatabase && isAutoIncrement()) {
+    return new DatabaseDataType("SERIAL");
+  }
+  if (database instanceof OracleDatabase) {
+    return new DatabaseDataType("INTEGER",getParameters());
+  }
+  return super.toDatabaseDataType(database);
+}

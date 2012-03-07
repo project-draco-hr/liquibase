@@ -1,3 +1,0 @@
-{
-  return new BooleanType.NumericBooleanType("TINYINT(1)");
-}

@@ -1,0 +1,8 @@
+{
+  DataTypeInfo dataTypeAnnotation=this.getClass().getAnnotation(DataTypeInfo.class);
+  this.name=dataTypeAnnotation.name();
+  this.minParameters=dataTypeAnnotation.minParameters();
+  this.maxParameters=dataTypeAnnotation.maxParameters();
+  this.aliases=dataTypeAnnotation.aliases();
+  this.priority=dataTypeAnnotation.priority();
+}

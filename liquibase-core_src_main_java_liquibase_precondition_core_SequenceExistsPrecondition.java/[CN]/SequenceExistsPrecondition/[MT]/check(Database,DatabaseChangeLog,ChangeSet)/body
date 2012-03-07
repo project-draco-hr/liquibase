@@ -1,14 +1,13 @@
 {
   DatabaseSnapshot snapshot;
-  String currentSchemaName;
+  Schema schema=new Schema(getCatalogName(),getSchemaName());
   try {
-    currentSchemaName=getSchemaName() == null ? (database == null ? null : database.getDefaultSchemaName()) : getSchemaName();
-    snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,currentSchemaName,null);
+    snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl(schema,Sequence.class));
   }
  catch (  DatabaseException e) {
     throw new PreconditionErrorException(e,changeLog,this);
   }
-  if (snapshot.getSequence(getSequenceName()) == null) {
-    throw new PreconditionFailedException("Sequence " + database.escapeSequenceName(currentSchemaName,getSequenceName()) + " does not exist",changeLog,this);
+  if (snapshot.getDatabaseObject(schema,getSequenceName(),Sequence.class) == null) {
+    throw new PreconditionFailedException("Sequence " + database.escapeSequenceName(getCatalogName(),getSchemaName(),getSequenceName()) + " does not exist",changeLog,this);
   }
 }

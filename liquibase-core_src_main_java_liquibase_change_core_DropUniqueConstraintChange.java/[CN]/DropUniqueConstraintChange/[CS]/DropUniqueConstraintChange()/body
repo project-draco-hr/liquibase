@@ -1,3 +1,0 @@
-{
-  super("dropUniqueConstraint","Drop Unique Constraint",ChangeMetaData.PRIORITY_DEFAULT);
-}

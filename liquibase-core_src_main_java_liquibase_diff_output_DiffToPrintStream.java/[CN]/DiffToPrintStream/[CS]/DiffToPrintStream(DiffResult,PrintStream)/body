@@ -1,0 +1,4 @@
+{
+  this.diffResult=diffResult;
+  this.out=out;
+}

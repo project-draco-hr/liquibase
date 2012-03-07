@@ -1,0 +1,12 @@
+{
+  String value=typeName;
+  if (columnSize != null) {
+    value+="(";
+    value+=columnSize;
+    if (decimalDigits != null) {
+      value+=", " + decimalDigits;
+    }
+    value+=")";
+  }
+  return value;
+}

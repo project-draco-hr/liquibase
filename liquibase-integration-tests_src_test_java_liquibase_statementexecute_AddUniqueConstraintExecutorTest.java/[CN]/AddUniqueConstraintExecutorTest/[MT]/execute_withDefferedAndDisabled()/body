@@ -1,5 +1,5 @@
 {
-  statementUnderTest=new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME).setDeferrable(true).setInitiallyDeferred(true).setDisabled(true);
+  statementUnderTest=new AddUniqueConstraintStatement(null,null,TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME).setDeferrable(true).setInitiallyDeferred(true).setDisabled(true);
   assertCorrect("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",SybaseDatabase.class);
   assertCorrect("alter table [dbo].[adduqtest] add constraint [uq_test] unique ([coltomakeuq])",MSSQLDatabase.class);
   assertCorrect("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",SybaseASADatabase.class);

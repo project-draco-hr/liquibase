@@ -1,4 +1,0 @@
-String columnName
-DataType columnType
-Object defaultValue
-ColumnConstraint constraints

@@ -1,3 +1,0 @@
-{
-  return escapeTableName(schemaName,viewName);
-}

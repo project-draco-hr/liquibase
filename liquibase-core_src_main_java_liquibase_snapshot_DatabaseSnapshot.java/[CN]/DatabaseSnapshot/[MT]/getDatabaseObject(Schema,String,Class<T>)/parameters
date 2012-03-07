@@ -1,0 +1,3 @@
+Schema schema
+String objectName
+Class<T> type

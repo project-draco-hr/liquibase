@@ -1,3 +1,0 @@
-{
-  return super.isSystemView(catalogName,schemaName,viewName) || schemaName.equals("sys");
-}

@@ -1,0 +1,3 @@
+String liquibaseString
+String databaseString
+Class<? extends LiquibaseDataType> expectedType

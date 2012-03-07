@@ -1,0 +1,4 @@
+{
+  super(catalogName,schemaName,tableName);
+  this.primaryKey=primaryKey;
+}

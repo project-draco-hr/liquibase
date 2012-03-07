@@ -1,5 +1,5 @@
 {
-  InsertStatement statement=new InsertStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName());
+  InsertStatement statement=new InsertStatement(getCatalogName(),getSchemaName(),getTableName());
   for (  ColumnConfig column : columns) {
     if (database.supportsAutoIncrement() && column.isAutoIncrement() != null && column.isAutoIncrement()) {
       continue;

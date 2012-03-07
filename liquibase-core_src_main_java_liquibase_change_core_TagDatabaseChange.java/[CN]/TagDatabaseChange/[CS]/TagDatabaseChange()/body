@@ -1,3 +1,0 @@
-{
-  super("tagDatabase","Tag Database",ChangeMetaData.PRIORITY_DEFAULT);
-}

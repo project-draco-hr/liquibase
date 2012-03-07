@@ -1,4 +1,0 @@
-{
-  Object returnValue=super.convertToCorrectObjectType(value,dataType,columnSize,decimalDigits,database);
-  return returnValue;
-}

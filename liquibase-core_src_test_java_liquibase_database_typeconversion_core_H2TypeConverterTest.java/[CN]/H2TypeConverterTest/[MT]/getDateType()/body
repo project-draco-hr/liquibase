@@ -1,3 +1,0 @@
-{
-  assertEquals("DATE",new H2TypeConverter().getDateType().toString());
-}

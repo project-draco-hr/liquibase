@@ -1,3 +1,3 @@
 {
-  return new SqlStatement[]{new DropViewStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getViewName())};
+  return new SqlStatement[]{new DropViewStatement(getCatalogName(),getSchemaName(),getViewName())};
 }

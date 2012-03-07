@@ -1,3 +1,8 @@
 {
-  return getConnection().getCatalog();
+  try {
+    return getConnection().getCatalog();
+  }
+ catch (  DatabaseException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
 }

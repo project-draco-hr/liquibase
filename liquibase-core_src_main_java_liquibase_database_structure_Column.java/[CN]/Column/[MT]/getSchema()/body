@@ -1,0 +1,7 @@
+{
+  Relation relation=getRelation();
+  if (relation == null) {
+    return null;
+  }
+  return relation.getSchema();
+}

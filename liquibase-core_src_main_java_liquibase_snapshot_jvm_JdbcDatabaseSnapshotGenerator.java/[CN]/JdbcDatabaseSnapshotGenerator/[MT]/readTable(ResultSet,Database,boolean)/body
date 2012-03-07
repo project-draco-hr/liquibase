@@ -1,0 +1,24 @@
+{
+  String rawTableName=tableMetadataResultSet.getString("TABLE_NAME");
+  String rawSchemaName=StringUtils.trimToNull(tableMetadataResultSet.getString("TABLE_SCHEM"));
+  String rawCatalogName=StringUtils.trimToNull(tableMetadataResultSet.getString("TABLE_CAT"));
+  String remarks=StringUtils.trimToNull(tableMetadataResultSet.getString("REMARKS"));
+  Table table=new Table(cleanObjectNameFromDatabase(rawTableName));
+  table.setRemarks(remarks);
+  table.setDatabase(database);
+  table.setRawSchemaName(rawSchemaName);
+  table.setRawCatalogName(rawCatalogName);
+  table.setSchema(new Schema(new Catalog(database.correctCatalogName(rawCatalogName)),database.correctSchemaName(rawSchemaName)));
+  if (readColumns) {
+    ResultSet columnMetadataResultSet=getMetaData(database).getColumns(table.getRawCatalogName(),table.getRawSchemaName(),rawTableName,null);
+    try {
+      while (columnMetadataResultSet.next()) {
+        table.getColumns().add(readColumn(columnMetadataResultSet,table,database));
+      }
+    }
+  finally {
+      columnMetadataResultSet.close();
+    }
+  }
+  return table;
+}

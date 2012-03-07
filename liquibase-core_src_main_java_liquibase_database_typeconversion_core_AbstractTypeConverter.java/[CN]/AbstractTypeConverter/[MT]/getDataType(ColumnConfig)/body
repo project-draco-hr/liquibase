@@ -1,3 +1,0 @@
-{
-  return getDataType(columnConfig.getType(),columnConfig.isAutoIncrement());
-}

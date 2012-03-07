@@ -1,0 +1,9 @@
+{
+  if (StringUtils.trimToNull(schemaName) == null) {
+    this.name=DEFAULT_NAME;
+  }
+ else {
+    this.name=schemaName;
+  }
+  this.catalog=new Catalog(catalog);
+}

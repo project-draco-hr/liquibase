@@ -1,4 +1,4 @@
 {
   Database database=new MSSQLDatabase();
-  assertEquals("[dbo].[tableName]",database.escapeTableName(null,"tableName"));
+  assertEquals("[dbo].[tableName]",database.escapeTableName(null,null,"tableName"));
 }

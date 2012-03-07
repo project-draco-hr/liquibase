@@ -1,3 +1,0 @@
-{
-  super("addLookupTable","Add Lookup Table",ChangeMetaData.PRIORITY_DEFAULT);
-}

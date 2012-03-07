@@ -1,0 +1,8 @@
+{
+  for (  DatabaseObject object : getDatabaseObjects(schema,type)) {
+    if (object.getName().equals(objectName)) {
+      return (T)object;
+    }
+  }
+  return null;
+}

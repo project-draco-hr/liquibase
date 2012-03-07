@@ -1,3 +1,0 @@
-{
-  super("addUniqueConstraint","Add Unique Constraint",ChangeMetaData.PRIORITY_DEFAULT);
-}

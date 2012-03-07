@@ -1,4 +1,0 @@
-{
-  ChangeLogSerializer changeLogSerializer=serializerFactory.getSerializer(changeLogFile);
-  this.printChangeLog(changeLogFile,targetDatabase,changeLogSerializer);
-}

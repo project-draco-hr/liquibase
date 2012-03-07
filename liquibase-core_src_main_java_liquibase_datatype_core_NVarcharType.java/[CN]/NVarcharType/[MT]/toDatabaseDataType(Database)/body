@@ -1,0 +1,9 @@
+{
+  if (database instanceof HsqlDatabase) {
+    return new DatabaseDataType("VARCHAR",getParameters());
+  }
+  if (database instanceof OracleDatabase) {
+    return new DatabaseDataType("NVARCHAR2",getParameters());
+  }
+  return super.toDatabaseDataType(database);
+}

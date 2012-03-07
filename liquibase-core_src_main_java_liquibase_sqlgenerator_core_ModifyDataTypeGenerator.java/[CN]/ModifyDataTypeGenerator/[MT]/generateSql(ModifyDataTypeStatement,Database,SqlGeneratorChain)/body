@@ -1,8 +1,8 @@
 {
-  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName());
+  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName());
   alterTable+=" " + getModifyString(database) + " ";
-  alterTable+=database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName());
+  alterTable+=database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName());
   alterTable+=getPreDataTypeString(database);
-  alterTable+=TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(statement.getNewDataType(),false);
+  alterTable+=DataTypeFactory.getInstance().fromDescription(statement.getNewDataType()).toDatabaseDataType(database);
   return new Sql[]{new UnparsedSql(alterTable)};
 }

@@ -4,7 +4,6 @@
   }
   Liquibase liquibase=createLiquibase(externalfkInitChangeLog);
   liquibase.update(contexts);
-  Diff diff=new Diff(database,(String)null);
-  DiffResult diffResult=diff.compare();
+  DiffResult diffResult=liquibase.diff(database,null,new DiffControl());
   DiffResultAssert.assertThat(diffResult).containsMissingForeignKeyWithName("fk_person_country");
 }

@@ -1,0 +1,8 @@
+{
+  if (StringUtils.trimToNull(name) == null) {
+    this.name=DEFAULT_NAME;
+  }
+ else {
+    this.name=name;
+  }
+}

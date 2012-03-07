@@ -1,3 +1,3 @@
 {
-  return new SqlStatement[]{new CreateTableStatement(null,"cwnestedtags").addColumn("id",TypeConverterFactory.getInstance().findTypeConverter(database).getDataType("int",false)).addColumn("name",TypeConverterFactory.getInstance().findTypeConverter(database).getDataType("varchar(5)",false))};
+  return new SqlStatement[]{new CreateTableStatement(null,null,"cwnestedtags").addColumn("id",DataTypeFactory.getInstance().fromDescription("int")).addColumn("name",DataTypeFactory.getInstance().fromDescription("varchar(5)"))};
 }

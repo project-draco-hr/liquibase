@@ -1,3 +1,0 @@
-{
-  super("dropTable","Drop Table",ChangeMetaData.PRIORITY_DEFAULT);
-}
