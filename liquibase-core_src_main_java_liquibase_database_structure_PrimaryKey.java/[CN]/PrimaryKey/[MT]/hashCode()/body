@@ -1,6 +1,6 @@
 {
   int result;
-  result=(getColumnNames() != null ? getColumnNames().toUpperCase().hashCode() : 0);
-  result=31 * result + (table.getName() != null ? table.getName().toUpperCase().hashCode() : 0);
+  result=(getColumnNames() != null ? getColumnNames().hashCode() : 0);
+  result=31 * result + (table.getName() != null ? table.getName().hashCode() : 0);
   return result;
 }

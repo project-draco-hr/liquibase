@@ -1,0 +1,5 @@
+{
+  this.referenceSnapshot=referenceDatabaseSnapshot;
+  this.comparisonSnapshot=comparisonDatabaseSnapshot;
+  this.diffControl=diffControl;
+}

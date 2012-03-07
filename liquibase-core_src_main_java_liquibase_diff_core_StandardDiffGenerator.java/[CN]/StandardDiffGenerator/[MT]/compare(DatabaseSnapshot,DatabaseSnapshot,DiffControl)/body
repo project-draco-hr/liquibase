@@ -1,0 +1,11 @@
+{
+  if (comparisonSnapshot == null) {
+    comparisonSnapshot=new DatabaseSnapshot(referenceSnapshot.getDatabase());
+  }
+  DiffResult diffResult=new DiffResult(referenceSnapshot,comparisonSnapshot,diffControl);
+  checkVersionInfo(referenceSnapshot,comparisonSnapshot,diffResult);
+  for (  Class<? extends DatabaseObject> typeToCompare : diffControl.getTypesToCompare()) {
+    compareObjectType(typeToCompare,referenceSnapshot,comparisonSnapshot,diffResult);
+  }
+  return diffResult;
+}

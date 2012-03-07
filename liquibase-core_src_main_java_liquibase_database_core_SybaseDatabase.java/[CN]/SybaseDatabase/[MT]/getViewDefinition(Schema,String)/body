@@ -1,0 +1,10 @@
+{
+  GetViewDefinitionStatement statement=new GetViewDefinitionStatement(schema.getCatalogName(this),schema.getName(this),viewName);
+  Executor executor=ExecutorService.getInstance().getExecutor(this);
+  @SuppressWarnings("unchecked") List<String> definitionRows=(List<String>)executor.queryForList(statement,String.class);
+  StringBuilder definition=new StringBuilder();
+  for (  String d : definitionRows) {
+    definition.append(d);
+  }
+  return definition.toString();
+}

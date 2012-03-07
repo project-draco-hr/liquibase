@@ -1,0 +1,11 @@
+{
+  schema=schema.clone(database);
+  if (!schemaSnapshots.containsKey(schema)) {
+    return Collections.unmodifiableSet(new HashSet<T>());
+  }
+  Set<? extends DatabaseObject> snapshotItems=schemaSnapshots.get(schema).databaseObjects.get(type);
+  if (snapshotItems == null) {
+    return Collections.unmodifiableSet(new HashSet<T>());
+  }
+  return (Set<T>)Collections.unmodifiableSet(snapshotItems);
+}

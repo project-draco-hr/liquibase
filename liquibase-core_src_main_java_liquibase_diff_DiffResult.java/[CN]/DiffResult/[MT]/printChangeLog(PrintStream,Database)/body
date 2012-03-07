@@ -1,3 +1,0 @@
-{
-  this.printChangeLog(out,targetDatabase,new XMLChangeLogSerializer());
-}

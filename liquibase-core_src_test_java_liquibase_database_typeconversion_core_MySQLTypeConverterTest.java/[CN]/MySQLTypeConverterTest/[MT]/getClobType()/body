@@ -1,3 +1,0 @@
-{
-  assertEquals("LONGTEXT",new MySQLTypeConverter().getClobType().toString());
-}

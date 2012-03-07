@@ -1,4 +1,0 @@
-{
-  this.lengthSemantics=lengthSemantics;
-  return this;
-}

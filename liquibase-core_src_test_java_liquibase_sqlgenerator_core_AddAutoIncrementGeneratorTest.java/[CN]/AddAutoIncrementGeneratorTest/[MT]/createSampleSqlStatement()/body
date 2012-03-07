@@ -1,3 +1,3 @@
 {
-  return new AddAutoIncrementStatement(null,TABLE_NAME,COLUMN_NAME,null,null,null);
+  return new AddAutoIncrementStatement(null,null,TABLE_NAME,COLUMN_NAME,null,null,null);
 }

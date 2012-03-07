@@ -1,9 +1,0 @@
-{
-  if (precision != null) {
-    String[] params=precision.split(",");
-    returnTypeName.setFirstParameter(params[0].trim());
-    if (params.length > 1) {
-      returnTypeName.setSecondParameter(params[1].trim());
-    }
-  }
-}

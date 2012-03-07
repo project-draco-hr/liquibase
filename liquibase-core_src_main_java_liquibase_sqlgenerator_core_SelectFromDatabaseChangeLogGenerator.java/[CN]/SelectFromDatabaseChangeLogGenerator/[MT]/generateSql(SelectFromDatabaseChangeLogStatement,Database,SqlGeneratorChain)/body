@@ -1,5 +1,5 @@
 {
-  String sql="SELECT " + StringUtils.join(statement.getColumnsToSelect(),",").toUpperCase() + " FROM "+ database.escapeTableName(database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName());
+  String sql="SELECT " + StringUtils.join(statement.getColumnsToSelect(),",").toUpperCase() + " FROM "+ database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName());
   SelectFromDatabaseChangeLogStatement.WhereClause whereClause=statement.getWhereClause();
   if (whereClause != null) {
     if (whereClause instanceof SelectFromDatabaseChangeLogStatement.ByTag) {

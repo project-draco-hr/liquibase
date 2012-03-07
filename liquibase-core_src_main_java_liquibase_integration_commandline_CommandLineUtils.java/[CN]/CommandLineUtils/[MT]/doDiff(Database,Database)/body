@@ -1,8 +1,8 @@
 {
-  Diff diff=new Diff(referenceDatabase,targetDatabase);
-  diff.addStatusListener(new OutDiffStatusListener());
-  DiffResult diffResult=diff.compare();
+  DiffControl diffControl=new DiffControl();
+  diffControl.addStatusListener(new OutDiffStatusListener());
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceDatabase,targetDatabase,diffControl);
   System.out.println("");
   System.out.println("Diff Results:");
-  diffResult.printResult(System.out);
+  new DiffToPrintStream(diffResult,System.out).print();
 }

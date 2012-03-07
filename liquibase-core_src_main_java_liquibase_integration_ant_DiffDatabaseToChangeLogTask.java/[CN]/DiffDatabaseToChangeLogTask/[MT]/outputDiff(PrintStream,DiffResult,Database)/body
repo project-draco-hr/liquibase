@@ -1,8 +1,8 @@
 {
   if (getChangeLogFile() == null) {
-    diffResult.printChangeLog(writer,targetDatabase);
+    new DiffToChangeLog(diffResult).print(writer);
   }
  else {
-    diffResult.printChangeLog(getChangeLogFile(),targetDatabase);
+    new DiffToChangeLog(diffResult).print(getChangeLogFile());
   }
 }

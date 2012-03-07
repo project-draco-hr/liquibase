@@ -1,0 +1,5 @@
+{
+  this.baseTableCatalogName=baseTableCatalogName;
+  this.baseTableSchemaName=baseTableSchemaName;
+  this.baseTableName=baseTableName;
+}

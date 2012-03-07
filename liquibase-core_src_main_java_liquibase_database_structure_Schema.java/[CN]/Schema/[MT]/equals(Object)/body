@@ -2,6 +2,7 @@
   if (this == o)   return true;
   if (o == null || getClass() != o.getClass())   return false;
   Schema schema=(Schema)o;
-  if (name != null ? !name.equals(schema.name) : schema.name != null)   return false;
+  if (!catalog.equals(schema.catalog))   return false;
+  if (!name.equals(schema.name))   return false;
   return true;
 }

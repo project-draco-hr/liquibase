@@ -1,3 +1,0 @@
-{
-  assertEquals("NUMERIC",new MSSQLTypeConverter().getNumberType().toString());
-}

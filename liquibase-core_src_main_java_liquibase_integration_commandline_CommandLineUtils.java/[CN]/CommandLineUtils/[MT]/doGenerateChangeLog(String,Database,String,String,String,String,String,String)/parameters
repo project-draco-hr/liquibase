@@ -1,0 +1,8 @@
+String changeLogFile
+Database originalDatabase
+String catalogName
+String schemaName
+String diffTypes
+String author
+String context
+String dataDir

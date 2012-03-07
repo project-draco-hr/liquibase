@@ -5,7 +5,7 @@
     if (database instanceof MSSQLDatabase) {
       clause+=" CONSTRAINT " + ((MSSQLDatabase)database).generateDefaultConstraintName(statement.getTableName(),statement.getColumnName());
     }
-    clause+=" DEFAULT " + TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(defaultValue).convertObjectToString(defaultValue,database);
+    clause+=" DEFAULT " + DataTypeFactory.getInstance().fromObject(defaultValue,database).objectToString(defaultValue,database);
   }
   return clause;
 }

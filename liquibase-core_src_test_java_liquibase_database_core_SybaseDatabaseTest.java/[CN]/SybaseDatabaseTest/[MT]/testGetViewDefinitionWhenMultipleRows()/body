@@ -1,5 +1,5 @@
 {
   SybaseDatabase database=new SybaseDatabase();
   configureExecutor(database,"foo"," bar"," bat");
-  assertEquals("foo bar bat",database.getViewDefinition("dbo","view_name"));
+  assertEquals("foo bar bat",database.getViewDefinition(new Schema(new Catalog(null),"dbo"),"view_name"));
 }

@@ -1,0 +1,44 @@
+{
+  String fk_name=cleanObjectNameFromDatabase(importedKeyMetadataResultSet.getString("FK_NAME"));
+  ForeignKey foreignKey=new ForeignKey();
+  foreignKey.setName(fk_name);
+  String fkTableCatalog=cleanObjectNameFromDatabase(importedKeyMetadataResultSet.getString("FKTABLE_CAT"));
+  String fkTableSchema=cleanObjectNameFromDatabase(importedKeyMetadataResultSet.getString("FKTABLE_SCHEM"));
+  String fkTableName=cleanObjectNameFromDatabase(importedKeyMetadataResultSet.getString("FKTABLE_NAME"));
+  Table foreignKeyTable=snapshot.getDatabaseObject(new Schema(fkTableCatalog,fkTableSchema),fkTableName,Table.class);
+  if (foreignKeyTable == null) {
+    foreignKeyTable=new Table(fkTableName);
+    foreignKeyTable.setSchema(new Schema(new Catalog(fkTableCatalog),fkTableSchema));
+  }
+  foreignKey.setForeignKeyTable(foreignKeyTable);
+  foreignKey.setForeignKeyColumns(cleanObjectNameFromDatabase(importedKeyMetadataResultSet.getString("FKCOLUMN_NAME")));
+  foreignKey.setPrimaryKeyTable(snapshot.getDatabaseObject(new Schema(importedKeyMetadataResultSet.getString("PKTABLE_CAT"),importedKeyMetadataResultSet.getString("PKTABLE_SCHEM")),importedKeyMetadataResultSet.getString("PKTABLE_NAME"),Table.class));
+  foreignKey.setPrimaryKeyColumns(cleanObjectNameFromDatabase(importedKeyMetadataResultSet.getString("PKCOLUMN_NAME")));
+  ForeignKeyConstraintType updateRule=convertToForeignKeyConstraintType(importedKeyMetadataResultSet.getInt("UPDATE_RULE"));
+  if (importedKeyMetadataResultSet.wasNull()) {
+    updateRule=null;
+  }
+  foreignKey.setUpdateRule(updateRule);
+  ForeignKeyConstraintType deleteRule=convertToForeignKeyConstraintType(importedKeyMetadataResultSet.getInt("DELETE_RULE"));
+  if (importedKeyMetadataResultSet.wasNull()) {
+    deleteRule=null;
+  }
+  foreignKey.setDeleteRule(deleteRule);
+  short deferrability=importedKeyMetadataResultSet.getShort("DEFERRABILITY");
+  if (deferrability == DatabaseMetaData.importedKeyInitiallyDeferred) {
+    foreignKey.setDeferrable(true);
+    foreignKey.setInitiallyDeferred(true);
+  }
+ else   if (deferrability == DatabaseMetaData.importedKeyInitiallyImmediate) {
+    foreignKey.setDeferrable(true);
+    foreignKey.setInitiallyDeferred(false);
+  }
+ else   if (deferrability == DatabaseMetaData.importedKeyNotDeferrable) {
+    foreignKey.setDeferrable(false);
+    foreignKey.setInitiallyDeferred(false);
+  }
+ else {
+    throw new RuntimeException("Unknown deferrablility result: " + deferrability);
+  }
+  return foreignKey;
+}

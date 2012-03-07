@@ -1,5 +1,0 @@
-{
-  targetDatabase=null;
-  referenceDatabase=originalDatabase;
-  referenceDatabase.setDefaultSchemaName(schema);
-}

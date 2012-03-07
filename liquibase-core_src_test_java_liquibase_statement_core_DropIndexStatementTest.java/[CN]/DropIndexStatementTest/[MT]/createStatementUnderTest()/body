@@ -1,3 +1,3 @@
 {
-  return new DropIndexStatement(null,null,null,null);
+  return new DropIndexStatement(null,null,null,null,null);
 }

@@ -1,0 +1,3 @@
+{
+  return type.getSimpleName().replaceAll("([A-Z])"," $1").trim() + "(s)";
+}

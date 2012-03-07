@@ -1,8 +1,3 @@
 {
-  try {
-    return new Sql[]{new UnparsedSql("select view_definition from SYSIBM.VIEWS where TABLE_NAME='" + statement.getViewName() + "' and TABLE_SCHEMA='"+ database.convertRequestedSchemaToSchema(statement.getSchemaName())+ "'")};
-  }
- catch (  DatabaseException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
+  return new Sql[]{new UnparsedSql("select view_definition from SYSIBM.VIEWS where TABLE_NAME='" + statement.getViewName() + "' and TABLE_SCHEMA='"+ database.correctSchemaName(statement.getSchemaName())+ "'")};
 }

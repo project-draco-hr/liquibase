@@ -1,0 +1,6 @@
+{
+  if (foreignKeyTable == null) {
+    return null;
+  }
+  return foreignKeyTable.getSchema();
+}

@@ -1,0 +1,12 @@
+{
+  for (  PrimaryKey pk : diffResult.getObjectDiff(PrimaryKey.class).getMissing()) {
+    AddPrimaryKeyChange change=new AddPrimaryKeyChange();
+    change.setTableName(pk.getTable().getName());
+    change.setCatalogName(pk.getTable().getSchema().getCatalog().getName());
+    change.setSchemaName(pk.getTable().getSchema().getName());
+    change.setConstraintName(pk.getName());
+    change.setColumnNames(pk.getColumnNames());
+    change.setTablespace(pk.getTablespace());
+    changes.add(generateChangeSet(change));
+  }
+}

@@ -1,3 +1,0 @@
-{
-  assertEquals("NVARCHAR(MAX)",new MSSQLTypeConverter().getClobType().toString());
-}

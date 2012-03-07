@@ -1,0 +1,3 @@
+{
+  return !diffResult.getReferenceSnapshot().getDatabase().isLiquibaseTable(column.getRelation().getName());
+}

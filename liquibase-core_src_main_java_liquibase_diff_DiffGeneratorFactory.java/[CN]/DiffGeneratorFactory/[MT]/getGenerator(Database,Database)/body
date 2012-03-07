@@ -1,0 +1,23 @@
+{
+  SortedSet<DiffGenerator> foundGenerators=new TreeSet<DiffGenerator>(new Comparator<DiffGenerator>(){
+    public int compare(    DiffGenerator o1,    DiffGenerator o2){
+      return -1 * new Integer(o1.getPriority()).compareTo(o2.getPriority());
+    }
+  }
+);
+  for (  DiffGenerator diffGenerator : implementedGenerators) {
+    if (diffGenerator.supports(referenceDatabase,comparisonDatabase)) {
+      foundGenerators.add(diffGenerator);
+    }
+  }
+  if (foundGenerators.size() == 0) {
+    throw new UnexpectedLiquibaseException("Cannot find DiffGenerator for " + referenceDatabase.getTypeName() + ", "+ comparisonDatabase.getTypeName());
+  }
+  DiffGenerator returnDiffGenerator;
+  try {
+    return foundGenerators.iterator().next().getClass().newInstance();
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

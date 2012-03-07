@@ -1,6 +1,0 @@
-{
-  this.schemaName=schemaName;
-  this.viewName=viewName;
-  this.selectQuery=selectQuery;
-  this.replaceIfExists=replaceIfExists;
-}

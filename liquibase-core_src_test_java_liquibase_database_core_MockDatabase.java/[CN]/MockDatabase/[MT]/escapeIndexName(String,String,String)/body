@@ -1,0 +1,3 @@
+{
+  return escapeTableName(catalogName,schemaName,indexName);
+}

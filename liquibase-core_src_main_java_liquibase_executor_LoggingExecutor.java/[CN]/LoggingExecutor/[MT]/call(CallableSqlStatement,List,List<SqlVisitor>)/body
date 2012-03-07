@@ -1,3 +1,0 @@
-{
-  throw new DatabaseException("Do not know how to output callable statement");
-}

@@ -1,3 +1,0 @@
-{
-  assertEquals("VARBINARY(MAX)",new MSSQLTypeConverter().getBlobType().toString());
-}

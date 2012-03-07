@@ -1,3 +1,0 @@
-{
-  assertEquals("BOOLEAN",new H2TypeConverter().getBooleanType().toString());
-}

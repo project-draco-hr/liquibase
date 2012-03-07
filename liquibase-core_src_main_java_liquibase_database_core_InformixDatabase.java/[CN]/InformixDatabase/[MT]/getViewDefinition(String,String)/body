@@ -1,9 +1,0 @@
-{
-  List<Map> retList=ExecutorService.getInstance().getExecutor(this).queryForList(new GetViewDefinitionStatement(schemaName,viewName));
-  StringBuilder sb=new StringBuilder();
-  for (  Map rowMap : retList) {
-    String s=(String)rowMap.get("VIEWTEXT");
-    sb.append(s);
-  }
-  return CREATE_VIEW_AS_PATTERN.matcher(sb.toString()).replaceFirst("");
-}

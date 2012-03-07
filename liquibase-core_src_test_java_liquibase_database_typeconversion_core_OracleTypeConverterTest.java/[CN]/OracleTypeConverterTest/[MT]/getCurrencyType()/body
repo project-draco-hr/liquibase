@@ -1,3 +1,0 @@
-{
-  assertEquals("NUMBER(15, 2)",new OracleTypeConverter().getCurrencyType().toString());
-}

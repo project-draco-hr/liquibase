@@ -1,3 +1,0 @@
-{
-  assertEquals("TINYINT(1)",new MySQLTypeConverter().getBooleanType().toString());
-}

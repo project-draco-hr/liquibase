@@ -1,5 +1,5 @@
 {
-  this.statementUnderTest=new AddUniqueConstraintStatement(null,TABLE_NAME,COLUMN_NAME,null);
+  this.statementUnderTest=new AddUniqueConstraintStatement(null,null,TABLE_NAME,COLUMN_NAME,null);
   assertCorrect("alter table `adduqtest` add unique (`coltomakeuq`)",MySQLDatabase.class);
   assertCorrect("alter table adduqtest add constraint unique (coltomakeuq)",InformixDatabase.class);
   assertCorrect("alter table adduqtest add unique (coltomakeuq)",OracleDatabase.class);

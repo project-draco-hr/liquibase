@@ -14,9 +14,9 @@
     }
     DatabaseSnapshotGeneratorFactory.resetAll();
     LockService.getInstance(database).forceReleaseLock();
-    database.dropDatabaseObjects(null);
+    database.dropDatabaseObjects(Schema.DEFAULT);
     if (database.supportsSchemas()) {
-      database.dropDatabaseObjects(DatabaseTestContext.ALT_SCHEMA);
+      database.dropDatabaseObjects(new Schema(DatabaseTestContext.ALT_CATALOG,DatabaseTestContext.ALT_SCHEMA));
     }
     database.commit();
     DatabaseSnapshotGeneratorFactory.resetAll();

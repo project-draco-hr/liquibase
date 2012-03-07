@@ -1,6 +1,0 @@
-{
-  if (requestedSchema == null) {
-    return getDefaultDatabaseSchemaName();
-  }
-  return requestedSchema;
-}

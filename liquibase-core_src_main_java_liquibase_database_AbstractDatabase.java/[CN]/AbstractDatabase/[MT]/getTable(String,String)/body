@@ -1,3 +1,0 @@
-{
-  return DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).getTable(schemaName,tableName,this);
-}

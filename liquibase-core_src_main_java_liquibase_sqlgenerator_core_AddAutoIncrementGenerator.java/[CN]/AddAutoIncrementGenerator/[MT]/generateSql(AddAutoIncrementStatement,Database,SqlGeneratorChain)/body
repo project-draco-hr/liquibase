@@ -1,4 +1,4 @@
 {
-  String sql="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " MODIFY "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(statement.getColumnDataType(),true)+ " "+ database.getAutoIncrementClause(statement.getStartWith(),statement.getIncrementBy());
-  return new Sql[]{new UnparsedSql(sql,new Column().setTable(new Table(statement.getTableName()).setSchema(statement.getSchemaName())).setName(statement.getColumnName()))};
+  String sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " MODIFY "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ DataTypeFactory.getInstance().fromDescription(statement.getColumnDataType() + "{autoIncrement:true}")+ " "+ database.getAutoIncrementClause(statement.getStartWith(),statement.getIncrementBy());
+  return new Sql[]{new UnparsedSql(sql,new Column().setRelation(new Table(statement.getTableName()).setSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()))).setName(statement.getColumnName()))};
 }

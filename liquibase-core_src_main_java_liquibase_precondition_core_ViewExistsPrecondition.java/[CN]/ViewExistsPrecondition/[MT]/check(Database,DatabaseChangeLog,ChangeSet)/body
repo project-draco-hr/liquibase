@@ -1,9 +1,11 @@
 {
   String currentSchemaName;
+  String currentCatalogName;
   try {
-    currentSchemaName=getSchemaName() == null ? (database == null ? null : database.getDefaultSchemaName()) : getSchemaName();
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasView(currentSchemaName,getViewName(),database)) {
-      throw new PreconditionFailedException("View " + database.escapeTableName(currentSchemaName,getViewName()) + " does not exist",changeLog,this);
+    currentCatalogName=getCatalogName();
+    currentSchemaName=getSchemaName();
+    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasView(currentCatalogName,currentSchemaName,getViewName(),database)) {
+      throw new PreconditionFailedException("View " + database.escapeTableName(currentCatalogName,currentSchemaName,getViewName()) + " does not exist",changeLog,this);
     }
   }
  catch (  PreconditionFailedException e) {

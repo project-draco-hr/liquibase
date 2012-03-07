@@ -1,15 +1,15 @@
 {
-  String schemaName=getSchemaName() == null ? (database == null ? null : database.getDefaultSchemaName()) : getSchemaName();
-  CreateTableStatement statement=new CreateTableStatement(schemaName,getTableName());
+  CreateTableStatement statement=new CreateTableStatement(getCatalogName(),getSchemaName(),getTableName());
   for (  ColumnConfig column : getColumns()) {
     ConstraintsConfig constraints=column.getConstraints();
     boolean isAutoIncrement=column.isAutoIncrement() != null && column.isAutoIncrement();
     Object defaultValue=column.getDefaultValueObject();
+    LiquibaseDataType columnType=DataTypeFactory.getInstance().fromDescription(column.getType() + (isAutoIncrement ? "{autoIncrement:true}" : ""));
     if (constraints != null && constraints.isPrimaryKey() != null && constraints.isPrimaryKey()) {
-      statement.addPrimaryKeyColumn(column.getName(),TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(column.getType(),isAutoIncrement),defaultValue,constraints.getPrimaryKeyName(),constraints.getPrimaryKeyTablespace());
+      statement.addPrimaryKeyColumn(column.getName(),columnType,defaultValue,constraints.getPrimaryKeyName(),constraints.getPrimaryKeyTablespace());
     }
  else {
-      statement.addColumn(column.getName(),TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(column.getType(),column.isAutoIncrement()),defaultValue);
+      statement.addColumn(column.getName(),columnType,defaultValue);
     }
     if (constraints != null) {
       if (constraints.isNullable() != null && !constraints.isNullable()) {
@@ -38,7 +38,7 @@
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
   statements.add(statement);
   if (StringUtils.trimToNull(remarks) != null) {
-    SetTableRemarksStatement remarksStatement=new SetTableRemarksStatement(schemaName,tableName,remarks);
+    SetTableRemarksStatement remarksStatement=new SetTableRemarksStatement(catalogName,schemaName,tableName,remarks);
     if (SqlGeneratorFactory.getInstance().supports(remarksStatement,database)) {
       statements.add(remarksStatement);
     }
@@ -46,7 +46,7 @@
   for (  ColumnConfig column : getColumns()) {
     String columnRemarks=StringUtils.trimToNull(column.getRemarks());
     if (columnRemarks != null) {
-      SetColumnRemarksStatement remarksStatement=new SetColumnRemarksStatement(schemaName,tableName,column.getName(),columnRemarks);
+      SetColumnRemarksStatement remarksStatement=new SetColumnRemarksStatement(catalogName,schemaName,tableName,column.getName(),columnRemarks);
       if (SqlGeneratorFactory.getInstance().supports(remarksStatement,database)) {
         statements.add(remarksStatement);
       }

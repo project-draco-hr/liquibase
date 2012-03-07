@@ -1,0 +1,9 @@
+{
+  for (  Table unexpectedTable : diffResult.getObjectDiff(Table.class).getUnexpected()) {
+    DropTableChange change=new DropTableChange();
+    change.setTableName(unexpectedTable.getName());
+    change.setCatalogName(unexpectedTable.getSchema().getCatalog().getName());
+    change.setSchemaName(unexpectedTable.getSchema().getName());
+    changes.add(generateChangeSet(change));
+  }
+}

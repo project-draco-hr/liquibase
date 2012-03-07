@@ -1,0 +1,11 @@
+{
+  if (databaseRole.equals(DatabaseRole.COMPARISON)) {
+    return comparisonDatabaseSchemas;
+  }
+ else   if (databaseRole.equals(DatabaseRole.REFERENCE)) {
+    return referenceDatabaseSchemas;
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknkown diff type: " + databaseRole);
+  }
+}

@@ -1,0 +1,12 @@
+{
+  if (database instanceof InformixDatabase) {
+    return new DatabaseDataType("INTERVAL HOUR TO FRACTION",5);
+  }
+  if (database instanceof MSSQLDatabase) {
+    return new DatabaseDataType("DATETIME");
+  }
+  if (database instanceof OracleDatabase) {
+    return new DatabaseDataType("DATE");
+  }
+  return super.toDatabaseDataType(database);
+}

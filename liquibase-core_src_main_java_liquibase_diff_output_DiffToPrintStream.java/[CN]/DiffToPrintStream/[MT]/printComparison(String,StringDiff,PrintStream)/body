@@ -1,0 +1,15 @@
+{
+  out.print(title + ":");
+  if (string == null) {
+    out.print("NULL");
+    return;
+  }
+  if (string.areEqual()) {
+    out.println(" EQUAL");
+  }
+ else {
+    out.println();
+    out.println("     Reference:   '" + string.getReferenceVersion() + "'");
+    out.println("     Target: '" + string.getTargetVersion() + "'");
+  }
+}

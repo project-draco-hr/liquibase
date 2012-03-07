@@ -25,5 +25,5 @@
  else   if (getDefaultValueComputed() != null) {
     defaultValue=getDefaultValueComputed();
   }
-  return new SqlStatement[]{new AddDefaultValueStatement(getSchemaName(),getTableName(),getColumnName(),getColumnDataType(),defaultValue)};
+  return new SqlStatement[]{new AddDefaultValueStatement(getCatalogName(),getSchemaName(),getTableName(),getColumnName(),getColumnDataType(),defaultValue)};
 }

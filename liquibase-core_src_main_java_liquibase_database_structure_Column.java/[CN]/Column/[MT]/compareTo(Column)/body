@@ -1,17 +1,14 @@
 {
   try {
     int returnValue=0;
-    if (this.getTable() != null && o.getTable() == null) {
+    if (this.getRelation() != null && o.getRelation() == null) {
       return 1;
     }
- else     if (this.getTable() == null && o.getTable() != null) {
+ else     if (this.getRelation() == null && o.getRelation() != null) {
       return -1;
     }
- else     if (this.getTable() == null && o.getTable() == null) {
-      returnValue=this.getView().compareTo(o.getView());
-    }
  else {
-      returnValue=this.getTable().compareTo(o.getTable());
+      returnValue=this.getRelation().compareTo(o.getRelation());
     }
     if (returnValue == 0) {
       returnValue=this.getName().compareTo(o.getName());

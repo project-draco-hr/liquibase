@@ -13,7 +13,8 @@
         refTableName=refTableName.split("\\.")[0];
       }
       String refColName=referencesMatcher.group(2);
-      AddForeignKeyConstraintStatement addForeignKeyConstraintStatement=new AddForeignKeyConstraintStatement(fkConstraint.getForeignKeyName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName(),refSchemaName,refTableName,refColName);
+      String refCatalogName=null;
+      AddForeignKeyConstraintStatement addForeignKeyConstraintStatement=new AddForeignKeyConstraintStatement(fkConstraint.getForeignKeyName(),statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName(),refCatalogName,refSchemaName,refTableName,refColName);
       returnSql.addAll(Arrays.asList(SqlGeneratorFactory.getInstance().generateSql(addForeignKeyConstraintStatement,database)));
     }
   }

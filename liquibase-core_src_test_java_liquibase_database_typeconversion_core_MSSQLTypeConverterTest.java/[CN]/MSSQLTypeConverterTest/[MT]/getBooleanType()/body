@@ -1,3 +1,0 @@
-{
-  assertEquals("BIT",new MSSQLTypeConverter().getBooleanType().toString());
-}

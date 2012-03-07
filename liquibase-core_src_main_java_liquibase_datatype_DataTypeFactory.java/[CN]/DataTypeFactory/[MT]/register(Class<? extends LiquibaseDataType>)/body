@@ -1,0 +1,28 @@
+{
+  try {
+    LiquibaseDataType example=dataTypeClass.newInstance();
+    List<String> names=new ArrayList<String>();
+    names.add(example.getName());
+    names.addAll(Arrays.asList(example.getAliases()));
+    for (    String name : names) {
+      name=name.toLowerCase();
+      if (registry.get(name) == null) {
+        registry.put(name,new TreeSet<Class<? extends LiquibaseDataType>>(new Comparator<Class<? extends LiquibaseDataType>>(){
+          public int compare(          Class<? extends LiquibaseDataType> o1,          Class<? extends LiquibaseDataType> o2){
+            try {
+              return -1 * new Integer(o1.newInstance().getPriority()).compareTo(o2.newInstance().getPriority());
+            }
+ catch (            Exception e) {
+              throw new UnexpectedLiquibaseException(e);
+            }
+          }
+        }
+));
+      }
+      registry.get(name).add(dataTypeClass);
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

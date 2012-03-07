@@ -1,8 +1,3 @@
 {
-  try {
-    return new Sql[]{new UnparsedSql("select definition from pg_views where viewname='" + statement.getViewName() + "' AND schemaname='"+ database.convertRequestedSchemaToSchema(statement.getSchemaName())+ "'")};
-  }
- catch (  DatabaseException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
+  return new Sql[]{new UnparsedSql("select definition from pg_views where viewname='" + statement.getViewName() + "' AND schemaname='"+ database.correctSchemaName(statement.getSchemaName())+ "'")};
 }

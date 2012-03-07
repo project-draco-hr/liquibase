@@ -2,7 +2,7 @@
   if (this.ranChangeSetList != null) {
     return this.ranChangeSetList;
   }
-  String databaseChangeLogTableName=escapeTableName(getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
+  String databaseChangeLogTableName=escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
   ranChangeSetList=new ArrayList<RanChangeSet>();
   if (hasDatabaseChangeLogTable()) {
     LogFactory.getLogger().info("Reading from " + databaseChangeLogTableName);

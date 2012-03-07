@@ -1,0 +1,11 @@
+{
+  int maxParameters=this.getMaxParameters(database);
+  int minParameters=this.getMinParameters(database);
+  if (parameters.size() > maxParameters) {
+    throw new UnexpectedLiquibaseException("Type " + getClass() + " doesn't support "+ maxParameters+ " parameters");
+  }
+  if (parameters.size() < minParameters) {
+    throw new UnexpectedLiquibaseException("Type " + getClass() + " requires "+ minParameters+ " parameters");
+  }
+  return true;
+}

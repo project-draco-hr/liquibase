@@ -1,7 +1,0 @@
-{
-  this.referenceSnapshot=referenceDatabaseSnapshot;
-  if (targetDatabaseSnapshot == null) {
-    targetDatabaseSnapshot=new DatabaseSnapshot(referenceDatabaseSnapshot.getDatabase(),null);
-  }
-  this.targetSnapshot=targetDatabaseSnapshot;
-}

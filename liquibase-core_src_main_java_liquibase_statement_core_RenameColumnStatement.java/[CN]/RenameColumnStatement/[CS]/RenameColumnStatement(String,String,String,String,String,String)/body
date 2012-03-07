@@ -1,0 +1,8 @@
+{
+  this.catalogName=catalogName;
+  this.schemaName=schemaName;
+  this.tableName=tableName;
+  this.oldColumnName=oldColumnName;
+  this.newColumnName=newColumnName;
+  this.columnDataType=columnDataType;
+}

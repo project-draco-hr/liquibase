@@ -1,0 +1,12 @@
+{
+  objectTypesToDiff.add(Table.class);
+  objectTypesToDiff.add(View.class);
+  objectTypesToDiff.add(Column.class);
+  objectTypesToDiff.add(Index.class);
+  objectTypesToDiff.add(ForeignKey.class);
+  objectTypesToDiff.add(PrimaryKey.class);
+  objectTypesToDiff.add(UniqueConstraint.class);
+  objectTypesToDiff.add(Sequence.class);
+  referenceDatabaseSchemas=new Schema[]{new Schema(new Catalog(null),null)};
+  comparisonDatabaseSchemas=new Schema[]{new Schema(new Catalog(null),null)};
+}

@@ -1,0 +1,30 @@
+{
+  ResultSet rs=null;
+  try {
+    DatabaseMetaData metaData=getMetaData(database);
+    rs=metaData.getTables(database.correctCatalogName(catalogName),database.correctSchemaName(schemaName),database.correctTableName(tableName),new String[]{"TABLE"});
+    Table table;
+    try {
+      if (!rs.next()) {
+        return null;
+      }
+      table=readTable(rs,database,true);
+    }
+  finally {
+      rs.close();
+    }
+    return table;
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (rs != null) {
+      try {
+        rs.close();
+      }
+ catch (      SQLException ignore) {
+      }
+    }
+  }
+}

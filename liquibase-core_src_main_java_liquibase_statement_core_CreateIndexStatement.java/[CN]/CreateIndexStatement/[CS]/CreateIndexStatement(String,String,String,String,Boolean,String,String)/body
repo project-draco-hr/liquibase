@@ -1,0 +1,9 @@
+{
+  this.indexName=indexName;
+  this.tableCatalogName=tableCatalogName;
+  this.tableSchemaName=tableSchemaName;
+  this.tableName=tableName;
+  this.columns=columns;
+  this.unique=isUnique;
+  this.associatedWith=associatedWith;
+}

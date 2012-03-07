@@ -1,0 +1,11 @@
+{
+  try {
+    Class[] classes=ServiceLocator.getInstance().findClasses(DiffGenerator.class);
+    for (    Class<? extends DiffGenerator> clazz : classes) {
+      register(clazz.getConstructor().newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

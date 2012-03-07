@@ -1,0 +1,9 @@
+{
+  if (database instanceof DB2Database) {
+    return value.replaceFirst("^\"SYSIBM\".\"TIME\"\\('","").replaceFirst("'\\)","");
+  }
+  if (database instanceof DerbyDatabase) {
+    return value.replaceFirst("^TIME\\('","").replaceFirst("'\\)","");
+  }
+  return super.stringToObject(value,database);
+}

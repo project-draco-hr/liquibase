@@ -1,0 +1,5 @@
+String catalogName
+String schemaName
+String tableName
+String constraintName
+String uniqueColumns

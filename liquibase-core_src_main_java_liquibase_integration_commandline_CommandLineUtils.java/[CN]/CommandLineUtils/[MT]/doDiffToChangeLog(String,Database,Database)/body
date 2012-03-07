@@ -1,11 +1,11 @@
 {
-  Diff diff=new Diff(referenceDatabase,targetDatabase);
-  diff.addStatusListener(new OutDiffStatusListener());
-  DiffResult diffResult=diff.compare();
+  DiffControl diffControl=new DiffControl();
+  diffControl.addStatusListener(new OutDiffStatusListener());
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceDatabase,targetDatabase,diffControl);
   if (changeLogFile == null) {
-    diffResult.printChangeLog(System.out,targetDatabase);
+    new DiffToChangeLog(diffResult).print(System.out);
   }
  else {
-    diffResult.printChangeLog(changeLogFile,targetDatabase);
+    new DiffToChangeLog(diffResult).print(changeLogFile);
   }
 }

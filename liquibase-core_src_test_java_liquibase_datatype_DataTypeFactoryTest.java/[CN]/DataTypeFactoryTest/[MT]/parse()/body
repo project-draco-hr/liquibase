@@ -1,0 +1,11 @@
+{
+  assertParseCorrect("int",IntType.class);
+  assertParseCorrect("varchar(255)",VarcharType.class);
+  assertParseCorrect("int{autoIncrement:true}","int",IntType.class);
+  assertParseCorrect("int{}","int",IntType.class);
+  H2Database database=new H2Database();
+  assertTrue(((IntType)DataTypeFactory.getInstance().fromDescription("int{autoIncrement:true}")).isAutoIncrement());
+  assertFalse(((IntType)DataTypeFactory.getInstance().fromDescription("int{autoIncrement:false}")).isAutoIncrement());
+  assertFalse(((IntType)DataTypeFactory.getInstance().fromDescription("int")).isAutoIncrement());
+  assertFalse(((IntType)DataTypeFactory.getInstance().fromDescription("int{}")).isAutoIncrement());
+}

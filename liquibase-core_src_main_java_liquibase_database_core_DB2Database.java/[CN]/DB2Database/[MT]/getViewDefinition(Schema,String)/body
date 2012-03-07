@@ -1,0 +1,3 @@
+{
+  return super.getViewDefinition(schema,name).replaceFirst("CREATE VIEW \\w+ AS ","");
+}

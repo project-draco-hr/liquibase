@@ -1,6 +1,0 @@
-{
-  column.setDataType(rs.getInt("DATA_TYPE"));
-  column.setColumnSize(rs.getInt("COLUMN_SIZE"));
-  column.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
-  column.setInitPrecision(!((column.getDataType() == Types.DECIMAL || column.getDataType() == Types.NUMERIC || column.getDataType() == Types.REAL) && rs.getString("DECIMAL_DIGITS") == null));
-}

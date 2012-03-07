@@ -1,0 +1,22 @@
+{
+  try {
+    DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+    DatabaseMetaData databaseMetaData=getMetaData(database);
+    this.statusListeners=diffControl.getStatusListeners();
+    for (    Schema schema : diffControl.getSchemas(type)) {
+      readTables(snapshot,schema,databaseMetaData);
+      readViews(snapshot,schema,databaseMetaData);
+      readForeignKeys(snapshot,schema,databaseMetaData);
+      readPrimaryKeys(snapshot,schema,databaseMetaData);
+      readColumns(snapshot,schema,databaseMetaData);
+      readUniqueConstraints(snapshot,schema,databaseMetaData);
+      readIndexes(snapshot,schema,databaseMetaData);
+      readSequences(snapshot,schema,databaseMetaData);
+    }
+    ;
+    return snapshot;
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

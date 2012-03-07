@@ -1,0 +1,28 @@
+{
+  String columnTypeName=columnMetadataResultSet.getString("TYPE_NAME");
+  int dataType=columnMetadataResultSet.getInt("DATA_TYPE");
+  Integer columnSize=columnMetadataResultSet.getInt("COLUMN_SIZE");
+  if (columnMetadataResultSet.wasNull()) {
+    columnSize=null;
+  }
+  Integer decimalDigits=columnMetadataResultSet.getInt("DECIMAL_DIGITS");
+  if (columnMetadataResultSet.wasNull() || decimalDigits.equals(0)) {
+    decimalDigits=null;
+  }
+  Integer radix=columnMetadataResultSet.getInt("NUM_PREC_RADIX");
+  if (columnMetadataResultSet.wasNull()) {
+    radix=null;
+  }
+  Integer characterOctetLength=columnMetadataResultSet.getInt("CHAR_OCTET_LENGTH");
+  if (columnMetadataResultSet.wasNull()) {
+    characterOctetLength=null;
+  }
+  DataType type=new DataType(columnTypeName);
+  type.setDataTypeId(dataType);
+  type.setColumnSize(columnSize);
+  type.setDecimalDigits(decimalDigits);
+  type.setRadix(radix);
+  type.setCharacterOctetLength(characterOctetLength);
+  type.setColumnSizeUnit(DataType.ColumnSizeUnit.BYTE);
+  return type;
+}

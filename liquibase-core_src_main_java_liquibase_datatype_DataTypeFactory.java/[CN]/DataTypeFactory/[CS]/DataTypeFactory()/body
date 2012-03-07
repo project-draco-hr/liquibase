@@ -1,0 +1,12 @@
+{
+  Class<? extends LiquibaseDataType>[] classes;
+  try {
+    classes=ServiceLocator.getInstance().findClasses(LiquibaseDataType.class);
+    for (    Class<? extends LiquibaseDataType> clazz : classes) {
+      register(clazz);
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

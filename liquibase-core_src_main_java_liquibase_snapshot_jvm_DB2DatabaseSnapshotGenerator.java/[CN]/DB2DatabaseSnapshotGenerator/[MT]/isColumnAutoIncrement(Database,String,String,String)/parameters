@@ -1,4 +1,0 @@
-Database database
-String schemaName
-String tableName
-String columnName

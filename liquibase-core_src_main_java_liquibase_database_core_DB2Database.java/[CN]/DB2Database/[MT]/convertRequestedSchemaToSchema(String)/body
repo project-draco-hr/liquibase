@@ -1,8 +1,0 @@
-{
-  if (requestedSchema == null) {
-    return getDefaultDatabaseSchemaName();
-  }
- else {
-    return requestedSchema.toUpperCase();
-  }
-}

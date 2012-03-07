@@ -1,0 +1,12 @@
+{
+  List<String> defLines=(List<String>)ExecutorService.getInstance().getExecutor(this).queryForList(new GetViewDefinitionStatement(schema.getCatalogName(this),schema.getName(this),viewName),String.class);
+  StringBuffer sb=new StringBuffer();
+  for (  String defLine : defLines) {
+    sb.append(defLine);
+  }
+  String definition=sb.toString();
+  if (definition == null) {
+    return null;
+  }
+  return CREATE_VIEW_AS_PATTERN.matcher(definition).replaceFirst("");
+}

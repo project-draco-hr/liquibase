@@ -1,3 +1,0 @@
-{
-  return INTEGER8_PATTERN.matcher(type.getDataTypeName()).matches() || SERIAL8_PATTERN.matcher(type.getDataTypeName()).matches() || "BIGINT".equalsIgnoreCase(type.getDataTypeName());
-}

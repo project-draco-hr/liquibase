@@ -1,3 +1,0 @@
-{
-  return column.getView() == null && !referenceSnapshot.getDatabase().isLiquibaseTable(column.getTable().getName());
-}

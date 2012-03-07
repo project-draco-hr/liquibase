@@ -10,13 +10,12 @@
   database.setDefaultSchemaName("liquibaseb");
   LockService.getInstance(database).forceReleaseLock();
   liquibase.update(includedChangeLog);
-  DatabaseSnapshot originalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
-  Diff diff=new Diff(database,"liquibaseb");
-  DiffResult diffResult=diff.compare();
+  DatabaseSnapshot originalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl());
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,null,new DiffControl(new Schema(Catalog.DEFAULT,"liquibaseb")));
   File tempFile=File.createTempFile("liquibase-test",".xml");
   FileOutputStream output=new FileOutputStream(tempFile);
   try {
-    diffResult.printChangeLog(new PrintStream(output),database);
+    new DiffToChangeLog(diffResult).print(new PrintStream(output));
     output.flush();
   }
   finally {
@@ -26,12 +25,12 @@
   clearDatabase(liquibase);
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
-    executor.execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogTableName(),false));
+    executor.execute(new DropTableStatement("liquibaseb","liquibaseb",database.getDatabaseChangeLogTableName(),false));
   }
  catch (  DatabaseException e) {
   }
   try {
-    executor.execute(new DropTableStatement("liquibaseb",database.getDatabaseChangeLogLockTableName(),false));
+    executor.execute(new DropTableStatement("liquibaseb","liquibaseb",database.getDatabaseChangeLogLockTableName(),false));
   }
  catch (  DatabaseException e) {
   }
@@ -48,7 +47,8 @@
     throw e;
   }
   tempFile.deleteOnExit();
-  DatabaseSnapshot finalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,null,null);
-  DiffResult finalDiffResult=new Diff(originalSnapshot,finalSnapshot).compare();
-  assertFalse(finalDiffResult.differencesFound());
+  DatabaseSnapshot finalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl());
+  DiffResult finalDiffResult=DiffGeneratorFactory.getInstance().compare(originalSnapshot,finalSnapshot,new DiffControl());
+  new DiffToPrintStream(finalDiffResult,System.out).print();
+  assertTrue(finalDiffResult.areEqual());
 }

@@ -1,3 +1,0 @@
-{
-  return new DateTimeType("DATETIME " + DATETIME_FIELD_QUALIFIER);
-}

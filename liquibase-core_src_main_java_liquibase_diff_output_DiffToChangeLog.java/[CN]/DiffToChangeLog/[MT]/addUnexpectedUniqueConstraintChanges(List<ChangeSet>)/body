@@ -1,0 +1,14 @@
+{
+  for (  UniqueConstraint uc : diffResult.getObjectDiff(UniqueConstraint.class).getUnexpected()) {
+    if (null != uc) {
+      if (null != uc.getTable()) {
+        DropUniqueConstraintChange change=new DropUniqueConstraintChange();
+        change.setTableName(uc.getTable().getName());
+        change.setCatalogName(uc.getTable().getSchema().getCatalog().getName());
+        change.setSchemaName(uc.getTable().getSchema().getName());
+        change.setConstraintName(uc.getName());
+        changes.add(generateChangeSet(change));
+      }
+    }
+  }
+}

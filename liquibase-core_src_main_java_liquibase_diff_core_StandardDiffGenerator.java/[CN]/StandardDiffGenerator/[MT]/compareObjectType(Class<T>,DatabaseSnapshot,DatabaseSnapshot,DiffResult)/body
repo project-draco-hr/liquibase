@@ -1,0 +1,22 @@
+{
+  Set<Schema> schemas=new HashSet<Schema>();
+  schemas.addAll(referenceSnapshot.getSchemas());
+  schemas.addAll(comparisonSnapshot.getSchemas());
+  for (  Schema schema : schemas) {
+    for (    T referenceObject : referenceSnapshot.getDatabaseObjects(schema,type)) {
+      if (comparisonSnapshot.contains(schema,referenceObject)) {
+        if (!comparisonSnapshot.matches(schema,referenceObject)) {
+          diffResult.getObjectDiff(type).addChanged(referenceObject);
+        }
+      }
+ else {
+        diffResult.getObjectDiff(type).addMissing(referenceObject);
+      }
+    }
+    for (    T targetObject : comparisonSnapshot.getDatabaseObjects(schema,type)) {
+      if (!referenceSnapshot.contains(schema,targetObject)) {
+        diffResult.getObjectDiff(type).addUnexpected(targetObject);
+      }
+    }
+  }
+}

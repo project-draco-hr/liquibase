@@ -1,4 +1,0 @@
-{
-  super(schemaName,tableName);
-  this.primaryKey=primaryKey;
-}

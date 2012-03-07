@@ -1,3 +1,0 @@
-{
-  this(schemaName,tableName,columnName,columnDataType,null);
-}

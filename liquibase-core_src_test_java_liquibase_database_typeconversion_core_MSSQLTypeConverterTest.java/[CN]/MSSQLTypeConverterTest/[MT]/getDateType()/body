@@ -1,3 +1,0 @@
-{
-  assertEquals("SMALLDATETIME",new MSSQLTypeConverter().getDateType().toString());
-}

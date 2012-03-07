@@ -1,3 +1,0 @@
-{
-  assertEquals("DECIMAL",new H2TypeConverter().getCurrencyType().toString());
-}

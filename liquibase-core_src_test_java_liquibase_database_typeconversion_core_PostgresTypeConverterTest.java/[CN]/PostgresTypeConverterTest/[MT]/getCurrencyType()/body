@@ -1,3 +1,0 @@
-{
-  assertEquals("DECIMAL",new PostgresTypeConverter().getCurrencyType().toString());
-}

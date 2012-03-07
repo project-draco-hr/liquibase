@@ -12,14 +12,9 @@
     }
     liquibase=createLiquibase();
     referenceDatabase=createDatabaseObject(getReferenceDriver(),getReferenceUrl(),getReferenceUsername(),getReferencePassword(),getReferenceDefaultSchemaName(),getDatabaseClass());
-    Diff diff=new Diff(referenceDatabase,liquibase.getDatabase());
-    if (getDiffTypes() != null) {
-      diff.setDiffTypes(getDiffTypes());
-    }
-    DiffResult diffResult=diff.compare();
-    if (getDataDir() != null) {
-      diffResult.setDataDir(getDataDir());
-    }
+    DiffControl diffControl=new DiffControl(getReferenceDefaultCatalogName(),getReferenceDefaultSchemaName(),getDefaultCatalogName(),getDefaultSchemaName(),getDiffTypes());
+    diffControl.setDataDir(getDataDir());
+    DiffResult diffResult=liquibase.diff(referenceDatabase,liquibase.getDatabase(),diffControl);
     outputDiff(writer,diffResult,liquibase.getDatabase());
     if (writer != null) {
       writer.flush();

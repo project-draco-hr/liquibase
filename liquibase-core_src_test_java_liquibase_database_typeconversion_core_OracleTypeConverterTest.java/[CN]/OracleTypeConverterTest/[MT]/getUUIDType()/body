@@ -1,3 +1,0 @@
-{
-  assertEquals("RAW(16)",new OracleTypeConverter().getUUIDType().toString());
-}

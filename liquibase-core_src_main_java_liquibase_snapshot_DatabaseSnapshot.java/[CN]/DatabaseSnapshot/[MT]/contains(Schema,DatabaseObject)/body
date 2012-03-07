@@ -1,0 +1,3 @@
+{
+  return schemaSnapshots.containsKey(schema) && schemaSnapshots.get(schema).databaseObjects.containsKey(databaseObject.getClass()) && schemaSnapshots.get(schema).databaseObjects.get(databaseObject.getClass()).contains(databaseObject);
+}

@@ -1,0 +1,22 @@
+{
+  for (  Index index : diffResult.getObjectDiff(Index.class).getMissing()) {
+    CreateIndexChange change=new CreateIndexChange();
+    change.setTableName(index.getTable().getName());
+    change.setTablespace(index.getTablespace());
+    change.setCatalogName(index.getTable().getSchema().getCatalog().getName());
+    change.setSchemaName(index.getTable().getSchema().getName());
+    change.setCatalogName(index.getTable().getSchema().getCatalog().getName());
+    change.setIndexName(index.getName());
+    change.setUnique(index.isUnique());
+    change.setAssociatedWith(index.getAssociatedWithAsString());
+    if (index.getAssociatedWith().contains(Index.MARK_PRIMARY_KEY) || index.getAssociatedWith().contains(Index.MARK_FOREIGN_KEY) || index.getAssociatedWith().contains(Index.MARK_UNIQUE_CONSTRAINT)) {
+      continue;
+    }
+    for (    String columnName : index.getColumns()) {
+      ColumnConfig column=new ColumnConfig();
+      column.setName(columnName);
+      change.addColumn(column);
+    }
+    changes.add(generateChangeSet(change));
+  }
+}

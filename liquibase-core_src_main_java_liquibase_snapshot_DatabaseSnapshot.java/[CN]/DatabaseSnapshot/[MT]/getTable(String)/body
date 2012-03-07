@@ -1,8 +1,0 @@
-{
-  for (  Table table : getTables()) {
-    if (table.getName().equalsIgnoreCase(tableName)) {
-      return table;
-    }
-  }
-  return null;
-}

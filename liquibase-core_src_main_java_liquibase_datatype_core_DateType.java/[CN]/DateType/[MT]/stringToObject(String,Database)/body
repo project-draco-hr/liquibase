@@ -1,0 +1,9 @@
+{
+  if (database instanceof DB2Database) {
+    return value.replaceFirst("^\"SYSIBM\".\"DATE\"\\('","").replaceFirst("'\\)","");
+  }
+  if (database instanceof DerbyDatabase) {
+    return value.replaceFirst("^DATE\\('","").replaceFirst("'\\)","");
+  }
+  return super.stringToObject(value,database);
+}

@@ -1,0 +1,13 @@
+{
+  for (  DatabaseObject object : objects) {
+    Schema schema=object.getSchema();
+    if (!schemaSnapshots.containsKey(schema)) {
+      schemaSnapshots.put(schema,new SchemaSnapshot());
+    }
+    SchemaSnapshot schemaSnapshot=schemaSnapshots.get(schema);
+    if (!schemaSnapshot.databaseObjects.containsKey(object.getClass())) {
+      schemaSnapshot.databaseObjects.put(object.getClass(),new HashSet<DatabaseObject>());
+    }
+    schemaSnapshot.databaseObjects.get((object.getClass())).add(object);
+  }
+}

@@ -1,7 +1,7 @@
 {
-  StringBuffer sql=new StringBuffer("UPDATE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " SET");
+  StringBuffer sql=new StringBuffer("UPDATE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " SET");
   for (  String column : statement.getNewColumnValues().keySet()) {
-    sql.append(" ").append(database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),column)).append(" = ");
+    sql.append(" ").append(database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),column)).append(" = ");
     sql.append(convertToString(statement.getNewColumnValues().get(column),database));
     sql.append(",");
   }
@@ -9,7 +9,7 @@
   if (statement.getWhereClause() != null) {
     String fixedWhereClause="WHERE " + statement.getWhereClause().trim();
     for (    Object param : statement.getWhereParameters()) {
-      fixedWhereClause=fixedWhereClause.replaceFirst("\\?",convertToString(param,database));
+      fixedWhereClause=fixedWhereClause.replaceFirst("\\?",DataTypeFactory.getInstance().fromObject(param,database).objectToString(param,database));
     }
     sql.append(" ").append(fixedWhereClause);
   }

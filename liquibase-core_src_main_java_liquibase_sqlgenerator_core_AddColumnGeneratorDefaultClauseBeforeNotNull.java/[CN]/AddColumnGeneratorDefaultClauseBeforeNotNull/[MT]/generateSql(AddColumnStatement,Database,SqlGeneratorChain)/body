@@ -1,5 +1,5 @@
 {
-  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getSchemaName(),statement.getTableName()) + " ADD "+ database.escapeColumnName(statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(statement.getColumnType(),statement.isAutoIncrement());
+  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " ADD "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ DataTypeFactory.getInstance().fromDescription(statement.getColumnType() + (statement.isAutoIncrement() ? "{autoIncrement:true}" : ""));
   alterTable+=getDefaultClause(statement,database);
   if (primaryKeyBeforeNotNull(database)) {
     if (statement.isPrimaryKey()) {
@@ -25,7 +25,7 @@
     alterTable+=" UNIQUE ";
   }
   List<Sql> returnSql=new ArrayList<Sql>();
-  returnSql.add(new UnparsedSql(alterTable,new Column().setTable(new Table(statement.getTableName()).setSchema(statement.getSchemaName())).setName(statement.getColumnName())));
+  returnSql.add(new UnparsedSql(alterTable,new Column().setRelation(new Table(statement.getTableName()).setSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()))).setName(statement.getColumnName())));
   addForeignKeyStatements(statement,database,returnSql);
   return returnSql.toArray(new Sql[returnSql.size()]);
 }

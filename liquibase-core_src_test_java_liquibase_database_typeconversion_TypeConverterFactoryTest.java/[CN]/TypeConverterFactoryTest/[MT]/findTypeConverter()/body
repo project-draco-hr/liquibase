@@ -1,4 +1,0 @@
-{
-  assertTrue(TypeConverterFactory.getInstance().findTypeConverter(new UnsupportedDatabase()) instanceof DefaultTypeConverter);
-  assertTrue(TypeConverterFactory.getInstance().findTypeConverter(new H2Database()) instanceof H2TypeConverter);
-}

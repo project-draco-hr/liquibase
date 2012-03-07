@@ -1,0 +1,11 @@
+{
+  this.catalogName=catalogName;
+  this.schemaName=schemaName;
+  this.tableName=tableName;
+  this.columnName=columnName;
+  this.columnType=columnType;
+  this.defaultValue=defaultValue;
+  if (constraints != null) {
+    this.constraints.addAll(Arrays.asList(constraints));
+  }
+}

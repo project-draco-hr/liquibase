@@ -19,13 +19,13 @@
     if (aColumn.isAutoIncrement() != null && aColumn.isAutoIncrement()) {
       constraints.add(new AutoIncrementConstraint(aColumn.getName(),aColumn.getStartWith(),aColumn.getIncrementBy()));
     }
-    AddColumnStatement addColumnStatement=new AddColumnStatement(getSchemaName(),getTableName(),aColumn.getName(),aColumn.getType(),aColumn.getDefaultValueObject(),constraints.toArray(new ColumnConstraint[constraints.size()]));
+    AddColumnStatement addColumnStatement=new AddColumnStatement(getCatalogName(),getSchemaName(),getTableName(),aColumn.getName(),aColumn.getType(),aColumn.getDefaultValueObject(),constraints.toArray(new ColumnConstraint[constraints.size()]));
     sql.add(addColumnStatement);
     if (database instanceof DB2Database) {
-      sql.add(new ReorganizeTableStatement(getSchemaName(),getTableName()));
+      sql.add(new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName()));
     }
     if (aColumn.getValueObject() != null) {
-      UpdateStatement updateStatement=new UpdateStatement(getSchemaName(),getTableName());
+      UpdateStatement updateStatement=new UpdateStatement(getCatalogName(),getSchemaName(),getTableName());
       updateStatement.addNewColumnValue(aColumn.getName(),aColumn.getValueObject());
       sql.add(updateStatement);
     }

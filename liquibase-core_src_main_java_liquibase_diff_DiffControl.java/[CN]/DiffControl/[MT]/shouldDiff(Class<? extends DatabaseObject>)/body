@@ -1,0 +1,3 @@
+{
+  return objectTypesToDiff.contains(type);
+}

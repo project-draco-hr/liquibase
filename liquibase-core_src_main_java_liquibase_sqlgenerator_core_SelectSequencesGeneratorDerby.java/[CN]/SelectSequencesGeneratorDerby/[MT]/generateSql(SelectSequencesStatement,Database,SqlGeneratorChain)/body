@@ -1,9 +1,4 @@
 {
-  try {
-    String schemaName=database.convertRequestedSchemaToSchema(statement.getSchemaName());
-    return new Sql[]{new UnparsedSql("SELECT " + "  seq.SEQUENCENAME AS SEQUENCE_NAME " + "FROM "+ "  SYS.SYSSEQUENCES seq, "+ "  SYS.SYSSCHEMAS sch "+ "WHERE "+ "  sch.SCHEMANAME = '" + schemaName + "' AND "+ "  sch.SCHEMAID = seq.SCHEMAID")};
-  }
- catch (  DatabaseException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
+  String schemaName=database.correctSchemaName(statement.getSchemaName());
+  return new Sql[]{new UnparsedSql("SELECT " + "  seq.SEQUENCENAME AS SEQUENCE_NAME " + "FROM "+ "  SYS.SYSSEQUENCES seq, "+ "  SYS.SYSSCHEMAS sch "+ "WHERE "+ "  sch.SCHEMANAME = '" + schemaName + "' AND "+ "  sch.SCHEMAID = seq.SCHEMAID")};
 }

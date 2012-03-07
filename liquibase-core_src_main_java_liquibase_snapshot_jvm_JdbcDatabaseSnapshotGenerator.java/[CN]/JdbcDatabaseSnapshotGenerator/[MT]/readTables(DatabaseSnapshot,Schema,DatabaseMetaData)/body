@@ -1,0 +1,31 @@
+{
+  Database database=snapshot.getDatabase();
+  updateListeners("Reading tables for " + database.toString() + " ...");
+  ResultSet tableMetaDataRs=databaseMetaData.getTables(schema.getCatalogName(snapshot.getDatabase()),schema.getName(snapshot.getDatabase()),null,new String[]{"TABLE","ALIAS"});
+  try {
+    while (tableMetaDataRs.next()) {
+      Table table=readTable(tableMetaDataRs,database,false);
+      if (database.isLiquibaseTable(table.getName())) {
+        if (table.getName().equals(database.getDatabaseChangeLogTableName())) {
+          snapshot.setDatabaseChangeLogTable(table);
+          continue;
+        }
+        if (table.getName().equals(database.getDatabaseChangeLogLockTableName())) {
+          snapshot.setDatabaseChangeLogLockTable(table);
+          continue;
+        }
+      }
+      if (database.isSystemTable(table.getSchema(),table.getName())) {
+        continue;
+      }
+      snapshot.addDatabaseObjects(table);
+    }
+  }
+  finally {
+    try {
+      tableMetaDataRs.close();
+    }
+ catch (    SQLException ignore) {
+    }
+  }
+}

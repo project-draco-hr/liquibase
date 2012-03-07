@@ -1,0 +1,3 @@
+Schema schema
+DatabaseObject databaseObject
+Class<T> type

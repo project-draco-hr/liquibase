@@ -1,3 +1,0 @@
-{
-  return new TimeType("INTERVAL " + INTERVAL_FIELD_QUALIFIER);
-}
