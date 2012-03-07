@@ -30,5 +30,14 @@
       sql.add(updateStatement);
     }
   }
+  for (  ColumnConfig column : getColumns()) {
+    String columnRemarks=StringUtils.trimToNull(column.getRemarks());
+    if (columnRemarks != null) {
+      SetColumnRemarksStatement remarksStatement=new SetColumnRemarksStatement(catalogName,schemaName,tableName,column.getName(),columnRemarks);
+      if (SqlGeneratorFactory.getInstance().supports(remarksStatement,database)) {
+        sql.add(remarksStatement);
+      }
+    }
+  }
   return sql.toArray(new SqlStatement[sql.size()]);
 }
