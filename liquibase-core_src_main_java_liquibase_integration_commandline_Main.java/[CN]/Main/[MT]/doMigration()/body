@@ -78,6 +78,12 @@
       liquibase.clearCheckSums();
       return;
     }
+ else     if ("calculateCheckSum".equalsIgnoreCase(command)) {
+      CheckSum checkSum=null;
+      checkSum=liquibase.calculateCheckSum(commandParams.iterator().next());
+      System.out.println(checkSum);
+      return;
+    }
  else     if ("dbdoc".equalsIgnoreCase(command)) {
       if (commandParams.size() == 0) {
         throw new CommandLineParsingException("dbdoc requires an output directory");
