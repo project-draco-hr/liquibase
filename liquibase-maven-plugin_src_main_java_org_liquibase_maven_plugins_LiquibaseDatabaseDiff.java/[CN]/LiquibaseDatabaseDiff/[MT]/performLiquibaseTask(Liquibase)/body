@@ -1,7 +1,7 @@
 {
   ClassLoader cl=null;
   try {
-    cl=getMavenArtifactClassLoader();
+    cl=getClassLoaderIncludingProjectClasspath();
     Thread.currentThread().setContextClassLoader(cl);
   }
  catch (  MojoExecutionException e) {
