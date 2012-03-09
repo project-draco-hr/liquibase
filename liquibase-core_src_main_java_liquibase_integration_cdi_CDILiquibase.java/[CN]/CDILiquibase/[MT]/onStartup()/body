@@ -1,0 +1,19 @@
+{
+  log.info("Booting Liquibase " + LiquibaseUtil.getBuildVersion());
+  String hostName;
+  try {
+    hostName=NetUtil.getLocalHost().getHostName();
+  }
+ catch (  Exception e) {
+    log.warning("Cannot find hostname: " + e.getMessage());
+    log.debug("",e);
+    return;
+  }
+  String shouldRunProperty=System.getProperty(Liquibase.SHOULD_RUN_SYSTEM_PROPERTY);
+  if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
+    log.info("Liquibase did not run on " + hostName + " because '"+ Liquibase.SHOULD_RUN_SYSTEM_PROPERTY+ "' system property was set to false");
+    return;
+  }
+  initialized=true;
+  performUpdate();
+}

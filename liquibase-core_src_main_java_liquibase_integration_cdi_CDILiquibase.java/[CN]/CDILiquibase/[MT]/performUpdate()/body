@@ -1,0 +1,27 @@
+{
+  Connection c=null;
+  Liquibase liquibase=null;
+  try {
+    c=dataSource.getConnection();
+    liquibase=createLiquibase(c);
+    liquibase.update(config.getContexts());
+    updateSuccessful=true;
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+catch (  LiquibaseException ex) {
+    updateSuccessful=false;
+    throw ex;
+  }
+ finally {
+    if (c != null) {
+      try {
+        c.rollback();
+        c.close();
+      }
+ catch (      SQLException e) {
+      }
+    }
+  }
+}
