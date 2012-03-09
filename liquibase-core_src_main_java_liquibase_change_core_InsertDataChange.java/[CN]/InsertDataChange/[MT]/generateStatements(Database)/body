@@ -1,11 +1,14 @@
 {
-  boolean needsStoredProc=false;
+  boolean needsPreparedStatement=false;
   for (  ColumnConfig column : columns) {
     if (column.getValueBlob() != null) {
-      needsStoredProc=true;
+      needsPreparedStatement=true;
+    }
+    if (column.getValueClob() != null) {
+      needsPreparedStatement=true;
     }
   }
-  if (needsStoredProc) {
+  if (needsPreparedStatement) {
     return new SqlStatement[]{new InsertExecutablePreparedStatement(database)};
   }
   InsertStatement statement=new InsertStatement(getCatalogName(),getSchemaName(),getTableName());
