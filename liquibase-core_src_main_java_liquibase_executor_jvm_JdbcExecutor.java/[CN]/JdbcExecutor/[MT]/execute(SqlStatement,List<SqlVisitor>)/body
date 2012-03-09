@@ -1,4 +1,8 @@
 {
+  if (sql instanceof ExecutablePreparedStatement) {
+    ((ExecutablePreparedStatement)sql).execute(new PreparedStatementFactory((JdbcConnection)database.getConnection()));
+    return;
+  }
 class ExecuteStatementCallback implements StatementCallback {
     public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
       for (      String statement : applyVisitors(sql,sqlVisitors)) {

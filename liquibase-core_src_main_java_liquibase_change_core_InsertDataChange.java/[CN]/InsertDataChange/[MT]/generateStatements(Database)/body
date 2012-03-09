@@ -1,4 +1,13 @@
 {
+  boolean needsStoredProc=false;
+  for (  ColumnConfig column : columns) {
+    if (column.getValueBlob() != null) {
+      needsStoredProc=true;
+    }
+  }
+  if (needsStoredProc) {
+    return new SqlStatement[]{new InsertExecutablePreparedStatement(database)};
+  }
   InsertStatement statement=new InsertStatement(getCatalogName(),getSchemaName(),getTableName());
   for (  ColumnConfig column : columns) {
     if (database.supportsAutoIncrement() && column.isAutoIncrement() != null && column.isAutoIncrement()) {
