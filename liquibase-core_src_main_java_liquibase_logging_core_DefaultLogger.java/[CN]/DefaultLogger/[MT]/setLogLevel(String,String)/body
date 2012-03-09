@@ -1,3 +1,14 @@
 {
   setLogLevel(logLevel);
+  File log=new File(logFile);
+  if (log.exists()) {
+    log.delete();
+  }
+  try {
+    log.createNewFile();
+    err=new PrintStream(log);
+  }
+ catch (  IOException e) {
+    throw new RuntimeException(e);
+  }
 }

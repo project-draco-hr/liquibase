@@ -24,7 +24,7 @@
       defaultSchemaName=value;
     }
  else     if ("dataOutputDirectory".equalsIgnoreCase(attributeName)) {
-      dataDir=value;
+      dataOutputDirectory=value;
     }
   }
   if (url == null) {

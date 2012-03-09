@@ -1,6 +1,6 @@
 {
   if (getLogLevel().compareTo(LogLevel.SEVERE) <= 0) {
     print(LogLevel.SEVERE,message);
-    e.printStackTrace();
+    e.printStackTrace(err);
   }
 }
