@@ -1,0 +1,4 @@
+{
+  this.classResolver=classResolver;
+  setResourceAccessor(accessor);
+}
