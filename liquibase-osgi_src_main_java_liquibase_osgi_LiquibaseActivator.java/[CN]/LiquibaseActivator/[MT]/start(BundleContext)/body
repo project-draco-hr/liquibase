@@ -1,0 +1,4 @@
+{
+  PackageScanClassResolver resolver=new OSGIPackageScanClassResolver(bundleContext.getBundle());
+  ServiceLocator.setInstance(new CustomResolverServiceLocator(resolver));
+}
