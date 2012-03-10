@@ -1,0 +1,10 @@
+{
+  String prefix="";
+  if (catalogName != null) {
+    prefix=catalogName + ".";
+  }
+ else   if (schemaName != null) {
+    prefix=schemaName + ".";
+  }
+  return prefix;
+}

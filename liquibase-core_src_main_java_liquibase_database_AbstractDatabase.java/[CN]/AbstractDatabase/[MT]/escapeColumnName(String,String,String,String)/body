@@ -2,8 +2,5 @@
   if (columnName.contains("(")) {
     return columnName;
   }
-  if (schemaName == null) {
-    schemaName=getDefaultSchemaName();
-  }
   return escapeDatabaseObject(columnName);
 }
