@@ -1,0 +1,7 @@
+{
+  if (commandParams.isEmpty() || commandParams.iterator().next().startsWith("-")) {
+    if ("calculateCheckSum".equalsIgnoreCase(command)) {
+      messages.add("missing changeSet identifier");
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  if (changeSetIdentifier == null) {
+    throw new LiquibaseException(new IllegalArgumentException("changeSetIdentifier"));
+  }
+  final List<String> parts=StringUtils.splitAndTrim(changeSetIdentifier,"::");
+  if (parts == null || parts.size() < 3) {
+    throw new LiquibaseException(new IllegalArgumentException("Invalid changeSet identifier: " + changeSetIdentifier));
+  }
+  return this.calculateCheckSum(parts.get(0),parts.get(1),parts.get(2));
+}

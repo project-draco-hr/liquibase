@@ -1,0 +1,11 @@
+{
+  log.info(String.format("Calculating checksum for changeset %s::%s::%s",filename,id,author));
+  final ChangeLogParameters changeLogParameters=this.getChangeLogParameters();
+  final ResourceAccessor resourceAccessor=this.getFileOpener();
+  final DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(this.changeLogFile,resourceAccessor).parse(this.changeLogFile,changeLogParameters,resourceAccessor);
+  final ChangeSet changeSet=changeLog.getChangeSet(filename,author,id);
+  if (changeSet == null) {
+    throw new LiquibaseException(new IllegalArgumentException("No such changeSet: " + filename + "::"+ id+ "::"+ author));
+  }
+  return changeSet.generateCheckSum();
+}

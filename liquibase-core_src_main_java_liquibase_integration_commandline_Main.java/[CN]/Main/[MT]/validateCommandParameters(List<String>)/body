@@ -1,0 +1,5 @@
+{
+  checkForUnexpectedCommandParameter(messages);
+  checkForMissingCommandParameters(messages);
+  checkForMalformedCommandParameters(messages);
+}
