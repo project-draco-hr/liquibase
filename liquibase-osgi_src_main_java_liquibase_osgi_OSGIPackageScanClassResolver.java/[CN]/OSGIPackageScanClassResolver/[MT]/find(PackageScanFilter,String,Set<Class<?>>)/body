@@ -1,0 +1,22 @@
+{
+  packageName=packageName.replace('.','/');
+  Enumeration names=bundle.getEntryPaths(packageName);
+  while (names != null && names.hasMoreElements()) {
+    String name=(String)names.nextElement();
+    if (name.endsWith("/")) {
+      find(test,name,classes);
+    }
+ else     if (name.endsWith(".class")) {
+      try {
+        String fixedName=name.substring(0,name.indexOf('.')).replace('/','.');
+        Class<?> klass=bundle.loadClass(fixedName);
+        if (test.matches(klass)) {
+          classes.add(klass);
+        }
+      }
+ catch (      Exception cce) {
+        log.debug("Cant load class: " + cce.getMessage());
+      }
+    }
+  }
+}
