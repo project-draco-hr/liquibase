@@ -11,10 +11,18 @@
         url+=";shutdown=true";
       }
       LogFactory.getLogger().info("Shutting down derby connection: " + url);
-      ((Driver)Class.forName(driverName).newInstance()).connect(url,null);
+      ClassLoader contextClassLoader=Thread.currentThread().getContextClassLoader();
+      Driver driver=(Driver)contextClassLoader.loadClass(driverName).newInstance();
+      driver.connect(url,null);
     }
  catch (    Exception e) {
-      LogFactory.getLogger().severe("Error closing derby cleanly",e);
+      if (e instanceof SQLException) {
+        String state=((SQLException)e).getSQLState();
+        if ("XJ015".equals(state) || "08006".equals(state)) {
+          return;
+        }
+      }
+      throw new DatabaseException("Error closing derby cleanly",e);
     }
   }
 }
