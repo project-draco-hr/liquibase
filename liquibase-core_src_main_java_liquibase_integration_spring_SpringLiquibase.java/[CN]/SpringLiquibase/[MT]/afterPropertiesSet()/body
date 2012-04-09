@@ -9,7 +9,7 @@
   try {
     c=getDataSource().getConnection();
     liquibase=createLiquibase(c);
-    liquibase.update(getContexts());
+    performUpdate(liquibase);
   }
  catch (  SQLException e) {
     throw new DatabaseException(e);
