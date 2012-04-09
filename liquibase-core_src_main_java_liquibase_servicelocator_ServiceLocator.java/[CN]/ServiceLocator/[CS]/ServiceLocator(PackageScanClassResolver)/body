@@ -1,4 +1,4 @@
 {
-  this.classResolver=defaultClassLoader();
+  this.classResolver=classResolver;
   setResourceAccessor(new ClassLoaderResourceAccessor());
 }
