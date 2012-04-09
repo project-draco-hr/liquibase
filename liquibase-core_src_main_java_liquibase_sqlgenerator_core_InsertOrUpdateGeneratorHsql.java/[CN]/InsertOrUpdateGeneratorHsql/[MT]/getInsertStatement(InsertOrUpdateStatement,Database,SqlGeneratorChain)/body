@@ -1,0 +1,13 @@
+{
+  StringBuilder columns=new StringBuilder();
+  StringBuilder values=new StringBuilder();
+  for (  String columnKey : insertOrUpdateStatement.getColumnValues().keySet()) {
+    columns.append(",");
+    columns.append(columnKey);
+    values.append(",");
+    values.append(convertToString(insertOrUpdateStatement.getColumnValue(columnKey),database));
+  }
+  columns.deleteCharAt(0);
+  values.deleteCharAt(0);
+  return "INSERT (" + columns.toString() + ") VALUES ("+ values.toString()+ ")";
+}

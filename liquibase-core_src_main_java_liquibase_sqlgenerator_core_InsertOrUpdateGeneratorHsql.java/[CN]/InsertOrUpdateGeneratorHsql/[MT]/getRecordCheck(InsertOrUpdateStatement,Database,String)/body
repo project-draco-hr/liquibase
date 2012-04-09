@@ -1,0 +1,9 @@
+{
+  StringBuilder sql=new StringBuilder();
+  sql.append("MERGE INTO ");
+  sql.append(insertOrUpdateStatement.getTableName());
+  sql.append(" USING (VALUES (1)) ON ");
+  sql.append(whereClause);
+  sql.append(" WHEN NOT MATCHED THEN ");
+  return sql.toString();
+}
