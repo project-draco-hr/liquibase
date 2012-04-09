@@ -1,0 +1,14 @@
+{
+  try {
+    List classpathElements=project.getCompileClasspathElements();
+    classpathElements.add(project.getBuild().getOutputDirectory());
+    URL urls[]=new URL[classpathElements.size()];
+    for (int i=0; i < classpathElements.size(); ++i) {
+      urls[i]=new File((String)classpathElements.get(i)).toURL();
+    }
+    return new URLClassLoader(urls,this.getClass().getClassLoader());
+  }
+ catch (  Exception e) {
+    throw new MojoExecutionException("Failed to create project classloader",e);
+  }
+}
