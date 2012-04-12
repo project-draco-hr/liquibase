@@ -1,6 +1,6 @@
 {
   if (getLogLevel().compareTo(LogLevel.WARNING) <= 0) {
     print(LogLevel.WARNING,message);
-    e.printStackTrace();
+    e.printStackTrace(err);
   }
 }
