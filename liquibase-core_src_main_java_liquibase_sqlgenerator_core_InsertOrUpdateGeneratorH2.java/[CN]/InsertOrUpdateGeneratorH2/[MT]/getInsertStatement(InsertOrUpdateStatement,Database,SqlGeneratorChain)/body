@@ -1,0 +1,4 @@
+{
+  String insertStatement=super.getInsertStatement(insertOrUpdateStatement,database,sqlGeneratorChain);
+  return insertStatement.replaceAll("(?i)insert into (.+) (values .+)","MERGE INTO $1 KEY(" + insertOrUpdateStatement.getPrimaryKey() + ") $2");
+}
