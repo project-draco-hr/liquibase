@@ -1,0 +1,9 @@
+{
+  try {
+    reservedWords.addAll(Arrays.asList(((JdbcConnection)conn).getMetaData().getSQLKeywords().split(",\\s*")));
+  }
+ catch (  Exception e) {
+    LogFactory.getLogger().warning("Cannot retrieve reserved words",e);
+  }
+  super.setConnection(conn);
+}
