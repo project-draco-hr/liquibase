@@ -212,6 +212,7 @@
         String attributeValue=atts.getValue(i);
         setProperty(change,attributeName,attributeValue);
       }
+      change.setChangeLogParameters(this.changeLogParameters);
       change.init();
     }
  else     if (change != null && "column".equals(qName)) {
