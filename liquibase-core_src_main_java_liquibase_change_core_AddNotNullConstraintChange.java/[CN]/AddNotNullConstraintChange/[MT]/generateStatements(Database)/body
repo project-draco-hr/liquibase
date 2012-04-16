@@ -2,7 +2,16 @@
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
   String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();
   if (defaultNullValue != null) {
-    String defaultValue=TypeConverterFactory.getInstance().findTypeConverter(database).getDataType(getDefaultNullValue()).convertObjectToString(getDefaultNullValue(),database);
+    String defaultValue=defaultNullValue;
+    if (getColumnDataType() != null && getColumnDataType().equalsIgnoreCase("BOOLEAN")) {
+      BooleanType booleanType=TypeConverterFactory.getInstance().findTypeConverter(database).getBooleanType();
+      if (defaultNullValue.equalsIgnoreCase("TRUE")) {
+        defaultValue=booleanType.getTrueBooleanValue();
+      }
+ else       if (defaultNullValue.equalsIgnoreCase("FALSE")) {
+        defaultValue=booleanType.getFalseBooleanValue();
+      }
+    }
     statements.add(new UpdateStatement(schemaName,getTableName()).addNewColumnValue(getColumnName(),defaultValue).setWhereClause(getColumnName() + " IS NULL"));
   }
   statements.add(new SetNullableStatement(schemaName,getTableName(),getColumnName(),getColumnDataType(),false));

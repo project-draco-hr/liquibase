@@ -1,3 +1,13 @@
 {
-  return database instanceof DerbyDatabase;
+  boolean supports=database instanceof DerbyDatabase;
+  if (supports) {
+    try {
+      if (database.getDatabaseMajorVersion() >= 10 && database.getDatabaseMinorVersion() >= 7) {
+        booleanType=new BooleanType("BOOLEAN");
+      }
+    }
+ catch (    DatabaseException e) {
+    }
+  }
+  return supports;
 }
