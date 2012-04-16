@@ -3,7 +3,7 @@
   String schemaName=getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName();
   if (defaultNullValue != null) {
     String defaultValue=defaultNullValue;
-    if (getColumnDataType().equalsIgnoreCase("BOOLEAN")) {
+    if (getColumnDataType() != null && getColumnDataType().equalsIgnoreCase("BOOLEAN")) {
       BooleanType booleanType=TypeConverterFactory.getInstance().findTypeConverter(database).getBooleanType();
       if (defaultNullValue.equalsIgnoreCase("TRUE")) {
         defaultValue=booleanType.getTrueBooleanValue();
