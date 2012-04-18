@@ -58,7 +58,7 @@
     columnInfo.setTypeName(columnTypeName);
     columnInfo.setDefaultValue(null);
   }
- else   if (columnTypeName.toLowerCase().equals("timestamp") && !"CURRENT_TIMESTAMP".equals(tableSchema.get(columnName).get(1))) {
+ else   if (columnTypeName.toLowerCase().equals("timestamp") && (tableSchema.get(columnName) != null && !"CURRENT_TIMESTAMP".equals(tableSchema.get(columnName).get(1)))) {
     columnInfo.setTypeName(columnTypeName);
     columnInfo.setDefaultValue(tableSchema.get(columnName).get(1));
   }
