@@ -3,7 +3,7 @@
   params.set("tablename","table4");
   DatabaseChangeLog changeLog=new MockFormattedSqlChangeLogParser(VALID_CHANGELOG).parse("asdf.sql",params,new JUnitResourceAccessor());
   assertEquals("asdf.sql",changeLog.getLogicalFilePath());
-  assertEquals(6,changeLog.getChangeSets().size());
+  assertEquals(7,changeLog.getChangeSets().size());
   assertEquals("nvoxland",changeLog.getChangeSets().get(0).getAuthor());
   assertEquals("1",changeLog.getChangeSets().get(0).getId());
   assertEquals(1,changeLog.getChangeSets().get(0).getChanges().size());
@@ -59,4 +59,12 @@
   assertEquals(1,changeLog.getChangeSets().get(5).getRollBackChanges().length);
   assertTrue(changeLog.getChangeSets().get(5).getRollBackChanges()[0] instanceof RawSQLChange);
   assertEquals("drop table table4;",((RawSQLChange)changeLog.getChangeSets().get(5).getRollBackChanges()[0]).getSql());
+  assertEquals("mysql",changeLog.getChangeSets().get(6).getAuthor());
+  assertEquals("1",changeLog.getChangeSets().get(6).getId());
+  assertEquals(1,changeLog.getChangeSets().get(6).getChanges().size());
+  assertTrue(changeLog.getChangeSets().get(6).getChanges().get(0) instanceof RawSQLChange);
+  assertEquals("create table mysql_boo (\n" + "  id int primary key\n" + ");",((RawSQLChange)changeLog.getChangeSets().get(6).getChanges().get(0)).getSql());
+  assertEquals(1,changeLog.getChangeSets().get(6).getRollBackChanges().length);
+  assertTrue(changeLog.getChangeSets().get(6).getRollBackChanges()[0] instanceof RawSQLChange);
+  assertEquals("drop table mysql_boo;",((RawSQLChange)changeLog.getChangeSets().get(6).getRollBackChanges()[0]).getSql());
 }
