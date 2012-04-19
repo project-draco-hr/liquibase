@@ -5,3 +5,4 @@ CheckSum lastCheckSum
 Date dateExecuted
 String tag
 ChangeSet.ExecType execType
+String description
