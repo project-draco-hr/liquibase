@@ -1,0 +1,4 @@
+InsertOrUpdateStatement insertOrUpdateStatement
+Database database
+String whereClause
+SqlGeneratorChain sqlGeneratorChain
