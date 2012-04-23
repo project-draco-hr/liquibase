@@ -3,5 +3,8 @@
   if (database instanceof PostgresDatabase) {
     sql+=" CASCADE";
   }
+  if (database instanceof DerbyDatabase) {
+    sql+=" RESTRICT";
+  }
   return new Sql[]{new UnparsedSql(sql)};
 }
