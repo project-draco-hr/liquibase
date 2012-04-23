@@ -6,6 +6,7 @@
     Method method=sqlConn.getClass().getMethod("setRemarksReporting",Boolean.TYPE);
     method.setAccessible(true);
     method.invoke(sqlConn,true);
+    reservedWords.addAll(Arrays.asList(sqlConn.getMetaData().getSQLKeywords().toUpperCase().split(",\\s*")));
   }
  catch (  Exception e) {
     LogFactory.getLogger().info("Could not set remarks reporting on OracleDatabase: " + e.getMessage());
