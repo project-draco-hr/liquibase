@@ -5,7 +5,11 @@
     sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " COMMENT = '"+ remarks+ "'";
   }
  else {
-    sql="COMMENT ON TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " IS '"+ remarks+ "'";
+    String command="COMMENT";
+    if (database instanceof DB2iDatabase) {
+      command="LABEL";
+    }
+    sql=command + " ON TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())+ " IS '"+ database.escapeStringForDatabase(remarks)+ "'";
   }
   return new Sql[]{new UnparsedSql(sql)};
 }
