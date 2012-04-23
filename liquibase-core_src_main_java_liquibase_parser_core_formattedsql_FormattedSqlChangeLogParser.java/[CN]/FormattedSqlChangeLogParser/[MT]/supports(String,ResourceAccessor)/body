@@ -3,7 +3,7 @@
   try {
     if (changeLogFile.endsWith(".sql")) {
       reader=new BufferedReader(new InputStreamReader(openChangeLogFile(changeLogFile,resourceAccessor)));
-      return reader.readLine().startsWith("--liquibase formatted");
+      return reader.readLine().matches("\\-\\-\\s*liquibase formatted.*");
     }
  else {
       return false;
