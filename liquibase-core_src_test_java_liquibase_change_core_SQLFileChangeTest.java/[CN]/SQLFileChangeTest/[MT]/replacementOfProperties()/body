@@ -1,0 +1,11 @@
+{
+  SQLFileChange change=new SQLFileChange();
+  ChangeLogParameters changeLogParameters=new ChangeLogParameters();
+  changeLogParameters.set("table.prefix","prfx");
+  changeLogParameters.set("some.other.prop","nofx");
+  change.setChangeLogParameters(changeLogParameters);
+  String fakeSql="create ${table.prefix}_customer (${some.other.prop} INTEGER NOT NULL, PRIMARY KEY (${some.other.prop}));";
+  change.setSql(fakeSql);
+  String expected="create prfx_customer (nofx INTEGER NOT NULL, PRIMARY KEY (nofx));";
+  assertEquals(expected,change.getSql());
+}

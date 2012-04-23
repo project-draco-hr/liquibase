@@ -54,6 +54,8 @@
  else     if (field.getType().equals(Map.class)) {
       field.set(object,createMap());
     }
+ else     if (field.getType().equals(ChangeLogParameters.class)) {
+    }
  else     if (Collection.class.isAssignableFrom(field.getType())) {
       Type genericType=field.getGenericType();
       if (genericType instanceof ParameterizedType) {

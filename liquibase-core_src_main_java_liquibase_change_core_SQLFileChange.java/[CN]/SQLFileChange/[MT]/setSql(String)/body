@@ -1,0 +1,6 @@
+{
+  if (getChangeLogParameters() != null) {
+    sql=getChangeLogParameters().expandExpressions(sql);
+  }
+  super.setSql(sql);
+}
