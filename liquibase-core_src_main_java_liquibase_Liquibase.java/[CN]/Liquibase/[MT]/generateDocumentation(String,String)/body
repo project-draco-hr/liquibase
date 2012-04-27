@@ -1,4 +1,5 @@
 {
+  contexts=StringUtils.trimToNull(contexts);
   log.info("Generating Database Documentation");
   changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
   LockService lockService=LockService.getInstance(database);
