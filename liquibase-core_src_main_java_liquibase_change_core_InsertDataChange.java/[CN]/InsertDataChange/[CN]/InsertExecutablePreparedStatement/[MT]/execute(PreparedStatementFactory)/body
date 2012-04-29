@@ -79,4 +79,12 @@
  catch (  SQLException e) {
     throw new DatabaseException(e);
   }
+ finally {
+    try {
+      stmt.close();
+    }
+ catch (    SQLException e) {
+      throw new DatabaseException(e);
+    }
+  }
 }
