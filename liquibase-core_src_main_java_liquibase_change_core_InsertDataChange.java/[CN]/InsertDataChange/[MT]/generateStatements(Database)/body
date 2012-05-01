@@ -1,3 +1,10 @@
 {
-  return new SqlStatement[]{new ExecutableStatement(database)};
+  InsertStatement statement=new InsertStatement(getSchemaName() == null ? database.getDefaultSchemaName() : getSchemaName(),getTableName());
+  for (  ColumnConfig column : columns) {
+    if (database.supportsAutoIncrement() && column.isAutoIncrement() != null && column.isAutoIncrement()) {
+      continue;
+    }
+    statement.addColumnValue(column.getName(),column.getValueObject());
+  }
+  return new SqlStatement[]{statement};
 }
