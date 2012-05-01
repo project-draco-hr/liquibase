@@ -1,4 +1,7 @@
 {
+  if (getDefaultSchemaName() != null) {
+    return getDefaultSchemaName();
+  }
   if (defaultDatabaseSchemaName == null) {
     try {
       List<String> searchPaths=getSearchPaths();
