@@ -1,6 +1,6 @@
 {
   if (connection == null) {
-    return null;
+    return getDefaultDatabaseProductName();
   }
   try {
     return connection.getDatabaseProductName();

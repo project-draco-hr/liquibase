@@ -1,0 +1,6 @@
+{
+  database.getDatabaseProductName();
+  database.getDefaultCatalogName();
+  database.getDefaultSchemaName();
+  database.getDefaultPort();
+}

@@ -1,4 +1,7 @@
 {
+  if (getConnection() == null) {
+    return null;
+  }
   try {
     return getConnection().getCatalog();
   }

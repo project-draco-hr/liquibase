@@ -1,6 +1,10 @@
 {
   try {
-    return getConnection().getCatalog();
+    DatabaseConnection connection=getConnection();
+    if (connection == null) {
+      return null;
+    }
+    return connection.getCatalog();
   }
  catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException(e);
