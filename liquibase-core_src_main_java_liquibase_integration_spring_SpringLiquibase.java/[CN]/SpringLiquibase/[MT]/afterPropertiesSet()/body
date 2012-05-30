@@ -4,6 +4,10 @@
     LogFactory.getLogger().info("Liquibase did not run because '" + Liquibase.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
     return;
   }
+  if (!shouldRun) {
+    LogFactory.getLogger().info("Liquibase did not run because 'shouldRun' " + "property was set to false on " + getBeanName() + " Liquibase Spring bean.");
+    return;
+  }
   Connection c=null;
   Liquibase liquibase=null;
   try {
