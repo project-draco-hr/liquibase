@@ -1,5 +1,5 @@
 {
-  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " ADD "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ DataTypeFactory.getInstance().fromDescription(statement.getColumnType() + (statement.isAutoIncrement() ? "{autoIncrement:true}" : ""));
+  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " ADD "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ database.getDataTypeFactory().fromDescription(statement.getColumnType() + (statement.isAutoIncrement() ? "{autoIncrement:true}" : ""));
   alterTable+=getDefaultClause(statement,database);
   if (primaryKeyBeforeNotNull(database)) {
     if (statement.isPrimaryKey()) {

@@ -1,4 +1,7 @@
 {
+  if (database instanceof InformixDatabase) {
+    return new InformixCreateViewGenerator().generateSql(statement,database,sqlGeneratorChain);
+  }
   String createClause;
   if (database instanceof FirebirdDatabase) {
     if (statement.isReplaceIfExists()) {

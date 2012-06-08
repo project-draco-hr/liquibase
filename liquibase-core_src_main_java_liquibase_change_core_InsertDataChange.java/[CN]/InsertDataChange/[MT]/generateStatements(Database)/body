@@ -7,6 +7,9 @@
     if (column.getValueClob() != null) {
       needsPreparedStatement=true;
     }
+    if (column.getValueText() != null && database instanceof InformixDatabase) {
+      needsPreparedStatement=true;
+    }
   }
   if (needsPreparedStatement) {
     return new SqlStatement[]{new InsertExecutablePreparedStatement(database)};

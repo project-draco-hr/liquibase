@@ -8,7 +8,7 @@
       where.append("NULL");
     }
  else {
-      where.append(DataTypeFactory.getInstance().fromObject(newValue,database).objectToString(newValue,database));
+      where.append(database.getDataTypeFactory().fromObject(newValue,database).objectToString(newValue,database));
     }
     where.append(" AND ");
   }

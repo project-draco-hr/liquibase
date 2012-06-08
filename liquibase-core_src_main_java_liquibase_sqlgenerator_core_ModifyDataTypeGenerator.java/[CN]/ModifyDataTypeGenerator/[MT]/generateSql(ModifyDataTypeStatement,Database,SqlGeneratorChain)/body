@@ -3,6 +3,6 @@
   alterTable+=" " + getModifyString(database) + " ";
   alterTable+=database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName());
   alterTable+=getPreDataTypeString(database);
-  alterTable+=DataTypeFactory.getInstance().fromDescription(statement.getNewDataType()).toDatabaseDataType(database);
+  alterTable+=database.getDataTypeFactory().fromDescription(statement.getNewDataType()).toDatabaseDataType(database);
   return new Sql[]{new UnparsedSql(alterTable)};
 }

@@ -11,10 +11,10 @@
   }
  else   if (newValue instanceof Boolean) {
     if (((Boolean)newValue)) {
-      sqlString=DataTypeFactory.getInstance().getTrueBooleanValue(database);
+      sqlString=database.getDataTypeFactory().getTrueBooleanValue(database);
     }
  else {
-      sqlString=DataTypeFactory.getInstance().getFalseBooleanValue(database);
+      sqlString=database.getDataTypeFactory().getFalseBooleanValue(database);
     }
   }
  else {

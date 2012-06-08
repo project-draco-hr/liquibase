@@ -4,7 +4,7 @@
     ConstraintsConfig constraints=column.getConstraints();
     boolean isAutoIncrement=column.isAutoIncrement() != null && column.isAutoIncrement();
     Object defaultValue=column.getDefaultValueObject();
-    LiquibaseDataType columnType=DataTypeFactory.getInstance().fromDescription(column.getType() + (isAutoIncrement ? "{autoIncrement:true}" : ""));
+    LiquibaseDataType columnType=database.getDataTypeFactory().fromDescription(column.getType() + (isAutoIncrement ? "{autoIncrement:true}" : ""));
     if (constraints != null && constraints.isPrimaryKey() != null && constraints.isPrimaryKey()) {
       statement.addPrimaryKeyColumn(column.getName(),columnType,defaultValue,constraints.getPrimaryKeyName(),constraints.getPrimaryKeyTablespace());
     }

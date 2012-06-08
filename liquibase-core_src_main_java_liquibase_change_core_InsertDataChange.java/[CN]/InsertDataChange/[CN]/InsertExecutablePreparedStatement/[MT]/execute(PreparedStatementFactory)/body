@@ -72,6 +72,18 @@
           throw new DatabaseException(e.getMessage(),e);
         }
       }
+ else       if (col.getValueText() != null) {
+        try {
+          StringReader r=new StringReader(col.getValueText());
+          stmt.setCharacterStream(i,new BufferedReader(r),col.getValueText().length());
+        }
+ catch (        Exception e) {
+          throw new DatabaseException(e.getMessage(),e);
+        }
+      }
+ else {
+        stmt.setNull(i,java.sql.Types.NULL);
+      }
       i++;
     }
     stmt.execute();
