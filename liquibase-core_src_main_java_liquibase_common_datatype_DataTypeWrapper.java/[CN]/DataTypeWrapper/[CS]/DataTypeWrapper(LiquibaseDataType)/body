@@ -1,0 +1,4 @@
+{
+  super(stripWrappedDataType(originalType));
+  this.underlyingDataType=stripWrappedDataType(originalType);
+}

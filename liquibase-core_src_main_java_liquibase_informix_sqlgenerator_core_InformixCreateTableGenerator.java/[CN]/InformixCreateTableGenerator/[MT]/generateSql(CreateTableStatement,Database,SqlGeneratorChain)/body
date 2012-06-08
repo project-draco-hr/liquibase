@@ -1,0 +1,96 @@
+{
+  StringBuilder buffer=new StringBuilder();
+  buffer.append("CREATE TABLE ").append(database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())).append(" ");
+  buffer.append("(");
+  boolean isSinglePrimaryKeyColumn=statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().size() == 1;
+  boolean isPrimaryKeyAutoIncrement=false;
+  Iterator<String> columnIterator=statement.getColumns().iterator();
+  List<String> primaryKeyColumns=new LinkedList<String>();
+  while (columnIterator.hasNext()) {
+    String column=columnIterator.next();
+    buffer.append(database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),column));
+    buffer.append(" ").append(statement.getColumnTypes().get(column).toDatabaseDataType(database).toSql());
+    AutoIncrementConstraint autoIncrementConstraint=null;
+    for (    AutoIncrementConstraint currentAutoIncrementConstraint : statement.getAutoIncrementConstraints()) {
+      if (column.equals(currentAutoIncrementConstraint.getColumnName())) {
+        autoIncrementConstraint=currentAutoIncrementConstraint;
+        break;
+      }
+    }
+    boolean isAutoIncrementColumn=autoIncrementConstraint != null;
+    boolean isPrimaryKeyColumn=statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().contains(column);
+    isPrimaryKeyAutoIncrement=isPrimaryKeyAutoIncrement || isPrimaryKeyColumn && isAutoIncrementColumn;
+    if (isPrimaryKeyColumn) {
+      primaryKeyColumns.add(column);
+    }
+    if (statement.getDefaultValue(column) != null) {
+      Object defaultValue=statement.getDefaultValue(column);
+      buffer.append(" DEFAULT ");
+      buffer.append(statement.getColumnTypes().get(column).objectToString(defaultValue,database));
+    }
+    if (isAutoIncrementColumn) {
+      if (database.supportsAutoIncrement()) {
+        String autoIncrementClause=database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(),autoIncrementConstraint.getIncrementBy());
+        if (autoIncrementClause.length() > 0) {
+          buffer.append(" ").append(autoIncrementClause);
+        }
+      }
+ else {
+        LogFactory.getLogger().warning(database.getTypeName() + " does not support autoincrement columns as request for " + (database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())));
+      }
+    }
+    if (statement.getNotNullColumns().contains(column)) {
+      buffer.append(" NOT NULL");
+    }
+    if (columnIterator.hasNext()) {
+      buffer.append(", ");
+    }
+  }
+  buffer.append(",");
+  if (!((isSinglePrimaryKeyColumn && isPrimaryKeyAutoIncrement) && isSinglePrimaryKeyColumn)) {
+    if (statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().size() > 0) {
+      buffer.append(" PRIMARY KEY (");
+      buffer.append(StringUtils.join(primaryKeyColumns,", "));
+      buffer.append(")");
+      buffer.append(",");
+    }
+  }
+  for (  ForeignKeyConstraint fkConstraint : statement.getForeignKeyConstraints()) {
+    String referencesString=fkConstraint.getReferences();
+    if (!referencesString.contains(".") && database.getDefaultSchemaName() != null) {
+      referencesString=database.getDefaultSchemaName() + "." + referencesString;
+    }
+    buffer.append(" FOREIGN KEY (").append(database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),fkConstraint.getColumn())).append(") REFERENCES ").append(referencesString);
+    if (fkConstraint.isDeleteCascade()) {
+      buffer.append(" ON DELETE CASCADE");
+    }
+    buffer.append(" CONSTRAINT ");
+    buffer.append(database.escapeConstraintName(fkConstraint.getForeignKeyName()));
+    if (fkConstraint.isInitiallyDeferred()) {
+      buffer.append(" INITIALLY DEFERRED");
+    }
+    if (fkConstraint.isDeferrable()) {
+      buffer.append(" DEFERRABLE");
+    }
+    buffer.append(",");
+  }
+  for (  UniqueConstraint uniqueConstraint : statement.getUniqueConstraints()) {
+    if (uniqueConstraint.getConstraintName() != null && !constraintNameAfterUnique(database)) {
+      buffer.append(" CONSTRAINT ");
+      buffer.append(database.escapeConstraintName(uniqueConstraint.getConstraintName()));
+    }
+    buffer.append(" UNIQUE (");
+    buffer.append(database.escapeColumnNameList(StringUtils.join(uniqueConstraint.getColumns(),", ")));
+    buffer.append(")");
+    if (uniqueConstraint.getConstraintName() != null && constraintNameAfterUnique(database)) {
+      buffer.append(" CONSTRAINT ");
+      buffer.append(database.escapeConstraintName(uniqueConstraint.getConstraintName()));
+    }
+    buffer.append(",");
+  }
+  String sql=buffer.toString().replaceFirst(",\\s*$","") + ")";
+  if (statement.getTablespace() != null && database.supportsTablespaces()) {
+    sql+=" IN " + statement.getTablespace();
+  }
+  return new Sql[]{new UnparsedSql(sql)};
+}
