@@ -1,1 +1,1 @@
-AbstractSqlGenerator<InsertDataChange.InsertExecutablePreparedStatement>
+AbstractSqlGenerator<InsertExecutablePreparedStatement>

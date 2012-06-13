@@ -1,4 +1,19 @@
 {
+  boolean needsPreparedStatement=false;
+  for (  ColumnConfig column : columns) {
+    if (column.getValueBlob() != null) {
+      needsPreparedStatement=true;
+    }
+    if (column.getValueClob() != null) {
+      needsPreparedStatement=true;
+    }
+    if (column.getValueText() != null && database instanceof InformixDatabase) {
+      needsPreparedStatement=true;
+    }
+  }
+  if (needsPreparedStatement) {
+    return new SqlStatement[]{new UpdateExecutablePreparedStatement(database,catalogName,schemaName,tableName,columns)};
+  }
   UpdateStatement statement=new UpdateStatement(getCatalogName(),getSchemaName(),getTableName());
   for (  ColumnConfig column : columns) {
     statement.addNewColumnValue(column.getName(),column.getValueObject());
