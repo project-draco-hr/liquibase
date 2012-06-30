@@ -1,0 +1,3 @@
+{
+  schemaSnapshots.put(schema,new SchemaSnapshot(schema));
+}

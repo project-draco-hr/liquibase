@@ -11,7 +11,7 @@
     DiffControl diffControl=new DiffControl(getDefaultCatalogName(),getDefaultSchemaName(),null,null,getDiffTypes());
     diffControl.setDataDir(getDataDir());
     DatabaseSnapshot referenceSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,diffControl,DiffControl.DatabaseRole.REFERENCE);
-    DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,new DatabaseSnapshot(database),diffControl);
+    DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,new DatabaseSnapshot(database,diffControl.getSchemas(DiffControl.DatabaseRole.REFERENCE)),diffControl);
     if (getChangeLogFile() == null) {
       new DiffToChangeLog(diffResult).print(writer);
     }

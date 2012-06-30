@@ -1,0 +1,6 @@
+{
+  this.database=database;
+  for (  Schema schema : schemas) {
+    addSchema(schema);
+  }
+}

@@ -2,7 +2,7 @@
   for (  DatabaseObject object : objects) {
     Schema schema=object.getSchema();
     if (!schemaSnapshots.containsKey(schema)) {
-      schemaSnapshots.put(schema,new SchemaSnapshot());
+      addSchema(schema);
     }
     SchemaSnapshot schemaSnapshot=schemaSnapshots.get(schema);
     if (!schemaSnapshot.databaseObjects.containsKey(object.getClass())) {

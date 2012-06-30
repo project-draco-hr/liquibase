@@ -1,6 +1,6 @@
 {
   try {
-    DatabaseSnapshot snapshot=new DatabaseSnapshot(database);
+    DatabaseSnapshot snapshot=new DatabaseSnapshot(database,diffControl.getSchemas(type));
     DatabaseMetaData databaseMetaData=getMetaData(database);
     this.statusListeners=diffControl.getStatusListeners();
     for (    Schema schema : diffControl.getSchemas(type)) {
