@@ -1,13 +1,6 @@
 {
   if (defaultSchemaName == null && connection != null) {
-    try {
-      ResultSet resultSet=((JdbcConnection)connection).prepareCall("call current_schema").executeQuery();
-      resultSet.next();
-      defaultSchemaName=resultSet.getString(1);
-    }
- catch (    Exception e) {
-      LogFactory.getLogger().info("Error getting default schema",e);
-    }
+    defaultSchemaName=doGetDefaultSchemaName();
   }
   return defaultSchemaName;
 }
