@@ -1,0 +1,10 @@
+{
+  Liquibase liquibase=createLiquibase(invalidReferenceChangeLog);
+  try {
+    liquibase.update(null);
+    fail("Did not fail with invalid include");
+  }
+ catch (  ChangeLogParseException ignored) {
+  }
+  assertFalse(LockService.getInstance(database).hasChangeLogLock());
+}
