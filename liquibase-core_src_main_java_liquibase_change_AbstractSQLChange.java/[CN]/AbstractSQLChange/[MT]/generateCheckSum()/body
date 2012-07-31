@@ -1,0 +1,7 @@
+{
+  String sql=getSql();
+  if (sql == null) {
+    sql="";
+  }
+  return CheckSum.compute(this.endDelimiter + ":" + this.isSplittingStatements()+ ":"+ this.isStrippingComments()+ ":"+ sql.replaceAll("\r\n","\n").replaceAll("\r","\n"));
+}

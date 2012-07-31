@@ -1,7 +1,0 @@
-{
-  String sql=getSql();
-  if (sql == null) {
-    sql="";
-  }
-  return CheckSum.compute(sql);
-}
