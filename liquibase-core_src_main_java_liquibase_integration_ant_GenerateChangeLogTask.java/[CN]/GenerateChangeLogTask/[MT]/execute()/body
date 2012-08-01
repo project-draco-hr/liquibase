@@ -8,7 +8,7 @@
     }
     liquibase=createLiquibase();
     Database database=liquibase.getDatabase();
-    DiffControl diffControl=new DiffControl(getDefaultCatalogName(),getDefaultSchemaName(),null,null,getDiffTypes());
+    DiffControl diffControl=new DiffControl(new Schema(getDefaultCatalogName(),getDefaultSchemaName()),getDiffTypes());
     diffControl.setDataDir(getDataDir());
     DatabaseSnapshot referenceSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,diffControl,DiffControl.DatabaseRole.REFERENCE);
     DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,new DatabaseSnapshot(database,diffControl.getSchemas(DiffControl.DatabaseRole.REFERENCE)),diffControl);

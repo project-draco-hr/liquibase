@@ -1,5 +1,0 @@
-{
-  this.referenceDatabaseSchemas=referenceDatabaseSchemas;
-  this.comparisonDatabaseSchemas=comparisonDatabaseSchemas;
-  this.objectTypesToDiff=Arrays.asList(typesToDiff);
-}

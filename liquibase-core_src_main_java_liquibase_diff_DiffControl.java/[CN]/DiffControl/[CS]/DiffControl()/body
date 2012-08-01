@@ -7,6 +7,5 @@
   objectTypesToDiff.add(PrimaryKey.class);
   objectTypesToDiff.add(UniqueConstraint.class);
   objectTypesToDiff.add(Sequence.class);
-  referenceDatabaseSchemas=new Schema[]{new Schema(new Catalog(null),null)};
-  comparisonDatabaseSchemas=new Schema[]{new Schema(new Catalog(null),null)};
+  schemaComparisons=new SchemaComparison[]{new SchemaComparison(new Schema(new Catalog(null),null),new Schema(new Catalog(null),null))};
 }

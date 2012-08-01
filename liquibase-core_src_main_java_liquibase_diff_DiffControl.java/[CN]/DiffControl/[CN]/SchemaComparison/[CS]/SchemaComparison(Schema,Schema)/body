@@ -1,0 +1,4 @@
+{
+  this.referenceSchema=reference;
+  this.comparisonSchema=comparison;
+}

@@ -1,3 +1,0 @@
-Schema[] referenceDatabaseSchemas
-Schema[] comparisonDatabaseSchemas
-Class<? extends DatabaseObject>[] typesToDiff

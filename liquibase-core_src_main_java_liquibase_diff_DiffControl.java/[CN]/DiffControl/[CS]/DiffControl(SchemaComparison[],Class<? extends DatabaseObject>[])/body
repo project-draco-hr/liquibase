@@ -1,0 +1,4 @@
+{
+  this.schemaComparisons=schemaComparison;
+  this.objectTypesToDiff=Arrays.asList(typesToDiff);
+}
