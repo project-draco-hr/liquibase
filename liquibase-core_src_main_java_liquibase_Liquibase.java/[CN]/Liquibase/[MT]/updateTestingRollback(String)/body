@@ -1,4 +1,5 @@
 {
+  contexts=StringUtils.trimToNull(contexts);
   changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
   Date baseDate=new Date();
   update(contexts);

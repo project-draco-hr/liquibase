@@ -1,4 +1,5 @@
 {
+  contexts=StringUtils.trimToNull(contexts);
   if (updateExistingNullChecksums && databaseChangeLog == null) {
     throw new LiquibaseException("changeLog parameter is required if updating existing checksums");
   }

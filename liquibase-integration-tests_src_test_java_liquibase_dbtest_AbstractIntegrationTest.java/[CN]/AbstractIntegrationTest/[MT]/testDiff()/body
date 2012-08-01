@@ -4,5 +4,11 @@
   }
   runCompleteChangeLog();
   DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,database,new DiffControl());
-  assertTrue(diffResult.areEqual());
+  try {
+    assertTrue(diffResult.areEqual());
+  }
+ catch (  AssertionError e) {
+    new DiffToPrintStream(diffResult,System.out).print();
+    throw e;
+  }
 }

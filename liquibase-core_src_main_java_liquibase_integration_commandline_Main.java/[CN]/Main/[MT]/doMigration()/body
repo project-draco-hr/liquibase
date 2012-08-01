@@ -156,6 +156,12 @@
  else       if ("futureRollbackSQL".equalsIgnoreCase(command)) {
         liquibase.futureRollbackSQL(contexts,getOutputWriter());
       }
+ else       if ("futureRollbackCountSQL".equalsIgnoreCase(command)) {
+        if (commandParams == null || commandParams.size() == 0) {
+          throw new CommandLineParsingException("futureRollbackCountSQL requires a rollback count");
+        }
+        liquibase.futureRollbackSQL(Integer.parseInt(commandParams.iterator().next()),contexts,getOutputWriter());
+      }
  else       if ("updateTestingRollback".equalsIgnoreCase(command)) {
         liquibase.updateTestingRollback(contexts);
       }
