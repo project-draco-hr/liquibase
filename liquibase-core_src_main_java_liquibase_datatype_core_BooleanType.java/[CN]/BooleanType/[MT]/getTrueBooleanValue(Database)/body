@@ -1,0 +1,6 @@
+{
+  if (database instanceof MSSQLDatabase) {
+    return "1";
+  }
+  return "TRUE";
+}

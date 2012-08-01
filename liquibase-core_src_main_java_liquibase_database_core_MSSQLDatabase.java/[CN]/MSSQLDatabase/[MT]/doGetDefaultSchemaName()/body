@@ -1,0 +1,11 @@
+{
+  try {
+    ResultSet resultSet=((JdbcConnection)getConnection()).prepareStatement("select schema_name()").executeQuery();
+    resultSet.next();
+    return resultSet.getString(1);
+  }
+ catch (  Exception e) {
+    LogFactory.getLogger().info("Error getting default schema",e);
+  }
+  return null;
+}
