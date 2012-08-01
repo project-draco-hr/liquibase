@@ -1,3 +1,27 @@
 {
-  return super.getDefaultDatabaseSchemaName().toUpperCase();
+  if (defaultSchemaName == null) {
+    Statement stmt=null;
+    ResultSet rs=null;
+    try {
+      stmt=((JdbcConnection)getConnection()).createStatement();
+      rs=stmt.executeQuery("select current schema from sysibm.sysdummy1");
+      if (rs.next()) {
+        String result=rs.getString(1);
+        if (result != null) {
+          this.defaultSchemaName=result;
+        }
+ else {
+          this.defaultSchemaName=super.getDefaultDatabaseSchemaName();
+        }
+      }
+    }
+ catch (    Exception e) {
+      throw new DatabaseException("Could not determine current schema",e);
+    }
+ finally {
+      JdbcUtils.closeResultSet(rs);
+      JdbcUtils.closeStatement(stmt);
+    }
+  }
+  return defaultSchemaName;
 }
