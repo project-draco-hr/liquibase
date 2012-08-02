@@ -1,5 +1,8 @@
 {
-  if (StringUtils.trimToNull(diffTypes) != null) {
+  if (StringUtils.trimToNull(diffTypes) == null) {
+    addDefaultTypes();
+  }
+ else {
     Set<String> types=new HashSet<String>(Arrays.asList(diffTypes.toLowerCase().split("\\s*,\\s*")));
     if (types.contains("tables")) {
       objectTypesToDiff.add(Table.class);

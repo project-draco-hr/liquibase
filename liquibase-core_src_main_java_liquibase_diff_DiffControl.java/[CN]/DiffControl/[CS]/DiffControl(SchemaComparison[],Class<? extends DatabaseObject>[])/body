@@ -1,4 +1,9 @@
 {
+  if (typesToDiff == null) {
+    addDefaultTypes();
+  }
+ else {
+    this.objectTypesToDiff=Arrays.asList(typesToDiff);
+  }
   this.schemaComparisons=schemaComparison;
-  this.objectTypesToDiff=Arrays.asList(typesToDiff);
 }

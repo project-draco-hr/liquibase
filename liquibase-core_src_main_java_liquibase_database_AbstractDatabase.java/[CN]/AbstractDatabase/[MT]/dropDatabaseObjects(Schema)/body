@@ -1,7 +1,7 @@
 {
   schema=schema.clone(this);
   try {
-    DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(this,new DiffControl(schema));
+    DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(this,new DiffControl(schema,""));
     List<Change> dropChanges=new ArrayList<Change>();
     for (    View view : snapshot.getDatabaseObjects(schema,View.class)) {
       DropViewChange dropChange=new DropViewChange();
