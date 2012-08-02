@@ -1,0 +1,6 @@
+{
+  if (database instanceof MySQLDatabase) {
+    return new DatabaseDataType("TIMESTAMP");
+  }
+  return super.toDatabaseDataType(database);
+}

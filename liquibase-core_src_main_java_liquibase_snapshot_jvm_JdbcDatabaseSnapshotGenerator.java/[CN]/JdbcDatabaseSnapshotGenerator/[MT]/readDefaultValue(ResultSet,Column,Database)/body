@@ -26,6 +26,9 @@
         return new DatabaseFunction(stringVal);
       }
  else       if (type == Types.BIT) {
+        if (stringVal.startsWith("b'")) {
+          stringVal=stringVal.replaceFirst("b'","").replaceFirst("'$","");
+        }
         return new Integer(stringVal);
       }
  else       if (type == Types.BLOB) {
