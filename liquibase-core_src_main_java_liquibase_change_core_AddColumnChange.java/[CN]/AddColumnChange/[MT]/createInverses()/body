@@ -5,6 +5,7 @@
       DropDefaultValueChange dropChange=new DropDefaultValueChange();
       dropChange.setTableName(getTableName());
       dropChange.setColumnName(aColumn.getName());
+      dropChange.setSchemaName(getSchemaName());
       inverses.add(dropChange);
     }
     DropColumnChange inverse=new DropColumnChange();
