@@ -9,6 +9,9 @@
         String tableName=cleanObjectNameFromDatabase(rs.getString("TABLE_NAME"));
         String columnName=cleanObjectNameFromDatabase(rs.getString("COLUMN_NAME"));
         short position=rs.getShort("KEY_SEQ");
+        if (database.isLiquibaseTable(tableName)) {
+          continue;
+        }
         boolean foundExistingPK=false;
         for (        PrimaryKey pk : foundPKs) {
           if (pk.getTable().getName().equals(tableName)) {

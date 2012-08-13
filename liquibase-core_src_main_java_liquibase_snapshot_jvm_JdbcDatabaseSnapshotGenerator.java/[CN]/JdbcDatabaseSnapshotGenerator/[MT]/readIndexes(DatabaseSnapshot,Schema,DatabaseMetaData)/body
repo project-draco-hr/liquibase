@@ -48,6 +48,9 @@
           indexInformation.setName(indexName);
           indexInformation.setUnique(!nonUnique);
           indexInformation.setFilterCondition(filterCondition);
+          if (!includeInSnapshot(indexInformation)) {
+            continue;
+          }
           indexMap.put(indexName,indexInformation);
         }
         for (int i=indexInformation.getColumns().size(); i < position; i++) {
