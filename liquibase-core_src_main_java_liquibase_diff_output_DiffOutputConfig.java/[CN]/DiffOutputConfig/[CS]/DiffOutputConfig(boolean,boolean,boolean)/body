@@ -1,0 +1,5 @@
+{
+  this.includeSchema=includeSchema;
+  this.includeCatalog=includeCatalog;
+  this.includeTablespace=includeTablespace;
+}

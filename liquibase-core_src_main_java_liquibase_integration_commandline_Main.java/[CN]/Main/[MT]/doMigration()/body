@@ -19,16 +19,20 @@
   Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultSchemaName,this.databaseClass,this.driverPropertiesFile);
   try {
     CompositeResourceAccessor fileOpener=new CompositeResourceAccessor(fsOpener,clOpener);
+    boolean includeCatalog=Boolean.parseBoolean(getCommandParam("includeCatalog","false"));
+    boolean includeSchema=Boolean.parseBoolean(getCommandParam("includeSchema","false"));
+    boolean includeTablespace=Boolean.parseBoolean(getCommandParam("includeTablespace","false"));
+    DiffOutputConfig diffOutputConfig=new DiffOutputConfig(includeCatalog,includeSchema,includeTablespace);
     if ("diff".equalsIgnoreCase(command)) {
       CommandLineUtils.doDiff(createReferenceDatabaseFromCommandParams(commandParams),database);
       return;
     }
  else     if ("diffChangeLog".equalsIgnoreCase(command)) {
-      CommandLineUtils.doDiffToChangeLog(changeLogFile,createReferenceDatabaseFromCommandParams(commandParams),database);
+      CommandLineUtils.doDiffToChangeLog(changeLogFile,createReferenceDatabaseFromCommandParams(commandParams),database,diffOutputConfig);
       return;
     }
  else     if ("generateChangeLog".equalsIgnoreCase(command)) {
-      CommandLineUtils.doGenerateChangeLog(changeLogFile,database,defaultSchemaName,defaultCatalogName,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataOutputDirectory));
+      CommandLineUtils.doGenerateChangeLog(changeLogFile,database,defaultSchemaName,defaultCatalogName,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataOutputDirectory),diffOutputConfig);
       return;
     }
     Liquibase liquibase=new Liquibase(changeLogFile,fileOpener,database);

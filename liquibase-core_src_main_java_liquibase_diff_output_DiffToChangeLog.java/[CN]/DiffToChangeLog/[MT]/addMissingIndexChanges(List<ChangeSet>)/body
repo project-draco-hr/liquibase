@@ -2,10 +2,15 @@
   for (  Index index : diffResult.getObjectDiff(Index.class).getMissing()) {
     CreateIndexChange change=new CreateIndexChange();
     change.setTableName(index.getTable().getName());
-    change.setTablespace(index.getTablespace());
-    change.setCatalogName(index.getTable().getSchema().getCatalog().getName());
-    change.setSchemaName(index.getTable().getSchema().getName());
-    change.setCatalogName(index.getTable().getSchema().getCatalog().getName());
+    if (diffOutputConfig.isIncludeTablespace()) {
+      change.setTablespace(index.getTablespace());
+    }
+    if (diffOutputConfig.isIncludeCatalog()) {
+      change.setCatalogName(index.getTable().getSchema().getCatalog().getName());
+    }
+    if (diffOutputConfig.isIncludeSchema()) {
+      change.setSchemaName(index.getTable().getSchema().getName());
+    }
     change.setIndexName(index.getName());
     change.setUnique(index.isUnique());
     change.setAssociatedWith(index.getAssociatedWithAsString());

@@ -1,8 +1,9 @@
 {
+  DiffOutputConfig diffOutputConfig=new DiffOutputConfig(getIncludeCatalog(),getIncludeSchema(),getIncludeTablespace());
   if (getChangeLogFile() == null) {
-    new DiffToChangeLog(diffResult).print(writer);
+    new DiffToChangeLog(diffResult,diffOutputConfig).print(writer);
   }
  else {
-    new DiffToChangeLog(diffResult).print(getChangeLogFile());
+    new DiffToChangeLog(diffResult,diffOutputConfig).print(getChangeLogFile());
   }
 }

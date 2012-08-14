@@ -8,8 +8,12 @@
     if (column.isDataTypeDifferent(referenceColumn)) {
       ModifyDataTypeChange change=new ModifyDataTypeChange();
       change.setTableName(column.getRelation().getName());
-      change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
-      change.setSchemaName(column.getRelation().getSchema().getName());
+      if (diffOutputConfig.isIncludeCatalog()) {
+        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+      }
+      if (diffOutputConfig.isIncludeSchema()) {
+        change.setSchemaName(column.getRelation().getSchema().getName());
+      }
       change.setColumnName(column.getName());
       change.setNewDataType(referenceColumn.getType().toString());
       changes.add(generateChangeSet(change));
@@ -19,8 +23,12 @@
       if (referenceColumn.isNullable() == null || referenceColumn.isNullable()) {
         DropNotNullConstraintChange change=new DropNotNullConstraintChange();
         change.setTableName(column.getRelation().getName());
-        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
-        change.setSchemaName(column.getRelation().getSchema().getName());
+        if (diffOutputConfig.isIncludeCatalog()) {
+          change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+        }
+        if (diffOutputConfig.isIncludeSchema()) {
+          change.setSchemaName(column.getRelation().getSchema().getName());
+        }
         change.setColumnName(column.getName());
         change.setColumnDataType(referenceColumn.getType().toString());
         changes.add(generateChangeSet(change));
@@ -29,8 +37,12 @@
  else {
         AddNotNullConstraintChange change=new AddNotNullConstraintChange();
         change.setTableName(column.getRelation().getName());
-        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
-        change.setSchemaName(column.getRelation().getSchema().getName());
+        if (diffOutputConfig.isIncludeCatalog()) {
+          change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+        }
+        if (diffOutputConfig.isIncludeSchema()) {
+          change.setSchemaName(column.getRelation().getSchema().getName());
+        }
         change.setColumnName(column.getName());
         change.setColumnDataType(referenceColumn.getType().toString());
         Object defaultValue=column.getDefaultValue();

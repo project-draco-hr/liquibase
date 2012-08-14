@@ -1,0 +1,11 @@
+{
+  for (  String param : commandParams) {
+    String[] splitArg=splitArg(param);
+    String attributeName=splitArg[0];
+    String value=splitArg[1];
+    if (attributeName.equalsIgnoreCase(paramName)) {
+      return value;
+    }
+  }
+  return defaultValue;
+}

@@ -5,9 +5,12 @@
     }
     DropIndexChange change=new DropIndexChange();
     change.setTableName(index.getTable().getName());
-    change.setCatalogName(index.getTable().getSchema().getCatalog().getName());
-    change.setSchemaName(index.getTable().getSchema().getName());
-    change.setCatalogName(index.getTable().getSchema().getCatalog().getName());
+    if (diffOutputConfig.isIncludeCatalog()) {
+      change.setCatalogName(index.getTable().getSchema().getCatalog().getName());
+    }
+    if (diffOutputConfig.isIncludeSchema()) {
+      change.setSchemaName(index.getTable().getSchema().getName());
+    }
     change.setIndexName(index.getName());
     change.setAssociatedWith(index.getAssociatedWithAsString());
     changes.add(generateChangeSet(change));

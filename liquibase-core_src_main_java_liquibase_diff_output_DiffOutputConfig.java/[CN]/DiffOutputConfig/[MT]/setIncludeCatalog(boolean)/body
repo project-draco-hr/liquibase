@@ -1,0 +1,4 @@
+{
+  this.includeCatalog=includeCatalog;
+  return this;
+}
