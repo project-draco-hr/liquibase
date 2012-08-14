@@ -1,0 +1,25 @@
+{
+  if (schema == null) {
+    schema=new Schema(getDefaultCatalogName(),getDefaultSchemaName());
+  }
+  String catalogName=schema.getCatalogName();
+  String schemaName=schema.getName();
+  if (catalogName == null) {
+    catalogName=getDefaultCatalogName();
+  }
+ else {
+    catalogName=correctObjectName(catalogName);
+  }
+  if (supportsSchemas()) {
+    if (schemaName == null) {
+      schemaName=getDefaultSchemaName();
+    }
+ else {
+      schemaName=correctObjectName(schemaName);
+    }
+  }
+ else {
+    schemaName=catalogName;
+  }
+  return new Schema(catalogName,schemaName);
+}

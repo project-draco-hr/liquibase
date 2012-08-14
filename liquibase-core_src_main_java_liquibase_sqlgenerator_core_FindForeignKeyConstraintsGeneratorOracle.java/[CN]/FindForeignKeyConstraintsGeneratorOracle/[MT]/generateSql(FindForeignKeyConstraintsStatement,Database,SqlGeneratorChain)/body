@@ -1,4 +1,5 @@
 {
+  Schema baseTableSchema=database.correctSchema(new Schema(statement.getBaseTableCatalogName(),statement.getBaseTableSchemaName()));
   StringBuilder sb=new StringBuilder();
   sb.append("SELECT ");
   sb.append("BASE.TABLE_NAME as ").append(FindForeignKeyConstraintsStatement.RESULT_COLUMN_BASE_TABLE_NAME).append(", ");
@@ -18,6 +19,6 @@
   sb.append("AND FRGN.CONSTRAINT_NAME = FCOLS.CONSTRAINT_NAME ");
   sb.append("AND BASE.TABLE_NAME =  '").append(statement.getBaseTableName().toUpperCase()).append("' ");
   sb.append("AND BASE.CONSTRAINT_TYPE = 'R' ");
-  sb.append("AND BASE.OWNER = '").append(database.correctSchemaName(statement.getBaseTableSchemaName())).append("'");
+  sb.append("AND BASE.OWNER = '").append(baseTableSchema.getName()).append("'");
   return new Sql[]{new UnparsedSql(sb.toString())};
 }

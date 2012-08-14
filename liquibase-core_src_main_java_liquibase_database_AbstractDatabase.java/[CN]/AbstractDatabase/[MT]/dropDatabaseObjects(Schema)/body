@@ -1,20 +1,20 @@
 {
-  schema=schema.clone(this);
+  schema=correctSchema(schema);
   try {
     DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(this,new DiffControl(schema,""));
     List<Change> dropChanges=new ArrayList<Change>();
     for (    View view : snapshot.getDatabaseObjects(schema,View.class)) {
       DropViewChange dropChange=new DropViewChange();
       dropChange.setViewName(view.getName());
-      dropChange.setSchemaName(schema.getName(this));
-      dropChange.setCatalogName(schema.getCatalogName(this));
+      dropChange.setSchemaName(schema.getName());
+      dropChange.setCatalogName(schema.getCatalogName());
       dropChanges.add(dropChange);
     }
     if (!supportsForeignKeyDisable()) {
       for (      ForeignKey fk : snapshot.getDatabaseObjects(schema,ForeignKey.class)) {
         DropForeignKeyConstraintChange dropFK=new DropForeignKeyConstraintChange();
-        dropFK.setBaseTableSchemaName(schema.getName(this));
-        dropFK.setBaseTableCatalogName(schema.getCatalogName(this));
+        dropFK.setBaseTableSchemaName(schema.getName());
+        dropFK.setBaseTableCatalogName(schema.getCatalogName());
         dropFK.setBaseTableName(fk.getForeignKeyTable().getName());
         dropFK.setConstraintName(fk.getName());
         dropChanges.add(dropFK);
@@ -22,8 +22,8 @@
     }
     for (    Table table : snapshot.getDatabaseObjects(schema,Table.class)) {
       DropTableChange dropChange=new DropTableChange();
-      dropChange.setSchemaName(schema.getName(this));
-      dropChange.setCatalogName(schema.getCatalogName(this));
+      dropChange.setSchemaName(schema.getName());
+      dropChange.setCatalogName(schema.getCatalogName());
       dropChange.setTableName(table.getName());
       if (supportsDropTableCascadeConstraints()) {
         dropChange.setCascadeConstraints(true);
@@ -34,13 +34,13 @@
       for (      Sequence seq : snapshot.getDatabaseObjects(schema,Sequence.class)) {
         DropSequenceChange dropChange=new DropSequenceChange();
         dropChange.setSequenceName(seq.getName());
-        dropChange.setSchemaName(schema.getName(this));
-        dropChange.setCatalogName(schema.getCatalogName(this));
+        dropChange.setSchemaName(schema.getName());
+        dropChange.setCatalogName(schema.getCatalogName());
         dropChanges.add(dropChange);
       }
     }
     if (snapshot.hasDatabaseChangeLogTable()) {
-      dropChanges.add(new AnonymousChange(new ClearDatabaseChangeLogTableStatement(schema.getCatalogName(this),schema.getName(this))));
+      dropChanges.add(new AnonymousChange(new ClearDatabaseChangeLogTableStatement(schema.getCatalogName(),schema.getName())));
     }
     final boolean reEnableFK=supportsForeignKeyDisable() && disableForeignKeyChecks();
     try {

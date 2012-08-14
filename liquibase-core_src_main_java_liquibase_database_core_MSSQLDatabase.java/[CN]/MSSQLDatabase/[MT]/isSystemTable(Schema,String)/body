@@ -1,3 +1,4 @@
 {
-  return super.isSystemTable(schema,tableName) || schema.getName(this).equals("sys");
+  schema=correctSchema(schema);
+  return super.isSystemTable(schema,tableName) || schema.getName().equals("sys");
 }

@@ -1,8 +1,0 @@
-{
-  if (schemaName == null) {
-    return getDefaultSchemaName();
-  }
- else {
-    return correctObjectName(schemaName);
-  }
-}

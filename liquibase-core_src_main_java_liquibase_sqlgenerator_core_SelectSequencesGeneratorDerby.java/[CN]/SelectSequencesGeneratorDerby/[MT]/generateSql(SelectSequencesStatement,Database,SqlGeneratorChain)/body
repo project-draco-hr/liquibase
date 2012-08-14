@@ -1,4 +1,4 @@
 {
-  String schemaName=database.correctSchemaName(statement.getSchemaName());
-  return new Sql[]{new UnparsedSql("SELECT " + "  seq.SEQUENCENAME AS SEQUENCE_NAME " + "FROM "+ "  SYS.SYSSEQUENCES seq, "+ "  SYS.SYSSCHEMAS sch "+ "WHERE "+ "  sch.SCHEMANAME = '" + schemaName + "' AND "+ "  sch.SCHEMAID = seq.SCHEMAID")};
+  Schema schema=database.correctSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()));
+  return new Sql[]{new UnparsedSql("SELECT " + "  seq.SEQUENCENAME AS SEQUENCE_NAME " + "FROM "+ "  SYS.SYSSEQUENCES seq, "+ "  SYS.SYSSCHEMAS sch "+ "WHERE "+ "  sch.SCHEMANAME = '" + schema.getName() + "' AND "+ "  sch.SCHEMAID = seq.SCHEMAID")};
 }

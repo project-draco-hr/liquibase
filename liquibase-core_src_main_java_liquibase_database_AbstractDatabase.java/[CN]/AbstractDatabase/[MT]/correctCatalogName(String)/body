@@ -1,8 +1,0 @@
-{
-  if (catalogName == null) {
-    return getDefaultCatalogName();
-  }
- else {
-    return correctObjectName(catalogName);
-  }
-}

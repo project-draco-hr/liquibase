@@ -1,7 +1,7 @@
 {
   Database database=snapshot.getDatabase();
   updateListeners("Reading tables for " + database.toString() + " ...");
-  ResultSet tableMetaDataRs=databaseMetaData.getTables(schema.getCatalogName(snapshot.getDatabase()),schema.getName(snapshot.getDatabase()),null,new String[]{"TABLE","ALIAS"});
+  ResultSet tableMetaDataRs=databaseMetaData.getTables(schema.getCatalogName(),schema.getName(),null,new String[]{"TABLE","ALIAS"});
   try {
     while (tableMetaDataRs.next()) {
       Table table=readTable(tableMetaDataRs,database,false);

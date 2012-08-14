@@ -8,7 +8,7 @@
   view.setDatabase(database);
   view.setRawSchemaName(rawSchemaName);
   view.setRawCatalogName(rawCatalogName);
-  view.setSchema(new Schema(rawCatalogName,rawSchemaName));
+  view.setSchema(database.correctSchema(new Schema(rawCatalogName,rawSchemaName)));
   try {
     view.setDefinition(database.getViewDefinition(view.getSchema(),view.getName()));
   }

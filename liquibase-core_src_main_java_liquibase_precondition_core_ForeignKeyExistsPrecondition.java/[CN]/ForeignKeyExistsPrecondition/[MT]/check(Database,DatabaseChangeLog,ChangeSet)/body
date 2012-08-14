@@ -1,6 +1,6 @@
 {
   try {
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasForeignKey(getCatalogName(),getSchemaName(),getForeignKeyTableName(),getForeignKeyName(),database)) {
+    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasForeignKey(database.correctSchema(new Schema(getCatalogName(),getSchemaName())),getForeignKeyTableName(),getForeignKeyName(),database)) {
       throw new PreconditionFailedException("Foreign Key " + database.escapeIndexName(catalogName,schemaName,foreignKeyName) + " does not exist",changeLog,this);
     }
   }

@@ -1,4 +1,6 @@
 {
-  schema=schema.clone(database);
+  if (database != null) {
+    schema=database.correctSchema(schema);
+  }
   schemaSnapshots.put(schema,new SchemaSnapshot(schema));
 }

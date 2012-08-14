@@ -1,3 +1,4 @@
 {
-  return super.isSystemTable(schema,tableName) || "pg_catalog".equals(schema.getName(this)) || "pg_toast".equals(schema.getName(this))|| tableName.endsWith("_seq")|| tableName.endsWith("_key")|| tableName.endsWith("_pkey")|| tableName.startsWith("idx_")|| tableName.startsWith("pk_");
+  schema=correctSchema(schema);
+  return super.isSystemTable(schema,tableName) || "pg_catalog".equals(schema.getName()) || "pg_toast".equals(schema.getName())|| tableName.endsWith("_seq")|| tableName.endsWith("_key")|| tableName.endsWith("_pkey")|| tableName.startsWith("idx_")|| tableName.startsWith("pk_");
 }
