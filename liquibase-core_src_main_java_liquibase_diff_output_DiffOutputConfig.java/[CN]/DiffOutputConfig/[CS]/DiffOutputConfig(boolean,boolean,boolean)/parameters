@@ -1,0 +1,3 @@
+boolean includeCatalog
+boolean includeSchema
+boolean includeTablespace

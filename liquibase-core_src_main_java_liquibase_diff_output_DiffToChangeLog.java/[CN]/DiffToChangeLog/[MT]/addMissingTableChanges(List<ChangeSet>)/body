@@ -5,8 +5,12 @@
     }
     CreateTableChange change=new CreateTableChange();
     change.setTableName(missingTable.getName());
-    change.setCatalogName(missingTable.getSchema().getCatalog().getName());
-    change.setSchemaName(missingTable.getSchema().getName());
+    if (diffOutputConfig.isIncludeCatalog()) {
+      change.setCatalogName(missingTable.getSchema().getCatalog().getName());
+    }
+    if (diffOutputConfig.isIncludeSchema()) {
+      change.setSchemaName(missingTable.getSchema().getName());
+    }
     if (missingTable.getRemarks() != null) {
       change.setRemarks(missingTable.getRemarks());
     }

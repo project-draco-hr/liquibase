@@ -7,11 +7,11 @@
     try {
       if (database instanceof OracleDatabase) {
         statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
-        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName(snapshot.getDatabase()) + "' AND TABLE_NAME='"+ table.getName()+ "' ORDER BY INDEX_NAME, ORDINAL_POSITION";
+        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "' ORDER BY INDEX_NAME, ORDINAL_POSITION";
         rs=statement.executeQuery(sql);
       }
  else {
-        rs=databaseMetaData.getIndexInfo(schema.getCatalogName(snapshot.getDatabase()),schema.getName(snapshot.getDatabase()),table.getName(),false,true);
+        rs=databaseMetaData.getIndexInfo(schema.getCatalogName(),schema.getName(),table.getName(),false,true);
       }
       Map<String,Index> indexMap=new HashMap<String,Index>();
       while (rs.next()) {

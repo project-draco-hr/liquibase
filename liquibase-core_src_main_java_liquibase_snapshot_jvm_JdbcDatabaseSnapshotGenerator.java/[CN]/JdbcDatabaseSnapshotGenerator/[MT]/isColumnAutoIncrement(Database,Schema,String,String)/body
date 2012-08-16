@@ -1,0 +1,31 @@
+{
+  if (!database.supportsAutoIncrement()) {
+    return false;
+  }
+  boolean autoIncrement=false;
+  Statement statement=null;
+  ResultSet selectRS=null;
+  try {
+    statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+    selectRS=statement.executeQuery("SELECT " + database.escapeColumnName(schema.getCatalogName(),schema.getName(),tableName,columnName) + " FROM "+ database.escapeTableName(schema.getCatalogName(),schema.getName(),tableName)+ " WHERE 1 = 0");
+    ResultSetMetaData meta=selectRS.getMetaData();
+    autoIncrement=meta.isAutoIncrement(1);
+  }
+  finally {
+    if (selectRS != null) {
+      try {
+        selectRS.close();
+      }
+ catch (      SQLException ignored) {
+      }
+    }
+    if (statement != null) {
+      try {
+        statement.close();
+      }
+ catch (      SQLException ignored) {
+      }
+    }
+  }
+  return autoIncrement;
+}

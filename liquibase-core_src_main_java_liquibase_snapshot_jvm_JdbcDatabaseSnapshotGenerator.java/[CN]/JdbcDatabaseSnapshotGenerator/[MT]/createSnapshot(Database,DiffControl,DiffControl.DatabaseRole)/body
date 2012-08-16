@@ -4,6 +4,7 @@
     DatabaseMetaData databaseMetaData=getMetaData(database);
     this.statusListeners=diffControl.getStatusListeners();
     for (    Schema schema : diffControl.getSchemas(type)) {
+      schema=snapshot.getDatabase().correctSchema(schema);
       readTables(snapshot,schema,databaseMetaData);
       readViews(snapshot,schema,databaseMetaData);
       readForeignKeys(snapshot,schema,databaseMetaData);

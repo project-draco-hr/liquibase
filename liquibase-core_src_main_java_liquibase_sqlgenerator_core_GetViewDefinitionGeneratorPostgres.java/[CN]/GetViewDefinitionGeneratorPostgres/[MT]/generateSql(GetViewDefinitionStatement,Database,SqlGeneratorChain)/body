@@ -1,3 +1,4 @@
 {
-  return new Sql[]{new UnparsedSql("select definition from pg_views where viewname='" + statement.getViewName() + "' AND schemaname='"+ database.correctSchemaName(statement.getSchemaName())+ "'")};
+  Schema schema=database.correctSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()));
+  return new Sql[]{new UnparsedSql("select definition from pg_views where viewname='" + statement.getViewName() + "' AND schemaname='"+ schema.getName()+ "'")};
 }

@@ -1,4 +1,5 @@
 {
+  Schema schema=database.correctSchema(new Schema(statement.getBaseTableCatalogName(),statement.getBaseTableSchemaName()));
   StringBuilder sb=new StringBuilder();
   sb.append("SELECT ");
   sb.append("RC.TABLE_NAME as ").append(FindForeignKeyConstraintsStatement.RESULT_COLUMN_BASE_TABLE_NAME).append(", ");
@@ -12,6 +13,6 @@
   sb.append("AND RC.CONSTRAINT_SCHEMA = KCU.CONSTRAINT_SCHEMA ");
   sb.append("AND RC.CONSTRAINT_NAME = KCU.CONSTRAINT_NAME ");
   sb.append("AND RC.TABLE_NAME = '").append(statement.getBaseTableName()).append("' ");
-  sb.append("AND RC.CONSTRAINT_SCHEMA = '").append(database.correctSchemaName(null)).append("'");
+  sb.append("AND RC.CONSTRAINT_SCHEMA = '").append(schema.getCatalogName()).append("'");
   return new Sql[]{new UnparsedSql(sb.toString())};
 }

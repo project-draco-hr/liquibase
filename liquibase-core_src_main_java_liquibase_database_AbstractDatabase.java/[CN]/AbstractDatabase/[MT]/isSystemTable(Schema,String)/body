@@ -1,5 +1,6 @@
 {
-  if ("information_schema".equalsIgnoreCase(schema.getName(this))) {
+  schema=correctSchema(schema);
+  if ("information_schema".equalsIgnoreCase(schema.getName())) {
     return true;
   }
  else   if (tableName.equalsIgnoreCase(getDatabaseChangeLogLockTableName())) {

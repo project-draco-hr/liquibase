@@ -1,8 +1,0 @@
-{
-  try {
-    return getColumn(catalogName,schemaName,tableName,columnName,database) != null;
-  }
- catch (  DatabaseException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
-}

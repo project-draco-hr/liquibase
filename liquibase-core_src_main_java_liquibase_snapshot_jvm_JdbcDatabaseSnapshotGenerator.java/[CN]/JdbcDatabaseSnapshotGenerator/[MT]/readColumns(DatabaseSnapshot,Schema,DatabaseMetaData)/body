@@ -3,7 +3,7 @@
   updateListeners("Reading columns for " + database.toString() + " ...");
   ResultSet allColumnsMetadataRs=null;
   try {
-    allColumnsMetadataRs=databaseMetaData.getColumns(schema.getCatalogName(snapshot.getDatabase()),schema.getName(snapshot.getDatabase()),null,null);
+    allColumnsMetadataRs=databaseMetaData.getColumns(schema.getCatalogName(),schema.getName(),null,null);
     while (allColumnsMetadataRs.next()) {
       String tableOrViewName=cleanObjectNameFromDatabase(allColumnsMetadataRs.getString("TABLE_NAME"));
       Relation relation=snapshot.getDatabaseObject(schema,tableOrViewName,Table.class);

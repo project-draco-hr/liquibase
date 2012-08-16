@@ -4,8 +4,12 @@
       if (null != uc.getTable()) {
         DropUniqueConstraintChange change=new DropUniqueConstraintChange();
         change.setTableName(uc.getTable().getName());
-        change.setCatalogName(uc.getTable().getSchema().getCatalog().getName());
-        change.setSchemaName(uc.getTable().getSchema().getName());
+        if (diffOutputConfig.isIncludeCatalog()) {
+          change.setCatalogName(uc.getTable().getSchema().getCatalog().getName());
+        }
+        if (diffOutputConfig.isIncludeSchema()) {
+          change.setSchemaName(uc.getTable().getSchema().getName());
+        }
         change.setConstraintName(uc.getName());
         changes.add(generateChangeSet(change));
       }

@@ -1,3 +1,0 @@
-{
-  return new Schema(catalog.getName(database),getName(database));
-}

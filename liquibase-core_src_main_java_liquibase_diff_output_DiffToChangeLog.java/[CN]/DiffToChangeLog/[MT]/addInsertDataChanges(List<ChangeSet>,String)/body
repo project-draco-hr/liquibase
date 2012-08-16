@@ -70,8 +70,12 @@
           LoadDataChange change=new LoadDataChange();
           change.setFile(fileName);
           change.setEncoding("UTF-8");
-          change.setCatalogName(schema.getCatalog().getName());
-          change.setSchemaName(schema.getName());
+          if (diffOutputConfig.isIncludeCatalog()) {
+            change.setCatalogName(schema.getCatalog().getName());
+          }
+          if (diffOutputConfig.isIncludeSchema()) {
+            change.setSchemaName(schema.getName());
+          }
           change.setTableName(table.getName());
           for (int i=0; i < columnNames.size(); i++) {
             String colName=columnNames.get(i);
@@ -86,8 +90,12 @@
  else {
           for (          Map row : rs) {
             InsertDataChange change=new InsertDataChange();
-            change.setCatalogName(schema.getCatalog().getName());
-            change.setSchemaName(schema.getName());
+            if (diffOutputConfig.isIncludeCatalog()) {
+              change.setCatalogName(schema.getCatalog().getName());
+            }
+            if (diffOutputConfig.isIncludeSchema()) {
+              change.setSchemaName(schema.getName());
+            }
             change.setTableName(table.getName());
             for (int i=0; i < columnNames.size(); i++) {
               ColumnConfig column=new ColumnConfig();

@@ -1,5 +1,7 @@
 {
-  schema=schema.clone(database);
+  if (database != null) {
+    schema=database.correctSchema(schema);
+  }
   if (!schemaSnapshots.containsKey(schema)) {
     return Collections.unmodifiableSet(new HashSet<T>());
   }
