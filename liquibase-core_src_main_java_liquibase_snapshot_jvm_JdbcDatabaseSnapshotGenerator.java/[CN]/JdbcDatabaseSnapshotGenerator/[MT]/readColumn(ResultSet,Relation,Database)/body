@@ -64,5 +64,6 @@
   DataType type=readDataType(columnMetadataResultSet,column,database);
   column.setType(type);
   column.setDefaultValue(readDefaultValue(columnMetadataResultSet,column,database));
+  readAdditionalDataType(columnMetadataResultSet,column,database);
   return column;
 }
