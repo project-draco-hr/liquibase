@@ -4,7 +4,7 @@
       ResultSet rs=getMetaData(database).getTables(schema.getCatalogName(),schema.getName(),null,new String[]{"TABLE"});
       try {
         while (rs.next()) {
-          if (hasIndex(schema,rs.getString("TABLE_NAME"),indexName,database,columnNames)) {
+          if (hasIndex(schema,rs.getString("TABLE_NAME"),indexName,columnNames,database)) {
             return true;
           }
         }
