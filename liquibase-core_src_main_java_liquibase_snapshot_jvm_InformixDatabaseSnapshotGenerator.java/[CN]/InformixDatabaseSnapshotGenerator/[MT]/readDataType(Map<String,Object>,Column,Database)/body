@@ -1,7 +1,7 @@
 {
-  String typeName=rs.getString("TYPE_NAME").toUpperCase();
+  String typeName=((String)rs.get("TYPE_NAME")).toUpperCase();
   if ("DATETIME".equals(typeName) || "INTERVAL".equals(typeName)) {
-    int collength=rs.getInt("COLUMN_SIZE");
+    int collength=(Integer)rs.get("COLUMN_SIZE");
     int firstQualifierType=(collength % 256) / 16;
     int lastQualifierType=(collength % 256) % 16;
     String type="DATETIME".equals(typeName) ? "DATETIME" : "INTERVAL";

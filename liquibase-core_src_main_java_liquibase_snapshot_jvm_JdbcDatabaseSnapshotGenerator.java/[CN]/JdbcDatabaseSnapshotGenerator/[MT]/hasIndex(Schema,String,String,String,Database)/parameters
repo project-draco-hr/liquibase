@@ -1,5 +1,5 @@
 Schema schema
 String tableName
 String indexName
-Database database
 String columnNames
+Database database

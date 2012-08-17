@@ -11,12 +11,12 @@
           this.defaultSchemaName=result;
         }
  else {
-          this.defaultSchemaName=super.getDefaultDatabaseSchemaName();
+          this.defaultSchemaName=super.getDefaultSchemaName();
         }
       }
     }
  catch (    Exception e) {
-      throw new DatabaseException("Could not determine current schema",e);
+      throw new RuntimeException("Could not determine current schema",e);
     }
  finally {
       JdbcUtils.closeResultSet(rs);

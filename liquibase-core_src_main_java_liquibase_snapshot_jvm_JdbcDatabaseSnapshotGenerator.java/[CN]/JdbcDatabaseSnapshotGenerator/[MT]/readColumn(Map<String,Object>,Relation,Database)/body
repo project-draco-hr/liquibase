@@ -1,9 +1,9 @@
 {
-  String rawTableName=columnMetadataResultSet.getString("TABLE_NAME");
-  String rawColumnName=columnMetadataResultSet.getString("COLUMN_NAME");
-  String rawSchemaName=StringUtils.trimToNull(columnMetadataResultSet.getString("TABLE_SCHEM"));
-  String rawCatalogName=StringUtils.trimToNull(columnMetadataResultSet.getString("TABLE_CAT"));
-  String remarks=StringUtils.trimToNull(columnMetadataResultSet.getString("REMARKS"));
+  String rawTableName=(String)columnMetadataResultSet.get("TABLE_NAME");
+  String rawColumnName=(String)columnMetadataResultSet.get("COLUMN_NAME");
+  String rawSchemaName=StringUtils.trimToNull((String)columnMetadataResultSet.get("TABLE_SCHEM"));
+  String rawCatalogName=StringUtils.trimToNull((String)columnMetadataResultSet.get("TABLE_CAT"));
+  String remarks=StringUtils.trimToNull((String)columnMetadataResultSet.get("REMARKS"));
   Schema schema=new Schema(rawCatalogName,rawSchemaName);
   if (database.isSystemTable(schema,rawTableName) || database.isSystemView(schema,rawTableName)) {
     return null;
@@ -12,7 +12,7 @@
   column.setName(rawColumnName);
   column.setRelation(table);
   column.setRemarks(remarks);
-  int nullable=columnMetadataResultSet.getInt("NULLABLE");
+  int nullable=(Integer)columnMetadataResultSet.get("NULLABLE");
   if (nullable == DatabaseMetaData.columnNoNulls) {
     column.setNullable(false);
   }
@@ -23,8 +23,8 @@
     LogFactory.getLogger().info("Unknown nullable state for column " + column.toString() + ". Assuming nullable");
     column.setNullable(true);
   }
-  try {
-    String isAutoincrement=columnMetadataResultSet.getString("IS_AUTOINCREMENT");
+  if (columnMetadataResultSet.containsKey("IS_AUTOINCREMENT")) {
+    String isAutoincrement=(String)columnMetadataResultSet.get("IS_AUTOINCREMENT");
     if (isAutoincrement.equals("YES")) {
       column.setAutoIncrement(true);
     }
@@ -39,7 +39,7 @@
       throw new UnexpectedLiquibaseException("Unknown is_autoincrement value: " + isAutoincrement);
     }
   }
- catch (  SQLException e) {
+ else {
     String selectStatement="select " + database.escapeColumnName(rawCatalogName,rawSchemaName,rawTableName,rawColumnName) + " from "+ database.escapeTableName(rawCatalogName,rawSchemaName,rawTableName)+ " where 0=1";
     Connection underlyingConnection=((JdbcConnection)database.getConnection()).getUnderlyingConnection();
     Statement statement=underlyingConnection.createStatement();

@@ -1,0 +1,25 @@
+{
+  Class[] types=new Class[]{null,String.class,String.class,String.class,String.class,int.class,String.class,int.class,String.class,int.class,int.class,int.class,String.class,String.class,int.class,int.class,int.class,int.class,String.class,String.class,String.class,String.class,short.class,String.class};
+  Map<String,Object> data=new HashMap<String,Object>();
+  for (int i=1; i <= rs.getMetaData().getColumnCount(); i++) {
+    Class classType=types[i];
+    Object value;
+    if (classType.equals(String.class)) {
+      value=rs.getString(i);
+    }
+ else     if (classType.equals(int.class)) {
+      value=rs.getInt(i);
+    }
+ else     if (classType.equals(short.class)) {
+      value=rs.getShort(i);
+    }
+ else {
+      value=rs.getObject(i);
+    }
+    if (rs.wasNull()) {
+      value=null;
+    }
+    data.put(rs.getMetaData().getColumnName(i),value);
+  }
+  return data;
+}
