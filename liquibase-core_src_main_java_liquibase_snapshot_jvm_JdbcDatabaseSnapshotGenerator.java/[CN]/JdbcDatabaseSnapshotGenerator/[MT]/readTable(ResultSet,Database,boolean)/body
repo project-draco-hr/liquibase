@@ -13,7 +13,7 @@
     ResultSet columnMetadataResultSet=getMetaData(database).getColumns(table.getRawCatalogName(),table.getRawSchemaName(),rawTableName,null);
     try {
       while (columnMetadataResultSet.next()) {
-        table.getColumns().add(readColumn(columnMetadataResultSet,table,database));
+        table.getColumns().add(readColumn(convertResultSetToMap(columnMetadataResultSet),table,database));
       }
     }
   finally {

@@ -1,8 +1,5 @@
 {
-  Object val=columnMetadataResultSet.getObject("COLUMN_DEF");
-  if (columnMetadataResultSet.wasNull()) {
-    return null;
-  }
+  Object val=columnMetadataResultSet.get("COLUMN_DEF");
   if (val instanceof String && val.equals("")) {
     return null;
   }
@@ -20,22 +17,22 @@
         return new DatabaseFunction(stringVal);
       }
  else       if (type == Types.BIGINT) {
-        return new BigInteger(stringVal);
+        return new BigInteger(stringVal.trim());
       }
  else       if (type == Types.BINARY) {
-        return new DatabaseFunction(stringVal);
+        return new DatabaseFunction(stringVal.trim());
       }
  else       if (type == Types.BIT) {
         if (stringVal.startsWith("b'")) {
           stringVal=stringVal.replaceFirst("b'","").replaceFirst("'$","");
         }
-        return new Integer(stringVal);
+        return new Integer(stringVal.trim());
       }
  else       if (type == Types.BLOB) {
         return new DatabaseFunction(stringVal);
       }
  else       if (type == Types.BOOLEAN) {
-        return Boolean.valueOf(stringVal);
+        return Boolean.valueOf(stringVal.trim());
       }
  else       if (type == Types.CHAR) {
         return stringVal;
@@ -44,22 +41,22 @@
         return new DatabaseFunction(stringVal);
       }
  else       if (type == Types.DATE) {
-        return new java.sql.Date(getDateFormat().parse(stringVal).getTime());
+        return new java.sql.Date(getDateFormat().parse(stringVal.trim()).getTime());
       }
  else       if (type == Types.DECIMAL) {
-        return new BigDecimal(stringVal);
+        return new BigDecimal(stringVal.trim());
       }
  else       if (type == Types.DISTINCT) {
         return new DatabaseFunction(stringVal);
       }
  else       if (type == Types.DOUBLE) {
-        return Double.valueOf(stringVal);
+        return Double.valueOf(stringVal.trim());
       }
  else       if (type == Types.FLOAT) {
-        return Float.valueOf(stringVal);
+        return Float.valueOf(stringVal.trim());
       }
  else       if (type == Types.INTEGER) {
-        return Integer.valueOf(stringVal);
+        return Integer.valueOf(stringVal.trim());
       }
  else       if (type == Types.JAVA_OBJECT) {
         return new DatabaseFunction(stringVal);
@@ -83,7 +80,7 @@
         return null;
       }
  else       if (type == Types.NUMERIC) {
-        return new BigDecimal(stringVal);
+        return new BigDecimal(stringVal.trim());
       }
  else       if (type == Types.NVARCHAR) {
         return stringVal;
@@ -92,7 +89,7 @@
         return new DatabaseFunction(stringVal);
       }
  else       if (type == Types.REAL) {
-        return new BigDecimal(stringVal);
+        return new BigDecimal(stringVal.trim());
       }
  else       if (type == Types.REF) {
         return new DatabaseFunction(stringVal);
@@ -101,7 +98,7 @@
         return new DatabaseFunction(stringVal);
       }
  else       if (type == Types.SMALLINT) {
-        return Integer.valueOf(stringVal);
+        return Integer.valueOf(stringVal.trim());
       }
  else       if (type == Types.SQLXML) {
         return new DatabaseFunction(stringVal);
@@ -116,7 +113,7 @@
         return new Timestamp(getDateTimeFormat().parse(stringVal).getTime());
       }
  else       if (type == Types.TINYINT) {
-        return Integer.valueOf(stringVal);
+        return Integer.valueOf(stringVal.trim());
       }
  else       if (type == Types.VARBINARY) {
         return new DatabaseFunction(stringVal);

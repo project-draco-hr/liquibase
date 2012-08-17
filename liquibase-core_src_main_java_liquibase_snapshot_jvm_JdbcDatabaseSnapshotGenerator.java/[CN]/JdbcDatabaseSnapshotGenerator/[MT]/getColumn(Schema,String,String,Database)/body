@@ -7,7 +7,7 @@
     }
     Table table=new Table(database.correctTableName(tableName));
     table.setSchema(schema);
-    return readColumn(rs,table,database);
+    return readColumn(convertResultSetToMap(rs),table,database);
   }
  catch (  Exception e) {
     throw new DatabaseException(e);

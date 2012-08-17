@@ -5,7 +5,8 @@
   try {
     allColumnsMetadataRs=databaseMetaData.getColumns(schema.getCatalogName(),schema.getName(),null,null);
     while (allColumnsMetadataRs.next()) {
-      String tableOrViewName=cleanObjectNameFromDatabase(allColumnsMetadataRs.getString("TABLE_NAME"));
+      Map<String,Object> data=convertResultSetToMap(allColumnsMetadataRs);
+      String tableOrViewName=cleanObjectNameFromDatabase((String)data.get("TABLE_NAME"));
       Relation relation=snapshot.getDatabaseObject(schema,tableOrViewName,Table.class);
       if (relation == null) {
         relation=snapshot.getDatabaseObject(schema,tableOrViewName,View.class);
@@ -21,7 +22,7 @@
           continue;
         }
       }
-      Column column=readColumn(allColumnsMetadataRs,relation,database);
+      Column column=readColumn(data,relation,database);
       if (column == null) {
         continue;
       }
