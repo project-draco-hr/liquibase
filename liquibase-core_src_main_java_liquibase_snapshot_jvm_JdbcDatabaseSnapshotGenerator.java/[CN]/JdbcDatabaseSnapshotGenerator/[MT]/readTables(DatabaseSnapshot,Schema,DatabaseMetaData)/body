@@ -6,11 +6,11 @@
     while (tableMetaDataRs.next()) {
       Table table=readTable(tableMetaDataRs,database,false);
       if (database.isLiquibaseTable(table.getName())) {
-        if (table.getName().equals(database.getDatabaseChangeLogTableName())) {
+        if (database.objectNamesEqual(table.getName(),database.getDatabaseChangeLogTableName())) {
           snapshot.setDatabaseChangeLogTable(table);
           continue;
         }
-        if (table.getName().equals(database.getDatabaseChangeLogLockTableName())) {
+        if (database.objectNamesEqual(table.getName(),database.getDatabaseChangeLogLockTableName())) {
           snapshot.setDatabaseChangeLogLockTable(table);
           continue;
         }

@@ -3,7 +3,7 @@
     ResultSet rs=getMetaData(database).getImportedKeys(schema.getCatalogName(),schema.getName(),database.correctTableName(foreignKeyTableName));
     try {
       while (rs.next()) {
-        if (rs.getString("FK_NAME").equals(database.correctForeignKeyName(fkName))) {
+        if (database.objectNamesEqual(rs.getString("FK_NAME"),database.correctForeignKeyName(fkName))) {
           return true;
         }
       }

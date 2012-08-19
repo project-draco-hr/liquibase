@@ -1,0 +1,8 @@
+{
+  if (isCaseSensitive()) {
+    return name1.equals(name2);
+  }
+ else {
+    return name1.equalsIgnoreCase(name2);
+  }
+}

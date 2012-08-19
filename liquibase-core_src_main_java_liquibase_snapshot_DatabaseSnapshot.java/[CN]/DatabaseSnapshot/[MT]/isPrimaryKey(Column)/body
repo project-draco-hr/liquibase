@@ -3,7 +3,7 @@
     if (column.getRelation() == null) {
       continue;
     }
-    if (pk.getTable().getName().equalsIgnoreCase(column.getRelation().getName())) {
+    if (database.objectNamesEqual(pk.getTable().getName(),column.getRelation().getName())) {
       if (pk.getColumnNamesAsList().contains(column.getName())) {
         return true;
       }
