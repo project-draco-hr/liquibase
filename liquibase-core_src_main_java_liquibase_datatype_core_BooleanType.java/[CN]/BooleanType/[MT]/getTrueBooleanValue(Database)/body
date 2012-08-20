@@ -1,6 +1,9 @@
 {
-  if (database instanceof MSSQLDatabase) {
+  if (isNumericBoolean(database)) {
     return "1";
+  }
+  if (database instanceof InformixDatabase) {
+    return "t";
   }
   return "TRUE";
 }

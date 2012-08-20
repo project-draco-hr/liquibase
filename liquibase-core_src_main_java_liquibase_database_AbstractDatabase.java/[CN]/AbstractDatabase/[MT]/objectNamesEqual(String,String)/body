@@ -1,4 +1,10 @@
 {
+  if (name1 == null && name2 == null) {
+    return true;
+  }
+  if (name1 == null || name2 == null) {
+    return false;
+  }
   if (isCaseSensitive()) {
     return name1.equals(name2);
   }

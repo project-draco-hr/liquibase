@@ -1,0 +1,8 @@
+{
+  if (database instanceof CacheDatabase || database instanceof DB2Database || database instanceof FirebirdDatabase|| database instanceof MSSQLDatabase|| database instanceof MySQLDatabase|| database instanceof OracleDatabase|| database instanceof SybaseASADatabase|| database instanceof SybaseDatabase|| database instanceof DerbyDatabase) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

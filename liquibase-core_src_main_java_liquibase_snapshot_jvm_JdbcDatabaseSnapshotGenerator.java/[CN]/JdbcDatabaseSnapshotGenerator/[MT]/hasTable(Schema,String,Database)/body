@@ -5,6 +5,7 @@
   try {
     if (database != null) {
       tableName=database.correctTableName(tableName);
+      schema=database.correctSchema(schema);
     }
     ResultSet rs=getMetaData(database).getTables(schema.getCatalogName(),schema.getName(),tableName,new String[]{"TABLE"});
     try {
