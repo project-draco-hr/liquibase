@@ -1,0 +1,7 @@
+{
+  DataType type=super.readDataType(columnMetadataResultSet,column,database);
+  if ("TINYTEXT".equalsIgnoreCase(type.getTypeName())) {
+    type.setColumnSize(null);
+  }
+  return type;
+}
