@@ -14,7 +14,7 @@
         }
         boolean foundExistingPK=false;
         for (        PrimaryKey pk : foundPKs) {
-          if (pk.getTable().getName().equals(tableName)) {
+          if (database.objectNamesEqual(pk.getTable().getName(),tableName)) {
             pk.addColumnName(position - 1,columnName);
             foundExistingPK=true;
           }

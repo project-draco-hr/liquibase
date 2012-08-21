@@ -1,0 +1,12 @@
+{
+  if (connection != null) {
+    try {
+      return !((JdbcConnection)connection).getUnderlyingConnection().getMetaData().supportsMixedCaseIdentifiers();
+    }
+ catch (    SQLException e) {
+      LogFactory.getLogger().warning("Cannot determine case sensitivity from JDBC driver",e);
+      return false;
+    }
+  }
+  return false;
+}

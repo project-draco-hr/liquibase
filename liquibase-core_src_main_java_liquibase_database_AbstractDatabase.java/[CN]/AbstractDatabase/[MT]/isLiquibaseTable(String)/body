@@ -1,3 +1,3 @@
 {
-  return tableName.equalsIgnoreCase(this.getDatabaseChangeLogTableName()) || tableName.equalsIgnoreCase(this.getDatabaseChangeLogLockTableName());
+  return this.objectNamesEqual(tableName,this.getDatabaseChangeLogTableName()) || this.objectNamesEqual(tableName,this.getDatabaseChangeLogLockTableName());
 }

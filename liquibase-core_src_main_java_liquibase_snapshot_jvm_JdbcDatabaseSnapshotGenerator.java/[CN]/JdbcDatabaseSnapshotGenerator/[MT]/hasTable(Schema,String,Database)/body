@@ -1,6 +1,13 @@
 {
+  if (schema == null) {
+    schema=Schema.DEFAULT;
+  }
   try {
-    ResultSet rs=getMetaData(database).getTables(schema.getCatalogName(),schema.getName(),database.correctTableName(tableName),new String[]{"TABLE"});
+    if (database != null) {
+      tableName=database.correctTableName(tableName);
+      schema=database.correctSchema(schema);
+    }
+    ResultSet rs=getMetaData(database).getTables(schema.getCatalogName(),schema.getName(),tableName,new String[]{"TABLE"});
     try {
       return rs.next();
     }

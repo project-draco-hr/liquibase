@@ -28,7 +28,7 @@
       try {
         while (rs.next()) {
           String foundIndexName=rs.getString("INDEX_NAME");
-          if (indexName != null && !foundIndexName.equals(indexName)) {
+          if (indexName != null && !database.objectNamesEqual(foundIndexName,indexName)) {
             continue;
           }
           short ordinalPosition=rs.getShort("ORDINAL_POSITION");
@@ -40,7 +40,7 @@
           columns.put(ordinalPosition,columnName);
         }
         for (        TreeMap<Short,String> columnList : columnsByIndexName.values()) {
-          if (StringUtils.join(columnList.values(),",").equals(columnNames)) {
+          if (database.objectNamesEqual(StringUtils.join(columnList.values(),","),columnNames)) {
             return true;
           }
         }
@@ -54,7 +54,7 @@
       ResultSet rs=getMetaData(database).getIndexInfo(schema.getCatalogName(),schema.getName(),database.correctTableName(tableName),false,true);
       try {
         while (rs.next()) {
-          if (rs.getString("INDEX_NAME").equals(database.correctIndexName(indexName))) {
+          if (database.objectNamesEqual(rs.getString("INDEX_NAME"),database.correctIndexName(indexName))) {
             return true;
           }
         }

@@ -1,6 +1,6 @@
 {
   schema=correctSchema(schema);
-  if ("information_schema".equalsIgnoreCase(schema.getName())) {
+  if (this.objectNamesEqual("information_schema",schema.getName())) {
     return true;
   }
  else   if (getSystemTablesAndViews().contains(viewName)) {

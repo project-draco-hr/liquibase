@@ -1,5 +1,10 @@
 {
   String value=typeName;
+  boolean unsigned=false;
+  if (value.toLowerCase().endsWith(" unsigned")) {
+    value=value.substring(0,value.length() - " unsigned".length());
+    unsigned=true;
+  }
   if (columnSize != null) {
     value+="(";
     value+=columnSize;
@@ -7,6 +12,9 @@
       value+=", " + decimalDigits;
     }
     value+=")";
+  }
+  if (unsigned) {
+    value+=" UNSIGNED";
   }
   return value;
 }
