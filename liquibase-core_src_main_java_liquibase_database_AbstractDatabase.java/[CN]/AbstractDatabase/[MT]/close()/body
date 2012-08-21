@@ -1,11 +1,15 @@
 {
-  try {
-    DatabaseConnection connection=getConnection();
-    if (connection != null) {
-      connection.close();
+  DatabaseConnection connection=getConnection();
+  if (connection != null) {
+    if (previousAutoCommit != null) {
+      try {
+        connection.setAutoCommit(previousAutoCommit);
+      }
+ catch (      DatabaseException e) {
+        LogFactory.getLogger().warning("Failed to restore the auto commit to " + previousAutoCommit);
+        throw e;
+      }
     }
-  }
- catch (  DatabaseException e) {
-    throw new DatabaseException(e);
+    connection.close();
   }
 }
