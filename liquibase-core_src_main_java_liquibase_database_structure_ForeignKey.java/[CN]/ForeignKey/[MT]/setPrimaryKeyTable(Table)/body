@@ -1,3 +1,4 @@
 {
   this.primaryKeyTable=primaryKeyTable;
+  return this;
 }

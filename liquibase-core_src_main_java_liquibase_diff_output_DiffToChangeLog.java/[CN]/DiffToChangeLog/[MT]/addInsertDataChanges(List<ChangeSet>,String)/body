@@ -2,7 +2,7 @@
   try {
     for (    Schema schema : diffResult.getReferenceSnapshot().getSchemas()) {
       for (      Table table : diffResult.getReferenceSnapshot().getDatabaseObjects(schema,Table.class)) {
-        if (diffResult.getReferenceSnapshot().getDatabase().isLiquibaseTable(table.getName())) {
+        if (diffResult.getReferenceSnapshot().getDatabase().isLiquibaseTable(schema,table.getName())) {
           continue;
         }
         List<Change> changes=new ArrayList<Change>();

@@ -1,0 +1,8 @@
+{
+  if (isCaseSensitive()) {
+    return tableName.equals(this.getDatabaseChangeLogTableName()) || tableName.equals(this.getDatabaseChangeLogLockTableName());
+  }
+ else {
+    return tableName.equalsIgnoreCase(this.getDatabaseChangeLogTableName()) || tableName.equalsIgnoreCase(this.getDatabaseChangeLogLockTableName());
+  }
+}

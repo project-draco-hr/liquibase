@@ -1,0 +1,3 @@
+{
+  return otherObjectName.equalsIgnoreCase(this.getName());
+}

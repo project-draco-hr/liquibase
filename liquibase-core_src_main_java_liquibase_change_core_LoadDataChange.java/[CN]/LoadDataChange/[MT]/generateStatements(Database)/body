@@ -24,7 +24,7 @@
         ColumnConfig columnConfig=getColumnConfig(i,headers[i]);
         if (columnConfig != null) {
           columnName=columnConfig.getName();
-          if (columnConfig.getType().equalsIgnoreCase("SKIP")) {
+          if ("skip".equalsIgnoreCase(columnConfig.getType())) {
             continue;
           }
           if (value.toString().equalsIgnoreCase("NULL")) {

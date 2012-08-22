@@ -1,13 +1,4 @@
 {
   schema=correctSchema(schema);
-  if (this.objectNamesEqual("information_schema",schema.getName())) {
-    return true;
-  }
- else   if (this.objectNamesEqual(tableName,getDatabaseChangeLogLockTableName())) {
-    return true;
-  }
- else   if (getSystemTablesAndViews().contains(tableName)) {
-    return true;
-  }
-  return false;
+  return "information_schema".equalsIgnoreCase(schema.getName()) || getSystemTables().contains(tableName);
 }

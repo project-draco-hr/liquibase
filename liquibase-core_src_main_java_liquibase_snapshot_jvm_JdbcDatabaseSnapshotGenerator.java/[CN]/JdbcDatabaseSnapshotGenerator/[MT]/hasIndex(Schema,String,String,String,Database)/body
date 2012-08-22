@@ -14,35 +14,38 @@
         rs.close();
       }
     }
+    Index index=new Index();
+    index.setTable((Table)new Table(tableName).setSchema(schema));
+    index.setName(indexName);
     if (columnNames != null) {
-      columnNames=columnNames.replace(" ","");
-      if (columnNames.contains(",")) {
-        List<String> fixedColumnNames=new ArrayList<String>();
-        for (        String columnName : columnNames.split(",")) {
-          fixedColumnNames.add(database.correctColumnName(columnName));
-        }
-        columnNames=StringUtils.join(fixedColumnNames,",");
+      for (      String column : columnNames.split("\\s*,\\s*")) {
+        index.getColumns().add(column);
       }
+    }
+    if (columnNames != null) {
       Map<String,TreeMap<Short,String>> columnsByIndexName=new HashMap<String,TreeMap<Short,String>>();
       ResultSet rs=getMetaData(database).getIndexInfo(schema.getCatalogName(),schema.getName(),database.correctTableName(tableName),false,true);
       try {
         while (rs.next()) {
           String foundIndexName=rs.getString("INDEX_NAME");
-          if (indexName != null && !database.objectNamesEqual(foundIndexName,indexName)) {
+          if (indexName != null && indexName.equalsIgnoreCase(foundIndexName)) {
             continue;
           }
           short ordinalPosition=rs.getShort("ORDINAL_POSITION");
           if (!columnsByIndexName.containsKey(foundIndexName)) {
             columnsByIndexName.put(foundIndexName,new TreeMap<Short,String>());
           }
-          String columnName=database.correctColumnName(rs.getString("COLUMN_NAME"));
+          String columnName=rs.getString("COLUMN_NAME");
           Map<Short,String> columns=columnsByIndexName.get(foundIndexName);
           columns.put(ordinalPosition,columnName);
         }
-        for (        TreeMap<Short,String> columnList : columnsByIndexName.values()) {
-          if (database.objectNamesEqual(StringUtils.join(columnList.values(),","),columnNames)) {
+        for (        Map.Entry<String,TreeMap<Short,String>> foundIndexData : columnsByIndexName.entrySet()) {
+          Index foundIndex=new Index().setName(foundIndexData.getKey()).setTable(((Table)new Table(tableName).setSchema(schema)));
+          foundIndex.getColumns().addAll(foundIndexData.getValue().values());
+          if (foundIndex.equals(index,database)) {
             return true;
           }
+          return false;
         }
         return false;
       }
@@ -54,7 +57,8 @@
       ResultSet rs=getMetaData(database).getIndexInfo(schema.getCatalogName(),schema.getName(),database.correctTableName(tableName),false,true);
       try {
         while (rs.next()) {
-          if (database.objectNamesEqual(rs.getString("INDEX_NAME"),database.correctIndexName(indexName))) {
+          Index foundIndex=new Index().setName(rs.getString("INDEX_NAME")).setTable(((Table)new Table(tableName).setSchema(schema)));
+          if (foundIndex.equals(index,database)) {
             return true;
           }
         }

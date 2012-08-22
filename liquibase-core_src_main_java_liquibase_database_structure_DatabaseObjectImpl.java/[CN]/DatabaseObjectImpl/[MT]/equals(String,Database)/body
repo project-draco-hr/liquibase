@@ -1,0 +1,11 @@
+{
+  if (otherObjectName == null) {
+    return false;
+  }
+  if (accordingTo.isCaseSensitive()) {
+    return this.getName().equals(otherObjectName);
+  }
+ else {
+    return this.getName().equalsIgnoreCase(otherObjectName);
+  }
+}

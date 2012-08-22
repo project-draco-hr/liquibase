@@ -1,6 +1,6 @@
 {
   for (  Table missingTable : diffResult.getObjectDiff(Table.class).getMissing()) {
-    if (diffResult.getReferenceSnapshot().getDatabase().isLiquibaseTable(missingTable.getName())) {
+    if (diffResult.getReferenceSnapshot().getDatabase().isLiquibaseTable(missingTable.getSchema(),missingTable.getName())) {
       continue;
     }
     CreateTableChange change=new CreateTableChange();
@@ -22,7 +22,7 @@
       if (column.isPrimaryKey()) {
         PrimaryKey primaryKey=null;
         for (        PrimaryKey pk : diffResult.getObjectDiff(PrimaryKey.class).getMissing()) {
-          if (diffResult.getComparisonSnapshot().getDatabase().objectNamesEqual(pk.getTable().getName(),missingTable.getName())) {
+          if (pk.getTable().equals(missingTable.getName(),diffResult.getComparisonSnapshot().getDatabase())) {
             primaryKey=pk;
           }
         }
