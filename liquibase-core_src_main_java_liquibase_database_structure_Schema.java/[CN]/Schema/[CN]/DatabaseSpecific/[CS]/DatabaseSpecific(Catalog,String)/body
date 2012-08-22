@@ -1,0 +1,10 @@
+{
+  super(catalog,name);
+  this.database=database;
+  if (catalog == null) {
+    this.catalog=new Catalog.DatabaseSpecific(null,database);
+  }
+  if (name == null) {
+    this.name=null;
+  }
+}

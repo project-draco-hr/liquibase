@@ -1,9 +1,26 @@
 {
-  if (StringUtils.trimToNull(schemaName) == null) {
-    this.name=DEFAULT_NAME;
+  catalog=StringUtils.trimToNull(catalog);
+  schemaName=StringUtils.trimToNull(schemaName);
+  if (catalog == null && schemaName == null) {
+    catalog=Catalog.DEFAULT_NAME;
+    schemaName=Schema.DEFAULT_NAME;
   }
+ else   if (schemaName != null && catalog == null) {
+    if (schemaName.equals(Schema.DEFAULT_NAME)) {
+      catalog=Catalog.DEFAULT_NAME;
+    }
  else {
-    this.name=schemaName;
+      catalog=schemaName;
+    }
   }
+ else   if (catalog != null && schemaName == null) {
+    if (catalog.equals(Catalog.DEFAULT_NAME)) {
+      schemaName=Schema.DEFAULT_NAME;
+    }
+ else {
+      schemaName=catalog;
+    }
+  }
+  this.name=schemaName;
   this.catalog=new Catalog(catalog);
 }

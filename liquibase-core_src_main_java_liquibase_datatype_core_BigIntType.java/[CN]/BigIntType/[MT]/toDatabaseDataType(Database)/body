@@ -10,5 +10,8 @@
   if (database instanceof OracleDatabase) {
     return new DatabaseDataType("NUMBER",38,0);
   }
+  if (database instanceof DB2Database) {
+    return new DatabaseDataType("BIGINT");
+  }
   return super.toDatabaseDataType(database);
 }
