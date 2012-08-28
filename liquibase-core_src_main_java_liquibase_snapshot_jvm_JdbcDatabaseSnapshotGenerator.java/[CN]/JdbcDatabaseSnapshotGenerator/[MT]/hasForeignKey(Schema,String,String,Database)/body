@@ -1,9 +1,11 @@
 {
+  ForeignKey fk=new ForeignKey().setName(fkName);
   try {
-    ResultSet rs=getMetaData(database).getImportedKeys(schema.getCatalogName(),schema.getName(),database.correctTableName(foreignKeyTableName));
+    ResultSet rs=getMetaData(database).getImportedKeys(getJdbcCatalogName(schema),getJdbcSchemaName(schema),database.correctTableName(foreignKeyTableName));
     try {
       while (rs.next()) {
-        if (rs.getString("FK_NAME").equals(database.correctForeignKeyName(fkName))) {
+        ForeignKey foundFk=new ForeignKey().setName(rs.getString("FK_NAME"));
+        if (fk.equals(foundFk,database)) {
           return true;
         }
       }

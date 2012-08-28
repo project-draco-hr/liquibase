@@ -1,6 +1,6 @@
 {
   try {
-    ResultSet rs=getMetaData(database).getTables(schema.getCatalogName(),schema.getName(),database.correctTableName(viewName),new String[]{"VIEW"});
+    ResultSet rs=getMetaData(database).getTables(getJdbcCatalogName(schema),getJdbcSchemaName(schema),database.correctTableName(viewName),new String[]{"VIEW"});
     try {
       return rs.next();
     }

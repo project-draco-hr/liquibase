@@ -1,7 +1,7 @@
 {
   ResultSet rs=null;
   try {
-    rs=getMetaData(database).getColumns(schema.getCatalogName(),schema.getName(),database.correctTableName(tableName),database.correctColumnName(columnName));
+    rs=getMetaData(database).getColumns(getJdbcCatalogName(schema),getJdbcSchemaName(schema),database.correctTableName(tableName),database.correctColumnName(columnName));
     if (!rs.next()) {
       return null;
     }

@@ -9,7 +9,7 @@
       for (      Map result : results) {
         String baseTableName=(String)result.get(FindForeignKeyConstraintsStatement.RESULT_COLUMN_BASE_TABLE_NAME);
         String constraintName=(String)result.get(FindForeignKeyConstraintsStatement.RESULT_COLUMN_CONSTRAINT_NAME);
-        if (getBaseTableName().equalsIgnoreCase(baseTableName)) {
+        if (new Table(getBaseTableName()).equals(new Table(baseTableName),database)) {
           if (!handledConstraints.contains(constraintName)) {
             DropForeignKeyConstraintChange dropForeignKeyConstraintChange=new DropForeignKeyConstraintChange();
             dropForeignKeyConstraintChange.setBaseTableSchemaName(getBaseTableSchemaName());

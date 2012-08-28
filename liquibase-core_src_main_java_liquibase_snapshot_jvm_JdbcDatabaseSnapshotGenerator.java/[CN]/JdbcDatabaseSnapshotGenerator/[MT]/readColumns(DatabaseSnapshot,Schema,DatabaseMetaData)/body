@@ -3,7 +3,7 @@
   updateListeners("Reading columns for " + database.toString() + " ...");
   ResultSet allColumnsMetadataRs=null;
   try {
-    allColumnsMetadataRs=databaseMetaData.getColumns(schema.getCatalogName(),schema.getName(),null,null);
+    allColumnsMetadataRs=databaseMetaData.getColumns(getJdbcCatalogName(schema),getJdbcSchemaName(schema),null,null);
     while (allColumnsMetadataRs.next()) {
       Map<String,Object> data=convertResultSetToMap(allColumnsMetadataRs);
       String tableOrViewName=cleanObjectNameFromDatabase((String)data.get("TABLE_NAME"));

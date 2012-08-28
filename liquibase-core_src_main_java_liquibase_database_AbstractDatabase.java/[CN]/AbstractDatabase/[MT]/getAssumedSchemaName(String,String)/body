@@ -1,0 +1,18 @@
+{
+  if (this.supportsSchemas()) {
+    if (schemaName == null) {
+      if (this.supportsCatalogs()) {
+        return null;
+      }
+ else {
+        return catalogName;
+      }
+    }
+ else {
+      return schemaName;
+    }
+  }
+ else {
+    return null;
+  }
+}

@@ -1,3 +1,4 @@
 {
   this.tablespace=tablespace;
+  return this;
 }

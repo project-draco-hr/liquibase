@@ -1,8 +1,12 @@
 {
-  StringBuffer string=new StringBuffer();
-  string.append("exec (").append(statement.getProcedureName());
+  StringBuilder string=new StringBuilder();
+  string.append("exec ").append(statement.getProcedureName()).append("(");
   for (  String param : statement.getParameters()) {
     string.append(" ").append(param).append(",");
   }
-  return new Sql[]{new UnparsedSql(string.toString().replaceFirst(",$",")"))};
+  String sql=string.toString().replaceFirst(",$","") + ")";
+  if (database instanceof OracleDatabase) {
+    sql=sql.replaceFirst("exec ","BEGIN ").replaceFirst("\\)$","); END;");
+  }
+  return new Sql[]{new UnparsedSql(sql)};
 }

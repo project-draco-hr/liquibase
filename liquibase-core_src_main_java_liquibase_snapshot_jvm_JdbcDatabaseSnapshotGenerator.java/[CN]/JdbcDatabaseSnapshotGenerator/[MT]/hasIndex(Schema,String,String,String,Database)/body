@@ -1,11 +1,14 @@
 {
   try {
     if (tableName == null) {
-      ResultSet rs=getMetaData(database).getTables(schema.getCatalogName(),schema.getName(),null,new String[]{"TABLE"});
+      ResultSet rs=getMetaData(database).getTables(getJdbcCatalogName(schema),getJdbcSchemaName(schema),null,new String[]{"TABLE"});
       try {
         while (rs.next()) {
-          if (hasIndex(schema,rs.getString("TABLE_NAME"),indexName,columnNames,database)) {
-            return true;
+          String foundTable=rs.getString("TABLE_NAME");
+          if (!database.isSystemTable(schema,foundTable) && !database.isSystemView(schema,foundTable)) {
+            if (hasIndex(schema,foundTable,indexName,columnNames,database)) {
+              return true;
+            }
           }
         }
         return false;
@@ -14,35 +17,38 @@
         rs.close();
       }
     }
+    Index index=new Index();
+    index.setTable((Table)new Table(tableName).setSchema(schema));
+    index.setName(indexName);
     if (columnNames != null) {
-      columnNames=columnNames.replace(" ","");
-      if (columnNames.contains(",")) {
-        List<String> fixedColumnNames=new ArrayList<String>();
-        for (        String columnName : columnNames.split(",")) {
-          fixedColumnNames.add(database.correctColumnName(columnName));
-        }
-        columnNames=StringUtils.join(fixedColumnNames,",");
+      for (      String column : columnNames.split("\\s*,\\s*")) {
+        index.getColumns().add(column);
       }
+    }
+    if (columnNames != null) {
       Map<String,TreeMap<Short,String>> columnsByIndexName=new HashMap<String,TreeMap<Short,String>>();
-      ResultSet rs=getMetaData(database).getIndexInfo(schema.getCatalogName(),schema.getName(),database.correctTableName(tableName),false,true);
+      ResultSet rs=getMetaData(database).getIndexInfo(getJdbcCatalogName(schema),getJdbcSchemaName(schema),database.correctTableName(tableName),false,true);
       try {
         while (rs.next()) {
           String foundIndexName=rs.getString("INDEX_NAME");
-          if (indexName != null && !foundIndexName.equals(indexName)) {
+          if (indexName != null && indexName.equalsIgnoreCase(foundIndexName)) {
             continue;
           }
           short ordinalPosition=rs.getShort("ORDINAL_POSITION");
           if (!columnsByIndexName.containsKey(foundIndexName)) {
             columnsByIndexName.put(foundIndexName,new TreeMap<Short,String>());
           }
-          String columnName=database.correctColumnName(rs.getString("COLUMN_NAME"));
+          String columnName=rs.getString("COLUMN_NAME");
           Map<Short,String> columns=columnsByIndexName.get(foundIndexName);
           columns.put(ordinalPosition,columnName);
         }
-        for (        TreeMap<Short,String> columnList : columnsByIndexName.values()) {
-          if (StringUtils.join(columnList.values(),",").equals(columnNames)) {
+        for (        Map.Entry<String,TreeMap<Short,String>> foundIndexData : columnsByIndexName.entrySet()) {
+          Index foundIndex=new Index().setName(foundIndexData.getKey()).setTable(((Table)new Table(tableName).setSchema(schema)));
+          foundIndex.getColumns().addAll(foundIndexData.getValue().values());
+          if (foundIndex.equals(index,database)) {
             return true;
           }
+          return false;
         }
         return false;
       }
@@ -51,10 +57,14 @@
       }
     }
  else     if (indexName != null) {
-      ResultSet rs=getMetaData(database).getIndexInfo(schema.getCatalogName(),schema.getName(),database.correctTableName(tableName),false,true);
+      ResultSet rs=getMetaData(database).getIndexInfo(getJdbcCatalogName(schema),getJdbcSchemaName(schema),database.correctTableName(tableName),false,true);
       try {
         while (rs.next()) {
-          if (rs.getString("INDEX_NAME").equals(database.correctIndexName(indexName))) {
+          Index foundIndex=new Index().setName(rs.getString("INDEX_NAME")).setTable(((Table)new Table(tableName).setSchema(schema)));
+          if (foundIndex.getName() == null) {
+            continue;
+          }
+          if (foundIndex.equals(index,database)) {
             return true;
           }
         }

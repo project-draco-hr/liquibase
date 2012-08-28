@@ -1,0 +1,7 @@
+{
+  super(name);
+  this.database=database;
+  if (name == null) {
+    this.name=null;
+  }
+}

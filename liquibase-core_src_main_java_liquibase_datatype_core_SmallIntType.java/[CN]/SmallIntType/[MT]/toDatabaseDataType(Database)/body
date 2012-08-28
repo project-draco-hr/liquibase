@@ -1,0 +1,6 @@
+{
+  if (database instanceof DB2Database) {
+    return new DatabaseDataType("SMALLINT");
+  }
+  return super.toDatabaseDataType(database);
+}

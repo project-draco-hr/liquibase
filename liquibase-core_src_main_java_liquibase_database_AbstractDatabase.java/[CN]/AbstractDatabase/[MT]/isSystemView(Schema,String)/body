@@ -3,7 +3,7 @@
   if ("information_schema".equalsIgnoreCase(schema.getName())) {
     return true;
   }
- else   if (getSystemTablesAndViews().contains(viewName)) {
+ else   if (getSystemViews().contains(viewName)) {
     return true;
   }
   return false;

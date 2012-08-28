@@ -1,7 +1,7 @@
 {
   Database database=snapshot.getDatabase();
   updateListeners("Reading views for " + database.toString() + " ...");
-  ResultSet viewsMetadataRs=databaseMetaData.getTables(schema.getCatalogName(),schema.getName(),null,new String[]{"VIEW"});
+  ResultSet viewsMetadataRs=databaseMetaData.getTables(getJdbcCatalogName(schema),getJdbcSchemaName(schema),null,new String[]{"VIEW"});
   try {
     while (viewsMetadataRs.next()) {
       View view=readView(viewsMetadataRs,database);

@@ -14,7 +14,7 @@
       String tableName=rs.getString("relname");
       UniqueConstraint constraintInformation=new UniqueConstraint();
       constraintInformation.setName(constraintName);
-      if (!database.isSystemTable(schema,tableName) && !database.isLiquibaseTable(tableName)) {
+      if (!database.isSystemTable(schema,tableName) && !database.isLiquibaseTable(schema,tableName)) {
         Table table=snapshot.getDatabaseObject(schema,tableName,Table.class);
         if (table == null) {
           continue;
