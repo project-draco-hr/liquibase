@@ -11,7 +11,7 @@
         rs=statement.executeQuery(sql);
       }
  else {
-        rs=databaseMetaData.getIndexInfo(schema.getCatalogName(),schema.getName(),table.getName(),false,true);
+        rs=databaseMetaData.getIndexInfo(getJdbcCatalogName(schema),getJdbcSchemaName(schema),table.getName(),false,true);
       }
       Map<String,Index> indexMap=new HashMap<String,Index>();
       while (rs.next()) {

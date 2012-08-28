@@ -1,4 +1,7 @@
 {
+  if (this.getName() == null) {
+    return otherObjectName == null;
+  }
   if (otherObjectName == null) {
     return false;
   }

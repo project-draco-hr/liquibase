@@ -3,7 +3,7 @@
   updateListeners("Reading primary keys for " + database.toString() + " ...");
   List<PrimaryKey> foundPKs=new ArrayList<PrimaryKey>();
   for (  Table table : snapshot.getDatabaseObjects(schema,Table.class)) {
-    ResultSet rs=databaseMetaData.getPrimaryKeys(schema.getCatalogName(),schema.getName(),table.getName());
+    ResultSet rs=databaseMetaData.getPrimaryKeys(getJdbcCatalogName(schema),getJdbcSchemaName(schema),table.getName());
     try {
       while (rs.next()) {
         String tableName=cleanObjectNameFromDatabase(rs.getString("TABLE_NAME"));

@@ -1,0 +1,3 @@
+String rawSchemaName
+String rawCatalogName
+Database database

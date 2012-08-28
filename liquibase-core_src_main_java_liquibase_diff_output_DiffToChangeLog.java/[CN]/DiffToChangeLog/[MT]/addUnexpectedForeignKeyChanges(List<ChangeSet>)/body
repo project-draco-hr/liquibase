@@ -3,7 +3,12 @@
     DropForeignKeyConstraintChange change=new DropForeignKeyConstraintChange();
     change.setConstraintName(fk.getName());
     change.setBaseTableName(fk.getForeignKeyTable().getName());
-    change.setBaseTableSchemaName(fk.getForeignKeyTable().getSchema().getName());
+    if (diffOutputConfig.isIncludeCatalog()) {
+      change.setBaseTableCatalogName(fk.getForeignKeyTable().getSchema().getCatalogName());
+    }
+    if (diffOutputConfig.isIncludeSchema()) {
+      change.setBaseTableSchemaName(fk.getForeignKeyTable().getSchema().getName());
+    }
     changes.add(generateChangeSet(change));
   }
 }

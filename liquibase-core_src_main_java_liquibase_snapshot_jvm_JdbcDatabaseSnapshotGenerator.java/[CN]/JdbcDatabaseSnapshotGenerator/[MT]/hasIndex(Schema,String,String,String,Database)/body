@@ -1,11 +1,14 @@
 {
   try {
     if (tableName == null) {
-      ResultSet rs=getMetaData(database).getTables(schema.getCatalogName(),schema.getName(),null,new String[]{"TABLE"});
+      ResultSet rs=getMetaData(database).getTables(getJdbcCatalogName(schema),getJdbcSchemaName(schema),null,new String[]{"TABLE"});
       try {
         while (rs.next()) {
-          if (hasIndex(schema,rs.getString("TABLE_NAME"),indexName,columnNames,database)) {
-            return true;
+          String foundTable=rs.getString("TABLE_NAME");
+          if (!database.isSystemTable(schema,foundTable) && !database.isSystemView(schema,foundTable)) {
+            if (hasIndex(schema,foundTable,indexName,columnNames,database)) {
+              return true;
+            }
           }
         }
         return false;
@@ -24,7 +27,7 @@
     }
     if (columnNames != null) {
       Map<String,TreeMap<Short,String>> columnsByIndexName=new HashMap<String,TreeMap<Short,String>>();
-      ResultSet rs=getMetaData(database).getIndexInfo(schema.getCatalogName(),schema.getName(),database.correctTableName(tableName),false,true);
+      ResultSet rs=getMetaData(database).getIndexInfo(getJdbcCatalogName(schema),getJdbcSchemaName(schema),database.correctTableName(tableName),false,true);
       try {
         while (rs.next()) {
           String foundIndexName=rs.getString("INDEX_NAME");
@@ -54,7 +57,7 @@
       }
     }
  else     if (indexName != null) {
-      ResultSet rs=getMetaData(database).getIndexInfo(schema.getCatalogName(),schema.getName(),database.correctTableName(tableName),false,true);
+      ResultSet rs=getMetaData(database).getIndexInfo(getJdbcCatalogName(schema),getJdbcSchemaName(schema),database.correctTableName(tableName),false,true);
       try {
         while (rs.next()) {
           Index foundIndex=new Index().setName(rs.getString("INDEX_NAME")).setTable(((Table)new Table(tableName).setSchema(schema)));

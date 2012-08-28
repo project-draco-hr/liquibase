@@ -3,22 +3,17 @@
     return schema;
   }
   if (schema == null) {
-    schema=new Schema.DatabaseSpecific(getDefaultCatalogName(),getDefaultSchemaName(),this);
+    return new Schema.DatabaseSpecific(getDefaultCatalogName(),getDefaultSchemaName(),this);
   }
   String catalogName=schema.getCatalogName();
   String schemaName=schema.getName();
-  if (supportsCatalogs()) {
+  if (supportsCatalogs() && supportsSchemas()) {
     if (catalogName.equals(Catalog.DEFAULT_NAME)) {
       catalogName=getDefaultCatalogName();
     }
  else {
       catalogName=correctObjectName(catalogName);
     }
-  }
- else {
-    catalogName=null;
-  }
-  if (supportsSchemas()) {
     if (schemaName.equals(Schema.DEFAULT_NAME)) {
       schemaName=getDefaultSchemaName();
     }
@@ -26,8 +21,30 @@
       schemaName=correctObjectName(schemaName);
     }
   }
+ else   if (!supportsCatalogs() && !supportsSchemas()) {
+    return new Schema.DatabaseSpecific("DEFAULT","DEFAULT",this);
+  }
+ else   if (supportsCatalogs()) {
+    if (catalogName.equals(Catalog.DEFAULT_NAME)) {
+      if (Schema.DEFAULT_NAME.equals(schemaName)) {
+        catalogName=getDefaultCatalogName();
+      }
  else {
-    schemaName=null;
+        catalogName=schemaName;
+      }
+    }
+    schemaName=catalogName;
+  }
+ else   if (supportsSchemas()) {
+    if (schemaName.equals(Schema.DEFAULT_NAME)) {
+      if (Catalog.DEFAULT_NAME.equals(catalogName)) {
+        schemaName=getDefaultSchemaName();
+      }
+ else {
+        schemaName=catalogName;
+      }
+    }
+    catalogName=schemaName;
   }
   return new Schema.DatabaseSpecific(catalogName,schemaName,this);
 }

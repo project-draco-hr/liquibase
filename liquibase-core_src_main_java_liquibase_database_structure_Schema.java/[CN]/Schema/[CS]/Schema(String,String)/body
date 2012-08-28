@@ -10,7 +10,7 @@
       catalog=Catalog.DEFAULT_NAME;
     }
  else {
-      catalog=schemaName;
+      catalog=Catalog.DEFAULT_NAME;
     }
   }
  else   if (catalog != null && schemaName == null) {
