@@ -1,5 +1,0 @@
-Schema schema
-String tableName
-String indexName
-String columnNames
-Database database

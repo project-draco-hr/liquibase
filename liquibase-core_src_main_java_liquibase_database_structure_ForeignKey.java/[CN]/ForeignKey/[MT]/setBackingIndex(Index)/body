@@ -1,3 +1,4 @@
 {
   this.backingIndex=backingIndex;
+  return this;
 }

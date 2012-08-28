@@ -1,6 +1,3 @@
 {
-  if (name.equals(DEFAULT_NAME)) {
-    return null;
-  }
   return name;
 }

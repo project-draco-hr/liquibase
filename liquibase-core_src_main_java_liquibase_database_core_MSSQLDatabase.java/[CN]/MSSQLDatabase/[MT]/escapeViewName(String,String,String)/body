@@ -1,0 +1,9 @@
+{
+  schemaName=getAssumedSchemaName(catalogName,schemaName);
+  if (StringUtils.trimToNull(schemaName) == null) {
+    return escapeDatabaseObject(viewName);
+  }
+ else {
+    return escapeDatabaseObject(schemaName) + "." + escapeDatabaseObject(viewName);
+  }
+}

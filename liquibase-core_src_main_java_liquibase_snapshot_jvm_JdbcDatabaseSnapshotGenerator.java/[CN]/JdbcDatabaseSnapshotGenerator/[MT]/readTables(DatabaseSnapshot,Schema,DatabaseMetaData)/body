@@ -2,21 +2,21 @@
   schema=snapshot.getDatabase().correctSchema(schema);
   Database database=snapshot.getDatabase();
   updateListeners("Reading tables for " + database.toString() + " ...");
-  ResultSet tableMetaDataRs=databaseMetaData.getTables(schema.getCatalogName(),schema.getName(),null,new String[]{"TABLE","ALIAS"});
+  ResultSet tableMetaDataRs=databaseMetaData.getTables(getJdbcCatalogName(schema),getJdbcSchemaName(schema),null,new String[]{"TABLE","ALIAS"});
   try {
     while (tableMetaDataRs.next()) {
       Table table=readTable(tableMetaDataRs,database,false);
-      if (database.isLiquibaseTable(table.getName())) {
-        if (database.objectNamesEqual(table.getName(),database.getDatabaseChangeLogTableName())) {
+      if (database.isLiquibaseTable(schema,table.getName())) {
+        if (table.equals(database.getDatabaseChangeLogTableName(),database)) {
           snapshot.setDatabaseChangeLogTable(table);
           continue;
         }
-        if (database.objectNamesEqual(table.getName(),database.getDatabaseChangeLogLockTableName())) {
+        if (table.equals(database.getDatabaseChangeLogLockTableName(),database)) {
           snapshot.setDatabaseChangeLogLockTable(table);
           continue;
         }
       }
-      if (database.isSystemTable(table.getSchema(),table.getName())) {
+      if (database.isSystemTable(table.getSchema(),table.getName()) || database.isLiquibaseTable(table.getSchema(),table.getName())) {
         continue;
       }
       snapshot.addDatabaseObjects(table);

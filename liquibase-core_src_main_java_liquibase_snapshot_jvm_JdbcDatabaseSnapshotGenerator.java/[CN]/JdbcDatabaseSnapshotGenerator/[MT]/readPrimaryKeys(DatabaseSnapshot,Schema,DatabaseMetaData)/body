@@ -3,18 +3,18 @@
   updateListeners("Reading primary keys for " + database.toString() + " ...");
   List<PrimaryKey> foundPKs=new ArrayList<PrimaryKey>();
   for (  Table table : snapshot.getDatabaseObjects(schema,Table.class)) {
-    ResultSet rs=databaseMetaData.getPrimaryKeys(schema.getCatalogName(),schema.getName(),table.getName());
+    ResultSet rs=databaseMetaData.getPrimaryKeys(getJdbcCatalogName(schema),getJdbcSchemaName(schema),table.getName());
     try {
       while (rs.next()) {
         String tableName=cleanObjectNameFromDatabase(rs.getString("TABLE_NAME"));
         String columnName=cleanObjectNameFromDatabase(rs.getString("COLUMN_NAME"));
         short position=rs.getShort("KEY_SEQ");
-        if (database.isLiquibaseTable(tableName)) {
+        if (database.isLiquibaseTable(schema,tableName)) {
           continue;
         }
         boolean foundExistingPK=false;
         for (        PrimaryKey pk : foundPKs) {
-          if (database.objectNamesEqual(pk.getTable().getName(),tableName)) {
+          if (pk.getTable().equals(tableName,database)) {
             pk.addColumnName(position - 1,columnName);
             foundExistingPK=true;
           }

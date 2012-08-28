@@ -1,3 +1,0 @@
-{
-  return name1.equalsIgnoreCase(name2);
-}

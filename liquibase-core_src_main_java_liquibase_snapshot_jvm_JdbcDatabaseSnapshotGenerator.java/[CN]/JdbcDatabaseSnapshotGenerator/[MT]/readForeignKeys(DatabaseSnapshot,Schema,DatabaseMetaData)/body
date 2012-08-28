@@ -2,7 +2,8 @@
   Database database=snapshot.getDatabase();
   updateListeners("Reading foreign keys for " + database.toString() + " ...");
   for (  Table table : snapshot.getDatabaseObjects(schema,Table.class)) {
-    ResultSet importedKeyMetadataResultSet=getMetaData(database).getImportedKeys(table.getRawCatalogName(),table.getRawSchemaName(),table.getName());
+    Schema rawSchema=getSchemaFromJdbcInfo(table.getRawSchemaName(),table.getRawCatalogName(),database);
+    ResultSet importedKeyMetadataResultSet=getMetaData(database).getImportedKeys(getJdbcCatalogName(rawSchema),getJdbcSchemaName(rawSchema),table.getName());
     try {
       while (importedKeyMetadataResultSet.next()) {
         ForeignKey newFk=readForeignKey(importedKeyMetadataResultSet,snapshot);

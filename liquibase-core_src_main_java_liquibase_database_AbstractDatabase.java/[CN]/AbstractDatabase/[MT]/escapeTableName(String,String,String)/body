@@ -1,11 +1,30 @@
 {
-  if (schemaName == null) {
-    schemaName=getDefaultSchemaName();
-  }
-  if (StringUtils.trimToNull(schemaName) == null || !supportsSchemas()) {
+  if (catalogName == null && schemaName == null) {
     return escapeDatabaseObject(tableName);
   }
+  if (!supportsCatalogs() && !supportsSchemas()) {
+    return escapeDatabaseObject(tableName);
+  }
+ else   if (supportsCatalogs() && supportsSchemas()) {
+    catalogName=StringUtils.trimToNull(catalogName);
+    schemaName=StringUtils.trimToNull(schemaName);
+    if (catalogName == null && schemaName == null) {
+      return escapeDatabaseObject(tableName);
+    }
+ else     if (catalogName == null) {
+      return escapeDatabaseObject(schemaName) + "." + escapeDatabaseObject(tableName);
+    }
  else {
-    return escapeDatabaseObject(schemaName) + "." + escapeDatabaseObject(tableName);
+      return escapeDatabaseObject(catalogName) + "." + escapeDatabaseObject(schemaName)+ "."+ escapeDatabaseObject(tableName);
+    }
+  }
+ else {
+    catalogName=getAssumedCatalogName(catalogName,schemaName);
+    if (StringUtils.trimToNull(catalogName) == null) {
+      return escapeDatabaseObject(tableName);
+    }
+ else {
+      return escapeDatabaseObject(catalogName) + "." + escapeDatabaseObject(tableName);
+    }
   }
 }

@@ -1,3 +1,0 @@
-{
-  return getPrefix(catalogName,schemaName) + viewName;
-}

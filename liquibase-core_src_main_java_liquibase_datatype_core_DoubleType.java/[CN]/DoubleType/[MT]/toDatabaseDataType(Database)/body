@@ -2,6 +2,9 @@
   if (database instanceof MSSQLDatabase) {
     return new DatabaseDataType("FLOAT");
   }
+  if (database instanceof DB2Database) {
+    return new DatabaseDataType("DOUBLE");
+  }
   if (database instanceof OracleDatabase) {
     return new DatabaseDataType("FLOAT",24);
   }

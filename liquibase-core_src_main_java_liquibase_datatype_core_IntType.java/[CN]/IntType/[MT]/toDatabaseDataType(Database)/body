@@ -5,5 +5,8 @@
   if (database instanceof OracleDatabase) {
     return new DatabaseDataType("INTEGER",getParameters());
   }
+  if (database instanceof DB2Database) {
+    return new DatabaseDataType("INTEGER");
+  }
   return super.toDatabaseDataType(database);
 }

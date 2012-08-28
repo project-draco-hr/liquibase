@@ -7,7 +7,7 @@
       tableName=database.correctTableName(tableName);
       schema=database.correctSchema(schema);
     }
-    ResultSet rs=getMetaData(database).getTables(schema.getCatalogName(),schema.getName(),tableName,new String[]{"TABLE"});
+    ResultSet rs=getMetaData(database).getTables(getJdbcCatalogName(schema),getJdbcSchemaName(schema),tableName,new String[]{"TABLE"});
     try {
       return rs.next();
     }

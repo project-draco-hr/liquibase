@@ -1,0 +1,11 @@
+{
+  if (!schema.equals(correctSchema(new Schema(getLiquibaseCatalogName(),getLiquibaseSchemaName())),this)) {
+    return false;
+  }
+  if (isCaseSensitive()) {
+    return tableName.equals(this.getDatabaseChangeLogTableName()) || tableName.equals(this.getDatabaseChangeLogLockTableName());
+  }
+ else {
+    return tableName.equalsIgnoreCase(this.getDatabaseChangeLogTableName()) || tableName.equalsIgnoreCase(this.getDatabaseChangeLogLockTableName());
+  }
+}

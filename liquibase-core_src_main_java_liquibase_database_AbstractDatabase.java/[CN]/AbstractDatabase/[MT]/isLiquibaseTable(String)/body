@@ -1,3 +1,0 @@
-{
-  return this.objectNamesEqual(tableName,this.getDatabaseChangeLogTableName()) || this.objectNamesEqual(tableName,this.getDatabaseChangeLogLockTableName());
-}
