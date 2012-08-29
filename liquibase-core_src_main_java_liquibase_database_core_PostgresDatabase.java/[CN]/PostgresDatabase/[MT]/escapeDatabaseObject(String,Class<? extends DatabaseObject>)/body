@@ -6,6 +6,6 @@
     return "\"" + objectName + "\"";
   }
  else {
-    return super.escapeDatabaseObject(objectName);
+    return super.escapeDatabaseObject(objectName,objectType);
   }
 }
