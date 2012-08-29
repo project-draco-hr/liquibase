@@ -1,0 +1,3 @@
+{
+  return catalogname + "." + schemaName+ "."+ objectName;
+}

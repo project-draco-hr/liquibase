@@ -1,0 +1,30 @@
+{
+  if (catalogName == null && schemaName == null) {
+    return escapeDatabaseObject(objectName);
+  }
+  if (!supportsCatalogs() && !supportsSchemas()) {
+    return escapeDatabaseObject(objectName);
+  }
+ else   if (supportsCatalogs() && supportsSchemas()) {
+    catalogName=StringUtils.trimToNull(catalogName);
+    schemaName=StringUtils.trimToNull(schemaName);
+    if (catalogName == null && schemaName == null) {
+      return escapeDatabaseObject(objectName);
+    }
+ else     if (catalogName == null) {
+      return escapeDatabaseObject(schemaName) + "." + escapeDatabaseObject(objectName);
+    }
+ else {
+      return escapeDatabaseObject(catalogName) + "." + escapeDatabaseObject(schemaName)+ "."+ escapeDatabaseObject(objectName);
+    }
+  }
+ else {
+    catalogName=getAssumedCatalogName(catalogName,schemaName);
+    if (StringUtils.trimToNull(catalogName) == null) {
+      return escapeDatabaseObject(objectName);
+    }
+ else {
+      return escapeDatabaseObject(catalogName) + "." + escapeDatabaseObject(objectName);
+    }
+  }
+}

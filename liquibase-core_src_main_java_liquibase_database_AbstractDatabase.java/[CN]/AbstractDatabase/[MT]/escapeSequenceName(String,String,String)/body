@@ -1,11 +1,3 @@
 {
-  if (schemaName == null) {
-    schemaName=getDefaultSchemaName();
-  }
-  if (StringUtils.trimToNull(schemaName) == null || !supportsSchemas()) {
-    return escapeDatabaseObject(sequenceName);
-  }
- else {
-    return escapeDatabaseObject(schemaName) + "." + escapeDatabaseObject(sequenceName);
-  }
+  return escapeDatabaseObject(catalogName,schemaName,sequenceName,Sequence.class);
 }
