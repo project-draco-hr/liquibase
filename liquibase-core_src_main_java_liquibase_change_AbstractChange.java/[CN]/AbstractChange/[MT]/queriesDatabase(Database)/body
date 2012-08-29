@@ -1,6 +1,6 @@
 {
   for (  SqlStatement statement : generateStatements(database)) {
-    if (SqlGeneratorFactory.getInstance().requiresCurrentDatabaseMetadata(statement,database)) {
+    if (SqlGeneratorFactory.getInstance().queriesDatabase(statement,database)) {
       return true;
     }
   }
