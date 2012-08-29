@@ -1,3 +1,0 @@
-{
-  return super.shouldQuoteValue(value) && !value.startsWith("\"SYSIBM\"");
-}
