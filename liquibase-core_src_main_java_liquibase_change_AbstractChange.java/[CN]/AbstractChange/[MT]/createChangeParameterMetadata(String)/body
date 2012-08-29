@@ -12,7 +12,7 @@
     throw new RuntimeException("Could not find property " + propertyName);
   }
   String type=property.getPropertyType().getSimpleName();
-  ChangeProperty changePropertyAnnotation=property.getReadMethod().getAnnotation(ChangeProperty.class);
+  DatabaseChangeProperty changePropertyAnnotation=property.getReadMethod().getAnnotation(DatabaseChangeProperty.class);
   String[] requiredForDatabase;
   String mustApplyTo=null;
   if (changePropertyAnnotation == null) {

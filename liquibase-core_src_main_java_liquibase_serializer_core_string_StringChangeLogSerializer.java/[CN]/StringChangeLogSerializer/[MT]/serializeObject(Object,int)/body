@@ -7,7 +7,7 @@
     while (!classToCheck.equals(Object.class)) {
       for (      Field field : classToCheck.getDeclaredFields()) {
         field.setAccessible(true);
-        ChangeProperty changePropertyAnnotation=field.getAnnotation(ChangeProperty.class);
+        DatabaseChangeProperty changePropertyAnnotation=field.getAnnotation(DatabaseChangeProperty.class);
         if (changePropertyAnnotation != null && !changePropertyAnnotation.includeInSerialization()) {
           continue;
         }

@@ -4,7 +4,7 @@
     return;
   }
   for (  Field field : clazz.getDeclaredFields()) {
-    if (field.getAnnotation(ChangeProperty.class) != null && !field.getAnnotation(ChangeProperty.class).includeInSerialization()) {
+    if (field.getAnnotation(DatabaseChangeProperty.class) != null && !field.getAnnotation(DatabaseChangeProperty.class).includeInSerialization()) {
       continue;
     }
     field.setAccessible(true);
