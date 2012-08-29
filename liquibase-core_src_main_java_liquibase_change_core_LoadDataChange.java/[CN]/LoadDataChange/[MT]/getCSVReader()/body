@@ -21,6 +21,5 @@
  else {
     quotchar=this.quotchar.charAt(0);
   }
-  CSVReader reader=new CSVReader(streamReader,separator.charAt(0),quotchar);
-  return reader;
+  return new CSVReader(streamReader,separator.charAt(0),quotchar);
 }

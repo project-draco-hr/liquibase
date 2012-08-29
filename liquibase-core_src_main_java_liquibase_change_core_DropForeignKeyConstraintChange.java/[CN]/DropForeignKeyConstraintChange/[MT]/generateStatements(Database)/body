@@ -1,6 +1,6 @@
 {
   if (database instanceof SQLiteDatabase) {
-    return generateStatementsForSQLiteDatabase(database);
+    return generateStatementsForSQLiteDatabase();
   }
   return new SqlStatement[]{new DropForeignKeyConstraintStatement(getBaseTableCatalogName(),getBaseTableSchemaName(),getBaseTableName(),getConstraintName())};
 }

@@ -1,3 +1,0 @@
-{
-  throw new UnsupportedChangeException("Derby does not currently support merging columns");
-}
