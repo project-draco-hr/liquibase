@@ -1,8 +1,8 @@
 {
   try {
-    ChangeClass changeClass=this.getClass().getAnnotation(ChangeClass.class);
-    if (changeClass == null) {
-      throw new UnexpectedLiquibaseException("No @ChangeClass annotation for " + getClass().getName());
+    DatabaseChange databaseChange=this.getClass().getAnnotation(DatabaseChange.class);
+    if (databaseChange == null) {
+      throw new UnexpectedLiquibaseException("No @DatabaseChange annotation for " + getClass().getName());
     }
     Set<ChangeParameterMetaData> params=new HashSet<ChangeParameterMetaData>();
     for (    PropertyDescriptor property : Introspector.getBeanInfo(this.getClass()).getPropertyDescriptors()) {
@@ -16,7 +16,7 @@
         }
       }
     }
-    return new ChangeMetaData(changeClass.name(),changeClass.description(),changeClass.priority(),changeClass.appliesTo(),params);
+    return new ChangeMetaData(databaseChange.name(),databaseChange.description(),databaseChange.priority(),databaseChange.appliesTo(),params);
   }
  catch (  Throwable e) {
     throw new UnexpectedLiquibaseException(e);
