@@ -11,7 +11,7 @@
     }
   }
   if (isValid && validDatabases != null && validDatabases.size() > 0) {
-    isValid=validDatabases.contains(currentDatabase.getTypeName());
+    isValid=validDatabases.contains(currentDatabase.getShortName());
   }
   return isValid;
 }

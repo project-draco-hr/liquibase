@@ -4,6 +4,6 @@
     return;
   }
   for (  Database database : TestContext.getInstance().getAllDatabases()) {
-    assertEquals("Unexpected availablity on " + database.getTypeName(),!changeIsUnsupported(database),change.supports(database));
+    assertEquals("Unexpected availablity on " + database.getShortName(),!changeIsUnsupported(database),change.supports(database));
   }
 }

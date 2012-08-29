@@ -9,7 +9,7 @@
       validator.validate(sqlStatements,database);
     }
  catch (    AssertionError e) {
-      AssertionError error=new AssertionError("GenerateAllValidator failed for " + database.getTypeName() + ": "+ e.getMessage());
+      AssertionError error=new AssertionError("GenerateAllValidator failed for " + database.getShortName() + ": "+ e.getMessage());
       error.setStackTrace(e.getStackTrace());
       throw error;
     }

@@ -1,6 +1,6 @@
 {
   if (getConnection() == null) {
-    return getTypeName() + " Database";
+    return getShortName() + " Database";
   }
   return getConnection().getConnectionUserName() + " @ " + getConnection().getURL()+ (getDefaultSchemaName() == null ? "" : " (Default Schema: " + getDefaultSchemaName() + ")");
 }
