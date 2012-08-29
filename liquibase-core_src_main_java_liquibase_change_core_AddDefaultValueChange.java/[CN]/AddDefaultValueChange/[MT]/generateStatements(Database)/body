@@ -4,7 +4,7 @@
     defaultValue=getDefaultValue();
   }
  else   if (getDefaultValueBoolean() != null) {
-    defaultValue=Boolean.valueOf(getDefaultValueBoolean());
+    defaultValue=getDefaultValueBoolean();
   }
  else   if (getDefaultValueNumeric() != null) {
     try {
