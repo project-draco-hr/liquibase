@@ -3,6 +3,7 @@ String url
 String username
 String password
 String driver
+String defaultCatalogName
 String defaultSchemaName
 String databaseClass
 String driverPropertiesFile

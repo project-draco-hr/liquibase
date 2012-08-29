@@ -11,7 +11,7 @@
       throw new BuildException("diffDatabase requires outputFile or changeLogFile to be set");
     }
     liquibase=createLiquibase();
-    referenceDatabase=createDatabaseObject(getReferenceDriver(),getReferenceUrl(),getReferenceUsername(),getReferencePassword(),getReferenceDefaultSchemaName(),getDatabaseClass());
+    referenceDatabase=createDatabaseObject(getReferenceDriver(),getReferenceUrl(),getReferenceUsername(),getReferencePassword(),getReferenceDefaultCatalogName(),getReferenceDefaultSchemaName(),getDatabaseClass());
     DiffControl diffControl=new DiffControl(new DiffControl.SchemaComparison[]{new DiffControl.SchemaComparison(new Schema(getReferenceDefaultCatalogName(),getReferenceDefaultSchemaName()),new Schema(getDefaultCatalogName(),getDefaultSchemaName()))},getDiffTypes());
     diffControl.setDataDir(getDataDir());
     DiffResult diffResult=liquibase.diff(referenceDatabase,liquibase.getDatabase(),diffControl);

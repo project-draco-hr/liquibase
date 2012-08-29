@@ -39,6 +39,7 @@
     throw new DatabaseException("Connection could not be created to " + databaseUrl + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
   }
   database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+  database.setDefaultCatalogName(defaultCatalogName);
   database.setDefaultSchemaName(defaultSchemaName);
   if (getDatabaseChangeLogTableName() != null)   database.setDatabaseChangeLogTableName(getDatabaseChangeLogTableName());
   if (getDatabaseChangeLogLockTableName() != null)   database.setDatabaseChangeLogLockTableName(getDatabaseChangeLogLockTableName());

@@ -4,6 +4,7 @@
   String username=referenceUsername;
   String password=referencePassword;
   String defaultSchemaName=this.defaultSchemaName;
+  String defaultCatalogName=this.defaultCatalogName;
   for (  String param : commandParams) {
     String[] splitArg=splitArg(param);
     String attributeName=splitArg[0];
@@ -20,6 +21,9 @@
  else     if ("referencePassword".equalsIgnoreCase(attributeName)) {
       password=value;
     }
+ else     if ("referenceDefaultCatalogName".equalsIgnoreCase(attributeName)) {
+      defaultCatalogName=value;
+    }
  else     if ("referenceDefaultSchemaName".equalsIgnoreCase(attributeName)) {
       defaultSchemaName=value;
     }
@@ -30,5 +34,5 @@
   if (url == null) {
     throw new CommandLineParsingException("referenceUrl parameter missing");
   }
-  return CommandLineUtils.createDatabaseObject(classLoader,url,username,password,driver,defaultSchemaName,null,null);
+  return CommandLineUtils.createDatabaseObject(classLoader,url,username,password,driver,defaultCatalogName,defaultSchemaName,null,null);
 }
