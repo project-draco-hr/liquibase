@@ -1,2 +1,3 @@
 {
+  this.dateFunctions.add(new DatabaseFunction(getCurrentDateTimeFunction()));
 }

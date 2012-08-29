@@ -1,5 +1,5 @@
 {
-  databaseFunctions.add(new DatabaseFunction("SYSDATE"));
-  databaseFunctions.add(new DatabaseFunction("SYSTIMESTAMP"));
-  databaseFunctions.add(new DatabaseFunction("CURRENT_TIMESTAMP"));
+  dateFunctions.add(new DatabaseFunction("SYSDATE"));
+  dateFunctions.add(new DatabaseFunction("SYSTIMESTAMP"));
+  dateFunctions.add(new DatabaseFunction("CURRENT_TIMESTAMP"));
 }
