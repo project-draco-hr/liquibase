@@ -12,13 +12,13 @@
       catalogName=getDefaultCatalogName();
     }
  else {
-      catalogName=correctObjectName(catalogName);
+      catalogName=correctObjectName(catalogName,Catalog.class);
     }
     if (schemaName.equals(Schema.DEFAULT_NAME)) {
       schemaName=getDefaultSchemaName();
     }
  else {
-      schemaName=correctObjectName(schemaName);
+      schemaName=correctObjectName(schemaName,Schema.class);
     }
   }
  else   if (!supportsCatalogs() && !supportsSchemas()) {

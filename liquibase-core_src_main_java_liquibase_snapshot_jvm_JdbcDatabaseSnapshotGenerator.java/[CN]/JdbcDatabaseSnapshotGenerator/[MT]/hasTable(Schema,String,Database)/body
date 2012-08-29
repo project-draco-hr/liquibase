@@ -4,7 +4,7 @@
   }
   try {
     if (database != null) {
-      tableName=database.correctTableName(tableName);
+      tableName=database.correctObjectName(tableName,Table.class);
       schema=database.correctSchema(schema);
     }
     ResultSet rs=getMetaData(database).getTables(getJdbcCatalogName(schema),getJdbcSchemaName(schema),tableName,new String[]{"TABLE"});

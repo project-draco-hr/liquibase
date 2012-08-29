@@ -1,0 +1,8 @@
+{
+  if (objectType.equals(PrimaryKey.class) && name.equals("PRIMARY")) {
+    return null;
+  }
+ else {
+    return name;
+  }
+}

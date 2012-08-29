@@ -23,7 +23,7 @@
           PrimaryKey primaryKey=new PrimaryKey();
           primaryKey.setTable(table);
           primaryKey.addColumnName(position - 1,columnName);
-          primaryKey.setName(database.correctPrimaryKeyName(rs.getString("PK_NAME")));
+          primaryKey.setName(database.correctObjectName(rs.getString("PK_NAME"),PrimaryKey.class));
           foundPKs.add(primaryKey);
         }
       }

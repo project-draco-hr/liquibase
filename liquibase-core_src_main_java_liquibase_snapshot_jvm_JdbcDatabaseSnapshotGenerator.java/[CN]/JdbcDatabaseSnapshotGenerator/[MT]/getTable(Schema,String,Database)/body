@@ -2,7 +2,7 @@
   ResultSet rs=null;
   try {
     DatabaseMetaData metaData=getMetaData(database);
-    rs=metaData.getTables(getJdbcCatalogName(schema),getJdbcSchemaName(schema),database.correctTableName(tableName),new String[]{"TABLE"});
+    rs=metaData.getTables(getJdbcCatalogName(schema),getJdbcSchemaName(schema),database.correctObjectName(tableName,Table.class),new String[]{"TABLE"});
     Table table;
     try {
       if (!rs.next()) {
