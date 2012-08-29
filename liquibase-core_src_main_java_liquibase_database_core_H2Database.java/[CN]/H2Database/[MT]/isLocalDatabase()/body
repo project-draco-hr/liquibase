@@ -1,5 +1,0 @@
-{
-  String url=getConnection().getURL();
-  boolean isLocalURL=(super.isLocalDatabase() || url.startsWith("jdbc:h2:file:") || url.startsWith("jdbc:h2:mem:")|| url.startsWith("jdbc:h2:zip:")|| url.startsWith("jdbc:h2:~"));
-  return isLocalURL;
-}
