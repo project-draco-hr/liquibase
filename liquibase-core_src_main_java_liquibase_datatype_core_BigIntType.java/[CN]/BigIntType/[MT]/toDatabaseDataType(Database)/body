@@ -13,5 +13,10 @@
   if (database instanceof DB2Database) {
     return new DatabaseDataType("BIGINT");
   }
+  if (database instanceof PostgresDatabase) {
+    if (isAutoIncrement()) {
+      return new DatabaseDataType("BIGSERIAL");
+    }
+  }
   return super.toDatabaseDataType(database);
 }

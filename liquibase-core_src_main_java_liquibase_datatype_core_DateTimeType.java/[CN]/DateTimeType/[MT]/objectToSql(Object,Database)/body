@@ -2,7 +2,7 @@
   if (value == null || value.toString().equalsIgnoreCase("null")) {
     return null;
   }
- else   if (value.toString().equals("CURRENT_TIMESTAMP()")) {
+ else   if (value instanceof String && database.getDateFunctions().contains(new DatabaseFunction(value.toString()))) {
     return database.getCurrentDateTimeFunction();
   }
  else   if (value instanceof DatabaseFunction) {

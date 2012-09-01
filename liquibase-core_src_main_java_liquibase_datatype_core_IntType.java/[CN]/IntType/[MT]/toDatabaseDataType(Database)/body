@@ -8,5 +8,10 @@
   if (database instanceof DB2Database) {
     return new DatabaseDataType("INTEGER");
   }
+  if (database instanceof PostgresDatabase) {
+    if (autoIncrement) {
+      return new DatabaseDataType("SERIAL");
+    }
+  }
   return super.toDatabaseDataType(database);
 }

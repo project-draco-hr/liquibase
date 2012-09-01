@@ -5,5 +5,5 @@
   if (database instanceof DerbyDatabase) {
     return value.replaceFirst("^TIMESTAMP\\('","").replaceFirst("'\\)","");
   }
-  return super.stringToObject(value,database);
+  return super.sqlToObject(value,database);
 }
