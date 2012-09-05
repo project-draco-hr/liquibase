@@ -1,0 +1,6 @@
+{
+  if (string.endsWith("()")) {
+    return true;
+  }
+  return false;
+}

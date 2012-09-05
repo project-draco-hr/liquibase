@@ -1,0 +1,11 @@
+{
+  if (string.endsWith("()")) {
+    return true;
+  }
+  for (  DatabaseFunction function : getDateFunctions()) {
+    if (function.toString().equalsIgnoreCase(string)) {
+      return true;
+    }
+  }
+  return false;
+}
