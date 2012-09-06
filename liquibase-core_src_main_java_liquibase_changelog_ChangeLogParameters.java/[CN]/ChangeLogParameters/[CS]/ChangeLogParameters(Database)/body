@@ -2,7 +2,8 @@
   for (  Map.Entry entry : System.getProperties().entrySet()) {
     changeLogParameters.add(new ChangeLogParameter(entry.getKey().toString(),entry.getValue()));
   }
-  this.expressionExpander=new ExpressionExpander(this);
+  String enableEscaping=System.getProperty(ENABLE_CHANGELOG_PROP_ESCAPING,"false");
+  this.expressionExpander=new ExpressionExpander(this,Boolean.valueOf(enableEscaping));
   this.currentDatabase=currentDatabase;
   this.currentContexts=new ArrayList<String>();
 }

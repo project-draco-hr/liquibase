@@ -1,0 +1,6 @@
+{
+  changeLogParameters.set("a","Value A");
+  changeLogParameters.set("b","Value B");
+  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,true);
+  assertEquals("Value A is a variable, ${a} and ${b} are literals but this isn't: Value B",handler.expandExpressions("${a} is a variable, ${:a} and ${:b} are literals but this isn't: ${b}"));
+}

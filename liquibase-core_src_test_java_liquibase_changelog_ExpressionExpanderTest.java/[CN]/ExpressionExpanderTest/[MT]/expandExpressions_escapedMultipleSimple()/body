@@ -1,0 +1,4 @@
+{
+  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,true);
+  assertEquals("${user.name} and ${user.name} are literals",handler.expandExpressions("${:user.name} and ${:user.name} are literals"));
+}
