@@ -12,7 +12,7 @@
   assertTrue(cli.checkSetup().size() > 0);
   cli.command="migrate";
   assertEquals(0,cli.checkSetup().size());
-  String[] noArgCommand={"migrate","migrateSQL","update","updateSQL","futureRollbackSQL","updateTestingRollback","listLocks","dropAll","releaseLocks","validate","help","generateChangeLog","clearCheckSums","changelogSync","changelogSyncSQL","markNextChangeSetRan","markNextChangeSetRanSQL"};
+  String[] noArgCommand={"migrate","migrateSQL","update","updateSQL","futureRollbackSQL","updateTestingRollback","listLocks","dropAll","releaseLocks","validate","help","clearCheckSums","changelogSync","changelogSyncSQL","markNextChangeSetRan","markNextChangeSetRanSQL"};
   cli.commandParams.clear();
   cli.commandParams.add("--logLevel=debug");
   for (int i=0; i < noArgCommand.length; i++) {
