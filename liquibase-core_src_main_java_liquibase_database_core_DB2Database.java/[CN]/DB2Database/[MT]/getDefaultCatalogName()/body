@@ -1,5 +1,8 @@
 {
   if (defaultSchemaName == null) {
+    if (getConnection() == null) {
+      return null;
+    }
     Statement stmt=null;
     ResultSet rs=null;
     try {

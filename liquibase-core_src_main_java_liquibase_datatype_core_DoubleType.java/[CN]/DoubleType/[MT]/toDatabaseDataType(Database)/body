@@ -2,7 +2,7 @@
   if (database instanceof MSSQLDatabase) {
     return new DatabaseDataType("FLOAT");
   }
-  if (database instanceof DB2Database) {
+  if (database instanceof DB2Database || database instanceof DerbyDatabase) {
     return new DatabaseDataType("DOUBLE");
   }
   if (database instanceof OracleDatabase) {

@@ -5,7 +5,7 @@
   if (database instanceof OracleDatabase) {
     return new DatabaseDataType("INTEGER",getParameters());
   }
-  if (database instanceof DB2Database) {
+  if (database instanceof DB2Database || database instanceof DerbyDatabase) {
     return new DatabaseDataType("INTEGER");
   }
   if (database instanceof PostgresDatabase) {

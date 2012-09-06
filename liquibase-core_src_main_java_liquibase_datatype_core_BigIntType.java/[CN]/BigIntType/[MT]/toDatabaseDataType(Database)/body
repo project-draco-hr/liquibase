@@ -10,7 +10,7 @@
   if (database instanceof OracleDatabase) {
     return new DatabaseDataType("NUMBER",38,0);
   }
-  if (database instanceof DB2Database) {
+  if (database instanceof DB2Database || database instanceof DerbyDatabase) {
     return new DatabaseDataType("BIGINT");
   }
   if (database instanceof PostgresDatabase) {
