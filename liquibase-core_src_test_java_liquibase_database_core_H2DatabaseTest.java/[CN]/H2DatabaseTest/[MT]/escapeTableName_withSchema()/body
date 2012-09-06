@@ -1,4 +1,4 @@
 {
   Database database=getDatabase();
-  assertEquals("schemaName.tableName",database.escapeTableName("catalogName","schemaName","tableName"));
+  assertEquals("catalogName.schemaName.tableName",database.escapeTableName("catalogName","schemaName","tableName"));
 }

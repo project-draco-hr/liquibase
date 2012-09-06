@@ -1,0 +1,6 @@
+{
+  if (schemaName == null) {
+    schemaName="dbo";
+  }
+  return super.escapeDatabaseObject(catalogName,schemaName,objectName,objectType);
+}
