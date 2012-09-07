@@ -1,3 +1,5 @@
 {
-  return new DatabaseDataType(name.toUpperCase(),getParameters());
+  DatabaseDataType type=new DatabaseDataType(name.toUpperCase(),getParameters());
+  type.addAdditionalInformation(additionalInformation);
+  return type;
 }

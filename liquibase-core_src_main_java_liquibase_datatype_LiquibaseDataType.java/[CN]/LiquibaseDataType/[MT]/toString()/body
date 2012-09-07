@@ -11,5 +11,8 @@
     returnString=returnString.replaceFirst(",$","");
     returnString+=")";
   }
+  if (additionalInformation != null) {
+    returnString+=" " + additionalInformation;
+  }
   return returnString.trim();
 }

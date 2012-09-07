@@ -32,6 +32,11 @@
       }
     }
   }
+  String lookingForAdditionalInfo=dataTypeDefinition;
+  lookingForAdditionalInfo=lookingForAdditionalInfo.replaceFirst("\\(.*\\)","");
+  if (lookingForAdditionalInfo.contains(" ")) {
+    liquibaseDataType.setAdditionalInformation(lookingForAdditionalInfo.split(" ",2)[1]);
+  }
   if (dataTypeDefinition.matches(".*\\{.*")) {
     String paramStrings=dataTypeDefinition.replaceFirst(".*?\\{","").replaceFirst("\\}.*","");
     String[] params=paramStrings.split(",");
