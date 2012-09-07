@@ -11,7 +11,7 @@
     if (catalogName == null && schemaName == null) {
       return escapeDatabaseObject(objectName,objectType);
     }
- else     if (catalogName == null) {
+ else     if (catalogName == null || !this.supportsCatalogInObjectName()) {
       return escapeDatabaseObject(schemaName,Schema.class) + "." + escapeDatabaseObject(objectName,objectType);
     }
  else {
