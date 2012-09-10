@@ -1,6 +1,6 @@
 {
   String returnString=getName();
-  if (parameters != null && parameters.size() > 0) {
+  if (parameters != null && parameters.size() > 0 && maxParameters > 0) {
     returnString+="(";
     for (    Object param : parameters) {
       if (returnString == null) {
