@@ -1,0 +1,6 @@
+{
+  super.printSettings(indent);
+  getLog().info(indent + "defaultSchemaName: " + defaultSchemaName);
+  getLog().info(indent + "diffTypes: " + diffTypes);
+  getLog().info(indent + "dataDir: " + dataDir);
+}
