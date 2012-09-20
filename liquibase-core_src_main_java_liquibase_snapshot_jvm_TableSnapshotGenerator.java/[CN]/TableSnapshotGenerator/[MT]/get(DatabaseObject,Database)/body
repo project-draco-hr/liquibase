@@ -1,0 +1,30 @@
+{
+  if (!(container instanceof Schema)) {
+    return null;
+  }
+  Schema schema=(Schema)container;
+  schema=database.correctSchema(schema);
+  updateListeners("Reading tables for " + database.toString() + " ...");
+  List<Table> returnTables=new ArrayList<Table>();
+  ResultSet tableMetaDataRs=null;
+  try {
+    tableMetaDataRs=getMetaData(database).getTables(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),null,new String[]{"TABLE"});
+    while (tableMetaDataRs.next()) {
+      Table table=readTable(tableMetaDataRs,database,false);
+      returnTables.add(table);
+    }
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    try {
+      if (tableMetaDataRs != null) {
+        tableMetaDataRs.close();
+      }
+    }
+ catch (    SQLException ignore) {
+    }
+  }
+  return returnTables.toArray(new Table[returnTables.size()]);
+}

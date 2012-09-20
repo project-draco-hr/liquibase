@@ -1,6 +1,11 @@
 {
   try {
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasForeignKey(database.correctSchema(new Schema(getCatalogName(),getSchemaName())),getForeignKeyTableName(),getForeignKeyName(),database)) {
+    ForeignKey example=new ForeignKey();
+    example.setName(getForeignKeyName());
+    if (StringUtils.trimToNull(getForeignKeyTableName()) != null) {
+      example.setForeignKeyTable(new Table().setName(getForeignKeyTableName()));
+    }
+    if (!DatabaseObjectGeneratorFactory.getInstance().getGenerator(ForeignKey.class,database).has(database.correctSchema(new Schema(getCatalogName(),getSchemaName())),example,database)) {
       throw new PreconditionFailedException("Foreign Key " + database.escapeIndexName(catalogName,schemaName,foreignKeyName) + " does not exist",changeLog,this);
     }
   }

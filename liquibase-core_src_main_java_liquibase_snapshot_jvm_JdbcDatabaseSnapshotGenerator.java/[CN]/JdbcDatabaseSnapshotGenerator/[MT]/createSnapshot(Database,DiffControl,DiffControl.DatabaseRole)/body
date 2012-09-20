@@ -1,23 +1,18 @@
 {
-  try {
-    DatabaseSnapshot snapshot=new DatabaseSnapshot(database,diffControl.getSchemas(type));
-    DatabaseMetaData databaseMetaData=getMetaData(database);
-    this.statusListeners=diffControl.getStatusListeners();
-    for (    Schema schema : diffControl.getSchemas(type)) {
-      schema=snapshot.getDatabase().correctSchema(schema);
-      readTables(snapshot,schema,databaseMetaData);
-      readViews(snapshot,schema,databaseMetaData);
-      readForeignKeys(snapshot,schema,databaseMetaData);
-      readPrimaryKeys(snapshot,schema,databaseMetaData);
-      readColumns(snapshot,schema,databaseMetaData);
-      readUniqueConstraints(snapshot,schema,databaseMetaData);
-      readIndexes(snapshot,schema,databaseMetaData);
-      readSequences(snapshot,schema,databaseMetaData);
+  DatabaseSnapshot snapshot=new DatabaseSnapshot(database,diffControl.getSchemas(type));
+  this.statusListeners=diffControl.getStatusListeners();
+  for (  Schema schema : diffControl.getSchemas(type)) {
+    schema=snapshot.getDatabase().correctSchema(schema);
+    for (    Class clazz : ServiceLocator.getInstance().findClasses(DatabaseObject.class)) {
+      DatabaseObjectSnapshotGenerator generator=DatabaseObjectGeneratorFactory.getInstance().getGenerator(clazz,database);
+      if (generator != null) {
+        updateListeners("Reading objects of type " + clazz.getName() + " from "+ schema);
+        DatabaseObject[] objects=generator.get(schema,database);
+        if (objects != null) {
+          snapshot.addDatabaseObjects(objects);
+        }
+      }
     }
-    ;
-    return snapshot;
   }
- catch (  SQLException e) {
-    throw new DatabaseException(e);
-  }
+  return snapshot;
 }

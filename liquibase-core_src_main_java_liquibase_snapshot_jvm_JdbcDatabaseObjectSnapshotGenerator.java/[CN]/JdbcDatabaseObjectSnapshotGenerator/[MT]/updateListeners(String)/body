@@ -1,0 +1,9 @@
+{
+  if (this.statusListeners == null) {
+    return;
+  }
+  LogFactory.getLogger().debug(message);
+  for (  DiffStatusListener listener : this.statusListeners) {
+    listener.statusUpdate(message);
+  }
+}

@@ -1,3 +1,0 @@
-{
-  return database.correctSchema(new Schema(rawSchemaName,null));
-}

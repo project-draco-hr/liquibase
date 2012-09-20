@@ -1,6 +1,6 @@
 {
   try {
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasTable(database.correctSchema(new Schema(getCatalogName(),getSchemaName())),getTableName(),database)) {
+    if (!DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).has(database.correctSchema(new Schema(getCatalogName(),getSchemaName())),getTableName(),database)) {
       throw new PreconditionFailedException("Table " + database.escapeTableName(getCatalogName(),getSchemaName(),getTableName()) + " does not exist",changeLog,this);
     }
   }

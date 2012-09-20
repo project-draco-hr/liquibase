@@ -1,0 +1,25 @@
+{
+  SortedSet<DatabaseObjectSnapshotGenerator> validGenerators=new TreeSet<DatabaseObjectSnapshotGenerator>(new DatabaseObjectGeneratorComparator());
+  for (  DatabaseObjectSnapshotGenerator generator : getGenerators()) {
+    Class clazz=generator.getClass();
+    Type classType=null;
+    while (clazz != null) {
+      if (classType instanceof ParameterizedType) {
+        checkType(classType,generatorClass,generator,database,validGenerators);
+      }
+      for (      Type type : clazz.getGenericInterfaces()) {
+        if (type instanceof ParameterizedType) {
+          checkType(type,generatorClass,generator,database,validGenerators);
+        }
+ else         if (isTypeEqual(type,DatabaseObjectSnapshotGenerator.class)) {
+          if (generator.supports(generatorClass,database)) {
+            validGenerators.add(generator);
+          }
+        }
+      }
+      classType=clazz.getGenericSuperclass();
+      clazz=clazz.getSuperclass();
+    }
+  }
+  return validGenerators;
+}

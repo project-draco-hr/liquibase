@@ -1,0 +1,19 @@
+{
+  String rawViewName=viewMetadataResultSet.getString("TABLE_NAME");
+  String rawSchemaName=StringUtils.trimToNull(viewMetadataResultSet.getString("TABLE_SCHEM"));
+  String rawCatalogName=StringUtils.trimToNull(viewMetadataResultSet.getString("TABLE_CAT"));
+  String remarks=viewMetadataResultSet.getString("REMARKS");
+  View view=new View().setName(cleanNameFromDatabase(rawViewName,database));
+  view.setRemarks(remarks);
+  view.setDatabase(database);
+  view.setRawSchemaName(rawSchemaName);
+  view.setRawCatalogName(rawCatalogName);
+  view.setSchema(database.getSchemaFromJdbcInfo(rawSchemaName,rawCatalogName));
+  try {
+    view.setDefinition(database.getViewDefinition(view.getSchema(),view.getName()));
+  }
+ catch (  DatabaseException e) {
+    throw new DatabaseException("Error getting " + database.getConnection().getURL() + " view with "+ new GetViewDefinitionStatement(view.getSchema().getCatalog().getName(),view.getSchema().getName(),rawViewName),e);
+  }
+  return view;
+}

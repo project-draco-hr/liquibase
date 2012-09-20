@@ -1,4 +1,0 @@
-{
-  Schema schema=database.correctSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()));
-  return new Sql[]{new UnparsedSql("SELECT SEQUENCE_NAME FROM ALL_SEQUENCES WHERE SEQUENCE_OWNER = '" + schema.getName() + "'")};
-}

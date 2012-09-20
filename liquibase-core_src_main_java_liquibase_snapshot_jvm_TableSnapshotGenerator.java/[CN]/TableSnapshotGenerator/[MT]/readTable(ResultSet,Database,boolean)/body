@@ -1,0 +1,26 @@
+{
+  String rawTableName=tableMetadataResultSet.getString("TABLE_NAME");
+  String rawSchemaName=StringUtils.trimToNull(tableMetadataResultSet.getString("TABLE_SCHEM"));
+  String rawCatalogName=StringUtils.trimToNull(tableMetadataResultSet.getString("TABLE_CAT"));
+  String remarks=StringUtils.trimToNull(tableMetadataResultSet.getString("REMARKS"));
+  Table table=new Table().setName(cleanNameFromDatabase(rawTableName,database));
+  table.setRemarks(remarks);
+  table.setDatabase(database);
+  table.setRawSchemaName(rawSchemaName);
+  table.setRawCatalogName(rawCatalogName);
+  table.setSchema(database.getSchemaFromJdbcInfo(rawSchemaName,rawCatalogName));
+  if (readColumns) {
+    Schema rawSchema=database.correctSchema(new Schema(table.getRawCatalogName(),table.getRawSchemaName()));
+    ResultSet columnMetadataResultSet=getMetaData(database).getColumns(database.getJdbcCatalogName(rawSchema),database.getJdbcSchemaName(rawSchema),rawTableName,null);
+    try {
+      while (columnMetadataResultSet.next()) {
+        table.getColumns().addAll(Arrays.asList(DatabaseObjectGeneratorFactory.getInstance().getGenerator(Column.class,database).get(table,database)));
+      }
+    }
+  finally {
+      columnMetadataResultSet.close();
+    }
+  }
+  table.setPartial(false);
+  return table;
+}

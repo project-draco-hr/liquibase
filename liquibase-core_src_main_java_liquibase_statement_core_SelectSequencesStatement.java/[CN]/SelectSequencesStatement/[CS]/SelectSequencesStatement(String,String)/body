@@ -1,4 +1,0 @@
-{
-  this.catalogName=catalogName;
-  this.schemaName=schemaName;
-}

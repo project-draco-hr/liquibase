@@ -1,4 +1,5 @@
 {
+  setPartial(false);
   catalog=StringUtils.trimToNull(catalog);
   schemaName=StringUtils.trimToNull(schemaName);
   if (catalog == null && schemaName == null) {

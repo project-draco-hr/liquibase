@@ -1,0 +1,15 @@
+{
+  for (  Type typeClass : ((ParameterizedType)type).getActualTypeArguments()) {
+    if (typeClass instanceof TypeVariable) {
+      typeClass=((TypeVariable)typeClass).getBounds()[0];
+    }
+    if (isTypeEqual(typeClass,DatabaseObject.class)) {
+      return;
+    }
+    if (((Class)typeClass).isAssignableFrom(databaseObject)) {
+      if (generator.supports(databaseObject,database)) {
+        validGenerators.add(generator);
+      }
+    }
+  }
+}

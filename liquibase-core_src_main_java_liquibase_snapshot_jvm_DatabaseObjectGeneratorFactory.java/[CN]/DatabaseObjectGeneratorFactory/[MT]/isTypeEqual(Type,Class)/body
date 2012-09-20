@@ -1,0 +1,6 @@
+{
+  if (aType instanceof Class) {
+    return ((Class)aType).getName().equals(aClass.getName());
+  }
+  return aType.equals(aClass);
+}

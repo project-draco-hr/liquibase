@@ -1,0 +1,12 @@
+{
+  Class[] classes;
+  try {
+    classes=ServiceLocator.getInstance().findClasses(DatabaseObjectSnapshotGenerator.class);
+    for (    Class clazz : classes) {
+      register((DatabaseObjectSnapshotGenerator)clazz.getConstructor().newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

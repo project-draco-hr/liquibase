@@ -1,0 +1,49 @@
+{
+  Schema schema;
+  Table relation=null;
+  if (container instanceof Schema) {
+    schema=(Schema)container;
+  }
+ else   if (container instanceof Table) {
+    relation=(Table)container;
+    schema=relation.getSchema();
+  }
+ else {
+    return new ForeignKey[0];
+  }
+  updateListeners("Reading foreign keys for " + database.toString() + " ...");
+  List<ForeignKey> returnList=new ArrayList<ForeignKey>();
+  ResultSet importedKeyMetadataResultSet=null;
+  try {
+    List<Table> tables=new ArrayList<Table>();
+    if (relation == null) {
+      tables.addAll((List<Table>)Arrays.asList(DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).get(schema,database)));
+    }
+ else {
+      tables.add(relation);
+    }
+    for (    Table table : tables) {
+      Schema rawSchema=database.getSchemaFromJdbcInfo(table.getRawSchemaName(),table.getRawCatalogName());
+      importedKeyMetadataResultSet=getMetaData(database).getImportedKeys(database.getJdbcCatalogName(rawSchema),database.getJdbcSchemaName(rawSchema),table.getName());
+      while (importedKeyMetadataResultSet.next()) {
+        ForeignKey newFk=readForeignKey(importedKeyMetadataResultSet,database);
+        if (newFk != null) {
+          returnList.add(newFk);
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (importedKeyMetadataResultSet != null) {
+      try {
+        importedKeyMetadataResultSet.close();
+      }
+ catch (      SQLException ignored) {
+      }
+    }
+  }
+  return returnList.toArray(new ForeignKey[returnList.size()]);
+}

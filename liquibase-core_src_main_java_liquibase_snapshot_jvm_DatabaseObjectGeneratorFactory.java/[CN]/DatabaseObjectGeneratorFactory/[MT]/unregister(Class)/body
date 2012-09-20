@@ -1,0 +1,9 @@
+{
+  DatabaseObjectSnapshotGenerator toRemove=null;
+  for (  DatabaseObjectSnapshotGenerator existingGenerator : generators) {
+    if (existingGenerator.getClass().equals(generatorClass)) {
+      toRemove=existingGenerator;
+    }
+  }
+  unregister(toRemove);
+}

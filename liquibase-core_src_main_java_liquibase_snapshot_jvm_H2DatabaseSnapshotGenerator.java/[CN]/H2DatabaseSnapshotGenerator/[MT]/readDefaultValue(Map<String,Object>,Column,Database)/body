@@ -1,8 +1,0 @@
-{
-  Object defaultValue=super.readDefaultValue(columnMetadataResultSet,columnInfo,database);
-  if (defaultValue != null && defaultValue instanceof DatabaseFunction && ((DatabaseFunction)defaultValue).getValue().startsWith("NEXT VALUE FOR ")) {
-    columnInfo.setAutoIncrement(true);
-    return null;
-  }
-  return defaultValue;
-}

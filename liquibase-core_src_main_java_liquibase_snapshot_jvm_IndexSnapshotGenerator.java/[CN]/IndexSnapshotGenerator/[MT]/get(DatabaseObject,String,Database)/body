@@ -1,0 +1,9 @@
+{
+  objectName=database.correctObjectName(objectName,ForeignKey.class);
+  for (  Index index : get(container,database)) {
+    if (index.getName().equals(objectName)) {
+      return index;
+    }
+  }
+  return null;
+}

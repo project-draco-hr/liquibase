@@ -4,7 +4,7 @@
   try {
     currentCatalogName=getCatalogName();
     currentSchemaName=getSchemaName();
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasView(database.correctSchema(new Schema(currentCatalogName,currentSchemaName)),getViewName(),database)) {
+    if (!DatabaseObjectGeneratorFactory.getInstance().getGenerator(View.class,database).has(database.correctSchema(new Schema(currentCatalogName,currentSchemaName)),getViewName(),database)) {
       throw new PreconditionFailedException("View " + database.escapeTableName(currentCatalogName,currentSchemaName,getViewName()) + " does not exist",changeLog,this);
     }
   }
