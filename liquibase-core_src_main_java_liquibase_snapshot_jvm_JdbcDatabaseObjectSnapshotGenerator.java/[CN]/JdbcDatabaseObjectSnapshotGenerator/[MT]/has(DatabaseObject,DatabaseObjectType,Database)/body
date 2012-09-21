@@ -1,3 +1,0 @@
-{
-  return has(container,example.getName(),database);
-}

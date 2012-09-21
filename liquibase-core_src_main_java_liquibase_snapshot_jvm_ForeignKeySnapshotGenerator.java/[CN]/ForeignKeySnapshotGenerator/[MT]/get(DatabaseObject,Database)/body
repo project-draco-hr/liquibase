@@ -17,7 +17,7 @@
   try {
     List<Table> tables=new ArrayList<Table>();
     if (relation == null) {
-      tables.addAll((List<Table>)Arrays.asList(DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).get(schema,database)));
+      tables.addAll(Arrays.asList(DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).get(schema,database)));
     }
  else {
       tables.add(relation);

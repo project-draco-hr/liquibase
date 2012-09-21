@@ -10,7 +10,7 @@
   try {
     tableMetaDataRs=getMetaData(database).getTables(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),null,new String[]{"TABLE"});
     while (tableMetaDataRs.next()) {
-      Table table=readTable(tableMetaDataRs,database,false);
+      Table table=readTable(tableMetaDataRs,database);
       returnTables.add(table);
     }
   }

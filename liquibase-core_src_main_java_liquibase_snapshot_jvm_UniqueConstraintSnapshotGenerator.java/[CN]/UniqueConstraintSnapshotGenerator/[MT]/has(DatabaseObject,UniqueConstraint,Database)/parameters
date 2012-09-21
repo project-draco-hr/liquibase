@@ -1,3 +1,3 @@
 DatabaseObject container
-String objectName
+UniqueConstraint example
 Database database

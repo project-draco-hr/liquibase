@@ -38,7 +38,7 @@
         }
         if (!foundExistingPK) {
           PrimaryKey primaryKey=new PrimaryKey();
-          primaryKey.setTable(table);
+          primaryKey.setTable(new Table().setName(table.getName()));
           primaryKey.addColumnName(position - 1,columnName);
           primaryKey.setName(database.correctObjectName(rs.getString("PK_NAME"),PrimaryKey.class));
           foundPKs.add(primaryKey);

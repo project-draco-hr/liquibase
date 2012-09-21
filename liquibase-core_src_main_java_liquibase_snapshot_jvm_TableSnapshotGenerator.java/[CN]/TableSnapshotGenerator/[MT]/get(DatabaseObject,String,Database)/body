@@ -10,7 +10,7 @@
     Table table;
     try {
       if (rs.next()) {
-        table=readTable(rs,database,true);
+        table=readTable(rs,database);
       }
  else {
         return null;

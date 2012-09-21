@@ -7,6 +7,7 @@
     schema=Schema.DEFAULT;
   }
   try {
+    String tableName=example.getName();
     if (database != null) {
       tableName=database.correctObjectName(tableName,Table.class);
       schema=database.correctSchema(schema);

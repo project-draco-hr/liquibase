@@ -9,17 +9,15 @@
   table.setRawSchemaName(rawSchemaName);
   table.setRawCatalogName(rawCatalogName);
   table.setSchema(database.getSchemaFromJdbcInfo(rawSchemaName,rawCatalogName));
-  if (readColumns) {
-    Schema rawSchema=database.correctSchema(new Schema(table.getRawCatalogName(),table.getRawSchemaName()));
-    ResultSet columnMetadataResultSet=getMetaData(database).getColumns(database.getJdbcCatalogName(rawSchema),database.getJdbcSchemaName(rawSchema),rawTableName,null);
-    try {
-      while (columnMetadataResultSet.next()) {
-        table.getColumns().addAll(Arrays.asList(DatabaseObjectGeneratorFactory.getInstance().getGenerator(Column.class,database).get(table,database)));
-      }
+  Schema rawSchema=database.correctSchema(new Schema(table.getRawCatalogName(),table.getRawSchemaName()));
+  ResultSet columnMetadataResultSet=getMetaData(database).getColumns(database.getJdbcCatalogName(rawSchema),database.getJdbcSchemaName(rawSchema),rawTableName,null);
+  try {
+    while (columnMetadataResultSet.next()) {
+      table.getColumns().add(new Column().setName(columnMetadataResultSet.getString("COLUMN_NAME")));
     }
+  }
   finally {
-      columnMetadataResultSet.close();
-    }
+    columnMetadataResultSet.close();
   }
   table.setPartial(false);
   return table;
