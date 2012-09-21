@@ -1,4 +1,5 @@
 {
+  String objectName=example.getName();
   if (!(container instanceof Schema)) {
     return null;
   }

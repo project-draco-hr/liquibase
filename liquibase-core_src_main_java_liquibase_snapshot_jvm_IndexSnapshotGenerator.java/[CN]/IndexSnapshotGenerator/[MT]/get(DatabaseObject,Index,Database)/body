@@ -1,5 +1,5 @@
 {
-  objectName=database.correctObjectName(objectName,ForeignKey.class);
+  String objectName=database.correctObjectName(example.getName(),Index.class);
   for (  Index index : get(container,database)) {
     if (index.getName().equals(objectName)) {
       return index;

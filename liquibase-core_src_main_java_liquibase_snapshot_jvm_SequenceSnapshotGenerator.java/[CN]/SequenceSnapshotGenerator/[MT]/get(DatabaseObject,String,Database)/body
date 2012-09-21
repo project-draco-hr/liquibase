@@ -1,5 +1,0 @@
-{
-  Sequence example=new Sequence();
-  example.setName(objectName);
-  return get(container,example,database);
-}

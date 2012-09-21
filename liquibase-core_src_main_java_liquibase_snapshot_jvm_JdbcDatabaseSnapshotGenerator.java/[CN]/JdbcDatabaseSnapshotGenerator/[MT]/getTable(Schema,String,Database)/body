@@ -1,3 +1,3 @@
 {
-  return DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).get(schema,tableName,database);
+  return DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).get(schema,new Table().setName(tableName),database);
 }
