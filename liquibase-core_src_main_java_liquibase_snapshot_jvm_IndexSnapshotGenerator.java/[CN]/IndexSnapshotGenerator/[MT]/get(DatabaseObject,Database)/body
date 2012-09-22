@@ -13,12 +13,12 @@
     return new Index[0];
   }
   List<Index> indexes=new ArrayList<Index>();
-  List<Table> tables=new ArrayList<Table>();
+  List<String> tables=new ArrayList<String>();
   if (relation == null) {
-    tables.addAll(Arrays.asList(DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).get(schema,database)));
+    tables.addAll(listAllTables(schema,database));
   }
  else {
-    tables.add(relation);
+    tables.add(relation.getName());
   }
   DatabaseMetaData databaseMetaData=null;
   try {
@@ -27,17 +27,18 @@
  catch (  SQLException e) {
     throw new DatabaseException(e);
   }
-  for (  Table table : tables) {
+  for (  String tableName : tables) {
+    database.correctObjectName(tableName,Table.class);
     ResultSet rs=null;
     Statement statement=null;
     try {
       if (database instanceof OracleDatabase) {
         statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
-        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "' ORDER BY INDEX_NAME, ORDINAL_POSITION";
+        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ tableName+ "' ORDER BY INDEX_NAME, ORDINAL_POSITION";
         rs=statement.executeQuery(sql);
       }
  else {
-        rs=databaseMetaData.getIndexInfo(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),table.getName(),false,true);
+        rs=databaseMetaData.getIndexInfo(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),tableName,false,true);
       }
       Map<String,Index> indexMap=new HashMap<String,Index>();
       while (rs.next()) {
@@ -70,7 +71,7 @@
         }
  else {
           indexInformation=new Index();
-          indexInformation.setTable(table);
+          indexInformation.setTable(new Table().setName(tableName));
           indexInformation.setName(indexName);
           indexInformation.setUnique(!nonUnique);
           indexInformation.setFilterCondition(filterCondition);

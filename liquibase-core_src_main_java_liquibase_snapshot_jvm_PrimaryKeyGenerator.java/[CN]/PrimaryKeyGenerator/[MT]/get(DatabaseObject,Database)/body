@@ -13,20 +13,19 @@
     return new PrimaryKey[0];
   }
   List<PrimaryKey> foundPKs=new ArrayList<PrimaryKey>();
-  List<Table> tables=new ArrayList<Table>();
+  List<String> tables=new ArrayList<String>();
   if (relation == null) {
-    tables.addAll(Arrays.asList(DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).get(schema,database)));
+    tables.addAll(listAllTables(schema,database));
   }
  else {
-    tables.add(relation);
+    tables.add(relation.getName());
   }
   ResultSet rs=null;
   try {
     DatabaseMetaData metaData=getMetaData(database);
-    for (    Table table : tables) {
-      rs=metaData.getPrimaryKeys(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),table.getName());
+    for (    String tableName : tables) {
+      rs=metaData.getPrimaryKeys(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),tableName);
       while (rs.next()) {
-        String tableName=cleanNameFromDatabase(rs.getString("TABLE_NAME"),database);
         String columnName=cleanNameFromDatabase(rs.getString("COLUMN_NAME"),database);
         short position=rs.getShort("KEY_SEQ");
         boolean foundExistingPK=false;
@@ -38,7 +37,7 @@
         }
         if (!foundExistingPK) {
           PrimaryKey primaryKey=new PrimaryKey();
-          primaryKey.setTable(new Table().setName(table.getName()));
+          primaryKey.setTable(new Table().setName(tableName));
           primaryKey.addColumnName(position - 1,columnName);
           primaryKey.setName(database.correctObjectName(rs.getString("PK_NAME"),PrimaryKey.class));
           foundPKs.add(primaryKey);
