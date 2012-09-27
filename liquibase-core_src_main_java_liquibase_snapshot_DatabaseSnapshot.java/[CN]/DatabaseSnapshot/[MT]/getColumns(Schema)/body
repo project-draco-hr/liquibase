@@ -1,9 +1,0 @@
-{
-  Set<Column> returnSet=new HashSet<Column>();
-  for (  Table table : getDatabaseObjects(schema,Table.class)) {
-    for (    Column column : table.getColumns()) {
-      returnSet.add(column);
-    }
-  }
-  return Collections.unmodifiableSet(returnSet);
-}

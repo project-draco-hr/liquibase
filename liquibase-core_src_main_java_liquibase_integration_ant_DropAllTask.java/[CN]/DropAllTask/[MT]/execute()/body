@@ -8,11 +8,11 @@
     liquibase=createLiquibase();
     if (StringUtils.trimToNull(schemas) != null) {
       List<String> schemaNames=StringUtils.splitAndTrim(this.schemas,",");
-      List<Schema> schemas=new ArrayList<Schema>();
+      List<CatalogAndSchema> schemas=new ArrayList<CatalogAndSchema>();
       for (      String name : schemaNames) {
-        schemas.add(new Schema(catalog,name));
+        schemas.add(new CatalogAndSchema(catalog,name));
       }
-      liquibase.dropAll(schemas.toArray(new Schema[schemas.size()]));
+      liquibase.dropAll(schemas.toArray(new CatalogAndSchema[schemas.size()]));
     }
  else {
       liquibase.dropAll();

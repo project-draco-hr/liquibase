@@ -1,0 +1,7 @@
+{
+  DatabaseSnapshot snapshot=new DatabaseSnapshot(database,snapshotControl);
+  for (  CatalogAndSchema schema : snapshotControl.getSchemas()) {
+    snapshot.addSchema(snapshot(new Schema(schema.getCatalogName(),schema.getSchemaName()),snapshot));
+  }
+  return snapshot;
+}

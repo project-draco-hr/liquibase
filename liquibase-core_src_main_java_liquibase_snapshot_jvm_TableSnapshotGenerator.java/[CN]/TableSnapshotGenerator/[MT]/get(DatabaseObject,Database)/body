@@ -3,7 +3,6 @@
     return null;
   }
   Schema schema=(Schema)container;
-  schema=database.correctSchema(schema);
   updateListeners("Reading tables for " + database.toString() + " ...");
   List<Table> returnTables=new ArrayList<Table>();
   ResultSet tableMetaDataRs=null;

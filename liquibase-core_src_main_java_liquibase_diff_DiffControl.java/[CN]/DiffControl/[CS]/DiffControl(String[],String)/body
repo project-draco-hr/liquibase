@@ -15,8 +15,8 @@
       comparisonCatalogName=comparisonSchemaName.split(".",2)[0];
       comparisonSchemaName=comparisonSchemaName.split(".",2)[1];
     }
-    Schema referenceSchema=new Schema(new Catalog(referenceCatalogName),referenceSchemaName);
-    Schema comparisonSchema=new Schema(new Catalog(comparisonCatalogName),comparisonSchemaName);
+    CatalogAndSchema referenceSchema=new CatalogAndSchema(referenceCatalogName,referenceSchemaName);
+    CatalogAndSchema comparisonSchema=new CatalogAndSchema(comparisonCatalogName,comparisonSchemaName);
     this.schemaComparisons[i]=new SchemaComparison(referenceSchema,comparisonSchema);
   }
   readDiffTypesString(diffTypes);

@@ -9,7 +9,8 @@
   foreignKeyTable.setSchema(new Schema(new Catalog(fkTableCatalog),fkTableSchema));
   foreignKey.setForeignKeyTable(foreignKeyTable);
   foreignKey.setForeignKeyColumns(cleanNameFromDatabase(importedKeyMetadataResultSet.getString("FKCOLUMN_NAME"),database));
-  Table tempPkTable=(Table)new Table().setName(importedKeyMetadataResultSet.getString("PKTABLE_NAME")).setSchema(database.correctSchema(new Schema(importedKeyMetadataResultSet.getString("PKTABLE_CAT"),importedKeyMetadataResultSet.getString("PKTABLE_SCHEM"))));
+  CatalogAndSchema pkTableSchema=database.getSchemaFromJdbcInfo(importedKeyMetadataResultSet.getString("PKTABLE_CAT"),importedKeyMetadataResultSet.getString("PKTABLE_SCHEM"));
+  Table tempPkTable=(Table)new Table().setName(importedKeyMetadataResultSet.getString("PKTABLE_NAME")).setSchema(new Schema(pkTableSchema.getCatalogName(),pkTableSchema.getSchemaName()));
   foreignKey.setPrimaryKeyTable(tempPkTable);
   foreignKey.setPrimaryKeyColumns(cleanNameFromDatabase(importedKeyMetadataResultSet.getString("PKCOLUMN_NAME"),database));
   ForeignKeyConstraintType updateRule=convertToForeignKeyConstraintType(importedKeyMetadataResultSet.getInt("UPDATE_RULE"),database);

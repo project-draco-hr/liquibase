@@ -1,7 +1,6 @@
 {
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
-  DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl((Schema)null,(String)null));
-  Table table=snapshot.getDatabaseObject(new Schema(new Catalog(null),schemaName),new Table().setName(tableName),Table.class);
+  Table table=DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).snapshot((Table)new Table().setName(tableName).setSchema(new Schema(new Catalog(null),null)),database);
   List<ColumnConfig> createColumns=new Vector<ColumnConfig>();
   List<ColumnConfig> copyColumns=new Vector<ColumnConfig>();
   if (table != null) {
@@ -27,7 +26,7 @@
     }
   }
   List<Index> newIndices=new Vector<Index>();
-  for (  Index index : snapshot.getDatabaseObjects(new Schema(new Catalog(null),schemaName),Index.class)) {
+  for (  Index index : DatabaseObjectGeneratorFactory.getInstance().getGenerator(Index.class,database).get(new Schema(new Catalog(null),schemaName),database)) {
     if (index.getTable().getName().equalsIgnoreCase(tableName)) {
       if (alterTableVisitor.createThisIndex(index)) {
         newIndices.add(index);

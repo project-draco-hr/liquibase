@@ -8,8 +8,9 @@
   table.setDatabase(database);
   table.setRawSchemaName(rawSchemaName);
   table.setRawCatalogName(rawCatalogName);
-  table.setSchema(database.getSchemaFromJdbcInfo(rawSchemaName,rawCatalogName));
-  Schema rawSchema=database.correctSchema(new Schema(table.getRawCatalogName(),table.getRawSchemaName()));
+  CatalogAndSchema schemaFromJdbcInfo=database.getSchemaFromJdbcInfo(rawSchemaName,rawCatalogName);
+  table.setSchema(new Schema(schemaFromJdbcInfo.getCatalogName(),schemaFromJdbcInfo.getSchemaName()));
+  CatalogAndSchema rawSchema=database.correctSchema(new CatalogAndSchema(table.getRawCatalogName(),table.getRawSchemaName()));
   ResultSet columnMetadataResultSet=getMetaData(database).getColumns(database.getJdbcCatalogName(rawSchema),database.getJdbcSchemaName(rawSchema),rawTableName,null);
   try {
     while (columnMetadataResultSet.next()) {

@@ -1,0 +1,34 @@
+{
+  String objectName=example.getName();
+  Schema schema=example.getSchema();
+  ResultSet rs=null;
+  try {
+    DatabaseMetaData metaData=getMetaData(database);
+    rs=metaData.getTables(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),database.correctObjectName(objectName,Table.class),new String[]{"TABLE"});
+    Table table;
+    try {
+      if (rs.next()) {
+        table=readTable(rs,database);
+      }
+ else {
+        return null;
+      }
+    }
+  finally {
+      rs.close();
+    }
+    return table;
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (rs != null) {
+      try {
+        rs.close();
+      }
+ catch (      SQLException ignore) {
+      }
+    }
+  }
+}

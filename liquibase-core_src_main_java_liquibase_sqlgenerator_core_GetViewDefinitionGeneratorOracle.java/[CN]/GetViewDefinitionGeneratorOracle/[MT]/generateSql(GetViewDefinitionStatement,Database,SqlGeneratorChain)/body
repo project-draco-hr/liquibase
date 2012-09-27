@@ -1,4 +1,4 @@
 {
-  Schema schema=database.correctSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()));
-  return new Sql[]{new UnparsedSql("SELECT TEXT FROM ALL_VIEWS WHERE upper(VIEW_NAME)='" + statement.getViewName().toUpperCase() + "' AND OWNER='"+ schema.getName()+ "'")};
+  CatalogAndSchema schema=database.correctSchema(new CatalogAndSchema(statement.getCatalogName(),statement.getSchemaName()));
+  return new Sql[]{new UnparsedSql("SELECT TEXT FROM ALL_VIEWS WHERE upper(VIEW_NAME)='" + statement.getViewName().toUpperCase() + "' AND OWNER='"+ schema.getSchemaName()+ "'")};
 }

@@ -1,0 +1,3 @@
+{
+  return getGenerator(database).createSnapshot(database,snapshotControl);
+}

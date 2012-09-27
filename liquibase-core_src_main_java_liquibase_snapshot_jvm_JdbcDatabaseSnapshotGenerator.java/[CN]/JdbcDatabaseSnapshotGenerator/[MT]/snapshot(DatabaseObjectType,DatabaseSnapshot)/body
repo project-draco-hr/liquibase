@@ -1,0 +1,5 @@
+{
+  Class<? extends DatabaseObject> objectType=example.getClass();
+  DatabaseObjectSnapshotGenerator<DatabaseObjectType> generator=(DatabaseObjectSnapshotGenerator<DatabaseObjectType>)DatabaseObjectGeneratorFactory.getInstance().getGenerator(objectType,snapshot.getDatabase());
+  return generator.snapshot(example,snapshot.getDatabase());
+}

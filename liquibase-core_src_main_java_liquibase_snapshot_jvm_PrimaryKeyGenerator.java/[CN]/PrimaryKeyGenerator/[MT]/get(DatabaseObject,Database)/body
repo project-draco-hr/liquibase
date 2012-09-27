@@ -15,7 +15,7 @@
   List<PrimaryKey> foundPKs=new ArrayList<PrimaryKey>();
   List<String> tables=new ArrayList<String>();
   if (relation == null) {
-    tables.addAll(listAllTables(schema,database));
+    tables.addAll(listAllTables(schema.toCatalogAndSchema(),database));
   }
  else {
     tables.add(relation.getName());

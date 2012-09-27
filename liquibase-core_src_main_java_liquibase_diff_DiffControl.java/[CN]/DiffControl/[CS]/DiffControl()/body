@@ -1,4 +1,4 @@
 {
   addDefaultTypes();
-  schemaComparisons=new SchemaComparison[]{new SchemaComparison(new Schema(new Catalog(null),null),new Schema(new Catalog(null),null))};
+  schemaComparisons=new SchemaComparison[]{new SchemaComparison(new CatalogAndSchema(null,null),new CatalogAndSchema(null,null))};
 }

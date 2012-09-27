@@ -1,5 +1,5 @@
 {
-  Schema schema=database.correctSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()));
-  String sql="exec sp_helptext '" + schema.getName() + "."+ statement.getViewName().toUpperCase()+ "'";
+  CatalogAndSchema schema=database.correctSchema(new CatalogAndSchema(statement.getCatalogName(),statement.getSchemaName()));
+  String sql="exec sp_helptext '" + schema.getSchemaName() + "."+ statement.getViewName().toUpperCase()+ "'";
   return new Sql[]{new UnparsedSql(sql)};
 }

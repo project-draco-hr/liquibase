@@ -1,8 +1,0 @@
-{
-  schema=correctSchema(schema);
-  String definition=(String)ExecutorService.getInstance().getExecutor(this).queryForObject(new GetViewDefinitionStatement(schema.getCatalogName(),schema.getName(),viewName),String.class);
-  if (definition == null) {
-    return null;
-  }
-  return CREATE_VIEW_AS_PATTERN.matcher(definition).replaceFirst("");
-}

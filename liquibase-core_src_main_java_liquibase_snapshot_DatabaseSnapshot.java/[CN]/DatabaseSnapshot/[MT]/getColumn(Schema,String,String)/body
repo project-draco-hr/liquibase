@@ -1,4 +1,0 @@
-{
-  Table table=getDatabaseObject(schema,new Table().setName(tableName),Table.class);
-  return table.getColumn(columnName);
-}

@@ -1,0 +1,20 @@
+{
+  String viewName=example.getName();
+  Schema schema=example.getSchema();
+  try {
+    ResultSet rs=getMetaData(database).getTables(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),database.correctObjectName(viewName,View.class),new String[]{"VIEW"});
+    try {
+      return rs.next();
+    }
+  finally {
+      try {
+        rs.close();
+      }
+ catch (      SQLException ignore) {
+      }
+    }
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

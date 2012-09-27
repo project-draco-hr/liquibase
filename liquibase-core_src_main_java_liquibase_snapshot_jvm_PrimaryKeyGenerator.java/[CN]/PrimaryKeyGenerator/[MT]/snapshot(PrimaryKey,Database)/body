@@ -1,0 +1,9 @@
+{
+  String objectName=database.correctObjectName(example.getName(),PrimaryKey.class);
+  for (  PrimaryKey key : get(example.getSchema(),database)) {
+    if (key.getName().equals(objectName)) {
+      return key;
+    }
+  }
+  return null;
+}

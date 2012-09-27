@@ -17,7 +17,7 @@
   try {
     List<String> tables=new ArrayList<String>();
     if (relation == null) {
-      tables.addAll(listAllTables(schema,database));
+      tables.addAll(listAllTables(new CatalogAndSchema(schema.getCatalogName(),schema.getName()),database));
     }
  else {
       tables.add(relation.getName());

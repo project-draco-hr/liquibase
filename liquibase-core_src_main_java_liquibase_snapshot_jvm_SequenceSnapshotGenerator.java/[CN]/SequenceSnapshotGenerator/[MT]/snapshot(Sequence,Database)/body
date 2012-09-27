@@ -1,0 +1,13 @@
+{
+  Sequence[] sequences=get(example.getSchema(),database);
+  if (sequences == null) {
+    return null;
+  }
+  String objectName=database.correctObjectName(example.getName(),Sequence.class);
+  for (  Sequence sequence : sequences) {
+    if (sequence.getName().equals(objectName)) {
+      return sequence;
+    }
+  }
+  return null;
+}

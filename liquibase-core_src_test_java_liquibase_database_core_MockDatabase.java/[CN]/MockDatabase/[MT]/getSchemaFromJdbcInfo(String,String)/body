@@ -1,3 +1,3 @@
 {
-  return new Schema(rawCatalogName,rawSchemaName);
+  return new CatalogAndSchema(rawCatalogName,rawSchemaName);
 }

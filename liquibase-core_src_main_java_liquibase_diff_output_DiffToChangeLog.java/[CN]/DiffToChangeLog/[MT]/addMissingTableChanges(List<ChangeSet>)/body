@@ -1,6 +1,6 @@
 {
   for (  Table missingTable : diffResult.getObjectDiff(Table.class).getMissing()) {
-    if (diffResult.getReferenceSnapshot().getDatabase().isLiquibaseTable(missingTable.getSchema(),missingTable.getName())) {
+    if (diffResult.getReferenceSnapshot().getDatabase().isLiquibaseTable(missingTable.getSchema().toCatalogAndSchema(),missingTable.getName())) {
       continue;
     }
     CreateTableChange change=new CreateTableChange();

@@ -1,9 +1,0 @@
-{
-  String objectName=database.correctObjectName(example.getName(),ForeignKey.class);
-  for (  ForeignKey key : get(container,database)) {
-    if (key.getName().equals(objectName)) {
-      return key;
-    }
-  }
-  return null;
-}

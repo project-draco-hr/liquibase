@@ -1,0 +1,10 @@
+{
+  schema=correctSchema(schema);
+  if ("information_schema".equalsIgnoreCase(schema.getSchemaName())) {
+    return true;
+  }
+ else   if (getSystemViews().contains(viewName)) {
+    return true;
+  }
+  return false;
+}

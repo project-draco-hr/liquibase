@@ -1,5 +1,5 @@
 {
-  Schema[] schemas=new Schema[schemaComparisons.length];
+  CatalogAndSchema[] schemas=new CatalogAndSchema[schemaComparisons.length];
   for (int i=0; i < schemaComparisons.length; i++) {
     if (databaseRole.equals(DatabaseRole.COMPARISON)) {
       schemas[i]=schemaComparisons[i].getComparisonSchema();

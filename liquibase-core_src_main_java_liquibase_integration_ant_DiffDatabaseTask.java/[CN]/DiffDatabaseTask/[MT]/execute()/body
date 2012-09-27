@@ -12,7 +12,7 @@
     }
     liquibase=createLiquibase();
     referenceDatabase=createDatabaseObject(getReferenceDriver(),getReferenceUrl(),getReferenceUsername(),getReferencePassword(),getReferenceDefaultCatalogName(),getReferenceDefaultSchemaName(),getDatabaseClass());
-    DiffControl diffControl=new DiffControl(new DiffControl.SchemaComparison[]{new DiffControl.SchemaComparison(new Schema(getReferenceDefaultCatalogName(),getReferenceDefaultSchemaName()),new Schema(getDefaultCatalogName(),getDefaultSchemaName()))},getDiffTypes());
+    DiffControl diffControl=new DiffControl(new DiffControl.SchemaComparison[]{new DiffControl.SchemaComparison(new CatalogAndSchema(getReferenceDefaultCatalogName(),getReferenceDefaultSchemaName()),new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()))},getDiffTypes());
     diffControl.setDataDir(getDataDir());
     DiffResult diffResult=liquibase.diff(referenceDatabase,liquibase.getDatabase(),diffControl);
     outputDiff(writer,diffResult,liquibase.getDatabase());
