@@ -5,7 +5,7 @@
   for (int run=0; run < 2; run++) {
     boolean outputCsv=run == 1;
     runCompleteChangeLog();
-    DatabaseSnapshot originalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new SnapshotControl());
+    DatabaseSnapshot originalSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),database);
     DiffControl diffControl=new DiffControl();
     diffControl.setDiffData(true);
     File tempFile=File.createTempFile("liquibase-test",".xml");
@@ -23,7 +23,7 @@
     }
     Liquibase liquibase=createLiquibase(tempFile.getName());
     clearDatabase(liquibase);
-    DatabaseSnapshot emptySnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new SnapshotControl());
+    DatabaseSnapshot emptySnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),database);
     liquibase=createLiquibase(tempFile.getName());
     try {
       liquibase.update(this.contexts);
@@ -32,7 +32,7 @@
       e.printDescriptiveError(System.out);
       throw e;
     }
-    DatabaseSnapshot migratedSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new SnapshotControl());
+    DatabaseSnapshot migratedSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),database);
     DiffResult finalDiffResult=DiffGeneratorFactory.getInstance().compare(originalSnapshot,migratedSnapshot,new DiffControl());
     try {
       assertTrue(finalDiffResult.areEqual());
@@ -58,8 +58,8 @@
  catch (    LiquibaseException e) {
       throw e;
     }
-    DatabaseSnapshot emptyAgainSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new SnapshotControl());
-    assertEquals(0,emptyAgainSnapshot.getDatabaseObjects(migratedSnapshot.getSchemas().iterator().next(),Table.class).length);
-    assertEquals(0,emptyAgainSnapshot.getDatabaseObjects(migratedSnapshot.getSchemas().iterator().next(),View.class).length);
+    DatabaseSnapshot emptyAgainSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),database);
+    assertEquals(0,emptyAgainSnapshot.getSchemas().iterator().next().getDatabaseObjects(Table.class).length);
+    assertEquals(0,emptyAgainSnapshot.getSchemas().iterator().next().getDatabaseObjects(View.class).length);
   }
 }

@@ -1,6 +1,6 @@
 {
   Executor executor=ExecutorService.getInstance().getExecutor(this);
-  Table changeLogTable=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).getDatabaseChangeLogTable(this);
+  Table changeLogTable=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).getDatabaseChangeLogTable();
   List<SqlStatement> statementsToExecute=new ArrayList<SqlStatement>();
   boolean changeLogCreateAttempted=false;
   if (changeLogTable != null) {

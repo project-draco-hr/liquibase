@@ -2,10 +2,10 @@
   try {
     SnapshotControl snapshotControl=new SnapshotControl(schemaToDrop);
     snapshotControl.setTypes(View.class,Table.class);
-    DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(this,snapshotControl);
+    DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(snapshotControl,this);
     List<Change> dropChanges=new ArrayList<Change>();
     for (    Schema schema : snapshot.getSchemas()) {
-      for (      View view : snapshot.getDatabaseObjects(schema,View.class)) {
+      for (      View view : schema.getDatabaseObjects(View.class)) {
         DropViewChange dropChange=new DropViewChange();
         dropChange.setViewName(view.getName());
         dropChange.setSchemaName(schema.getName());
@@ -13,7 +13,7 @@
         dropChanges.add(dropChange);
       }
       if (!supportsForeignKeyDisable()) {
-        for (        ForeignKey fk : snapshot.getDatabaseObjects(schema,ForeignKey.class)) {
+        for (        ForeignKey fk : schema.getDatabaseObjects(ForeignKey.class)) {
           DropForeignKeyConstraintChange dropFK=new DropForeignKeyConstraintChange();
           dropFK.setBaseTableSchemaName(schema.getName());
           dropFK.setBaseTableCatalogName(schema.getCatalogName());
@@ -22,7 +22,7 @@
           dropChanges.add(dropFK);
         }
       }
-      for (      Table table : snapshot.getDatabaseObjects(schema,Table.class)) {
+      for (      Table table : schema.getDatabaseObjects(Table.class)) {
         DropTableChange dropChange=new DropTableChange();
         dropChange.setSchemaName(schema.getName());
         dropChange.setCatalogName(schema.getCatalogName());
@@ -33,7 +33,7 @@
         dropChanges.add(dropChange);
       }
       if (this.supportsSequences()) {
-        for (        Sequence seq : snapshot.getDatabaseObjects(schema,Sequence.class)) {
+        for (        Sequence seq : schema.getDatabaseObjects(Sequence.class)) {
           DropSequenceChange dropChange=new DropSequenceChange();
           dropChange.setSequenceName(seq.getName());
           dropChange.setSchemaName(schema.getName());

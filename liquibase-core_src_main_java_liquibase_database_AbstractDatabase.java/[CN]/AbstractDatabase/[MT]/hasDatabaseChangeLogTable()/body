@@ -2,7 +2,7 @@
   if (hasDatabaseChangeLogTable) {
     return true;
   }
-  boolean hasTable=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).hasDatabaseChangeLogTable(this);
+  boolean hasTable=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).hasDatabaseChangeLogTable();
   if (canCacheLiquibaseTableInfo) {
     hasDatabaseChangeLogTable=hasTable;
   }

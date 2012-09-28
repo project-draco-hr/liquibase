@@ -1,0 +1,3 @@
+{
+  return getTable(database.correctSchema(new CatalogAndSchema(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName())),database.getDatabaseChangeLogTableName());
+}
