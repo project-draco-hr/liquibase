@@ -3,7 +3,7 @@
   params.set("tablename","table4");
   DatabaseChangeLog changeLog=new MockFormattedSqlChangeLogParser(VALID_CHANGELOG).parse("asdf.sql",params,new JUnitResourceAccessor());
   assertEquals("asdf.sql",changeLog.getLogicalFilePath());
-  assertEquals(7,changeLog.getChangeSets().size());
+  assertEquals(8,changeLog.getChangeSets().size());
   assertEquals("nvoxland",changeLog.getChangeSets().get(0).getAuthor());
   assertEquals("1",changeLog.getChangeSets().get(0).getId());
   assertEquals(1,changeLog.getChangeSets().get(0).getChanges().size());
@@ -67,4 +67,27 @@
   assertEquals(1,changeLog.getChangeSets().get(6).getRollBackChanges().length);
   assertTrue(changeLog.getChangeSets().get(6).getRollBackChanges()[0] instanceof RawSQLChange);
   assertEquals("drop table mysql_boo;",((RawSQLChange)changeLog.getChangeSets().get(6).getRollBackChanges()[0]).getSql());
+  ChangeSet cs=changeLog.getChangeSets().get(7);
+  assertEquals("bboisvert",cs.getAuthor());
+  assertEquals("with_preconditions",cs.getId());
+  PreconditionContainer pc=cs.getPreconditions();
+  assertNotNull(pc);
+  assertEquals(PreconditionContainer.FailOption.MARK_RAN,pc.getOnFail());
+  assertEquals(PreconditionContainer.ErrorOption.HALT,pc.getOnError());
+  assertEquals(PreconditionContainer.OnSqlOutputOption.FAIL,pc.getOnSqlOutput());
+  assertEquals(2,pc.getNestedPreconditions().size());
+  assertTrue(pc.getNestedPreconditions().get(0) instanceof SqlPrecondition);
+  SqlPrecondition p0=(SqlPrecondition)pc.getNestedPreconditions().get(0);
+  assertEquals("0 table(s)",p0.getExpectedResult());
+  assertEquals("select count(*) || ' table(s)' from information_schema.tables where table_name = 'my_table'",p0.getSql());
+  assertTrue(pc.getNestedPreconditions().get(1) instanceof SqlPrecondition);
+  SqlPrecondition p1=(SqlPrecondition)pc.getNestedPreconditions().get(1);
+  assertEquals("0",p1.getExpectedResult());
+  assertEquals("select count(*) from information_schema.columns where table_name = 'my_table' and column_name = 'id'",p1.getSql());
+  assertEquals(1,cs.getChanges().size());
+  assertTrue(cs.getChanges().get(0) instanceof RawSQLChange);
+  assertEquals("create table my_table (\n" + "  id int primary key\n" + ");",((RawSQLChange)cs.getChanges().get(0)).getSql());
+  assertEquals(1,cs.getRollBackChanges().length);
+  assertTrue(cs.getRollBackChanges()[0] instanceof RawSQLChange);
+  assertEquals("drop table my_table;",((RawSQLChange)cs.getRollBackChanges()[0]).getSql());
 }
