@@ -6,14 +6,14 @@
     }
     DatabaseSnapshotGeneratorFactory.resetAll();
     ExecutorService.getInstance().reset();
-    LockService.resetAll();
+    LockServiceImpl.resetAll();
     database.checkDatabaseChangeLogLockTable();
     if (database.getConnection() != null) {
       ((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().executeUpdate("drop table " + database.getDatabaseChangeLogLockTableName());
       database.commit();
     }
     DatabaseSnapshotGeneratorFactory.resetAll();
-    LockService.getInstance(database).forceReleaseLock();
+    LockServiceImpl.getInstance(database).forceReleaseLock();
     database.dropDatabaseObjects(Schema.DEFAULT);
     if (database.supportsSchemas()) {
       database.dropDatabaseObjects(new Schema((String)null,DatabaseTestContext.ALT_SCHEMA));

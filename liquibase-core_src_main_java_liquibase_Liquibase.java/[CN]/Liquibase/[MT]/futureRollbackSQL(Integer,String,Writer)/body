@@ -5,7 +5,7 @@
   Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
   ExecutorService.getInstance().setExecutor(database,outputTemplate);
   outputHeader("SQL to roll back currently unexecuted changes");
-  LockService lockService=LockService.getInstance(database);
+  LockService lockService=LockServiceImpl.getInstance(database);
   lockService.waitForLock();
   try {
     DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);

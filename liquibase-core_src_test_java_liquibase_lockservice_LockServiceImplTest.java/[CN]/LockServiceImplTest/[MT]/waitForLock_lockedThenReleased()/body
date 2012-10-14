@@ -1,0 +1,27 @@
+{
+  Database database=createMock(Database.class);
+  Executor executor=createMock(Executor.class);
+  database.checkDatabaseChangeLogLockTable();
+  expectLastCall().anyTimes();
+  database.setCanCacheLiquibaseTableInfo(true);
+  expectLastCall();
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(true);
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(true);
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(true);
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(false);
+  executor.comment("Lock Database");
+  expectLastCall();
+  database.rollback();
+  expectLastCall().anyTimes();
+  expect(executor.update(isA(LockDatabaseChangeLogStatement.class))).andReturn(1);
+  database.commit();
+  expectLastCall();
+  replay(database);
+  replay(executor);
+  ExecutorService.getInstance().setExecutor(database,executor);
+  LockServiceImpl service=(LockServiceImpl)LockServiceImpl.getInstance(database);
+  service.setChangeLogLockRecheckTime(1);
+  service.waitForLock();
+  verify(database);
+  verify(executor);
+}

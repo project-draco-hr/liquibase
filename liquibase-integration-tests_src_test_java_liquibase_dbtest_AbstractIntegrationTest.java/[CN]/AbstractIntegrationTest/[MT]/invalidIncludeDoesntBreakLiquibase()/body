@@ -6,5 +6,5 @@
   }
  catch (  ChangeLogParseException ignored) {
   }
-  assertFalse(LockService.getInstance(database).hasChangeLogLock());
+  assertFalse(LockServiceImpl.getInstance(database).hasChangeLogLock());
 }

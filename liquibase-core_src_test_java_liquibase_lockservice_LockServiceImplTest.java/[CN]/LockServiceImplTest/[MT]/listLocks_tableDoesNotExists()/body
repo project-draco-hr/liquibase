@@ -1,0 +1,9 @@
+{
+  Database database=createMock(Database.class);
+  expect(database.hasDatabaseChangeLogLockTable()).andReturn(false);
+  replay(database);
+  LockServiceImpl service=(LockServiceImpl)LockServiceImpl.getInstance(database);
+  DatabaseChangeLogLock[] locks=service.listLocks();
+  assertEquals(0,locks.length);
+  verify(database);
+}
