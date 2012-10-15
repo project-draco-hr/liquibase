@@ -13,7 +13,8 @@
       database.commit();
     }
     DatabaseSnapshotGeneratorFactory.resetAll();
-    LockServiceImpl.getInstance(database).forceReleaseLock();
+    LockService lockService=LockServiceFactory.getInstance().getLockService(database);
+    lockService.forceReleaseLock();
     database.dropDatabaseObjects(Schema.DEFAULT);
     if (database.supportsSchemas()) {
       database.dropDatabaseObjects(new Schema((String)null,DatabaseTestContext.ALT_SCHEMA));

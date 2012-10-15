@@ -10,7 +10,8 @@
   replay(database);
   replay(executor);
   ExecutorService.getInstance().setExecutor(database,executor);
-  LockServiceImpl service=(LockServiceImpl)LockServiceImpl.getInstance(database);
+  LockServiceImpl service=new LockServiceImpl();
+  service.setDatabase(database);
   DatabaseChangeLogLock[] locks=service.listLocks();
   assertEquals(0,locks.length);
   verify(database);

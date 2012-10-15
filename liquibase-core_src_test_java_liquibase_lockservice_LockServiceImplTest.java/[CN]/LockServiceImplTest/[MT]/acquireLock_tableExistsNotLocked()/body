@@ -16,7 +16,8 @@
   replay(executor);
   replay(database);
   ExecutorService.getInstance().setExecutor(database,executor);
-  LockServiceImpl service=(LockServiceImpl)LockServiceImpl.getInstance(database);
+  LockServiceImpl service=new LockServiceImpl();
+  service.setDatabase(database);
   assertTrue(service.acquireLock());
   verify(database);
   verify(executor);

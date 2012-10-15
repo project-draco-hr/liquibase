@@ -1,0 +1,8 @@
+{
+  if (!lockServices.containsKey(database)) {
+    LockService lockService=new LockServiceImpl();
+    lockService.setDatabase(database);
+    lockServices.put(database,lockService);
+  }
+  return lockServices.get(database);
+}

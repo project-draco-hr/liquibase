@@ -1,6 +1,6 @@
 {
   contexts=StringUtils.trimToNull(contexts);
-  LockService lockService=LockServiceImpl.getInstance(database);
+  LockService lockService=getLockService();
   lockService.waitForLock();
   changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
   try {

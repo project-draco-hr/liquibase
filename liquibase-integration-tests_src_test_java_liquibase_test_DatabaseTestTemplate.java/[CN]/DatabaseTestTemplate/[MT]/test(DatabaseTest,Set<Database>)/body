@@ -6,9 +6,10 @@
     JdbcExecutor writeExecutor=new JdbcExecutor();
     writeExecutor.setDatabase(database);
     ExecutorService.getInstance().setExecutor(database,writeExecutor);
-    LockServiceImpl.getInstance(database).reset();
+    LockService lockService=LockServiceFactory.getInstance().getLockService(database);
+    lockService.reset();
     if (database.getConnection() != null) {
-      LockServiceImpl.getInstance(database).forceReleaseLock();
+      lockService.forceReleaseLock();
     }
     try {
       test.performTest(database);

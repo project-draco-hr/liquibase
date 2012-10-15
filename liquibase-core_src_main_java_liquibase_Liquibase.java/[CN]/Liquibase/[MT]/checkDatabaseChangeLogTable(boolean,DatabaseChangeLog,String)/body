@@ -8,7 +8,7 @@
     splitContexts=contexts.split(",");
   }
   getDatabase().checkDatabaseChangeLogTable(updateExistingNullChecksums,databaseChangeLog,splitContexts);
-  if (!LockServiceImpl.getInstance(database).hasChangeLogLock()) {
+  if (!getLockService().hasChangeLogLock()) {
     getDatabase().checkDatabaseChangeLogLockTable();
   }
 }
