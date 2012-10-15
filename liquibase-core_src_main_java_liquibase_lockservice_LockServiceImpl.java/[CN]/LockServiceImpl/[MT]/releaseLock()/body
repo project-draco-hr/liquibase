@@ -17,7 +17,6 @@
  finally {
     try {
       hasChangeLogLock=false;
-      instances.remove(this.database);
       database.setCanCacheLiquibaseTableInfo(false);
       LogFactory.getLogger().info("Successfully released change log lock");
       database.rollback();

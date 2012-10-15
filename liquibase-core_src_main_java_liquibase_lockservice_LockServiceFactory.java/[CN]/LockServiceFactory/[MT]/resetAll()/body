@@ -1,0 +1,8 @@
+{
+  for (  Database database : registry.keySet()) {
+    for (    LockService lockService : registry.get(database)) {
+      lockService.reset();
+    }
+  }
+  instance=null;
+}

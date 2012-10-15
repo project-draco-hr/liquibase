@@ -1,2 +1,12 @@
 {
+  Class<? extends LockService>[] classes;
+  try {
+    classes=ServiceLocator.getInstance().findClasses(LockService.class);
+    for (    Class<? extends LockService> clazz : classes) {
+      register(clazz);
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
 }

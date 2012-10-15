@@ -17,13 +17,18 @@
     }
   }
 ;
-  LockServiceFactory factory=LockServiceFactory.getInstance();
-  assertNotNull(factory.getLockService(oracle1));
-  assertNotNull(factory.getLockService(oracle2));
-  assertNotNull(factory.getLockService(mysql));
-  assertTrue(factory.getLockService(oracle1) == factory.getLockService(oracle1));
-  assertTrue(factory.getLockService(oracle2) == factory.getLockService(oracle2));
-  assertTrue(factory.getLockService(mysql) == factory.getLockService(mysql));
-  assertTrue(factory.getLockService(oracle1) != factory.getLockService(oracle2));
-  assertTrue(factory.getLockService(oracle1) != factory.getLockService(mysql));
+  DatabaseFactory databaseFactory=DatabaseFactory.getInstance();
+  databaseFactory.register(oracle1);
+  databaseFactory.register(oracle2);
+  databaseFactory.register(mysql);
+  LockServiceFactory lockServiceFactory=LockServiceFactory.getInstance();
+  assertNotNull(lockServiceFactory.getLockService(oracle1));
+  assertNotNull(lockServiceFactory.getLockService(oracle2));
+  assertNotNull(lockServiceFactory.getLockService(mysql));
+  assertTrue(lockServiceFactory.getLockService(oracle1) == lockServiceFactory.getLockService(oracle1));
+  assertTrue(lockServiceFactory.getLockService(oracle2) == lockServiceFactory.getLockService(oracle2));
+  assertTrue(lockServiceFactory.getLockService(mysql) == lockServiceFactory.getLockService(mysql));
+  assertTrue(lockServiceFactory.getLockService(oracle1) != lockServiceFactory.getLockService(oracle2));
+  assertTrue(lockServiceFactory.getLockService(oracle1) != lockServiceFactory.getLockService(mysql));
+  assertTrue(lockServiceFactory.getLockService(getMockDatabase()) instanceof MockLockService);
 }

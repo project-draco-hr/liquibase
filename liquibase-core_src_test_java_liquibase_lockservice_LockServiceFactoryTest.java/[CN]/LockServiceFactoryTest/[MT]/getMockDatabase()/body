@@ -1,0 +1,10 @@
+{
+  DatabaseFactory factory=DatabaseFactory.getInstance();
+  MockDatabase database=new MockDatabase();
+  for (  Database db : factory.getImplementedDatabases()) {
+    if (db.getName().equals(database.getName()) && db instanceof MockDatabase) {
+      return (MockDatabase)db;
+    }
+  }
+  return null;
+}

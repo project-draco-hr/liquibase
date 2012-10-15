@@ -1,6 +1,4 @@
 {
   assertNotNull(LockServiceFactory.getInstance());
   assertTrue(LockServiceFactory.getInstance() == LockServiceFactory.getInstance());
-  Collection<LockService> lockServices=LockServiceFactory.getInstance().getLockServices();
-  assertEquals(0,lockServices.size());
 }

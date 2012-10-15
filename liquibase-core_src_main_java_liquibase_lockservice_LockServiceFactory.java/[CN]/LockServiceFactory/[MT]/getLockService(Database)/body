@@ -1,8 +1,7 @@
 {
-  if (!lockServices.containsKey(database)) {
-    LockService lockService=new LockServiceImpl();
-    lockService.setDatabase(database);
-    lockServices.put(database,lockService);
+  SortedSet<LockService> set=registry.get(database);
+  if (set == null) {
+    return null;
   }
-  return lockServices.get(database);
+  return set.iterator().next();
 }

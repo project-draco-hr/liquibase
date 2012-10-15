@@ -1,0 +1,19 @@
+{
+  DatabaseFactory databaseFactory=DatabaseFactory.getInstance();
+  List<Database> databases=databaseFactory.getImplementedDatabases();
+  for (  Database database : databases) {
+    if (!registry.containsKey(database)) {
+      registry.put(database,new TreeSet<LockService>(comparator));
+    }
+    try {
+      LockService lockService=clazz.newInstance();
+      if (lockService.supports(database)) {
+        SortedSet<LockService> set=registry.get(database);
+        set.add(lockService);
+      }
+    }
+ catch (    Exception e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+  }
+}
