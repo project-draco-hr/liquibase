@@ -1,6 +1,12 @@
 {
   Executor executor=ExecutorService.getInstance().getExecutor(this);
-  Table changeLogTable=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).getDatabaseChangeLogTable();
+  Table changeLogTable=null;
+  try {
+    changeLogTable=SnapshotGeneratorFactory.getInstance().getDatabaseChangeLogTable(this);
+  }
+ catch (  LiquibaseException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
   List<SqlStatement> statementsToExecute=new ArrayList<SqlStatement>();
   boolean changeLogCreateAttempted=false;
   if (changeLogTable != null) {

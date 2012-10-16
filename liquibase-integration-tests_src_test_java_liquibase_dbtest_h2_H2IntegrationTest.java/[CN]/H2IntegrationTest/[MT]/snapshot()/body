@@ -1,0 +1,8 @@
+{
+  if (getDatabase() == null) {
+    return;
+  }
+  runCompleteChangeLog();
+  DatabaseSnapshot snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),getDatabase());
+  System.out.println(snapshot);
+}

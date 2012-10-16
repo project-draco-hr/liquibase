@@ -1,0 +1,5 @@
+{
+  if (snapshotGenerators != null) {
+    this.snapshotGenerators=snapshotGenerators.iterator();
+  }
+}

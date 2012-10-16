@@ -5,21 +5,7 @@
   String remarks=StringUtils.trimToNull(tableMetadataResultSet.getString("REMARKS"));
   Table table=new Table().setName(cleanNameFromDatabase(rawTableName,database));
   table.setRemarks(remarks);
-  table.setDatabase(database);
-  table.setRawSchemaName(rawSchemaName);
-  table.setRawCatalogName(rawCatalogName);
-  CatalogAndSchema schemaFromJdbcInfo=database.getSchemaFromJdbcInfo(rawSchemaName,rawCatalogName);
+  CatalogAndSchema schemaFromJdbcInfo=database.getSchemaFromJdbcInfo(rawCatalogName,rawSchemaName);
   table.setSchema(new Schema(schemaFromJdbcInfo.getCatalogName(),schemaFromJdbcInfo.getSchemaName()));
-  CatalogAndSchema rawSchema=database.correctSchema(new CatalogAndSchema(table.getRawCatalogName(),table.getRawSchemaName()));
-  ResultSet columnMetadataResultSet=getMetaData(database).getColumns(database.getJdbcCatalogName(rawSchema),database.getJdbcSchemaName(rawSchema),rawTableName,null);
-  try {
-    while (columnMetadataResultSet.next()) {
-      table.getColumns().add(new Column().setName(columnMetadataResultSet.getString("COLUMN_NAME")));
-    }
-  }
-  finally {
-    columnMetadataResultSet.close();
-  }
-  table.setPartial(false);
   return table;
 }

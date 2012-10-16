@@ -1,0 +1,42 @@
+{
+  Database database=snapshot.getDatabase();
+  Schema schema=example.getSchema();
+  String searchTableName=null;
+  if (example.getTable() != null) {
+    searchTableName=example.getTable().getName();
+  }
+  ResultSet rs=null;
+  try {
+    DatabaseMetaData metaData=getMetaData(database);
+    rs=metaData.getPrimaryKeys(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),searchTableName);
+    PrimaryKey returnKey=null;
+    while (rs.next()) {
+      if (example.getName().equals(rs.getString("PK_NAME"))) {
+        continue;
+      }
+      String columnName=cleanNameFromDatabase(rs.getString("COLUMN_NAME"),database);
+      short position=rs.getShort("KEY_SEQ");
+      if (returnKey == null) {
+        returnKey=new PrimaryKey();
+        CatalogAndSchema tableSchema=database.getSchemaFromJdbcInfo(rs.getString("TABLE_CAT"),rs.getString("TABLE_SCHEMA"));
+        returnKey.setTable((Table)snapshot.snapshot(new Table().setName(rs.getString("TABLE_NAME")).setSchema(new Schema(tableSchema.getCatalogName(),tableSchema.getSchemaName()))));
+        returnKey.setName(database.correctObjectName(rs.getString("PK_NAME"),PrimaryKey.class));
+      }
+      returnKey.addColumnName(position - 1,columnName);
+    }
+    rs.close();
+    return returnKey;
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    try {
+      if (rs != null) {
+        rs.close();
+      }
+    }
+ catch (    SQLException ignored) {
+    }
+  }
+}

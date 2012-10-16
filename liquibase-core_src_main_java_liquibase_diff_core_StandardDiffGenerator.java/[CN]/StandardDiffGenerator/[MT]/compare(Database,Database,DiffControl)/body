@@ -1,8 +1,10 @@
 {
-  DatabaseSnapshot referenceSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(diffControl.toSnapshotControl(DiffControl.DatabaseRole.REFERENCE),referenceDatabase);
+  DatabaseSnapshot referenceSnapshot=null;
   DatabaseSnapshot comparisonSnapshot=null;
+  referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(diffControl.toSnapshotControl(DiffControl.DatabaseRole.REFERENCE),referenceDatabase);
+  comparisonSnapshot=null;
   if (comparisonDatabase != null) {
-    comparisonSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(diffControl.toSnapshotControl(DiffControl.DatabaseRole.COMPARISON),comparisonDatabase);
+    comparisonSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(diffControl.toSnapshotControl(DiffControl.DatabaseRole.COMPARISON),comparisonDatabase);
   }
   return compare(referenceSnapshot,comparisonSnapshot,diffControl);
 }

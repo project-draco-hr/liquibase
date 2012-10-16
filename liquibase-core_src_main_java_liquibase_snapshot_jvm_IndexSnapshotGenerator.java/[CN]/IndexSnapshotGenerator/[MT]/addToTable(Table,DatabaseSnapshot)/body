@@ -1,0 +1,46 @@
+{
+  if (table == null) {
+    return null;
+  }
+  Database database=snapshot.getDatabase();
+  Schema schema;
+  schema=table.getSchema();
+  ResultSet rs=null;
+  Statement statement=null;
+  DatabaseMetaData databaseMetaData=null;
+  try {
+    databaseMetaData=getMetaData(database);
+    if (database instanceof OracleDatabase) {
+      statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+      String sql="SELECT INDEX_NAME FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "'";
+      rs=statement.executeQuery(sql);
+    }
+ else {
+      rs=databaseMetaData.getIndexInfo(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),table.getName(),false,true);
+    }
+    while (rs.next()) {
+      Index exampleIndex=new Index().setName(rs.getString("INDEX_NAME")).setTable(table);
+      table.getIndexes().add(snapshot.snapshot(exampleIndex));
+    }
+    return table;
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (rs != null) {
+      try {
+        rs.close();
+      }
+ catch (      SQLException ignored) {
+      }
+    }
+    if (statement != null) {
+      try {
+        statement.close();
+      }
+ catch (      SQLException ignored) {
+      }
+    }
+  }
+}

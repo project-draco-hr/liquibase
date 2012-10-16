@@ -1,0 +1,12 @@
+{
+  Set<DatabaseObject> databaseObjects=allFound.get(example.getClass());
+  if (databaseObjects == null) {
+    return null;
+  }
+  for (  DatabaseObject obj : databaseObjects) {
+    if (obj.equals(example,database)) {
+      return (DatabaseObjectType)obj;
+    }
+  }
+  return null;
+}

@@ -1,0 +1,3 @@
+{
+  super(Table.class,new Class[]{Schema.class});
+}

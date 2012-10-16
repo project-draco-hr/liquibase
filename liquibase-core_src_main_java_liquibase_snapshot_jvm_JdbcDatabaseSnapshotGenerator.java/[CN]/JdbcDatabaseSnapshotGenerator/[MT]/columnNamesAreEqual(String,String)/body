@@ -1,8 +1,0 @@
-{
-  if (database.isCaseSensitive()) {
-    return columnNames.replace(" ","").equals(otherColumnNames.replace(" ",""));
-  }
- else {
-    return columnNames.replace(" ","").equalsIgnoreCase(otherColumnNames.replace(" ",""));
-  }
-}

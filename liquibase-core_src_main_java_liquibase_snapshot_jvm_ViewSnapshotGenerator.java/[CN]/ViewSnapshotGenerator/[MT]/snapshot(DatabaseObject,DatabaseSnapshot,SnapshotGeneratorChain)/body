@@ -1,0 +1,11 @@
+{
+  if (example instanceof Schema) {
+    return addToSchema((Schema)chain.snapshot(example,snapshot),snapshot);
+  }
+ else   if (example instanceof View) {
+    return snapshotView((View)example,snapshot);
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unexpected example type: " + example.getClass().getName());
+  }
+}

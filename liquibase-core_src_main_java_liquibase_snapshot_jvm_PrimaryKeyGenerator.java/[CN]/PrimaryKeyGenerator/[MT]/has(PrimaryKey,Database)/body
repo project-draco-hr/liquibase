@@ -1,3 +1,0 @@
-{
-  return snapshot(example,database) != null;
-}

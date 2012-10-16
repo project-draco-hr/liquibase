@@ -1,0 +1,40 @@
+{
+  Database database=snapshot.getDatabase();
+  Schema schema=example.getSchema();
+  ResultSet viewsMetadataRs=null;
+  try {
+    viewsMetadataRs=getMetaData(database).getTables(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),example.getName(),new String[]{"VIEW"});
+    if (viewsMetadataRs.next()) {
+      String rawViewName=viewsMetadataRs.getString("TABLE_NAME");
+      String rawSchemaName=StringUtils.trimToNull(viewsMetadataRs.getString("TABLE_SCHEM"));
+      String rawCatalogName=StringUtils.trimToNull(viewsMetadataRs.getString("TABLE_CAT"));
+      String remarks=viewsMetadataRs.getString("REMARKS");
+      View view=new View().setName(cleanNameFromDatabase(rawViewName,database));
+      view.setRemarks(remarks);
+      CatalogAndSchema schemaFromJdbcInfo=database.getSchemaFromJdbcInfo(rawCatalogName,rawSchemaName);
+      view.setSchema(new Schema(schemaFromJdbcInfo.getCatalogName(),schemaFromJdbcInfo.getSchemaName()));
+      try {
+        view.setDefinition(database.getViewDefinition(schemaFromJdbcInfo,view.getName()));
+      }
+ catch (      DatabaseException e) {
+        throw new DatabaseException("Error getting " + database.getConnection().getURL() + " view with "+ new GetViewDefinitionStatement(view.getSchema().getCatalog().getName(),view.getSchema().getName(),rawViewName),e);
+      }
+      return view;
+    }
+ else {
+      return null;
+    }
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    try {
+      if (viewsMetadataRs != null) {
+        viewsMetadataRs.close();
+      }
+    }
+ catch (    SQLException ignore) {
+    }
+  }
+}

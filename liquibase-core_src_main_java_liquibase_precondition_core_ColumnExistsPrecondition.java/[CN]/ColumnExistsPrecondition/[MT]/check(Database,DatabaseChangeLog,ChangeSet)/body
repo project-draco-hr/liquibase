@@ -5,11 +5,11 @@
   }
   example.setName(getColumnName());
   try {
-    if (!DatabaseObjectGeneratorFactory.getInstance().getGenerator(Column.class,database).has(example,database)) {
+    if (!SnapshotGeneratorFactory.getInstance().has(example,database)) {
       throw new PreconditionFailedException("Column '" + database.escapeColumnName(catalogName,schemaName,getTableName(),getColumnName()) + "' does not exist",changeLog,this);
     }
   }
- catch (  DatabaseException e) {
+ catch (  LiquibaseException e) {
     throw new PreconditionErrorException(e,changeLog,this);
   }
 }

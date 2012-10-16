@@ -1,1 +1,1 @@
-JdbcDatabaseObjectSnapshotGenerator<UniqueConstraint>
+JdbcSnapshotGenerator

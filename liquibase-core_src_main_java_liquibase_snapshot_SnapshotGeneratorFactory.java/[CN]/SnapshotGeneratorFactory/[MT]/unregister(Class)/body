@@ -1,0 +1,9 @@
+{
+  SnapshotGenerator toRemove=null;
+  for (  SnapshotGenerator existingGenerator : generators) {
+    if (existingGenerator.getClass().equals(generatorClass)) {
+      toRemove=existingGenerator;
+    }
+  }
+  unregister(toRemove);
+}

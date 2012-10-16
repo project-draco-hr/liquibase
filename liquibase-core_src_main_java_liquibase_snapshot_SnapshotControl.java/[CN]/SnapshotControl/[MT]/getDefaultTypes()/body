@@ -1,0 +1,7 @@
+{
+  HashSet<Class<? extends DatabaseObject>> set=new HashSet<Class<? extends DatabaseObject>>();
+  set.add(Table.class);
+  set.add(View.class);
+  set.add(Column.class);
+  return set;
+}

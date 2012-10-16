@@ -1,0 +1,3 @@
+{
+  super(ForeignKey.class,new Class[]{Table.class});
+}

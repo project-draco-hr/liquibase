@@ -1,3 +1,0 @@
-{
-  return -1 * new Integer(o1.getPriority()).compareTo(o2.getPriority());
-}

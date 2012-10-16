@@ -13,7 +13,7 @@
         example.getColumns().add(column);
       }
     }
-    if (!DatabaseObjectGeneratorFactory.getInstance().getGenerator(Index.class,database).has(example,database)) {
+    if (!SnapshotGeneratorFactory.getInstance().has(example,database)) {
       String name="";
       if (getIndexName() != null) {
         name+=database.escapeStringForDatabase(getIndexName());
@@ -27,7 +27,7 @@
       throw new PreconditionFailedException("Index " + name + " does not exist",changeLog,this);
     }
   }
- catch (  DatabaseException e) {
+ catch (  Exception e) {
     throw new PreconditionErrorException(e,changeLog,this);
   }
 }

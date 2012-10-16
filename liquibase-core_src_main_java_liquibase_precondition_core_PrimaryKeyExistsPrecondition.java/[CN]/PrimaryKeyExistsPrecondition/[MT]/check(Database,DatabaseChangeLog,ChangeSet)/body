@@ -8,7 +8,7 @@
     }
     example.setTable(table);
     example.setName(getPrimaryKeyName());
-    if (!DatabaseObjectGeneratorFactory.getInstance().getGenerator(PrimaryKey.class,database).has(example,database)) {
+    if (!SnapshotGeneratorFactory.getInstance().has(example,database)) {
       if (tableName != null) {
         throw new PreconditionFailedException("Primary Key does not exist on " + database.escapeStringForDatabase(getTableName()),changeLog,this);
       }

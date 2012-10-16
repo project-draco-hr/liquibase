@@ -1,3 +1,0 @@
-{
-  return DatabaseObjectGeneratorFactory.getInstance().getGenerator(Table.class,database).has((Table)new Table().setName(tableName).setSchema(new Schema(schema.getCatalogName(),schema.getSchemaName())),database);
-}

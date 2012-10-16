@@ -1,9 +1,0 @@
-{
-  String objectName=database.correctObjectName(example.getName(),Index.class);
-  for (  Index index : get(example.getSchema(),database)) {
-    if (index.getName().equals(objectName)) {
-      return index;
-    }
-  }
-  return null;
-}

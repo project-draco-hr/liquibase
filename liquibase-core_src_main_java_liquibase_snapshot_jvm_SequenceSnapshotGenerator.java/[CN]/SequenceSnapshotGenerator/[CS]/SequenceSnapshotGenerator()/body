@@ -1,0 +1,3 @@
+{
+  super(Sequence.class,new Class[]{Schema.class});
+}

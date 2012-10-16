@@ -2,7 +2,13 @@
   if (hasDatabaseChangeLogTable) {
     return true;
   }
-  boolean hasTable=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).hasDatabaseChangeLogTable();
+  boolean hasTable=false;
+  try {
+    hasTable=SnapshotGeneratorFactory.getInstance().hasDatabaseChangeLogTable(this);
+  }
+ catch (  LiquibaseException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
   if (canCacheLiquibaseTableInfo) {
     hasDatabaseChangeLogTable=hasTable;
   }

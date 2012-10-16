@@ -1,0 +1,4 @@
+{
+  this.objectType=objectType;
+  this.database=database;
+}

@@ -1,8 +1,0 @@
-{
-  try {
-    return getGenerators(database).iterator().next().getClass().getConstructor(Database.class).newInstance(database);
-  }
- catch (  Exception e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
-}

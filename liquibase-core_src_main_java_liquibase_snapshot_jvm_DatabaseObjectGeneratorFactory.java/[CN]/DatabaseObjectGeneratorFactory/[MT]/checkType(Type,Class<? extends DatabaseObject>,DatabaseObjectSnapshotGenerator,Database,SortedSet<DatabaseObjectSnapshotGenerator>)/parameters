@@ -1,5 +1,0 @@
-Type type
-Class<? extends DatabaseObject> databaseObject
-DatabaseObjectSnapshotGenerator generator
-Database database
-SortedSet<DatabaseObjectSnapshotGenerator> validGenerators

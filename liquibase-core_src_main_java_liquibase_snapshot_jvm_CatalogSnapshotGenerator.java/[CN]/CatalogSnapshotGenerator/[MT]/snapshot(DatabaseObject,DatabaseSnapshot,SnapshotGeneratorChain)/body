@@ -1,0 +1,41 @@
+{
+  if (!(example instanceof Catalog)) {
+    throw new UnexpectedLiquibaseException("Unexpected example type: " + example.getClass().getName());
+  }
+  Database database=snapshot.getDatabase();
+  ResultSet catalogs=null;
+  Catalog match=null;
+  String catalogName=example.getName();
+  if (catalogName == null && database.supportsCatalogs()) {
+    catalogName=database.getDefaultCatalogName();
+  }
+  example=new Catalog(catalogName);
+  try {
+    catalogs=((JdbcConnection)database.getConnection()).getMetaData().getCatalogs();
+    while (catalogs.next()) {
+      CatalogAndSchema schemaFromJdbcInfo=database.getSchemaFromJdbcInfo(catalogs.getString("TABLE_CAT"),null);
+      Catalog catalog=new Catalog(schemaFromJdbcInfo.getCatalogName());
+      if (catalog.equals(example,database)) {
+        if (match == null) {
+          match=catalog;
+        }
+ else {
+          throw new InvalidExampleException("Found multiple catalogs matching " + example.getName());
+        }
+      }
+    }
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (catalogs != null) {
+      try {
+        catalogs.close();
+      }
+ catch (      SQLException ignore) {
+      }
+    }
+  }
+  return match;
+}

@@ -1,0 +1,11 @@
+{
+  if (example instanceof ForeignKey) {
+    return snapshotForeignKey((ForeignKey)example,snapshot);
+  }
+ else   if (example instanceof Table) {
+    return addToTable((Table)chain.snapshot(example,snapshot),snapshot);
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown example type: " + example.getClass().getName());
+  }
+}

@@ -1,0 +1,5 @@
+Type type
+Class<? extends DatabaseObject> databaseObject
+SnapshotGenerator generator
+Database database
+SortedSet<SnapshotGenerator> validGenerators

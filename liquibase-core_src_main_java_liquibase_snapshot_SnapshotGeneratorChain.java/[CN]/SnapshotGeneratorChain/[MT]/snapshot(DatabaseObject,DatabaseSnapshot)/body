@@ -1,0 +1,15 @@
+{
+  if (example == null) {
+    return null;
+  }
+  if (!(example instanceof Catalog || example instanceof Schema) && !snapshot.getSnapshotControl().shouldSnapshot(example.getClass())) {
+    return null;
+  }
+  if (snapshotGenerators == null) {
+    return null;
+  }
+  if (!snapshotGenerators.hasNext()) {
+    return null;
+  }
+  return snapshotGenerators.next().snapshot(example,snapshot,this);
+}

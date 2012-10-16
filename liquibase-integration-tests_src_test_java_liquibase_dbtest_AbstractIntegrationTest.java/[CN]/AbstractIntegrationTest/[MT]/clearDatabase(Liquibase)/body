@@ -19,6 +19,6 @@
  catch (  SQLException e) {
     throw new DatabaseException(e);
   }
-  DatabaseSnapshotGeneratorFactory.resetAll();
+  SnapshotGeneratorFactory.resetAll();
   DatabaseFactory.reset();
 }

@@ -1,0 +1,4 @@
+{
+  SnapshotGeneratorChain chain=createGeneratorChain(example.getClass(),database);
+  return (T)chain.snapshot(example,new DatabaseSnapshot(database,new SnapshotControl()));
+}

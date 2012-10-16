@@ -1,8 +1,13 @@
 {
   try {
     SnapshotControl snapshotControl=new SnapshotControl(schemaToDrop);
-    snapshotControl.setTypes(View.class,Table.class);
-    DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(snapshotControl,this);
+    DatabaseSnapshot snapshot=null;
+    try {
+      snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(snapshotControl,this);
+    }
+ catch (    LiquibaseException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
     List<Change> dropChanges=new ArrayList<Change>();
     for (    Schema schema : snapshot.getSchemas()) {
       for (      View view : schema.getDatabaseObjects(View.class)) {

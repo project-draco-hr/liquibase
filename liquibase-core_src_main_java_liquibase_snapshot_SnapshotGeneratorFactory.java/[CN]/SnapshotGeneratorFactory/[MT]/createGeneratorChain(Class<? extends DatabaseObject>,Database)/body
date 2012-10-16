@@ -1,0 +1,7 @@
+{
+  SortedSet<SnapshotGenerator> generators=getGenerators(databaseObjectType,database);
+  if (generators == null || generators.size() == 0) {
+    return null;
+  }
+  return new SnapshotGeneratorChain(generators);
+}

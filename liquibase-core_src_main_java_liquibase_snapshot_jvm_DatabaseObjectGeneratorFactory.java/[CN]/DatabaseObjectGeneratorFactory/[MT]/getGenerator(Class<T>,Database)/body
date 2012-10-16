@@ -1,7 +1,0 @@
-{
-  SortedSet<DatabaseObjectSnapshotGenerator> generators=getGenerators(generatorClass,database);
-  if (generators != null && generators.size() > 0) {
-    return generators.iterator().next();
-  }
-  return null;
-}

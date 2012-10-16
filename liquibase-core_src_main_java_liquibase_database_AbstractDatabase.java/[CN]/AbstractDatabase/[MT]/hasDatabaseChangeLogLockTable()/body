@@ -2,7 +2,13 @@
   if (canCacheLiquibaseTableInfo && hasDatabaseChangeLogLockTable) {
     return true;
   }
-  boolean hasTable=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).hasDatabaseChangeLogLockTable();
+  boolean hasTable=false;
+  try {
+    hasTable=SnapshotGeneratorFactory.getInstance().hasDatabaseChangeLogLockTable(this);
+  }
+ catch (  LiquibaseException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
   if (canCacheLiquibaseTableInfo) {
     hasDatabaseChangeLogLockTable=hasTable;
   }

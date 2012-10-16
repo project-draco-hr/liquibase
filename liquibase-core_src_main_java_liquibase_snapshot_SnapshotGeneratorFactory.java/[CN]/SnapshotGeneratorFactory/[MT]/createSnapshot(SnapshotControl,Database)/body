@@ -1,0 +1,16 @@
+{
+  DatabaseSnapshot snapshot=new DatabaseSnapshot(database,snapshotControl);
+  CatalogAndSchema[] schemas=snapshotControl.getSchemas();
+  if (schemas == null || schemas.length == 0) {
+    schemas=new CatalogAndSchema[]{new CatalogAndSchema(database.getDefaultCatalogName(),database.getDefaultSchemaName())};
+  }
+  try {
+    for (    CatalogAndSchema schema : schemas) {
+      snapshot.addSchema(snapshot.snapshot(new Schema(schema.getCatalogName(),schema.getSchemaName())));
+    }
+  }
+ catch (  InvalidExampleException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  return snapshot;
+}

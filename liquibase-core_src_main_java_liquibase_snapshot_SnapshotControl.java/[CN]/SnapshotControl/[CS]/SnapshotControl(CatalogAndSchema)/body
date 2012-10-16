@@ -1,4 +1,0 @@
-{
-  this.schemas=schemas;
-  this.types=new Class[]{Table.class,View.class};
-}
