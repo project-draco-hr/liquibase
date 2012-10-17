@@ -1,7 +1,7 @@
 {
-  Class[] types=new Class[]{null,String.class,String.class,String.class,String.class,int.class,String.class,int.class,String.class,int.class,int.class,int.class,String.class,String.class,int.class,int.class,int.class,int.class,String.class,String.class,String.class,String.class,short.class,String.class,String.class};
+  Class[] types=new Class[]{null,String.class,String.class,String.class,String.class,int.class,String.class,int.class,String.class,int.class,int.class,int.class,String.class,String.class,int.class,int.class,int.class,int.class,String.class,String.class,String.class,String.class,short.class,String.class};
   Map<String,Object> data=new HashMap<String,Object>();
-  for (int i=1; i <= rs.getMetaData().getColumnCount(); i++) {
+  for (int i=1; i < types.length; i++) {
     Class classType=types[i];
     Object value;
     if (classType.equals(String.class)) {
@@ -11,7 +11,7 @@
       value=rs.getInt(i);
     }
  else     if (classType.equals(short.class)) {
-      value=rs.getShort(i);
+      value=null;
     }
  else {
       value=rs.getObject(i);

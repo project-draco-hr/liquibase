@@ -1,0 +1,11 @@
+{
+  Object defaultValue=columnMetadataResultSet.get("COLUMN_DEF");
+  if (defaultValue != null && defaultValue instanceof String) {
+    String newValue=null;
+    if (defaultValue.equals("(NULL)")) {
+      newValue=null;
+    }
+    columnMetadataResultSet.put("COLUMN_DEF",newValue);
+  }
+  return super.readDefaultValue(columnMetadataResultSet,columnInfo,database);
+}

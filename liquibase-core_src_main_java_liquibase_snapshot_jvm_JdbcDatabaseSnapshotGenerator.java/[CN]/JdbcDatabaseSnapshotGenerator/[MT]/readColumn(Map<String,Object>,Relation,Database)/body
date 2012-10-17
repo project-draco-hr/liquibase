@@ -26,7 +26,10 @@
   if (table instanceof Table) {
     if (columnMetadataResultSet.containsKey("IS_AUTOINCREMENT")) {
       String isAutoincrement=(String)columnMetadataResultSet.get("IS_AUTOINCREMENT");
-      if (isAutoincrement.equals("YES")) {
+      if (isAutoincrement == null) {
+        column.setAutoIncrement(false);
+      }
+ else       if (isAutoincrement.equals("YES")) {
         column.setAutoIncrement(true);
       }
  else       if (isAutoincrement.equals("NO")) {

@@ -6,6 +6,11 @@
   if (dataTypeName.matches(".+\\{.*")) {
     dataTypeName=dataTypeDefinition.replaceFirst("\\s*\\{.*","");
   }
+  boolean primaryKey=false;
+  if (dataTypeName.endsWith(" identity")) {
+    dataTypeName=dataTypeName.replaceFirst(" identity$","");
+    primaryKey=true;
+  }
   SortedSet<Class<? extends LiquibaseDataType>> classes=registry.get(dataTypeName.toLowerCase());
   LiquibaseDataType liquibaseDataType=null;
   if (classes == null) {
@@ -52,6 +57,12 @@
         }
       }
     }
+  }
+  if (primaryKey && liquibaseDataType instanceof IntType) {
+    ((IntType)liquibaseDataType).setAutoIncrement(true);
+  }
+  if (primaryKey && liquibaseDataType instanceof BigIntType) {
+    ((BigIntType)liquibaseDataType).setAutoIncrement(true);
   }
   return liquibaseDataType;
 }
