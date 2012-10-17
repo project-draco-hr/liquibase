@@ -1,0 +1,4 @@
+{
+  DatabaseSnapshot snapshot=createSnapshot(new SnapshotControl(example.getClass()),database,example);
+  return snapshot.get(example);
+}

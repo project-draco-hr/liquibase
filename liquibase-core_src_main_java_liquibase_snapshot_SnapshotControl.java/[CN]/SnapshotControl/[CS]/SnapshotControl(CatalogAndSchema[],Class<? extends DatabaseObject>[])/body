@@ -1,9 +1,0 @@
-{
-  this.schemas=schemas;
-  if (types == null || types.length == 0) {
-    this.types=getDefaultTypes();
-  }
- else {
-    this.types=new HashSet<Class<? extends DatabaseObject>>(Arrays.asList(types));
-  }
-}

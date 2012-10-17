@@ -1,3 +1,0 @@
-{
-  this(new CatalogAndSchema[]{CatalogAndSchema.DEFAULT},null);
-}

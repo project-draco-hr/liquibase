@@ -1,2 +1,0 @@
-CatalogAndSchema[] schemas
-Class<? extends DatabaseObject>[] types

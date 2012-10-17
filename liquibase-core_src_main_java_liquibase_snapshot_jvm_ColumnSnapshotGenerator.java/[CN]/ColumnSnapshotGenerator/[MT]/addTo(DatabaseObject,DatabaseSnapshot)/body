@@ -1,0 +1,29 @@
+{
+  if (foundObject instanceof Relation) {
+    Database database=snapshot.getDatabase();
+    Relation relation=(Relation)foundObject;
+    ResultSet allColumnsMetadataRs=null;
+    try {
+      DatabaseMetaData databaseMetaData=getMetaData(database);
+      Schema schema;
+      schema=relation.getSchema();
+      allColumnsMetadataRs=databaseMetaData.getColumns(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),relation.getName(),null);
+      while (allColumnsMetadataRs.next()) {
+        Column exampleColumn=new Column().setRelation(relation).setName(allColumnsMetadataRs.getString("COLUMN_NAME"));
+        relation.getColumns().add(snapshot.include(exampleColumn));
+      }
+    }
+ catch (    Exception e) {
+      throw new DatabaseException(e);
+    }
+ finally {
+      if (allColumnsMetadataRs != null) {
+        try {
+          allColumnsMetadataRs.close();
+        }
+ catch (        SQLException ignored) {
+        }
+      }
+    }
+  }
+}

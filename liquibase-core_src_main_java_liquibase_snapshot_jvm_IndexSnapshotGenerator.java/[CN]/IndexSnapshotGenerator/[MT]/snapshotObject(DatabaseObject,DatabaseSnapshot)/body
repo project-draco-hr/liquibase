@@ -1,0 +1,90 @@
+{
+  Database database=snapshot.getDatabase();
+  Table exampleTable=((Index)example).getTable();
+  Schema schema=exampleTable.getSchema();
+  List<Table> tables=new ArrayList<Table>();
+  if (exampleTable.getName() == null) {
+    DatabaseSnapshot tableSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(Table.class),database);
+    tables.addAll(tableSnapshot.getAll(Table.class));
+  }
+ else {
+    tables.add(exampleTable);
+  }
+  for (  Table table : tables) {
+    DatabaseMetaData databaseMetaData=null;
+    ResultSet rs=null;
+    Statement statement=null;
+    try {
+      databaseMetaData=getMetaData(database);
+      if (database instanceof OracleDatabase) {
+        statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "' AND INDEX_NAME='"+ example.getName()+ "' ORDER BY INDEX_NAME, ORDINAL_POSITION";
+        rs=statement.executeQuery(sql);
+      }
+ else {
+        rs=databaseMetaData.getIndexInfo(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),table.getName(),false,true);
+      }
+      Index returnIndex=null;
+      while (rs.next()) {
+        String indexName=cleanNameFromDatabase(rs.getString("INDEX_NAME"),database);
+        if (example.getName() != null && !indexName.equals(example.getName())) {
+          continue;
+        }
+        if (database instanceof InformixDatabase && indexName.startsWith(" ")) {
+          indexName="_generated_index_" + indexName.substring(1);
+        }
+        short type=rs.getShort("TYPE");
+        boolean nonUnique=true;
+        try {
+          nonUnique=rs.getBoolean("NON_UNIQUE");
+        }
+ catch (        SQLException e) {
+        }
+        String columnName=cleanNameFromDatabase(rs.getString("COLUMN_NAME"),database);
+        short position=rs.getShort("ORDINAL_POSITION");
+        if (database instanceof InformixDatabase && type != DatabaseMetaData.tableIndexStatistic && position == 0) {
+          System.out.println(this.getClass().getName() + ": corrected position to " + ++position);
+        }
+        String filterCondition=rs.getString("FILTER_CONDITION");
+        if (type == DatabaseMetaData.tableIndexStatistic) {
+          continue;
+        }
+        if (columnName == null) {
+          continue;
+        }
+        if (returnIndex == null) {
+          returnIndex=new Index();
+          returnIndex.setTable(((Index)example).getTable());
+          returnIndex.setName(indexName);
+          returnIndex.setUnique(!nonUnique);
+          returnIndex.setFilterCondition(filterCondition);
+        }
+        for (int i=returnIndex.getColumns().size(); i < position; i++) {
+          returnIndex.getColumns().add(null);
+        }
+        returnIndex.getColumns().set(position - 1,columnName);
+      }
+      return returnIndex;
+    }
+ catch (    Exception e) {
+      throw new DatabaseException(e);
+    }
+ finally {
+      if (rs != null) {
+        try {
+          rs.close();
+        }
+ catch (        SQLException ignored) {
+        }
+      }
+      if (statement != null) {
+        try {
+          statement.close();
+        }
+ catch (        SQLException ignored) {
+        }
+      }
+    }
+  }
+  return null;
+}

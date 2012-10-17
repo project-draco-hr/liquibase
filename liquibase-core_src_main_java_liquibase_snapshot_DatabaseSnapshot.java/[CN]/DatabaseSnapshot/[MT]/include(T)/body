@@ -1,0 +1,18 @@
+{
+  T existing=get(example);
+  if (existing != null) {
+    return existing;
+  }
+  SnapshotGeneratorChain chain=createGeneratorChain(example.getClass(),database);
+  T object=chain.snapshot(example,this);
+  if (object == null) {
+    return object;
+  }
+  Set<DatabaseObject> collection=allFound.get(object.getClass());
+  if (collection == null) {
+    collection=new HashSet<DatabaseObject>();
+    allFound.put(object.getClass(),collection);
+  }
+  collection.add(object);
+  return object;
+}

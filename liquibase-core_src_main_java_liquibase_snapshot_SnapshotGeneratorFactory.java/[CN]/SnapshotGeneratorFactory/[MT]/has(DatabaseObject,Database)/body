@@ -1,4 +1,3 @@
 {
-  SnapshotGeneratorChain chain=createGeneratorChain(example.getClass(),database);
-  return chain.snapshot(example,new DatabaseSnapshot(database,new SnapshotControl(CatalogAndSchema.DEFAULT,new Class[]{example.getClass()}))) != null;
+  return createSnapshot(example,database) != null;
 }

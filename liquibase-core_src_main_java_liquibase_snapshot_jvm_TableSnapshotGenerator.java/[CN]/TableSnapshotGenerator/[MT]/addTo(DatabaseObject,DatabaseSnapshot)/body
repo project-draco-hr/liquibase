@@ -1,0 +1,29 @@
+{
+  if (foundObject instanceof Schema) {
+    Database database=snapshot.getDatabase();
+    Schema schema=(Schema)foundObject;
+    if (schema != null) {
+      ResultSet tableMetaDataRs=null;
+      try {
+        tableMetaDataRs=getMetaData(database).getTables(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),null,new String[]{"TABLE"});
+        while (tableMetaDataRs.next()) {
+          String tableName=tableMetaDataRs.getString("TABLE_NAME");
+          Table tableExample=(Table)new Table().setName(tableName).setSchema(schema);
+          schema.addDatabaseObject(snapshot.include(tableExample));
+        }
+      }
+ catch (      SQLException e) {
+        throw new DatabaseException(e);
+      }
+ finally {
+        try {
+          if (tableMetaDataRs != null) {
+            tableMetaDataRs.close();
+          }
+        }
+ catch (        SQLException ignore) {
+        }
+      }
+    }
+  }
+}

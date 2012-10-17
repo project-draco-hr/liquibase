@@ -1,0 +1,67 @@
+{
+  Database database=snapshot.getDatabase();
+  ResultSet importedKeyMetadataResultSet=null;
+  try {
+    Table fkTable=((ForeignKey)example).getForeignKeyTable();
+    String searchCatalog=database.getJdbcCatalogName(fkTable.getSchema());
+    String searchSchema=database.getJdbcSchemaName(fkTable.getSchema());
+    String searchTableName=fkTable.getName();
+    importedKeyMetadataResultSet=getMetaData(database).getImportedKeys(searchCatalog,searchSchema,searchTableName);
+    while (importedKeyMetadataResultSet.next()) {
+      String fk_name=cleanNameFromDatabase(importedKeyMetadataResultSet.getString("FK_NAME"),database);
+      ForeignKey foreignKey=new ForeignKey();
+      foreignKey.setName(fk_name);
+      String fkTableCatalog=cleanNameFromDatabase(importedKeyMetadataResultSet.getString("FKTABLE_CAT"),database);
+      String fkTableSchema=cleanNameFromDatabase(importedKeyMetadataResultSet.getString("FKTABLE_SCHEM"),database);
+      String fkTableName=cleanNameFromDatabase(importedKeyMetadataResultSet.getString("FKTABLE_NAME"),database);
+      Table foreignKeyTable=new Table().setName(fkTableName);
+      foreignKeyTable.setSchema(new Schema(new Catalog(fkTableCatalog),fkTableSchema));
+      foreignKey.setForeignKeyTable(snapshot.include(foreignKeyTable));
+      foreignKey.setForeignKeyColumns(cleanNameFromDatabase(importedKeyMetadataResultSet.getString("FKCOLUMN_NAME"),database));
+      CatalogAndSchema pkTableSchema=database.getSchemaFromJdbcInfo(importedKeyMetadataResultSet.getString("PKTABLE_CAT"),importedKeyMetadataResultSet.getString("PKTABLE_SCHEM"));
+      Table tempPkTable=(Table)new Table().setName(importedKeyMetadataResultSet.getString("PKTABLE_NAME")).setSchema(new Schema(pkTableSchema.getCatalogName(),pkTableSchema.getSchemaName()));
+      foreignKey.setPrimaryKeyTable(snapshot.include(tempPkTable));
+      foreignKey.setPrimaryKeyColumns(cleanNameFromDatabase(importedKeyMetadataResultSet.getString("PKCOLUMN_NAME"),database));
+      ForeignKeyConstraintType updateRule=convertToForeignKeyConstraintType(importedKeyMetadataResultSet.getInt("UPDATE_RULE"),database);
+      if (importedKeyMetadataResultSet.wasNull()) {
+        updateRule=null;
+      }
+      foreignKey.setUpdateRule(updateRule);
+      ForeignKeyConstraintType deleteRule=convertToForeignKeyConstraintType(importedKeyMetadataResultSet.getInt("DELETE_RULE"),database);
+      if (importedKeyMetadataResultSet.wasNull()) {
+        deleteRule=null;
+      }
+      foreignKey.setDeleteRule(deleteRule);
+      short deferrability=importedKeyMetadataResultSet.getShort("DEFERRABILITY");
+      if (deferrability == DatabaseMetaData.importedKeyInitiallyDeferred) {
+        foreignKey.setDeferrable(true);
+        foreignKey.setInitiallyDeferred(true);
+      }
+ else       if (deferrability == DatabaseMetaData.importedKeyInitiallyImmediate) {
+        foreignKey.setDeferrable(true);
+        foreignKey.setInitiallyDeferred(false);
+      }
+ else       if (deferrability == DatabaseMetaData.importedKeyNotDeferrable) {
+        foreignKey.setDeferrable(false);
+        foreignKey.setInitiallyDeferred(false);
+      }
+ else {
+        throw new RuntimeException("Unknown deferrablility result: " + deferrability);
+      }
+      return foreignKey;
+    }
+    return null;
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (importedKeyMetadataResultSet != null) {
+      try {
+        importedKeyMetadataResultSet.close();
+      }
+ catch (      SQLException ignored) {
+      }
+    }
+  }
+}
