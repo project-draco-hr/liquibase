@@ -2,6 +2,9 @@
   if (value == null || value.toString().equalsIgnoreCase("null")) {
     return null;
   }
+ else   if (value instanceof SequenceFunction) {
+    return database.generateSequenceNextValueFunction(value.toString());
+  }
  else   if (isCurrentDateTimeFunction(value.toString(),database)) {
     return database.getCurrentDateTimeFunction();
   }

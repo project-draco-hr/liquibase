@@ -48,7 +48,6 @@
           if (foundIndex.equals(index,database)) {
             return true;
           }
-          return false;
         }
         return false;
       }

@@ -5,7 +5,7 @@
   try {
     allColumnsMetadataRs=databaseMetaData.getColumns(getJdbcCatalogName(schema),getJdbcSchemaName(schema),null,null);
     while (allColumnsMetadataRs.next()) {
-      Map<String,Object> data=convertResultSetToMap(allColumnsMetadataRs,database);
+      Map<String,String> data=convertResultSetToMap(allColumnsMetadataRs,database);
       String tableOrViewName=cleanObjectNameFromDatabase((String)data.get("TABLE_NAME"));
       Relation relation=snapshot.getDatabaseObject(schema,tableOrViewName,Table.class);
       if (relation == null) {

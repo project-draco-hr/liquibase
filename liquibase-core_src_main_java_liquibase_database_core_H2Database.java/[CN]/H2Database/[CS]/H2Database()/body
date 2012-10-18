@@ -1,3 +1,4 @@
 {
   this.dateFunctions.add(new DatabaseFunction("CURRENT_TIMESTAMP()"));
+  sequenceNextValueFunction="nextval('%s')";
 }

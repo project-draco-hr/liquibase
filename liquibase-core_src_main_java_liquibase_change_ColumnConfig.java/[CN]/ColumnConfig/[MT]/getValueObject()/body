@@ -14,5 +14,8 @@
  else   if (getValueComputed() != null) {
     return getValueComputed();
   }
+ else   if (getValueSequenceNext() != null) {
+    return getValueSequenceNext();
+  }
   return null;
 }

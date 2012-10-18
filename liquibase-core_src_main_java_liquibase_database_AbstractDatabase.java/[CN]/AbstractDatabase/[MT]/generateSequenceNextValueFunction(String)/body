@@ -1,0 +1,6 @@
+{
+  if (sequenceNextValueFunction == null) {
+    return null;
+  }
+  return String.format(sequenceNextValueFunction,this.escapeDatabaseObject(sequenceName,Sequence.class));
+}

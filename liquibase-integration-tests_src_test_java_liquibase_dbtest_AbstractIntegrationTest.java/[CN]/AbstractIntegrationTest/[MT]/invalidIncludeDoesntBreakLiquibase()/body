@@ -1,4 +1,7 @@
 {
+  if (database == null) {
+    return;
+  }
   Liquibase liquibase=createLiquibase(invalidReferenceChangeLog);
   try {
     liquibase.update(null);

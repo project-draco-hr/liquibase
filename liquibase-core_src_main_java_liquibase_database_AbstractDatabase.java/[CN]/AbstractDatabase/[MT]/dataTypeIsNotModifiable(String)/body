@@ -1,0 +1,3 @@
+{
+  return unmodifiableDataTypes.contains(typeName.toLowerCase());
+}

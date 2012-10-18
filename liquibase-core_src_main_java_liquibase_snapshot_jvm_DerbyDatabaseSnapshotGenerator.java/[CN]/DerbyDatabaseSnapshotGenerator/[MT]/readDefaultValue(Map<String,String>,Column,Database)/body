@@ -1,0 +1,7 @@
+{
+  Object val=columnMetadataResultSet.get("COLUMN_DEF");
+  if ("GENERATED_BY_DEFAULT".equals(val)) {
+    return null;
+  }
+  return super.readDefaultValue(columnMetadataResultSet,columnInfo,database);
+}

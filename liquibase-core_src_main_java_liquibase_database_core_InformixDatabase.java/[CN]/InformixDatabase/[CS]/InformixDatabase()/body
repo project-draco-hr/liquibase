@@ -62,4 +62,5 @@
   systemTablesAndViews.add("sysproccolumns");
   systemTablesAndViews.add("sysdomains");
   systemTablesAndViews.add("sysindexes");
+  super.sequenceNextValueFunction="%s.NEXTVAL";
 }

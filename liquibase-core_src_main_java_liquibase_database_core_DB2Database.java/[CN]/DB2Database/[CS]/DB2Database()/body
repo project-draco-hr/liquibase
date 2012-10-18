@@ -1,0 +1,4 @@
+{
+  super();
+  super.sequenceNextValueFunction="nextval for %s";
+}

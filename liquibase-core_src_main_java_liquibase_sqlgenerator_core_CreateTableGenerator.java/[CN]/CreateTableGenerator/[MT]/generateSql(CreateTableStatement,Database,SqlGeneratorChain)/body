@@ -7,8 +7,9 @@
   Iterator<String> columnIterator=statement.getColumns().iterator();
   while (columnIterator.hasNext()) {
     String column=columnIterator.next();
+    DatabaseDataType columnType=statement.getColumnTypes().get(column).toDatabaseDataType(database);
     buffer.append(database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),column));
-    buffer.append(" ").append(statement.getColumnTypes().get(column).toDatabaseDataType(database));
+    buffer.append(" ").append(columnType);
     AutoIncrementConstraint autoIncrementConstraint=null;
     for (    AutoIncrementConstraint currentAutoIncrementConstraint : statement.getAutoIncrementConstraints()) {
       if (column.equals(currentAutoIncrementConstraint.getColumnName())) {
@@ -30,7 +31,7 @@
       }
       buffer.append(" PRIMARY KEY AUTOINCREMENT");
     }
-    if (statement.getDefaultValue(column) != null) {
+    if (!columnType.isSerialDataType() && statement.getDefaultValue(column) != null) {
       Object defaultValue=statement.getDefaultValue(column);
       if (database instanceof MSSQLDatabase) {
         buffer.append(" CONSTRAINT ").append(((MSSQLDatabase)database).generateDefaultConstraintName(statement.getTableName(),column));
@@ -97,7 +98,7 @@
       buffer.append(database.escapeConstraintName(fkConstraint.getForeignKeyName()));
     }
     String referencesString=fkConstraint.getReferences();
-    if (!referencesString.contains(".") && database.getDefaultSchemaName() != null) {
+    if (!referencesString.contains(".") && database.getLiquibaseSchemaName() != null) {
       referencesString=database.getDefaultSchemaName() + "." + referencesString;
     }
     buffer.append(" FOREIGN KEY (").append(database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),fkConstraint.getColumn())).append(") REFERENCES ").append(referencesString);

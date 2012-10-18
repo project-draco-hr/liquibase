@@ -9,7 +9,8 @@
     LockService.resetAll();
     database.checkDatabaseChangeLogLockTable();
     if (database.getConnection() != null) {
-      ((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().executeUpdate("drop table " + database.getDatabaseChangeLogLockTableName());
+      String dropTableCommand="drop table " + database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName());
+      ((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().executeUpdate(dropTableCommand);
       database.commit();
     }
     DatabaseSnapshotGeneratorFactory.resetAll();

@@ -1,0 +1,22 @@
+{
+  String columnTypeName=columnMetadataResultSet.get("TYPE_NAME");
+  int dataType=NumberUtils.readInteger(columnMetadataResultSet.get("DATA_TYPE"));
+  Integer columnSize=NumberUtils.readInteger(columnMetadataResultSet.get("COLUMN_SIZE"));
+  Integer decimalDigits=NumberUtils.readInteger(columnMetadataResultSet.get("DECIMAL_DIGITS"));
+  if (decimalDigits != null && decimalDigits.equals(0)) {
+    decimalDigits=null;
+  }
+  Integer radix=NumberUtils.readInteger(columnMetadataResultSet.get("NUM_PREC_RADIX"));
+  Integer characterOctetLength=NumberUtils.readInteger(columnMetadataResultSet.get("CHAR_OCTET_LENGTH"));
+  if (database.dataTypeIsNotModifiable(columnTypeName)) {
+    columnSize=null;
+  }
+  DataType type=new DataType(columnTypeName);
+  type.setDataTypeId(dataType);
+  type.setColumnSize(columnSize);
+  type.setDecimalDigits(decimalDigits);
+  type.setRadix(radix);
+  type.setCharacterOctetLength(characterOctetLength);
+  type.setColumnSizeUnit(DataType.ColumnSizeUnit.BYTE);
+  return type;
+}

@@ -62,4 +62,5 @@
   systemTablesAndViews.add("TRANSACTIONS");
   systemTablesAndViews.add("UNLOADEDSTATEMENTS");
   systemTablesAndViews.add("VERSION");
+  super.sequenceNextValueFunction="%s.NEXTVAL";
 }

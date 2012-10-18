@@ -1,4 +1,5 @@
 {
   super();
   super.defaultAutoIncrementStartWith=BigInteger.ZERO;
+  super.sequenceNextValueFunction="NEXT VALUE FOR %s";
 }

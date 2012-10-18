@@ -25,6 +25,9 @@
         sql.append(DataTypeFactory.getInstance().getFalseBooleanValue(database));
       }
     }
+ else     if (newValue instanceof SequenceFunction) {
+      sql.append(database.generateSequenceNextValueFunction(newValue.toString()));
+    }
  else {
       sql.append(newValue);
     }
