@@ -1,17 +1,21 @@
 {
-  Class[] types=new Class[]{null,String.class,String.class,String.class,String.class,int.class,String.class,int.class,String.class,int.class,int.class,int.class,String.class,String.class,int.class,int.class,int.class,int.class,String.class,String.class,String.class,String.class,short.class,String.class};
   Map<String,Object> data=new HashMap<String,Object>();
-  for (int i=1; i < types.length; i++) {
-    Class classType=types[i];
+  for (int i=1; i <= rs.getMetaData().getColumnCount(); i++) {
+    int type=rs.getMetaData().getColumnType(i);
     Object value;
-    if (classType.equals(String.class)) {
+    if (type == Types.VARCHAR || type == Types.CHAR || type == Types.LONGVARCHAR) {
       value=rs.getString(i);
     }
- else     if (classType.equals(int.class)) {
+ else     if (type == Types.INTEGER || type == Types.NUMERIC) {
       value=rs.getInt(i);
     }
- else     if (classType.equals(short.class)) {
-      value=null;
+ else     if (type == Types.SMALLINT) {
+      try {
+        value=rs.getInt(i);
+      }
+ catch (      ClassCastException e) {
+        value=rs.getString(i);
+      }
     }
  else {
       value=rs.getObject(i);
