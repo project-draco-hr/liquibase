@@ -5,7 +5,7 @@
     Table fkTable=((ForeignKey)example).getForeignKeyTable();
     String searchCatalog=database.getJdbcCatalogName(fkTable.getSchema());
     String searchSchema=database.getJdbcSchemaName(fkTable.getSchema());
-    String searchTableName=fkTable.getName();
+    String searchTableName=database.correctObjectName(fkTable.getName(),Table.class);
     importedKeyMetadataResultSet=getMetaData(database).getImportedKeys(searchCatalog,searchSchema,searchTableName);
     while (importedKeyMetadataResultSet.next()) {
       String fk_name=cleanNameFromDatabase(importedKeyMetadataResultSet.getString("FK_NAME"),database);

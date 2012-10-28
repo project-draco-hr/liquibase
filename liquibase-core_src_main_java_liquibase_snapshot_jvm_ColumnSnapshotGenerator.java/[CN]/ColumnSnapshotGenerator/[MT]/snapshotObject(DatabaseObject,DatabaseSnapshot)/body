@@ -5,7 +5,7 @@
   ResultSet columnMetadataRs=null;
   try {
     DatabaseMetaData databaseMetaData=getMetaData(database);
-    columnMetadataRs=databaseMetaData.getColumns(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),relation.getName(),((Column)example).getName());
+    columnMetadataRs=databaseMetaData.getColumns(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),database.correctObjectName(relation.getName(),Table.class),database.correctObjectName(example.getName(),Column.class));
     if (columnMetadataRs.next()) {
       Map<String,Object> data=convertResultSetToMap(columnMetadataRs);
       return readColumn(data,relation,database);

@@ -1,10 +1,10 @@
 {
   Database database=snapshot.getDatabase();
   Table exampleTable=((Index)example).getTable();
-  Schema schema=exampleTable.getSchema();
+  Schema schema=new Schema(database.getDefaultCatalogName(),database.getDefaultSchemaName());
   List<Table> tables=new ArrayList<Table>();
   if (exampleTable.getName() == null) {
-    DatabaseSnapshot tableSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(Table.class),database);
+    DatabaseSnapshot tableSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(Schema.class,Table.class),database,schema);
     tables.addAll(tableSnapshot.getAll(Table.class));
   }
  else {
@@ -22,12 +22,12 @@
         rs=statement.executeQuery(sql);
       }
  else {
-        rs=databaseMetaData.getIndexInfo(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),table.getName(),false,true);
+        rs=databaseMetaData.getIndexInfo(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),database.correctObjectName(table.getName(),Table.class),false,true);
       }
       Index returnIndex=null;
       while (rs.next()) {
         String indexName=cleanNameFromDatabase(rs.getString("INDEX_NAME"),database);
-        if (example.getName() != null && !indexName.equals(example.getName())) {
+        if (example.getName() != null && !indexName.equalsIgnoreCase(example.getName())) {
           continue;
         }
         if (database instanceof InformixDatabase && indexName.startsWith(" ")) {
@@ -64,7 +64,9 @@
         }
         returnIndex.getColumns().set(position - 1,columnName);
       }
-      return returnIndex;
+      if (returnIndex != null) {
+        return returnIndex;
+      }
     }
  catch (    Exception e) {
       throw new DatabaseException(e);

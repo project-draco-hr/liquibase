@@ -10,7 +10,10 @@
       allColumnsMetadataRs=databaseMetaData.getColumns(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),relation.getName(),null);
       while (allColumnsMetadataRs.next()) {
         Column exampleColumn=new Column().setRelation(relation).setName(allColumnsMetadataRs.getString("COLUMN_NAME"));
-        relation.getColumns().add(snapshot.include(exampleColumn));
+        Column column=snapshot.include(exampleColumn);
+        if (column != null) {
+          relation.getColumns().add(column);
+        }
       }
     }
  catch (    Exception e) {
