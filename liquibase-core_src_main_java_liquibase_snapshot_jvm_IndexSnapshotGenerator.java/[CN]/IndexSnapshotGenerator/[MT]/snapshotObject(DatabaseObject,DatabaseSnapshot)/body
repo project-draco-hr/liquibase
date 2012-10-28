@@ -22,7 +22,7 @@
         rs=statement.executeQuery(sql);
       }
  else {
-        rs=databaseMetaData.getIndexInfo(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),database.correctObjectName(table.getName(),Table.class),false,true);
+        rs=databaseMetaData.getIndexInfo(((AbstractDatabase)database).getJdbcCatalogName(schema),((AbstractDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(table.getName(),Table.class),false,true);
       }
       Index returnIndex=null;
       while (rs.next()) {

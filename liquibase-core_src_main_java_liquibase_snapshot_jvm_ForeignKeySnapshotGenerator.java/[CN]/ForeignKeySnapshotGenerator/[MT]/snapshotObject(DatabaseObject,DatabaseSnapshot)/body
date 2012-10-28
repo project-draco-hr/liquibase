@@ -3,8 +3,8 @@
   ResultSet importedKeyMetadataResultSet=null;
   try {
     Table fkTable=((ForeignKey)example).getForeignKeyTable();
-    String searchCatalog=database.getJdbcCatalogName(fkTable.getSchema());
-    String searchSchema=database.getJdbcSchemaName(fkTable.getSchema());
+    String searchCatalog=((AbstractDatabase)database).getJdbcCatalogName(fkTable.getSchema());
+    String searchSchema=((AbstractDatabase)database).getJdbcSchemaName(fkTable.getSchema());
     String searchTableName=database.correctObjectName(fkTable.getName(),Table.class);
     importedKeyMetadataResultSet=getMetaData(database).getImportedKeys(searchCatalog,searchSchema,searchTableName);
     while (importedKeyMetadataResultSet.next()) {
@@ -18,7 +18,7 @@
       foreignKeyTable.setSchema(new Schema(new Catalog(fkTableCatalog),fkTableSchema));
       foreignKey.setForeignKeyTable(snapshot.include(foreignKeyTable));
       foreignKey.setForeignKeyColumns(cleanNameFromDatabase(importedKeyMetadataResultSet.getString("FKCOLUMN_NAME"),database));
-      CatalogAndSchema pkTableSchema=database.getSchemaFromJdbcInfo(importedKeyMetadataResultSet.getString("PKTABLE_CAT"),importedKeyMetadataResultSet.getString("PKTABLE_SCHEM"));
+      CatalogAndSchema pkTableSchema=((AbstractDatabase)database).getSchemaFromJdbcInfo(importedKeyMetadataResultSet.getString("PKTABLE_CAT"),importedKeyMetadataResultSet.getString("PKTABLE_SCHEM"));
       Table tempPkTable=(Table)new Table().setName(importedKeyMetadataResultSet.getString("PKTABLE_NAME")).setSchema(new Schema(pkTableSchema.getCatalogName(),pkTableSchema.getSchemaName()));
       foreignKey.setPrimaryKeyTable(snapshot.include(tempPkTable));
       foreignKey.setPrimaryKeyColumns(cleanNameFromDatabase(importedKeyMetadataResultSet.getString("PKCOLUMN_NAME"),database));

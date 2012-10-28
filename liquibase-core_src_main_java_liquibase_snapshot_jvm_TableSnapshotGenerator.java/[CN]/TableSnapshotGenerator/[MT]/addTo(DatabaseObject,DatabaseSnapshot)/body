@@ -5,7 +5,7 @@
     if (schema != null) {
       ResultSet tableMetaDataRs=null;
       try {
-        tableMetaDataRs=getMetaData(database).getTables(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),null,new String[]{"TABLE"});
+        tableMetaDataRs=getMetaData(database).getTables(((AbstractDatabase)database).getJdbcCatalogName(schema),((AbstractDatabase)database).getJdbcSchemaName(schema),null,new String[]{"TABLE"});
         while (tableMetaDataRs.next()) {
           String tableName=tableMetaDataRs.getString("TABLE_NAME");
           Table tableExample=(Table)new Table().setName(tableName).setSchema(schema);

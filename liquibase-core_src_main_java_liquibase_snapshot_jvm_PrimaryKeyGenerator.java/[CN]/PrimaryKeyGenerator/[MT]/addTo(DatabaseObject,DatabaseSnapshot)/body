@@ -6,7 +6,7 @@
     ResultSet rs=null;
     try {
       DatabaseMetaData metaData=getMetaData(database);
-      rs=metaData.getPrimaryKeys(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),table.getName());
+      rs=metaData.getPrimaryKeys(((AbstractDatabase)database).getJdbcCatalogName(schema),((AbstractDatabase)database).getJdbcSchemaName(schema),table.getName());
       if (rs.next()) {
         table.setPrimaryKey(snapshot.include(new PrimaryKey().setName(rs.getString("PK_NAME")).setTable(table)));
       }

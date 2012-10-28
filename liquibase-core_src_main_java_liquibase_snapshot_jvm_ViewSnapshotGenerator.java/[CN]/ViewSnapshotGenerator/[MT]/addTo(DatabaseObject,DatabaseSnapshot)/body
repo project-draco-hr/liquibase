@@ -4,7 +4,7 @@
     Database database=snapshot.getDatabase();
     ResultSet viewsMetadataRs=null;
     try {
-      viewsMetadataRs=getMetaData(database).getTables(database.getJdbcCatalogName(schema),database.getJdbcSchemaName(schema),null,new String[]{"VIEW"});
+      viewsMetadataRs=getMetaData(database).getTables(((AbstractDatabase)database).getJdbcCatalogName(schema),((AbstractDatabase)database).getJdbcSchemaName(schema),null,new String[]{"VIEW"});
       while (viewsMetadataRs.next()) {
         schema.addDatabaseObject(snapshot.include(new View().setName(viewsMetadataRs.getString("TABLE_NAME")).setSchema(schema)));
       }

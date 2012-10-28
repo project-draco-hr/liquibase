@@ -5,7 +5,7 @@
   String remarks=StringUtils.trimToNull(tableMetadataResultSet.getString("REMARKS"));
   Table table=new Table().setName(cleanNameFromDatabase(rawTableName,database));
   table.setRemarks(remarks);
-  CatalogAndSchema schemaFromJdbcInfo=database.getSchemaFromJdbcInfo(rawCatalogName,rawSchemaName);
+  CatalogAndSchema schemaFromJdbcInfo=((AbstractDatabase)database).getSchemaFromJdbcInfo(rawCatalogName,rawSchemaName);
   table.setSchema(new Schema(schemaFromJdbcInfo.getCatalogName(),schemaFromJdbcInfo.getSchemaName()));
   return table;
 }
