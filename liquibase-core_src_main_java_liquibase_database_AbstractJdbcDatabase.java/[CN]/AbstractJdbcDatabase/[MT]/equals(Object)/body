@@ -1,7 +1,7 @@
 {
   if (this == o)   return true;
   if (o == null || getClass() != o.getClass())   return false;
-  AbstractDatabase that=(AbstractDatabase)o;
+  AbstractJdbcDatabase that=(AbstractJdbcDatabase)o;
   if (connection == null) {
     if (that.connection == null) {
       return this == that;

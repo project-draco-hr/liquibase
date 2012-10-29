@@ -5,7 +5,7 @@
   ResultSet rs=null;
   try {
     DatabaseMetaData metaData=getMetaData(database);
-    rs=metaData.getTables(((AbstractDatabase)database).getJdbcCatalogName(schema),((AbstractDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(objectName,Table.class),new String[]{"TABLE"});
+    rs=metaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(objectName,Table.class),new String[]{"TABLE"});
     Table table;
     try {
       if (rs.next()) {

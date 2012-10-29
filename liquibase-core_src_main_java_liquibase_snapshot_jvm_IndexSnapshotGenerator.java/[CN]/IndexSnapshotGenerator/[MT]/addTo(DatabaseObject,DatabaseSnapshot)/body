@@ -15,7 +15,7 @@
         rs=statement.executeQuery(sql);
       }
  else {
-        rs=databaseMetaData.getIndexInfo(((AbstractDatabase)database).getJdbcCatalogName(schema),((AbstractDatabase)database).getJdbcSchemaName(schema),table.getName(),false,true);
+        rs=databaseMetaData.getIndexInfo(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),table.getName(),false,true);
       }
       while (rs.next()) {
         Index exampleIndex=new Index().setName(rs.getString("INDEX_NAME")).setTable(table);

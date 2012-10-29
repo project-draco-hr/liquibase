@@ -15,7 +15,7 @@
     if (database.supportsSchemas()) {
       schemas=((JdbcConnection)database.getConnection()).getMetaData().getSchemas();
       while (schemas.next()) {
-        CatalogAndSchema schemaFromJdbcInfo=((AbstractDatabase)database).getSchemaFromJdbcInfo(schemas.getString("TABLE_CATALOG"),schemas.getString("TABLE_SCHEM"));
+        CatalogAndSchema schemaFromJdbcInfo=((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(schemas.getString("TABLE_CATALOG"),schemas.getString("TABLE_SCHEM"));
         Catalog catalog=snapshot.include(new Catalog(schemaFromJdbcInfo.getCatalogName()));
         Schema schema=new Schema(catalog,schemaFromJdbcInfo.getSchemaName());
         if (schema.equals(example,database)) {
