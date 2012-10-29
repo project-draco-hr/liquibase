@@ -4,7 +4,7 @@
     if (sb.length() > 0) {
       sb.append(", ");
     }
-    sb.append(escapeDatabaseObject(columnName.trim(),Column.class));
+    sb.append(escapeObjectName(columnName.trim(),Column.class));
   }
   return sb.toString();
 }
