@@ -3,10 +3,19 @@
   if (existing != null) {
     return existing;
   }
+  if (isKnownNull(example)) {
+    return null;
+  }
   SnapshotGeneratorChain chain=createGeneratorChain(example.getClass(),database);
   T object=chain.snapshot(example,this);
   if (object == null) {
-    return object;
+    Set<DatabaseObject> collection=knownNull.get(example.getClass());
+    if (collection == null) {
+      collection=new HashSet<DatabaseObject>();
+      knownNull.put(example.getClass(),collection);
+    }
+    collection.add(example);
+    return null;
   }
   Set<DatabaseObject> collection=allFound.get(object.getClass());
   if (collection == null) {

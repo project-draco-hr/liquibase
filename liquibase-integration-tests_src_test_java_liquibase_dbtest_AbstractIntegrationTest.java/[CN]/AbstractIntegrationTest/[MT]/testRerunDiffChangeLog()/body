@@ -59,7 +59,7 @@
       throw e;
     }
     DatabaseSnapshot emptyAgainSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),database);
-    assertEquals(0,emptyAgainSnapshot.getSchemas().iterator().next().getDatabaseObjects(Table.class).size());
-    assertEquals(0,emptyAgainSnapshot.getSchemas().iterator().next().getDatabaseObjects(View.class).size());
+    assertEquals(0,emptyAgainSnapshot.get(Schema.class).iterator().next().getDatabaseObjects(Table.class).size());
+    assertEquals(0,emptyAgainSnapshot.get(Schema.class).iterator().next().getDatabaseObjects(View.class).size());
   }
 }

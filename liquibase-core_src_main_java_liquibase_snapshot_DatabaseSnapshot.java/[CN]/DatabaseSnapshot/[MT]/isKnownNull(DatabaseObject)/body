@@ -1,5 +1,5 @@
 {
-  Set<DatabaseObject> databaseObjects=allFound.get(example.getClass());
+  Set<DatabaseObject> databaseObjects=knownNull.get(example.getClass());
   if (databaseObjects == null) {
     return false;
   }

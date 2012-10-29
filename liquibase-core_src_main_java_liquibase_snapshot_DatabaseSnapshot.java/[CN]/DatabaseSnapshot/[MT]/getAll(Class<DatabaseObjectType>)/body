@@ -1,3 +1,0 @@
-{
-  return (Set<DatabaseObjectType>)allFound.get(type);
-}
