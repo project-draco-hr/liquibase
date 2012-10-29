@@ -1,4 +1,7 @@
 {
+  CatalogAndSchema catalogAndSchema=this.correctSchema(catalogName,schemaName);
+  catalogName=catalogAndSchema.getCatalogName();
+  schemaName=catalogAndSchema.getSchemaName();
   if (catalogName == null && schemaName == null) {
     return escapeObjectName(objectName,objectType);
   }
@@ -19,7 +22,6 @@
     }
   }
  else {
-    catalogName=getAssumedCatalogName(catalogName,schemaName);
     if (StringUtils.trimToNull(catalogName) == null) {
       return escapeObjectName(objectName,objectType);
     }

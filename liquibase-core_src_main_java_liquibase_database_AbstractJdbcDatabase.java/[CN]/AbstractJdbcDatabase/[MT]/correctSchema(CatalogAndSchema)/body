@@ -2,8 +2,8 @@
   if (schema == null) {
     return new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName());
   }
-  String catalogName=schema.getCatalogName();
-  String schemaName=schema.getSchemaName();
+  String catalogName=StringUtils.trimToNull(schema.getCatalogName());
+  String schemaName=StringUtils.trimToNull(schema.getSchemaName());
   if (supportsCatalogs() && supportsSchemas()) {
     if (catalogName == null) {
       catalogName=getDefaultCatalogName();

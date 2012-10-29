@@ -1,5 +1,4 @@
 {
-  schemaName=getAssumedSchemaName(catalogName,schemaName);
   if (StringUtils.trimToNull(schemaName) == null) {
     return escapeObjectName(viewName,View.class);
   }
