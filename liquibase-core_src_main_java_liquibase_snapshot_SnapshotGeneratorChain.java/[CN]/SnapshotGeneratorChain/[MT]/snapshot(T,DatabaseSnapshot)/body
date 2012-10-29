@@ -2,7 +2,7 @@
   if (example == null) {
     return null;
   }
-  if (!(example instanceof Catalog || example instanceof Schema) && !snapshot.getSnapshotControl().shouldSnapshot(example.getClass())) {
+  if (!(example instanceof Catalog || example instanceof Schema) && !snapshot.getSnapshotControl().shouldInclude(example.getClass())) {
     return null;
   }
   if (snapshotGenerators == null) {
