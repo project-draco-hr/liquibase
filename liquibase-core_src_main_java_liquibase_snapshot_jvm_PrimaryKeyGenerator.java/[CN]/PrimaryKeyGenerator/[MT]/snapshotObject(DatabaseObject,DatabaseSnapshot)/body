@@ -19,7 +19,7 @@
       if (returnKey == null) {
         returnKey=new PrimaryKey();
         CatalogAndSchema tableSchema=((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(rs.getString("TABLE_CAT"),rs.getString("TABLE_SCHEMA"));
-        returnKey.setTable((Table)snapshot.include(new Table().setName(rs.getString("TABLE_NAME")).setSchema(new Schema(tableSchema.getCatalogName(),tableSchema.getSchemaName()))));
+        returnKey.setTable((Table)new Table().setName(rs.getString("TABLE_NAME")).setSchema(new Schema(tableSchema.getCatalogName(),tableSchema.getSchemaName())));
         returnKey.setName(database.correctObjectName(rs.getString("PK_NAME"),PrimaryKey.class));
       }
       returnKey.addColumnName(position - 1,columnName);

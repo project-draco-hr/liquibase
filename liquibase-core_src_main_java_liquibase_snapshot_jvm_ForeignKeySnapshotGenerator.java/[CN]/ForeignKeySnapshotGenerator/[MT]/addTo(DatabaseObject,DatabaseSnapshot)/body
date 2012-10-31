@@ -11,7 +11,7 @@
       while (importedKeyMetadataResultSet.next()) {
         ForeignKey fk=new ForeignKey().setName(importedKeyMetadataResultSet.getString("FK_NAME")).setForeignKeyTable(table);
         if (seenFks.add(fk.getName())) {
-          table.getOutgoingForeignKeys().add(snapshot.include(fk));
+          table.getOutgoingForeignKeys().add(fk);
         }
       }
     }
@@ -34,7 +34,7 @@
       while (exportedKeyMetadataResultSet.next()) {
         ForeignKey fk=new ForeignKey().setName(exportedKeyMetadataResultSet.getString("FK_NAME")).setForeignKeyTable(table);
         if (seenFks.add(fk.getName())) {
-          table.getIncomingForeignKeys().add(snapshot.include(fk));
+          table.getIncomingForeignKeys().add(fk);
         }
       }
     }

@@ -1,0 +1,23 @@
+{
+  try {
+    Class clazz=object.getClass();
+    do {
+      for (      Field field : clazz.getDeclaredFields()) {
+        field.setAccessible(true);
+        Object fieldValue=field.get(object);
+        Object newFieldValue=replaceObject(fieldValue);
+        if (fieldValue != newFieldValue) {
+          field.set(object,newFieldValue);
+        }
+      }
+      clazz=clazz.getSuperclass();
+    }
+ while (clazz != null && !clazz.equals(Object.class));
+  }
+ catch (  IllegalAccessException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+catch (  InstantiationException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

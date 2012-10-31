@@ -15,13 +15,15 @@
       knownNull.put(example.getClass(),collection);
     }
     collection.add(example);
-    return null;
   }
-  Set<DatabaseObject> collection=allFound.get(object.getClass());
-  if (collection == null) {
-    collection=new HashSet<DatabaseObject>();
-    allFound.put(object.getClass(),collection);
+ else {
+    Set<DatabaseObject> collection=allFound.get(object.getClass());
+    if (collection == null) {
+      collection=new HashSet<DatabaseObject>();
+      allFound.put(object.getClass(),collection);
+    }
+    collection.add(object);
+    includeNestedObjects(object);
   }
-  collection.add(object);
   return object;
 }

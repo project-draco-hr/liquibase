@@ -11,5 +11,9 @@
   if (!snapshotGenerators.hasNext()) {
     return null;
   }
-  return snapshotGenerators.next().snapshot(example,snapshot,this);
+  T obj=snapshotGenerators.next().snapshot(example,snapshot,this);
+  if (obj != null) {
+    obj.setSnapshotId(UUID.randomUUID());
+  }
+  return obj;
 }

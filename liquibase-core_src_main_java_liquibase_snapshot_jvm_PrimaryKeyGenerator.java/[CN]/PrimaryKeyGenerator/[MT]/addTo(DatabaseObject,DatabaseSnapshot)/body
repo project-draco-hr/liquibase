@@ -8,7 +8,7 @@
       DatabaseMetaData metaData=getMetaData(database);
       rs=metaData.getPrimaryKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),table.getName());
       if (rs.next()) {
-        table.setPrimaryKey(snapshot.include(new PrimaryKey().setName(rs.getString("PK_NAME")).setTable(table)));
+        table.setPrimaryKey(new PrimaryKey().setName(rs.getString("PK_NAME")).setTable(table));
       }
       rs.close();
     }
