@@ -1,9 +1,8 @@
 {
   try {
-    SnapshotControl snapshotControl=new SnapshotControl();
     DatabaseSnapshot snapshot=null;
     try {
-      snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(snapshotControl,this,new Schema(schemaToDrop.getCatalogName(),schemaToDrop.getSchemaName()));
+      snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schemaToDrop,this,new SnapshotControl());
     }
  catch (    LiquibaseException e) {
       throw new UnexpectedLiquibaseException(e);

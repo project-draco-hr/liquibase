@@ -5,7 +5,7 @@
   for (int run=0; run < 2; run++) {
     boolean outputCsv=run == 1;
     runCompleteChangeLog();
-    DatabaseSnapshot originalSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),database);
+    DatabaseSnapshot originalSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl());
     DiffControl diffControl=new DiffControl();
     diffControl.setDiffData(true);
     File tempFile=File.createTempFile("liquibase-test",".xml");
@@ -23,7 +23,7 @@
     }
     Liquibase liquibase=createLiquibase(tempFile.getName());
     clearDatabase(liquibase);
-    DatabaseSnapshot emptySnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),database);
+    DatabaseSnapshot emptySnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl());
     liquibase=createLiquibase(tempFile.getName());
     try {
       liquibase.update(this.contexts);
@@ -32,7 +32,7 @@
       e.printDescriptiveError(System.out);
       throw e;
     }
-    DatabaseSnapshot migratedSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),database);
+    DatabaseSnapshot migratedSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl());
     DiffResult finalDiffResult=DiffGeneratorFactory.getInstance().compare(originalSnapshot,migratedSnapshot,new DiffControl());
     try {
       assertTrue(finalDiffResult.areEqual());
@@ -58,7 +58,7 @@
  catch (    LiquibaseException e) {
       throw e;
     }
-    DatabaseSnapshot emptyAgainSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(),database);
+    DatabaseSnapshot emptyAgainSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl());
     assertEquals(0,emptyAgainSnapshot.get(Schema.class).iterator().next().getDatabaseObjects(Table.class).size());
     assertEquals(0,emptyAgainSnapshot.get(Schema.class).iterator().next().getDatabaseObjects(View.class).size());
   }

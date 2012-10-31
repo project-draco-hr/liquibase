@@ -4,7 +4,7 @@
   Schema schema=new Schema(database.getDefaultCatalogName(),database.getDefaultSchemaName());
   List<Table> tables=new ArrayList<Table>();
   if (exampleTable.getName() == null) {
-    DatabaseSnapshot tableSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new SnapshotControl(Schema.class,Table.class),database,schema);
+    DatabaseSnapshot tableSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schema.toCatalogAndSchema(),database,new SnapshotControl(Table.class));
     tables.addAll(tableSnapshot.get(Table.class));
   }
  else {
