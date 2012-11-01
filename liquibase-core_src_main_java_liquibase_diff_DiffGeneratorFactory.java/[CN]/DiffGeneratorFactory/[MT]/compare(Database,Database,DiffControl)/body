@@ -1,3 +1,5 @@
 {
-  return getGenerator(referenceDatabase,comparisonDatabase).compare(referenceDatabase,comparisonDatabase,diffControl);
+  DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase.getDefaultSchema(),referenceDatabase,new SnapshotControl());
+  DatabaseSnapshot comparisonSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(comparisonDatabase.getDefaultSchema(),comparisonDatabase,new SnapshotControl());
+  return getGenerator(referenceDatabase,comparisonDatabase).compare(referenceSnapshot,comparisonSnapshot,diffControl);
 }

@@ -2,7 +2,7 @@ String changeLogFile
 Database originalDatabase
 String catalogName
 String schemaName
-String diffTypes
+String snapshotTypes
 String author
 String context
 String dataDir

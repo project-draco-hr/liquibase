@@ -1,4 +1,0 @@
-{
-  this.schemaComparisons=new SchemaComparison[]{new SchemaComparison(schema,schema)};
-  readDiffTypesString(diffTypes);
-}

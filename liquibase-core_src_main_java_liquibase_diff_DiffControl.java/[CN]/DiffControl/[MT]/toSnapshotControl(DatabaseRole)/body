@@ -1,8 +1,0 @@
-{
-  CatalogAndSchema[] diffSchemas=getSchemas(role);
-  CatalogAndSchema[] snapshotSchemas=new CatalogAndSchema[diffSchemas.length];
-  for (int i=0; i < diffSchemas.length; i++) {
-    snapshotSchemas[i]=new CatalogAndSchema(diffSchemas[i].getCatalogName(),diffSchemas[i].getSchemaName());
-  }
-  return new SnapshotControl();
-}

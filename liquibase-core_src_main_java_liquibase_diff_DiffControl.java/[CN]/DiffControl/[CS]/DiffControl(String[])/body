@@ -19,5 +19,4 @@
     CatalogAndSchema comparisonSchema=new CatalogAndSchema(comparisonCatalogName,comparisonSchemaName);
     this.schemaComparisons[i]=new SchemaComparison(referenceSchema,comparisonSchema);
   }
-  readDiffTypesString(diffTypes);
 }

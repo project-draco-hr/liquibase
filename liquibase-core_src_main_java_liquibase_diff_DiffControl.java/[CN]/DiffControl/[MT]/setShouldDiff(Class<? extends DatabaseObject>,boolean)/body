@@ -1,8 +1,0 @@
-{
-  if (shouldDiff) {
-    objectTypesToDiff.add(type);
-  }
- else {
-    objectTypesToDiff.remove(type);
-  }
-}
