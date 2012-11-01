@@ -59,7 +59,7 @@
       throw e;
     }
     DatabaseSnapshot emptyAgainSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl());
-    assertEquals(0,emptyAgainSnapshot.get(Schema.class).iterator().next().getDatabaseObjects(Table.class).size());
-    assertEquals(0,emptyAgainSnapshot.get(Schema.class).iterator().next().getDatabaseObjects(View.class).size());
+    assertEquals(2,emptyAgainSnapshot.get(Table.class).size());
+    assertEquals(0,emptyAgainSnapshot.get(View.class).size());
   }
 }

@@ -1,3 +1,8 @@
 {
-  return getJdbcSchemaName(new CatalogAndSchema(schema.getCatalogName(),schema.getName()));
+  if (schema == null) {
+    return getJdbcSchemaName(getDefaultSchema());
+  }
+ else {
+    return getJdbcSchemaName(new CatalogAndSchema(schema.getCatalogName(),schema.getName()));
+  }
 }
