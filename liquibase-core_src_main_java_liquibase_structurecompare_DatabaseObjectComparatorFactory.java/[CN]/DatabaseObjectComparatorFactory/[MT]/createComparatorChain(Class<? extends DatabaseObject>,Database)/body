@@ -1,0 +1,7 @@
+{
+  SortedSet<DatabaseObjectComparator> comparators=DatabaseObjectComparatorFactory.getInstance().getComparators(databaseObjectType,database);
+  if (comparators == null || comparators.size() == 0) {
+    return null;
+  }
+  return new DatabaseObjectComparatorChain(comparators);
+}

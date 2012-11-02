@@ -4,7 +4,7 @@
     return false;
   }
   for (  DatabaseObject obj : databaseObjects) {
-    if (obj.equals(example,database)) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(obj,example,database)) {
       return true;
     }
   }

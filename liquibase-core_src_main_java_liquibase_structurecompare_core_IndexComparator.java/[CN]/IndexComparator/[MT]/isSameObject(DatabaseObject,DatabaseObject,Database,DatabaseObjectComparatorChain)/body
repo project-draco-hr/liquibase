@@ -1,0 +1,19 @@
+{
+  Index thisIndex=(Index)databaseObject1;
+  Index otherIndex=(Index)databaseObject2;
+  if (otherIndex.getColumns().size() == 0) {
+    return chain.isSameObject(databaseObject1,databaseObject2,accordingTo);
+  }
+  if (thisIndex.getTable() != null) {
+    return DatabaseObjectComparatorFactory.getInstance().isSameObject(thisIndex.getTable(),otherIndex.getTable(),accordingTo);
+  }
+  if (otherIndex.getColumns() != null & otherIndex.getColumns().size() > 0) {
+    for (int i=0; i < otherIndex.getColumns().size(); i++) {
+      if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(new Column().setName(thisIndex.getColumns().get(i)),new Column().setName(otherIndex.getColumns().get(i)),accordingTo)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  throw new UnexpectedLiquibaseException("Nothing to compare");
+}

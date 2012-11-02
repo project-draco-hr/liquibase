@@ -18,7 +18,7 @@
         CatalogAndSchema schemaFromJdbcInfo=((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(schemas.getString("TABLE_CATALOG"),schemas.getString("TABLE_SCHEM"));
         Catalog catalog=new Catalog(schemaFromJdbcInfo.getCatalogName());
         Schema schema=new Schema(catalog,schemaFromJdbcInfo.getSchemaName());
-        if (schema.equals(example,database)) {
+        if (DatabaseObjectComparatorFactory.getInstance().isSameObject(schema,example,database)) {
           if (match == null) {
             match=schema;
           }

@@ -1,0 +1,9 @@
+{
+  SortedSet<DatabaseObjectComparator> validComparators=new TreeSet<DatabaseObjectComparator>(new DatabaseObjectComparatorComparator(comparatorClass,database));
+  for (  DatabaseObjectComparator comparator : comparators) {
+    if (comparator.getPriority(comparatorClass,database) > 0) {
+      validComparators.add(comparator);
+    }
+  }
+  return validComparators;
+}

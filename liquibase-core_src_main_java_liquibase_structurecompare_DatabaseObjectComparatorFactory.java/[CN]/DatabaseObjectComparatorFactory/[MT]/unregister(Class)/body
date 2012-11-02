@@ -1,0 +1,9 @@
+{
+  DatabaseObjectComparator toRemove=null;
+  for (  DatabaseObjectComparator existingGenerator : comparators) {
+    if (existingGenerator.getClass().equals(generatorClass)) {
+      toRemove=existingGenerator;
+    }
+  }
+  unregister(toRemove);
+}

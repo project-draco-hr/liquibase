@@ -15,7 +15,7 @@
     while (catalogs.next()) {
       CatalogAndSchema schemaFromJdbcInfo=((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(catalogs.getString("TABLE_CAT"),null);
       Catalog catalog=new Catalog(schemaFromJdbcInfo.getCatalogName());
-      if (catalog.equals(example,database)) {
+      if (DatabaseObjectComparatorFactory.getInstance().isSameObject(catalog,example,database)) {
         if (match == null) {
           match=catalog;
         }
