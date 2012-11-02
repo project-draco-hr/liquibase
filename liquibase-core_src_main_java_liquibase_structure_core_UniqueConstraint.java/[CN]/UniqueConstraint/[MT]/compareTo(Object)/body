@@ -1,4 +1,5 @@
 {
+  UniqueConstraint o=(UniqueConstraint)other;
   String thisTableName;
   String thatTableName;
   thisTableName=null == this.getTable() ? "" : this.getTable().getName();

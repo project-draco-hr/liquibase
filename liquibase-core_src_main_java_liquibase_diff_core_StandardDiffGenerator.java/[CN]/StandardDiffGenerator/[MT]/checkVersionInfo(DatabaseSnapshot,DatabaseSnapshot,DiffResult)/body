@@ -1,6 +1,6 @@
 {
   if (comparisonSnapshot != null && comparisonSnapshot.getDatabase() != null) {
-    diffResult.setProductName(new StringDiff(referenceSnapshot.getDatabase().getDatabaseProductName(),comparisonSnapshot.getDatabase().getDatabaseProductName()));
-    diffResult.setProductVersion(new StringDiff(referenceSnapshot.getDatabase().getDatabaseProductVersion(),comparisonSnapshot.getDatabase().getDatabaseProductVersion()));
+    diffResult.setProductNameDiff(new StringDiff(referenceSnapshot.getDatabase().getDatabaseProductName(),comparisonSnapshot.getDatabase().getDatabaseProductName()));
+    diffResult.setProductVersionDiff(new StringDiff(referenceSnapshot.getDatabase().getDatabaseProductVersion(),comparisonSnapshot.getDatabase().getDatabaseProductVersion()));
   }
 }

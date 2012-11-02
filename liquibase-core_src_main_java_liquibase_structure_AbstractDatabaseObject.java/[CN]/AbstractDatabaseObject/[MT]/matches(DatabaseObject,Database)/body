@@ -2,8 +2,8 @@
   if (otherObject == null) {
     return false;
   }
-  if (this.getName() == null) {
-    return otherObject.getName() == null;
+  if (!equals(otherObject,accordingTo)) {
+    return false;
   }
   return accordingTo.correctObjectName(getName(),otherObject.getClass()).equals(accordingTo.correctObjectName(otherObject.getName(),otherObject.getClass()));
 }

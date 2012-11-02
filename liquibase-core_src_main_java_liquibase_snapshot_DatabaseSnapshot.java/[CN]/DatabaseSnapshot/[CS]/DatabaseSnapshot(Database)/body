@@ -1,3 +1,4 @@
 {
   this.database=database;
+  this.snapshotControl=new SnapshotControl();
 }
