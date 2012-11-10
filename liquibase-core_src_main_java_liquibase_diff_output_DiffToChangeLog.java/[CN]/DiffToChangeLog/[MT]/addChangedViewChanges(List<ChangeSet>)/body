@@ -1,5 +1,6 @@
 {
-  for (  View view : diffResult.getObjectDiff(View.class).getChanged()) {
+  for (  Map.Entry<View,ObjectDifferences> viewChange : diffResult.getObjectDiff(View.class).getChanged().entrySet()) {
+    View view=viewChange.getKey();
     CreateViewChange change=new CreateViewChange();
     change.setViewName(view.getName());
     if (diffOutputConfig.isIncludeCatalog()) {

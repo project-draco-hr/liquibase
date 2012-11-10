@@ -1,0 +1,17 @@
+{
+  out.print(title + ": ");
+  if (objects.size() == 0) {
+    out.println("NONE");
+  }
+ else {
+    out.println();
+    for (    Map.Entry<? extends DatabaseObject,ObjectDifferences> object : objects.entrySet()) {
+      if (object.getValue().hasDifferences()) {
+        out.println("     " + object.getKey());
+        for (        Difference difference : object.getValue().getDifferences()) {
+          out.println("          " + difference.toString());
+        }
+      }
+    }
+  }
+}

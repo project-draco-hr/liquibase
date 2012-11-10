@@ -1,3 +1,0 @@
-{
-  return nameMatches(databaseObject1,databaseObject2,accordingTo);
-}

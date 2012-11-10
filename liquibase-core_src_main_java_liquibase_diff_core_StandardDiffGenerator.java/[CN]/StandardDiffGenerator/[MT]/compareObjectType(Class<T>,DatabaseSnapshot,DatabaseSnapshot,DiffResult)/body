@@ -11,8 +11,9 @@
         diffResult.getObjectDiff(type).addMissing(referenceObject);
       }
  else {
-        if (!DatabaseObjectComparatorFactory.getInstance().containsDifferences(referenceObject,comparisonObject,comparisonSnapshot.getDatabase())) {
-          diffResult.getObjectDiff(type).addChanged(referenceObject);
+        ObjectDifferences differences=DatabaseObjectComparatorFactory.getInstance().findDifferences(referenceObject,comparisonObject,comparisonSnapshot.getDatabase());
+        if (differences.hasDifferences()) {
+          diffResult.getObjectDiff(type).addChanged(referenceObject,differences);
         }
       }
     }

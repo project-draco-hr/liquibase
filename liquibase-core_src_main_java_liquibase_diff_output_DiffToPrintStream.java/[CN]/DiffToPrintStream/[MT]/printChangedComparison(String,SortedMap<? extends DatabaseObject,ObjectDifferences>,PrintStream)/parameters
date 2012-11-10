@@ -1,0 +1,3 @@
+String title
+SortedMap<? extends DatabaseObject,ObjectDifferences> objects
+PrintStream out

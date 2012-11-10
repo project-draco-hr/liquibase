@@ -1,0 +1,22 @@
+{
+  if (chain.isSameObject(databaseObject1,databaseObject2,accordingTo)) {
+    return true;
+  }
+  Index thisIndex=(Index)databaseObject1;
+  Index otherIndex=(Index)databaseObject2;
+  if (thisIndex.getColumns().size() == 0 || otherIndex.getColumns().size() == 0) {
+    return false;
+  }
+  if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(thisIndex.getTable(),otherIndex.getTable(),accordingTo)) {
+    return false;
+  }
+  if (thisIndex.getColumns().size() != otherIndex.getColumns().size()) {
+    return false;
+  }
+  for (int i=0; i < otherIndex.getColumns().size(); i++) {
+    if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(new Column().setName(thisIndex.getColumns().get(i)),new Column().setName(otherIndex.getColumns().get(i)),accordingTo)) {
+      return false;
+    }
+  }
+  return true;
+}

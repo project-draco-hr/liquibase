@@ -1,0 +1,6 @@
+{
+  this.message=message;
+  this.field=field;
+  this.referenceValue=referenceValue;
+  this.comparedValue=comparedValue;
+}

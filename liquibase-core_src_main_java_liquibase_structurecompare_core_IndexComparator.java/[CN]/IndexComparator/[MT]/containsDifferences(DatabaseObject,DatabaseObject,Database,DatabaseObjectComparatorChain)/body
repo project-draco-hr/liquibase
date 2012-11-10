@@ -1,3 +1,0 @@
-{
-  return chain.containsDifferences(databaseObject1,databaseObject2,accordingTo);
-}
