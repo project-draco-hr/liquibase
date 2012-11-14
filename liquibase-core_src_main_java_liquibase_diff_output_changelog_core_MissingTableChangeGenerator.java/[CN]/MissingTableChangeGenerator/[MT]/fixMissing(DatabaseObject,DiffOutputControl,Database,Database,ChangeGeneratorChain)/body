@@ -1,0 +1,66 @@
+{
+  Table missingTable=(Table)missingObject;
+  CreateTableChange change=new CreateTableChange();
+  change.setTableName(missingTable.getName());
+  if (control.isIncludeCatalog()) {
+    change.setCatalogName(missingTable.getSchema().getCatalog().getName());
+  }
+  if (control.isIncludeSchema()) {
+    change.setSchemaName(missingTable.getSchema().getName());
+  }
+  if (missingTable.getRemarks() != null) {
+    change.setRemarks(missingTable.getRemarks());
+  }
+  PrimaryKey primaryKey=missingTable.getPrimaryKey();
+  for (  Column column : missingTable.getColumns()) {
+    ColumnConfig columnConfig=new ColumnConfig();
+    columnConfig.setName(column.getName());
+    columnConfig.setType(column.getType().toString());
+    ConstraintsConfig constraintsConfig=null;
+    if (column.isPrimaryKey()) {
+      constraintsConfig=new ConstraintsConfig();
+      constraintsConfig.setPrimaryKey(true);
+      constraintsConfig.setPrimaryKeyTablespace(column.getTablespace());
+      if (primaryKey != null) {
+        constraintsConfig.setPrimaryKeyName(primaryKey.getName());
+      }
+    }
+    if (column.getType().isAutoIncrement()) {
+      columnConfig.setAutoIncrement(true);
+    }
+    if (column.isNullable() != null && !column.isNullable()) {
+      if (constraintsConfig == null) {
+        constraintsConfig=new ConstraintsConfig();
+      }
+      constraintsConfig.setNullable(false);
+    }
+    if (constraintsConfig != null) {
+      columnConfig.setConstraints(constraintsConfig);
+    }
+    Object defaultValue=column.getDefaultValue();
+    if (defaultValue == null) {
+    }
+ else     if (column.getType().isAutoIncrement()) {
+    }
+ else     if (defaultValue instanceof Date) {
+      columnConfig.setDefaultValueDate((Date)defaultValue);
+    }
+ else     if (defaultValue instanceof Boolean) {
+      columnConfig.setDefaultValueBoolean(((Boolean)defaultValue));
+    }
+ else     if (defaultValue instanceof Number) {
+      columnConfig.setDefaultValueNumeric(((Number)defaultValue));
+    }
+ else     if (defaultValue instanceof DatabaseFunction) {
+      columnConfig.setDefaultValueComputed((DatabaseFunction)defaultValue);
+    }
+ else {
+      columnConfig.setDefaultValue(defaultValue.toString());
+    }
+    if (column.getRemarks() != null) {
+      columnConfig.setRemarks(column.getRemarks());
+    }
+    change.addColumn(columnConfig);
+  }
+  return new Change[]{change};
+}

@@ -1,5 +1,5 @@
 {
-  for (  DiffControl.SchemaComparison schemaComparison : diffResult.getDiffControl().getSchemaComparisons()) {
+  for (  CompareControl.SchemaComparison schemaComparison : diffResult.getCompareControl().getSchemaComparisons()) {
     CatalogAndSchema referenceSchema=referenceSnapshot.getDatabase().correctSchema(schemaComparison.getReferenceSchema());
     CatalogAndSchema comparisonSchema=null;
     if (comparisonSnapshot.getDatabase() != null) {
@@ -8,18 +8,18 @@
     for (    T referenceObject : referenceSnapshot.get(type)) {
       T comparisonObject=comparisonSnapshot.get(referenceObject);
       if (comparisonObject == null) {
-        diffResult.getObjectDiff(type).addMissing(referenceObject);
+        diffResult.addMissingObject(referenceObject);
       }
  else {
         ObjectDifferences differences=DatabaseObjectComparatorFactory.getInstance().findDifferences(referenceObject,comparisonObject,comparisonSnapshot.getDatabase());
         if (differences.hasDifferences()) {
-          diffResult.getObjectDiff(type).addChanged(referenceObject,differences);
+          diffResult.addChangedObject(referenceObject,differences);
         }
       }
     }
     for (    T comparisonObject : comparisonSnapshot.get(type)) {
       if (referenceSnapshot.get(comparisonObject) == null) {
-        diffResult.getObjectDiff(type).addUnexpected(comparisonObject);
+        diffResult.addUnexpectedObject(comparisonObject);
       }
     }
   }

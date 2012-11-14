@@ -1,0 +1,18 @@
+{
+  View view=(View)changedObject;
+  CreateViewChange change=new CreateViewChange();
+  change.setViewName(view.getName());
+  if (control.isIncludeCatalog()) {
+    change.setCatalogName(view.getSchema().getCatalog().getName());
+  }
+  if (control.isIncludeSchema()) {
+    change.setSchemaName(view.getSchema().getName());
+  }
+  String selectQuery=view.getDefinition();
+  if (selectQuery == null) {
+    selectQuery="COULD NOT DETERMINE VIEW QUERY";
+  }
+  change.setSelectQuery(selectQuery);
+  change.setReplaceIfExists(true);
+  return new Change[]{change};
+}

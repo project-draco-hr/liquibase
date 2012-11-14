@@ -1,0 +1,5 @@
+{
+  if (changeGenerators != null) {
+    this.changeGenerators=changeGenerators.iterator();
+  }
+}

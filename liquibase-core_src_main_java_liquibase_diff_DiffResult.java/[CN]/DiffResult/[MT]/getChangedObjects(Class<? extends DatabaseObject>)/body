@@ -1,0 +1,9 @@
+{
+  Map returnSet=new HashMap();
+  for (  Map.Entry<DatabaseObject,ObjectDifferences> obj : changedObjects.entrySet()) {
+    if (type.isAssignableFrom(obj.getKey().getClass())) {
+      returnSet.put(obj.getKey(),obj.getValue());
+    }
+  }
+  return returnSet;
+}

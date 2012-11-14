@@ -1,8 +1,3 @@
 {
-  for (  DatabaseObjectDiff diff : databaseObjectDiffs.values()) {
-    if (!diff.areEqual()) {
-      return false;
-    }
-  }
-  return true;
+  return missingObjects.size() == 0 && unexpectedObjects.size() == 0 && changedObjects.size() == 0;
 }

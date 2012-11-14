@@ -1,3 +1,3 @@
 {
-  super(ForeignKey.class,Table.class);
+  super(ForeignKey.class,new Class[]{Table.class});
 }

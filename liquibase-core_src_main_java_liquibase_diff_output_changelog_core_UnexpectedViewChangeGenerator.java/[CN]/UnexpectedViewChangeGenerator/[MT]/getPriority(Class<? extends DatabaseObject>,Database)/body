@@ -1,0 +1,6 @@
+{
+  if (View.class.isAssignableFrom(objectType)) {
+    return PRIORITY_DEFAULT;
+  }
+  return PRIORITY_NONE;
+}

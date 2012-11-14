@@ -1,0 +1,19 @@
+{
+  if (missingObject == null) {
+    return null;
+  }
+  if (changeGenerators == null) {
+    return null;
+  }
+  if (!changeGenerators.hasNext()) {
+    return null;
+  }
+  Change[] changes=((MissingObjectChangeGenerator)changeGenerators.next()).fixMissing(missingObject,control,referenceDatabase,comparisionDatabase,this);
+  if (changes == null) {
+    return null;
+  }
+  if (changes.length == 0) {
+    return null;
+  }
+  return changes;
+}

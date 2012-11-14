@@ -1,0 +1,8 @@
+{
+  if (getDatabase() == null) {
+    return;
+  }
+  runCompleteChangeLog();
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(getDatabase(),null,new CompareControl());
+  new DiffToChangeLog(diffResult,new DiffOutputControl(true,true,true)).print(System.out);
+}

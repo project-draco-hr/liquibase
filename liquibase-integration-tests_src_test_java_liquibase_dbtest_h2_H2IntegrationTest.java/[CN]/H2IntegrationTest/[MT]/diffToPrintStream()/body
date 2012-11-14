@@ -3,6 +3,6 @@
     return;
   }
   runCompleteChangeLog();
-  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(getDatabase(),null,new DiffControl());
-  new DiffToPrintStream(diffResult,System.out).print();
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(getDatabase(),null,new CompareControl());
+  new DiffToReport(diffResult,System.out).print();
 }

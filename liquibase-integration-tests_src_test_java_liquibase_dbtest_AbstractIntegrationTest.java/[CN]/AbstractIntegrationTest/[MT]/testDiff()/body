@@ -3,12 +3,12 @@
     return;
   }
   runCompleteChangeLog();
-  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,database,new DiffControl());
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,database,new CompareControl());
   try {
     assertTrue(diffResult.areEqual());
   }
  catch (  AssertionError e) {
-    new DiffToPrintStream(diffResult,System.out).print();
+    new DiffToReport(diffResult,System.out).print();
     throw e;
   }
 }

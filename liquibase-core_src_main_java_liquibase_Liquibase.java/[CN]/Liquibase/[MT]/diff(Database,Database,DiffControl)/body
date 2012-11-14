@@ -1,3 +1,0 @@
-{
-  return DiffGeneratorFactory.getInstance().compare(referenceDatabase,targetDatabase,diffControl);
-}

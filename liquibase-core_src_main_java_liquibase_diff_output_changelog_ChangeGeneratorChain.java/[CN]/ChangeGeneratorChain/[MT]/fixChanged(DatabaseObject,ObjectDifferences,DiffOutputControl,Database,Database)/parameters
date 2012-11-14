@@ -1,0 +1,5 @@
+DatabaseObject changedObject
+ObjectDifferences differences
+DiffOutputControl control
+Database referenceDatabase
+Database comparisionDatabase

@@ -1,10 +1,9 @@
 {
-  DiffControl diffControl=new DiffControl();
-  diffControl.addStatusListener(new OutDiffStatusListener());
+  CompareControl compareControl=new CompareControl();
   DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase.getDefaultSchema(),referenceDatabase,new SnapshotControl());
   DatabaseSnapshot targetSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(targetDatabase.getDefaultSchema(),targetDatabase,new SnapshotControl());
-  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,targetSnapshot,diffControl);
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,targetSnapshot,compareControl);
   System.out.println("");
   System.out.println("Diff Results:");
-  new DiffToPrintStream(diffResult,System.out).print();
+  new DiffToReport(diffResult,System.out).print();
 }

@@ -1,0 +1,12 @@
+{
+  Table unexpectedTable=(Table)unexpectedObject;
+  DropTableChange change=new DropTableChange();
+  change.setTableName(unexpectedTable.getName());
+  if (control.isIncludeCatalog()) {
+    change.setCatalogName(unexpectedTable.getSchema().getCatalog().getName());
+  }
+  if (control.isIncludeSchema()) {
+    change.setSchemaName(unexpectedTable.getSchema().getName());
+  }
+  return new Change[]{change};
+}

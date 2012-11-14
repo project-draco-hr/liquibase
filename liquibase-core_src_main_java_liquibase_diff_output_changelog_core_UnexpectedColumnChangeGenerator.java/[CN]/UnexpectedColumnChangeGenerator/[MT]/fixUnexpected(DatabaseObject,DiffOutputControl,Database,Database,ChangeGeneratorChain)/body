@@ -1,0 +1,13 @@
+{
+  Column column=(Column)unexpectedObject;
+  DropColumnChange change=new DropColumnChange();
+  change.setTableName(column.getRelation().getName());
+  if (control.isIncludeCatalog()) {
+    change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+  }
+  if (control.isIncludeSchema()) {
+    change.setSchemaName(column.getRelation().getSchema().getName());
+  }
+  change.setColumnName(column.getName());
+  return new Change[]{change};
+}

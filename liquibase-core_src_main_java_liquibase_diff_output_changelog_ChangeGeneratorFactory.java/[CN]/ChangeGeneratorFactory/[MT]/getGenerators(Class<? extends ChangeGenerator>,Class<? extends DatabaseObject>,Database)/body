@@ -1,0 +1,9 @@
+{
+  SortedSet<ChangeGenerator> validGenerators=new TreeSet<ChangeGenerator>(new ChangeGeneratorComparator(objectType,database));
+  for (  ChangeGenerator generator : generators) {
+    if (generatorType.isAssignableFrom(generator.getClass()) && generator.getPriority(objectType,database) > 0) {
+      validGenerators.add(generator);
+    }
+  }
+  return validGenerators;
+}

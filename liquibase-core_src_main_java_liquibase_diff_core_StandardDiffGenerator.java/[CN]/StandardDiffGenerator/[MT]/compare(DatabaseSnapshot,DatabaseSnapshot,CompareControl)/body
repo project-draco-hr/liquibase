@@ -1,0 +1,13 @@
+{
+  if (comparisonSnapshot == null) {
+    comparisonSnapshot=new DatabaseSnapshot(referenceSnapshot.getDatabase());
+  }
+  DiffResult diffResult=new DiffResult(referenceSnapshot,comparisonSnapshot,compareControl);
+  checkVersionInfo(referenceSnapshot,comparisonSnapshot,diffResult);
+  Set<Class<? extends DatabaseObject>> typesToCompare=referenceSnapshot.getSnapshotControl().getTypesToInclude();
+  typesToCompare.retainAll(comparisonSnapshot.getSnapshotControl().getTypesToInclude());
+  for (  Class<? extends DatabaseObject> typeToCompare : typesToCompare) {
+    compareObjectType(typeToCompare,referenceSnapshot,comparisonSnapshot,diffResult);
+  }
+  return diffResult;
+}

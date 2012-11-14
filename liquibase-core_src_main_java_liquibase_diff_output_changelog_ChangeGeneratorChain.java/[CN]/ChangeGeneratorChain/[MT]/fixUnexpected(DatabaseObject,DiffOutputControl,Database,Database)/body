@@ -1,0 +1,19 @@
+{
+  if (unexpectedObject == null) {
+    return null;
+  }
+  if (changeGenerators == null) {
+    return null;
+  }
+  if (!changeGenerators.hasNext()) {
+    return null;
+  }
+  Change[] changes=((UnexpectedObjectChangeGenerator)changeGenerators.next()).fixUnexpected(unexpectedObject,control,referenceDatabase,comparisionDatabase,this);
+  if (changes == null) {
+    return null;
+  }
+  if (changes.length == 0) {
+    return null;
+  }
+  return changes;
+}
