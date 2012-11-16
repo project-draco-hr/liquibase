@@ -1,0 +1,4 @@
+{
+  Edge e=(Edge)obj;
+  return e.from == from && e.to == to;
+}

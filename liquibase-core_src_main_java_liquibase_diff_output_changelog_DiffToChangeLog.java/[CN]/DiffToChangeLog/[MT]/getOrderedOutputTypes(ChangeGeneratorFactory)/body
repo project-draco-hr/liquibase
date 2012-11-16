@@ -1,0 +1,9 @@
+{
+  Database comparisonDatabase=diffResult.getComparisonSnapshot().getDatabase();
+  Graph graph=new Graph();
+  for (  Class<? extends DatabaseObject> type : diffResult.getReferenceSnapshot().getSnapshotControl().getTypesToInclude()) {
+    graph.addType(type);
+  }
+  List<Class<? extends DatabaseObject>> types=graph.sort(comparisonDatabase);
+  return types;
+}

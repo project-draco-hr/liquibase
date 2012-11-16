@@ -1,0 +1,5 @@
+{
+  this.type=type;
+  inEdges=new HashSet<Edge>();
+  outEdges=new HashSet<Edge>();
+}

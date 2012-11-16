@@ -1,0 +1,7 @@
+{
+  if (changes != null) {
+    for (    Change change : changes) {
+      changeSets.add(generateChangeSet(change));
+    }
+  }
+}
