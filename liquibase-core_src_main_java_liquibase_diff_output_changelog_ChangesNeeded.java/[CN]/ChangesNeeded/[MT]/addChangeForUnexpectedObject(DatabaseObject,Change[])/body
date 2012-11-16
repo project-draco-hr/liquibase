@@ -1,3 +1,0 @@
-{
-  changeForUnexpectedObjects.put(object,changes);
-}

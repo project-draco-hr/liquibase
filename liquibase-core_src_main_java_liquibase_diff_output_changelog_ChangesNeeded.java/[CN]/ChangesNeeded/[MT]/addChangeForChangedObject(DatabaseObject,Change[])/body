@@ -1,3 +1,0 @@
-{
-  changeForChangedObjects.put(object,changes);
-}
