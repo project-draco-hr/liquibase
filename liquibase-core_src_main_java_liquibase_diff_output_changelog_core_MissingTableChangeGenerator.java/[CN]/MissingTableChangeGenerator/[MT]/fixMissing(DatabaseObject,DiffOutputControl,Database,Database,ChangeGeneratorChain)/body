@@ -12,6 +12,7 @@
     change.setRemarks(missingTable.getRemarks());
   }
   PrimaryKey primaryKey=missingTable.getPrimaryKey();
+  control.setAlreadyHandledMissing(primaryKey);
   for (  Column column : missingTable.getColumns()) {
     ColumnConfig columnConfig=new ColumnConfig();
     columnConfig.setName(column.getName());
@@ -61,6 +62,7 @@
       columnConfig.setRemarks(column.getRemarks());
     }
     change.addColumn(columnConfig);
+    control.setAlreadyHandledMissing(column);
   }
   return new Change[]{change};
 }

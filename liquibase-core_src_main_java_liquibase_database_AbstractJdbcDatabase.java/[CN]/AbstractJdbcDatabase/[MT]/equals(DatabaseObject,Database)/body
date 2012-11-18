@@ -1,3 +1,0 @@
-{
-  return otherObject.getClass().equals(this.getClass());
-}

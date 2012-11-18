@@ -1,0 +1,8 @@
+{
+  for (  DatabaseObject object : this.alreadyHandledMissing) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,missingObject,accordingTo)) {
+      return true;
+    }
+  }
+  return false;
+}

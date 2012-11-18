@@ -19,5 +19,6 @@
   change.setDeferrable(uc.isDeferrable());
   change.setInitiallyDeferred(uc.isInitiallyDeferred());
   change.setDisabled(uc.isDisabled());
+  control.setAlreadyHandledMissing(uc.getBackingIndex());
   return new Change[]{change};
 }

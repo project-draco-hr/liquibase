@@ -9,5 +9,6 @@
   if (control.isIncludeSchema()) {
     change.setBaseTableSchemaName(fk.getForeignKeyTable().getSchema().getName());
   }
+  control.setAlreadyHandledUnexpected(fk.getBackingIndex());
   return new Change[]{change};
 }

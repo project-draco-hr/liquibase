@@ -1,0 +1,8 @@
+{
+  for (  DatabaseObject object : this.alreadyHandledChanged) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,changedObject,accordingTo)) {
+      return true;
+    }
+  }
+  return false;
+}

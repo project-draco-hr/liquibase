@@ -23,5 +23,6 @@
   change.setOnUpdate(fk.getUpdateRule());
   change.setOnDelete(fk.getDeleteRule());
   change.setReferencesUniqueColumn(fk.getReferencesUniqueColumn());
+  control.setAlreadyHandledMissing(fk.getBackingIndex());
   return new Change[]{change};
 }

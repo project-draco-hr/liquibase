@@ -1,5 +1,5 @@
 {
-  if (Sequence.class.isAssignableFrom(objectType)) {
+  if (UniqueConstraint.class.isAssignableFrom(objectType)) {
     return PRIORITY_DEFAULT;
   }
   return PRIORITY_NONE;

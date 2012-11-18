@@ -8,6 +8,9 @@
   if (!changeGenerators.hasNext()) {
     return null;
   }
+  if (control.alreadyHandledMissing(missingObject,comparisionDatabase)) {
+    return null;
+  }
   Change[] changes=((MissingObjectChangeGenerator)changeGenerators.next()).fixMissing(missingObject,control,referenceDatabase,comparisionDatabase,this);
   if (changes == null) {
     return null;

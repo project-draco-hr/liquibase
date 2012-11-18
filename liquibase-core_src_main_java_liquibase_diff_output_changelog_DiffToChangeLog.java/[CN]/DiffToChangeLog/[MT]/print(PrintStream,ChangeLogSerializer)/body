@@ -1,16 +1,22 @@
 {
   final ChangeGeneratorFactory changeGeneratorFactory=ChangeGeneratorFactory.getInstance();
-  List<Class<? extends DatabaseObject>> types=getOrderedOutputTypes(changeGeneratorFactory);
   List<ChangeSet> changeSets=new ArrayList<ChangeSet>();
+  List<Class<? extends DatabaseObject>> types=getOrderedOutputTypes(MissingObjectChangeGenerator.class);
   for (  Class<? extends DatabaseObject> type : types) {
     for (    DatabaseObject object : diffResult.getMissingObjects(type)) {
       Change[] changes=changeGeneratorFactory.fixMissing(object,diffOutputControl,diffResult.getReferenceSnapshot().getDatabase(),diffResult.getComparisonSnapshot().getDatabase());
       addToChangeSets(changes,changeSets);
     }
+  }
+  types=getOrderedOutputTypes(UnexpectedObjectChangeGenerator.class);
+  for (  Class<? extends DatabaseObject> type : types) {
     for (    DatabaseObject object : diffResult.getUnexpectedObjects(type)) {
       Change[] changes=changeGeneratorFactory.fixUnexpected(object,diffOutputControl,diffResult.getReferenceSnapshot().getDatabase(),diffResult.getComparisonSnapshot().getDatabase());
       addToChangeSets(changes,changeSets);
     }
+  }
+  types=getOrderedOutputTypes(ChangedObjectChangeGenerator.class);
+  for (  Class<? extends DatabaseObject> type : types) {
     for (    Map.Entry<DatabaseObject,ObjectDifferences> entry : diffResult.getChangedObjects(type).entrySet()) {
       Change[] changes=changeGeneratorFactory.fixChanged(entry.getKey(),entry.getValue(),diffOutputControl,diffResult.getReferenceSnapshot().getDatabase(),diffResult.getComparisonSnapshot().getDatabase());
       addToChangeSets(changes,changeSets);
