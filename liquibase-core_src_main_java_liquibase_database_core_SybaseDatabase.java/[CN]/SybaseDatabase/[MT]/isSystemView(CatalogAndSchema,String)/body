@@ -1,4 +1,0 @@
-{
-  schema=correctSchema(schema);
-  return super.isSystemView(schema,viewName) || schema.getSchemaName().equals("sys") || viewName.toLowerCase().equals("sybfi");
-}

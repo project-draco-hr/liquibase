@@ -1,3 +1,0 @@
-{
-  return tableName.startsWith("RDB$") || super.isSystemTable(schema,tableName);
-}

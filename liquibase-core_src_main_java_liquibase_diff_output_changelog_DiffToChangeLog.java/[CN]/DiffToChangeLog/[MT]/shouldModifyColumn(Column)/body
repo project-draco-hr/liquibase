@@ -1,4 +1,0 @@
-{
-  CatalogAndSchema schema=column.getRelation().getSchema().toCatalogAndSchema();
-  return !diffResult.getReferenceSnapshot().getDatabase().isLiquibaseTable(schema,column.getRelation().getName());
-}

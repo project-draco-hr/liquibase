@@ -1,0 +1,17 @@
+{
+  if (example instanceof Table) {
+    if (example.getName().startsWith("BIN$")) {
+      return true;
+    }
+ else     if (example.getName().startsWith("AQ$")) {
+      return true;
+    }
+ else     if (example.getName().startsWith("DR$")) {
+      return true;
+    }
+ else     if (example.getName().startsWith("SYS_IOT_OVER")) {
+      return true;
+    }
+  }
+  return super.isSystemObject(example);
+}

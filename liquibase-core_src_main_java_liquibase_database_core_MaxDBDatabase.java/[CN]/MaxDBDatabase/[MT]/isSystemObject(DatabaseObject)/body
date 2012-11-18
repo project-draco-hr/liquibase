@@ -1,0 +1,20 @@
+{
+  if (super.isSystemObject(example)) {
+    return true;
+  }
+  if (example instanceof View && example.getSchema() != null) {
+    if ("DOMAIN".equalsIgnoreCase(example.getSchema().getName())) {
+      return true;
+    }
+ else     if ("SYSINFO".equalsIgnoreCase(example.getSchema().getName())) {
+      return true;
+    }
+ else     if ("SYSLOADER".equalsIgnoreCase(example.getSchema().getName())) {
+      return true;
+    }
+ else     if ("SYSDBA".equalsIgnoreCase(example.getSchema().getName())) {
+      return true;
+    }
+  }
+  return false;
+}

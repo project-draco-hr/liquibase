@@ -1,4 +1,0 @@
-{
-  schema=correctSchema(schema);
-  return super.isSystemTable(schema,tableName) || schema.getSchemaName().equals("sys") || tableName.toLowerCase().startsWith("sybfi");
-}

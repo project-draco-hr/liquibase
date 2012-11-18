@@ -1,0 +1,9 @@
+{
+  if (example instanceof Table && (example.getSchema().getName().equals("sys") || example.getSchema().getName().equals("sybfi"))) {
+    return true;
+  }
+  if (example instanceof View && (example.getSchema().getName().equals("sys") || example.getSchema().getName().equals("sybfi"))) {
+    return true;
+  }
+  return super.isSystemObject(example);
+}

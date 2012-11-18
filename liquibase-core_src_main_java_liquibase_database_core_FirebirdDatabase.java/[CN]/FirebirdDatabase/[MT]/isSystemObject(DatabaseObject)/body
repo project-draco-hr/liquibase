@@ -1,0 +1,6 @@
+{
+  if (example instanceof Table && example.getName().startsWith("RDB$")) {
+    return true;
+  }
+  return super.isSystemObject(example);
+}
