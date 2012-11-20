@@ -8,6 +8,9 @@
   if (!changeGenerators.hasNext()) {
     return null;
   }
+  if (control.alreadyHandledUnexpected(unexpectedObject,comparisionDatabase)) {
+    return null;
+  }
   Change[] changes=((UnexpectedObjectChangeGenerator)changeGenerators.next()).fixUnexpected(unexpectedObject,control,referenceDatabase,comparisionDatabase,this);
   if (changes == null) {
     return null;

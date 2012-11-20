@@ -24,15 +24,6 @@
   change.setOnDelete(fk.getDeleteRule());
   change.setReferencesUniqueColumn(fk.getReferencesUniqueColumn());
   Index backingIndex=fk.getBackingIndex();
-  if (backingIndex == null) {
-    Index exampleIndex=new Index().setTable(fk.getForeignKeyTable());
-    for (    String col : fk.getForeignKeyColumns().split("\\s*,\\s*")) {
-      exampleIndex.getColumns().add(col);
-    }
-    control.setAlreadyHandledMissing(exampleIndex);
-  }
- else {
-    control.setAlreadyHandledMissing(backingIndex);
-  }
+  control.setAlreadyHandledMissing(backingIndex);
   return new Change[]{change};
 }

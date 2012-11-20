@@ -42,4 +42,9 @@
       }
     }
   }
+  if (foundObject instanceof UniqueConstraint) {
+    Index exampleIndex=new Index().setTable(((UniqueConstraint)foundObject).getTable()).setName(foundObject.getName());
+    exampleIndex.getColumns().addAll(((UniqueConstraint)foundObject).getColumns());
+    ((UniqueConstraint)foundObject).setBackingIndex(exampleIndex);
+  }
 }

@@ -2,7 +2,7 @@
   try {
     DatabaseSnapshot snapshot=null;
     try {
-      snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schemaToDrop,this,new SnapshotControl());
+      snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schemaToDrop,this,new SnapshotControl(Table.class,View.class,ForeignKey.class));
     }
  catch (    LiquibaseException e) {
       throw new UnexpectedLiquibaseException(e);

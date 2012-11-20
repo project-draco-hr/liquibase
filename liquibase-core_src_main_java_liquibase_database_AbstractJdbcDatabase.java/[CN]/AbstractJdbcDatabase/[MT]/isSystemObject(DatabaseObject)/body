@@ -1,5 +1,8 @@
 {
-  if (example.getSchema() != null && example.getSchema().getName().equalsIgnoreCase("information_schema")) {
+  if (example == null) {
+    return false;
+  }
+  if (example.getSchema() != null && example.getSchema().getName() != null && example.getSchema().getName().equalsIgnoreCase("information_schema")) {
     return true;
   }
   if (example instanceof Table && getSystemTables().contains(example.getName())) {
