@@ -1,2 +1,16 @@
 {
+  if (foundObject instanceof Table) {
+    Table table=(Table)foundObject;
+    Database database=snapshot.getDatabase();
+    Schema schema;
+    schema=table.getSchema();
+    List<Map> metadata=ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement("select * " + "from information_schema.table_constraints " + "where constraint_schema='" + database.correctObjectName(schema.getCatalogName(),Catalog.class) + "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "'"));
+    Set<String> seenConstraints=new HashSet<String>();
+    for (    Map<String,Object> constraint : metadata) {
+      UniqueConstraint uq=new UniqueConstraint().setName((String)constraint.get("CONSTRAINT_NAME")).setTable(table);
+      if (seenConstraints.add(uq.getName())) {
+        table.getUniqueConstraints().add(uq);
+      }
+    }
+  }
 }

@@ -11,21 +11,11 @@
   if (missingTable.getRemarks() != null) {
     change.setRemarks(missingTable.getRemarks());
   }
-  PrimaryKey primaryKey=missingTable.getPrimaryKey();
-  control.setAlreadyHandledMissing(primaryKey);
   for (  Column column : missingTable.getColumns()) {
     ColumnConfig columnConfig=new ColumnConfig();
     columnConfig.setName(column.getName());
     columnConfig.setType(column.getType().toString());
     ConstraintsConfig constraintsConfig=null;
-    if (column.isPrimaryKey()) {
-      constraintsConfig=new ConstraintsConfig();
-      constraintsConfig.setPrimaryKey(true);
-      constraintsConfig.setPrimaryKeyTablespace(column.getTablespace());
-      if (primaryKey != null) {
-        constraintsConfig.setPrimaryKeyName(primaryKey.getName());
-      }
-    }
     if (column.getType().isAutoIncrement()) {
       columnConfig.setAutoIncrement(true);
     }

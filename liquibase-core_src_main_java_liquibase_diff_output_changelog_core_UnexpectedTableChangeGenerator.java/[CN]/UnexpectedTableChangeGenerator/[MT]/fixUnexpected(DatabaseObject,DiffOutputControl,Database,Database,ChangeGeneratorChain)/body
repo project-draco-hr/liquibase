@@ -12,5 +12,6 @@
     control.setAlreadyHandledUnexpected(column);
   }
   ;
+  control.setAlreadyHandledUnexpected(unexpectedTable.getPrimaryKey());
   return new Change[]{change};
 }
