@@ -15,15 +15,7 @@
       LogFactory.getLogger().info("Successfully released change log lock");
     }
   }
- catch (  Exception e) {
-    throw new LockException(e);
-  }
- finally {
-    try {
-      database.rollback();
-    }
- catch (    DatabaseException e) {
-      ;
-    }
+  finally {
+    database.rollback();
   }
 }
