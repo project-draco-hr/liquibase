@@ -34,7 +34,10 @@
       }
       while (rs.next()) {
         String indexName=cleanNameFromDatabase(rs.getString("INDEX_NAME"),database);
-        if (exampleName != null && !indexName.equals(exampleName)) {
+        if (indexName == null) {
+          continue;
+        }
+        if (exampleName != null && !exampleName.equals(indexName)) {
           continue;
         }
         if (database instanceof InformixDatabase && indexName.startsWith(" ")) {

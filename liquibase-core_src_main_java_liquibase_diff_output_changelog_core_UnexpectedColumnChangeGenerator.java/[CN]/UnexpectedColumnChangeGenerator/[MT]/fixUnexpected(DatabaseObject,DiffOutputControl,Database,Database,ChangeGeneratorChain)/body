@@ -1,5 +1,8 @@
 {
   Column column=(Column)unexpectedObject;
+  if (column.getRelation() instanceof View) {
+    return null;
+  }
   DropColumnChange change=new DropColumnChange();
   change.setTableName(column.getRelation().getName());
   if (control.isIncludeCatalog()) {

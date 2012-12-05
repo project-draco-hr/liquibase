@@ -13,5 +13,6 @@
   if (control.isIncludeTablespace()) {
     change.setTablespace(pk.getTablespace());
   }
+  control.setAlreadyHandledMissing(pk.getBackingIndex());
   return new Change[]{change};
 }

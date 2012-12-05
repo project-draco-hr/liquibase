@@ -1,4 +1,14 @@
 {
+  if (database instanceof MSSQLDatabase) {
+    Object defaultValue=columnMetadataResultSet.get("COLUMN_DEF");
+    if (defaultValue != null && defaultValue instanceof String) {
+      String newValue=null;
+      if (defaultValue.equals("(NULL)")) {
+        newValue=null;
+      }
+      columnMetadataResultSet.put("COLUMN_DEF",newValue);
+    }
+  }
   Object val=columnMetadataResultSet.get("COLUMN_DEF");
   if (val instanceof String && val.equals("")) {
     return null;

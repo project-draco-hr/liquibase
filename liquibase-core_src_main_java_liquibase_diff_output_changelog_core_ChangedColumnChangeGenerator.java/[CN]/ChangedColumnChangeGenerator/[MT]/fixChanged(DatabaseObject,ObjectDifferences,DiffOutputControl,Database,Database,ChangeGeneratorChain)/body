@@ -1,3 +1,6 @@
 {
+  if (((Column)changedObject).getRelation() instanceof View) {
+    return null;
+  }
   return null;
 }

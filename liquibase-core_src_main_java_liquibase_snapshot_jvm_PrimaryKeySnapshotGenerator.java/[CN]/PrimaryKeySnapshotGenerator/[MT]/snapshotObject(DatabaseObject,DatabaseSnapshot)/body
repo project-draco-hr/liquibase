@@ -26,6 +26,12 @@
       returnKey.addColumnName(position - 1,columnName);
     }
     rs.close();
+    Index exampleIndex=new Index().setTable(returnKey.getTable());
+    exampleIndex.getColumns().addAll(Arrays.asList(returnKey.getColumnNames().split("\\s*,\\s*")));
+    if (database instanceof MSSQLDatabase) {
+      exampleIndex.setName(returnKey.getName());
+    }
+    returnKey.setBackingIndex(exampleIndex);
     return returnKey;
   }
  catch (  SQLException e) {

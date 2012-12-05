@@ -1,5 +1,8 @@
 {
   Column column=(Column)missingObject;
+  if (column.getRelation() instanceof View) {
+    return null;
+  }
   AddColumnChange change=new AddColumnChange();
   change.setTableName(column.getRelation().getName());
   if (control.isIncludeCatalog()) {

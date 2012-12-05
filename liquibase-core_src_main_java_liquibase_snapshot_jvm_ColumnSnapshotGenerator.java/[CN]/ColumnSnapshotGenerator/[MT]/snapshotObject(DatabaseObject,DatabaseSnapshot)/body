@@ -7,7 +7,7 @@
     DatabaseMetaData databaseMetaData=getMetaData(database);
     columnMetadataRs=databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(relation.getName(),Table.class),database.correctObjectName(example.getName(),Column.class));
     if (columnMetadataRs.next()) {
-      Map<String,Object> data=convertResultSetToMap(columnMetadataRs);
+      Map<String,Object> data=convertResultSetToMap(columnMetadataRs,database);
       return readColumn(data,relation,database);
     }
  else {

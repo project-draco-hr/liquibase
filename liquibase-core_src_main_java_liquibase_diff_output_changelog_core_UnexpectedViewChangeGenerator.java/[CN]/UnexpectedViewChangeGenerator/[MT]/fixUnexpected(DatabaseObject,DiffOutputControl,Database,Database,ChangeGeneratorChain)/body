@@ -8,5 +8,9 @@
   if (control.isIncludeSchema()) {
     change.setSchemaName(view.getSchema().getName());
   }
+  for (  Column column : view.getColumns()) {
+    control.setAlreadyHandledUnexpected(column);
+  }
+  ;
   return new Change[]{change};
 }

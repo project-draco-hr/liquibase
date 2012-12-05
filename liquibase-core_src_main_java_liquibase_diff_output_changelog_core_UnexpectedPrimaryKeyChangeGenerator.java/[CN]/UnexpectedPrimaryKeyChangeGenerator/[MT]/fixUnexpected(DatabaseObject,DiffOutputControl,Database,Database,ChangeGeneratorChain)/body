@@ -9,5 +9,7 @@
     change.setSchemaName(pk.getTable().getSchema().getName());
   }
   change.setConstraintName(pk.getName());
+  Index backingIndex=pk.getBackingIndex();
+  control.setAlreadyHandledUnexpected(backingIndex);
   return new Change[]{change};
 }

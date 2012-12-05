@@ -1,6 +1,3 @@
 {
-  if (schemaName == null) {
-    schemaName="dbo";
-  }
   return super.escapeObjectName(catalogName,schemaName,objectName,objectType);
 }

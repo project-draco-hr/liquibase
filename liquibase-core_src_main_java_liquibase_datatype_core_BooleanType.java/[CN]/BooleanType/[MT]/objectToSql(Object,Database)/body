@@ -22,6 +22,9 @@
       returnValue=this.getFalseBooleanValue(database);
     }
   }
+ else   if (value instanceof DatabaseFunction) {
+    return ((DatabaseFunction)value).toString();
+  }
  else   if (((Boolean)value)) {
     returnValue=this.getTrueBooleanValue(database);
   }
