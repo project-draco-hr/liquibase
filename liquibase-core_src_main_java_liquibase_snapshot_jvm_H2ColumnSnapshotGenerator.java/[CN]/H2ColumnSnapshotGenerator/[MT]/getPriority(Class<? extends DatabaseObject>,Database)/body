@@ -1,0 +1,8 @@
+{
+  if (Column.class.isAssignableFrom(objectType) && database instanceof H2Database) {
+    return PRIORITY_DATABASE;
+  }
+ else {
+    return PRIORITY_NONE;
+  }
+}
