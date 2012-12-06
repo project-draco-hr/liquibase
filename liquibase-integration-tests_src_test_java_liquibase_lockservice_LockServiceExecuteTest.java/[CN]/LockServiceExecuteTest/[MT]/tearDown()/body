@@ -1,4 +1,4 @@
 {
-  LockServiceImpl.resetAll();
+  LockServiceFactory.getInstance().resetAll();
   fixupLockTables();
 }

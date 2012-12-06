@@ -1,7 +1,6 @@
 {
   Database database=createMock(Database.class);
   replay(database);
-  LockServiceImpl lockService=new LockServiceImpl();
   lockService.setDatabase(database);
   assertFalse(lockService.hasChangeLogLock());
   Field field=lockService.getClass().getDeclaredField("hasChangeLogLock");

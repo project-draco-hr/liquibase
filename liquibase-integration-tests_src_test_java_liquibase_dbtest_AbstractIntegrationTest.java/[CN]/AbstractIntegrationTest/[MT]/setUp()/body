@@ -6,7 +6,7 @@
     }
     DatabaseSnapshotGeneratorFactory.resetAll();
     ExecutorService.getInstance().reset();
-    LockServiceImpl.resetAll();
+    LockServiceFactory.getInstance().resetAll();
     database.checkDatabaseChangeLogLockTable();
     if (database.getConnection() != null) {
       ((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().executeUpdate("drop table " + database.getDatabaseChangeLogLockTableName());

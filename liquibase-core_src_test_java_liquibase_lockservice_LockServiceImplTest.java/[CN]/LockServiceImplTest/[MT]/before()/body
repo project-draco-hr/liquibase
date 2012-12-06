@@ -1,3 +1,4 @@
 {
-  LockServiceImpl.resetAll();
+  lockService=new LockServiceImpl();
+  lockService.reset();
 }
