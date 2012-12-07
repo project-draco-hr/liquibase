@@ -1,3 +1,4 @@
 {
   this.schemaComparisons=schemaComparison;
+  initCompareTypes(compareTypes);
 }

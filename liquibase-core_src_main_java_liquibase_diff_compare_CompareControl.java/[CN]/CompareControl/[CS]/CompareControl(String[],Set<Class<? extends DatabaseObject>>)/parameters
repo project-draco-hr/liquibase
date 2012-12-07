@@ -1,0 +1,2 @@
+String[] referenceVsComparisonSchemas
+Set<Class<? extends DatabaseObject>> compareTypes

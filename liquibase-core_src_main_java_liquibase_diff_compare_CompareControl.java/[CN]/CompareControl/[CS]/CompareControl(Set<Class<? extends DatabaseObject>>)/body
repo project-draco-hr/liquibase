@@ -1,0 +1,4 @@
+{
+  schemaComparisons=new SchemaComparison[]{new SchemaComparison(new CatalogAndSchema(null,null),new CatalogAndSchema(null,null))};
+  initCompareTypes(compareTypes);
+}

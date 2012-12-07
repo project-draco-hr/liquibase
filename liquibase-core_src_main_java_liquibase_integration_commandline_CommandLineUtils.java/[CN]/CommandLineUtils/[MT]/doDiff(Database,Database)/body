@@ -1,7 +1,7 @@
 {
-  CompareControl compareControl=new CompareControl();
   DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase.getDefaultSchema(),referenceDatabase,new SnapshotControl());
   DatabaseSnapshot targetSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(targetDatabase.getDefaultSchema(),targetDatabase,new SnapshotControl());
+  CompareControl compareControl=new CompareControl(referenceSnapshot.getSnapshotControl().getTypesToInclude());
   DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,targetSnapshot,compareControl);
   System.out.println("");
   System.out.println("Diff Results:");
