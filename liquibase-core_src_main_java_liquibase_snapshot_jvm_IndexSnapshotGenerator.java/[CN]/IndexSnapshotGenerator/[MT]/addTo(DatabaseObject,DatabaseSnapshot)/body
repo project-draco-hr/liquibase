@@ -11,7 +11,7 @@
       databaseMetaData=getMetaData(database);
       if (database instanceof OracleDatabase) {
         statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
-        String sql="SELECT INDEX_NAME FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "'";
+        String sql="SELECT INDEX_NAME, COLUMN_NAME FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "'";
         rs=statement.executeQuery(sql);
       }
  else {

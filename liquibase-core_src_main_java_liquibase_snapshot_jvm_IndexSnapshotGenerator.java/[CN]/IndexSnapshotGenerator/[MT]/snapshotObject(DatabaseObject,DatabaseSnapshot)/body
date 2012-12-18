@@ -15,6 +15,7 @@
     tables.addAll(tableSnapshot.get(Table.class));
   }
  else {
+    exampleTable.setName(database.correctObjectName(exampleTable.getName(),Table.class));
     tables.add(exampleTable);
   }
   Map<String,Index> foundIndexes=new HashMap<String,Index>();
@@ -26,7 +27,11 @@
       databaseMetaData=getMetaData(database);
       if (database instanceof OracleDatabase) {
         statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
-        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "' AND INDEX_NAME='"+ exampleName+ "' ORDER BY INDEX_NAME, ORDINAL_POSITION";
+        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "'";
+        if (exampleName != null) {
+          sql+=" AND INDEX_NAME='" + exampleName + "'";
+        }
+        sql+=" ORDER BY INDEX_NAME, ORDINAL_POSITION";
         rs=statement.executeQuery(sql);
       }
  else {

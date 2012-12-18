@@ -6,6 +6,9 @@
  else   if (database instanceof MSSQLDatabase) {
     sql="select Constraint_Name from information_schema.table_constraints " + "where constraint_type = 'Unique' " + "and constraint_schema='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "'";
   }
+ else   if (database instanceof OracleDatabase) {
+    sql="select uc.constraint_name, uc.table_name,uc.status,uc.deferrable,uc.deferred,ui.tablespace_name from all_constraints uc, all_cons_columns ucc, all_indexes ui " + "where uc.constraint_type='U' and uc.index_name = ui.index_name and uc.constraint_name = ucc.constraint_name " + "and uc.owner = '" + database.correctObjectName(schema.getCatalogName(),Catalog.class) + "' "+ "and ui.table_owner = '"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and ucc.owner = '"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "'";
+  }
  else {
     sql="select CONSTRAINT_NAME, CONSTRAINT_TYPE " + "from information_schema.constraints " + "where constraint_schema='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and constraint_catalog='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "'";
   }

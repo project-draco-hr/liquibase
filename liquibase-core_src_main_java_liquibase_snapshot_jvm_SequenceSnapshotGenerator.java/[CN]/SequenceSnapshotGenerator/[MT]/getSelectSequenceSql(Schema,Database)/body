@@ -21,7 +21,7 @@
     return "SELECT SEQUENCE_NAME FROM DOMAIN.SEQUENCES WHERE OWNER = '" + schema.getName() + "'";
   }
  else   if (database instanceof OracleDatabase) {
-    return "SELECT SEQUENCE_NAME FROM ALL_SEQUENCES WHERE SEQUENCE_OWNER = '" + schema.getName() + "'";
+    return "SELECT SEQUENCE_NAME FROM ALL_SEQUENCES WHERE SEQUENCE_OWNER = '" + schema.getCatalogName() + "'";
   }
  else   if (database instanceof PostgresDatabase) {
     return "SELECT relname AS SEQUENCE_NAME FROM pg_class, pg_namespace " + "WHERE relkind='S' " + "AND pg_class.relnamespace = pg_namespace.oid "+ "AND nspname = '" + schema.getName() + "' "+ "AND 'nextval(''"+ (schema == null ? "" : schema + ".")+ "'||relname||'''::regclass)' not in (select adsrc from pg_attrdef where adsrc is not null) "+ "AND 'nextval(''"+ (schema == null ? "" : schema + ".")+ "\"'||relname||'\"''::regclass)' not in (select adsrc from pg_attrdef where adsrc is not null) "+ "AND 'nextval('''||relname||'''::regclass)' not in (select adsrc from pg_attrdef where adsrc is not null)";

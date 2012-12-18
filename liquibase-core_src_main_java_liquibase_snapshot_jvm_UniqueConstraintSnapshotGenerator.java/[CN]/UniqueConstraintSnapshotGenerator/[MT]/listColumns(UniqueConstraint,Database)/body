@@ -9,6 +9,9 @@
  else   if (database instanceof MSSQLDatabase) {
     sql="select TC.Constraint_Name as CONSTRAINT_NAME, CC.Column_Name as COLUMN_NAME from information_schema.table_constraints TC " + "inner join information_schema.constraint_column_usage CC on TC.Constraint_Name = CC.Constraint_Name " + "where TC.constraint_schema='" + database.correctObjectName(schema.getCatalogName(),Catalog.class) + "' "+ "and TC.table_name='"+ database.correctObjectName(example.getTable().getName(),Table.class)+ "' "+ "and TC.Constraint_Name='"+ database.correctObjectName(name,UniqueConstraint.class)+ "'"+ "order by TC.Constraint_Name";
   }
+ else   if (database instanceof OracleDatabase) {
+    sql="select ucc.column_name from all_cons_columns ucc where ucc.constraint_name='" + database.correctObjectName(name,UniqueConstraint.class) + "' and ucc.owner='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' order by ucc.position";
+  }
  else {
     sql="select CONSTRAINT_NAME, COLUMN_LIST as COLUMN_NAME " + "from information_schema.constraints " + "where constraint_schema='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and constraint_catalog='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "' "+ "and constraint_name='"+ database.correctObjectName(name,UniqueConstraint.class)+ "'";
   }
