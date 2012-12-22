@@ -1,4 +1,4 @@
 {
-  this.referencesUniqueColumn=referencesUniqueColumn;
+  this.setAttribute("referencesUniqueColumn",referencesUniqueColumn);
   return this;
 }

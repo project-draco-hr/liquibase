@@ -1,4 +1,4 @@
 {
-  this.backingIndex=backingIndex;
+  setAttribute("backingIndex",backingIndex);
   return this;
 }

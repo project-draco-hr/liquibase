@@ -1,7 +1,7 @@
 {
   List<DatabaseObject> columns=new ArrayList<DatabaseObject>();
-  for (  String column : this.columns) {
-    columns.add(new Column().setName(column).setRelation(table));
+  for (  String column : this.getColumns()) {
+    columns.add(new Column().setName(column).setRelation(getTable()));
   }
   return columns.toArray(new DatabaseObject[columns.size()]);
 }

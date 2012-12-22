@@ -1,8 +1,8 @@
 {
   try {
     int result;
-    result=(relation != null ? relation.hashCode() : 0);
-    result=31 * result + name.toUpperCase().hashCode();
+    result=(getRelation() != null ? getRelation().hashCode() : 0);
+    result=31 * result + getName().toUpperCase().hashCode();
     return result;
   }
  catch (  Exception e) {

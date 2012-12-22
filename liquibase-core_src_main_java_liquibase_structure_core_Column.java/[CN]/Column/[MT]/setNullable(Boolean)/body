@@ -1,4 +1,4 @@
 {
-  this.nullable=nullable;
+  setAttribute("nullable",nullable);
   return this;
 }

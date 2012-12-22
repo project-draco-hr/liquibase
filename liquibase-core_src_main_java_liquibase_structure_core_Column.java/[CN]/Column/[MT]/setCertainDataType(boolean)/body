@@ -1,4 +1,4 @@
 {
-  this.certainDataType=certainDataType;
+  setAttribute("certainDataType",certainDataType);
   return this;
 }

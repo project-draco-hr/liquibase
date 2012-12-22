@@ -1,5 +1,5 @@
 {
-  int result=catalog != null ? catalog.hashCode() : 0;
-  result=31 * result + (name != null ? name.hashCode() : 0);
+  int result=getCatalog() != null ? getCatalog().hashCode() : 0;
+  result=31 * result + (getName() != null ? getName().hashCode() : 0);
   return result;
 }

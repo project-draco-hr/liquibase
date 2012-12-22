@@ -1,3 +1,3 @@
 {
-  return catalog;
+  return getAttribute("catalog",Catalog.class);
 }

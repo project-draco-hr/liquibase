@@ -1,4 +1,4 @@
 {
-  this.initiallyDeferred=initiallyDeferred;
+  this.setAttribute("initiallyDeferred",initiallyDeferred);
   return this;
 }

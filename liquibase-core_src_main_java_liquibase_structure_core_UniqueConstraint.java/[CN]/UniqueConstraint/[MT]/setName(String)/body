@@ -1,4 +1,4 @@
 {
-  this.name=constraintName;
+  this.setAttribute("name",constraintName);
   return this;
 }

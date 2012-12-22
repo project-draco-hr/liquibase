@@ -16,7 +16,7 @@
   if (returnValue == 0 && this.getPrimaryKeyColumns() != null && o.getPrimaryKeyColumns() != null) {
     returnValue=this.getPrimaryKeyColumns().compareToIgnoreCase(o.getPrimaryKeyColumns());
   }
-  if (returnValue == 0 && this.updateRule != null && o.getUpdateRule() != null)   returnValue=this.updateRule.compareTo(o.getUpdateRule());
-  if (returnValue == 0 && this.deleteRule != null && o.getDeleteRule() != null)   returnValue=this.deleteRule.compareTo(o.getDeleteRule());
+  if (returnValue == 0 && this.getUpdateRule() != null && o.getUpdateRule() != null)   returnValue=this.getUpdateRule().compareTo(o.getUpdateRule());
+  if (returnValue == 0 && this.getDeleteRule() != null && o.getDeleteRule() != null)   returnValue=this.getDeleteRule().compareTo(o.getDeleteRule());
   return returnValue;
 }

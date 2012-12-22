@@ -1,0 +1,6 @@
+{
+  setAttribute("columns",new ArrayList());
+  setAttribute("deferrable",false);
+  setAttribute("initiallyDeferred",false);
+  setAttribute("disabled",false);
+}

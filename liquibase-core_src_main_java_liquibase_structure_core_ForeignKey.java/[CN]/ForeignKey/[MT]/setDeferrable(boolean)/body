@@ -1,4 +1,4 @@
 {
-  this.deferrable=deferrable;
+  this.setAttribute("deferrable",deferrable);
   return this;
 }

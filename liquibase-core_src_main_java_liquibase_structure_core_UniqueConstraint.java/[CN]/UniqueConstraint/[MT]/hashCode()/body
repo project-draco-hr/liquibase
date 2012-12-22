@@ -1,10 +1,10 @@
 {
   int result=0;
-  if (this.table != null) {
-    result=this.table.hashCode();
+  if (this.getTable() != null) {
+    result=this.getTable().hashCode();
   }
-  if (this.name != null) {
-    result=31 * result + this.name.toUpperCase().hashCode();
+  if (this.getName() != null) {
+    result=31 * result + this.getName().toUpperCase().hashCode();
   }
   if (getColumnNames() != null) {
     result=31 * result + getColumnNames().hashCode();

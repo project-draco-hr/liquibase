@@ -1,4 +1,4 @@
 {
-  this.schema=schema;
+  this.setAttribute("schema",schema);
   return this;
 }

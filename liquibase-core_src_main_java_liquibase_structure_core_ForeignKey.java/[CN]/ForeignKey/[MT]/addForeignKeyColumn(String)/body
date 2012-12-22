@@ -1,8 +1,8 @@
 {
-  if ((this.foreignKeyColumns == null) || (this.foreignKeyColumns.length() == 0)) {
-    this.foreignKeyColumns=foreignKeyColumn;
+  if ((this.getForeignKeyColumns() == null) || (this.getForeignKeyColumns().length() == 0)) {
+    this.setForeignKeyColumns(foreignKeyColumn);
   }
  else {
-    this.foreignKeyColumns=this.foreignKeyColumns + ", " + foreignKeyColumn;
+    this.setForeignKeyColumns(this.getForeignKeyColumns() + ", " + foreignKeyColumn);
   }
 }

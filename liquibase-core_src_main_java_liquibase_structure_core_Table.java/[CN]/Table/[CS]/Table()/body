@@ -1,2 +1,6 @@
 {
+  setAttribute("outgoingForeignKeys",new ArrayList<ForeignKey>());
+  setAttribute("incomingForeignKeys",new ArrayList<ForeignKey>());
+  setAttribute("indexes",new ArrayList<Index>());
+  setAttribute("uniqueConstraints",new ArrayList<UniqueConstraint>());
 }

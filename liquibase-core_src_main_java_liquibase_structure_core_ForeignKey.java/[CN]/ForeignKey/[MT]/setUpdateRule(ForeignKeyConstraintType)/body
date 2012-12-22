@@ -1,4 +1,4 @@
 {
-  this.updateRule=rule;
+  this.setAttribute("updateRule",rule);
   return this;
 }

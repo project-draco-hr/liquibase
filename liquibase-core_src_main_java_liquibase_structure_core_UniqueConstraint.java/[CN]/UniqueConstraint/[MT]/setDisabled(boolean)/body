@@ -1,4 +1,4 @@
 {
-  this.disabled=disabled;
+  this.setAttribute("disabled",disabled);
   return this;
 }

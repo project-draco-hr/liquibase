@@ -1,4 +1,4 @@
 {
-  this.deleteRule=rule;
+  this.setAttribute("deleteRule",rule);
   return this;
 }

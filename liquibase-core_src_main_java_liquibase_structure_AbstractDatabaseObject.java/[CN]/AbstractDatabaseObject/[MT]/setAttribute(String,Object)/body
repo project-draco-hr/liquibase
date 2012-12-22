@@ -1,0 +1,9 @@
+{
+  if (value == null) {
+    attributes.remove(attribute);
+  }
+ else {
+    attributes.put(attribute,value);
+  }
+  return this;
+}

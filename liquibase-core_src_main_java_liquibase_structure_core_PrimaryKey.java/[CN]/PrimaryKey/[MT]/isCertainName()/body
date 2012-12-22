@@ -1,3 +1,3 @@
 {
-  return certainName;
+  return getAttribute("certainName",Boolean.class);
 }

@@ -1,6 +1,6 @@
 {
-  if (catalog == null) {
+  if (getCatalog() == null) {
     return null;
   }
-  return catalog.getName();
+  return getCatalog().getName();
 }

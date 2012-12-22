@@ -1,3 +1,3 @@
 {
-  this.primaryKey=primaryKey;
+  this.setAttribute("primaryKey",primaryKey);
 }

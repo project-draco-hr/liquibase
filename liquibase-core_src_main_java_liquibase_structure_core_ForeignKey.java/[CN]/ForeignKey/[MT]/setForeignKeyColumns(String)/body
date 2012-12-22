@@ -1,4 +1,4 @@
 {
-  this.foreignKeyColumns=foreignKeyColumns;
+  this.setAttribute("foreignKeyColumns",foreignKeyColumns);
   return this;
 }

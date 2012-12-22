@@ -1,4 +1,4 @@
 {
-  this.unique=value;
+  this.setAttribute("unique",value);
   return this;
 }

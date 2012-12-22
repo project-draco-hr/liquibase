@@ -1,3 +1,3 @@
 {
-  return StringUtils.join(associatedWith,",");
+  return StringUtils.join(getAssociatedWith(),",");
 }

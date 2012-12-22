@@ -1,3 +1,3 @@
 {
-  return initiallyDeferred;
+  return getAttribute("initiallyDeferred",Boolean.class);
 }

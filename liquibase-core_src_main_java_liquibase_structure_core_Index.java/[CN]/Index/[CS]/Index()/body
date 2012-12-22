@@ -1,0 +1,4 @@
+{
+  setAttribute("columns",new ArrayList<String>());
+  setAttribute("associatedWith",new HashSet<String>());
+}

@@ -1,8 +1,8 @@
 {
-  if ((this.primaryKeyColumns == null) || (this.primaryKeyColumns.length() == 0)) {
-    this.primaryKeyColumns=primaryKeyColumn;
+  if ((this.getPrimaryKeyColumns() == null) || (this.getPrimaryKeyColumns().length() == 0)) {
+    this.setPrimaryKeyColumns(primaryKeyColumn);
   }
  else {
-    this.primaryKeyColumns=this.primaryKeyColumns + ", " + primaryKeyColumn;
+    this.setPrimaryKeyColumns(this.getPrimaryKeyColumns() + ", " + primaryKeyColumn);
   }
 }

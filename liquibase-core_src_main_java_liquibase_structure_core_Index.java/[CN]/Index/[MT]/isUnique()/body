@@ -1,3 +1,3 @@
 {
-  return this.unique;
+  return getAttribute("unique",Boolean.class);
 }

@@ -5,5 +5,5 @@
   if (getForeignKeyColumns() == null) {
     return this.getName().equalsIgnoreCase(that.getName());
   }
-  return getForeignKeyColumns().equalsIgnoreCase(that.getForeignKeyColumns()) && foreignKeyTable.equals(that.foreignKeyTable) && getPrimaryKeyColumns().equalsIgnoreCase(that.getPrimaryKeyColumns())&& primaryKeyTable.equals(that.primaryKeyTable)&& referencesUniqueColumn == that.getReferencesUniqueColumn();
+  return getForeignKeyColumns().equalsIgnoreCase(that.getForeignKeyColumns()) && getForeignKeyTable().equals(that.getForeignKeyTable()) && getPrimaryKeyColumns().equalsIgnoreCase(that.getPrimaryKeyColumns())&& getPrimaryKeyTable().equals(that.getPrimaryKeyTable())&& getReferencesUniqueColumn() == that.getReferencesUniqueColumn();
 }

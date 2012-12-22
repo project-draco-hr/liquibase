@@ -1,4 +1,4 @@
 {
-  this.type=type;
+  setAttribute("type",type);
   return this;
 }

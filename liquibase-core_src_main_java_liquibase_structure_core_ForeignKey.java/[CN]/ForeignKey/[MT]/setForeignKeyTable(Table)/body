@@ -1,4 +1,4 @@
 {
-  this.foreignKeyTable=foreignKeyTable;
+  this.setAttribute("foreignKeyTable",foreignKeyTable);
   return this;
 }

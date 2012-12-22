@@ -1,16 +1,16 @@
 {
   int result=0;
-  if (primaryKeyTable != null) {
-    result=primaryKeyTable.hashCode();
+  if (getPrimaryKeyTable() != null) {
+    result=getPrimaryKeyTable().hashCode();
   }
-  if (primaryKeyColumns != null) {
-    result=31 * result + primaryKeyColumns.toUpperCase().hashCode();
+  if (getPrimaryKeyColumns() != null) {
+    result=31 * result + getPrimaryKeyColumns().toUpperCase().hashCode();
   }
-  if (foreignKeyTable != null) {
-    result=31 * result + foreignKeyTable.hashCode();
+  if (getForeignKeyTable() != null) {
+    result=31 * result + getForeignKeyTable().hashCode();
   }
-  if (foreignKeyColumns != null) {
-    result=31 * result + foreignKeyColumns.toUpperCase().hashCode();
+  if (getForeignKeyColumns() != null) {
+    result=31 * result + getForeignKeyColumns().toUpperCase().hashCode();
   }
   return result;
 }
