@@ -1,0 +1,10 @@
+{
+  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/columnFirstChangeLog.xml",new ChangeLogParameters(),new JUnitResourceAccessor());
+  ChangeSet changeSet=changeLog.getChangeSets().get(1);
+  List<Change> changes=changeSet.getChanges();
+  Change change=changes.get(0);
+  List<ColumnConfig> columns=((AddColumnChange)change).getColumns();
+  ColumnConfig columnConfig=columns.get(0);
+  assertEquals("middlename",columnConfig.getName());
+  assertTrue(columnConfig.getFirst());
+}
