@@ -1,8 +1,12 @@
 {
   AddColumnChange change=new AddColumnChange();
   assertEquals(0,change.getColumns().size());
-  change.addColumn(new ColumnConfig().setName("a"));
+  AddColumnConfig column=new AddColumnConfig();
+  column.setName("a");
+  change.addColumn(column);
   assertEquals(1,change.getColumns().size());
-  change.addColumn(new ColumnConfig().setName("b"));
+  column=new AddColumnConfig();
+  column.setName("b");
+  change.addColumn(column);
   assertEquals(2,change.getColumns().size());
 }
