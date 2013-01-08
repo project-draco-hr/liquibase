@@ -1,0 +1,4 @@
+{
+  InputStream is=prepareStream(buffer);
+  reader=new UtfBomAwareReader(is,"ISO8859_1");
+}

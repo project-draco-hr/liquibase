@@ -1,0 +1,5 @@
+{
+  prepare(0xFF,0xFE);
+  assertEncoding("UTF-16LE");
+  assertEmpty();
+}

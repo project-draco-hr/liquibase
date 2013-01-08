@@ -1,0 +1,4 @@
+{
+  prepare(0x61,0x62,0x63);
+  assertEncoding("ISO-8859-1");
+}

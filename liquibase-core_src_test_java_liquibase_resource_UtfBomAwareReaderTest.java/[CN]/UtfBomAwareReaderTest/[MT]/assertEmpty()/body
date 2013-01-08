@@ -1,0 +1,3 @@
+{
+  assertEquals("reader is not empty",-1,reader.read());
+}
