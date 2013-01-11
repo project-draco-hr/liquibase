@@ -1,5 +1,3 @@
 {
-  String canonicalCharsetName=Charset.forName(reader.getEncoding()).toString();
-  assertEquals(expectedCharsetName,canonicalCharsetName);
-  assertEquals("ISO8859_1",reader.getDefaultEncoding());
+  assertEncoding(expectedCharsetName,"ISO8859_1");
 }
