@@ -1,3 +1,12 @@
 {
-  return (Boolean)row.get(columnName);
+  Object o=row.get(columnName);
+  if (o instanceof Number) {
+    if (((Number)o).longValue() == 0) {
+      return false;
+    }
+ else {
+      return true;
+    }
+  }
+  return (Boolean)o;
 }

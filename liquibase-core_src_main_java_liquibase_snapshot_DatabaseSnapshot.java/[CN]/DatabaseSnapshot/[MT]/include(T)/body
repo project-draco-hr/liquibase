@@ -1,4 +1,7 @@
 {
+  if (example == null) {
+    return null;
+  }
   if (database.isSystemObject(example)) {
     return null;
   }

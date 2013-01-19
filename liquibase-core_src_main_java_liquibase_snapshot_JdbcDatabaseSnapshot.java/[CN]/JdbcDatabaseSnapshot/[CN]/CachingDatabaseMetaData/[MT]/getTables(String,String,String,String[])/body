@@ -1,3 +1,7 @@
 {
-  return cacheResultSet(databaseMetaData.getTables(catalogName,schemaName,tableNamePattern,types));
+  String key=createKey("getTables",catalogName,schemaName,tableNamePattern,types);
+  if (hasCachedValue(key)) {
+    return getCachedValue(key);
+  }
+  return cacheResultSet(key,databaseMetaData.getTables(catalogName,schemaName,tableNamePattern,types));
 }

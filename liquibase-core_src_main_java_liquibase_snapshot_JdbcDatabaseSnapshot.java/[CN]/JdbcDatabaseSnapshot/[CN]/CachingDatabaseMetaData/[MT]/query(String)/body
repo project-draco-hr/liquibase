@@ -1,7 +1,11 @@
 {
+  String key=createKey("query",sql);
+  if (hasCachedValue(key)) {
+    return getCachedValue(key);
+  }
   Statement statement=this.getDatabaseMetaData().getConnection().createStatement();
   try {
-    return cacheResultSet(statement.executeQuery(sql));
+    return cacheResultSet(key,statement.executeQuery(sql));
   }
   finally {
     statement.close();

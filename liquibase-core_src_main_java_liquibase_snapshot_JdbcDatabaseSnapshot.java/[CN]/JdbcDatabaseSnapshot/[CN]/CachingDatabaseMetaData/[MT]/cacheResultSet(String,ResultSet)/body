@@ -1,0 +1,14 @@
+{
+  List list;
+  try {
+    list=(List)new RowMapperResultSetExtractor(new ColumnMapRowMapper()).extractData(rs);
+    for (int i=0; i < list.size(); i++) {
+      list.set(i,new CachedRow((Map)list.get(i)));
+    }
+  }
+  finally {
+    rs.close();
+  }
+  cachedResults.put(key,list);
+  return list;
+}
