@@ -1,14 +1,15 @@
 {
   Database database=snapshot.getDatabase();
   Schema schema=example.getSchema();
-  ResultSet viewsMetadataRs=null;
+  List<JdbcDatabaseSnapshot.CachedRow> viewsMetadataRs=null;
   try {
-    viewsMetadataRs=getMetaData(database).getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),example.getName(),new String[]{"VIEW"});
-    if (viewsMetadataRs.next()) {
-      String rawViewName=viewsMetadataRs.getString("TABLE_NAME");
-      String rawSchemaName=StringUtils.trimToNull(viewsMetadataRs.getString("TABLE_SCHEM"));
-      String rawCatalogName=StringUtils.trimToNull(viewsMetadataRs.getString("TABLE_CAT"));
-      String remarks=viewsMetadataRs.getString("REMARKS");
+    viewsMetadataRs=((JdbcDatabaseSnapshot)snapshot).getMetaData().getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),example.getName(),new String[]{"VIEW"});
+    if (viewsMetadataRs.size() > 0) {
+      JdbcDatabaseSnapshot.CachedRow row=viewsMetadataRs.get(0);
+      String rawViewName=row.getString("TABLE_NAME");
+      String rawSchemaName=StringUtils.trimToNull(row.getString("TABLE_SCHEM"));
+      String rawCatalogName=StringUtils.trimToNull(row.getString("TABLE_CAT"));
+      String remarks=row.getString("REMARKS");
       View view=new View().setName(cleanNameFromDatabase(rawViewName,database));
       view.setRemarks(remarks);
       CatalogAndSchema schemaFromJdbcInfo=((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(rawCatalogName,rawSchemaName);
@@ -27,14 +28,5 @@
   }
  catch (  SQLException e) {
     throw new DatabaseException(e);
-  }
- finally {
-    try {
-      if (viewsMetadataRs != null) {
-        viewsMetadataRs.close();
-      }
-    }
- catch (    SQLException ignore) {
-    }
   }
 }

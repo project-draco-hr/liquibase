@@ -1,0 +1,3 @@
+{
+  return cacheResultSet(databaseMetaData.getColumns(catalogName,schemaName,tableNamePattern,columnNamePattern));
+}

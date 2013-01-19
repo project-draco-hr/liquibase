@@ -1,5 +1,5 @@
 {
-  DatabaseSnapshot snapshot=new DatabaseSnapshot(snapshotControl,database);
+  DatabaseSnapshot snapshot=new JdbcDatabaseSnapshot(snapshotControl,database);
   for (  DatabaseObject example : examples) {
     snapshot.include(example);
   }

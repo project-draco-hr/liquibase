@@ -2,12 +2,12 @@
   Database database=snapshot.getDatabase();
   Relation relation=((Column)example).getRelation();
   Schema schema=relation.getSchema();
-  ResultSet columnMetadataRs=null;
+  List<JdbcDatabaseSnapshot.CachedRow> columnMetadataRs=null;
   try {
-    DatabaseMetaData databaseMetaData=getMetaData(database);
+    JdbcDatabaseSnapshot.CachingDatabaseMetaData databaseMetaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
     columnMetadataRs=databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(relation.getName(),Table.class),database.correctObjectName(example.getName(),Column.class));
-    if (columnMetadataRs.next()) {
-      Map<String,Object> data=convertResultSetToMap(columnMetadataRs,database);
+    if (columnMetadataRs.size() > 0) {
+      JdbcDatabaseSnapshot.CachedRow data=columnMetadataRs.get(0);
       return readColumn(data,relation,database);
     }
  else {
@@ -16,14 +16,5 @@
   }
  catch (  Exception e) {
     throw new DatabaseException(e);
-  }
- finally {
-    if (columnMetadataRs != null) {
-      try {
-        columnMetadataRs.close();
-      }
- catch (      SQLException ignored) {
-      }
-    }
   }
 }

@@ -1,0 +1,3 @@
+{
+  return cacheResultSet(databaseMetaData.getImportedKeys(catalogName,schemaName,table));
+}

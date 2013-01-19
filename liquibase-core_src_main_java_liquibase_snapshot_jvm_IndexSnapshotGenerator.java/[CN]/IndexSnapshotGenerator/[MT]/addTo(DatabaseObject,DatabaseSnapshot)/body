@@ -4,22 +4,20 @@
     Database database=snapshot.getDatabase();
     Schema schema;
     schema=table.getSchema();
-    ResultSet rs=null;
-    Statement statement=null;
-    DatabaseMetaData databaseMetaData=null;
+    List<JdbcDatabaseSnapshot.CachedRow> rs=null;
+    JdbcDatabaseSnapshot.CachingDatabaseMetaData databaseMetaData=null;
     try {
-      databaseMetaData=getMetaData(database);
+      databaseMetaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
       if (database instanceof OracleDatabase) {
-        statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
         String sql="SELECT INDEX_NAME, COLUMN_NAME FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "'";
-        rs=statement.executeQuery(sql);
+        rs=databaseMetaData.query(sql);
       }
  else {
         rs=databaseMetaData.getIndexInfo(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),table.getName(),false,true);
       }
       Map<String,Index> foundIndexes=new HashMap<String,Index>();
-      while (rs.next()) {
-        String indexName=rs.getString("INDEX_NAME");
+      for (      JdbcDatabaseSnapshot.CachedRow row : rs) {
+        String indexName=row.getString("INDEX_NAME");
         if (indexName == null) {
           continue;
         }
@@ -29,7 +27,7 @@
           index.setName(indexName);
           index.setTable(table);
         }
-        index.getColumns().add(rs.getString("COLUMN_NAME"));
+        index.getColumns().add(row.getString("COLUMN_NAME"));
       }
       for (      Index exampleIndex : foundIndexes.values()) {
         table.getIndexes().add(exampleIndex);
@@ -37,22 +35,6 @@
     }
  catch (    Exception e) {
       throw new DatabaseException(e);
-    }
- finally {
-      if (rs != null) {
-        try {
-          rs.close();
-        }
- catch (        SQLException ignored) {
-        }
-      }
-      if (statement != null) {
-        try {
-          statement.close();
-        }
- catch (        SQLException ignored) {
-        }
-      }
     }
   }
   if (foundObject instanceof UniqueConstraint) {

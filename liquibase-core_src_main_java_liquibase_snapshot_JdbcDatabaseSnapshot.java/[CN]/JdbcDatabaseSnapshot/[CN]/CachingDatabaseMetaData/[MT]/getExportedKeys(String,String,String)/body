@@ -1,0 +1,3 @@
+{
+  return cacheResultSet(databaseMetaData.getExportedKeys(catalogName,schemaName,table));
+}

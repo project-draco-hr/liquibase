@@ -2,28 +2,19 @@
   if (foundObject instanceof Relation) {
     Database database=snapshot.getDatabase();
     Relation relation=(Relation)foundObject;
-    ResultSet allColumnsMetadataRs=null;
+    List<JdbcDatabaseSnapshot.CachedRow> allColumnsMetadataRs=null;
     try {
-      DatabaseMetaData databaseMetaData=getMetaData(database);
+      JdbcDatabaseSnapshot.CachingDatabaseMetaData databaseMetaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
       Schema schema;
       schema=relation.getSchema();
       allColumnsMetadataRs=databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),relation.getName(),null);
-      while (allColumnsMetadataRs.next()) {
-        Column exampleColumn=new Column().setRelation(relation).setName(allColumnsMetadataRs.getString("COLUMN_NAME"));
+      for (      JdbcDatabaseSnapshot.CachedRow row : allColumnsMetadataRs) {
+        Column exampleColumn=new Column().setRelation(relation).setName(row.getString("COLUMN_NAME"));
         relation.getColumns().add(exampleColumn);
       }
     }
  catch (    Exception e) {
       throw new DatabaseException(e);
-    }
- finally {
-      if (allColumnsMetadataRs != null) {
-        try {
-          allColumnsMetadataRs.close();
-        }
- catch (        SQLException ignored) {
-        }
-      }
     }
   }
 }

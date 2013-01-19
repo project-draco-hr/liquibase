@@ -1,0 +1,3 @@
+{
+  return cacheResultSet(databaseMetaData.getIndexInfo(catalogName,schemaName,table,unique,approximate));
+}

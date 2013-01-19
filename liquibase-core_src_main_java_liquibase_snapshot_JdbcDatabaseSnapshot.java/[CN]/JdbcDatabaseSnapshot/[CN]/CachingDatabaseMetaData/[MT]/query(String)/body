@@ -1,0 +1,9 @@
+{
+  Statement statement=this.getDatabaseMetaData().getConnection().createStatement();
+  try {
+    return cacheResultSet(statement.executeQuery(sql));
+  }
+  finally {
+    statement.close();
+  }
+}

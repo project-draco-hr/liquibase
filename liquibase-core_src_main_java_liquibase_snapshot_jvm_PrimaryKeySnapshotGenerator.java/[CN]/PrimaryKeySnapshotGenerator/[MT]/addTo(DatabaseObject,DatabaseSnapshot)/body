@@ -3,26 +3,16 @@
     Table table=(Table)foundObject;
     Database database=snapshot.getDatabase();
     Schema schema=table.getSchema();
-    ResultSet rs=null;
+    List<JdbcDatabaseSnapshot.CachedRow> rs=null;
     try {
-      DatabaseMetaData metaData=getMetaData(database);
+      JdbcDatabaseSnapshot.CachingDatabaseMetaData metaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
       rs=metaData.getPrimaryKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),table.getName());
-      if (rs.next()) {
-        table.setPrimaryKey(new PrimaryKey().setName(rs.getString("PK_NAME")).setTable(table));
+      if (rs.size() > 0) {
+        table.setPrimaryKey(new PrimaryKey().setName(rs.get(0).getString("PK_NAME")).setTable(table));
       }
-      rs.close();
     }
  catch (    SQLException e) {
       throw new DatabaseException(e);
-    }
- finally {
-      try {
-        if (rs != null) {
-          rs.close();
-        }
-      }
- catch (      SQLException ignored) {
-      }
     }
   }
 }

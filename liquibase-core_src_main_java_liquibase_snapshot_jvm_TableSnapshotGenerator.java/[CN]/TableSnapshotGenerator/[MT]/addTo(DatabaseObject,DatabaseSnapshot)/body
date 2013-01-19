@@ -2,26 +2,17 @@
   if (foundObject instanceof Schema) {
     Database database=snapshot.getDatabase();
     Schema schema=(Schema)foundObject;
-    ResultSet tableMetaDataRs=null;
+    List<JdbcDatabaseSnapshot.CachedRow> tableMetaDataRs=null;
     try {
-      tableMetaDataRs=getMetaData(database).getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),null,new String[]{"TABLE"});
-      while (tableMetaDataRs.next()) {
-        String tableName=tableMetaDataRs.getString("TABLE_NAME");
+      tableMetaDataRs=((JdbcDatabaseSnapshot)snapshot).getMetaData().getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),null,new String[]{"TABLE"});
+      for (      JdbcDatabaseSnapshot.CachedRow row : tableMetaDataRs) {
+        String tableName=row.getString("TABLE_NAME");
         Table tableExample=(Table)new Table().setName(tableName).setSchema(schema);
         schema.addDatabaseObject(tableExample);
       }
     }
  catch (    SQLException e) {
       throw new DatabaseException(e);
-    }
- finally {
-      try {
-        if (tableMetaDataRs != null) {
-          tableMetaDataRs.close();
-        }
-      }
- catch (      SQLException ignore) {
-      }
     }
   }
 }

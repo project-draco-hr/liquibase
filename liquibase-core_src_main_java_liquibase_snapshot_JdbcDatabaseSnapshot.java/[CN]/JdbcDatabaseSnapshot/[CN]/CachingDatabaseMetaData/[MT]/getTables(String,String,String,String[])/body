@@ -1,0 +1,3 @@
+{
+  return cacheResultSet(databaseMetaData.getTables(catalogName,schemaName,tableNamePattern,types));
+}
