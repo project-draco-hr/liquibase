@@ -1,5 +1,3 @@
 {
   this.types=readTypesString(types);
-  this.types.add(Catalog.class);
-  this.types.add(Schema.class);
 }

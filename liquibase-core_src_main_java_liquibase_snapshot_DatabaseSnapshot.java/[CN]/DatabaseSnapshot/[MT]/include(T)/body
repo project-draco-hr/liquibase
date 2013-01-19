@@ -9,6 +9,9 @@
     CatalogAndSchema catalogAndSchema=database.correctSchema(((Schema)example).toCatalogAndSchema());
     example=(T)new Schema(catalogAndSchema.getCatalogName(),catalogAndSchema.getSchemaName());
   }
+  if (!snapshotControl.shouldInclude(example.getClass())) {
+    return example;
+  }
   T existing=get(example);
   if (existing != null) {
     return existing;

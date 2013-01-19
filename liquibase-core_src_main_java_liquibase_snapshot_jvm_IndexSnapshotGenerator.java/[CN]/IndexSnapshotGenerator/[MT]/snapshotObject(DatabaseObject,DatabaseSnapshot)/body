@@ -11,7 +11,7 @@
   }
   List<Table> tables=new ArrayList<Table>();
   if (exampleTable.getName() == null) {
-    DatabaseSnapshot tableSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schema.toCatalogAndSchema(),database,new SnapshotControl(Table.class));
+    DatabaseSnapshot tableSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schema.toCatalogAndSchema(),database,new SnapshotControl(Table.class,Schema.class,Catalog.class));
     tables.addAll(tableSnapshot.get(Table.class));
   }
  else {
