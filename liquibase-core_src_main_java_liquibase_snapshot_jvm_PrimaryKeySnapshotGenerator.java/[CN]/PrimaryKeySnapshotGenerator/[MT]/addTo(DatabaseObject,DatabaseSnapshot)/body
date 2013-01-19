@@ -1,4 +1,7 @@
 {
+  if (!snapshot.getSnapshotControl().shouldInclude(PrimaryKey.class)) {
+    return;
+  }
   if (foundObject instanceof Table) {
     Table table=(Table)foundObject;
     Database database=snapshot.getDatabase();

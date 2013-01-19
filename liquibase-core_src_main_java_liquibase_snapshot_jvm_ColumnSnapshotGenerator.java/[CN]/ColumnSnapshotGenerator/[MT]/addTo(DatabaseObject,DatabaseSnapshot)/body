@@ -1,4 +1,7 @@
 {
+  if (!snapshot.getSnapshotControl().shouldInclude(Column.class)) {
+    return;
+  }
   if (foundObject instanceof Relation) {
     Database database=snapshot.getDatabase();
     Relation relation=(Relation)foundObject;

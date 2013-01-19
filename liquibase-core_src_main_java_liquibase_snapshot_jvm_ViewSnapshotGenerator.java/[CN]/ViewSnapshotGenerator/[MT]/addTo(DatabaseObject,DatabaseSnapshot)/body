@@ -1,4 +1,7 @@
 {
+  if (!snapshot.getSnapshotControl().shouldInclude(View.class)) {
+    return;
+  }
   if (foundObject instanceof Schema) {
     Schema schema=(Schema)foundObject;
     Database database=snapshot.getDatabase();
