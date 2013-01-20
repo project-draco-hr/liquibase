@@ -8,7 +8,7 @@
   }
   UniqueConstraint constraint=new UniqueConstraint();
   constraint.setTable(table);
-  constraint.setName((String)metadata.get(0).get("CONSTRAINT_NAME"));
+  constraint.setName(example.getName());
   for (  Map<String,Object> col : metadata) {
     constraint.getColumns().add((String)col.get("COLUMN_NAME"));
   }

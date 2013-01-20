@@ -1,2 +1,2 @@
-int jdbcType
+Integer jdbcType
 Database database

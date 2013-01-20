@@ -1,4 +1,7 @@
 {
+  if (jdbcType == null) {
+    return ForeignKeyConstraintType.importedKeyRestrict;
+  }
   if (database instanceof MSSQLDatabase) {
     if (jdbcType == 0) {
       return ForeignKeyConstraintType.importedKeyCascade;

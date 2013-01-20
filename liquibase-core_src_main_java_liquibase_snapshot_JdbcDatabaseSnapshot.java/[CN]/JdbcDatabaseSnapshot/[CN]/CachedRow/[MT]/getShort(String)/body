@@ -1,3 +1,7 @@
 {
-  return (Short)row.get(columnName);
+  Object o=row.get(columnName);
+  if (o instanceof Number) {
+    return ((Number)o).shortValue();
+  }
+  return (Short)o;
 }

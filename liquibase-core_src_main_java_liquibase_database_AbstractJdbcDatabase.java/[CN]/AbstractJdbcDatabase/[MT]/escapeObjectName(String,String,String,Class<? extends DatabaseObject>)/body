@@ -2,10 +2,7 @@
   if (catalogName == null && schemaName == null) {
     return escapeObjectName(objectName,objectType);
   }
-  if (!supportsCatalogs() && !supportsSchemas()) {
-    return escapeObjectName(objectName,objectType);
-  }
- else   if (supportsCatalogs() && supportsSchemas()) {
+  if (supportsSchemas()) {
     catalogName=StringUtils.trimToNull(catalogName);
     schemaName=StringUtils.trimToNull(schemaName);
     if (catalogName == null && schemaName == null) {
@@ -18,12 +15,18 @@
       return escapeObjectName(catalogName,Catalog.class) + "." + escapeObjectName(schemaName,Schema.class)+ "."+ escapeObjectName(objectName,objectType);
     }
   }
- else {
-    if (StringUtils.trimToNull(catalogName) == null) {
-      return escapeObjectName(objectName,objectType);
-    }
- else {
+ else   if (supportsCatalogs()) {
+    if (StringUtils.trimToNull(catalogName) != null) {
       return escapeObjectName(catalogName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
     }
+ else     if (StringUtils.trimToNull(schemaName) != null) {
+      return escapeObjectName(schemaName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
+    }
+ else {
+      return escapeObjectName(objectName,objectType);
+    }
+  }
+ else {
+    return escapeObjectName(objectName,objectType);
   }
 }
