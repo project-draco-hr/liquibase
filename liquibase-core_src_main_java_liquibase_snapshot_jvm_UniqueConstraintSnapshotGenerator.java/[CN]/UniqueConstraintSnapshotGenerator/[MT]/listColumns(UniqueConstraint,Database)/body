@@ -12,6 +12,9 @@
  else   if (database instanceof OracleDatabase) {
     sql="select ucc.column_name from all_cons_columns ucc where ucc.constraint_name='" + database.correctObjectName(name,UniqueConstraint.class) + "' and ucc.owner='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' order by ucc.position";
   }
+ else   if (database instanceof DB2Database) {
+    sql="select k.colname as column_name from syscat.keycoluse k, syscat.tabconst t " + "where k.constname = t.constname " + "and t.type='U' "+ "and k.constname='" + database.correctObjectName(name,UniqueConstraint.class) + "' "+ "order by colseq";
+  }
  else {
     sql="select CONSTRAINT_NAME, COLUMN_LIST as COLUMN_NAME " + "from information_schema.constraints " + "where constraint_schema='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and constraint_catalog='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "' "+ "and constraint_name='"+ database.correctObjectName(name,UniqueConstraint.class)+ "'";
   }
