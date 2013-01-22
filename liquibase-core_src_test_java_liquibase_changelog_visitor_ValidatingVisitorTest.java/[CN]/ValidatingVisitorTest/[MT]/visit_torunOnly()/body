@@ -1,0 +1,16 @@
+{
+  changeSet1.addChange(new CreateTableChange(){
+    @Override public ValidationErrors validate(    Database database){
+      ValidationErrors changeValidationErrors=new ValidationErrors();
+      changeValidationErrors.addError("Test message");
+      return changeValidationErrors;
+    }
+  }
+);
+  List<RanChangeSet> ran=new ArrayList<RanChangeSet>();
+  ran.add(new RanChangeSet(changeSet1));
+  ValidatingVisitor handler=new ValidatingVisitor(ran);
+  handler.visit(changeSet1,new DatabaseChangeLog(),null);
+  assertEquals(0,handler.getSetupExceptions().size());
+  assertTrue(handler.validationPassed());
+}
