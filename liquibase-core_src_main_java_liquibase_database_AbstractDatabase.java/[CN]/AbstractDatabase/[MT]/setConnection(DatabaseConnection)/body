@@ -2,9 +2,17 @@
   LogFactory.getLogger().debug("Connected to " + conn.getConnectionUserName() + "@"+ conn.getURL());
   this.connection=conn;
   try {
-    connection.setAutoCommit(getAutoCommitMode());
+    boolean autoCommit=conn.getAutoCommit();
+    if (autoCommit == getAutoCommitMode()) {
+      LogFactory.getLogger().debug("Not adjusting the auto commit mode; it is already " + autoCommit);
+    }
+ else {
+      previousAutoCommit=autoCommit;
+      LogFactory.getLogger().debug("Setting auto commit to " + getAutoCommitMode() + " from "+ autoCommit);
+      connection.setAutoCommit(getAutoCommitMode());
+    }
   }
- catch (  DatabaseException sqle) {
-    LogFactory.getLogger().warning("Can not set auto commit to " + getAutoCommitMode() + " on connection");
+ catch (  DatabaseException e) {
+    LogFactory.getLogger().warning("Cannot set auto commit to " + getAutoCommitMode() + " on connection");
   }
 }

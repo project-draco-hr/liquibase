@@ -1,0 +1,14 @@
+{
+  DatabaseConnection connection=createStrictMock(DatabaseConnection.class);
+  expect(connection.getConnectionUserName()).andReturn("user");
+  expect(connection.getURL()).andReturn("URL");
+  expect(connection.getAutoCommit()).andReturn(getDatabase().getAutoCommitMode());
+  replay(connection);
+  getDatabase().setConnection(connection);
+  verify(connection);
+  reset(connection);
+  connection.close();
+  replay(connection);
+  getDatabase().close();
+  verify(connection);
+}

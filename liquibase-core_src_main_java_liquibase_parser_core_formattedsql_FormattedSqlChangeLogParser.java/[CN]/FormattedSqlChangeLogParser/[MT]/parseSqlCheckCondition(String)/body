@@ -1,0 +1,13 @@
+{
+  Pattern[] patterns=new Pattern[]{Pattern.compile("^(?:expectedResult:)?(\\w+) (.*)",Pattern.CASE_INSENSITIVE),Pattern.compile("^(?:expectedResult:)?'([^']+)' (.*)",Pattern.CASE_INSENSITIVE),Pattern.compile("^(?:expectedResult:)?\"([^\"]+)\" (.*)",Pattern.CASE_INSENSITIVE)};
+  for (  Pattern pattern : patterns) {
+    Matcher matcher=pattern.matcher(body);
+    if (matcher.matches() && matcher.groupCount() == 2) {
+      SqlPrecondition p=new SqlPrecondition();
+      p.setExpectedResult(matcher.group(1));
+      p.setSql(matcher.group(2));
+      return p;
+    }
+  }
+  throw new ChangeLogParseException("Could not parse a SqlCheck precondition from '" + body + "'.");
+}
