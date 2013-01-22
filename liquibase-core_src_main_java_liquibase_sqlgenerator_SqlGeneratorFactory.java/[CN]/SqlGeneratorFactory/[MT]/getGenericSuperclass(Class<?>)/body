@@ -1,0 +1,8 @@
+{
+  if (genericSuperClassCache.containsKey(clazz)) {
+    return genericSuperClassCache.get(clazz);
+  }
+  Type genericSuperclass=clazz.getGenericSuperclass();
+  genericSuperClassCache.put(clazz,genericSuperclass);
+  return genericSuperclass;
+}

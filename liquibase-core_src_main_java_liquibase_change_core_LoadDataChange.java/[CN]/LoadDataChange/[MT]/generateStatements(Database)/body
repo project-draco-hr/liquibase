@@ -69,8 +69,11 @@ catch (  UnexpectedLiquibaseException ule) {
     if (getChangeSet() != null && getChangeSet().getFailOnError() != null && !getChangeSet().getFailOnError()) {
       Logger log=LogFactory.getLogger();
       log.info("Change set " + getChangeSet().toString(false) + " failed, but failOnError was false.  Error: "+ ule.getMessage());
+      return new SqlStatement[0];
     }
-    return new SqlStatement[0];
+ else {
+      throw ule;
+    }
   }
  finally {
     if (null != reader) {

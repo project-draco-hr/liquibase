@@ -1,0 +1,8 @@
+{
+  if (genericInterfacesCache.containsKey(clazz)) {
+    return genericInterfacesCache.get(clazz);
+  }
+  Type[] genericInterfaces=clazz.getGenericInterfaces();
+  genericInterfacesCache.put(clazz,genericInterfaces);
+  return genericInterfaces;
+}
