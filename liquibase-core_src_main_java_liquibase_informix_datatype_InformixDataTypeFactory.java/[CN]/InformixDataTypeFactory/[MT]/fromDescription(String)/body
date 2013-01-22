@@ -1,0 +1,4 @@
+{
+  LiquibaseDataType dataType=super.fromDescription(dataTypeDefinition);
+  return new InformixDataType(dataType);
+}

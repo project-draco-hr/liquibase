@@ -1,0 +1,16 @@
+{
+  List<ColumnConfig> cols=new ArrayList<ColumnConfig>(getColumns().size());
+  String sql=generateSql(cols);
+  PreparedStatement stmt=factory.create(sql);
+  try {
+    int i=1;
+    for (    ColumnConfig col : cols) {
+      applyColumnParameter(stmt,i,col);
+      i++;
+    }
+    stmt.execute();
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

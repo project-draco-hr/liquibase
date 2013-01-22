@@ -1,0 +1,6 @@
+{
+  if (candidate instanceof DataTypeWrapper) {
+    return ((DataTypeWrapper)candidate).getUnderlyingDataType();
+  }
+  return candidate;
+}

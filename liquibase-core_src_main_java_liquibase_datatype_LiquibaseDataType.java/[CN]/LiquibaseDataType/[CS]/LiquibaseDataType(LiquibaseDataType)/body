@@ -1,0 +1,7 @@
+{
+  name=originalType.name;
+  this.minParameters=originalType.minParameters;
+  this.maxParameters=originalType.maxParameters;
+  this.aliases=originalType.aliases;
+  this.priority=originalType.priority;
+}

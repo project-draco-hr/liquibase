@@ -1,10 +1,15 @@
 {
+  if (database instanceof InformixDatabase) {
+    AbstractSqlGenerator<CreateTableStatement> gen=new InformixCreateTableGenerator();
+    return gen.generateSql(statement,database,sqlGeneratorChain);
+  }
   StringBuffer buffer=new StringBuffer();
   buffer.append("CREATE TABLE ").append(database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())).append(" ");
   buffer.append("(");
   boolean isSinglePrimaryKeyColumn=statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().size() == 1;
   boolean isPrimaryKeyAutoIncrement=false;
   Iterator<String> columnIterator=statement.getColumns().iterator();
+  List<String> primaryKeyColumns=new LinkedList<String>();
   while (columnIterator.hasNext()) {
     String column=columnIterator.next();
     buffer.append(database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),column));
@@ -19,6 +24,9 @@
     boolean isAutoIncrementColumn=autoIncrementConstraint != null;
     boolean isPrimaryKeyColumn=statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().contains(column);
     isPrimaryKeyAutoIncrement=isPrimaryKeyAutoIncrement || isPrimaryKeyColumn && isAutoIncrementColumn;
+    if (isPrimaryKeyColumn) {
+      primaryKeyColumns.add(column);
+    }
     if ((database instanceof SQLiteDatabase) && isSinglePrimaryKeyColumn && isPrimaryKeyColumn&& isAutoIncrementColumn) {
       String pkName=StringUtils.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
       if (pkName == null) {
@@ -61,8 +69,7 @@
         }
       }
     }
-    if (database instanceof InformixDatabase && isSinglePrimaryKeyColumn) {
-      buffer.append(" PRIMARY KEY");
+    if (database instanceof InformixDatabase && isSinglePrimaryKeyColumn && isPrimaryKeyColumn) {
     }
     if (columnIterator.hasNext()) {
       buffer.append(", ");
