@@ -16,7 +16,7 @@
       if (field.getName().equals("serialVersionUID")) {
         continue;
       }
-      if (field.getName().equals("$VRc")) {
+      if (field.isSynthetic() || field.getName().equals("$VRc")) {
         continue;
       }
       String propertyName=field.getName();
