@@ -1,0 +1,5 @@
+{
+  SequenceFunction function=new SequenceFunction("SEQUENCE_NAME");
+  setFields(function);
+  return function;
+}

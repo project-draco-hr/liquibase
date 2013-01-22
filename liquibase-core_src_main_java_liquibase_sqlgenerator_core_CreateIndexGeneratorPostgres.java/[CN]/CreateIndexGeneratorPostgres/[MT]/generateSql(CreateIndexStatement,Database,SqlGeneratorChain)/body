@@ -10,8 +10,7 @@
   }
   buffer.append("INDEX ");
   if (statement.getIndexName() != null) {
-    String indexSchema=statement.getTableSchemaName();
-    buffer.append(database.escapeIndexName(null,indexSchema,statement.getIndexName())).append(" ");
+    buffer.append(database.escapeObjectName(statement.getIndexName(),Index.class)).append(" ");
   }
   buffer.append("ON ");
   buffer.append(database.escapeTableName(statement.getTableCatalogName(),statement.getTableSchemaName(),statement.getTableName())).append("(");

@@ -1,3 +1,4 @@
 {
   determineDriverVersion();
+  super.sequenceNextValueFunction="NEXT VALUE FOR %s";
 }

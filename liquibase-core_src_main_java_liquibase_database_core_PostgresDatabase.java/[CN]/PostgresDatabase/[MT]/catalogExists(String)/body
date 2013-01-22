@@ -1,8 +1,3 @@
 {
-  if (catalogName != null) {
-    return runExistsQuery("select count(*) from information_schema.schemata where catalog_name='" + catalogName + "'");
-  }
- else {
-    return false;
-  }
+  return catalogName != null && runExistsQuery("select count(*) from information_schema.schemata where catalog_name='" + catalogName + "'");
 }

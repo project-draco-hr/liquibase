@@ -20,5 +20,8 @@
  else   if (getValueBlob() != null) {
     return getValueBlob();
   }
+ else   if (getValueSequenceNext() != null) {
+    return getValueSequenceNext();
+  }
   return null;
 }
