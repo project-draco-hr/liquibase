@@ -1,4 +1,0 @@
-{
-  this.primaryKeyColumns=primaryKeyColumns;
-  return this;
-}

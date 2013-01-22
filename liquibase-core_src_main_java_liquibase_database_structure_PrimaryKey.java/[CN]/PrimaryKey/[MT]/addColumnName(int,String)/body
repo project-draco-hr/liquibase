@@ -1,8 +1,0 @@
-{
-  if (position >= columnNames.size()) {
-    for (int i=columnNames.size() - 1; i < position; i++) {
-      this.columnNames.add(null);
-    }
-  }
-  this.columnNames.set(position,columnName);
-}

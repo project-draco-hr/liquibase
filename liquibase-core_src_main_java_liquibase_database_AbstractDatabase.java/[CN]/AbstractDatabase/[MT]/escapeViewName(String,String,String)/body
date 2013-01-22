@@ -1,3 +1,0 @@
-{
-  return escapeDatabaseObject(catalogName,schemaName,viewName,View.class);
-}

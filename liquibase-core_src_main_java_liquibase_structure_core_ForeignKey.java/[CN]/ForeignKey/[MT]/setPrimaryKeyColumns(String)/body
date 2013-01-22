@@ -1,0 +1,4 @@
+{
+  this.setAttribute("primaryKeyColumns",primaryKeyColumns);
+  return this;
+}

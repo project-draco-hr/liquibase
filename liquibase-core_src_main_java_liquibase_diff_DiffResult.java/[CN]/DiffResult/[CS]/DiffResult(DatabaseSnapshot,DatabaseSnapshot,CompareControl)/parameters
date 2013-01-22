@@ -1,0 +1,3 @@
+DatabaseSnapshot referenceDatabaseSnapshot
+DatabaseSnapshot comparisonDatabaseSnapshot
+CompareControl compareControl

@@ -1,0 +1,9 @@
+{
+  try {
+    Table liquibaseTable=(Table)new Table().setName(database.getDatabaseChangeLogTableName()).setSchema(new Schema(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName()));
+    return createSnapshot(liquibaseTable,database,snapshotControl);
+  }
+ catch (  InvalidExampleException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

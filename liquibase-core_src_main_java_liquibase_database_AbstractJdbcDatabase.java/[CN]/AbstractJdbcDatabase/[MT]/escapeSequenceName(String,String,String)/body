@@ -1,0 +1,3 @@
+{
+  return escapeObjectName(catalogName,schemaName,sequenceName,Sequence.class);
+}

@@ -1,0 +1,10 @@
+{
+  Database database=snapshot.getDatabase();
+  if (!database.supportsSequences()) {
+    return null;
+  }
+  Sequence seq=new Sequence();
+  seq.setName(example.getName());
+  seq.setSchema(example.getSchema());
+  return seq;
+}

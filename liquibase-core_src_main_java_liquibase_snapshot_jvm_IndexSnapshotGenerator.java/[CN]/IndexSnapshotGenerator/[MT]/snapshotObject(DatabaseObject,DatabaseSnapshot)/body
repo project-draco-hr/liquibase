@@ -1,0 +1,98 @@
+{
+  Database database=snapshot.getDatabase();
+  Table exampleTable=((Index)example).getTable();
+  for (int i=0; i < ((Index)example).getColumns().size(); i++) {
+    ((Index)example).getColumns().set(i,database.correctObjectName(((Index)example).getColumns().get(i),Column.class));
+  }
+  Schema schema=new Schema(database.getDefaultCatalogName(),database.getDefaultSchemaName());
+  String exampleName=example.getName();
+  if (exampleName != null) {
+    exampleName=database.correctObjectName(exampleName,Index.class);
+  }
+  List<Table> tables=new ArrayList<Table>();
+  if (exampleTable.getName() == null) {
+    DatabaseSnapshot tableSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schema.toCatalogAndSchema(),database,new SnapshotControl(Table.class,Schema.class,Catalog.class));
+    tables.addAll(tableSnapshot.get(Table.class));
+  }
+ else {
+    exampleTable.setName(database.correctObjectName(exampleTable.getName(),Table.class));
+    tables.add(exampleTable);
+  }
+  Map<String,Index> foundIndexes=new HashMap<String,Index>();
+  for (  Table table : tables) {
+    JdbcDatabaseSnapshot.CachingDatabaseMetaData databaseMetaData=null;
+    List<JdbcDatabaseSnapshot.CachedRow> rs=null;
+    try {
+      databaseMetaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
+      if (database instanceof OracleDatabase) {
+        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "'";
+        if (exampleName != null) {
+          sql+=" AND INDEX_NAME='" + exampleName + "'";
+        }
+        sql+=" ORDER BY INDEX_NAME, ORDINAL_POSITION";
+        rs=databaseMetaData.query(sql);
+      }
+ else {
+        rs=databaseMetaData.getIndexInfo(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(table.getName(),Table.class),false,true);
+      }
+      for (      JdbcDatabaseSnapshot.CachedRow row : rs) {
+        String indexName=cleanNameFromDatabase(row.getString("INDEX_NAME"),database);
+        if (indexName == null) {
+          continue;
+        }
+        if (exampleName != null && !exampleName.equals(indexName)) {
+          continue;
+        }
+        if (database instanceof InformixDatabase && indexName.startsWith(" ")) {
+          indexName="_generated_index_" + indexName.substring(1);
+        }
+        short type=row.getShort("TYPE");
+        Boolean nonUnique=row.getBoolean("NON_UNIQUE");
+        if (nonUnique == null) {
+          nonUnique=true;
+        }
+        String columnName=cleanNameFromDatabase(row.getString("COLUMN_NAME"),database);
+        short position=row.getShort("ORDINAL_POSITION");
+        if (database instanceof InformixDatabase && type != DatabaseMetaData.tableIndexStatistic && position == 0) {
+          System.out.println(this.getClass().getName() + ": corrected position to " + ++position);
+        }
+        String filterCondition=row.getString("FILTER_CONDITION");
+        if (type == DatabaseMetaData.tableIndexStatistic) {
+          continue;
+        }
+        if (columnName == null) {
+          continue;
+        }
+        Index returnIndex=foundIndexes.get(indexName);
+        if (returnIndex == null) {
+          returnIndex=new Index();
+          returnIndex.setTable(table);
+          returnIndex.setName(indexName);
+          returnIndex.setUnique(!nonUnique);
+          returnIndex.setFilterCondition(filterCondition);
+          foundIndexes.put(indexName,returnIndex);
+        }
+        for (int i=returnIndex.getColumns().size(); i < position; i++) {
+          returnIndex.getColumns().add(null);
+        }
+        returnIndex.getColumns().set(position - 1,columnName);
+      }
+    }
+ catch (    Exception e) {
+      throw new DatabaseException(e);
+    }
+  }
+  if (exampleName != null) {
+    return foundIndexes.get(exampleName);
+  }
+ else {
+    for (    Index index : foundIndexes.values()) {
+      if (DatabaseObjectComparatorFactory.getInstance().isSameObject(index.getTable(),exampleTable,database)) {
+        if (index.getColumnNames().equals(((Index)example).getColumnNames())) {
+          return index;
+        }
+      }
+    }
+    return null;
+  }
+}

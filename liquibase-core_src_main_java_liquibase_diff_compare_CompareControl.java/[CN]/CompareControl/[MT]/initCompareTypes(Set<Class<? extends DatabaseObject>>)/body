@@ -1,0 +1,6 @@
+{
+  if (compareTypes == null || compareTypes.size() == 0) {
+    compareTypes=getDefaultTypes();
+  }
+  this.compareTypes=compareTypes;
+}

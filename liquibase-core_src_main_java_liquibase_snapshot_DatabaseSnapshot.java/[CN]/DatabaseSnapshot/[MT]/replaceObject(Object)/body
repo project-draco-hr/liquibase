@@ -1,0 +1,47 @@
+{
+  if (fieldValue == null) {
+    return null;
+  }
+  if (fieldValue instanceof DatabaseObject) {
+    if (!snapshotControl.shouldInclude(((DatabaseObject)fieldValue).getClass())) {
+      return fieldValue;
+    }
+    if (((DatabaseObject)fieldValue).getSnapshotId() == null) {
+      return include((DatabaseObject)fieldValue);
+    }
+ else {
+      return fieldValue;
+    }
+  }
+ else   if (fieldValue instanceof Collection) {
+    Iterator fieldValueIterator=((Collection)fieldValue).iterator();
+    List newValues=new ArrayList();
+    while (fieldValueIterator.hasNext()) {
+      Object obj=fieldValueIterator.next();
+      if (fieldValue instanceof DatabaseObject && !snapshotControl.shouldInclude(((DatabaseObject)fieldValue).getClass())) {
+        return fieldValue;
+      }
+      if (obj instanceof DatabaseObject && ((DatabaseObject)obj).getSnapshotId() == null) {
+        obj=include((DatabaseObject)obj);
+      }
+      if (obj != null) {
+        newValues.add(obj);
+      }
+    }
+    Collection newCollection=(Collection)fieldValue.getClass().newInstance();
+    newCollection.addAll(newValues);
+    return newCollection;
+  }
+ else   if (fieldValue instanceof Map) {
+    Map newMap=(Map)fieldValue.getClass().newInstance();
+    for (    Map.Entry entry : (Set<Map.Entry>)((Map)fieldValue).entrySet()) {
+      Object key=replaceObject(entry.getKey());
+      Object value=replaceObject(entry.getValue());
+      if (key != null) {
+        newMap.put(key,value);
+      }
+    }
+    return newMap;
+  }
+  return fieldValue;
+}

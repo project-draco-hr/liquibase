@@ -1,0 +1,17 @@
+{
+  SnapshotControl snapshotControl=new SnapshotControl(snapshotTypes);
+  CompareControl compareControl=new CompareControl(new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(catalogName,schemaName),new CatalogAndSchema(catalogName,schemaName))},snapshotControl.getTypesToInclude());
+  diffOutputControl.setDataDir(dataDir);
+  DatabaseSnapshot originalDatabaseSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(compareControl.getSchemas(CompareControl.DatabaseRole.REFERENCE),originalDatabase,snapshotControl);
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(originalDatabaseSnapshot,SnapshotGeneratorFactory.getInstance().createSnapshot(compareControl.getSchemas(CompareControl.DatabaseRole.REFERENCE),null,snapshotControl),compareControl);
+  DiffToChangeLog changeLogWriter=new DiffToChangeLog(diffResult,diffOutputControl);
+  changeLogWriter.setChangeSetAuthor(author);
+  changeLogWriter.setChangeSetContext(context);
+  if (StringUtils.trimToNull(changeLogFile) != null) {
+    changeLogWriter.print(changeLogFile);
+  }
+ else {
+    PrintStream outputStream=System.out;
+    changeLogWriter.print(outputStream);
+  }
+}

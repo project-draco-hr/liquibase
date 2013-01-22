@@ -1,0 +1,3 @@
+{
+  return new Class[]{Table.class,Index.class};
+}

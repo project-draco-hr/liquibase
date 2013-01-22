@@ -1,3 +1,0 @@
-{
-  return missing.size() == 0 && unexpected.size() == 0 && changed.size() == 0;
-}

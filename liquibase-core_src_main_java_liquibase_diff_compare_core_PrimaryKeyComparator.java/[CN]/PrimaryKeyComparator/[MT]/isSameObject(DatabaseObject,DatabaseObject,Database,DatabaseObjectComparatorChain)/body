@@ -1,0 +1,8 @@
+{
+  if (!(databaseObject1 instanceof PrimaryKey && databaseObject2 instanceof PrimaryKey)) {
+    return false;
+  }
+  PrimaryKey thisPrimaryKey=(PrimaryKey)databaseObject1;
+  PrimaryKey otherPrimaryKey=(PrimaryKey)databaseObject2;
+  return DatabaseObjectComparatorFactory.getInstance().isSameObject(thisPrimaryKey.getTable(),otherPrimaryKey.getTable(),accordingTo);
+}

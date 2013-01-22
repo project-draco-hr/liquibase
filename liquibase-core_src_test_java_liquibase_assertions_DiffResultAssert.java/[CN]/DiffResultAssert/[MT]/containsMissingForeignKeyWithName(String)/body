@@ -1,5 +1,5 @@
 {
-  for (  ForeignKey fk : diff.getObjectDiff(ForeignKey.class).getMissing()) {
+  for (  ForeignKey fk : diff.getMissingObjects(ForeignKey.class)) {
     if (fk.getName().equalsIgnoreCase(fkName))     return this;
   }
   fail("Foreign key with name " + fkName + " not found");

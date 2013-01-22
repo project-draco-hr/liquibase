@@ -1,0 +1,7 @@
+{
+  String key=createKey("getColumns",catalogName,schemaName,tableNamePattern,columnNamePattern);
+  if (hasCachedValue(key)) {
+    return getCachedValue(key);
+  }
+  return cacheResultSet(key,databaseMetaData.getColumns(catalogName,schemaName,tableNamePattern,columnNamePattern));
+}

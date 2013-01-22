@@ -1,0 +1,19 @@
+{
+  if (!snapshot.getSnapshotControl().shouldInclude(View.class)) {
+    return;
+  }
+  if (foundObject instanceof Schema) {
+    Schema schema=(Schema)foundObject;
+    Database database=snapshot.getDatabase();
+    List<JdbcDatabaseSnapshot.CachedRow> viewsMetadataRs=null;
+    try {
+      viewsMetadataRs=((JdbcDatabaseSnapshot)snapshot).getMetaData().getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),null,new String[]{"VIEW"});
+      for (      JdbcDatabaseSnapshot.CachedRow row : viewsMetadataRs) {
+        schema.addDatabaseObject(new View().setName(row.getString("TABLE_NAME")).setSchema(schema));
+      }
+    }
+ catch (    SQLException e) {
+      throw new DatabaseException(e);
+    }
+  }
+}

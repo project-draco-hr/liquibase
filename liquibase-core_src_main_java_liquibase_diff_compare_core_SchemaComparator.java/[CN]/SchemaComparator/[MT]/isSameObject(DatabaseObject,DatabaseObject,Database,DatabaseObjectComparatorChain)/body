@@ -1,0 +1,22 @@
+{
+  if (chain.isSameObject(databaseObject1,databaseObject2,accordingTo)) {
+    return true;
+  }
+  if (!(databaseObject1 instanceof Schema && databaseObject2 instanceof Schema)) {
+    return false;
+  }
+  Schema thisSchema=(Schema)databaseObject1;
+  Schema otherSchema=(Schema)databaseObject2;
+  if (accordingTo.supportsCatalogs()) {
+    if (thisSchema.getCatalog() == null) {
+      return otherSchema.getCatalog() == null || accordingTo.getDefaultCatalogName().equals(otherSchema.getCatalogName());
+    }
+    if (!thisSchema.getCatalogName().equals(otherSchema.getCatalogName())) {
+      return false;
+    }
+  }
+  if (accordingTo.supportsSchemas()) {
+    return thisSchema.getName().equals(otherSchema.getName());
+  }
+  return true;
+}

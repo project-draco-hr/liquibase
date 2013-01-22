@@ -1,0 +1,9 @@
+{
+  ChangeGenerator toRemove=null;
+  for (  ChangeGenerator existingGenerator : generators) {
+    if (existingGenerator.getClass().equals(generatorClass)) {
+      toRemove=existingGenerator;
+    }
+  }
+  unregister(toRemove);
+}

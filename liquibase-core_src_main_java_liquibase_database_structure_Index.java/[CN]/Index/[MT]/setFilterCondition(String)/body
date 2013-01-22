@@ -1,4 +1,0 @@
-{
-  this.filterCondition=filterCondition;
-  return this;
-}

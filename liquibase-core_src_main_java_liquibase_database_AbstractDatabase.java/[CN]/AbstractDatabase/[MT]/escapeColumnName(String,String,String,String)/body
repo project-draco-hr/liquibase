@@ -1,6 +1,0 @@
-{
-  if (columnName.contains("(")) {
-    return columnName;
-  }
-  return escapeDatabaseObject(columnName,Column.class);
-}

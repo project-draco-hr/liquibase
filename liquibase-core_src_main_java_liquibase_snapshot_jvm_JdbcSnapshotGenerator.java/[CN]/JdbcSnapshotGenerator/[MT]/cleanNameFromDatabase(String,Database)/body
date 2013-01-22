@@ -1,0 +1,9 @@
+{
+  if (objectName == null) {
+    return null;
+  }
+  if (database instanceof PostgresDatabase) {
+    return objectName.replaceAll("\"","");
+  }
+  return objectName;
+}

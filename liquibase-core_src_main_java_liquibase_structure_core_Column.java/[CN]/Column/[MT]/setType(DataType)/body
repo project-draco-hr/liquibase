@@ -1,0 +1,4 @@
+{
+  setAttribute("type",type);
+  return this;
+}

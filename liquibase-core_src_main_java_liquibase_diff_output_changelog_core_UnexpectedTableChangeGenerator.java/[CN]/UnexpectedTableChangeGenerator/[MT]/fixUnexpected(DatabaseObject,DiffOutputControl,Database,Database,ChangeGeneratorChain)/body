@@ -1,0 +1,24 @@
+{
+  Table unexpectedTable=(Table)unexpectedObject;
+  DropTableChange change=new DropTableChange();
+  change.setTableName(unexpectedTable.getName());
+  if (control.isIncludeCatalog()) {
+    change.setCatalogName(unexpectedTable.getSchema().getCatalogName());
+  }
+  if (control.isIncludeSchema()) {
+    change.setSchemaName(unexpectedTable.getSchema().getName());
+  }
+  for (  Column column : unexpectedTable.getColumns()) {
+    control.setAlreadyHandledUnexpected(column);
+  }
+  ;
+  control.setAlreadyHandledUnexpected(unexpectedTable.getPrimaryKey());
+  for (  Index index : unexpectedTable.getIndexes()) {
+    control.setAlreadyHandledUnexpected(index);
+  }
+  control.setAlreadyHandledUnexpected(unexpectedTable.getPrimaryKey());
+  if (unexpectedTable.getPrimaryKey() != null) {
+    control.setAlreadyHandledUnexpected(unexpectedTable.getPrimaryKey().getBackingIndex());
+  }
+  return new Change[]{change};
+}

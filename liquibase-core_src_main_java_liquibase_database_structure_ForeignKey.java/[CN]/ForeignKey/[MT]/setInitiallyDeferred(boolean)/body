@@ -1,4 +1,0 @@
-{
-  this.initiallyDeferred=initiallyDeferred;
-  return this;
-}

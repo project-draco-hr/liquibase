@@ -1,6 +1,0 @@
-{
-  if (table == null) {
-    return null;
-  }
-  return table.getSchema();
-}

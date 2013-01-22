@@ -1,0 +1,7 @@
+{
+  ChangeGeneratorChain chain=createGeneratorChain(UnexpectedObjectChangeGenerator.class,unexpectedObject.getClass(),referenceDatabase);
+  if (chain == null) {
+    return null;
+  }
+  return chain.fixUnexpected(unexpectedObject,control,referenceDatabase,comparisionDatabase);
+}

@@ -1,0 +1,16 @@
+{
+  Column column=(Column)unexpectedObject;
+  if (column.getRelation() instanceof View) {
+    return null;
+  }
+  DropColumnChange change=new DropColumnChange();
+  change.setTableName(column.getRelation().getName());
+  if (control.isIncludeCatalog()) {
+    change.setCatalogName(column.getRelation().getSchema().getCatalogName());
+  }
+  if (control.isIncludeSchema()) {
+    change.setSchemaName(column.getRelation().getSchema().getName());
+  }
+  change.setColumnName(column.getName());
+  return new Change[]{change};
+}

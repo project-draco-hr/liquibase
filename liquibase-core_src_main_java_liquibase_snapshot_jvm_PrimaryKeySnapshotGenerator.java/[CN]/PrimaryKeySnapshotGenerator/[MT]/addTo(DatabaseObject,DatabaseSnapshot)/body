@@ -1,0 +1,21 @@
+{
+  if (!snapshot.getSnapshotControl().shouldInclude(PrimaryKey.class)) {
+    return;
+  }
+  if (foundObject instanceof Table) {
+    Table table=(Table)foundObject;
+    Database database=snapshot.getDatabase();
+    Schema schema=table.getSchema();
+    List<JdbcDatabaseSnapshot.CachedRow> rs=null;
+    try {
+      JdbcDatabaseSnapshot.CachingDatabaseMetaData metaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
+      rs=metaData.getPrimaryKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),table.getName());
+      if (rs.size() > 0) {
+        table.setPrimaryKey(new PrimaryKey().setName(rs.get(0).getString("PK_NAME")).setTable(table));
+      }
+    }
+ catch (    SQLException e) {
+      throw new DatabaseException(e);
+    }
+  }
+}

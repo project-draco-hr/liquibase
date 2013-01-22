@@ -1,0 +1,4 @@
+{
+  this.setAttribute("table",table);
+  return this;
+}

@@ -1,3 +1,3 @@
 {
-  return super.escapeDatabaseObject(indexName,Index.class);
+  return super.escapeObjectName(indexName,Index.class);
 }

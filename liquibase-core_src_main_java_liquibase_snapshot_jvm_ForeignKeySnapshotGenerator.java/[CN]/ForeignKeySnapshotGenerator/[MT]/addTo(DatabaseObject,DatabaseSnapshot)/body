@@ -1,0 +1,40 @@
+{
+  if (!snapshot.getSnapshotControl().shouldInclude(ForeignKey.class)) {
+    return;
+  }
+  if (foundObject instanceof Table) {
+    Table table=(Table)foundObject;
+    Database database=snapshot.getDatabase();
+    Schema schema;
+    schema=table.getSchema();
+    Set<String> seenFks=new HashSet<String>();
+    List<JdbcDatabaseSnapshot.CachedRow> importedKeyMetadataResultSet=null;
+    try {
+      importedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getImportedKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(table.getName(),Table.class));
+      for (      JdbcDatabaseSnapshot.CachedRow row : importedKeyMetadataResultSet) {
+        ForeignKey fk=new ForeignKey().setName(row.getString("FK_NAME")).setForeignKeyTable(table);
+        if (seenFks.add(fk.getName())) {
+          table.getOutgoingForeignKeys().add(fk);
+        }
+      }
+    }
+ catch (    Exception e) {
+      throw new DatabaseException(e);
+    }
+    seenFks=new HashSet<String>();
+    List<JdbcDatabaseSnapshot.CachedRow> exportedKeyMetadataResultSet=null;
+    try {
+      exportedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getExportedKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(table.getName(),Table.class));
+      for (      JdbcDatabaseSnapshot.CachedRow row : exportedKeyMetadataResultSet) {
+        Table fktable=(Table)new Table().setName(row.getString("FKTABLE_NAME")).setSchema(new Schema(row.getString("FKTABLE_CAT"),row.getString("FKTABLE_SCHEM")));
+        ForeignKey fk=new ForeignKey().setName(row.getString("FK_NAME")).setForeignKeyTable(fktable);
+        if (seenFks.add(fk.getName())) {
+          table.getIncomingForeignKeys().add(fk);
+        }
+      }
+    }
+ catch (    Exception e) {
+      throw new DatabaseException(e);
+    }
+  }
+}

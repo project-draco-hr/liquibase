@@ -1,0 +1,16 @@
+{
+  View view=(View)unexpectedObject;
+  DropViewChange change=new DropViewChange();
+  change.setViewName(view.getName());
+  if (control.isIncludeCatalog()) {
+    change.setCatalogName(view.getSchema().getCatalogName());
+  }
+  if (control.isIncludeSchema()) {
+    change.setSchemaName(view.getSchema().getName());
+  }
+  for (  Column column : view.getColumns()) {
+    control.setAlreadyHandledUnexpected(column);
+  }
+  ;
+  return new Change[]{change};
+}

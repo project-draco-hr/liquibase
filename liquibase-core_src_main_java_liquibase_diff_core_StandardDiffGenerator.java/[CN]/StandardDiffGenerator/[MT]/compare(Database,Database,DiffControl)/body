@@ -1,8 +1,0 @@
-{
-  DatabaseSnapshot referenceSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase,diffControl,DiffControl.DatabaseRole.REFERENCE);
-  DatabaseSnapshot comparisonSnapshot=null;
-  if (comparisonDatabase != null) {
-    comparisonSnapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(comparisonDatabase,diffControl,DiffControl.DatabaseRole.COMPARISON);
-  }
-  return compare(referenceSnapshot,comparisonSnapshot,diffControl);
-}

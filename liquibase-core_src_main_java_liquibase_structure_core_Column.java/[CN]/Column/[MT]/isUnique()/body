@@ -1,0 +1,3 @@
+{
+  return (Boolean)getAttribute("unique",Boolean.class);
+}

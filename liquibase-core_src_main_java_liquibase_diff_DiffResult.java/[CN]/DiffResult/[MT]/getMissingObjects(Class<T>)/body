@@ -1,0 +1,9 @@
+{
+  Set returnSet=new HashSet();
+  for (  DatabaseObject obj : missingObjects) {
+    if (type.isAssignableFrom(obj.getClass())) {
+      returnSet.add(obj);
+    }
+  }
+  return returnSet;
+}

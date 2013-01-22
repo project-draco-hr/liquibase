@@ -1,0 +1,4 @@
+{
+  ObjectDifferences differences=chain.findDifferences(databaseObject1,databaseObject2,accordingTo);
+  return differences;
+}

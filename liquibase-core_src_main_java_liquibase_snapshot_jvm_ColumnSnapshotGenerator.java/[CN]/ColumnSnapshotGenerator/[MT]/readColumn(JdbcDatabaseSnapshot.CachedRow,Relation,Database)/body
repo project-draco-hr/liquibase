@@ -1,0 +1,69 @@
+{
+  String rawTableName=(String)columnMetadataResultSet.get("TABLE_NAME");
+  String rawColumnName=(String)columnMetadataResultSet.get("COLUMN_NAME");
+  String rawSchemaName=StringUtils.trimToNull((String)columnMetadataResultSet.get("TABLE_SCHEM"));
+  String rawCatalogName=StringUtils.trimToNull((String)columnMetadataResultSet.get("TABLE_CAT"));
+  String remarks=StringUtils.trimToNull((String)columnMetadataResultSet.get("REMARKS"));
+  Column column=new Column();
+  column.setName(rawColumnName);
+  column.setRelation(table);
+  column.setRemarks(remarks);
+  int nullable=columnMetadataResultSet.getInt("NULLABLE");
+  if (nullable == DatabaseMetaData.columnNoNulls) {
+    column.setNullable(false);
+  }
+ else   if (nullable == DatabaseMetaData.columnNullable) {
+    column.setNullable(true);
+  }
+ else   if (nullable == DatabaseMetaData.columnNullableUnknown) {
+    LogFactory.getLogger().info("Unknown nullable state for column " + column.toString() + ". Assuming nullable");
+    column.setNullable(true);
+  }
+  if (table instanceof Table) {
+    if (columnMetadataResultSet.containsColumn("IS_AUTOINCREMENT")) {
+      String isAutoincrement=(String)columnMetadataResultSet.get("IS_AUTOINCREMENT");
+      if (isAutoincrement == null) {
+        column.setAutoIncrement(false);
+      }
+ else       if (isAutoincrement.equals("YES")) {
+        column.setAutoIncrement(true);
+      }
+ else       if (isAutoincrement.equals("NO")) {
+        column.setAutoIncrement(false);
+      }
+ else       if (isAutoincrement.equals("")) {
+        LogFactory.getLogger().info("Unknown auto increment state for column " + column.toString() + ". Assuming not auto increment");
+        column.setAutoIncrement(false);
+      }
+ else {
+        throw new UnexpectedLiquibaseException("Unknown is_autoincrement value: " + isAutoincrement);
+      }
+    }
+ else {
+      String selectStatement="select " + database.escapeColumnName(rawCatalogName,rawSchemaName,rawTableName,rawColumnName) + " from "+ database.escapeTableName(rawCatalogName,rawSchemaName,rawTableName)+ " where 0=1";
+      Connection underlyingConnection=((JdbcConnection)database.getConnection()).getUnderlyingConnection();
+      Statement statement=underlyingConnection.createStatement();
+      ResultSet columnSelectRS=statement.executeQuery(selectStatement);
+      try {
+        if (columnSelectRS.getMetaData().isAutoIncrement(1)) {
+          column.setAutoIncrement(true);
+        }
+ else {
+          column.setAutoIncrement(false);
+        }
+      }
+  finally {
+        try {
+          statement.close();
+        }
+ catch (        SQLException ignore) {
+        }
+        columnSelectRS.close();
+      }
+    }
+  }
+  DataType type=readDataType(columnMetadataResultSet,column,database);
+  column.setType(type);
+  column.setDefaultValue(readDefaultValue(columnMetadataResultSet,column,database));
+  return column;
+}

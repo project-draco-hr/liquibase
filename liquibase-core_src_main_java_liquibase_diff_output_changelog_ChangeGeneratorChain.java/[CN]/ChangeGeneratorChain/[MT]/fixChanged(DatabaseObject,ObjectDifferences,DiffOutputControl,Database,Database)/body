@@ -1,0 +1,22 @@
+{
+  if (changedObject == null) {
+    return null;
+  }
+  if (changeGenerators == null) {
+    return null;
+  }
+  if (!changeGenerators.hasNext()) {
+    return null;
+  }
+  if (control.alreadyHandledChanged(changedObject,comparisionDatabase)) {
+    return null;
+  }
+  Change[] changes=((ChangedObjectChangeGenerator)changeGenerators.next()).fixChanged(changedObject,differences,control,referenceDatabase,comparisionDatabase,this);
+  if (changes == null) {
+    return null;
+  }
+  if (changes.length == 0) {
+    return null;
+  }
+  return changes;
+}

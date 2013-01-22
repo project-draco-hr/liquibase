@@ -1,4 +1,0 @@
-{
-  schema=correctSchema(schema);
-  return DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(this).getTable(schema,tableName,this);
-}

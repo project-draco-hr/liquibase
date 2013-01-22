@@ -1,0 +1,3 @@
+{
+  allNodes.put(type,new Node(type));
+}

@@ -1,10 +1,19 @@
 {
   try {
     Schema schema=new Schema(getCatalogName(),getSchemaName());
-    if (database != null) {
-      schema=database.correctSchema(schema);
+    Index example=new Index();
+    example.setTable(new Table());
+    if (StringUtils.trimToNull(getTableName()) != null) {
+      example.getTable().setName(getTableName());
     }
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasIndex(schema,getTableName(),getIndexName(),getColumnNames(),database)) {
+    example.getTable().setSchema(schema);
+    example.setName(getIndexName());
+    if (StringUtils.trimToNull(getColumnNames()) != null) {
+      for (      String column : getColumnNames().split("\\s*,\\s*")) {
+        example.getColumns().add(column);
+      }
+    }
+    if (!SnapshotGeneratorFactory.getInstance().has(example,database)) {
       String name="";
       if (getIndexName() != null) {
         name+=database.escapeStringForDatabase(getIndexName());
@@ -18,7 +27,8 @@
       throw new PreconditionFailedException("Index " + name + " does not exist",changeLog,this);
     }
   }
- catch (  DatabaseException e) {
+ catch (  Exception e) {
+    e.printStackTrace();
     throw new PreconditionErrorException(e,changeLog,this);
   }
 }

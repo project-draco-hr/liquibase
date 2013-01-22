@@ -1,0 +1,12 @@
+{
+  Class[] classes;
+  try {
+    classes=ServiceLocator.getInstance().findClasses(SnapshotGenerator.class);
+    for (    Class clazz : classes) {
+      register((SnapshotGenerator)clazz.getConstructor().newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

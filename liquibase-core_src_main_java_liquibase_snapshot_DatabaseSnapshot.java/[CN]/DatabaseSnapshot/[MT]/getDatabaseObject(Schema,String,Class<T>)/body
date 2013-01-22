@@ -1,9 +1,0 @@
-{
-  schema=database.correctSchema(schema);
-  for (  DatabaseObject object : getDatabaseObjects(schema,type)) {
-    if (object.equals(objectName,database)) {
-      return (T)object;
-    }
-  }
-  return null;
-}

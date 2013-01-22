@@ -1,3 +1,0 @@
-{
-  return createSnapshot(database,diffControl,DiffControl.DatabaseRole.REFERENCE);
-}

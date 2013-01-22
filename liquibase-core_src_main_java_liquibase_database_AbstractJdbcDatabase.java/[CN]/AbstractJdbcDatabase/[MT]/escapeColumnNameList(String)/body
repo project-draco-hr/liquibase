@@ -1,0 +1,10 @@
+{
+  StringBuffer sb=new StringBuffer();
+  for (  String columnName : columnNames.split(",")) {
+    if (sb.length() > 0) {
+      sb.append(", ");
+    }
+    sb.append(escapeObjectName(columnName.trim(),Column.class));
+  }
+  return sb.toString();
+}

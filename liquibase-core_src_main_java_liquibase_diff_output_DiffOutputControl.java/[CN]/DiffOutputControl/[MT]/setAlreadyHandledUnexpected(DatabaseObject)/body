@@ -1,0 +1,6 @@
+{
+  if (unexpectedObject == null) {
+    return;
+  }
+  this.alreadyHandledUnexpected.add(unexpectedObject);
+}

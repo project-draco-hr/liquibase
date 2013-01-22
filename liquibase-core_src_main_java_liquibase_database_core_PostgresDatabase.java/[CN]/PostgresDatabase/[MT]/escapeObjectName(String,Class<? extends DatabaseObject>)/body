@@ -1,0 +1,11 @@
+{
+  if (objectName == null) {
+    return null;
+  }
+  if (objectName.contains("-") || hasMixedCase(objectName) || startsWithNumeric(objectName)|| isReservedWord(objectName)) {
+    return "\"" + objectName + "\"";
+  }
+ else {
+    return super.escapeObjectName(objectName,objectType);
+  }
+}

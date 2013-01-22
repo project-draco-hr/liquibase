@@ -1,0 +1,11 @@
+{
+  try {
+    int result;
+    result=(getRelation() != null ? getRelation().hashCode() : 0);
+    result=31 * result + getName().toUpperCase().hashCode();
+    return result;
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

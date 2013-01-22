@@ -1,0 +1,22 @@
+{
+  StringBuffer stringBuffer=new StringBuffer();
+  stringBuffer.append(getName());
+  if (this.isUnique() != null && !this.isUnique()) {
+    stringBuffer.append(" unique ");
+  }
+  if (getTable() != null && getColumns() != null) {
+    stringBuffer.append(" on ").append(getTable().getName());
+    if (getColumns() != null && getColumns().size() > 0) {
+      stringBuffer.append("(");
+      for (      String column : getColumns()) {
+        stringBuffer.append(column).append(", ");
+      }
+      stringBuffer.delete(stringBuffer.length() - 2,stringBuffer.length());
+      stringBuffer.append(")");
+    }
+ else {
+      stringBuffer.append("()");
+    }
+  }
+  return stringBuffer.toString();
+}

@@ -1,0 +1,4 @@
+{
+  String tableOrViewName=getRelation().getName();
+  return tableOrViewName + "." + getName();
+}

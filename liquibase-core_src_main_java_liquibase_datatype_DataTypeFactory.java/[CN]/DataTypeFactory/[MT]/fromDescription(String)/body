@@ -64,5 +64,11 @@
   if (primaryKey && liquibaseDataType instanceof BigIntType) {
     ((BigIntType)liquibaseDataType).setAutoIncrement(true);
   }
+  if (primaryKey && liquibaseDataType instanceof IntType) {
+    ((IntType)liquibaseDataType).setAutoIncrement(true);
+  }
+  if (primaryKey && liquibaseDataType instanceof BigIntType) {
+    ((BigIntType)liquibaseDataType).setAutoIncrement(true);
+  }
   return liquibaseDataType;
 }

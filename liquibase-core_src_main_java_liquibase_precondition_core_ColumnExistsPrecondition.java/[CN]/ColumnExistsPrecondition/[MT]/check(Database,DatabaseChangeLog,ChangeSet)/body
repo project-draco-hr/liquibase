@@ -1,5 +1,15 @@
 {
-  if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasColumn(database.correctSchema(new Schema(getCatalogName(),getSchemaName())),getTableName(),getColumnName(),database)) {
-    throw new PreconditionFailedException("Column '" + database.escapeColumnName(catalogName,schemaName,getTableName(),getColumnName()) + "' does not exist",changeLog,this);
+  Column example=new Column();
+  if (StringUtils.trimToNull(getTableName()) != null) {
+    example.setRelation(new Table().setName(getTableName()).setSchema(new Schema(getCatalogName(),getSchemaName())));
+  }
+  example.setName(getColumnName());
+  try {
+    if (!SnapshotGeneratorFactory.getInstance().has(example,database)) {
+      throw new PreconditionFailedException("Column '" + database.escapeColumnName(catalogName,schemaName,getTableName(),getColumnName()) + "' does not exist",changeLog,this);
+    }
+  }
+ catch (  LiquibaseException e) {
+    throw new PreconditionErrorException(e,changeLog,this);
   }
 }

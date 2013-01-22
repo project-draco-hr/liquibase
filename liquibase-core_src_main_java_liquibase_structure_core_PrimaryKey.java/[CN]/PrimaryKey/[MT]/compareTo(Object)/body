@@ -1,0 +1,8 @@
+{
+  PrimaryKey o=(PrimaryKey)other;
+  int returnValue=this.getTable().getName().compareTo(o.getTable().getName());
+  if (returnValue == 0) {
+    returnValue=this.getColumnNames().compareTo(o.getColumnNames());
+  }
+  return returnValue;
+}

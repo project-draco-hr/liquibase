@@ -1,0 +1,4 @@
+{
+  setAttribute("relation",relation);
+  return this;
+}

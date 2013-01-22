@@ -1,3 +1,0 @@
-{
-  return getGenerator(referenceDatabase,comparisonDatabase).compare(referenceDatabase,comparisonDatabase,diffControl);
-}

@@ -1,8 +1,0 @@
-{
-  if (this == o)   return true;
-  if (o == null || getClass() != o.getClass())   return false;
-  Schema schema=(Schema)o;
-  if (catalog != null ? !catalog.equals(schema.catalog) : schema.catalog != null)   return false;
-  if (name != null ? !name.equals(schema.name) : schema.name != null)   return false;
-  return true;
-}

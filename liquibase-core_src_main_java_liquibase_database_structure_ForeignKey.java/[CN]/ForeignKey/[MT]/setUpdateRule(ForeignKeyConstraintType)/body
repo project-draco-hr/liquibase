@@ -1,4 +1,0 @@
-{
-  this.updateRule=rule;
-  return this;
-}

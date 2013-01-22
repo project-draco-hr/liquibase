@@ -1,3 +1,0 @@
-{
-  this(new SchemaComparison[]{new SchemaComparison(schema,null)},typesToDiff);
-}

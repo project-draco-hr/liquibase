@@ -1,3 +1,0 @@
-{
-  return getName() + "(" + getForeignKeyTable()+ "."+ getForeignKeyColumns()+ " ->"+ getPrimaryKeyTable()+ "."+ getPrimaryKeyColumns()+ ")";
-}

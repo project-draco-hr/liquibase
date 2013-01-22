@@ -1,5 +1,5 @@
 {
-  Column column=new Column().setRelation(new Table(statement.getTableName()).setSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()))).setName(statement.getColumnName());
+  Column column=new Column().setRelation(new Table().setName(statement.getTableName()).setSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()))).setName(statement.getColumnName());
   Object defaultValue=statement.getDefaultValue();
   StringBuffer sql=new StringBuffer("ALTER TABLE ");
   sql.append(database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()));

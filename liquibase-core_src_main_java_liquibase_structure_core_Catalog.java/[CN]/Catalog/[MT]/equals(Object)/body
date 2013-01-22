@@ -1,0 +1,7 @@
+{
+  if (this == o)   return true;
+  if (o == null || getClass() != o.getClass())   return false;
+  Catalog catalog=(Catalog)o;
+  if (getName() != null ? !getName().equals(catalog.getName()) : catalog.getName() != null)   return false;
+  return true;
+}

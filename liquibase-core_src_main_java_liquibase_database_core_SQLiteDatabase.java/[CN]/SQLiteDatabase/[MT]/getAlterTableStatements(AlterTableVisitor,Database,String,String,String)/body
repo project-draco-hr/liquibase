@@ -1,7 +1,13 @@
 {
+  DatabaseSnapshot snapshot=null;
   List<SqlStatement> statements=new ArrayList<SqlStatement>();
-  DatabaseSnapshot snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl((Schema)null,(String)null));
-  Table table=snapshot.getDatabaseObject(new Schema(new Catalog(null),schemaName),tableName,Table.class);
+  Table table=null;
+  try {
+    table=SnapshotGeneratorFactory.getInstance().createSnapshot((Table)new Table().setName(tableName).setSchema(new Schema(new Catalog(null),null)),database);
+  }
+ catch (  InvalidExampleException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
   List<ColumnConfig> createColumns=new Vector<ColumnConfig>();
   List<ColumnConfig> copyColumns=new Vector<ColumnConfig>();
   if (table != null) {
@@ -27,7 +33,7 @@
     }
   }
   List<Index> newIndices=new Vector<Index>();
-  for (  Index index : snapshot.getDatabaseObjects(new Schema(new Catalog(null),schemaName),Index.class)) {
+  for (  Index index : new ArrayList<Index>()) {
     if (index.getTable().getName().equalsIgnoreCase(tableName)) {
       if (alterTableVisitor.createThisIndex(index)) {
         newIndices.add(index);

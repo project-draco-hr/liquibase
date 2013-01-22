@@ -1,0 +1,11 @@
+{
+  DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase.getDefaultSchema(),referenceDatabase,new SnapshotControl());
+  DatabaseSnapshot comparisonSnapshot=null;
+  if (comparisonDatabase == null) {
+    comparisonSnapshot=new JdbcDatabaseSnapshot(referenceDatabase);
+  }
+ else {
+    comparisonSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(comparisonDatabase.getDefaultSchema(),comparisonDatabase,new SnapshotControl());
+  }
+  return getGenerator(referenceDatabase,comparisonDatabase).compare(referenceSnapshot,comparisonSnapshot,compareControl);
+}

@@ -1,0 +1,4 @@
+{
+  setAttribute("nullable",nullable);
+  return this;
+}

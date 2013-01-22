@@ -1,0 +1,8 @@
+{
+  if ((this.getPrimaryKeyColumns() == null) || (this.getPrimaryKeyColumns().length() == 0)) {
+    this.setPrimaryKeyColumns(primaryKeyColumn);
+  }
+ else {
+    this.setPrimaryKeyColumns(this.getPrimaryKeyColumns() + ", " + primaryKeyColumn);
+  }
+}

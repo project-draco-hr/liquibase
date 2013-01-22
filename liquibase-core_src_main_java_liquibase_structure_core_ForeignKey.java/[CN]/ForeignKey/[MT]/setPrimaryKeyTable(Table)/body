@@ -1,0 +1,4 @@
+{
+  this.setAttribute("primaryKeyTable",primaryKeyTable);
+  return this;
+}

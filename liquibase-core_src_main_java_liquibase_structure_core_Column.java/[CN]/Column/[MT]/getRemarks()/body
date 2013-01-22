@@ -1,0 +1,3 @@
+{
+  return (String)getAttribute("remarks",String.class);
+}

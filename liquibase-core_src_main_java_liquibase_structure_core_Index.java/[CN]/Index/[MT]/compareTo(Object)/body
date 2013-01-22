@@ -1,0 +1,10 @@
+{
+  Index o=(Index)other;
+  int returnValue=this.getTable().getName().compareTo(o.getTable().getName());
+  if (returnValue == 0) {
+    String thisName=StringUtils.trimToEmpty(this.getName());
+    String oName=StringUtils.trimToEmpty(o.getName());
+    returnValue=thisName.compareTo(oName);
+  }
+  return returnValue;
+}

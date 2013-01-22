@@ -1,4 +1,0 @@
-{
-  DatabaseObject thisDatabaseObject=this.getDatabaseObject(schema,databaseObject,databaseObject.getClass());
-  return thisDatabaseObject != null;
-}

@@ -11,7 +11,9 @@
   }
   ConstraintsConfig constraints=new ConstraintsConfig();
   constraints.setNullable(columnStructure.isNullable());
-  constraints.setPrimaryKey(columnStructure.isPrimaryKey());
+  if (columnStructure.getRelation() != null && columnStructure.getRelation() instanceof Table && ((Table)columnStructure.getRelation()).getPrimaryKey().getColumnNamesAsList().contains(columnStructure.getName())) {
+    constraints.setPrimaryKey(true);
+  }
   constraints.setUnique(columnStructure.isUnique());
   setConstraints(constraints);
 }

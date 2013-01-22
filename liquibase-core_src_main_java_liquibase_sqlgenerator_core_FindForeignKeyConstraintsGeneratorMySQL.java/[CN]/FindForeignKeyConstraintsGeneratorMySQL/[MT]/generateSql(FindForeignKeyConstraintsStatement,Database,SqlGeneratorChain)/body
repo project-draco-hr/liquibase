@@ -1,5 +1,5 @@
 {
-  Schema schema=database.correctSchema(new Schema(statement.getBaseTableCatalogName(),statement.getBaseTableSchemaName()));
+  CatalogAndSchema schema=database.correctSchema(new CatalogAndSchema(statement.getBaseTableCatalogName(),statement.getBaseTableSchemaName()));
   StringBuilder sb=new StringBuilder();
   sb.append("SELECT ");
   sb.append("RC.TABLE_NAME as ").append(FindForeignKeyConstraintsStatement.RESULT_COLUMN_BASE_TABLE_NAME).append(", ");

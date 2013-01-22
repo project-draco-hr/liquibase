@@ -1,0 +1,6 @@
+DatabaseObject changedObject
+ObjectDifferences differences
+DiffOutputControl control
+Database referenceDatabase
+Database comparisonDatabase
+ChangeGeneratorChain chain

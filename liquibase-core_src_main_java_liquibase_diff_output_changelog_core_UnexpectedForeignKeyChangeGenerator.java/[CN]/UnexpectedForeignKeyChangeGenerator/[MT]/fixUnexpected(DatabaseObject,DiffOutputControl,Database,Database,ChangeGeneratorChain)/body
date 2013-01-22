@@ -1,0 +1,15 @@
+{
+  ForeignKey fk=(ForeignKey)unexpectedObject;
+  DropForeignKeyConstraintChange change=new DropForeignKeyConstraintChange();
+  change.setConstraintName(fk.getName());
+  change.setBaseTableName(fk.getForeignKeyTable().getName());
+  if (control.isIncludeCatalog()) {
+    change.setBaseTableCatalogName(fk.getForeignKeyTable().getSchema().getCatalogName());
+  }
+  if (control.isIncludeSchema()) {
+    change.setBaseTableSchemaName(fk.getForeignKeyTable().getSchema().getName());
+  }
+  Index backingIndex=fk.getBackingIndex();
+  control.setAlreadyHandledUnexpected(backingIndex);
+  return new Change[]{change};
+}

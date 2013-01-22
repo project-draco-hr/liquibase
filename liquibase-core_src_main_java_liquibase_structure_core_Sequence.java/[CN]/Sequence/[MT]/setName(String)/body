@@ -1,0 +1,4 @@
+{
+  this.setAttribute("name",name);
+  return this;
+}

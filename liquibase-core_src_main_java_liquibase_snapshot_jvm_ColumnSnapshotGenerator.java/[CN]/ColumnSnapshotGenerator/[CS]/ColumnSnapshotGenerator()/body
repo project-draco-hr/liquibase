@@ -1,0 +1,3 @@
+{
+  super(Column.class,new Class[]{Table.class,View.class});
+}

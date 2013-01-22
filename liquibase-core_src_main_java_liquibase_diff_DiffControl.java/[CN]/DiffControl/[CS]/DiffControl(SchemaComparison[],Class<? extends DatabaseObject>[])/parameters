@@ -1,2 +1,0 @@
-SchemaComparison[] schemaComparison
-Class<? extends DatabaseObject>[] typesToDiff

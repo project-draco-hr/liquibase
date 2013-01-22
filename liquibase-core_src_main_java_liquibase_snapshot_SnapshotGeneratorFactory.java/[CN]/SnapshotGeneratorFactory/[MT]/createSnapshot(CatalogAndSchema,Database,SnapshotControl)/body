@@ -1,0 +1,3 @@
+{
+  return createSnapshot(new CatalogAndSchema[]{example},database,snapshotControl);
+}

@@ -1,6 +1,0 @@
-{
-  if (obj instanceof Index && obj.getName().equals("PRIMARY")) {
-    return false;
-  }
-  return super.includeInSnapshot(obj);
-}

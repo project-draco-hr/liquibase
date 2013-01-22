@@ -1,0 +1,16 @@
+{
+  if (this == o)   return true;
+  if (o == null || getClass() != o.getClass())   return false;
+  AbstractJdbcDatabase that=(AbstractJdbcDatabase)o;
+  if (connection == null) {
+    if (that.connection == null) {
+      return this == that;
+    }
+ else {
+      return false;
+    }
+  }
+ else {
+    return connection.equals(that.connection);
+  }
+}

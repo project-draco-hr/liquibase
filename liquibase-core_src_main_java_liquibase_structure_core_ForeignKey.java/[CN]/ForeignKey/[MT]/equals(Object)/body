@@ -1,0 +1,9 @@
+{
+  if (this == o)   return true;
+  if (o == null || getClass() != o.getClass())   return false;
+  ForeignKey that=(ForeignKey)o;
+  if (getForeignKeyColumns() == null) {
+    return this.getName().equalsIgnoreCase(that.getName());
+  }
+  return getForeignKeyColumns().equalsIgnoreCase(that.getForeignKeyColumns()) && getForeignKeyTable().equals(that.getForeignKeyTable()) && getPrimaryKeyColumns().equalsIgnoreCase(that.getPrimaryKeyColumns())&& getPrimaryKeyTable().equals(that.getPrimaryKeyTable())&& getReferencesUniqueColumn() == that.getReferencesUniqueColumn();
+}

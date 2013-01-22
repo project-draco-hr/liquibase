@@ -1,0 +1,4 @@
+{
+  this.setAttribute("foreignKeyTable",foreignKeyTable);
+  return this;
+}

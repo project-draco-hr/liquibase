@@ -1,4 +1,0 @@
-{
-  this.unique=value;
-  return this;
-}

@@ -1,0 +1,7 @@
+{
+  SortedSet<ChangeGenerator> generators=getGenerators(generatorType,objectType,database);
+  if (generators == null || generators.size() == 0) {
+    return null;
+  }
+  return new ChangeGeneratorChain(generators);
+}

@@ -1,4 +1,0 @@
-{
-  this.nullable=nullable;
-  return this;
-}

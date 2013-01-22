@@ -1,0 +1,4 @@
+{
+  this.setAttribute("tablespace",tablespace);
+  return this;
+}

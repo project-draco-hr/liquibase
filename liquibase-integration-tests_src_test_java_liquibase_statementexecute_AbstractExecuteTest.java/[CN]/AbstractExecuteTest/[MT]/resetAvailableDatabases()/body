@@ -2,7 +2,7 @@
   for (  Database database : DatabaseTestContext.getInstance().getAvailableDatabases()) {
     DatabaseConnection connection=database.getConnection();
     Statement connectionStatement=((JdbcConnection)connection).getUnderlyingConnection().createStatement();
-    database.dropDatabaseObjects(Schema.DEFAULT);
+    database.dropDatabaseObjects(CatalogAndSchema.DEFAULT);
     try {
       connectionStatement.executeUpdate("drop table " + database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()));
     }
@@ -18,7 +18,7 @@
     }
     connection.commit();
     if (database.supportsSchemas()) {
-      database.dropDatabaseObjects(new Schema(DatabaseTestContext.ALT_CATALOG,DatabaseTestContext.ALT_SCHEMA));
+      database.dropDatabaseObjects(new CatalogAndSchema(DatabaseTestContext.ALT_CATALOG,DatabaseTestContext.ALT_SCHEMA));
       connection.commit();
       try {
         connectionStatement.executeUpdate("drop table " + database.escapeTableName(DatabaseTestContext.ALT_CATALOG,DatabaseTestContext.ALT_SCHEMA,database.getDatabaseChangeLogLockTableName()));

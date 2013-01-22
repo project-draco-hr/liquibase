@@ -1,0 +1,4 @@
+{
+  this.setAttribute("filterCondition",filterCondition);
+  return this;
+}

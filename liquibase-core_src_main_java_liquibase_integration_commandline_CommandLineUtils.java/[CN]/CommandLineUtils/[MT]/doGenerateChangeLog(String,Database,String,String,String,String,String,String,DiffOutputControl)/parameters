@@ -1,0 +1,9 @@
+String changeLogFile
+Database originalDatabase
+String catalogName
+String schemaName
+String snapshotTypes
+String author
+String context
+String dataDir
+DiffOutputControl diffOutputControl

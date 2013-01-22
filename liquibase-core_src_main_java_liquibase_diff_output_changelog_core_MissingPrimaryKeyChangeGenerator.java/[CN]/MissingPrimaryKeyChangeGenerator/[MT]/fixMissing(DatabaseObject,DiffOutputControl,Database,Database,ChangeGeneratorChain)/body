@@ -1,0 +1,18 @@
+{
+  PrimaryKey pk=(PrimaryKey)missingObject;
+  AddPrimaryKeyChange change=new AddPrimaryKeyChange();
+  change.setTableName(pk.getTable().getName());
+  if (control.isIncludeCatalog()) {
+    change.setCatalogName(pk.getTable().getSchema().getCatalogName());
+  }
+  if (control.isIncludeSchema()) {
+    change.setSchemaName(pk.getTable().getSchema().getName());
+  }
+  change.setConstraintName(pk.getName());
+  change.setColumnNames(pk.getColumnNames());
+  if (control.isIncludeTablespace()) {
+    change.setTablespace(pk.getTablespace());
+  }
+  control.setAlreadyHandledMissing(pk.getBackingIndex());
+  return new Change[]{change};
+}

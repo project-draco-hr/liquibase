@@ -1,0 +1,3 @@
+String title
+Map<? extends DatabaseObject,ObjectDifferences> objects
+PrintStream out

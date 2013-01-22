@@ -1,0 +1,9 @@
+{
+  Set returnSet=new HashSet();
+  for (  DatabaseObject obj : unexpectedObjects) {
+    if (type.isAssignableFrom(obj.getClass())) {
+      returnSet.add(obj);
+    }
+  }
+  return returnSet;
+}

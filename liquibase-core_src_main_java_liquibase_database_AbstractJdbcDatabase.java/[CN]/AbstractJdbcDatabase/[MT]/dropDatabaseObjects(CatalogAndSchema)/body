@@ -1,0 +1,32 @@
+{
+  try {
+    DatabaseSnapshot snapshot=null;
+    try {
+      snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schemaToDrop,this,new SnapshotControl());
+    }
+ catch (    LiquibaseException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+    DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(new JdbcDatabaseSnapshot(this),snapshot,new CompareControl(snapshot.getSnapshotControl().getTypesToInclude()));
+    List<ChangeSet> changeSets=new DiffToChangeLog(diffResult,new DiffOutputControl(true,true,false)).generateChangeSets();
+    final boolean reEnableFK=supportsForeignKeyDisable() && disableForeignKeyChecks();
+    try {
+      for (      ChangeSet changeSet : changeSets) {
+        for (        Change change : changeSet.getChanges()) {
+          SqlStatement[] sqlStatements=change.generateStatements(this);
+          for (          SqlStatement statement : sqlStatements) {
+            ExecutorService.getInstance().getExecutor(this).execute(statement);
+          }
+        }
+      }
+    }
+  finally {
+      if (reEnableFK) {
+        enableForeignKeyChecks();
+      }
+    }
+  }
+  finally {
+    this.commit();
+  }
+}

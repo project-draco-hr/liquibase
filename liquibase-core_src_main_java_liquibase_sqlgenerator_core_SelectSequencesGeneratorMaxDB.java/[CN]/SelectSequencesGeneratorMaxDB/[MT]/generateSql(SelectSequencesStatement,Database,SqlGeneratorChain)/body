@@ -1,4 +1,0 @@
-{
-  Schema schema=database.correctSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()));
-  return new Sql[]{new UnparsedSql("SELECT SEQUENCE_NAME FROM DOMAIN.SEQUENCES WHERE OWNER = '" + schema.getName() + "'")};
-}

@@ -1,0 +1,10 @@
+{
+  if (cachingDatabaseMetaData == null) {
+    DatabaseMetaData databaseMetaData=null;
+    if (getDatabase().getConnection() != null) {
+      databaseMetaData=((JdbcConnection)getDatabase().getConnection()).getUnderlyingConnection().getMetaData();
+    }
+    cachingDatabaseMetaData=new CachingDatabaseMetaData(databaseMetaData);
+  }
+  return cachingDatabaseMetaData;
+}

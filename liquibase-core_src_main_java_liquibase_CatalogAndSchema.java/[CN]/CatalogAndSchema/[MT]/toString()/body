@@ -1,0 +1,12 @@
+{
+  if (catalogName == null && schemaName == null) {
+    return "DEFAULT";
+  }
+  if (catalogName != null && schemaName == null) {
+    return catalogName;
+  }
+  if (catalogName == null && schemaName != null) {
+    return schemaName;
+  }
+  return catalogName + "." + schemaName;
+}

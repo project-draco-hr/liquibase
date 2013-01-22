@@ -1,6 +1,14 @@
 {
   try {
-    if (!DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database).hasPrimaryKey(new Schema(getCatalogName(),getSchemaName()),getTableName(),getPrimaryKeyName(),database)) {
+    PrimaryKey example=new PrimaryKey();
+    Table table=new Table();
+    table.setSchema(new Schema(getCatalogName(),getSchemaName()));
+    if (StringUtils.trimToNull(getTableName()) != null) {
+      table.setName(getTableName());
+    }
+    example.setTable(table);
+    example.setName(getPrimaryKeyName());
+    if (!SnapshotGeneratorFactory.getInstance().has(example,database)) {
       if (tableName != null) {
         throw new PreconditionFailedException("Primary Key does not exist on " + database.escapeStringForDatabase(getTableName()),changeLog,this);
       }

@@ -1,0 +1,23 @@
+{
+  if (object instanceof Table) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object.getSchema(),new Schema(getLiquibaseCatalogName(),getLiquibaseSchemaName()),this)) {
+      if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,new Table().setName(getDatabaseChangeLogTableName()),this)) {
+        return true;
+      }
+      if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,new Table().setName(getDatabaseChangeLogLockTableName()),this)) {
+        return true;
+      }
+    }
+    return false;
+  }
+ else   if (object instanceof Column) {
+    return isLiquibaseObject(((Column)object).getRelation());
+  }
+ else   if (object instanceof Index) {
+    return isLiquibaseObject(((Index)object).getTable());
+  }
+ else   if (object instanceof PrimaryKey) {
+    return isLiquibaseObject(((PrimaryKey)object).getTable());
+  }
+  return false;
+}

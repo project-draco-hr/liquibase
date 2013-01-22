@@ -1,6 +1,0 @@
-{
-  if (!databaseObjectDiffs.containsKey(type)) {
-    databaseObjectDiffs.put(type,new DatabaseObjectDiff());
-  }
-  return databaseObjectDiffs.get(type);
-}

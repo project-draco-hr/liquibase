@@ -1,4 +1,0 @@
-Schema schema
-String foreignKeyTableName
-String fkName
-Database database

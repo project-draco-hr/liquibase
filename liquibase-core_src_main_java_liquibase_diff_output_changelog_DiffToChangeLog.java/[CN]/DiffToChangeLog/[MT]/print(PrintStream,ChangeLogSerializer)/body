@@ -1,0 +1,5 @@
+{
+  List<ChangeSet> changeSets=generateChangeSets();
+  changeLogSerializer.write(changeSets,out);
+  out.flush();
+}

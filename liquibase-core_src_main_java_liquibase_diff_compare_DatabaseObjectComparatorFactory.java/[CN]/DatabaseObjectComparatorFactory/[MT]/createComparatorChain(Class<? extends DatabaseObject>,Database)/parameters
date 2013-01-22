@@ -1,0 +1,2 @@
+Class<? extends DatabaseObject> databaseObjectType
+Database database

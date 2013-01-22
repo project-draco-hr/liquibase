@@ -1,0 +1,12 @@
+{
+  Set<DatabaseObject> databaseObjects=knownNull.get(example.getClass());
+  if (databaseObjects == null) {
+    return false;
+  }
+  for (  DatabaseObject obj : databaseObjects) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(obj,example,database)) {
+      return true;
+    }
+  }
+  return false;
+}

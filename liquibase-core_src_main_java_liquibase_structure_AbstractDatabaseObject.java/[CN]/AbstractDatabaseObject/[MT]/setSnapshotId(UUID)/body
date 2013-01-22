@@ -1,0 +1,6 @@
+{
+  if (this.snapshotId != null) {
+    throw new UnexpectedLiquibaseException("snapshotId already set");
+  }
+  this.snapshotId=snapshotId;
+}

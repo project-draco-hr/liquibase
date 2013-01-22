@@ -1,0 +1,6 @@
+{
+  if (getTable() == null) {
+    return null;
+  }
+  return getTable().getSchema();
+}

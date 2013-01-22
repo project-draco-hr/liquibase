@@ -1,0 +1,3 @@
+{
+  super(Index.class,new Class[]{Table.class,ForeignKey.class,UniqueConstraint.class});
+}

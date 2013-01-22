@@ -1,0 +1,35 @@
+{
+  final ChangeGeneratorFactory changeGeneratorFactory=ChangeGeneratorFactory.getInstance();
+  List<ChangeSet> changeSets=new ArrayList<ChangeSet>();
+  List<Class<? extends DatabaseObject>> types=getOrderedOutputTypes(MissingObjectChangeGenerator.class);
+  for (  Class<? extends DatabaseObject> type : types) {
+    for (    DatabaseObject object : diffResult.getMissingObjects(type)) {
+      if (object == null) {
+        continue;
+      }
+      Change[] changes=changeGeneratorFactory.fixMissing(object,diffOutputControl,diffResult.getReferenceSnapshot().getDatabase(),diffResult.getComparisonSnapshot().getDatabase());
+      if (!diffResult.getReferenceSnapshot().getDatabase().isLiquibaseObject(object) && !diffResult.getReferenceSnapshot().getDatabase().isSystemObject(object)) {
+        addToChangeSets(changes,changeSets);
+      }
+    }
+  }
+  types=getOrderedOutputTypes(UnexpectedObjectChangeGenerator.class);
+  for (  Class<? extends DatabaseObject> type : types) {
+    for (    DatabaseObject object : diffResult.getUnexpectedObjects(type)) {
+      Change[] changes=changeGeneratorFactory.fixUnexpected(object,diffOutputControl,diffResult.getReferenceSnapshot().getDatabase(),diffResult.getComparisonSnapshot().getDatabase());
+      if (!diffResult.getComparisonSnapshot().getDatabase().isLiquibaseObject(object) && !diffResult.getComparisonSnapshot().getDatabase().isSystemObject(object)) {
+        addToChangeSets(changes,changeSets);
+      }
+    }
+  }
+  types=getOrderedOutputTypes(ChangedObjectChangeGenerator.class);
+  for (  Class<? extends DatabaseObject> type : types) {
+    for (    Map.Entry<DatabaseObject,ObjectDifferences> entry : diffResult.getChangedObjects(type).entrySet()) {
+      Change[] changes=changeGeneratorFactory.fixChanged(entry.getKey(),entry.getValue(),diffOutputControl,diffResult.getReferenceSnapshot().getDatabase(),diffResult.getComparisonSnapshot().getDatabase());
+      if (!diffResult.getReferenceSnapshot().getDatabase().isLiquibaseObject(entry.getKey()) && !diffResult.getReferenceSnapshot().getDatabase().isSystemObject(entry.getKey())) {
+        addToChangeSets(changes,changeSets);
+      }
+    }
+  }
+  return changeSets;
+}

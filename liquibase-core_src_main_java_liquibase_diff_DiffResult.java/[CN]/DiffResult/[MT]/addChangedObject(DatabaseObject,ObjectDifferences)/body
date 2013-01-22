@@ -1,0 +1,3 @@
+{
+  changedObjects.put(obj,differences);
+}

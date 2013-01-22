@@ -2,12 +2,11 @@
   DatabaseSnapshot snapshot;
   Schema schema=new Schema(getCatalogName(),getSchemaName());
   try {
-    snapshot=DatabaseSnapshotGeneratorFactory.getInstance().createSnapshot(database,new DiffControl(schema,Sequence.class));
+    if (!SnapshotGeneratorFactory.getInstance().has(new Sequence().setName(getSequenceName()).setSchema(schema),database)) {
+      throw new PreconditionFailedException("Sequence " + database.escapeSequenceName(getCatalogName(),getSchemaName(),getSequenceName()) + " does not exist",changeLog,this);
+    }
   }
- catch (  DatabaseException e) {
+ catch (  LiquibaseException e) {
     throw new PreconditionErrorException(e,changeLog,this);
-  }
-  if (snapshot.getDatabaseObject(schema,getSequenceName(),Sequence.class) == null) {
-    throw new PreconditionFailedException("Sequence " + database.escapeSequenceName(getCatalogName(),getSchemaName(),getSequenceName()) + " does not exist",changeLog,this);
   }
 }

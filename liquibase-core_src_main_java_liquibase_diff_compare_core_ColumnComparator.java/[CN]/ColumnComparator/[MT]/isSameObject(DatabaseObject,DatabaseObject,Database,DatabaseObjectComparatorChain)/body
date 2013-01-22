@@ -1,0 +1,11 @@
+{
+  if (!(databaseObject1 instanceof Column && databaseObject2 instanceof Column)) {
+    return false;
+  }
+  Column thisColumn=(Column)databaseObject1;
+  Column otherColumn=(Column)databaseObject2;
+  if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(thisColumn.getRelation(),otherColumn.getRelation(),accordingTo)) {
+    return false;
+  }
+  return chain.isSameObject(databaseObject1,databaseObject2,accordingTo);
+}

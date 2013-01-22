@@ -1,0 +1,3 @@
+{
+  super(PrimaryKey.class,new Class[]{Table.class});
+}

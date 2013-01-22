@@ -1,0 +1,56 @@
+{
+  ChangeGeneratorFactory changeGeneratorFactory=ChangeGeneratorFactory.getInstance();
+  for (  Class<? extends DatabaseObject> type : allNodes.keySet()) {
+    for (    Class<? extends DatabaseObject> afterType : changeGeneratorFactory.runBeforeTypes(type,database,generatorType)) {
+      getNode(type).addEdge(getNode(afterType));
+    }
+    for (    Class<? extends DatabaseObject> beforeType : changeGeneratorFactory.runAfterTypes(type,database,generatorType)) {
+      getNode(beforeType).addEdge(getNode(type));
+    }
+  }
+  ArrayList<Node> L=new ArrayList<Node>();
+  HashSet<Node> S=new HashSet<Node>();
+  for (  Node n : allNodes.values()) {
+    if (n.inEdges.size() == 0) {
+      S.add(n);
+    }
+  }
+  while (!S.isEmpty()) {
+    Node n=S.iterator().next();
+    S.remove(n);
+    L.add(n);
+    for (Iterator<Edge> it=n.outEdges.iterator(); it.hasNext(); ) {
+      Edge e=it.next();
+      Node m=e.to;
+      it.remove();
+      m.inEdges.remove(e);
+      if (m.inEdges.isEmpty()) {
+        S.add(m);
+      }
+    }
+  }
+  for (  Node n : allNodes.values()) {
+    if (!n.inEdges.isEmpty()) {
+      String message="Could not resolve " + generatorType.getSimpleName() + " dependencies due to dependency cycle. Dependencies: \n";
+      for (      Node node : allNodes.values()) {
+        SortedSet<String> fromTypes=new TreeSet<String>();
+        SortedSet<String> toTypes=new TreeSet<String>();
+        for (        Edge edge : node.inEdges) {
+          fromTypes.add(edge.from.type.getSimpleName());
+        }
+        for (        Edge edge : node.outEdges) {
+          toTypes.add(edge.to.type.getSimpleName());
+        }
+        String from=StringUtils.join(fromTypes,",");
+        String to=StringUtils.join(toTypes,",");
+        message+="    [" + from + "] -> "+ node.type.getSimpleName()+ " -> ["+ to+ "]\n";
+      }
+      throw new UnexpectedLiquibaseException(message);
+    }
+  }
+  List<Class<? extends DatabaseObject>> returnList=new ArrayList<Class<? extends DatabaseObject>>();
+  for (  Node node : L) {
+    returnList.add(node.type);
+  }
+  return returnList;
+}

@@ -1,0 +1,6 @@
+{
+  Edge e=new Edge(this,node);
+  outEdges.add(e);
+  node.inEdges.add(e);
+  return this;
+}

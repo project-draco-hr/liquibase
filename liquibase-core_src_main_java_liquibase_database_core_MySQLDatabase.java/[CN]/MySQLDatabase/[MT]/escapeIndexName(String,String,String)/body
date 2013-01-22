@@ -1,3 +1,3 @@
 {
-  return escapeDatabaseObject(indexName,Index.class);
+  return escapeObjectName(indexName,Index.class);
 }

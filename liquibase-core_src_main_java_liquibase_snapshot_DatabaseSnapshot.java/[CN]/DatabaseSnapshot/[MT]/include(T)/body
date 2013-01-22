@@ -1,0 +1,50 @@
+{
+  if (example == null) {
+    return null;
+  }
+  if (database.isSystemObject(example)) {
+    return null;
+  }
+  if (example instanceof Schema && example.getName() == null && (((Schema)example).getCatalog() == null || ((Schema)example).getCatalogName() == null)) {
+    CatalogAndSchema catalogAndSchema=database.correctSchema(((Schema)example).toCatalogAndSchema());
+    example=(T)new Schema(catalogAndSchema.getCatalogName(),catalogAndSchema.getSchemaName());
+  }
+  if (!snapshotControl.shouldInclude(example.getClass())) {
+    return example;
+  }
+  T existing=get(example);
+  if (existing != null) {
+    return existing;
+  }
+  if (isKnownNull(example)) {
+    return null;
+  }
+  SnapshotGeneratorChain chain=createGeneratorChain(example.getClass(),database);
+  T object=chain.snapshot(example,this);
+  if (object == null) {
+    Set<DatabaseObject> collection=knownNull.get(example.getClass());
+    if (collection == null) {
+      collection=new HashSet<DatabaseObject>();
+      knownNull.put(example.getClass(),collection);
+    }
+    collection.add(example);
+  }
+ else {
+    Set<DatabaseObject> collection=allFound.get(object.getClass());
+    if (collection == null) {
+      collection=new HashSet<DatabaseObject>();
+      allFound.put(object.getClass(),collection);
+    }
+    collection.add(object);
+    try {
+      includeNestedObjects(object);
+    }
+ catch (    InstantiationException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+catch (    IllegalAccessException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+  }
+  return object;
+}

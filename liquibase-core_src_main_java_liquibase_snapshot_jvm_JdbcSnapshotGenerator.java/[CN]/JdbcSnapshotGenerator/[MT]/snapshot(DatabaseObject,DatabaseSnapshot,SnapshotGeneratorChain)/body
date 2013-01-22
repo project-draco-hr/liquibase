@@ -1,0 +1,19 @@
+{
+  if (defaultFor != null && defaultFor.isAssignableFrom(example.getClass())) {
+    return snapshotObject(example,snapshot);
+  }
+  DatabaseObject chainResponse=chain.snapshot(example,snapshot);
+  if (chainResponse == null) {
+    return null;
+  }
+  if (addsTo != null) {
+    for (    Class<? extends DatabaseObject> addType : addsTo) {
+      if (addType.isAssignableFrom(example.getClass())) {
+        if (chainResponse != null) {
+          addTo(chainResponse,snapshot);
+        }
+      }
+    }
+  }
+  return chainResponse;
+}

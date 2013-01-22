@@ -1,0 +1,3 @@
+{
+  return (Relation)getAttribute("relation",Relation.class);
+}

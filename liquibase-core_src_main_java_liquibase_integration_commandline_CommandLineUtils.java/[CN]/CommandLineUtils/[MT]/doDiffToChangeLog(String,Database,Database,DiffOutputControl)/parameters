@@ -1,0 +1,4 @@
+String changeLogFile
+Database referenceDatabase
+Database targetDatabase
+DiffOutputControl diffOutputControl

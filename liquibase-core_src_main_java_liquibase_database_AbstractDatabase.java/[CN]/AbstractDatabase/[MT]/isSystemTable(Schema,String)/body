@@ -1,4 +1,0 @@
-{
-  schema=correctSchema(schema);
-  return "information_schema".equalsIgnoreCase(schema.getName()) || getSystemTables().contains(tableName);
-}

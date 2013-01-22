@@ -1,0 +1,4 @@
+{
+  DatabaseSnapshot snapshot=createSnapshot(new DatabaseObject[]{example},database,snapshotControl);
+  return snapshot.get(example);
+}

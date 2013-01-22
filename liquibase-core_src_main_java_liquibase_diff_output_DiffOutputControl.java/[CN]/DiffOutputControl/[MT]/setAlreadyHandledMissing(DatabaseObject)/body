@@ -1,0 +1,6 @@
+{
+  if (missingObject == null) {
+    return;
+  }
+  this.alreadyHandledMissing.add(missingObject);
+}

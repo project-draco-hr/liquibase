@@ -1,0 +1,8 @@
+{
+  for (  DatabaseObject object : this.alreadyHandledUnexpected) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,unexpectedObject,accordingTo)) {
+      return true;
+    }
+  }
+  return false;
+}

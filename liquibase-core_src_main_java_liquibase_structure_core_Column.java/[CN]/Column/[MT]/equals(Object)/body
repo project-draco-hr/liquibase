@@ -1,0 +1,11 @@
+{
+  try {
+    if (this == o)     return true;
+    if (o == null || getClass() != o.getClass())     return false;
+    Column column=(Column)o;
+    return getName().equalsIgnoreCase(column.getName()) && !(getRelation() != null ? !getRelation().equals(column.getRelation()) : column.getRelation() != null);
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

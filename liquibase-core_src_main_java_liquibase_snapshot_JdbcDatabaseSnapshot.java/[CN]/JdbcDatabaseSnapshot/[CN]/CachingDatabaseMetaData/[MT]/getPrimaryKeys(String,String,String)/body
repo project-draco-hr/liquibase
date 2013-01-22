@@ -1,0 +1,7 @@
+{
+  String key=createKey("getPrimaryKeys",catalogName,schemaName,table);
+  if (hasCachedValue(key)) {
+    return getCachedValue(key);
+  }
+  return cacheResultSet(key,databaseMetaData.getPrimaryKeys(catalogName,schemaName,table));
+}

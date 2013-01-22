@@ -1,0 +1,3 @@
+{
+  return (getName() != null ? getName().toUpperCase().hashCode() : 0);
+}

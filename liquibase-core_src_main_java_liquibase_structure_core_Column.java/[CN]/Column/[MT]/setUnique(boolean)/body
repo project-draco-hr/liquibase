@@ -1,0 +1,4 @@
+{
+  setAttribute("unique",unique);
+  return this;
+}

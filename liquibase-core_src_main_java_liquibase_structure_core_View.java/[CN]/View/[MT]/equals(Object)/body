@@ -1,0 +1,6 @@
+{
+  if (this == o)   return true;
+  if (o == null || getClass() != o.getClass())   return false;
+  View that=(View)o;
+  return getName().equalsIgnoreCase(that.getName());
+}

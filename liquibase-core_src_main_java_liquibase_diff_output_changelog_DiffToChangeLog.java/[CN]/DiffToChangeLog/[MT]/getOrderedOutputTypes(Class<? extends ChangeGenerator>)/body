@@ -1,0 +1,17 @@
+{
+  Database comparisonDatabase=diffResult.getComparisonSnapshot().getDatabase();
+  DependencyGraph graph=new DependencyGraph();
+  for (  Class<? extends DatabaseObject> type : diffResult.getReferenceSnapshot().getSnapshotControl().getTypesToInclude()) {
+    graph.addType(type);
+  }
+  List<Class<? extends DatabaseObject>> types=graph.sort(comparisonDatabase,generatorType);
+  if (!loggedOrderFor.contains(generatorType)) {
+    String log=generatorType.getSimpleName() + " type order: ";
+    for (    Class<? extends DatabaseObject> type : types) {
+      log+="    " + type.getName();
+    }
+    LogFactory.getLogger().debug(log);
+    loggedOrderFor.add(generatorType);
+  }
+  return types;
+}

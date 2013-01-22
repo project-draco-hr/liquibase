@@ -1,4 +1,0 @@
-{
-  this.referencesUniqueColumn=referencesUniqueColumn;
-  return this;
-}

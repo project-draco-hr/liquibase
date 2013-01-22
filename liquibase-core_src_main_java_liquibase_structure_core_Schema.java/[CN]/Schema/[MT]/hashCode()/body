@@ -1,0 +1,5 @@
+{
+  int result=getCatalog() != null ? getCatalog().hashCode() : 0;
+  result=31 * result + (getName() != null ? getName().hashCode() : 0);
+  return result;
+}

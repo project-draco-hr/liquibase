@@ -1,7 +1,0 @@
-{
-  Table table=getDatabaseObject(schema,tableName,Table.class);
-  if (table == null) {
-    return null;
-  }
-  return table.getPrimaryKey();
-}

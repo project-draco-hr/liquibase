@@ -1,3 +1,0 @@
-{
-  return getGenerator(referenceSnapshot.getDatabase(),comparisonSnapshot.getDatabase()).compare(referenceSnapshot,comparisonSnapshot,diffControl);
-}

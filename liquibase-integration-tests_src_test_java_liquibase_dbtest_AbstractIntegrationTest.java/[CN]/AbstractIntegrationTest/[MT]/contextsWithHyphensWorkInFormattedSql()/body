@@ -1,9 +1,9 @@
 {
   Liquibase liquibase=createLiquibase("changelogs/common/sqlstyle/formatted.changelog.sql");
   liquibase.update("hyphen-context-using-sql,camelCaseContextUsingSql");
-  DatabaseSnapshotGenerator snapshot=DatabaseSnapshotGeneratorFactory.getInstance().getGenerator(database);
-  assertNotNull(snapshot.hasTable(null,"hyphen_context",database));
-  assertNotNull(snapshot.hasTable(null,"camel_context",database));
-  assertNotNull(snapshot.hasTable(null,"bar_id",database));
-  assertNotNull(snapshot.hasTable(null,"foo_id",database));
+  SnapshotGeneratorFactory tableSnapshotGenerator=SnapshotGeneratorFactory.getInstance();
+  assertNotNull(tableSnapshotGenerator.has(new Table().setName("hyphen_context"),database));
+  assertNotNull(tableSnapshotGenerator.has(new Table().setName("camel_context"),database));
+  assertNotNull(tableSnapshotGenerator.has(new Table().setName("bar_id"),database));
+  assertNotNull(tableSnapshotGenerator.has(new Table().setName("foo_id"),database));
 }

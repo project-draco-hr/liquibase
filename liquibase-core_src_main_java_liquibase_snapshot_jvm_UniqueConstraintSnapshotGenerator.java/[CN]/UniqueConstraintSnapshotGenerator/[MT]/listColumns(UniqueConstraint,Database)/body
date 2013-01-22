@@ -1,0 +1,22 @@
+{
+  Table table=example.getTable();
+  Schema schema=table.getSchema();
+  String name=example.getName();
+  String sql=null;
+  if (database instanceof MySQLDatabase) {
+    sql="select const.CONSTRAINT_NAME, COLUMN_NAME " + "from information_schema.table_constraints const " + "join information_schema.key_column_usage col "+ "on const.constraint_schema=col.constraint_schema "+ "and const.table_name=col.table_name "+ "and const.constraint_name=col.constraint_name "+ "where const.constraint_schema='" + database.correctObjectName(schema.getCatalogName(),Catalog.class) + "' "+ "and const.table_name='"+ database.correctObjectName(example.getTable().getName(),Table.class)+ "' "+ "and const.constraint_name='"+ database.correctObjectName(name,UniqueConstraint.class)+ "'"+ "order by ordinal_position";
+  }
+ else   if (database instanceof MSSQLDatabase) {
+    sql="select TC.Constraint_Name as CONSTRAINT_NAME, CC.Column_Name as COLUMN_NAME from information_schema.table_constraints TC " + "inner join information_schema.constraint_column_usage CC on TC.Constraint_Name = CC.Constraint_Name " + "where TC.constraint_schema='" + database.correctObjectName(schema.getCatalogName(),Catalog.class) + "' "+ "and TC.table_name='"+ database.correctObjectName(example.getTable().getName(),Table.class)+ "' "+ "and TC.Constraint_Name='"+ database.correctObjectName(name,UniqueConstraint.class)+ "'"+ "order by TC.Constraint_Name";
+  }
+ else   if (database instanceof OracleDatabase) {
+    sql="select ucc.column_name from all_cons_columns ucc where ucc.constraint_name='" + database.correctObjectName(name,UniqueConstraint.class) + "' and ucc.owner='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' order by ucc.position";
+  }
+ else   if (database instanceof DB2Database) {
+    sql="select k.colname as column_name from syscat.keycoluse k, syscat.tabconst t " + "where k.constname = t.constname " + "and t.type='U' "+ "and k.constname='" + database.correctObjectName(name,UniqueConstraint.class) + "' "+ "order by colseq";
+  }
+ else {
+    sql="select CONSTRAINT_NAME, COLUMN_LIST as COLUMN_NAME " + "from information_schema.constraints " + "where constraint_schema='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and constraint_catalog='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "' "+ "and constraint_name='"+ database.correctObjectName(name,UniqueConstraint.class)+ "'";
+  }
+  return ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement(sql));
+}

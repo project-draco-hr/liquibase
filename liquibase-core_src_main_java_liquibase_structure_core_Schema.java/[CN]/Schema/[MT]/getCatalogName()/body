@@ -1,0 +1,6 @@
+{
+  if (getCatalog() == null) {
+    return null;
+  }
+  return getCatalog().getName();
+}

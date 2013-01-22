@@ -1,0 +1,6 @@
+{
+  if (this == o)   return true;
+  if (o == null || getClass() != o.getClass())   return false;
+  Table that=(Table)o;
+  return getName().equalsIgnoreCase(that.getName());
+}

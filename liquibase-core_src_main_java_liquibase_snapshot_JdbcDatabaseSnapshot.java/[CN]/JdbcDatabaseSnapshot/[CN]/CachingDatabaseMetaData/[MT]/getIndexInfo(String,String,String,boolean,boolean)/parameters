@@ -1,0 +1,5 @@
+String catalogName
+String schemaName
+String table
+boolean unique
+boolean approximate
