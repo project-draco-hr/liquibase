@@ -8,7 +8,8 @@
   Liquibase liquibase=createLiquibase(includedChangeLog);
   clearDatabase(liquibase);
   database.setDefaultSchemaName("liquibaseb");
-  LockService.getInstance(database).forceReleaseLock();
+  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
+  lockService.forceReleaseLock();
   liquibase.update(includedChangeLog);
   DatabaseSnapshot originalSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl());
   CompareControl compareControl=new CompareControl(new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(CatalogAndSchema.DEFAULT,new CatalogAndSchema(null,"liquibaseb"))},originalSnapshot.getSnapshotControl().getTypesToInclude());

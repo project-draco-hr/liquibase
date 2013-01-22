@@ -1,0 +1,21 @@
+{
+  Database database=createMock(Database.class);
+  Executor executor=createMock(Executor.class);
+  expect(executor.update(isA(UnlockDatabaseChangeLogStatement.class))).andReturn(1);
+  expect(database.hasDatabaseChangeLogLockTable()).andReturn(true);
+  database.commit();
+  expectLastCall().atLeastOnce();
+  database.setCanCacheLiquibaseTableInfo(false);
+  expectLastCall();
+  executor.comment("Release Database Lock");
+  expectLastCall().anyTimes();
+  database.rollback();
+  expectLastCall().anyTimes();
+  replay(database);
+  replay(executor);
+  ExecutorService.getInstance().setExecutor(database,executor);
+  LockServiceImpl service=new LockServiceImpl();
+  service.setDatabase(database);
+  service.releaseLock();
+  verify(database);
+}

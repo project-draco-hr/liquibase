@@ -1,0 +1,30 @@
+{
+  Database database=createMock(Database.class);
+  Executor executor=createMock(Executor.class);
+  database.checkDatabaseChangeLogLockTable();
+  expectLastCall().anyTimes();
+  expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(true).anyTimes();
+  expect(database.hasDatabaseChangeLogLockTable()).andReturn(true);
+  database.rollback();
+  expectLastCall().times(1);
+  List<Map> resultList=new ArrayList<Map>();
+  Map<String,Object> result=new HashMap<String,Object>();
+  result.put("ID",1);
+  result.put("LOCKED",true);
+  Date lockDate=new Date();
+  result.put("LOCKGRANTED",lockDate);
+  result.put("LOCKEDBY","Locker");
+  resultList.add(result);
+  expect(executor.queryForList(isA(SelectFromDatabaseChangeLogLockStatement.class))).andReturn(resultList);
+  replay(database);
+  replay(executor);
+  ExecutorService.getInstance().setExecutor(database,executor);
+  LockServiceImpl service=new LockServiceImpl();
+  service.setDatabase(database);
+  DatabaseChangeLogLock[] locks=service.listLocks();
+  assertEquals(1,locks.length);
+  assertEquals(1,locks[0].getId());
+  assertEquals("Locker",locks[0].getLockedBy());
+  assertEquals(lockDate,locks[0].getLockGranted());
+  verify(database);
+}

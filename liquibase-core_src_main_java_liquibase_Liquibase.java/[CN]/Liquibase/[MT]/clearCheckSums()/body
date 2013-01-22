@@ -1,6 +1,6 @@
 {
   log.info("Clearing database change log checksums");
-  LockService lockService=LockService.getInstance(database);
+  LockService lockService=getLockService();
   lockService.waitForLock();
   try {
     checkDatabaseChangeLogTable(false,null,null);

@@ -1,0 +1,34 @@
+{
+  final Database oracle1=new OracleDatabase(){
+    @Override public boolean equals(    Object o){
+      return o == this;
+    }
+  }
+;
+  final Database oracle2=new OracleDatabase(){
+    @Override public boolean equals(    Object o){
+      return o == this;
+    }
+  }
+;
+  final Database mysql=new MySQLDatabase(){
+    @Override public boolean equals(    Object o){
+      return o == this;
+    }
+  }
+;
+  DatabaseFactory databaseFactory=DatabaseFactory.getInstance();
+  databaseFactory.register(oracle1);
+  databaseFactory.register(oracle2);
+  databaseFactory.register(mysql);
+  LockServiceFactory lockServiceFactory=LockServiceFactory.getInstance();
+  assertNotNull(lockServiceFactory.getLockService(oracle1));
+  assertNotNull(lockServiceFactory.getLockService(oracle2));
+  assertNotNull(lockServiceFactory.getLockService(mysql));
+  assertTrue(lockServiceFactory.getLockService(oracle1) == lockServiceFactory.getLockService(oracle1));
+  assertTrue(lockServiceFactory.getLockService(oracle2) == lockServiceFactory.getLockService(oracle2));
+  assertTrue(lockServiceFactory.getLockService(mysql) == lockServiceFactory.getLockService(mysql));
+  assertTrue(lockServiceFactory.getLockService(oracle1) != lockServiceFactory.getLockService(oracle2));
+  assertTrue(lockServiceFactory.getLockService(oracle1) != lockServiceFactory.getLockService(mysql));
+  assertTrue(lockServiceFactory.getLockService(getMockDatabase()) instanceof MockLockService);
+}

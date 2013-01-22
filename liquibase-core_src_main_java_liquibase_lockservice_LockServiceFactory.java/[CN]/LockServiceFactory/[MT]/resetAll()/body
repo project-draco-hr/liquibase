@@ -1,0 +1,6 @@
+{
+  for (  LockService lockService : registry) {
+    lockService.reset();
+  }
+  instance=null;
+}

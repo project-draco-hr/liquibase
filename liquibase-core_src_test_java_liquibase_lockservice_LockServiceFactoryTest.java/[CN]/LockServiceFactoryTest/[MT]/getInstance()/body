@@ -1,0 +1,4 @@
+{
+  assertNotNull(LockServiceFactory.getInstance());
+  assertTrue(LockServiceFactory.getInstance() == LockServiceFactory.getInstance());
+}
