@@ -1,4 +1,7 @@
 {
+  RanChangeSet ranChangeSet=ranIndex.get(changeSet.toString(false));
+  boolean ran=ranChangeSet != null;
+  boolean shouldValidate=!ran || changeSet.shouldRunOnChange() || changeSet.shouldAlwaysRun();
   for (  Change change : changeSet.getChanges()) {
     try {
       change.init();
@@ -6,29 +9,29 @@
  catch (    SetupException se) {
       setupExceptions.add(se);
     }
-    warnings.addAll(change.warn(database));
-    try {
-      ValidationErrors foundErrors=change.validate(database);
-      if (foundErrors != null && foundErrors.hasErrors()) {
-        if (changeSet.getOnValidationFail().equals(ChangeSet.ValidationFailOption.MARK_RAN)) {
-          LogFactory.getLogger().info("Skipping changeSet " + changeSet + " due to validation error(s): "+ StringUtils.join(foundErrors.getErrorMessages(),", "));
-          changeSet.setValidationFailed(true);
-        }
+    if (shouldValidate) {
+      warnings.addAll(change.warn(database));
+      try {
+        ValidationErrors foundErrors=change.validate(database);
+        if (foundErrors != null && foundErrors.hasErrors()) {
+          if (changeSet.getOnValidationFail().equals(ChangeSet.ValidationFailOption.MARK_RAN)) {
+            LogFactory.getLogger().info("Skipping changeSet " + changeSet + " due to validation error(s): "+ StringUtils.join(foundErrors.getErrorMessages(),", "));
+            changeSet.setValidationFailed(true);
+          }
  else {
-          validationErrors.addAll(foundErrors,changeSet);
+            validationErrors.addAll(foundErrors,changeSet);
+          }
         }
       }
-    }
- catch (    Throwable e) {
-      changeValidationExceptions.add(e);
+ catch (      Throwable e) {
+        changeValidationExceptions.add(e);
+      }
     }
   }
-  for (  RanChangeSet ranChangeSet : ranChangeSets) {
-    if (ranChangeSet.getId().equalsIgnoreCase(changeSet.getId()) && ranChangeSet.getAuthor().equalsIgnoreCase(changeSet.getAuthor()) && ranChangeSet.getChangeLog().equalsIgnoreCase(changeSet.getFilePath())) {
-      if (!changeSet.isCheckSumValid(ranChangeSet.getLastCheckSum())) {
-        if (!changeSet.shouldRunOnChange()) {
-          invalidMD5Sums.add(changeSet);
-        }
+  if (ranChangeSet != null) {
+    if (!changeSet.isCheckSumValid(ranChangeSet.getLastCheckSum())) {
+      if (!changeSet.shouldRunOnChange()) {
+        invalidMD5Sums.add(changeSet);
       }
     }
   }
