@@ -7,7 +7,7 @@
       if (classType instanceof ParameterizedType) {
         checkType(classType,statement,generator,database,validGenerators);
       }
-      for (      Type type : clazz.getGenericInterfaces()) {
+      for (      Type type : getGenericInterfaces(clazz)) {
         if (type instanceof ParameterizedType) {
           checkType(type,statement,generator,database,validGenerators);
         }
@@ -17,7 +17,7 @@
           }
         }
       }
-      classType=clazz.getGenericSuperclass();
+      classType=getGenericSuperclass(clazz);
       clazz=clazz.getSuperclass();
     }
   }
