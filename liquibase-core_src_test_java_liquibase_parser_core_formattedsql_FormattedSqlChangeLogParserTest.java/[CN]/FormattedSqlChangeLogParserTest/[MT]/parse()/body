@@ -3,7 +3,7 @@
   params.set("tablename","table4");
   DatabaseChangeLog changeLog=new MockFormattedSqlChangeLogParser(VALID_CHANGELOG).parse("asdf.sql",params,new JUnitResourceAccessor());
   assertEquals("asdf.sql",changeLog.getLogicalFilePath());
-  assertEquals(8,changeLog.getChangeSets().size());
+  assertEquals(9,changeLog.getChangeSets().size());
   assertEquals("nvoxland",changeLog.getChangeSets().get(0).getAuthor());
   assertEquals("1",changeLog.getChangeSets().get(0).getId());
   assertEquals(1,changeLog.getChangeSets().get(0).getChanges().size());
@@ -77,7 +77,7 @@
   assertTrue(changeLog.getChangeSets().get(7).getContexts().contains("first"));
   assertTrue(changeLog.getChangeSets().get(7).getContexts().contains("second"));
   assertTrue(changeLog.getChangeSets().get(7).getContexts().contains("third"));
-  ChangeSet cs=changeLog.getChangeSets().get(7);
+  ChangeSet cs=changeLog.getChangeSets().get(8);
   assertEquals("bboisvert",cs.getAuthor());
   assertEquals("with_preconditions",cs.getId());
   PreconditionContainer pc=cs.getPreconditions();
