@@ -8,7 +8,14 @@
     if (database instanceof MSSQLDatabase) {
       statement=statement.replaceAll("\n","\r\n");
     }
-    returnStatements.add(new RawSqlStatement(statement,getEndDelimiter()));
+    String escapedStatement;
+    try {
+      escapedStatement=database.getConnection().nativeSQL(statement);
+    }
+ catch (    DatabaseException e) {
+      escapedStatement=statement;
+    }
+    returnStatements.add(new RawSqlStatement(escapedStatement,getEndDelimiter()));
   }
   return returnStatements.toArray(new SqlStatement[returnStatements.size()]);
 }

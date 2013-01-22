@@ -8,4 +8,7 @@
   executor.comment("Against: " + getDatabase().getConnection().getConnectionUserName() + "@"+ getDatabase().getConnection().getURL());
   executor.comment("Liquibase version: " + LiquibaseUtil.getBuildVersion());
   executor.comment("*********************************************************************" + StreamUtil.getLineSeparator());
+  if (database instanceof OracleDatabase) {
+    executor.execute(new RawSqlStatement("SET DEFINE OFF;"));
+  }
 }
