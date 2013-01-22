@@ -4,7 +4,7 @@
       messages.add("unexpected command parameters: " + commandParams);
     }
   }
- else   if ("status".equalsIgnoreCase(command)) {
+ else   if ("status".equalsIgnoreCase(command) || "unexpectedChangeSets".equalsIgnoreCase(command)) {
     if (commandParams.size() > 0 && !commandParams.iterator().next().equalsIgnoreCase("--verbose")) {
       messages.add("unexpected command parameters: " + commandParams);
     }

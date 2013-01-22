@@ -67,6 +67,14 @@
       liquibase.reportStatus(runVerbose,contexts,getOutputWriter());
       return;
     }
+ else     if ("unexpectedChangeSets".equalsIgnoreCase(command)) {
+      boolean runVerbose=false;
+      if (commandParams.contains("--verbose")) {
+        runVerbose=true;
+      }
+      liquibase.reportUnexpectedChangeSets(runVerbose,contexts,getOutputWriter());
+      return;
+    }
  else     if ("validate".equalsIgnoreCase(command)) {
       try {
         liquibase.validate();

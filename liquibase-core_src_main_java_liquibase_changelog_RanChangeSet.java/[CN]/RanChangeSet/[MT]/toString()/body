@@ -1,0 +1,3 @@
+{
+  return getChangeLog() + "::" + getId()+ "::"+ getAuthor();
+}
