@@ -93,7 +93,11 @@
  else     if (change != null && localName.equals(change.getChangeMetaData().getName())) {
       if (textString != null) {
         if (change instanceof RawSQLChange) {
-          ((RawSQLChange)change).setSql(changeLogParameters.expandExpressions(textString));
+          String expandedExpression=textString;
+          if (false == ChangeLogParameters.EnableEscaping) {
+            expandedExpression=changeLogParameters.expandExpressions(textString);
+          }
+          ((RawSQLChange)change).setSql(expandedExpression);
         }
  else         if (change instanceof CreateProcedureChange) {
           ((CreateProcedureChange)change).setProcedureBody(textString);

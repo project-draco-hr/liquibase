@@ -2,7 +2,7 @@
   for (  Map.Entry entry : System.getProperties().entrySet()) {
     changeLogParameters.add(new ChangeLogParameter(entry.getKey().toString(),entry.getValue()));
   }
-  this.expressionExpander=new ExpressionExpander(this);
+  this.expressionExpander=new ExpressionExpander(this,EnableEscaping);
   this.currentDatabase=currentDatabase;
   this.currentContexts=new ArrayList<String>();
 }

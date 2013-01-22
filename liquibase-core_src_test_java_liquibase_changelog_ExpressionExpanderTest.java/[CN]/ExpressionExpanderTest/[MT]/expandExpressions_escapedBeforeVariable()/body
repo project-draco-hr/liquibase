@@ -1,0 +1,4 @@
+{
+  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,true);
+  assertEquals("${user.name} is a literal, " + System.getProperty("user.name") + " is a variable",handler.expandExpressions("${:user.name} is a literal, ${user.name} is a variable"));
+}
