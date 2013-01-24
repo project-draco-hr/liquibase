@@ -31,7 +31,9 @@
     if (database.supportsSchemas()) {
       schemas=((JdbcConnection)database.getConnection()).getMetaData().getSchemas();
       while (schemas.next()) {
-        CatalogAndSchema schemaFromJdbcInfo=((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(schemas.getString("TABLE_CATALOG"),schemas.getString("TABLE_SCHEM"));
+        String tableCatalog=JdbcUtils.getValueForCaseInsensitiveColumn(schemas,"TABLE_CATALOG");
+        String tableSchema=JdbcUtils.getValueForCaseInsensitiveColumn(schemas,"TABLE_SCHEM");
+        CatalogAndSchema schemaFromJdbcInfo=((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(tableCatalog,tableSchema);
         Catalog catalog=new Catalog(schemaFromJdbcInfo.getCatalogName());
         Schema schema=new Schema(catalog,schemaFromJdbcInfo.getSchemaName());
         if (DatabaseObjectComparatorFactory.getInstance().isSameObject(schema,example,database)) {

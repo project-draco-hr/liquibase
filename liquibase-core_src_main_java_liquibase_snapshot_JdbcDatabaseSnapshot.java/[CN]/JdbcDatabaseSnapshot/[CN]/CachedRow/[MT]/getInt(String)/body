@@ -3,5 +3,8 @@
   if (o instanceof Number) {
     return ((Number)o).intValue();
   }
+ else   if (o instanceof String) {
+    return Integer.valueOf((String)o);
+  }
   return (Integer)o;
 }

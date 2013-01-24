@@ -2,6 +2,9 @@
   String columnTypeName=(String)columnMetadataResultSet.get("TYPE_NAME");
   int dataType=columnMetadataResultSet.getInt("DATA_TYPE");
   Integer columnSize=columnMetadataResultSet.getInt("COLUMN_SIZE");
+  if (database.dataTypeIsNotModifiable(columnTypeName)) {
+    columnSize=null;
+  }
   Integer decimalDigits=columnMetadataResultSet.getInt("DECIMAL_DIGITS");
   if (decimalDigits != null && decimalDigits.equals(0)) {
     decimalDigits=null;
