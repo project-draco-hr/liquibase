@@ -120,6 +120,7 @@
       if (StringUtils.trimToNull(atts.getValue("onValidationFail")) != null) {
         changeSet.setOnValidationFail(ChangeSet.ValidationFailOption.valueOf(atts.getValue("onValidationFail")));
       }
+      changeSet.setChangeLogParameters(changeLogParameters);
     }
  else     if (changeSet != null && "rollback".equals(qName)) {
       text=new StringBuffer();
@@ -212,8 +213,7 @@
         String attributeValue=atts.getValue(i);
         setProperty(change,attributeName,attributeValue);
       }
-      change.setChangeLogParameters(this.changeLogParameters);
-      change.init();
+      change.finishInitialization();
     }
  else     if (change != null && "column".equals(qName)) {
       ColumnConfig column;

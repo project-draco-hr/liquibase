@@ -1,6 +1,6 @@
 {
   changeSet1.addChange(new CreateTableChange(){
-    @Override public void init() throws SetupException {
+    @Override public void finishInitialization() throws SetupException {
       throw new SetupException("Test message");
     }
   }

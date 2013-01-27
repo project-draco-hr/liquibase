@@ -3,7 +3,9 @@
   ChangeLogParameters changeLogParameters=new ChangeLogParameters();
   changeLogParameters.set("table.prefix","prfx");
   changeLogParameters.set("some.other.prop","nofx");
-  change.setChangeLogParameters(changeLogParameters);
+  ChangeSet changeSet=new ChangeSet("x","y",true,true,null,null,null);
+  changeSet.setChangeLogParameters(changeLogParameters);
+  change.setChangeSet(changeSet);
   String fakeSql="create ${table.prefix}_customer (${some.other.prop} INTEGER NOT NULL, PRIMARY KEY (${some.other.prop}));";
   change.setSql(fakeSql);
   String expected="create prfx_customer (nofx INTEGER NOT NULL, PRIMARY KEY (nofx));";

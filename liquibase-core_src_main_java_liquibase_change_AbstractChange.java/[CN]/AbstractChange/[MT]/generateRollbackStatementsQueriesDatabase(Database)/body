@@ -1,0 +1,8 @@
+{
+  for (  SqlStatement statement : generateStatements(database)) {
+    if (SqlGeneratorFactory.getInstance().generateRollbackStatementsQueriesDatabase(statement,database)) {
+      return true;
+    }
+  }
+  return false;
+}

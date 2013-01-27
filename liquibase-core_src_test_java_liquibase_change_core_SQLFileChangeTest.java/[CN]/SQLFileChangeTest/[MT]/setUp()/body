@@ -5,5 +5,5 @@
   ClassLoaderResourceAccessor opener=new ClassLoaderResourceAccessor();
   change.setResourceAccessor(opener);
   change.setPath(fileName);
-  change.init();
+  change.finishInitialization();
 }

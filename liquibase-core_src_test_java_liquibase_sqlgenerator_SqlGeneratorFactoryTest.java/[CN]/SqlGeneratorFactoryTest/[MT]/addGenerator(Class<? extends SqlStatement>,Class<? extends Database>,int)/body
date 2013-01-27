@@ -3,7 +3,10 @@
     public int getPriority(){
       return level;
     }
-    public boolean queriesDatabase(    Database database){
+    public boolean generateStatementsQueriesDatabase(    Database database){
+      return false;
+    }
+    public boolean generateRollbackStatementsQueriesDatabase(    Database database){
       return false;
     }
     public Warnings warn(    SqlStatement sqlStatement,    Database database,    SqlGeneratorChain sqlGeneratorChain){

@@ -1,15 +1,15 @@
 {
-  String displayName=propertyName.replaceAll("([A-Z])"," $1");
+  String displayName=parameterName.replaceAll("([A-Z])"," $1");
   displayName=displayName.substring(0,1).toUpperCase() + displayName.substring(1);
   PropertyDescriptor property=null;
   for (  PropertyDescriptor prop : Introspector.getBeanInfo(this.getClass()).getPropertyDescriptors()) {
-    if (prop.getDisplayName().equals(propertyName)) {
+    if (prop.getDisplayName().equals(parameterName)) {
       property=prop;
       break;
     }
   }
   if (property == null) {
-    throw new RuntimeException("Could not find property " + propertyName);
+    throw new RuntimeException("Could not find property " + parameterName);
   }
   String type=property.getPropertyType().getSimpleName();
   DatabaseChangeProperty changePropertyAnnotation=property.getReadMethod().getAnnotation(DatabaseChangeProperty.class);
@@ -22,5 +22,5 @@
     requiredForDatabase=changePropertyAnnotation.requiredForDatabase();
     mustApplyTo=changePropertyAnnotation.mustApplyTo();
   }
-  return new ChangeParameterMetaData(propertyName,displayName,type,requiredForDatabase,mustApplyTo);
+  return new ChangeParameterMetaData(parameterName,displayName,type,requiredForDatabase,mustApplyTo);
 }

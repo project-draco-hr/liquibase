@@ -1,6 +1,6 @@
 {
   for (  SqlGenerator generator : getGenerators(statement,database)) {
-    if (generator.queriesDatabase(database)) {
+    if (generator.generateStatementsQueriesDatabase(database)) {
       return true;
     }
   }

@@ -1,6 +1,6 @@
 {
-  if (getChangeLogParameters() != null) {
-    sql=getChangeLogParameters().expandExpressions(sql);
+  if (getChangeSet() != null && getChangeSet().getChangeLogParameters() != null) {
+    sql=getChangeSet().getChangeLogParameters().expandExpressions(sql);
   }
   super.setSql(sql);
 }
