@@ -1,0 +1,14 @@
+{
+  assertTrue(new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return null;
+    }
+  }
+.supports(mock(Database.class)));
+  assertTrue(new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return new SqlStatement[0];
+    }
+  }
+.supports(mock(Database.class)));
+}

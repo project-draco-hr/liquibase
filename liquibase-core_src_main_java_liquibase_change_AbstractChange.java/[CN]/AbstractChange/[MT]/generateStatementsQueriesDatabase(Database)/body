@@ -1,8 +1,0 @@
-{
-  for (  SqlStatement statement : generateStatements(database)) {
-    if (SqlGeneratorFactory.getInstance().generateStatementsQueriesDatabase(statement,database)) {
-      return true;
-    }
-  }
-  return false;
-}

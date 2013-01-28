@@ -1,0 +1,6 @@
+{
+  ExampleAbstractChange change=new ExampleAbstractChange();
+  ValidationErrors errors=change.validate(new MSSQLDatabase());
+  assertEquals(1,errors.getErrorMessages().size());
+  assertEquals("paramTwo is required for exampleAbstractChange on mssql",errors.getErrorMessages().get(0));
+}

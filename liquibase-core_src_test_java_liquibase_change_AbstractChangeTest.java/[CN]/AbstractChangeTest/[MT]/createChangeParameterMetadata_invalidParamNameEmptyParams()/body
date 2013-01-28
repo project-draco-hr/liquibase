@@ -1,0 +1,3 @@
+{
+  assertNull(new ExampleParamlessAbstractChange().createChangeParameterMetadata("paramOne"));
+}

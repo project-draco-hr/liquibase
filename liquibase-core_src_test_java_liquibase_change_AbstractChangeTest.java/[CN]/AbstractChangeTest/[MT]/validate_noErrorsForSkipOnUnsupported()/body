@@ -1,0 +1,22 @@
+{
+  Database database=new MySQLDatabase();
+  final SqlStatement statementSkip=mock(SqlStatement.class);
+  final SqlStatement statementFails=mock(SqlStatement.class);
+  when(statementSkip.skipOnUnsupported()).thenReturn(true);
+  when(statementFails.skipOnUnsupported()).thenReturn(true);
+  SqlGeneratorFactory generatorFactory=mock(SqlGeneratorFactory.class);
+  when(generatorFactory.supports(statementSkip,database)).thenReturn(false);
+  when(generatorFactory.supports(statementFails,database)).thenReturn(true);
+  when(generatorFactory.validate(statementSkip,database)).thenReturn(new ValidationErrors().addError("x"));
+  when(generatorFactory.validate(statementFails,database)).thenReturn(new ValidationErrors().addError("y"));
+  mockStatic(SqlGeneratorFactory.class);
+  when(SqlGeneratorFactory.getInstance()).thenReturn(generatorFactory);
+  ValidationErrors errors=new ExampleParamlessAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return new SqlStatement[]{statementSkip,statementFails};
+    }
+  }
+.validate(database);
+  assertEquals(1,errors.getErrorMessages().size());
+  assertEquals("y",errors.getErrorMessages().get(0));
+}

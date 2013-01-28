@@ -1,0 +1,34 @@
+{
+  ExampleAbstractChange change=new ExampleAbstractChange();
+  ChangeMetaData changeMetaData=change.createChangeMetaData();
+  assertEquals("exampleAbstractChange",changeMetaData.getName());
+  assertEquals("Used for the AbstractChangeTest unit test",changeMetaData.getDescription());
+  assertEquals(1,changeMetaData.getPriority());
+  assertEquals(1,changeMetaData.getAppliesTo().length);
+  assertEquals("all",changeMetaData.getAppliesTo()[0]);
+  Map<String,ChangeParameterMetaData> parameters=changeMetaData.getParameters();
+  assertEquals(3,parameters.size());
+  ChangeParameterMetaData paramOneMetaData=parameters.get("paramOne");
+  ChangeParameterMetaData paramTwoMetaData=parameters.get("paramTwo");
+  ChangeParameterMetaData paramNoMetaData=parameters.get("paramNoMetadata");
+  ChangeParameterMetaData paramNotIncludedMetaData=parameters.get("paramNotIncluded");
+  ChangeParameterMetaData paramNoWriteMethodMetaData=parameters.get("paramNoWriteMethod");
+  assertNotNull(paramOneMetaData);
+  assertEquals("paramOne",paramOneMetaData.getParameterName());
+  assertEquals("Param One",paramOneMetaData.getDisplayName());
+  assertEquals("String",paramOneMetaData.getType());
+  assertEquals("",paramOneMetaData.getMustApplyTo());
+  assertEquals(1,paramOneMetaData.getRequiredForDatabase().size());
+  assertEquals("none",paramOneMetaData.getRequiredForDatabase().iterator().next());
+  assertNotNull(paramTwoMetaData);
+  assertEquals("paramTwo",paramTwoMetaData.getParameterName());
+  assertEquals("Param Two",paramTwoMetaData.getDisplayName());
+  assertEquals("Integer",paramTwoMetaData.getType());
+  assertEquals("table",paramTwoMetaData.getMustApplyTo());
+  assertEquals(2,paramTwoMetaData.getRequiredForDatabase().size());
+  assertTrue(paramTwoMetaData.getRequiredForDatabase().contains("mysql"));
+  assertTrue(paramTwoMetaData.getRequiredForDatabase().contains("mssql"));
+  assertNotNull(paramNoMetaData);
+  assertNull(paramNotIncludedMetaData);
+  assertNull("Properties with no write method should not be included",paramNoWriteMethodMetaData);
+}

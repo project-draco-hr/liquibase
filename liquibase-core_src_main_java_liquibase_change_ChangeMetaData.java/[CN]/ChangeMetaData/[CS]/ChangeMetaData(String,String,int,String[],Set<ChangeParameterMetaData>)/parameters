@@ -1,5 +1,0 @@
-String name
-String description
-int priority
-String[] appliesTo
-Set<ChangeParameterMetaData> parameters

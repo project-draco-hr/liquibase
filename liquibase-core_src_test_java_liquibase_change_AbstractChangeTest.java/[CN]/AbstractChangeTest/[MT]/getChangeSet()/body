@@ -1,0 +1,8 @@
+{
+  ExampleAbstractChange change=new ExampleAbstractChange();
+  ChangeSet changeSet=mock(ChangeSet.class);
+  change.setChangeSet(changeSet);
+  assertSame(changeSet,change.getChangeSet());
+  change.setChangeSet(null);
+  assertNull("Should be able to clear out changeset",change.getChangeSet());
+}

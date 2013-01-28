@@ -1,3 +1,6 @@
 {
-  this.messages.addAll(warnings.getMessages());
+  if (warnings != null) {
+    this.messages.addAll(warnings.getMessages());
+  }
+  return this;
 }

@@ -1,8 +1,15 @@
 {
   Warnings warnings=new Warnings();
-  for (  SqlStatement statement : generateStatements(database)) {
+  SqlStatement[] statements=generateStatements(database);
+  if (statements == null) {
+    return warnings;
+  }
+  for (  SqlStatement statement : statements) {
     if (SqlGeneratorFactory.getInstance().supports(statement,database)) {
       warnings.addAll(SqlGeneratorFactory.getInstance().warn(statement,database));
+    }
+ else     if (statement.skipOnUnsupported()) {
+      warnings.addWarning(statement.getClass().getName() + " is not supported on " + database.getShortName()+ ", but "+ getChangeMetaData().getName()+ " will still execute");
     }
   }
   return warnings;

@@ -1,0 +1,17 @@
+{
+  try {
+    new AbstractChange(){
+      public String getConfirmationMessage(){
+        return null;
+      }
+      public SqlStatement[] generateStatements(      Database database) throws UnsupportedChangeException {
+        return null;
+      }
+    }
+;
+    fail("Did not throw exception");
+  }
+ catch (  UnexpectedLiquibaseException e) {
+    assertTrue("Incorrect message: " + e.getMessage(),e.getMessage().startsWith("liquibase.exception.UnexpectedLiquibaseException: No @DatabaseChange annotation for "));
+  }
+}

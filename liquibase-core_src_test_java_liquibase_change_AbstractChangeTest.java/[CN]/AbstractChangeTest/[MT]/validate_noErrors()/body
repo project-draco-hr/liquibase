@@ -1,0 +1,6 @@
+{
+  ExampleAbstractChange change=new ExampleAbstractChange();
+  change.setParamTwo(3);
+  ValidationErrors errors=change.validate(new MSSQLDatabase());
+  assertFalse(errors.hasErrors());
+}

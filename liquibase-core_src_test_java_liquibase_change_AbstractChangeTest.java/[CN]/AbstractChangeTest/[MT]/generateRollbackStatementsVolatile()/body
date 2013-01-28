@@ -1,0 +1,32 @@
+{
+  Database database=mock(Database.class);
+  final SqlStatement statement1No=mock(SqlStatement.class);
+  final SqlStatement statement2No=mock(SqlStatement.class);
+  final SqlStatement statement1Yes=mock(SqlStatement.class);
+  final SqlStatement statement2Yes=mock(SqlStatement.class);
+  SqlGeneratorFactory generatorFactory=mock(SqlGeneratorFactory.class);
+  when(generatorFactory.generateRollbackStatementsVolatile(statement1No,database)).thenReturn(false);
+  when(generatorFactory.generateRollbackStatementsVolatile(statement2No,database)).thenReturn(false);
+  when(generatorFactory.generateRollbackStatementsVolatile(statement1Yes,database)).thenReturn(true);
+  when(generatorFactory.generateRollbackStatementsVolatile(statement2Yes,database)).thenReturn(true);
+  mockStatic(SqlGeneratorFactory.class);
+  when(SqlGeneratorFactory.getInstance()).thenReturn(generatorFactory);
+  assertTrue(new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return new SqlStatement[]{statement1Yes,statement2Yes};
+    }
+  }
+.generateRollbackStatementsVolatile(database));
+  assertFalse(new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return new SqlStatement[]{statement1No,statement2No};
+    }
+  }
+.generateRollbackStatementsVolatile(database));
+  assertTrue(new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return new SqlStatement[]{statement1No,statement1Yes};
+    }
+  }
+.generateRollbackStatementsVolatile(database));
+}

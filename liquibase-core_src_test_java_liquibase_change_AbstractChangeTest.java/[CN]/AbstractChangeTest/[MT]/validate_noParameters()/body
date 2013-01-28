@@ -1,0 +1,3 @@
+{
+  assertFalse(new ExampleParamlessAbstractChange().validate(mock(Database.class)).hasErrors());
+}

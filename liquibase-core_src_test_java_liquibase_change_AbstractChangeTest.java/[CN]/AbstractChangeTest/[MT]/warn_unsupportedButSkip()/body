@@ -1,0 +1,23 @@
+{
+  Database database=new MySQLDatabase();
+  final SqlStatement statementSkip=mock(SqlStatement.class);
+  final SqlStatement statementFails=mock(SqlStatement.class);
+  when(statementSkip.skipOnUnsupported()).thenReturn(true);
+  when(statementFails.skipOnUnsupported()).thenReturn(true);
+  SqlGeneratorFactory generatorFactory=mock(SqlGeneratorFactory.class);
+  when(generatorFactory.supports(statementSkip,database)).thenReturn(false);
+  when(generatorFactory.supports(statementFails,database)).thenReturn(true);
+  when(generatorFactory.warn(statementSkip,database)).thenReturn(new Warnings().addWarning("x"));
+  when(generatorFactory.warn(statementFails,database)).thenReturn(new Warnings().addWarning("y"));
+  mockStatic(SqlGeneratorFactory.class);
+  when(SqlGeneratorFactory.getInstance()).thenReturn(generatorFactory);
+  Warnings warnings=new ExampleParamlessAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return new SqlStatement[]{statementSkip,statementFails};
+    }
+  }
+.warn(database);
+  assertEquals(2,warnings.getMessages().size());
+  assertTrue(warnings.getMessages().get(0),warnings.getMessages().get(0).matches("liquibase.statement.SqlStatement.* is not supported on mysql, but exampleParamelessAbstractChange will still execute"));
+  assertEquals("y",warnings.getMessages().get(1));
+}

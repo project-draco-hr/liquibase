@@ -1,0 +1,23 @@
+{
+  Database database=mock(Database.class);
+  final SqlStatement statement1=mock(SqlStatement.class);
+  final SqlStatement statement2=mock(SqlStatement.class);
+  SqlGeneratorFactory generatorFactory=mock(SqlGeneratorFactory.class);
+  Table table=new Table().setName("x");
+  Column column=new Column().setName("y");
+  View view=new View().setName("z");
+  when(generatorFactory.getAffectedDatabaseObjects(statement1,database)).thenReturn(new HashSet<DatabaseObject>(Arrays.asList(table,column)));
+  when(generatorFactory.getAffectedDatabaseObjects(statement2,database)).thenReturn(new HashSet<DatabaseObject>(Arrays.asList(view)));
+  mockStatic(SqlGeneratorFactory.class);
+  when(SqlGeneratorFactory.getInstance()).thenReturn(generatorFactory);
+  Set<DatabaseObject> objects=new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return new SqlStatement[]{statement1,statement2};
+    }
+  }
+.getAffectedDatabaseObjects(database);
+  assertEquals(3,objects.size());
+  objects.contains(table);
+  objects.contains(column);
+  objects.contains(view);
+}

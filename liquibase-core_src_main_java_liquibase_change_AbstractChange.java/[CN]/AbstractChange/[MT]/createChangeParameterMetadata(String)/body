@@ -9,7 +9,7 @@
     }
   }
   if (property == null) {
-    throw new RuntimeException("Could not find property " + parameterName);
+    throw new UnexpectedLiquibaseException("Could not find property " + parameterName);
   }
   String type=property.getPropertyType().getSimpleName();
   DatabaseChangeProperty changePropertyAnnotation=property.getReadMethod().getAnnotation(DatabaseChangeProperty.class);

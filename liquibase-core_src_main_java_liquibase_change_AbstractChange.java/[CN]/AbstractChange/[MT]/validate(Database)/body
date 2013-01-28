@@ -1,6 +1,6 @@
 {
   ValidationErrors changeValidationErrors=new ValidationErrors();
-  for (  ChangeParameterMetaData param : getChangeMetaData().getParameters()) {
+  for (  ChangeParameterMetaData param : getChangeMetaData().getParameters().values()) {
     if (param.isRequiredFor(database) && param.getCurrentValue(this) == null) {
       changeValidationErrors.addError(param.getParameterName() + " is required for " + getChangeMetaData().getName()+ " on "+ database.getShortName());
     }
@@ -8,18 +8,20 @@
   if (changeValidationErrors.hasErrors()) {
     return changeValidationErrors;
   }
-  for (  SqlStatement statement : generateStatements(database)) {
-    boolean supported=SqlGeneratorFactory.getInstance().supports(statement,database);
-    if (!supported) {
-      if (statement.skipOnUnsupported()) {
-        LogFactory.getLogger().info(getChangeMetaData().getName() + " is not supported on " + database.getShortName()+ " but will continue");
+  boolean sawUnsupportedError=false;
+  SqlStatement[] statements=generateStatements(database);
+  if (statements != null) {
+    for (    SqlStatement statement : statements) {
+      boolean supported=SqlGeneratorFactory.getInstance().supports(statement,database);
+      if (!supported && !sawUnsupportedError) {
+        if (!statement.skipOnUnsupported()) {
+          changeValidationErrors.addError(getChangeMetaData().getName() + " is not supported on " + database.getShortName());
+          sawUnsupportedError=true;
+        }
       }
  else {
-        changeValidationErrors.addError(getChangeMetaData().getName() + " is not supported on " + database.getShortName());
+        changeValidationErrors.addAll(SqlGeneratorFactory.getInstance().validate(statement,database));
       }
-    }
- else {
-      changeValidationErrors.addAll(SqlGeneratorFactory.getInstance().validate(statement,database));
     }
   }
   return changeValidationErrors;

@@ -4,7 +4,7 @@
     if (databaseChange == null) {
       throw new UnexpectedLiquibaseException("No @DatabaseChange annotation for " + getClass().getName());
     }
-    Set<ChangeParameterMetaData> params=new HashSet<ChangeParameterMetaData>();
+    Map<String,ChangeParameterMetaData> params=new HashMap<String,ChangeParameterMetaData>();
     for (    PropertyDescriptor property : Introspector.getBeanInfo(this.getClass()).getPropertyDescriptors()) {
       Method readMethod=property.getReadMethod();
       Method writeMethod=property.getWriteMethod();
@@ -12,7 +12,7 @@
         DatabaseChangeProperty annotation=readMethod.getAnnotation(DatabaseChangeProperty.class);
         if (annotation == null || annotation.includeInMetaData()) {
           ChangeParameterMetaData param=createChangeParameterMetadata(property.getDisplayName());
-          params.add(param);
+          params.put(param.getParameterName(),param);
         }
       }
     }

@@ -1,0 +1,14 @@
+{
+  assertFalse(new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return null;
+    }
+  }
+.generateStatementsVolatile(mock(Database.class)));
+  assertFalse(new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return new SqlStatement[0];
+    }
+  }
+.generateStatementsVolatile(mock(Database.class)));
+}

@@ -1,0 +1,10 @@
+{
+  final ChangeMetaData metaData=mock(ChangeMetaData.class);
+  AbstractChange change=new ExampleAbstractChange(){
+    @Override protected ChangeMetaData createChangeMetaData(){
+      return metaData;
+    }
+  }
+;
+  assertSame(metaData,change.getChangeMetaData());
+}

@@ -1,0 +1,31 @@
+{
+  Database database=mock(Database.class);
+  final SqlStatement statementUnsupported=mock(SqlStatement.class);
+  final SqlStatement statementNullWarnings=mock(SqlStatement.class);
+  final SqlStatement statementEmptyWarnings=mock(SqlStatement.class);
+  final SqlStatement statementOneWarning=mock(SqlStatement.class);
+  final SqlStatement statementTwoWarnings=mock(SqlStatement.class);
+  SqlGeneratorFactory generatorFactory=mock(SqlGeneratorFactory.class);
+  when(generatorFactory.supports(statementUnsupported,database)).thenReturn(false);
+  when(generatorFactory.supports(statementNullWarnings,database)).thenReturn(true);
+  when(generatorFactory.supports(statementEmptyWarnings,database)).thenReturn(true);
+  when(generatorFactory.supports(statementOneWarning,database)).thenReturn(true);
+  when(generatorFactory.supports(statementTwoWarnings,database)).thenReturn(true);
+  when(generatorFactory.warn(statementUnsupported,database)).thenReturn(new Warnings().addWarning("A"));
+  when(generatorFactory.warn(statementNullWarnings,database)).thenReturn(null);
+  when(generatorFactory.warn(statementEmptyWarnings,database)).thenReturn(new Warnings());
+  when(generatorFactory.warn(statementOneWarning,database)).thenReturn(new Warnings().addWarning("x"));
+  when(generatorFactory.warn(statementTwoWarnings,database)).thenReturn(new Warnings().addWarning("y").addWarning("z"));
+  mockStatic(SqlGeneratorFactory.class);
+  when(SqlGeneratorFactory.getInstance()).thenReturn(generatorFactory);
+  Warnings warningsToTest=new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      return new SqlStatement[]{statementUnsupported,statementNullWarnings,statementEmptyWarnings,statementOneWarning,statementTwoWarnings};
+    }
+  }
+.warn(database);
+  assertEquals(3,warningsToTest.getMessages().size());
+  assertEquals("x",warningsToTest.getMessages().get(0));
+  assertEquals("y",warningsToTest.getMessages().get(1));
+  assertEquals("z",warningsToTest.getMessages().get(2));
+}

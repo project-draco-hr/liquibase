@@ -1,0 +1,10 @@
+{
+  Database database=mock(Database.class);
+  SqlStatement[] rollbackStatements=new ExampleParamlessAbstractChange(){
+    @Override protected Change[] createInverses(){
+      return new Change[0];
+    }
+  }
+.generateRollbackStatements(database);
+  assertEquals(0,rollbackStatements.length);
+}

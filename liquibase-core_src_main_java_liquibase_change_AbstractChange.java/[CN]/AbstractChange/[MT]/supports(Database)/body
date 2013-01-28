@@ -1,8 +1,17 @@
 {
-  for (  SqlStatement statement : generateStatements(database)) {
-    if (!SqlGeneratorFactory.getInstance().supports(statement,database)) {
-      return false;
+  try {
+    SqlStatement[] statements=generateStatements(database);
+    if (statements == null) {
+      return true;
     }
+    for (    SqlStatement statement : statements) {
+      if (!SqlGeneratorFactory.getInstance().supports(statement,database)) {
+        return false;
+      }
+    }
+  }
+ catch (  UnsupportedChangeException e) {
+    return false;
   }
   return true;
 }

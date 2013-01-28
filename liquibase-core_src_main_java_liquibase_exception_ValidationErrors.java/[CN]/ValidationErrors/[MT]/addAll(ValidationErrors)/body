@@ -1,3 +1,7 @@
 {
+  if (validationErrors == null) {
+    return this;
+  }
   this.errorMessages.addAll(validationErrors.getErrorMessages());
+  return this;
 }

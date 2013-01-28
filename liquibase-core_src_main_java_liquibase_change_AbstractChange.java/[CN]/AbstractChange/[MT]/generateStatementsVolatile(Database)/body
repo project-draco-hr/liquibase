@@ -1,0 +1,12 @@
+{
+  SqlStatement[] statements=generateStatements(database);
+  if (statements == null) {
+    return false;
+  }
+  for (  SqlStatement statement : statements) {
+    if (SqlGeneratorFactory.getInstance().generateStatementsVolatile(statement,database)) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -1,8 +1,0 @@
-{
-  for (  SqlGenerator generator : getGenerators(statement,database)) {
-    if (generator.generateRollbackStatementsQueriesDatabase(database)) {
-      return true;
-    }
-  }
-  return false;
-}

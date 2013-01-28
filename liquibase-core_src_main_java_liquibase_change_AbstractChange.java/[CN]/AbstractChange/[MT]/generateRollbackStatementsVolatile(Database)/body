@@ -1,0 +1,12 @@
+{
+  SqlStatement[] statements=generateStatements(database);
+  if (statements == null) {
+    return false;
+  }
+  for (  SqlStatement statement : statements) {
+    if (SqlGeneratorFactory.getInstance().generateRollbackStatementsVolatile(statement,database)) {
+      return true;
+    }
+  }
+  return false;
+}
