@@ -1,3 +1,3 @@
 {
-  this.defaultCatalogName=defaultCatalogName;
+  this.defaultCatalogName=correctObjectName(defaultCatalogName,Catalog.class);
 }

@@ -2,4 +2,5 @@
   super();
   super.defaultAutoIncrementStartWith=BigInteger.ZERO;
   super.sequenceNextValueFunction="NEXT VALUE FOR %s";
+  super.unquotedObjectsAreUppercased=Boolean.TRUE;
 }

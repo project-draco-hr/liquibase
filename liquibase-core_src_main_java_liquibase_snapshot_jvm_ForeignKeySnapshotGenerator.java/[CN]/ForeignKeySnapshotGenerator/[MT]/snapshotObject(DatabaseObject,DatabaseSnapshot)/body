@@ -27,7 +27,11 @@
       ForeignKeyConstraintType deleteRule=convertToForeignKeyConstraintType(row.getInt("DELETE_RULE"),database);
       foreignKey.setDeleteRule(deleteRule);
       short deferrability=row.getShort("DEFERRABILITY");
-      if (deferrability == DatabaseMetaData.importedKeyInitiallyDeferred) {
+      if (deferrability == 0 || deferrability == DatabaseMetaData.importedKeyNotDeferrable) {
+        foreignKey.setDeferrable(false);
+        foreignKey.setInitiallyDeferred(false);
+      }
+ else       if (deferrability == DatabaseMetaData.importedKeyInitiallyDeferred) {
         foreignKey.setDeferrable(true);
         foreignKey.setInitiallyDeferred(true);
       }
@@ -35,12 +39,8 @@
         foreignKey.setDeferrable(true);
         foreignKey.setInitiallyDeferred(false);
       }
- else       if (deferrability == DatabaseMetaData.importedKeyNotDeferrable) {
-        foreignKey.setDeferrable(false);
-        foreignKey.setInitiallyDeferred(false);
-      }
  else {
-        throw new RuntimeException("Unknown deferrablility result: " + deferrability);
+        throw new RuntimeException("Unknown deferrability result: " + deferrability);
       }
       Index exampleIndex=new Index().setTable(foreignKey.getForeignKeyTable());
       exampleIndex.getColumns().addAll(Arrays.asList(foreignKey.getForeignKeyColumns().split("\\s*,\\s*")));

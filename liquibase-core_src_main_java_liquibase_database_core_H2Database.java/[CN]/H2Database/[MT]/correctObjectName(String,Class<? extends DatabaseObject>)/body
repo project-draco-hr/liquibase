@@ -1,6 +1,0 @@
-{
-  if (objectName == null) {
-    return null;
-  }
-  return objectName.toUpperCase();
-}

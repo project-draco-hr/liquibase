@@ -1,3 +1,11 @@
 {
-  return objectName;
+  if (unquotedObjectsAreUppercased == null || objectName == null || (objectName.startsWith("\"") && objectName.endsWith("\""))) {
+    return objectName;
+  }
+ else   if (unquotedObjectsAreUppercased == Boolean.TRUE) {
+    return objectName.toUpperCase();
+  }
+ else {
+    return objectName.toLowerCase();
+  }
 }
