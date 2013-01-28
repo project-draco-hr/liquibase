@@ -1,4 +1,7 @@
 {
+  if (database == null) {
+    return;
+  }
   Liquibase liquibase=createLiquibase("changelogs/common/sqlstyle/formatted.changelog.sql");
   liquibase.update("hyphen-context-using-sql,camelCaseContextUsingSql");
   SnapshotGeneratorFactory tableSnapshotGenerator=SnapshotGeneratorFactory.getInstance();
