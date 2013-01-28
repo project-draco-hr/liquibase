@@ -1,0 +1,19 @@
+{
+  if (!hasDatabaseChangeLogLockTable()) {
+    try {
+      Statement statement=getStatement();
+      statement.executeUpdate("CREATE TABLE DATABASECHANGELOGLOCK (ID int PRIMARY KEY, LOCKED boolean, LOCKGRANTED timestamp, LOCKEDBY text)");
+      statement.close();
+      statement=getStatement();
+      statement.executeUpdate("insert into DATABASECHANGELOGLOCK (ID, LOCKED) values (1, false)");
+      statement.close();
+    }
+ catch (    SQLException e) {
+      LogFactory.getLogger().info("No DATABASECHANGELOG available in cassandra.");
+      throw new RuntimeException(e);
+    }
+catch (    ClassNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+  }
+}

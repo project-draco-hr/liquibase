@@ -1,0 +1,18 @@
+{
+  boolean hasChangeLogLockTable;
+  try {
+    Statement statement=getStatement();
+    statement.executeQuery("select ID from DATABASECHANGELOGLOCK");
+    statement.close();
+    hasChangeLogLockTable=true;
+  }
+ catch (  SQLException e) {
+    LogFactory.getLogger().info("No DATABASECHANGELOGLOCK available in cassandra.");
+    hasChangeLogLockTable=false;
+  }
+catch (  ClassNotFoundException e) {
+    e.printStackTrace();
+    hasChangeLogLockTable=false;
+  }
+  return hasChangeLogLockTable;
+}

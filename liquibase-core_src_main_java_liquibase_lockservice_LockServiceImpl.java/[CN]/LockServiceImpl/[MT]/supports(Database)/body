@@ -1,3 +1,8 @@
 {
-  return true;
+  if (database instanceof CassandraDatabase) {
+    return false;
+  }
+ else {
+    return true;
+  }
 }

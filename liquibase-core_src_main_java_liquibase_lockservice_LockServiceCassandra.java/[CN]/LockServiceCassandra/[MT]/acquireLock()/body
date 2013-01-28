@@ -1,0 +1,34 @@
+{
+  if (hasChangeLogLock) {
+    return true;
+  }
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
+  try {
+    database.rollback();
+    database.checkDatabaseChangeLogLockTable();
+    Boolean locked=(Boolean)ExecutorService.getInstance().getExecutor(database).queryForObject(new SelectFromDatabaseChangeLogLockStatement("LOCKED"),Boolean.class);
+    if (locked) {
+      return false;
+    }
+ else {
+      executor.comment("Lock Database");
+      executor.update(new LockDatabaseChangeLogStatement());
+      database.commit();
+      LogFactory.getLogger().info("Successfully acquired change log lock");
+      hasChangeLogLock=true;
+      database.setCanCacheLiquibaseTableInfo(true);
+      return true;
+    }
+  }
+ catch (  Exception e) {
+    throw new LockException(e);
+  }
+ finally {
+    try {
+      database.rollback();
+    }
+ catch (    DatabaseException e) {
+      ;
+    }
+  }
+}
