@@ -1,0 +1,11 @@
+{
+  new ExampleAbstractChange(){
+    @Override protected Change[] createInverses(){
+      Change change1=mock(Change.class);
+      when(change1.getChangeMetaData()).thenReturn(new ChangeMetaData("testChange",null,1,null,null));
+      when(change1.supports(any(Database.class))).thenReturn(false);
+      return new Change[]{change1};
+    }
+  }
+.generateRollbackStatements(mock(Database.class));
+}

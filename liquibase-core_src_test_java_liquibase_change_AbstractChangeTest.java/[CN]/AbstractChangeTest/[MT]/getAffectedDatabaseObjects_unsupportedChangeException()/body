@@ -1,0 +1,8 @@
+{
+  assertEquals(0,new ExampleParamlessAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      throw new UnsupportedChangeException("test exception");
+    }
+  }
+.getAffectedDatabaseObjects(new MySQLDatabase()).size());
+}

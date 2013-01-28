@@ -8,21 +8,28 @@
   if (changeValidationErrors.hasErrors()) {
     return changeValidationErrors;
   }
+  String unsupportedWarning=getChangeMetaData().getName() + " is not supported on " + database.getShortName();
   boolean sawUnsupportedError=false;
-  SqlStatement[] statements=generateStatements(database);
-  if (statements != null) {
-    for (    SqlStatement statement : statements) {
-      boolean supported=SqlGeneratorFactory.getInstance().supports(statement,database);
-      if (!supported && !sawUnsupportedError) {
-        if (!statement.skipOnUnsupported()) {
-          changeValidationErrors.addError(getChangeMetaData().getName() + " is not supported on " + database.getShortName());
-          sawUnsupportedError=true;
+  try {
+    SqlStatement[] statements;
+    statements=generateStatements(database);
+    if (statements != null) {
+      for (      SqlStatement statement : statements) {
+        boolean supported=SqlGeneratorFactory.getInstance().supports(statement,database);
+        if (!supported && !sawUnsupportedError) {
+          if (!statement.skipOnUnsupported()) {
+            changeValidationErrors.addError(unsupportedWarning);
+            sawUnsupportedError=true;
+          }
+        }
+ else {
+          changeValidationErrors.addAll(SqlGeneratorFactory.getInstance().validate(statement,database));
         }
       }
- else {
-        changeValidationErrors.addAll(SqlGeneratorFactory.getInstance().validate(statement,database));
-      }
     }
+  }
+ catch (  UnsupportedChangeException e) {
+    changeValidationErrors.addError(unsupportedWarning);
   }
   return changeValidationErrors;
 }

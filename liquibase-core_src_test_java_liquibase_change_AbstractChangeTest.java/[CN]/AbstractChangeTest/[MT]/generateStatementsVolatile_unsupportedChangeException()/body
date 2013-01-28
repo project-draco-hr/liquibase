@@ -1,0 +1,8 @@
+{
+  assertFalse(new ExampleAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      throw new UnsupportedChangeException("test exception");
+    }
+  }
+.generateStatementsVolatile(mock(Database.class)));
+}

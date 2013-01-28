@@ -9,11 +9,11 @@
       ((CustomTaskRollback)customChange).rollback(database);
     }
  else {
-      throw new UnsupportedChangeException("Unknown rollback type: " + customChange.getClass().getName());
+      throw new RollbackImpossibleException("Unknown rollback type: " + customChange.getClass().getName());
     }
   }
  catch (  CustomChangeException e) {
-    throw new UnsupportedChangeException(e);
+    throw new RollbackImpossibleException(e);
   }
   if (statements == null) {
     statements=new SqlStatement[0];

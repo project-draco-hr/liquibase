@@ -1,0 +1,10 @@
+{
+  ValidationErrors errors=new ExampleParamlessAbstractChange(){
+    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+      throw new UnsupportedChangeException("test exception");
+    }
+  }
+.validate(new MySQLDatabase());
+  assertEquals(1,errors.getErrorMessages().size());
+  assertEquals("exampleParamelessAbstractChange is not supported on mysql",errors.getErrorMessages().get(0));
+}

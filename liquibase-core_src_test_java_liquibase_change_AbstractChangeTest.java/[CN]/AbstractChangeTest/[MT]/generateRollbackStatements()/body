@@ -2,11 +2,13 @@
   Database database=mock(Database.class);
   final Change change1=mock(Change.class);
   final Change change2=mock(Change.class);
+  when(change1.supports(database)).thenReturn(true);
+  when(change2.supports(database)).thenReturn(true);
   SqlStatement change1Statement1=mock(SqlStatement.class);
   SqlStatement change1Statement2=mock(SqlStatement.class);
   SqlStatement change2Statement=mock(SqlStatement.class);
-  PowerMockito.when(change1.generateStatements(database)).thenReturn(new SqlStatement[]{change1Statement1,change1Statement2});
-  PowerMockito.when(change2.generateStatements(database)).thenReturn(new SqlStatement[]{change2Statement});
+  when(change1.generateStatements(database)).thenReturn(new SqlStatement[]{change1Statement1,change1Statement2});
+  when(change2.generateStatements(database)).thenReturn(new SqlStatement[]{change2Statement});
   SqlStatement[] rollbackStatements=new ExampleParamlessAbstractChange(){
     @Override protected Change[] createInverses(){
       return new Change[]{change1,change2};
