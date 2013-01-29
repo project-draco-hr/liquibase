@@ -1,0 +1,11 @@
+{
+  ChangeFactory factory=ChangeFactory.getInstance();
+  factory.clear();
+  assertEquals(0,factory.getRegistry().size());
+  factory.register(CreateTableChange.class);
+  factory.register(AddAutoIncrementChange.class);
+  factory.register(DropTableChange.class);
+  assertEquals(3,factory.getRegistry().size());
+  factory.unregister("doesNoExist");
+  assertEquals(3,factory.getRegistry().size());
+}

@@ -1,12 +1,7 @@
 {
   Class<? extends Change>[] classes;
-  try {
-    classes=ServiceLocator.getInstance().findClasses(Change.class);
-    for (    Class<? extends Change> clazz : classes) {
-      register(clazz);
-    }
-  }
- catch (  Exception e) {
-    throw new UnexpectedLiquibaseException(e);
+  classes=ServiceLocator.getInstance().findClasses(Change.class);
+  for (  Class<? extends Change> clazz : classes) {
+    register(clazz);
   }
 }

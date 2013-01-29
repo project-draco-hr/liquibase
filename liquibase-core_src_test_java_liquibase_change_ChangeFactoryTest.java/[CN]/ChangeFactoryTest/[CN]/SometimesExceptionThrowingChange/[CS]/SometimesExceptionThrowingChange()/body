@@ -1,0 +1,6 @@
+{
+  if (timesCalled > 1) {
+    throw new RuntimeException("I throw exceptions");
+  }
+  timesCalled++;
+}

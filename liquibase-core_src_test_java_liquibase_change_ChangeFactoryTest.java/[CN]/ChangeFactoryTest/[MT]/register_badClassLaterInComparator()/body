@@ -1,0 +1,6 @@
+{
+  ChangeFactory changeFactory=ChangeFactory.getInstance();
+  changeFactory.register(SometimesExceptionThrowingChange.class);
+  changeFactory.register(Priority5Change.class);
+  changeFactory.register(Priority10Change.class);
+}

@@ -1,0 +1,3 @@
+{
+  ChangeFactory.getInstance().getRegistry().put("x",new TreeSet<Class<? extends Change>>());
+}

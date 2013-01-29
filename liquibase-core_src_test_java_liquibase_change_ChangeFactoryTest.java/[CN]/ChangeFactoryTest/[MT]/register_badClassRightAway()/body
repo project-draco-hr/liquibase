@@ -1,0 +1,4 @@
+{
+  ChangeFactory changeFactory=ChangeFactory.getInstance();
+  changeFactory.register(ExceptionThrowingChange.class);
+}

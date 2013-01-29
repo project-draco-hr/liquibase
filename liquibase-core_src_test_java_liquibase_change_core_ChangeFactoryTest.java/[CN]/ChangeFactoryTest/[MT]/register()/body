@@ -1,6 +1,0 @@
-{
-  ChangeFactory.getInstance().getRegistry().clear();
-  assertEquals(0,ChangeFactory.getInstance().getRegistry().size());
-  ChangeFactory.getInstance().register(CreateTableChange.class);
-  assertEquals(1,ChangeFactory.getInstance().getRegistry().size());
-}

@@ -1,0 +1,13 @@
+{
+  ChangeFactory changeFactory=ChangeFactory.getInstance();
+  changeFactory.clear();
+  assertEquals(0,changeFactory.getRegistry().size());
+  changeFactory.register(CreateTableChange.class);
+  assertEquals(1,changeFactory.getRegistry().size());
+  assertTrue(changeFactory.getRegistry().containsKey("createTable"));
+  changeFactory.register(Priority10Change.class);
+  changeFactory.register(Priority5Change.class);
+  changeFactory.register(AnotherPriority5Change.class);
+  assertEquals(3,changeFactory.getRegistry().get("createTable").size());
+  assertEquals(Priority10Change.class,changeFactory.getRegistry().get("createTable").iterator().next());
+}

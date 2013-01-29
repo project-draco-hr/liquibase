@@ -1,0 +1,5 @@
+{
+  ChangeFactory instance=ChangeFactory.getInstance();
+  assertTrue(instance.getRegistry().containsKey("createTable"));
+  assertTrue(instance.getRegistry().containsKey("dropTable"));
+}

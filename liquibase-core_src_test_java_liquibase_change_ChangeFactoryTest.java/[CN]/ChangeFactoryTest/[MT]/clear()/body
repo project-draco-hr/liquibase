@@ -1,0 +1,6 @@
+{
+  ChangeFactory changeFactory=ChangeFactory.getInstance();
+  assertTrue(changeFactory.getRegistry().size() > 5);
+  changeFactory.clear();
+  assertEquals(0,changeFactory.getRegistry().size());
+}

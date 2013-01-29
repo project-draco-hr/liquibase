@@ -1,0 +1,6 @@
+{
+  Change change=ChangeFactory.getInstance().create("createTable");
+  assertNotNull(change);
+  assertTrue(change instanceof CreateTableChange);
+  assertNotSame(change,ChangeFactory.getInstance().create("createTable"));
+}
