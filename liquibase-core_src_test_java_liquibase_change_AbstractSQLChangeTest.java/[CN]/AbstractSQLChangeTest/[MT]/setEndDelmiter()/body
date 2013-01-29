@@ -1,0 +1,7 @@
+{
+  AbstractSQLChange change=new ExampleAbstractSQLChange();
+  change.setEndDelimiter("GO");
+  assertEquals("GO",change.getEndDelimiter());
+  change.setEndDelimiter(";");
+  assertEquals(";",change.getEndDelimiter());
+}

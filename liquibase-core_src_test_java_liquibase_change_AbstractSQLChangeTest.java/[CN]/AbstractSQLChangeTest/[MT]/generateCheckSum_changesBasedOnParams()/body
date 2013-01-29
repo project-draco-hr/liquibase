@@ -1,0 +1,12 @@
+{
+  CheckSum baseCheckSum=new ExampleAbstractSQLChange("SOME SQL").generateCheckSum();
+  ExampleAbstractSQLChange change=new ExampleAbstractSQLChange("SOME SQL");
+  change.setSplitStatements(false);
+  assertFalse(baseCheckSum.toString().equals(change.generateCheckSum().toString()));
+  change=new ExampleAbstractSQLChange("SOME SQL");
+  change.setEndDelimiter("X");
+  assertFalse(baseCheckSum.toString().equals(change.generateCheckSum().toString()));
+  change=new ExampleAbstractSQLChange("SOME SQL");
+  change.setStripComments(true);
+  assertFalse(baseCheckSum.toString().equals(change.generateCheckSum().toString()));
+}

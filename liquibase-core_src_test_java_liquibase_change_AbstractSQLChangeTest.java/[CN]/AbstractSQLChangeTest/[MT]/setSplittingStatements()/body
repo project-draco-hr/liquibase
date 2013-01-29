@@ -1,0 +1,9 @@
+{
+  AbstractSQLChange change=new ExampleAbstractSQLChange();
+  change.setSplitStatements(true);
+  assertTrue(change.isSplittingStatements());
+  change.setSplitStatements(false);
+  assertFalse(change.isSplittingStatements());
+  change.setSplitStatements(null);
+  assertTrue(change.isSplittingStatements());
+}

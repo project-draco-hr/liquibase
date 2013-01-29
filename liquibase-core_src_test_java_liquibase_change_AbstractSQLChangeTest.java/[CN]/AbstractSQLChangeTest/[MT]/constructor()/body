@@ -1,0 +1,6 @@
+{
+  AbstractSQLChange change=new ExampleAbstractSQLChange();
+  assertFalse(change.isStrippingComments());
+  assertTrue(change.isSplittingStatements());
+  assertNull(change.getEndDelimiter());
+}

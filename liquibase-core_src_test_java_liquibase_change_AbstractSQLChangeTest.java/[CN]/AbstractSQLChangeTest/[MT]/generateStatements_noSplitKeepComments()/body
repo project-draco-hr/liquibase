@@ -1,0 +1,8 @@
+{
+  ExampleAbstractSQLChange change=new ExampleAbstractSQLChange("LINE 1;\n--a comment\nLINE 2;\nLINE 3;");
+  change.setSplitStatements(false);
+  change.setStripComments(false);
+  SqlStatement[] statements=change.generateStatements(mock(Database.class));
+  assertEquals(1,statements.length);
+  assertEquals("LINE 1;\n--a comment\nLINE 2;\nLINE 3;",((RawSqlStatement)statements[0]).getSql());
+}

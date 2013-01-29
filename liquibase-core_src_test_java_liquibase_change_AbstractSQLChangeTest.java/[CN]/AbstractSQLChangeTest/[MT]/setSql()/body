@@ -1,0 +1,9 @@
+{
+  AbstractSQLChange sql=new ExampleAbstractSQLChange();
+  sql.setSql("SOME SQL");
+  assertEquals("SOME SQL",sql.getSql());
+  sql.setSql("   SOME SQL   ");
+  assertEquals("setSql should trim","SOME SQL",sql.getSql());
+  sql.setSql("   ");
+  assertNull("setSql should set empty strings to null",sql.getSql());
+}

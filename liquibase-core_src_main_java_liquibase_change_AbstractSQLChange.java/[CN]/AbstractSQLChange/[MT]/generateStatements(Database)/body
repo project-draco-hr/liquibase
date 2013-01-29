@@ -3,14 +3,16 @@
   if (StringUtils.trimToNull(getSql()) == null) {
     return new SqlStatement[0];
   }
-  String processedSQL=getSql().replaceAll("\r\n","\n").replaceAll("\r","\n");
+  String processedSQL=normalizeLineEndings(sql);
   for (  String statement : StringUtils.processMutliLineSQL(processedSQL,isStrippingComments(),isSplittingStatements(),getEndDelimiter())) {
     if (database instanceof MSSQLDatabase) {
       statement=statement.replaceAll("\n","\r\n");
     }
-    String escapedStatement;
+    String escapedStatement=statement;
     try {
-      escapedStatement=database.getConnection().nativeSQL(statement);
+      if (database.getConnection() != null) {
+        escapedStatement=database.getConnection().nativeSQL(statement);
+      }
     }
  catch (    DatabaseException e) {
       escapedStatement=statement;

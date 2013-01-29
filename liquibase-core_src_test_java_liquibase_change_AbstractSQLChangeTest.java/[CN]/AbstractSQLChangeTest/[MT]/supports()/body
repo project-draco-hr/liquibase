@@ -1,0 +1,3 @@
+{
+  assertTrue("AbstractSQLChange automatically supports all databases",new ExampleAbstractSQLChange().supports(mock(Database.class)));
+}

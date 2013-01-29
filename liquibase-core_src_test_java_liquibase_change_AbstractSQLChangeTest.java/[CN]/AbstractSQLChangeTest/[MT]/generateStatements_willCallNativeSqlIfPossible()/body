@@ -1,0 +1,14 @@
+{
+  ExampleAbstractSQLChange change=new ExampleAbstractSQLChange("SOME SQL");
+  Database database=mock(Database.class);
+  DatabaseConnection connection=mock(DatabaseConnection.class);
+  when(database.getConnection()).thenReturn(connection);
+  when(connection.nativeSQL("SOME SQL")).thenReturn("SOME NATIVE SQL");
+  SqlStatement[] statements=change.generateStatements(database);
+  assertEquals(1,statements.length);
+  assertEquals("SOME NATIVE SQL",((RawSqlStatement)statements[0]).getSql());
+  when(connection.nativeSQL("SOME SQL")).thenThrow(new DatabaseException("Testing exception"));
+  statements=change.generateStatements(database);
+  assertEquals(1,statements.length);
+  assertEquals("SOME SQL",((RawSqlStatement)statements[0]).getSql());
+}

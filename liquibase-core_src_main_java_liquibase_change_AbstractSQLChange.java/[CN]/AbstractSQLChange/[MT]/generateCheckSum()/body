@@ -3,5 +3,5 @@
   if (sql == null) {
     sql="";
   }
-  return CheckSum.compute(this.endDelimiter + ":" + this.isSplittingStatements()+ ":"+ this.isStrippingComments()+ ":"+ sql.replaceAll("\r\n","\n").replaceAll("\r","\n"));
+  return CheckSum.compute(this.getEndDelimiter() + ":" + this.isSplittingStatements()+ ":"+ this.isStrippingComments()+ ":"+ normalizeLineEndings(sql));
 }
