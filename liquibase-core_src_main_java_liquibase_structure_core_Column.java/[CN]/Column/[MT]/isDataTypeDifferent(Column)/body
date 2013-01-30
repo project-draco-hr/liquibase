@@ -1,8 +1,0 @@
-{
-  if (!this.isCertainDataType() || !otherColumn.isCertainDataType()) {
-    return false;
-  }
- else {
-    return !this.getType().equals(otherColumn.getType());
-  }
-}

@@ -1,4 +1,0 @@
-{
-  setAttribute("certainDataType",certainDataType);
-  return this;
-}

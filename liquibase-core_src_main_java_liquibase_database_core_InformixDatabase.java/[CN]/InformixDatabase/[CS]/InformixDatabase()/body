@@ -1,5 +1,6 @@
 {
-  super();
+  super.setCurrentDateTimeFunction("CURRENT " + DATETIME_FIELD_QUALIFIER);
+  super.sequenceNextValueFunction="%s.NEXTVAL";
   systemTablesAndViews.add("systables");
   systemTablesAndViews.add("syscolumns");
   systemTablesAndViews.add("sysindices");
@@ -62,5 +63,4 @@
   systemTablesAndViews.add("sysproccolumns");
   systemTablesAndViews.add("sysdomains");
   systemTablesAndViews.add("sysindexes");
-  super.sequenceNextValueFunction="%s.NEXTVAL";
 }

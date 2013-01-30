@@ -1,4 +1,5 @@
 {
+  super.setCurrentDateTimeFunction("GETDATE()");
   systemTablesAndViews.add("syscolumns");
   systemTablesAndViews.add("syscomments");
   systemTablesAndViews.add("sysdepends");

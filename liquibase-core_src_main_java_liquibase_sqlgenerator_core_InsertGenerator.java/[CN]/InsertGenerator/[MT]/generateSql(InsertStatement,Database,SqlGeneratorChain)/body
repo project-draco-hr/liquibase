@@ -28,6 +28,9 @@
  else     if (newValue instanceof SequenceFunction) {
       sql.append(database.generateSequenceNextValueFunction(newValue.toString()));
     }
+ else     if (newValue instanceof DatabaseFunction && DatabaseFunction.CURRENT_DATE_TIME_PLACE_HOLDER.equalsIgnoreCase(newValue.toString())) {
+      sql.append(database.getCurrentDateTimeFunction());
+    }
  else {
       sql.append(newValue);
     }

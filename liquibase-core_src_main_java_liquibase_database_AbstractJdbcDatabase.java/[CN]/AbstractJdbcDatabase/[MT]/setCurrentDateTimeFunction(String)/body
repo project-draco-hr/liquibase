@@ -1,5 +1,6 @@
 {
   if (function != null) {
     this.currentDateTimeFunction=function;
+    this.dateFunctions.add(new DatabaseFunction(function));
   }
 }

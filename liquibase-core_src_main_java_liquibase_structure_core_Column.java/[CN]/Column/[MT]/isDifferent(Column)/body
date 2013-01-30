@@ -1,3 +1,0 @@
-{
-  return isDataTypeDifferent(otherColumn) || isNullabilityDifferent(otherColumn);
-}
