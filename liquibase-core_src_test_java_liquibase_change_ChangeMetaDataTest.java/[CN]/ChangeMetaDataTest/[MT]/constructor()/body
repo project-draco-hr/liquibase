@@ -1,0 +1,12 @@
+{
+  HashMap<String,ChangeParameterMetaData> params=new HashMap<String,ChangeParameterMetaData>();
+  params.put("a",mock(ChangeParameterMetaData.class));
+  Class<? extends DatabaseObject>[] appliesTo=new Class[]{Table.class,Column.class};
+  ChangeMetaData metaData=new ChangeMetaData("x","y",10,appliesTo,params);
+  assertEquals("x",metaData.getName());
+  assertEquals("y",metaData.getDescription());
+  assertEquals(10,metaData.getPriority());
+  assertEquals(2,metaData.getAppliesTo().length);
+  assertEquals(1,metaData.getParameters().size());
+  assertEquals("a",metaData.getParameters().keySet().iterator().next());
+}

@@ -2,6 +2,9 @@
   if (parameters == null) {
     parameters=new HashMap<String,ChangeParameterMetaData>();
   }
+  if (appliesTo != null && appliesTo.length == 0) {
+    appliesTo=null;
+  }
   this.name=name;
   this.description=description;
   this.priority=priority;

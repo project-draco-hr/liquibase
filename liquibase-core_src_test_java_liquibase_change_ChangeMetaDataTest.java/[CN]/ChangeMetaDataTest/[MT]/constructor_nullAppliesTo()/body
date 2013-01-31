@@ -1,0 +1,4 @@
+{
+  ChangeMetaData metaData=new ChangeMetaData("x","y",5,null,null);
+  assertNull(metaData.getAppliesTo());
+}

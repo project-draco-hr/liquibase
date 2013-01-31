@@ -1,0 +1,3 @@
+{
+  new ChangeMetaData("x","y",1,null,new HashMap()).getParameters().put("new",mock(ChangeParameterMetaData.class));
+}

@@ -1,5 +1,5 @@
 String name
 String description
 int priority
-String[] appliesTo
+Class<? extends DatabaseObject>[] appliesTo
 Map<String,ChangeParameterMetaData> parameters
