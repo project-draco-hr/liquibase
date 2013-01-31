@@ -1,4 +1,5 @@
 {
   determineDriverVersion();
   super.sequenceNextValueFunction="NEXT VALUE FOR %s";
+  super.sequenceCurrentValueFunction="(SELECT currentvalue FROM sys.syssequences WHERE %s='SEQ_TYPE')";
 }

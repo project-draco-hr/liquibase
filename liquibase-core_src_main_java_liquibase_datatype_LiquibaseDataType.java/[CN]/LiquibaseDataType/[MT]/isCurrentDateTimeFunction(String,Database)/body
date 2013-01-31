@@ -1,3 +1,0 @@
-{
-  return string.toLowerCase().startsWith("current_timestamp") || string.toLowerCase().startsWith("current_datetime") || database.getCurrentDateTimeFunction().equalsIgnoreCase(string);
-}

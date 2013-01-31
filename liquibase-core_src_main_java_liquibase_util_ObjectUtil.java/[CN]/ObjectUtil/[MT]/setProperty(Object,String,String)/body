@@ -34,8 +34,12 @@
           method.invoke(object,new DatabaseFunction(propertyValue));
           return;
         }
- else         if (parameterType.equals(SequenceFunction.class)) {
-          method.invoke(object,new SequenceFunction(propertyValue));
+ else         if (parameterType.equals(SequenceNextValueFunction.class)) {
+          method.invoke(object,new SequenceNextValueFunction(propertyValue));
+          return;
+        }
+ else         if (parameterType.equals(SequenceCurrentValueFunction.class)) {
+          method.invoke(object,new SequenceCurrentValueFunction(propertyValue));
           return;
         }
       }

@@ -1,0 +1,4 @@
+{
+  this.defaultValueSequenceNext=defaultValueSequenceNext;
+  return this;
+}

@@ -63,4 +63,5 @@
   systemTablesAndViews.add("UNLOADEDSTATEMENTS");
   systemTablesAndViews.add("VERSION");
   super.sequenceNextValueFunction="%s.NEXTVAL";
+  super.sequenceCurrentValueFunction="%s.CURRVAL";
 }

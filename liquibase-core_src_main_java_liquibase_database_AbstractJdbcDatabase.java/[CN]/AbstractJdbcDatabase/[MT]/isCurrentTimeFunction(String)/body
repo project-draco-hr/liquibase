@@ -1,0 +1,3 @@
+{
+  return functionValue.startsWith("current_timestamp") || functionValue.startsWith("current_datetime") || getCurrentDateTimeFunction().equalsIgnoreCase(functionValue);
+}
