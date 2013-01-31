@@ -1,0 +1,7 @@
+{
+  for (int i=0; i < atts.getLength(); i++) {
+    String attributeName=atts.getQName(i);
+    String attributeValue=atts.getValue(i);
+    setProperty(column,attributeName,attributeValue);
+  }
+}

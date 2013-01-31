@@ -16,5 +16,11 @@
     statement.addNewColumnValue(column.getName(),column.getValueObject());
   }
   statement.setWhereClause(whereClause);
+  for (  ColumnConfig whereParam : whereParams) {
+    if (whereParam.getName() != null) {
+      statement.addWhereColumnName(whereParam.getName());
+    }
+    statement.addWhereParameter(whereParam.getValueObject());
+  }
   return new SqlStatement[]{statement};
 }

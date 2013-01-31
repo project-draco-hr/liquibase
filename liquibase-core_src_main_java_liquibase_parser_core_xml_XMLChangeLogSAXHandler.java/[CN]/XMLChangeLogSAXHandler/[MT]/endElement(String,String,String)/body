@@ -48,11 +48,8 @@
       text=new StringBuffer();
     }
  else     if (change != null && "where".equals(qName)) {
-      if (change instanceof UpdateDataChange) {
-        ((UpdateDataChange)change).setWhereClause(textString);
-      }
- else       if (change instanceof DeleteDataChange) {
-        ((DeleteDataChange)change).setWhereClause(textString);
+      if (change instanceof AbstractModifyDataChange) {
+        ((AbstractModifyDataChange)change).setWhereClause(textString);
       }
  else {
         throw new RuntimeException("Unexpected change type: " + change.getClass().getName());
@@ -88,6 +85,11 @@
  else {
         throw new RuntimeException("Unexpected column with text: " + textString);
       }
+      this.text=new StringBuffer();
+    }
+ else     if (change != null && change instanceof AbstractModifyDataChange && qName.equals("param") && textString != null) {
+      List<ColumnConfig> columns=((AbstractModifyDataChange)change).getWhereParams();
+      columns.get(columns.size() - 1).setValue(textString);
       this.text=new StringBuffer();
     }
  else     if (change != null && localName.equals(change.getChangeMetaData().getName())) {
