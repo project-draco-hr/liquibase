@@ -1,0 +1,14 @@
+{
+  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql"},null).isRequiredFor(new MySQLDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql"},null).isRequiredFor(new MySQLDatabase(){
+  }
+));
+  assertFalse(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql"},null).isRequiredFor(new MSSQLDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql","mssql"},null).isRequiredFor(new MySQLDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql","mssql"},null).isRequiredFor(new MSSQLDatabase()));
+  assertFalse(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql","mssql"},null).isRequiredFor(new OracleDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"all"},null).isRequiredFor(new OracleDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"all"},null).isRequiredFor(new MySQLDatabase()));
+  assertFalse(new ChangeParameterMetaData("x","y",Integer.class,new String[]{},null).isRequiredFor(new OracleDatabase()));
+  assertFalse(new ChangeParameterMetaData("x","y",Integer.class,new String[]{},null).isRequiredFor(new MySQLDatabase()));
+}

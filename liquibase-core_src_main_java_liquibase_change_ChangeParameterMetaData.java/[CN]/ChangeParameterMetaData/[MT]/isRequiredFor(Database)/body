@@ -1,8 +1,3 @@
 {
-  try {
-    return requiredForDatabase != null && (requiredForDatabase.contains("all") || requiredForDatabase.contains(database.getShortName()));
-  }
- catch (  NullPointerException e) {
-    throw e;
-  }
+  return requiredForDatabase.contains("all") || requiredForDatabase.contains(database.getShortName());
 }

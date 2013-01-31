@@ -1,0 +1,5 @@
+{
+  CreateTableChange change=new CreateTableChange();
+  ChangeParameterMetaData badParamMetaData=new ChangeParameterMetaData("badParameter","Doesn't really exist",Integer.class,null,null);
+  badParamMetaData.getCurrentValue(change);
+}

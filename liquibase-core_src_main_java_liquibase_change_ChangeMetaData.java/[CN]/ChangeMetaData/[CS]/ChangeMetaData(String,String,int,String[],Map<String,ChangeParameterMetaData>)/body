@@ -9,5 +9,8 @@
   this.description=description;
   this.priority=priority;
   this.parameters=Collections.unmodifiableMap(parameters);
-  this.appliesTo=appliesTo;
+  this.appliesTo=null;
+  if (appliesTo != null && appliesTo.length > 0) {
+    this.appliesTo=Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(appliesTo)));
+  }
 }
