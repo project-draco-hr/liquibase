@@ -3,5 +3,8 @@
   if (o instanceof Number) {
     return ((Number)o).shortValue();
   }
+ else   if (o instanceof String) {
+    return Short.valueOf((String)o);
+  }
   return (Short)o;
 }
