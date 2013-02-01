@@ -1,0 +1,5 @@
+{
+  ChangeMetaData metaData=new ChangeMetaData("x","y",5,new String[0],null);
+  assertFalse(metaData.appliesTo(new Table()));
+  assertFalse(metaData.appliesTo(new Column()));
+}
