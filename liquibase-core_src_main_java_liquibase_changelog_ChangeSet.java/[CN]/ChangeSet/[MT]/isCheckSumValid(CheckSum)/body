@@ -1,4 +1,9 @@
 {
+  for (  CheckSum validCheckSum : validCheckSums) {
+    if (validCheckSum.toString().equalsIgnoreCase("1:any")) {
+      return true;
+    }
+  }
   CheckSum currentMd5Sum=generateCheckSum();
   if (currentMd5Sum == null) {
     return true;
@@ -10,9 +15,6 @@
     return true;
   }
   for (  CheckSum validCheckSum : validCheckSums) {
-    if (validCheckSum.toString().equalsIgnoreCase("1:any")) {
-      return true;
-    }
     if (currentMd5Sum.equals(validCheckSum)) {
       return true;
     }
