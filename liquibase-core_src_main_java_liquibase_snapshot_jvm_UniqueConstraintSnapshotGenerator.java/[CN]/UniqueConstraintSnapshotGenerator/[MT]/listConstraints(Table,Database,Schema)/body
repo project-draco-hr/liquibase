@@ -1,6 +1,6 @@
 {
   String sql=null;
-  if (database instanceof MySQLDatabase) {
+  if (database instanceof MySQLDatabase || database instanceof PostgresDatabase) {
     sql="select CONSTRAINT_NAME " + "from information_schema.table_constraints " + "where constraint_schema='" + database.correctObjectName(schema.getCatalogName(),Catalog.class) + "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "'";
   }
  else   if (database instanceof MSSQLDatabase) {
