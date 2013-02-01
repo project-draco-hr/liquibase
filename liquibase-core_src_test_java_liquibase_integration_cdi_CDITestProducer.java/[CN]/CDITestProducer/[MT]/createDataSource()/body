@@ -1,5 +1,5 @@
 {
-  jdbcDataSource ds=new jdbcDataSource();
+  JDBCDataSource ds=new JDBCDataSource();
   ds.setDatabase("jdbc:hsqldb:mem:test");
   ds.setUser("sa");
   ds.setPassword("");
