@@ -1,0 +1,3 @@
+{
+  assertNotNull(CheckSum.parse("5:asdf").hashCode());
+}

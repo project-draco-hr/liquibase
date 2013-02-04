@@ -1,0 +1,7 @@
+{
+  assertTrue(CheckSum.parse("9:asdf").equals(CheckSum.parse("9:asdf")));
+  assertFalse(CheckSum.parse("9:asdf").equals(CheckSum.parse("8:asdf")));
+  assertFalse(CheckSum.parse("9:asdf").equals(CheckSum.parse("9:qwert")));
+  assertFalse(CheckSum.parse("9:asdf").equals(12));
+  assertFalse(CheckSum.parse("9:asdf").equals(null));
+}

@@ -1,0 +1,3 @@
+{
+  assertNull(CheckSum.parse(null));
+}

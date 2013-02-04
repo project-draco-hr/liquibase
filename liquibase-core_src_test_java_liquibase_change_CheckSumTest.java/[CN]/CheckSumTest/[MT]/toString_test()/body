@@ -1,0 +1,3 @@
+{
+  assertTrue(CheckSum.parse("9:asdf").toString().startsWith("9:"));
+}
