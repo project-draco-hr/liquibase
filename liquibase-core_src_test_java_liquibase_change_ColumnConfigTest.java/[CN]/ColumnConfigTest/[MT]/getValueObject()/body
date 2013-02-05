@@ -1,0 +1,11 @@
+{
+  assertEquals(true,new ColumnConfig().setValueBoolean(true).getValueObject());
+  assertEquals(5,new ColumnConfig().setValueNumeric(5).getValueObject());
+  assertEquals("1993-02-11 13:22:44.006",new ColumnConfig().setValueDate("1993-02-11T13:22:44.006").getValueObject().toString());
+  assertEquals("func",new ColumnConfig().setValueComputed(new DatabaseFunction("func")).getValueObject().toString());
+  assertEquals("seq_name",new ColumnConfig().setValueSequenceNext(new SequenceFunction("seq_name")).getValueObject().toString());
+  assertEquals("asdg",new ColumnConfig().setValueBlobFile("asdg").getValueObject());
+  assertEquals("zxcv",new ColumnConfig().setValueClobFile("zxcv").getValueObject());
+  assertEquals("A value",new ColumnConfig().setValue("A value").getValueObject());
+  assertNull(new ColumnConfig().getValueObject());
+}

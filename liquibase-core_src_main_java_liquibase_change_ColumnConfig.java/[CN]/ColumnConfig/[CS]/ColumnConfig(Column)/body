@@ -1,19 +1,52 @@
 {
-  setName(columnStructure.getName());
-  setType(columnStructure.getType().toString());
-  if (columnStructure.getDefaultValue() != null) {
-    setDefaultValue(columnStructure.getDefaultValue().toString());
+  setName(columnSnapshot.getName());
+  setType(columnSnapshot.getType().toString());
+  if (columnSnapshot.getRelation() != null && columnSnapshot.getRelation() instanceof Table) {
+    if (columnSnapshot.getDefaultValue() != null) {
+      setDefaultValue(columnSnapshot.getDefaultValue().toString());
+    }
+    ConstraintsConfig constraints=new ConstraintsConfig();
+    constraints.setNullable(columnSnapshot.isNullable());
+    if (columnSnapshot.isAutoIncrement()) {
+      setAutoIncrement(true);
+      setStartWith(columnSnapshot.getAutoIncrementInformation().getStartWith());
+      setIncrementBy(columnSnapshot.getAutoIncrementInformation().getIncrementBy());
+    }
+ else {
+      setAutoIncrement(false);
+    }
+    Table table=(Table)columnSnapshot.getRelation();
+    PrimaryKey primaryKey=table.getPrimaryKey();
+    if (primaryKey != null && primaryKey.getColumnNamesAsList().contains(columnSnapshot.getName())) {
+      constraints.setPrimaryKey(true);
+      constraints.setPrimaryKeyName(primaryKey.getName());
+      constraints.setPrimaryKeyTablespace(primaryKey.getTablespace());
+    }
+    List<UniqueConstraint> uniqueConstraints=table.getUniqueConstraints();
+    if (uniqueConstraints != null) {
+      for (      UniqueConstraint constraint : uniqueConstraints) {
+        if (constraint.getColumnNames().contains(getName())) {
+          constraints.setUnique(true);
+          constraints.setUniqueConstraintName(constraint.getName());
+        }
+      }
+    }
+    List<ForeignKey> fks=table.getOutgoingForeignKeys();
+    if (fks != null) {
+      for (      ForeignKey fk : fks) {
+        if (fk.getForeignKeyColumns().equals(getName())) {
+          constraints.setForeignKeyName(fk.getName());
+          constraints.setReferences(fk.getPrimaryKeyTable().getName() + "(" + fk.getPrimaryKeyColumns()+ ")");
+        }
+      }
+    }
+    if (constraints.isPrimaryKey() == null) {
+      constraints.setPrimaryKey(false);
+    }
+    if (constraints.isUnique() == null) {
+      constraints.setUnique(false);
+    }
+    setConstraints(constraints);
   }
-  if (columnStructure.getType().isAutoIncrement()) {
-    setAutoIncrement(true);
-    setStartWith(columnStructure.getType().getAutoIncrementInformation().getStartWith());
-    setIncrementBy(columnStructure.getType().getAutoIncrementInformation().getIncrementBy());
-  }
-  ConstraintsConfig constraints=new ConstraintsConfig();
-  constraints.setNullable(columnStructure.isNullable());
-  if (columnStructure.getRelation() != null && columnStructure.getRelation() instanceof Table && ((Table)columnStructure.getRelation()).getPrimaryKey().getColumnNamesAsList().contains(columnStructure.getName())) {
-    constraints.setPrimaryKey(true);
-  }
-  constraints.setUnique(columnStructure.isUnique());
-  setConstraints(constraints);
+  setRemarks(columnSnapshot.getRemarks());
 }

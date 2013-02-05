@@ -1,0 +1,23 @@
+{
+  Table table=new Table();
+  Column column=new Column();
+  column.setName("colName");
+  column.setRelation(table);
+  column.setType(new DataType("BIGINT"));
+  ColumnConfig config=new ColumnConfig(column);
+  assertEquals("colName",config.getName());
+  assertNull(config.getDefaultValue());
+  assertNull(config.getRemarks());
+  assertEquals("BIGINT",config.getType());
+  assertNull(config.getConstraints().isNullable());
+  assertEquals(false,config.getConstraints().isUnique());
+  assertNull(config.getConstraints().getUniqueConstraintName());
+  assertEquals(false,config.getConstraints().isPrimaryKey());
+  assertNull(config.getConstraints().getPrimaryKeyName());
+  assertNull(config.getConstraints().getPrimaryKeyTablespace());
+  assertNull(config.getConstraints().getForeignKeyName());
+  assertNull(config.getConstraints().getReferences());
+  assertEquals(false,config.isAutoIncrement());
+  assertNull(config.getStartWith());
+  assertNull(config.getIncrementBy());
+}

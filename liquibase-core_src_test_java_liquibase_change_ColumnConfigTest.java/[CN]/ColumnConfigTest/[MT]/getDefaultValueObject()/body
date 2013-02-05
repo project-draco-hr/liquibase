@@ -1,0 +1,8 @@
+{
+  assertEquals(true,new ColumnConfig().setDefaultValueBoolean(true).getDefaultValueObject());
+  assertEquals(5,new ColumnConfig().setDefaultValueNumeric(5).getDefaultValueObject());
+  assertEquals("1993-02-11 13:22:44.006",new ColumnConfig().setDefaultValueDate("1993-02-11T13:22:44.006").getDefaultValueObject().toString());
+  assertEquals("func",new ColumnConfig().setDefaultValueComputed(new DatabaseFunction("func")).getDefaultValueObject().toString());
+  assertEquals("A value",new ColumnConfig().setDefaultValue("A value").getDefaultValueObject());
+  assertNull(new ColumnConfig().getDefaultValueObject());
+}

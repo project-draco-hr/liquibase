@@ -1,0 +1,6 @@
+{
+  assertNull(new ColumnConfig().setDefaultValueNumeric((String)null).getDefaultValueNumeric());
+  assertNull(new ColumnConfig().setDefaultValueNumeric("null").getDefaultValueNumeric());
+  assertNull(new ColumnConfig().setDefaultValueNumeric("NULL").getDefaultValueNumeric());
+  assertNull(new ColumnConfig().setDefaultValueNumeric((Number)null).getDefaultValueNumeric());
+}

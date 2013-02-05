@@ -1,0 +1,11 @@
+{
+  assertNull(new ColumnConfig().setValueDate((String)null).getValueDate());
+  assertNull(new ColumnConfig().setValueDate("null").getValueDate());
+  assertNull(new ColumnConfig().setValueDate("NULL").getValueDate());
+  assertNull(new ColumnConfig().setValueDate((Date)null).getValueDate());
+  Date today=new Date();
+  assertEquals(today,new ColumnConfig().setValueDate(today).getValueDate());
+  assertEquals("1992-02-11 13:22:44.006",new ColumnConfig().setValueDate("1992-02-11T13:22:44.6").getValueDate().toString());
+  assertEquals("1992-02-12",new ColumnConfig().setValueDate("1992-02-12").getValueDate().toString());
+  assertEquals("date_func",new ColumnConfig().setValueDate("date_func").getValueComputed().toString());
+}

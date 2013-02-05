@@ -1,0 +1,3 @@
+{
+  return getAttribute("autoIncrementInformation",AutoIncrementInformation.class);
+}

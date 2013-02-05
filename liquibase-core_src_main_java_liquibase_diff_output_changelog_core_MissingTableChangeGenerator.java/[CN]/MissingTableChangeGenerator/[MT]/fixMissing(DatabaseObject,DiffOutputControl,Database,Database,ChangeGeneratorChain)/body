@@ -16,7 +16,7 @@
     columnConfig.setName(column.getName());
     columnConfig.setType(column.getType().toString());
     ConstraintsConfig constraintsConfig=null;
-    if (column.getType().isAutoIncrement()) {
+    if (column.isAutoIncrement()) {
       columnConfig.setAutoIncrement(true);
     }
     if (column.isNullable() != null && !column.isNullable()) {
@@ -31,7 +31,7 @@
     Object defaultValue=column.getDefaultValue();
     if (defaultValue == null) {
     }
- else     if (column.getType().isAutoIncrement()) {
+ else     if (column.isAutoIncrement()) {
     }
  else     if (defaultValue instanceof Date) {
       columnConfig.setDefaultValueDate((Date)defaultValue);

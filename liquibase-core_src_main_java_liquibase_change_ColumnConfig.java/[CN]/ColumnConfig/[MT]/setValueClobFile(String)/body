@@ -1,0 +1,4 @@
+{
+  this.valueClobFile=valueClobFile;
+  return this;
+}

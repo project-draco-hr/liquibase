@@ -5,4 +5,5 @@
     }
   }
   this.getColumnNamesAsList().set(position,columnName);
+  return this;
 }

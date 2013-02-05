@@ -1,3 +1,0 @@
-{
-  return getConstraints() == null || getConstraints().isNullable();
-}

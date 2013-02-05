@@ -7,8 +7,10 @@
       setAutoIncrement(true);
     }
  else {
-      defaultValueNumeric=defaultValueNumeric.replaceFirst("^\\(","");
-      defaultValueNumeric=defaultValueNumeric.replaceFirst("\\)$","");
+      if (defaultValueNumeric.startsWith("(")) {
+        defaultValueNumeric=defaultValueNumeric.replaceFirst("^\\(","");
+        defaultValueNumeric=defaultValueNumeric.replaceFirst("\\)$","");
+      }
       try {
         this.defaultValueNumeric=NumberFormat.getInstance(Locale.US).parse(defaultValueNumeric);
       }

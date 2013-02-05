@@ -1,0 +1,4 @@
+{
+  this.startWith=BigInteger.valueOf(startWith.longValue());
+  this.incrementBy=BigInteger.valueOf(incrementBy.longValue());
+}

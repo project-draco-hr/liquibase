@@ -1,0 +1,7 @@
+{
+  assertNull(new ColumnConfig().setDefaultValue(null).getDefaultValue());
+  assertEquals("abc",new ColumnConfig().setDefaultValue("abc").getDefaultValue());
+  assertEquals("  abc  ",new ColumnConfig().setDefaultValue("  abc  ").getDefaultValue());
+  assertEquals("null",new ColumnConfig().setDefaultValue("null").getDefaultValue());
+  assertEquals("",new ColumnConfig().setDefaultValue("").getDefaultValue());
+}

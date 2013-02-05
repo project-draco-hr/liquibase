@@ -1,0 +1,4 @@
+{
+  assertNull(new ColumnConfig().setValueBlobFile(null).getValueBlobFile());
+  assertEquals("blob_file",new ColumnConfig().setValueBlobFile("blob_file").getValueBlobFile());
+}

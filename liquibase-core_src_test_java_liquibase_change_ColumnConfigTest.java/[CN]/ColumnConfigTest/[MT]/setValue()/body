@@ -1,11 +1,7 @@
 {
-  ColumnConfig column=new ColumnConfig();
-  column.setValue(null);
-  assertNull(column.getValue());
-  column.setValue("abc");
-  assertEquals("abc",column.getValue());
-  column.setValue(null);
-  assertEquals("passed null should override the value",null,column.getValue());
-  column.setValue("");
-  assertEquals("passed empty strings should override the value","",column.getValue());
+  assertNull(new ColumnConfig().setValue(null).getValue());
+  assertEquals("abc",new ColumnConfig().setValue("abc").getValue());
+  assertEquals("empty strings are saved","",new ColumnConfig().setValue("").getValue());
+  assertEquals("strings should not be trimmed","  not trimmed  ",new ColumnConfig().setValue("  not trimmed  ").getValue());
+  assertEquals("null",new ColumnConfig().setValue("null").getValue());
 }

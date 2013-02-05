@@ -1,0 +1,5 @@
+{
+  assertNull(new ColumnConfig().setDefaultValueBoolean(null).getDefaultValueBoolean());
+  assertEquals(true,new ColumnConfig().setDefaultValueBoolean(true).getDefaultValueBoolean());
+  assertFalse(new ColumnConfig().setDefaultValueBoolean(false).getDefaultValueBoolean());
+}

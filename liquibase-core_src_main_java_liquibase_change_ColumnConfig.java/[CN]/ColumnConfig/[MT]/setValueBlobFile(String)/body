@@ -1,0 +1,4 @@
+{
+  this.valueBlobFile=valueBlobFile;
+  return this;
+}

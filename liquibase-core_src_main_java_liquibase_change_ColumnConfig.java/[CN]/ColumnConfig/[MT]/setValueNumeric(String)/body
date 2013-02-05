@@ -3,17 +3,14 @@
     this.valueNumeric=null;
   }
  else {
-    valueNumeric=valueNumeric.replaceFirst("^\\(","");
-    valueNumeric=valueNumeric.replaceFirst("\\)$","");
-    if (valueNumeric.matches("\\d+\\.?\\d*")) {
-      try {
-        this.valueNumeric=NumberFormat.getInstance(Locale.US).parse(valueNumeric);
-      }
- catch (      ParseException e) {
-        throw new RuntimeException(e);
-      }
+    if (valueNumeric.startsWith("(")) {
+      valueNumeric=valueNumeric.replaceFirst("^\\(","");
+      valueNumeric=valueNumeric.replaceFirst("\\)$","");
     }
- else {
+    try {
+      this.valueNumeric=NumberFormat.getInstance(Locale.US).parse(valueNumeric);
+    }
+ catch (    ParseException e) {
       this.valueComputed=new DatabaseFunction(valueNumeric);
     }
   }

@@ -1,4 +1,0 @@
-{
-  this.startWith=startWith;
-  this.incrementBy=incrementBy;
-}

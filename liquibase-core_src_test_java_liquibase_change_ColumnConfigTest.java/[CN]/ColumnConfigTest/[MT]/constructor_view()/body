@@ -1,0 +1,12 @@
+{
+  View view=new View();
+  Column column=new Column();
+  column.setName("colName");
+  column.setRelation(view);
+  column.setType(new DataType("BIGINT"));
+  ColumnConfig config=new ColumnConfig(column);
+  assertEquals("colName",config.getName());
+  assertEquals("BIGINT",config.getType());
+  assertNull(config.getConstraints());
+  assertNull(config.isAutoIncrement());
+}

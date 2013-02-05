@@ -1,10 +1,10 @@
 {
   boolean needsPreparedStatement=false;
   for (  ColumnConfig column : columns) {
-    if (column.getValueBlob() != null) {
+    if (column.getValueBlobFile() != null) {
       needsPreparedStatement=true;
     }
-    if (column.getValueClob() != null) {
+    if (column.getValueClobFile() != null) {
       needsPreparedStatement=true;
     }
   }

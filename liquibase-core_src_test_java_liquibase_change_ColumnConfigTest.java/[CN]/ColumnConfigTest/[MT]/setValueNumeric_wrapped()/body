@@ -1,0 +1,4 @@
+{
+  assertEquals(52.3,new ColumnConfig().setValueNumeric("(52.3)").getValueNumeric());
+  assertEquals(-32.3,new ColumnConfig().setValueNumeric("(-32.3)").getValueNumeric());
+}

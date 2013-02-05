@@ -1,0 +1,4 @@
+{
+  assertNull(new ColumnConfig().setValueComputed(null).getValueComputed());
+  assertEquals("func",new ColumnConfig().setValueComputed(new DatabaseFunction("func")).getValueComputed().toString());
+}

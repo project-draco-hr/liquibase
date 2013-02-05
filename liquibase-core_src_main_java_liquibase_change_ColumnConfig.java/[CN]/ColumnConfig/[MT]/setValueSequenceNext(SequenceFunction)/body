@@ -1,3 +1,4 @@
 {
   this.valueSequenceNext=valueSequenceNext;
+  return this;
 }

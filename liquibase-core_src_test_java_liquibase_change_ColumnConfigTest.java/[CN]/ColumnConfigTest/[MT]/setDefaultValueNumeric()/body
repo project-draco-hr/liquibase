@@ -1,0 +1,13 @@
+{
+  assertEquals(3,new ColumnConfig().setDefaultValueNumeric(3).getDefaultValueNumeric());
+  assertEquals(3L,new ColumnConfig().setDefaultValueNumeric("3").getDefaultValueNumeric());
+  assertEquals(3.5,new ColumnConfig().setDefaultValueNumeric(3.5).getDefaultValueNumeric());
+  assertEquals(3.5,new ColumnConfig().setDefaultValueNumeric("3.5").getDefaultValueNumeric());
+  assertEquals(-6,new ColumnConfig().setDefaultValueNumeric(-6).getDefaultValueNumeric());
+  assertEquals(-6L,new ColumnConfig().setDefaultValueNumeric("-6").getDefaultValueNumeric());
+  assertEquals(0,new ColumnConfig().setDefaultValueNumeric(0).getDefaultValueNumeric());
+  assertEquals(0L,new ColumnConfig().setDefaultValueNumeric("0").getDefaultValueNumeric());
+  assertEquals(0.33,new ColumnConfig().setDefaultValueNumeric(0.33).getDefaultValueNumeric());
+  assertEquals(0.33,new ColumnConfig().setDefaultValueNumeric("0.33").getDefaultValueNumeric());
+  assertEquals("new_value()",new ColumnConfig().setDefaultValueNumeric("new_value()").getDefaultValueComputed().toString());
+}

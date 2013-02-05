@@ -1,0 +1,11 @@
+{
+  ColumnConfig columnConfig=new ColumnConfig().setValueNumeric("max_integer()");
+  assertNull(columnConfig.getValueNumeric());
+  assertEquals("max_integer()",columnConfig.getValueComputed().toString());
+  columnConfig=new ColumnConfig().setValueNumeric("paramless_fn");
+  assertNull(columnConfig.getValueNumeric());
+  assertEquals("paramless_fn",columnConfig.getValueComputed().toString());
+  columnConfig=new ColumnConfig().setValueNumeric("fn(3,5)");
+  assertNull(columnConfig.getValueNumeric());
+  assertEquals("fn(3,5)",columnConfig.getValueComputed().toString());
+}

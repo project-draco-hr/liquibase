@@ -14,11 +14,11 @@
  else   if (getValueComputed() != null) {
     return getValueComputed();
   }
- else   if (getValueClob() != null) {
-    return getValueClob();
+ else   if (getValueClobFile() != null) {
+    return getValueClobFile();
   }
- else   if (getValueBlob() != null) {
-    return getValueBlob();
+ else   if (getValueBlobFile() != null) {
+    return getValueBlobFile();
   }
  else   if (getValueSequenceNext() != null) {
     return getValueSequenceNext();
