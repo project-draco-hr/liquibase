@@ -105,10 +105,16 @@
       buffer.append(database.escapeConstraintName(fkConstraint.getForeignKeyName()));
     }
     String referencesString=fkConstraint.getReferences();
-    if (!referencesString.contains(".") && database.getDefaultSchemaName() != null) {
-      referencesString=database.escapeObjectName(database.getDefaultSchemaName(),Schema.class) + "." + referencesString;
+    buffer.append(" FOREIGN KEY (").append(database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),fkConstraint.getColumn())).append(") REFERENCES ");
+    if (referencesString != null) {
+      if (!referencesString.contains(".") && database.getDefaultSchemaName() != null) {
+        referencesString=database.getDefaultSchemaName() + "." + referencesString;
+      }
+      buffer.append(referencesString);
     }
-    buffer.append(" FOREIGN KEY (").append(database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),fkConstraint.getColumn())).append(") REFERENCES ").append(referencesString);
+ else {
+      buffer.append(database.escapeObjectName(fkConstraint.getReferencedTableName(),Table.class)).append("(").append(database.escapeColumnNameList(fkConstraint.getReferencedColumnNames())).append(")");
+    }
     if (fkConstraint.isDeleteCascade()) {
       buffer.append(" ON DELETE CASCADE");
     }

@@ -1,8 +1,0 @@
-{
-  if (objectName != null) {
-    if (isReservedWord(objectName)) {
-      return "\"" + objectName.toUpperCase() + "\"";
-    }
-  }
-  return objectName;
-}

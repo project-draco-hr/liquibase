@@ -1,5 +1,0 @@
-{
-  ChangeSet changeSet=generateChangeSet();
-  changeSet.addChange(change);
-  return changeSet;
-}

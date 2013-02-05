@@ -8,7 +8,7 @@
   columnConfig.setType(getFinalColumnType());
   addNewColumnChange.addColumn(columnConfig);
   statements.addAll(Arrays.asList(addNewColumnChange.generateStatements(database)));
-  String updateStatement="UPDATE " + database.escapeTableName(getCatalogName(),getSchemaName(),getTableName()) + " SET "+ getFinalColumnName()+ " = "+ database.getConcatSql(getColumn1Name(),"'" + getJoinString() + "'",getColumn2Name());
+  String updateStatement="UPDATE " + database.escapeTableName(getCatalogName(),getSchemaName(),getTableName()) + " SET "+ database.escapeObjectName(getFinalColumnName(),Column.class)+ " = "+ database.getConcatSql(database.escapeObjectName(getColumn1Name(),Column.class),"'" + getJoinString() + "'",database.escapeObjectName(getColumn2Name(),Column.class));
   statements.add(new RawSqlStatement(updateStatement));
   if (database instanceof SQLiteDatabase) {
     AlterTableVisitor rename_alter_visitor=new AlterTableVisitor(){

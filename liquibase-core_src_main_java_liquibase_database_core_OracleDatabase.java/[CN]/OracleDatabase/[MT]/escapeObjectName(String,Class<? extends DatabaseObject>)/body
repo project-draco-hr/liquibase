@@ -1,8 +1,0 @@
-{
-  if (objectName != null && (Pattern.compile("\\W").matcher(objectName).find() || isReservedWord(objectName))) {
-    return "\"" + objectName.trim().toUpperCase() + "\"";
-  }
- else {
-    return objectName;
-  }
-}

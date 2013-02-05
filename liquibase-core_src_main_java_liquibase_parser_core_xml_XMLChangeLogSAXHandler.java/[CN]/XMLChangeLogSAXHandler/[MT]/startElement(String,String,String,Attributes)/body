@@ -19,6 +19,12 @@
         }
       }
       databaseChangeLog.setLogicalFilePath(atts.getValue("logicalFilePath"));
+      ObjectQuotingStrategy quotingStrategy=ObjectQuotingStrategy.LEGACY;
+      String quotingStrategyText=atts.getValue("objectQuotingStrategy");
+      if (quotingStrategyText != null) {
+        quotingStrategy=ObjectQuotingStrategy.valueOf(quotingStrategyText);
+      }
+      databaseChangeLog.setObjectQuotingStrategy(quotingStrategy);
     }
  else     if ("include".equals(qName)) {
       String fileName=atts.getValue("file");
@@ -113,7 +119,12 @@
       if (filePath == null || "".equals(filePath)) {
         filePath=databaseChangeLog.getFilePath();
       }
-      changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,filePath,atts.getValue("context"),atts.getValue("dbms"),Boolean.valueOf(atts.getValue("runInTransaction")));
+      ObjectQuotingStrategy quotingStrategy=databaseChangeLog.getObjectQuotingStrategy();
+      String quotingStrategyText=atts.getValue("objectQuotingStrategy");
+      if (quotingStrategyText != null) {
+        quotingStrategy=ObjectQuotingStrategy.valueOf(quotingStrategyText);
+      }
+      changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,filePath,atts.getValue("context"),atts.getValue("dbms"),Boolean.valueOf(atts.getValue("runInTransaction")),quotingStrategy);
       if (StringUtils.trimToNull(atts.getValue("failOnError")) != null) {
         changeSet.setFailOnError(Boolean.parseBoolean(atts.getValue("failOnError")));
       }

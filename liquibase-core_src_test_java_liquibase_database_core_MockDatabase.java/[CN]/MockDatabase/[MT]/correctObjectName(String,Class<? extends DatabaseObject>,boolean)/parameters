@@ -1,0 +1,3 @@
+String name
+Class<? extends DatabaseObject> objectType
+boolean quoteCorrectedName

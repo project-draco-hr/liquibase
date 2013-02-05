@@ -11,7 +11,7 @@
   change.setResourceAccessor(resourceAccessor);
   change.setSplitStatements(false);
   change.setStripComments(false);
-  ChangeSet changeSet=new ChangeSet("raw","includeAll",false,false,physicalChangeLogLocation,null,null,true);
+  ChangeSet changeSet=new ChangeSet("raw","includeAll",false,false,physicalChangeLogLocation,null,null,true,ObjectQuotingStrategy.LEGACY);
   changeSet.addChange(change);
   DatabaseChangeLog changeLog=new DatabaseChangeLog();
   changeLog.setPhysicalFilePath(physicalChangeLogLocation);

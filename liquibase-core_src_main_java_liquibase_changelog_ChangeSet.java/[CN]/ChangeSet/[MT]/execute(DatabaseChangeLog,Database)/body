@@ -7,6 +7,7 @@
   boolean skipChange=false;
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
+    database.setObjectQuotingStrategy(objectQuotingStrategy);
     if (database.supportsDDLInTransaction()) {
       database.setAutoCommit(!runInTransaction);
     }

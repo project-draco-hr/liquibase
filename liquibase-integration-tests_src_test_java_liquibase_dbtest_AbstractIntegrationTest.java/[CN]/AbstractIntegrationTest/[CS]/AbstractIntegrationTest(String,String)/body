@@ -8,6 +8,7 @@
   this.externalEntityChangeLog="changelogs/common/externalEntity.changelog.xml";
   this.externalEntityChangeLog2="com/example/nonIncluded/externalEntity.changelog.xml";
   this.invalidReferenceChangeLog="changelogs/common/invalid.reference.changelog.xml";
+  this.objectQuotingStrategyChangeLog="changelogs/common/object.quoting.strategy.changelog.xml";
   this.url=url;
   ServiceLocator.getInstance().setResourceAccessor(TestContext.getInstance().getTestResourceAccessor());
 }
