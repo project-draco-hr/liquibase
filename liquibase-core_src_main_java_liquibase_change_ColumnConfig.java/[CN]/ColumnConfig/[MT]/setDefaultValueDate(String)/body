@@ -1,4 +1,5 @@
 {
+  defaultValueDate=StringUtils.trimToNull(defaultValueDate);
   if (defaultValueDate == null || defaultValueDate.equalsIgnoreCase("null")) {
     this.defaultValueDate=null;
   }

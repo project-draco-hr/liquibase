@@ -1,0 +1,18 @@
+{
+  valueBoolean=StringUtils.trimToNull(valueBoolean);
+  if (valueBoolean == null || valueBoolean.equalsIgnoreCase("null")) {
+    this.valueBoolean=null;
+  }
+ else {
+    if (valueBoolean.equalsIgnoreCase("true") || valueBoolean.equals("1")) {
+      this.valueBoolean=true;
+    }
+ else     if (valueBoolean.equalsIgnoreCase("false") || valueBoolean.equals("0")) {
+      this.valueBoolean=false;
+    }
+ else {
+      this.valueComputed=new DatabaseFunction(valueBoolean);
+    }
+  }
+  return this;
+}

@@ -1,0 +1,18 @@
+{
+  defaultValueBoolean=StringUtils.trimToNull(defaultValueBoolean);
+  if (defaultValueBoolean == null || defaultValueBoolean.equalsIgnoreCase("null")) {
+    this.defaultValueBoolean=null;
+  }
+ else {
+    if (defaultValueBoolean.equalsIgnoreCase("true") || defaultValueBoolean.equals("1")) {
+      this.defaultValueBoolean=true;
+    }
+ else     if (defaultValueBoolean.equalsIgnoreCase("false") || defaultValueBoolean.equals("0")) {
+      this.defaultValueBoolean=false;
+    }
+ else {
+      this.defaultValueComputed=new DatabaseFunction(defaultValueBoolean);
+    }
+  }
+  return this;
+}
