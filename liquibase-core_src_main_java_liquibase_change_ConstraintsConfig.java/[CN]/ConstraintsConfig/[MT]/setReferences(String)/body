@@ -1,3 +1,4 @@
 {
   this.references=references;
+  return this;
 }

@@ -1,0 +1,4 @@
+{
+  assertEquals(true,new ConstraintsConfig().setUnique(true).isUnique());
+  assertEquals(false,new ConstraintsConfig().setUnique(false).isUnique());
+}

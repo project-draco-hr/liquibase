@@ -1,0 +1,3 @@
+{
+  assertEquals("xyz",new ConstraintsConfig().setForeignKeyName("xyz").getForeignKeyName());
+}

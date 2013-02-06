@@ -1,3 +1,4 @@
 {
   this.unique=unique;
+  return this;
 }

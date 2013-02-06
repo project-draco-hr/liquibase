@@ -1,0 +1,12 @@
+{
+  assertEquals(true,new ConstraintsConfig().setInitiallyDeferred("true").isInitiallyDeferred());
+  assertEquals(true,new ConstraintsConfig().setInitiallyDeferred("TRUE").isInitiallyDeferred());
+  assertEquals(true,new ConstraintsConfig().setInitiallyDeferred("1").isInitiallyDeferred());
+  assertEquals(false,new ConstraintsConfig().setInitiallyDeferred("false").isInitiallyDeferred());
+  assertEquals(false,new ConstraintsConfig().setInitiallyDeferred("FALSE").isInitiallyDeferred());
+  assertEquals(false,new ConstraintsConfig().setInitiallyDeferred("0").isInitiallyDeferred());
+  assertNull(new ConstraintsConfig().setInitiallyDeferred("").isInitiallyDeferred());
+  assertNull(new ConstraintsConfig().setInitiallyDeferred("null").isInitiallyDeferred());
+  assertNull(new ConstraintsConfig().setInitiallyDeferred("NULL").isInitiallyDeferred());
+  assertNull(new ConstraintsConfig().setInitiallyDeferred((String)null).isInitiallyDeferred());
+}

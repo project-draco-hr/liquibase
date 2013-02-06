@@ -1,0 +1,4 @@
+{
+  this.unique=parseBoolean(unique);
+  return this;
+}

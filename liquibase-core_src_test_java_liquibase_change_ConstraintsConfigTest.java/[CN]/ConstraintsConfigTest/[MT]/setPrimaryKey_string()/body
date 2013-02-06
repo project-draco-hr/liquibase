@@ -1,0 +1,12 @@
+{
+  assertEquals(true,new ConstraintsConfig().setPrimaryKey("true").isPrimaryKey());
+  assertEquals(true,new ConstraintsConfig().setPrimaryKey("TRUE").isPrimaryKey());
+  assertEquals(true,new ConstraintsConfig().setPrimaryKey("1").isPrimaryKey());
+  assertEquals(false,new ConstraintsConfig().setPrimaryKey("false").isPrimaryKey());
+  assertEquals(false,new ConstraintsConfig().setPrimaryKey("FALSE").isPrimaryKey());
+  assertEquals(false,new ConstraintsConfig().setPrimaryKey("0").isPrimaryKey());
+  assertNull(new ConstraintsConfig().setPrimaryKey("").isPrimaryKey());
+  assertNull(new ConstraintsConfig().setPrimaryKey("null").isPrimaryKey());
+  assertNull(new ConstraintsConfig().setPrimaryKey("NULL").isPrimaryKey());
+  assertNull(new ConstraintsConfig().setPrimaryKey((String)null).isPrimaryKey());
+}

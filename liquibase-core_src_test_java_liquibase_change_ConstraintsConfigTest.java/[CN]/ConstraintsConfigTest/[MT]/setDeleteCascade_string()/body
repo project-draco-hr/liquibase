@@ -1,0 +1,12 @@
+{
+  assertEquals(true,new ConstraintsConfig().setDeleteCascade("true").isDeleteCascade());
+  assertEquals(true,new ConstraintsConfig().setDeleteCascade("TRUE").isDeleteCascade());
+  assertEquals(true,new ConstraintsConfig().setDeleteCascade("1").isDeleteCascade());
+  assertEquals(false,new ConstraintsConfig().setDeleteCascade("false").isDeleteCascade());
+  assertEquals(false,new ConstraintsConfig().setDeleteCascade("FALSE").isDeleteCascade());
+  assertEquals(false,new ConstraintsConfig().setDeleteCascade("0").isDeleteCascade());
+  assertNull(new ConstraintsConfig().setDeleteCascade("").isDeleteCascade());
+  assertNull(new ConstraintsConfig().setDeleteCascade("null").isDeleteCascade());
+  assertNull(new ConstraintsConfig().setDeleteCascade("NULL").isDeleteCascade());
+  assertNull(new ConstraintsConfig().setDeleteCascade((String)null).isDeleteCascade());
+}

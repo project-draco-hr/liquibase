@@ -1,0 +1,17 @@
+{
+  value=StringUtils.trimToNull(value);
+  if (value == null || value.equalsIgnoreCase("null")) {
+    return null;
+  }
+ else {
+    if (value.equalsIgnoreCase("true") || value.equals("1")) {
+      return true;
+    }
+ else     if (value.equalsIgnoreCase("false") || value.equals("0")) {
+      return false;
+    }
+ else {
+      throw new UnexpectedLiquibaseException("Unparsable boolean value: " + value);
+    }
+  }
+}

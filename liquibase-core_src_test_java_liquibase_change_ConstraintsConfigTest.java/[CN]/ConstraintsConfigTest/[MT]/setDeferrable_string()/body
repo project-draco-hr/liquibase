@@ -1,0 +1,12 @@
+{
+  assertEquals(true,new ConstraintsConfig().setDeferrable("true").isDeferrable());
+  assertEquals(true,new ConstraintsConfig().setDeferrable("TRUE").isDeferrable());
+  assertEquals(true,new ConstraintsConfig().setDeferrable("1").isDeferrable());
+  assertEquals(false,new ConstraintsConfig().setDeferrable("false").isDeferrable());
+  assertEquals(false,new ConstraintsConfig().setDeferrable("FALSE").isDeferrable());
+  assertEquals(false,new ConstraintsConfig().setDeferrable("0").isDeferrable());
+  assertNull(new ConstraintsConfig().setDeferrable("").isDeferrable());
+  assertNull(new ConstraintsConfig().setDeferrable("null").isDeferrable());
+  assertNull(new ConstraintsConfig().setDeferrable("NULL").isDeferrable());
+  assertNull(new ConstraintsConfig().setDeferrable((String)null).isDeferrable());
+}

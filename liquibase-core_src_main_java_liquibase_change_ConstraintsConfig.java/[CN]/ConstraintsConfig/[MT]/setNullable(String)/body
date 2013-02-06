@@ -1,0 +1,4 @@
+{
+  this.nullable=parseBoolean(nullable);
+  return this;
+}

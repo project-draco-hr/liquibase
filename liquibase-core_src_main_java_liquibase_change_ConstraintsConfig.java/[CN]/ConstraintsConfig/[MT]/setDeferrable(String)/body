@@ -1,0 +1,4 @@
+{
+  this.deferrable=parseBoolean(deferrable);
+  return this;
+}

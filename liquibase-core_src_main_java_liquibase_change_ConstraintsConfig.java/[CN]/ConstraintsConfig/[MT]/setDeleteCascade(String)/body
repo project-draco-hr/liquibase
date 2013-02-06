@@ -1,0 +1,4 @@
+{
+  this.deleteCascade=parseBoolean(deleteCascade);
+  return this;
+}

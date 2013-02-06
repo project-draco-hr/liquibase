@@ -1,0 +1,4 @@
+{
+  this.checkConstraint=checkConstraint;
+  return this;
+}

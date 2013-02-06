@@ -1,0 +1,3 @@
+{
+  new ConstraintsConfig().setDeferrable("bad val");
+}

@@ -1,0 +1,4 @@
+{
+  assertEquals(true,new ConstraintsConfig().setNullable(true).isNullable());
+  assertEquals(false,new ConstraintsConfig().setNullable(false).isNullable());
+}

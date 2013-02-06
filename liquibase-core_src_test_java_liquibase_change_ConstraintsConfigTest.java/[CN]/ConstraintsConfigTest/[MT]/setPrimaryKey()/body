@@ -1,0 +1,4 @@
+{
+  assertEquals(true,new ConstraintsConfig().setPrimaryKey(true).isPrimaryKey());
+  assertEquals(false,new ConstraintsConfig().setPrimaryKey(false).isPrimaryKey());
+}

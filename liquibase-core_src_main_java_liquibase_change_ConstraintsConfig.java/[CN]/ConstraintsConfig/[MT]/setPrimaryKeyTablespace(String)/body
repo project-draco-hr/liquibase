@@ -1,3 +1,4 @@
 {
   this.primaryKeyTablespace=primaryKeyTablespace;
+  return this;
 }

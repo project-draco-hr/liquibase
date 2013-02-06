@@ -1,3 +1,4 @@
 {
   this.foreignKeyName=foreignKeyName;
+  return this;
 }
