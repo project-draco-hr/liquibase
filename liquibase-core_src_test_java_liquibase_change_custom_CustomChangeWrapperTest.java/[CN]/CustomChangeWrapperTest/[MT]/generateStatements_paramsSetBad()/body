@@ -1,0 +1,7 @@
+{
+  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
+  changeWrapper.setClassLoader(getClass().getClassLoader());
+  changeWrapper.setClass(ExampleCustomSqlChange.class.getName());
+  changeWrapper.setParam("badParam","myName");
+  changeWrapper.generateStatements(mock(Database.class));
+}

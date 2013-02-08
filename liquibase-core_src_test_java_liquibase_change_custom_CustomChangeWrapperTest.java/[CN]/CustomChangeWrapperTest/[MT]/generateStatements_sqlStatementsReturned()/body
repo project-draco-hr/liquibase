@@ -1,0 +1,7 @@
+{
+  SqlStatement[] statements=new SqlStatement[0];
+  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
+  changeWrapper.customChange=mock(CustomSqlChange.class);
+  when(((CustomSqlChange)changeWrapper.customChange).generateStatements(any(Database.class))).thenReturn(statements);
+  assertSame(statements,changeWrapper.generateStatements(mock(Database.class)));
+}

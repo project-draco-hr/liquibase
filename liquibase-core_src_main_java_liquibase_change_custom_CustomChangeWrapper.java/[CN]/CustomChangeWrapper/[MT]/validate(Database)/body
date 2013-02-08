@@ -2,7 +2,7 @@
   try {
     return customChange.validate(database);
   }
- catch (  AbstractMethodError e) {
-    return new ValidationErrors();
+ catch (  Throwable e) {
+    return new ValidationErrors().addError("Exception thrown calling " + getClassName() + ".validate():"+ e.getMessage());
   }
 }

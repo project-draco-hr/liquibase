@@ -1,0 +1,10 @@
+{
+  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
+  changeWrapper.setClassLoader(getClass().getClassLoader());
+  changeWrapper.setClass(ExampleCustomSqlChange.class.getName());
+  changeWrapper.setParam("name","myName");
+  changeWrapper.setParam("address","myAddr");
+  changeWrapper.generateStatements(mock(Database.class));
+  assertEquals("myName",((ExampleCustomSqlChange)changeWrapper.customChange).name);
+  assertEquals("myAddr",((ExampleCustomSqlChange)changeWrapper.customChange).address);
+}

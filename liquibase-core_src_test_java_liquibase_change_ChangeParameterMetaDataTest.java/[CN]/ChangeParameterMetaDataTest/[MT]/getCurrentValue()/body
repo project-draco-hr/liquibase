@@ -2,9 +2,9 @@
   CreateTableChange change=new CreateTableChange();
   change.setTableName("newTable");
   change.setCatalogName("newCatalog");
-  ChangeParameterMetaData tableNameMetaData=new ChangeParameterMetaData("tableName","New Table",String.class,null,null);
-  ChangeParameterMetaData catalogNameMetaData=new ChangeParameterMetaData("catalogName","New Catalog",String.class,null,null);
-  ChangeParameterMetaData remarksMetaData=new ChangeParameterMetaData("remarks","Remarks",String.class,null,null);
+  ChangeParameterMetaData tableNameMetaData=new ChangeParameterMetaData("tableName","New Table",String.class,null,null,false);
+  ChangeParameterMetaData catalogNameMetaData=new ChangeParameterMetaData("catalogName","New Catalog",String.class,null,null,false);
+  ChangeParameterMetaData remarksMetaData=new ChangeParameterMetaData("remarks","Remarks",String.class,null,null,false);
   assertEquals("newTable",tableNameMetaData.getCurrentValue(change));
   assertEquals("newCatalog",catalogNameMetaData.getCurrentValue(change));
   assertNull(remarksMetaData.getCurrentValue(change));

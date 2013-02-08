@@ -13,7 +13,7 @@
     }
   }
  catch (  CustomChangeException e) {
-    throw new RollbackImpossibleException(e);
+    throw new UnexpectedLiquibaseException(e);
   }
   if (statements == null) {
     statements=new SqlStatement[0];

@@ -21,4 +21,5 @@
   this.requiredForDatabase.remove("none");
   this.requiredForDatabase=Collections.unmodifiableSet(this.requiredForDatabase);
   this.mustEqualExisting=mustEqualExisting;
+  this.nestedProperty=nestedProperty;
 }

@@ -10,7 +10,7 @@
       Method writeMethod=property.getWriteMethod();
       if (readMethod != null && writeMethod != null) {
         DatabaseChangeProperty annotation=readMethod.getAnnotation(DatabaseChangeProperty.class);
-        if (annotation == null || annotation.includeInMetaData()) {
+        if (annotation == null || annotation.isChangeProperty()) {
           ChangeParameterMetaData param=createChangeParameterMetadata(property.getDisplayName());
           params.put(param.getParameterName(),param);
         }

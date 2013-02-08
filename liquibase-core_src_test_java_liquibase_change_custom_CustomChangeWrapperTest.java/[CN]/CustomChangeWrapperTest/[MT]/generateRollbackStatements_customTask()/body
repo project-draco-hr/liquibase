@@ -1,0 +1,6 @@
+{
+  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
+  changeWrapper.customChange=mock(CustomTaskChange.class,withSettings().extraInterfaces(CustomTaskRollback.class));
+  Assert.assertEquals(0,changeWrapper.generateRollbackStatements(mock(Database.class)).length);
+  verify(((CustomTaskRollback)changeWrapper.customChange)).rollback(any(Database.class));
+}

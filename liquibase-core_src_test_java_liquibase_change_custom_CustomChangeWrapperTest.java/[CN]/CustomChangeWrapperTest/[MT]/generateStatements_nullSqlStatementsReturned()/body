@@ -1,0 +1,6 @@
+{
+  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
+  changeWrapper.customChange=mock(CustomSqlChange.class);
+  when(((CustomSqlChange)changeWrapper.customChange).generateStatements(any(Database.class))).thenReturn(null);
+  Assert.assertEquals(0,changeWrapper.generateStatements(mock(Database.class)).length);
+}

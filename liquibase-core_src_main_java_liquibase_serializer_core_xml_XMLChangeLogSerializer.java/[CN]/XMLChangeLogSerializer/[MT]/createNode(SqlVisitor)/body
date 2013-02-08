@@ -10,7 +10,7 @@
     for (    Field field : allFields) {
       field.setAccessible(true);
       DatabaseChangeProperty changePropertyAnnotation=field.getAnnotation(DatabaseChangeProperty.class);
-      if (changePropertyAnnotation != null && !changePropertyAnnotation.includeInSerialization()) {
+      if (changePropertyAnnotation != null && !changePropertyAnnotation.isChangeProperty()) {
         continue;
       }
       if (field.getName().equals("serialVersionUID")) {

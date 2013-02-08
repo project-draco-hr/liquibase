@@ -4,7 +4,7 @@
   for (  String param : change.getParams()) {
     Element paramElement=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),"param");
     paramElement.setAttribute("name",param);
-    paramElement.setAttribute("value",change.getParamValues().get(param));
+    paramElement.setAttribute("value",change.getParamValue(param));
     customElement.appendChild(paramElement);
   }
   return customElement;

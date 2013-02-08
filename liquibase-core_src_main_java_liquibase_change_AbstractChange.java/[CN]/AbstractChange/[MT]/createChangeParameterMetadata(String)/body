@@ -15,12 +15,14 @@
   DatabaseChangeProperty changePropertyAnnotation=property.getReadMethod().getAnnotation(DatabaseChangeProperty.class);
   String[] requiredForDatabase;
   String mustEqualExisting=null;
+  boolean nestedProperty=false;
   if (changePropertyAnnotation == null) {
     requiredForDatabase=new String[]{"none"};
   }
  else {
     requiredForDatabase=changePropertyAnnotation.requiredForDatabase();
     mustEqualExisting=changePropertyAnnotation.mustEqualExisting();
+    nestedProperty=changePropertyAnnotation.isNestedProperty();
   }
-  return new ChangeParameterMetaData(parameterName,displayName,type,requiredForDatabase,mustEqualExisting);
+  return new ChangeParameterMetaData(parameterName,displayName,type,requiredForDatabase,mustEqualExisting,nestedProperty);
 }

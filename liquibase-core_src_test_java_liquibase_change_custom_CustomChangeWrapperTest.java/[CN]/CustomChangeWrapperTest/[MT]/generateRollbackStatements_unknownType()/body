@@ -1,0 +1,5 @@
+{
+  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
+  changeWrapper.customChange=mock(CustomChange.class);
+  changeWrapper.generateRollbackStatements(mock(Database.class));
+}

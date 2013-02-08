@@ -1,0 +1,6 @@
+{
+  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
+  changeWrapper.customChange=mock(CustomChange.class);
+  when(changeWrapper.customChange.getConfirmationMessage()).thenReturn("mock message");
+  assertEquals("mock message",changeWrapper.getConfirmationMessage());
+}
