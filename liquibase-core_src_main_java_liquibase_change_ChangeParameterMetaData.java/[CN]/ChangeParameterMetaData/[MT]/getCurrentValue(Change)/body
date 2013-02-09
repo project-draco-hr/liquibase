@@ -2,7 +2,11 @@
   try {
     for (    PropertyDescriptor descriptor : Introspector.getBeanInfo(change.getClass()).getPropertyDescriptors()) {
       if (descriptor.getDisplayName().equals(this.parameterName)) {
-        return descriptor.getReadMethod().invoke(change);
+        Method readMethod=descriptor.getReadMethod();
+        if (readMethod == null) {
+          readMethod=change.getClass().getMethod("is" + StringUtils.upperCaseFirst(descriptor.getName()));
+        }
+        return readMethod.invoke(change);
       }
     }
     throw new RuntimeException("Could not find readMethod for " + this.parameterName);

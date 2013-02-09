@@ -1,0 +1,3 @@
+{
+  return object.getSerializedObjectName() + ":" + serializeObject(object,1);
+}

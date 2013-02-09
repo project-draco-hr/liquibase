@@ -1,0 +1,4 @@
+{
+  assertEquals(LiquibaseSerializable.SerializationType.NAMED_FIELD,new ExampleAbstractChange().getSerializableFieldType("paramOne"));
+  assertEquals(LiquibaseSerializable.SerializationType.NESTED_OBJECT,new ExampleAbstractChange().getSerializableFieldType("paramTwo"));
+}

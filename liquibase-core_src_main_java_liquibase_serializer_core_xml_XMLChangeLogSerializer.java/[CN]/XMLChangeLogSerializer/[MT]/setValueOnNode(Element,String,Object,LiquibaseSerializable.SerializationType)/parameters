@@ -1,0 +1,4 @@
+Element node
+String objectName
+Object value
+LiquibaseSerializable.SerializationType serializationType

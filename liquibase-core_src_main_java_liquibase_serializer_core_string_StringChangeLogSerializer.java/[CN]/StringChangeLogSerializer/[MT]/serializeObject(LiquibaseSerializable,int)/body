@@ -1,0 +1,39 @@
+{
+  try {
+    StringBuffer buffer=new StringBuffer();
+    buffer.append("[");
+    SortedSet<String> values=new TreeSet<String>();
+    for (    String field : objectToSerialize.getSerializableFields()) {
+      Object value=objectToSerialize.getSerializableFieldValue(field);
+      if (value instanceof LiquibaseSerializable) {
+        values.add(indent(indent) + serializeObject((LiquibaseSerializable)value,indent + 1));
+      }
+ else {
+        if (value != null) {
+          if (value instanceof Map) {
+            values.add(indent(indent) + field + "="+ serializeObject((Map)value,indent + 1));
+          }
+ else           if (value instanceof Collection) {
+            values.add(indent(indent) + field + "="+ serializeObject((Collection)value,indent + 1));
+          }
+ else           if (value instanceof Object[]) {
+            values.add(indent(indent) + field + "="+ serializeObject((Object[])value,indent + 1));
+          }
+ else {
+            values.add(indent(indent) + field + "=\""+ value.toString()+ "\"");
+          }
+        }
+      }
+    }
+    if (values.size() > 0) {
+      buffer.append("\n");
+      buffer.append(StringUtils.join(values,"\n"));
+      buffer.append("\n");
+    }
+    buffer.append(indent(indent - 1)).append("]");
+    return buffer.toString().replace("\r\n","\n").replace("\r","\n");
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

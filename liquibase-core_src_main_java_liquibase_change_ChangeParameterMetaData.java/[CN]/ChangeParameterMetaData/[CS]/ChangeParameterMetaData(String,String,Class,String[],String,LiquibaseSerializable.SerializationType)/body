@@ -1,0 +1,25 @@
+{
+  if (parameterName == null) {
+    throw new UnexpectedLiquibaseException("Unexpected null parameterName");
+  }
+  if (parameterName.contains(" ")) {
+    throw new UnexpectedLiquibaseException("Unexpected space in parameterName");
+  }
+  if (displayName == null) {
+    throw new UnexpectedLiquibaseException("Unexpected null displayName");
+  }
+  if (dataType == null) {
+    throw new UnexpectedLiquibaseException("Unexpected null dataType");
+  }
+  this.parameterName=parameterName;
+  this.displayName=displayName;
+  this.dataType=StringUtils.lowerCaseFirst(dataType.getSimpleName());
+  if (requiredForDatabase == null) {
+    requiredForDatabase=new String[0];
+  }
+  this.requiredForDatabase=new HashSet<String>(Arrays.asList(requiredForDatabase));
+  this.requiredForDatabase.remove("none");
+  this.requiredForDatabase=Collections.unmodifiableSet(this.requiredForDatabase);
+  this.mustEqualExisting=mustEqualExisting;
+  this.serializationType=serializationType;
+}

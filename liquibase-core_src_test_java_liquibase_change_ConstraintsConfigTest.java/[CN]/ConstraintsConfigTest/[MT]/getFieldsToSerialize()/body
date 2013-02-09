@@ -1,0 +1,7 @@
+{
+  Set<String> fields=new ConstraintsConfig().getSerializableFields();
+  assertTrue(fields.contains("nullable"));
+  assertTrue(fields.contains("primaryKey"));
+  assertTrue(fields.contains("primaryKeyName"));
+  assertTrue(fields.contains("nullable"));
+}

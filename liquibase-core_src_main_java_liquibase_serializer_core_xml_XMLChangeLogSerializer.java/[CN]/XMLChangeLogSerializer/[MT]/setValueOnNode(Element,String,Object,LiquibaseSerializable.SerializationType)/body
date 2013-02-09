@@ -1,0 +1,30 @@
+{
+  if (value == null) {
+    return;
+  }
+  if (value instanceof Collection) {
+    for (    Object child : (Collection)value) {
+      setValueOnNode(node,objectName,child,serializationType);
+    }
+  }
+ else   if (value instanceof Map) {
+    for (    Map.Entry entry : (Set<Map.Entry>)((Map)value).entrySet()) {
+      Element mapNode=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),objectName);
+      setValueOnNode(mapNode,(String)entry.getKey(),entry.getValue(),serializationType);
+    }
+  }
+ else   if (value instanceof LiquibaseSerializable) {
+    node.appendChild(createNode((LiquibaseSerializable)value));
+  }
+ else {
+    if (serializationType.equals(LiquibaseSerializable.SerializationType.NESTED_OBJECT)) {
+      node.appendChild(createNode(objectName,value.toString()));
+    }
+ else     if (serializationType.equals(LiquibaseSerializable.SerializationType.DIRECT_VALUE)) {
+      node.setTextContent(value.toString());
+    }
+ else {
+      node.setAttribute(objectName,value.toString());
+    }
+  }
+}

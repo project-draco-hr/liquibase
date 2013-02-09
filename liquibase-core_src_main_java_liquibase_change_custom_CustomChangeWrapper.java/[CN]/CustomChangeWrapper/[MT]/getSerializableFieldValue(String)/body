@@ -1,0 +1,11 @@
+{
+  if (field.equals("class")) {
+    return getClassName();
+  }
+ else   if (field.equals("param")) {
+    return this.paramValues;
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unexpected CustomChangeWrapper field " + field);
+  }
+}

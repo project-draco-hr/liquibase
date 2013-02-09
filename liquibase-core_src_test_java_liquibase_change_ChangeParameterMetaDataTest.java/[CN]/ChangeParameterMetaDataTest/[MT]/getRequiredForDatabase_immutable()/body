@@ -1,3 +1,3 @@
 {
-  new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql"},null,false).getRequiredForDatabase().add("mssql");
+  new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).getRequiredForDatabase().add("mssql");
 }

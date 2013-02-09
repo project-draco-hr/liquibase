@@ -12,17 +12,21 @@
     throw new UnexpectedLiquibaseException("Could not find property " + parameterName);
   }
   Class type=property.getPropertyType();
-  DatabaseChangeProperty changePropertyAnnotation=property.getReadMethod().getAnnotation(DatabaseChangeProperty.class);
+  Method readMethod=property.getReadMethod();
+  if (readMethod == null) {
+    readMethod=getClass().getMethod("is" + StringUtils.upperCaseFirst(property.getName()));
+  }
+  DatabaseChangeProperty changePropertyAnnotation=readMethod.getAnnotation(DatabaseChangeProperty.class);
   String[] requiredForDatabase;
   String mustEqualExisting=null;
-  boolean nestedProperty=false;
+  SerializationType serializationType=SerializationType.NAMED_FIELD;
   if (changePropertyAnnotation == null) {
     requiredForDatabase=new String[]{"none"};
   }
  else {
     requiredForDatabase=changePropertyAnnotation.requiredForDatabase();
     mustEqualExisting=changePropertyAnnotation.mustEqualExisting();
-    nestedProperty=changePropertyAnnotation.isNestedProperty();
+    serializationType=changePropertyAnnotation.serializationType();
   }
-  return new ChangeParameterMetaData(parameterName,displayName,type,requiredForDatabase,mustEqualExisting,nestedProperty);
+  return new ChangeParameterMetaData(parameterName,displayName,type,requiredForDatabase,mustEqualExisting,serializationType);
 }

@@ -4,7 +4,7 @@
     return new SqlStatement[0];
   }
   String processedSQL=normalizeLineEndings(sql);
-  for (  String statement : StringUtils.processMutliLineSQL(processedSQL,isStrippingComments(),isSplittingStatements(),getEndDelimiter())) {
+  for (  String statement : StringUtils.processMutliLineSQL(processedSQL,isStripComments(),isSplitStatements(),getEndDelimiter())) {
     if (database instanceof MSSQLDatabase) {
       statement=statement.replaceAll("\n","\r\n");
     }

@@ -8,6 +8,13 @@
     for (    PropertyDescriptor property : Introspector.getBeanInfo(this.getClass()).getPropertyDescriptors()) {
       Method readMethod=property.getReadMethod();
       Method writeMethod=property.getWriteMethod();
+      if (readMethod == null) {
+        try {
+          readMethod=this.getClass().getMethod("is" + StringUtils.upperCaseFirst(property.getName()));
+        }
+ catch (        Exception ignore) {
+        }
+      }
       if (readMethod != null && writeMethod != null) {
         DatabaseChangeProperty annotation=readMethod.getAnnotation(DatabaseChangeProperty.class);
         if (annotation == null || annotation.isChangeProperty()) {

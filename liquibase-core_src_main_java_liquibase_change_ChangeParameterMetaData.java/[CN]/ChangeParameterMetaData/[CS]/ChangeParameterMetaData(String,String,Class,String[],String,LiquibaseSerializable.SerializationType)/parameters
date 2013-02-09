@@ -1,0 +1,6 @@
+String parameterName
+String displayName
+Class dataType
+String[] requiredForDatabase
+String mustEqualExisting
+LiquibaseSerializable.SerializationType serializationType

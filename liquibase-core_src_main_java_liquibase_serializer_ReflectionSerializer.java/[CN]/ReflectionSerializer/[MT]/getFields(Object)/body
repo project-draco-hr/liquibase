@@ -1,0 +1,19 @@
+{
+  Set<String> returnSet=new HashSet<String>();
+  Set<Field> allFields=new HashSet<Field>();
+  Class classToExtractFieldsFrom=object.getClass();
+  while (!classToExtractFieldsFrom.equals(Object.class)) {
+    allFields.addAll(Arrays.asList(classToExtractFieldsFrom.getDeclaredFields()));
+    classToExtractFieldsFrom=classToExtractFieldsFrom.getSuperclass();
+  }
+  for (  Field field : allFields) {
+    if (field.getName().equals("serialVersionUID")) {
+      continue;
+    }
+    if (field.isSynthetic() || field.getName().equals("$VRc")) {
+      continue;
+    }
+    returnSet.add(field.getName());
+  }
+  return returnSet;
+}

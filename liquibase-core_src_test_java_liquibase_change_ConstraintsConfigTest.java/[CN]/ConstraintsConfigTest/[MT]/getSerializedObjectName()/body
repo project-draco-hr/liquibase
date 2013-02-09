@@ -1,0 +1,3 @@
+{
+  assertEquals("constraints",new ConstraintsConfig().getSerializedObjectName());
+}

@@ -4,8 +4,8 @@
   }
   String returnString="[\n";
   for (  Object object : collection) {
-    if (object instanceof ColumnConfig) {
-      returnString+=indent(indent) + serializeColumnConfig((ColumnConfig)object,indent + 1) + ",\n";
+    if (object instanceof LiquibaseSerializable) {
+      returnString+=indent(indent) + serializeObject((LiquibaseSerializable)object,indent + 1) + ",\n";
     }
  else {
       returnString+=indent(indent) + object.toString() + ",\n";

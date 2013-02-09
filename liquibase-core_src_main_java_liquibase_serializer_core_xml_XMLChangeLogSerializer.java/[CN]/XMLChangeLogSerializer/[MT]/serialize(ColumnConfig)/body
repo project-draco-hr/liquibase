@@ -1,5 +1,0 @@
-{
-  StringBuffer buffer=new StringBuffer();
-  nodeToStringBuffer(createNode(columnConfig),buffer);
-  return buffer.toString();
-}

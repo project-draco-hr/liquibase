@@ -1,9 +1,9 @@
 {
   AbstractSQLChange change=new ExampleAbstractSQLChange();
   change.setStripComments(true);
-  assertTrue(change.isStrippingComments());
+  assertTrue(change.isStripComments());
   change.setStripComments(false);
-  assertFalse(change.isStrippingComments());
+  assertFalse(change.isStripComments());
   change.setStripComments(null);
-  assertFalse(change.isStrippingComments());
+  assertFalse(change.isStripComments());
 }

@@ -1,6 +1,0 @@
-String parameterName
-String displayName
-Class dataType
-String[] requiredForDatabase
-String mustEqualExisting
-boolean nestedProperty

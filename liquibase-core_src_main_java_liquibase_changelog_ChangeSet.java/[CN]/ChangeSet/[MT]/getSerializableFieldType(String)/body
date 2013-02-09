@@ -1,0 +1,8 @@
+{
+  if (field.equals("comment") || field.equals("changes") || field.equals("rollback")) {
+    return SerializationType.NESTED_OBJECT;
+  }
+ else {
+    return SerializationType.NAMED_FIELD;
+  }
+}

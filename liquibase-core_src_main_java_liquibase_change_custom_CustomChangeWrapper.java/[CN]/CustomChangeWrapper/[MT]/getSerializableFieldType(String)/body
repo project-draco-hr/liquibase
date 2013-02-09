@@ -1,0 +1,11 @@
+{
+  if (field.equals("class")) {
+    return SerializationType.NAMED_FIELD;
+  }
+ else   if (field.equals("param")) {
+    return SerializationType.NESTED_OBJECT;
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unexpected CustomChangeWrapper field " + field);
+  }
+}

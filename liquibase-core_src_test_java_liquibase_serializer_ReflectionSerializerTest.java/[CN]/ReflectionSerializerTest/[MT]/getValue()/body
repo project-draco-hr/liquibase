@@ -1,0 +1,7 @@
+{
+  PrependSqlVisitor visitor=new PrependSqlVisitor();
+  visitor.setValue("ValHere");
+  visitor.setApplyToRollback(true);
+  assertEquals("ValHere",ReflectionSerializer.getInstance().getValue(visitor,"value"));
+  assertEquals(true,ReflectionSerializer.getInstance().getValue(visitor,"applyToRollback"));
+}

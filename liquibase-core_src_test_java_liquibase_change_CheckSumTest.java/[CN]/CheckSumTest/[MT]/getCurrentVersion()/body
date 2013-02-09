@@ -1,3 +1,3 @@
 {
-  assertEquals(4,CheckSum.getCurrentVersion());
+  assertEquals(5,CheckSum.getCurrentVersion());
 }

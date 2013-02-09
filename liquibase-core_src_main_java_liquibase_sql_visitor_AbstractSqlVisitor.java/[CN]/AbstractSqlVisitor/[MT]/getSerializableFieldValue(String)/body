@@ -1,0 +1,3 @@
+{
+  return ReflectionSerializer.getInstance().getValue(this,field);
+}

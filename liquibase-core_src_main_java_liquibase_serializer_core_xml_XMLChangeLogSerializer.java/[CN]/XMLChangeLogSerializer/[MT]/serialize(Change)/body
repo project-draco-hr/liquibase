@@ -1,5 +1,0 @@
-{
-  StringBuffer buffer=new StringBuffer();
-  nodeToStringBuffer(createNode(change),buffer);
-  return buffer.toString();
-}

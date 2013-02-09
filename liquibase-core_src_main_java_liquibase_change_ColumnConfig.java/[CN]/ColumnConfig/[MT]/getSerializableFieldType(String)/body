@@ -1,0 +1,3 @@
+{
+  return SerializationType.NAMED_FIELD;
+}
