@@ -25,11 +25,8 @@
         sql.append(DataTypeFactory.getInstance().getFalseBooleanValue(database));
       }
     }
- else     if (newValue instanceof SequenceFunction) {
-      sql.append(database.generateSequenceNextValueFunction(newValue.toString()));
-    }
- else     if (newValue instanceof DatabaseFunction && DatabaseFunction.CURRENT_DATE_TIME_PLACE_HOLDER.equalsIgnoreCase(newValue.toString())) {
-      sql.append(database.getCurrentDateTimeFunction());
+ else     if (newValue instanceof DatabaseFunction) {
+      sql.append(database.generateDatabaseFunctionValue((DatabaseFunction)newValue));
     }
  else {
       sql.append(newValue);
