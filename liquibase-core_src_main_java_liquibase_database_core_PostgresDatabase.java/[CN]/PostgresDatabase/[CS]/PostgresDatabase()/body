@@ -1,4 +1,5 @@
 {
+  super.setCurrentDateTimeFunction("NOW()");
   reservedWords.addAll(Arrays.asList("USER","LIKE","GROUP","DATE","ALL"));
   super.sequenceNextValueFunction="nextval('%s')";
   super.sequenceCurrentValueFunction="currval('%s')";

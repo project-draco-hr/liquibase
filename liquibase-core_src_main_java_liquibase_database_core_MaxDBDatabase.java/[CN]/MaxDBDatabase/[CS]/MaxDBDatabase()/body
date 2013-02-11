@@ -1,5 +1,6 @@
 {
-  super();
+  super.setCurrentDateTimeFunction("TIMESTAMP");
+  super.sequenceNextValueFunction="%s.NEXTVAL";
   systemTablesAndViews.add("---");
   systemTablesAndViews.add("ACTIVECONFIGURATION");
   systemTablesAndViews.add("BACKUPTHREADS");

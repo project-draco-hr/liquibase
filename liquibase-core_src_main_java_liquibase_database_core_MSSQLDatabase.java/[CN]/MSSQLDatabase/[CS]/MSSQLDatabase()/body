@@ -1,4 +1,5 @@
 {
+  super.setCurrentDateTimeFunction("GETDATE()");
   setDefaultSchemaName("dbo");
   systemTablesAndViews.add("syscolumns");
   systemTablesAndViews.add("syscomments");

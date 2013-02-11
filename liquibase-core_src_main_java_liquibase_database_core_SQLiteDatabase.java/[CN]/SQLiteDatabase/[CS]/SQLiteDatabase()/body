@@ -1,4 +1,3 @@
 {
   super.setCurrentDateTimeFunction("CURRENT_TIMESTAMP");
-  super.sequenceNextValueFunction="NEXT VALUE FOR %s";
 }

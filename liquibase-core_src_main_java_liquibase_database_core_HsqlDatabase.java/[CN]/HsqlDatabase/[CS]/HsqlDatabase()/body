@@ -1,6 +1,6 @@
 {
-  super();
-  super.defaultAutoIncrementStartWith=BigInteger.ZERO;
+  super.setCurrentDateTimeFunction("NOW");
   super.sequenceNextValueFunction="NEXT VALUE FOR %s";
+  super.defaultAutoIncrementStartWith=BigInteger.ZERO;
   super.sequenceCurrentValueFunction="CURRVAL('%s')";
 }

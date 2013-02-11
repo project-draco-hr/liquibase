@@ -1,6 +1,0 @@
-{
-  if (currentDateTimeFunction != null) {
-    return currentDateTimeFunction;
-  }
-  return "GETDATE()";
-}

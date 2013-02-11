@@ -1,4 +1,0 @@
-{
-  this.dateFunctions.add(new DatabaseFunction(getCurrentDateTimeFunction()));
-  this.sequenceNextValueFunction="NEXTVAL('%s')";
-}
