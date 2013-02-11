@@ -1,4 +1,4 @@
 {
   assertNull(new ColumnConfig().setValueSequenceNext(null).getValueSequenceNext());
-  assertEquals("my_seq",new ColumnConfig().setValueSequenceNext(new SequenceFunction("my_seq")).getValueSequenceNext().toString());
+  assertEquals("my_seq",new ColumnConfig().setValueSequenceNext(new SequenceNextValueFunction("my_seq")).getValueSequenceNext().toString());
 }
