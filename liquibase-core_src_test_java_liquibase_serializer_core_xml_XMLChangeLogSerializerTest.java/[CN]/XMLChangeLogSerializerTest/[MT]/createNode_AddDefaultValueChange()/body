@@ -7,6 +7,7 @@
   change.setDefaultValueNumeric("42");
   change.setDefaultValueBoolean(true);
   change.setDefaultValueDate("2007-01-02");
+  change.setDefaultValueSequenceNext(new SequenceNextValueFunction("sampleSeq"));
   Element node=new XMLChangeLogSerializer(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()).createNode(change);
   assertEquals("addDefaultValue",node.getTagName());
   assertEquals("SCHEMA_NAME",node.getAttribute("schemaName"));
@@ -16,4 +17,5 @@
   assertEquals("42",node.getAttribute("defaultValueNumeric"));
   assertEquals("true",node.getAttribute("defaultValueBoolean"));
   assertEquals("2007-01-02",node.getAttribute("defaultValueDate"));
+  assertEquals("sampleSeq",node.getAttribute("defaultValueSequenceNext"));
 }

@@ -23,5 +23,8 @@
  else   if (getValueSequenceNext() != null) {
     return getValueSequenceNext();
   }
+ else   if (getValueSequenceCurrent() != null) {
+    return getValueSequenceCurrent();
+  }
   return null;
 }

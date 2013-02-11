@@ -14,5 +14,8 @@
  else   if (getDefaultValueComputed() != null) {
     return getDefaultValueComputed();
   }
+ else   if (getDefaultValueSequenceNext() != null) {
+    return getDefaultValueSequenceNext();
+  }
   return null;
 }

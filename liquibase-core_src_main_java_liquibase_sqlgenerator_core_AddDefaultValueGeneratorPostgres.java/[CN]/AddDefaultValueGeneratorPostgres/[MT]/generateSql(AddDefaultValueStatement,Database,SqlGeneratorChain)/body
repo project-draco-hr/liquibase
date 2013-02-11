@@ -1,9 +1,9 @@
 {
-  if (!(statement.getDefaultValue() instanceof SequenceFunction)) {
+  if (!(statement.getDefaultValue() instanceof SequenceNextValueFunction)) {
     return super.generateSql(statement,database,sqlGeneratorChain);
   }
   List<Sql> commands=new ArrayList<Sql>(Arrays.asList(super.generateSql(statement,database,sqlGeneratorChain)));
-  SequenceFunction sequenceFunction=(SequenceFunction)statement.getDefaultValue();
+  SequenceNextValueFunction sequenceFunction=(SequenceNextValueFunction)statement.getDefaultValue();
   Sql alterSequenceOwner=new UnparsedSql("ALTER SEQUENCE " + database.escapeSequenceName(statement.getCatalogName(),statement.getSchemaName(),sequenceFunction.getValue()) + " OWNED BY "+ database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())+ "."+ database.escapeObjectName(statement.getColumnName(),Column.class),new Column().setRelation(new Table().setName(statement.getTableName()).setSchema(new Schema(statement.getCatalogName(),statement.getSchemaName()))).setName(statement.getColumnName()),new Sequence().setName(sequenceFunction.getValue()));
   commands.add(alterSequenceOwner);
   return commands.toArray(new Sql[commands.size()]);

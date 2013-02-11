@@ -45,9 +45,6 @@
  else     if (field.getType().equals(DatabaseFunction.class)) {
       field.set(object,createDatabaseFunction());
     }
- else     if (field.getType().equals(SequenceFunction.class)) {
-      field.set(object,createSequenceFunction());
-    }
  else     if (field.getType().equals(ConstraintsConfig.class)) {
       field.set(object,createConstraintsConfig());
     }

@@ -1,0 +1,4 @@
+{
+  this.valueSequenceCurrent=valueSequenceCurrent;
+  return this;
+}
