@@ -1,0 +1,8 @@
+{
+  final String tableRemarks=table.getRemarks();
+  if (tableRemarks != null && tableRemarks.length() > 0) {
+    final List<List<String>> cells=new ArrayList<List<String>>();
+    cells.add(Arrays.asList(tableRemarks));
+    writeTable("Table Description",cells,fileWriter);
+  }
+}
