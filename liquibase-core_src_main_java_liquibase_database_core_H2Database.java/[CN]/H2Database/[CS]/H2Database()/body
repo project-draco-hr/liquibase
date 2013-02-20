@@ -1,4 +1,5 @@
 {
+  super.unquotedObjectsAreUppercased=true;
   super.setCurrentDateTimeFunction("NOW()");
   super.sequenceNextValueFunction="nextval('%s')";
   this.dateFunctions.add(new DatabaseFunction("CURRENT_TIMESTAMP()"));
