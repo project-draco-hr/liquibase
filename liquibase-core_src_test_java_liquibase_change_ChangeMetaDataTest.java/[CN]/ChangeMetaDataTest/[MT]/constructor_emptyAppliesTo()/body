@@ -1,4 +1,4 @@
 {
-  ChangeMetaData metaData=new ChangeMetaData("x","y",5,new String[0],null);
+  ChangeMetaData metaData=new ChangeMetaData("x","y",5,new String[0],null,null);
   assertNull("Empty appliesTo should convert to a null appliesTo",metaData.getAppliesTo());
 }

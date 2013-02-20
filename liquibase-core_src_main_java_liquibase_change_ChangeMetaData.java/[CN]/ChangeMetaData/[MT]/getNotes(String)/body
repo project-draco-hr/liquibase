@@ -1,0 +1,3 @@
+{
+  return databaseNotes.get(database);
+}

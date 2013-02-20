@@ -1,0 +1,37 @@
+{
+  if (exampleValue != null) {
+    return exampleValue;
+  }
+  Map standardExamples=new HashMap();
+  standardExamples.put("tableName","person");
+  standardExamples.put("schemaName","public");
+  standardExamples.put("catalogName","cat");
+  standardExamples.put("columnName","id");
+  if (standardExamples.containsKey(parameterName)) {
+    return standardExamples.get(parameterName);
+  }
+  if (dataType.equals("string")) {
+    return "A String";
+  }
+ else   if (dataType.equals("integer")) {
+    return 3;
+  }
+ else   if (dataType.equals("boolean")) {
+    return true;
+  }
+ else   if (dataType.equals("bigInteger")) {
+    return new BigInteger("371717");
+  }
+ else   if (dataType.equals("list")) {
+    return null;
+  }
+ else   if (dataType.equals("sequenceNextValueFunction")) {
+    return new SequenceNextValueFunction("seq_name");
+  }
+ else   if (dataType.equals("databaseFunction")) {
+    return new DatabaseFunction("now");
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown dataType " + dataType + " for "+ getParameterName());
+  }
+}

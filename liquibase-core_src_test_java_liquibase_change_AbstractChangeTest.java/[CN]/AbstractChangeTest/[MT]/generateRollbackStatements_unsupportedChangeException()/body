@@ -4,7 +4,7 @@
       try {
         Change change1=mock(Change.class);
         when(change1.supports(any(Database.class))).thenReturn(true);
-        when(change1.getChangeMetaData()).thenReturn(new ChangeMetaData("testChange",null,1,null,null));
+        when(change1.getChangeMetaData()).thenReturn(new ChangeMetaData("testChange",null,1,null,null,null));
         when(change1.generateStatements(any(Database.class))).thenThrow(new UnsupportedChangeException("testing exception"));
         return new Change[]{change1};
       }

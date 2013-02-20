@@ -1,5 +1,7 @@
 String parameterName
 String displayName
+String description
+String exampleValue
 Class dataType
 String[] requiredForDatabase
 String mustEqualExisting

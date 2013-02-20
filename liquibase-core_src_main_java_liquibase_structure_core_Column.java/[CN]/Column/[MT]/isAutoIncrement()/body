@@ -1,4 +1,3 @@
 {
-  Boolean isAutoIncrement=getAttribute("autoIncrement",Boolean.class);
-  return isAutoIncrement != null && isAutoIncrement;
+  return getAutoIncrementInformation() != null;
 }

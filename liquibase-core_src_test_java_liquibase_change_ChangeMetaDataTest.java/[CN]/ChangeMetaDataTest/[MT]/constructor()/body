@@ -1,12 +1,18 @@
 {
   HashMap<String,ChangeParameterMetaData> params=new HashMap<String,ChangeParameterMetaData>();
   params.put("a",mock(ChangeParameterMetaData.class));
+  HashMap<String,String> notes=new HashMap<String,String>();
+  notes.put("db1","note1");
+  notes.put("db2","note2");
   String[] appliesTo=new String[]{"table","column"};
-  ChangeMetaData metaData=new ChangeMetaData("x","y",10,appliesTo,params);
+  ChangeMetaData metaData=new ChangeMetaData("x","y",10,appliesTo,notes,params);
   assertEquals("x",metaData.getName());
   assertEquals("y",metaData.getDescription());
   assertEquals(10,metaData.getPriority());
   assertEquals(2,metaData.getAppliesTo().size());
   assertEquals(1,metaData.getParameters().size());
   assertEquals("a",metaData.getParameters().keySet().iterator().next());
+  assertEquals("note1",metaData.getNotes("db1"));
+  assertEquals("note2",metaData.getNotes("db2"));
+  assertNull(metaData.getNotes("db3"));
 }

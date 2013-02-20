@@ -13,6 +13,8 @@
   }
   this.parameterName=parameterName;
   this.displayName=displayName;
+  this.description=description;
+  this.exampleValue=exampleValue;
   this.dataType=StringUtils.lowerCaseFirst(dataType.getSimpleName());
   if (requiredForDatabase == null) {
     requiredForDatabase=new String[0];

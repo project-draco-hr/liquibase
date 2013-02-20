@@ -7,7 +7,7 @@
     write(Arrays.asList(changeSet),out);
   }
  else {
-    existingChangeLog=existingChangeLog.replaceFirst("</databaseChangeLog>",serialize(changeSet) + "\n</databaseChangeLog>");
+    existingChangeLog=existingChangeLog.replaceFirst("</databaseChangeLog>",serialize(changeSet,true) + "\n</databaseChangeLog>");
     StreamUtil.copy(new ByteArrayInputStream(existingChangeLog.getBytes()),out);
   }
   out.flush();
