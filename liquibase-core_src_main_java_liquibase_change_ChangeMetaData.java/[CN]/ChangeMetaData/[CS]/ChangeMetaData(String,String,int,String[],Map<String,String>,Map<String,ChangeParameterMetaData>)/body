@@ -13,5 +13,7 @@
   if (appliesTo != null && appliesTo.length > 0) {
     this.appliesTo=Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(appliesTo)));
   }
-  this.databaseNotes.putAll(databaseNotes);
+  if (databaseNotes != null) {
+    this.databaseNotes.putAll(databaseNotes);
+  }
 }
