@@ -1,9 +1,12 @@
 {
   SimpleDateFormat dateTimeFormat=this.dateTimeFormat;
-  if (dateAsString.indexOf('.') >= 0) {
+  if (dateAsString.contains(".") && dateAsString.contains(" ")) {
+    dateTimeFormat=this.dateTimeFormatWithSpaceAndDecimal;
+  }
+ else   if (dateAsString.contains(".")) {
     dateTimeFormat=this.dateTimeFormatWithDecimal;
   }
- else   if (dateAsString.indexOf(' ') >= 0) {
+ else   if (dateAsString.contains(" ")) {
     dateTimeFormat=this.dateTimeFormatWithSpace;
   }
   if (dateAsString.length() != dateFormat.toPattern().length() && dateAsString.length() != timeFormat.toPattern().length()) {
