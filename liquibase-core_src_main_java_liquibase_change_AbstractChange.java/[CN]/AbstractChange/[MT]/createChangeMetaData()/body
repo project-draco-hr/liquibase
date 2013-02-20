@@ -23,7 +23,11 @@
         }
       }
     }
-    return new ChangeMetaData(databaseChange.name(),databaseChange.description(),databaseChange.priority(),databaseChange.appliesTo(),params);
+    Map<String,String> notes=new HashMap<String,String>();
+    for (    DatabaseChangeNote note : databaseChange.databaseNotes()) {
+      notes.put(note.database(),note.notes());
+    }
+    return new ChangeMetaData(databaseChange.name(),databaseChange.description(),databaseChange.priority(),databaseChange.appliesTo(),notes,params);
   }
  catch (  Throwable e) {
     throw new UnexpectedLiquibaseException(e);

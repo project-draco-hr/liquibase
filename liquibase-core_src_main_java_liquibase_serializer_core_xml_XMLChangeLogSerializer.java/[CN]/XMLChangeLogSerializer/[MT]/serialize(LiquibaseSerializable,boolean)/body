@@ -1,0 +1,9 @@
+{
+  StringBuffer buffer=new StringBuffer();
+  int indent=-1;
+  if (pretty) {
+    indent=0;
+  }
+  nodeToStringBuffer(createNode(object),buffer,indent);
+  return buffer.toString();
+}

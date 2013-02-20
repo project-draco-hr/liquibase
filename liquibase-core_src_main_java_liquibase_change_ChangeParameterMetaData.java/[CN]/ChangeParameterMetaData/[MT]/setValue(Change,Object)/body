@@ -1,0 +1,29 @@
+{
+  if (value instanceof String && !dataType.equals("string")) {
+    try {
+      if (dataType.equals("bigInteger")) {
+        value=new BigInteger((String)value);
+      }
+ else {
+        throw new UnexpectedLiquibaseException("Unknown Data Type: " + dataType);
+      }
+    }
+ catch (    Throwable e) {
+      throw new UnexpectedLiquibaseException("Cannot convert string value '" + value + "' to "+ dataType+ ": "+ e.getMessage());
+    }
+  }
+  try {
+    for (    PropertyDescriptor descriptor : Introspector.getBeanInfo(change.getClass()).getPropertyDescriptors()) {
+      if (descriptor.getDisplayName().equals(this.parameterName)) {
+        Method writeMethod=descriptor.getWriteMethod();
+        if (writeMethod == null) {
+          throw new UnexpectedLiquibaseException("Could not find writeMethod for " + this.parameterName);
+        }
+        writeMethod.invoke(change,value);
+      }
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException("Error setting " + this.parameterName + " to "+ value,e);
+  }
+}

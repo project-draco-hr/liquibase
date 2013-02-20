@@ -19,6 +19,8 @@
   DatabaseChangeProperty changePropertyAnnotation=readMethod.getAnnotation(DatabaseChangeProperty.class);
   String[] requiredForDatabase;
   String mustEqualExisting=null;
+  String description=null;
+  String example=null;
   SerializationType serializationType=SerializationType.NAMED_FIELD;
   if (changePropertyAnnotation == null) {
     requiredForDatabase=new String[]{"none"};
@@ -27,6 +29,8 @@
     requiredForDatabase=changePropertyAnnotation.requiredForDatabase();
     mustEqualExisting=changePropertyAnnotation.mustEqualExisting();
     serializationType=changePropertyAnnotation.serializationType();
+    description=StringUtils.trimToNull(changePropertyAnnotation.description());
+    example=StringUtils.trimToNull(changePropertyAnnotation.exampleValue());
   }
-  return new ChangeParameterMetaData(parameterName,displayName,type,requiredForDatabase,mustEqualExisting,serializationType);
+  return new ChangeParameterMetaData(parameterName,displayName,description,example,type,requiredForDatabase,mustEqualExisting,serializationType);
 }

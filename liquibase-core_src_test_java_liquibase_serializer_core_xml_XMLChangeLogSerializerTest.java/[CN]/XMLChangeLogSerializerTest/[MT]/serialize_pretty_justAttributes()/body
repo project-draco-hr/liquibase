@@ -1,0 +1,8 @@
+{
+  AddAutoIncrementChange change=new AddAutoIncrementChange();
+  change.setCatalogName("a");
+  change.setSchemaName("b");
+  change.setTableName("c");
+  String out=new XMLChangeLogSerializer().serialize(change,true);
+  assertEquals("<addAutoIncrement catalogName=\"a\"\n" + "        schemaName=\"b\"\n" + "        tableName=\"c\"/>",out);
+}

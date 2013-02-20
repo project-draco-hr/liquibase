@@ -1,6 +1,6 @@
 {
   ExampleAbstractChange change=new ExampleAbstractChange();
-  String serializedChange=new StringChangeLogSerializer().serialize(change);
+  String serializedChange=new StringChangeLogSerializer().serialize(change,false);
   mockStatic(CheckSum.class);
   CheckSum checkSum=mock(CheckSum.class);
   when(CheckSum.compute(serializedChange)).thenReturn(checkSum);

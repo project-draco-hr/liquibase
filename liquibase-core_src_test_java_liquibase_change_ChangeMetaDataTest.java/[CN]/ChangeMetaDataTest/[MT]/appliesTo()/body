@@ -1,5 +1,5 @@
 {
-  ChangeMetaData metaData=new ChangeMetaData("x","y",5,new String[]{"table","column"},null);
+  ChangeMetaData metaData=new ChangeMetaData("x","y",5,new String[]{"table","column"},null,null);
   assertTrue(metaData.appliesTo(new Table()));
   assertTrue(metaData.appliesTo(new Column()));
   assertFalse(metaData.appliesTo(new View()));

@@ -1,14 +1,14 @@
 {
-  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase()));
-  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase(){
+  assertTrue(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{"mysql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{"mysql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase(){
   }
 ));
-  assertFalse(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MSSQLDatabase()));
-  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql","mssql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase()));
-  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql","mssql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MSSQLDatabase()));
-  assertFalse(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"mysql","mssql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new OracleDatabase()));
-  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"all"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new OracleDatabase()));
-  assertTrue(new ChangeParameterMetaData("x","y",Integer.class,new String[]{"all"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase()));
-  assertFalse(new ChangeParameterMetaData("x","y",Integer.class,new String[]{},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new OracleDatabase()));
-  assertFalse(new ChangeParameterMetaData("x","y",Integer.class,new String[]{},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase()));
+  assertFalse(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{"mysql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MSSQLDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{"mysql","mssql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{"mysql","mssql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MSSQLDatabase()));
+  assertFalse(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{"mysql","mssql"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new OracleDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{"all"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new OracleDatabase()));
+  assertTrue(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{"all"},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase()));
+  assertFalse(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new OracleDatabase()));
+  assertFalse(new ChangeParameterMetaData("x","y",null,null,Integer.class,new String[]{},null,LiquibaseSerializable.SerializationType.NAMED_FIELD).isRequiredFor(new MySQLDatabase()));
 }

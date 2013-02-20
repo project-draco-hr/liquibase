@@ -7,5 +7,5 @@
   wrapper.setParam("columnName","column_name");
   wrapper.setParam("newValue","new_value");
   wrapper.setParam("tableName","table_name");
-  assertEquals(expectedString,new StringChangeLogSerializer().serialize(wrapper));
+  assertEquals(expectedString,new StringChangeLogSerializer().serialize(wrapper,false));
 }
