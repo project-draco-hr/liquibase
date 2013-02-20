@@ -1,5 +1,8 @@
 {
-  if (url.startsWith("jdbc:derby")) {
+  if (url.startsWith("jdbc:derby://")) {
+    return "org.apache.derby.jdbc.ClientDriver";
+  }
+ else   if (url.startsWith("java:derby")) {
     return "org.apache.derby.jdbc.EmbeddedDriver";
   }
   return null;
