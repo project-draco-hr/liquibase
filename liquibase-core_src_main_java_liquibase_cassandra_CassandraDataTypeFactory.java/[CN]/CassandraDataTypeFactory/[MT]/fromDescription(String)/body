@@ -1,5 +1,0 @@
-{
-  System.out.println("from description: " + dataTypeDefinition);
-  LiquibaseDataType dataType=super.fromDescription(dataTypeDefinition);
-  return new CassandraDataType(dataType);
-}

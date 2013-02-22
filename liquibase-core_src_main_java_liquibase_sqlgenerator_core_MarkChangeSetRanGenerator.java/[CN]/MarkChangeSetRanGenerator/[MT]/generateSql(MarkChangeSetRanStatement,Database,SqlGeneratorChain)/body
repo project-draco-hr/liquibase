@@ -11,7 +11,6 @@
     }
  else {
       runStatement=new InsertStatement(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()).addColumnValue("ID",changeSet.getId()).addColumnValue("AUTHOR",changeSet.getAuthor()).addColumnValue("FILENAME",changeSet.getFilePath()).addColumnValue("DATEEXECUTED",new DatabaseFunction(dateValue)).addColumnValue("ORDEREXECUTED",database.getNextChangeSetSequenceValue()).addColumnValue("MD5SUM",changeSet.generateCheckSum().toString()).addColumnValue("DESCRIPTION",limitSize(changeSet.getDescription())).addColumnValue("COMMENTS",limitSize(StringUtils.trimToEmpty(changeSet.getComments()))).addColumnValue("EXECTYPE",statement.getExecType().value).addColumnValue("LIQUIBASE",LiquibaseUtil.getBuildVersion().replaceAll("SNAPSHOT","SNP"));
-      System.out.println("runStatement: " + runStatement);
       String tag=null;
       List<Change> changes=changeSet.getChanges();
       if (changes != null && changes.size() == 1) {

@@ -1,7 +1,0 @@
-{
-  String url=super.getConnection().getURL();
-  Class.forName("org.apache.cassandra.cql.jdbc.CassandraDriver");
-  Connection con=DriverManager.getConnection(url);
-  Statement statement=con.createStatement();
-  return statement;
-}
