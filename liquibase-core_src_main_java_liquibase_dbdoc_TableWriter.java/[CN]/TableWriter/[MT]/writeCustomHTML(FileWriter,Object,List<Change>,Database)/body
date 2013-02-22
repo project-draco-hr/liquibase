@@ -1,3 +1,5 @@
 {
-  writeColumns(fileWriter,((Table)object),database);
+  final Table table=(Table)object;
+  writeTableRemarks(fileWriter,table,database);
+  writeColumns(fileWriter,table,database);
 }
