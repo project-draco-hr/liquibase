@@ -12,7 +12,7 @@
       }
     }
     if (foundServices.size() == 0) {
-      throw new UnexpectedLiquibaseException("Cannot find LogService for " + database.getShortName());
+      throw new UnexpectedLiquibaseException("Cannot find LockService for " + database.getShortName());
     }
     try {
       LockService lockService=foundServices.iterator().next().getClass().newInstance();

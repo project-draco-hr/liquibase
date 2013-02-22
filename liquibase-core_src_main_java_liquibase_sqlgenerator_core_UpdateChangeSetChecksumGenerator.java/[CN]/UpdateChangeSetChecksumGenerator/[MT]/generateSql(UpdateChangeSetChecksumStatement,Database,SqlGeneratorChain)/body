@@ -1,6 +1,6 @@
 {
   ChangeSet changeSet=statement.getChangeSet();
   SqlStatement runStatement=null;
-  runStatement=new UpdateStatement(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()).addNewColumnValue("MD5SUM",changeSet.generateCheckSum().toString()).setWhereClause("ID=? AND AUTHOR=? AND FILENAME=?").addWhereParameters(changeSet.getId(),changeSet.getAuthor(),changeSet.getFilePath());
+  runStatement=new UpdateStatement(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()).addNewColumnValue("MD5SUM",changeSet.generateCheckSum().toString()).setWhereClause("ID=? AND AUTHOR=? AND FILENAME=?").addWhereParameters(database.escapeStringForDatabase(changeSet.toString()),changeSet.getAuthor(),changeSet.getFilePath());
   return SqlGeneratorFactory.getInstance().generateSql(runStatement,database);
 }

@@ -1,0 +1,4 @@
+{
+  System.out.println("from object: " + object + " => "+ super.fromObject(object,database));
+  return super.fromObject(object,database);
+}
