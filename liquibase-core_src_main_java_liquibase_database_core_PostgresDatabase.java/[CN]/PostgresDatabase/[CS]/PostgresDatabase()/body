@@ -4,4 +4,5 @@
   super.sequenceNextValueFunction="nextval('%s')";
   super.sequenceCurrentValueFunction="currval('%s')";
   super.unmodifiableDataTypes.addAll(Arrays.asList("bool","int4","int8","float4","float8","numeric","bigserial","serial","bytea","timestamptz"));
+  super.unquotedObjectsAreUppercased=false;
 }

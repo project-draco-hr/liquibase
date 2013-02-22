@@ -1,0 +1,6 @@
+{
+  this.foreignKeyName=foreignKeyName;
+  this.references=references;
+  this.referencedTableName=referencedTableName;
+  this.referencedColumnNames=referencedColumnNames;
+}

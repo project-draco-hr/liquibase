@@ -1,0 +1,13 @@
+{
+  try {
+    if (changeLog.getObjectQuotingStrategy() != strategy) {
+      throw new PreconditionFailedException("Quoting strategy Precondition failed: expected " + strategy + ", got "+ changeSet.getObjectQuotingStrategy(),changeLog,this);
+    }
+  }
+ catch (  PreconditionFailedException e) {
+    throw e;
+  }
+catch (  Exception e) {
+    throw new PreconditionErrorException(e,changeLog,this);
+  }
+}

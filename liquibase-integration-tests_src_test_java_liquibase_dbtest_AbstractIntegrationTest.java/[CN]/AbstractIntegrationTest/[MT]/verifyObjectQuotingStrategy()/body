@@ -1,0 +1,7 @@
+{
+  if (database == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase(objectQuotingStrategyChangeLog);
+  liquibase.update(contexts);
+}

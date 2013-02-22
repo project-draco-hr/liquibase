@@ -1,0 +1,9 @@
+String id
+String author
+boolean alwaysRun
+boolean runOnChange
+String filePath
+String contextList
+String dbmsList
+boolean runInTransaction
+ObjectQuotingStrategy quotingStrategy

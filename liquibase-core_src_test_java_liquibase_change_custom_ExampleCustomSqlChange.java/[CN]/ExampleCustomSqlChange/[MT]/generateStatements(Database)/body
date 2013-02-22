@@ -1,3 +1,3 @@
 {
-  return new SqlStatement[]{new RawSqlStatement("update " + tableName + " set "+ columnName+ " = "+ newValue)};
+  return new SqlStatement[]{new RawSqlStatement("update " + database.escapeObjectName(tableName,Table.class) + " set "+ database.escapeObjectName(columnName,Column.class)+ " = "+ newValue)};
 }
