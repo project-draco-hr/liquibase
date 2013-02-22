@@ -1,7 +1,8 @@
 {
   List<List<String>> cells=new ArrayList<List<String>>();
   for (  Column column : table.getColumns()) {
-    cells.add(Arrays.asList(TypeConverterFactory.getInstance().findTypeConverter(database).convertToDatabaseTypeString(column,database),"<A HREF=\"../columns/" + table.getName().toLowerCase() + "."+ column.getName().toLowerCase()+ ".html"+ "\">"+ column.getName()+ "</A>"));
+    String remarks=column.getRemarks();
+    cells.add(Arrays.asList(TypeConverterFactory.getInstance().findTypeConverter(database).convertToDatabaseTypeString(column,database),"<A HREF=\"../columns/" + table.getName().toLowerCase() + "."+ column.getName().toLowerCase()+ ".html"+ "\">"+ column.getName()+ "</A>",remarks != null ? remarks : ""));
   }
   writeTable("Current Columns",cells,fileWriter);
 }
