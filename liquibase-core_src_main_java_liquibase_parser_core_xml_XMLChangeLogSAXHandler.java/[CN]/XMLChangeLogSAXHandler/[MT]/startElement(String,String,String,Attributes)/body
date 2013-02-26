@@ -255,7 +255,7 @@
       }
       ColumnConfig lastColumn=null;
       if (change instanceof ChangeWithColumns) {
-        List<ColumnConfig> columns=((ChangeWithColumns)change).getColumns();
+        List<ColumnConfig> columns=((ChangeWithColumns)change).getColumn();
         if (columns != null && columns.size() > 0) {
           lastColumn=columns.get(columns.size() - 1);
         }

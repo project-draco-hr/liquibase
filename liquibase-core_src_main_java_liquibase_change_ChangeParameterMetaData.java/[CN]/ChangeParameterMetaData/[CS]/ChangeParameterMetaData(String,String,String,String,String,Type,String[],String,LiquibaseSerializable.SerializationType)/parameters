@@ -2,7 +2,8 @@ String parameterName
 String displayName
 String description
 String exampleValue
-Class dataType
+String since
+Type dataType
 String[] requiredForDatabase
 String mustEqualExisting
 LiquibaseSerializable.SerializationType serializationType

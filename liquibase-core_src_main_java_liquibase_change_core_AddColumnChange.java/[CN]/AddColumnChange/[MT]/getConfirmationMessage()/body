@@ -1,6 +1,6 @@
 {
-  List<String> names=new ArrayList<String>(columns.size());
-  for (  ColumnConfig col : columns) {
+  List<String> names=new ArrayList<String>(column.size());
+  for (  ColumnConfig col : column) {
     names.add(col.getName() + "(" + col.getType()+ ")");
   }
   return "Columns " + StringUtils.join(names,",") + " added to "+ tableName;

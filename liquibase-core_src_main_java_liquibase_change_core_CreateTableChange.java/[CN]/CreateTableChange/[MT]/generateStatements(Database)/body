@@ -1,6 +1,6 @@
 {
   CreateTableStatement statement=new CreateTableStatement(getCatalogName(),getSchemaName(),getTableName());
-  for (  ColumnConfig column : getColumns()) {
+  for (  ColumnConfig column : getColumn()) {
     ConstraintsConfig constraints=column.getConstraints();
     boolean isAutoIncrement=column.isAutoIncrement() != null && column.isAutoIncrement();
     Object defaultValue=column.getDefaultValueObject();
@@ -43,7 +43,7 @@
       statements.add(remarksStatement);
     }
   }
-  for (  ColumnConfig column : getColumns()) {
+  for (  ColumnConfig column : getColumn()) {
     String columnRemarks=StringUtils.trimToNull(column.getRemarks());
     if (columnRemarks != null) {
       SetColumnRemarksStatement remarksStatement=new SetColumnRemarksStatement(catalogName,schemaName,tableName,column.getName(),columnRemarks);

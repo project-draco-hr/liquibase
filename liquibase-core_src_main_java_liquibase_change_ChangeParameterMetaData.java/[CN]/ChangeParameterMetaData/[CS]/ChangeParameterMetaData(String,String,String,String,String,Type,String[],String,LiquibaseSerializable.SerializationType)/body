@@ -15,7 +15,12 @@
   this.displayName=displayName;
   this.description=description;
   this.exampleValue=exampleValue;
-  this.dataType=StringUtils.lowerCaseFirst(dataType.getSimpleName());
+  if (dataType instanceof Class) {
+    this.dataType=StringUtils.lowerCaseFirst(((Class)dataType).getSimpleName());
+  }
+ else   if (dataType instanceof ParameterizedType) {
+    this.dataType=StringUtils.lowerCaseFirst(((Class)((ParameterizedType)dataType).getRawType()).getSimpleName() + " of " + StringUtils.lowerCaseFirst(((Class)((ParameterizedType)dataType).getActualTypeArguments()[0]).getSimpleName()));
+  }
   if (requiredForDatabase == null) {
     requiredForDatabase=new String[0];
   }
@@ -24,4 +29,5 @@
   this.requiredForDatabase=Collections.unmodifiableSet(this.requiredForDatabase);
   this.mustEqualExisting=mustEqualExisting;
   this.serializationType=serializationType;
+  this.since=since;
 }

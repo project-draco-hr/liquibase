@@ -1,4 +1,7 @@
 {
+  if (generateStatementsVolatile(database)) {
+    return true;
+  }
   try {
     SqlStatement[] statements=generateStatements(database);
     if (statements == null) {

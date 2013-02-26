@@ -1,5 +1,5 @@
 {
-  ChangeParameterMetaData metaData=new ChangeParameterMetaData("x","y","desc","examp",Integer.class,new String[]{"mysql","mssql"},"column",LiquibaseSerializable.SerializationType.NESTED_OBJECT);
+  ChangeParameterMetaData metaData=new ChangeParameterMetaData("x","y","desc","examp","2.1",Integer.class,new String[]{"mysql","mssql"},"column",LiquibaseSerializable.SerializationType.NESTED_OBJECT);
   assertEquals("x",metaData.getParameterName());
   assertEquals("y",metaData.getDisplayName());
   assertEquals("integer",metaData.getDataType());
@@ -10,4 +10,5 @@
   assertEquals(LiquibaseSerializable.SerializationType.NESTED_OBJECT,metaData.getSerializationType());
   assertEquals("desc",metaData.getDescription());
   assertEquals("examp",metaData.getExampleValue());
+  assertEquals("2.1",metaData.getSince());
 }
