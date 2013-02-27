@@ -1,3 +1,7 @@
 {
-  return createGeneratorChain(statement,database).validate(statement,database);
+  SqlGeneratorChain generatorChain=createGeneratorChain(statement,database);
+  if (generatorChain == null) {
+    throw new UnexpectedLiquibaseException("Unable to create generator chain for " + statement.getClass().getName() + " on "+ database.getShortName());
+  }
+  return generatorChain.validate(statement,database);
 }

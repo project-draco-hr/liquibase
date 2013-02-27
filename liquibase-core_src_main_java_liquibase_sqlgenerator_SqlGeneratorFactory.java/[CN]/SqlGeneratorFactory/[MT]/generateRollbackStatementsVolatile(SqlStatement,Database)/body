@@ -1,6 +1,6 @@
 {
   for (  SqlGenerator generator : getGenerators(statement,database)) {
-    if (generator.generateRollbackStatementsVolatile(database)) {
+    if (generator.generateRollbackStatementsIsVolatile(database)) {
       return true;
     }
   }

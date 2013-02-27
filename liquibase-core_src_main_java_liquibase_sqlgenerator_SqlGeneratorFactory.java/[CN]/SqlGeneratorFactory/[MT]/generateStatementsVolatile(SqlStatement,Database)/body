@@ -1,6 +1,6 @@
 {
   for (  SqlGenerator generator : getGenerators(statement,database)) {
-    if (generator.generateStatementsVolatile(database)) {
+    if (generator.generateStatementsIsVolatile(database)) {
       return true;
     }
   }
