@@ -5,6 +5,7 @@
     if (stream == null) {
       throw new RuntimeException(getFile() + " could not be found");
     }
+    stream=new BufferedInputStream(stream);
     return CheckSum.compute(stream,true);
   }
  catch (  IOException e) {
