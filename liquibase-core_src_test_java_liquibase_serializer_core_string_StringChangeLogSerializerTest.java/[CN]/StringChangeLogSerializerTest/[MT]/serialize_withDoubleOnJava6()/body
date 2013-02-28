@@ -1,0 +1,7 @@
+{
+  InsertDataChange change=new InsertDataChange();
+  change.setTableName("NUMBER_TABLE");
+  change.addColumn(new ColumnConfig().setName("VALUE").setValueNumeric(new Double("0.001")));
+  String out=new StringChangeLogSerializer().serialize(change,true);
+  assertEquals("insert:[\n" + "    column=[\n" + "        [\n"+ "            name=\"VALUE\"\n"+ "            valueNumeric=\"0.001\"\n"+ "        ]\n"+ "    ]\n"+ "    tableName=\"NUMBER_TABLE\"\n"+ "]",out);
+}

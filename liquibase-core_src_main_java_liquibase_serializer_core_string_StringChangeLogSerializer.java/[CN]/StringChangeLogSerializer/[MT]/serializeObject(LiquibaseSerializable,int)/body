@@ -20,7 +20,13 @@
             values.add(indent(indent) + field + "="+ serializeObject((Object[])value,indent + 1));
           }
  else {
-            values.add(indent(indent) + field + "=\""+ value.toString()+ "\"");
+            String valueString=value.toString();
+            if (value instanceof Double || value instanceof Float) {
+              if (valueString.contains(".")) {
+                valueString=valueString.replaceFirst("0*$","");
+              }
+            }
+            values.add(indent(indent) + field + "=\""+ valueString+ "\"");
           }
         }
       }
