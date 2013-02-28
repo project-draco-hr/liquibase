@@ -1,3 +1,4 @@
 {
+  super();
   columns=new ArrayList<ColumnConfig>();
 }
