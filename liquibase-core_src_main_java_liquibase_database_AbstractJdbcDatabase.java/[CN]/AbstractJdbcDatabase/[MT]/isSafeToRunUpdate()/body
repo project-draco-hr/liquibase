@@ -4,5 +4,8 @@
     return true;
   }
   String url=connection.getURL();
+  if (url == null) {
+    return false;
+  }
   return (url.contains("localhost")) || (url.contains("127.0.0.1"));
 }
