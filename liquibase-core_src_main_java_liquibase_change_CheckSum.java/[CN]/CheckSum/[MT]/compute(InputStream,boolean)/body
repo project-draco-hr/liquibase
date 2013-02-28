@@ -1,0 +1,22 @@
+{
+  InputStream newStream=stream;
+  if (standardizeLineEndings) {
+    newStream=new InputStream(){
+      int lastChar='X';
+      @Override public int read() throws IOException {
+        int read=stream.read();
+        int returnChar=read;
+        if (returnChar == '\r') {
+          returnChar='\n';
+        }
+        if (lastChar == '\r' && returnChar == '\n') {
+          returnChar=stream.read();
+        }
+        lastChar=read;
+        return returnChar;
+      }
+    }
+;
+  }
+  return new CheckSum(MD5Util.computeMD5(newStream),getCurrentVersion());
+}

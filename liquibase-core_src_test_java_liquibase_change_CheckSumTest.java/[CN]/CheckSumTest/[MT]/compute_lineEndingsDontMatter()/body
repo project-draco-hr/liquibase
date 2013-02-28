@@ -1,0 +1,11 @@
+{
+  String checkSum=CheckSum.compute("a string\nwith\nlines").toString();
+  assertEquals(checkSum,CheckSum.compute("a string\rwith\rlines").toString());
+  assertEquals(checkSum,CheckSum.compute("a string\r\nwith\r\nlines").toString());
+  assertEquals(checkSum,CheckSum.compute("a string\rwith\nlines").toString());
+  assertFalse(checkSum.equals(CheckSum.compute("a string\n\nwith\n\nlines").toString()));
+  assertEquals(checkSum,CheckSum.compute(new ByteArrayInputStream("a string\nwith\nlines".getBytes()),true).toString());
+  assertEquals(checkSum,CheckSum.compute(new ByteArrayInputStream("a string\rwith\rlines".getBytes()),true).toString());
+  assertEquals(checkSum,CheckSum.compute(new ByteArrayInputStream("a string\r\nwith\r\nlines".getBytes()),true).toString());
+  assertEquals(checkSum,CheckSum.compute(new ByteArrayInputStream("a string\rwith\r\nlines".getBytes()),true).toString());
+}
