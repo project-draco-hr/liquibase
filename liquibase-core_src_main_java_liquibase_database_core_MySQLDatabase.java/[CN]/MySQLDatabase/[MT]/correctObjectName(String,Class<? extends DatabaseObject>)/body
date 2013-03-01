@@ -3,9 +3,6 @@
     return null;
   }
  else {
-    if (name == null) {
-      return null;
-    }
-    return name.toLowerCase();
+    return super.correctObjectName(name,objectType);
   }
 }

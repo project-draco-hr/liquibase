@@ -3,10 +3,10 @@
     return objectName;
   }
  else   if (objectName.contains("-") || startsWithNumeric(objectName) || isReservedWord(objectName)) {
-    return quotingCharacter + objectName + quotingCharacter;
+    return quotingStartCharacter + objectName + quotingEndCharacter;
   }
  else   if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS) {
-    return quotingCharacter + objectName + quotingCharacter;
+    return quotingStartCharacter + objectName + quotingEndCharacter;
   }
   return objectName;
 }

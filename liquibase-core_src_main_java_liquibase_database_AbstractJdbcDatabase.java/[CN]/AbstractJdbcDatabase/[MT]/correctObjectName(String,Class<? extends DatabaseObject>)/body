@@ -1,5 +1,5 @@
 {
-  if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS || unquotedObjectsAreUppercased == null || objectName == null || (objectName.startsWith(quotingCharacter) && objectName.endsWith(quotingCharacter))) {
+  if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS || unquotedObjectsAreUppercased == null || objectName == null || (objectName.startsWith(quotingStartCharacter) && objectName.endsWith(quotingEndCharacter))) {
     return objectName;
   }
  else   if (unquotedObjectsAreUppercased == Boolean.TRUE) {
