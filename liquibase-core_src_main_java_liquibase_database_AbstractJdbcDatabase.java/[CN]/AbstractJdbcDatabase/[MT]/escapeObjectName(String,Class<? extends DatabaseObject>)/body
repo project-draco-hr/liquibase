@@ -5,13 +5,8 @@
  else   if (objectName.contains("-") || startsWithNumeric(objectName) || isReservedWord(objectName)) {
     return "\"" + objectName + "\"";
   }
- else   if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS && unquotedObjectsAreUppercased != null) {
-    if (unquotedObjectsAreUppercased && !objectName.toUpperCase().equals(objectName)) {
-      return "\"" + objectName + "\"";
-    }
- else     if (!unquotedObjectsAreUppercased && !objectName.toLowerCase().equals(objectName)) {
-      return "\"" + objectName + "\"";
-    }
+ else   if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS) {
+    return "\"" + objectName + "\"";
   }
   return objectName;
 }
