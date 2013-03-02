@@ -1,4 +1,6 @@
 {
+  ObjectQuotingStrategy currentStrategy=this.getObjectQuotingStrategy();
+  this.setObjectQuotingStrategy(ObjectQuotingStrategy.QUOTE_ALL_OBJECTS);
   try {
     DatabaseSnapshot snapshot=null;
     try {
@@ -27,6 +29,7 @@
     }
   }
   finally {
+    this.setObjectQuotingStrategy(currentStrategy);
     this.commit();
   }
 }

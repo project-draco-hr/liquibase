@@ -12,6 +12,7 @@
   }
   finally {
     try {
+      database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
       lockService.releaseLock();
     }
  catch (    LockException e) {

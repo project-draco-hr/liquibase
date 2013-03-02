@@ -9,13 +9,13 @@
     if (sequenceNextValueFunction == null) {
       throw new RuntimeException(String.format("next value function for a sequence is not configured for database %s",getDefaultDatabaseProductName()));
     }
-    return String.format(sequenceNextValueFunction,databaseFunction.getValue());
+    return String.format(sequenceNextValueFunction,escapeObjectName(databaseFunction.getValue(),Sequence.class));
   }
  else   if (databaseFunction instanceof SequenceCurrentValueFunction) {
     if (sequenceCurrentValueFunction == null) {
       throw new RuntimeException(String.format("current value function for a sequence is not configured for database %s",getDefaultDatabaseProductName()));
     }
-    return String.format(sequenceCurrentValueFunction,databaseFunction.getValue());
+    return String.format(sequenceCurrentValueFunction,escapeObjectName(databaseFunction.getValue(),Sequence.class));
   }
  else {
     return databaseFunction.getValue();
