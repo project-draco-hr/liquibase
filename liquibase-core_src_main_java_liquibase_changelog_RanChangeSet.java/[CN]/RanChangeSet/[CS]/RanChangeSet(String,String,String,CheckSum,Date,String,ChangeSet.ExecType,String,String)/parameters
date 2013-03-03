@@ -6,3 +6,4 @@ Date dateExecuted
 String tag
 ChangeSet.ExecType execType
 String description
+String comments
