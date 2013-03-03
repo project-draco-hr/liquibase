@@ -1,7 +1,7 @@
 {
   try {
     if (dateAsString.indexOf(" ") > 0) {
-      return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(dateAsString);
+      return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(dateAsString);
     }
  else {
       if (dateAsString.indexOf(":") > 0) {

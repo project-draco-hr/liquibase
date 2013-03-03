@@ -107,7 +107,6 @@
       liquibase.generateDocumentation(commandParams.iterator().next(),contexts);
       return;
     }
-    DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     try {
       if ("update".equalsIgnoreCase(command)) {
         liquibase.update(contexts);
@@ -143,7 +142,7 @@
         if (commandParams == null || commandParams.size() == 0) {
           throw new CommandLineParsingException("rollback requires a rollback date");
         }
-        liquibase.rollback(dateFormat.parse(commandParams.iterator().next()),contexts);
+        liquibase.rollback(new ISODateFormat().parse(commandParams.iterator().next()),contexts);
       }
  else       if ("rollbackCount".equalsIgnoreCase(command)) {
         liquibase.rollback(Integer.parseInt(commandParams.iterator().next()),contexts);
@@ -158,7 +157,7 @@
         if (commandParams == null || commandParams.size() == 0) {
           throw new CommandLineParsingException("rollbackToDateSQL requires a rollback date");
         }
-        liquibase.rollback(dateFormat.parse(commandParams.iterator().next()),contexts,getOutputWriter());
+        liquibase.rollback(new ISODateFormat().parse(commandParams.iterator().next()),contexts,getOutputWriter());
       }
  else       if ("rollbackCountSQL".equalsIgnoreCase(command)) {
         if (commandParams == null || commandParams.size() == 0) {

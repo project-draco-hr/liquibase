@@ -1,0 +1,5 @@
+{
+  ISODateFormat dateFormat=new ISODateFormat();
+  Date date=dateFormat.parse("2012-09-12T09:47:54.664");
+  assertEquals("2012-09-12T09:47:54.664",dateFormat.format(date));
+}
