@@ -1,5 +1,5 @@
 {
-  this.sql=sql.trim();
+  this.sql=StringUtils.trimToEmpty(sql.trim());
   this.endDelimiter=endDelimiter;
   this.affectedDatabaseObjects.addAll(Arrays.asList(affectedDatabaseObjects));
   List<DatabaseObject> moreAffectedDatabaseObjects=new ArrayList<DatabaseObject>();
