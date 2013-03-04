@@ -41,6 +41,11 @@
       log.debug("includeAll for " + pathName);
       log.debug("Using file opener for includeAll: " + resourceAccessor.toString());
       boolean isRelativeToChangelogFile=Boolean.parseBoolean(atts.getValue("relativeToChangelogFile"));
+      String resourceFilterDef=atts.getValue("resourceFilter");
+      IncludeAllFilter resourceFilter=null;
+      if (resourceFilterDef != null) {
+        resourceFilter=(IncludeAllFilter)Class.forName(resourceFilterDef).newInstance();
+      }
       if (isRelativeToChangelogFile) {
         File changeLogFile=new File(databaseChangeLog.getPhysicalFilePath());
         File resourceBase=new File(changeLogFile.getParent(),pathName);
@@ -62,6 +67,7 @@
       }
       boolean foundResource=false;
       Set<String> seenPaths=new HashSet<String>();
+      List<String> includedChangeLogs=new LinkedList<String>();
       for (      URL fileUrl : resources) {
         if (!fileUrl.toExternalForm().startsWith("file:")) {
           if (fileUrl.toExternalForm().startsWith("jar:file:") || fileUrl.toExternalForm().startsWith("wsjar:file:") || fileUrl.toExternalForm().startsWith("zip:")) {
@@ -86,9 +92,7 @@
               log.debug("already included " + path);
               continue;
             }
-            if (handleIncludedChangeLog(path,false,databaseChangeLog.getPhysicalFilePath())) {
-              foundResource=true;
-            }
+            includedChangeLogs.add(path);
           }
         }
  else {
@@ -97,9 +101,16 @@
             log.debug("already included " + path);
             continue;
           }
-          if (handleIncludedChangeLog(path,false,databaseChangeLog.getPhysicalFilePath())) {
-            foundResource=true;
-          }
+          includedChangeLogs.add(path);
+          includedChangeLogs.add(path);
+        }
+      }
+      if (resourceFilter != null) {
+        includedChangeLogs=resourceFilter.filter(includedChangeLogs);
+      }
+      for (      String path : includedChangeLogs) {
+        if (handleIncludedChangeLog(path,false,databaseChangeLog.getPhysicalFilePath())) {
+          foundResource=true;
         }
       }
       if (!foundResource) {
