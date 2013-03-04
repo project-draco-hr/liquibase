@@ -1,0 +1,4 @@
+{
+  assertEquals("abc",new BufferedReader(reader).readLine());
+  assertEmpty();
+}

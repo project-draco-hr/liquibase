@@ -1,0 +1,3 @@
+{
+  assertEncoding(expectedCharsetName,"ISO8859_1");
+}

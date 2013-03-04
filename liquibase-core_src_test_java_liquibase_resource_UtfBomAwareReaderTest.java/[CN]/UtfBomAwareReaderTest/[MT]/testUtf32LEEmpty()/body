@@ -1,0 +1,4 @@
+{
+  prepare(0xFF,0xFE,0x00,0x00);
+  assertEncoding("UTF-32LE");
+}

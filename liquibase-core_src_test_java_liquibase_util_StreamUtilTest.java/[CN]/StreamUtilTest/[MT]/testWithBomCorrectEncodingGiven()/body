@@ -1,0 +1,5 @@
+{
+  String contents="abc";
+  ByteArrayInputStream bais=new ByteArrayInputStream(new byte[]{(byte)0xEF,(byte)0xBB,(byte)0xBF,0x61,0x62,0x63});
+  assertEquals(contents,StreamUtil.getStreamContents(bais,"UTF8"));
+}

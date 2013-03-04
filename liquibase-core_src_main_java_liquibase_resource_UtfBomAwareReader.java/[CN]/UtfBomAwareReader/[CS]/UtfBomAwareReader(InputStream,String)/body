@@ -1,0 +1,5 @@
+{
+  pis=new PushbackInputStream(in,4);
+  if (defaultCharsetName == null)   throw new NullPointerException("defaultCharsetName");
+  this.defaultCharsetName=defaultCharsetName;
+}
