@@ -1,96 +1,33 @@
 {
-  String hostName;
+  ServletContext servletContext=servletContextEvent.getServletContext();
   try {
-    hostName=NetUtil.getLocalHost().getHostName();
+    this.hostName=NetUtil.getLocalHost().getHostName();
   }
  catch (  Exception e) {
-    servletContextEvent.getServletContext().log("Cannot find hostname: " + e.getMessage());
+    servletContext.log("Cannot find hostname: " + e.getMessage());
     return;
   }
-  String shouldRunProperty=System.getProperty(Liquibase.SHOULD_RUN_SYSTEM_PROPERTY);
-  if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
-    LogFactory.getLogger().info("Liquibase did not run on " + hostName + " because '"+ Liquibase.SHOULD_RUN_SYSTEM_PROPERTY+ "' system property was set to false");
-    return;
-  }
-  String machineIncludes=servletContextEvent.getServletContext().getInitParameter("liquibase.host.includes");
-  String machineExcludes=servletContextEvent.getServletContext().getInitParameter("liquibase.host.excludes");
-  String failOnError=servletContextEvent.getServletContext().getInitParameter("liquibase.onerror.fail");
-  boolean shouldRun=false;
-  if (machineIncludes == null && machineExcludes == null) {
-    shouldRun=true;
-  }
- else   if (machineIncludes != null) {
-    for (    String machine : machineIncludes.split(",")) {
-      machine=machine.trim();
-      if (hostName.equalsIgnoreCase(machine)) {
-        shouldRun=true;
-      }
-    }
-  }
- else   if (machineExcludes != null) {
-    shouldRun=true;
-    for (    String machine : machineExcludes.split(",")) {
-      machine=machine.trim();
-      if (hostName.equalsIgnoreCase(machine)) {
-        shouldRun=false;
-      }
-    }
-  }
-  if (!shouldRun) {
-    servletContextEvent.getServletContext().log("LiquibaseServletListener did not run due to liquibase.host.includes and/or liquibase.host.excludes");
-    return;
-  }
-  setDataSource(servletContextEvent.getServletContext().getInitParameter("liquibase.datasource"));
-  setChangeLogFile(servletContextEvent.getServletContext().getInitParameter("liquibase.changelog"));
-  setContexts(servletContextEvent.getServletContext().getInitParameter("liquibase.contexts"));
-  this.defaultSchema=StringUtils.trimToNull(servletContextEvent.getServletContext().getInitParameter("liquibase.schema.default"));
-  if (getChangeLogFile() == null) {
-    throw new RuntimeException("Cannot run Liquibase, liquibase.changelog is not set");
-  }
-  if (getDataSource() == null) {
-    throw new RuntimeException("Cannot run Liquibase, liquibase.datasource is not set");
-  }
+  InitialContext ic=null;
+  String failOnError=null;
   try {
-    Context ic=null;
-    Connection connection=null;
-    try {
-      ic=new InitialContext();
-      DataSource dataSource=(DataSource)ic.lookup(this.dataSource);
-      connection=dataSource.getConnection();
-      Thread currentThread=Thread.currentThread();
-      ClassLoader contextClassLoader=currentThread.getContextClassLoader();
-      ResourceAccessor threadClFO=new ClassLoaderResourceAccessor(contextClassLoader);
-      ResourceAccessor clFO=new ClassLoaderResourceAccessor();
-      ResourceAccessor fsFO=new FileSystemResourceAccessor();
-      Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
-      database.setDefaultSchemaName(this.defaultSchema);
-      String tablePrefix=servletContextEvent.getServletContext().getInitParameter("liquibase.parameter.tablePrefix");
-      if (tablePrefix != null) {
-        database.setDatabaseChangeLogLockTableName(tablePrefix + database.getDatabaseChangeLogLockTableName());
-        database.setDatabaseChangeLogTableName(tablePrefix + database.getDatabaseChangeLogTableName());
-      }
-      Liquibase liquibase=new Liquibase(getChangeLogFile(),new CompositeResourceAccessor(clFO,fsFO,threadClFO),database);
-      Enumeration<String> initParameters=servletContextEvent.getServletContext().getInitParameterNames();
-      while (initParameters.hasMoreElements()) {
-        String name=initParameters.nextElement().trim();
-        if (name.startsWith("liquibase.parameter.")) {
-          liquibase.setChangeLogParameter(name.substring("liquibase.parameter.".length()),servletContextEvent.getServletContext().getInitParameter(name));
-        }
-      }
-      liquibase.update(getContexts());
-    }
-  finally {
-      if (ic != null) {
-        ic.close();
-      }
-      if (connection != null) {
-        connection.close();
-      }
+    ic=new InitialContext();
+    failOnError=getValue(LIQUIBASE_ONERROR_FAIL,servletContext,ic);
+    if (checkPreconditions(servletContext,ic)) {
+      executeUpdate(servletContext,ic);
     }
   }
  catch (  Exception e) {
     if (!"false".equals(failOnError)) {
       throw new RuntimeException(e);
+    }
+  }
+ finally {
+    if (ic != null) {
+      try {
+        ic.close();
+      }
+ catch (      NamingException e) {
+      }
     }
   }
 }

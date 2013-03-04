@@ -1,0 +1,38 @@
+{
+  setDataSource(getValue(LIQUIBASE_DATASOURCE,servletContext,ic));
+  if (getDataSource() == null) {
+    throw new RuntimeException("Cannot run Liquibase, " + LIQUIBASE_DATASOURCE + " is not set");
+  }
+  setChangeLogFile(getValue(LIQUIBASE_CHANGELOG,servletContext,ic));
+  if (getChangeLogFile() == null) {
+    throw new RuntimeException("Cannot run Liquibase, " + LIQUIBASE_CHANGELOG + " is not set");
+  }
+  setContexts(getValue(LIQUIBASE_CONTEXTS,servletContext,ic));
+  this.defaultSchema=StringUtils.trimToNull(getValue(LIQUIBASE_SCHEMA_DEFAULT,servletContext,ic));
+  Connection connection=null;
+  try {
+    DataSource dataSource=(DataSource)ic.lookup(this.dataSourceName);
+    connection=dataSource.getConnection();
+    Thread currentThread=Thread.currentThread();
+    ClassLoader contextClassLoader=currentThread.getContextClassLoader();
+    ResourceAccessor threadClFO=new ClassLoaderResourceAccessor(contextClassLoader);
+    ResourceAccessor clFO=new ClassLoaderResourceAccessor();
+    ResourceAccessor fsFO=new FileSystemResourceAccessor();
+    Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+    database.setDefaultSchemaName(getDefaultSchema());
+    Liquibase liquibase=new Liquibase(getChangeLogFile(),new CompositeResourceAccessor(clFO,fsFO,threadClFO),database);
+    @SuppressWarnings("unchecked") Enumeration<String> initParameters=servletContext.getInitParameterNames();
+    while (initParameters.hasMoreElements()) {
+      String name=initParameters.nextElement().trim();
+      if (name.startsWith(LIQUIBASE_PARAMETER + ".")) {
+        liquibase.setChangeLogParameter(name.substring(LIQUIBASE_PARAMETER.length()),getValue(name,servletContext,ic));
+      }
+    }
+    liquibase.update(getContexts());
+  }
+  finally {
+    if (connection != null) {
+      connection.close();
+    }
+  }
+}

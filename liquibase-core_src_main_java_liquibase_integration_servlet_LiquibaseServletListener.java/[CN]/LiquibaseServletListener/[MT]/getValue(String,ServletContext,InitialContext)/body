@@ -1,0 +1,14 @@
+{
+  try {
+    Context envCtx=(Context)initialContext.lookup(JAVA_COMP_ENV);
+    String valueFromJndi=(String)envCtx.lookup(key);
+    return valueFromJndi;
+  }
+ catch (  NamingException e) {
+  }
+  String valueFromServletContext=servletContext.getInitParameter(key);
+  if (valueFromServletContext != null) {
+    return valueFromServletContext;
+  }
+  return System.getProperty(key);
+}
