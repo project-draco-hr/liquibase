@@ -1,0 +1,12 @@
+{
+  Liquibase liquibase=createLiquibase(changelogFile);
+  clearDatabase(liquibase);
+  liquibase=createLiquibase(changelogFile);
+  try {
+    liquibase.update(this.contexts);
+  }
+ catch (  ValidationFailedException e) {
+    e.printDescriptiveError(System.out);
+    throw e;
+  }
+}
