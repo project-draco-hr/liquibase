@@ -1,0 +1,3 @@
+{
+  whereParams.remove(param);
+}

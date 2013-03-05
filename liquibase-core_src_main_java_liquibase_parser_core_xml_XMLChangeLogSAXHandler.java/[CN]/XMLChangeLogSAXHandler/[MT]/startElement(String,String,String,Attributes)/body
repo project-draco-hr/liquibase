@@ -245,17 +245,23 @@
  else {
         column=new ColumnConfig();
       }
-      for (int i=0; i < atts.getLength(); i++) {
-        String attributeName=atts.getQName(i);
-        String attributeValue=atts.getValue(i);
-        setProperty(column,attributeName,attributeValue);
-      }
+      populateColumnFromAttributes(atts,column);
       if (change instanceof ChangeWithColumns) {
         ((ChangeWithColumns)change).addColumn(column);
       }
  else {
         throw new RuntimeException("Unexpected column tag for " + change.getClass().getName());
       }
+    }
+ else     if (change != null && "whereParams".equals(qName)) {
+      if (!(change instanceof AbstractModifyDataChange)) {
+        throw new RuntimeException("Unexpected change: " + change.getClass().getName());
+      }
+    }
+ else     if (change != null && change instanceof AbstractModifyDataChange && "param".equals(qName)) {
+      ColumnConfig param=new ColumnConfig();
+      populateColumnFromAttributes(atts,param);
+      ((AbstractModifyDataChange)change).addWhereParam(param);
     }
  else     if (change != null && "constraints".equals(qName)) {
       ConstraintsConfig constraints=new ConstraintsConfig();
@@ -279,18 +285,13 @@
       }
       lastColumn.setConstraints(constraints);
     }
- else     if ("param".equals(qName)) {
-      if (change instanceof CustomChangeWrapper) {
-        if (atts.getValue("value") == null) {
-          paramName=atts.getValue("name");
-          text=new StringBuffer();
-        }
- else {
-          ((CustomChangeWrapper)change).setParam(atts.getValue("name"),atts.getValue("value"));
-        }
+ else     if ("param".equals(qName) && change instanceof CustomChangeWrapper) {
+      if (atts.getValue("value") == null) {
+        paramName=atts.getValue("name");
+        text=new StringBuffer();
       }
  else {
-        throw new MigrationFailedException(changeSet,"'param' unexpected in " + qName);
+        ((CustomChangeWrapper)change).setParam(atts.getValue("name"),atts.getValue("value"));
       }
     }
  else     if ("where".equals(qName)) {

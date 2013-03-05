@@ -1,6 +1,6 @@
 {
   boolean needsPreparedStatement=false;
-  for (  ColumnConfig column : columns) {
+  for (  ColumnConfig column : getColumn()) {
     if (column.getValueBlobFile() != null) {
       needsPreparedStatement=true;
     }
@@ -12,9 +12,15 @@
     return new SqlStatement[]{new UpdateExecutablePreparedStatement(database,catalogName,schemaName,tableName,columns)};
   }
   UpdateStatement statement=new UpdateStatement(getCatalogName(),getSchemaName(),getTableName());
-  for (  ColumnConfig column : columns) {
+  for (  ColumnConfig column : getColumn()) {
     statement.addNewColumnValue(column.getName(),column.getValueObject());
   }
   statement.setWhereClause(whereClause);
+  for (  ColumnConfig whereParam : whereParams) {
+    if (whereParam.getName() != null) {
+      statement.addWhereColumnName(whereParam.getName());
+    }
+    statement.addWhereParameter(whereParam.getValueObject());
+  }
   return new SqlStatement[]{statement};
 }
