@@ -44,7 +44,7 @@
       inRollback=false;
     }
  else     if (change != null && change instanceof RawSQLChange && "comment".equals(qName)) {
-      ((RawSQLChange)change).setComments(textString);
+      ((RawSQLChange)change).setComment(textString);
       text=new StringBuffer();
     }
  else     if (change != null && "where".equals(qName)) {
@@ -75,11 +75,11 @@
     }
  else     if (change != null && qName.equals("column") && textString != null) {
       if (change instanceof InsertDataChange) {
-        List<ColumnConfig> columns=((InsertDataChange)change).getColumn();
+        List<ColumnConfig> columns=((InsertDataChange)change).getColumns();
         columns.get(columns.size() - 1).setValue(textString);
       }
  else       if (change instanceof UpdateDataChange) {
-        List<ColumnConfig> columns=((UpdateDataChange)change).getColumn();
+        List<ColumnConfig> columns=((UpdateDataChange)change).getColumns();
         columns.get(columns.size() - 1).setValue(textString);
       }
  else {

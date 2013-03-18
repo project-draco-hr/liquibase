@@ -1,0 +1,39 @@
+{
+  Comparator<String> comparator;
+  if (object instanceof ChangeSet) {
+    comparator=new ChangeSetComparator();
+  }
+ else {
+    comparator=new Comparator<String>(){
+      public int compare(      String o1,      String o2){
+        return o1.compareTo(o2);
+      }
+    }
+;
+  }
+  Map<String,Object> objectMap=new TreeMap<String,Object>(comparator);
+  for (  String field : object.getSerializableFields()) {
+    Object value=object.getSerializableFieldValue(field);
+    if (value != null) {
+      if (value instanceof LiquibaseSerializable) {
+        value=toMap((LiquibaseSerializable)value);
+      }
+      if (value instanceof Collection) {
+        List valueAsList=new ArrayList((Collection)value);
+        if (valueAsList.size() == 0) {
+          continue;
+        }
+        for (int i=0; i < valueAsList.size(); i++) {
+          if (valueAsList.get(i) instanceof LiquibaseSerializable) {
+            valueAsList.set(i,toMap((LiquibaseSerializable)valueAsList.get(i)));
+          }
+        }
+        value=valueAsList;
+      }
+      objectMap.put(field,value);
+    }
+  }
+  Map<String,Object> containerMap=new HashMap<String,Object>();
+  containerMap.put(object.getSerializedObjectName(),objectMap);
+  return containerMap;
+}

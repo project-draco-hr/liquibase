@@ -1,0 +1,3 @@
+{
+  return yaml.dumpAs(toMap(object),Tag.MAP,DumperOptions.FlowStyle.FLOW);
+}

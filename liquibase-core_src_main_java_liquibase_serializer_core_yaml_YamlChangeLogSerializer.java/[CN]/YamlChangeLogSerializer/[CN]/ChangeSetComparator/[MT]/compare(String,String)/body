@@ -1,0 +1,15 @@
+{
+  Integer o1Order=order.get(o1);
+  if (o1Order == null) {
+    o1Order=10;
+  }
+  Integer o2Order=order.get(o2);
+  if (o2Order == null) {
+    o2Order=10;
+  }
+  int orderCompare=o1Order.compareTo(o2Order);
+  if (orderCompare == 0) {
+    return o1.compareTo(o2);
+  }
+  return orderCompare;
+}

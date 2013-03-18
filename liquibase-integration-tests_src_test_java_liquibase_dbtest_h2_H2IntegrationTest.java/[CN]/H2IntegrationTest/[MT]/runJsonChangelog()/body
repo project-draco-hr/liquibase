@@ -1,0 +1,15 @@
+{
+  if (getDatabase() == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  clearDatabase(liquibase);
+  liquibase=createLiquibase("changelogs/json/common.tests.changelog.json");
+  try {
+    liquibase.update(this.contexts);
+  }
+ catch (  ValidationFailedException e) {
+    e.printDescriptiveError(System.out);
+    throw e;
+  }
+}

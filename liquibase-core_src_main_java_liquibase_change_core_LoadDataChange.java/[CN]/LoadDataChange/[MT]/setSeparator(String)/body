@@ -1,3 +1,6 @@
 {
+  if (separator.equals("\\t")) {
+    separator="\t";
+  }
   this.separator=separator;
 }

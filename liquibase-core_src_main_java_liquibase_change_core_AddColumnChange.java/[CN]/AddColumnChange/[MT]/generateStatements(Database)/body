@@ -1,6 +1,6 @@
 {
   List<SqlStatement> sql=new ArrayList<SqlStatement>();
-  for (  ColumnConfig column : getColumn()) {
+  for (  ColumnConfig column : getColumns()) {
     Set<ColumnConstraint> constraints=new HashSet<ColumnConstraint>();
     ConstraintsConfig constraintsConfig=column.getConstraints();
     if (constraintsConfig != null) {
@@ -31,7 +31,7 @@
       sql.add(updateStatement);
     }
   }
-  for (  ColumnConfig column : getColumn()) {
+  for (  ColumnConfig column : getColumns()) {
     String columnRemarks=StringUtils.trimToNull(column.getRemarks());
     if (columnRemarks != null) {
       SetColumnRemarksStatement remarksStatement=new SetColumnRemarksStatement(catalogName,schemaName,tableName,column.getName(),columnRemarks);

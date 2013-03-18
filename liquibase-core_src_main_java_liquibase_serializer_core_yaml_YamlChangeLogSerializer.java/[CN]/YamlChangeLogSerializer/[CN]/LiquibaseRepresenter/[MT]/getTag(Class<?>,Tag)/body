@@ -1,0 +1,3 @@
+{
+  return super.getTag(clazz,defaultTag);
+}

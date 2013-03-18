@@ -1,0 +1,5 @@
+{
+  if (!map.containsKey(key)) {
+    throw new ChangeLogParseException(outerNode + " is missing required attribute " + key);
+  }
+}

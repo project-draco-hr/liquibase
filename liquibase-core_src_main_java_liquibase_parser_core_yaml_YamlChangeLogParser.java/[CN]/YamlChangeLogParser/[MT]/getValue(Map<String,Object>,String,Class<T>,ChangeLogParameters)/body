@@ -1,0 +1,3 @@
+{
+  return getValue(map,key,type,null,changeLogParameters);
+}

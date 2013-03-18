@@ -1,0 +1,26 @@
+{
+  Set<Property> returnSet=new HashSet<Property>();
+  LiquibaseSerializable serialzableType=null;
+  try {
+    if (type.equals(ChangeSet.class)) {
+      serialzableType=new ChangeSet("x","y",false,false,null,null,null);
+    }
+ else     if (LiquibaseSerializable.class.isAssignableFrom(type)) {
+      serialzableType=(LiquibaseSerializable)type.newInstance();
+    }
+ else {
+      return super.getProperties(type);
+    }
+  }
+ catch (  InstantiationException e) {
+    throw new RuntimeException(e);
+  }
+catch (  IllegalAccessException e) {
+    e.printStackTrace();
+  }
+  for (  String property : serialzableType.getSerializableFields()) {
+    LiquibaseSerializable.SerializationType fieldType=serialzableType.getSerializableFieldType(property);
+    returnSet.add(new LiquibaseProperty(property,String.class,String.class));
+  }
+  return returnSet;
+}
