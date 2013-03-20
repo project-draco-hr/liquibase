@@ -1,6 +1,6 @@
 {
   List<Change> inverses=new ArrayList<Change>();
-  for (  ColumnConfig aColumn : column) {
+  for (  ColumnConfig aColumn : columns) {
     if (aColumn.hasDefaultValue()) {
       DropDefaultValueChange dropChange=new DropDefaultValueChange();
       dropChange.setTableName(getTableName());

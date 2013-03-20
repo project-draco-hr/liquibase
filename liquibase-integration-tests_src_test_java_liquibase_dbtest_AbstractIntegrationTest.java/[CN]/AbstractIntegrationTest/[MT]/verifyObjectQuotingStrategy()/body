@@ -3,5 +3,7 @@
     return;
   }
   Liquibase liquibase=createLiquibase(objectQuotingStrategyChangeLog);
+  clearDatabase(liquibase);
   liquibase.update(contexts);
+  clearDatabase(liquibase);
 }

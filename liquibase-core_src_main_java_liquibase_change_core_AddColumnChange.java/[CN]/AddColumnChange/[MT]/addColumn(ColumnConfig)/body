@@ -1,3 +1,3 @@
 {
-  this.column.add(column);
+  this.columns.add(column);
 }

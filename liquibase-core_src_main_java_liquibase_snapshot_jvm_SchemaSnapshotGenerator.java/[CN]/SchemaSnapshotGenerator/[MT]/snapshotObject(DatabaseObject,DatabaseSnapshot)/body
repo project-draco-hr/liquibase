@@ -27,6 +27,8 @@
     }
   }
   example=new Schema(catalogName,schemaName);
+  ObjectQuotingStrategy currentStrategy=database.getObjectQuotingStrategy();
+  database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
   try {
     if (database.supportsSchemas()) {
       schemas=((JdbcConnection)database.getConnection()).getMetaData().getSchemas();
@@ -55,6 +57,7 @@
     throw new DatabaseException(e);
   }
  finally {
+    database.setObjectQuotingStrategy(currentStrategy);
     if (schemas != null) {
       try {
         schemas.close();

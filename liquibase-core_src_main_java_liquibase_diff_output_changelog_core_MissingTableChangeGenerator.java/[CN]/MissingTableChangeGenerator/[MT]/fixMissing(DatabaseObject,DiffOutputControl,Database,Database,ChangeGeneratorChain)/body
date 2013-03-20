@@ -1,5 +1,6 @@
 {
   Table missingTable=(Table)missingObject;
+  PrimaryKey primaryKey=missingTable.getPrimaryKey();
   CreateTableChange change=new CreateTableChange();
   change.setTableName(missingTable.getName());
   if (control.isIncludeCatalog()) {
@@ -15,14 +16,24 @@
     ColumnConfig columnConfig=new ColumnConfig();
     columnConfig.setName(column.getName());
     columnConfig.setType(column.getType().toString());
-    ConstraintsConfig constraintsConfig=null;
     if (column.isAutoIncrement()) {
       columnConfig.setAutoIncrement(true);
     }
-    if (column.isNullable() != null && !column.isNullable()) {
-      if (constraintsConfig == null) {
-        constraintsConfig=new ConstraintsConfig();
+    ConstraintsConfig constraintsConfig=null;
+    if (column.isAutoIncrement() && primaryKey != null && primaryKey.getColumnNamesAsList().contains(column.getName())) {
+      constraintsConfig=new ConstraintsConfig();
+      constraintsConfig.setPrimaryKey(true);
+      constraintsConfig.setPrimaryKeyTablespace(primaryKey.getTablespace());
+      if (comparisonDatabase instanceof MySQLDatabase && "PRIMARY".equals(primaryKey.getName())) {
+        constraintsConfig.setPrimaryKeyName(null);
       }
+ else {
+        constraintsConfig.setPrimaryKeyName(primaryKey.getName());
+      }
+      control.setAlreadyHandledMissing(primaryKey);
+    }
+ else     if (column.isNullable() != null && !column.isNullable()) {
+      constraintsConfig=new ConstraintsConfig();
       constraintsConfig.setNullable(false);
     }
     if (constraintsConfig != null) {

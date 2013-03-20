@@ -1,4 +1,5 @@
 {
+  super.unquotedObjectsAreUppercased=true;
   super.setCurrentDateTimeFunction("SYSTIMESTAMP");
   dateFunctions.add(new DatabaseFunction("SYSDATE"));
   dateFunctions.add(new DatabaseFunction("SYSTIMESTAMP"));
