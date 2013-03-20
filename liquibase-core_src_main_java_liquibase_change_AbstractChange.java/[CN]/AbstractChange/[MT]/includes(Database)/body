@@ -1,0 +1,7 @@
+{
+  if (dbms == null || dbms.trim().isEmpty()) {
+    return true;
+  }
+  List<String> dbmsList=StringUtils.splitAndTrim(dbms,",");
+  return dbmsList.contains(database.getShortName());
+}
