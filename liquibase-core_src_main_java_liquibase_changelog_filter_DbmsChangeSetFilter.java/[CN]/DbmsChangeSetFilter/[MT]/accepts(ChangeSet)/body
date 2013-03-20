@@ -1,12 +1,11 @@
 {
   List<SqlVisitor> visitorsToRemove=new ArrayList<SqlVisitor>();
   for (  SqlVisitor visitor : changeSet.getSqlVisitors()) {
-    if (databaseString != null && visitor.getApplicableDbms() != null && visitor.getApplicableDbms().size() > 0) {
-      boolean shouldRemove=true;
-      if (visitor.getApplicableDbms().contains(databaseString)) {
-        shouldRemove=false;
-      }
-      if (shouldRemove) {
+    if (databaseString == null) {
+      continue;
+    }
+    if (visitor.getApplicableDbms() != null && visitor.getApplicableDbms().size() > 0) {
+      if (!visitor.getApplicableDbms().contains(databaseString)) {
         visitorsToRemove.add(visitor);
       }
     }
@@ -15,13 +14,21 @@
   if (databaseString == null) {
     return true;
   }
-  if (changeSet.getDbmsSet() == null) {
+  Set<String> dbmsSet=changeSet.getDbmsSet();
+  if (dbmsSet == null || dbmsSet.isEmpty()) {
     return true;
   }
-  for (  String dbms : changeSet.getDbmsSet()) {
-    if (databaseString.equals(dbms)) {
-      return true;
+  if (dbmsSet.contains("!" + databaseString)) {
+    return false;
+  }
+  Set<String> dbmsSupported=new HashSet<String>();
+  for (  String dbms : dbmsSet) {
+    if (!dbms.startsWith("!")) {
+      dbmsSupported.add(dbms);
     }
+  }
+  if (dbmsSupported.isEmpty() || dbmsSupported.contains(databaseString)) {
+    return true;
   }
   return false;
 }

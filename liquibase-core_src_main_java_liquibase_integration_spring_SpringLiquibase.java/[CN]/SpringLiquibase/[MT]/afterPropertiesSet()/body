@@ -13,6 +13,7 @@
   try {
     c=getDataSource().getConnection();
     liquibase=createLiquibase(c);
+    generateRollbackFile(liquibase);
     performUpdate(liquibase);
   }
  catch (  SQLException e) {

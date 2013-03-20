@@ -1,0 +1,10 @@
+{
+  if (rollbackFile != null) {
+    try {
+      liquibase.futureRollbackSQL(getContexts(),new FileWriter(rollbackFile));
+    }
+ catch (    IOException e) {
+      throw new LiquibaseException("Unable to generate rollback file.",e);
+    }
+  }
+}
