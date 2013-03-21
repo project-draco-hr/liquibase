@@ -35,12 +35,19 @@
         rs=databaseMetaData.getIndexInfo(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),table.getName(),false,true);
       }
       for (      JdbcDatabaseSnapshot.CachedRow row : rs) {
-        String indexName=cleanNameFromDatabase(row.getString("INDEX_NAME"),database);
+        String indexName=database.correctObjectName(cleanNameFromDatabase(row.getString("INDEX_NAME"),database),Index.class);
         if (indexName == null) {
           continue;
         }
-        if (exampleName != null && !exampleName.equals(indexName)) {
-          continue;
+        if (database.isCaseSensitive()) {
+          if (exampleName != null && !exampleName.equals(indexName)) {
+            continue;
+          }
+        }
+ else {
+          if (exampleName != null && !exampleName.equalsIgnoreCase(indexName)) {
+            continue;
+          }
         }
         if (database instanceof InformixDatabase && indexName.startsWith(" ")) {
           indexName="_generated_index_" + indexName.substring(1);

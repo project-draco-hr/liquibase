@@ -3,6 +3,13 @@
     return null;
   }
  else {
-    return super.correctObjectName(name,objectType);
+    name=super.correctObjectName(name,objectType);
+    if (name == null) {
+      return null;
+    }
+    if (!this.isCaseSensitive()) {
+      return name.toLowerCase();
+    }
+    return name;
   }
 }
