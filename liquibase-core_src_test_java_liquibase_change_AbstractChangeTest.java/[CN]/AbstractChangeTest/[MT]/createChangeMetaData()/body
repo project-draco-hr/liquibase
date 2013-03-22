@@ -6,7 +6,8 @@
   assertEquals(1,changeMetaData.getPriority());
   assertNull(null,changeMetaData.getAppliesTo());
   Map<String,ChangeParameterMetaData> parameters=changeMetaData.getParameters();
-  assertEquals(3,parameters.size());
+  assertEquals(4,parameters.size());
+  ChangeParameterMetaData dbmsMetaData=parameters.get("dbms");
   ChangeParameterMetaData paramOneMetaData=parameters.get("paramOne");
   ChangeParameterMetaData paramTwoMetaData=parameters.get("paramTwo");
   ChangeParameterMetaData paramNoMetaData=parameters.get("paramNoMetadata");
@@ -26,6 +27,8 @@
   assertEquals(2,paramTwoMetaData.getRequiredForDatabase().size());
   assertTrue(paramTwoMetaData.getRequiredForDatabase().contains("mysql"));
   assertTrue(paramTwoMetaData.getRequiredForDatabase().contains("mssql"));
+  assertNotNull(dbmsMetaData);
+  assertTrue(dbmsMetaData.getExampleValue().toString().contains("h2"));
   assertNotNull(paramNoMetaData);
   assertNull(paramNotIncludedMetaData);
   assertNull("Properties with no write method should not be included",paramNoWriteMethodMetaData);

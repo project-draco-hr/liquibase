@@ -1,3 +1,3 @@
 {
-  assertEquals("Drop Sequence",new DropSequenceChange().getChangeMetaData().getDescription());
+  assertEquals("dropSequence",new DropSequenceChange().getChangeMetaData().getName());
 }

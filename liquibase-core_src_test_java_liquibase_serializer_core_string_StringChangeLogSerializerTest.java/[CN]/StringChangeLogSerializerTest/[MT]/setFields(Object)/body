@@ -12,6 +12,8 @@
     }
  else     if (field.getName().equals("serialVersionUID")) {
     }
+ else     if (Modifier.isStatic(field.getModifiers())) {
+    }
  else     if (field.getType().equals(Logger.class)) {
     }
  else     if (field.getType().equals(ResourceAccessor.class)) {
@@ -42,6 +44,12 @@
  else     if (field.getType().equals(ColumnConfig.class)) {
       field.set(object,createColumnConfig());
     }
+ else     if (field.getType().equals(SequenceNextValueFunction.class)) {
+      field.set(object,createSequenceNextValueFunction());
+    }
+ else     if (field.getType().equals(SequenceCurrentValueFunction.class)) {
+      field.set(object,createSequenceCurrentValueFunction());
+    }
  else     if (field.getType().equals(DatabaseFunction.class)) {
       field.set(object,createDatabaseFunction());
     }
@@ -70,7 +78,7 @@
             collection=new TreeSet();
           }
  else {
-            throw new RuntimeException("Unknow collection type: " + field.getType().getName());
+            throw new RuntimeException("Unknown collection type: " + field.getType().getName());
           }
           if (typeToCreate.equals(ColumnConfig.class)) {
             collection.add(createColumnConfig());

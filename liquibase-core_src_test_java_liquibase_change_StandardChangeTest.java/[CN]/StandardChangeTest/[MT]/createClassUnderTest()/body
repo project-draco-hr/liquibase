@@ -1,4 +1,7 @@
 {
+  if (testChangeInstance != null) {
+    return testChangeInstance;
+  }
   String className=getClass().getName().replaceAll("Test$","");
   if (className.indexOf("Abstract") > 0) {
     return null;
