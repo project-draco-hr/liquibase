@@ -1,0 +1,5 @@
+{
+  multiRepresenters.put(DatabaseFunction.class,new AsStringRepresenter());
+  multiRepresenters.put(SequenceNextValueFunction.class,new AsStringRepresenter());
+  multiRepresenters.put(SequenceCurrentValueFunction.class,new AsStringRepresenter());
+}

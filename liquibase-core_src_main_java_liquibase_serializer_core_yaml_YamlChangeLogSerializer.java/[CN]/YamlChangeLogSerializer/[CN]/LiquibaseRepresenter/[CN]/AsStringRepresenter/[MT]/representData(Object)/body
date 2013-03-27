@@ -1,0 +1,3 @@
+{
+  return representScalar(Tag.STR,data.toString());
+}
