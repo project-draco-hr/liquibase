@@ -3,4 +3,4 @@ String description
 int priority
 String[] appliesTo
 Map<String,String> databaseNotes
-Map<String,ChangeParameterMetaData> parameters
+Set<ChangeParameterMetaData> parameters

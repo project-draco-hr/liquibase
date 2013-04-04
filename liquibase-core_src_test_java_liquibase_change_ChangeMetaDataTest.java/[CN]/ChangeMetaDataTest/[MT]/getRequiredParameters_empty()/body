@@ -1,0 +1,4 @@
+{
+  ChangeMetaData changeMetaData=new ChangeMetaData("x","y",1,null,null,null);
+  assertEquals(0,changeMetaData.getRequiredParameters(new H2Database()).size());
+}

@@ -1,0 +1,9 @@
+{
+  Assert.assertEquals("Set size does not match",expected.length,set.size());
+  for (  String string : expected) {
+    Assert.assertTrue("Missing expected element " + string,set.contains(string));
+  }
+  for (  String found : set) {
+    Assert.assertTrue("Unexpected element in set: " + found,Arrays.asList(expected).contains(found));
+  }
+}
