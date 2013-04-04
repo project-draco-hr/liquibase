@@ -1,0 +1,5 @@
+{
+  SequenceCurrentValueFunction function=new SequenceCurrentValueFunction("Sequence1");
+  setFields(function);
+  return function;
+}

@@ -15,6 +15,9 @@
  else     if (field.getName().equals("associatedWith")) {
     }
  else     if (String.class.isAssignableFrom(field.getType())) {
+      if (field.getName().equals("comment")) {
+        continue;
+      }
       field.set(change,"asdghasdgasdg");
       checkThatChecksumIsNew(change,seenCheckSums,field);
       field.set(change,"gsgasdgasdggasdg sdg a");
@@ -30,6 +33,12 @@
       field.set(change,6532);
       checkThatChecksumIsNew(change,seenCheckSums,field);
       field.set(change,-52352);
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+    }
+ else     if (SequenceNextValueFunction.class.isAssignableFrom(field.getType())) {
+      field.set(change,new SequenceNextValueFunction("Sequence1"));
+      checkThatChecksumIsNew(change,seenCheckSums,field);
+      field.set(change,new SequenceNextValueFunction("Sequence2"));
       checkThatChecksumIsNew(change,seenCheckSums,field);
     }
  else     if (DatabaseFunction.class.isAssignableFrom(field.getType())) {

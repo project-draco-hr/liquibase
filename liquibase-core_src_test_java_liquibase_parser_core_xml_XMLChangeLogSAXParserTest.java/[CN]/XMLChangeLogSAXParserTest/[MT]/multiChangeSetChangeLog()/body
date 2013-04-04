@@ -48,7 +48,7 @@
   change=changeSet.getChanges().get(0);
   assertTrue(change instanceof CustomChangeWrapper);
   CustomChangeWrapper wrapper=(CustomChangeWrapper)change;
-  wrapper.generateStatements(null);
+  wrapper.generateStatements(new MockDatabase());
   assertTrue(wrapper.getCustomChange() instanceof ExampleCustomSqlChange);
   ExampleCustomSqlChange exChg=(ExampleCustomSqlChange)wrapper.getCustomChange();
   assertEquals("table",exChg.getTableName());

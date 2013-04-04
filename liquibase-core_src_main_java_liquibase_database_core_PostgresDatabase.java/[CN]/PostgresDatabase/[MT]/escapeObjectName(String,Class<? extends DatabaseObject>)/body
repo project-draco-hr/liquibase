@@ -1,5 +1,5 @@
 {
-  if (quotingStrategy != ObjectQuotingStrategy.LEGACY) {
+  if (objectName == null || quotingStrategy != ObjectQuotingStrategy.LEGACY) {
     return super.escapeObjectName(objectName,objectType);
   }
   if (objectName.contains("-") || hasMixedCase(objectName) || startsWithNumeric(objectName)|| isReservedWord(objectName)) {

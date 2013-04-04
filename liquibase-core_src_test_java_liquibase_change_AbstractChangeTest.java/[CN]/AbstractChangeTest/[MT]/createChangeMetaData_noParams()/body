@@ -2,5 +2,5 @@
   ExampleParamlessAbstractChange change=new ExampleParamlessAbstractChange();
   ChangeMetaData changeMetaData=change.createChangeMetaData();
   Map<String,ChangeParameterMetaData> parameters=changeMetaData.getParameters();
-  assertEquals(0,parameters.size());
+  assertEquals(1,parameters.size());
 }
