@@ -1,0 +1,35 @@
+{
+  ChangeFactory changeFactory=ChangeFactory.getInstance();
+  for (  String changeName : changeFactory.getDefinedChanges()) {
+    for (    Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+      Change change=changeFactory.create(changeName);
+      if (!change.supports(database)) {
+        continue;
+      }
+      if (change.generateStatementsVolatile(database)) {
+        System.out.println("Cannot test " + changeName + " on "+ database);
+        continue;
+      }
+      ChangeMetaData changeMetaData=change.getChangeMetaData();
+      System.out.println("Change: " + changeName);
+      System.out.println("Database: " + database.getShortName());
+      System.out.println("Parameters: " + StringUtils.join(new TreeSet<String>(changeMetaData.getRequiredParameters(database).keySet()),","));
+      change.setResourceAccessor(new JUnitResourceAccessor());
+      for (      ChangeParameterMetaData param : changeMetaData.getRequiredParameters(database).values()) {
+        param.setValue(change,param.getExampleValue());
+      }
+      SqlStatement[] sqlStatements=change.generateStatements(database);
+      for (      SqlStatement statement : sqlStatements) {
+        Sql[] sql=SqlGeneratorFactory.getInstance().generateSql(statement,database);
+        if (sql == null) {
+          System.out.println("Null sql for " + statement);
+        }
+ else {
+          for (          Sql line : sql) {
+            System.out.println(line.toSql());
+          }
+        }
+      }
+    }
+  }
+}
