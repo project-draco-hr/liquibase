@@ -1,0 +1,9 @@
+{
+  String existingContent=readExistingValue();
+  if (existingContent.equals("") && StringUtils.trimToNull(stateContent.toString()) != null) {
+    save();
+  }
+ else {
+    assertEquals("Unexpected difference in " + stateFile.getAbsolutePath(),existingContent,stateContent.toString());
+  }
+}

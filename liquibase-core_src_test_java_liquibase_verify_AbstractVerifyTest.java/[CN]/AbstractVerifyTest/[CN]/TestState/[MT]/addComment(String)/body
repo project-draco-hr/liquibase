@@ -1,0 +1,3 @@
+{
+  stateContent.append(Pattern.compile("^",Pattern.MULTILINE).matcher(comment).replaceAll("-- ")).append("\n");
+}

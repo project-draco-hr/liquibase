@@ -1,0 +1,6 @@
+{
+  if (getErrorMessages().size() == 0) {
+    return "No errors";
+  }
+  return StringUtils.join(getErrorMessages(),"; ");
+}

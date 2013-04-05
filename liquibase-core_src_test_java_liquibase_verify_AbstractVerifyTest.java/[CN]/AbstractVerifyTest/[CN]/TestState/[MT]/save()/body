@@ -1,0 +1,7 @@
+{
+  savedStateDir.mkdirs();
+  BufferedWriter outputStream=new BufferedWriter(new FileWriter(stateFile));
+  outputStream.write(stateContent.toString());
+  outputStream.flush();
+  outputStream.close();
+}

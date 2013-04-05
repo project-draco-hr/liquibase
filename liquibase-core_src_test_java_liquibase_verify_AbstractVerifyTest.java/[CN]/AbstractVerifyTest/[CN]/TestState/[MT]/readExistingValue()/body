@@ -1,0 +1,12 @@
+{
+  StringBuilder content=new StringBuilder();
+  if (stateFile.exists()) {
+    BufferedReader reader=new BufferedReader(new FileReader(stateFile));
+    String line;
+    while ((line=reader.readLine()) != null) {
+      content.append(line).append("\n");
+    }
+    reader.close();
+  }
+  return content.toString();
+}

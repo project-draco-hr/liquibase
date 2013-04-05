@@ -1,0 +1,44 @@
+{
+  ChangeFactory changeFactory=ChangeFactory.getInstance();
+  for (  String changeName : changeFactory.getDefinedChanges()) {
+    for (    Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+      if (database.getShortName() == null) {
+        continue;
+      }
+      TestState state=new TestState(name.getMethodName(),changeName,database.getShortName(),TestState.Type.SQL);
+      Change change=changeFactory.create(changeName);
+      if (!change.supports(database)) {
+        continue;
+      }
+      if (change.generateStatementsVolatile(database)) {
+        continue;
+      }
+      ChangeMetaData changeMetaData=change.getChangeMetaData();
+      change.setResourceAccessor(new JUnitResourceAccessor());
+      for (      String paramName : new TreeSet<String>(changeMetaData.getRequiredParameters(database).keySet())) {
+        ChangeParameterMetaData param=changeMetaData.getParameters().get(paramName);
+        Object paramValue=param.getExampleValue();
+        String serializedValue;
+        serializedValue=formatParameter(paramValue);
+        state.addComment("Database: " + database.getShortName());
+        state.addComment("Change Parameter: " + param.getParameterName() + "="+ serializedValue);
+        param.setValue(change,paramValue);
+      }
+      ValidationErrors errors=change.validate(database);
+      assertFalse("Validation errors for " + changeMetaData.getName() + " on "+ database.getShortName()+ ": "+ errors.toString(),errors.hasErrors());
+      SqlStatement[] sqlStatements=change.generateStatements(database);
+      for (      SqlStatement statement : sqlStatements) {
+        Sql[] sql=SqlGeneratorFactory.getInstance().generateSql(statement,database);
+        if (sql == null) {
+          System.out.println("Null sql for " + statement + " on "+ database.getShortName());
+        }
+ else {
+          for (          Sql line : sql) {
+            state.addValue(line.toSql() + ";");
+          }
+        }
+      }
+      state.test();
+    }
+  }
+}

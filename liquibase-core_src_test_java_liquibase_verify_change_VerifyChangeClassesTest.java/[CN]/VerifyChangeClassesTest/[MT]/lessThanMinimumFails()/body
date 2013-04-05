@@ -1,0 +1,33 @@
+{
+  ChangeFactory changeFactory=ChangeFactory.getInstance();
+  for (  String changeName : changeFactory.getDefinedChanges()) {
+    for (    Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+      if (database.getShortName() == null) {
+        continue;
+      }
+      Change change=changeFactory.create(changeName);
+      if (!change.supports(database)) {
+        continue;
+      }
+      if (change.generateStatementsVolatile(database)) {
+        continue;
+      }
+      ChangeMetaData changeMetaData=change.getChangeMetaData();
+      change.setResourceAccessor(new JUnitResourceAccessor());
+      ArrayList<String> requiredParams=new ArrayList<String>(changeMetaData.getRequiredParameters(database).keySet());
+      for (      String paramName : requiredParams) {
+        ChangeParameterMetaData param=changeMetaData.getParameters().get(paramName);
+        Object paramValue=param.getExampleValue();
+        param.setValue(change,paramValue);
+      }
+      for (int i=0; i < requiredParams.size(); i++) {
+        String paramToRemove=requiredParams.get(i);
+        ChangeParameterMetaData paramToRemoveMetadata=changeMetaData.getParameters().get(paramToRemove);
+        Object currentValue=paramToRemoveMetadata.getCurrentValue(change);
+        paramToRemoveMetadata.setValue(change,null);
+        assertTrue(change.validate(database).hasErrors());
+        paramToRemoveMetadata.setValue(change,currentValue);
+      }
+    }
+  }
+}

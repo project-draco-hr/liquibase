@@ -1,6 +1,3 @@
 {
-  if (primaryKey == null) {
-    throw new LiquibaseException("primaryKey cannot be null.");
-  }
   this.primaryKey=primaryKey;
 }

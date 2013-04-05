@@ -1,0 +1,17 @@
+{
+  String serializedValue;
+  if (paramValue instanceof Collection) {
+    serializedValue="[";
+    for (    Object obj : (Collection)paramValue) {
+      serializedValue+=formatParameter(obj) + ", ";
+    }
+    serializedValue+="]";
+  }
+ else   if (paramValue instanceof LiquibaseSerializable) {
+    serializedValue=new StringChangeLogSerializer().serialize(((LiquibaseSerializable)paramValue),true);
+  }
+ else {
+    serializedValue=paramValue.toString();
+  }
+  return serializedValue;
+}
