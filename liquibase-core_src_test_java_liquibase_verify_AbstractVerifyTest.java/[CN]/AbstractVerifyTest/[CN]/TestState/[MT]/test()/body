@@ -4,6 +4,16 @@
     save();
   }
  else {
-    assertEquals("Unexpected difference in " + stateFile.getAbsolutePath(),existingContent,stateContent.toString());
+    try {
+      assertEquals("Unexpected difference in " + stateFile.getAbsolutePath(),existingContent,stateContent.toString());
+    }
+ catch (    ComparisonFailure e) {
+      if ("overwrite".equals(System.getProperty("liquibase.verify.mode"))) {
+        save();
+      }
+ else {
+        throw e;
+      }
+    }
   }
 }
