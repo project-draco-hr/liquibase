@@ -4,7 +4,7 @@
       public String getConfirmationMessage(){
         return null;
       }
-      public SqlStatement[] generateStatements(      Database database) throws UnsupportedChangeException {
+      public SqlStatement[] generateStatements(      Database database){
         return null;
       }
     }

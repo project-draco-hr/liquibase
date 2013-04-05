@@ -1,12 +1,12 @@
 {
   assertEquals(0,new ExampleAbstractChange(){
-    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+    @Override public SqlStatement[] generateStatements(    Database database){
       return null;
     }
   }
 .getAffectedDatabaseObjects(mock(Database.class)).size());
   assertEquals(0,new ExampleAbstractChange(){
-    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+    @Override public SqlStatement[] generateStatements(    Database database){
       return new SqlStatement[0];
     }
   }

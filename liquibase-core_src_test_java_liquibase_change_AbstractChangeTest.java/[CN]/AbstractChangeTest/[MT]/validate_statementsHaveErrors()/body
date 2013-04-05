@@ -11,7 +11,7 @@
   mockStatic(SqlGeneratorFactory.class);
   when(SqlGeneratorFactory.getInstance()).thenReturn(generatorFactory);
   ValidationErrors errors=new ExampleParamlessAbstractChange(){
-    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+    @Override public SqlStatement[] generateStatements(    Database database){
       return new SqlStatement[]{statement1Fails,statement2Fails,statementNoErrors};
     }
   }

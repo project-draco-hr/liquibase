@@ -35,18 +35,13 @@
           }
           change.setSql(finalCurrentSql);
           if (StringUtils.trimToNull(currentRollbackSql.toString()) != null) {
-            try {
-              if (currentRollbackSql.toString().trim().toLowerCase().matches("^not required.*")) {
-                changeSet.addRollbackChange(new EmptyChange());
-              }
- else {
-                RawSQLChange rollbackChange=new RawSQLChange();
-                rollbackChange.setSql(changeLogParameters.expandExpressions(currentRollbackSql.toString()));
-                changeSet.addRollbackChange(rollbackChange);
-              }
+            if (currentRollbackSql.toString().trim().toLowerCase().matches("^not required.*")) {
+              changeSet.addRollbackChange(new EmptyChange());
             }
- catch (            UnsupportedChangeException e) {
-              throw new RuntimeException(e);
+ else {
+              RawSQLChange rollbackChange=new RawSQLChange();
+              rollbackChange.setSql(changeLogParameters.expandExpressions(currentRollbackSql.toString()));
+              changeSet.addRollbackChange(rollbackChange);
             }
           }
         }
@@ -130,18 +125,13 @@
     if (changeSet != null) {
       change.setSql(changeLogParameters.expandExpressions(StringUtils.trimToNull(currentSql.toString())));
       if (StringUtils.trimToNull(currentRollbackSql.toString()) != null) {
-        try {
-          if (currentRollbackSql.toString().trim().toLowerCase().matches("^not required.*")) {
-            changeSet.addRollbackChange(new EmptyChange());
-          }
- else {
-            RawSQLChange rollbackChange=new RawSQLChange();
-            rollbackChange.setSql(changeLogParameters.expandExpressions(currentRollbackSql.toString()));
-            changeSet.addRollbackChange(rollbackChange);
-          }
+        if (currentRollbackSql.toString().trim().toLowerCase().matches("^not required.*")) {
+          changeSet.addRollbackChange(new EmptyChange());
         }
- catch (        UnsupportedChangeException e) {
-          throw new RuntimeException(e);
+ else {
+          RawSQLChange rollbackChange=new RawSQLChange();
+          rollbackChange.setSql(changeLogParameters.expandExpressions(currentRollbackSql.toString()));
+          changeSet.addRollbackChange(rollbackChange);
         }
       }
     }

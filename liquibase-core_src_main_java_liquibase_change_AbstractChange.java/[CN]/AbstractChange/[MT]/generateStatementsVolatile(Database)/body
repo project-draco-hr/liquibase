@@ -1,11 +1,5 @@
 {
-  SqlStatement[] statements;
-  try {
-    statements=generateStatements(database);
-  }
- catch (  UnsupportedChangeException e) {
-    return false;
-  }
+  SqlStatement[] statements=generateStatements(database);
   if (statements == null) {
     return false;
   }

@@ -1,12 +1,6 @@
 {
   Warnings warnings=new Warnings();
-  SqlStatement[] statements;
-  try {
-    statements=generateStatements(database);
-  }
- catch (  UnsupportedChangeException e) {
-    return warnings;
-  }
+  SqlStatement[] statements=generateStatements(database);
   if (statements == null) {
     return warnings;
   }

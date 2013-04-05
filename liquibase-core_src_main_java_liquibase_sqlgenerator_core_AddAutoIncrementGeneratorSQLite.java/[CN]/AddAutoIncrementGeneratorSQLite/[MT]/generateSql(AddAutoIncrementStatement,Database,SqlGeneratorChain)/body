@@ -27,8 +27,5 @@
  catch (  DatabaseException e) {
     e.printStackTrace();
   }
-catch (  UnsupportedChangeException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
   return statements.toArray(new Sql[statements.size()]);
 }

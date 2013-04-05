@@ -1,12 +1,12 @@
 {
   assertFalse(new ExampleAbstractChange(){
-    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+    @Override public SqlStatement[] generateStatements(    Database database){
       return null;
     }
   }
 .generateRollbackStatementsVolatile(mock(Database.class)));
   assertFalse(new ExampleAbstractChange(){
-    @Override public SqlStatement[] generateStatements(    Database database) throws UnsupportedChangeException {
+    @Override public SqlStatement[] generateStatements(    Database database){
       return new SqlStatement[0];
     }
   }

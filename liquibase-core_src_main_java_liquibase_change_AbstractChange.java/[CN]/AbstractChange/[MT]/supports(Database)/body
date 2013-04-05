@@ -2,19 +2,14 @@
   if (generateStatementsVolatile(database)) {
     return true;
   }
-  try {
-    SqlStatement[] statements=generateStatements(database);
-    if (statements == null) {
-      return true;
-    }
-    for (    SqlStatement statement : statements) {
-      if (!SqlGeneratorFactory.getInstance().supports(statement,database)) {
-        return false;
-      }
-    }
+  SqlStatement[] statements=generateStatements(database);
+  if (statements == null) {
+    return true;
   }
- catch (  UnsupportedChangeException e) {
-    return false;
+  for (  SqlStatement statement : statements) {
+    if (!SqlGeneratorFactory.getInstance().supports(statement,database)) {
+      return false;
+    }
   }
   return true;
 }

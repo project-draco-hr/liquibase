@@ -12,7 +12,7 @@
       statements.addAll(Arrays.asList(inverse.generateStatements(database)));
     }
   }
- catch (  UnsupportedChangeException e) {
+ catch (  LiquibaseException e) {
     throw new RollbackImpossibleException(e);
   }
   return statements.toArray(new SqlStatement[statements.size()]);
