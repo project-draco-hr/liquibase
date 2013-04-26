@@ -1,0 +1,6 @@
+{
+  if (changePropertyAnnotation == null) {
+    return SerializationType.NAMED_FIELD;
+  }
+  return changePropertyAnnotation.serializationType();
+}

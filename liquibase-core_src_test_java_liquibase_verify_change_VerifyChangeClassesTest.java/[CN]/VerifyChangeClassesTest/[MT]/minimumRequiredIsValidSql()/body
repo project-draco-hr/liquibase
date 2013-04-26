@@ -14,7 +14,7 @@
       if (change.generateStatementsVolatile(database)) {
         continue;
       }
-      ChangeMetaData changeMetaData=change.getChangeMetaData();
+      ChangeMetaData changeMetaData=ChangeFactory.getInstance().getChangeMetaData(change);
       change.setResourceAccessor(new JUnitResourceAccessor());
       for (      String paramName : new TreeSet<String>(changeMetaData.getRequiredParameters(database).keySet())) {
         ChangeParameterMetaData param=changeMetaData.getParameters().get(paramName);

@@ -10,8 +10,8 @@
       }
     }
   }
-  if (isValid && validDatabases != null && validDatabases.size() > 0) {
-    isValid=validDatabases.contains(currentDatabase.getShortName());
+  if (isValid) {
+    isValid=DatabaseList.definitionMatches(validDatabases,currentDatabase,true);
   }
   return isValid;
 }

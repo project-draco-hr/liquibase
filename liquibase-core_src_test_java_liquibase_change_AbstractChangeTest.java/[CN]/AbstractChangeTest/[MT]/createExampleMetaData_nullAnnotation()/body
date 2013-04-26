@@ -1,0 +1,3 @@
+{
+  assertNull(new ExampleAbstractChange().createExampleValueMetaData("x",null));
+}

@@ -1,0 +1,6 @@
+{
+  if (changePropertyAnnotation == null) {
+    return null;
+  }
+  return changePropertyAnnotation.mustEqualExisting();
+}

@@ -1,0 +1,37 @@
+{
+  if (requiredDatabases == null) {
+    requiredDatabases=new String[]{"COMPUTED"};
+  }
+  if (requiredDatabases.length == 1 && StringUtils.join(requiredDatabases,",").equals("COMPUTE")) {
+    List<String> computedRequired=new ArrayList<String>();
+    try {
+      for (      Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+        if (change.generateStatementsVolatile(database)) {
+          computedRequired=new ArrayList<String>(Arrays.asList("none"));
+          break;
+        }
+ else {
+          Change testChange=change.getClass().newInstance();
+          ValidationErrors originalErrors=getStatementErrors(testChange,database);
+          this.setValue(change,this.getExampleValue());
+          ValidationErrors finalErrors=getStatementErrors(testChange,database);
+          if (finalErrors.getRequiredErrorMessages().size() == originalErrors.getRequiredErrorMessages().size()) {
+            computedRequired.add(database.getShortName());
+          }
+        }
+      }
+      if (computedRequired.size() == DatabaseFactory.getInstance().getImplementedDatabases().size()) {
+        requiredDatabases=new String[]{"none"};
+      }
+ else {
+        requiredDatabases=computedRequired.toArray(new String[computedRequired.size()]);
+      }
+    }
+ catch (    Exception e) {
+      requiredDatabases=new String[]{"none"};
+    }
+  }
+  this.requiredForDatabase=new HashSet<String>(Arrays.asList(requiredDatabases));
+  this.requiredForDatabase.remove("none");
+  this.requiredForDatabase=Collections.unmodifiableSet(this.requiredForDatabase);
+}

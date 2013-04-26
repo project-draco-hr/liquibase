@@ -1,3 +1,3 @@
 {
-  assertEquals("loadData",new LoadDataChange().getChangeMetaData().getName());
+  assertEquals("loadData",ChangeFactory.getInstance().getChangeMetaData(new LoadDataChange()).getName());
 }

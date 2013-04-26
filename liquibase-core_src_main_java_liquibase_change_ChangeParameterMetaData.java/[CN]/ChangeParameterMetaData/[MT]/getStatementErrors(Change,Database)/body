@@ -1,0 +1,8 @@
+{
+  ValidationErrors errors=new ValidationErrors();
+  SqlStatement[] statements=testChange.generateStatements(database);
+  for (  SqlStatement statement : statements) {
+    errors.addAll(SqlGeneratorFactory.getInstance().validate(statement,database));
+  }
+  return errors;
+}

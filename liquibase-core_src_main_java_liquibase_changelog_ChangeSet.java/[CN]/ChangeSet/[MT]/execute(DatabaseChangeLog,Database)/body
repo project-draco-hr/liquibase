@@ -95,7 +95,7 @@ catch (    PreconditionErrorException e) {
       }
       log.debug("Reading ChangeSet: " + toString());
       for (      Change change : getChanges()) {
-        if (change.includes(database)) {
+        if ((!(change instanceof DbmsTargetedChange)) || DatabaseList.definitionMatches(((DbmsTargetedChange)change).getDbms(),database,true)) {
           database.executeStatements(change,databaseChangeLog,sqlVisitors);
           log.debug(change.getConfirmationMessage());
         }

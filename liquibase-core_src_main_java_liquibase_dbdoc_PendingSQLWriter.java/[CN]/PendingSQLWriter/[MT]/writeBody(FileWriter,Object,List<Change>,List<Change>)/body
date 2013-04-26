@@ -20,7 +20,7 @@
         thisChangeSet.execute(databaseChangeLog,this.database);
       }
  catch (      MigrationFailedException e) {
-        fileWriter.append("EXECUTION ERROR: ").append(change.getChangeMetaData().getDescription()).append(": ").append(e.getMessage()).append("\n\n");
+        fileWriter.append("EXECUTION ERROR: ").append(ChangeFactory.getInstance().getChangeMetaData(change).getDescription()).append(": ").append(e.getMessage()).append("\n\n");
       }
     }
     fileWriter.append("</pre></code>");

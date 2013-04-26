@@ -7,7 +7,7 @@
   try {
     for (    Change inverse : inverses) {
       if (!inverse.supports(database)) {
-        throw new RollbackImpossibleException(inverse.getChangeMetaData().getName() + " is not supported on " + database.getShortName());
+        throw new RollbackImpossibleException(ChangeFactory.getInstance().getChangeMetaData(inverse).getName() + " is not supported on " + database.getShortName());
       }
       statements.addAll(Arrays.asList(inverse.generateStatements(database)));
     }

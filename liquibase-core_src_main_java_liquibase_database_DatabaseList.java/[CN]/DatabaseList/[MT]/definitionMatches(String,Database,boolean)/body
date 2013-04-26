@@ -1,0 +1,3 @@
+{
+  return definitionMatches(StringUtils.splitAndTrim(StringUtils.trimToNull(definition),","),database,returnValueIfEmpty);
+}

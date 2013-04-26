@@ -1,9 +1,0 @@
-String parameterName
-String displayName
-String description
-String exampleValue
-String since
-Type dataType
-String[] requiredForDatabase
-String mustEqualExisting
-LiquibaseSerializable.SerializationType serializationType

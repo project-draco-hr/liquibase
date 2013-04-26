@@ -1,5 +1,8 @@
 {
   Warnings warnings=new Warnings();
+  if (generateStatementsVolatile(database)) {
+    return warnings;
+  }
   SqlStatement[] statements=generateStatements(database);
   if (statements == null) {
     return warnings;
@@ -9,7 +12,7 @@
       warnings.addAll(SqlGeneratorFactory.getInstance().warn(statement,database));
     }
  else     if (statement.skipOnUnsupported()) {
-      warnings.addWarning(statement.getClass().getName() + " is not supported on " + database.getShortName()+ ", but "+ getChangeMetaData().getName()+ " will still execute");
+      warnings.addWarning(statement.getClass().getName() + " is not supported on " + database.getShortName()+ ", but "+ ChangeFactory.getInstance().getChangeMetaData(this).getName()+ " will still execute");
     }
   }
   return warnings;

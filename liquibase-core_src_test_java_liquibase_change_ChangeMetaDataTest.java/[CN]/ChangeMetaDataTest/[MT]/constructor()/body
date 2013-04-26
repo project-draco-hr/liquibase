@@ -1,6 +1,6 @@
 {
   HashSet<ChangeParameterMetaData> params=new HashSet<ChangeParameterMetaData>();
-  params.add(new ChangeParameterMetaData("a","a",null,null,null,Integer.class,null,null,null));
+  params.add(new ChangeParameterMetaData("a","a",null,null,null,Integer.class,null,null,null,null,null));
   HashMap<String,String> notes=new HashMap<String,String>();
   notes.put("db1","note1");
   notes.put("db2","note2");

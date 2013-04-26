@@ -1,6 +1,7 @@
 {
   if (instance == null) {
     instance=new ChangeFactory();
+    instance.init();
   }
   return instance;
 }

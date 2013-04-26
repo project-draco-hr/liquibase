@@ -12,7 +12,7 @@
       if (change.generateStatementsVolatile(database)) {
         continue;
       }
-      ChangeMetaData changeMetaData=change.getChangeMetaData();
+      ChangeMetaData changeMetaData=ChangeFactory.getInstance().getChangeMetaData(change);
       change.setResourceAccessor(new JUnitResourceAccessor());
       ArrayList<String> requiredParams=new ArrayList<String>(changeMetaData.getRequiredParameters(database).keySet());
       for (      String paramName : requiredParams) {

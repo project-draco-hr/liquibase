@@ -1,14 +1,14 @@
 {
   ValidationErrors changeValidationErrors=new ValidationErrors();
-  for (  ChangeParameterMetaData param : getChangeMetaData().getParameters().values()) {
+  for (  ChangeParameterMetaData param : ChangeFactory.getInstance().getChangeMetaData(this).getParameters().values()) {
     if (param.isRequiredFor(database) && param.getCurrentValue(this) == null) {
-      changeValidationErrors.addError(param.getParameterName() + " is required for " + getChangeMetaData().getName()+ " on "+ database.getShortName());
+      changeValidationErrors.addError(param.getParameterName() + " is required for " + ChangeFactory.getInstance().getChangeMetaData(this).getName()+ " on "+ database.getShortName());
     }
   }
   if (changeValidationErrors.hasErrors()) {
     return changeValidationErrors;
   }
-  String unsupportedWarning=getChangeMetaData().getName() + " is not supported on " + database.getShortName();
+  String unsupportedWarning=ChangeFactory.getInstance().getChangeMetaData(this).getName() + " is not supported on " + database.getShortName();
   boolean sawUnsupportedError=false;
   SqlStatement[] statements;
   statements=generateStatements(database);

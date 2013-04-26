@@ -1,0 +1,6 @@
+{
+  if (!metaDataByClass.containsKey(change.getClass())) {
+    metaDataByClass.put(change.getClass(),change.createChangeMetaData());
+  }
+  return metaDataByClass.get(change.getClass());
+}

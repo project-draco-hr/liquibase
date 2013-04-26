@@ -1,38 +1,33 @@
 {
-  String displayName=parameterName.replaceAll("([A-Z])"," $1");
-  displayName=displayName.substring(0,1).toUpperCase() + displayName.substring(1);
-  PropertyDescriptor property=null;
-  for (  PropertyDescriptor prop : Introspector.getBeanInfo(this.getClass()).getPropertyDescriptors()) {
-    if (prop.getDisplayName().equals(parameterName)) {
-      property=prop;
-      break;
+  try {
+    String displayName=parameterName.replaceAll("([A-Z])"," $1");
+    displayName=displayName.substring(0,1).toUpperCase() + displayName.substring(1);
+    PropertyDescriptor property=null;
+    for (    PropertyDescriptor prop : Introspector.getBeanInfo(this.getClass()).getPropertyDescriptors()) {
+      if (prop.getDisplayName().equals(parameterName)) {
+        property=prop;
+        break;
+      }
     }
+    if (property == null) {
+      throw new UnexpectedLiquibaseException("Could not find property " + parameterName);
+    }
+    Method readMethod=property.getReadMethod();
+    if (readMethod == null) {
+      readMethod=getClass().getMethod("is" + StringUtils.upperCaseFirst(property.getName()));
+    }
+    Type type=readMethod.getGenericReturnType();
+    DatabaseChangeProperty changePropertyAnnotation=readMethod.getAnnotation(DatabaseChangeProperty.class);
+    String mustEqualExisting=createMustEqualExistingMetaData(parameterName,changePropertyAnnotation);
+    String description=createDescriptionMetaData(parameterName,changePropertyAnnotation);
+    String example=createExampleValueMetaData(parameterName,changePropertyAnnotation);
+    String since=createSinceMetaData(parameterName,changePropertyAnnotation);
+    SerializationType serializationType=createSerializationTypeMetaData(parameterName,changePropertyAnnotation);
+    String[] requiredForDatabase=createRequiredDatabasesMetaData(parameterName,changePropertyAnnotation);
+    String[] supportsDatabase=createSupportedDatabasesMetaData(parameterName,changePropertyAnnotation);
+    return new ChangeParameterMetaData(parameterName,displayName,description,example,since,type,requiredForDatabase,supportsDatabase,mustEqualExisting,serializationType,this);
   }
-  if (property == null) {
-    throw new UnexpectedLiquibaseException("Could not find property " + parameterName);
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
   }
-  Method readMethod=property.getReadMethod();
-  if (readMethod == null) {
-    readMethod=getClass().getMethod("is" + StringUtils.upperCaseFirst(property.getName()));
-  }
-  Type type=readMethod.getGenericReturnType();
-  DatabaseChangeProperty changePropertyAnnotation=readMethod.getAnnotation(DatabaseChangeProperty.class);
-  String[] requiredForDatabase;
-  String mustEqualExisting=null;
-  String description=null;
-  String example=null;
-  String since=null;
-  SerializationType serializationType=SerializationType.NAMED_FIELD;
-  if (changePropertyAnnotation == null) {
-    requiredForDatabase=new String[]{"none"};
-  }
- else {
-    requiredForDatabase=changePropertyAnnotation.requiredForDatabase();
-    mustEqualExisting=changePropertyAnnotation.mustEqualExisting();
-    serializationType=changePropertyAnnotation.serializationType();
-    description=StringUtils.trimToNull(changePropertyAnnotation.description());
-    example=StringUtils.trimToNull(changePropertyAnnotation.exampleValue());
-    since=StringUtils.trimToNull(changePropertyAnnotation.since());
-  }
-  return new ChangeParameterMetaData(parameterName,displayName,description,example,since,type,requiredForDatabase,mustEqualExisting,serializationType);
 }

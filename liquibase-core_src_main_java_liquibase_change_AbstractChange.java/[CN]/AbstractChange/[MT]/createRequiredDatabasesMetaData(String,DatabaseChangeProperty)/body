@@ -1,0 +1,8 @@
+{
+  if (changePropertyAnnotation == null) {
+    return new String[]{"COMPUTE"};
+  }
+ else {
+    return changePropertyAnnotation.requiredForDatabase();
+  }
+}

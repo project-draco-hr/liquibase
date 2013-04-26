@@ -1,0 +1,5 @@
+{
+  DatabaseChangeProperty property=mock(DatabaseChangeProperty.class);
+  when(property.mustEqualExisting()).thenReturn("table");
+  assertEquals("table",new ExampleAbstractChange().createMustEqualExistingMetaData("x",property));
+}

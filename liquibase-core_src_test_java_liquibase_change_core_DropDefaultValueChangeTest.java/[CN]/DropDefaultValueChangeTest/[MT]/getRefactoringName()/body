@@ -1,3 +1,3 @@
 {
-  assertEquals("dropDefaultValue",new DropDefaultValueChange().getChangeMetaData().getName());
+  assertEquals("dropDefaultValue",ChangeFactory.getInstance().getChangeMetaData(new DropDefaultValueChange()).getName());
 }

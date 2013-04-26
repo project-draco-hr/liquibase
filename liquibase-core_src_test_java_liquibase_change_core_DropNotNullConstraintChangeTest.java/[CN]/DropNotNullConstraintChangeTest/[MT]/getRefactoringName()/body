@@ -1,3 +1,3 @@
 {
-  assertEquals("dropNotNullConstraint",new DropNotNullConstraintChange().getChangeMetaData().getName());
+  assertEquals("dropNotNullConstraint",ChangeFactory.getInstance().getChangeMetaData(new DropNotNullConstraintChange()).getName());
 }

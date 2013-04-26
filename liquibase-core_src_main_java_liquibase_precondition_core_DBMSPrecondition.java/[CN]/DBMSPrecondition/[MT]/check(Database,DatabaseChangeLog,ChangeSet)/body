@@ -1,7 +1,7 @@
 {
   try {
     String dbType=database.getShortName();
-    if (!type.equals(dbType)) {
+    if (!DatabaseList.definitionMatches(this.type,database,false)) {
       throw new PreconditionFailedException("DBMS Precondition failed: expected " + type + ", got "+ dbType,changeLog,this);
     }
   }

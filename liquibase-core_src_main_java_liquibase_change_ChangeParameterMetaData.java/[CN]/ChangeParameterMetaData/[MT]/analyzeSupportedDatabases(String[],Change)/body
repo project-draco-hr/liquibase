@@ -1,0 +1,37 @@
+{
+  if (supportedDatabases == null) {
+    supportedDatabases=new String[]{"COMPUTED"};
+  }
+  if (supportedDatabases.length == 1 && StringUtils.join(supportedDatabases,",").equals("COMPUTE")) {
+    List<String> computedSupported=new ArrayList<String>();
+    try {
+      for (      Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+        if (change.generateStatementsVolatile(database)) {
+          computedSupported=new ArrayList<String>(Arrays.asList("all"));
+          break;
+        }
+ else {
+          Change testChange=change.getClass().newInstance();
+          ValidationErrors originalErrors=getStatementErrors(testChange,database);
+          this.setValue(change,this.getExampleValue());
+          ValidationErrors finalErrors=getStatementErrors(testChange,database);
+          if (finalErrors.getUnsupportedErrorMessages().size() == originalErrors.getUnsupportedErrorMessages().size()) {
+            computedSupported.add(database.getShortName());
+          }
+        }
+      }
+      if (computedSupported.size() == DatabaseFactory.getInstance().getImplementedDatabases().size()) {
+        supportedDatabases=new String[]{"all"};
+      }
+ else {
+        supportedDatabases=computedSupported.toArray(new String[computedSupported.size()]);
+      }
+    }
+ catch (    Exception e) {
+      supportedDatabases=new String[]{"all"};
+    }
+  }
+  this.supportedDatabases=new HashSet<String>(Arrays.asList(supportedDatabases));
+  this.supportedDatabases.remove("none");
+  this.supportedDatabases=Collections.unmodifiableSet(this.supportedDatabases);
+}

@@ -1,0 +1,18 @@
+{
+  List<List<String>> returnList=new LinkedList<List<String>>();
+  if (baseSet.isEmpty()) {
+    returnList.add(new ArrayList<String>());
+    return returnList;
+  }
+  List<String> list=new ArrayList<String>(baseSet);
+  String head=list.get(0);
+  List<String> rest=new ArrayList<String>(list.subList(1,list.size()));
+  for (  List<String> set : powerSet(rest)) {
+    List<String> newSet=new ArrayList<String>();
+    newSet.add(head);
+    newSet.addAll(set);
+    returnList.add(newSet);
+    returnList.add(set);
+  }
+  return returnList;
+}

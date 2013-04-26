@@ -1,0 +1,59 @@
+{
+  ChangeFactory changeFactory=ChangeFactory.getInstance();
+  for (  String changeName : changeFactory.getDefinedChanges()) {
+    for (    Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+      if (database.getShortName() == null) {
+        continue;
+      }
+      TestState state=new TestState(name.getMethodName(),changeName,database.getShortName(),TestState.Type.SQL);
+      state.addComment("Database: " + database.getShortName());
+      Change baseChange=changeFactory.create(changeName);
+      if (!baseChange.supports(database)) {
+        continue;
+      }
+      if (baseChange.generateStatementsVolatile(database)) {
+        continue;
+      }
+      ChangeMetaData changeMetaData=ChangeFactory.getInstance().getChangeMetaData(baseChange);
+      ArrayList<String> optionalParameters=new ArrayList<String>(changeMetaData.getOptionalParameters(database).keySet());
+      Collections.sort(optionalParameters);
+      List<List<String>> paramLists=powerSet(optionalParameters);
+      Collections.sort(paramLists,new Comparator<List<String>>(){
+        public int compare(        List<String> o1,        List<String> o2){
+          int comp=Integer.valueOf(o1.size()).compareTo(o2.size());
+          if (comp == 0) {
+            comp=StringUtils.join(o1,",").compareTo(StringUtils.join(o2,","));
+          }
+          return comp;
+        }
+      }
+);
+      for (      List<String> permutation : paramLists) {
+        System.out.println(StringUtils.join(permutation,","));
+        Change change=changeFactory.create(changeName);
+        change.setResourceAccessor(new JUnitResourceAccessor());
+        for (        String paramName : new TreeSet<String>(changeMetaData.getRequiredParameters(database).keySet())) {
+          ChangeParameterMetaData param=changeMetaData.getParameters().get(paramName);
+          Object paramValue=param.getExampleValue();
+          String serializedValue;
+          serializedValue=formatParameter(paramValue);
+          state.addComment("Required Change Parameter: " + param.getParameterName() + "="+ serializedValue);
+          param.setValue(change,paramValue);
+        }
+        for (        String paramName : permutation) {
+          ChangeParameterMetaData param=changeMetaData.getParameters().get(paramName);
+          if (!param.supports(database)) {
+            continue;
+          }
+          Object paramValue=param.getExampleValue();
+          String serializedValue;
+          serializedValue=formatParameter(paramValue);
+          state.addComment("Optional Change Parameter: " + param.getParameterName() + "="+ serializedValue);
+          param.setValue(change,paramValue);
+        }
+        ValidationErrors errors=change.validate(database);
+        assertFalse("Validation errors for " + changeMetaData.getName() + " on "+ database.getShortName()+ ": "+ errors.toString(),errors.hasErrors());
+      }
+    }
+  }
+}

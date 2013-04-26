@@ -1,3 +1,3 @@
 {
-  assertEquals("addAutoIncrement",new AddAutoIncrementChange().getChangeMetaData().getName());
+  assertEquals("addAutoIncrement",ChangeFactory.getInstance().getChangeMetaData(new AddAutoIncrementChange()).getName());
 }

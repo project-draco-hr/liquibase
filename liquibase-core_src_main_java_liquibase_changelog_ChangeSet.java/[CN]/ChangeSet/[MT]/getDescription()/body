@@ -13,11 +13,11 @@
  else     if (changeCount > 1) {
       returnString.append(" (x").append(changeCount).append(")");
       returnString.append(", ");
-      returnString.append(change.getChangeMetaData().getDescription());
+      returnString.append(ChangeFactory.getInstance().getChangeMetaData(change).getDescription());
       changeCount=1;
     }
  else {
-      returnString.append(", ").append(change.getChangeMetaData().getDescription());
+      returnString.append(", ").append(ChangeFactory.getInstance().getChangeMetaData(change).getDescription());
       changeCount=1;
     }
     lastChangeClass=change.getClass();

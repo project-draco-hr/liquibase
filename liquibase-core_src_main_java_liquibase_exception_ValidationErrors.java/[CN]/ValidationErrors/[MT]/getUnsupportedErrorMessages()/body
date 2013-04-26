@@ -1,0 +1,9 @@
+{
+  List<String> unsupportedErrorMessages=new ArrayList<String>();
+  for (  String message : errorMessages) {
+    if (message.contains(" is not allowed on ")) {
+      unsupportedErrorMessages.add(message);
+    }
+  }
+  return Collections.unmodifiableList(unsupportedErrorMessages);
+}

@@ -1,5 +1,5 @@
 {
   CreateTableChange change=new CreateTableChange();
-  ChangeParameterMetaData badParamMetaData=new ChangeParameterMetaData("badParameter","Doesn't really exist",null,null,null,Integer.class,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
+  ChangeParameterMetaData badParamMetaData=new ChangeParameterMetaData("badParameter","Doesn't really exist",null,null,null,Integer.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD,null);
   badParamMetaData.getCurrentValue(change);
 }

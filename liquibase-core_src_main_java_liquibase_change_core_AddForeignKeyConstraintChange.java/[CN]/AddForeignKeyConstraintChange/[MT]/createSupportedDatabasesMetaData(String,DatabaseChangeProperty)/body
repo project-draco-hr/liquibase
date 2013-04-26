@@ -1,0 +1,14 @@
+{
+  if (parameterName.equals("deferrable") || parameterName.equals("initiallyDeferred")) {
+    List<String> supported=new ArrayList<String>();
+    for (    Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+      if (database.supportsInitiallyDeferrableColumns()) {
+        supported.add(database.getShortName());
+      }
+    }
+    return supported.toArray(new String[supported.size()]);
+  }
+ else {
+    return super.createSupportedDatabasesMetaData(parameterName,changePropertyAnnotation);
+  }
+}

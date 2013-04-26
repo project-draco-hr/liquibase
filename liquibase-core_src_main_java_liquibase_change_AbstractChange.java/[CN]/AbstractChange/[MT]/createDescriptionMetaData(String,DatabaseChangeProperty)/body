@@ -1,0 +1,6 @@
+{
+  if (changePropertyAnnotation == null) {
+    return null;
+  }
+  return StringUtils.trimToNull(changePropertyAnnotation.description());
+}

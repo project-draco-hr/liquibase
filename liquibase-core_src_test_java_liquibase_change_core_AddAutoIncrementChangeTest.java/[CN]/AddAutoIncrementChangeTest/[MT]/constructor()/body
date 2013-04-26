@@ -1,4 +1,4 @@
 {
   AddAutoIncrementChange change=new AddAutoIncrementChange();
-  assertEquals("column",change.getChangeMetaData().getAppliesTo().iterator().next());
+  assertEquals("column",ChangeFactory.getInstance().getChangeMetaData(change).getAppliesTo().iterator().next());
 }

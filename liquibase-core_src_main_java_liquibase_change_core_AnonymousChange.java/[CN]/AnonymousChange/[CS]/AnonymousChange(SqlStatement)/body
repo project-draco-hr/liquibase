@@ -1,3 +1,0 @@
-{
-  this.statements.addAll(Arrays.asList(statement));
-}

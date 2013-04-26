@@ -1,3 +1,3 @@
 {
-  assertEquals("renameColumn",refactoring.getChangeMetaData().getName());
+  assertEquals("renameColumn",ChangeFactory.getInstance().getChangeMetaData(refactoring).getName());
 }

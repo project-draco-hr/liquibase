@@ -1,0 +1,6 @@
+{
+  org.junit.Assert.assertEquals("Set size does not match",expected.length,array.length);
+  for (int i=0; i < expected.length; i++) {
+    org.junit.Assert.assertEquals("Difference in element " + i,expected[i],array[i]);
+  }
+}

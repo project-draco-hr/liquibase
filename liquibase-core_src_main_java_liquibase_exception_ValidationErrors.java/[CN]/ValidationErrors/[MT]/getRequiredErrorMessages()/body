@@ -1,0 +1,9 @@
+{
+  List<String> requiredErrorMessages=new ArrayList<String>();
+  for (  String message : errorMessages) {
+    if (message.contains("is required")) {
+      requiredErrorMessages.add(message);
+    }
+  }
+  return Collections.unmodifiableList(requiredErrorMessages);
+}

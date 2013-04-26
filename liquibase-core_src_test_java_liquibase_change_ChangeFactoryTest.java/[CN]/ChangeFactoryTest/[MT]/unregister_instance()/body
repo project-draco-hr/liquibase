@@ -7,6 +7,6 @@
   factory.register(change.getClass());
   factory.register(DropTableChange.class);
   assertEquals(3,factory.getRegistry().size());
-  factory.unregister(change.getChangeMetaData().getName());
+  factory.unregister(ChangeFactory.getInstance().getChangeMetaData(change).getName());
   assertEquals(2,factory.getRegistry().size());
 }
