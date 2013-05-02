@@ -1,9 +1,9 @@
 {
   HashSet<ChangeParameterMetaData> parameters=new HashSet<ChangeParameterMetaData>();
-  parameters.add(new ChangeParameterMetaData("noneRequired","x",null,null,null,Integer.class,new String[]{"none"},null,null,null,null));
-  parameters.add(new ChangeParameterMetaData("allRequired","x",null,null,null,Integer.class,new String[]{"all"},null,null,null,null));
-  parameters.add(new ChangeParameterMetaData("h2Required","x",null,null,null,Integer.class,new String[]{"h2"},null,null,null,null));
-  parameters.add(new ChangeParameterMetaData("oracleRequired","x",null,null,null,Integer.class,new String[]{"oracle"},null,null,null,null));
+  parameters.add(new ChangeParameterMetaData(null,"noneRequired","x",null,null,null,Integer.class,new String[]{"none"},null,null,null));
+  parameters.add(new ChangeParameterMetaData(null,"allRequired","x",null,null,null,Integer.class,new String[]{"all"},null,null,null));
+  parameters.add(new ChangeParameterMetaData(null,"h2Required","x",null,null,null,Integer.class,new String[]{"h2"},null,null,null));
+  parameters.add(new ChangeParameterMetaData(null,"oracleRequired","x",null,null,null,Integer.class,new String[]{"oracle"},null,null,null));
   ChangeMetaData changeMetaData=new ChangeMetaData("x","y",1,null,null,parameters);
   assertSetsEqual(new String[]{"allRequired","h2Required"},changeMetaData.getRequiredParameters(new H2Database()).keySet());
   assertSetsEqual(new String[]{"allRequired","oracleRequired"},changeMetaData.getRequiredParameters(new OracleDatabase()).keySet());

@@ -1,0 +1,42 @@
+{
+  if (supportedDatabases == null) {
+    supportedDatabases=new String[]{ChangeParameterMetaData.COMPUTE};
+  }
+  Set<String> computedDatabases=new HashSet<String>();
+  if (supportedDatabases.length == 1 && StringUtils.join(supportedDatabases,",").equals(ChangeParameterMetaData.COMPUTE)) {
+    int validDatabases=0;
+    for (    Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+      if (database.getShortName() == null || database.getShortName().equals("unsupported")) {
+        continue;
+      }
+      if (!change.supports(database)) {
+        continue;
+      }
+      try {
+        if (!change.generateStatementsVolatile(database)) {
+          Change testChange=change.getClass().newInstance();
+          ValidationErrors originalErrors=getStatementErrors(testChange,database);
+          this.setValue(testChange,this.getExampleValue());
+          ValidationErrors finalErrors=getStatementErrors(testChange,database);
+          if (finalErrors.getUnsupportedErrorMessages().size() == 0 || finalErrors.getUnsupportedErrorMessages().size() == originalErrors.getUnsupportedErrorMessages().size()) {
+            computedDatabases.add(database.getShortName());
+          }
+          validDatabases++;
+        }
+      }
+ catch (      Exception ignore) {
+      }
+    }
+    if (validDatabases == 0) {
+      return new HashSet<String>(Arrays.asList("all"));
+    }
+ else     if (computedDatabases.size() == validDatabases) {
+      computedDatabases=new HashSet<String>(Arrays.asList("all"));
+    }
+    computedDatabases.remove("none");
+    return computedDatabases;
+  }
+ else {
+    return new HashSet<String>(Arrays.asList(supportedDatabases));
+  }
+}

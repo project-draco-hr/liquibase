@@ -1,3 +1,4 @@
+Change change
 String parameterName
 String displayName
 String description
@@ -8,4 +9,3 @@ String[] requiredForDatabase
 String[] supportedDatabases
 String mustEqualExisting
 LiquibaseSerializable.SerializationType serializationType
-Change change

@@ -11,6 +11,7 @@
   if (dataType == null) {
     throw new UnexpectedLiquibaseException("Unexpected null dataType");
   }
+  this.change=change;
   this.parameterName=parameterName;
   this.displayName=displayName;
   this.description=description;
@@ -24,6 +25,6 @@
   this.mustEqualExisting=mustEqualExisting;
   this.serializationType=serializationType;
   this.since=since;
-  analyzeSupportedDatabases(supportedDatabases,change);
-  analyzeRequiredDatabases(requiredForDatabase,change);
+  this.supportedDatabases=Collections.unmodifiableSet(analyzeSupportedDatabases(supportedDatabases));
+  this.requiredForDatabase=Collections.unmodifiableSet(analyzeRequiredDatabases(requiredForDatabase));
 }

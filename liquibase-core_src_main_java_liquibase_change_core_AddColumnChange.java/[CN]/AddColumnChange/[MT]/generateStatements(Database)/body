@@ -1,5 +1,8 @@
 {
   List<SqlStatement> sql=new ArrayList<SqlStatement>();
+  if (getColumns().size() == 0) {
+    return new SqlStatement[]{new AddColumnStatement(catalogName,schemaName,tableName,null,null,null)};
+  }
   for (  ColumnConfig column : getColumns()) {
     Set<ColumnConstraint> constraints=new HashSet<ColumnConstraint>();
     ConstraintsConfig constraintsConfig=column.getConstraints();

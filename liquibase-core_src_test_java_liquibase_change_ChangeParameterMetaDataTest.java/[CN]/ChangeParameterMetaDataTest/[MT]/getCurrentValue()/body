@@ -2,9 +2,9 @@
   CreateTableChange change=new CreateTableChange();
   change.setTableName("newTable");
   change.setCatalogName("newCatalog");
-  ChangeParameterMetaData tableNameMetaData=new ChangeParameterMetaData("tableName","New Table",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD,null);
-  ChangeParameterMetaData catalogNameMetaData=new ChangeParameterMetaData("catalogName","New Catalog",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD,null);
-  ChangeParameterMetaData remarksMetaData=new ChangeParameterMetaData("remarks","Remarks",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD,null);
+  ChangeParameterMetaData tableNameMetaData=new ChangeParameterMetaData(null,"tableName","New Table",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
+  ChangeParameterMetaData catalogNameMetaData=new ChangeParameterMetaData(null,"catalogName","New Catalog",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
+  ChangeParameterMetaData remarksMetaData=new ChangeParameterMetaData(null,"remarks","Remarks",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
   assertEquals("newTable",tableNameMetaData.getCurrentValue(change));
   assertEquals("newCatalog",catalogNameMetaData.getCurrentValue(change));
   assertNull(remarksMetaData.getCurrentValue(change));

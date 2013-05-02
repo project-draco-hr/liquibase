@@ -7,5 +7,5 @@
   standardDescriptions.put("schemaName","Name of the schema");
   standardDescriptions.put("catalogName","Name of the catalog");
   standardDescriptions.put("columnName","Name of the column");
-  return standardDescriptions.get(parameterName);
+  return StringUtils.trimToEmpty(standardDescriptions.get(parameterName));
 }

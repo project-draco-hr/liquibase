@@ -25,7 +25,7 @@
     SerializationType serializationType=createSerializationTypeMetaData(parameterName,changePropertyAnnotation);
     String[] requiredForDatabase=createRequiredDatabasesMetaData(parameterName,changePropertyAnnotation);
     String[] supportsDatabase=createSupportedDatabasesMetaData(parameterName,changePropertyAnnotation);
-    return new ChangeParameterMetaData(parameterName,displayName,description,example,since,type,requiredForDatabase,supportsDatabase,mustEqualExisting,serializationType,this);
+    return new ChangeParameterMetaData(this,parameterName,displayName,description,example,since,type,requiredForDatabase,supportsDatabase,mustEqualExisting,serializationType);
   }
  catch (  Exception e) {
     throw new UnexpectedLiquibaseException(e);

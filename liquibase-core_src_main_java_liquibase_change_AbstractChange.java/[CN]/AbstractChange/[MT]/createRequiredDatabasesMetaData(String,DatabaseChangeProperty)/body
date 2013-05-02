@@ -1,6 +1,6 @@
 {
   if (changePropertyAnnotation == null) {
-    return new String[]{"COMPUTE"};
+    return new String[]{ChangeParameterMetaData.COMPUTE};
   }
  else {
     return changePropertyAnnotation.requiredForDatabase();
