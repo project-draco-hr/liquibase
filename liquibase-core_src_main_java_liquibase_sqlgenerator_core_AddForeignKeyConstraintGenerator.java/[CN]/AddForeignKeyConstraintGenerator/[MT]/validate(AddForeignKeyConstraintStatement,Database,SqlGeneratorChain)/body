@@ -8,5 +8,6 @@
   validationErrors.checkRequiredField("baseTableNames",addForeignKeyConstraintStatement.getBaseTableName());
   validationErrors.checkRequiredField("referencedColumnNames",addForeignKeyConstraintStatement.getReferencedColumnNames());
   validationErrors.checkRequiredField("referencedTableName",addForeignKeyConstraintStatement.getReferencedTableName());
+  validationErrors.checkRequiredField("constraintName",addForeignKeyConstraintStatement.getConstraintName());
   return validationErrors;
 }

@@ -34,7 +34,9 @@
         }
  else {
           for (          Sql line : sql) {
-            state.addValue(line.toSql() + ";");
+            String sqlLine=line.toSql();
+            assertFalse("Change " + changeMetaData.getName() + " contains 'null' for "+ database.getShortName()+ ": "+ sqlLine,sqlLine.contains(" null "));
+            state.addValue(sqlLine + ";");
           }
         }
       }

@@ -1,6 +1,0 @@
-{
-  if (referencesUniqueColumn != null) {
-    this.referencesUniqueColumn=referencesUniqueColumn;
-  }
-  return this;
-}

@@ -25,7 +25,7 @@
         ChangeParameterMetaData paramToRemoveMetadata=changeMetaData.getParameters().get(paramToRemove);
         Object currentValue=paramToRemoveMetadata.getCurrentValue(change);
         paramToRemoveMetadata.setValue(change,null);
-        assertTrue(change.validate(database).hasErrors());
+        assertTrue("No errors even with " + changeMetaData.getName() + " with a null "+ paramToRemove+ " on "+ database.getShortName(),change.validate(database).hasErrors());
         paramToRemoveMetadata.setValue(change,currentValue);
       }
     }

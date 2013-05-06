@@ -22,7 +22,6 @@
   change.setInitiallyDeferred(fk.isInitiallyDeferred());
   change.setOnUpdate(fk.getUpdateRule());
   change.setOnDelete(fk.getDeleteRule());
-  change.setReferencesUniqueColumn(fk.getReferencesUniqueColumn());
   Index backingIndex=fk.getBackingIndex();
   control.setAlreadyHandledMissing(backingIndex);
   return new Change[]{change};

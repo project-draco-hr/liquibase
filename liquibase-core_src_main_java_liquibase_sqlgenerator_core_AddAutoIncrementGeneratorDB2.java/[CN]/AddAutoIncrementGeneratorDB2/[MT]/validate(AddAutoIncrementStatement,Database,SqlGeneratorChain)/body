@@ -2,6 +2,5 @@
   ValidationErrors validationErrors=new ValidationErrors();
   validationErrors.checkRequiredField("columnName",statement.getColumnName());
   validationErrors.checkRequiredField("tableName",statement.getTableName());
-  validationErrors.checkRequiredField("columnDataType",statement.getColumnDataType());
   return validationErrors;
 }

@@ -29,7 +29,6 @@
       }
 );
       for (      List<String> permutation : paramLists) {
-        System.out.println(StringUtils.join(permutation,","));
         Change change=changeFactory.create(changeName);
         change.setResourceAccessor(new JUnitResourceAccessor());
         for (        String paramName : new TreeSet<String>(changeMetaData.getRequiredParameters(database).keySet())) {

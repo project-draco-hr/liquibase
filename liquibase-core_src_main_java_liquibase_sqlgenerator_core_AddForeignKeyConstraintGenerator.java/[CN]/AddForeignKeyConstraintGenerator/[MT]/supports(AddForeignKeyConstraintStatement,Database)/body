@@ -1,6 +1,3 @@
 {
-  if (statement.getReferencesUniqueColumn() && !(database instanceof OracleDatabase)) {
-    return false;
-  }
   return (!(database instanceof SQLiteDatabase));
 }
