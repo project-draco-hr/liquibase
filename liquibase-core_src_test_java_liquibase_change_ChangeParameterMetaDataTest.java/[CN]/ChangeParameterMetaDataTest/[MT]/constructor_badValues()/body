@@ -1,27 +1,27 @@
 {
   try {
-    new ChangeParameterMetaData(null,null,"y",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
+    new ChangeParameterMetaData(new ExampleAbstractChange(),null,"y",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
     fail("Did not throw exception");
   }
  catch (  UnexpectedLiquibaseException e) {
     assertEquals("Unexpected null parameterName",e.getMessage());
   }
   try {
-    new ChangeParameterMetaData(null,"x tag","y",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
+    new ChangeParameterMetaData(new ExampleAbstractChange(),"x tag","y",null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
     fail("Did not throw exception");
   }
  catch (  UnexpectedLiquibaseException e) {
     assertEquals("Unexpected space in parameterName",e.getMessage());
   }
   try {
-    new ChangeParameterMetaData(null,"x",null,null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
+    new ChangeParameterMetaData(new ExampleAbstractChange(),"x",null,null,null,null,String.class,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
     fail("Did not throw exception");
   }
  catch (  UnexpectedLiquibaseException e) {
     assertEquals("Unexpected null displayName",e.getMessage());
   }
   try {
-    new ChangeParameterMetaData(null,"x","y",null,null,null,null,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
+    new ChangeParameterMetaData(new ExampleAbstractChange(),"x","y",null,null,null,null,null,null,null,LiquibaseSerializable.SerializationType.NAMED_FIELD);
     fail("Did not throw exception");
   }
  catch (  UnexpectedLiquibaseException e) {

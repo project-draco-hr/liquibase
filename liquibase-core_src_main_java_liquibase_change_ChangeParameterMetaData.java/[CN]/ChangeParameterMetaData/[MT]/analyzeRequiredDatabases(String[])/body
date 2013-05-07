@@ -28,9 +28,10 @@
       computedDatabases=new HashSet<String>(Arrays.asList("all"));
     }
     computedDatabases.remove("none");
-    return computedDatabases;
   }
  else {
-    return new HashSet<String>(Arrays.asList(requiredDatabases));
+    computedDatabases=new HashSet<String>(Arrays.asList(requiredDatabases));
   }
+  computedDatabases.remove("none");
+  return computedDatabases;
 }
