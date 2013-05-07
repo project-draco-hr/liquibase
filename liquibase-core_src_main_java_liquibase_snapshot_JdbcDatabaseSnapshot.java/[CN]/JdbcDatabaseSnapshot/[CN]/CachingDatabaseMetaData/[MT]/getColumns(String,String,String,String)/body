@@ -1,7 +1,22 @@
 {
-  String key=createKey("getColumns",catalogName,schemaName,tableNamePattern,columnNamePattern);
+  String key=createKey("getColumns",catalogName,schemaName,tableNamePattern);
+  List<CachedRow> returnList;
   if (hasCachedValue(key)) {
-    return getCachedValue(key);
+    returnList=getCachedValue(key);
   }
-  return cacheResultSet(key,databaseMetaData.getColumns(catalogName,schemaName,tableNamePattern,columnNamePattern));
+ else {
+    returnList=cacheResultSet(key,databaseMetaData.getColumns(catalogName,schemaName,tableNamePattern,null));
+  }
+  if (columnNamePattern != null) {
+    List<CachedRow> filteredList=new ArrayList<CachedRow>();
+    for (    CachedRow row : returnList) {
+      if (row.getString("COLUMN_NAME").equals(columnNamePattern)) {
+        filteredList.add(row);
+      }
+    }
+    return filteredList;
+  }
+ else {
+    return returnList;
+  }
 }
