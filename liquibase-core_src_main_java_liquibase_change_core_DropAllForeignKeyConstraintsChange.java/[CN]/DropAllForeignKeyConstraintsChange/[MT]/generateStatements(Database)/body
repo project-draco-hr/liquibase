@@ -1,8 +1,6 @@
 {
   List<SqlStatement> sqlStatements=new ArrayList<SqlStatement>();
-  if (childDropChanges == null) {
-    generateChildren(database);
-  }
+  List<DropForeignKeyConstraintChange> childDropChanges=generateChildren(database);
   if (childDropChanges != null) {
     for (    DropForeignKeyConstraintChange change : childDropChanges) {
       sqlStatements.addAll(Arrays.asList(change.generateStatements(database)));

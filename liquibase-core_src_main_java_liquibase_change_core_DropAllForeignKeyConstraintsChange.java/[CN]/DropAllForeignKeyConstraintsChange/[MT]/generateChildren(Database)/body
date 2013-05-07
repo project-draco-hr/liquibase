@@ -1,5 +1,5 @@
 {
-  childDropChanges=new ArrayList<DropForeignKeyConstraintChange>();
+  List<DropForeignKeyConstraintChange> childDropChanges=new ArrayList<DropForeignKeyConstraintChange>();
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   FindForeignKeyConstraintsStatement sql=new FindForeignKeyConstraintsStatement(getBaseTableCatalogName(),getBaseTableSchemaName(),getBaseTableName());
   try {
@@ -24,6 +24,7 @@
         }
       }
     }
+    return childDropChanges;
   }
  catch (  DatabaseException e) {
     throw new UnexpectedLiquibaseException("Failed to find foreign keys for table: " + getBaseTableName(),e);

@@ -1,8 +1,6 @@
 {
   Database database=createMock(Database.class);
   expect(database.hasDatabaseChangeLogLockTable()).andReturn(false);
-  database.rollback();
-  expectLastCall().times(1);
   replay(database);
   LockServiceImpl service=new LockServiceImpl();
   service.setDatabase(database);

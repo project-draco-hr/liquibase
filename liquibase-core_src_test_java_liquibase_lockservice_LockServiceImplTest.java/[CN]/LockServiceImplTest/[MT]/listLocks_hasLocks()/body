@@ -5,8 +5,6 @@
   expectLastCall().anyTimes();
   expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(true).anyTimes();
   expect(database.hasDatabaseChangeLogLockTable()).andReturn(true);
-  database.rollback();
-  expectLastCall().times(1);
   List<Map> resultList=new ArrayList<Map>();
   Map<String,Object> result=new HashMap<String,Object>();
   result.put("ID",1);

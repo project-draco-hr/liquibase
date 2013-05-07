@@ -1,6 +1,9 @@
 {
   ChangeFactory changeFactory=ChangeFactory.getInstance();
   for (  String changeName : changeFactory.getDefinedChanges()) {
+    if (changeName.equals("addDefaultValue")) {
+      continue;
+    }
     for (    Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
       if (database.getShortName() == null) {
         continue;
