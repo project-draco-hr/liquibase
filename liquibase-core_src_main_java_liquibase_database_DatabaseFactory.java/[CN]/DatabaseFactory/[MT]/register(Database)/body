@@ -1,3 +1,6 @@
 {
-  implementedDatabases.add(0,database);
+  if (!implementedDatabases.containsKey(database.getShortName())) {
+    implementedDatabases.put(database.getShortName(),new TreeSet<Database>(new TreeSet<Database>(new DatabaseComparator())));
+  }
+  implementedDatabases.get(database.getShortName()).add(database);
 }

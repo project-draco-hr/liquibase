@@ -19,7 +19,7 @@
  else {
       returnList=cacheResultSet(byTableKey,databaseMetaData.getColumns(catalogName,schemaName,tableNamePattern,null));
       if (returnList.size() == 0) {
-        throw new UnexpectedLiquibaseException("No Columns found for " + tableNamePattern);
+        throw new UnexpectedLiquibaseException("No Columns found for table " + tableNamePattern);
       }
     }
   }

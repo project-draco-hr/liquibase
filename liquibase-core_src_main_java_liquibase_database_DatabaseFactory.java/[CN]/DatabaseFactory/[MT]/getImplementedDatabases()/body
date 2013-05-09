@@ -1,3 +1,7 @@
 {
-  return implementedDatabases;
+  List<Database> returnList=new ArrayList<Database>();
+  for (  SortedSet<Database> set : implementedDatabases.values()) {
+    returnList.add(set.iterator().next());
+  }
+  return returnList;
 }
