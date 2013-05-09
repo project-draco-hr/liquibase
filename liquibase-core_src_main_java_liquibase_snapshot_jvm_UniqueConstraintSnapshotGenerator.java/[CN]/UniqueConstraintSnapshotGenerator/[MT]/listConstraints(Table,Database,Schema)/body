@@ -13,7 +13,7 @@
     sql="select distinct k.constname as constraint_name from syscat.keycoluse k, syscat.tabconst t " + "where k.constname = t.constname " + "and t.tabname = '" + database.correctObjectName(table.getName(),Table.class) + "' "+ "and t.tabschema = '"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and t.type='U'";
   }
  else   if (database instanceof FirebirdDatabase) {
-    sql="SELECT RDB$INDEX_NAME FROM RDB$INDICES WHERE RDB$RELATION_NAME='" + database.correctObjectName(table.getName(),Table.class) + "' AND RDB$UNIQUE_FLAG IS NOT NULL);";
+    sql="SELECT RDB$INDICES.RDB$INDEX_NAME AS CONSTRAINT_NAME FROM RDB$INDICES " + "LEFT JOIN RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDICES.RDB$INDEX_NAME " + "WHERE RDB$INDICES.RDB$RELATION_NAME='" + database.correctObjectName(table.getName(),Table.class) + "' "+ "AND RDB$INDICES.RDB$UNIQUE_FLAG IS NOT NULL "+ "AND RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE != 'PRIMARY KEY' "+ "AND NOT(RDB$INDICES.RDB$INDEX_NAME LIKE 'RDB$%')";
   }
  else {
     sql="select CONSTRAINT_NAME, CONSTRAINT_TYPE " + "from information_schema.constraints " + "where constraint_schema='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and constraint_catalog='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "'";

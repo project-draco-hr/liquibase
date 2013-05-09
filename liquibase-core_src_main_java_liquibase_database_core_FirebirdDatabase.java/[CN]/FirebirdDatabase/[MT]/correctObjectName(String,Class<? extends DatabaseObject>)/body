@@ -2,5 +2,5 @@
   if (objectName == null) {
     return null;
   }
-  return objectName.toUpperCase();
+  return objectName.toUpperCase().trim();
 }

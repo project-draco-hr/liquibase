@@ -1,0 +1,6 @@
+{
+  if (database instanceof FirebirdDatabase) {
+    return new DatabaseDataType("FLOAT");
+  }
+  return super.toDatabaseDataType(database);
+}

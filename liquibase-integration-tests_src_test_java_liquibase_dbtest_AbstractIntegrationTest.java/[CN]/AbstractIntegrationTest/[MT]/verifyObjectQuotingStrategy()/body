@@ -2,6 +2,9 @@
   if (database == null) {
     return;
   }
+  if (!Arrays.asList("oracle,h2,hsqldb,postgresql,mysql").contains(database.getShortName())) {
+    return;
+  }
   Liquibase liquibase=createLiquibase(objectQuotingStrategyChangeLog);
   clearDatabase(liquibase);
   liquibase.update(contexts);

@@ -15,8 +15,27 @@
  else   if (database instanceof DB2Database) {
     sql="select k.colname as column_name from syscat.keycoluse k, syscat.tabconst t " + "where k.constname = t.constname " + "and t.type='U' "+ "and k.constname='" + database.correctObjectName(name,UniqueConstraint.class) + "' "+ "order by colseq";
   }
+ else   if (database instanceof FirebirdDatabase) {
+    sql="SELECT RDB$INDEX_SEGMENTS.RDB$FIELD_NAME AS column_name " + "FROM RDB$INDEX_SEGMENTS " + "LEFT JOIN RDB$INDICES ON RDB$INDICES.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME "+ "WHERE UPPER(RDB$INDICES.RDB$INDEX_NAME)='" + database.correctObjectName(name,UniqueConstraint.class) + "' "+ "ORDER BY RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION";
+  }
  else {
-    sql="select CONSTRAINT_NAME, COLUMN_LIST as COLUMN_NAME " + "from information_schema.constraints " + "where constraint_schema='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and constraint_catalog='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "' "+ "and constraint_name='"+ database.correctObjectName(name,UniqueConstraint.class)+ "'";
+    String catalogName=database.correctObjectName(schema.getCatalogName(),Catalog.class);
+    String schemaName=database.correctObjectName(schema.getName(),Schema.class);
+    String constraintName=database.correctObjectName(name,UniqueConstraint.class);
+    String tableName=database.correctObjectName(table.getName(),Table.class);
+    sql="select CONSTRAINT_NAME, COLUMN_LIST as COLUMN_NAME " + "from information_schema.constraints " + "where constraint_type='UNIQUE' ";
+    if (catalogName != null) {
+      sql+="and constraint_catalog='" + catalogName + "' ";
+    }
+    if (schemaName != null) {
+      sql+="and constraint_schema='" + schemaName + "' ";
+    }
+    if (tableName != null) {
+      sql+="and table_name='" + tableName + "' ";
+    }
+    if (constraintName != null) {
+      sql+="and constraint_name='" + constraintName + "'";
+    }
   }
   return ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement(sql));
 }

@@ -1,5 +1,13 @@
 {
   String columnTypeName=(String)columnMetadataResultSet.get("TYPE_NAME");
+  if (database instanceof FirebirdDatabase) {
+    if (columnTypeName.equals("BLOB SUB_TYPE 0")) {
+      columnTypeName="BLOB";
+    }
+    if (columnTypeName.equals("BLOB SUB_TYPE 1")) {
+      columnTypeName="CLOB";
+    }
+  }
   int dataType=columnMetadataResultSet.getInt("DATA_TYPE");
   Integer columnSize=columnMetadataResultSet.getInt("COLUMN_SIZE");
   if (database.dataTypeIsNotModifiable(columnTypeName)) {

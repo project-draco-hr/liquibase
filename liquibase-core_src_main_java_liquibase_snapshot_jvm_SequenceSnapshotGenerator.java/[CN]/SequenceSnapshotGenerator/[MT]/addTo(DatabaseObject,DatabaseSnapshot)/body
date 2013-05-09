@@ -11,7 +11,7 @@
     List<String> sequenceNames=(List<String>)ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement(getSelectSequenceSql(schema,database)),String.class);
     if (sequenceNames != null) {
       for (      String sequenceName : sequenceNames) {
-        schema.addDatabaseObject(new Sequence().setName(sequenceName).setSchema(schema));
+        schema.addDatabaseObject(new Sequence().setName(cleanNameFromDatabase(sequenceName,database)).setSchema(schema));
       }
     }
   }
