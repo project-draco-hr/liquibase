@@ -2,7 +2,12 @@
   for (  Database database : DatabaseTestContext.getInstance().getAvailableDatabases()) {
     DatabaseConnection connection=database.getConnection();
     Statement connectionStatement=((JdbcConnection)connection).getUnderlyingConnection().createStatement();
-    database.dropDatabaseObjects(CatalogAndSchema.DEFAULT);
+    try {
+      database.dropDatabaseObjects(CatalogAndSchema.DEFAULT);
+    }
+ catch (    Throwable e) {
+      throw new UnexpectedLiquibaseException("Error dropping objects for database " + database.getShortName(),e);
+    }
     try {
       connectionStatement.executeUpdate("drop table " + database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()));
     }

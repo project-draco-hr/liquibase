@@ -1,4 +1,9 @@
 {
   Database database=getDatabase();
-  assertEquals("catalogName.schemaName.tableName",database.escapeTableName("catalogName","schemaName","tableName"));
+  if (database.supportsCatalogInObjectName(Table.class)) {
+    assertEquals("catalogName.schemaName.tableName",database.escapeTableName("catalogName","schemaName","tableName"));
+  }
+ else {
+    assertEquals("schemaName.tableName",database.escapeTableName("catalogName","schemaName","tableName"));
+  }
 }

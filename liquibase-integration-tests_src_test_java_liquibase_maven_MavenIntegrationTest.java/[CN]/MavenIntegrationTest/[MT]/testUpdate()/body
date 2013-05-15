@@ -1,7 +1,0 @@
-{
-  Verifier verifier=createVerifier();
-  verifier.executeGoal("clean");
-  verifier.executeGoal("install");
-  verifier.verifyErrorFreeLog();
-  verifier.resetStreams();
-}

@@ -3,7 +3,7 @@
     return "0";
   }
   if (database instanceof InformixDatabase) {
-    return "f";
+    return "'f'";
   }
   return "FALSE";
 }

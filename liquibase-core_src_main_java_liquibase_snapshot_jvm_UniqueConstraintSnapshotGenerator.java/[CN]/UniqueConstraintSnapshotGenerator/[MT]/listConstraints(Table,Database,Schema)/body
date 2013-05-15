@@ -15,6 +15,9 @@
  else   if (database instanceof FirebirdDatabase) {
     sql="SELECT RDB$INDICES.RDB$INDEX_NAME AS CONSTRAINT_NAME FROM RDB$INDICES " + "LEFT JOIN RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDICES.RDB$INDEX_NAME " + "WHERE RDB$INDICES.RDB$RELATION_NAME='" + database.correctObjectName(table.getName(),Table.class) + "' "+ "AND RDB$INDICES.RDB$UNIQUE_FLAG IS NOT NULL "+ "AND RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE != 'PRIMARY KEY' "+ "AND NOT(RDB$INDICES.RDB$INDEX_NAME LIKE 'RDB$%')";
   }
+ else   if (database instanceof DerbyDatabase) {
+    sql="select c.constraintname as CONSTRAINT_NAME " + "from sys.systables t, sys.sysconstraints c, sys.sysschemas s " + "where t.tablename = '" + database.correctObjectName(table.getName(),Table.class) + "' "+ "and s.schemaname='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and t.tableid = c.tableid "+ "and t.schemaid=s.schemaid "+ "and c.type = 'U'";
+  }
  else {
     sql="select CONSTRAINT_NAME, CONSTRAINT_TYPE " + "from information_schema.constraints " + "where constraint_schema='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and constraint_catalog='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "'";
   }

@@ -1,3 +1,0 @@
-{
-  return super.escapeObjectName(null,schemaName,objectName,objectType);
-}

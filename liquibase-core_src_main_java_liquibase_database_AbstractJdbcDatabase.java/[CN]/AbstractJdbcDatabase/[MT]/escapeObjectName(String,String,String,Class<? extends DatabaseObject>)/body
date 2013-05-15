@@ -5,10 +5,13 @@
   if (supportsSchemas()) {
     catalogName=StringUtils.trimToNull(catalogName);
     schemaName=StringUtils.trimToNull(schemaName);
+    if (!supportsCatalogInObjectName(objectType)) {
+      catalogName=null;
+    }
     if (catalogName == null && schemaName == null) {
       return escapeObjectName(objectName,objectType);
     }
- else     if (catalogName == null || !this.supportsCatalogInObjectName()) {
+ else     if (catalogName == null || !this.supportsCatalogInObjectName(objectType)) {
       return escapeObjectName(schemaName,Schema.class) + "." + escapeObjectName(objectName,objectType);
     }
  else {
