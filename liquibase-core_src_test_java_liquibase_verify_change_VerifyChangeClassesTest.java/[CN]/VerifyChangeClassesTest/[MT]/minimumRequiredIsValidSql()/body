@@ -4,6 +4,9 @@
     if (changeName.equals("addDefaultValue")) {
       continue;
     }
+    if (changeName.equals("changeWithNestedTags") || changeName.equals("sampleChange")) {
+      continue;
+    }
     for (    Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
       if (database.getShortName() == null) {
         continue;

@@ -1,5 +1,5 @@
 {
-  this.statementUnderTest=new AddColumnStatement(null,TABLE_NAME,COLUMN_NAME,"int",null,new AutoIncrementConstraint());
+  this.statementUnderTest=new AddColumnStatement(null,TABLE_NAME,"column_name","int",null,new AutoIncrementConstraint());
   assertCorrect("ALTER TABLE [dbo].[table_name] ADD [column_name] int auto_increment_clause",MSSQLDatabase.class);
   assertCorrect("alter table [table_name] add [column_name] int default autoincrement null",SybaseASADatabase.class);
   assertCorrect("alter table [table_name] add [column_name] int identity null",SybaseDatabase.class);
