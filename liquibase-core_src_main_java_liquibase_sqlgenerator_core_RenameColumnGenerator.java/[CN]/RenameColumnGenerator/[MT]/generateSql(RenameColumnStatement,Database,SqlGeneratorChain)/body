@@ -18,6 +18,9 @@
  else   if (database instanceof SybaseASADatabase) {
     sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " RENAME "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getOldColumnName())+ " TO "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getNewColumnName());
   }
+ else   if (database instanceof DB2Database) {
+    sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " RENAME COLUMN "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getOldColumnName())+ " TO "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getNewColumnName());
+  }
  else {
     sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " RENAME COLUMN "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getOldColumnName())+ " TO "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getNewColumnName());
   }
