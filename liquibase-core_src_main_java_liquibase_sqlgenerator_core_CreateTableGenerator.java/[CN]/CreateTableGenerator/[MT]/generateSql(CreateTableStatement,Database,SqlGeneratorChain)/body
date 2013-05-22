@@ -156,5 +156,5 @@
       sql+=" TABLESPACE " + statement.getTablespace();
     }
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,getAffectedTable(statement))};
 }

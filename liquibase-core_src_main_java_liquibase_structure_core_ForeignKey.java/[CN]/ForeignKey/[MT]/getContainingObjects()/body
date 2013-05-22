@@ -1,3 +1,14 @@
 {
-  return new DatabaseObject[]{new Column().setName(getPrimaryKeyColumns()).setRelation(getPrimaryKeyTable()),new Column().setName(getForeignKeyColumns()).setRelation(getForeignKeyTable())};
+  List<Column> objects=new ArrayList<Column>();
+  if (getPrimaryKeyColumns() != null) {
+    for (    String column : StringUtils.splitAndTrim(getPrimaryKeyColumns(),",")) {
+      objects.add(new Column().setName(column).setRelation(getPrimaryKeyTable()));
+    }
+  }
+  if (getForeignKeyColumns() != null) {
+    for (    String column : StringUtils.splitAndTrim(getForeignKeyColumns(),",")) {
+      objects.add(new Column().setName(column).setRelation(getForeignKeyTable()));
+    }
+  }
+  return objects.toArray(new DatabaseObject[objects.size()]);
 }

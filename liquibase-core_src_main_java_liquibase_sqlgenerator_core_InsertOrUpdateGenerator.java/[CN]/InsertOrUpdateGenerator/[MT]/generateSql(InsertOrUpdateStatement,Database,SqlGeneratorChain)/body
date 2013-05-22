@@ -11,5 +11,5 @@
  catch (  LiquibaseException e) {
   }
   completeSql.append(getPostUpdateStatements());
-  return new Sql[]{new UnparsedSql(completeSql.toString())};
+  return new Sql[]{new UnparsedSql(completeSql.toString(),getAffectedTable(insertOrUpdateStatement))};
 }

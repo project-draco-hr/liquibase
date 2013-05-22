@@ -15,5 +15,5 @@
  else {
     sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " DROP CONSTRAINT "+ database.escapeConstraintName(statement.getConstraintName());
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,getAffectedUniqueConstraint(statement))};
 }

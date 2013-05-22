@@ -11,5 +11,5 @@
     }
     sql.append(" FROM `").append(statement.getSourceTable()).append("`");
   }
-  return new Sql[]{new UnparsedSql(sql.toString())};
+  return new Sql[]{new UnparsedSql(sql.toString(),getAffectedTable(statement))};
 }

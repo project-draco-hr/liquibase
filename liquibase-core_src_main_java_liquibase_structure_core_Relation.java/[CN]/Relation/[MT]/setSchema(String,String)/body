@@ -1,0 +1,3 @@
+{
+  return setSchema(new Schema(catalog,schema));
+}

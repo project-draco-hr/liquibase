@@ -12,5 +12,5 @@
       buffer.append(" CASCADE");
     }
   }
-  return new Sql[]{new UnparsedSql(buffer.toString())};
+  return new Sql[]{new UnparsedSql(buffer.toString(),getAffectedTable(statement))};
 }

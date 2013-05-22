@@ -17,5 +17,5 @@
       sql+=" USING INDEX TABLESPACE " + statement.getTablespace();
     }
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,getAffectedPrimaryKey(statement))};
 }

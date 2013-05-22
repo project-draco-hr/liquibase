@@ -21,5 +21,5 @@
  else {
     sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " RENAME COLUMN "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getOldColumnName())+ " TO "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getNewColumnName());
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,getAffectedOldColumn(statement),getAffectedNewColumn(statement))};
 }

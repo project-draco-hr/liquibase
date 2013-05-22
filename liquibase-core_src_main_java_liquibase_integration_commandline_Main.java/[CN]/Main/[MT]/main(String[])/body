@@ -51,7 +51,7 @@
         ((ValidationFailedException)e.getCause()).printDescriptiveError(System.err);
       }
  else {
-        System.err.println("Liquibase Update Failed: " + message);
+        System.err.println("Liquibase " + main.command + " Failed: "+ message);
         LogFactory.getLogger().severe(message,e);
         System.err.println(generateLogLevelWarningMessage());
       }

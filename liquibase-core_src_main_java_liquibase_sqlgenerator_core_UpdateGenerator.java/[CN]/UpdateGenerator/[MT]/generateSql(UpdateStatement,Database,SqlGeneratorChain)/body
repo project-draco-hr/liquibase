@@ -22,5 +22,5 @@
     }
     sql.append(" ").append(fixedWhereClause);
   }
-  return new Sql[]{new UnparsedSql(sql.toString())};
+  return new Sql[]{new UnparsedSql(sql.toString(),getAffectedTable(statement))};
 }

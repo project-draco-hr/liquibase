@@ -30,5 +30,5 @@
  else {
     sql="RENAME " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getOldTableName()) + " TO "+ database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getNewTableName());
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,getAffectedOldTable(statement),getAffectedNewTable(statement))};
 }

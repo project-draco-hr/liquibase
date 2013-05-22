@@ -1,0 +1,3 @@
+{
+  return new Index().setName(statement.getIndexName()).setTable((Table)new Table().setName(statement.getTableName()).setSchema(statement.getTableCatalogName(),statement.getTableSchemaName()));
+}

@@ -21,5 +21,5 @@
       buffer.append(" ORDER");
     }
   }
-  return new Sql[]{new UnparsedSql(buffer.toString())};
+  return new Sql[]{new UnparsedSql(buffer.toString(),getAffectedSequence(statement))};
 }

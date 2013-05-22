@@ -1,0 +1,3 @@
+{
+  return new Column().setName(statement.getColumnName()).setRelation(new Table().setName(statement.getTableName()).setSchema(statement.getCatalogName(),statement.getSchemaName()));
+}

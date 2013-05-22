@@ -27,5 +27,5 @@
       buffer.append(" CYCLE");
     }
   }
-  return new Sql[]{new UnparsedSql(buffer.toString())};
+  return new Sql[]{new UnparsedSql(buffer.toString(),getAffectedSequence(statement))};
 }

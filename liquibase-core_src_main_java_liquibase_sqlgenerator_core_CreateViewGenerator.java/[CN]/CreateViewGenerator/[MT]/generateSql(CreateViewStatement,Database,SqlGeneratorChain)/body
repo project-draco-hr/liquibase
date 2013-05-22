@@ -28,6 +28,6 @@
  else {
     createClause="CREATE " + (statement.isReplaceIfExists() ? "OR REPLACE " : "") + "VIEW";
   }
-  sql.add(new UnparsedSql(createClause + " " + database.escapeViewName(statement.getCatalogName(),statement.getSchemaName(),statement.getViewName())+ " AS "+ statement.getSelectQuery()));
+  sql.add(new UnparsedSql(createClause + " " + database.escapeViewName(statement.getCatalogName(),statement.getSchemaName(),statement.getViewName())+ " AS "+ statement.getSelectQuery(),getAffectedView(statement)));
   return sql.toArray(new Sql[sql.size()]);
 }

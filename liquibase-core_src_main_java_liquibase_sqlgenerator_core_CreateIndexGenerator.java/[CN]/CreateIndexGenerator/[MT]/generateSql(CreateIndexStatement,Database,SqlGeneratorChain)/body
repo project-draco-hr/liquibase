@@ -43,5 +43,5 @@
       buffer.append(" TABLESPACE ").append(statement.getTablespace());
     }
   }
-  return new Sql[]{new UnparsedSql(buffer.toString())};
+  return new Sql[]{new UnparsedSql(buffer.toString(),getAffectedIndex(statement))};
 }

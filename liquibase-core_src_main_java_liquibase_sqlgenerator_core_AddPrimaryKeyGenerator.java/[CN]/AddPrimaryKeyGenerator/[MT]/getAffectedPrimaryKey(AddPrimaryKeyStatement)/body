@@ -1,0 +1,3 @@
+{
+  return new PrimaryKey().setTable((Table)new Table().setName(statement.getTableName()).setSchema(statement.getCatalogName(),statement.getSchemaName()));
+}

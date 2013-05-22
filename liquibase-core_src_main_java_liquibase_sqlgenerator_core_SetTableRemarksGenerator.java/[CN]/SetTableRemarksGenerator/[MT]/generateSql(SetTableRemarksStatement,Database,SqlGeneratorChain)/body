@@ -11,5 +11,5 @@
     }
     sql=command + " ON TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())+ " IS '"+ database.escapeStringForDatabase(remarks)+ "'";
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,getAffectedTable(statement))};
 }

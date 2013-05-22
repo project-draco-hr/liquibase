@@ -1,5 +1,8 @@
 {
   for (  String param : commandParams) {
+    if (!param.contains("=")) {
+      return null;
+    }
     String[] splitArg=splitArg(param);
     String attributeName=splitArg[0];
     String value=splitArg[1];

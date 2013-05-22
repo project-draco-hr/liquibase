@@ -61,5 +61,5 @@
  else {
     sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " DROP PRIMARY KEY";
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,getAffectedPrimaryKey(statement))};
 }

@@ -6,5 +6,5 @@
   if (database instanceof DerbyDatabase) {
     sql+=" RESTRICT";
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,getAffectedSequence(statement))};
 }

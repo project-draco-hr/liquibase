@@ -15,5 +15,5 @@
  else {
     sql="RENAME " + database.escapeViewName(statement.getCatalogName(),statement.getSchemaName(),statement.getOldViewName()) + " TO "+ database.escapeViewName(null,null,statement.getNewViewName());
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,getAffectedOldView(statement),getAffectedNewView(statement))};
 }

@@ -1,0 +1,3 @@
+{
+  return new ForeignKey().setName(statement.getConstraintName()).setForeignKeyColumns(statement.getBaseColumnNames()).setForeignKeyTable((Table)new Table().setName(statement.getBaseTableName()).setSchema(statement.getBaseTableCatalogName(),statement.getBaseTableSchemaName()));
+}

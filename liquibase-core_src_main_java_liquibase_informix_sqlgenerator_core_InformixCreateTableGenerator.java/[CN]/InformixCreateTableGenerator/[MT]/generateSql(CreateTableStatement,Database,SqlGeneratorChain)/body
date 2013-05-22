@@ -92,5 +92,5 @@
   if (statement.getTablespace() != null && database.supportsTablespaces()) {
     sql+=" IN " + statement.getTablespace();
   }
-  return new Sql[]{new UnparsedSql(sql)};
+  return new Sql[]{new UnparsedSql(sql,new Table().setName(statement.getTableName()).setSchema(new Schema(statement.getCatalogName(),statement.getSchemaName())))};
 }
