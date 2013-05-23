@@ -1,0 +1,7 @@
+{
+  string=super.escapeStringForDatabase(string);
+  if (string == null) {
+    return null;
+  }
+  return string.replace("\\","\\\\");
+}
