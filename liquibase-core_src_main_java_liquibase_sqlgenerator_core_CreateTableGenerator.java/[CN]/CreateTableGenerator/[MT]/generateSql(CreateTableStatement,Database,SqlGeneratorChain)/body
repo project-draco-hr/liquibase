@@ -3,6 +3,7 @@
     AbstractSqlGenerator<CreateTableStatement> gen=new InformixCreateTableGenerator();
     return gen.generateSql(statement,database,sqlGeneratorChain);
   }
+  List<Sql> additionalSql=new ArrayList<Sql>();
   StringBuffer buffer=new StringBuffer();
   buffer.append("CREATE TABLE ").append(database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())).append(" ");
   buffer.append("(");
@@ -39,7 +40,7 @@
       }
       buffer.append(" PRIMARY KEY AUTOINCREMENT");
     }
-    if (!columnType.isSerialDataType() && statement.getDefaultValue(column) != null) {
+    if (!columnType.isAutoIncrement() && statement.getDefaultValue(column) != null) {
       Object defaultValue=statement.getDefaultValue(column);
       if (database instanceof MSSQLDatabase) {
         buffer.append(" CONSTRAINT ").append(((MSSQLDatabase)database).generateDefaultConstraintName(statement.getTableName(),column));
@@ -52,6 +53,10 @@
         String autoIncrementClause=database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(),autoIncrementConstraint.getIncrementBy());
         if (!"".equals(autoIncrementClause)) {
           buffer.append(" ").append(autoIncrementClause);
+        }
+        if (database instanceof PostgresDatabase && autoIncrementConstraint.getStartWith() != null) {
+          String sequenceName=statement.getTableName() + "_" + column+ "_seq";
+          additionalSql.add(new UnparsedSql("alter sequence " + database.escapeSequenceName(statement.getCatalogName(),statement.getSchemaName(),sequenceName) + " start with "+ autoIncrementConstraint.getStartWith(),new Sequence().setName(sequenceName).setSchema(statement.getCatalogName(),statement.getSchemaName())));
         }
       }
  else {
@@ -156,5 +161,6 @@
       sql+=" TABLESPACE " + statement.getTablespace();
     }
   }
-  return new Sql[]{new UnparsedSql(sql,getAffectedTable(statement))};
+  additionalSql.add(0,new UnparsedSql(sql,getAffectedTable(statement)));
+  return additionalSql.toArray(new Sql[additionalSql.size()]);
 }
