@@ -1,11 +1,3 @@
 {
-  if (database instanceof PostgresDatabase) {
-    try {
-      return database.getDatabaseMajorVersion() >= 9;
-    }
- catch (    DatabaseException e) {
-      return true;
-    }
-  }
-  return false;
+  return database instanceof PostgresDatabase;
 }
