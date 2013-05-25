@@ -1,6 +1,9 @@
 {
   int dataTypeMaxParameters=database.getDataTypeMaxParameters(getName());
   Object[] parameters=getParameters();
+  if (database instanceof MySQLDatabase && getName().equals("TINYBLOB") || getName().equals("MEDIUMBLOB")) {
+    parameters=new Object[0];
+  }
   if (dataTypeMaxParameters < parameters.length) {
     parameters=Arrays.copyOfRange(parameters,0,dataTypeMaxParameters);
   }
