@@ -1,4 +1,7 @@
 {
+  if (message == null) {
+    message=field + " changed from '" + referenceValue+ "' to '"+ comparedValue+ "'";
+  }
   this.message=message;
   this.field=field;
   this.referenceValue=referenceValue;

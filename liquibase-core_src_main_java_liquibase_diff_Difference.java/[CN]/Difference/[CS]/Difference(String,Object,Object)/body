@@ -1,3 +1,3 @@
 {
-  this(field + " changed from '" + referenceValue+ "' to '"+ comparedValue+ "'",field,referenceValue,comparedValue);
+  this(null,field,referenceValue,comparedValue);
 }

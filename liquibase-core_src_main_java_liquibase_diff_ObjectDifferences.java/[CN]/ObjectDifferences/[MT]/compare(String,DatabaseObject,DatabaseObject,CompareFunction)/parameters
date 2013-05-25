@@ -1,0 +1,4 @@
+String attribute
+DatabaseObject referenceObject
+DatabaseObject compareToObject
+CompareFunction compareFunction

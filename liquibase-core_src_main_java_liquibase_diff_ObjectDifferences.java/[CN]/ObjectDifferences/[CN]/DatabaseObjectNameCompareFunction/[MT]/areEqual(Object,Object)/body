@@ -1,0 +1,31 @@
+{
+  if (referenceValue instanceof Collection) {
+    if (((Collection)referenceValue).size() != ((Collection)compareToValue).size()) {
+      return false;
+    }
+ else {
+      Iterator referenceIterator=((Collection)referenceValue).iterator();
+      Iterator compareToIterator=((Collection)compareToValue).iterator();
+      while (referenceIterator.hasNext()) {
+        if (!areEqual(referenceIterator.next(),compareToIterator.next())) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+  String object1Name=accordingTo.correctObjectName((String)referenceValue,type);
+  String object2Name=accordingTo.correctObjectName((String)compareToValue,type);
+  if (object1Name == null && object2Name == null) {
+    return true;
+  }
+  if (object1Name == null || object2Name == null) {
+    return false;
+  }
+  if (accordingTo.isCaseSensitive()) {
+    return object1Name.equals(object2Name);
+  }
+ else {
+    return object1Name.equalsIgnoreCase(object2Name);
+  }
+}

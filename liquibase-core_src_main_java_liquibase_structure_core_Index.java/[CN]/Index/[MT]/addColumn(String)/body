@@ -1,0 +1,4 @@
+{
+  getColumns().add(column);
+  return this;
+}

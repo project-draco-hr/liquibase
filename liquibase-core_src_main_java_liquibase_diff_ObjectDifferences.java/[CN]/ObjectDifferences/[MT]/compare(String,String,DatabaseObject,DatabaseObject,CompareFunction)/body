@@ -1,0 +1,17 @@
+{
+  Object referenceValue=referenceObject.getAttribute(attribute,Object.class);
+  Object compareValue=compareToObject.getAttribute(attribute,Object.class);
+  boolean different;
+  if (referenceValue == null && compareValue == null) {
+    different=true;
+  }
+ else   if (referenceValue == null || compareValue == null) {
+    different=false;
+  }
+ else {
+    different=!compareFunction.areEqual(referenceValue,compareValue);
+  }
+  if (different) {
+    addDifference(message,attribute,referenceValue,compareValue);
+  }
+}

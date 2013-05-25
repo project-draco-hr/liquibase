@@ -1,4 +1,4 @@
 {
-  this.differences.add(new Difference(message,changedField,referenceValue,compareToValue));
+  this.differences.put(changedField,new Difference(message,changedField,referenceValue,compareToValue));
   return this;
 }
