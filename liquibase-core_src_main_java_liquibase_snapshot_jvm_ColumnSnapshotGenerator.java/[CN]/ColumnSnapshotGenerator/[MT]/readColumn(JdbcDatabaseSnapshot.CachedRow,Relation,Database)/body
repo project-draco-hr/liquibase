@@ -4,6 +4,9 @@
   String rawSchemaName=StringUtils.trimToNull((String)columnMetadataResultSet.get("TABLE_SCHEM"));
   String rawCatalogName=StringUtils.trimToNull((String)columnMetadataResultSet.get("TABLE_CAT"));
   String remarks=StringUtils.trimToNull((String)columnMetadataResultSet.get("REMARKS"));
+  if (remarks != null) {
+    remarks=remarks.replace("''","'");
+  }
   Column column=new Column();
   column.setName(rawColumnName);
   column.setRelation(table);

@@ -8,10 +8,15 @@
       columnTypeName="CLOB";
     }
   }
+  DataType.ColumnSizeUnit columnSizeUnit=DataType.ColumnSizeUnit.BYTE;
   int dataType=columnMetadataResultSet.getInt("DATA_TYPE");
   Integer columnSize=columnMetadataResultSet.getInt("COLUMN_SIZE");
   if (database.dataTypeIsNotModifiable(columnTypeName)) {
     columnSize=null;
+  }
+ else   if (database instanceof OracleDatabase && columnTypeName.equals("NVARCHAR2")) {
+    columnSize=columnSize / 2;
+    columnSizeUnit=DataType.ColumnSizeUnit.CHAR;
   }
   Integer decimalDigits=columnMetadataResultSet.getInt("DECIMAL_DIGITS");
   if (decimalDigits != null && decimalDigits.equals(0)) {
@@ -25,6 +30,6 @@
   type.setDecimalDigits(decimalDigits);
   type.setRadix(radix);
   type.setCharacterOctetLength(characterOctetLength);
-  type.setColumnSizeUnit(DataType.ColumnSizeUnit.BYTE);
+  type.setColumnSizeUnit(columnSizeUnit);
   return type;
 }

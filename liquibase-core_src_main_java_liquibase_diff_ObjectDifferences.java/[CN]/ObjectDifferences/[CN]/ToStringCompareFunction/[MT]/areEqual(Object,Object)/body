@@ -1,0 +1,9 @@
+{
+  if (referenceValue == null && compareToValue == null) {
+    return true;
+  }
+  if (referenceValue == null || compareToValue == null) {
+    return false;
+  }
+  return referenceValue.toString().equals(compareToValue.toString());
+}

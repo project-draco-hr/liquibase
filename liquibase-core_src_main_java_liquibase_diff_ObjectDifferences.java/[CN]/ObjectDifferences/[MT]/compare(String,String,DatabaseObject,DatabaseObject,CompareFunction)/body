@@ -3,7 +3,7 @@
   Object compareValue=compareToObject.getAttribute(attribute,Object.class);
   boolean different;
   if (referenceValue == null && compareValue == null) {
-    different=true;
+    different=false;
   }
  else   if (referenceValue == null || compareValue == null) {
     different=false;

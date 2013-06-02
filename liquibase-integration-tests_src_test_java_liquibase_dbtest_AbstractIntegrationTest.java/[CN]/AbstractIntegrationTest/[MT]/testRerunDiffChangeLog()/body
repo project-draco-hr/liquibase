@@ -39,7 +39,7 @@
       assertTrue(finalDiffResult.areEqual());
     }
  catch (    AssertionError e) {
-      new DiffToReport(finalDiffResult,System.out).print();
+      new DiffToReport(finalDiffResult,System.err).print();
       throw e;
     }
     DiffResult emptyDiffResult=DiffGeneratorFactory.getInstance().compare(emptySnapshot,migratedSnapshot,new CompareControl());

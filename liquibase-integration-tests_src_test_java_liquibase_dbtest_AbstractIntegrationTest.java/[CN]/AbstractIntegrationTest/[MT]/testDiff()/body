@@ -8,7 +8,7 @@
     assertTrue(diffResult.areEqual());
   }
  catch (  AssertionError e) {
-    new DiffToReport(diffResult,System.out).print();
+    new DiffToReport(diffResult,System.err).print();
     throw e;
   }
 }

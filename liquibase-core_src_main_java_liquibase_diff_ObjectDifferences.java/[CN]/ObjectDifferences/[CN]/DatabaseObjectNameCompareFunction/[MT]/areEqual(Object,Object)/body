@@ -14,8 +14,26 @@
       return true;
     }
   }
-  String object1Name=accordingTo.correctObjectName((String)referenceValue,type);
-  String object2Name=accordingTo.correctObjectName((String)compareToValue,type);
+  if (referenceValue == null && compareToValue == null) {
+    return true;
+  }
+  if (referenceValue == null || compareToValue == null) {
+    return false;
+  }
+  String object1Name;
+  if (referenceValue instanceof DatabaseObject) {
+    object1Name=accordingTo.correctObjectName(((DatabaseObject)referenceValue).getAttribute("name",String.class),type);
+  }
+ else {
+    object1Name=referenceValue.toString();
+  }
+  String object2Name;
+  if (compareToValue instanceof DatabaseObject) {
+    object2Name=accordingTo.correctObjectName(((DatabaseObject)compareToValue).getAttribute("name",String.class),type);
+  }
+ else {
+    object2Name=referenceValue.toString();
+  }
   if (object1Name == null && object2Name == null) {
     return true;
   }

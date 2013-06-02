@@ -1,4 +1,6 @@
 {
   ObjectDifferences differences=chain.findDifferences(databaseObject1,databaseObject2,accordingTo);
+  differences.removeDifference("autoIncrementInformation");
+  differences.removeDifference("defaultValue");
   return differences;
 }
