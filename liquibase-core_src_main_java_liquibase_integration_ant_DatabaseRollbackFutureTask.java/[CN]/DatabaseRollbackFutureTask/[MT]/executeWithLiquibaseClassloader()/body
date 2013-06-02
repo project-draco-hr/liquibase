@@ -1,5 +1,4 @@
 {
-  super.execute();
   Liquibase liquibase=null;
   try {
     Writer writer=createOutputWriter();

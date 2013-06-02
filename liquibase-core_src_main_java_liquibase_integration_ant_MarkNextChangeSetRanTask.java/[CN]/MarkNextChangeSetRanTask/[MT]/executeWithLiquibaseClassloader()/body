@@ -1,5 +1,4 @@
 {
-  super.execute();
   if (!shouldRun()) {
     return;
   }
@@ -8,10 +7,10 @@
     liquibase=createLiquibase();
     Writer writer=createOutputWriter();
     if (writer == null) {
-      liquibase.changeLogSync(getContexts());
+      liquibase.markNextChangeSetRan(getContexts());
     }
  else {
-      liquibase.changeLogSync(getContexts(),writer);
+      liquibase.markNextChangeSetRan(getContexts(),writer);
       writer.flush();
       writer.close();
     }

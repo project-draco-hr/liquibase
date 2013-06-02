@@ -1,5 +1,4 @@
 {
-  super.execute();
   if (!shouldRun()) {
     return;
   }

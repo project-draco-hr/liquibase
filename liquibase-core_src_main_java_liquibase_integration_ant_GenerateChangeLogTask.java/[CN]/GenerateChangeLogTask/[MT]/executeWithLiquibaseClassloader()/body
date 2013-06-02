@@ -1,0 +1,30 @@
+{
+  Liquibase liquibase=null;
+  try {
+    PrintStream writer=createPrintStream();
+    if (writer == null) {
+      throw new BuildException("generateChangeLog requires outputFile to be set");
+    }
+    liquibase=createLiquibase();
+    Database database=liquibase.getDatabase();
+    SnapshotControl snapshotControl=new SnapshotControl(getDiffTypes());
+    DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()),database,snapshotControl);
+    DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,null,new CompareControl());
+    DiffOutputControl diffOutputConfig=new DiffOutputControl(getIncludeCatalog(),getIncludeSchema(),getIncludeTablespace());
+    diffOutputConfig.setDataDir(getDataDir());
+    if (getChangeLogFile() == null) {
+      new DiffToChangeLog(diffResult,diffOutputConfig).print(writer);
+    }
+ else {
+      new DiffToChangeLog(diffResult,diffOutputConfig).print(getChangeLogFile());
+    }
+    writer.flush();
+    writer.close();
+  }
+ catch (  Exception e) {
+    throw new BuildException(e);
+  }
+ finally {
+    closeDatabase(liquibase);
+  }
+}

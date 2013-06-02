@@ -3,4 +3,10 @@
   AntClassLoader loader=getProject().createClassLoader(classpath);
   loader.setParent(this.getClass().getClassLoader());
   loader.setThreadContextLoader();
+  try {
+    executeWithLiquibaseClassloader();
+  }
+  finally {
+    loader.resetThreadContextLoader();
+  }
 }
