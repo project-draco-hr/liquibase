@@ -1,5 +1,6 @@
 {
   DatabaseChangeLog changeLog=new DatabaseChangeLog();
+  changeLog.setChangeLogParameters(changeLogParameters);
   changeLog.setPhysicalFilePath(physicalChangeLogLocation);
   BufferedReader reader=null;
   try {
