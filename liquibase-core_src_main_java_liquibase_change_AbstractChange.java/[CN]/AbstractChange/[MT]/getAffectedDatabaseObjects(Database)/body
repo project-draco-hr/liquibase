@@ -1,4 +1,7 @@
 {
+  if (this.generateStatementsVolatile(database)) {
+    return new HashSet<DatabaseObject>();
+  }
   Set<DatabaseObject> affectedObjects=new HashSet<DatabaseObject>();
   SqlStatement[] statements=generateStatements(database);
   if (statements != null) {
