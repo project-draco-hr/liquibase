@@ -3,7 +3,7 @@
   if (StringUtils.trimToNull(getSql()) == null) {
     return new SqlStatement[0];
   }
-  String processedSQL=prepareSqlForChecksum(sql);
+  String processedSQL=normalizeLineEndings(sql);
   for (  String statement : StringUtils.processMutliLineSQL(processedSQL,isStripComments(),isSplitStatements(),getEndDelimiter())) {
     if (database instanceof MSSQLDatabase) {
       statement=statement.replaceAll("\n","\r\n");
