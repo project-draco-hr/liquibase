@@ -1,0 +1,13 @@
+{
+  Runtime.getRuntime().addShutdownHook(new Thread(){
+    @Override public void run(){
+      try {
+        FileUtil.deleteDirectory(file);
+      }
+ catch (      IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+);
+}
