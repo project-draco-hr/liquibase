@@ -1,3 +1,0 @@
-{
-  return string.replaceAll("\r\n","\n").replaceAll("\r","\n");
-}
