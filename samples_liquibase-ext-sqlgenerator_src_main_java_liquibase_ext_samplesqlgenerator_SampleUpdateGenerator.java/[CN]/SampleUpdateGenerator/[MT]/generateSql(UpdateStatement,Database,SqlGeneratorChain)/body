@@ -1,6 +1,0 @@
-{
-  List<Sql> list=new ArrayList<Sql>();
-  list.add(new UnparsedSql("select " + database.getCurrentDateTimeFunction()));
-  list.addAll(Arrays.asList(sqlGeneratorChain.generateSql(statement,database)));
-  return list.toArray(new Sql[list.size()]);
-}

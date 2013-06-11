@@ -1,3 +1,0 @@
-{
-  return new SqlStatement[]{new CreateTableStatement(null,null,"samplechange").addColumn("id",DataTypeFactory.getInstance().fromDescription("int")).addColumn("name",DataTypeFactory.getInstance().fromDescription("varchar(5)"))};
-}
