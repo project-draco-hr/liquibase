@@ -1,3 +1,0 @@
-{
-  return file.startsWith(ResourceLoader.CLASSPATH_URL_PREFIX);
-}
