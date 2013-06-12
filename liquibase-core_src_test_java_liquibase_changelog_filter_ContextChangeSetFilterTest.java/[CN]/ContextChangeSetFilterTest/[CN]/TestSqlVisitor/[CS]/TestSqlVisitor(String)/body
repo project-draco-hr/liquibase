@@ -1,0 +1,3 @@
+{
+  setContexts(new HashSet<String>(Arrays.asList(contexts)));
+}
