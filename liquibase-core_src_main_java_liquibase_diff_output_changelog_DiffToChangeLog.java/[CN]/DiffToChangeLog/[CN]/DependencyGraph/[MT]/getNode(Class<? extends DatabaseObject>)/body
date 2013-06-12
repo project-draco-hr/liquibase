@@ -1,3 +1,7 @@
 {
-  return allNodes.get(type);
+  Node node=allNodes.get(type);
+  if (node == null) {
+    node=new Node(type);
+  }
+  return node;
 }
