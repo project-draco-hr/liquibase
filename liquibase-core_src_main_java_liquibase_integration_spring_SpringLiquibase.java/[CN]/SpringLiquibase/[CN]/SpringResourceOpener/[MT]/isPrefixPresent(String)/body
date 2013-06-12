@@ -1,0 +1,6 @@
+{
+  if (file.startsWith("classpath") || file.startsWith("file:") || file.startsWith("url:")) {
+    return true;
+  }
+  return false;
+}
