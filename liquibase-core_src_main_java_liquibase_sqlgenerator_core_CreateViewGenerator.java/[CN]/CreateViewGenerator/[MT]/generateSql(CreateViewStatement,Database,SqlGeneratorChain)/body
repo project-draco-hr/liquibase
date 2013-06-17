@@ -1,6 +1,6 @@
 {
   if (database instanceof InformixDatabase) {
-    return new InformixCreateViewGenerator().generateSql(statement,database,sqlGeneratorChain);
+    return new CreateViewGeneratorInformix().generateSql(statement,database,sqlGeneratorChain);
   }
   String createClause;
   List<Sql> sql=new ArrayList<Sql>();

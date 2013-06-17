@@ -1,6 +1,6 @@
 {
   if (database instanceof InformixDatabase) {
-    AbstractSqlGenerator<CreateTableStatement> gen=new InformixCreateTableGenerator();
+    AbstractSqlGenerator<CreateTableStatement> gen=new CreateTableGeneratorInformix();
     return gen.generateSql(statement,database,sqlGeneratorChain);
   }
   List<Sql> additionalSql=new ArrayList<Sql>();

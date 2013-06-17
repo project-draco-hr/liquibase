@@ -1,3 +1,0 @@
-{
-  return new DatabaseDataType("DATETIME YEAR TO FRACTION",5);
-}

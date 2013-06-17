@@ -1,6 +1,6 @@
 {
   if (database instanceof InformixDatabase) {
-    return new InformixCreateViewGenerator().validate(createViewStatement,database,sqlGeneratorChain);
+    return new CreateViewGeneratorInformix().validate(createViewStatement,database,sqlGeneratorChain);
   }
   ValidationErrors validationErrors=new ValidationErrors();
   validationErrors.checkRequiredField("viewName",createViewStatement.getViewName());
