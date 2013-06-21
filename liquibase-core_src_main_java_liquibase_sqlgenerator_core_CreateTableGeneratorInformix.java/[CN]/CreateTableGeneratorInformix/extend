@@ -1,1 +1,1 @@
-AbstractSqlGenerator<CreateTableStatement>
+CreateTableGenerator
