@@ -1,9 +1,10 @@
 {
-  if (!(fileName.endsWith(".xml") || fileName.endsWith(".sql"))) {
-    log.debug(relativeBaseFileName + "/" + fileName+ " is not a recognized file type");
+  if (fileName.equalsIgnoreCase(".svn") || fileName.equalsIgnoreCase("cvs")) {
     return false;
   }
-  if (fileName.equalsIgnoreCase(".svn") || fileName.equalsIgnoreCase("cvs")) {
+  ChangeLogParser changeLogParser=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor);
+  if (changeLogParser == null) {
+    log.warning("included file " + relativeBaseFileName + "/"+ fileName+ " is not a recognized file type");
     return false;
   }
   if (isRelativePath) {
