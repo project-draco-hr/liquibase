@@ -1,0 +1,6 @@
+String fileName
+boolean isRelativePath
+String relativeBaseFileName
+DatabaseChangeLog databaseChangeLog
+ChangeLogParameters changeLogParameters
+ResourceAccessor resourceAccessor

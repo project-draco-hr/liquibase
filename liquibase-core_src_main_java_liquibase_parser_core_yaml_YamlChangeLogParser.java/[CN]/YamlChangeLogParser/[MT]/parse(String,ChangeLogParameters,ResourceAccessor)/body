@@ -251,15 +251,10 @@
         }
         file=file.replace('\\','/');
         boolean isRelativeToChangelogFile=getValue(includeMap,"relativeToChangelogFile",Boolean.class,false,changeLogParameters);
+        handleIncludedChangeLog(file,isRelativeToChangelogFile,physicalChangeLogLocation,changeLog,changeLogParameters,resourceAccessor);
       }
  else       if (objectType.equals("includeAll")) {
-        Map<String,Object> includeAllMap=(Map)nestedMap.get("includeAll");
-        String path=getValue(includeAllMap,"path",String.class,changeLogParameters);
-        if (path == null) {
-          throw new ChangeLogParseException("Missing includeAll 'file' attribute");
-        }
-        path=path.replace('\\','/');
-        boolean isRelativeToChangelogFile=getValue(includeAllMap,"relativeToChangelogFile",Boolean.class,false,changeLogParameters);
+        throw new ChangeLogParseException("includeAll not yet supported in yaml");
       }
  else {
         throw new ChangeLogParseException("Unexpected databaseChangeLog node: " + objectType);
