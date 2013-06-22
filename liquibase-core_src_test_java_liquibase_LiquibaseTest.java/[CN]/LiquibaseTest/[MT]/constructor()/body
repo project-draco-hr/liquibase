@@ -1,5 +1,5 @@
 {
-  MockResourceAccessor resourceAccessor=new MockResourceAccessor();
+  MockResourceAccessor resourceAccessor=this.mockResourceAccessor;
   MockDatabase database=new MockDatabase();
   Liquibase liquibase=new Liquibase("com/example/test.xml",resourceAccessor,database);
   assertNotNull(liquibase.getLog());

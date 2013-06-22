@@ -1,0 +1,4 @@
+{
+  reset(mockResourceAccessor,mockDatabase,mockLockServiceFactory);
+  LockServiceFactory.reset();
+}

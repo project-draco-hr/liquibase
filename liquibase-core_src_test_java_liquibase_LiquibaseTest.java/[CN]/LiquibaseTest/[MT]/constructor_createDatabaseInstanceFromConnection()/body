@@ -1,10 +1,10 @@
 {
   DatabaseConnection databaseConnection=mock(DatabaseConnection.class);
-  Database database=mock(Database.class);
+  Database database=mockDatabase;
   try {
     DatabaseFactory.setInstance(mock(DatabaseFactory.class));
     when(DatabaseFactory.getInstance().findCorrectDatabaseImplementation(databaseConnection)).thenReturn(database);
-    Liquibase liquibase=new Liquibase("com/example/test.xml",new MockResourceAccessor(),databaseConnection);
+    Liquibase liquibase=new Liquibase("com/example/test.xml",mockResourceAccessor,databaseConnection);
     assertSame("Liquibase constructor passing connection did not find the correct database implementation",database,liquibase.getDatabase());
   }
   finally {

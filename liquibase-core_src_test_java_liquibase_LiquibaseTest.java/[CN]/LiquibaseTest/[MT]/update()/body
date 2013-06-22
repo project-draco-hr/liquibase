@@ -1,0 +1,6 @@
+{
+  LockServiceFactory.setInstance(mock(LockServiceFactory.class));
+  Liquibase liquibase=new Liquibase("com/example/test.xml",mockResourceAccessor,mockDatabase);
+  liquibase.update(new Contexts("a","b"));
+  verify(mockLockService).waitForLock();
+}

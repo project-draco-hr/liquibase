@@ -1,8 +1,8 @@
 {
-  Liquibase liquibase=new Liquibase("path\\with\\windows\\separators.xml",new MockResourceAccessor(),new MockDatabase());
+  Liquibase liquibase=new Liquibase("path\\with\\windows\\separators.xml",mockResourceAccessor,new MockDatabase());
   assertEquals("path/with/windows/separators.xml",liquibase.getChangeLogFile());
-  liquibase=new Liquibase("path/with/unix/separators.xml",new MockResourceAccessor(),new MockDatabase());
+  liquibase=new Liquibase("path/with/unix/separators.xml",mockResourceAccessor,new MockDatabase());
   assertEquals("path/with/unix/separators.xml",liquibase.getChangeLogFile());
-  liquibase=new Liquibase("/absolute/path/remains.xml",new MockResourceAccessor(),new MockDatabase());
+  liquibase=new Liquibase("/absolute/path/remains.xml",mockResourceAccessor,new MockDatabase());
   assertEquals("/absolute/path/remains.xml",liquibase.getChangeLogFile());
 }

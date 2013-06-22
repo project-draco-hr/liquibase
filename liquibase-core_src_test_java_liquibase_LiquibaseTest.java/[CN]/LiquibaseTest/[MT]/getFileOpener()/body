@@ -1,4 +1,4 @@
 {
-  Liquibase liquibase=new Liquibase("com/example/test.xml",new MockResourceAccessor(),mock(Database.class));
+  Liquibase liquibase=new Liquibase("com/example/test.xml",mockResourceAccessor,mockDatabase);
   assertSame(liquibase.getResourceAccessor(),liquibase.getFileOpener());
 }
