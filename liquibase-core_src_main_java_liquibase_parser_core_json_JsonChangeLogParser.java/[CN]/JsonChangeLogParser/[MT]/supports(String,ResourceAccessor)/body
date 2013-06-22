@@ -1,3 +1,0 @@
-{
-  return changeLogFile.endsWith(".json");
-}

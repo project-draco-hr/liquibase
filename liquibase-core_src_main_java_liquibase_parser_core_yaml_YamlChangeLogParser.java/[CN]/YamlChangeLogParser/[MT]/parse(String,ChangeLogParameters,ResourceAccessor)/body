@@ -7,7 +7,7 @@
       changeLogAsMap=yaml.loadAs(changeLogStream,Map.class);
     }
  catch (    Exception e) {
-      throw new ChangeLogParseException("Syntax error in yaml: " + e.getMessage(),e);
+      throw new ChangeLogParseException("Syntax error in " + getSupportedFileExtension() + ": "+ e.getMessage(),e);
     }
     DatabaseChangeLog changeLog=new DatabaseChangeLog(physicalChangeLogLocation);
     changeLog.setChangeLogParameters(changeLogParameters);
@@ -171,7 +171,7 @@
  else                 if (param.equals("context")) {
                   String value=getValue(visitorParams,param,String.class,changeLogParameters);
                   String context=value.toString().replace(" ","");
-                  sqlVisitor.setContexts(new HashSet<String>(Arrays.asList(context.split(","))));
+                  sqlVisitor.setContexts(new Contexts(context.split(",")));
                 }
  else                 if (param.equals("applyToRollback")) {
                   Boolean value=getValue(visitorParams,param,Boolean.class,changeLogParameters);
@@ -254,7 +254,7 @@
         handleIncludedChangeLog(file,isRelativeToChangelogFile,physicalChangeLogLocation,changeLog,changeLogParameters,resourceAccessor);
       }
  else       if (objectType.equals("includeAll")) {
-        throw new ChangeLogParseException("includeAll not yet supported in yaml");
+        throw new ChangeLogParseException("includeAll not yet supported in " + getSupportedFileExtension());
       }
  else {
         throw new ChangeLogParseException("Unexpected databaseChangeLog node: " + objectType);
