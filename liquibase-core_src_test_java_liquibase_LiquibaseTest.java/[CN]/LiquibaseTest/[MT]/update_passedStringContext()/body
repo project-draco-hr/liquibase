@@ -1,0 +1,20 @@
+{
+  LiquibaseDelegate liquibase=new LiquibaseDelegate(){
+    @Override public void update(    Contexts contexts) throws LiquibaseException {
+      objectToVerify=contexts;
+    }
+  }
+;
+  liquibase.update("test");
+  assertEquals("test",liquibase.objectToVerify.toString());
+  liquibase.reset();
+  liquibase.update("");
+  assertEquals("",liquibase.objectToVerify.toString());
+  liquibase.reset();
+  liquibase.update((String)null);
+  assertEquals("",liquibase.objectToVerify.toString());
+  liquibase.reset();
+  liquibase.update("test1, test2");
+  assertEquals("test1,test2",liquibase.objectToVerify.toString());
+  liquibase.reset();
+}

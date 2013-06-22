@@ -1,0 +1,3 @@
+{
+  super("com/example/test.xml",new MockResourceAccessor(),mock(Database.class));
+}
