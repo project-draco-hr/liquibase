@@ -1,4 +1,4 @@
 {
-  checkDatabaseChangeLogTable(false,null,null);
+  checkDatabaseChangeLogTable(false,null,new Contexts());
   return getLockService().listLocks();
 }

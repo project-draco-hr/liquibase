@@ -1,16 +1,3 @@
 {
-  contexts=StringUtils.trimToNull(contexts);
-  changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
-  LoggingExecutor outputTemplate=new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database);
-  Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
-  ExecutorService.getInstance().setExecutor(database,outputTemplate);
-  outputHeader("SQL to add all changesets to database history table");
-  markNextChangeSetRan(contexts);
-  try {
-    output.flush();
-  }
- catch (  IOException e) {
-    throw new LiquibaseException(e);
-  }
-  ExecutorService.getInstance().setExecutor(database,oldTemplate);
+  markNextChangeSetRan(new Contexts(contexts),output);
 }

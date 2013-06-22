@@ -17,7 +17,7 @@
   if (contexts == null || contexts.size() == 0) {
     return true;
   }
-  if (changeSet.getContexts() == null) {
+  if (changeSet.getContexts() == null || changeSet.getContexts().size() == 0) {
     return true;
   }
   for (  String context : changeSet.getContexts()) {

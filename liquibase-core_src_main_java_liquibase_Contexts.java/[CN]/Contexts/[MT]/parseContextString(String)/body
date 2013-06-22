@@ -1,0 +1,7 @@
+{
+  contexts=StringUtils.trimToNull(contexts);
+  if (contexts == null) {
+    return;
+  }
+  addAll(StringUtils.splitAndTrim(contexts,","));
+}

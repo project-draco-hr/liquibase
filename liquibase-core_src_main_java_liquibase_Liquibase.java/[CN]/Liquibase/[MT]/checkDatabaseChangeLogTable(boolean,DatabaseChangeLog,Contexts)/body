@@ -1,0 +1,9 @@
+{
+  if (updateExistingNullChecksums && databaseChangeLog == null) {
+    throw new LiquibaseException("changeLog parameter is required if updating existing checksums");
+  }
+  getDatabase().checkDatabaseChangeLogTable(updateExistingNullChecksums,databaseChangeLog,contexts);
+  if (!getLockService().hasChangeLogLock()) {
+    getDatabase().checkDatabaseChangeLogLockTable();
+  }
+}

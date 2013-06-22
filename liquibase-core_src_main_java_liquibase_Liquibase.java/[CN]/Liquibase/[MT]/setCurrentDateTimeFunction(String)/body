@@ -1,5 +1,3 @@
 {
-  if (currentDateTimeFunction != null) {
-    this.database.setCurrentDateTimeFunction(currentDateTimeFunction);
-  }
+  this.database.setCurrentDateTimeFunction(currentDateTimeFunction);
 }

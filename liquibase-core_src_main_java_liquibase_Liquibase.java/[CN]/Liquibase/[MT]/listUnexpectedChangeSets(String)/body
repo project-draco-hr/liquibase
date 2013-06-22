@@ -1,9 +1,3 @@
 {
-  changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
-  DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
-  changeLog.validate(database,contexts);
-  ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database));
-  ExpectedChangesVisitor visitor=new ExpectedChangesVisitor(database.getRanChangeSetList());
-  logIterator.run(visitor,database);
-  return visitor.getUnexpectedChangeSets();
+  return listUnexpectedChangeSets(new Contexts(contexts));
 }

@@ -14,7 +14,7 @@
   assertFalse(changeLog.getChangeSets().get(0).isAlwaysRun());
   assertFalse(changeLog.getChangeSets().get(0).isRunOnChange());
   assertTrue(changeLog.getChangeSets().get(0).isRunInTransaction());
-  assertNull(changeLog.getChangeSets().get(0).getContexts());
+  assertEquals(0,changeLog.getChangeSets().get(0).getContexts().size());
   assertNull(changeLog.getChangeSets().get(0).getDbmsSet());
   assertEquals("nvoxland",changeLog.getChangeSets().get(1).getAuthor());
   assertEquals("2",changeLog.getChangeSets().get(1).getId());

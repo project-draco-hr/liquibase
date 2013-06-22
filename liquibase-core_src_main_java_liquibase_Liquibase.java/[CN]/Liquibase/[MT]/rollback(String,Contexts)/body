@@ -1,0 +1,16 @@
+{
+  changeLogParameters.setContexts(contexts);
+  LockService lockService=getLockService();
+  lockService.waitForLock();
+  try {
+    DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
+    checkDatabaseChangeLogTable(false,changeLog,contexts);
+    changeLog.validate(database,contexts);
+    List<RanChangeSet> ranChangeSetList=database.getRanChangeSetList();
+    ChangeLogIterator logIterator=new ChangeLogIterator(ranChangeSetList,changeLog,new AfterTagChangeSetFilter(tagToRollBackTo,ranChangeSetList),new AlreadyRanChangeSetFilter(ranChangeSetList),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database));
+    logIterator.run(new RollbackVisitor(database),database);
+  }
+  finally {
+    lockService.releaseLock();
+  }
+}

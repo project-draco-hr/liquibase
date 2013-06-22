@@ -1,0 +1,4 @@
+String key
+Object value
+Contexts validContexts
+List<String> validDatabases

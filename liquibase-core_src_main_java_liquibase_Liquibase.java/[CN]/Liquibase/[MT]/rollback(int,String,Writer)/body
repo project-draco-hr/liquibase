@@ -1,15 +1,3 @@
 {
-  contexts=StringUtils.trimToNull(contexts);
-  changeLogParameters.setContexts(StringUtils.splitAndTrim(contexts,","));
-  Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
-  ExecutorService.getInstance().setExecutor(database,new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database));
-  outputHeader("Rollback " + changesToRollback + " Change(s) Script");
-  rollback(changesToRollback,contexts);
-  try {
-    output.flush();
-  }
- catch (  IOException e) {
-    throw new LiquibaseException(e);
-  }
-  ExecutorService.getInstance().setExecutor(database,oldTemplate);
+  rollback(changesToRollback,new Contexts(contexts),output);
 }

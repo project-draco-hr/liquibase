@@ -1,8 +1,0 @@
-{
-  if (database == null) {
-    database=new OracleDatabase(){
-    }
-;
-  }
-  return database;
-}

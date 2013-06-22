@@ -8,13 +8,7 @@
   this.runOnChange=runOnChange;
   this.runInTransaction=runInTransaction;
   this.objectQuotingStrategy=quotingStrategy;
-  if (StringUtils.trimToNull(contextList) != null) {
-    String[] strings=contextList.toLowerCase().split(",");
-    contexts=new HashSet<String>();
-    for (    String string : strings) {
-      contexts.add(string.trim().toLowerCase());
-    }
-  }
+  this.contexts=new Contexts(contextList);
   if (StringUtils.trimToNull(dbmsList) != null) {
     String[] strings=dbmsList.toLowerCase().split(",");
     dbmsSet=new HashSet<String>();

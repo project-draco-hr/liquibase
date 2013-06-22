@@ -1,4 +1,0 @@
-{
-  this.database=database;
-  if (database != null)   setDatabasePropertiesAsChangelogParameters(database);
-}

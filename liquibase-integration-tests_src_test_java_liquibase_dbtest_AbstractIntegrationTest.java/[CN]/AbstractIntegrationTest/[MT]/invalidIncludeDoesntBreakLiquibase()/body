@@ -4,7 +4,7 @@
   }
   Liquibase liquibase=createLiquibase(invalidReferenceChangeLog);
   try {
-    liquibase.update(null);
+    liquibase.update(new Contexts());
     fail("Did not fail with invalid include");
   }
  catch (  ChangeLogParseException ignored) {

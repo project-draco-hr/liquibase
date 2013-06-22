@@ -198,7 +198,7 @@
         modifySqlDbmsList=new HashSet<String>(StringUtils.splitAndTrim(atts.getValue("dbms"),","));
       }
       if (StringUtils.trimToNull(atts.getValue("context")) != null) {
-        modifySqlContexts=new HashSet<String>(StringUtils.splitAndTrim(atts.getValue("context"),","));
+        modifySqlContexts=new Contexts(atts.getValue("context"));
       }
       if (StringUtils.trimToNull(atts.getValue("applyToRollback")) != null) {
         modifySqlAppliedOnRollback=Boolean.valueOf(atts.getValue("applyToRollback"));
