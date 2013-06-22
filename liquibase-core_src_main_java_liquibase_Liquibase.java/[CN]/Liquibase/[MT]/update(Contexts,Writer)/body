@@ -4,7 +4,7 @@
   LoggingExecutor loggingExecutor=new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database);
   ExecutorService.getInstance().setExecutor(database,loggingExecutor);
   outputHeader("Update Database Script");
-  LockService lockService=getLockService();
+  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
   lockService.waitForLock();
   try {
     update(contexts);

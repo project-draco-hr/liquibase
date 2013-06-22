@@ -1,5 +1,5 @@
 {
-  LockService lockService=getLockService();
+  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
   lockService.waitForLock();
   try {
     checkDatabaseChangeLogTable(false,null,new Contexts());

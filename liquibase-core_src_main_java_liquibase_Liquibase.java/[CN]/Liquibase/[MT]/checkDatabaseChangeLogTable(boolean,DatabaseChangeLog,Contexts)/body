@@ -3,7 +3,7 @@
     throw new LiquibaseException("changeLog parameter is required if updating existing checksums");
   }
   getDatabase().checkDatabaseChangeLogTable(updateExistingNullChecksums,databaseChangeLog,contexts);
-  if (!getLockService().hasChangeLogLock()) {
+  if (!LockServiceFactory.getInstance().getLockService(database).hasChangeLogLock()) {
     getDatabase().checkDatabaseChangeLogLockTable();
   }
 }

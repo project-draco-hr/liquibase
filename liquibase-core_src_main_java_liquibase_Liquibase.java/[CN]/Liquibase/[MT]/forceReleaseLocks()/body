@@ -1,4 +1,4 @@
 {
   checkDatabaseChangeLogTable(false,null,new Contexts());
-  getLockService().forceReleaseLock();
+  LockServiceFactory.getInstance().getLockService(database).forceReleaseLock();
 }

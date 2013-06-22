@@ -1,6 +1,6 @@
 {
   try {
-    getLockService().waitForLock();
+    LockServiceFactory.getInstance().getLockService(database).waitForLock();
     for (    CatalogAndSchema schema : schemas) {
       log.info("Dropping Database Objects in schema: " + schema);
       checkDatabaseChangeLogTable(false,null,new Contexts());
@@ -17,7 +17,7 @@ catch (  Exception e) {
   }
  finally {
     try {
-      getLockService().releaseLock();
+      LockServiceFactory.getInstance().getLockService(database).releaseLock();
     }
  catch (    LockException e) {
       log.severe("Unable to release lock: " + e.getMessage());

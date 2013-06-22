@@ -1,7 +1,7 @@
 {
   log.info("Generating Database Documentation");
   changeLogParameters.setContexts(contexts);
-  LockService lockService=getLockService();
+  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
   lockService.waitForLock();
   try {
     DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
