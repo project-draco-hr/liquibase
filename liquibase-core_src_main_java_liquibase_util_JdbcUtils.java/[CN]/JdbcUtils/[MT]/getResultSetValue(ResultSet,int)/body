@@ -1,5 +1,16 @@
 {
-  Object obj=rs.getObject(index);
+  Object obj=null;
+  try {
+    obj=rs.getObject(index);
+  }
+ catch (  SQLException e) {
+    if (e.getMessage().equals("The conversion from char to SMALLINT is unsupported.")) {
+      obj=rs.getString(index);
+    }
+ else {
+      throw e;
+    }
+  }
   if (obj instanceof Blob) {
     obj=rs.getBytes(index);
   }
