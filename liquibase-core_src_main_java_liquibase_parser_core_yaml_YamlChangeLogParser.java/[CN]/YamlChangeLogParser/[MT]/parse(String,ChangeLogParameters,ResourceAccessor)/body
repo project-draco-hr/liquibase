@@ -24,7 +24,7 @@
         }
         checkRequiredAttribute("changeSet","id",changeSetMap);
         checkRequiredAttribute("changeSet","author",changeSetMap);
-        ChangeSet changeSet=new ChangeSet(getValue(changeSetMap,"id",String.class,changeLogParameters),getValue(changeSetMap,"author",String.class,changeLogParameters),getValue(changeSetMap,"alwaysRun",boolean.class,false,changeLogParameters),getValue(changeSetMap,"runOnChange",boolean.class,false,changeLogParameters),physicalChangeLogLocation,getValue(changeSetMap,"context",String.class,changeLogParameters),getValue(changeSetMap,"dbms",String.class,changeLogParameters));
+        ChangeSet changeSet=new ChangeSet(getValue(changeSetMap,"id",String.class,changeLogParameters),getValue(changeSetMap,"author",String.class,changeLogParameters),getValue(changeSetMap,"alwaysRun",boolean.class,false,changeLogParameters),getValue(changeSetMap,"runOnChange",boolean.class,false,changeLogParameters),physicalChangeLogLocation,getValue(changeSetMap,"context",String.class,changeLogParameters),getValue(changeSetMap,"dbms",String.class,changeLogParameters),changeLog);
         try {
           List<Map<String,Object>> changes=null;
           try {

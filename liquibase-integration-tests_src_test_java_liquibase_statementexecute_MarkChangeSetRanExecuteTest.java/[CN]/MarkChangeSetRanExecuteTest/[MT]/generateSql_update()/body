@@ -1,5 +1,5 @@
 {
-  this.statementUnderTest=new MarkChangeSetRanStatement(new ChangeSet("a","b",false,false,"c","e","f"),ChangeSet.ExecType.RERAN);
+  this.statementUnderTest=new MarkChangeSetRanStatement(new ChangeSet("a","b",false,false,"c","e","f",null),ChangeSet.ExecType.RERAN);
   assertCorrect("update [dbo].[databasechangelog] set [dateexecuted] = NOW(), [exectype] = 'reran', [md5sum] = '7:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",MSSQLDatabase.class);
   assertCorrect("update [databasechangelog] set [dateexecuted] = timestamp, [exectype] = 'reran', [md5sum] = '7:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",MaxDBDatabase.class);
   assertCorrect("update [databasechangelog] set [dateexecuted] = sysdate, [exectype] = 'reran', [md5sum] = '7:d41d8cd98f00b204e9800998ecf8427e' where id='a' and author='b' and filename='c'",CacheDatabase.class);

@@ -5,4 +5,4 @@ boolean runOnChange
 String filePath
 String contextList
 String dbmsList
-boolean runInTransaction
+DatabaseChangeLog databaseChangeLog

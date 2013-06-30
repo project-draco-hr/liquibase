@@ -22,4 +22,5 @@
       dbmsSet.add(string.trim().toLowerCase());
     }
   }
+  this.changeLog=databaseChangeLog;
 }

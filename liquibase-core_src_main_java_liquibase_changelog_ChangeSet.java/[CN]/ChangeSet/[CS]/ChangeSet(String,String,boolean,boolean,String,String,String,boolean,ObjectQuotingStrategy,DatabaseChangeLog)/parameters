@@ -7,3 +7,4 @@ String contextList
 String dbmsList
 boolean runInTransaction
 ObjectQuotingStrategy quotingStrategy
+DatabaseChangeLog databaseChangeLog
