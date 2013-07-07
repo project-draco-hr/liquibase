@@ -18,6 +18,6 @@
     CatalogAndSchema referenceSchema=new CatalogAndSchema(referenceCatalogName,referenceSchemaName);
     CatalogAndSchema comparisonSchema=new CatalogAndSchema(comparisonCatalogName,comparisonSchemaName);
     this.schemaComparisons[i]=new SchemaComparison(referenceSchema,comparisonSchema);
-    initCompareTypes(compareTypes);
+    setTypes(compareTypes);
   }
 }

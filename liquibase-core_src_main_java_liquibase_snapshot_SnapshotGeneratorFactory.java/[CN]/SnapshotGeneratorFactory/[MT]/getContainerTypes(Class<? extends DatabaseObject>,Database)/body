@@ -1,0 +1,5 @@
+{
+  Set<Class<? extends DatabaseObject>> returnSet=new HashSet<Class<? extends DatabaseObject>>();
+  getContainerTypes(type,database,returnSet);
+  return returnSet;
+}

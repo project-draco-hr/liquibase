@@ -7,7 +7,7 @@
     }
     liquibase=createLiquibase();
     Database database=liquibase.getDatabase();
-    SnapshotControl snapshotControl=new SnapshotControl(getDiffTypes());
+    SnapshotControl snapshotControl=new SnapshotControl(database,getDiffTypes());
     DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()),database,snapshotControl);
     DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,null,new CompareControl());
     DiffOutputControl diffOutputConfig=new DiffOutputControl(getIncludeCatalog(),getIncludeSchema(),getIncludeTablespace());

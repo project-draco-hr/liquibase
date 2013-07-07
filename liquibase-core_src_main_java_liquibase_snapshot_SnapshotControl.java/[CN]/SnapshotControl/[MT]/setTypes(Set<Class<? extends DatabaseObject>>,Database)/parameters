@@ -1,0 +1,2 @@
+Set<Class<? extends DatabaseObject>> types
+Database database

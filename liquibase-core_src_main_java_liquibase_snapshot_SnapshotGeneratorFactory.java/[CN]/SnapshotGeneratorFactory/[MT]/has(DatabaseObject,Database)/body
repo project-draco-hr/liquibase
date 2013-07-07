@@ -1,5 +1,5 @@
 {
-  if (createSnapshot(example,database,new SnapshotControl(example.getClass())) != null) {
+  if (createSnapshot(example,database,new SnapshotControl(database,example.getClass())) != null) {
     return true;
   }
   CatalogAndSchema catalogAndSchema;
@@ -9,7 +9,7 @@
  else {
     catalogAndSchema=example.getSchema().toCatalogAndSchema();
   }
-  DatabaseSnapshot snapshot=createSnapshot(catalogAndSchema,database,new SnapshotControl(example.getClass()));
+  DatabaseSnapshot snapshot=createSnapshot(catalogAndSchema,database,new SnapshotControl(database,example.getClass()));
   for (  DatabaseObject obj : snapshot.get(example.getClass())) {
     if (DatabaseObjectComparatorFactory.getInstance().isSameObject(example,obj,database)) {
       return true;

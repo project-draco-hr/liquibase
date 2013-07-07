@@ -1,6 +1,6 @@
 {
-  DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase.getDefaultSchema(),referenceDatabase,new SnapshotControl());
-  DatabaseSnapshot targetSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(targetDatabase.getDefaultSchema(),targetDatabase,new SnapshotControl());
+  DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase.getDefaultSchema(),referenceDatabase,new SnapshotControl(referenceDatabase));
+  DatabaseSnapshot targetSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(targetDatabase.getDefaultSchema(),targetDatabase,new SnapshotControl(targetDatabase));
   CompareControl compareControl=new CompareControl(referenceSnapshot.getSnapshotControl().getTypesToInclude());
   DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,targetSnapshot,compareControl);
   if (changeLogFile == null) {

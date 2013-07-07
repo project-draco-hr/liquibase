@@ -1,0 +1,15 @@
+{
+  if (!snapshot.getSnapshotControl().shouldInclude(Data.class)) {
+    return;
+  }
+  if (foundObject instanceof Table) {
+    Table table=(Table)foundObject;
+    try {
+      Data exampleData=new Data().setTable(table);
+      table.setAttribute("data",exampleData);
+    }
+ catch (    Exception e) {
+      throw new DatabaseException(e);
+    }
+  }
+}

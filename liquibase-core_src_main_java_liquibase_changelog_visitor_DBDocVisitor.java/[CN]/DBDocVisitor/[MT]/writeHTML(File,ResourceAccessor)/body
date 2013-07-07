@@ -10,7 +10,7 @@
   copyFile("liquibase/dbdoc/index.html",rootOutputDir);
   copyFile("liquibase/dbdoc/globalnav.html",rootOutputDir);
   copyFile("liquibase/dbdoc/overview-summary.html",rootOutputDir);
-  DatabaseSnapshot snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl());
+  DatabaseSnapshot snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl(database));
   new ChangeLogListWriter(rootOutputDir).writeHTML(changeLogs);
   new TableListWriter(rootOutputDir).writeHTML(new TreeSet<Object>(snapshot.get(Table.class)));
   new AuthorListWriter(rootOutputDir).writeHTML(new TreeSet<Object>(changesByAuthor.keySet()));

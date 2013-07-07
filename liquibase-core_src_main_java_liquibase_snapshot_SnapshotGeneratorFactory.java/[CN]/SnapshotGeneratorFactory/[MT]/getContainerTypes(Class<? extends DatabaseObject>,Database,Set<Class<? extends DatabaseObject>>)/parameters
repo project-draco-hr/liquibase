@@ -1,0 +1,3 @@
+Class<? extends DatabaseObject> type
+Database database
+Set<Class<? extends DatabaseObject>> returnSet
