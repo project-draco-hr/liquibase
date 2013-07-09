@@ -1,3 +1,0 @@
-{
-  return super.getDefaultSchemaName() == null ? null : super.getDefaultSchemaName().toUpperCase();
-}

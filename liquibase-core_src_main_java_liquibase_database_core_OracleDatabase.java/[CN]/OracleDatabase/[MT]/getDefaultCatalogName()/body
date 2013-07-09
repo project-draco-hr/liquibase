@@ -1,0 +1,3 @@
+{
+  return super.getDefaultCatalogName() == null ? null : super.getDefaultCatalogName().toUpperCase();
+}

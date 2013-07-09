@@ -1,8 +1,11 @@
 {
   if (defaultCatalogName == null) {
+    if (defaultSchemaName != null && !this.supportsSchemas()) {
+      return defaultSchemaName;
+    }
     if (connection != null) {
       try {
-        defaultCatalogName=doGetDefaultCatalogName();
+        defaultCatalogName=getConnectionCatalogName();
       }
  catch (      DatabaseException e) {
         LogFactory.getLogger().info("Error getting default catalog",e);

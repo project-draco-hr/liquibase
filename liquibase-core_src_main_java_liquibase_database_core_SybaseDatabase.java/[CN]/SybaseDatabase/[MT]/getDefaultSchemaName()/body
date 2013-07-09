@@ -1,3 +1,6 @@
 {
-  return "dbo";
+  if (defaultSchemaName == null) {
+    defaultSchemaName=getConnectionSchemaName();
+  }
+  return defaultSchemaName;
 }

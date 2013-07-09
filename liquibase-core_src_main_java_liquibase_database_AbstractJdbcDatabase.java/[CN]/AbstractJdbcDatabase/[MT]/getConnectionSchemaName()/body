@@ -1,4 +1,7 @@
 {
+  if (connection == null) {
+    return null;
+  }
   try {
     ResultSet resultSet=((JdbcConnection)connection).prepareCall("call current_schema").executeQuery();
     resultSet.next();
