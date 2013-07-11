@@ -11,11 +11,15 @@
     dataTypeName=dataTypeName.replaceFirst(" identity$","");
     primaryKey=true;
   }
-  String[] splitTypeName=dataTypeName.split("\\s+",2);
-  dataTypeName=splitTypeName[0];
   String additionalInfo=null;
-  if (splitTypeName.length > 1) {
-    additionalInfo=splitTypeName[1];
+  if (dataTypeName.toLowerCase().startsWith("bit varying")) {
+  }
+ else {
+    String[] splitTypeName=dataTypeName.split("\\s+",2);
+    dataTypeName=splitTypeName[0];
+    if (splitTypeName.length > 1) {
+      additionalInfo=splitTypeName[1];
+    }
   }
   SortedSet<Class<? extends LiquibaseDataType>> classes=registry.get(dataTypeName.toLowerCase());
   LiquibaseDataType liquibaseDataType=null;
