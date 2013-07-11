@@ -1,0 +1,6 @@
+{
+  if (Table.class.isAssignableFrom(objectType)) {
+    return PRIORITY_TYPE;
+  }
+  return PRIORITY_NONE;
+}

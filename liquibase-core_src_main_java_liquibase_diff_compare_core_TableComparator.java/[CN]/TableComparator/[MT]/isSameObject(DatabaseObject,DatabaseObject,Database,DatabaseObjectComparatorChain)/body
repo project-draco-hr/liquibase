@@ -1,0 +1,6 @@
+{
+  if (!(databaseObject1 instanceof Table && databaseObject2 instanceof Table)) {
+    return false;
+  }
+  return chain.isSameObject(databaseObject1,databaseObject2,accordingTo);
+}

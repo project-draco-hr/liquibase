@@ -9,6 +9,7 @@
       database.commit();
     }
  catch (    Exception e) {
+      System.out.println("Probably expected error dropping databasechangelog table");
       e.printStackTrace();
     }
     try {
@@ -17,6 +18,7 @@
       database.commit();
     }
  catch (    Exception e) {
+      System.out.println("Probably expected error dropping databasechangeloglock table");
       e.printStackTrace();
     }
   }
