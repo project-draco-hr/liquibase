@@ -1,3 +1,5 @@
 {
-  return chain.findDifferences(databaseObject1,databaseObject2,accordingTo);
+  ObjectDifferences differences=new ObjectDifferences();
+  differences.compare("name",databaseObject1,databaseObject2,new ObjectDifferences.DatabaseObjectNameCompareFunction(Schema.class,accordingTo));
+  return differences;
 }
