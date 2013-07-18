@@ -102,7 +102,6 @@
             continue;
           }
           includedChangeLogs.add(path);
-          includedChangeLogs.add(path);
         }
       }
       if (resourceFilter != null) {
@@ -135,7 +134,7 @@
       if (quotingStrategyText != null) {
         quotingStrategy=ObjectQuotingStrategy.valueOf(quotingStrategyText);
       }
-      changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,filePath,atts.getValue("context"),atts.getValue("dbms"),Boolean.valueOf(atts.getValue("runInTransaction")),quotingStrategy);
+      changeSet=new ChangeSet(atts.getValue("id"),atts.getValue("author"),alwaysRun,runOnChange,filePath,atts.getValue("context"),atts.getValue("dbms"),Boolean.valueOf(atts.getValue("runInTransaction")),quotingStrategy,databaseChangeLog);
       if (StringUtils.trimToNull(atts.getValue("failOnError")) != null) {
         changeSet.setFailOnError(Boolean.parseBoolean(atts.getValue("failOnError")));
       }

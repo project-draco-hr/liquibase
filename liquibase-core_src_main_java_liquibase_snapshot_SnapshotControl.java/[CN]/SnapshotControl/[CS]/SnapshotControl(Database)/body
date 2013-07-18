@@ -1,0 +1,3 @@
+{
+  setTypes(DatabaseObjectFactory.getInstance().getStandardTypes(),database);
+}

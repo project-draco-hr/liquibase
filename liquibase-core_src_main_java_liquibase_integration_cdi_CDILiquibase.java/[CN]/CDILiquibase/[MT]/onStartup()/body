@@ -15,5 +15,10 @@
     return;
   }
   initialized=true;
-  performUpdate();
+  try {
+    performUpdate();
+  }
+ catch (  LiquibaseException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
 }

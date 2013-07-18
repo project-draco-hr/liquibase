@@ -1,0 +1,15 @@
+{
+  if (!returnSet.add(type)) {
+    return;
+  }
+  SortedSet<SnapshotGenerator> generators=getGenerators(type,database);
+  if (generators != null && generators.size() > 0) {
+    SnapshotGenerator generator=generators.iterator().next();
+    if (generator.addsTo() != null) {
+      for (      Class<? extends DatabaseObject> newType : generator.addsTo()) {
+        returnSet.add(newType);
+        getContainerTypes(newType,database,returnSet);
+      }
+    }
+  }
+}

@@ -1,5 +1,7 @@
 {
-  if (createSnapshot(example,database,new SnapshotControl(example.getClass())) != null) {
+  List<Class<? extends DatabaseObject>> types=new ArrayList<Class<? extends DatabaseObject>>(getContainerTypes(example.getClass(),database));
+  types.add(example.getClass());
+  if (createSnapshot(example,database,new SnapshotControl(database,types.toArray(new Class[types.size()]))) != null) {
     return true;
   }
   CatalogAndSchema catalogAndSchema;
@@ -9,7 +11,7 @@
  else {
     catalogAndSchema=example.getSchema().toCatalogAndSchema();
   }
-  DatabaseSnapshot snapshot=createSnapshot(catalogAndSchema,database,new SnapshotControl(example.getClass()));
+  DatabaseSnapshot snapshot=createSnapshot(catalogAndSchema,database,new SnapshotControl(database,example.getClass()));
   for (  DatabaseObject obj : snapshot.get(example.getClass())) {
     if (DatabaseObjectComparatorFactory.getInstance().isSameObject(example,obj,database)) {
       return true;

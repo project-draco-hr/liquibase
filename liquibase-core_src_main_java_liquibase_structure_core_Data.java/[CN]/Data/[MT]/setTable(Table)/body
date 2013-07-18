@@ -1,0 +1,4 @@
+{
+  setAttribute("table",table);
+  return this;
+}

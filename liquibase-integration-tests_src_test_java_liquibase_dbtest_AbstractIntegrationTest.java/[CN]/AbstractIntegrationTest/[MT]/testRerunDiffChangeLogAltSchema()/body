@@ -11,7 +11,7 @@
   LockService lockService=LockServiceFactory.getInstance().getLockService(database);
   lockService.forceReleaseLock();
   liquibase.update(includedChangeLog);
-  DatabaseSnapshot originalSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl());
+  DatabaseSnapshot originalSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl(database));
   CompareControl compareControl=new CompareControl(new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(CatalogAndSchema.DEFAULT,new CatalogAndSchema(null,"liquibaseb"))},originalSnapshot.getSnapshotControl().getTypesToInclude());
   DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,null,compareControl);
   File tempFile=File.createTempFile("liquibase-test",".xml");
@@ -49,7 +49,7 @@
     throw e;
   }
   tempFile.deleteOnExit();
-  DatabaseSnapshot finalSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl());
+  DatabaseSnapshot finalSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl(database));
   DiffResult finalDiffResult=DiffGeneratorFactory.getInstance().compare(originalSnapshot,finalSnapshot,new CompareControl());
   new DiffToReport(finalDiffResult,System.out).print();
   assertTrue(finalDiffResult.areEqual());

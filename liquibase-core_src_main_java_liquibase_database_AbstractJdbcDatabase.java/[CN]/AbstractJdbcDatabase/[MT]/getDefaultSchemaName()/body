@@ -3,7 +3,7 @@
     return getDefaultCatalogName();
   }
   if (defaultSchemaName == null && connection != null) {
-    defaultSchemaName=doGetDefaultSchemaName();
+    defaultSchemaName=getConnectionSchemaName();
   }
   return defaultSchemaName;
 }

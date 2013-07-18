@@ -1,10 +1,13 @@
 {
-  if (catalogName == null && schemaName == null) {
-    return escapeObjectName(objectName,objectType);
-  }
   if (supportsSchemas()) {
     catalogName=StringUtils.trimToNull(catalogName);
     schemaName=StringUtils.trimToNull(schemaName);
+    if (catalogName == null) {
+      catalogName=this.getDefaultCatalogName();
+    }
+    if (schemaName == null) {
+      schemaName=this.getDefaultSchemaName();
+    }
     if (!supportsCatalogInObjectName(objectType)) {
       catalogName=null;
     }
@@ -19,14 +22,24 @@
     }
   }
  else   if (supportsCatalogs()) {
-    if (StringUtils.trimToNull(catalogName) != null) {
+    catalogName=StringUtils.trimToNull(catalogName);
+    schemaName=StringUtils.trimToNull(schemaName);
+    if (catalogName != null) {
       return escapeObjectName(catalogName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
     }
- else     if (StringUtils.trimToNull(schemaName) != null) {
-      return escapeObjectName(schemaName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
-    }
  else {
-      return escapeObjectName(objectName,objectType);
+      if (schemaName != null) {
+        return escapeObjectName(schemaName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
+      }
+ else {
+        catalogName=this.getDefaultCatalogName();
+        if (catalogName == null) {
+          return escapeObjectName(objectName,objectType);
+        }
+ else {
+          return escapeObjectName(catalogName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
+        }
+      }
     }
   }
  else {

@@ -1,5 +1,12 @@
 {
   CatalogAndSchema schema=database.correctSchema(new CatalogAndSchema(statement.getCatalogName(),statement.getSchemaName()));
-  String sql="select text from syscomments where id = object_id('" + schema.getSchemaName() + "."+ statement.getViewName()+ "') order by colid";
+  String schemaName=schema.getSchemaName();
+  if (schemaName == null) {
+    schemaName=database.getDefaultSchemaName();
+  }
+  if (schemaName == null) {
+    schemaName="dbo";
+  }
+  String sql="select text from syscomments where id = object_id('" + schemaName + "."+ statement.getViewName()+ "') order by colid";
   return new Sql[]{new UnparsedSql(sql)};
 }

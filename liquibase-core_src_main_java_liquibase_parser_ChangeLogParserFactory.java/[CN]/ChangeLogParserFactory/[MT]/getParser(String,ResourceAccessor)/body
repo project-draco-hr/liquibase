@@ -4,5 +4,5 @@
       return parser;
     }
   }
-  throw new LiquibaseException("Cannot find parser that supports " + fileNameOrExtension);
+  throw new UnknownChangelogFormatException("Cannot find parser that supports " + fileNameOrExtension);
 }

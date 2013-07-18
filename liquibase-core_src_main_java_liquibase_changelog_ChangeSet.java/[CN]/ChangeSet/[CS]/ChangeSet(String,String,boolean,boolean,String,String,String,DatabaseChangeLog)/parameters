@@ -1,0 +1,8 @@
+String id
+String author
+boolean alwaysRun
+boolean runOnChange
+String filePath
+String contextList
+String dbmsList
+DatabaseChangeLog databaseChangeLog

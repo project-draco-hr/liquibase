@@ -2,8 +2,8 @@
   if (defaultFor != null && defaultFor.isAssignableFrom(objectType)) {
     return PRIORITY_DEFAULT;
   }
-  if (addsTo != null) {
-    for (    Class<? extends DatabaseObject> type : addsTo) {
+  if (addsTo() != null) {
+    for (    Class<? extends DatabaseObject> type : addsTo()) {
       if (type.isAssignableFrom(objectType)) {
         return PRIORITY_ADDITIONAL;
       }

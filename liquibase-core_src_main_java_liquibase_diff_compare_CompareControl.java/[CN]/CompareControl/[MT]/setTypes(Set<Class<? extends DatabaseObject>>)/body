@@ -1,0 +1,6 @@
+{
+  if (types == null || types.size() == 0) {
+    types=DatabaseObjectFactory.getInstance().getStandardTypes();
+  }
+  this.compareTypes=types;
+}

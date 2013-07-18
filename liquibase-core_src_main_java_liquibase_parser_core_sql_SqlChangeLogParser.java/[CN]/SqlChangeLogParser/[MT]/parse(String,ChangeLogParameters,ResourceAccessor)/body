@@ -1,4 +1,6 @@
 {
+  DatabaseChangeLog changeLog=new DatabaseChangeLog();
+  changeLog.setPhysicalFilePath(physicalChangeLogLocation);
   RawSQLChange change=new RawSQLChange();
   try {
     InputStream sqlStream=resourceAccessor.getResourceAsStream(physicalChangeLogLocation);
@@ -11,10 +13,8 @@
   change.setResourceAccessor(resourceAccessor);
   change.setSplitStatements(false);
   change.setStripComments(false);
-  ChangeSet changeSet=new ChangeSet("raw","includeAll",false,false,physicalChangeLogLocation,null,null,true,ObjectQuotingStrategy.LEGACY);
+  ChangeSet changeSet=new ChangeSet("raw","includeAll",false,false,physicalChangeLogLocation,null,null,true,ObjectQuotingStrategy.LEGACY,changeLog);
   changeSet.addChange(change);
-  DatabaseChangeLog changeLog=new DatabaseChangeLog();
-  changeLog.setPhysicalFilePath(physicalChangeLogLocation);
   changeLog.addChangeSet(changeSet);
   return changeLog;
 }

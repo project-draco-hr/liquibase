@@ -1,6 +1,6 @@
 {
   ContextChangeSetFilter filter=new ContextChangeSetFilter("test1");
-  ChangeSet changeSet=new ChangeSet(null,null,false,false,null,null,null);
+  ChangeSet changeSet=new ChangeSet(null,null,false,false,null,null,null,null);
   changeSet.addSqlVisitor(new TestSqlVisitor("test1"));
   assertTrue(filter.accepts(changeSet));
   assertEquals(1,changeSet.getSqlVisitors().size());

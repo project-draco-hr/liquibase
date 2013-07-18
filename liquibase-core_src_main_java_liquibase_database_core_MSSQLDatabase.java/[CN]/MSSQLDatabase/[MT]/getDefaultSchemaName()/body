@@ -1,9 +1,0 @@
-{
-  String defaultSchemaName=super.getDefaultSchemaName();
-  if (defaultSchemaName == null) {
-    return "dbo";
-  }
- else {
-    return defaultSchemaName;
-  }
-}

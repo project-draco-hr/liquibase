@@ -1,6 +1,16 @@
 {
   if (relativeToChangelogFile != null && relativeToChangelogFile) {
-    file=getChangeSet().getFilePath().replaceFirst("/[^/]*$","") + "/" + file;
+    String base;
+    if (getChangeSet().getChangeLog() == null) {
+      base=getChangeSet().getFilePath();
+    }
+ else {
+      base=getChangeSet().getChangeLog().getPhysicalFilePath().replaceAll("\\\\","/");
+    }
+    if (!base.contains("/")) {
+      base=".";
+    }
+    file=base.replaceFirst("/[^/]*$","") + "/" + file;
   }
   InputStream in=null;
   try {

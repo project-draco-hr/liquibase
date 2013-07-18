@@ -1,3 +1,0 @@
-{
-  this(id,author,alwaysRun,runOnChange,filePath,contextList,dbmsList,true,quotingStrategy);
-}

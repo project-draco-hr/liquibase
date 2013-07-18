@@ -29,6 +29,7 @@
           index=new Index();
           index.setName(indexName);
           index.setTable(table);
+          foundIndexes.put(indexName,index);
         }
         index.getColumns().add(row.getString("COLUMN_NAME"));
       }

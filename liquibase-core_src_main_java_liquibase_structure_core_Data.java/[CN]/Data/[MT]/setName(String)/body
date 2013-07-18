@@ -1,0 +1,10 @@
+{
+  Table table=getTable();
+  if (table == null) {
+    setTable(new Table().setName(name));
+  }
+ else {
+    table.setName(name);
+  }
+  return this;
+}

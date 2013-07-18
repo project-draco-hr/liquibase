@@ -2,8 +2,11 @@
   if (fileName.equalsIgnoreCase(".svn") || fileName.equalsIgnoreCase("cvs")) {
     return false;
   }
-  ChangeLogParser changeLogParser=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor);
-  if (changeLogParser == null) {
+  ChangeLogParser changeLogParser=null;
+  try {
+    changeLogParser=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor);
+  }
+ catch (  LiquibaseException e) {
     log.warning("included file " + relativeBaseFileName + "/"+ fileName+ " is not a recognized file type");
     return false;
   }

@@ -20,6 +20,9 @@
  else     if (attribute1 instanceof DataType || attribute2 instanceof DataType) {
       compareFunction=new ObjectDifferences.ToStringCompareFunction();
     }
+ else     if (attribute1 instanceof Collection || attribute2 instanceof Collection) {
+      compareFunction=new ObjectDifferences.OrderedCollectionCompareFunction(new ObjectDifferences.StandardCompareFunction());
+    }
  else {
       compareFunction=new ObjectDifferences.StandardCompareFunction();
     }

@@ -1,6 +1,6 @@
 {
-  ChangeSet changeSet1=new ChangeSet("testId","testAuthor",false,false,null,null,null);
-  ChangeSet changeSet2=new ChangeSet("testId","testAuthor",false,false,null,null,null);
+  ChangeSet changeSet1=new ChangeSet("testId","testAuthor",false,false,null,null,null,null);
+  ChangeSet changeSet2=new ChangeSet("testId","testAuthor",false,false,null,null,null,null);
   AddDefaultValueChange change=new AddDefaultValueChange();
   change.setSchemaName("SCHEMA_NAME");
   change.setTableName("TABLE_NAME");
