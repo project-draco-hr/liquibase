@@ -3,11 +3,12 @@
   lockService.waitForLock();
   changeLogParameters.setContexts(contexts);
   try {
-    DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
-    checkLiquibaseTables(true,changeLog,contexts);
+    ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor);
+    DatabaseChangeLog changeLog=parser.parse(changeLogFile,changeLogParameters,resourceAccessor);
     changeLog.validate(database,contexts);
+    checkLiquibaseTables(true,changeLog,contexts);
     ChangeLogIterator changeLogIterator=getStandardChangelogIterator(contexts,changeLog);
-    changeLogIterator.run(new UpdateVisitor(database),database);
+    changeLogIterator.run(createUpdateVisitor(),database);
   }
   finally {
     database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
