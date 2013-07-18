@@ -5,7 +5,7 @@
   Liquibase liquibase=createLiquibase(completeChangeLog);
   clearDatabase(liquibase);
   liquibase=createLiquibase(completeChangeLog);
-  liquibase.checkDatabaseChangeLogTable(false,null,new Contexts());
+  liquibase.checkLiquibaseTables(false,null,new Contexts());
   liquibase.tag("empty");
   liquibase=createLiquibase(rollbackChangeLog);
   liquibase.update(new Contexts());

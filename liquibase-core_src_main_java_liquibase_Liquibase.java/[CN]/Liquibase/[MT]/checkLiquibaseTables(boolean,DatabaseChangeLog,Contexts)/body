@@ -1,0 +1,4 @@
+{
+  getDatabase().checkDatabaseChangeLogTable(updateExistingNullChecksums,databaseChangeLog,contexts);
+  getDatabase().checkDatabaseChangeLogLockTable();
+}

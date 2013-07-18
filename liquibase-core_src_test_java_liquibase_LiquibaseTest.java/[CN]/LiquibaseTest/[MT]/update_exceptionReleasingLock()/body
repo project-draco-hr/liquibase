@@ -1,0 +1,4 @@
+{
+  doThrow(LockException.class).when(mockLockService).releaseLock();
+  update();
+}

@@ -3,9 +3,9 @@
     LockServiceFactory.getInstance().getLockService(database).waitForLock();
     for (    CatalogAndSchema schema : schemas) {
       log.info("Dropping Database Objects in schema: " + schema);
-      checkDatabaseChangeLogTable(false,null,new Contexts());
+      checkLiquibaseTables(false,null,new Contexts());
       getDatabase().dropDatabaseObjects(schema);
-      checkDatabaseChangeLogTable(false,null,new Contexts());
+      checkLiquibaseTables(false,null,new Contexts());
       log.debug("Objects dropped successfully");
     }
   }

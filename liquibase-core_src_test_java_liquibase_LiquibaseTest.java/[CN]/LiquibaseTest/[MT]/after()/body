@@ -1,4 +1,6 @@
 {
-  reset(mockDatabase,mockLockServiceFactory,mockLockService);
+  verifyNoMoreInteractions(mockLockService,mockChangeLogParser,mockChangeLog,mockChangeLogIterator);
+  reset(mockDatabase,mockLockServiceFactory,mockLockService,mockChangeLogParserFactory,mockChangeLogParser,mockChangeLog,mockChangeLogIterator);
   LockServiceFactory.reset();
+  ChangeLogParserFactory.reset();
 }

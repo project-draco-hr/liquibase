@@ -1,4 +1,4 @@
 {
-  checkDatabaseChangeLogTable(false,null,new Contexts());
+  checkLiquibaseTables(false,null,new Contexts());
   return LockServiceFactory.getInstance().getLockService(database).listLocks();
 }

@@ -1,4 +1,7 @@
 {
+  if (updateExistingNullChecksums && databaseChangeLog == null) {
+    throw new DatabaseException("changeLog parameter is required if updating existing checksums");
+  }
   Executor executor=ExecutorService.getInstance().getExecutor(this);
   Table changeLogTable=SnapshotGeneratorFactory.getInstance().getDatabaseChangeLogTable(new SnapshotControl(this,Table.class,Column.class),this);
   List<SqlStatement> statementsToExecute=new ArrayList<SqlStatement>();

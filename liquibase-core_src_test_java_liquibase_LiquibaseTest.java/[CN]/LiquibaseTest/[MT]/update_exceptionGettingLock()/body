@@ -1,0 +1,10 @@
+{
+  doThrow(LockException.class).when(mockLockService).waitForLock();
+  Liquibase liquibase=new Liquibase("com/example/test.xml",mockResourceAccessor,mockDatabase);
+  try {
+    liquibase.update((Contexts)null);
+  }
+  finally {
+    verify(mockLockService).waitForLock();
+  }
+}

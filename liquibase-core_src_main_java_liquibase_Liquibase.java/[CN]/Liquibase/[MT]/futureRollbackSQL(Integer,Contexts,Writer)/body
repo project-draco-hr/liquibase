@@ -8,7 +8,7 @@
   lockService.waitForLock();
   try {
     DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
-    checkDatabaseChangeLogTable(false,changeLog,contexts);
+    checkLiquibaseTables(false,changeLog,contexts);
     changeLog.validate(database,contexts);
     ChangeLogIterator logIterator;
     if (count == null) {

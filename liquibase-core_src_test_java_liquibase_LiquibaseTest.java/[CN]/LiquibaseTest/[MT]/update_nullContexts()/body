@@ -1,19 +1,18 @@
 {
-  Contexts contexts=new Contexts("a,b");
   Liquibase liquibase=new Liquibase("com/example/test.xml",mockResourceAccessor,mockDatabase){
     @Override protected ChangeLogIterator getStandardChangelogIterator(    Contexts contexts,    DatabaseChangeLog changeLog) throws DatabaseException {
       return mockChangeLogIterator;
     }
   }
 ;
-  liquibase.update(contexts);
+  liquibase.update((Contexts)null);
   verify(mockLockService).waitForLock();
-  verify(mockDatabase).checkDatabaseChangeLogTable(true,mockChangeLog,contexts);
+  verify(mockDatabase).checkDatabaseChangeLogTable(true,mockChangeLog,(Contexts)null);
   verify(mockDatabase).checkDatabaseChangeLogLockTable();
-  verify(mockChangeLog).validate(mockDatabase,contexts);
+  verify(mockChangeLog).validate(mockDatabase,(Contexts)null);
   verify(mockChangeLogParser).parse("com/example/test.xml",liquibase.getChangeLogParameters(),mockResourceAccessor);
   verify(mockChangeLogIterator).run(any(UpdateVisitor.class),eq(mockDatabase));
   verify(mockLockService).releaseLock();
   verify(mockDatabase).setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
-  assertEquals("Passed contexts were not set on the changelog parameters object","a,b",liquibase.getChangeLogParameters().getContexts().toString());
+  assertNull(liquibase.getChangeLogParameters().getContexts());
 }
