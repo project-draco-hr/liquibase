@@ -7,9 +7,16 @@
   mockChangeLogParser=mock(ChangeLogParser.class);
   mockChangeLog=mock(DatabaseChangeLog.class);
   mockChangeLogIterator=mock(ChangeLogIterator.class);
+  mockLogger=mock(Logger.class);
   LockServiceFactory.setInstance(mockLockServiceFactory);
   when(mockLockServiceFactory.getLockService(isA(Database.class))).thenReturn(mockLockService);
   ChangeLogParserFactory.setInstance(mockChangeLogParserFactory);
   when(mockChangeLogParserFactory.getParser(anyString(),isA(ResourceAccessor.class))).thenReturn(mockChangeLogParser);
   when(mockChangeLogParser.parse(anyString(),any(ChangeLogParameters.class),isA(ResourceAccessor.class))).thenReturn(mockChangeLog);
+  LogFactory.setInstance(new LogFactory(){
+    @Override public Logger getLog(    String name){
+      return mockLogger;
+    }
+  }
+);
 }

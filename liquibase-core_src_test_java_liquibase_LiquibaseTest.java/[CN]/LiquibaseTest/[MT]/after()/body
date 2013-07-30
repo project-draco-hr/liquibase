@@ -3,4 +3,5 @@
   reset(mockDatabase,mockLockServiceFactory,mockLockService,mockChangeLogParserFactory,mockChangeLogParser,mockChangeLog,mockChangeLogIterator);
   LockServiceFactory.reset();
   ChangeLogParserFactory.reset();
+  LogFactory.reset();
 }

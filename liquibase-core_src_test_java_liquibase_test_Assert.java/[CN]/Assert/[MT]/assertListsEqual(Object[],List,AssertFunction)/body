@@ -1,0 +1,6 @@
+{
+  org.junit.Assert.assertEquals("List size does not match",expected.length,list.size());
+  for (int i=0; i < expected.length; i++) {
+    assertFunction.check("Difference in element " + i,expected[i],list.get(i));
+  }
+}

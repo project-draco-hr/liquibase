@@ -1,4 +1,5 @@
 {
+  LogFactory.reset();
   MockResourceAccessor resourceAccessor=this.mockResourceAccessor;
   MockDatabase database=new MockDatabase();
   Liquibase liquibase=new Liquibase("com/example/test.xml",resourceAccessor,database);

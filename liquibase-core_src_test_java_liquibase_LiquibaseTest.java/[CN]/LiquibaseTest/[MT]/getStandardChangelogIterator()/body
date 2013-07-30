@@ -1,0 +1,9 @@
+{
+  ChangeLogIterator iterator=new Liquibase("com/example/changelog.xml",mockResourceAccessor,mockDatabase).getStandardChangelogIterator(new Contexts("a","b"),mockChangeLog);
+  assertListsEqual(new Class[]{ShouldRunChangeSetFilter.class,ContextChangeSetFilter.class,DbmsChangeSetFilter.class},iterator.getChangeSetFilters(),new Assert.AssertFunction(){
+    @Override public void check(    String message,    Object expected,    Object actual){
+      assertEquals(message,expected,actual.getClass());
+    }
+  }
+);
+}

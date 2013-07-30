@@ -1,0 +1,15 @@
+{
+  if (!loggers.containsKey(name)) {
+    Logger value;
+    try {
+      value=(Logger)ServiceLocator.getInstance().newInstance(Logger.class);
+    }
+ catch (    Exception e) {
+      throw new ServiceNotFoundException(e);
+    }
+    value.setName(name);
+    value.setLogLevel(defaultLoggingLevel);
+    loggers.put(name,value);
+  }
+  return loggers.get(name);
+}
