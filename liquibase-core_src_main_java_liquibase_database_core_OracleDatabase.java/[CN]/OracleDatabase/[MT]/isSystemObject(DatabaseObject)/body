@@ -2,6 +2,9 @@
   if (example == null) {
     return false;
   }
+  if (this.isLiquibaseObject(example)) {
+    return false;
+  }
   if (example instanceof Schema) {
     if ("SYSTEM".equals(example.getName()) || "SYS".equals(example.getName()) || "CTXSYS".equals(example.getName())|| "XDB".equals(example.getName())) {
       return true;
