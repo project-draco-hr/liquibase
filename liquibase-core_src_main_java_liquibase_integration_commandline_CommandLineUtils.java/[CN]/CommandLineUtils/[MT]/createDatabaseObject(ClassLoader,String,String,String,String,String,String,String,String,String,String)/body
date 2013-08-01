@@ -44,6 +44,8 @@
     Database database=databaseFactory.findCorrectDatabaseImplementation(new JdbcConnection(connection));
     database.setDefaultCatalogName(StringUtils.trimToNull(defaultCatalogName));
     database.setDefaultSchemaName(StringUtils.trimToNull(defaultSchemaName));
+    database.setLiquibaseCatalogName(StringUtils.trimToNull(liquibaseCatalogName));
+    database.setLiquibaseSchemaName(StringUtils.trimToNull(liquibaseSchemaName));
     return database;
   }
  catch (  Exception e) {

@@ -7,3 +7,5 @@ String defaultCatalogName
 String defaultSchemaName
 String databaseClass
 String driverPropertiesFile
+String liquibaseCatalogName
+String liquibaseSchemaName
