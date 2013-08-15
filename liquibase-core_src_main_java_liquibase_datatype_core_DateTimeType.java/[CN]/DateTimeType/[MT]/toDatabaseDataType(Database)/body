@@ -11,5 +11,8 @@
   if (database instanceof SQLiteDatabase) {
     return new DatabaseDataType("TEXT");
   }
+  if (database instanceof OracleDatabase) {
+    return new DatabaseDataType("DATE");
+  }
   return new DatabaseDataType(getName());
 }
