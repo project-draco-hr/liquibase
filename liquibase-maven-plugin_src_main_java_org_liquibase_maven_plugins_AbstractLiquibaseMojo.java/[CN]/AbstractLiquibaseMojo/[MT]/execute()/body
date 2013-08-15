@@ -30,7 +30,7 @@
   Database database=null;
   try {
     String dbPassword=emptyPassword || password == null ? "" : password;
-    database=CommandLineUtils.createDatabaseObject(artifactClassLoader,url,username,dbPassword,driver,defaultCatalogName,defaultSchemaName,databaseClass,null);
+    database=CommandLineUtils.createDatabaseObject(artifactClassLoader,url,username,dbPassword,driver,defaultCatalogName,defaultSchemaName,databaseClass,null,changelogCatalogName,changelogSchemaName);
     liquibase=createLiquibase(getFileOpener(artifactClassLoader),database);
     getLog().debug("expressionVars = " + String.valueOf(expressionVars));
     if (expressionVars != null) {
