@@ -1,7 +1,10 @@
 {
   int dataTypeMaxParameters=database.getDataTypeMaxParameters(getName());
   Object[] parameters=getParameters();
-  if (database instanceof MySQLDatabase && (getName().equals("TINYBLOB") || getName().equals("MEDIUMBLOB") || getName().equals("TINYTEXT")|| getName().equals("MEDIUMTEXT"))) {
+  if (database instanceof MySQLDatabase && (getName().equalsIgnoreCase("TINYBLOB") || getName().equalsIgnoreCase("MEDIUMBLOB") || getName().equalsIgnoreCase("TINYTEXT")|| getName().equalsIgnoreCase("MEDIUMTEXT")|| getName().equalsIgnoreCase("REAL"))) {
+    parameters=new Object[0];
+  }
+  if (database instanceof MSSQLDatabase && getName().equalsIgnoreCase("REAL")) {
     parameters=new Object[0];
   }
   if (dataTypeMaxParameters < parameters.length) {
