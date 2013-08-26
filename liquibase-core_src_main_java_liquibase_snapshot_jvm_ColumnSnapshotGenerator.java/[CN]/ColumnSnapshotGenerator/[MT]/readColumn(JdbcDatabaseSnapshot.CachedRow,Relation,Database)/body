@@ -25,6 +25,7 @@
   if (table instanceof Table) {
     if (columnMetadataResultSet.containsColumn("IS_AUTOINCREMENT")) {
       String isAutoincrement=(String)columnMetadataResultSet.get("IS_AUTOINCREMENT");
+      isAutoincrement=StringUtils.trimToNull(isAutoincrement);
       if (isAutoincrement == null) {
         column.setAutoIncrementInformation(null);
       }
@@ -39,7 +40,7 @@
         column.setAutoIncrementInformation(null);
       }
  else {
-        throw new UnexpectedLiquibaseException("Unknown is_autoincrement value: " + isAutoincrement);
+        throw new UnexpectedLiquibaseException("Unknown is_autoincrement value: '" + isAutoincrement + "'");
       }
     }
  else {
