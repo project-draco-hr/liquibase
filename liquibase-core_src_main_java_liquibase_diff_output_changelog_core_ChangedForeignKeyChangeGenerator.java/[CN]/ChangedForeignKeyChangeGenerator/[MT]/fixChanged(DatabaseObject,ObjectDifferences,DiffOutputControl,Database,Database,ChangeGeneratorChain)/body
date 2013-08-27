@@ -1,0 +1,26 @@
+{
+  ForeignKey fk=(ForeignKey)changedObject;
+  DropForeignKeyConstraintChange dropFkChange=new DropForeignKeyConstraintChange();
+  dropFkChange.setConstraintName(fk.getName());
+  dropFkChange.setBaseTableName(fk.getForeignKeyTable().getName());
+  AddForeignKeyConstraintChange addFkChange=new AddForeignKeyConstraintChange();
+  addFkChange.setConstraintName(fk.getName());
+  addFkChange.setBaseTableName(fk.getForeignKeyTable().getName());
+  addFkChange.setBaseColumnNames(fk.getForeignKeyColumns());
+  addFkChange.setReferencedTableName(fk.getPrimaryKeyTable().getName());
+  addFkChange.setReferencedColumnNames(fk.getPrimaryKeyColumns());
+  if (control.isIncludeCatalog()) {
+    dropFkChange.setBaseTableCatalogName(fk.getForeignKeyTable().getSchema().getCatalogName());
+    addFkChange.setBaseTableCatalogName(fk.getForeignKeyTable().getSchema().getCatalogName());
+    addFkChange.setReferencedTableCatalogName(fk.getPrimaryKeyTable().getSchema().getCatalogName());
+  }
+  if (control.isIncludeSchema()) {
+    dropFkChange.setBaseTableSchemaName(fk.getForeignKeyTable().getSchema().getName());
+    addFkChange.setBaseTableSchemaName(fk.getForeignKeyTable().getSchema().getName());
+    addFkChange.setReferencedTableSchemaName(fk.getPrimaryKeyTable().getSchema().getName());
+  }
+  if (fk.getBackingIndex() != null) {
+    control.setAlreadyHandledChanged(fk.getBackingIndex());
+  }
+  return new Change[]{dropFkChange,addFkChange};
+}
