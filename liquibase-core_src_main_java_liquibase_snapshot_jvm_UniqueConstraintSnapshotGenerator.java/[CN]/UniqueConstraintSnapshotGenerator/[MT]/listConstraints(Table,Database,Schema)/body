@@ -1,7 +1,10 @@
 {
   String sql=null;
-  if (database instanceof MySQLDatabase || database instanceof PostgresDatabase || database instanceof HsqlDatabase) {
+  if (database instanceof MySQLDatabase || database instanceof HsqlDatabase) {
     sql="select CONSTRAINT_NAME " + "from information_schema.table_constraints " + "where constraint_schema='" + database.correctObjectName(schema.getCatalogName(),Catalog.class) + "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "'";
+  }
+ else   if (database instanceof PostgresDatabase) {
+    sql="select CONSTRAINT_NAME " + "from information_schema.table_constraints " + "where constraint_catalog='" + database.correctObjectName(schema.getCatalogName(),Catalog.class) + "' "+ "and constraint_schema='"+ database.correctObjectName(schema.getSchema().getName(),Schema.class)+ "' "+ "and constraint_type='UNIQUE' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "'";
   }
  else   if (database instanceof MSSQLDatabase) {
     sql="select Constraint_Name from information_schema.table_constraints " + "where constraint_type = 'Unique' " + "and constraint_schema='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and table_name='"+ database.correctObjectName(table.getName(),Table.class)+ "'";
