@@ -1,0 +1,8 @@
+{
+  if (Table.class.isAssignableFrom(objectType) && catalogName != null && schemaName != null) {
+    return escapeObjectName(catalogName,Catalog.class) + ":" + escapeObjectName(schemaName,Schema.class)+ "."+ escapeObjectName(objectName,Table.class);
+  }
+ else {
+    return super.escapeObjectName(catalogName,schemaName,objectName,objectType);
+  }
+}
