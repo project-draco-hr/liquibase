@@ -16,7 +16,7 @@
   }
   FileSystemResourceAccessor fsOpener=new FileSystemResourceAccessor();
   CommandLineResourceAccessor clOpener=new CommandLineResourceAccessor(classLoader);
-  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultCatalogName,this.defaultSchemaName,this.databaseClass,this.driverPropertiesFile,null,null);
+  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultCatalogName,this.defaultSchemaName,Boolean.parseBoolean(outputDefaultCatalog),Boolean.parseBoolean(outputDefaultSchema),this.databaseClass,this.driverPropertiesFile,null,null);
   try {
     CompositeResourceAccessor fileOpener=new CompositeResourceAccessor(fsOpener,clOpener);
     boolean includeCatalog=Boolean.parseBoolean(getCommandParam("includeCatalog","false"));

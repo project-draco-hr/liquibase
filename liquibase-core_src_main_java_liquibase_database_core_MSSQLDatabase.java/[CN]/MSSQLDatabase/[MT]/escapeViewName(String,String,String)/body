@@ -1,5 +1,5 @@
 {
-  if (StringUtils.trimToNull(schemaName) == null) {
+  if (!getOutputDefaultSchema() && !isDefaultSchema(catalogName,schemaName)) {
     return escapeObjectName(viewName,View.class);
   }
  else {

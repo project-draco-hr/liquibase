@@ -1,0 +1,25 @@
+{
+  if (getDatabase() == null) {
+    return;
+  }
+  String schemaName=getDatabase().getDefaultSchemaName();
+  assertNotNull(schemaName);
+  boolean outputDefaultSchema=getDatabase().getOutputDefaultSchema();
+  getDatabase().setOutputDefaultSchema(false);
+  StringWriter output=new StringWriter();
+  Liquibase liquibase=createLiquibase(completeChangeLog);
+  clearDatabase(liquibase);
+  liquibase=createLiquibase(completeChangeLog);
+  liquibase.update(contexts,output);
+  String outputResult=output.getBuffer().toString();
+  assertNotNull(outputResult);
+  assertTrue(outputResult.length() > 100);
+  System.out.println(outputResult);
+  CharSequence expected="CREATE TABLE " + getDatabase().escapeTableName(getDatabase().getLiquibaseCatalogName(),getDatabase().getLiquibaseSchemaName(),getDatabase().getDatabaseChangeLogTableName());
+  assertTrue("create databasechangelog command not found in: \n" + outputResult,outputResult.contains(expected));
+  assertTrue("create databasechangeloglock command not found in: \n" + outputResult,outputResult.contains(expected));
+  assertFalse("the schame name should be ignored",outputResult.contains(schemaName));
+  assertTrue(outputResult.contains("???"));
+  assertTrue(outputResult.contains("???"));
+  getDatabase().setOutputDefaultSchema(outputDefaultSchema);
+}
