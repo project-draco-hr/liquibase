@@ -22,7 +22,13 @@
  finally {
     if (c != null) {
       try {
-        c.rollback();
+        if (!c.getAutoCommit()) {
+          c.rollback();
+        }
+      }
+ catch (      SQLException e) {
+      }
+      try {
         c.close();
       }
  catch (      SQLException e) {
