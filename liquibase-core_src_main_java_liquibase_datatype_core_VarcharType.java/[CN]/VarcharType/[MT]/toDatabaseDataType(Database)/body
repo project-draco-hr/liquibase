@@ -2,5 +2,8 @@
   if (database instanceof OracleDatabase) {
     return new DatabaseDataType("VARCHAR2",getParameters());
   }
+  if (database instanceof InformixDatabase && getSize() > 255) {
+    return new DatabaseDataType("LVARCHAR",getParameters());
+  }
   return super.toDatabaseDataType(database);
 }
