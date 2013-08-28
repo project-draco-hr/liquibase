@@ -7,4 +7,9 @@
     LogFactory.getLogger().debug("Created database lock table with name: " + escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()));
     this.hasDatabaseChangeLogLockTable=true;
   }
+  if (!isDatabaseChangeLogLockTableInitialized()) {
+    executor.comment("Initialize Database Lock Table");
+    executor.execute(new InitializeDatabaseChangeLogLockTableStatement());
+    this.commit();
+  }
 }
