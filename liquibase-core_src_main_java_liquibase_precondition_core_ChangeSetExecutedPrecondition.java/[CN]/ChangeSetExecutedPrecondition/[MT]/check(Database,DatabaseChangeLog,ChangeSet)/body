@@ -1,5 +1,12 @@
 {
-  ChangeSet interestedChangeSet=new ChangeSet(getId(),getAuthor(),false,false,getChangeLogFile(),null,null,false,changeSet.getObjectQuotingStrategy(),changeLog);
+  ObjectQuotingStrategy objectQuotingStrategy=null;
+  if (changeSet == null) {
+    objectQuotingStrategy=ObjectQuotingStrategy.LEGACY;
+  }
+ else {
+    objectQuotingStrategy=changeSet.getObjectQuotingStrategy();
+  }
+  ChangeSet interestedChangeSet=new ChangeSet(getId(),getAuthor(),false,false,getChangeLogFile(),null,null,false,objectQuotingStrategy,changeLog);
   RanChangeSet ranChangeSet;
   try {
     ranChangeSet=database.getRanChangeSet(interestedChangeSet);

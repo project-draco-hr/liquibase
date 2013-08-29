@@ -1,0 +1,9 @@
+{
+  if (!supportsSchemas()) {
+    return true;
+  }
+  if (!isDefaultCatalog(catalog)) {
+    return false;
+  }
+  return schema == null || schema.equalsIgnoreCase(getDefaultSchemaName());
+}

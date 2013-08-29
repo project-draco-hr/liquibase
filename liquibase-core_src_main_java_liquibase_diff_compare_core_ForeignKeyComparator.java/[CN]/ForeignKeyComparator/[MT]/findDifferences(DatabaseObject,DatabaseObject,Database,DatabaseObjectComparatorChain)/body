@@ -3,6 +3,9 @@
   differences.removeDifference("name");
   differences.removeDifference("backingIndex");
   differences.removeDifference("columnNames");
-  differences.compare("columnNames",databaseObject1,databaseObject2,new ObjectDifferences.DatabaseObjectNameCompareFunction(Column.class,accordingTo));
+  differences.compare("foreignKeyColumns",databaseObject1,databaseObject2,new ObjectDifferences.DatabaseObjectNameCompareFunction(Column.class,accordingTo));
+  differences.compare("primaryKeyColumns",databaseObject1,databaseObject2,new ObjectDifferences.DatabaseObjectNameCompareFunction(Column.class,accordingTo));
+  differences.compare("foreignKeyTable",databaseObject1,databaseObject2,new ObjectDifferences.DatabaseObjectNameCompareFunction(Table.class,accordingTo));
+  differences.compare("primaryKeyTable",databaseObject1,databaseObject2,new ObjectDifferences.DatabaseObjectNameCompareFunction(Table.class,accordingTo));
   return differences;
 }

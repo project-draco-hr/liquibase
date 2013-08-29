@@ -1,4 +1,5 @@
 {
+  boolean createdTable=false;
   Executor executor=ExecutorService.getInstance().getExecutor(this);
   if (!hasDatabaseChangeLogLockTable()) {
     executor.comment("Create Database Lock Table");
@@ -6,5 +7,11 @@
     this.commit();
     LogFactory.getLogger().debug("Created database lock table with name: " + escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogLockTableName()));
     this.hasDatabaseChangeLogLockTable=true;
+    createdTable=true;
+  }
+  if (!isDatabaseChangeLogLockTableInitialized(createdTable)) {
+    executor.comment("Initialize Database Lock Table");
+    executor.execute(new InitializeDatabaseChangeLogLockTableStatement());
+    this.commit();
   }
 }

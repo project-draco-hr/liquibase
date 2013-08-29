@@ -16,7 +16,7 @@
   }
   FileSystemResourceAccessor fsOpener=new FileSystemResourceAccessor();
   CommandLineResourceAccessor clOpener=new CommandLineResourceAccessor(classLoader);
-  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultCatalogName,this.defaultSchemaName,this.databaseClass,this.driverPropertiesFile);
+  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultCatalogName,this.defaultSchemaName,Boolean.parseBoolean(outputDefaultCatalog),Boolean.parseBoolean(outputDefaultSchema),this.databaseClass,this.driverPropertiesFile,null,null);
   try {
     CompositeResourceAccessor fileOpener=new CompositeResourceAccessor(fsOpener,clOpener);
     boolean includeCatalog=Boolean.parseBoolean(getCommandParam("includeCatalog","false"));
@@ -32,7 +32,7 @@
       return;
     }
  else     if ("generateChangeLog".equalsIgnoreCase(command)) {
-      CommandLineUtils.doGenerateChangeLog(changeLogFile,database,defaultSchemaName,defaultCatalogName,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataOutputDirectory),diffOutputControl);
+      CommandLineUtils.doGenerateChangeLog(changeLogFile,database,defaultCatalogName,defaultSchemaName,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataOutputDirectory),diffOutputControl);
       return;
     }
     Liquibase liquibase=new Liquibase(changeLogFile,fileOpener,database);

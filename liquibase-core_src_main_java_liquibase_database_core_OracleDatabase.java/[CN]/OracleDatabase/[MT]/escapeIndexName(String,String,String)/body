@@ -1,7 +1,0 @@
-{
-  String escapedIndexName=escapeObjectName(indexName,Index.class);
-  if (schemaName != null) {
-    escapedIndexName=escapeObjectName(schemaName,Schema.class) + "." + escapedIndexName;
-  }
-  return escapedIndexName;
-}

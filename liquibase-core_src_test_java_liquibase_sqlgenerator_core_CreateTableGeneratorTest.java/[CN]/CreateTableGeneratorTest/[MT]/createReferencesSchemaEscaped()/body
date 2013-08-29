@@ -1,5 +1,6 @@
 {
   Database database=new PostgresDatabase();
+  database.setOutputDefaultSchema(true);
   database.setDefaultSchemaName("my-schema");
   CreateTableStatement statement=new CreateTableStatement(CATALOG_NAME,SCHEMA_NAME,TABLE_NAME);
   statement.addColumnConstraint(new ForeignKeyConstraint("fk_test_parent",TABLE_NAME + "(id)").setColumn("id"));

@@ -1,0 +1,6 @@
+{
+  if (!supportsCatalogs()) {
+    return true;
+  }
+  return catalog == null || catalog.equalsIgnoreCase(getDefaultCatalogName());
+}

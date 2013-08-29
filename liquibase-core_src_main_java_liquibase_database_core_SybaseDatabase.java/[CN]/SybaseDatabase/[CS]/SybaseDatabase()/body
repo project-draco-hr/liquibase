@@ -22,4 +22,6 @@
   systemTablesAndViews.add("sysquerymetrics");
   systemTablesAndViews.add("syssegments");
   systemTablesAndViews.add("sysconstraints");
+  super.quotingStartCharacter="[";
+  super.quotingEndCharacter="]";
 }

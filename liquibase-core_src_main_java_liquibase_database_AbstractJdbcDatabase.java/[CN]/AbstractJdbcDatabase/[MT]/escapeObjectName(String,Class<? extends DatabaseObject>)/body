@@ -1,12 +1,11 @@
 {
-  if (objectName == null || quotingStrategy == ObjectQuotingStrategy.LEGACY) {
-    return objectName;
-  }
- else   if (objectName.contains("-") || startsWithNumeric(objectName) || isReservedWord(objectName)) {
-    return quotingStartCharacter + objectName + quotingEndCharacter;
-  }
- else   if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS) {
-    return quotingStartCharacter + objectName + quotingEndCharacter;
+  if (objectName != null) {
+    if (objectName.contains("-") || startsWithNumeric(objectName) || isReservedWord(objectName)) {
+      return quotingStartCharacter + objectName + quotingEndCharacter;
+    }
+ else     if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS) {
+      return quotingStartCharacter + objectName + quotingEndCharacter;
+    }
   }
   return objectName;
 }

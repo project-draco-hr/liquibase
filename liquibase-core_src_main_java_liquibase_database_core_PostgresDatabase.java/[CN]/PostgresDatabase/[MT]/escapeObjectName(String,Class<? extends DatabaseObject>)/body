@@ -1,11 +1,8 @@
 {
-  if (objectName == null || quotingStrategy != ObjectQuotingStrategy.LEGACY) {
-    return super.escapeObjectName(objectName,objectType);
-  }
-  if (objectName.contains("-") || hasMixedCase(objectName) || startsWithNumeric(objectName)|| isReservedWord(objectName)) {
+  if (hasMixedCase(objectName)) {
     return "\"" + objectName + "\"";
   }
  else {
-    return objectName;
+    return super.escapeObjectName(objectName,objectType);
   }
 }

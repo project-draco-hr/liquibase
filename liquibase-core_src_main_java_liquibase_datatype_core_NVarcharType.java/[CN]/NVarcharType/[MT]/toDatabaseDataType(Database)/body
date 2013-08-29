@@ -1,5 +1,5 @@
 {
-  if (database instanceof HsqlDatabase || database instanceof PostgresDatabase) {
+  if (database instanceof HsqlDatabase || database instanceof PostgresDatabase || database instanceof DerbyDatabase) {
     return new DatabaseDataType("VARCHAR",getParameters());
   }
   if (database instanceof OracleDatabase) {

@@ -1,3 +1,20 @@
 {
-  return chain.isSameObject(databaseObject1,databaseObject2,accordingTo);
+  if (!(databaseObject1 instanceof ForeignKey && databaseObject2 instanceof ForeignKey)) {
+    return false;
+  }
+  ForeignKey thisForeignKey=(ForeignKey)databaseObject1;
+  ForeignKey otherForeignKey=(ForeignKey)databaseObject2;
+  if (thisForeignKey.getName() != null && databaseObject2.getName() != null) {
+    if (chain.isSameObject(thisForeignKey,databaseObject2,accordingTo)) {
+      return true;
+    }
+  }
+  boolean columnsTheSame;
+  if (accordingTo.isCaseSensitive()) {
+    columnsTheSame=StringUtils.trimToEmpty(((ForeignKey)databaseObject1).getForeignKeyColumns()).equals(StringUtils.trimToEmpty(((ForeignKey)databaseObject2).getForeignKeyColumns())) && StringUtils.trimToEmpty(((ForeignKey)databaseObject1).getPrimaryKeyColumns()).equals(StringUtils.trimToEmpty(((ForeignKey)databaseObject2).getPrimaryKeyColumns()));
+  }
+ else {
+    columnsTheSame=((ForeignKey)databaseObject1).getForeignKeyColumns().equalsIgnoreCase(((ForeignKey)databaseObject2).getForeignKeyColumns()) && ((ForeignKey)databaseObject1).getPrimaryKeyColumns().equalsIgnoreCase(((ForeignKey)databaseObject2).getPrimaryKeyColumns());
+  }
+  return columnsTheSame && DatabaseObjectComparatorFactory.getInstance().isSameObject(thisForeignKey.getForeignKeyTable(),otherForeignKey.getForeignKeyTable(),accordingTo) && DatabaseObjectComparatorFactory.getInstance().isSameObject(thisForeignKey.getPrimaryKeyTable(),otherForeignKey.getPrimaryKeyTable(),accordingTo);
 }

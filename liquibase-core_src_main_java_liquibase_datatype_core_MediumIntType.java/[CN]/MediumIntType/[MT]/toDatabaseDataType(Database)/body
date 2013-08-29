@@ -1,0 +1,6 @@
+{
+  if (database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof FirebirdDatabase|| database instanceof MSSQLDatabase) {
+    return new DatabaseDataType("MEDIUMINT");
+  }
+  return super.toDatabaseDataType(database);
+}

@@ -19,6 +19,9 @@
   systemTablesAndViews.add("sysreferences");
   systemTablesAndViews.add("systypes");
   systemTablesAndViews.add("sysusers");
+  systemTablesAndViews.add("sysdiagrams");
   systemTablesAndViews.add("syssegments");
   systemTablesAndViews.add("sysconstraints");
+  super.quotingStartCharacter="[";
+  super.quotingEndCharacter="]";
 }

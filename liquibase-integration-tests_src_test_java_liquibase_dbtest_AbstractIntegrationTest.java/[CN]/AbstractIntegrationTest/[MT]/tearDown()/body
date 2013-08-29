@@ -5,6 +5,8 @@
     }
     ExecutorService.getInstance().clearExecutor(database);
     database.setDefaultSchemaName(null);
+    database.setOutputDefaultCatalog(true);
+    database.setOutputDefaultSchema(true);
   }
   SnapshotGeneratorFactory.resetAll();
 }
