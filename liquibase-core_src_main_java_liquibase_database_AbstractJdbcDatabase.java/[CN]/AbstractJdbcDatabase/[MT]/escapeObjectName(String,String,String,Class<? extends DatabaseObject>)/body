@@ -38,20 +38,30 @@
     catalogName=StringUtils.trimToNull(catalogName);
     schemaName=StringUtils.trimToNull(schemaName);
     if (catalogName != null) {
-      if (isDefaultCatalog(catalogName) && getOutputDefaultCatalog()) {
+      if (getOutputDefaultCatalog()) {
         return escapeObjectName(catalogName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
       }
  else {
-        return escapeObjectName(objectName,objectType);
+        if (isDefaultCatalog(catalogName)) {
+          return escapeObjectName(objectName,objectType);
+        }
+ else {
+          return escapeObjectName(catalogName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
+        }
       }
     }
  else {
       if (schemaName != null) {
-        if (isDefaultCatalog(schemaName) && getOutputDefaultCatalog()) {
+        if (getOutputDefaultCatalog()) {
           return escapeObjectName(schemaName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
         }
  else {
-          return escapeObjectName(objectName,objectType);
+          if (isDefaultCatalog(schemaName)) {
+            return escapeObjectName(objectName,objectType);
+          }
+ else {
+            return escapeObjectName(schemaName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
+          }
         }
       }
  else {
