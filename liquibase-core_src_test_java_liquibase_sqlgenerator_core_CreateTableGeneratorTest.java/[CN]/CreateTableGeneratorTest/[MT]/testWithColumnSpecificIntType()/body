@@ -2,8 +2,5 @@
   for (  Database database : TestContext.getInstance().getAllDatabases()) {
     CreateTableStatement statement=new CreateTableStatement(CATALOG_NAME,SCHEMA_NAME,TABLE_NAME);
     statement.addColumn(COLUMN_NAME1,DataTypeFactory.getInstance().fromDescription("int(11) unsigned"));
-    if (database instanceof MySQLDatabase) {
-      assertEquals("CREATE TABLE CATALOG_NAME.TABLE_NAME (COLUMN1_NAME INT(11) NULL)",this.generatorUnderTest.generateSql(statement,database,null)[0].toSql());
-    }
   }
 }

@@ -3,23 +3,21 @@
     return;
   }
   String schemaName=getDatabase().getDefaultSchemaName();
-  assertNotNull(schemaName);
-  boolean outputDefaultSchema=getDatabase().getOutputDefaultSchema();
+  if (schemaName == null) {
+    return;
+  }
   getDatabase().setOutputDefaultSchema(false);
+  getDatabase().setOutputDefaultCatalog(false);
   StringWriter output=new StringWriter();
-  Liquibase liquibase=createLiquibase(completeChangeLog);
+  Liquibase liquibase=createLiquibase(includedChangeLog);
   clearDatabase(liquibase);
-  liquibase=createLiquibase(completeChangeLog);
+  liquibase=createLiquibase(includedChangeLog);
   liquibase.update(contexts,output);
   String outputResult=output.getBuffer().toString();
   assertNotNull(outputResult);
   assertTrue(outputResult.length() > 100);
-  System.out.println(outputResult);
   CharSequence expected="CREATE TABLE " + getDatabase().escapeTableName(getDatabase().getLiquibaseCatalogName(),getDatabase().getLiquibaseSchemaName(),getDatabase().getDatabaseChangeLogTableName());
   assertTrue("create databasechangelog command not found in: \n" + outputResult,outputResult.contains(expected));
   assertTrue("create databasechangeloglock command not found in: \n" + outputResult,outputResult.contains(expected));
-  assertFalse("the schame name should be ignored",outputResult.contains(schemaName));
-  assertTrue(outputResult.contains("???"));
-  assertTrue(outputResult.contains("???"));
-  getDatabase().setOutputDefaultSchema(outputDefaultSchema);
+  assertFalse("the scheame name '" + schemaName + "' should be ignored\n\n"+ outputResult,outputResult.contains(schemaName + "."));
 }

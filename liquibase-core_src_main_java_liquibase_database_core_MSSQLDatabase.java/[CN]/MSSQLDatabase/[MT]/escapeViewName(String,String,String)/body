@@ -1,5 +1,5 @@
 {
-  if (!getOutputDefaultSchema() && !isDefaultSchema(catalogName,schemaName)) {
+  if (schemaName == null || (isDefaultSchema(catalogName,schemaName) && !getOutputDefaultSchema())) {
     return escapeObjectName(viewName,View.class);
   }
  else {

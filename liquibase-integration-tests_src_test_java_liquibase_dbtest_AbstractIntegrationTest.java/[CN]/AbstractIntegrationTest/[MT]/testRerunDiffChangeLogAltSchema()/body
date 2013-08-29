@@ -8,7 +8,6 @@
   Liquibase liquibase=createLiquibase(includedChangeLog);
   clearDatabase(liquibase);
   database.setDefaultSchemaName("liquibaseb");
-  database.setOutputDefaultSchema(true);
   LockService lockService=LockServiceFactory.getInstance().getLockService(database);
   lockService.forceReleaseLock();
   liquibase.update(includedChangeLog);

@@ -1,28 +1,36 @@
 {
   liquibase.dropAll(getSchemasToDrop());
-  Statement statement=null;
   try {
-    statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+    Statement statement=null;
     try {
-      try {
-        statement.execute("drop table " + database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()));
-        database.commit();
-      }
- catch (      Exception e) {
-        System.out.println("Probably expected error dropping databasechangelog table");
-        e.printStackTrace();
-      }
-      try {
-        statement.execute("drop table " + database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()));
-        database.commit();
-      }
- catch (      Exception e) {
-        System.out.println("Probably expected error dropping databasechangeloglock table");
-        e.printStackTrace();
+      statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+      statement.execute("drop table " + database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()));
+      database.commit();
+    }
+ catch (    Exception e) {
+      System.out.println("Probably expected error dropping databasechangelog table");
+      e.printStackTrace();
+      database.rollback();
+    }
+ finally {
+      if (statement != null) {
+        statement.close();
       }
     }
-  finally {
-      statement.close();
+    try {
+      statement=((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement();
+      statement.execute("drop table " + database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()));
+      database.commit();
+    }
+ catch (    Exception e) {
+      System.out.println("Probably expected error dropping databasechangeloglock table");
+      e.printStackTrace();
+      database.rollback();
+    }
+ finally {
+      if (statement != null) {
+        statement.close();
+      }
     }
   }
  catch (  SQLException e) {
