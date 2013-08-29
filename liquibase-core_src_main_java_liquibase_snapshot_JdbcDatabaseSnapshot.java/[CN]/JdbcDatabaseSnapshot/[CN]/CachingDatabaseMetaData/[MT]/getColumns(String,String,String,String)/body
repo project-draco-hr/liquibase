@@ -38,13 +38,13 @@
       }
     }
     if (filteredList.size() == 0) {
-      System.out.println("zero size");
+      LogFactory.getInstance().getLog().debug("zero size");
     }
     return filteredList;
   }
  else {
     if (returnList.size() == 0) {
-      System.out.println("zero size");
+      LogFactory.getInstance().getLog().debug("zero size");
     }
     return returnList;
   }
