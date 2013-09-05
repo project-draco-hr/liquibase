@@ -23,7 +23,7 @@
     if (column.isAutoIncrement() != null && column.isAutoIncrement()) {
       constraints.add(new AutoIncrementConstraint(column.getName(),column.getStartWith(),column.getIncrementBy()));
     }
-    AddColumnStatement addColumnStatement=new AddColumnStatement(getCatalogName(),getSchemaName(),getTableName(),column.getName(),column.getType(),column.getDefaultValueObject(),constraints.toArray(new ColumnConstraint[constraints.size()]));
+    AddColumnStatement addColumnStatement=new AddColumnStatement(getCatalogName(),getSchemaName(),getTableName(),column.getName(),column.getType(),column.getDefaultValueObject(),column.getRemarks(),constraints.toArray(new ColumnConstraint[constraints.size()]));
     sql.add(addColumnStatement);
     if (database instanceof DB2Database) {
       sql.add(new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName()));

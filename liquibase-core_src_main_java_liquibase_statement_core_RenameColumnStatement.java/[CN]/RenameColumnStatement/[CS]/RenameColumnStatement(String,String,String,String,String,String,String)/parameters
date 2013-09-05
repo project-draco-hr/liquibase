@@ -1,0 +1,7 @@
+String catalogName
+String schemaName
+String tableName
+String oldColumnName
+String newColumnName
+String columnDataType
+String remarks

@@ -1,6 +1,6 @@
 {
   if (defaultValue instanceof ColumnConstraint) {
-    return addColumn(columnName,columnType,null,(ColumnConstraint)defaultValue);
+    return addColumn(columnName,columnType,null,new ColumnConstraint[]{(ColumnConstraint)defaultValue});
   }
   return addColumn(columnName,columnType,defaultValue,new ColumnConstraint[0]);
 }

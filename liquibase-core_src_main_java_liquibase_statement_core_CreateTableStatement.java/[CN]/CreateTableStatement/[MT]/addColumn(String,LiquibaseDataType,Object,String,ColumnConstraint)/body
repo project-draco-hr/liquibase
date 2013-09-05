@@ -4,6 +4,9 @@
   if (defaultValue != null) {
     defaultValues.put(columnName,defaultValue);
   }
+  if (remarks != null) {
+    this.columnRemarks.put(columnName,remarks);
+  }
   if (constraints != null) {
     for (    ColumnConstraint constraint : constraints) {
       if (constraint == null) {
