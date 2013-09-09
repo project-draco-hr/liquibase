@@ -6,8 +6,13 @@
     sb.append(defLine);
   }
   String definition=sb.toString();
-  if (definition == null) {
-    return null;
+  String finalDef=definition.replaceAll("\r\n","\n");
+  finalDef=INITIAL_COMMENT_PATTERN.matcher(finalDef).replaceFirst("").trim();
+  finalDef=CREATE_VIEW_AS_PATTERN.matcher(finalDef).replaceFirst("").trim();
+  finalDef=finalDef.replaceAll("--.*","").trim();
+  if (finalDef.startsWith("(") && (finalDef.endsWith(")") || finalDef.endsWith(");"))) {
+    finalDef=finalDef.replaceFirst("^\\(","");
+    finalDef=finalDef.replaceFirst("\\);?$","");
   }
-  return CREATE_VIEW_AS_PATTERN.matcher(definition).replaceFirst("");
+  return finalDef;
 }
