@@ -5,6 +5,7 @@
   if (!runStatus.equals(ChangeSet.RunStatus.NOT_RAN)) {
     execType=ChangeSet.ExecType.RERAN;
   }
+  sendRanEvent(changeSet,databaseChangeLog,database,execType);
   this.database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
   this.database.markChangeSetExecStatus(changeSet,execType);
   this.database.commit();
