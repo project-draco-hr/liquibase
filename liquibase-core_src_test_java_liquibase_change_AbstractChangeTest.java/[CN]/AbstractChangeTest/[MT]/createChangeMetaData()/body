@@ -13,6 +13,7 @@
   ChangeParameterMetaData paramNoMetaData=parameters.get("paramNoMetadata");
   ChangeParameterMetaData paramNotIncludedMetaData=parameters.get("paramNotIncluded");
   ChangeParameterMetaData paramNoWriteMethodMetaData=parameters.get("paramNoWriteMethod");
+  assertNotNull(dbmsMetaData);
   assertNotNull(paramOneMetaData);
   assertEquals("paramOne",paramOneMetaData.getParameterName());
   assertEquals("Param One",paramOneMetaData.getDisplayName());
