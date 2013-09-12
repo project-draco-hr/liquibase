@@ -1,4 +1,6 @@
 {
+  Logger log=LogFactory.getInstance().getLog();
+  log.setChangeLog(databaseChangeLog);
   List<ChangeSet> changeSetList=databaseChangeLog.getChangeSets();
   if (visitor.getDirection().equals(ChangeSetVisitor.Direction.REVERSE)) {
     Collections.reverse(changeSetList);
@@ -14,7 +16,9 @@
       }
     }
     if (shouldVisit) {
+      log.setChangeSet(changeSet);
       visitor.visit(changeSet,databaseChangeLog,database);
+      log.setChangeSet(null);
     }
   }
 }
