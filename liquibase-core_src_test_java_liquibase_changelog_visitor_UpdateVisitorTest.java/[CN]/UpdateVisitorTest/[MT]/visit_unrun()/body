@@ -6,6 +6,8 @@
   expect(changeSet.execute(databaseChangeLog,database)).andReturn(ChangeSet.ExecType.EXECUTED);
   expect(database.getRunStatus(changeSet)).andReturn(ChangeSet.RunStatus.NOT_RAN);
   ChangeExecListener listener=createMock(ChangeExecListener.class);
+  listener.willRun(changeSet,databaseChangeLog,database,RunStatus.NOT_RAN);
+  expectLastCall();
   listener.ran(changeSet,databaseChangeLog,database,ChangeSet.ExecType.EXECUTED);
   expectLastCall();
   database.markChangeSetExecStatus(changeSet,ChangeSet.ExecType.EXECUTED);

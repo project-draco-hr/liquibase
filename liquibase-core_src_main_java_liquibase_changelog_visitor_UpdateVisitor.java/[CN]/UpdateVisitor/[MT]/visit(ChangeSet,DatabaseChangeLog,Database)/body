@@ -1,6 +1,7 @@
 {
   ChangeSet.RunStatus runStatus=this.database.getRunStatus(changeSet);
   log.debug("Running Changeset:" + changeSet);
+  sendWillRunEvent(changeSet,databaseChangeLog,database,runStatus);
   ChangeSet.ExecType execType=changeSet.execute(databaseChangeLog,this.database);
   if (!runStatus.equals(ChangeSet.RunStatus.NOT_RAN)) {
     execType=ChangeSet.ExecType.RERAN;
