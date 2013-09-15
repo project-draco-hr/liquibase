@@ -1,0 +1,27 @@
+{
+  Context context=new InitialContext();
+  int lastIndexOf=jndiBase.lastIndexOf("/");
+  String jndiRoot=jndiBase.substring(0,lastIndexOf);
+  String jndiParent=jndiBase.substring(lastIndexOf + 1);
+  Context base=(Context)context.lookup(jndiRoot);
+  NamingEnumeration<NameClassPair> list=base.list(jndiParent);
+  while (list.hasMoreElements()) {
+    NameClassPair entry=list.nextElement();
+    String name=entry.getName();
+    String jndiUrl;
+    if (entry.isRelative()) {
+      jndiUrl=jndiBase + "/" + name;
+    }
+ else {
+      jndiUrl=name;
+    }
+    Object lookup=context.lookup(jndiUrl);
+    if (lookup instanceof DataSource) {
+      dataSources.add((DataSource)lookup);
+      log.debug("Added a data source at " + jndiUrl);
+    }
+ else {
+      log.info("Skipping a resource " + jndiUrl + " not compatible with DataSource.");
+    }
+  }
+}
