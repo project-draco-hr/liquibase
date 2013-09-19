@@ -10,5 +10,8 @@
       return true;
     }
   }
+  if (!hash(object1,accordingTo).equals(hash(object2,accordingTo))) {
+    return false;
+  }
   return createComparatorChain(object1.getClass(),accordingTo).isSameObject(object1,object2,accordingTo);
 }

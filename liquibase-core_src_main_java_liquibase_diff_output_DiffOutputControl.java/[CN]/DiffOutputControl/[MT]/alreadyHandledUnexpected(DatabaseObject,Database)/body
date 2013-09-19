@@ -1,5 +1,9 @@
 {
-  for (  DatabaseObject object : this.alreadyHandledUnexpected) {
+  String hash=DatabaseObjectComparatorFactory.getInstance().hash(unexpectedObject,databaseForHash);
+  if (!alreadyHandledUnexpectedByHash.containsKey(hash)) {
+    return false;
+  }
+  for (  DatabaseObject object : this.alreadyHandledUnexpectedByHash.get(hash)) {
     if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,unexpectedObject,accordingTo)) {
       return true;
     }

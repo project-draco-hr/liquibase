@@ -30,10 +30,16 @@
     collection.add(example);
   }
  else {
-    Set<DatabaseObject> collection=allFound.get(object.getClass());
+    Map<String,Set<DatabaseObject>> collectionMap=allFoundByHash.get(object.getClass());
+    if (collectionMap == null) {
+      collectionMap=new HashMap<String,Set<DatabaseObject>>();
+      allFoundByHash.put(object.getClass(),collectionMap);
+    }
+    String hash=DatabaseObjectComparatorFactory.getInstance().hash(object,database);
+    Set<DatabaseObject> collection=collectionMap.get(hash);
     if (collection == null) {
       collection=new HashSet<DatabaseObject>();
-      allFound.put(object.getClass(),collection);
+      collectionMap.put(hash,collection);
     }
     collection.add(object);
     try {

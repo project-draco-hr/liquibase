@@ -2,5 +2,9 @@
   if (missingObject == null) {
     return;
   }
-  this.alreadyHandledMissing.add(missingObject);
+  String hash=DatabaseObjectComparatorFactory.getInstance().hash(missingObject,databaseForHash);
+  if (!alreadyHandledMissingByHash.containsKey(hash)) {
+    alreadyHandledMissingByHash.put(hash,new HashSet<DatabaseObject>());
+  }
+  this.alreadyHandledMissingByHash.get(hash).add(missingObject);
 }

@@ -1,5 +1,10 @@
 {
-  Set<DatabaseObject> databaseObjects=allFound.get(example.getClass());
+  Map<String,Set<DatabaseObject>> databaseObjectsByHash=allFoundByHash.get(example.getClass());
+  if (databaseObjectsByHash == null) {
+    return null;
+  }
+  String hash=DatabaseObjectComparatorFactory.getInstance().hash(example,database);
+  Set<DatabaseObject> databaseObjects=databaseObjectsByHash.get(hash);
   if (databaseObjects == null) {
     return null;
   }

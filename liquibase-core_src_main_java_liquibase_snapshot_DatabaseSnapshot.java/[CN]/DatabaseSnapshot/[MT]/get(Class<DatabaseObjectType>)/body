@@ -1,9 +1,10 @@
 {
-  Set<DatabaseObjectType> objects=(Set<DatabaseObjectType>)allFound.get(type);
-  if (objects == null) {
-    return Collections.unmodifiableSet(new HashSet<DatabaseObjectType>());
+  Set<DatabaseObject> returnSet=new HashSet<DatabaseObject>();
+  Map<String,Set<DatabaseObject>> allFound=allFoundByHash.get(type);
+  if (allFound != null) {
+    for (    Set<DatabaseObject> objects : allFound.values()) {
+      returnSet.addAll(objects);
+    }
   }
- else {
-    return Collections.unmodifiableSet(objects);
-  }
+  return (Set<DatabaseObjectType>)Collections.unmodifiableSet(returnSet);
 }

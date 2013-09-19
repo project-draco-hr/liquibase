@@ -2,5 +2,9 @@
   if (changedObject == null) {
     return;
   }
-  this.alreadyHandledChanged.add(changedObject);
+  String hash=DatabaseObjectComparatorFactory.getInstance().hash(changedObject,databaseForHash);
+  if (!alreadyHandledChangedByHash.containsKey(hash)) {
+    alreadyHandledChangedByHash.put(hash,new HashSet<DatabaseObject>());
+  }
+  this.alreadyHandledChangedByHash.get(hash).add(changedObject);
 }

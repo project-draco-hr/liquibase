@@ -1,5 +1,9 @@
 {
-  for (  DatabaseObject object : this.alreadyHandledMissing) {
+  String hash=DatabaseObjectComparatorFactory.getInstance().hash(missingObject,databaseForHash);
+  if (!alreadyHandledMissingByHash.containsKey(hash)) {
+    return false;
+  }
+  for (  DatabaseObject object : this.alreadyHandledMissingByHash.get(hash)) {
     if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,missingObject,accordingTo)) {
       return true;
     }

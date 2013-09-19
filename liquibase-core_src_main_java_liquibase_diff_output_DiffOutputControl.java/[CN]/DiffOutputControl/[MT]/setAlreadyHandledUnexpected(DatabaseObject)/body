@@ -2,5 +2,9 @@
   if (unexpectedObject == null) {
     return;
   }
-  this.alreadyHandledUnexpected.add(unexpectedObject);
+  String hash=DatabaseObjectComparatorFactory.getInstance().hash(unexpectedObject,databaseForHash);
+  if (!alreadyHandledUnexpectedByHash.containsKey(hash)) {
+    alreadyHandledUnexpectedByHash.put(hash,new HashSet<DatabaseObject>());
+  }
+  this.alreadyHandledUnexpectedByHash.get(hash).add(unexpectedObject);
 }

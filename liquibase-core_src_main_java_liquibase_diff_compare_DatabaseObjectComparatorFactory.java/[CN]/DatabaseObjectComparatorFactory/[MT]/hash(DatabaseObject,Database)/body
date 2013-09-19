@@ -1,0 +1,10 @@
+{
+  String hash=null;
+  if (databaseObject != null) {
+    hash=createComparatorChain(databaseObject.getClass(),accordingTo).hash(databaseObject,accordingTo);
+  }
+  if (StringUtils.trimToNull(hash) == null) {
+    hash="null";
+  }
+  return hash;
+}

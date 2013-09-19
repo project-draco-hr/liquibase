@@ -1,0 +1,3 @@
+{
+  return DatabaseObjectComparatorFactory.getInstance().hash(((PrimaryKey)databaseObject).getTable(),accordingTo);
+}

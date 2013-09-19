@@ -1,0 +1,8 @@
+{
+  Column column=(Column)databaseObject;
+  String name=column.getName();
+  if (!accordingTo.isCaseSensitive()) {
+    name=name.toLowerCase();
+  }
+  return DatabaseObjectComparatorFactory.getInstance().hash(column.getRelation(),accordingTo) + ":" + name;
+}
