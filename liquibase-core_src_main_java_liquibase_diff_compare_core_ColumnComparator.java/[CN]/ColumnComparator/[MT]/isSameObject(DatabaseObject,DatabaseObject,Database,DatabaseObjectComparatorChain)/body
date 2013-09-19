@@ -10,5 +10,5 @@
   if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(thisColumn.getRelation(),otherColumn.getRelation(),accordingTo)) {
     return false;
   }
-  return chain.isSameObject(databaseObject1,databaseObject2,accordingTo);
+  return true;
 }
