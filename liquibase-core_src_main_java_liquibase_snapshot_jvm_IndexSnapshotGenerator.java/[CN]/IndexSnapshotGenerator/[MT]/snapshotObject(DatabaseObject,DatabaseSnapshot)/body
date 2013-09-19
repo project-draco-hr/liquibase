@@ -10,7 +10,7 @@
     exampleName=database.correctObjectName(exampleName,Index.class);
   }
   List<Table> tables=new ArrayList<Table>();
-  if (exampleTable.getName() == null) {
+  if (exampleTable == null || exampleTable.getName() == null) {
     DatabaseSnapshot tableSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schema.toCatalogAndSchema(),database,new SnapshotControl(snapshot.getDatabase(),Table.class,Schema.class,Catalog.class));
     tables.addAll(tableSnapshot.get(Table.class));
   }
