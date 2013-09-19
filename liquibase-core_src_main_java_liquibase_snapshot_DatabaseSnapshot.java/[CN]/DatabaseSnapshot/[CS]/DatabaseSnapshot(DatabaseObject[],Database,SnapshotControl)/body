@@ -1,0 +1,8 @@
+{
+  this.originalExamples=Arrays.asList(examples);
+  this.database=database;
+  this.snapshotControl=snapshotControl;
+  for (  DatabaseObject obj : examples) {
+    include(obj);
+  }
+}

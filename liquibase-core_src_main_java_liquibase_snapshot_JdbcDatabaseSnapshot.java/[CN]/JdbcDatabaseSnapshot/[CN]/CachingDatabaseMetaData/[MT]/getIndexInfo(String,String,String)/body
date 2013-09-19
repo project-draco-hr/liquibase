@@ -1,0 +1,28 @@
+{
+  return getResultSetCache("getIndexInfo").get(new ResultSetCache.ResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("TABLE_CAT"),row.getString("TABLE_SCHEM"),database,row.getString("TABLE_NAME"));
+    }
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,table);
+    }
+    @Override public ResultSet fastFetch() throws SQLException, DatabaseException {
+      if (database instanceof OracleDatabase) {
+        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS " + "WHERE TABLE_OWNER='" + schemaName + "'";
+        if (table != null) {
+          sql+=" AND TABLE_NAME='" + table + "'";
+        }
+        sql+=" ORDER BY INDEX_NAME, ORDINAL_POSITION";
+        return executeQuery(sql,database);
+      }
+      return databaseMetaData.getIndexInfo(catalogName,schemaName,table,false,true);
+    }
+    @Override public ResultSet bulkFetch() throws SQLException {
+      return null;
+    }
+    @Override boolean shouldBulkSelect(    ResultSetCache resultSetCache){
+      return false;
+    }
+  }
+);
+}

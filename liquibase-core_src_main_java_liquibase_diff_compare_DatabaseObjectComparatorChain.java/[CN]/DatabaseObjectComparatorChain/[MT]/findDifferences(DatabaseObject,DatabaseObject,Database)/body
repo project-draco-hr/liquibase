@@ -8,11 +8,9 @@
   if (object1 != null && object2 == null) {
     return new ObjectDifferences().addDifference("Compared value was null","this",null,null);
   }
-  if (comparators == null) {
+  DatabaseObjectComparator next=getNextComparator();
+  if (next == null) {
     return new ObjectDifferences();
   }
-  if (!comparators.hasNext()) {
-    return new ObjectDifferences();
-  }
-  return comparators.next().findDifferences(object1,object2,accordingTo,this);
+  return next.findDifferences(object1,object2,accordingTo,this);
 }

@@ -1,7 +1,17 @@
 {
-  String key=createKey("getTables",catalogName,schemaName,tableNamePattern,types);
-  if (hasCachedValue(key)) {
-    return getCachedValue(key);
+  return getResultSetCache("getTables." + StringUtils.join(types,":")).get(new ResultSetCache.ResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("TABLE_CAT"),row.getString("TABLE_SCHEM"),database,row.getString("TABLE_NAME"));
+    }
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,table);
+    }
+    @Override public ResultSet fastFetch() throws SQLException {
+      return databaseMetaData.getTables(catalogName,schemaName,table,types);
+    }
+    @Override public ResultSet bulkFetch() throws SQLException {
+      return databaseMetaData.getTables(catalogName,schemaName,null,types);
+    }
   }
-  return cacheResultSet(key,databaseMetaData.getTables(catalogName,schemaName,tableNamePattern,types));
+);
 }

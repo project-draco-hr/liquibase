@@ -11,8 +11,9 @@
   if (comparators == null) {
     return true;
   }
-  if (!comparators.hasNext()) {
+  DatabaseObjectComparator next=getNextComparator();
+  if (next == null) {
     return true;
   }
-  return comparators.next().isSameObject(object1,object2,accordingTo,this);
+  return next.isSameObject(object1,object2,accordingTo,this);
 }

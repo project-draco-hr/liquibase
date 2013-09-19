@@ -2,7 +2,7 @@
   Database database=snapshot.getDatabase();
   String objectName=example.getName();
   Schema schema=example.getSchema();
-  List<JdbcDatabaseSnapshot.CachedRow> rs=null;
+  List<CachedRow> rs=null;
   try {
     JdbcDatabaseSnapshot.CachingDatabaseMetaData metaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
     rs=metaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),objectName,new String[]{"TABLE"});

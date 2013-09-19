@@ -1,0 +1,6 @@
+{
+  this.database=database;
+  this.catalog=catalog;
+  this.schema=schema;
+  this.parameters=parameters;
+}

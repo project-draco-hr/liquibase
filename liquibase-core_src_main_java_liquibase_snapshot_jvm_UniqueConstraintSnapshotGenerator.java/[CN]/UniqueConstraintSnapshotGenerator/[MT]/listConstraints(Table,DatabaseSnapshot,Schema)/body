@@ -1,0 +1,3 @@
+{
+  return ((JdbcDatabaseSnapshot)snapshot).getMetaData().getUniqueConstraints(schema.getCatalogName(),schema.getName(),table.getName());
+}

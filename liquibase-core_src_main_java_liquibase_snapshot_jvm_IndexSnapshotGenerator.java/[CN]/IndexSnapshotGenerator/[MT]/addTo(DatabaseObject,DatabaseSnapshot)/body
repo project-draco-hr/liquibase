@@ -7,19 +7,13 @@
     Database database=snapshot.getDatabase();
     Schema schema;
     schema=table.getSchema();
-    List<JdbcDatabaseSnapshot.CachedRow> rs=null;
+    List<CachedRow> rs=null;
     JdbcDatabaseSnapshot.CachingDatabaseMetaData databaseMetaData=null;
     try {
       databaseMetaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
-      if (database instanceof OracleDatabase) {
-        String sql="SELECT INDEX_NAME, COLUMN_NAME FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='" + schema.getName() + "' AND TABLE_NAME='"+ table.getName()+ "'";
-        rs=databaseMetaData.query(sql);
-      }
- else {
-        rs=databaseMetaData.getIndexInfo(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),table.getName(),false,true);
-      }
+      rs=databaseMetaData.getIndexInfo(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),table.getName());
       Map<String,Index> foundIndexes=new HashMap<String,Index>();
-      for (      JdbcDatabaseSnapshot.CachedRow row : rs) {
+      for (      CachedRow row : rs) {
         String indexName=row.getString("INDEX_NAME");
         if (indexName == null) {
           continue;

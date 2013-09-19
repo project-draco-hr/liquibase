@@ -1,0 +1,43 @@
+{
+  try {
+    String wantedKey=resultSetExtractor.wantedKeyParameters().createParamsKey(resultSetExtractor.database);
+    String schemaKey=resultSetExtractor.wantedKeyParameters().createSchemaKey(resultSetExtractor.database);
+    Map<String,List<CachedRow>> cache=cacheBySchema.get(schemaKey);
+    if (cache == null) {
+      cache=new HashMap<String,List<CachedRow>>();
+      cacheBySchema.put(schemaKey,cache);
+    }
+    if (cache.containsKey(wantedKey)) {
+      return cache.get(wantedKey);
+    }
+    if (didBulkQuery) {
+      return new ArrayList<CachedRow>();
+    }
+    List<CachedRow> results;
+    if (resultSetExtractor.shouldBulkSelect(this)) {
+      cache.clear();
+      results=extract(resultSetExtractor.bulkFetch());
+      didBulkQuery=true;
+    }
+ else {
+      timesSingleQueried++;
+      results=extract(resultSetExtractor.fastFetch());
+    }
+    for (    CachedRow row : results) {
+      for (      String rowKey : resultSetExtractor.rowKeyParameters(row).getKeyPermutations()) {
+        if (!cache.containsKey(rowKey)) {
+          cache.put(rowKey,new ArrayList<CachedRow>());
+        }
+        cache.get(rowKey).add(row);
+      }
+    }
+    List<CachedRow> returnList=cache.get(wantedKey);
+    if (returnList == null) {
+      returnList=new ArrayList<CachedRow>();
+    }
+    return returnList;
+  }
+ catch (  SQLException e) {
+    throw new DatabaseException(e);
+  }
+}

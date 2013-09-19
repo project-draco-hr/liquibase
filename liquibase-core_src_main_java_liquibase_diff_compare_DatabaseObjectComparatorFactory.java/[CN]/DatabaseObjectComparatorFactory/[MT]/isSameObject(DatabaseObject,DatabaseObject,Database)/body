@@ -5,5 +5,10 @@
   if (object1 == null || object2 == null) {
     return false;
   }
+  if (object1.getSnapshotId() != null && object2.getSnapshotId() != null) {
+    if (object1.getSnapshotId().equals(object2.getSnapshotId())) {
+      return true;
+    }
+  }
   return createComparatorChain(object1.getClass(),accordingTo).isSameObject(object1,object2,accordingTo);
 }

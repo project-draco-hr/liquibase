@@ -4,7 +4,7 @@
     if (getDatabase().getConnection() != null) {
       databaseMetaData=((JdbcConnection)getDatabase().getConnection()).getUnderlyingConnection().getMetaData();
     }
-    cachingDatabaseMetaData=new CachingDatabaseMetaData(databaseMetaData);
+    cachingDatabaseMetaData=new CachingDatabaseMetaData(this.getDatabase(),databaseMetaData);
   }
   return cachingDatabaseMetaData;
 }

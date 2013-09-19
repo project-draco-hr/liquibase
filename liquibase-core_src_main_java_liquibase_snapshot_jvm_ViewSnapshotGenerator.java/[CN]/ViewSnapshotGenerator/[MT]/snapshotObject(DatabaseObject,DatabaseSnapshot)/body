@@ -1,11 +1,11 @@
 {
   Database database=snapshot.getDatabase();
   Schema schema=example.getSchema();
-  List<JdbcDatabaseSnapshot.CachedRow> viewsMetadataRs=null;
+  List<CachedRow> viewsMetadataRs=null;
   try {
     viewsMetadataRs=((JdbcDatabaseSnapshot)snapshot).getMetaData().getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),example.getName(),new String[]{"VIEW"});
     if (viewsMetadataRs.size() > 0) {
-      JdbcDatabaseSnapshot.CachedRow row=viewsMetadataRs.get(0);
+      CachedRow row=viewsMetadataRs.get(0);
       String rawViewName=row.getString("TABLE_NAME");
       String rawSchemaName=StringUtils.trimToNull(row.getString("TABLE_SCHEM"));
       String rawCatalogName=StringUtils.trimToNull(row.getString("TABLE_CAT"));

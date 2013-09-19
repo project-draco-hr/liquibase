@@ -1,7 +1,0 @@
-{
-  String key=createKey("getIndexInfo",catalogName,schemaName,table,unique,approximate);
-  if (hasCachedValue(key)) {
-    return getCachedValue(key);
-  }
-  return cacheResultSet(key,databaseMetaData.getIndexInfo(catalogName,schemaName,table,unique,approximate));
-}

@@ -1,0 +1,19 @@
+{
+  if (!database.supportsCatalogs() && !database.supportsSchemas()) {
+    return "all";
+  }
+ else   if (database.supportsCatalogs() && database.supportsSchemas()) {
+    return (catalog + "." + schema).toLowerCase();
+  }
+ else {
+    if (catalog == null && schema != null) {
+      return schema.toLowerCase();
+    }
+ else {
+      if (catalog == null) {
+        return "all";
+      }
+      return catalog.toLowerCase();
+    }
+  }
+}

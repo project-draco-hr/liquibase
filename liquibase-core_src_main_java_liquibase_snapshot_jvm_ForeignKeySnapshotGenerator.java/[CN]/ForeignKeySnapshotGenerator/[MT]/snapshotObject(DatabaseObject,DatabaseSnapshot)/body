@@ -1,6 +1,6 @@
 {
   Database database=snapshot.getDatabase();
-  List<JdbcDatabaseSnapshot.CachedRow> importedKeyMetadataResultSet=null;
+  List<CachedRow> importedKeyMetadataResultSet=null;
   try {
     Table fkTable=((ForeignKey)example).getForeignKeyTable();
     String searchCatalog=((AbstractJdbcDatabase)database).getJdbcCatalogName(fkTable.getSchema());
@@ -8,7 +8,7 @@
     String searchTableName=database.correctObjectName(fkTable.getName(),Table.class);
     importedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getImportedKeys(searchCatalog,searchSchema,searchTableName);
     ForeignKey foreignKey=null;
-    for (    JdbcDatabaseSnapshot.CachedRow row : importedKeyMetadataResultSet) {
+    for (    CachedRow row : importedKeyMetadataResultSet) {
       String fk_name=cleanNameFromDatabase(row.getString("FK_NAME"),database);
       if (!fk_name.equals(example.getName())) {
         continue;

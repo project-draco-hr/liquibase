@@ -1,5 +1,0 @@
-{
-  if (comparators != null) {
-    this.comparators=comparators.iterator();
-  }
-}
