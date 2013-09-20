@@ -1,10 +1,3 @@
 {
-  if (unexpectedObject == null) {
-    return;
-  }
-  String hash=DatabaseObjectComparatorFactory.getInstance().hash(unexpectedObject,databaseForHash);
-  if (!alreadyHandledUnexpectedByHash.containsKey(hash)) {
-    alreadyHandledUnexpectedByHash.put(hash,new HashSet<DatabaseObject>());
-  }
-  this.alreadyHandledUnexpectedByHash.get(hash).add(unexpectedObject);
+  this.alreadyHandledUnexpected.add(unexpectedObject);
 }

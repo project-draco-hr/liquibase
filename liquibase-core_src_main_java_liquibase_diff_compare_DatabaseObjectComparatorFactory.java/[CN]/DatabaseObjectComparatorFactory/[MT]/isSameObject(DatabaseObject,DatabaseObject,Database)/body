@@ -12,7 +12,16 @@
       return true;
     }
   }
-  if (!hash(object1,accordingTo).equals(hash(object2,accordingTo))) {
+  boolean aHashMatches=false;
+  List<String> hash1=Arrays.asList(hash(object1,accordingTo));
+  List<String> hash2=Arrays.asList(hash(object2,accordingTo));
+  for (  String hash : hash1) {
+    if (hash2.contains(hash)) {
+      aHashMatches=true;
+      break;
+    }
+  }
+  if (!aHashMatches) {
     return false;
   }
   return createComparatorChain(object1.getClass(),accordingTo).isSameObject(object1,object2,accordingTo);

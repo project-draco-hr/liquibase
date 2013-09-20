@@ -1,17 +1,3 @@
 {
-  Map<String,Set<DatabaseObject>> databaseObjectsByHash=allFoundByHash.get(example.getClass());
-  if (databaseObjectsByHash == null) {
-    return null;
-  }
-  String hash=DatabaseObjectComparatorFactory.getInstance().hash(example,database);
-  Set<DatabaseObject> databaseObjects=databaseObjectsByHash.get(hash);
-  if (databaseObjects == null) {
-    return null;
-  }
-  for (  DatabaseObject obj : databaseObjects) {
-    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(obj,example,database)) {
-      return (DatabaseObjectType)obj;
-    }
-  }
-  return null;
+  return allFound.get(example);
 }

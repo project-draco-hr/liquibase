@@ -1,0 +1,19 @@
+{
+  if (databaseObject == null) {
+    return;
+  }
+  Map<String,Set<DatabaseObject>> collectionMap=cache.get(databaseObject.getClass());
+  if (collectionMap == null) {
+    collectionMap=new HashMap<String,Set<DatabaseObject>>();
+    cache.put(databaseObject.getClass(),collectionMap);
+  }
+  String[] hashes=DatabaseObjectComparatorFactory.getInstance().hash(databaseObject,database);
+  for (  String hash : hashes) {
+    Set<DatabaseObject> collection=collectionMap.get(hash);
+    if (collection == null) {
+      collection=new HashSet<DatabaseObject>();
+      collectionMap.put(hash,collection);
+    }
+    collection.add(databaseObject);
+  }
+}

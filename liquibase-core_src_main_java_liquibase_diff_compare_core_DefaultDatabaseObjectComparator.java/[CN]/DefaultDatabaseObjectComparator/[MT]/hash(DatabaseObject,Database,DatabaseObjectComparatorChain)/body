@@ -1,9 +1,3 @@
 {
-  String name=databaseObject.getName();
-  if (name != null) {
-    if (!accordingTo.isCaseSensitive()) {
-      name=name.toLowerCase();
-    }
-  }
-  return DatabaseObjectComparatorFactory.getInstance().hash(databaseObject.getSchema(),accordingTo) + ":" + name;
+  return new String[]{databaseObject.getName().toLowerCase()};
 }

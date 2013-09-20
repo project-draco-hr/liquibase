@@ -1,6 +1,6 @@
 {
-  this.originalExamples=Arrays.asList(examples);
   this.database=database;
+  allFound=new DatabaseObjectCollection(database);
   this.snapshotControl=snapshotControl;
   for (  DatabaseObject obj : examples) {
     include(obj);

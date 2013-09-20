@@ -1,12 +1,3 @@
 {
-  String hash=DatabaseObjectComparatorFactory.getInstance().hash(changedObject,databaseForHash);
-  if (!alreadyHandledChangedByHash.containsKey(hash)) {
-    return false;
-  }
-  for (  DatabaseObject object : this.alreadyHandledChangedByHash.get(hash)) {
-    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,changedObject,accordingTo)) {
-      return true;
-    }
-  }
-  return false;
+  return alreadyHandledChanged.contains(changedObject);
 }
