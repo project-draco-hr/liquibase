@@ -1,5 +1,5 @@
 {
-  super("Precondition Error");
+  super("Precondition Error",errorPrecondition.getCause());
   this.erroredPreconditions=new ArrayList<ErrorPrecondition>();
   erroredPreconditions.add(errorPrecondition);
 }
