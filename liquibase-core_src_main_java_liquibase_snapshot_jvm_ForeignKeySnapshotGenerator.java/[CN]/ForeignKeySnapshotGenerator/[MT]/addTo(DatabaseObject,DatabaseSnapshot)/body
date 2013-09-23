@@ -8,7 +8,7 @@
     Schema schema;
     schema=table.getSchema();
     Set<String> seenFks=new HashSet<String>();
-    List<CachedRow> importedKeyMetadataResultSet=null;
+    List<CachedRow> importedKeyMetadataResultSet;
     try {
       importedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getForeignKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(table.getName(),Table.class),null);
       for (      CachedRow row : importedKeyMetadataResultSet) {

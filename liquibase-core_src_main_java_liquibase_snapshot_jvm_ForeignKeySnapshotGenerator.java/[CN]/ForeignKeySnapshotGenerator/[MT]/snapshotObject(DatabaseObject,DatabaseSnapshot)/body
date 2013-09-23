@@ -1,6 +1,6 @@
 {
   Database database=snapshot.getDatabase();
-  List<CachedRow> importedKeyMetadataResultSet=null;
+  List<CachedRow> importedKeyMetadataResultSet;
   try {
     Table fkTable=((ForeignKey)example).getForeignKeyTable();
     String searchCatalog=((AbstractJdbcDatabase)database).getJdbcCatalogName(fkTable.getSchema());
