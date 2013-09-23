@@ -1,3 +1,3 @@
 {
-  return new Class[]{UniqueConstraint.class};
+  return null;
 }
