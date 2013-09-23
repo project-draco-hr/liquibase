@@ -1,4 +1,7 @@
 {
+  if (compareControl.isSuppressedField(referenceObject.getClass(),attribute)) {
+    return;
+  }
   Object referenceValue=referenceObject.getAttribute(attribute,Object.class);
   Object compareValue=compareToObject.getAttribute(attribute,Object.class);
   boolean different;

@@ -5,5 +5,6 @@
   runCompleteChangeLog();
   DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,database,new CompareControl());
   DiffToChangeLog changeLogWriter=new DiffToChangeLog(diffResult,new DiffOutputControl(false,false,false));
-  assertEquals(0,changeLogWriter.generateChangeSets().size());
+  List<ChangeSet> changeSets=changeLogWriter.generateChangeSets();
+  assertEquals(0,changeSets.size());
 }
