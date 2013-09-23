@@ -1,7 +1,0 @@
-{
-  List<CachedRow> returnList=new ArrayList<CachedRow>();
-  for (  ResultSet rs : resultSets) {
-    returnList.addAll(extract(rs));
-  }
-  return returnList;
-}
