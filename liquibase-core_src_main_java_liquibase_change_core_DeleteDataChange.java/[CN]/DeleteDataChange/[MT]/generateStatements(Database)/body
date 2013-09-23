@@ -1,6 +1,6 @@
 {
   DeleteStatement statement=new DeleteStatement(getCatalogName(),getSchemaName(),getTableName());
-  statement.setWhereClause(whereClause);
+  statement.setWhereClause(where);
   for (  ColumnConfig whereParam : whereParams) {
     if (whereParam.getName() != null) {
       statement.addWhereColumnName(whereParam.getName());
