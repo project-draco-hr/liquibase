@@ -5,8 +5,8 @@
   if (!(databaseObject1 instanceof Schema && databaseObject2 instanceof Schema)) {
     return false;
   }
-  Schema thisSchema=(Schema)databaseObject1;
-  Schema otherSchema=(Schema)databaseObject2;
+  CatalogAndSchema thisSchema=accordingTo.correctSchema(((Schema)databaseObject1).toCatalogAndSchema());
+  CatalogAndSchema otherSchema=accordingTo.correctSchema(((Schema)databaseObject2).toCatalogAndSchema());
   if (accordingTo.supportsCatalogs()) {
     if (thisSchema.getCatalogName() == null) {
       return otherSchema.getCatalogName() == null || accordingTo.getDefaultCatalogName() == null || accordingTo.getDefaultCatalogName().equalsIgnoreCase(otherSchema.getCatalogName());
@@ -16,7 +16,7 @@
     }
   }
   if (accordingTo.supportsSchemas()) {
-    return thisSchema.getName().equalsIgnoreCase(otherSchema.getName());
+    return thisSchema.getSchemaName().equalsIgnoreCase(otherSchema.getSchemaName());
   }
   return true;
 }

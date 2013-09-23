@@ -1,0 +1,46 @@
+{
+  return getResultSetCache("getIndexInfo").get(new ResultSetCache.UnionResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("TABLE_CAT"),row.getString("TABLE_SCHEM"),database,row.getString("TABLE_NAME"),row.getString("INDEX_NAME"));
+    }
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,tableName,indexName);
+    }
+    @Override public ResultSet[] fastFetchQuery() throws SQLException, DatabaseException {
+      List<ResultSet> results=new ArrayList<ResultSet>();
+      if (database instanceof OracleDatabase) {
+        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS " + "WHERE TABLE_OWNER='" + schemaName + "'";
+        if (tableName != null) {
+          sql+=" AND TABLE_NAME='" + database.correctObjectName(tableName,Table.class) + "'";
+        }
+        if (indexName != null) {
+          sql+=" AND INDEX_NAME='" + database.correctObjectName(indexName,Index.class) + "'";
+        }
+        sql+=" ORDER BY INDEX_NAME, ORDINAL_POSITION";
+        results.add(executeQuery(sql,database));
+      }
+ else {
+        List<String> tables=new ArrayList<String>();
+        if (tableName == null) {
+          for (          CachedRow row : getTables(catalogName,schemaName,null,new String[]{"TABLE"})) {
+            tables.add(row.getString("TABLE_NAME"));
+          }
+        }
+ else {
+          tables.add(tableName);
+        }
+        for (        String tableName : tables) {
+          results.add(databaseMetaData.getIndexInfo(catalogName,schemaName,tableName,false,true));
+        }
+      }
+      return results.toArray(new ResultSet[results.size()]);
+    }
+    @Override public ResultSet[] bulkFetchQuery() throws SQLException {
+      return null;
+    }
+    @Override boolean shouldBulkSelect(    ResultSetCache resultSetCache){
+      return false;
+    }
+  }
+);
+}

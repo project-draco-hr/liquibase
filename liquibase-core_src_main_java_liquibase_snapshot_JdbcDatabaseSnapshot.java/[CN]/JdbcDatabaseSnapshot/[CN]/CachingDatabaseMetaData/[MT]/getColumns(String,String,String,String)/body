@@ -1,5 +1,5 @@
 {
-  return getResultSetCache("getColumns").get(new ResultSetCache.ResultSetExtractor(database){
+  return getResultSetCache("getColumns").get(new ResultSetCache.SingleResultSetExtractor(database){
     @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
       return new ResultSetCache.RowData(row.getString("TABLE_CAT"),row.getString("TABLE_SCHEM"),database,row.getString("TABLE_NAME"),row.getString("COLUMN_NAME"));
     }
@@ -15,10 +15,10 @@
       seenTables.add(catalogName + ":" + schemaName+ ":"+ tableName);
       return seenTables.size() > 2;
     }
-    @Override public ResultSet fastFetch() throws SQLException {
+    @Override public ResultSet fastFetchQuery() throws SQLException {
       return databaseMetaData.getColumns(catalogName,schemaName,tableName,columnName);
     }
-    @Override public ResultSet bulkFetch() throws SQLException {
+    @Override public ResultSet bulkFetchQuery() throws SQLException {
       return databaseMetaData.getColumns(catalogName,schemaName,null,null);
     }
   }

@@ -1,0 +1,33 @@
+{
+  return getResultSetCache("getImportedKeys").get(new ResultSetCache.UnionResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("FKTABLE_CAT"),row.getString("FKTABLE_SCHEM"),database,row.getString("FKTABLE_NAME"),row.getString("FK_NAME"));
+    }
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,tableName,fkName);
+    }
+    @Override public ResultSet[] fastFetchQuery() throws SQLException, DatabaseException {
+      List<ResultSet> results=new ArrayList<ResultSet>();
+      List<String> tables=new ArrayList<String>();
+      if (tableName == null) {
+        for (        CachedRow row : getTables(catalogName,schemaName,null,new String[]{"TABLE"})) {
+          tables.add(row.getString("TABLE_NAME"));
+        }
+      }
+ else {
+        tables.add(tableName);
+      }
+      for (      String foundTable : tables) {
+        results.add(databaseMetaData.getImportedKeys(catalogName,schemaName,foundTable));
+      }
+      return results.toArray(new ResultSet[results.size()]);
+    }
+    @Override public ResultSet[] bulkFetchQuery() throws SQLException {
+      return null;
+    }
+    @Override boolean shouldBulkSelect(    ResultSetCache resultSetCache){
+      return false;
+    }
+  }
+);
+}

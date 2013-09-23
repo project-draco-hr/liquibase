@@ -10,7 +10,7 @@
     Set<String> seenFks=new HashSet<String>();
     List<CachedRow> importedKeyMetadataResultSet=null;
     try {
-      importedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getImportedKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(table.getName(),Table.class));
+      importedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getForeignKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(table.getName(),Table.class),null);
       for (      CachedRow row : importedKeyMetadataResultSet) {
         ForeignKey fk=new ForeignKey().setName(row.getString("FK_NAME")).setForeignKeyTable(table);
         if (seenFks.add(fk.getName())) {

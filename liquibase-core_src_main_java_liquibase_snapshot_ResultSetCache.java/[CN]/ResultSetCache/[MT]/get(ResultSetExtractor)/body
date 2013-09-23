@@ -16,12 +16,12 @@
     List<CachedRow> results;
     if (resultSetExtractor.shouldBulkSelect(this)) {
       cache.clear();
-      results=extract(resultSetExtractor.bulkFetch());
+      results=resultSetExtractor.bulkFetch();
       didBulkQuery=true;
     }
  else {
       timesSingleQueried++;
-      results=extract(resultSetExtractor.fastFetch());
+      results=resultSetExtractor.fastFetch();
     }
     for (    CachedRow row : results) {
       for (      String rowKey : resultSetExtractor.rowKeyParameters(row).getKeyPermutations()) {

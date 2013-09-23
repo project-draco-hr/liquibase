@@ -6,12 +6,17 @@
     String searchCatalog=((AbstractJdbcDatabase)database).getJdbcCatalogName(fkTable.getSchema());
     String searchSchema=((AbstractJdbcDatabase)database).getJdbcSchemaName(fkTable.getSchema());
     String searchTableName=database.correctObjectName(fkTable.getName(),Table.class);
-    importedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getImportedKeys(searchCatalog,searchSchema,searchTableName);
+    importedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getForeignKeys(searchCatalog,searchSchema,searchTableName,example.getName());
     ForeignKey foreignKey=null;
     for (    CachedRow row : importedKeyMetadataResultSet) {
       String fk_name=cleanNameFromDatabase(row.getString("FK_NAME"),database);
-      if (!fk_name.equals(example.getName())) {
-        continue;
+      if (snapshot.getDatabase().isCaseSensitive()) {
+        if (!fk_name.equals(example.getName())) {
+          continue;
+        }
+ else         if (!fk_name.equalsIgnoreCase(example.getName())) {
+          continue;
+        }
       }
       if (foreignKey == null) {
         foreignKey=new ForeignKey();
