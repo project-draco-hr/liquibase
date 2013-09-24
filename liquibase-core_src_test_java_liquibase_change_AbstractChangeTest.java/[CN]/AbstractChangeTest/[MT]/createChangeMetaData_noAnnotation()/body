@@ -1,10 +1,10 @@
 {
   try {
     new AbstractChange(){
-      public String getConfirmationMessage(){
+      @Override public String getConfirmationMessage(){
         return null;
       }
-      public SqlStatement[] generateStatements(      Database database){
+      @Override public SqlStatement[] generateStatements(      Database database){
         return null;
       }
     }
