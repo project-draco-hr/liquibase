@@ -1,6 +1,3 @@
 {
-  if (database instanceof MSSQLDatabase || database instanceof SybaseDatabase) {
-    return new DatabaseDataType("SMALLDATETIME");
-  }
   return new DatabaseDataType(getName());
 }
