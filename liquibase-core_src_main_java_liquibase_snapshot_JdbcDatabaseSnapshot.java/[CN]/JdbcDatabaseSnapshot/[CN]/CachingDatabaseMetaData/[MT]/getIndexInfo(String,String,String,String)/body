@@ -8,8 +8,9 @@
     }
     @Override public List<CachedRow> fastFetch() throws SQLException, DatabaseException {
       List<CachedRow> returnList=new ArrayList<CachedRow>();
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
       if (database instanceof OracleDatabase) {
-        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS " + "WHERE TABLE_OWNER='" + schemaName + "'";
+        String sql="SELECT INDEX_NAME, 3 AS TYPE, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION AS ORDINAL_POSITION, null AS FILTER_CONDITION FROM ALL_IND_COLUMNS " + "WHERE TABLE_OWNER='" + database.correctObjectName(catalogAndSchema.getCatalogName(),Schema.class) + "'";
         if (tableName != null) {
           sql+=" AND TABLE_NAME='" + database.correctObjectName(tableName,Table.class) + "'";
         }
@@ -22,7 +23,7 @@
  else {
         List<String> tables=new ArrayList<String>();
         if (tableName == null) {
-          for (          CachedRow row : getTables(catalogName,schemaName,null,new String[]{"TABLE"})) {
+          for (          CachedRow row : getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,new String[]{"TABLE"})) {
             tables.add(row.getString("TABLE_NAME"));
           }
         }
@@ -30,7 +31,7 @@
           tables.add(tableName);
         }
         for (        String tableName : tables) {
-          returnList.addAll(extract(databaseMetaData.getIndexInfo(catalogName,schemaName,tableName,false,true)));
+          returnList.addAll(extract(databaseMetaData.getIndexInfo(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName,false,true)));
         }
       }
       return returnList;

@@ -16,10 +16,12 @@
       return seenTables.size() > 2;
     }
     @Override public ResultSet fastFetchQuery() throws SQLException {
-      return databaseMetaData.getColumns(catalogName,schemaName,tableName,columnName);
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName,columnName);
     }
     @Override public ResultSet bulkFetchQuery() throws SQLException {
-      return databaseMetaData.getColumns(catalogName,schemaName,null,null);
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,null);
     }
   }
 );

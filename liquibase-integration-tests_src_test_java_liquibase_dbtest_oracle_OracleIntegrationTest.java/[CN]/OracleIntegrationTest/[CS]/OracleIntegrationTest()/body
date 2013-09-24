@@ -1,5 +1,5 @@
 {
-  super("oracle","jdbc:oracle:thin:@" + getDatabaseServerHostname("Oracle") + ":1521:liquibase");
+  super("oracle","jdbc:oracle:thin:@" + getDatabaseServerHostname("Oracle") + ":1521:XE");
   this.indexOnSchemaChangeLog="changelogs/oracle/complete/indexOnSchema.xml";
   this.viewOnSchemaChangeLog="changelogs/oracle/complete/viewOnSchema.xml";
 }

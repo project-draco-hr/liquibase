@@ -10,6 +10,9 @@
     CompareControl compareControl=new CompareControl();
     compareControl.addSuppressedField(Column.class,"defaultValue");
     compareControl.addSuppressedField(Column.class,"autoIncrementInformation");
+    if (database instanceof OracleDatabase) {
+      compareControl.addSuppressedField(Column.class,"type");
+    }
     DiffOutputControl diffOutputControl=new DiffOutputControl();
     File tempFile=File.createTempFile("liquibase-test",".xml");
     FileUtil.forceDeleteOnExit(tempFile);

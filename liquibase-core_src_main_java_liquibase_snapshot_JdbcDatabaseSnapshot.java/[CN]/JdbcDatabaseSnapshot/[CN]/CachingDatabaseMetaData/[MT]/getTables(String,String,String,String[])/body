@@ -7,10 +7,12 @@
       return new ResultSetCache.RowData(catalogName,schemaName,database,table);
     }
     @Override public ResultSet fastFetchQuery() throws SQLException {
-      return databaseMetaData.getTables(catalogName,schemaName,database.correctObjectName(table,Table.class),types);
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),database.correctObjectName(table,Table.class),types);
     }
     @Override public ResultSet bulkFetchQuery() throws SQLException {
-      return databaseMetaData.getTables(catalogName,schemaName,null,types);
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,types);
     }
   }
 );

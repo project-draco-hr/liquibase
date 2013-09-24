@@ -7,7 +7,8 @@
       return new ResultSetCache.RowData(catalogName,schemaName,database,table);
     }
     @Override public ResultSet fastFetchQuery() throws SQLException {
-      return databaseMetaData.getPrimaryKeys(catalogName,schemaName,table);
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getPrimaryKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),table);
     }
     @Override public ResultSet bulkFetchQuery() throws SQLException {
       return null;

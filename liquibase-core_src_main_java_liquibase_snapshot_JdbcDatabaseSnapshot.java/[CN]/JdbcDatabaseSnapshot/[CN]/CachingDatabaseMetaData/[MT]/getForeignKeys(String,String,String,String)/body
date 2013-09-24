@@ -7,10 +7,11 @@
       return new ResultSetCache.RowData(catalogName,schemaName,database,tableName,fkName);
     }
     @Override public List<CachedRow> fastFetch() throws SQLException, DatabaseException {
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
       List<CachedRow> returnList=new ArrayList<CachedRow>();
       List<String> tables=new ArrayList<String>();
       if (tableName == null) {
-        for (        CachedRow row : getTables(catalogName,schemaName,null,new String[]{"TABLE"})) {
+        for (        CachedRow row : getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,new String[]{"TABLE"})) {
           tables.add(row.getString("TABLE_NAME"));
         }
       }
@@ -18,7 +19,7 @@
         tables.add(tableName);
       }
       for (      String foundTable : tables) {
-        returnList.addAll(extract(databaseMetaData.getImportedKeys(catalogName,schemaName,foundTable)));
+        returnList.addAll(extract(databaseMetaData.getImportedKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),foundTable)));
       }
       return returnList;
     }
