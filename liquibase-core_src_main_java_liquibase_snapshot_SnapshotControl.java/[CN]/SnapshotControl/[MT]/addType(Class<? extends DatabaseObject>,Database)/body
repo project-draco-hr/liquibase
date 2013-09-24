@@ -1,0 +1,9 @@
+{
+  boolean added=this.types.add(type);
+  if (added) {
+    for (    Class<? extends DatabaseObject> container : SnapshotGeneratorFactory.getInstance().getContainerTypes(type,database)) {
+      addType(container,database);
+    }
+  }
+  return added;
+}
