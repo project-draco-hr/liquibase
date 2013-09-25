@@ -5,5 +5,24 @@
   if (object1 == null || object2 == null) {
     return false;
   }
+  UUID snapshotId1=object1.getSnapshotId();
+  UUID snapshotId2=object2.getSnapshotId();
+  if (snapshotId1 != null && snapshotId2 != null) {
+    if (snapshotId1.equals(snapshotId2)) {
+      return true;
+    }
+  }
+  boolean aHashMatches=false;
+  List<String> hash1=Arrays.asList(hash(object1,accordingTo));
+  List<String> hash2=Arrays.asList(hash(object2,accordingTo));
+  for (  String hash : hash1) {
+    if (hash2.contains(hash)) {
+      aHashMatches=true;
+      break;
+    }
+  }
+  if (!aHashMatches) {
+    return false;
+  }
   return createComparatorChain(object1.getClass(),accordingTo).isSameObject(object1,object2,accordingTo);
 }

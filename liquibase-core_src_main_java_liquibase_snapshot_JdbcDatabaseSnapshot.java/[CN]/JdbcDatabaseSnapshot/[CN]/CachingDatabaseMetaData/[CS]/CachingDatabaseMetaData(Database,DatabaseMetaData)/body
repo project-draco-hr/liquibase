@@ -1,0 +1,4 @@
+{
+  this.databaseMetaData=metaData;
+  this.database=database;
+}

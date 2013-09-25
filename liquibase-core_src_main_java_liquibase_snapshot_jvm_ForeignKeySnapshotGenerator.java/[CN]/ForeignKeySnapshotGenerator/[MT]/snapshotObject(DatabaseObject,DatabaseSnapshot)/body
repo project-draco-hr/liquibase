@@ -1,17 +1,22 @@
 {
   Database database=snapshot.getDatabase();
-  List<JdbcDatabaseSnapshot.CachedRow> importedKeyMetadataResultSet=null;
+  List<CachedRow> importedKeyMetadataResultSet;
   try {
     Table fkTable=((ForeignKey)example).getForeignKeyTable();
     String searchCatalog=((AbstractJdbcDatabase)database).getJdbcCatalogName(fkTable.getSchema());
     String searchSchema=((AbstractJdbcDatabase)database).getJdbcSchemaName(fkTable.getSchema());
     String searchTableName=database.correctObjectName(fkTable.getName(),Table.class);
-    importedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getImportedKeys(searchCatalog,searchSchema,searchTableName);
+    importedKeyMetadataResultSet=((JdbcDatabaseSnapshot)snapshot).getMetaData().getForeignKeys(searchCatalog,searchSchema,searchTableName,example.getName());
     ForeignKey foreignKey=null;
-    for (    JdbcDatabaseSnapshot.CachedRow row : importedKeyMetadataResultSet) {
+    for (    CachedRow row : importedKeyMetadataResultSet) {
       String fk_name=cleanNameFromDatabase(row.getString("FK_NAME"),database);
-      if (!fk_name.equals(example.getName())) {
-        continue;
+      if (snapshot.getDatabase().isCaseSensitive()) {
+        if (!fk_name.equals(example.getName())) {
+          continue;
+        }
+ else         if (!fk_name.equalsIgnoreCase(example.getName())) {
+          continue;
+        }
       }
       if (foreignKey == null) {
         foreignKey=new ForeignKey();
@@ -53,7 +58,6 @@
         exampleIndex.getColumns().addAll(Arrays.asList(foreignKey.getForeignKeyColumns().split("\\s*,\\s*")));
         foreignKey.setBackingIndex(exampleIndex);
       }
-      return foreignKey;
     }
     return foreignKey;
   }

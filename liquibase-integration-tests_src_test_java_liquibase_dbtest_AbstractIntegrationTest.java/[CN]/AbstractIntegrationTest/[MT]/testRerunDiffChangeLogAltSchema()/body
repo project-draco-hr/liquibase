@@ -50,7 +50,9 @@
   }
   tempFile.deleteOnExit();
   DatabaseSnapshot finalSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl(database));
-  DiffResult finalDiffResult=DiffGeneratorFactory.getInstance().compare(originalSnapshot,finalSnapshot,new CompareControl());
+  CompareControl finalCompareControl=new CompareControl();
+  finalCompareControl.addSuppressedField(Column.class,"autoIncrementInformation");
+  DiffResult finalDiffResult=DiffGeneratorFactory.getInstance().compare(originalSnapshot,finalSnapshot,finalCompareControl);
   new DiffToReport(finalDiffResult,System.out).print();
   assertTrue(finalDiffResult.areEqual());
 }

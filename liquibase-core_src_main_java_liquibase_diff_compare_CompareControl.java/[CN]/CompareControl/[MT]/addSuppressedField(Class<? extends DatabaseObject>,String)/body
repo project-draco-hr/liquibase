@@ -1,0 +1,6 @@
+{
+  if (!suppressedFields.containsKey(type)) {
+    suppressedFields.put(type,new HashSet<String>());
+  }
+  suppressedFields.get(type).add(field);
+}

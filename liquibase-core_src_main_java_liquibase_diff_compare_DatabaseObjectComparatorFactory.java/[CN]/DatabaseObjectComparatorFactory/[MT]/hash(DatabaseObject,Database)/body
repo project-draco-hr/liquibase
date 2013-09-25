@@ -1,0 +1,15 @@
+{
+  String[] hash=null;
+  if (databaseObject != null) {
+    hash=createComparatorChain(databaseObject.getClass(),accordingTo).hash(databaseObject,accordingTo);
+  }
+  if (hash == null) {
+    hash=new String[]{"null"};
+  }
+  for (int i=0; i < hash.length; i++) {
+    if (StringUtils.trimToNull(hash[i]) == null) {
+      hash[i]="null";
+    }
+  }
+  return hash;
+}

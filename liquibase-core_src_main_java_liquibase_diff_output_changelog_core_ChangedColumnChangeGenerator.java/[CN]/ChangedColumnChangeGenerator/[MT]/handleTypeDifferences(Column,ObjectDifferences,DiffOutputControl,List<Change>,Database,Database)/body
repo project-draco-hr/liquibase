@@ -1,0 +1,17 @@
+{
+  Difference typeDifference=differences.getDifference("type");
+  if (typeDifference != null) {
+    ModifyDataTypeChange change=new ModifyDataTypeChange();
+    if (control.isIncludeCatalog()) {
+      change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+    }
+    if (control.isIncludeSchema()) {
+      change.setSchemaName(column.getRelation().getSchema().getName());
+    }
+    change.setTableName(column.getRelation().getName());
+    change.setColumnName(column.getName());
+    DataType referenceType=(DataType)typeDifference.getReferenceValue();
+    change.setNewDataType(DataTypeFactory.getInstance().from(referenceType).toString());
+    changes.add(change);
+  }
+}

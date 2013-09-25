@@ -1,0 +1,16 @@
+{
+  if (object1 == null && object2 == null) {
+    return new ObjectDifferences(compareControl);
+  }
+  if (object1 == null && object2 != null) {
+    return new ObjectDifferences(compareControl).addDifference("Reference value was null","this",null,null);
+  }
+  if (object1 != null && object2 == null) {
+    return new ObjectDifferences(compareControl).addDifference("Compared value was null","this",null,null);
+  }
+  DatabaseObjectComparator next=getNextComparator();
+  if (next == null) {
+    return new ObjectDifferences(compareControl);
+  }
+  return next.findDifferences(object1,object2,accordingTo,compareControl,this);
+}

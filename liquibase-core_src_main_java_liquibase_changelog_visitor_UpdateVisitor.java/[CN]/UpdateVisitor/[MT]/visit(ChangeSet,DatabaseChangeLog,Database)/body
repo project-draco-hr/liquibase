@@ -1,10 +1,12 @@
 {
   ChangeSet.RunStatus runStatus=this.database.getRunStatus(changeSet);
   log.debug("Running Changeset:" + changeSet);
+  fireWillRun(changeSet,databaseChangeLog,database,runStatus);
   ChangeSet.ExecType execType=changeSet.execute(databaseChangeLog,this.database);
   if (!runStatus.equals(ChangeSet.RunStatus.NOT_RAN)) {
     execType=ChangeSet.ExecType.RERAN;
   }
+  fireRan(changeSet,databaseChangeLog,database,execType);
   this.database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
   this.database.markChangeSetExecStatus(changeSet,execType);
   this.database.commit();

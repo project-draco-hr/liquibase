@@ -1,0 +1,5 @@
+DatabaseObject databaseObject1
+DatabaseObject databaseObject2
+Database accordingTo
+CompareControl compareControl
+DatabaseObjectComparatorChain chain

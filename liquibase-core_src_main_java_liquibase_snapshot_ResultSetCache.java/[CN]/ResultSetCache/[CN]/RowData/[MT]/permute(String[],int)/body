@@ -1,0 +1,13 @@
+{
+  String[] nullVersion=Arrays.copyOf(params,params.length);
+  nullVersion[fromIndex]=null;
+  if (params.length == fromIndex + 1) {
+    return new String[]{createKey(database,params),createKey(database,nullVersion)};
+  }
+ else {
+    List<String> permutations=new ArrayList<String>();
+    Collections.addAll(permutations,permute(params,fromIndex + 1));
+    Collections.addAll(permutations,permute(nullVersion,fromIndex + 1));
+    return permutations.toArray(new String[permutations.size()]);
+  }
+}

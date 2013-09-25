@@ -15,7 +15,7 @@
   for (  ColumnConfig column : getColumns()) {
     statement.addNewColumnValue(column.getName(),column.getValueObject());
   }
-  statement.setWhereClause(whereClause);
+  statement.setWhereClause(where);
   for (  ColumnConfig whereParam : whereParams) {
     if (whereParam.getName() != null) {
       statement.addWhereColumnName(whereParam.getName());

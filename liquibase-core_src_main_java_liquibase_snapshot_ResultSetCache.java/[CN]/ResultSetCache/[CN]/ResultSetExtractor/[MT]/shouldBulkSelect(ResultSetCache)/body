@@ -1,0 +1,3 @@
+{
+  return resultSetCache.timesSingleQueried >= 3;
+}

@@ -3,6 +3,9 @@
     return null;
   }
   if (fieldValue instanceof DatabaseObject) {
+    if (((DatabaseObject)fieldValue).getSnapshotId() != null) {
+      return fieldValue;
+    }
     if (!snapshotControl.shouldInclude(((DatabaseObject)fieldValue).getClass())) {
       return fieldValue;
     }

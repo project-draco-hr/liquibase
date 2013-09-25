@@ -1,0 +1,34 @@
+{
+  return getResultSetCache("getImportedKeys").get(new ResultSetCache.UnionResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("FKTABLE_CAT"),row.getString("FKTABLE_SCHEM"),database,row.getString("FKTABLE_NAME"),row.getString("FK_NAME"));
+    }
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,tableName,fkName);
+    }
+    @Override public List<CachedRow> fastFetch() throws SQLException, DatabaseException {
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      List<CachedRow> returnList=new ArrayList<CachedRow>();
+      List<String> tables=new ArrayList<String>();
+      if (tableName == null) {
+        for (        CachedRow row : getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,new String[]{"TABLE"})) {
+          tables.add(row.getString("TABLE_NAME"));
+        }
+      }
+ else {
+        tables.add(tableName);
+      }
+      for (      String foundTable : tables) {
+        returnList.addAll(extract(databaseMetaData.getImportedKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),foundTable)));
+      }
+      return returnList;
+    }
+    @Override public List<CachedRow> bulkFetch() throws SQLException, DatabaseException {
+      return null;
+    }
+    @Override boolean shouldBulkSelect(    ResultSetCache resultSetCache){
+      return false;
+    }
+  }
+);
+}

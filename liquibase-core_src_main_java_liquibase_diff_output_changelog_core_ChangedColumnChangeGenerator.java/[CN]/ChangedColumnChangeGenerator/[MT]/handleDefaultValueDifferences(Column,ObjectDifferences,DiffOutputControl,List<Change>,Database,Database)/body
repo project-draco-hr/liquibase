@@ -1,0 +1,48 @@
+{
+  Difference difference=differences.getDifference("defaultValue");
+  if (difference != null) {
+    Object value=difference.getReferenceValue();
+    LiquibaseDataType columnDataType=DataTypeFactory.getInstance().from(column.getType());
+    if (value == null) {
+      DropDefaultValueChange change=new DropDefaultValueChange();
+      if (control.isIncludeCatalog()) {
+        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+      }
+      if (control.isIncludeSchema()) {
+        change.setSchemaName(column.getRelation().getSchema().getName());
+      }
+      change.setTableName(column.getRelation().getName());
+      change.setColumnName(column.getName());
+      change.setColumnDataType(columnDataType.toString());
+      changes.add(change);
+    }
+ else {
+      AddDefaultValueChange change=new AddDefaultValueChange();
+      if (control.isIncludeCatalog()) {
+        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+      }
+      if (control.isIncludeSchema()) {
+        change.setSchemaName(column.getRelation().getSchema().getName());
+      }
+      change.setTableName(column.getRelation().getName());
+      change.setColumnName(column.getName());
+      change.setColumnDataType(columnDataType.toString());
+      if (value instanceof Boolean) {
+        change.setDefaultValueBoolean((Boolean)value);
+      }
+ else       if (value instanceof Date) {
+        change.setDefaultValueDate(new ISODateFormat().format(((Date)value)));
+      }
+ else       if (value instanceof Number) {
+        change.setDefaultValueNumeric(value.toString());
+      }
+ else       if (value instanceof DatabaseFunction) {
+        change.setDefaultValueComputed(((DatabaseFunction)value));
+      }
+ else {
+        change.setDefaultValue(value.toString());
+      }
+      changes.add(change);
+    }
+  }
+}

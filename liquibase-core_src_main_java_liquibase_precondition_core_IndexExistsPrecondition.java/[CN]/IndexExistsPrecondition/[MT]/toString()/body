@@ -1,0 +1,13 @@
+{
+  String string="Index Exists Precondition: ";
+  if (getIndexName() != null) {
+    string+=getIndexName();
+  }
+  if (tableName != null) {
+    string+=" on " + getTableName();
+    if (StringUtils.trimToNull(getColumnNames()) != null) {
+      string+=" columns " + getColumnNames();
+    }
+  }
+  return string;
+}

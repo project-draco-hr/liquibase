@@ -7,12 +7,12 @@
   if (stream == null) {
     throw new UnexpectedLiquibaseException("Data file " + getFile() + " was not found");
   }
-  InputStreamReader streamReader;
+  Reader streamReader;
   if (getEncoding() == null) {
-    streamReader=new InputStreamReader(stream);
+    streamReader=new UtfBomAwareReader(stream);
   }
  else {
-    streamReader=new InputStreamReader(stream,getEncoding());
+    streamReader=new UtfBomAwareReader(stream,getEncoding());
   }
   char quotchar;
   if (0 == this.quotchar.length()) {

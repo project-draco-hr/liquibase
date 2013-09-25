@@ -4,8 +4,11 @@
   }
   Column thisColumn=(Column)databaseObject1;
   Column otherColumn=(Column)databaseObject2;
+  if (!DefaultDatabaseObjectComparator.nameMatches(thisColumn,otherColumn,accordingTo)) {
+    return false;
+  }
   if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(thisColumn.getRelation(),otherColumn.getRelation(),accordingTo)) {
     return false;
   }
-  return chain.isSameObject(databaseObject1,databaseObject2,accordingTo);
+  return true;
 }

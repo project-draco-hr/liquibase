@@ -1,0 +1,10 @@
+{
+  if (object == null) {
+    return null;
+  }
+  DatabaseObjectComparator next=getNextComparator();
+  if (next == null) {
+    return null;
+  }
+  return next.hash(object,accordingTo,this);
+}

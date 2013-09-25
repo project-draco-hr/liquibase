@@ -1,4 +1,4 @@
 String catalogName
 String schemaName
-String tableNamePattern
-String columnNamePattern
+String tableName
+String columnName

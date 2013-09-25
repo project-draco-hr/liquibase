@@ -1,4 +1,3 @@
 {
-  setAttribute("name",name);
-  return this;
+  return (Table)super.setName(name);
 }

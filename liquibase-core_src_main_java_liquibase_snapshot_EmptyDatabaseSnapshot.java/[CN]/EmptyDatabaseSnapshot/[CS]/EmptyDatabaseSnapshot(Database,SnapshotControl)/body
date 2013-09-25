@@ -1,0 +1,3 @@
+{
+  super(new DatabaseObject[0],database,snapshotControl);
+}
