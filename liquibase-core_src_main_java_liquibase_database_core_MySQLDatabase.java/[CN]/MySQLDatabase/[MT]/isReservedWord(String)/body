@@ -1,0 +1,6 @@
+{
+  if (string.equalsIgnoreCase("condition")) {
+    return true;
+  }
+  return super.isReservedWord(string);
+}

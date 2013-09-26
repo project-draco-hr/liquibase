@@ -12,15 +12,24 @@
     return false;
   }
   Iterator referenceIterator=((Collection)referenceValue).iterator();
-  Iterator compareIterator=((Collection)compareToValue).iterator();
+  List unmatchedCompareToValues=new ArrayList(((Collection)compareToValue));
   if (((Collection)referenceValue).size() != ((Collection)compareToValue).size()) {
     return false;
   }
   while (referenceIterator.hasNext()) {
     Object referenceObj=referenceIterator.next();
-    Object compareObj=compareIterator.next();
-    if (!compareFunction.areEqual(referenceObj,compareObj)) {
+    Object foundMatch=null;
+    for (    Object compareObj : unmatchedCompareToValues) {
+      if (compareFunction.areEqual(referenceObj,compareObj)) {
+        foundMatch=compareObj;
+        break;
+      }
+    }
+    if (foundMatch == null) {
       return false;
+    }
+ else {
+      unmatchedCompareToValues.remove(foundMatch);
     }
   }
   return true;

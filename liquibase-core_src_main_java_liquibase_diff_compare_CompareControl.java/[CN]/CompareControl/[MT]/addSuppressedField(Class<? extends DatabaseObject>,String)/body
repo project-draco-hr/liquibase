@@ -3,4 +3,5 @@
     suppressedFields.put(type,new HashSet<String>());
   }
   suppressedFields.get(type).add(field);
+  return this;
 }

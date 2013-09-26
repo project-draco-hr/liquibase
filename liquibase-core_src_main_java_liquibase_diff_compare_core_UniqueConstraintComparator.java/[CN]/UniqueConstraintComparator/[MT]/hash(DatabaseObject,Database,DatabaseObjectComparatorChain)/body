@@ -1,0 +1,11 @@
+{
+  List<String> hashes=new ArrayList<String>();
+  if (databaseObject.getName() != null) {
+    hashes.add(databaseObject.getName().toLowerCase());
+  }
+  Table table=((UniqueConstraint)databaseObject).getTable();
+  if (table != null) {
+    hashes.addAll(Arrays.asList(DatabaseObjectComparatorFactory.getInstance().hash(table,accordingTo)));
+  }
+  return hashes.toArray(new String[hashes.size()]);
+}

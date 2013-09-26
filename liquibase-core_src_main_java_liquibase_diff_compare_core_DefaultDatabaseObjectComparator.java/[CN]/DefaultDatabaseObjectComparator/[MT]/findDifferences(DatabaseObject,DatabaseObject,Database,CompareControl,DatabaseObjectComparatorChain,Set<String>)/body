@@ -1,0 +1,38 @@
+{
+  Set<String> attributes=new HashSet<String>();
+  attributes.addAll(databaseObject1.getAttributes());
+  attributes.addAll(databaseObject2.getAttributes());
+  ObjectDifferences differences=new ObjectDifferences(compareControl);
+  for (  String attribute : attributes) {
+    if (exclude.contains(attribute)) {
+      continue;
+    }
+    Object attribute1=databaseObject1.getAttribute(attribute,Object.class);
+    Object attribute2=databaseObject2.getAttribute(attribute,Object.class);
+    ObjectDifferences.CompareFunction compareFunction;
+    if (attribute1 instanceof DatabaseObject || attribute2 instanceof DatabaseObject) {
+      Class<? extends DatabaseObject> type;
+      if (attribute1 != null) {
+        type=(Class<? extends DatabaseObject>)attribute1.getClass();
+      }
+ else {
+        type=(Class<? extends DatabaseObject>)attribute2.getClass();
+      }
+      compareFunction=new ObjectDifferences.DatabaseObjectNameCompareFunction(type,accordingTo);
+    }
+ else     if (attribute1 instanceof DataType || attribute2 instanceof DataType) {
+      compareFunction=new ObjectDifferences.ToStringCompareFunction();
+    }
+ else     if (attribute1 instanceof Column.AutoIncrementInformation || attribute2 instanceof Column.AutoIncrementInformation) {
+      compareFunction=new ObjectDifferences.ToStringCompareFunction();
+    }
+ else     if (attribute1 instanceof Collection || attribute2 instanceof Collection) {
+      compareFunction=new ObjectDifferences.OrderedCollectionCompareFunction(new ObjectDifferences.StandardCompareFunction(accordingTo));
+    }
+ else {
+      compareFunction=new ObjectDifferences.StandardCompareFunction(accordingTo);
+    }
+    differences.compare(attribute,databaseObject1,databaseObject2,compareFunction);
+  }
+  return differences;
+}

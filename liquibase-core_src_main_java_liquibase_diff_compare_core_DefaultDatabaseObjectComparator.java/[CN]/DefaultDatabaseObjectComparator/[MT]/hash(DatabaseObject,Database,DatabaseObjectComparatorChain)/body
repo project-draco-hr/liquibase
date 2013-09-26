@@ -1,3 +1,7 @@
 {
-  return new String[]{databaseObject.getName().toLowerCase()};
+  String name=databaseObject.getName();
+  if (name == null) {
+    name="null";
+  }
+  return new String[]{name.toLowerCase()};
 }

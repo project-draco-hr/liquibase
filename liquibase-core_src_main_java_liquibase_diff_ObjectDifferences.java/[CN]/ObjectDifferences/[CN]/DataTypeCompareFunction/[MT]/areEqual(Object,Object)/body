@@ -1,0 +1,19 @@
+{
+  if (referenceValue == null && compareToValue == null) {
+    return true;
+  }
+  if (referenceValue == null || compareToValue == null) {
+    return false;
+  }
+  DataType referenceType=(DataType)referenceValue;
+  DataType compareToType=(DataType)compareToValue;
+  if (!referenceType.getTypeName().equalsIgnoreCase(compareToType.getTypeName())) {
+    return false;
+  }
+  if (compareToType.toString().contains("(") && referenceType.toString().contains("(")) {
+    return compareToType.toString().equalsIgnoreCase(referenceType.toString());
+  }
+ else {
+    return true;
+  }
+}
