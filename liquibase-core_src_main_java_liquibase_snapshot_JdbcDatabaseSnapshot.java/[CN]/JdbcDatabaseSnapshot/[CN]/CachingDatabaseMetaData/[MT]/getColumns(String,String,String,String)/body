@@ -1,2 +1,28 @@
 {
+  return getResultSetCache("getColumns").get(new ResultSetCache.SingleResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("TABLE_CAT"),row.getString("TABLE_SCHEM"),database,row.getString("TABLE_NAME"),row.getString("COLUMN_NAME"));
+    }
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,tableName,columnName);
+    }
+    @Override boolean shouldBulkSelect(    ResultSetCache resultSetCache){
+      Set<String> seenTables=resultSetCache.getInfo("seenTables",Set.class);
+      if (seenTables == null) {
+        seenTables=new HashSet<String>();
+        resultSetCache.putInfo("seenTables",seenTables);
+      }
+      seenTables.add(catalogName + ":" + schemaName+ ":"+ tableName);
+      return seenTables.size() > 2;
+    }
+    @Override public ResultSet fastFetchQuery() throws SQLException {
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName,columnName);
+    }
+    @Override public ResultSet bulkFetchQuery() throws SQLException {
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,null);
+    }
+  }
+);
 }
