@@ -1,5 +1,5 @@
 {
-  Vector<URL> tmp=new Vector<URL>();
+  List<URL> tmp=new ArrayList<URL>();
   tmp.add(getResource(packageName).getURL());
-  return tmp.elements();
+  return Collections.enumeration(tmp);
 }
