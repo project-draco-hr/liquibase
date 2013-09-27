@@ -43,5 +43,6 @@
   database.setDefaultSchemaName(defaultSchemaName);
   if (getDatabaseChangeLogTableName() != null)   database.setDatabaseChangeLogTableName(getDatabaseChangeLogTableName());
   if (getDatabaseChangeLogLockTableName() != null)   database.setDatabaseChangeLogLockTableName(getDatabaseChangeLogLockTableName());
+  if (getDatabaseChangeLogObjectsTablespace() != null)   database.setChangeLogObjectsTablespace(getChangeLogObjectsTablespace());
   return database;
 }

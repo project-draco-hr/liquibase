@@ -1,9 +1,9 @@
 {
-  try {
-    Resource resource=getResource(file);
-    return resource.getInputStream();
+  Enumeration<URL> resources=getResources(file);
+  if (resources.hasMoreElements()) {
+    return resources.nextElement().openStream();
   }
- catch (  FileNotFoundException ex) {
+ else {
     return null;
   }
 }
