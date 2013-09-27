@@ -11,6 +11,9 @@
     if (decimalDigits != null) {
       value+=", " + decimalDigits;
     }
+    if (columnSizeUnit != null) {
+      value+=" " + columnSizeUnit;
+    }
     value+=")";
   }
   if (unsigned) {
