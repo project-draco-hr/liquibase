@@ -2,14 +2,6 @@
   if (fileName.equalsIgnoreCase(".svn") || fileName.equalsIgnoreCase("cvs")) {
     return false;
   }
-  ChangeLogParser changeLogParser=null;
-  try {
-    changeLogParser=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor);
-  }
- catch (  LiquibaseException e) {
-    log.warning("included file " + relativeBaseFileName + "/"+ fileName+ " is not a recognized file type");
-    return false;
-  }
   if (isRelativePath) {
     String tempFile=FilenameUtils.concat(FilenameUtils.getFullPath(relativeBaseFileName),fileName);
     if (tempFile != null && new File(tempFile).exists() == true) {
@@ -19,7 +11,14 @@
       fileName=FilenameUtils.getFullPath(relativeBaseFileName) + fileName;
     }
   }
-  DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor).parse(fileName,changeLogParameters,resourceAccessor);
+  DatabaseChangeLog changeLog;
+  try {
+    changeLog=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor).parse(fileName,changeLogParameters,resourceAccessor);
+  }
+ catch (  UnknownChangelogFormatException e) {
+    log.warning("included file " + relativeBaseFileName + "/"+ fileName+ " is not a recognized file type");
+    return false;
+  }
   PreconditionContainer preconditions=changeLog.getPreconditions();
   if (preconditions != null) {
     if (null == databaseChangeLog.getPreconditions()) {
