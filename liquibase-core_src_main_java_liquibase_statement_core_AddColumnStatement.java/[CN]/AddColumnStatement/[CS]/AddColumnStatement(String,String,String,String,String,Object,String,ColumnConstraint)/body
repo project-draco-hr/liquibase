@@ -1,0 +1,4 @@
+{
+  this(catalogName,schemaName,tableName,columnName,columnType,defaultValue,constraints);
+  this.remarks=remarks;
+}

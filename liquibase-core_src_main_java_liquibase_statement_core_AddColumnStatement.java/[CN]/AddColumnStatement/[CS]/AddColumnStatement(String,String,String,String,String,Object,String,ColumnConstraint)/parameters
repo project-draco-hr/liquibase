@@ -1,0 +1,8 @@
+String catalogName
+String schemaName
+String tableName
+String columnName
+String columnType
+Object defaultValue
+String remarks
+ColumnConstraint constraints
