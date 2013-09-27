@@ -12,7 +12,7 @@
   getLog().info("Performing Diff on database " + db.toString());
   if (diffChangeLogFile != null) {
     try {
-      CommandLineUtils.doDiffToChangeLog(diffChangeLogFile,referenceDatabase,db,new DiffOutputControl(diffIncludeCatalog,diffIncludeSchema,diffIncludeTablespace));
+      CommandLineUtils.doDiffToChangeLog(diffChangeLogFile,referenceDatabase,db,new DiffOutputControl(diffIncludeCatalog,diffIncludeSchema,diffIncludeTablespace),StringUtils.trimToNull(diffTypes));
       getLog().info("Differences written to Change Log File, " + diffChangeLogFile);
     }
  catch (    IOException e) {
@@ -23,6 +23,6 @@ catch (    ParserConfigurationException e) {
     }
   }
  else {
-    CommandLineUtils.doDiff(referenceDatabase,db);
+    CommandLineUtils.doDiff(referenceDatabase,db,StringUtils.trimToNull(diffTypes));
   }
 }
