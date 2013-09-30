@@ -5,5 +5,10 @@
   if (referenceValue == null || compareToValue == null) {
     return false;
   }
-  return referenceValue.toString().equals(compareToValue.toString());
+  if (caseSensitive) {
+    return referenceValue.toString().equals(compareToValue.toString());
+  }
+ else {
+    return referenceValue.toString().equalsIgnoreCase(compareToValue.toString());
+  }
 }
