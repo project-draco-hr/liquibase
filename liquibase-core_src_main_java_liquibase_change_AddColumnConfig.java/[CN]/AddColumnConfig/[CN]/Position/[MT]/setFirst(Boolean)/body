@@ -1,3 +1,0 @@
-{
-  setPosition(Boolean.TRUE.equals(first) ? Integer.valueOf(1) : null);
-}

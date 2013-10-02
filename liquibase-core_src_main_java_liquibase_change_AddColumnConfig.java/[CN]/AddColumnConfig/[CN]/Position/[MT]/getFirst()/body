@@ -1,3 +1,0 @@
-{
-  return (position != null) ? position.equals(Integer.valueOf(1)) : null;
-}

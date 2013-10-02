@@ -12,9 +12,5 @@
   assertEquals(1,columns.size());
   AddColumnConfig columnConfig=columns.get(0);
   assertEquals("middlename",columnConfig.getName());
-  AddColumnConfig.Position addAtPosition=columnConfig.getPosition();
-  assertNotNull(addAtPosition);
-  assertEquals("firstname",addAtPosition.getAfterColumn());
-  assertNull(addAtPosition.getFirst());
-  assertNull(addAtPosition.getPosition());
+  assertEquals("firstname",columnConfig.getAfterColumn());
 }
