@@ -1,0 +1,13 @@
+{
+  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/columnFirstChangeLog.xml",new ChangeLogParameters(),new JUnitResourceAccessor());
+  ChangeSet changeSet=changeLog.getChangeSets().get(1);
+  List<Change> changes=changeSet.getChanges();
+  Change change=changes.get(0);
+  List<AddColumnConfig> columns=((AddColumnChange)change).getColumns();
+  AddColumnConfig columnConfig=columns.get(0);
+  assertEquals("middlename",columnConfig.getName());
+  AddColumnConfig.Position addAtPosition=columnConfig.getPosition();
+  assertNotNull(addAtPosition);
+  assertTrue(addAtPosition.getFirst());
+  assertEquals(Integer.valueOf(1),addAtPosition.getPosition());
+}

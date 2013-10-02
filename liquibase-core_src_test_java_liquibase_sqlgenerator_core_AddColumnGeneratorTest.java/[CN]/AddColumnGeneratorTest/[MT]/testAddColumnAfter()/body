@@ -1,0 +1,5 @@
+{
+  AddColumnStatement statement=new AddColumnStatement(null,null,TABLE_NAME,COLUMN_NAME,COLUMN_TYPE,null);
+  statement.setAddAfterColumn("column_after");
+  assertFalse(generatorUnderTest.validate(statement,new MySQLDatabase(),new MockSqlGeneratorChain()).hasErrors());
+}

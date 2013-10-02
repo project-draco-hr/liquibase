@@ -2,7 +2,7 @@
   AddColumnChange refactoring=new AddColumnChange();
   refactoring.setSchemaName("SCHEMA");
   refactoring.setTableName("TAB");
-  ColumnConfig column=new ColumnConfig();
+  AddColumnConfig column=new AddColumnConfig();
   column.setName("NEWCOL");
   column.setType("TYP");
   ConstraintsConfig constraints=new ConstraintsConfig();
@@ -11,7 +11,7 @@
   column.setAutoIncrement(Boolean.TRUE);
   column.setConstraints(constraints);
   refactoring.addColumn(column);
-  column=new ColumnConfig();
+  column=new AddColumnConfig();
   column.setName("NEWCOL2");
   column.setType("TYP");
   refactoring.addColumn(column);
