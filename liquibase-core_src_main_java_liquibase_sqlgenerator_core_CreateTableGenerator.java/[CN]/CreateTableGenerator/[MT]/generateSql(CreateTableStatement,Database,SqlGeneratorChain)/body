@@ -80,7 +80,7 @@
   buffer.append(",");
   if (!((database instanceof SQLiteDatabase) && isSinglePrimaryKeyColumn && isPrimaryKeyAutoIncrement) && !((database instanceof InformixDatabase) && isSinglePrimaryKeyColumn)) {
     if (statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().size() > 0) {
-      if (!(database instanceof InformixDatabase)) {
+      if (database.supportsPrimaryKeyNames()) {
         String pkName=StringUtils.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
         if (pkName == null) {
           pkName=database.generatePrimaryKeyName(statement.getTableName());
