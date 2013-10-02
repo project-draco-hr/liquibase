@@ -7,6 +7,6 @@
     return val;
   }
  else {
-    return "'" + val + "'";
+    return "'" + database.escapeStringForDatabase(val) + "'";
   }
 }
