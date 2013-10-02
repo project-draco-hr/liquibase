@@ -1,0 +1,8 @@
+{
+  if (databaseChangeLog == null) {
+    changeLogName=null;
+  }
+ else {
+    changeLogName=databaseChangeLog.getFilePath();
+  }
+}

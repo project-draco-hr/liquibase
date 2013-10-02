@@ -1,0 +1,11 @@
+{
+  if (comparators == null) {
+    return null;
+  }
+  if (nextIndex >= comparators.size()) {
+    return null;
+  }
+  DatabaseObjectComparator next=comparators.get(nextIndex);
+  nextIndex++;
+  return next;
+}

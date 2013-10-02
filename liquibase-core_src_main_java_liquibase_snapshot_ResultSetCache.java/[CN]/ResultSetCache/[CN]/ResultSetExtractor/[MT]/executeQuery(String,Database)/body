@@ -1,0 +1,4 @@
+{
+  Statement statement=((JdbcConnection)database.getConnection()).createStatement();
+  return statement.executeQuery(sql);
+}

@@ -97,7 +97,7 @@ catch (    PreconditionErrorException e) {
       for (      Change change : getChanges()) {
         if ((!(change instanceof DbmsTargetedChange)) || DatabaseList.definitionMatches(((DbmsTargetedChange)change).getDbms(),database,true)) {
           database.executeStatements(change,databaseChangeLog,sqlVisitors);
-          log.debug(change.getConfirmationMessage());
+          log.info(change.getConfirmationMessage());
         }
  else {
           log.debug("Change " + change.getSerializedObjectName() + " not included for database "+ database.getShortName());

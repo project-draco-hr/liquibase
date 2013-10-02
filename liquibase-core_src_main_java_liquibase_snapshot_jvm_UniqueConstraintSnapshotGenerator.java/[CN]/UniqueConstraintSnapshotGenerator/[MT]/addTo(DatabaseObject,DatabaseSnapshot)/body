@@ -7,9 +7,15 @@
     Database database=snapshot.getDatabase();
     Schema schema;
     schema=table.getSchema();
-    List<Map> metadata=listConstraints(table,database,schema);
+    List<CachedRow> metadata=null;
+    try {
+      metadata=listConstraints(table,snapshot,schema);
+    }
+ catch (    SQLException e) {
+      throw new DatabaseException(e);
+    }
     Set<String> seenConstraints=new HashSet<String>();
-    for (    Map<String,Object> constraint : metadata) {
+    for (    CachedRow constraint : metadata) {
       UniqueConstraint uq=new UniqueConstraint().setName(cleanNameFromDatabase((String)constraint.get("CONSTRAINT_NAME"),database)).setTable(table);
       if (seenConstraints.add(uq.getName())) {
         table.getUniqueConstraints().add(uq);

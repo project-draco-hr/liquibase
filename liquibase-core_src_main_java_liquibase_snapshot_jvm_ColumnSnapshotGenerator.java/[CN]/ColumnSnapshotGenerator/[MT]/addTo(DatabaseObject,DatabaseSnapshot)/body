@@ -5,13 +5,13 @@
   if (foundObject instanceof Relation) {
     Database database=snapshot.getDatabase();
     Relation relation=(Relation)foundObject;
-    List<JdbcDatabaseSnapshot.CachedRow> allColumnsMetadataRs=null;
+    List<CachedRow> allColumnsMetadataRs=null;
     try {
       JdbcDatabaseSnapshot.CachingDatabaseMetaData databaseMetaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
       Schema schema;
       schema=relation.getSchema();
       allColumnsMetadataRs=databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),relation.getName(),null);
-      for (      JdbcDatabaseSnapshot.CachedRow row : allColumnsMetadataRs) {
+      for (      CachedRow row : allColumnsMetadataRs) {
         Column exampleColumn=new Column().setRelation(relation).setName(row.getString("COLUMN_NAME"));
         relation.getColumns().add(exampleColumn);
       }

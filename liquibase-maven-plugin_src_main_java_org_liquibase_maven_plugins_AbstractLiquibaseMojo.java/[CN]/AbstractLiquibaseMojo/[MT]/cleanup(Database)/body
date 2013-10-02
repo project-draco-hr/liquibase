@@ -1,12 +1,4 @@
 {
-  if (getLiquibase() != null) {
-    try {
-      getLiquibase().forceReleaseLocks();
-    }
- catch (    LiquibaseException e) {
-      getLog().error(e.getMessage(),e);
-    }
-  }
   if (db != null) {
     try {
       db.rollback();

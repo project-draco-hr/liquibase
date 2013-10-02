@@ -1,0 +1,3 @@
+{
+  return LockServiceFactory.getInstance().getLockService(database);
+}

@@ -1,0 +1,6 @@
+{
+  if (keyPermutations == null) {
+    this.keyPermutations=permutations(parameters);
+  }
+  return keyPermutations;
+}

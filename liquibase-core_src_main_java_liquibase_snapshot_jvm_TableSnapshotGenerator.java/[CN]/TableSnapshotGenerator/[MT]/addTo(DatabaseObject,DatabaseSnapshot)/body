@@ -5,10 +5,10 @@
   if (foundObject instanceof Schema) {
     Database database=snapshot.getDatabase();
     Schema schema=(Schema)foundObject;
-    List<JdbcDatabaseSnapshot.CachedRow> tableMetaDataRs=null;
+    List<CachedRow> tableMetaDataRs=null;
     try {
       tableMetaDataRs=((JdbcDatabaseSnapshot)snapshot).getMetaData().getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),null,new String[]{"TABLE"});
-      for (      JdbcDatabaseSnapshot.CachedRow row : tableMetaDataRs) {
+      for (      CachedRow row : tableMetaDataRs) {
         String tableName=row.getString("TABLE_NAME");
         Table tableExample=(Table)new Table().setName(cleanNameFromDatabase(tableName,database)).setSchema(schema);
         schema.addDatabaseObject(tableExample);

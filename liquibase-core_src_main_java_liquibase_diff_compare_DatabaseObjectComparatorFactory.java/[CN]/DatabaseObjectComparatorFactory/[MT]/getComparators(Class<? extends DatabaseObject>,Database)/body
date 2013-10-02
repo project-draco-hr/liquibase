@@ -1,9 +1,15 @@
 {
-  SortedSet<DatabaseObjectComparator> validComparators=new TreeSet<DatabaseObjectComparator>(new DatabaseObjectComparatorComparator(comparatorClass,database));
+  String key=comparatorClass.getName() + ":" + database.getShortName();
+  if (validComparatorsByClassAndDatabase.containsKey(key)) {
+    return validComparatorsByClassAndDatabase.get(key);
+  }
+  List<DatabaseObjectComparator> validComparators=new ArrayList<DatabaseObjectComparator>();
   for (  DatabaseObjectComparator comparator : comparators) {
     if (comparator.getPriority(comparatorClass,database) > 0) {
       validComparators.add(comparator);
     }
   }
+  Collections.sort(validComparators,new DatabaseObjectComparatorComparator(comparatorClass,database));
+  validComparatorsByClassAndDatabase.put(key,validComparators);
   return validComparators;
 }

@@ -1,0 +1,50 @@
+{
+  return getResultSetCache("getIndexInfo").get(new ResultSetCache.UnionResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("TABLE_CAT"),row.getString("TABLE_SCHEM"),database,row.getString("TABLE_NAME"),row.getString("INDEX_NAME"));
+    }
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,tableName,indexName);
+    }
+    @Override public List<CachedRow> fastFetch() throws SQLException, DatabaseException {
+      List<CachedRow> returnList=new ArrayList<CachedRow>();
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      if (database instanceof OracleDatabase) {
+        String sql="SELECT c.INDEX_NAME, 3 AS TYPE, c.TABLE_NAME, c.COLUMN_NAME, c.COLUMN_POSITION AS ORDINAL_POSITION, e.COLUMN_EXPRESSION AS FILTER_CONDITION, case I.UNIQUENESS when 'UNIQUE' then 0 else 1 end as NON_UNIQUE " + "FROM ALL_IND_COLUMNS c " + "JOIN ALL_INDEXES i on i.index_name = c.index_name "+ "LEFT JOIN all_ind_expressions e on (e.column_position = c.column_position AND e.index_name = c.index_name) "+ "WHERE c.TABLE_OWNER='" + database.correctObjectName(catalogAndSchema.getCatalogName(),Schema.class) + "'";
+        if (tableName != null) {
+          sql+=" AND c.TABLE_NAME='" + database.correctObjectName(tableName,Table.class) + "'";
+        }
+        if (indexName != null) {
+          sql+=" AND c.INDEX_NAME='" + database.correctObjectName(indexName,Index.class) + "'";
+        }
+        sql+=" ORDER BY c.INDEX_NAME, ORDINAL_POSITION";
+        returnList.addAll(extract(executeQuery(sql,database)));
+      }
+ else {
+        List<String> tables=new ArrayList<String>();
+        if (tableName == null) {
+          for (          CachedRow row : getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,new String[]{"TABLE"})) {
+            tables.add(row.getString("TABLE_NAME"));
+          }
+        }
+ else {
+          tables.add(tableName);
+        }
+        for (        String tableName : tables) {
+          returnList.addAll(extract(databaseMetaData.getIndexInfo(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName,false,true)));
+        }
+      }
+      return returnList;
+    }
+    @Override public List<CachedRow> bulkFetch() throws SQLException, DatabaseException {
+      return fastFetch();
+    }
+    @Override boolean shouldBulkSelect(    ResultSetCache resultSetCache){
+      if (database instanceof OracleDatabase) {
+        return super.shouldBulkSelect(resultSetCache);
+      }
+      return false;
+    }
+  }
+);
+}

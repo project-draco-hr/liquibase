@@ -1,6 +1,12 @@
 {
-  if (((Column)changedObject).getRelation() instanceof View) {
+  Column column=(Column)changedObject;
+  if (column.getRelation() instanceof View) {
     return null;
   }
-  return null;
+  List<Change> changes=new ArrayList<Change>();
+  handleTypeDifferences(column,differences,control,changes,referenceDatabase,comparisonDatabase);
+  handleNullableDifferences(column,differences,control,changes,referenceDatabase,comparisonDatabase);
+  handleDefaultValueDifferences(column,differences,control,changes,referenceDatabase,comparisonDatabase);
+  handleAutoIncrementDifferences(column,differences,control,changes,referenceDatabase,comparisonDatabase);
+  return changes.toArray(new Change[changes.size()]);
 }

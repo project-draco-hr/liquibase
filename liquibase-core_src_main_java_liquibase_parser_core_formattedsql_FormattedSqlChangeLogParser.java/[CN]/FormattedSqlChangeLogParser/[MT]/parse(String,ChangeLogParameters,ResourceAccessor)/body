@@ -4,7 +4,7 @@
   changeLog.setPhysicalFilePath(physicalChangeLogLocation);
   BufferedReader reader=null;
   try {
-    reader=new BufferedReader(new InputStreamReader(openChangeLogFile(physicalChangeLogLocation,resourceAccessor)));
+    reader=new BufferedReader(new UtfBomAwareReader(openChangeLogFile(physicalChangeLogLocation,resourceAccessor)));
     StringBuffer currentSql=new StringBuffer();
     StringBuffer currentRollbackSql=new StringBuffer();
     ChangeSet changeSet=null;

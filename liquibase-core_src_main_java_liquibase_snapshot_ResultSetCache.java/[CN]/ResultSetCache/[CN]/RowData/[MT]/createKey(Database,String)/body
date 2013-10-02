@@ -1,0 +1,7 @@
+{
+  String key=StringUtils.join(params,":");
+  if (!database.isCaseSensitive()) {
+    return key.toLowerCase();
+  }
+  return key;
+}

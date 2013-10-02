@@ -1,51 +1,28 @@
 {
-  String byTableKey=createKey("getColumns",catalogName,schemaName,tableNamePattern);
-  String allTablesKey=createKey("getColumns",catalogName,schemaName);
-  List<CachedRow> returnList;
-  boolean needToFilter=false;
-  if (hasCachedValue(byTableKey)) {
-    returnList=getCachedValue(byTableKey);
-  }
- else   if (hasCachedValue(allTablesKey)) {
-    returnList=getCachedValue(allTablesKey);
-    needToFilter=true;
-  }
- else {
-    tablesOfColumnsFetched++;
-    if (shouldCacheAllTableColumns()) {
-      returnList=cacheResultSet(allTablesKey,databaseMetaData.getColumns(catalogName,schemaName,null,null));
-      needToFilter=true;
+  return getResultSetCache("getColumns").get(new ResultSetCache.SingleResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("TABLE_CAT"),row.getString("TABLE_SCHEM"),database,row.getString("TABLE_NAME"),row.getString("COLUMN_NAME"));
     }
- else {
-      returnList=cacheResultSet(byTableKey,databaseMetaData.getColumns(catalogName,schemaName,tableNamePattern,null));
-      if (returnList.size() == 0) {
-        throw new UnexpectedLiquibaseException("No Columns found for table " + tableNamePattern);
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,tableName,columnName);
+    }
+    @Override boolean shouldBulkSelect(    ResultSetCache resultSetCache){
+      Set<String> seenTables=resultSetCache.getInfo("seenTables",Set.class);
+      if (seenTables == null) {
+        seenTables=new HashSet<String>();
+        resultSetCache.putInfo("seenTables",seenTables);
       }
+      seenTables.add(catalogName + ":" + schemaName+ ":"+ tableName);
+      return seenTables.size() > 2;
+    }
+    @Override public ResultSet fastFetchQuery() throws SQLException {
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName,columnName);
+    }
+    @Override public ResultSet bulkFetchQuery() throws SQLException {
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,null);
     }
   }
-  if (columnNamePattern != null || needToFilter) {
-    List<CachedRow> filteredList=new ArrayList<CachedRow>();
-    for (    CachedRow row : returnList) {
-      if (getDatabase().isCaseSensitive()) {
-        if (row.getString("TABLE_NAME").equals(tableNamePattern))         if (columnNamePattern == null || row.getString("COLUMN_NAME").equals(columnNamePattern)) {
-          filteredList.add(row);
-        }
-      }
- else {
-        if (row.getString("TABLE_NAME").equalsIgnoreCase(tableNamePattern))         if (columnNamePattern == null || row.getString("COLUMN_NAME").equalsIgnoreCase(columnNamePattern)) {
-          filteredList.add(row);
-        }
-      }
-    }
-    if (filteredList.size() == 0) {
-      System.out.println("zero size");
-    }
-    return filteredList;
-  }
- else {
-    if (returnList.size() == 0) {
-      System.out.println("zero size");
-    }
-    return returnList;
-  }
+);
 }

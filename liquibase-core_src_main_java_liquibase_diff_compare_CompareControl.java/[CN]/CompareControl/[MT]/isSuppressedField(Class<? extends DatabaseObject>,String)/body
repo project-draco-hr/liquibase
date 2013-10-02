@@ -1,0 +1,6 @@
+{
+  if (!suppressedFields.containsKey(type)) {
+    return false;
+  }
+  return suppressedFields.get(type).contains(field);
+}

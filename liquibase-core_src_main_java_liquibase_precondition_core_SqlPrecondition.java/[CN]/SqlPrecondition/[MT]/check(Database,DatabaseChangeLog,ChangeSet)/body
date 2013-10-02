@@ -5,6 +5,7 @@
     if (result == null) {
       throw new PreconditionFailedException("No rows returned from SQL Precondition",changeLog,this);
     }
+    String expectedResult=getExpectedResult();
     if (!expectedResult.equals(result)) {
       throw new PreconditionFailedException("SQL Precondition failed.  Expected '" + expectedResult + "' got '"+ result+ "'",changeLog,this);
     }

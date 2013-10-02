@@ -1,0 +1,8 @@
+{
+  exclude.add("name");
+  exclude.add("backingIndex");
+  exclude.add("columnNames");
+  ObjectDifferences differences=chain.findDifferences(databaseObject1,databaseObject2,accordingTo,compareControl,exclude);
+  differences.compare("columnNames",databaseObject1,databaseObject2,new ObjectDifferences.DatabaseObjectNameCompareFunction(Column.class,accordingTo));
+  return differences;
+}

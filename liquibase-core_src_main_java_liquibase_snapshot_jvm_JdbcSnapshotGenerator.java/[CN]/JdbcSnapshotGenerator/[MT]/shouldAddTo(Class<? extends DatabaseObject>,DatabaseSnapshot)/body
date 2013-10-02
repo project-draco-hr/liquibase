@@ -1,0 +1,3 @@
+{
+  return defaultFor != null && snapshot.getSnapshotControl().shouldInclude(defaultFor);
+}

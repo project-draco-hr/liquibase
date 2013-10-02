@@ -1,7 +1,0 @@
-{
-  String key=createKey("getImportedKeys",catalogName,schemaName,table);
-  if (hasCachedValue(key)) {
-    return getCachedValue(key);
-  }
-  return cacheResultSet(key,databaseMetaData.getImportedKeys(catalogName,schemaName,table));
-}
