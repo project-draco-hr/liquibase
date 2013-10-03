@@ -36,7 +36,7 @@
         }
       }
  else {
-        LogFactory.getLogger().warning(database.getShortName() + " does not support autoincrement columns as request for " + (database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())));
+        LogFactory.getLogger().warning(database.getShortName() + " does not support autoincrement columns as requested for " + (database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())));
       }
     }
     if (statement.getNotNullColumns().contains(column)) {

@@ -3,7 +3,10 @@
     return;
   }
   runCompleteChangeLog();
-  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,database,new CompareControl());
+  CompareControl compareControl=new CompareControl();
+  compareControl.addSuppressedField(Column.class,"defaultValue");
+  compareControl.addSuppressedField(Column.class,"autoIncrementInformation");
+  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(database,database,compareControl);
   try {
     assertTrue(diffResult.areEqual());
   }

@@ -1,5 +1,5 @@
 {
-  CreateTableStatement statement=new CreateTableStatement(getCatalogName(),getSchemaName(),getTableName());
+  CreateTableStatement statement=new CreateTableStatement(getCatalogName(),getSchemaName(),getTableName(),getRemarks());
   for (  ColumnConfig column : getColumns()) {
     ConstraintsConfig constraints=column.getConstraints();
     boolean isAutoIncrement=column.isAutoIncrement() != null && column.isAutoIncrement();
@@ -9,7 +9,7 @@
       statement.addPrimaryKeyColumn(column.getName(),columnType,defaultValue,constraints.getPrimaryKeyName(),constraints.getPrimaryKeyTablespace());
     }
  else {
-      statement.addColumn(column.getName(),columnType,defaultValue);
+      statement.addColumn(column.getName(),columnType,defaultValue,column.getRemarks());
     }
     if (constraints != null) {
       if (constraints.isNullable() != null && !constraints.isNullable()) {
@@ -47,7 +47,7 @@
     String columnRemarks=StringUtils.trimToNull(column.getRemarks());
     if (columnRemarks != null) {
       SetColumnRemarksStatement remarksStatement=new SetColumnRemarksStatement(catalogName,schemaName,tableName,column.getName(),columnRemarks);
-      if (SqlGeneratorFactory.getInstance().supports(remarksStatement,database)) {
+      if (!(database instanceof MySQLDatabase) && SqlGeneratorFactory.getInstance().supports(remarksStatement,database)) {
         statements.add(remarksStatement);
       }
     }

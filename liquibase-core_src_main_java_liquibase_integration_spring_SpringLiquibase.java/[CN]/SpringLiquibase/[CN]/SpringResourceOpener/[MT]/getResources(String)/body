@@ -1,8 +1,8 @@
 {
-  Vector<URL> tmp=new Vector<URL>();
+  List<URL> tmp=new ArrayList<URL>();
   Resource[] resources=org.springframework.core.io.support.ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources(adjustClasspath(packageName));
   for (  Resource res : resources) {
     tmp.add(res.getURL());
   }
-  return tmp.elements();
+  return Collections.enumeration(tmp);
 }

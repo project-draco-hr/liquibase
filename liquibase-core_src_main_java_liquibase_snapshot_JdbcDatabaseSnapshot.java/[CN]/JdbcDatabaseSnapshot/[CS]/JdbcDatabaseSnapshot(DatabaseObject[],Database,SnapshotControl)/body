@@ -1,0 +1,3 @@
+{
+  super(examples,database,snapshotControl);
+}

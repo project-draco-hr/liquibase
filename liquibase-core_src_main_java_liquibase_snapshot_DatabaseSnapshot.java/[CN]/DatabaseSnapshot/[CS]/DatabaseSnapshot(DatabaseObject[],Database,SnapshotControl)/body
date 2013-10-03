@@ -1,0 +1,11 @@
+{
+  this.database=database;
+  allFound=new DatabaseObjectCollection(database);
+  this.snapshotControl=snapshotControl;
+  if (examples != null) {
+    for (    DatabaseObject obj : examples) {
+      this.snapshotControl.addType(obj.getClass(),database);
+      include(obj);
+    }
+  }
+}

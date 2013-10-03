@@ -1,0 +1,6 @@
+Column column
+ObjectDifferences differences
+DiffOutputControl control
+List<Change> changes
+Database referenceDatabase
+Database comparisonDatabase

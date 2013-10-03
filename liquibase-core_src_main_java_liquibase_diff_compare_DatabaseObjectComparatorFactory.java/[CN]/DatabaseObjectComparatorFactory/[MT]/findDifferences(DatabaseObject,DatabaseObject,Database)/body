@@ -1,3 +1,0 @@
-{
-  return createComparatorChain(object1.getClass(),accordingTo).findDifferences(object1,object2,accordingTo);
-}

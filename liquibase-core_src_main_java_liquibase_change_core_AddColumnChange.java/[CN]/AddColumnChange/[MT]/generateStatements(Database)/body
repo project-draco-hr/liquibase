@@ -3,7 +3,7 @@
   if (getColumns().size() == 0) {
     return new SqlStatement[]{new AddColumnStatement(catalogName,schemaName,tableName,null,null,null)};
   }
-  for (  ColumnConfig column : getColumns()) {
+  for (  AddColumnConfig column : getColumns()) {
     Set<ColumnConstraint> constraints=new HashSet<ColumnConstraint>();
     ConstraintsConfig constraintsConfig=column.getConstraints();
     if (constraintsConfig != null) {
@@ -23,7 +23,16 @@
     if (column.isAutoIncrement() != null && column.isAutoIncrement()) {
       constraints.add(new AutoIncrementConstraint(column.getName(),column.getStartWith(),column.getIncrementBy()));
     }
-    AddColumnStatement addColumnStatement=new AddColumnStatement(getCatalogName(),getSchemaName(),getTableName(),column.getName(),column.getType(),column.getDefaultValueObject(),constraints.toArray(new ColumnConstraint[constraints.size()]));
+    AddColumnStatement addColumnStatement=new AddColumnStatement(getCatalogName(),getSchemaName(),getTableName(),column.getName(),column.getType(),column.getDefaultValueObject(),column.getRemarks(),constraints.toArray(new ColumnConstraint[constraints.size()]));
+    if ((database instanceof MySQLDatabase) && (column.getAfterColumn() != null)) {
+      addColumnStatement.setAddAfterColumn(column.getAfterColumn());
+    }
+ else     if (((database instanceof HsqlDatabase) || (database instanceof H2Database)) && (column.getBeforeColumn() != null)) {
+      addColumnStatement.setAddBeforeColumn(column.getBeforeColumn());
+    }
+ else     if ((database instanceof FirebirdDatabase) && (column.getPosition() != null)) {
+      addColumnStatement.setAddAtPosition(column.getPosition());
+    }
     sql.add(addColumnStatement);
     if (database instanceof DB2Database) {
       sql.add(new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName()));

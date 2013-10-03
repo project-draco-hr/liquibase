@@ -2,12 +2,12 @@
   Database database=snapshot.getDatabase();
   Relation relation=((Column)example).getRelation();
   Schema schema=relation.getSchema();
-  List<JdbcDatabaseSnapshot.CachedRow> columnMetadataRs=null;
+  List<CachedRow> columnMetadataRs=null;
   try {
     JdbcDatabaseSnapshot.CachingDatabaseMetaData databaseMetaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
     columnMetadataRs=databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),relation.getName(),example.getName());
     if (columnMetadataRs.size() > 0) {
-      JdbcDatabaseSnapshot.CachedRow data=columnMetadataRs.get(0);
+      CachedRow data=columnMetadataRs.get(0);
       return readColumn(data,relation,database);
     }
  else {

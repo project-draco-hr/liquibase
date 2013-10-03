@@ -8,7 +8,7 @@
       returnValue=this.getTrueBooleanValue(database);
     }
  else     if (((String)value).equalsIgnoreCase("false") || value.equals("0") || value.equals("f")|| ((String)value).equalsIgnoreCase(this.getFalseBooleanValue(database))) {
-      returnValue=this.getTrueBooleanValue(database);
+      returnValue=this.getFalseBooleanValue(database);
     }
  else {
       throw new UnexpectedLiquibaseException("Unknown boolean value: " + value);

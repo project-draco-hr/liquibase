@@ -1,7 +1,21 @@
 {
-  String key=createKey("getPrimaryKeys",catalogName,schemaName,table);
-  if (hasCachedValue(key)) {
-    return getCachedValue(key);
+  return getResultSetCache("getPrimaryKeys").get(new ResultSetCache.SingleResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("TABLE_CAT"),row.getString("TABLE_SCHEM"),database,row.getString("TABLE_NAME"));
+    }
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,table);
+    }
+    @Override public ResultSet fastFetchQuery() throws SQLException {
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getPrimaryKeys(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),table);
+    }
+    @Override public ResultSet bulkFetchQuery() throws SQLException {
+      return null;
+    }
+    @Override boolean shouldBulkSelect(    ResultSetCache resultSetCache){
+      return false;
+    }
   }
-  return cacheResultSet(key,databaseMetaData.getPrimaryKeys(catalogName,schemaName,table));
+);
 }

@@ -1,0 +1,32 @@
+{
+  Difference nullableDifference=differences.getDifference("nullable");
+  if (nullableDifference != null && nullableDifference.getReferenceValue() != null) {
+    boolean nullable=(Boolean)nullableDifference.getReferenceValue();
+    if (nullable) {
+      DropNotNullConstraintChange change=new DropNotNullConstraintChange();
+      if (control.isIncludeCatalog()) {
+        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+      }
+      if (control.isIncludeSchema()) {
+        change.setSchemaName(column.getRelation().getSchema().getName());
+      }
+      change.setTableName(column.getRelation().getName());
+      change.setColumnName(column.getName());
+      change.setColumnDataType(DataTypeFactory.getInstance().from(column.getType()).toString());
+      changes.add(change);
+    }
+ else {
+      AddNotNullConstraintChange change=new AddNotNullConstraintChange();
+      if (control.isIncludeCatalog()) {
+        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+      }
+      if (control.isIncludeSchema()) {
+        change.setSchemaName(column.getRelation().getSchema().getName());
+      }
+      change.setTableName(column.getRelation().getName());
+      change.setColumnName(column.getName());
+      change.setColumnDataType(DataTypeFactory.getInstance().from(column.getType()).toString());
+      changes.add(change);
+    }
+  }
+}

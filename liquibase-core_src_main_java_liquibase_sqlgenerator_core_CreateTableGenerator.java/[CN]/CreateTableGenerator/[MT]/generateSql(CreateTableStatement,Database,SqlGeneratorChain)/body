@@ -60,7 +60,7 @@
         }
       }
  else {
-        LogFactory.getLogger().warning(database.getShortName() + " does not support autoincrement columns as request for " + (database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())));
+        LogFactory.getLogger().warning(database.getShortName() + " does not support autoincrement columns as requested for " + (database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName())));
       }
     }
     if (statement.getNotNullColumns().contains(column)) {
@@ -68,14 +68,13 @@
     }
  else {
       if (database instanceof SybaseDatabase || database instanceof SybaseASADatabase || database instanceof MySQLDatabase) {
-        if (database instanceof MySQLDatabase && statement.getColumnTypes().get(column).getName().equalsIgnoreCase("timestamp")) {
-        }
- else {
-          buffer.append(" NULL");
-        }
+        buffer.append(" NULL");
       }
     }
     if (database instanceof InformixDatabase && isSinglePrimaryKeyColumn && isPrimaryKeyColumn) {
+    }
+    if (database instanceof MySQLDatabase && statement.getColumnRemarks(column) != null) {
+      buffer.append(" COMMENT '" + statement.getColumnRemarks(column) + "'");
     }
     if (columnIterator.hasNext()) {
       buffer.append(", ");
@@ -84,7 +83,7 @@
   buffer.append(",");
   if (!((database instanceof SQLiteDatabase) && isSinglePrimaryKeyColumn && isPrimaryKeyAutoIncrement) && !((database instanceof InformixDatabase) && isSinglePrimaryKeyColumn)) {
     if (statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().size() > 0) {
-      if (!(database instanceof InformixDatabase)) {
+      if (database.supportsPrimaryKeyNames()) {
         String pkName=StringUtils.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
         if (pkName == null) {
           pkName=database.generatePrimaryKeyName(statement.getTableName());
@@ -160,6 +159,9 @@
  else {
       sql+=" TABLESPACE " + statement.getTablespace();
     }
+  }
+  if (database instanceof MySQLDatabase && statement.getRemarks() != null) {
+    sql+=" COMMENT='" + statement.getRemarks() + "' ";
   }
   additionalSql.add(0,new UnparsedSql(sql,getAffectedTable(statement)));
   return additionalSql.toArray(new Sql[additionalSql.size()]);

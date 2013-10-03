@@ -1,7 +1,13 @@
 {
-  SortedSet<DatabaseObjectComparator> comparators=DatabaseObjectComparatorFactory.getInstance().getComparators(databaseObjectType,database);
+  String key=databaseObjectType.getName() + ":" + database.getShortName();
+  if (comparatorChainsByClassAndDatabase.containsKey(key)) {
+    return comparatorChainsByClassAndDatabase.get(key).copy();
+  }
+  List<DatabaseObjectComparator> comparators=DatabaseObjectComparatorFactory.getInstance().getComparators(databaseObjectType,database);
   if (comparators == null || comparators.size() == 0) {
     return null;
   }
-  return new DatabaseObjectComparatorChain(comparators);
+  DatabaseObjectComparatorChain chain=new DatabaseObjectComparatorChain(comparators);
+  comparatorChainsByClassAndDatabase.put(key,chain);
+  return chain;
 }

@@ -2,7 +2,7 @@
   DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase.getDefaultSchema(),referenceDatabase,new SnapshotControl(referenceDatabase));
   DatabaseSnapshot comparisonSnapshot=null;
   if (comparisonDatabase == null) {
-    comparisonSnapshot=new JdbcDatabaseSnapshot(referenceDatabase);
+    comparisonSnapshot=new EmptyDatabaseSnapshot(referenceDatabase);
   }
  else {
     comparisonSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(comparisonDatabase.getDefaultSchema(),comparisonDatabase,new SnapshotControl(comparisonDatabase));

@@ -1,6 +1,3 @@
 {
-  if (changedObject == null) {
-    return;
-  }
   this.alreadyHandledChanged.add(changedObject);
 }

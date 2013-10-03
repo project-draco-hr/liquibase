@@ -1,0 +1,6 @@
+{
+  if (!resultSetCaches.containsKey(key)) {
+    resultSetCaches.put(key,new ResultSetCache());
+  }
+  return resultSetCaches.get(key);
+}

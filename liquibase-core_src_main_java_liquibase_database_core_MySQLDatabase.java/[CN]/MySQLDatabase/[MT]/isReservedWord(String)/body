@@ -1,0 +1,6 @@
+{
+  if (reservedWords.contains(string.toUpperCase())) {
+    return true;
+  }
+  return super.isReservedWord(string);
+}

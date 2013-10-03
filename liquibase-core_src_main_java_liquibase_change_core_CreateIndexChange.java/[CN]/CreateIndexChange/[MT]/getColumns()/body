@@ -1,6 +1,6 @@
 {
   if (columns == null) {
-    return new ArrayList<ColumnConfig>();
+    return new ArrayList<AddColumnConfig>();
   }
   return columns;
 }

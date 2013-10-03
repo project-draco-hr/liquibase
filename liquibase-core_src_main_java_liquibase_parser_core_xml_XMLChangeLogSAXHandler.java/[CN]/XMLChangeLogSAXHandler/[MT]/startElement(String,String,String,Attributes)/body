@@ -57,7 +57,7 @@
       }
       Enumeration<URL> resourcesEnum=resourceAccessor.getResources(pathName);
       SortedSet<URL> resources=new TreeSet<URL>(new Comparator<URL>(){
-        public int compare(        URL o1,        URL o2){
+        @Override public int compare(        URL o1,        URL o2){
           return o1.toString().compareTo(o2.toString());
         }
       }
@@ -186,11 +186,7 @@
     }
  else     if (rootPrecondition != null) {
       currentPrecondition=PreconditionFactory.getInstance().create(localName);
-      for (int i=0; i < atts.getLength(); i++) {
-        String attributeName=atts.getLocalName(i);
-        String attributeValue=atts.getValue(i);
-        setProperty(currentPrecondition,attributeName,attributeValue);
-      }
+      setAllProperties(currentPrecondition,atts);
       preconditionLogicStack.peek().addNestedPrecondition(currentPrecondition);
       if (currentPrecondition instanceof PreconditionLogic) {
         preconditionLogicStack.push(((PreconditionLogic)currentPrecondition));
@@ -213,11 +209,7 @@
     }
  else     if (inModifySql) {
       SqlVisitor sqlVisitor=SqlVisitorFactory.getInstance().create(localName);
-      for (int i=0; i < atts.getLength(); i++) {
-        String attributeName=atts.getLocalName(i);
-        String attributeValue=atts.getValue(i);
-        setProperty(sqlVisitor,attributeName,attributeValue);
-      }
+      setAllProperties(sqlVisitor,atts);
       sqlVisitor.setApplicableDbms(modifySqlDbmsList);
       sqlVisitor.setApplyToRollback(modifySqlAppliedOnRollback);
       sqlVisitor.setContexts(modifySqlContexts);
@@ -237,17 +229,19 @@
       if (change instanceof CustomChangeWrapper) {
         ((CustomChangeWrapper)change).setClassLoader(resourceAccessor.toClassLoader());
       }
-      for (int i=0; i < atts.getLength(); i++) {
-        String attributeName=atts.getLocalName(i);
-        String attributeValue=atts.getValue(i);
-        setProperty(change,attributeName,attributeValue);
-      }
+      setAllProperties(change,atts);
       change.finishInitialization();
     }
  else     if (change != null && "column".equals(qName)) {
       ColumnConfig column;
       if (change instanceof LoadDataChange) {
         column=new LoadDataColumnConfig();
+      }
+ else       if (change instanceof AddColumnChange || change instanceof CreateIndexChange) {
+        column=new AddColumnConfig();
+      }
+ else       if (change instanceof CreateIndexChange) {
+        column=new AddColumnConfig();
       }
  else {
         column=new ColumnConfig();
@@ -344,11 +338,7 @@
         throw new MigrationFailedException(changeSet,"Could not find creator method " + creatorMethod + " for tag: "+ localName);
       }
       Object subObject=method.invoke(objectToCreateFrom);
-      for (int i=0; i < atts.getLength(); i++) {
-        String attributeName=atts.getLocalName(i);
-        String attributeValue=atts.getValue(i);
-        setProperty(subObject,attributeName,attributeValue);
-      }
+      setAllProperties(subObject,atts);
       changeSubObjects.push(subObject);
     }
  else {

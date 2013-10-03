@@ -1,4 +1,3 @@
 {
-  this.whereClause=whereClause;
-  return this;
+  return setWhere(whereClause);
 }

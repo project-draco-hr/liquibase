@@ -1,0 +1,9 @@
+{
+  if (expectedValue == null && foundValue == null) {
+    return true;
+  }
+  if (expectedValue == null || foundValue == null) {
+    return equalIfEitherNull;
+  }
+  return expectedValue.equals(foundValue);
+}

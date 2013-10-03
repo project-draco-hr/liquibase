@@ -11,7 +11,7 @@
   if (control.isIncludeSchema()) {
     change.setSchemaName(column.getRelation().getSchema().getName());
   }
-  ColumnConfig columnConfig=new ColumnConfig();
+  AddColumnConfig columnConfig=new AddColumnConfig();
   columnConfig.setName(column.getName());
   String dataType=column.getType().toString();
   columnConfig.setType(dataType);

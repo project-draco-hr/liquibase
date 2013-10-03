@@ -1,7 +1,19 @@
 {
-  String key=createKey("getTables",catalogName,schemaName,tableNamePattern,types);
-  if (hasCachedValue(key)) {
-    return getCachedValue(key);
+  return getResultSetCache("getTables." + StringUtils.join(types,":")).get(new ResultSetCache.SingleResultSetExtractor(database){
+    @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
+      return new ResultSetCache.RowData(row.getString("TABLE_CAT"),row.getString("TABLE_SCHEM"),database,row.getString("TABLE_NAME"));
+    }
+    @Override public ResultSetCache.RowData wantedKeyParameters(){
+      return new ResultSetCache.RowData(catalogName,schemaName,database,table);
+    }
+    @Override public ResultSet fastFetchQuery() throws SQLException {
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),database.correctObjectName(table,Table.class),types);
+    }
+    @Override public ResultSet bulkFetchQuery() throws SQLException {
+      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      return databaseMetaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,types);
+    }
   }
-  return cacheResultSet(key,databaseMetaData.getTables(catalogName,schemaName,tableNamePattern,types));
+);
 }

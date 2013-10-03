@@ -5,5 +5,10 @@
   if (referenceValue == null || compareToValue == null) {
     return false;
   }
-  return referenceValue.equals(compareToValue);
+  if (referenceValue instanceof DatabaseObject && compareToValue instanceof DatabaseObject) {
+    return DatabaseObjectComparatorFactory.getInstance().isSameObject((DatabaseObject)referenceValue,(DatabaseObject)compareToValue,accordingTo);
+  }
+ else {
+    return referenceValue.equals(compareToValue);
+  }
 }

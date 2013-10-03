@@ -13,19 +13,15 @@
   }
   Iterator referenceIterator=((Collection)referenceValue).iterator();
   Iterator compareIterator=((Collection)compareToValue).iterator();
+  if (((Collection)referenceValue).size() != ((Collection)compareToValue).size()) {
+    return false;
+  }
   while (referenceIterator.hasNext()) {
     Object referenceObj=referenceIterator.next();
     Object compareObj=compareIterator.next();
-    if (referenceObj instanceof DatabaseObject) {
-      if (!compareFunction.areEqual(referenceObj,compareObj)) {
-        return false;
-      }
-    }
-  }
-  for (  Object obj : ((Collection)referenceValue)) {
-    if (!((Collection)compareToValue).contains(obj)) {
+    if (!compareFunction.areEqual(referenceObj,compareObj)) {
       return false;
     }
   }
-  return referenceValue.equals(compareToValue);
+  return true;
 }

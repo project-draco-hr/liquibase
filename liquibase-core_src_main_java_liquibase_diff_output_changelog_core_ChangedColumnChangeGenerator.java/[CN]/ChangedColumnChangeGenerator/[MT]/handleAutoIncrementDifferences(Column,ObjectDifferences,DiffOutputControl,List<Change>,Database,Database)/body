@@ -1,0 +1,21 @@
+{
+  Difference difference=differences.getDifference("autoIncrementInformation");
+  if (difference != null) {
+    if (difference.getReferenceValue() == null) {
+      LogFactory.getLogger().info("ChangedColumnChangeGenerator cannot fix dropped auto increment values");
+    }
+ else {
+      AddAutoIncrementChange change=new AddAutoIncrementChange();
+      if (control.isIncludeCatalog()) {
+        change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
+      }
+      if (control.isIncludeSchema()) {
+        change.setSchemaName(column.getRelation().getSchema().getName());
+      }
+      change.setTableName(column.getRelation().getName());
+      change.setColumnName(column.getName());
+      change.setColumnDataType(DataTypeFactory.getInstance().from(column.getType()).toString());
+      changes.add(change);
+    }
+  }
+}

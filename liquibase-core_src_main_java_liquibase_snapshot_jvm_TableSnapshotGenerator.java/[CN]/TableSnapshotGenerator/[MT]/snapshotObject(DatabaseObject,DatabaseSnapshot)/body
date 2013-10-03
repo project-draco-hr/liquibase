@@ -2,10 +2,10 @@
   Database database=snapshot.getDatabase();
   String objectName=example.getName();
   Schema schema=example.getSchema();
-  List<JdbcDatabaseSnapshot.CachedRow> rs=null;
+  List<CachedRow> rs=null;
   try {
     JdbcDatabaseSnapshot.CachingDatabaseMetaData metaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
-    rs=metaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),objectName,new String[]{"TABLE"});
+    rs=metaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),database.correctObjectName(objectName,Table.class),new String[]{"TABLE"});
     Table table;
     if (rs.size() > 0) {
       table=readTable(rs.get(0),database);

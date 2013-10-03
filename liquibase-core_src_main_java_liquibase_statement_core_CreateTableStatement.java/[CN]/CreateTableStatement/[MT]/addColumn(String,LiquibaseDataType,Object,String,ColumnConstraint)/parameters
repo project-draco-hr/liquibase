@@ -1,0 +1,5 @@
+String columnName
+LiquibaseDataType columnType
+Object defaultValue
+String remarks
+ColumnConstraint constraints

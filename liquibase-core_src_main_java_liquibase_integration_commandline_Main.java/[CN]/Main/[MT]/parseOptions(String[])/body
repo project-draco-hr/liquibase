@@ -27,6 +27,18 @@
       String[] splitArg=splitArg(arg);
       String attributeName=splitArg[0];
       String value=splitArg[1];
+      if (StringUtils.trimToEmpty(value).equalsIgnoreCase("PROMPT")) {
+        Console c=System.console();
+        if (c == null) {
+          throw new CommandLineParsingException("Console unavailable");
+        }
+        if (attributeName.toLowerCase().contains("password")) {
+          value=new String(c.readPassword(attributeName + ": "));
+        }
+ else {
+          value=new String(c.readLine(attributeName + ": "));
+        }
+      }
       try {
         Field field=getClass().getDeclaredField(attributeName);
         if (field.getType().equals(Boolean.class)) {

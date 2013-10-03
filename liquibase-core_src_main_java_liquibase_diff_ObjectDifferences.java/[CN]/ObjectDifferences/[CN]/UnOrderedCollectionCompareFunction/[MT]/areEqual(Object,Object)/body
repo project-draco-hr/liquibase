@@ -1,0 +1,36 @@
+{
+  if (referenceValue == null && compareToValue == null) {
+    return true;
+  }
+  if (referenceValue == null || compareToValue == null) {
+    return false;
+  }
+  if (!(referenceValue instanceof Collection) || (!(compareToValue instanceof Collection))) {
+    return false;
+  }
+  if (((Collection)referenceValue).size() != ((Collection)compareToValue).size()) {
+    return false;
+  }
+  Iterator referenceIterator=((Collection)referenceValue).iterator();
+  List unmatchedCompareToValues=new ArrayList(((Collection)compareToValue));
+  if (((Collection)referenceValue).size() != ((Collection)compareToValue).size()) {
+    return false;
+  }
+  while (referenceIterator.hasNext()) {
+    Object referenceObj=referenceIterator.next();
+    Object foundMatch=null;
+    for (    Object compareObj : unmatchedCompareToValues) {
+      if (compareFunction.areEqual(referenceObj,compareObj)) {
+        foundMatch=compareObj;
+        break;
+      }
+    }
+    if (foundMatch == null) {
+      return false;
+    }
+ else {
+      unmatchedCompareToValues.remove(foundMatch);
+    }
+  }
+  return true;
+}

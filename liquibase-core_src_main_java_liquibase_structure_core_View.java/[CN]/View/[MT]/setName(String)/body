@@ -1,4 +1,3 @@
 {
-  this.setAttribute("name",name);
-  return this;
+  return (View)super.setName(name);
 }

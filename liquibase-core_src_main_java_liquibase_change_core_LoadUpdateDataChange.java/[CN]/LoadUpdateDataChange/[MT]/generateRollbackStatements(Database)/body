@@ -4,7 +4,7 @@
   for (  SqlStatement thisForward : forward) {
     InsertOrUpdateStatement thisInsert=(InsertOrUpdateStatement)thisForward;
     DeleteStatement delete=new DeleteStatement(getCatalogName(),getSchemaName(),getTableName());
-    delete.setWhereClause(getWhereClause(thisInsert,database));
+    delete.setWhere(getWhere(thisInsert,database));
     statements.add(delete);
   }
   return statements.toArray(new SqlStatement[statements.size()]);

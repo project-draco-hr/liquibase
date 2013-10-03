@@ -10,9 +10,9 @@
   Object[] args;
   String result;
   args=new Object[]{statements[0],database};
-  result=(String)invokePrivateMethod(change,"getWhereClause",args);
+  result=(String)invokePrivateMethod(change,"getWhere",args);
   assertEquals("name = 'Bob Johnson'",result.trim());
   args=new Object[]{statements[1],database};
-  result=(String)invokePrivateMethod(change,"getWhereClause",args);
+  result=(String)invokePrivateMethod(change,"getWhere",args);
   assertEquals("name = 'John Doe'",result.trim());
 }

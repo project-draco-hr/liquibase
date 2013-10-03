@@ -1,0 +1,3 @@
+{
+  return DatabaseObjectComparatorFactory.getInstance().hash(((ForeignKey)databaseObject).getForeignKeyTable(),accordingTo);
+}

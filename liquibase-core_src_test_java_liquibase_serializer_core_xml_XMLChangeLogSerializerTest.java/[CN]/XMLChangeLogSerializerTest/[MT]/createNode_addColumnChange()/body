@@ -1,7 +1,7 @@
 {
   AddColumnChange refactoring=new AddColumnChange();
   refactoring.setTableName("TAB");
-  ColumnConfig column=new ColumnConfig();
+  AddColumnConfig column=new AddColumnConfig();
   column.setName("NEWCOL");
   column.setType("TYP");
   refactoring.addColumn(column);

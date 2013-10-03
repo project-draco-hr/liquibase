@@ -24,7 +24,6 @@
       for (int i=changes.size() - 1; i >= 0; i--) {
         Change change=changes.get(i);
         database.executeRollbackStatements(change,sqlVisitors);
-        log.debug(change.getConfirmationMessage());
       }
     }
     database.commit();
