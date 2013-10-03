@@ -1,0 +1,13 @@
+{
+  super.checkDatabaseChangeLogLockTable();
+  if (this.supportsBooleanDataType()) {
+    Executor executor=ExecutorService.getInstance().getExecutor(this);
+    String lockTable=this.escapeTableName(this.getLiquibaseCatalogName(),this.getLiquibaseSchemaName(),this.getDatabaseChangeLogLockTableName());
+    Object obj=executor.queryForObject(new RawSqlStatement("select min(locked) as test from " + lockTable + " fetch first row only"),Object.class);
+    if (!(obj instanceof Boolean)) {
+      executor.execute(new DropTableStatement(this.getLiquibaseCatalogName(),this.getLiquibaseSchemaName(),this.getDatabaseChangeLogLockTableName(),false));
+      executor.execute(new CreateDatabaseChangeLogLockTableStatement());
+      executor.execute(new InitializeDatabaseChangeLogLockTableStatement());
+    }
+  }
+}
