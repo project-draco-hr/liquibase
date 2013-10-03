@@ -72,6 +72,14 @@
         if (!fileUrl.toExternalForm().startsWith("file:")) {
           if (fileUrl.toExternalForm().startsWith("jar:file:") || fileUrl.toExternalForm().startsWith("wsjar:file:") || fileUrl.toExternalForm().startsWith("zip:")) {
             File zipFileDir=extractZipFile(fileUrl);
+            if (pathName.startsWith("classpath:")) {
+              log.debug("replace classpath");
+              pathName=pathName.replaceFirst("classpath:","");
+            }
+            if (pathName.startsWith("classpath*:")) {
+              log.debug("replace classpath*");
+              pathName=pathName.replaceFirst("classpath\\*:","");
+            }
             fileUrl=new File(zipFileDir,pathName).toURL();
           }
  else {
