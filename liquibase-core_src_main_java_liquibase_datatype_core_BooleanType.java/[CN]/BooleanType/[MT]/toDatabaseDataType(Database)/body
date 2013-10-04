@@ -18,7 +18,12 @@
     return new DatabaseDataType("BIT");
   }
  else   if (database instanceof DerbyDatabase) {
-    return new DatabaseDataType("SMALLINT");
+    if (((DerbyDatabase)database).supportsBooleanDataType()) {
+      return new DatabaseDataType("BOOLEAN");
+    }
+ else {
+      return new DatabaseDataType("SMALLINT");
+    }
   }
  else   if (database instanceof HsqlDatabase) {
     return new DatabaseDataType("BOOLEAN");
