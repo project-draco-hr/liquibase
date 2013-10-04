@@ -1,0 +1,5 @@
+{
+  AddColumnConfig config=new AddColumnConfig();
+  setFields(config);
+  return config;
+}

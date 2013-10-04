@@ -84,6 +84,10 @@
             collection.add(createColumnConfig());
             collection.add(createColumnConfig());
           }
+ else           if (typeToCreate.equals(AddColumnConfig.class)) {
+            collection.add(createAddColumnConfig());
+            collection.add(createAddColumnConfig());
+          }
  else           if (typeToCreate.equals(LoadDataColumnConfig.class)) {
             collection.add(createLoadDataColumnConfig());
             collection.add(createLoadDataColumnConfig());
