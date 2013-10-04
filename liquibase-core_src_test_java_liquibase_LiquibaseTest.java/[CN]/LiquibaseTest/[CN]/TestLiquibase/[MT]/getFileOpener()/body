@@ -1,12 +1,12 @@
 {
   return new ResourceAccessor(){
-    public InputStream getResourceAsStream(    String file){
+    @Override public InputStream getResourceAsStream(    String file){
       return inputStream;
     }
-    public Enumeration<URL> getResources(    String packageName){
+    @Override public Enumeration<URL> getResources(    String packageName){
       return null;
     }
-    public ClassLoader toClassLoader(){
+    @Override public ClassLoader toClassLoader(){
       return null;
     }
   }

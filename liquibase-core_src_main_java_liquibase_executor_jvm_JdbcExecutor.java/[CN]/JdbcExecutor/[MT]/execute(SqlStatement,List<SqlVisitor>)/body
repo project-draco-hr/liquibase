@@ -4,7 +4,7 @@
     return;
   }
 class ExecuteStatementCallback implements StatementCallback {
-    public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
+    @Override public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
       for (      String statement : applyVisitors(sql,sqlVisitors)) {
         if (database instanceof OracleDatabase) {
           statement=statement.replaceFirst("/\\s*/\\s*$","");
@@ -22,7 +22,7 @@ class ExecuteStatementCallback implements StatementCallback {
       }
       return null;
     }
-    public SqlStatement getStatement(){
+    @Override public SqlStatement getStatement(){
       return sql;
     }
   }

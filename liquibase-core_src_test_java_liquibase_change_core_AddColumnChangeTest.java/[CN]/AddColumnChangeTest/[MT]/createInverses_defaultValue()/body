@@ -13,7 +13,7 @@
   column.setConstraints(constraints);
   refactoring.addColumn(column);
   testInverseOnAll(refactoring,new InverseValidator(){
-    public void validate(    Change[] changes){
+    @Override public void validate(    Change[] changes){
       assertEquals(2,changes.length);
       assertTrue(changes[0] instanceof DropDefaultValueChange);
       assertEquals("TAB",((DropDefaultValueChange)changes[0]).getTableName());

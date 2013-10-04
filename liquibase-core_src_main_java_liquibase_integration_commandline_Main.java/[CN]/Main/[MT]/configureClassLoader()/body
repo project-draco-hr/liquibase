@@ -44,7 +44,7 @@
   }
   if (includeSystemClasspath) {
     classLoader=AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>(){
-      public URLClassLoader run(){
+      @Override public URLClassLoader run(){
         return new URLClassLoader(urls.toArray(new URL[urls.size()]),Thread.currentThread().getContextClassLoader());
       }
     }
@@ -52,7 +52,7 @@
   }
  else {
     classLoader=AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>(){
-      public URLClassLoader run(){
+      @Override public URLClassLoader run(){
         return new URLClassLoader(urls.toArray(new URL[urls.size()]));
       }
     }

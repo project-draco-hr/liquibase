@@ -5,7 +5,7 @@
   change.setColumnName("COLUMN_NAME");
   change.setColumnDataType("DATATYPE(255)");
   testChangeOnAllExcept(change,new GenerateAllValidator(){
-    public void validate(    SqlStatement[] sqlStatements,    Database database){
+    @Override public void validate(    SqlStatement[] sqlStatements,    Database database){
       assertEquals(1,sqlStatements.length);
       assertTrue(sqlStatements[0] instanceof AddAutoIncrementStatement);
       assertEquals("SCHEMA_NAME",((AddAutoIncrementStatement)sqlStatements[0]).getSchemaName());
@@ -16,7 +16,7 @@
   }
 ,PostgresDatabase.class);
   testChange(change,new GenerateAllValidator(){
-    public void validate(    SqlStatement[] sqlStatements,    Database database){
+    @Override public void validate(    SqlStatement[] sqlStatements,    Database database){
       assertEquals(3,sqlStatements.length);
       assertTrue(sqlStatements[0] instanceof CreateSequenceStatement);
       assertTrue(sqlStatements[1] instanceof SetNullableStatement);

@@ -20,7 +20,7 @@
       final ListVisitor listVisitor=new ListVisitor();
       forwardIterator.run(listVisitor,database);
       logIterator=new ChangeLogIterator(changeLog,new NotRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database),new ChangeSetFilter(){
-        public boolean accepts(        ChangeSet changeSet){
+        @Override public boolean accepts(        ChangeSet changeSet){
           return listVisitor.getSeenChangeSets().contains(changeSet);
         }
       }

@@ -16,7 +16,7 @@
   column.setType("TYP");
   refactoring.addColumn(column);
   testInverseOnAll(refactoring,new InverseValidator(){
-    public void validate(    Change[] changes){
+    @Override public void validate(    Change[] changes){
       assertEquals(2,changes.length);
       assertTrue(changes[0] instanceof DropColumnChange);
       assertEquals("NEWCOL",((DropColumnChange)changes[0]).getColumnName());

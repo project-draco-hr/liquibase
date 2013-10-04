@@ -14,15 +14,15 @@ catch (    SAXNotSupportedException e) {
     resolver.useResoureAccessor(resourceAccessor,FilenameUtils.getFullPath(physicalChangeLogLocation));
     xmlReader.setEntityResolver(resolver);
     xmlReader.setErrorHandler(new ErrorHandler(){
-      public void warning(      SAXParseException exception) throws SAXException {
+      @Override public void warning(      SAXParseException exception) throws SAXException {
         LogFactory.getLogger().warning(exception.getMessage());
         throw exception;
       }
-      public void error(      SAXParseException exception) throws SAXException {
+      @Override public void error(      SAXParseException exception) throws SAXException {
         LogFactory.getLogger().severe(exception.getMessage());
         throw exception;
       }
-      public void fatalError(      SAXParseException exception) throws SAXException {
+      @Override public void fatalError(      SAXParseException exception) throws SAXException {
         LogFactory.getLogger().severe(exception.getMessage());
         throw exception;
       }

@@ -9,7 +9,7 @@
   change.setNewColumnName("NEW_COL");
   change.setNewTableSchemaName("NEW_SCHEM");
   testChangeOnAll(change,new GenerateAllValidator(){
-    public void validate(    SqlStatement[] statements,    Database database){
+    @Override public void validate(    SqlStatement[] statements,    Database database){
     }
   }
 );

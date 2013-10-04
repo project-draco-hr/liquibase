@@ -6,7 +6,7 @@
     taskClassPath.add(url);
   }
   URLClassLoader loader=AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>(){
-    public URLClassLoader run(){
+    @Override public URLClassLoader run(){
       return new URLClassLoader(taskClassPath.toArray(new URL[taskClassPath.size()]),Database.class.getClassLoader());
     }
   }
