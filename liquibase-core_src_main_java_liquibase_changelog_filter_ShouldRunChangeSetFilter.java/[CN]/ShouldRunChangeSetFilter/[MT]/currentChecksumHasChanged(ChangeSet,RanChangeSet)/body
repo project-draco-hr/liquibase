@@ -1,0 +1,3 @@
+{
+  return !changeSet.generateCheckSum().equals(ranChangeSet.getLastCheckSum());
+}
