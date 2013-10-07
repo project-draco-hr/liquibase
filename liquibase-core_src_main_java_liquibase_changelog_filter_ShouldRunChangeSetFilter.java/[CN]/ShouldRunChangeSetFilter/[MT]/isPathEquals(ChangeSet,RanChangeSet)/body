@@ -1,3 +1,0 @@
-{
-  return getChangeLog(ranChangeSet).equalsIgnoreCase(getFilePath(changeSet));
-}

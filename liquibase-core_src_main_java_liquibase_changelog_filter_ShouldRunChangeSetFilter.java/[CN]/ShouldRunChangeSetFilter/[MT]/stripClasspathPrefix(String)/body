@@ -1,6 +1,6 @@
 {
   if (ignoringClasspathPrefix) {
-    return filePath.replace("classpath:","");
+    return filePath.replaceFirst("^classpath:","");
   }
   return filePath;
 }

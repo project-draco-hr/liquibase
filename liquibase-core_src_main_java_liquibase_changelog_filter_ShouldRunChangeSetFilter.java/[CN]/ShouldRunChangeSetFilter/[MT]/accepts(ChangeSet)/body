@@ -1,10 +1,10 @@
 {
   for (  RanChangeSet ranChangeSet : ranChangeSets) {
-    if (currentAndRanChangesetsMatch(changeSet,ranChangeSet)) {
+    if (changeSetsMatch(changeSet,ranChangeSet)) {
       if (changeSet.shouldAlwaysRun()) {
         return true;
       }
-      if (changeSet.shouldRunOnChange() && currentChecksumHasChanged(changeSet,ranChangeSet)) {
+      if (changeSet.shouldRunOnChange() && checksumChanged(changeSet,ranChangeSet)) {
         return true;
       }
       return false;

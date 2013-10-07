@@ -1,3 +1,0 @@
-{
-  return ranChangeSet.getId().equals(changeSet.getId()) && ranChangeSet.getAuthor().equals(changeSet.getAuthor()) && isPathEquals(changeSet,ranChangeSet);
-}
