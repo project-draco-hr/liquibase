@@ -1,4 +1,5 @@
 {
+  DatabaseObjectComparator comparator=new DatabaseObjectComparator();
   out.println("Reference Database: " + diffResult.getReferenceSnapshot().getDatabase());
   out.println("Comparison Database: " + diffResult.getComparisonSnapshot().getDatabase());
   printComparison("Product Name",diffResult.getProductNameDiff(),out);
@@ -11,8 +12,8 @@
 );
   types.addAll(diffResult.getCompareControl().getComparedTypes());
   for (  Class<? extends DatabaseObject> type : types) {
-    printSetComparison("Missing " + getTypeName(type),diffResult.getMissingObjects(type),out);
-    printSetComparison("Unexpected " + getTypeName(type),diffResult.getUnexpectedObjects(type),out);
-    printChangedComparison("Changed " + getTypeName(type),diffResult.getChangedObjects(type),out);
+    printSetComparison("Missing " + getTypeName(type),diffResult.getMissingObjects(type,comparator),out);
+    printSetComparison("Unexpected " + getTypeName(type),diffResult.getUnexpectedObjects(type,comparator),out);
+    printChangedComparison("Changed " + getTypeName(type),diffResult.getChangedObjects(type,comparator),out);
   }
 }

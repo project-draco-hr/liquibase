@@ -1,0 +1,5 @@
+{
+  SortedMap<T,ObjectDifferences> map=new TreeMap<T,ObjectDifferences>(comparator);
+  map.putAll(getChangedObjects(type));
+  return map;
+}
