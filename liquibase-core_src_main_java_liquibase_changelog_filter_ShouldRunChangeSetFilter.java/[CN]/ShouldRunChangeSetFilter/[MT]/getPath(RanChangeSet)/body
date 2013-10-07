@@ -1,3 +1,3 @@
 {
-  return stripClasspathPrefix(ranChangeSet.getChangeLog());
+  return normalizePath(ranChangeSet.getChangeLog());
 }
