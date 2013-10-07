@@ -1,5 +1,5 @@
 {
   this.database=database;
-  this.ignoringClasspathPrefix=ignoringClasspathPrefix;
+  this.ignoreClasspathPrefix=ignoreClasspathPrefix;
   this.ranChangeSets=database.getRanChangeSetList();
 }
