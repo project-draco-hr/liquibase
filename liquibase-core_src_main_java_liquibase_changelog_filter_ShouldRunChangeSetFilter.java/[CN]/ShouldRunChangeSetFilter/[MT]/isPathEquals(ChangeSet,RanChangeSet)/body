@@ -1,8 +1,3 @@
 {
-  if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
-    return ranChangeSet.getChangeLog().equalsIgnoreCase(changeSet.getFilePath());
-  }
- else {
-    return ranChangeSet.getChangeLog().equalsIgnoreCase(changeSet.getFilePath());
-  }
+  return getChangeLog(ranChangeSet).equalsIgnoreCase(getFilePath(changeSet));
 }
