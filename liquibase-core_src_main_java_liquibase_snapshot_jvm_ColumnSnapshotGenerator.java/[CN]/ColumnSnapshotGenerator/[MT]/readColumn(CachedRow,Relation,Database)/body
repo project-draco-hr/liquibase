@@ -11,16 +11,27 @@
   column.setName(rawColumnName);
   column.setRelation(table);
   column.setRemarks(remarks);
-  int nullable=columnMetadataResultSet.getInt("NULLABLE");
-  if (nullable == DatabaseMetaData.columnNoNulls) {
-    column.setNullable(false);
+  if (database instanceof OracleDatabase) {
+    String nullable=columnMetadataResultSet.getString("NULLABLE");
+    if (nullable.equals("Y")) {
+      column.setNullable(true);
+    }
+ else {
+      column.setNullable(false);
+    }
   }
- else   if (nullable == DatabaseMetaData.columnNullable) {
-    column.setNullable(true);
-  }
- else   if (nullable == DatabaseMetaData.columnNullableUnknown) {
-    LogFactory.getLogger().info("Unknown nullable state for column " + column.toString() + ". Assuming nullable");
-    column.setNullable(true);
+ else {
+    int nullable=columnMetadataResultSet.getInt("NULLABLE");
+    if (nullable == DatabaseMetaData.columnNoNulls) {
+      column.setNullable(false);
+    }
+ else     if (nullable == DatabaseMetaData.columnNullable) {
+      column.setNullable(true);
+    }
+ else     if (nullable == DatabaseMetaData.columnNullableUnknown) {
+      LogFactory.getLogger().info("Unknown nullable state for column " + column.toString() + ". Assuming nullable");
+      column.setNullable(true);
+    }
   }
   if (database.supportsAutoIncrement()) {
     if (table instanceof Table) {

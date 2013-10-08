@@ -11,6 +11,9 @@
     if (decimalDigits != null) {
       value+=", " + decimalDigits;
     }
+    if (columnSizeUnit != null && columnSizeUnit.equals(ColumnSizeUnit.CHAR) && (typeName.equalsIgnoreCase("VARCHAR") || typeName.equalsIgnoreCase("VARCHAR2"))) {
+      value+=" " + columnSizeUnit;
+    }
     value+=")";
   }
   if (unsigned) {
