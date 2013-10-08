@@ -1,0 +1,34 @@
+{
+  Index index=(Index)changedObject;
+  DropIndexChange dropIndexChange=new DropIndexChange();
+  dropIndexChange.setTableName(index.getTable().getName());
+  CreateIndexChange addIndexChange=new CreateIndexChange();
+  addIndexChange.setTableName(index.getTable().getName());
+  List<ColumnConfig> columns=new ArrayList<ColumnConfig>();
+  for (  String col : index.getColumns()) {
+    columns.add(new ColumnConfig().setName(col));
+  }
+  addIndexChange.setColumns(columns);
+  addIndexChange.setIndexName(index.getName());
+  if (control.isIncludeCatalog()) {
+    dropIndexChange.setCatalogName(index.getSchema().getCatalogName());
+    addIndexChange.setCatalogName(index.getSchema().getCatalogName());
+  }
+  if (control.isIncludeSchema()) {
+    dropIndexChange.setSchemaName(index.getSchema().getName());
+    addIndexChange.setSchemaName(index.getSchema().getName());
+  }
+  String referenceColumns=StringUtils.join((Collection<String>)differences.getDifference("columnNames").getReferenceValue(),",");
+  String comparedColumns=StringUtils.join((Collection<String>)differences.getDifference("columnNames").getComparedValue(),",");
+  control.setAlreadyHandledChanged(new Index().setTable(index.getTable()).setColumns(referenceColumns));
+  if (!referenceColumns.equalsIgnoreCase(comparedColumns)) {
+    control.setAlreadyHandledChanged(new Index().setTable(index.getTable()).setColumns(comparedColumns));
+  }
+  if (index.isUnique() != null && index.isUnique()) {
+    control.setAlreadyHandledChanged(new UniqueConstraint().setTable(index.getTable()).setColumns(referenceColumns));
+    if (!referenceColumns.equalsIgnoreCase(comparedColumns)) {
+      control.setAlreadyHandledChanged(new UniqueConstraint().setTable(index.getTable()).setColumns(comparedColumns));
+    }
+  }
+  return new Change[]{dropIndexChange,addIndexChange};
+}
