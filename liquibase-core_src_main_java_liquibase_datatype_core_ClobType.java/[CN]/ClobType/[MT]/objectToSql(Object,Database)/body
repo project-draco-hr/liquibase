@@ -1,0 +1,12 @@
+{
+  if (value == null || value.toString().equalsIgnoreCase("null")) {
+    return null;
+  }
+  String val=String.valueOf(value);
+  if (val.startsWith("'")) {
+    return val;
+  }
+ else {
+    return "'" + database.escapeStringForDatabase(val) + "'";
+  }
+}
