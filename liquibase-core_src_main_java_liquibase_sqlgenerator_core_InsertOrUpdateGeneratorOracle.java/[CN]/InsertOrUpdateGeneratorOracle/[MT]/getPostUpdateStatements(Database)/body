@@ -2,5 +2,8 @@
   StringBuffer endStatements=new StringBuffer();
   endStatements.append("END IF;\n");
   endStatements.append("END;\n");
+  if (ExecutorService.getInstance().getExecutor(database) instanceof LoggingExecutor) {
+    endStatements.append("/\n");
+  }
   return endStatements.toString();
 }
