@@ -3,7 +3,7 @@
     throw new DatabaseException("Direct update using CallableSqlStatement not currently implemented");
   }
 class UpdateStatementCallback implements StatementCallback {
-    public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
+    @Override public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
       String[] sqlToExecute=applyVisitors(sql,sqlVisitors);
       if (sqlToExecute.length != 1) {
         throw new DatabaseException("Cannot call update on Statement that returns back multiple Sql objects");
@@ -11,7 +11,7 @@ class UpdateStatementCallback implements StatementCallback {
       log.debug("Executing UPDATE database command: " + sqlToExecute[0]);
       return stmt.executeUpdate(sqlToExecute[0]);
     }
-    public SqlStatement getStatement(){
+    @Override public SqlStatement getStatement(){
       return sql;
     }
   }

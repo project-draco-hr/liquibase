@@ -1,11 +1,11 @@
 {
   ChangeSet changeSet=new ChangeSet("testId","testAuthor",false,false,null,null,null,null);
   assertEquals("Empty",changeSet.getDescription());
-  String insertDescription="Inserts data into an existing table";
+  String insertDescription="insert";
   changeSet.addChange(new InsertDataChange());
   assertEquals(insertDescription,changeSet.getDescription());
   changeSet.addChange(new InsertDataChange());
   assertEquals(insertDescription + " (x2)",changeSet.getDescription());
   changeSet.addChange(new CreateTableChange());
-  assertEquals(insertDescription + " (x2), Create Table",changeSet.getDescription());
+  assertEquals(insertDescription + " (x2), createTable",changeSet.getDescription());
 }

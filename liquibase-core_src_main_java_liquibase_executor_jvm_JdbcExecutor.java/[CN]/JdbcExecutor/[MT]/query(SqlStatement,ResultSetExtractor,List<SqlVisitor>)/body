@@ -3,7 +3,7 @@
     throw new DatabaseException("Direct query using CallableSqlStatement not currently implemented");
   }
 class QueryStatementCallback implements StatementCallback {
-    public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
+    @Override public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
       ResultSet rs=null;
       try {
         String[] sqlToExecute=applyVisitors(sql,sqlVisitors);
@@ -19,7 +19,7 @@ class QueryStatementCallback implements StatementCallback {
         JdbcUtils.closeResultSet(rs);
       }
     }
-    public SqlStatement getStatement(){
+    @Override public SqlStatement getStatement(){
       return sql;
     }
   }

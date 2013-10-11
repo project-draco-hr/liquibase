@@ -1,7 +1,7 @@
 {
   Class<? extends ChangeLogParser>[] classes;
   changelogParserComparator=new Comparator<ChangeLogParser>(){
-    public int compare(    ChangeLogParser o1,    ChangeLogParser o2){
+    @Override public int compare(    ChangeLogParser o1,    ChangeLogParser o2){
       return Integer.valueOf(o2.getPriority()).compareTo(o1.getPriority());
     }
   }

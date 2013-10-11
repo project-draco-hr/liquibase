@@ -1,15 +1,13 @@
 {
   for (  RanChangeSet ranChangeSet : ranChangeSets) {
-    if (ranChangeSet.getId().equals(changeSet.getId()) && ranChangeSet.getAuthor().equals(changeSet.getAuthor()) && isPathEquals(changeSet,ranChangeSet)) {
+    if (changeSetsMatch(changeSet,ranChangeSet)) {
       if (changeSet.shouldAlwaysRun()) {
         return true;
       }
- else       if (changeSet.shouldRunOnChange() && !changeSet.generateCheckSum().equals(ranChangeSet.getLastCheckSum())) {
+      if (changeSet.shouldRunOnChange() && checksumChanged(changeSet,ranChangeSet)) {
         return true;
       }
- else {
-        return false;
-      }
+      return false;
     }
   }
   return true;

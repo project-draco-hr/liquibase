@@ -1,5 +1,4 @@
 {
-  Database database=createMock(Database.class);
   expect(database.getRanChangeSetList()).andReturn(new ArrayList<RanChangeSet>());
   replay(database);
   ShouldRunChangeSetFilter filter=new ShouldRunChangeSetFilter(database);

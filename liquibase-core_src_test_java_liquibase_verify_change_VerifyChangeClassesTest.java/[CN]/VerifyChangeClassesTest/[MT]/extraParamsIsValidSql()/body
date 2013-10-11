@@ -22,7 +22,7 @@
       Collections.sort(optionalParameters);
       List<List<String>> paramLists=powerSet(optionalParameters);
       Collections.sort(paramLists,new Comparator<List<String>>(){
-        public int compare(        List<String> o1,        List<String> o2){
+        @Override public int compare(        List<String> o1,        List<String> o2){
           int comp=Integer.valueOf(o1.size()).compareTo(o2.size());
           if (comp == 0) {
             comp=StringUtils.join(o1,",").compareTo(StringUtils.join(o2,","));

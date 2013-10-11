@@ -2,13 +2,13 @@
   AnnotatedType<CDILiquibase> at=bm.createAnnotatedType(CDILiquibase.class);
   final InjectionTarget<CDILiquibase> it=bm.createInjectionTarget(at);
   instance=new Bean<CDILiquibase>(){
-    public Set<Type> getTypes(){
+    @Override public Set<Type> getTypes(){
       Set<Type> types=new HashSet<Type>();
       types.add(CDILiquibase.class);
       types.add(Object.class);
       return types;
     }
-    public Set<Annotation> getQualifiers(){
+    @Override public Set<Annotation> getQualifiers(){
       Set<Annotation> qualifiers=new HashSet<Annotation>();
       qualifiers.add(new AnnotationLiteral<Default>(){
       }
@@ -18,34 +18,34 @@
 );
       return qualifiers;
     }
-    public Class<? extends Annotation> getScope(){
+    @Override public Class<? extends Annotation> getScope(){
       return ApplicationScoped.class;
     }
-    public String getName(){
+    @Override public String getName(){
       return "cdiLiquibase";
     }
-    public Set<Class<? extends Annotation>> getStereotypes(){
+    @Override public Set<Class<? extends Annotation>> getStereotypes(){
       return Collections.emptySet();
     }
-    public Class<?> getBeanClass(){
+    @Override public Class<?> getBeanClass(){
       return CDILiquibase.class;
     }
-    public boolean isAlternative(){
+    @Override public boolean isAlternative(){
       return false;
     }
-    public boolean isNullable(){
+    @Override public boolean isNullable(){
       return false;
     }
-    public Set<InjectionPoint> getInjectionPoints(){
+    @Override public Set<InjectionPoint> getInjectionPoints(){
       return it.getInjectionPoints();
     }
-    public CDILiquibase create(    CreationalContext<CDILiquibase> ctx){
+    @Override public CDILiquibase create(    CreationalContext<CDILiquibase> ctx){
       CDILiquibase instance=it.produce(ctx);
       it.inject(instance,ctx);
       it.postConstruct(instance);
       return instance;
     }
-    public void destroy(    CDILiquibase instance,    CreationalContext<CDILiquibase> ctx){
+    @Override public void destroy(    CDILiquibase instance,    CreationalContext<CDILiquibase> ctx){
       it.preDestroy(instance);
       it.dispose(instance);
       ctx.release();

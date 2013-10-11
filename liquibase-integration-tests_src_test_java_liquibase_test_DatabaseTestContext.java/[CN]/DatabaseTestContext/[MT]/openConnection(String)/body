@@ -63,7 +63,7 @@
   }
   connectionsByUrl.put(url,databaseConnection);
   Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
-    public void run(){
+    @Override public void run(){
       try {
         try {
           if (!((JdbcConnection)databaseConnection).getUnderlyingConnection().getAutoCommit()) {

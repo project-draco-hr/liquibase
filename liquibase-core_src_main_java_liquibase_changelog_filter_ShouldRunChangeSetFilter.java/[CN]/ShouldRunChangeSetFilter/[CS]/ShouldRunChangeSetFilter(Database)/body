@@ -1,4 +1,3 @@
 {
-  this.database=database;
-  this.ranChangeSets=database.getRanChangeSetList();
+  this(database,true);
 }

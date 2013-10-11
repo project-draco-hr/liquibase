@@ -11,7 +11,7 @@
   column.setConstraints(constraints);
   refactoring.addColumn(column);
   testChangeOnAll(refactoring,new GenerateAllValidator(){
-    public void validate(    SqlStatement[] sqlStatements,    Database database){
+    @Override public void validate(    SqlStatement[] sqlStatements,    Database database){
       if (database instanceof DB2Database) {
         assertEquals(2,sqlStatements.length);
         assertTrue(sqlStatements[0] instanceof AddColumnStatement);

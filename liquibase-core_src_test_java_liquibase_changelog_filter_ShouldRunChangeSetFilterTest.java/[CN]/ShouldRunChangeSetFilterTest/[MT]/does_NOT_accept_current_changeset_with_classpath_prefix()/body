@@ -1,0 +1,6 @@
+{
+  given_a_database_with_two_executed_changesets();
+  ChangeSet changeSetWithClasspathPrefix=new ChangeSet("1","testAuthor",false,false,"classpath:path/changelog",null,null,null);
+  ShouldRunChangeSetFilter filter=new ShouldRunChangeSetFilter(database,true);
+  assertFalse(filter.accepts(changeSetWithClasspathPrefix));
+}

@@ -1,3 +1,9 @@
 {
-  return getCatalog().getName() + "." + getName();
+  String catalogName=getCatalogName();
+  if (catalogName == null) {
+    return getName();
+  }
+ else {
+    return catalogName + "." + getName();
+  }
 }

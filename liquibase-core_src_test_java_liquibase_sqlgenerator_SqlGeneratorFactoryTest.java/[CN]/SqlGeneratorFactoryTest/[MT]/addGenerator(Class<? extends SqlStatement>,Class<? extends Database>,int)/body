@@ -1,25 +1,25 @@
 {
   SqlGenerator generator=new SqlGenerator(){
-    public int getPriority(){
+    @Override public int getPriority(){
       return level;
     }
-    public boolean generateStatementsIsVolatile(    Database database){
+    @Override public boolean generateStatementsIsVolatile(    Database database){
       return false;
     }
-    public boolean generateRollbackStatementsIsVolatile(    Database database){
+    @Override public boolean generateRollbackStatementsIsVolatile(    Database database){
       return false;
     }
-    public Warnings warn(    SqlStatement sqlStatement,    Database database,    SqlGeneratorChain sqlGeneratorChain){
+    @Override public Warnings warn(    SqlStatement sqlStatement,    Database database,    SqlGeneratorChain sqlGeneratorChain){
       return new Warnings();
     }
-    public ValidationErrors validate(    SqlStatement sqlStatement,    Database database,    SqlGeneratorChain sqlGeneratorChain){
+    @Override public ValidationErrors validate(    SqlStatement sqlStatement,    Database database,    SqlGeneratorChain sqlGeneratorChain){
       return new ValidationErrors();
     }
-    public boolean supports(    SqlStatement statement,    Database database){
+    @Override public boolean supports(    SqlStatement statement,    Database database){
       boolean ret=sqlStatementClass.isAssignableFrom(statement.getClass()) && sqlDatabaseClass.isAssignableFrom(database.getClass());
       return ret;
     }
-    public Sql[] generateSql(    SqlStatement statement,    Database database,    SqlGeneratorChain sqlGeneratorChain){
+    @Override public Sql[] generateSql(    SqlStatement statement,    Database database,    SqlGeneratorChain sqlGeneratorChain){
       return new Sql[0];
     }
   }

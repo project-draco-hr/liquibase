@@ -1,0 +1,3 @@
+{
+  return ranChangeSet.getAuthor().equals(changeSet.getAuthor());
+}

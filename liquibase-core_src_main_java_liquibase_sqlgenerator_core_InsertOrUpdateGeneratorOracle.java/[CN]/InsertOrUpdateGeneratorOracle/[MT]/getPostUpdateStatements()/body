@@ -1,6 +1,0 @@
-{
-  StringBuffer endStatements=new StringBuffer();
-  endStatements.append("END IF;\n");
-  endStatements.append("END;\n");
-  return endStatements.toString();
-}

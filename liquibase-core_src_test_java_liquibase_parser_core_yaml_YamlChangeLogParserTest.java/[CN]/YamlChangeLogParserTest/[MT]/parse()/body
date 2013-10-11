@@ -1,12 +1,12 @@
 {
   DatabaseChangeLog changeLog=new YamlChangeLogParser().parse("test.yaml",new ChangeLogParameters(),new ResourceAccessor(){
-    public InputStream getResourceAsStream(    String file) throws IOException {
+    @Override public InputStream getResourceAsStream(    String file) throws IOException {
       return new ByteArrayInputStream(changeLogText.getBytes());
     }
-    public Enumeration<URL> getResources(    String packageName) throws IOException {
+    @Override public Enumeration<URL> getResources(    String packageName) throws IOException {
       return null;
     }
-    public ClassLoader toClassLoader(){
+    @Override public ClassLoader toClassLoader(){
       return null;
     }
   }

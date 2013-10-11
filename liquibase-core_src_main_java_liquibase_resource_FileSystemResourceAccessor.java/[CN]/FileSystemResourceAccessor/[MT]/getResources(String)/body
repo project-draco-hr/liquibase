@@ -11,10 +11,10 @@
   }
   final Iterator<URL> it=results.iterator();
   return new Enumeration<URL>(){
-    public boolean hasMoreElements(){
+    @Override public boolean hasMoreElements(){
       return it.hasNext();
     }
-    public URL nextElement(){
+    @Override public URL nextElement(){
       return it.next();
     }
   }
