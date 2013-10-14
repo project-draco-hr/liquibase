@@ -1,0 +1,11 @@
+{
+  ColumnConfig columnConfig=new ColumnConfig();
+  String valueClobFile="unicode-file.txt";
+  columnConfig.setValueClobFile(valueClobFile);
+  columnConfig.setEncoding("UTF-8");
+  List<ColumnConfig> columns=Arrays.asList(columnConfig);
+  ChangeSet changeSet=createMock(ChangeSet.class);
+  expect(changeSet.getFilePath()).andReturn("liquibase/util/");
+  replay(changeSet);
+  assertSetCharacterStream(columns,changeSet);
+}

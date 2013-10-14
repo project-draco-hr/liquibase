@@ -1,0 +1,3 @@
+{
+  return (in instanceof BufferedInputStream) ? in : new BufferedInputStream(in);
+}
