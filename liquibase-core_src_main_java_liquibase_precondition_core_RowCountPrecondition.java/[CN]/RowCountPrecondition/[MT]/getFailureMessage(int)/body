@@ -1,0 +1,3 @@
+{
+  return "Table " + tableName + " is not empty. Contains "+ result+ " rows";
+}

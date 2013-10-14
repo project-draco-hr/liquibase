@@ -1,0 +1,3 @@
+{
+  return "SELECT COUNT(*) FROM " + database.escapeTableName(statement.getTableName(),statement.getSchemaName(),statement.getTableName());
+}
