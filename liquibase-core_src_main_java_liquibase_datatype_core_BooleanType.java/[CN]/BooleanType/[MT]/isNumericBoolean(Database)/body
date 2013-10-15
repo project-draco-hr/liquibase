@@ -2,5 +2,5 @@
   if (database instanceof DerbyDatabase) {
     return !((DerbyDatabase)database).supportsBooleanDataType();
   }
-  return database instanceof CacheDatabase || database instanceof DB2Database || database instanceof FirebirdDatabase|| database instanceof MSSQLDatabase|| database instanceof MySQLDatabase|| database instanceof OracleDatabase|| database instanceof SybaseASADatabase|| database instanceof SybaseDatabase;
+  return database instanceof CacheDatabase || database instanceof DB2Database || database instanceof FirebirdDatabase|| database instanceof MSSQLDatabase|| database instanceof MySQLDatabase|| database instanceof OracleDatabase|| database instanceof SQLiteDatabase|| database instanceof SybaseASADatabase|| database instanceof SybaseDatabase;
 }
