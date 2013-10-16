@@ -1,0 +1,11 @@
+{
+  if (string == null) {
+    return true;
+  }
+  for (  char c : string.toCharArray()) {
+    if (!isAscii(c)) {
+      return false;
+    }
+  }
+  return true;
+}
