@@ -1,7 +1,7 @@
 {
-  String sql=getSql();
-  if (sql == null) {
-    sql="";
+  InputStream stream=this.sqlStream;
+  if (stream == null && sql != null) {
+    stream=new ByteArrayInputStream(sql.getBytes());
   }
-  return CheckSum.compute(this.getEndDelimiter() + ":" + this.isSplitStatements()+ ":"+ this.isStripComments()+ ":"+ prepareSqlForChecksum(sql));
+  return CheckSum.compute(this.getEndDelimiter() + ":" + this.isSplitStatements()+ ":"+ this.isStripComments()+ ":"+ prepareSqlForChecksum(stream));
 }

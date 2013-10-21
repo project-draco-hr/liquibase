@@ -3,7 +3,8 @@
   try {
     digest=MessageDigest.getInstance("MD5");
     DigestInputStream digestStream=new DigestInputStream(stream,digest);
-    while (digestStream.read() != -1) {
+    byte[] buf=new byte[20480];
+    while (digestStream.read(buf) != -1) {
       ;
     }
   }
@@ -12,6 +13,6 @@
   }
   byte[] digestBytes=digest.digest();
   String returnString=new String(encodeHex(digestBytes));
-  LogFactory.getLogger().debug("Computed checksum for " + returnString + " as "+ returnString);
+  LogFactory.getLogger().debug("Computed checksum for inputStream as " + returnString);
   return returnString;
 }

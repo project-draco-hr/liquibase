@@ -10,5 +10,4 @@
   if (!loaded) {
     throw new SetupException("<sqlfile path=" + path + "> - Could not find file");
   }
-  LogFactory.getLogger().debug("SQLFile file contents is:" + getSql());
 }

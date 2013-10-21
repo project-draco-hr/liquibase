@@ -1,0 +1,21 @@
+{
+  String sql=super.getSql();
+  if (sql == null) {
+    try {
+      setSql(StreamUtil.getStreamContents(sqlStream,encoding));
+    }
+ catch (    IOException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+ finally {
+      try {
+        sqlStream.close();
+      }
+ catch (      IOException e) {
+        LogFactory.getLogger().info("Error closing " + path);
+      }
+    }
+    sql=super.getSql();
+  }
+  return sql;
+}

@@ -12,13 +12,11 @@
     }
     file=base.replaceFirst("/[^/]*$","") + "/" + file;
   }
-  InputStream fis=null;
   try {
-    fis=getResourceAccessor().getResourceAsStream(file);
-    if (fis == null) {
+    sqlStream=getResourceAccessor().getResourceAsStream(file);
+    if (sqlStream == null) {
       throw new SetupException("<sqlfile path=" + file + "> -Unable to read file");
     }
-    setSql(StreamUtil.getStreamContents(fis,encoding));
     return true;
   }
  catch (  FileNotFoundException fnfe) {
@@ -26,14 +24,5 @@
   }
 catch (  IOException e) {
     throw new SetupException("<sqlfile path=" + file + "> -Unable to read file",e);
-  }
- finally {
-    if (fis != null) {
-      try {
-        fis.close();
-      }
- catch (      IOException ioe) {
-      }
-    }
   }
 }
