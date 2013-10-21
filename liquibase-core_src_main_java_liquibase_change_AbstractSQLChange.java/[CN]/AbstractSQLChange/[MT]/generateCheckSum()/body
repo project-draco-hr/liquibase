@@ -1,5 +1,9 @@
 {
   InputStream stream=this.sqlStream;
+  String sql=this.sql;
+  if (sqlStream == null && sql == null) {
+    sql="";
+  }
   if (sql != null) {
     stream=new ByteArrayInputStream(sql.getBytes());
   }
