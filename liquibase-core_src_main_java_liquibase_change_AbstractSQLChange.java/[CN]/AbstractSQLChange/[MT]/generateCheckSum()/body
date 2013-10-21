@@ -1,7 +1,14 @@
 {
   InputStream stream=this.sqlStream;
-  if (stream == null && sql != null) {
+  if (sql != null) {
     stream=new ByteArrayInputStream(sql.getBytes());
   }
-  return CheckSum.compute(this.getEndDelimiter() + ":" + this.isSplitStatements()+ ":"+ this.isStripComments()+ ":"+ prepareSqlForChecksum(stream));
+  CheckSum checkSum=CheckSum.compute(new NormalizingStream(this.getEndDelimiter(),this.isSplitStatements(),this.isStripComments(),stream),false);
+  try {
+    initializeSql();
+  }
+ catch (  SetupException e) {
+    throw new UnexpectedLiquibaseException("Exception re-initializing sql",e);
+  }
+  return checkSum;
 }

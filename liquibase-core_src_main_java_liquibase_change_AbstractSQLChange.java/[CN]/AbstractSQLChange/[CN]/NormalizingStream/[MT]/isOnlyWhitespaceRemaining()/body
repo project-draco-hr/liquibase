@@ -1,0 +1,18 @@
+{
+  List<Byte> readChars=new ArrayList<Byte>();
+  while (true) {
+    byte read=(byte)stream.read();
+    readChars.add(read);
+    if (read == -1) {
+      return true;
+    }
+    if (!isWhiteSpace(read)) {
+      byte[] buf=new byte[readChars.size()];
+      for (int i=0; i < readChars.size(); i++) {
+        buf[i]=readChars.get(i);
+      }
+      stream.unread(buf);
+      return false;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  boolean loaded=loadFromClasspath(path);
+  if (!loaded) {
+    loaded=loadFromFileSystem(path);
+  }
+  return loaded;
+}

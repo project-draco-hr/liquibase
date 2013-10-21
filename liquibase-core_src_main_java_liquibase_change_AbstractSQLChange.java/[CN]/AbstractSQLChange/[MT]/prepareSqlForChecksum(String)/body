@@ -1,6 +1,0 @@
-{
-  if (sql == null) {
-    return "";
-  }
-  return prepareSqlForChecksum(new ByteArrayInputStream(sql.getBytes()));
-}
