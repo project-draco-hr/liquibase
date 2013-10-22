@@ -9,7 +9,7 @@
     }
   }
   if (needsPreparedStatement) {
-    return new SqlStatement[]{new UpdateExecutablePreparedStatement(database,catalogName,schemaName,tableName,columns)};
+    return new SqlStatement[]{new UpdateExecutablePreparedStatement(database,catalogName,schemaName,tableName,columns,getChangeSet())};
   }
   UpdateStatement statement=new UpdateStatement(getCatalogName(),getSchemaName(),getTableName());
   for (  ColumnConfig column : getColumns()) {

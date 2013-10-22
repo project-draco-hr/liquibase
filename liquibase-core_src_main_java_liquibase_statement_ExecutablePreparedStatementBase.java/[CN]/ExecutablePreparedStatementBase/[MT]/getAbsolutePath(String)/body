@@ -1,0 +1,9 @@
+{
+  String p=path;
+  File f=new File(p);
+  if (!f.isAbsolute()) {
+    String basePath=FilenameUtils.getFullPath(changeSet.getChangeLog().getPhysicalFilePath());
+    p=FilenameUtils.normalize(basePath + p);
+  }
+  return p;
+}

@@ -1,3 +1,0 @@
-{
-  super(database,catalogName,schemaName,tableName,columns);
-}
