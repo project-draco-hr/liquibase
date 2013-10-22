@@ -3,7 +3,13 @@
     throw new SetupException("<sqlfile> - No path specified");
   }
   LogFactory.getLogger().debug("SQLFile file:" + path);
-  boolean loaded=initializeSql();
+  boolean loaded=false;
+  try {
+    loaded=initializeSqlStream();
+  }
+ catch (  IOException e) {
+    throw new SetupException(e);
+  }
   if (!loaded) {
     throw new SetupException("<sqlfile path=" + path + "> - Could not find file");
   }

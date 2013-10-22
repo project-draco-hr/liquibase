@@ -1,6 +1,7 @@
 {
   List<SqlStatement> returnStatements=new ArrayList<SqlStatement>();
-  if (StringUtils.trimToNull(getSql()) == null) {
+  String sql=StringUtils.trimToNull(getSql());
+  if (sql == null) {
     return new SqlStatement[0];
   }
   String processedSQL=normalizeLineEndings(sql);

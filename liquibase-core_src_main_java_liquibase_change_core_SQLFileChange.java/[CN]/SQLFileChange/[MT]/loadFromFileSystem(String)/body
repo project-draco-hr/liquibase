@@ -15,7 +15,7 @@
   try {
     sqlStream=getResourceAccessor().getResourceAsStream(file);
     if (sqlStream == null) {
-      throw new SetupException("<sqlfile path=" + file + "> -Unable to read file");
+      throw new IOException("<sqlfile path=" + file + "> -Unable to read file");
     }
     return true;
   }
@@ -23,6 +23,6 @@
     return false;
   }
 catch (  IOException e) {
-    throw new SetupException("<sqlfile path=" + file + "> -Unable to read file",e);
+    throw new IOException("<sqlfile path=" + file + "> -Unable to read file",e);
   }
 }

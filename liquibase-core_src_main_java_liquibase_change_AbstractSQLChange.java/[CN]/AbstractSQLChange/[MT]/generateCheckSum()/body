@@ -7,12 +7,16 @@
   if (sql != null) {
     stream=new ByteArrayInputStream(sql.getBytes());
   }
-  CheckSum checkSum=CheckSum.compute(new NormalizingStream(this.getEndDelimiter(),this.isSplitStatements(),this.isStripComments(),stream),false);
   try {
-    initializeSql();
+    CheckSum checkSum=CheckSum.compute(new NormalizingStream(this.getEndDelimiter(),this.isSplitStatements(),this.isStripComments(),stream),false);
+    return checkSum;
   }
- catch (  SetupException e) {
-    throw new UnexpectedLiquibaseException("Exception re-initializing sql",e);
+  finally {
+    try {
+      initializeSqlStream();
+    }
+ catch (    IOException e) {
+      LogFactory.getLogger().severe("Exception re-initializing sql",e);
+    }
   }
-  return checkSum;
 }

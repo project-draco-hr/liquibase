@@ -5,12 +5,21 @@
       return null;
     }
     try {
-      setSql(StreamUtil.getStreamContents(sqlStream,encoding));
+      return StreamUtil.getStreamContents(sqlStream,encoding);
     }
  catch (    IOException e) {
       throw new UnexpectedLiquibaseException(e);
     }
-    sql=super.getSql();
+ finally {
+      try {
+        initializeSqlStream();
+      }
+ catch (      IOException e) {
+        LogFactory.getLogger().severe("Error re-initializing sqlStream",e);
+      }
+    }
   }
-  return sql;
+ else {
+    return sql;
+  }
 }

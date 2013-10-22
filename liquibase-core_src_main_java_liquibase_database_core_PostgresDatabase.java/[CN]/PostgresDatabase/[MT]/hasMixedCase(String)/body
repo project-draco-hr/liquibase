@@ -2,5 +2,5 @@
   if (tableName == null) {
     return false;
   }
-  return tableName.matches(".*[A-Z].*") && tableName.matches(".*[a-z].*");
+  return StringUtils.hasUpperCase(tableName) && StringUtils.hasLowerCase(tableName);
 }
