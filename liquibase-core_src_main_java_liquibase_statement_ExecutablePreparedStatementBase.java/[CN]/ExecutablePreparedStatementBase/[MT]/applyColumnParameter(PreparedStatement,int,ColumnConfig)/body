@@ -41,9 +41,19 @@
  else   if (col.getValueClobFile() != null) {
     try {
       File file=new File(col.getValueClobFile());
-      stmt.setCharacterStream(i,new BufferedReader(new FileReader(file)),(int)file.length());
+      Reader bufReader=new BufferedReader(new FileReader(file));
+      if (database instanceof PostgresDatabase) {
+        String text=StreamUtil.getReaderContents(bufReader);
+        stmt.setString(i,text);
+      }
+ else {
+        stmt.setCharacterStream(i,bufReader);
+      }
     }
  catch (    FileNotFoundException e) {
+      throw new DatabaseException(e.getMessage(),e);
+    }
+catch (    IOException e) {
       throw new DatabaseException(e.getMessage(),e);
     }
   }
