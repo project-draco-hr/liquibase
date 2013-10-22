@@ -1,0 +1,21 @@
+{
+  if (this.getDatabase() == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase("changelogs/mssql/issues/data.types.xml");
+  liquibase.update(null);
+  DatabaseSnapshot snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(CatalogAndSchema.DEFAULT,this.getDatabase(),new SnapshotControl(getDatabase()));
+  for (  Table table : snapshot.get(Table.class)) {
+    if (getDatabase().isLiquibaseObject(table)) {
+      continue;
+    }
+    for (    Column column : table.getColumns()) {
+      String expectedType=column.getName().split("_")[0];
+      if (expectedType.equalsIgnoreCase("text")) {
+        expectedType="nvarchar";
+      }
+      String foundType=DataTypeFactory.getInstance().from(column.getType()).toDatabaseDataType(getDatabase()).toString().replaceFirst("\\(.*","");
+      assertEquals("Wrong data type for " + table.getName() + "."+ column.getName(),expectedType.toLowerCase(),foundType.toLowerCase());
+    }
+  }
+}
