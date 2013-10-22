@@ -1,6 +1,9 @@
 {
   if (database instanceof MySQLDatabase) {
-    return new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+  }
+  if (database instanceof MSSQLDatabase) {
+    return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
   }
   return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 }
