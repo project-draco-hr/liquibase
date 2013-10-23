@@ -1,0 +1,10 @@
+{
+  long length=0;
+  char[] buf=new char[2048];
+  int charsRead=reader.read(buf);
+  while (charsRead > 0) {
+    length+=charsRead;
+    charsRead=reader.read(buf);
+  }
+  return length;
+}

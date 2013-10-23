@@ -1,0 +1,10 @@
+{
+  long length=0;
+  byte[] buf=new byte[4096];
+  int bytesRead=in.read(buf);
+  while (bytesRead > 0) {
+    length+=bytesRead;
+    bytesRead=in.read(buf);
+  }
+  return length;
+}

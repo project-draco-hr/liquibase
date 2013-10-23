@@ -1,0 +1,22 @@
+{
+  InputStream in=getResourceAsStream(valueLobFile);
+  if (in == null) {
+    throw new DatabaseException("BLOB resource not found: " + valueLobFile);
+  }
+  if (in instanceof FileInputStream) {
+    return new LOBContent<InputStream>(createStream(in),((FileInputStream)in).getChannel().size());
+  }
+  in=createStream(in);
+  final int IN_MEMORY_THRESHOLD=100000;
+  if (in.markSupported()) {
+    in.mark(IN_MEMORY_THRESHOLD);
+  }
+  long length=StreamUtil.getContentLength(in);
+  if (in.markSupported() && length <= IN_MEMORY_THRESHOLD) {
+    in.reset();
+  }
+ else {
+    in=createStream(getResourceAsStream(valueLobFile));
+  }
+  return new LOBContent<InputStream>(in,length);
+}

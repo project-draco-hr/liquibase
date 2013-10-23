@@ -1,5 +1,6 @@
 {
   this.database=database;
+  this.changeSet=changeSet;
   this.catalogName=catalogName;
   this.schemaName=schemaName;
   this.tableName=tableName;

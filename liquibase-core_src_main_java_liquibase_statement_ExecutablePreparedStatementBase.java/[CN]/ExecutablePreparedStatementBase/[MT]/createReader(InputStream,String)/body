@@ -1,0 +1,3 @@
+{
+  return new BufferedReader(StringUtils.trimToNull(encoding) == null ? new UtfBomAwareReader(in) : new UtfBomAwareReader(in,encoding));
+}
