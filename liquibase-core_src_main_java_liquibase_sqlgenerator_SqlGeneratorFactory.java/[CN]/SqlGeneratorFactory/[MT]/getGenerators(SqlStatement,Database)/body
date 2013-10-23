@@ -1,4 +1,8 @@
 {
+  String key=statement.getClass().getName() + ":" + database.getShortName();
+  if (generatorsByKey.containsKey(key)) {
+    return generatorsByKey.get(key);
+  }
   SortedSet<SqlGenerator> validGenerators=new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
   for (  SqlGenerator generator : getGenerators()) {
     Class clazz=generator.getClass();
@@ -21,5 +25,6 @@
       clazz=clazz.getSuperclass();
     }
   }
+  generatorsByKey.put(key,validGenerators);
   return validGenerators;
 }
