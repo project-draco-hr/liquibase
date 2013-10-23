@@ -177,7 +177,7 @@
       ((CustomPreconditionWrapper)currentPrecondition).setParam(atts.getValue("name"),atts.getValue("value"));
     }
  else     if (rootPrecondition != null) {
-      currentPrecondition=PreconditionFactory.getInstance().create(localName);
+      currentPrecondition=preconditionFactory.create(localName);
       for (int i=0; i < atts.getLength(); i++) {
         String attributeName=atts.getLocalName(i);
         String attributeValue=atts.getValue(i);
@@ -204,7 +204,7 @@
       }
     }
  else     if (inModifySql) {
-      SqlVisitor sqlVisitor=SqlVisitorFactory.getInstance().create(localName);
+      SqlVisitor sqlVisitor=sqlVisitorFactory.create(localName);
       for (int i=0; i < atts.getLength(); i++) {
         String attributeName=atts.getLocalName(i);
         String attributeValue=atts.getValue(i);
@@ -216,7 +216,7 @@
       changeSet.addSqlVisitor(sqlVisitor);
     }
  else     if (changeSet != null && change == null) {
-      change=ChangeFactory.getInstance().create(localName);
+      change=changeFactory.create(localName);
       if (change == null) {
         throw new SAXException("Unknown Liquibase extension: " + localName + ".  Are you missing a jar from your classpath?");
       }
