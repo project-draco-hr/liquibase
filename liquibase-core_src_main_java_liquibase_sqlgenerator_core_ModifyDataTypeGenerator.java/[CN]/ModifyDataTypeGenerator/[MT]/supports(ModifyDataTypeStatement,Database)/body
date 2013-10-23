@@ -1,0 +1,6 @@
+{
+  if (database instanceof SQLiteDatabase) {
+    return false;
+  }
+  return super.supports(statement,database);
+}
