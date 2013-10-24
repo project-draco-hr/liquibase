@@ -1,7 +1,7 @@
 {
   super.checkRequiredParametersAreSpecified();
   if (referenceUrl == null) {
-    throw new MojoFailureException("A reference database or hibernate configuration file " + "must be provided to perform a diff.");
+    throw new MojoFailureException("A reference database must be provided to perform a diff.");
   }
   if (referencePassword == null) {
     referencePassword="";

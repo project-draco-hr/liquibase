@@ -1,0 +1,4 @@
+String endDelimiter
+Boolean splitStatements
+Boolean stripComments
+InputStream stream

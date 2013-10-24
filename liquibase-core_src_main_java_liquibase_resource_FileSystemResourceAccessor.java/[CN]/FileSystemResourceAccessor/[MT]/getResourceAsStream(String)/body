@@ -2,10 +2,10 @@
   File absoluteFile=new File(file);
   File relativeFile=(baseDirectory == null) ? new File(file) : new File(baseDirectory,file);
   if (absoluteFile.exists() && absoluteFile.isFile() && absoluteFile.isAbsolute()) {
-    return new FileInputStream(absoluteFile);
+    return new BufferedInputStream(new FileInputStream(absoluteFile));
   }
  else   if (relativeFile.exists() && relativeFile.isFile()) {
-    return new FileInputStream(relativeFile);
+    return new BufferedInputStream(new FileInputStream(relativeFile));
   }
  else {
     return null;

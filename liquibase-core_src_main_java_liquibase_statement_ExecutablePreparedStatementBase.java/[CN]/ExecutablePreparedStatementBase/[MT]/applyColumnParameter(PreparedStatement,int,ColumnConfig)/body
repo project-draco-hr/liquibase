@@ -31,19 +31,31 @@
   }
  else   if (col.getValueBlobFile() != null) {
     try {
-      LOBContent<InputStream> lob=toBinaryStream(col.getValueBlobFile());
-      stmt.setBinaryStream(i,lob.content,lob.length);
+      String filePath=getAbsolutePath(col.getValueBlobFile());
+      File file=new File(filePath);
+      stmt.setBinaryStream(i,new BufferedInputStream(new FileInputStream(file)),(int)file.length());
     }
- catch (    IOException e) {
+ catch (    FileNotFoundException e) {
       throw new DatabaseException(e.getMessage(),e);
     }
   }
  else   if (col.getValueClobFile() != null) {
     try {
-      LOBContent<Reader> lob=toCharacterStream(col.getValueClobFile(),col.getEncoding());
-      stmt.setCharacterStream(i,lob.content,lob.length);
+      String filePath=getAbsolutePath(col.getValueClobFile());
+      File file=new File(filePath);
+      Reader bufReader=new BufferedReader(new FileReader(file));
+      if (database instanceof PostgresDatabase) {
+        String text=StreamUtil.getReaderContents(bufReader);
+        stmt.setString(i,text);
+      }
+ else {
+        stmt.setCharacterStream(i,bufReader);
+      }
     }
- catch (    IOException e) {
+ catch (    FileNotFoundException e) {
+      throw new DatabaseException(e.getMessage(),e);
+    }
+catch (    IOException e) {
       throw new DatabaseException(e.getMessage(),e);
     }
   }

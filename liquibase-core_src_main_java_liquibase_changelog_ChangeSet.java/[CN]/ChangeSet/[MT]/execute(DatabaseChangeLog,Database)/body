@@ -11,7 +11,7 @@
     if (database.supportsDDLInTransaction()) {
       database.setAutoCommit(!runInTransaction);
     }
-    executor.comment("Changeset " + toString());
+    executor.comment("Changeset " + toString(false));
     if (StringUtils.trimToNull(getComments()) != null) {
       String comments=getComments();
       String[] lines=comments.split("\n");

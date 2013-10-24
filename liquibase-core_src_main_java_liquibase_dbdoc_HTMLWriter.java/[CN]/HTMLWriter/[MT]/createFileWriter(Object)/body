@@ -1,3 +1,3 @@
 {
-  return new FileWriter(new File(outputDir,object.toString().toLowerCase() + ".html"));
+  return new FileWriter(new File(outputDir,DBDocUtil.toFileName(object.toString().toLowerCase()) + ".html"));
 }

@@ -5,4 +5,8 @@
   databaseChangeLog.setPhysicalFilePath(physicalChangeLogLocation);
   databaseChangeLog.setChangeLogParameters(changeLogParameters);
   this.changeLogParameters=changeLogParameters;
+  changeFactory=ChangeFactory.getInstance();
+  preconditionFactory=PreconditionFactory.getInstance();
+  sqlVisitorFactory=SqlVisitorFactory.getInstance();
+  changeLogParserFactory=ChangeLogParserFactory.getInstance();
 }

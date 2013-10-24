@@ -1,3 +1,3 @@
 {
-  new DiffToChangeLog(diffResult,new DiffOutputControl(getIncludeCatalog(),getIncludeSchema(),getIncludeTablespace())).print(writer);
+  new DiffToReport(diffResult,writer).print();
 }

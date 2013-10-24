@@ -12,6 +12,10 @@
   }
   byte[] digestBytes=digest.digest();
   String returnString=new String(encodeHex(digestBytes));
-  LogFactory.getLogger().debug("Computed checksum for " + input + " as "+ returnString);
+  String inputToLog=input;
+  if (inputToLog.length() > 500) {
+    inputToLog=inputToLog.substring(0,500) + "... [truncated in log]";
+  }
+  LogFactory.getLogger().debug("Computed checksum for " + inputToLog + " as "+ returnString);
   return returnString;
 }

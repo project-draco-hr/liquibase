@@ -1,6 +1,3 @@
 {
-  if (columnName.contains("(")) {
-    return columnName;
-  }
   return escapeObjectName(columnName,Column.class);
 }

@@ -23,6 +23,9 @@
         returnKey.setTable((Table)new Table().setName(row.getString("TABLE_NAME")).setSchema(new Schema(tableSchema.getCatalogName(),tableSchema.getSchemaName())));
         returnKey.setName(row.getString("PK_NAME"));
       }
+      if (database instanceof SQLiteDatabase) {
+        position=(short)(position + 1);
+      }
       returnKey.addColumnName(position - 1,columnName);
     }
     if (returnKey != null) {

@@ -57,6 +57,9 @@
         if (columnName == null) {
           columnName=headers[i];
         }
+        if (columnName.contains("(") || columnName.contains(")") && database instanceof AbstractJdbcDatabase) {
+          columnName=((AbstractJdbcDatabase)database).quoteObject(columnName,Column.class);
+        }
         insertStatement.addColumnValue(columnName,value);
       }
       statements.add(insertStatement);

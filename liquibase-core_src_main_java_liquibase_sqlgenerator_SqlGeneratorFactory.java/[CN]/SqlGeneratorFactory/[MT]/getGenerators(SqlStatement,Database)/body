@@ -1,4 +1,15 @@
 {
+  String databaseName=null;
+  if (database == null) {
+    databaseName="NULL";
+  }
+ else {
+    databaseName=database.getShortName();
+  }
+  String key=statement.getClass().getName() + ":" + databaseName;
+  if (generatorsByKey.containsKey(key)) {
+    return generatorsByKey.get(key);
+  }
   SortedSet<SqlGenerator> validGenerators=new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
   for (  SqlGenerator generator : getGenerators()) {
     Class clazz=generator.getClass();
@@ -21,5 +32,6 @@
       clazz=clazz.getSuperclass();
     }
   }
+  generatorsByKey.put(key,validGenerators);
   return validGenerators;
 }
