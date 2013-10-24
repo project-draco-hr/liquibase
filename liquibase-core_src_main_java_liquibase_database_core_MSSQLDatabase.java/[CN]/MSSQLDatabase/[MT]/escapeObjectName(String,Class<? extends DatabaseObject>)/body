@@ -1,4 +1,7 @@
 {
+  if (objectName == null) {
+    return null;
+  }
   if (objectName.contains("(")) {
     return objectName;
   }
