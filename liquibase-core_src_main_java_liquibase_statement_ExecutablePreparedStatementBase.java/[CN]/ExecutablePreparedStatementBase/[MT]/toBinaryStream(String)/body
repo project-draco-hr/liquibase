@@ -16,6 +16,7 @@
     in.reset();
   }
  else {
+    StreamUtil.closeQuietly(in);
     in=createStream(getResourceAsStream(valueLobFile));
   }
   return new LOBContent<InputStream>(in,length);
