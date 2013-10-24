@@ -3,7 +3,7 @@
     return;
   }
   Liquibase liquibase=createLiquibase("changelogs/mssql/issues/default.values.xml");
-  liquibase.update(null);
+  liquibase.update((String)null);
   DatabaseSnapshot snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(CatalogAndSchema.DEFAULT,this.getDatabase(),new SnapshotControl(getDatabase()));
   for (  Table table : snapshot.get(Table.class)) {
     for (    Column column : table.getColumns()) {
