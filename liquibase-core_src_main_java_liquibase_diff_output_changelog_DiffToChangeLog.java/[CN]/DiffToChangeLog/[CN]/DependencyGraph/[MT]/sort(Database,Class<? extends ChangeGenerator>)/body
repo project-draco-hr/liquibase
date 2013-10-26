@@ -8,24 +8,29 @@
       getNode(beforeType).addEdge(getNode(type));
     }
   }
-  ArrayList<Node> L=new ArrayList<Node>();
-  HashSet<Node> S=new HashSet<Node>();
-  for (  Node n : allNodes.values()) {
-    if (n.inEdges.size() == 0) {
-      S.add(n);
+  ArrayList<Node> returnNodes=new ArrayList<Node>();
+  SortedSet<Node> nodesWithNoIncomingEdges=new TreeSet<Node>(new Comparator<Node>(){
+    @Override public int compare(    Node o1,    Node o2){
+      return o1.type.getName().compareTo(o2.type.getName());
     }
   }
-  while (!S.isEmpty()) {
-    Node n=S.iterator().next();
-    S.remove(n);
-    L.add(n);
-    for (Iterator<Edge> it=n.outEdges.iterator(); it.hasNext(); ) {
-      Edge e=it.next();
-      Node m=e.to;
+);
+  for (  Node n : allNodes.values()) {
+    if (n.inEdges.size() == 0) {
+      nodesWithNoIncomingEdges.add(n);
+    }
+  }
+  while (!nodesWithNoIncomingEdges.isEmpty()) {
+    Node node=nodesWithNoIncomingEdges.iterator().next();
+    nodesWithNoIncomingEdges.remove(node);
+    returnNodes.add(node);
+    for (Iterator<Edge> it=node.outEdges.iterator(); it.hasNext(); ) {
+      Edge edge=it.next();
+      Node nodePointedTo=edge.to;
       it.remove();
-      m.inEdges.remove(e);
-      if (m.inEdges.isEmpty()) {
-        S.add(m);
+      nodePointedTo.inEdges.remove(edge);
+      if (nodePointedTo.inEdges.isEmpty()) {
+        nodesWithNoIncomingEdges.add(nodePointedTo);
       }
     }
   }
@@ -49,7 +54,7 @@
     }
   }
   List<Class<? extends DatabaseObject>> returnList=new ArrayList<Class<? extends DatabaseObject>>();
-  for (  Node node : L) {
+  for (  Node node : returnNodes) {
     returnList.add(node.type);
   }
   return returnList;

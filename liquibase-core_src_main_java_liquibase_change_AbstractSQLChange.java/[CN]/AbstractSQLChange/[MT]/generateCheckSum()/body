@@ -1,7 +1,22 @@
 {
-  String sql=getSql();
-  if (sql == null) {
+  InputStream stream=this.sqlStream;
+  String sql=this.sql;
+  if (sqlStream == null && sql == null) {
     sql="";
   }
-  return CheckSum.compute(this.getEndDelimiter() + ":" + this.isSplitStatements()+ ":"+ this.isStripComments()+ ":"+ prepareSqlForChecksum(sql));
+  if (sql != null) {
+    stream=new ByteArrayInputStream(sql.getBytes());
+  }
+  try {
+    CheckSum checkSum=CheckSum.compute(new NormalizingStream(this.getEndDelimiter(),this.isSplitStatements(),this.isStripComments(),stream),false);
+    return checkSum;
+  }
+  finally {
+    try {
+      initializeSqlStream();
+    }
+ catch (    IOException e) {
+      LogFactory.getLogger().severe("Exception re-initializing sql",e);
+    }
+  }
 }

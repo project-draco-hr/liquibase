@@ -1,11 +1,12 @@
 {
   if (objectName != null) {
     if (objectName.contains("-") || startsWithNumeric(objectName) || isReservedWord(objectName)) {
-      return quotingStartCharacter + objectName + quotingEndCharacter;
+      return quoteObject(objectName,objectType);
     }
  else     if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS) {
-      return quotingStartCharacter + objectName + quotingEndCharacter;
+      return quoteObject(objectName,objectType);
     }
+    objectName=objectName.trim();
   }
   return objectName;
 }

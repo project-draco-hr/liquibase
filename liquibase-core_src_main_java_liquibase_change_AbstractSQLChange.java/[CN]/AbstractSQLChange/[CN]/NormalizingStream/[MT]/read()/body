@@ -1,0 +1,25 @@
+{
+  if (headerStream != null) {
+    int returnChar=headerStream.read();
+    if (returnChar != -1) {
+      return returnChar;
+    }
+    headerStream=null;
+  }
+  int returnChar=stream.read();
+  if (isWhiteSpace(returnChar)) {
+    returnChar=' ';
+  }
+  while (returnChar == ' ' && (!seenNonSpace || lastChar == ' ')) {
+    returnChar=stream.read();
+    if (isWhiteSpace(returnChar)) {
+      returnChar=' ';
+    }
+  }
+  seenNonSpace=true;
+  lastChar=returnChar;
+  if (lastChar == ' ' && isOnlyWhitespaceRemaining()) {
+    return -1;
+  }
+  return returnChar;
+}

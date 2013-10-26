@@ -1,0 +1,10 @@
+{
+  this.database=database;
+  this.changeSet=changeSet;
+  this.catalogName=catalogName;
+  this.schemaName=schemaName;
+  this.tableName=tableName;
+  this.columns=columns;
+  this.changeSet=changeSet;
+  this.closeables=new HashSet<Closeable>();
+}

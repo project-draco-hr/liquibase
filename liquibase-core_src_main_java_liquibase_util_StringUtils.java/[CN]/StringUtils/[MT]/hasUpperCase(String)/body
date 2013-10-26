@@ -1,0 +1,3 @@
+{
+  return upperCasePattern.matcher(string).matches();
+}

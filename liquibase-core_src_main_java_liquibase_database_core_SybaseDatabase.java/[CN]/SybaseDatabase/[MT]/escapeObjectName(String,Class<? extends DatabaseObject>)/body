@@ -1,3 +1,9 @@
 {
+  if (objectName == null) {
+    return null;
+  }
+  if (objectName.contains("(")) {
+    return objectName;
+  }
   return this.quotingStartCharacter + objectName + this.quotingEndCharacter;
 }

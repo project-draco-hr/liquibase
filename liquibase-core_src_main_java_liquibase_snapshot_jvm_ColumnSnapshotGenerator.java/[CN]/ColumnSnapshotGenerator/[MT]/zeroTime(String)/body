@@ -1,0 +1,3 @@
+{
+  return stringVal.replace("-","").replace(":","").replace(" ","").replace("0","").equals("");
+}

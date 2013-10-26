@@ -38,7 +38,7 @@
         buffer.append(" CONSTRAINT ");
         buffer.append(database.escapeConstraintName(pkName));
       }
-      buffer.append(" PRIMARY KEY AUTOINCREMENT");
+      buffer.append(" PRIMARY KEY");
     }
     if (!columnType.isAutoIncrement() && statement.getDefaultValue(column) != null) {
       Object defaultValue=statement.getDefaultValue(column);

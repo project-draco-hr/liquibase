@@ -1,0 +1,9 @@
+{
+  if (database instanceof SQLiteDatabase) {
+    ValidationErrors validationErrors=new ValidationErrors();
+    validationErrors.checkRequiredField("tableName",tableName);
+    validationErrors.checkRequiredField("columnName",columnName);
+    return validationErrors;
+  }
+  return super.validate(database);
+}
