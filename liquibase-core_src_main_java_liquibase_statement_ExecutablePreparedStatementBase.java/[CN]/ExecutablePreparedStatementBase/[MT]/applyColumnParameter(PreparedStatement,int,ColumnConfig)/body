@@ -38,7 +38,6 @@
  else {
         stmt.setBinaryStream(i,lob.content,lob.length);
       }
-      closeables.add(lob.content);
     }
  catch (    IOException e) {
       throw new DatabaseException(e.getMessage(),e);
@@ -59,7 +58,6 @@
           stmt.setCharacterStream(i,lob.content,lob.length);
         }
       }
-      closeables.add(lob.content);
     }
  catch (    IOException e) {
       throw new DatabaseException(e.getMessage(),e);
