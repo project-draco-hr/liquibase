@@ -46,17 +46,11 @@
  else   if (col.getValueClobFile() != null) {
     try {
       LOBContent<Reader> lob=toCharacterStream(col.getValueClobFile(),col.getEncoding());
-      if (database instanceof PostgresDatabase) {
-        String text=StreamUtil.getReaderContents(lob.content);
-        stmt.setString(i,text);
+      if (lob.length <= Integer.MAX_VALUE) {
+        stmt.setCharacterStream(i,lob.content,(int)lob.length);
       }
  else {
-        if (lob.length <= Integer.MAX_VALUE) {
-          stmt.setCharacterStream(i,lob.content,(int)lob.length);
-        }
- else {
-          stmt.setCharacterStream(i,lob.content,lob.length);
-        }
+        stmt.setCharacterStream(i,lob.content,lob.length);
       }
     }
  catch (    IOException e) {
