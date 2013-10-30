@@ -3,14 +3,14 @@
   PreparedStatement stmt=createMock(PreparedStatement.class);
   final Capture<Integer> index=new Capture<Integer>();
   final Capture<InputStream> in=new Capture<InputStream>();
-  final Capture<Long> length=new Capture<Long>();
+  final Capture<Integer> length=new Capture<Integer>();
   stmt.setBinaryStream(capture(index),capture(in),capture(length));
   expectLastCall().andAnswer(new IAnswer<Object>(){
     @Override public Object answer() throws Throwable {
       Assert.assertEquals(new Integer(1),index.getValue());
       Assert.assertNotNull(in.getValue());
       Assert.assertTrue(in.getValue() instanceof BufferedInputStream);
-      Assert.assertEquals(new Long(50),length.getValue());
+      Assert.assertEquals(new Integer(50),length.getValue());
       return null;
     }
   }
