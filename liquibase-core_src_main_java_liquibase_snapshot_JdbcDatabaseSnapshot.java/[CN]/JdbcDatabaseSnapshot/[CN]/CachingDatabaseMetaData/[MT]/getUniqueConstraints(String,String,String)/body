@@ -18,13 +18,13 @@
       Database database=JdbcDatabaseSnapshot.this.getDatabase();
       String sql;
       if (database instanceof MySQLDatabase || database instanceof HsqlDatabase) {
-        sql="select CONSTRAINT_NAME, TABLE_NAME " + "from information_schema.table_constraints " + "where constraint_schema='" + database.correctObjectName(catalogName,Catalog.class) + "' "+ "and constraint_type='UNIQUE'";
+        sql="select CONSTRAINT_NAME, TABLE_NAME " + "from " + database.getSystemSchema() + ".table_constraints "+ "where constraint_schema='"+ database.correctObjectName(catalogName,Catalog.class)+ "' "+ "and constraint_type='UNIQUE'";
         if (tableName != null) {
           sql+=" and table_name='" + database.correctObjectName(tableName,Table.class) + "'";
         }
       }
  else       if (database instanceof PostgresDatabase) {
-        sql="select CONSTRAINT_NAME, TABLE_NAME " + "from information_schema.table_constraints " + "where constraint_catalog='" + database.correctObjectName(catalogName,Catalog.class) + "' "+ "and constraint_schema='"+ database.correctObjectName(schemaName,Schema.class)+ "' "+ "and constraint_type='UNIQUE'";
+        sql="select CONSTRAINT_NAME, TABLE_NAME " + "from " + database.getSystemSchema() + ".table_constraints "+ "where constraint_catalog='"+ database.correctObjectName(catalogName,Catalog.class)+ "' "+ "and constraint_schema='"+ database.correctObjectName(schemaName,Schema.class)+ "' "+ "and constraint_type='UNIQUE'";
         if (tableName != null) {
           sql+=" and table_name='" + database.correctObjectName(tableName,Table.class) + "'";
         }
@@ -59,8 +59,14 @@
           sql+=" AND t.tablename = '" + database.correctObjectName(tableName,Table.class) + "'";
         }
       }
+ else       if (database instanceof InformixDatabase) {
+        sql="select sysindexes.idxname, sysindexes.idxtype, systables.tabname " + "from sysindexes, systables " + "where sysindexes.tabid = systables.tabid "+ "and sysindexes.idxtype ='U'";
+        if (tableName != null) {
+          sql+=" AND systables.tabname = '" + database.correctObjectName(tableName,Table.class) + "'";
+        }
+      }
  else {
-        sql="select CONSTRAINT_NAME, CONSTRAINT_TYPE, TABLE_NAME " + "from information_schema.constraints " + "where constraint_schema='" + database.correctObjectName(schemaName,Schema.class) + "' "+ "and constraint_catalog='"+ database.correctObjectName(catalogName,Catalog.class)+ "' "+ "and constraint_type='UNIQUE'";
+        sql="select CONSTRAINT_NAME, CONSTRAINT_TYPE, TABLE_NAME " + "from " + database.getSystemSchema() + ".constraints "+ "where constraint_schema='"+ database.correctObjectName(schemaName,Schema.class)+ "' "+ "and constraint_catalog='"+ database.correctObjectName(catalogName,Catalog.class)+ "' "+ "and constraint_type='UNIQUE'";
         if (tableName != null) {
           sql+=" and table_name='" + database.correctObjectName(tableName,Table.class) + "'";
         }
