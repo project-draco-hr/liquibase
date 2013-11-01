@@ -1,0 +1,6 @@
+{
+  final UtfBomStripperInputStream is=prepare(0x61,0x62,0x63);
+  assertNull(is.getDetectedCharsetName());
+  assertData(is);
+  is.close();
+}
