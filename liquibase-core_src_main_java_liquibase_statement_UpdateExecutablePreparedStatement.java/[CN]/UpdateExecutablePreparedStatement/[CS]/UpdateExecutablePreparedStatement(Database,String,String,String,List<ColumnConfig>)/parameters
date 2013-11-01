@@ -1,5 +1,0 @@
-Database database
-String catalogName
-String schemaName
-String tableName
-List<ColumnConfig> columns

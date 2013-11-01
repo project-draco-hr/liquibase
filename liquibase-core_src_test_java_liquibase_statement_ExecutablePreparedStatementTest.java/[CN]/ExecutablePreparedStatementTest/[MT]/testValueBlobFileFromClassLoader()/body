@@ -1,0 +1,10 @@
+{
+  ColumnConfig columnConfig=new ColumnConfig();
+  String valueBlobFile="../unicode-file.txt";
+  columnConfig.setValueBlobFile(valueBlobFile);
+  List<ColumnConfig> columns=Arrays.asList(columnConfig);
+  ChangeSet changeSet=createMock(ChangeSet.class);
+  expect(changeSet.getFilePath()).andReturn("liquibase/util/foo/");
+  replay(changeSet);
+  assertSetBinaryStream(columns,changeSet);
+}

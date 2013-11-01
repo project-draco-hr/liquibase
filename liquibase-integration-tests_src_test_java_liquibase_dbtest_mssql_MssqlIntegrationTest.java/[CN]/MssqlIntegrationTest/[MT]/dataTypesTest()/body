@@ -1,0 +1,30 @@
+{
+  if (this.getDatabase() == null) {
+    return;
+  }
+  Liquibase liquibase=createLiquibase("changelogs/mssql/issues/data.types.xml");
+  liquibase.update((String)null);
+  DatabaseSnapshot snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(CatalogAndSchema.DEFAULT,this.getDatabase(),new SnapshotControl(getDatabase()));
+  for (  Table table : snapshot.get(Table.class)) {
+    if (getDatabase().isLiquibaseObject(table)) {
+      continue;
+    }
+    for (    Column column : table.getColumns()) {
+      String expectedType=column.getName().split("_")[0];
+      if (expectedType.equalsIgnoreCase("text")) {
+        expectedType="nvarchar";
+      }
+      String foundTypeDefinition=DataTypeFactory.getInstance().from(column.getType()).toDatabaseDataType(getDatabase()).toString();
+      String foundType=foundTypeDefinition.replaceFirst("\\(.*","");
+      assertEquals("Wrong data type for " + table.getName() + "."+ column.getName(),expectedType.toLowerCase(),foundType.toLowerCase());
+      if (expectedType.equalsIgnoreCase("varbinary")) {
+        if (column.getName().endsWith("_MAX")) {
+          assertEquals("VARBINARY(MAX)",foundTypeDefinition);
+        }
+ else {
+          assertEquals("VARBINARY(1)",foundTypeDefinition);
+        }
+      }
+    }
+  }
+}

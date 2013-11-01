@@ -13,4 +13,9 @@
  catch (  SQLException e) {
     throw new DatabaseException(e);
   }
+ finally {
+    for (    Closeable closeable : closeables) {
+      StreamUtil.closeQuietly(closeable);
+    }
+  }
 }

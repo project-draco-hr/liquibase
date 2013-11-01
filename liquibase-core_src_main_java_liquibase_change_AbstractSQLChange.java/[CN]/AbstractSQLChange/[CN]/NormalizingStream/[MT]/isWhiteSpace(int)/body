@@ -1,0 +1,3 @@
+{
+  return read == ' ' || read == '\n' || read == '\r' || read == '\t';
+}

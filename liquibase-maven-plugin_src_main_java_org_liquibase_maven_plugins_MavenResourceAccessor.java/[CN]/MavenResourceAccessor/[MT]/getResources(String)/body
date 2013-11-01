@@ -1,3 +1,4 @@
 {
+  packageName=packageName.replaceFirst("^target/classes/","");
   return _loader.getResources(packageName);
 }

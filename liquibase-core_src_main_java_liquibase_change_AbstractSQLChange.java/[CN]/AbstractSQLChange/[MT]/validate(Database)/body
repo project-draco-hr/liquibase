@@ -1,0 +1,7 @@
+{
+  ValidationErrors validationErrors=new ValidationErrors();
+  if (StringUtils.trimToNull(sql) == null) {
+    validationErrors.addError("'sql' is required");
+  }
+  return validationErrors;
+}

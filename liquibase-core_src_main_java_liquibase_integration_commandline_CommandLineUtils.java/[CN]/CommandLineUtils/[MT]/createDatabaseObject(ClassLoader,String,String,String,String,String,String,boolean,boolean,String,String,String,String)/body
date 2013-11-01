@@ -1,4 +1,5 @@
 {
+  driver=StringUtils.trimToNull(driver);
   if (driver == null) {
     driver=DatabaseFactory.getInstance().findDefaultDriver(url);
   }

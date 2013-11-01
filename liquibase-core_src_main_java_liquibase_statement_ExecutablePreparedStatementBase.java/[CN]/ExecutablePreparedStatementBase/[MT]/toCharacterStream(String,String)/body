@@ -1,0 +1,32 @@
+{
+  InputStream in=getResourceAsStream(valueLobFile);
+  if (in == null) {
+    throw new DatabaseException("CLOB resource not found: " + valueLobFile);
+  }
+  final int IN_MEMORY_THRESHOLD=100000;
+  Reader reader=null;
+  try {
+    reader=createReader(in,encoding);
+    if (reader.markSupported()) {
+      reader.mark(IN_MEMORY_THRESHOLD);
+    }
+    long length=StreamUtil.getContentLength(reader);
+    if (reader.markSupported() && length <= IN_MEMORY_THRESHOLD) {
+      reader.reset();
+    }
+ else {
+      StreamUtil.closeQuietly(reader);
+      in=getResourceAsStream(valueLobFile);
+      reader=createReader(in,encoding);
+    }
+    return new LOBContent<Reader>(reader,length);
+  }
+  finally {
+    if (reader != null) {
+      closeables.add(reader);
+    }
+    if (in != null) {
+      closeables.add(in);
+    }
+  }
+}

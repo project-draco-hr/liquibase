@@ -1,7 +1,0 @@
-{
-  this.database=database;
-  this.catalogName=catalogName;
-  this.schemaName=schemaName;
-  this.tableName=tableName;
-  this.columns=columns;
-}

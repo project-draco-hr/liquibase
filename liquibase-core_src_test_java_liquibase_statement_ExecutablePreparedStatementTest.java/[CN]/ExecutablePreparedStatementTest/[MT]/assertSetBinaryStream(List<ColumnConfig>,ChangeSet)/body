@@ -1,0 +1,24 @@
+{
+  InsertExecutablePreparedStatement statement=new InsertExecutablePreparedStatement(new MockDatabase(),"catalog","schema","table",columns,changeSet);
+  PreparedStatement stmt=createMock(PreparedStatement.class);
+  final Capture<Integer> index=new Capture<Integer>();
+  final Capture<InputStream> in=new Capture<InputStream>();
+  final Capture<Integer> length=new Capture<Integer>();
+  stmt.setBinaryStream(capture(index),capture(in),capture(length));
+  expectLastCall().andAnswer(new IAnswer<Object>(){
+    @Override public Object answer() throws Throwable {
+      Assert.assertEquals(new Integer(1),index.getValue());
+      Assert.assertNotNull(in.getValue());
+      Assert.assertTrue(in.getValue() instanceof BufferedInputStream);
+      Assert.assertEquals(new Integer(50),length.getValue());
+      return null;
+    }
+  }
+);
+  expect(stmt.execute()).andReturn(true);
+  replay(stmt);
+  JdbcConnection connection=createMock(JdbcConnection.class);
+  expect(connection.prepareStatement("INSERT INTO schema.table(null) VALUES(?)")).andReturn(stmt);
+  replay(connection);
+  statement.execute(new PreparedStatementFactory(connection));
+}

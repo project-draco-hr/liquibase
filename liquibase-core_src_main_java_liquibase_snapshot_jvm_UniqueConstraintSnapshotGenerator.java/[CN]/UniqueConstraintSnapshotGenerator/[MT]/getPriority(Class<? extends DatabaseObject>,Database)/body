@@ -1,0 +1,6 @@
+{
+  if (database instanceof SQLiteDatabase) {
+    return PRIORITY_NONE;
+  }
+  return super.getPriority(objectType,database);
+}

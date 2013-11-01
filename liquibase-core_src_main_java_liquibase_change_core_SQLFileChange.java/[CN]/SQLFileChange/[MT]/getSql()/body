@@ -1,0 +1,25 @@
+{
+  String sql=super.getSql();
+  if (sql == null) {
+    if (sqlStream == null) {
+      return null;
+    }
+    try {
+      return StreamUtil.getStreamContents(sqlStream,encoding);
+    }
+ catch (    IOException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+ finally {
+      try {
+        initializeSqlStream();
+      }
+ catch (      IOException e) {
+        LogFactory.getLogger().severe("Error re-initializing sqlStream",e);
+      }
+    }
+  }
+ else {
+    return sql;
+  }
+}

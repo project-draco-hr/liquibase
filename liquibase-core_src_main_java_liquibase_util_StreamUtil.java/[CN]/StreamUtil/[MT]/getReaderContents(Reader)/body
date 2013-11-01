@@ -9,10 +9,6 @@
     return result.toString();
   }
   finally {
-    try {
-      reader.close();
-    }
- catch (    IOException ioe) {
-    }
+    closeQuietly(reader);
   }
 }
