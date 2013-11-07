@@ -1,0 +1,4 @@
+{
+  this.whereColumnNames.add(value);
+  return this;
+}

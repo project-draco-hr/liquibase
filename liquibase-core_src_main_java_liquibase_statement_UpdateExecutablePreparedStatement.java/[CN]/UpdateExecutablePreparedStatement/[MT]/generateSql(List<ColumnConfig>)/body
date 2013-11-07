@@ -10,5 +10,18 @@
   params.deleteCharAt(params.lastIndexOf(" "));
   params.deleteCharAt(params.lastIndexOf(","));
   sql.append(params);
+  if (getWhereClause() != null) {
+    String fixedWhereClause="WHERE " + getWhereClause().trim();
+    for (    String columnName : getWhereColumnNames()) {
+      if (columnName == null) {
+        continue;
+      }
+      fixedWhereClause=fixedWhereClause.replaceFirst(":name",database.escapeObjectName(columnName,Column.class));
+    }
+    for (    Object param : getWhereParameters()) {
+      fixedWhereClause=fixedWhereClause.replaceFirst("\\?|:value",DataTypeFactory.getInstance().fromObject(param,database).objectToSql(param,database));
+    }
+    sql.append(" ").append(fixedWhereClause);
+  }
   return sql.toString();
 }
