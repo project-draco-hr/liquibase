@@ -2,6 +2,9 @@
   try {
     Executor executor=ExecutorService.getInstance().getExecutor(database);
     executor.comment("Rolling Back ChangeSet: " + toString());
+    if (database.supportsDDLInTransaction()) {
+      database.setAutoCommit(!runInTransaction);
+    }
     RanChangeSet ranChangeSet=database.getRanChangeSet(this);
     if (rollBackChanges != null && rollBackChanges.size() > 0) {
       for (      Change rollback : rollBackChanges) {
@@ -26,7 +29,9 @@
         database.executeRollbackStatements(change,sqlVisitors);
       }
     }
-    database.commit();
+    if (runInTransaction) {
+      database.commit();
+    }
     log.debug("ChangeSet " + toString() + " has been successfully rolled back.");
   }
  catch (  Exception e) {
@@ -36,5 +41,15 @@
  catch (    DatabaseException e1) {
     }
     throw new RollbackFailedException(e);
+  }
+ finally {
+    if (!runInTransaction && database.supportsDDLInTransaction()) {
+      try {
+        database.setAutoCommit(false);
+      }
+ catch (      DatabaseException e) {
+        throw new RollbackFailedException("Could not resetInternalState autocommit",e);
+      }
+    }
   }
 }
