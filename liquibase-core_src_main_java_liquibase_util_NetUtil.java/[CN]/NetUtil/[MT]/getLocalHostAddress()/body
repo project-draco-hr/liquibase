@@ -1,7 +1,7 @@
 {
   String osName=System.getProperty("os.name");
   if (osName != null && osName.toLowerCase().contains("windows")) {
-    return InetAddress.getLocalHost();
+    return InetAddress.getLocalHost().getHostAddress();
   }
   InetAddress lch=null;
   Enumeration<NetworkInterface> e=NetworkInterface.getNetworkInterfaces();
@@ -14,5 +14,5 @@
     lch=ie.nextElement();
     if (!lch.isLoopbackAddress())     break;
   }
-  return lch;
+  return lch == null ? null : lch.getHostAddress();
 }
