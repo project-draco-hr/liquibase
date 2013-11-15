@@ -34,7 +34,7 @@ catch (    SAXNotSupportedException e) {
     }
     XMLChangeLogSAXHandler contentHandler=new XMLChangeLogSAXHandler(physicalChangeLogLocation,resourceAccessor,changeLogParameters);
     xmlReader.setContentHandler(contentHandler);
-    xmlReader.parse(new InputSource(new UtfBomAwareReader(inputStream)));
+    xmlReader.parse(new InputSource(new UtfBomStripperInputStream(inputStream)));
     return contentHandler.getDatabaseChangeLog();
   }
  catch (  ChangeLogParseException e) {
