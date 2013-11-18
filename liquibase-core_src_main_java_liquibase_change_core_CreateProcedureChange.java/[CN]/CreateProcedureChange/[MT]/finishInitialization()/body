@@ -1,0 +1,15 @@
+{
+  if (getPath() == null) {
+    return;
+  }
+  boolean loaded=false;
+  try {
+    loaded=initializeSqlStream();
+  }
+ catch (  IOException e) {
+    throw new SetupException(e);
+  }
+  if (!loaded) {
+    throw new SetupException("<createProcedure path=" + path + "> - Could not find file");
+  }
+}

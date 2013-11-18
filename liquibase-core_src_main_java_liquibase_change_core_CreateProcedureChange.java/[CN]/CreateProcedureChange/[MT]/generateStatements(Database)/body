@@ -6,5 +6,26 @@
  else   if (database instanceof DB2Database) {
     endDelimiter="";
   }
-  return new SqlStatement[]{new CreateProcedureStatement(getCatalogName(),getSchemaName(),getProcedureName(),getProcedureText(),endDelimiter)};
+  String procedureText;
+  String path=getPath();
+  if (path == null) {
+    procedureText=StringUtils.trimToNull(getProcedureText());
+  }
+ else {
+    try {
+      procedureText=StreamUtil.getStreamContents(procedureTextStream,encoding);
+    }
+ catch (    IOException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+ finally {
+      try {
+        initializeSqlStream();
+      }
+ catch (      IOException e) {
+        LogFactory.getLogger().severe("Error re-initializing sqlStream",e);
+      }
+    }
+  }
+  return new SqlStatement[]{new CreateProcedureStatement(getCatalogName(),getSchemaName(),getProcedureName(),procedureText,endDelimiter)};
 }

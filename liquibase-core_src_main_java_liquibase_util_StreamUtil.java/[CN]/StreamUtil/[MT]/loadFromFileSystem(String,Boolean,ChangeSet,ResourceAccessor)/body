@@ -1,0 +1,21 @@
+{
+  if (relativeToChangelogFile != null && relativeToChangelogFile) {
+    String base;
+    if (changeSet.getChangeLog() == null) {
+      base=changeSet.getFilePath();
+    }
+ else {
+      base=changeSet.getChangeLog().getPhysicalFilePath().replaceAll("\\\\","/");
+    }
+    if (!base.contains("/")) {
+      base=".";
+    }
+    file=base.replaceFirst("/[^/]*$","") + "/" + file;
+  }
+  try {
+    return resourceAccessor.getResourceAsStream(file);
+  }
+ catch (  FileNotFoundException fnfe) {
+    return null;
+  }
+}

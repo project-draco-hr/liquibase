@@ -1,0 +1,7 @@
+{
+  InputStream stream=loadFromClasspath(path,relativeToChangelogFile,changeSet,resourceAccessor);
+  if (stream == null) {
+    stream=loadFromFileSystem(path,relativeToChangelogFile,changeSet,resourceAccessor);
+  }
+  return stream;
+}

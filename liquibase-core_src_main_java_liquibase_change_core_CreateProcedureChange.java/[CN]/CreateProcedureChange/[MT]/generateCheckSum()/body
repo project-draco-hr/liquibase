@@ -1,0 +1,22 @@
+{
+  InputStream stream=this.procedureTextStream;
+  String procedureText=this.procedureText;
+  if (stream == null && procedureText == null) {
+    procedureText="";
+  }
+  if (procedureText != null) {
+    stream=new ByteArrayInputStream(procedureText.getBytes());
+  }
+  try {
+    CheckSum checkSum=CheckSum.compute(new AbstractSQLChange.NormalizingStream(";",false,false,stream),false);
+    return checkSum;
+  }
+  finally {
+    try {
+      initializeSqlStream();
+    }
+ catch (    IOException e) {
+      LogFactory.getLogger().severe("Exception re-initializing procedureText",e);
+    }
+  }
+}

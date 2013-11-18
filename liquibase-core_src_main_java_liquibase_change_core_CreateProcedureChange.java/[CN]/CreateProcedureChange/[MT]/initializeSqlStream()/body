@@ -1,0 +1,7 @@
+{
+  if (path == null) {
+    return true;
+  }
+  procedureTextStream=StreamUtil.openStream(getPath(),isRelativeToChangelogFile(),getChangeSet(),getResourceAccessor());
+  return procedureTextStream != null;
+}

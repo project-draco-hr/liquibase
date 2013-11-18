@@ -1,0 +1,4 @@
+String path
+Boolean relativeToChangelogFile
+ChangeSet changeSet
+ResourceAccessor resourceAccessor
