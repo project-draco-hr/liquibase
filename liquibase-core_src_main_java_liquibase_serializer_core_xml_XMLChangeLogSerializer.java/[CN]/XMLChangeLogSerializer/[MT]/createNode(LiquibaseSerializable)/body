@@ -1,5 +1,6 @@
 {
-  Element node=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),object.getSerializedObjectName());
+  String namespace=object.getSerializedObjectNamespace();
+  Element node=currentChangeLogFileDOM.createElementNS(namespace,object.getSerializedObjectName());
   for (  String field : object.getSerializableFields()) {
     setValueOnNode(node,field,object.getSerializableFieldValue(field),object.getSerializableFieldType(field));
   }

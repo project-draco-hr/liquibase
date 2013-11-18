@@ -7,6 +7,9 @@
       @Override public SqlStatement[] generateStatements(      Database database){
         return null;
       }
+      @Override public String getSerializedObjectNamespace(){
+        return STANDARD_OBJECTS_NAMESPACE;
+      }
     }
 .createChangeMetaData();
     fail("Did not throw exception");

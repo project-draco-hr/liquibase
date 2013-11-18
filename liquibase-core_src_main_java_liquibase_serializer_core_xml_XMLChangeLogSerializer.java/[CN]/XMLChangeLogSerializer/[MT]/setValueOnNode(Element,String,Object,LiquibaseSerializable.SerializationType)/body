@@ -9,7 +9,7 @@
   }
  else   if (value instanceof Map) {
     for (    Map.Entry entry : (Set<Map.Entry>)((Map)value).entrySet()) {
-      Element mapNode=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),objectName);
+      Element mapNode=currentChangeLogFileDOM.createElementNS(LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE,objectName);
       setValueOnNode(mapNode,(String)entry.getKey(),entry.getValue(),serializationType);
     }
   }
@@ -18,7 +18,11 @@
   }
  else {
     if (serializationType.equals(LiquibaseSerializable.SerializationType.NESTED_OBJECT)) {
-      node.appendChild(createNode(objectName,value.toString()));
+      String namespace=LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE;
+      if (value instanceof LiquibaseSerializable) {
+        namespace=((LiquibaseSerializable)value).getSerializedObjectNamespace();
+      }
+      node.appendChild(createNode(namespace,objectName,value.toString()));
     }
  else     if (serializationType.equals(LiquibaseSerializable.SerializationType.DIRECT_VALUE)) {
       node.setTextContent(value.toString());

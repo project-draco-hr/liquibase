@@ -1,5 +1,0 @@
-{
-  Element element=currentChangeLogFileDOM.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),nodeName);
-  element.setTextContent(nodeContent);
-  return element;
-}

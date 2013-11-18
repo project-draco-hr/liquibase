@@ -1,5 +1,6 @@
 {
   DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+  factory.setNamespaceAware(true);
   DocumentBuilder documentBuilder;
   try {
     documentBuilder=factory.newDocumentBuilder();
@@ -9,10 +10,11 @@
   }
   documentBuilder.setEntityResolver(new LiquibaseEntityResolver());
   Document doc=documentBuilder.newDocument();
-  Element changeLogElement=doc.createElementNS(XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace(),"databaseChangeLog");
-  changeLogElement.setAttribute("xmlns",XMLChangeLogSAXParser.getDatabaseChangeLogNameSpace());
+  Element changeLogElement=doc.createElementNS(LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE,"databaseChangeLog");
+  changeLogElement.setAttribute("xmlns",LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE);
   changeLogElement.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
-  changeLogElement.setAttribute("xsi:schemaLocation","http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-" + XMLChangeLogSAXParser.getSchemaVersion() + ".xsd");
+  changeLogElement.setAttribute("xmlns:ext",LiquibaseSerializable.GENERIC_EXTENSION_NAMESPACE);
+  changeLogElement.setAttribute("xsi:schemaLocation",LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE + " http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-" + XMLChangeLogSAXParser.getSchemaVersion()+ ".xsd\n"+ LiquibaseSerializable.GENERIC_EXTENSION_NAMESPACE+ " http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd");
   doc.appendChild(changeLogElement);
   setCurrentChangeLogFileDOM(doc);
   for (  ChangeSet changeSet : changeSets) {
