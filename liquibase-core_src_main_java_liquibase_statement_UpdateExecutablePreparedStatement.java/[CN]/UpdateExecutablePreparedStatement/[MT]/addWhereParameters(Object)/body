@@ -1,0 +1,4 @@
+{
+  this.whereParameters.addAll(Arrays.asList(value));
+  return this;
+}

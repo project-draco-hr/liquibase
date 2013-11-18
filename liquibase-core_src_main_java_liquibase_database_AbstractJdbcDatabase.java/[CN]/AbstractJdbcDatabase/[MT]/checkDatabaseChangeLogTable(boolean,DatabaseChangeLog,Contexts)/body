@@ -2,6 +2,9 @@
   if (updateExistingNullChecksums && databaseChangeLog == null) {
     throw new DatabaseException("changeLog parameter is required if updating existing checksums");
   }
+  if (updateExistingNullChecksums && databaseChangeLog == null) {
+    throw new DatabaseException("changeLog parameter is required if updating existing checksums");
+  }
   Executor executor=ExecutorService.getInstance().getExecutor(this);
   Table changeLogTable=null;
   try {
