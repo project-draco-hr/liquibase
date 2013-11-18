@@ -1,0 +1,4 @@
+{
+  setAttribute("valid",valid);
+  return (T)this;
+}

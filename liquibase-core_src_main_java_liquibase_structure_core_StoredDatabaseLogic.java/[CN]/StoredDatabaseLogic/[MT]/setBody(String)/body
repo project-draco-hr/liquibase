@@ -1,0 +1,4 @@
+{
+  setAttribute("body",body);
+  return (T)this;
+}

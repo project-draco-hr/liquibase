@@ -1,0 +1,4 @@
+{
+  setAttribute("created",date);
+  return (T)this;
+}
