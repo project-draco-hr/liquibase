@@ -2,7 +2,7 @@
   if (getPath() == null) {
     return;
   }
-  boolean loaded=false;
+  boolean loaded;
   try {
     loaded=initializeSqlStream();
   }
@@ -10,6 +10,6 @@
     throw new SetupException(e);
   }
   if (!loaded) {
-    throw new SetupException("<createProcedure path=" + path + "> - Could not find file");
+    throw new SetupException("<" + ChangeFactory.getInstance().getChangeMetaData(this).getName() + " path="+ path+ "> - Could not find file");
   }
 }

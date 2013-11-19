@@ -20,6 +20,8 @@
     }
  else     if (field.getType().equals(ClassLoader.class)) {
     }
+ else     if (field.getType().equals(InputStream.class)) {
+    }
  else     if (field.getType().equals(long.class)) {
       field.set(object,createInteger().longValue());
     }

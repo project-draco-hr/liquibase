@@ -15,7 +15,7 @@
  else     if (field.getName().equals("associatedWith")) {
     }
  else     if (String.class.isAssignableFrom(field.getType())) {
-      if (field.getName().equals("comment")) {
+      if (field.getName().equals("comment") || field.getName().equals("comments")) {
         continue;
       }
       field.set(change,"asdghasdgasdg");
@@ -66,6 +66,8 @@
       checkThatChecksumIsNew(change,seenCheckSums,field);
     }
  else     if (field.getName().equalsIgnoreCase("changeLogParameters")) {
+    }
+ else     if (InputStream.class.isAssignableFrom(field.getType())) {
     }
  else {
       throw new RuntimeException("Unknown field type: " + field.getType() + " for "+ field.getName());

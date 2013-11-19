@@ -9,7 +9,7 @@
   }
   try {
     CheckSum checkSum=CheckSum.compute(new AbstractSQLChange.NormalizingStream(";",false,false,stream),false);
-    return checkSum;
+    return CheckSum.compute(super.generateCheckSum().toString() + ":" + checkSum.toString());
   }
   finally {
     try {

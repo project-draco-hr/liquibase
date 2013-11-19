@@ -27,5 +27,5 @@
       }
     }
   }
-  return new SqlStatement[]{new CreateProcedureStatement(getCatalogName(),getSchemaName(),getProcedureName(),procedureText,endDelimiter)};
+  return generateStatements(procedureText,endDelimiter,database);
 }

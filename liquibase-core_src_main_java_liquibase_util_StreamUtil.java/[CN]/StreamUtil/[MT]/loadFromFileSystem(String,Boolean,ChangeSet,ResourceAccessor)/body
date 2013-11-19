@@ -1,4 +1,7 @@
 {
+  if (resourceAccessor == null) {
+    return null;
+  }
   if (relativeToChangelogFile != null && relativeToChangelogFile) {
     String base;
     if (changeSet.getChangeLog() == null) {
