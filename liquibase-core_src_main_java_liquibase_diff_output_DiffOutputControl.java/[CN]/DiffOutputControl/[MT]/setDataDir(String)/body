@@ -1,4 +1,6 @@
 {
-  this.dataDir=dataDir;
+  if (dataDir != null) {
+    ChangeGeneratorFactory.getInstance().register(new MissingDataExternalFileChangeGenerator(dataDir));
+  }
   return this;
 }
