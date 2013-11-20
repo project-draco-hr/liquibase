@@ -1,0 +1,3 @@
+{
+  return (this.from.toString() + "." + this.to.toString()).hashCode();
+}
