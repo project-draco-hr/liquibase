@@ -1,0 +1,3 @@
+{
+  return (T)queryForObject(sql,requiredType,new ArrayList());
+}

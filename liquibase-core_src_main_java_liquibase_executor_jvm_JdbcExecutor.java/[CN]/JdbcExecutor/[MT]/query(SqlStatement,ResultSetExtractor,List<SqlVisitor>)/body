@@ -1,27 +1,6 @@
 {
   if (sql instanceof CallableSqlStatement) {
-    throw new DatabaseException("Direct query using CallableSqlStatement not currently implemented");
+    return execute(new QueryCallableStatementCallback(sql,rse),sqlVisitors);
   }
-class QueryStatementCallback implements StatementCallback {
-    @Override public Object doInStatement(    Statement stmt) throws SQLException, DatabaseException {
-      ResultSet rs=null;
-      try {
-        String[] sqlToExecute=applyVisitors(sql,sqlVisitors);
-        if (sqlToExecute.length != 1) {
-          throw new DatabaseException("Can only query with statements that return one sql statement");
-        }
-        log.debug("Executing QUERY database command: " + sqlToExecute[0]);
-        rs=stmt.executeQuery(sqlToExecute[0]);
-        ResultSet rsToUse=rs;
-        return rse.extractData(rsToUse);
-      }
-  finally {
-        JdbcUtils.closeResultSet(rs);
-      }
-    }
-    @Override public SqlStatement getStatement(){
-      return sql;
-    }
-  }
-  return execute(new QueryStatementCallback(),sqlVisitors);
+  return execute(new QueryStatementCallback(sql,rse,sqlVisitors),sqlVisitors);
 }

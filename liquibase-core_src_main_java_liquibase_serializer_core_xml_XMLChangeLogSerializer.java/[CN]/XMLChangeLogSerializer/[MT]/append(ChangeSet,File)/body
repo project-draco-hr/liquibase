@@ -3,13 +3,17 @@
   String existingChangeLog=StreamUtil.getStreamContents(in);
   in.close();
   FileOutputStream out=new FileOutputStream(changeLogFile);
-  if (!existingChangeLog.contains("</databaseChangeLog>")) {
-    write(Arrays.asList(changeSet),out);
-  }
+  try {
+    if (!existingChangeLog.contains("</databaseChangeLog>")) {
+      write(Arrays.asList(changeSet),out);
+    }
  else {
-    existingChangeLog=existingChangeLog.replaceFirst("</databaseChangeLog>",serialize(changeSet,true) + "\n</databaseChangeLog>");
-    StreamUtil.copy(new ByteArrayInputStream(existingChangeLog.getBytes()),out);
+      existingChangeLog=existingChangeLog.replaceFirst("</databaseChangeLog>",serialize(changeSet,true) + "\n</databaseChangeLog>");
+      StreamUtil.copy(new ByteArrayInputStream(existingChangeLog.getBytes()),out);
+    }
+    out.flush();
   }
-  out.flush();
-  out.close();
+  finally {
+    out.close();
+  }
 }

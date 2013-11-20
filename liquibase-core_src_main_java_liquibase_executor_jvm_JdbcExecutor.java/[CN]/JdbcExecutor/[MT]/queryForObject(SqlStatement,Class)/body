@@ -1,3 +1,0 @@
-{
-  return queryForObject(sql,requiredType,new ArrayList());
-}
