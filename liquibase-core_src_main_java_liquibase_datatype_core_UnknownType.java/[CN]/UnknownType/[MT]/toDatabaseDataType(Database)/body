@@ -1,6 +1,6 @@
 {
   int dataTypeMaxParameters;
-  if (getName().equalsIgnoreCase("enum")) {
+  if (getName().equalsIgnoreCase("enum") || getName().equalsIgnoreCase("set")) {
     dataTypeMaxParameters=Integer.MAX_VALUE;
   }
  else {
