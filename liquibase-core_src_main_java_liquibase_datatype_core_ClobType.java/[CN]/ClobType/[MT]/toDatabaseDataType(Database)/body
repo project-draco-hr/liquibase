@@ -12,7 +12,12 @@
     return new DatabaseDataType("NVARCHAR","MAX");
   }
  else   if (database instanceof MySQLDatabase) {
-    return new DatabaseDataType("LONGTEXT");
+    if (originalDefinition.toLowerCase().startsWith("text")) {
+      return new DatabaseDataType("TEXT");
+    }
+ else {
+      return new DatabaseDataType("LONGTEXT");
+    }
   }
  else   if (database instanceof PostgresDatabase || database instanceof SQLiteDatabase || database instanceof SybaseDatabase) {
     return new DatabaseDataType("TEXT");
