@@ -1,4 +1,10 @@
 {
+  if (!(obj instanceof Edge)) {
+    return false;
+  }
+  if (obj == null) {
+    return false;
+  }
   Edge e=(Edge)obj;
   return e.from == from && e.to == to;
 }

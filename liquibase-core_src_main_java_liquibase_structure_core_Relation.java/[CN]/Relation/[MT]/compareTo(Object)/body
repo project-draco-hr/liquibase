@@ -1,0 +1,3 @@
+{
+  return this.getName().compareToIgnoreCase(((Relation)o).getName());
+}
