@@ -1,0 +1,18 @@
+{
+  if (path == null) {
+    return null;
+  }
+  InputStream innputStream=openFromClasspath(path);
+  if (innputStream == null) {
+    try {
+      innputStream=openFromFileSystem(path);
+      if (innputStream == null) {
+        throw new IOException("No file found");
+      }
+    }
+ catch (    IOException e) {
+      throw new IOException("<sqlfile path=" + path + "> -Unable to read file",e);
+    }
+  }
+  return innputStream;
+}

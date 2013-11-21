@@ -12,18 +12,9 @@
     }
     file=base.replaceFirst("/[^/]*$","") + "/" + file;
   }
-  try {
-    ResourceAccessor fo=getResourceAccessor();
-    if (fo == null) {
-      return false;
-    }
-    sqlStream=fo.getResourceAsStream(file);
-    if (sqlStream == null) {
-      return false;
-    }
-    return true;
+  ResourceAccessor fo=getResourceAccessor();
+  if (fo == null) {
+    return null;
   }
- catch (  IOException ioe) {
-    return false;
-  }
+  return fo.getResourceAsStream(file);
 }

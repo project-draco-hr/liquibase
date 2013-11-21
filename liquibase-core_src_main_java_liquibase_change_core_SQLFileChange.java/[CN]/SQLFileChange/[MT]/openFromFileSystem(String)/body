@@ -12,17 +12,5 @@
     }
     file=base.replaceFirst("/[^/]*$","") + "/" + file;
   }
-  try {
-    sqlStream=getResourceAccessor().getResourceAsStream(file);
-    if (sqlStream == null) {
-      throw new IOException("<sqlfile path=" + file + "> -Unable to read file");
-    }
-    return true;
-  }
- catch (  FileNotFoundException fnfe) {
-    return false;
-  }
-catch (  IOException e) {
-    throw new IOException("<sqlfile path=" + file + "> -Unable to read file",e);
-  }
+  return getResourceAccessor().getResourceAsStream(file);
 }
