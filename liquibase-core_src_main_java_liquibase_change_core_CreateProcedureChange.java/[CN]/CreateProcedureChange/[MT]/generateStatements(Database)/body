@@ -13,18 +13,10 @@
   }
  else {
     try {
-      procedureText=StreamUtil.getStreamContents(procedureTextStream,encoding);
+      procedureText=StreamUtil.getStreamContents(openSqlStream(),encoding);
     }
  catch (    IOException e) {
       throw new UnexpectedLiquibaseException(e);
-    }
- finally {
-      try {
-        initializeSqlStream();
-      }
- catch (      IOException e) {
-        LogFactory.getLogger().severe("Error re-initializing sqlStream",e);
-      }
     }
   }
   return generateStatements(procedureText,endDelimiter,database);
