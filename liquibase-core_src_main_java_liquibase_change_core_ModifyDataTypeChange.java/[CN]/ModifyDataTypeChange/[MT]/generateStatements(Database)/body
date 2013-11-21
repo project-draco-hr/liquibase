@@ -4,6 +4,6 @@
     return new SqlStatement[]{modifyDataTypeStatement,new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName())};
   }
  else {
-    return new SqlStatement[]{new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName())};
+    return new SqlStatement[]{modifyDataTypeStatement};
   }
 }
