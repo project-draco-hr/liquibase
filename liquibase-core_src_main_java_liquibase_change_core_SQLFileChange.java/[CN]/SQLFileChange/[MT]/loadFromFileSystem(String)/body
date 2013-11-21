@@ -1,0 +1,28 @@
+{
+  if (relativeToChangelogFile != null && relativeToChangelogFile) {
+    String base;
+    if (getChangeSet().getChangeLog() == null) {
+      base=getChangeSet().getFilePath();
+    }
+ else {
+      base=getChangeSet().getChangeLog().getPhysicalFilePath().replaceAll("\\\\","/");
+    }
+    if (!base.contains("/")) {
+      base=".";
+    }
+    file=base.replaceFirst("/[^/]*$","") + "/" + file;
+  }
+  try {
+    sqlStream=getResourceAccessor().getResourceAsStream(file);
+    if (sqlStream == null) {
+      throw new IOException("<sqlfile path=" + file + "> -Unable to read file");
+    }
+    return true;
+  }
+ catch (  FileNotFoundException fnfe) {
+    return false;
+  }
+catch (  IOException e) {
+    throw new IOException("<sqlfile path=" + file + "> -Unable to read file",e);
+  }
+}

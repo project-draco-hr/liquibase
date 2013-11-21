@@ -1,0 +1,18 @@
+{
+  for (  String statement : applyVisitors(sql,sqlVisitors)) {
+    if (database instanceof OracleDatabase) {
+      statement=statement.replaceFirst("/\\s*/\\s*$","");
+    }
+    log.debug("Executing EXECUTE database command: " + statement);
+    if (statement.contains("?")) {
+      stmt.setEscapeProcessing(false);
+    }
+    try {
+      stmt.execute(statement);
+    }
+ catch (    SQLException e) {
+      throw e;
+    }
+  }
+  return null;
+}

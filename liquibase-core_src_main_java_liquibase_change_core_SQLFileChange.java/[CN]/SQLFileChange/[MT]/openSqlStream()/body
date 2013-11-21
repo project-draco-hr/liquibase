@@ -1,0 +1,16 @@
+{
+  if (path == null) {
+    return null;
+  }
+  try {
+    return StreamUtil.openStream(path,isRelativeToChangelogFile(),getChangeSet(),getResourceAccessor());
+  }
+ catch (  IOException e) {
+    throw new IOException("<sqlfile path=" + path + "> -Unable to read file",e);
+  }
+  boolean loaded=loadFromClasspath(path);
+  if (!loaded) {
+    loaded=loadFromFileSystem(path);
+  }
+  return loaded;
+}

@@ -1,3 +1,0 @@
-SqlStatement sql
-Class requiredType
-List<SqlVisitor> sqlVisitors

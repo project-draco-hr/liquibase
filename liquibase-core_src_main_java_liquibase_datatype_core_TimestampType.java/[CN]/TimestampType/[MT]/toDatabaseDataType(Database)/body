@@ -2,5 +2,8 @@
   if (database instanceof MySQLDatabase) {
     return new DatabaseDataType("TIMESTAMP");
   }
+  if (database instanceof MSSQLDatabase) {
+    return new DatabaseDataType("DATETIME");
+  }
   return super.toDatabaseDataType(database);
 }

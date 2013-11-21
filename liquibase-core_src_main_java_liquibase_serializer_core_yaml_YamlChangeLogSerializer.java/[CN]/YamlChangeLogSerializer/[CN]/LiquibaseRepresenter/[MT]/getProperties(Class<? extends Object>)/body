@@ -13,10 +13,10 @@
     }
   }
  catch (  InstantiationException e) {
-    throw new RuntimeException(e);
+    throw new UnexpectedLiquibaseException(e);
   }
 catch (  IllegalAccessException e) {
-    e.printStackTrace();
+    throw new UnexpectedLiquibaseException(e);
   }
   for (  String property : serialzableType.getSerializableFields()) {
     LiquibaseSerializable.SerializationType fieldType=serialzableType.getSerializableFieldType(property);

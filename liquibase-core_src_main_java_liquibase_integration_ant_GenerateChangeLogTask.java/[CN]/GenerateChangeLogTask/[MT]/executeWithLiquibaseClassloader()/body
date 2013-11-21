@@ -9,7 +9,7 @@
     Database database=liquibase.getDatabase();
     SnapshotControl snapshotControl=new SnapshotControl(database,getDiffTypes());
     DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()),database,snapshotControl);
-    DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,null,new CompareControl());
+    DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,null,new CompareControl(new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()),new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()))},getDiffTypes()));
     DiffOutputControl diffOutputConfig=new DiffOutputControl(getIncludeCatalog(),getIncludeSchema(),getIncludeTablespace());
     diffOutputConfig.setDataDir(getDataDir());
     if (getChangeLogFile() == null) {

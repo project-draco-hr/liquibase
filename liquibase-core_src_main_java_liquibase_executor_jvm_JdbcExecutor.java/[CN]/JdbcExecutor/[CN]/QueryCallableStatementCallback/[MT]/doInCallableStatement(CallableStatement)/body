@@ -1,0 +1,10 @@
+{
+  ResultSet rs=null;
+  try {
+    rs=cs.executeQuery();
+    return rse.extractData(rs);
+  }
+  finally {
+    JdbcUtils.closeResultSet(rs);
+  }
+}

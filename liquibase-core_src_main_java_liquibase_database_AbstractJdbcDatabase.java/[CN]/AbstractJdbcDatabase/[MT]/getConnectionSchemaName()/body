@@ -3,9 +3,7 @@
     return null;
   }
   try {
-    ResultSet resultSet=((JdbcConnection)connection).prepareCall("call current_schema").executeQuery();
-    resultSet.next();
-    return resultSet.getString(1);
+    return ExecutorService.getInstance().getExecutor(this).queryForObject(new RawCallStatement("call current_schema"),String.class);
   }
  catch (  Exception e) {
     LogFactory.getLogger().info("Error getting default schema",e);

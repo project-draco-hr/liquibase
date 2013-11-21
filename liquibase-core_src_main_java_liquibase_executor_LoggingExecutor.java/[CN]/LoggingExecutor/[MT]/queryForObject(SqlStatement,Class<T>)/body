@@ -1,0 +1,6 @@
+{
+  if (sql instanceof SelectFromDatabaseChangeLogLockStatement) {
+    return (T)Boolean.FALSE;
+  }
+  return delegatedReadExecutor.queryForObject(sql,requiredType);
+}

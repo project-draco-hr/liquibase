@@ -1,0 +1,29 @@
+{
+  if (relativeToChangelogFile != null && relativeToChangelogFile) {
+    String base;
+    if (getChangeSet().getChangeLog() == null) {
+      base=getChangeSet().getFilePath();
+    }
+ else {
+      base=getChangeSet().getChangeLog().getPhysicalFilePath().replaceAll("\\\\","/");
+    }
+    if (!base.contains("/")) {
+      base=".";
+    }
+    file=base.replaceFirst("/[^/]*$","") + "/" + file;
+  }
+  try {
+    ResourceAccessor fo=getResourceAccessor();
+    if (fo == null) {
+      return false;
+    }
+    sqlStream=fo.getResourceAsStream(file);
+    if (sqlStream == null) {
+      return false;
+    }
+    return true;
+  }
+ catch (  IOException ioe) {
+    return false;
+  }
+}

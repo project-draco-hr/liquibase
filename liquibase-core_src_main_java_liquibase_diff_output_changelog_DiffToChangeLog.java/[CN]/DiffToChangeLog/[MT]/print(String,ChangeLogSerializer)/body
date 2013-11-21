@@ -33,9 +33,6 @@
       }
     }
     fileReader.close();
-    fileReader=new BufferedReader(new FileReader(file));
-    fileReader.skip(offset);
-    fileReader.close();
     RandomAccessFile randomAccessFile=new RandomAccessFile(file,"rw");
     randomAccessFile.seek(offset);
     randomAccessFile.writeBytes("    ");

@@ -1,3 +1,9 @@
 {
-  return new SqlStatement[]{new ModifyDataTypeStatement(getCatalogName(),getSchemaName(),getTableName(),getColumnName(),getNewDataType())};
+  ModifyDataTypeStatement modifyDataTypeStatement=new ModifyDataTypeStatement(getCatalogName(),getSchemaName(),getTableName(),getColumnName(),getNewDataType());
+  if (database instanceof DB2Database) {
+    return new SqlStatement[]{modifyDataTypeStatement,new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName())};
+  }
+ else {
+    return new SqlStatement[]{modifyDataTypeStatement};
+  }
 }
