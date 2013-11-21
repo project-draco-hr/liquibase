@@ -8,9 +8,4 @@
  catch (  IOException e) {
     throw new IOException("<sqlfile path=" + path + "> -Unable to read file",e);
   }
-  boolean loaded=loadFromClasspath(path);
-  if (!loaded) {
-    loaded=loadFromFileSystem(path);
-  }
-  return loaded;
 }
