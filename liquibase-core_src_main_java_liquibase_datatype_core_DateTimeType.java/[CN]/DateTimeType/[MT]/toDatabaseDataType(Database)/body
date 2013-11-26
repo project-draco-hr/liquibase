@@ -15,7 +15,7 @@
     return new DatabaseDataType("TEXT");
   }
   if (database instanceof MySQLDatabase) {
-    return new DatabaseDataType(getName(),getParameters());
+    return new DatabaseDataType(getName());
   }
   return new DatabaseDataType(getName());
 }
