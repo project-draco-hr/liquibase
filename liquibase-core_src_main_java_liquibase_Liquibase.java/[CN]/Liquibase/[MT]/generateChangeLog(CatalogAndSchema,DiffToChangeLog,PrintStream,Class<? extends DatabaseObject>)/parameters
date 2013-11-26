@@ -1,0 +1,4 @@
+CatalogAndSchema catalogAndSchema
+DiffToChangeLog changeLogWriter
+PrintStream outputStream
+Class<? extends DatabaseObject> snapshotTypes
