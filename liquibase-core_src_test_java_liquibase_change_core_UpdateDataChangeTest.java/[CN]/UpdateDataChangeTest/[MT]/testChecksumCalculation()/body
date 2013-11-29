@@ -5,7 +5,7 @@
   DatabaseChangeLog changelog=parser.parse(null,new ChangeLogParameters(),resourceAccessor);
   ChangeSet changeSet=changelog.getChangeSet("a","a","1");
   CheckSum checksum=changeSet.generateCheckSum();
-  Assert.assertEquals("7:0942bdbc964a85c23c6536ac31947073",checksum.toString());
+  Assert.assertEquals("7:f5d90faf3e96175decc8395de001a5bb",checksum.toString());
   String changelogString=new StringChangeLogSerializer().serialize(changeSet.getChanges().get(0),false);
-  Assert.assertTrue(changelogString.contains("whereClause="));
+  Assert.assertTrue(changelogString.contains("where="));
 }
