@@ -1,0 +1,11 @@
+{
+  String xml="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "\n" + "<databaseChangeLog\n"+ "        xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"\n"+ "        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"+ "        xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd\">\n"+ "\n"+ "    <changeSet id=\"1\" author=\"a\" logicalFilePath=\"a\">\n"+ "        <update tableName=\"test\">\n"+ "            <column name=\"name\" value=\"changed\"/>\n"+ "            <where>id = 1</where>\n"+ "        </update>\n"+ "    </changeSet>\n"+ "</databaseChangeLog>\n";
+  ResourceAccessor resourceAccessor=getResource(xml);
+  ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser("xml",resourceAccessor);
+  DatabaseChangeLog changelog=parser.parse(null,new ChangeLogParameters(),resourceAccessor);
+  ChangeSet changeSet=changelog.getChangeSet("a","a","1");
+  CheckSum checksum=changeSet.generateCheckSum();
+  Assert.assertEquals("7:f5d90faf3e96175decc8395de001a5bb",checksum.toString());
+  String changelogString=new StringChangeLogSerializer().serialize(changeSet.getChanges().get(0),false);
+  Assert.assertTrue(changelogString.contains("where="));
+}
