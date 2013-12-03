@@ -1,7 +1,7 @@
 {
   String namespace=object.getSerializedObjectNamespace();
   String nodeName=object.getSerializedObjectName();
-  SerializerNamespaceDetails details=SerializerNamespaceDetailsFactory.getInstance().getNamespaceDetails(this,namespace);
+  NamespaceDetails details=NamespaceDetailsFactory.getInstance().getNamespaceDetails(this,namespace);
   if (details != null && !details.getShortName(namespace).equals("")) {
     nodeName=details.getShortName(namespace) + ":" + nodeName;
   }

@@ -1,11 +1,11 @@
 {
   if (systemId != null) {
-    SerializerNamespaceDetails namespaceDetails;
+    NamespaceDetails namespaceDetails;
     if (serializer != null) {
-      namespaceDetails=SerializerNamespaceDetailsFactory.getInstance().getNamespaceDetails(serializer,systemId);
+      namespaceDetails=NamespaceDetailsFactory.getInstance().getNamespaceDetails(serializer,systemId);
     }
  else {
-      namespaceDetails=SerializerNamespaceDetailsFactory.getInstance().getNamespaceDetails(parser,systemId);
+      namespaceDetails=NamespaceDetailsFactory.getInstance().getNamespaceDetails(parser,systemId);
     }
     if (namespaceDetails == null) {
       return null;

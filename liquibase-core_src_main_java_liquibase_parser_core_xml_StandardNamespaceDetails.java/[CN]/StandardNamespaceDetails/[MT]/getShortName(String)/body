@@ -1,0 +1,6 @@
+{
+  if (namespaceOrUrl.equals(LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE)) {
+    return "";
+  }
+  return "ext";
+}

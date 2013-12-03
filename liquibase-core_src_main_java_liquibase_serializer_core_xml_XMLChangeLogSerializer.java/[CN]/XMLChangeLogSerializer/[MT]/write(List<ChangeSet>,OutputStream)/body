@@ -16,7 +16,7 @@
   Map<String,String> shortNameByNamespace=new HashMap<String,String>();
   Map<String,String> urlByNamespace=new HashMap<String,String>();
   for (  String namespace : ChangeFactory.getInstance().getAllChangeNamespaces()) {
-    SerializerNamespaceDetails details=SerializerNamespaceDetailsFactory.getInstance().getNamespaceDetails(this,namespace);
+    NamespaceDetails details=NamespaceDetailsFactory.getInstance().getNamespaceDetails(this,namespace);
     if (details != null) {
       shortNameByNamespace.put(namespace,details.getShortName(namespace));
       urlByNamespace.put(namespace,details.getSchemaUrl(namespace));
