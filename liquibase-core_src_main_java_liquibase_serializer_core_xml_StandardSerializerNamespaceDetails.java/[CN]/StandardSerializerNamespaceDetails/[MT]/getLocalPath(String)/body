@@ -1,0 +1,14 @@
+{
+  if (url.equals(GENERIC_EXTENSION_XSD)) {
+    return "liquibase/parser/core/xml/dbchangelog-ext.xsd";
+  }
+  Matcher matcher=standardUrlPattern.matcher(url);
+  if (matcher.matches()) {
+    return "liquibase/parser/core/xml/" + matcher.group(1);
+  }
+  matcher=oldStandardUrlPattern.matcher(url);
+  if (matcher.matches()) {
+    return "liquibase/parser/core/xml/" + matcher.group(1);
+  }
+  return null;
+}

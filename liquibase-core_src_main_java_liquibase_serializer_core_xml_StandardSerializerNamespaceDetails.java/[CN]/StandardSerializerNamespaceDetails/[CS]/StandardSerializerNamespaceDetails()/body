@@ -1,0 +1,4 @@
+{
+  standardUrlPattern=Pattern.compile("http://www.liquibase.org/xml/ns/dbchangelog/(dbchangelog-[\\d\\.]+.xsd)");
+  oldStandardUrlPattern=Pattern.compile("http://www.liquibase.org/xml/ns/migrator/(dbchangelog-[\\d\\.]+.xsd)");
+}

@@ -2,5 +2,5 @@
   if (namespace.equals(LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE)) {
     return "http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-" + XMLChangeLogSAXParser.getSchemaVersion() + ".xsd";
   }
-  return "http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd";
+  return GENERIC_EXTENSION_XSD;
 }

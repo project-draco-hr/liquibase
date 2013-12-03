@@ -8,7 +8,7 @@
  catch (  ParserConfigurationException e) {
     throw new RuntimeException(e);
   }
-  documentBuilder.setEntityResolver(new LiquibaseEntityResolver());
+  documentBuilder.setEntityResolver(new LiquibaseEntityResolver(this));
   Document doc=documentBuilder.newDocument();
   Element changeLogElement=doc.createElementNS(LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE,"databaseChangeLog");
   changeLogElement.setAttribute("xmlns",LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE);

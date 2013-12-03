@@ -1,27 +1,34 @@
 {
   if (systemId != null) {
-    int iSlash=systemId.lastIndexOf('/');
-    if (iSlash >= 0) {
-      String xsdFile=systemId.substring(iSlash + 1);
-      try {
-        InputStream resourceAsStream=null;
-        if (Thread.currentThread().getContextClassLoader() != null) {
-          resourceAsStream=Thread.currentThread().getContextClassLoader().getResourceAsStream(SEARCH_PACKAGE + xsdFile);
-        }
-        if (resourceAsStream == null) {
-          resourceAsStream=this.getClass().getClassLoader().getResourceAsStream(SEARCH_PACKAGE + xsdFile);
-        }
-        if (resourceAsStream == null) {
-          return null;
-        }
-        InputSource source=new InputSource(resourceAsStream);
-        source.setPublicId(publicId);
-        source.setSystemId(systemId);
-        return source;
+    SerializerNamespaceDetails namespaceDetails;
+    if (serializer != null) {
+      namespaceDetails=SerializerNamespaceDetailsFactory.getInstance().getNamespaceDetails(serializer,systemId);
+    }
+ else {
+      namespaceDetails=SerializerNamespaceDetailsFactory.getInstance().getNamespaceDetails(parser,systemId);
+    }
+    if (namespaceDetails == null) {
+      return null;
+    }
+    String xsdFile=namespaceDetails.getLocalPath(systemId);
+    try {
+      InputStream resourceAsStream=null;
+      if (Thread.currentThread().getContextClassLoader() != null) {
+        resourceAsStream=Thread.currentThread().getContextClassLoader().getResourceAsStream(xsdFile);
       }
- catch (      Exception ex) {
+      if (resourceAsStream == null) {
+        resourceAsStream=this.getClass().getClassLoader().getResourceAsStream(xsdFile);
+      }
+      if (resourceAsStream == null) {
         return null;
       }
+      InputSource source=new InputSource(resourceAsStream);
+      source.setPublicId(publicId);
+      source.setSystemId(systemId);
+      return source;
+    }
+ catch (    Exception ex) {
+      return null;
     }
   }
   return null;
