@@ -7,7 +7,7 @@
     try {
       innputStream=openFromFileSystem(path);
       if (innputStream == null) {
-        throw new IOException("No file found");
+        return null;
       }
     }
  catch (    IOException e) {
