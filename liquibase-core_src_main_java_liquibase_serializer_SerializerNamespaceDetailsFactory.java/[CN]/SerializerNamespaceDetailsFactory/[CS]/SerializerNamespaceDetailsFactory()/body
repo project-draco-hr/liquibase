@@ -1,0 +1,12 @@
+{
+  Class<? extends SerializerNamespaceDetails>[] classes;
+  try {
+    classes=ServiceLocator.getInstance().findClasses(SerializerNamespaceDetails.class);
+    for (    Class<? extends SerializerNamespaceDetails> clazz : classes) {
+      register(clazz.getConstructor().newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

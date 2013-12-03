@@ -19,9 +19,6 @@
  else {
     if (serializationType.equals(LiquibaseSerializable.SerializationType.NESTED_OBJECT)) {
       String namespace=LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE;
-      if (value instanceof LiquibaseSerializable) {
-        namespace=((LiquibaseSerializable)value).getSerializedObjectNamespace();
-      }
       node.appendChild(createNode(namespace,objectName,value.toString()));
     }
  else     if (serializationType.equals(LiquibaseSerializable.SerializationType.DIRECT_VALUE)) {

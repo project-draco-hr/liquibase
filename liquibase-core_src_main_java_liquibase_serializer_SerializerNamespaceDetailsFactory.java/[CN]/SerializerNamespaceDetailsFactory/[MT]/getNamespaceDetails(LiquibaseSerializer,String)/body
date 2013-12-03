@@ -1,0 +1,12 @@
+{
+  SortedSet<SerializerNamespaceDetails> validNamespaceDetails=new TreeSet<SerializerNamespaceDetails>(new SerializerNamespaceDetailsComparator());
+  for (  SerializerNamespaceDetails details : namespaceDetails) {
+    if (details.supports(serializer,namespace)) {
+      validNamespaceDetails.add(details);
+    }
+  }
+  if (validNamespaceDetails.isEmpty()) {
+    LogFactory.getInstance().getLog().debug("No serializer namespace details associated with namespace '" + namespace + "' and serializer "+ serializer.getClass().getName());
+  }
+  return validNamespaceDetails.iterator().next();
+}

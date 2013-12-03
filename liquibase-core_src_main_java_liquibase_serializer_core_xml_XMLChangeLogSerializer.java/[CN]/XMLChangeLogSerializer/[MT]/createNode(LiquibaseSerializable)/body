@@ -1,6 +1,11 @@
 {
   String namespace=object.getSerializedObjectNamespace();
-  Element node=currentChangeLogFileDOM.createElementNS(namespace,object.getSerializedObjectName());
+  String nodeName=object.getSerializedObjectName();
+  SerializerNamespaceDetails details=SerializerNamespaceDetailsFactory.getInstance().getNamespaceDetails(this,namespace);
+  if (details != null && !details.getShortName(namespace).equals("")) {
+    nodeName=details.getShortName(namespace) + ":" + nodeName;
+  }
+  Element node=currentChangeLogFileDOM.createElementNS(namespace,nodeName);
   for (  String field : object.getSerializableFields()) {
     setValueOnNode(node,field,object.getSerializableFieldValue(field),object.getSerializableFieldType(field));
   }

@@ -1,0 +1,3 @@
+{
+  return Integer.valueOf(o2.getPriority()).compareTo(o1.getPriority());
+}
