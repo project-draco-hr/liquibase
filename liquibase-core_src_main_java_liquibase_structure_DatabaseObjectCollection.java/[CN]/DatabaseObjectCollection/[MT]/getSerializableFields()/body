@@ -1,0 +1,7 @@
+{
+  SortedSet<String> types=new TreeSet<String>();
+  for (  Class type : cache.keySet()) {
+    types.add(type.getName());
+  }
+  return types;
+}

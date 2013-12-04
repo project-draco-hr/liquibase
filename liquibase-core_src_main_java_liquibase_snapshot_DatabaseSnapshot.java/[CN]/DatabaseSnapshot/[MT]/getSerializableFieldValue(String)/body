@@ -1,0 +1,11 @@
+{
+  if (field.equals("snapshotControl")) {
+    return snapshotControl;
+  }
+ else   if (field.equals("objects")) {
+    return allFound;
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown field: " + field);
+  }
+}

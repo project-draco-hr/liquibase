@@ -1,0 +1,5 @@
+{
+  for (  String extension : snapshotSerializer.getValidFileExtensions()) {
+    serializers.put(extension,snapshotSerializer);
+  }
+}

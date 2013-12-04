@@ -1,0 +1,12 @@
+{
+  if (field.equals("includedType")) {
+    SortedSet<String> types=new TreeSet<String>();
+    for (    Class type : this.getTypesToInclude()) {
+      types.add(type.getName());
+    }
+    return types;
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown field " + field);
+  }
+}

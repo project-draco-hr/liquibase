@@ -1,0 +1,21 @@
+{
+  if (field.equals("snapshotId")) {
+    return snapshotId;
+  }
+  if (!attributes.containsKey(field)) {
+    throw new UnexpectedLiquibaseException("Unknown field " + field);
+  }
+  Object value=attributes.get(field);
+  if (value instanceof DatabaseObject) {
+    try {
+      DatabaseObject clone=(DatabaseObject)value.getClass().newInstance();
+      clone.setName(((DatabaseObject)value).getName());
+      clone.setSnapshotId(((DatabaseObject)value).getSnapshotId());
+      return clone;
+    }
+ catch (    Exception e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+  }
+  return value;
+}

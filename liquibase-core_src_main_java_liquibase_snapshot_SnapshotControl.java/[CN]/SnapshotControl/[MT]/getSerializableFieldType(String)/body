@@ -1,0 +1,8 @@
+{
+  if (field.equals("includedType")) {
+    return SerializationType.NESTED_OBJECT;
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown field " + field);
+  }
+}

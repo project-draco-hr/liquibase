@@ -1,0 +1,16 @@
+{
+  SortedSet<DatabaseObject> objects=new TreeSet<DatabaseObject>(new DatabaseObjectComparator());
+  try {
+    Map<String,Set<DatabaseObject>> map=cache.get(Class.forName(field));
+    if (map == null) {
+      return null;
+    }
+    for (    Set<DatabaseObject> set : map.values()) {
+      objects.addAll(set);
+    }
+    return objects;
+  }
+ catch (  ClassNotFoundException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

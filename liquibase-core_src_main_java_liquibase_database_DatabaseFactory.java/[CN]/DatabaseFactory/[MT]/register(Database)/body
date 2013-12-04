@@ -1,6 +1,13 @@
 {
-  if (!implementedDatabases.containsKey(database.getShortName())) {
-    implementedDatabases.put(database.getShortName(),new TreeSet<Database>(new TreeSet<Database>(new DatabaseComparator())));
+  Map<String,SortedSet<Database>> map=null;
+  if (database instanceof InternalDatabase) {
+    map=internalDatabases;
   }
-  implementedDatabases.get(database.getShortName()).add(database);
+ else {
+    map=implementedDatabases;
+  }
+  if (!map.containsKey(database.getShortName())) {
+    map.put(database.getShortName(),new TreeSet<Database>(new TreeSet<Database>(new DatabaseComparator())));
+  }
+  map.get(database.getShortName()).add(database);
 }

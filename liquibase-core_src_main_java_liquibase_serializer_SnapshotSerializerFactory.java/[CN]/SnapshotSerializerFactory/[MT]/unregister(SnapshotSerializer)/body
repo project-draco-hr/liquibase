@@ -1,0 +1,11 @@
+{
+  List<Map.Entry<String,SnapshotSerializer>> entrysToRemove=new ArrayList<Map.Entry<String,SnapshotSerializer>>();
+  for (  Map.Entry<String,SnapshotSerializer> entry : serializers.entrySet()) {
+    if (entry.getValue().equals(snapshotSerializer)) {
+      entrysToRemove.add(entry);
+    }
+  }
+  for (  Map.Entry<String,SnapshotSerializer> entry : entrysToRemove) {
+    serializers.remove(entry.getKey());
+  }
+}

@@ -1,0 +1,5 @@
+{
+  TreeSet<String> fields=new TreeSet<String>(attributes.keySet());
+  fields.add("snapshotId");
+  return fields;
+}

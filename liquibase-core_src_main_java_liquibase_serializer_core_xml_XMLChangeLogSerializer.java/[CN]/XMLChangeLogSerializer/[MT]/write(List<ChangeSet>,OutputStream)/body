@@ -10,8 +10,8 @@
   }
   documentBuilder.setEntityResolver(new LiquibaseEntityResolver(this));
   Document doc=documentBuilder.newDocument();
-  Element changeLogElement=doc.createElementNS(LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE,"databaseChangeLog");
-  changeLogElement.setAttribute("xmlns",LiquibaseSerializable.STANDARD_OBJECTS_NAMESPACE);
+  Element changeLogElement=doc.createElementNS(LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE,"databaseChangeLog");
+  changeLogElement.setAttribute("xmlns",LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE);
   changeLogElement.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
   Map<String,String> shortNameByNamespace=new HashMap<String,String>();
   Map<String,String> urlByNamespace=new HashMap<String,String>();

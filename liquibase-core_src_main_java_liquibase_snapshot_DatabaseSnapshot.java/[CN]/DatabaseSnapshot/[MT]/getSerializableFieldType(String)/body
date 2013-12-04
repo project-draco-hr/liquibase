@@ -1,0 +1,11 @@
+{
+  if (field.equals("snapshotControl")) {
+    return SerializationType.NESTED_OBJECT;
+  }
+ else   if (field.equals("objects")) {
+    return SerializationType.NESTED_OBJECT;
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown field: " + field);
+  }
+}

@@ -1,0 +1,8 @@
+{
+  if (getSerializableFieldValue(field) instanceof DatabaseObject) {
+    return LiquibaseSerializable.SerializationType.NAMED_FIELD;
+  }
+ else {
+    return LiquibaseSerializable.SerializationType.NAMED_FIELD;
+  }
+}

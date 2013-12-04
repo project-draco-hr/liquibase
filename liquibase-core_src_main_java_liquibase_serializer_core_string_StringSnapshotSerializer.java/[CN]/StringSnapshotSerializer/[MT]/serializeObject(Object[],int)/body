@@ -1,0 +1,17 @@
+{
+  if (collection.length == 0) {
+    return "[]";
+  }
+  String returnString="[\n";
+  for (  Object object : collection) {
+    if (object instanceof LiquibaseSerializable) {
+      returnString+=indent(indent) + serializeObject((LiquibaseSerializable)object,indent + 1) + ",\n";
+    }
+ else {
+      returnString+=indent(indent) + object.toString() + ",\n";
+    }
+  }
+  returnString=returnString.replaceFirst(",$","");
+  returnString+=indent(indent - 1) + "]";
+  return returnString;
+}
