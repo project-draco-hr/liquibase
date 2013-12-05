@@ -61,6 +61,9 @@
  else     if (type == Types.CHAR) {
       return stringVal;
     }
+ else     if (type == Types.CLOB) {
+      return stringVal;
+    }
  else     if (type == Types.DATALINK) {
       return new DatabaseFunction(stringVal);
     }
@@ -116,6 +119,9 @@
       return stringVal;
     }
  else     if (type == Types.OTHER) {
+      if (database instanceof DB2Database && typeName.equalsIgnoreCase("DECFLOAT")) {
+        return new BigDecimal(stringVal);
+      }
       return new DatabaseFunction(stringVal);
     }
  else     if (type == Types.REAL) {

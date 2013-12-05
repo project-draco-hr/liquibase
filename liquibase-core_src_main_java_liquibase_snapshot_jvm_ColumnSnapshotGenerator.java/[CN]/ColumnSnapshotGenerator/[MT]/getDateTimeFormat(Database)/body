@@ -5,5 +5,8 @@
   if (database instanceof MSSQLDatabase) {
     return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
   }
+  if (database instanceof DB2Database) {
+    return new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss.SSS");
+  }
   return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 }
