@@ -1,0 +1,4 @@
+{
+  String startWithClause=String.format(getAutoIncrementStartWithClause(),(startWith == null) ? defaultAutoIncrementStartWith : startWith);
+  return getAutoIncrementClause() + startWithClause;
+}
