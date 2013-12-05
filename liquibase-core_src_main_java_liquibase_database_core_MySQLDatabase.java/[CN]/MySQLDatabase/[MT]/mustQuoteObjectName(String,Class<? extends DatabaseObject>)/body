@@ -1,0 +1,3 @@
+{
+  return super.mustQuoteObjectName(objectName,objectType) || !objectName.matches("\\w+");
+}
