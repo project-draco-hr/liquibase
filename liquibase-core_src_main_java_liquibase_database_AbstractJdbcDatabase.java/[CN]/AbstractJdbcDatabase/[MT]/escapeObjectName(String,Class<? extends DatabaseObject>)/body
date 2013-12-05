@@ -1,5 +1,6 @@
 {
   if (objectName != null) {
+    objectName=objectName.trim();
     if (mustQuoteObjectName(objectName,objectType)) {
       return quoteObject(objectName,objectType);
     }
