@@ -13,7 +13,9 @@
     }
  else {
       type.setColumnSize(columnMetadataResultSet.getInt("DATA_LENGTH"));
-      if (dataType.equalsIgnoreCase("NVARCHAR")) {
+      if (dataType.equalsIgnoreCase("NCLOB")) {
+      }
+ else       if (dataType.equalsIgnoreCase("NVARCHAR")) {
         type.setColumnSize(type.getColumnSize() / 2);
         type.setColumnSizeUnit(DataType.ColumnSizeUnit.CHAR);
       }
