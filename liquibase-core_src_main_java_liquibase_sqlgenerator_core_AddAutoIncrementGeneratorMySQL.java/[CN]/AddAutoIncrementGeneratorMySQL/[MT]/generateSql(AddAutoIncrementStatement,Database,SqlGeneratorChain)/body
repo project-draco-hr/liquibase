@@ -1,0 +1,9 @@
+{
+  Sql[] sql=super.generateSql(statement,database,sqlGeneratorChain);
+  if (statement.getStartWith() != null) {
+    MySQLDatabase mysqlDatabase=(MySQLDatabase)database;
+    String alterTableSql="ALTER TABLE " + mysqlDatabase.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " "+ mysqlDatabase.getTableOptionAutoIncrementStartWithClause(statement.getStartWith());
+    sql=concact(sql,new UnparsedSql(alterTableSql,getAffectedTable(statement)));
+  }
+  return sql;
+}
