@@ -24,7 +24,7 @@
   SortedSet<Class<? extends LiquibaseDataType>> classes=registry.get(dataTypeName.toLowerCase());
   LiquibaseDataType liquibaseDataType=null;
   if (classes == null) {
-    liquibaseDataType=new UnknownType(dataTypeName);
+    liquibaseDataType=new UnknownType(dataTypeDefinition);
   }
  else {
     try {
