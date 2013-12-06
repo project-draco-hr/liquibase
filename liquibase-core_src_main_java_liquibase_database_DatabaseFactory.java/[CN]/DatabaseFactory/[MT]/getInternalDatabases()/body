@@ -1,0 +1,7 @@
+{
+  List<Database> returnList=new ArrayList<Database>();
+  for (  SortedSet<Database> set : internalDatabases.values()) {
+    returnList.add(set.iterator().next());
+  }
+  return returnList;
+}
