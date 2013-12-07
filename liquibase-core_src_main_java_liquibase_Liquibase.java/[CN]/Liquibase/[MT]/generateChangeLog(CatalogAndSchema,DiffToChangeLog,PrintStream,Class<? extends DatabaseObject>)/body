@@ -1,6 +1,6 @@
 {
   Set<Class<? extends DatabaseObject>> finalCompareTypes=null;
-  if (snapshotTypes != null || snapshotTypes.length > 0) {
+  if (snapshotTypes != null && snapshotTypes.length > 0) {
     finalCompareTypes=new HashSet<Class<? extends DatabaseObject>>(Arrays.asList(snapshotTypes));
   }
   SnapshotControl snapshotControl=new SnapshotControl(this.getDatabase(),snapshotTypes);
