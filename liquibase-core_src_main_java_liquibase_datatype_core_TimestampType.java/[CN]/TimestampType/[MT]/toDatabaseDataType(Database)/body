@@ -1,5 +1,8 @@
 {
   if (database instanceof MySQLDatabase) {
+    if (originalDefinition.contains(" ")) {
+      return new DatabaseDataType(originalDefinition);
+    }
     return new DatabaseDataType("TIMESTAMP");
   }
   if (database instanceof MSSQLDatabase) {
