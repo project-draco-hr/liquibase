@@ -1,3 +1,7 @@
 {
-  return super.getJdbcSchemaName(schema).toLowerCase();
+  String schemaName=super.getJdbcSchemaName(schema);
+  if (schemaName != null) {
+    schemaName=schemaName.toLowerCase();
+  }
+  return schemaName;
 }
