@@ -1,3 +1,14 @@
 {
+  try {
+    URL fileUrl=classLoader.getResource(packageName);
+    if (fileUrl != null) {
+      File file=new File(fileUrl.toURI());
+      if (file.exists() && !file.isDirectory()) {
+        return new Vector<URL>(Arrays.asList(fileUrl)).elements();
+      }
+    }
+  }
+ catch (  Throwable e) {
+  }
   return classLoader.getResources(packageName);
 }
