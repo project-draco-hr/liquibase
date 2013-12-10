@@ -6,13 +6,13 @@
     @Override public ResultSetCache.RowData wantedKeyParameters(){
       return new ResultSetCache.RowData(catalogName,schemaName,database,tableName);
     }
-    @Override public ResultSet fastFetchQuery() throws SQLException, DatabaseException {
+    @Override public List<CachedRow> fastFetchQuery() throws SQLException, DatabaseException {
       CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
-      return executeQuery(createSql(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName),JdbcDatabaseSnapshot.this.getDatabase());
+      return executeAndExtract(createSql(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName),JdbcDatabaseSnapshot.this.getDatabase());
     }
-    @Override public ResultSet bulkFetchQuery() throws SQLException, DatabaseException {
+    @Override public List<CachedRow> bulkFetchQuery() throws SQLException, DatabaseException {
       CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
-      return executeQuery(createSql(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null),JdbcDatabaseSnapshot.this.getDatabase());
+      return executeAndExtract(createSql(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null),JdbcDatabaseSnapshot.this.getDatabase());
     }
     private String createSql(    String catalogName,    String schemaName,    String tableName) throws SQLException {
       Database database=JdbcDatabaseSnapshot.this.getDatabase();

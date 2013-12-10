@@ -18,7 +18,7 @@
           sql+=" AND c.INDEX_NAME='" + database.correctObjectName(indexName,Index.class) + "'";
         }
         sql+=" ORDER BY c.INDEX_NAME, ORDINAL_POSITION";
-        returnList.addAll(extract(executeQuery(sql,database)));
+        returnList.addAll(executeAndExtract(sql,database));
       }
  else {
         List<String> tables=new ArrayList<String>();

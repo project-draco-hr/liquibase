@@ -6,15 +6,15 @@
     @Override public ResultSetCache.RowData wantedKeyParameters(){
       return new ResultSetCache.RowData(catalogName,schemaName,database,table);
     }
-    @Override public ResultSet fastFetchQuery() throws SQLException {
+    @Override public List<CachedRow> fastFetchQuery() throws SQLException {
       CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
       String catalog=((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema);
       String schema=((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema);
-      return databaseMetaData.getTables(catalog,schema,database.correctObjectName(table,Table.class),types);
+      return extract(databaseMetaData.getTables(catalog,schema,database.correctObjectName(table,Table.class),types));
     }
-    @Override public ResultSet bulkFetchQuery() throws SQLException {
+    @Override public List<CachedRow> bulkFetchQuery() throws SQLException {
       CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
-      return databaseMetaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,types);
+      return extract(databaseMetaData.getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,types));
     }
   }
 );

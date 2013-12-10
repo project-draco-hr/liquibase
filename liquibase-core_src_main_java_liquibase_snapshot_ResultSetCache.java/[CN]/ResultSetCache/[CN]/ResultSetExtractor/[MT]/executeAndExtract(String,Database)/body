@@ -1,0 +1,12 @@
+{
+  Statement statement=null;
+  ResultSet resultSet=null;
+  try {
+    statement=((JdbcConnection)database.getConnection()).createStatement();
+    resultSet=statement.executeQuery(sql);
+    return extract(resultSet);
+  }
+  finally {
+    JdbcUtils.close(resultSet,statement);
+  }
+}
