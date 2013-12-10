@@ -21,7 +21,7 @@
           throw new UnexpectedLiquibaseException("CSV Line " + lineNumber + " has only "+ (i - 1)+ " columns, the header has "+ headers.length);
         }
         Object value=line[i];
-        ColumnConfig columnConfig=getColumnConfig(i,headers[i]);
+        ColumnConfig columnConfig=getColumnConfig(i,headers[i].trim());
         if (columnConfig != null) {
           columnName=columnConfig.getName();
           if ("skip".equalsIgnoreCase(columnConfig.getType())) {

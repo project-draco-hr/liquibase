@@ -3,7 +3,7 @@
     return null;
   }
   String val=String.valueOf(value);
-  if (val.startsWith("'")) {
+  if (val.startsWith("'") && val.endsWith("'")) {
     return val;
   }
  else {
