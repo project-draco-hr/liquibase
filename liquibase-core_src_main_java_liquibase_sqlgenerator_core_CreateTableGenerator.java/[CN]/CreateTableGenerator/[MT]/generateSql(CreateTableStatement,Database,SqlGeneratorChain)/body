@@ -11,6 +11,7 @@
   boolean isPrimaryKeyAutoIncrement=false;
   Iterator<String> columnIterator=statement.getColumns().iterator();
   List<String> primaryKeyColumns=new LinkedList<String>();
+  BigInteger mysqlTableOptionStartWith=null;
   while (columnIterator.hasNext()) {
     String column=columnIterator.next();
     DatabaseDataType columnType=statement.getColumnTypes().get(column).toDatabaseDataType(database);
@@ -54,9 +55,14 @@
         if (!"".equals(autoIncrementClause)) {
           buffer.append(" ").append(autoIncrementClause);
         }
-        if (database instanceof PostgresDatabase && autoIncrementConstraint.getStartWith() != null) {
-          String sequenceName=statement.getTableName() + "_" + column+ "_seq";
-          additionalSql.add(new UnparsedSql("alter sequence " + database.escapeSequenceName(statement.getCatalogName(),statement.getSchemaName(),sequenceName) + " start with "+ autoIncrementConstraint.getStartWith(),new Sequence().setName(sequenceName).setSchema(statement.getCatalogName(),statement.getSchemaName())));
+        if (autoIncrementConstraint.getStartWith() != null) {
+          if (database instanceof PostgresDatabase) {
+            String sequenceName=statement.getTableName() + "_" + column+ "_seq";
+            additionalSql.add(new UnparsedSql("alter sequence " + database.escapeSequenceName(statement.getCatalogName(),statement.getSchemaName(),sequenceName) + " start with "+ autoIncrementConstraint.getStartWith(),new Sequence().setName(sequenceName).setSchema(statement.getCatalogName(),statement.getSchemaName())));
+          }
+ else           if (database instanceof MySQLDatabase) {
+            mysqlTableOptionStartWith=autoIncrementConstraint.getStartWith();
+          }
         }
       }
  else {
@@ -149,6 +155,10 @@
     buffer.append(",");
   }
   String sql=buffer.toString().replaceFirst(",\\s*$","") + ")";
+  if (database instanceof MySQLDatabase && mysqlTableOptionStartWith != null) {
+    LogFactory.getInstance().getLog().info("[MySQL] Using last startWith statement (" + mysqlTableOptionStartWith.toString() + ") as table option.");
+    sql+=" " + ((MySQLDatabase)database).getTableOptionAutoIncrementStartWithClause(mysqlTableOptionStartWith);
+  }
   if (statement.getTablespace() != null && database.supportsTablespaces()) {
     if (database instanceof MSSQLDatabase || database instanceof SybaseASADatabase) {
       sql+=" ON " + statement.getTablespace();

@@ -1,0 +1,6 @@
+{
+  Sql[] changedSql=new Sql[origSql.length + 1];
+  System.arraycopy(origSql,0,changedSql,0,origSql.length);
+  changedSql[origSql.length]=unparsedSql;
+  return changedSql;
+}
