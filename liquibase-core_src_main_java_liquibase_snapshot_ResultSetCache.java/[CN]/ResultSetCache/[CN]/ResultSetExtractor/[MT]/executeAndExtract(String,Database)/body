@@ -1,4 +1,7 @@
 {
+  if (sql == null) {
+    return new ArrayList<CachedRow>();
+  }
   Statement statement=null;
   ResultSet resultSet=null;
   try {

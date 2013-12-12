@@ -65,6 +65,10 @@
           sql+=" AND systables.tabname = '" + database.correctObjectName(tableName,Table.class) + "'";
         }
       }
+ else       if (database instanceof SybaseDatabase) {
+        LogFactory.getLogger().warning("Finding unique constraints not currently supported for Sybase");
+        return null;
+      }
  else {
         sql="select CONSTRAINT_NAME, CONSTRAINT_TYPE, TABLE_NAME " + "from " + database.getSystemSchema() + ".constraints "+ "where constraint_schema='"+ database.correctObjectName(schemaName,Schema.class)+ "' "+ "and constraint_catalog='"+ database.correctObjectName(catalogName,Catalog.class)+ "' "+ "and constraint_type='UNIQUE'";
         if (tableName != null) {
