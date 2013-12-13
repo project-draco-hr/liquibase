@@ -1,3 +1,6 @@
 {
+  if (database instanceof DB2Database) {
+    return new SimpleDateFormat("HH.mm.ss");
+  }
   return new SimpleDateFormat("HH:mm:ss");
 }

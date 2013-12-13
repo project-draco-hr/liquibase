@@ -3,7 +3,7 @@
     return new DatabaseDataType("CHAR",getParameters());
   }
   if (database instanceof OracleDatabase) {
-    return new DatabaseDataType("NCHAR2",getParameters());
+    return new DatabaseDataType("NCHAR",getParameters());
   }
   return super.toDatabaseDataType(database);
 }

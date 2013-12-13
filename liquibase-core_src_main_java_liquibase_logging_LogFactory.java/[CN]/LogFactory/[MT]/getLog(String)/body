@@ -8,7 +8,9 @@
       throw new ServiceNotFoundException(e);
     }
     value.setName(name);
-    value.setLogLevel(defaultLoggingLevel);
+    if (defaultLoggingLevel != null) {
+      value.setLogLevel(defaultLoggingLevel);
+    }
     loggers.put(name,value);
   }
   return loggers.get(name);

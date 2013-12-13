@@ -1,4 +1,12 @@
 {
+  if (!configured) {
+    try {
+      configureCustomChange();
+    }
+ catch (    CustomChangeException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+  }
   try {
     return customChange.validate(database);
   }

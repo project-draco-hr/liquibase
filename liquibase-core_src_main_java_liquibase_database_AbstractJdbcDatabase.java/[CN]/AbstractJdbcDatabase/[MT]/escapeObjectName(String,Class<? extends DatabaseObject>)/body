@@ -1,6 +1,7 @@
 {
   if (objectName != null) {
-    if (objectName.contains("-") || startsWithNumeric(objectName) || isReservedWord(objectName)) {
+    objectName=objectName.trim();
+    if (mustQuoteObjectName(objectName,objectType)) {
       return quoteObject(objectName,objectType);
     }
  else     if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS) {

@@ -1,7 +1,9 @@
 {
   SqlStatement[] statements=null;
   try {
-    configureCustomChange();
+    if (!configured) {
+      configureCustomChange();
+    }
     if (customChange instanceof CustomSqlChange) {
       statements=((CustomSqlChange)customChange).generateStatements(database);
     }

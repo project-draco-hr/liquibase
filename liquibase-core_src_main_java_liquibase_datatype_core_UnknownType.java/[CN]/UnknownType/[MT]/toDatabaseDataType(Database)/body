@@ -10,8 +10,19 @@
   if (database instanceof MySQLDatabase && (getName().equalsIgnoreCase("TINYBLOB") || getName().equalsIgnoreCase("MEDIUMBLOB") || getName().equalsIgnoreCase("TINYTEXT")|| getName().equalsIgnoreCase("MEDIUMTEXT")|| getName().equalsIgnoreCase("REAL"))) {
     parameters=new Object[0];
   }
+  if (database instanceof DB2Database && (getName().equalsIgnoreCase("REAL") || getName().equalsIgnoreCase("XML"))) {
+    parameters=new Object[0];
+  }
   if (database instanceof MSSQLDatabase && (getName().equalsIgnoreCase("REAL") || getName().equalsIgnoreCase("XML") || getName().equalsIgnoreCase("HIERARCHYID")|| getName().equalsIgnoreCase("DATETIMEOFFSET")|| getName().equalsIgnoreCase("IMAGE")|| getName().equalsIgnoreCase("NTEXT")|| getName().equalsIgnoreCase("SMALLMONEY"))) {
     parameters=new Object[0];
+  }
+  if (database instanceof OracleDatabase) {
+    if (getName().equalsIgnoreCase("LONG") || getName().equalsIgnoreCase("NCLOB")) {
+      parameters=new Object[0];
+    }
+ else     if (getName().toUpperCase().startsWith("INTERVAL ")) {
+      return new DatabaseDataType(getName().replaceAll("\\(\\d+\\)",""));
+    }
   }
   if (dataTypeMaxParameters < parameters.length) {
     parameters=Arrays.copyOfRange(parameters,0,dataTypeMaxParameters);

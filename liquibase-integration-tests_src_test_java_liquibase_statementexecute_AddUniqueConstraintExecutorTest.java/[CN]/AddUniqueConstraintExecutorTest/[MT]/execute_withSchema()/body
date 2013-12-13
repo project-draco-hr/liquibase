@@ -1,6 +1,6 @@
 {
   statementUnderTest=new AddUniqueConstraintStatement(DatabaseTestContext.ALT_CATALOG,DatabaseTestContext.ALT_SCHEMA,TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME);
-  assertCorrect("alter table liquibasec.adduqtest add constraint unique (coltomakeuq) constraint uq_test",InformixDatabase.class);
+  assertCorrect("alter table liquibaseb.adduqtest add constraint unique (coltomakeuq) constraint uq_test",InformixDatabase.class);
   assertCorrect("alter table liquibasec.adduqtest add constraint uq_test unique (coltomakeuq)",OracleDatabase.class);
   assertCorrect("alter table liquibaseb.\"adduqtest\" add constraint uq_test unique (\"coltomakeuq\")",PostgresDatabase.class);
   assertCorrect("alter table liquibasec.adduqtest add constraint uq_test unique (coltomakeuq)",DerbyDatabase.class);

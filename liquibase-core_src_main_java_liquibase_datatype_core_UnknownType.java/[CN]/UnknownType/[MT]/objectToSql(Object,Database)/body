@@ -1,0 +1,8 @@
+{
+  if (value instanceof DatabaseFunction) {
+    return super.objectToSql(value,database);
+  }
+ else {
+    return "'" + super.objectToSql(value,database) + "'";
+  }
+}

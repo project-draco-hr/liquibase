@@ -1,4 +1,15 @@
 {
+  try {
+    URL fileUrl=_loader.getResource(packageName);
+    if (fileUrl != null) {
+      File file=new File(fileUrl.toURI());
+      if (file.exists() && !file.isDirectory()) {
+        return new Vector<URL>(Arrays.asList(fileUrl)).elements();
+      }
+    }
+  }
+ catch (  Throwable e) {
+  }
   packageName=packageName.replaceFirst("^target/classes/","");
   return _loader.getResources(packageName);
 }

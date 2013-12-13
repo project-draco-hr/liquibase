@@ -6,13 +6,13 @@
     @Override public ResultSetCache.RowData wantedKeyParameters(){
       return new ResultSetCache.RowData(catalogName,schemaName,database,tableName);
     }
-    @Override public ResultSet fastFetchQuery() throws SQLException, DatabaseException {
+    @Override public List<CachedRow> fastFetchQuery() throws SQLException, DatabaseException {
       CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
-      return executeQuery(createSql(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName),JdbcDatabaseSnapshot.this.getDatabase());
+      return executeAndExtract(createSql(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName),JdbcDatabaseSnapshot.this.getDatabase());
     }
-    @Override public ResultSet bulkFetchQuery() throws SQLException, DatabaseException {
+    @Override public List<CachedRow> bulkFetchQuery() throws SQLException, DatabaseException {
       CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
-      return executeQuery(createSql(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null),JdbcDatabaseSnapshot.this.getDatabase());
+      return executeAndExtract(createSql(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null),JdbcDatabaseSnapshot.this.getDatabase());
     }
     private String createSql(    String catalogName,    String schemaName,    String tableName) throws SQLException {
       Database database=JdbcDatabaseSnapshot.this.getDatabase();
@@ -70,6 +70,10 @@
         if (tableName != null) {
           sql+=" AND systables.tabname = '" + database.correctObjectName(tableName,Table.class) + "'";
         }
+      }
+ else       if (database instanceof SybaseDatabase) {
+        LogFactory.getLogger().warning("Finding unique constraints not currently supported for Sybase");
+        return null;
       }
  else {
         sql="select CONSTRAINT_NAME, CONSTRAINT_TYPE, TABLE_NAME " + "from " + database.getSystemSchema() + ".constraints "+ "where constraint_schema='"+ database.correctObjectName(schemaName,Schema.class)+ "' "+ "and constraint_catalog='"+ database.correctObjectName(catalogName,Catalog.class)+ "' "+ "and constraint_type='UNIQUE'";
