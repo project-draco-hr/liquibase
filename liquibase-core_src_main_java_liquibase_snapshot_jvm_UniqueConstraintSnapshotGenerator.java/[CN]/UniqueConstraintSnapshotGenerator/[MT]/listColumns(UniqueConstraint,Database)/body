@@ -23,8 +23,8 @@
   }
  else   if (database instanceof DerbyDatabase) {
     sql="SELECT cg.descriptor as descriptor, t.tablename " + "FROM sys.sysconglomerates cg " + "JOIN sys.syskeys k ON cg.conglomerateid = k.conglomerateid "+ "JOIN sys.sysconstraints c ON c.constraintid = k.constraintid "+ "JOIN sys.systables t ON c.tableid = t.tableid "+ "WHERE c.constraintname='" + database.correctObjectName(name,UniqueConstraint.class) + "'";
-    List<Map> rows=ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement(sql));
-    List<Map> returnList=new ArrayList<Map>();
+    List<Map<String,?>> rows=ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement(sql));
+    List<Map<String,?>> returnList=new ArrayList<Map<String,?>>();
     if (rows.size() == 0) {
       return returnList;
     }

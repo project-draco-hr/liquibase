@@ -54,7 +54,7 @@
       statementsToExecute.add(new UpdateStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()).addNewColumnValue("EXECTYPE","EXECUTED"));
       statementsToExecute.add(new SetNullableStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"EXECTYPE","VARCHAR(10)",false));
     }
-    List<Map> md5sumRS=ExecutorService.getInstance().getExecutor(this).queryForList(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum(),"MD5SUM"));
+    List<Map<String,?>> md5sumRS=ExecutorService.getInstance().getExecutor(this).queryForList(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum(),"MD5SUM"));
     if (md5sumRS.size() > 0) {
       String md5sum=md5sumRS.get(0).get("MD5SUM").toString();
       if (!md5sum.startsWith(CheckSum.getCurrentVersion() + ":")) {

@@ -2,14 +2,14 @@
   Database database=snapshot.getDatabase();
   UniqueConstraint exampleConstraint=(UniqueConstraint)example;
   Table table=exampleConstraint.getTable();
-  List<Map> metadata=listColumns(exampleConstraint,database);
+  List<Map<String,?>> metadata=listColumns(exampleConstraint,database);
   if (metadata.size() == 0) {
     return null;
   }
   UniqueConstraint constraint=new UniqueConstraint();
   constraint.setTable(table);
   constraint.setName(example.getName());
-  for (  Map<String,Object> col : metadata) {
+  for (  Map<String,?> col : metadata) {
     constraint.getColumns().add((String)col.get("COLUMN_NAME"));
   }
   return constraint;

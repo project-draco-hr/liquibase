@@ -1,6 +1,6 @@
 {
   schema=correctSchema(schema);
-  List<Map> retList=ExecutorService.getInstance().getExecutor(this).queryForList(new GetViewDefinitionStatement(schema.getCatalogName(),schema.getSchemaName(),viewName));
+  List<Map<String,?>> retList=ExecutorService.getInstance().getExecutor(this).queryForList(new GetViewDefinitionStatement(schema.getCatalogName(),schema.getSchemaName(),viewName));
   StringBuilder sb=new StringBuilder();
   for (  Map rowMap : retList) {
     String s=(String)rowMap.get("VIEWTEXT");
