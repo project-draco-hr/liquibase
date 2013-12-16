@@ -1,6 +1,6 @@
 {
   if (defaultCatalogName != null) {
-    return defaultSchemaName;
+    return defaultCatalogName;
   }
   if (defaultSchemaName != null) {
     return defaultSchemaName;
