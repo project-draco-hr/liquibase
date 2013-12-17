@@ -1,7 +1,11 @@
 {
   String path=FilenameUtils.concat(basePath,systemId);
   try {
-    return new InputSource(resourceAccessor.getResourceAsStream(path));
+    InputStream resourceAsStream=resourceAccessor.getResourceAsStream(path);
+    if (resourceAsStream == null) {
+      return null;
+    }
+    return new InputSource(resourceAsStream);
   }
  catch (  Exception ex) {
     return null;

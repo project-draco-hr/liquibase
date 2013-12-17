@@ -11,6 +11,9 @@
       return null;
     }
     String xsdFile=namespaceDetails.getLocalPath(systemId);
+    if (xsdFile == null) {
+      return null;
+    }
     try {
       InputStream resourceAsStream=resourceAccessor.getResourceAsStream(xsdFile);
       if (resourceAsStream == null) {
