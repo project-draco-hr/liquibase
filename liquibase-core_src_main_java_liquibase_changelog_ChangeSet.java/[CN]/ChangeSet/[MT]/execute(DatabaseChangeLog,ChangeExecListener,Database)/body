@@ -1,0 +1,163 @@
+{
+  if (validationFailed) {
+    return ExecType.MARK_RAN;
+  }
+  long startTime=new Date().getTime();
+  ExecType execType=null;
+  boolean skipChange=false;
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
+  try {
+    database.setObjectQuotingStrategy(objectQuotingStrategy);
+    if (database.supportsDDLInTransaction()) {
+      database.setAutoCommit(!runInTransaction);
+    }
+    executor.comment("Changeset " + toString(false));
+    if (StringUtils.trimToNull(getComments()) != null) {
+      String comments=getComments();
+      String[] lines=comments.split("\n");
+      for (int i=0; i < lines.length; i++) {
+        if (i > 0) {
+          lines[i]=database.getLineComment() + " " + lines[i];
+        }
+      }
+      executor.comment(StringUtils.join(Arrays.asList(lines),"\n"));
+    }
+    try {
+      if (preconditions != null) {
+        preconditions.check(database,databaseChangeLog,this);
+      }
+    }
+ catch (    PreconditionFailedException e) {
+      if (listener != null) {
+        listener.preconditionFailed(e,preconditions.getOnFail());
+      }
+      StringBuffer message=new StringBuffer();
+      message.append(StreamUtil.getLineSeparator());
+      for (      FailedPrecondition invalid : e.getFailedPreconditions()) {
+        message.append("          ").append(invalid.toString());
+        message.append(StreamUtil.getLineSeparator());
+      }
+      if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.HALT)) {
+        throw new MigrationFailedException(this,message.toString(),e);
+      }
+ else       if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.CONTINUE)) {
+        skipChange=true;
+        execType=ExecType.SKIPPED;
+        LogFactory.getLogger().info("Continuing past: " + toString() + " despite precondition failure due to onFail='CONTINUE': "+ message);
+      }
+ else       if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.MARK_RAN)) {
+        execType=ExecType.MARK_RAN;
+        skipChange=true;
+        log.info("Marking ChangeSet: " + toString() + " ran despite precondition failure due to onFail='MARK_RAN': "+ message);
+      }
+ else       if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.WARN)) {
+        execType=null;
+      }
+ else {
+        throw new UnexpectedLiquibaseException("Unexpected precondition onFail attribute: " + preconditions.getOnFail(),e);
+      }
+    }
+catch (    PreconditionErrorException e) {
+      if (listener != null) {
+        listener.preconditionErrored(e,preconditions.getOnError());
+      }
+      StringBuffer message=new StringBuffer();
+      message.append(StreamUtil.getLineSeparator());
+      for (      ErrorPrecondition invalid : e.getErrorPreconditions()) {
+        message.append("          ").append(invalid.toString());
+        message.append(StreamUtil.getLineSeparator());
+      }
+      if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.HALT)) {
+        throw new MigrationFailedException(this,message.toString(),e);
+      }
+ else       if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.CONTINUE)) {
+        skipChange=true;
+        execType=ExecType.SKIPPED;
+      }
+ else       if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.MARK_RAN)) {
+        execType=ExecType.MARK_RAN;
+        skipChange=true;
+        log.info("Marking ChangeSet: " + toString() + " ran despite precondition error: "+ message);
+      }
+ else       if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.WARN)) {
+        execType=null;
+      }
+ else {
+        throw new UnexpectedLiquibaseException("Unexpected precondition onError attribute: " + preconditions.getOnError(),e);
+      }
+      database.rollback();
+    }
+ finally {
+      database.rollback();
+    }
+    if (!skipChange) {
+      for (      Change change : changes) {
+        try {
+          change.finishInitialization();
+        }
+ catch (        SetupException se) {
+          throw new MigrationFailedException(this,se);
+        }
+      }
+      log.debug("Reading ChangeSet: " + toString());
+      for (      Change change : getChanges()) {
+        if ((!(change instanceof DbmsTargetedChange)) || DatabaseList.definitionMatches(((DbmsTargetedChange)change).getDbms(),database,true)) {
+          if (listener != null) {
+            listener.willRun(change,this,changeLog,database);
+          }
+          database.executeStatements(change,databaseChangeLog,sqlVisitors);
+          log.info(change.getConfirmationMessage());
+          if (listener != null) {
+            listener.ran(change,this,changeLog,database);
+          }
+        }
+ else {
+          log.debug("Change " + change.getSerializedObjectName() + " not included for database "+ database.getShortName());
+        }
+      }
+      if (runInTransaction) {
+        database.commit();
+      }
+      log.info("ChangeSet " + toString(false) + " ran successfully in "+ (new Date().getTime() - startTime + "ms"));
+      if (execType == null) {
+        execType=ExecType.EXECUTED;
+      }
+    }
+ else {
+      log.debug("Skipping ChangeSet: " + toString());
+    }
+  }
+ catch (  Exception e) {
+    try {
+      database.rollback();
+    }
+ catch (    Exception e1) {
+      throw new MigrationFailedException(this,e);
+    }
+    if (getFailOnError() != null && !getFailOnError()) {
+      log.info("Change set " + toString(false) + " failed, but failOnError was false.  Error: "+ e.getMessage());
+      log.debug("Failure Stacktrace",e);
+      execType=ExecType.FAILED;
+    }
+ else {
+      log.severe("Change Set " + toString(false) + " failed.  Error: "+ e.getMessage(),e);
+      if (e instanceof MigrationFailedException) {
+        throw ((MigrationFailedException)e);
+      }
+ else {
+        throw new MigrationFailedException(this,e);
+      }
+    }
+  }
+ finally {
+    if (!runInTransaction && database.supportsDDLInTransaction()) {
+      try {
+        database.setAutoCommit(false);
+      }
+ catch (      DatabaseException e) {
+        throw new MigrationFailedException(this,"Could not resetInternalState autocommit",e);
+      }
+    }
+  }
+  return execType;
+}
