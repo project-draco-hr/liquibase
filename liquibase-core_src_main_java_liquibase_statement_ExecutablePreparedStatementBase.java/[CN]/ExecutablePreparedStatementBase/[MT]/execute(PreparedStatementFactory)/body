@@ -17,5 +17,6 @@
     for (    Closeable closeable : closeables) {
       StreamUtil.closeQuietly(closeable);
     }
+    JdbcUtils.closeStatement(stmt);
   }
 }
