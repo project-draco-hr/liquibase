@@ -1,5 +1,4 @@
 {
-  System.out.println("Testing...");
   File pom=getTestFile("src/test/resources/update/relativeClobFiles/plugin_config.xml");
   LiquibaseUpdate update=(LiquibaseUpdate)lookupMojo("update",pom);
   update.execute();
