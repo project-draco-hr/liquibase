@@ -1,11 +1,5 @@
 {
-  Thread currentThread=Thread.currentThread();
-  ClassLoader contextClassLoader=currentThread.getContextClassLoader();
-  ResourceAccessor threadClFO=new ClassLoaderResourceAccessor(contextClassLoader);
-  ResourceAccessor clFO=new ClassLoaderResourceAccessor();
-  ResourceAccessor fsFO=new FileSystemResourceAccessor();
-  ResourceAccessor accessor=new CompositeResourceAccessor(clFO,fsFO,threadClFO);
   String fileName=getFileName(valueLobFile);
-  InputStream in=accessor.getResourceAsStream(fileName);
+  InputStream in=this.resourceAccessor.getResourceAsStream(fileName);
   return in;
 }

@@ -9,7 +9,7 @@
     }
   }
   if (needsPreparedStatement) {
-    UpdateExecutablePreparedStatement statement=new UpdateExecutablePreparedStatement(database,catalogName,schemaName,tableName,columns,getChangeSet());
+    UpdateExecutablePreparedStatement statement=new UpdateExecutablePreparedStatement(database,catalogName,schemaName,tableName,columns,getChangeSet(),this.getResourceAccessor());
     statement.setWhereClause(where);
     for (    ColumnConfig whereParam : whereParams) {
       if (whereParam.getName() != null) {

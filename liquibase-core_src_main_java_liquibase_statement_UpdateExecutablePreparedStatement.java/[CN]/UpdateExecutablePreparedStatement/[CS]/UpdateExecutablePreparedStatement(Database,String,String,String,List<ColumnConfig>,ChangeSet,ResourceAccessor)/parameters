@@ -4,3 +4,4 @@ String schemaName
 String tableName
 List<ColumnConfig> columns
 ChangeSet changeSet
+ResourceAccessor resourceAccessor
