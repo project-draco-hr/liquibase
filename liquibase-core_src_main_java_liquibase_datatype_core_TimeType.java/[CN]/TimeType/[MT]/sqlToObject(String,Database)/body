@@ -1,9 +1,22 @@
 {
+  if (zeroTime(value)) {
+    return value;
+  }
   if (database instanceof DB2Database) {
     return value.replaceFirst("^\"SYSIBM\".\"TIME\"\\('","").replaceFirst("'\\)","");
   }
   if (database instanceof DerbyDatabase) {
     return value.replaceFirst("^TIME\\('","").replaceFirst("'\\)","");
   }
-  return super.sqlToObject(value,database);
+  try {
+    DateFormat timeFormat=getTimeFormat(database);
+    if (database instanceof OracleDatabase && value.matches("to_date\\('\\d+:\\d+:\\d+', 'HH24:MI:SS'\\)")) {
+      timeFormat=new SimpleDateFormat("HH:mm:s");
+      value=value.replaceFirst(".*?'","").replaceFirst("',.*","");
+    }
+    return new java.sql.Time(timeFormat.parse(value).getTime());
+  }
+ catch (  ParseException e) {
+    return new DatabaseFunction(value);
+  }
 }
