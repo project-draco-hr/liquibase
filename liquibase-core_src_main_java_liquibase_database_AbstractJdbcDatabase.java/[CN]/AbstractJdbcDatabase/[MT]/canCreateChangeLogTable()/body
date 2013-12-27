@@ -1,3 +1,3 @@
 {
-  return true;
+  return ((TableBasedChangeLogService)ChangeLogServiceFactory.getInstance().getChangeLogService(this)).canCreateChangeLogTable();
 }

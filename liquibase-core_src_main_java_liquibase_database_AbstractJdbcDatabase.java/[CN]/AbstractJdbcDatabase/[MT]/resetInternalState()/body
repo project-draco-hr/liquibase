@@ -1,4 +1,4 @@
 {
-  this.ranChangeSetList=null;
+  ChangeLogServiceFactory.getInstance().getChangeLogService(this).reset();
   this.hasDatabaseChangeLogLockTable=false;
 }

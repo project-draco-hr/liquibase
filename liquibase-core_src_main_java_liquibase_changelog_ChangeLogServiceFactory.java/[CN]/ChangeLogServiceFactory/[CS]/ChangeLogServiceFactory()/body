@@ -1,0 +1,12 @@
+{
+  Class<? extends ChangeLogService>[] classes;
+  try {
+    classes=ServiceLocator.getInstance().findClasses(ChangeLogService.class);
+    for (    Class<? extends ChangeLogService> clazz : classes) {
+      register(clazz.getConstructor().newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

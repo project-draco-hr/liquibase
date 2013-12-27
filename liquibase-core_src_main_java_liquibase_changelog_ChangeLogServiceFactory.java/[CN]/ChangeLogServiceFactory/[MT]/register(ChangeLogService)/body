@@ -1,0 +1,3 @@
+{
+  registry.add(0,changeLogService);
+}

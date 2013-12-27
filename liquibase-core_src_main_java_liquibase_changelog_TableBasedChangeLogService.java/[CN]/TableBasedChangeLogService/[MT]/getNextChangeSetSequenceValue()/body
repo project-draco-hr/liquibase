@@ -1,0 +1,11 @@
+{
+  if (lastChangeSetSequenceValue == null) {
+    if (getDatabase().getConnection() == null) {
+      lastChangeSetSequenceValue=0;
+    }
+ else {
+      lastChangeSetSequenceValue=ExecutorService.getInstance().getExecutor(getDatabase()).queryForInt(new GetNextChangeSetSequenceValueStatement());
+    }
+  }
+  return ++lastChangeSetSequenceValue;
+}

@@ -1,13 +1,3 @@
 {
-  if (!hasDatabaseChangeLogTable()) {
-    return null;
-  }
-  RanChangeSet foundRan=null;
-  for (  RanChangeSet ranChange : getRanChangeSetList()) {
-    if (ranChange.isSameAs(changeSet)) {
-      foundRan=ranChange;
-      break;
-    }
-  }
-  return foundRan;
+  return ChangeLogServiceFactory.getInstance().getChangeLogService(this).getRanChangeSet(changeSet);
 }

@@ -1,5 +1,3 @@
 {
-  ExecutorService.getInstance().getExecutor(this).execute(new RemoveChangeSetRanStatusStatement(changeSet));
-  commit();
-  getRanChangeSetList().remove(new RanChangeSet(changeSet));
+  ChangeLogServiceFactory.getInstance().getChangeLogService(this).removeRanStatus(changeSet);
 }

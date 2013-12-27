@@ -4,7 +4,7 @@
   }
   boolean hasTable=false;
   try {
-    hasTable=SnapshotGeneratorFactory.getInstance().hasDatabaseChangeLogTable(this);
+    hasTable=ChangeLogServiceFactory.getInstance().getChangeLogService(this).hasDatabaseChangeLogTable();
   }
  catch (  LiquibaseException e) {
     throw new UnexpectedLiquibaseException(e);

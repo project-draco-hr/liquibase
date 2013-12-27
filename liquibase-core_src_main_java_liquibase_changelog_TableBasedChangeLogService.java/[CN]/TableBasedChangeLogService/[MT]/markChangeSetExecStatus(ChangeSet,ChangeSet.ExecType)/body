@@ -1,0 +1,6 @@
+{
+  Database database=getDatabase();
+  ExecutorService.getInstance().getExecutor(database).execute(new MarkChangeSetRanStatement(changeSet,execType));
+  database.commit();
+  getRanChangeSetList().add(new RanChangeSet(changeSet,execType));
+}
