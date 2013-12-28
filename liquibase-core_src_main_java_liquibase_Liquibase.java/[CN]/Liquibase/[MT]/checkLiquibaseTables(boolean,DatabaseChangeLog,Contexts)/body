@@ -1,4 +1,8 @@
 {
-  getDatabase().checkDatabaseChangeLogTable(updateExistingNullChecksums,databaseChangeLog,contexts);
+  ChangeLogService changeLogService=ChangeLogServiceFactory.getInstance().getChangeLogService(getDatabase());
+  changeLogService.init();
+  if (updateExistingNullChecksums) {
+    changeLogService.upgradeChecksums(databaseChangeLog,contexts);
+  }
   getDatabase().checkDatabaseChangeLogLockTable();
 }

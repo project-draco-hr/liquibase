@@ -1,7 +1,4 @@
 {
-  if (updateExistingNullChecksums && databaseChangeLog == null) {
-    throw new DatabaseException("changeLog parameter is required if updating existing checksums");
-  }
   Database database=getDatabase();
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   Table changeLogTable=null;
@@ -92,18 +89,5 @@
  else {
       LogFactory.getLogger().info("Cannot run " + sql.getClass().getSimpleName() + " on "+ database.getShortName()+ " when checking databasechangelog table");
     }
-  }
-  if (updateExistingNullChecksums) {
-    for (    RanChangeSet ranChangeSet : database.getRanChangeSetList()) {
-      if (ranChangeSet.getLastCheckSum() == null) {
-        ChangeSet changeSet=databaseChangeLog.getChangeSet(ranChangeSet);
-        if (changeSet != null && new ContextChangeSetFilter(contexts).accepts(changeSet) && new DbmsChangeSetFilter(database).accepts(changeSet)) {
-          LogFactory.getLogger().debug("Updating null or out of date checksum on changeSet " + changeSet + " to correct value");
-          executor.execute(new UpdateChangeSetChecksumStatement(changeSet));
-        }
-      }
-    }
-    database.commit();
-    ranChangeSetList=null;
   }
 }

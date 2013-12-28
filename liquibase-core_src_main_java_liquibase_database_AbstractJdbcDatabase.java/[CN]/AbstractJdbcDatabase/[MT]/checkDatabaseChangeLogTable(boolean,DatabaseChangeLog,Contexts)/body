@@ -1,3 +1,0 @@
-{
-  ChangeLogServiceFactory.getInstance().getChangeLogService(this).checkDatabaseChangeLogTable(updateExistingNullChecksums,databaseChangeLog,contexts);
-}
