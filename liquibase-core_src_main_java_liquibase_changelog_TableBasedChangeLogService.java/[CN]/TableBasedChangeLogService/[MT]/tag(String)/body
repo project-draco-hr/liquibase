@@ -5,11 +5,11 @@
     int totalRows=ExecutorService.getInstance().getExecutor(database).queryForInt(new SelectFromDatabaseChangeLogStatement("COUNT(*)"));
     if (totalRows == 0) {
       ChangeSet emptyChangeSet=new ChangeSet(String.valueOf(new Date().getTime()),"liquibase",false,false,"liquibase-internal",null,null,database.getObjectQuotingStrategy(),null);
-      this.markChangeSetExecStatus(emptyChangeSet,ChangeSet.ExecType.EXECUTED);
+      this.markExecType(emptyChangeSet,ChangeSet.ExecType.EXECUTED);
     }
     executor.execute(new TagDatabaseStatement(tagString));
     database.commit();
-    getRanChangeSetList().get(getRanChangeSetList().size() - 1).setTag(tagString);
+    getRanChangeSets().get(getRanChangeSets().size() - 1).setTag(tagString);
   }
  catch (  Exception e) {
     throw new DatabaseException(e);

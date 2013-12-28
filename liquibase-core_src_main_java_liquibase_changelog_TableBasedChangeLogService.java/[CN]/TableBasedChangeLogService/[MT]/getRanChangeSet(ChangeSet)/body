@@ -3,7 +3,7 @@
     return null;
   }
   RanChangeSet foundRan=null;
-  for (  RanChangeSet ranChange : getRanChangeSetList()) {
+  for (  RanChangeSet ranChange : getRanChangeSets()) {
     if (ranChange.isSameAs(changeSet)) {
       foundRan=ranChange;
       break;
