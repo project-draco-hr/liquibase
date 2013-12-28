@@ -5,7 +5,7 @@
     int totalRows=ExecutorService.getInstance().getExecutor(database).queryForInt(new SelectFromDatabaseChangeLogStatement("COUNT(*)"));
     if (totalRows == 0) {
       ChangeSet emptyChangeSet=new ChangeSet(String.valueOf(new Date().getTime()),"liquibase",false,false,"liquibase-internal",null,null,database.getObjectQuotingStrategy(),null);
-      this.markExecType(emptyChangeSet,ChangeSet.ExecType.EXECUTED);
+      this.setExecType(emptyChangeSet,ChangeSet.ExecType.EXECUTED);
     }
     executor.execute(new TagDatabaseStatement(tagString));
     database.commit();

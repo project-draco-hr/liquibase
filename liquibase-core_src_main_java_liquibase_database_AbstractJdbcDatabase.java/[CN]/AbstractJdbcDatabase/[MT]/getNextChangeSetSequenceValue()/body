@@ -1,3 +1,0 @@
-{
-  return ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(this).getNextChangeSetSequenceValue();
-}
