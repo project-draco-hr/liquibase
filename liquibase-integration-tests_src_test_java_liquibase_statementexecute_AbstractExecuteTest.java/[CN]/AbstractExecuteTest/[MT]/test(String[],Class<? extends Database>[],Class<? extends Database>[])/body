@@ -4,7 +4,7 @@
       if (shouldTestDatabase(database,includeDatabases,excludeDatabases)) {
         testedDatabases.add(database.getClass());
         if (database.getConnection() != null) {
-          ChangeLogServiceFactory.getInstance().getChangeLogService(database).init();
+          ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database).init();
           database.checkDatabaseChangeLogLockTable();
         }
         Sql[] sql=SqlGeneratorFactory.getInstance().generateSql(statementUnderTest,database);

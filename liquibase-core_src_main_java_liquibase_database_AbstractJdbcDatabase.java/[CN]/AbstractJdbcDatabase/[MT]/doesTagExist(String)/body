@@ -1,3 +1,3 @@
 {
-  return ChangeLogServiceFactory.getInstance().getChangeLogService(this).tagExists(tag);
+  return ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(this).tagExists(tag);
 }

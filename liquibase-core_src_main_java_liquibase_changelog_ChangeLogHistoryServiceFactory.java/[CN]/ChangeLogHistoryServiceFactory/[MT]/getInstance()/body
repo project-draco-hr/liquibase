@@ -1,6 +1,6 @@
 {
   if (instance == null) {
-    instance=new ChangeLogServiceFactory();
+    instance=new ChangeLogHistoryServiceFactory();
   }
   return instance;
 }

@@ -1,0 +1,6 @@
+{
+  for (  ChangeLogHistoryService changeLogHistoryService : registry) {
+    changeLogHistoryService.reset();
+  }
+  instance=null;
+}

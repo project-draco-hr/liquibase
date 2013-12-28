@@ -1,3 +1,0 @@
-{
-  ChangeLogServiceFactory.instance=changeLogServiceFactory;
-}
