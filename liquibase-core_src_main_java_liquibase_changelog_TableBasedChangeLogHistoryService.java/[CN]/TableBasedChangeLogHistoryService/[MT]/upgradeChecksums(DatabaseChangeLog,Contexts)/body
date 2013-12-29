@@ -1,14 +1,5 @@
 {
-  Executor executor=ExecutorService.getInstance().getExecutor(database);
-  for (  RanChangeSet ranChangeSet : database.getRanChangeSetList()) {
-    if (ranChangeSet.getLastCheckSum() == null) {
-      ChangeSet changeSet=databaseChangeLog.getChangeSet(ranChangeSet);
-      if (changeSet != null && new ContextChangeSetFilter(contexts).accepts(changeSet) && new DbmsChangeSetFilter(database).accepts(changeSet)) {
-        LogFactory.getLogger().debug("Updating null or out of date checksum on changeSet " + changeSet + " to correct value");
-        executor.execute(new UpdateChangeSetChecksumStatement(changeSet));
-      }
-    }
-  }
-  database.commit();
+  super.upgradeChecksums(databaseChangeLog,contexts);
+  getDatabase().commit();
   ranChangeSetList=null;
 }

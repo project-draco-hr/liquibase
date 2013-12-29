@@ -16,13 +16,13 @@
     boolean hasTag=changeLogTable.getColumn("TAG") != null;
     boolean hasLiquibase=changeLogTable.getColumn("LIQUIBASE") != null;
     boolean liquibaseColumnNotRightSize=false;
-    if (!this.database.getConnection().getDatabaseProductName().equals("SQLite")) {
+    if (!this.getDatabase().getConnection().getDatabaseProductName().equals("SQLite")) {
       Integer columnSize=changeLogTable.getColumn("LIQUIBASE").getType().getColumnSize();
       liquibaseColumnNotRightSize=columnSize != null && columnSize != 20;
     }
     boolean hasOrderExecuted=changeLogTable.getColumn("ORDEREXECUTED") != null;
     boolean checksumNotRightSize=false;
-    if (!this.database.getConnection().getDatabaseProductName().equals("SQLite")) {
+    if (!this.getDatabase().getConnection().getDatabaseProductName().equals("SQLite")) {
       Integer columnSize=changeLogTable.getColumn("MD5SUM").getType().getColumnSize();
       checksumNotRightSize=columnSize != null && columnSize != 35;
     }
@@ -68,7 +68,7 @@
       String md5sum=md5sumRS.get(0).get("MD5SUM").toString();
       if (!md5sum.startsWith(CheckSum.getCurrentVersion() + ":")) {
         executor.comment("DatabaseChangeLog checksums are an incompatible version.  Setting them to null so they will be updated on next database update");
-        statementsToExecute.add(new RawSqlStatement("UPDATE " + database.escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " SET MD5SUM=null"));
+        statementsToExecute.add(new RawSqlStatement("UPDATE " + getDatabase().escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " SET MD5SUM=null"));
       }
     }
   }
@@ -76,18 +76,18 @@
     executor.comment("Create Database Change Log Table");
     SqlStatement createTableStatement=new CreateDatabaseChangeLogTableStatement();
     if (!canCreateChangeLogTable()) {
-      throw new DatabaseException("Cannot create " + database.escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " table for your database.\n\n"+ "Please construct it manually using the following SQL as a base and re-run Liquibase:\n\n"+ createTableStatement);
+      throw new DatabaseException("Cannot create " + getDatabase().escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " table for your getDatabase().\n\n"+ "Please construct it manually using the following SQL as a base and re-run Liquibase:\n\n"+ createTableStatement);
     }
     statementsToExecute.add(createTableStatement);
-    LogFactory.getLogger().info("Creating database history table with name: " + database.escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()));
+    LogFactory.getLogger().info("Creating database history table with name: " + getDatabase().escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()));
   }
   for (  SqlStatement sql : statementsToExecute) {
     if (SqlGeneratorFactory.getInstance().supports(sql,database)) {
       executor.execute(sql);
-      database.commit();
+      getDatabase().commit();
     }
  else {
-      LogFactory.getLogger().info("Cannot run " + sql.getClass().getSimpleName() + " on "+ database.getShortName()+ " when checking databasechangelog table");
+      LogFactory.getLogger().info("Cannot run " + sql.getClass().getSimpleName() + " on "+ getDatabase().getShortName()+ " when checking databasechangelog table");
     }
   }
 }

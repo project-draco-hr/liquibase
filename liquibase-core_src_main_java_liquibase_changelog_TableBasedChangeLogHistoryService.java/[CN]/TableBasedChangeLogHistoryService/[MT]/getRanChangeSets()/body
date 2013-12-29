@@ -3,7 +3,7 @@
     return this.ranChangeSetList;
   }
   Database database=getDatabase();
-  String databaseChangeLogTableName=database.escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
+  String databaseChangeLogTableName=getDatabase().escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
   ranChangeSetList=new ArrayList<RanChangeSet>();
   if (hasDatabaseChangeLogTable()) {
     LogFactory.getLogger().info("Reading from " + databaseChangeLogTableName);

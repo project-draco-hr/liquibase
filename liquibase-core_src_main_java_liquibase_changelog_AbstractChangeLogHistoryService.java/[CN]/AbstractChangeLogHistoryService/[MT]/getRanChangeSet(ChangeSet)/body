@@ -1,0 +1,8 @@
+{
+  for (  RanChangeSet ranChange : getRanChangeSets()) {
+    if (ranChange.isSameAs(changeSet)) {
+      return ranChange;
+    }
+  }
+  return null;
+}

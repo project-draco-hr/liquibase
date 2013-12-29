@@ -1,7 +1,4 @@
 {
-  if (!hasDatabaseChangeLogTable()) {
-    return ChangeSet.RunStatus.NOT_RAN;
-  }
   RanChangeSet foundRan=getRanChangeSet(changeSet);
   if (foundRan == null) {
     return ChangeSet.RunStatus.NOT_RAN;
@@ -10,8 +7,7 @@
     if (foundRan.getLastCheckSum() == null) {
       try {
         LogFactory.getLogger().info("Updating NULL md5sum for " + changeSet.toString());
-        ExecutorService.getInstance().getExecutor(getDatabase()).execute(new RawSqlStatement("UPDATE " + getDatabase().escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " SET MD5SUM='"+ changeSet.generateCheckSum().toString()+ "' WHERE ID='"+ changeSet.getId()+ "' AND AUTHOR='"+ changeSet.getAuthor()+ "' AND FILENAME='"+ changeSet.getFilePath()+ "'"));
-        getDatabase().commit();
+        replaceChecksum(changeSet);
       }
  catch (      DatabaseException e) {
         throw new DatabaseException(e);
