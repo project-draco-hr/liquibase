@@ -1,0 +1,6 @@
+{
+  if (!hasDatabaseChangeLogTable()) {
+    return null;
+  }
+  return super.getRanChangeSet(changeSet);
+}

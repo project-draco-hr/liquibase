@@ -1,5 +1,3 @@
 {
-  ExecutorService.getInstance().getExecutor(this).execute(new MarkChangeSetRanStatement(changeSet,execType));
-  commit();
-  getRanChangeSetList().add(new RanChangeSet(changeSet,execType));
+  ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(this).setExecType(changeSet,execType);
 }

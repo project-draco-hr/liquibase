@@ -1,0 +1,5 @@
+{
+  super.upgradeChecksums(databaseChangeLog,contexts);
+  getDatabase().commit();
+  ranChangeSetList=null;
+}

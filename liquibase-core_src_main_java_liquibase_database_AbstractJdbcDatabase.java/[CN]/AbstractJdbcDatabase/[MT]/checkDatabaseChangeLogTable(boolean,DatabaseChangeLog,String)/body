@@ -1,3 +1,0 @@
-{
-  checkDatabaseChangeLogTable(updateExistingNullChecksums,databaseChangeLog,new Contexts(contexts));
-}

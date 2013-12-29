@@ -1,0 +1,3 @@
+{
+  ChangeLogHistoryServiceFactory.instance=changeLogHistoryServiceFactory;
+}

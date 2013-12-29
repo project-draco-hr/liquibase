@@ -1,0 +1,6 @@
+{
+  Database database=getDatabase();
+  ExecutorService.getInstance().getExecutor(database).execute(new RemoveChangeSetRanStatusStatement(changeSet));
+  getDatabase().commit();
+  getRanChangeSets().remove(new RanChangeSet(changeSet));
+}

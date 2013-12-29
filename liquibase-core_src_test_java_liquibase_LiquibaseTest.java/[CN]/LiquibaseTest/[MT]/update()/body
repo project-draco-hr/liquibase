@@ -8,7 +8,6 @@
 ;
   liquibase.update(contexts);
   verify(mockLockService).waitForLock();
-  verify(mockDatabase).checkDatabaseChangeLogTable(true,mockChangeLog,contexts);
   verify(mockDatabase).checkDatabaseChangeLogLockTable();
   verify(mockChangeLog).validate(mockDatabase,contexts);
   verify(mockChangeLogParser).parse("com/example/test.xml",liquibase.getChangeLogParameters(),mockResourceAccessor);

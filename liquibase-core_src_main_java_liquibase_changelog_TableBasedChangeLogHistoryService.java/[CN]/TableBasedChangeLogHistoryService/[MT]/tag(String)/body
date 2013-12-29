@@ -1,0 +1,17 @@
+{
+  Database database=getDatabase();
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
+  try {
+    int totalRows=ExecutorService.getInstance().getExecutor(database).queryForInt(new SelectFromDatabaseChangeLogStatement("COUNT(*)"));
+    if (totalRows == 0) {
+      ChangeSet emptyChangeSet=new ChangeSet(String.valueOf(new Date().getTime()),"liquibase",false,false,"liquibase-internal",null,null,getDatabase().getObjectQuotingStrategy(),null);
+      this.setExecType(emptyChangeSet,ChangeSet.ExecType.EXECUTED);
+    }
+    executor.execute(new TagDatabaseStatement(tagString));
+    getDatabase().commit();
+    getRanChangeSets().get(getRanChangeSets().size() - 1).setTag(tagString);
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
+}

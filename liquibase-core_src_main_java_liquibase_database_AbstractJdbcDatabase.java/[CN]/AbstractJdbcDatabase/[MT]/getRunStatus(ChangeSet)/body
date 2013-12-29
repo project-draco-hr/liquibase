@@ -1,35 +1,3 @@
 {
-  if (!hasDatabaseChangeLogTable()) {
-    return ChangeSet.RunStatus.NOT_RAN;
-  }
-  RanChangeSet foundRan=getRanChangeSet(changeSet);
-  if (foundRan == null) {
-    return ChangeSet.RunStatus.NOT_RAN;
-  }
- else {
-    if (foundRan.getLastCheckSum() == null) {
-      try {
-        LogFactory.getLogger().info("Updating NULL md5sum for " + changeSet.toString());
-        ExecutorService.getInstance().getExecutor(this).execute(new RawSqlStatement("UPDATE " + escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()) + " SET MD5SUM='"+ changeSet.generateCheckSum().toString()+ "' WHERE ID='"+ changeSet.getId()+ "' AND AUTHOR='"+ changeSet.getAuthor()+ "' AND FILENAME='"+ changeSet.getFilePath()+ "'"));
-        this.commit();
-      }
- catch (      DatabaseException e) {
-        throw new DatabaseException(e);
-      }
-      return ChangeSet.RunStatus.ALREADY_RAN;
-    }
- else {
-      if (foundRan.getLastCheckSum().equals(changeSet.generateCheckSum())) {
-        return ChangeSet.RunStatus.ALREADY_RAN;
-      }
- else {
-        if (changeSet.shouldRunOnChange()) {
-          return ChangeSet.RunStatus.RUN_AGAIN;
-        }
- else {
-          return ChangeSet.RunStatus.INVALID_MD5SUM;
-        }
-      }
-    }
-  }
+  return ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(this).getRunStatus(changeSet);
 }
