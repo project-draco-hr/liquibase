@@ -1,0 +1,3 @@
+{
+  return database.getConnection() != null && database.getConnection() instanceof OfflineConnection;
+}

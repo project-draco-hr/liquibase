@@ -1,8 +1,6 @@
 {
   Database database=createMock(Database.class);
   Executor executor=createMock(Executor.class);
-  database.checkDatabaseChangeLogLockTable();
-  expectLastCall();
   database.rollback();
   expectLastCall().anyTimes();
   expect(executor.queryForObject(isA(SelectFromDatabaseChangeLogLockStatement.class),eq(Boolean.class))).andReturn(true);

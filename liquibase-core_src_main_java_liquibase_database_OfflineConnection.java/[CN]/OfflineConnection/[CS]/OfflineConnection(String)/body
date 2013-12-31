@@ -1,0 +1,16 @@
+{
+  this.url=url;
+  Matcher matcher=Pattern.compile("offline:(\\w+)\\??(.*)").matcher(url);
+  if (!matcher.matches()) {
+    throw new UnexpectedLiquibaseException("Could not parse offline url " + url);
+  }
+  this.databaseShortName=matcher.group(1).toLowerCase();
+  String params=StringUtils.trimToNull(matcher.group(2));
+  if (params != null) {
+    String[] keyValues=params.split("&");
+    for (    String param : keyValues) {
+      String[] split=param.split("=");
+      this.params.put(split[0],split[1]);
+    }
+  }
+}

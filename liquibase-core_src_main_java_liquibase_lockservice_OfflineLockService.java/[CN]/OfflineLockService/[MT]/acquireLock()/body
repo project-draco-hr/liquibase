@@ -1,0 +1,4 @@
+{
+  this.hasChangeLogLock=true;
+  return true;
+}

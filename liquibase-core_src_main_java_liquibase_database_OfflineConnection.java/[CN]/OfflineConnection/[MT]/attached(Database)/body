@@ -1,0 +1,7 @@
+{
+  if (params.containsKey("caseSensitive")) {
+    if (database instanceof AbstractJdbcDatabase) {
+      ((AbstractJdbcDatabase)database).setCaseSensitive(Boolean.valueOf(params.get("caseSensitive")));
+    }
+  }
+}

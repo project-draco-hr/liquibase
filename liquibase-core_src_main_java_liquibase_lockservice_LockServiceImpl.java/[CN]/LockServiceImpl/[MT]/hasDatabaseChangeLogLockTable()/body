@@ -1,0 +1,10 @@
+{
+  boolean hasTable=false;
+  try {
+    hasTable=SnapshotGeneratorFactory.getInstance().hasDatabaseChangeLogLockTable(database);
+  }
+ catch (  LiquibaseException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  return hasTable;
+}

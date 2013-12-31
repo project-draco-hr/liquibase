@@ -1,8 +1,8 @@
 {
   if (caseSensitive == null) {
-    if (connection != null) {
+    if (connection != null && connection instanceof JdbcConnection) {
       try {
-        caseSensitive=Boolean.valueOf(((JdbcConnection)connection).getUnderlyingConnection().getMetaData().supportsMixedCaseIdentifiers());
+        caseSensitive=((JdbcConnection)connection).getUnderlyingConnection().getMetaData().supportsMixedCaseIdentifiers();
       }
  catch (      SQLException e) {
         LogFactory.getLogger().warning("Cannot determine case sensitivity from JDBC driver",e);

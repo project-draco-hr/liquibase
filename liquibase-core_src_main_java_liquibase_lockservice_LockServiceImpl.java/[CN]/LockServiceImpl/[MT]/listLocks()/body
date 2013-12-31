@@ -1,6 +1,6 @@
 {
   try {
-    if (!database.hasDatabaseChangeLogLockTable()) {
+    if (!this.hasDatabaseChangeLogLockTable()) {
       return new DatabaseChangeLogLock[0];
     }
     List<DatabaseChangeLogLock> allLocks=new ArrayList<DatabaseChangeLogLock>();

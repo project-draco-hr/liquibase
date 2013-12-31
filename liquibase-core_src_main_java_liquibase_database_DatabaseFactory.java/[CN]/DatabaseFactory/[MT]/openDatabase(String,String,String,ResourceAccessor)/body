@@ -1,0 +1,3 @@
+{
+  return openDatabase(url,username,password,null,null,null,resourceAccessor);
+}

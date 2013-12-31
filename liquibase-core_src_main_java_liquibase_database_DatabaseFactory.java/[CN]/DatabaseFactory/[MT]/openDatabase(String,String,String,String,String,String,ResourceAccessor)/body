@@ -1,0 +1,3 @@
+{
+  return this.findCorrectDatabaseImplementation(openConnection(url,username,password,driver,databaseClass,driverPropertiesFile,resourceAccessor));
+}

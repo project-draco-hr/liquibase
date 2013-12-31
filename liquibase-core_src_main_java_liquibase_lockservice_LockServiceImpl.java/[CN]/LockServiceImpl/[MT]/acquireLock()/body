@@ -5,7 +5,7 @@
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
     database.rollback();
-    database.checkDatabaseChangeLogLockTable();
+    this.init();
     Boolean locked=(Boolean)ExecutorService.getInstance().getExecutor(database).queryForObject(new SelectFromDatabaseChangeLogLockStatement("LOCKED"),Boolean.class);
     if (locked) {
       return false;

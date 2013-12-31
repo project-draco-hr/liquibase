@@ -1,4 +1,4 @@
 {
-  database.checkDatabaseChangeLogLockTable();
+  this.init();
   releaseLock();
 }

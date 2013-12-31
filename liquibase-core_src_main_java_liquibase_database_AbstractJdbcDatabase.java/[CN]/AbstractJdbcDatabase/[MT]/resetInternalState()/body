@@ -1,4 +1,4 @@
 {
   ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(this).reset();
-  this.hasDatabaseChangeLogLockTable=false;
+  LockServiceFactory.getInstance().getLockService(this).reset();
 }

@@ -1,8 +1,6 @@
 {
   Database database=createMock(Database.class);
   Executor executor=createMock(Executor.class);
-  database.checkDatabaseChangeLogLockTable();
-  expectLastCall();
   database.rollback();
   expectLastCall().anyTimes();
   database.setCanCacheLiquibaseTableInfo(true);

@@ -1,0 +1,7 @@
+String url
+String username
+String password
+String driver
+String databaseClass
+String driverPropertiesFile
+ResourceAccessor resourceAccessor

@@ -1,8 +1,15 @@
 {
   SortedSet<Database> foundDatabases=new TreeSet<Database>(new DatabaseComparator());
   for (  Database implementedDatabase : getImplementedDatabases()) {
-    if (implementedDatabase.isCorrectDatabaseImplementation(connection)) {
-      foundDatabases.add(implementedDatabase);
+    if (connection instanceof OfflineConnection) {
+      if (((OfflineConnection)connection).isCorrectDatabaseImplementation(implementedDatabase)) {
+        foundDatabases.add(implementedDatabase);
+      }
+    }
+ else {
+      if (implementedDatabase.isCorrectDatabaseImplementation(connection)) {
+        foundDatabases.add(implementedDatabase);
+      }
     }
   }
   if (foundDatabases.size() == 0) {

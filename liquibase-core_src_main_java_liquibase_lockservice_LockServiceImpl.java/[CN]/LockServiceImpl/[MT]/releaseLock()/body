@@ -1,7 +1,7 @@
 {
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
-    if (database.hasDatabaseChangeLogLockTable()) {
+    if (this.hasDatabaseChangeLogLockTable()) {
       executor.comment("Release Database Lock");
       database.rollback();
       int updatedRows=executor.update(new UnlockDatabaseChangeLogStatement());

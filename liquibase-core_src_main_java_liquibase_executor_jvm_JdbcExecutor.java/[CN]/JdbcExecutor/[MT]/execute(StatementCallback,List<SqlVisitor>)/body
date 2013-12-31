@@ -2,6 +2,9 @@
   DatabaseConnection con=database.getConnection();
   Statement stmt=null;
   try {
+    if (con instanceof OfflineConnection) {
+      throw new DatabaseException("Cannot execute commands against an offline database");
+    }
     stmt=((JdbcConnection)con).getUnderlyingConnection().createStatement();
     Statement stmtToUse=stmt;
     return action.doInStatement(stmtToUse);
