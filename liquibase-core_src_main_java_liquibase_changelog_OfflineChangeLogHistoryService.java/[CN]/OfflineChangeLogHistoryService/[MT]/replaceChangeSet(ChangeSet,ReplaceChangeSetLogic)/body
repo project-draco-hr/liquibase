@@ -1,0 +1,48 @@
+{
+  File oldFile=this.changeLogFile;
+  File newFile=new File(oldFile.getParentFile(),oldFile.getName() + ".new");
+  FileReader reader=null;
+  FileWriter writer=null;
+  try {
+    reader=new FileReader(oldFile);
+    writer=new FileWriter(newFile);
+    CSVReader csvReader=new CSVReader(reader);
+    CSVWriter csvWriter=new CSVWriter(writer);
+    String[] line;
+    while ((line=csvReader.readNext()) != null) {
+      if (line[COLUMN_ID].equals(changeSet.getId()) && line[COLUMN_AUTHOR].equals(changeSet.getAuthor()) && line[COLUMN_FILENAME].equals(changeSet.getFilePath())) {
+        line=replaceLogic.execute(line);
+      }
+      if (line != null) {
+        csvWriter.writeNext(line);
+      }
+    }
+    csvWriter.flush();
+    csvWriter.close();
+    writer=null;
+    csvReader.close();
+    reader=null;
+    oldFile.delete();
+    newFile.renameTo(oldFile);
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (reader != null) {
+      try {
+        reader.close();
+      }
+ catch (      IOException ignore) {
+      }
+    }
+    if (writer != null) {
+      try {
+        writer.flush();
+        writer.close();
+      }
+ catch (      IOException ignore) {
+      }
+    }
+  }
+}

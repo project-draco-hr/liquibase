@@ -1,2 +1,12 @@
 {
+  if (executeAgainstDatabase) {
+    ExecutorService.getInstance().getExecutor(getDatabase()).execute(new RemoveChangeSetRanStatusStatement(changeSet));
+    getDatabase().commit();
+  }
+  replaceChangeSet(changeSet,new ReplaceChangeSetLogic(){
+    @Override public String[] execute(    String[] line){
+      return null;
+    }
+  }
+);
 }

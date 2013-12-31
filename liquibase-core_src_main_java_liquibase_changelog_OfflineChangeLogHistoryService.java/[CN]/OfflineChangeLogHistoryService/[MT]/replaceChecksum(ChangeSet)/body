@@ -1,0 +1,12 @@
+{
+  if (executeAgainstDatabase) {
+    ExecutorService.getInstance().getExecutor(getDatabase()).execute(new UpdateChangeSetChecksumStatement(changeSet));
+  }
+  replaceChangeSet(changeSet,new ReplaceChangeSetLogic(){
+    @Override public String[] execute(    String[] line){
+      line[COLUMN_MD5SUM]=changeSet.generateCheckSum().toString();
+      return line;
+    }
+  }
+);
+}

@@ -1,0 +1,14 @@
+{
+  FileWriter writer=null;
+  try {
+    writer=new FileWriter(file);
+    CSVWriter csvWriter=new CSVWriter(writer);
+    csvWriter.writeNext(new String[]{"ID","AUTHOR","FILENAME","DATEEXECUTED","ORDEREXECUTED","EXECTYPE","MD5SUM","DESCRIPTION","COMMENTS","TAG","LIQUIBASE"});
+  }
+  finally {
+    if (writer != null) {
+      writer.flush();
+      writer.close();
+    }
+  }
+}

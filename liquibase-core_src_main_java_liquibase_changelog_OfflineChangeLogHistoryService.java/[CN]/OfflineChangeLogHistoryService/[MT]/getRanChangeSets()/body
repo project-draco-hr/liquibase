@@ -1,3 +1,28 @@
 {
-  return new ArrayList<RanChangeSet>();
+  FileReader reader=null;
+  try {
+    reader=new FileReader(this.changeLogFile);
+    CSVReader csvReader=new CSVReader(reader);
+    String[] line=csvReader.readNext();
+    if (!line[COLUMN_ID].equals("ID")) {
+      throw new DatabaseException("Missing header in file " + this.changeLogFile.getAbsolutePath());
+    }
+    List<RanChangeSet> returnList=new ArrayList<RanChangeSet>();
+    while ((line=csvReader.readNext()) != null) {
+      returnList.add(new RanChangeSet(line[COLUMN_FILENAME],line[COLUMN_ID],line[COLUMN_AUTHOR],CheckSum.parse(line[COLUMN_MD5SUM]),new ISODateFormat().parse(line[COLUMN_DATEEXECUTED]),line[COLUMN_TAG],ChangeSet.ExecType.valueOf(line[COLUMN_EXECTYPE]),line[COLUMN_DESCRIPTION],line[COLUMN_COMMENTS]));
+    }
+    return returnList;
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (reader != null) {
+      try {
+        reader.close();
+      }
+ catch (      IOException ignore) {
+      }
+    }
+  }
 }

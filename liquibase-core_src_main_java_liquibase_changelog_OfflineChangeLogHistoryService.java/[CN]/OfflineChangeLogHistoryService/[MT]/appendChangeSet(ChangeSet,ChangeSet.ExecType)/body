@@ -1,0 +1,56 @@
+{
+  File oldFile=this.changeLogFile;
+  File newFile=new File(oldFile.getParentFile(),oldFile.getName() + ".new");
+  FileReader reader=null;
+  FileWriter writer=null;
+  try {
+    reader=new FileReader(oldFile);
+    writer=new FileWriter(newFile);
+    CSVReader csvReader=new CSVReader(reader);
+    CSVWriter csvWriter=new CSVWriter(writer);
+    String[] line;
+    while ((line=csvReader.readNext()) != null) {
+      csvWriter.writeNext(line);
+    }
+    String[] newLine=new String[11];
+    newLine[COLUMN_ID]=changeSet.getId();
+    newLine[COLUMN_AUTHOR]=changeSet.getAuthor();
+    newLine[COLUMN_FILENAME]=changeSet.getFilePath();
+    newLine[COLUMN_DATEEXECUTED]=new ISODateFormat().format(new java.sql.Timestamp(new Date().getTime()));
+    newLine[COLUMN_ORDEREXECUTED]=String.valueOf(getNextSequenceValue());
+    newLine[COLUMN_EXECTYPE]=execType.value;
+    newLine[COLUMN_MD5SUM]=changeSet.generateCheckSum().toString();
+    newLine[COLUMN_DESCRIPTION]=changeSet.getDescription();
+    newLine[COLUMN_COMMENTS]=changeSet.getComments();
+    newLine[COLUMN_TAG]="";
+    newLine[COLUMN_LIQUIBASE]=LiquibaseUtil.getBuildVersion().replaceAll("SNAPSHOT","SNP");
+    csvWriter.writeNext(newLine);
+    csvWriter.flush();
+    csvWriter.close();
+    writer=null;
+    csvReader.close();
+    reader=null;
+    oldFile.delete();
+    newFile.renameTo(oldFile);
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
+ finally {
+    if (reader != null) {
+      try {
+        reader.close();
+      }
+ catch (      IOException ignore) {
+      }
+    }
+    if (writer != null) {
+      try {
+        writer.flush();
+        writer.close();
+      }
+ catch (      IOException ignore) {
+      }
+    }
+  }
+}

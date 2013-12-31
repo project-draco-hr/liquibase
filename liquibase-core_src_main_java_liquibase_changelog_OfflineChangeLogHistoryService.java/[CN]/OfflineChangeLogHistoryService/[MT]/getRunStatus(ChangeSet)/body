@@ -1,3 +1,0 @@
-{
-  return ChangeSet.RunStatus.NOT_RAN;
-}

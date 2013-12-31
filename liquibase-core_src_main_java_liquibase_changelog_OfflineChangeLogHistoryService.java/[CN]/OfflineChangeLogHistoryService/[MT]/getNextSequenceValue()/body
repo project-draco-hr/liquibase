@@ -1,3 +1,31 @@
 {
-  return 0;
+  if (lastChangeSetSequenceValue == null) {
+    lastChangeSetSequenceValue=0;
+    FileReader reader=null;
+    try {
+      reader=new FileReader(this.changeLogFile);
+      CSVReader csvReader=new CSVReader(reader);
+      String[] line=csvReader.readNext();
+      List<RanChangeSet> returnList=new ArrayList<RanChangeSet>();
+      while ((line=csvReader.readNext()) != null) {
+        try {
+          lastChangeSetSequenceValue=Integer.valueOf(line[COLUMN_ORDEREXECUTED]);
+        }
+ catch (        NumberFormatException ignore) {
+        }
+      }
+    }
+ catch (    Exception ignore) {
+    }
+ finally {
+      if (reader != null) {
+        try {
+          reader.close();
+        }
+ catch (        IOException ignore) {
+        }
+      }
+    }
+  }
+  return ++lastChangeSetSequenceValue;
 }

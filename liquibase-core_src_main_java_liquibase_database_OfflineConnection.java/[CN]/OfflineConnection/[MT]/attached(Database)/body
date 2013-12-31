@@ -7,9 +7,8 @@
       LogFactory.getInstance().getLog().warning("Error setting database parameter " + param.getKey() + ": "+ e.getMessage(),e);
     }
   }
-  if (params.containsKey("caseSensitive")) {
-    if (database instanceof AbstractJdbcDatabase) {
-      ((AbstractJdbcDatabase)database).setCaseSensitive(Boolean.valueOf(params.get("caseSensitive")));
-    }
+  if (database instanceof AbstractJdbcDatabase) {
+    ((AbstractJdbcDatabase)database).setCaseSensitive(this.caseSensitive);
   }
+  ChangeLogHistoryServiceFactory.getInstance().register(new OfflineChangeLogHistoryService(database,new File(changeLogFile),changeLogSql));
 }
