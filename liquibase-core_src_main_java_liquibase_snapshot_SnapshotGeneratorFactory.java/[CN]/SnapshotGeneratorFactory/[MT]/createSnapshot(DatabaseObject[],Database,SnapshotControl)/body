@@ -1,3 +1,6 @@
 {
+  if (database.getConnection() instanceof OfflineConnection) {
+    throw new DatabaseException("Cannot snapshot offline database");
+  }
   return new JdbcDatabaseSnapshot(examples,database,snapshotControl);
 }

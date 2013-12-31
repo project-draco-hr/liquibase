@@ -13,4 +13,29 @@
       this.params.put(split[0],split[1]);
     }
   }
+  this.productName="Offline " + databaseShortName;
+  for (  Map.Entry<String,String> paramEntry : this.params.entrySet()) {
+    if (paramEntry.getKey().equals("version")) {
+      this.productVersion=paramEntry.getValue();
+      String[] versionParts=productVersion.split("\\.");
+      try {
+        this.databaseMajorVersion=Integer.valueOf(versionParts[0]);
+        if (versionParts.length > 1) {
+          this.databaseMinorVersion=Integer.valueOf(versionParts[1]);
+        }
+      }
+ catch (      NumberFormatException e) {
+        LogFactory.getInstance().getLog().warning("Cannot parse database version " + productVersion);
+      }
+    }
+ else     if (paramEntry.getKey().equals("productName")) {
+      this.productName=paramEntry.getValue();
+    }
+ else     if (paramEntry.getKey().equals("catalog")) {
+      this.catalog=this.params.get("catalog");
+    }
+ else {
+      this.databaseParams.put(paramEntry.getKey(),paramEntry.getValue());
+    }
+  }
 }

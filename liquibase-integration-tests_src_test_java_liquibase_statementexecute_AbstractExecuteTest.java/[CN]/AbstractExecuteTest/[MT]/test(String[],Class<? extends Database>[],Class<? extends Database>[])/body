@@ -5,7 +5,7 @@
         testedDatabases.add(database.getClass());
         if (database.getConnection() != null) {
           ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database).init();
-          database.checkDatabaseChangeLogLockTable();
+          LockServiceFactory.getInstance().getLockService(database).init();
         }
         Sql[] sql=SqlGeneratorFactory.getInstance().generateSql(statementUnderTest,database);
         assertNotNull("Null SQL for " + database,sql);
