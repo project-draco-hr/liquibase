@@ -1,0 +1,7 @@
+{
+  Database database=getDatabase();
+  UpdateStatement updateStatement=new UpdateStatement(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName());
+  updateStatement.addNewColumnValue("MD5SUM",null);
+  ExecutorService.getInstance().getExecutor(database).execute(updateStatement);
+  database.commit();
+}

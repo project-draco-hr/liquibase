@@ -10,7 +10,7 @@
     CSVWriter csvWriter=new CSVWriter(writer);
     String[] line;
     while ((line=csvReader.readNext()) != null) {
-      if (line[COLUMN_ID].equals(changeSet.getId()) && line[COLUMN_AUTHOR].equals(changeSet.getAuthor()) && line[COLUMN_FILENAME].equals(changeSet.getFilePath())) {
+      if (changeSet == null || (line[COLUMN_ID].equals(changeSet.getId()) && line[COLUMN_AUTHOR].equals(changeSet.getAuthor()) && line[COLUMN_FILENAME].equals(changeSet.getFilePath()))) {
         line=replaceLogic.execute(line);
       }
       if (line != null) {

@@ -1,0 +1,9 @@
+{
+  replaceChangeSet(null,new ReplaceChangeSetLogic(){
+    @Override public String[] execute(    String[] line){
+      line[COLUMN_MD5SUM]=null;
+      return line;
+    }
+  }
+);
+}

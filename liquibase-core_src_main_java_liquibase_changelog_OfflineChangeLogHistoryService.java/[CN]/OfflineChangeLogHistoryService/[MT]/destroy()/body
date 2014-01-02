@@ -1,0 +1,5 @@
+{
+  if (changeLogFile.exists() && !changeLogFile.delete()) {
+    throw new DatabaseException("Could not delete changelog history file " + changeLogFile.getAbsolutePath());
+  }
+}
