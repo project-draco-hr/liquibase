@@ -1,0 +1,11 @@
+{
+  log=LogFactory.getLogger();
+  this.databaseChangeLog=changeLog;
+  this.changeLogFile=changeLog.getPhysicalFilePath();
+  if (this.changeLogFile != null) {
+    changeLogFile=changeLogFile.replace('\\','/');
+  }
+  this.resourceAccessor=resourceAccessor;
+  this.database=database;
+  this.changeLogParameters=new ChangeLogParameters(database);
+}

@@ -1,6 +1,6 @@
 {
   changeLogParameters.setContexts(contexts);
-  DatabaseChangeLog changeLog=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor).parse(changeLogFile,changeLogParameters,resourceAccessor);
+  DatabaseChangeLog changeLog=getDatabaseChangeLog();
   changeLog.validate(database,contexts);
   ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database));
   ExpectedChangesVisitor visitor=new ExpectedChangesVisitor(database.getRanChangeSetList());
