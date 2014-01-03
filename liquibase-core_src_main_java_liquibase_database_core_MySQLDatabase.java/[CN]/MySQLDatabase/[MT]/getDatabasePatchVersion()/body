@@ -1,0 +1,9 @@
+{
+  String versionStrings[]=this.getDatabaseProductVersion().split("\\.");
+  try {
+    return Integer.parseInt(versionStrings[2].replaceFirst("\\D.*",""));
+  }
+ catch (  NumberFormatException e) {
+    return 0;
+  }
+}

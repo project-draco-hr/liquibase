@@ -11,6 +11,20 @@
  catch (    DatabaseException e) {
     }
   }
+  if (database instanceof MySQLDatabase) {
+    boolean supportsParameters=true;
+    try {
+      supportsParameters=database.getDatabaseMajorVersion() >= 5 && database.getDatabaseMinorVersion() >= 6 && ((MySQLDatabase)database).getDatabasePatchVersion() >= 4;
+    }
+ catch (    Exception ignore) {
+    }
+    if (supportsParameters) {
+      return new DatabaseDataType(getName(),getParameters());
+    }
+ else {
+      return new DatabaseDataType(getName());
+    }
+  }
   if (database instanceof OracleDatabase) {
     return new DatabaseDataType("DATE");
   }
