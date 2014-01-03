@@ -1,0 +1,12 @@
+{
+  if (getConnection() == null) {
+    return null;
+  }
+  try {
+    return ExecutorService.getInstance().getExecutor(this).queryForObject(new RawSqlStatement("select user_name()"),String.class);
+  }
+ catch (  Exception e) {
+    LogFactory.getLogger().info("Error getting default schema",e);
+  }
+  return null;
+}
