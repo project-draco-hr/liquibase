@@ -1,5 +1,5 @@
 {
-  InsertExecutablePreparedStatement statement=new InsertExecutablePreparedStatement(new MockDatabase(),"catalog","schema","table",columns,changeSet);
+  InsertExecutablePreparedStatement statement=new InsertExecutablePreparedStatement(new MockDatabase(),"catalog","schema","table",columns,changeSet,createResourceAccessor());
   PreparedStatement stmt=createMock(PreparedStatement.class);
   final Capture<Integer> index=new Capture<Integer>();
   final Capture<InputStream> in=new Capture<InputStream>();

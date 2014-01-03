@@ -5,7 +5,10 @@
   columnConfig.setEncoding("UTF-8");
   List<ColumnConfig> columns=Arrays.asList(columnConfig);
   ChangeSet changeSet=createMock(ChangeSet.class);
-  expect(changeSet.getFilePath()).andReturn("liquibase/util/");
+  DatabaseChangeLog changeLog=createMock(DatabaseChangeLog.class);
+  expect(changeLog.getPhysicalFilePath()).andReturn("liquibase/util/");
+  replay(changeLog);
+  expect(changeSet.getChangeLog()).andReturn(changeLog);
   replay(changeSet);
   assertSetCharacterStream(columns,changeSet);
 }
