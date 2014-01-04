@@ -1,5 +1,0 @@
-{
-  doThrow(LockException.class).when(mockLockService).releaseLock();
-  update();
-  verify(mockLogger).severe(eq("Could not release lock"),any(Exception.class));
-}
