@@ -1,3 +1,11 @@
 {
+  try {
+    if (this.getDatabaseMajorVersion() >= 11) {
+      return true;
+    }
+  }
+ catch (  DatabaseException e) {
+    return false;
+  }
   return false;
 }
