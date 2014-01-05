@@ -2,6 +2,9 @@
   Yaml yaml=new Yaml();
   try {
     InputStream changeLogStream=resourceAccessor.getResourceAsStream(physicalChangeLogLocation);
+    if (changeLogStream == null) {
+      throw new ChangeLogParseException("Change log file " + physicalChangeLogLocation + " does not exist");
+    }
     Map changeLogAsMap=null;
     try {
       changeLogAsMap=yaml.loadAs(changeLogStream,Map.class);
