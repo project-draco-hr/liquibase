@@ -2,10 +2,10 @@
   ResultSetMetaData rsmd=rs.getMetaData();
   int nrOfColumns=rsmd.getColumnCount();
   if (nrOfColumns == 0) {
-    throw new SQLException("Returned no rows!");
+    throw new SQLException("Returned no columns!");
   }
  else   if (nrOfColumns != 1) {
-    throw new SQLException("Returned too many rows: " + nrOfColumns);
+    throw new SQLException("Returned too many columns: " + nrOfColumns);
   }
   Object result=getColumnValue(rs,1,this.requiredType);
   if (result != null && this.requiredType != null && !this.requiredType.isInstance(result)) {
