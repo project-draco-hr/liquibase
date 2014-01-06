@@ -10,7 +10,7 @@
       Assert.assertEquals(new Integer(1),index.getValue());
       Assert.assertNotNull(in.getValue());
       Assert.assertTrue(in.getValue() instanceof BufferedInputStream);
-      Assert.assertEquals(new Integer(50),length.getValue());
+      Assert.assertEquals(new Integer(51),length.getValue());
       return null;
     }
   }
