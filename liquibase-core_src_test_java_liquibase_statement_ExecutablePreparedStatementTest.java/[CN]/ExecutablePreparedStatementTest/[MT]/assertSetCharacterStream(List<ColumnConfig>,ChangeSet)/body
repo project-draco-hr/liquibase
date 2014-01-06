@@ -10,7 +10,7 @@
       Assert.assertEquals(new Integer(1),index.getValue());
       Assert.assertNotNull(reader.getValue());
       Assert.assertTrue(reader.getValue() instanceof BufferedReader);
-      Assert.assertEquals(new Integer(40),length.getValue());
+      Assert.assertEquals(new Integer(39),length.getValue());
       return null;
     }
   }

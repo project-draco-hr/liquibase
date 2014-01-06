@@ -1,4 +1,4 @@
 {
-  ResourceAccessor resourceAccessor=new JUnitResourceAccessor();
+  ResourceAccessor resourceAccessor=new CompositeResourceAccessor(new ClassLoaderResourceAccessor(),new FileSystemResourceAccessor(),new ClassLoaderResourceAccessor(Thread.currentThread().getContextClassLoader()));
   return resourceAccessor;
 }
