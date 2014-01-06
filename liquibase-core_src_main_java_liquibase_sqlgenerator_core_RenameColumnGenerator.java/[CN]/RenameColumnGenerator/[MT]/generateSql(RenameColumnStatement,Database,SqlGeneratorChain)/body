@@ -15,7 +15,7 @@
  else   if (database instanceof FirebirdDatabase) {
     sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " ALTER COLUMN "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getOldColumnName())+ " TO "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getNewColumnName());
   }
- else   if ((database instanceof MaxDBDatabase) || (database instanceof DerbyDatabase) || (database instanceof InformixDatabase)) {
+ else   if ((database instanceof DerbyDatabase) || (database instanceof InformixDatabase)) {
     sql="RENAME COLUMN " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + "."+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getOldColumnName())+ " TO "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getNewColumnName());
   }
  else   if (database instanceof SybaseASADatabase) {

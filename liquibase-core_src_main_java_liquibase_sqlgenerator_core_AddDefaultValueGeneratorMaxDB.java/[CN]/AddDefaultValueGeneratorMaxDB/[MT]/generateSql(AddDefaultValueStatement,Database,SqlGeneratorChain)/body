@@ -1,4 +1,0 @@
-{
-  Object defaultValue=statement.getDefaultValue();
-  return new Sql[]{new UnparsedSql("ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " COLUMN  "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " ADD DEFAULT "+ DataTypeFactory.getInstance().fromObject(defaultValue,database).objectToSql(defaultValue,database),getAffectedColumn(statement))};
-}

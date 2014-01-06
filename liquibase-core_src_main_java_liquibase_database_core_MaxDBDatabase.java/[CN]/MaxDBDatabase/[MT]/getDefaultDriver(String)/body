@@ -1,6 +1,0 @@
-{
-  if (url.startsWith("jdbc:sapdb")) {
-    return "com.sap.dbtech.jdbc.DriverSapDB";
-  }
-  return null;
-}

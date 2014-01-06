@@ -1,3 +1,0 @@
-{
-  super("maxdb","jdbc:sapdb://" + getDatabaseServerHostname("MaxDB") + "/liquibas");
-}
