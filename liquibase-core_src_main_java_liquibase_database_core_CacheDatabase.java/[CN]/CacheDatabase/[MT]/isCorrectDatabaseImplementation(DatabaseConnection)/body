@@ -1,3 +1,0 @@
-{
-  return PRODUCT_NAME.equalsIgnoreCase(conn.getDatabaseProductName());
-}

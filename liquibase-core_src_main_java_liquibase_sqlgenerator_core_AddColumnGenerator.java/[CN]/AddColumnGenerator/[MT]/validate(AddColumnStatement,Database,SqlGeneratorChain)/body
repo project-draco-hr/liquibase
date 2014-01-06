@@ -3,7 +3,7 @@
   validationErrors.checkRequiredField("columnName",statement.getColumnName());
   validationErrors.checkRequiredField("columnType",statement.getColumnType());
   validationErrors.checkRequiredField("tableName",statement.getTableName());
-  if (statement.isPrimaryKey() && (database instanceof CacheDatabase || database instanceof H2Database || database instanceof DB2Database|| database instanceof DerbyDatabase|| database instanceof SQLiteDatabase)) {
+  if (statement.isPrimaryKey() && (database instanceof H2Database || database instanceof DB2Database || database instanceof DerbyDatabase|| database instanceof SQLiteDatabase)) {
     validationErrors.addError("Cannot add a primary key column");
   }
   if (database instanceof MySQLDatabase && statement.isAutoIncrement() && !statement.isPrimaryKey()) {

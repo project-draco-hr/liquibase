@@ -1,6 +1,0 @@
-{
-  if (url.startsWith("jdbc:Cache")) {
-    return "com.intersys.jdbc.CacheDriver";
-  }
-  return null;
-}
