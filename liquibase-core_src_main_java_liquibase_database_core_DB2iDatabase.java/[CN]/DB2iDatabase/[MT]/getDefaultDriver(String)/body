@@ -1,6 +1,0 @@
-{
-  if (url.startsWith("jdbc:as400")) {
-    return "com.ibm.as400.access.AS400JDBCDriver";
-  }
-  return null;
-}

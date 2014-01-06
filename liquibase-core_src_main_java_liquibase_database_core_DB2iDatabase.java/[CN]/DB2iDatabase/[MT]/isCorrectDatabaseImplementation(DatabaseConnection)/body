@@ -1,3 +1,0 @@
-{
-  return conn.getDatabaseProductName().startsWith("DB2 UDB for AS/400");
-}
