@@ -1,0 +1,18 @@
+{
+  Liquibase liquibase=super.createLiquibase(fo,db);
+  try {
+    if (!outputFile.exists()) {
+      outputFile.getParentFile().mkdirs();
+      if (!outputFile.createNewFile()) {
+        throw new MojoExecutionException("Cannot create the output file; " + outputFile.getAbsolutePath());
+      }
+    }
+    outputWriter=getOutputWriter(outputFile);
+  }
+ catch (  IOException e) {
+    getLog().error(e);
+    throw new MojoExecutionException("Failed to create SQL output writer",e);
+  }
+  getLog().info("Output File: " + outputFile.getAbsolutePath());
+  return liquibase;
+}
