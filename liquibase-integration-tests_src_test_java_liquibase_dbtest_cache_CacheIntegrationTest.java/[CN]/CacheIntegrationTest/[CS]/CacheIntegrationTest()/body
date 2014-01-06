@@ -1,3 +1,0 @@
-{
-  super("cache","jdbc:Cache://" + getDatabaseServerHostname("Cache") + ":1972/liquibase");
-}
