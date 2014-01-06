@@ -1,3 +1,6 @@
 {
-  return (objectName.contains("-") && !objectName.contains("(")) || startsWithNumeric(objectName) || isReservedWord(objectName);
+  if (objectName.contains("(")) {
+    return false;
+  }
+  return objectName.contains("-") || startsWithNumeric(objectName) || isReservedWord(objectName);
 }
