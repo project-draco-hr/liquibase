@@ -1,0 +1,15 @@
+{
+  if (snapshotGenerators == null) {
+    return null;
+  }
+  if (!snapshotGenerators.hasNext()) {
+    return null;
+  }
+  SnapshotGenerator next=snapshotGenerators.next();
+  for (  Class<? extends SnapshotGenerator> removedGenerator : replacedGenerators) {
+    if (removedGenerator.isAssignableFrom(next.getClass())) {
+      return getNextValidGenerator();
+    }
+  }
+  return next;
+}
