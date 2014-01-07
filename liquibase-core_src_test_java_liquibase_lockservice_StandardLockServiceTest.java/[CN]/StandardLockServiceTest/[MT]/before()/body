@@ -1,0 +1,4 @@
+{
+  lockService=new StandardLockService();
+  lockService.reset();
+}
