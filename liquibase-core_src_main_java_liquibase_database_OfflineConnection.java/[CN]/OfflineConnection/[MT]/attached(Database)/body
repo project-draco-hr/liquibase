@@ -10,5 +10,5 @@
   if (database instanceof AbstractJdbcDatabase) {
     ((AbstractJdbcDatabase)database).setCaseSensitive(this.caseSensitive);
   }
-  ChangeLogHistoryServiceFactory.getInstance().register(new OfflineChangeLogHistoryService(database,new File(changeLogFile),changeLogSql));
+  ChangeLogHistoryServiceFactory.getInstance().register(new OfflineChangeLogHistoryService(database,new File(changeLogFile),false));
 }

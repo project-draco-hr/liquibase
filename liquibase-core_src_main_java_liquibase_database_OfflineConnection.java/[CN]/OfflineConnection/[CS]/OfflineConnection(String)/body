@@ -40,9 +40,6 @@
  else     if (paramEntry.getKey().equals("changeLogFile")) {
       this.changeLogFile=paramEntry.getValue();
     }
- else     if (paramEntry.getKey().equals("changeLogSql")) {
-      this.changeLogSql=Boolean.valueOf(paramEntry.getValue());
-    }
  else {
       this.databaseParams.put(paramEntry.getKey(),paramEntry.getValue());
     }
