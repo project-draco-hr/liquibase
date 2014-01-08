@@ -1,0 +1,4 @@
+Map<String,Object> changeMap
+ChangeLogParameters changeLogParameters
+ResourceAccessor resourceAccessor
+ChangeSet changeSet
