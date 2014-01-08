@@ -7,7 +7,14 @@
       if (sqlStream == null) {
         return null;
       }
-      return getChangeSet().getChangeLogParameters().expandExpressions(StreamUtil.getStreamContents(sqlStream,encoding));
+      String content=StreamUtil.getStreamContents(sqlStream,encoding);
+      if (getChangeSet() != null) {
+        ChangeLogParameters parameters=getChangeSet().getChangeLogParameters();
+        if (parameters != null) {
+          content=parameters.expandExpressions(content);
+        }
+      }
+      return content;
     }
  catch (    IOException e) {
       throw new UnexpectedLiquibaseException(e);
