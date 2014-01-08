@@ -1,10 +1,7 @@
 {
-  if (this.ranChangeSetList != null) {
-    return this.ranChangeSetList;
-  }
   Database database=getDatabase();
   String databaseChangeLogTableName=getDatabase().escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
-  ranChangeSetList=new ArrayList<RanChangeSet>();
+  List<RanChangeSet> ranChangeSetList=new ArrayList<RanChangeSet>();
   if (hasDatabaseChangeLogTable()) {
     LogFactory.getLogger().info("Reading from " + databaseChangeLogTableName);
     SqlStatement select=new SelectFromDatabaseChangeLogStatement("FILENAME","AUTHOR","ID","MD5SUM","DATEEXECUTED","ORDEREXECUTED","TAG","EXECTYPE","DESCRIPTION","COMMENTS").setOrderBy("DATEEXECUTED ASC","ORDEREXECUTED ASC");
