@@ -4,7 +4,7 @@
     sqlString="NULL";
   }
  else   if (newValue instanceof String && !looksLikeFunctionCall(((String)newValue),database)) {
-    sqlString="'" + database.escapeStringForDatabase(newValue.toString()) + "'";
+    sqlString=DataTypeFactory.getInstance().fromObject(newValue,database).objectToSql(newValue,database);
   }
  else   if (newValue instanceof Date) {
     Date date=(Date)newValue;
