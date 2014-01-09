@@ -7,7 +7,7 @@
  else {
     path=path.replaceFirst("file:","");
   }
-  path=URLDecoder.decode(path);
+  path=URLDecoder.decode(path,"UTF-8");
   File zipfile=new File(path);
   File tempDir=File.createTempFile("liquibase-sax",".dir");
   tempDir.delete();

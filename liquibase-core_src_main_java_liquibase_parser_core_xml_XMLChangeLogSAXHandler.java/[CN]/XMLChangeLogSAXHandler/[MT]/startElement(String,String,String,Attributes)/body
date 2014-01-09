@@ -98,7 +98,8 @@
               log.debug("replace classpath*");
               pathName=pathName.replaceFirst("classpath\\*:","");
             }
-            fileUrl=new File(zipFileDir,pathName).toURL();
+            URI fileUri=new File(zipFileDir,pathName).toURI();
+            fileUrl=fileUri.toURL();
           }
  else {
             log.debug(fileUrl.toExternalForm() + " is not a file path");
