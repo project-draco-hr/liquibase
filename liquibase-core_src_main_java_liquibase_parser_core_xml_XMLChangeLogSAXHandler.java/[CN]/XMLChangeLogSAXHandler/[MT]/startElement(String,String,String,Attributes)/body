@@ -90,7 +90,8 @@
         if (!fileUrl.toExternalForm().startsWith("file:")) {
           if (fileUrl.toExternalForm().startsWith("jar:file:") || fileUrl.toExternalForm().startsWith("wsjar:file:") || fileUrl.toExternalForm().startsWith("zip:")) {
             File zipFileDir=extractZipFile(fileUrl);
-            fileUrl=new File(zipFileDir,pathName).toURL();
+            URI fileUri=new File(zipFileDir,pathName).toURI();
+            fileUrl=fileUri.toURL();
           }
  else {
             log.debug(fileUrl.toExternalForm() + " is not a file path");
