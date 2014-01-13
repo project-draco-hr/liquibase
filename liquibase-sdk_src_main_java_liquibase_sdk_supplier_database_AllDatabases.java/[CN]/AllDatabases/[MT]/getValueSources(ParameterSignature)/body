@@ -1,0 +1,10 @@
+{
+  List<PotentialAssignment> returnList=new ArrayList<PotentialAssignment>();
+  for (  Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+    for (    ConnectionConfiguration config : ConnectionConfigurationFactory.getInstance().getConfigurations(database)) {
+      database.setConnection(openConnection(config));
+      returnList.add(PotentialAssignment.forValue(database.getShortName() + " - " + config.getConfigurationName(),database));
+    }
+  }
+  return returnList;
+}

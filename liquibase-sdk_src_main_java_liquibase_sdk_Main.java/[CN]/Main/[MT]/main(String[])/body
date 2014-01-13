@@ -1,0 +1,43 @@
+{
+  Main main=new Main();
+  main.header("Liquibase SDK");
+  try {
+    main.init(args);
+    if (main.command == null) {
+      throw new UserError("No command passed");
+    }
+    if (main.command.equals("help")) {
+      main.printHelp();
+      return;
+    }
+    VagrantControl vagrantControl;
+    if (main.command.equals("vagrant")) {
+      vagrantControl=new VagrantControl(main);
+    }
+ else {
+      throw new UserError("Unknown command: " + main.command);
+    }
+    CommandLineParser commandParser=new GnuParser();
+    try {
+      CommandLine commandArguments=commandParser.parse(vagrantControl.getOptions(),main.commandArgs.toArray(new String[main.commandArgs.size()]));
+      vagrantControl.execute(commandArguments);
+    }
+ catch (    ParseException e) {
+      throw new UserError("Error parsing command arguments: " + e.getMessage());
+    }
+    main.divider();
+    main.out("Command executed successfully");
+  }
+ catch (  UserError userError) {
+    main.out("");
+    main.header("ERROR EXECUTING COMMAND");
+    main.out(userError.getMessage());
+    main.out("");
+    main.out("");
+    return;
+  }
+catch (  Throwable exception) {
+    System.out.println("Unexpected error: " + exception.getMessage());
+    exception.printStackTrace();
+  }
+}

@@ -1,0 +1,40 @@
+{
+  File jdbcLib=null;
+  try {
+    URL url=JDBCDriverClassLoader.class.getClassLoader().getResource(path);
+    if (url == null) {
+      System.out.println("Null URL for " + path);
+      return;
+    }
+ else {
+      jdbcLib=new File(url.toURI());
+    }
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+    return;
+  }
+  if (!jdbcLib.exists()) {
+    throw new RuntimeException("JDBC driver directory " + jdbcLib.getAbsolutePath() + " does not exist");
+  }
+  File[] files=jdbcLib.listFiles(new FileFilter(){
+    @Override public boolean accept(    File pathname){
+      return pathname.isDirectory();
+    }
+  }
+);
+  if (files == null) {
+    files=new File[]{};
+  }
+  for (  File driverDir : files) {
+    File[] driverJars=driverDir.listFiles(new FilenameFilter(){
+      @Override public boolean accept(      File dir,      String name){
+        return name.endsWith("jar");
+      }
+    }
+);
+    for (    File jar : driverJars) {
+      addTo.add(jar.toURL());
+    }
+  }
+}

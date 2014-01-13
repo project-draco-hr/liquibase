@@ -1,0 +1,30 @@
+{
+  if (!vagrantInfo.boxDir.exists()) {
+    mainApp.fatal("Vagrant box directory " + vagrantInfo.boxDir.getAbsolutePath() + " does not exist");
+  }
+  List<String> finalArguments=new ArrayList<String>();
+  finalArguments.add(vagrantPath);
+  finalArguments.addAll(Arrays.asList(arguments));
+  ProcessBuilder processBuilder=new ProcessBuilder(finalArguments.toArray(new String[finalArguments.size()]));
+  processBuilder.directory(vagrantInfo.boxDir);
+  Map<String,String> env=processBuilder.environment();
+  processBuilder.redirectErrorStream(true);
+  int out=0;
+  try {
+    Process process=processBuilder.start();
+    InputStream is=process.getInputStream();
+    BufferedReader reader=new BufferedReader(new InputStreamReader(is));
+    String line=null;
+    while ((line=reader.readLine()) != null) {
+      mainApp.out(line);
+    }
+    out=process.exitValue();
+  }
+ catch (  Exception e) {
+    mainApp.out("Error running vagrant");
+    e.printStackTrace();
+  }
+  if (out != 0) {
+    mainApp.out("Error running Vagrant. Return code " + out);
+  }
+}

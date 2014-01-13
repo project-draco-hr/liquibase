@@ -1,0 +1,34 @@
+{
+  String url=connectionConfiguration.getUrl();
+  assertNotNull("Null jdbc url",url);
+  String username=connectionConfiguration.getDatabaseUsername();
+  String password=connectionConfiguration.getDatabasePassword();
+  JDBCDriverClassLoader jdbcDriverLoader=new JDBCDriverClassLoader();
+  final Driver driver;
+  try {
+    String defaultDriver=DatabaseFactory.getInstance().findDefaultDriver(url);
+    driver=(Driver)Class.forName(defaultDriver,true,jdbcDriverLoader).newInstance();
+  }
+ catch (  Exception e) {
+    System.out.println("Error finding default driver for " + url + ": Will not test against.  "+ e.getMessage());
+    return null;
+  }
+  Properties info=new Properties();
+  info.put("user",username);
+  if (password != null) {
+    info.put("password",password);
+  }
+  info.put("retrieveMessagesFromServerOnGetMessage","true");
+  Connection connection;
+  try {
+    connection=driver.connect(url,info);
+  }
+ catch (  SQLException e) {
+    System.out.println("Could not connect to " + url + ": Will not test against.  "+ e.getMessage());
+    return null;
+  }
+  if (connection == null) {
+    throw new DatabaseException("Connection could not be created to " + url + " with driver "+ driver.getClass().getName()+ ".  Possibly the wrong driver for the given database URL");
+  }
+  return new JdbcConnection(connection);
+}

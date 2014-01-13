@@ -1,0 +1,3 @@
+{
+  runVagrant(vagrantInfo,"status");
+}

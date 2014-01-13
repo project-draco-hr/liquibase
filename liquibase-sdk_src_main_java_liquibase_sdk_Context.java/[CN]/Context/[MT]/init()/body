@@ -1,0 +1,33 @@
+{
+  propertyFiles=new HashSet<File>();
+  Enumeration<URL> resourceUrls=Context.class.getClassLoader().getResources(LIQUIBASE_SDK_PROPERTIES_FILENAME);
+  while (resourceUrls.hasMoreElements()) {
+    File propertiesFile=new File(resourceUrls.nextElement().toURI());
+    propertyFiles.add(propertiesFile);
+  }
+  try {
+    for (    String packageName : ServiceLocator.getInstance().getPackages()) {
+      Enumeration<URL> dirs=this.getClass().getClassLoader().getResources(packageName.replace('.','/'));
+      while (dirs.hasMoreElements()) {
+        File dir=new File(dirs.nextElement().toURI());
+        findClasses(packageName,dir);
+      }
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseSdkException(e);
+  }
+  for (  Class clazz : allClasses) {
+    if (Modifier.isAbstract(clazz.getModifiers()) || Modifier.isInterface(clazz.getModifiers())) {
+      continue;
+    }
+    Class type=getExtensionType(clazz);
+    if (type != null) {
+      if (!seenExtensionClasses.containsKey(type)) {
+        seenExtensionClasses.put(type,new HashSet<Class>());
+      }
+      seenExtensionClasses.get(type).add(clazz);
+    }
+  }
+  this.initialized=true;
+}

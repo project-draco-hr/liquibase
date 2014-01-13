@@ -1,0 +1,13 @@
+{
+  if (instance == null) {
+    instance=new Context();
+    try {
+      instance.init();
+    }
+ catch (    Exception e) {
+      System.out.println("Error initializing context: " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
+  return instance;
+}

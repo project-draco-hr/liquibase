@@ -1,0 +1,8 @@
+{
+  Map<String,Object> context=new HashMap<String,Object>();
+  context.put("configVmBox",vagrantInfo.boxName);
+  context.put("configVmBoxUrl",vagrantInfo.boxUrl);
+  context.put("configVmNetworkIp",vagrantInfo.hostName);
+  context.put("vmCustomizeMemory","8192");
+  writeVelocityFile("liquibase/sdk/vagrant/Vagrantfile.vm",vagrantInfo.boxDir,context);
+}

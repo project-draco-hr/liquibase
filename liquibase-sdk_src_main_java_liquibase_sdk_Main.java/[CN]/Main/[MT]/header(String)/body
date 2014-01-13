@@ -1,0 +1,7 @@
+{
+  divider();
+  for (  String line : header) {
+    System.out.println(line);
+  }
+  divider();
+}

@@ -1,0 +1,26 @@
+{
+  Context.reset();
+  CommandLineParser globalParser=new GnuParser();
+  List<String> globalArgs=new ArrayList<String>();
+  boolean inGlobal=true;
+  for (  String arg : args) {
+    if (inGlobal) {
+      if (arg.startsWith("--")) {
+        globalArgs.add(arg);
+      }
+ else {
+        this.command=arg;
+        inGlobal=false;
+      }
+    }
+ else {
+      commandArgs.add(arg);
+    }
+  }
+  try {
+    this.globalArguments=globalParser.parse(globalOptions,globalArgs.toArray(new String[globalArgs.size()]));
+  }
+ catch (  ParseException e) {
+    throw new UserError("Error parsing global command line argument: " + e.getMessage());
+  }
+}

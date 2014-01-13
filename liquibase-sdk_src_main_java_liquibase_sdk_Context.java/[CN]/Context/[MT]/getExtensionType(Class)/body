@@ -1,0 +1,12 @@
+{
+  for (  Class type : clazz.getInterfaces()) {
+    if (extensionInterfaces.contains(type)) {
+      return type;
+    }
+  }
+  Class superclass=clazz.getSuperclass();
+  if (superclass == null) {
+    return null;
+  }
+  return getExtensionType(superclass);
+}

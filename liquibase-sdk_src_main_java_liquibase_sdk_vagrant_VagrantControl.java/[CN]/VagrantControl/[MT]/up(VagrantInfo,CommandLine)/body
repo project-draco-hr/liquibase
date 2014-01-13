@@ -1,0 +1,6 @@
+{
+  mainApp.out("Starting vagrant in " + vagrantInfo.boxDir.getAbsolutePath());
+  mainApp.out("Vagrant box name: " + vagrantInfo.boxName);
+  mainApp.divider();
+  runVagrant(vagrantInfo,"up");
+}

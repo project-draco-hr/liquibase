@@ -1,0 +1,14 @@
+{
+  Map<String,String> environment=new ProcessBuilder().environment();
+  String path=environment.get("Path");
+  if (path == null) {
+    path=environment.get("PATH");
+  }
+  if (path == null) {
+    path=environment.get("path");
+  }
+  if (path == null) {
+    throw new UnexpectedLiquibaseException("Cannot find path variable in environment. Possible variables are " + StringUtils.join(environment.keySet(),","));
+  }
+  return path;
+}

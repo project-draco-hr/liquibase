@@ -1,0 +1,4 @@
+{
+  HelpFormatter formatter=new HelpFormatter();
+  formatter.printHelp("liquibase-sdk [global options] [command] [command options]",globalOptions);
+}

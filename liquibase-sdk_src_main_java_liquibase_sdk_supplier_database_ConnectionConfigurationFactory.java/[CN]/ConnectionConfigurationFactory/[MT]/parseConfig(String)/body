@@ -1,0 +1,17 @@
+{
+  Map<String,String> params=new HashMap<String,String>();
+  String databaseName;
+  if (config.contains("[")) {
+    databaseName=config.replaceFirst("\\[.*","").trim();
+    String paramString=config.replaceFirst(".*\\[","").replaceFirst("]$","");
+    for (    String keyValue : paramString.split(",")) {
+      String[] split=keyValue.split(":");
+      params.put(split[0].trim(),split[1].trim());
+    }
+  }
+ else {
+    databaseName=config;
+  }
+  params.put("databaseName",databaseName.trim());
+  return params;
+}

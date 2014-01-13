@@ -1,0 +1,12 @@
+{
+  Set<String> forges=new HashSet<String>();
+  Set<String> modules=new HashSet<String>();
+  for (  ConnectionConfiguration config : databases) {
+    forges.addAll(config.getPuppetForges(vagrantInfo.boxName));
+    modules.addAll(config.getPuppetModules());
+  }
+  Map<String,Object> context=new HashMap<String,Object>();
+  context.put("puppetForges",forges);
+  context.put("puppetModules",modules);
+  writeVelocityFile("liquibase/sdk/vagrant/Puppetfile.vm",vagrantInfo.boxDir,context);
+}

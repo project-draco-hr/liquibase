@@ -1,0 +1,11 @@
+{
+  try {
+    Class[] classes=ServiceLocator.getInstance().findClasses(ConnectionConfiguration.class);
+    for (    Class<? extends ConnectionConfiguration> clazz : classes) {
+      register(clazz.getConstructor().newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

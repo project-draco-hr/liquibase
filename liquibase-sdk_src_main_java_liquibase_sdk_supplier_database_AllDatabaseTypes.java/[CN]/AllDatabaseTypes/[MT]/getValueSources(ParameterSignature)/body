@@ -1,0 +1,7 @@
+{
+  List<PotentialAssignment> returnList=new ArrayList<PotentialAssignment>();
+  for (  Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
+    returnList.add(PotentialAssignment.forValue(database.getShortName(),database));
+  }
+  return returnList;
+}

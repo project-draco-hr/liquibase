@@ -1,0 +1,4 @@
+{
+  String pad=StringUtils.repeat(" ",padding);
+  return pad + (string.replaceAll("\n","\n" + pad));
+}

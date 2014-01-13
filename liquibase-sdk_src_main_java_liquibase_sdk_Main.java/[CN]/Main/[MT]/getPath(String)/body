@@ -1,0 +1,12 @@
+{
+  Set<String> fileNames=new HashSet<String>();
+  for (  String dir : getPath().split("[:;]")) {
+    for (    String fileName : possibleFileNames) {
+      File file=new File(dir,fileName);
+      if (file.exists()) {
+        return file.getAbsolutePath();
+      }
+    }
+  }
+  return null;
+}
