@@ -1,0 +1,5 @@
+{
+  Set<String> requiredPackages=super.getRequiredPackages(vagrantBoxName);
+  requiredPackages.addAll(Arrays.asList("binutils","compat-libcap1","gcc","gcc-c++","glibc","glibc-devel","ksh","libgcc","libstdc++","libstdc++-devel","libaio","libaio-devel","libXext","libX11","libXau","libxcb","libXi","make","sysstat","rlwrap"));
+  return requiredPackages;
+}

@@ -1,0 +1,5 @@
+{
+  Set<String> requiredPackages=super.getRequiredPackages(vagrantBoxName);
+  requiredPackages.addAll(Arrays.asList("compat-libstdc++-33","pam.i686","numactl"));
+  return requiredPackages;
+}

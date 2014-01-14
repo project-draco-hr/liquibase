@@ -1,0 +1,3 @@
+{
+  return "open_cursors=1000,processes=600,job_queue_processes=4";
+}

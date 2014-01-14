@@ -1,0 +1,3 @@
+{
+  return "jdbc:firebirdsql:" + getDatabaseShortName() + "/3050:c:\\firebird\\liquibase.fdb";
+}

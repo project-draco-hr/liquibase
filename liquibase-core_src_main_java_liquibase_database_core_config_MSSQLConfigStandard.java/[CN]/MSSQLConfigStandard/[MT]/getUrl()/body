@@ -1,0 +1,3 @@
+{
+  return "jdbc:sqlserver://" + getHostname() + ":1433;databaseName=liquibase";
+}

@@ -1,0 +1,3 @@
+{
+  return "jdbc:sybase:Tds:" + getHostname() + ":9810/servicename=prior";
+}
