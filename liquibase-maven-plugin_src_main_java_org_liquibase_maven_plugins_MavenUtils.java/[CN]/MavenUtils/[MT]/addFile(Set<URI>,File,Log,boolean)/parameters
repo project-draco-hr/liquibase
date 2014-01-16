@@ -1,4 +1,4 @@
-Set<URL> urls
+Set<URI> urls
 File f
 Log log
 boolean verbose

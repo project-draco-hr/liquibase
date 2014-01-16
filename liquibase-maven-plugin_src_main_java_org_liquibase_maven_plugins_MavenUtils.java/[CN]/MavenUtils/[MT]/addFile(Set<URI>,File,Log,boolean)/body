@@ -1,0 +1,9 @@
+{
+  if (f != null) {
+    URI fileUri=f.toURI();
+    if (verbose) {
+      log.info("  artifact: " + fileUri);
+    }
+    urls.add(fileUri);
+  }
+}

@@ -2,11 +2,11 @@
   if (verbose) {
     log.info("Loading artfacts into URLClassLoader");
   }
-  Set<URL> urls=new HashSet<URL>();
+  Set<URI> uris=new HashSet<URI>();
   Set dependencies=project.getArtifacts();
   if (dependencies != null && !dependencies.isEmpty()) {
     for (Iterator it=dependencies.iterator(); it.hasNext(); ) {
-      addArtifact(urls,(Artifact)it.next(),log,verbose);
+      addArtifact(uris,(Artifact)it.next(),log,verbose);
     }
   }
  else {
@@ -15,18 +15,22 @@
   if (includeArtifact) {
     Artifact a=project.getArtifact();
     if (a.getFile() != null) {
-      addArtifact(urls,a,log,verbose);
+      addArtifact(uris,a,log,verbose);
     }
  else {
-      addFile(urls,new File(project.getBuild().getOutputDirectory()),log,verbose);
+      addFile(uris,new File(project.getBuild().getOutputDirectory()),log,verbose);
     }
   }
   if (includeTestOutputDirectory) {
-    addFile(urls,new File(project.getBuild().getTestOutputDirectory()),log,verbose);
+    addFile(uris,new File(project.getBuild().getTestOutputDirectory()),log,verbose);
   }
   if (verbose) {
     log.info(LOG_SEPARATOR);
   }
-  URL[] urlArray=urls.toArray(new URL[urls.size()]);
+  List<URI> uriList=new ArrayList<URI>(uris);
+  URL[] urlArray=new URL[uris.size()];
+  for (int i=0; i < uris.size(); i++) {
+    urlArray[i]=uriList.get(i).toURL();
+  }
   return new URLClassLoader(urlArray,clazz.getClassLoader());
 }
