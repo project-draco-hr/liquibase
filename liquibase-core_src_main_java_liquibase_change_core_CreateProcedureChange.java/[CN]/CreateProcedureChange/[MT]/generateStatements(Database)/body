@@ -13,7 +13,11 @@
   }
  else {
     try {
-      procedureText=StreamUtil.getStreamContents(openSqlStream(),encoding);
+      InputStream stream=openSqlStream();
+      if (stream == null) {
+        throw new IOException("File does not exist: " + path);
+      }
+      procedureText=StreamUtil.getStreamContents(stream,encoding);
     }
  catch (    IOException e) {
       throw new UnexpectedLiquibaseException(e);

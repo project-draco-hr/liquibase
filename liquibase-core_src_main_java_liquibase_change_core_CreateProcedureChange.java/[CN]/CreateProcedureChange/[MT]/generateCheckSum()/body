@@ -1,4 +1,7 @@
 {
+  if (this.path == null) {
+    return super.generateCheckSum();
+  }
   InputStream stream=null;
   try {
     stream=openSqlStream();
