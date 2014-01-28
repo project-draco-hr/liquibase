@@ -1,0 +1,5 @@
+{
+  assertNull(exampleContext.getState().getValue("propertyBooleanNoDefault",Boolean.class));
+  assertEquals(Boolean.TRUE,exampleContext.getState().getValue("propertyBooleanDefaultTrue",Boolean.class));
+  assertEquals(Boolean.FALSE,exampleContext.getState().getValue("propertyBooleanDefaultFalse",Boolean.class));
+}

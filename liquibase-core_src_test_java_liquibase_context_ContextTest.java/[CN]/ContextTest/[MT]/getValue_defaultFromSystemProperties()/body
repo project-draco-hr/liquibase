@@ -1,0 +1,10 @@
+{
+  System.setProperty("liquibase.example.propertyBooleanNoDefault","true");
+  System.setProperty("liquibase.example.propertyBooleanDefaultFalse","true");
+  System.setProperty("liquibase.example.property.default.true","false");
+  ExampleContext exampleContext=new ExampleContext();
+  exampleContext.init(new SystemPropertyValueContainer());
+  TestCase.assertEquals(Boolean.TRUE,exampleContext.getState().getValue("propertyBooleanNoDefault",Boolean.class));
+  TestCase.assertEquals(Boolean.TRUE,exampleContext.getState().getValue("propertyBooleanDefaultFalse",Boolean.class));
+  TestCase.assertEquals(Boolean.FALSE,exampleContext.getState().getValue("propertyBooleanDefaultTrue",Boolean.class));
+}

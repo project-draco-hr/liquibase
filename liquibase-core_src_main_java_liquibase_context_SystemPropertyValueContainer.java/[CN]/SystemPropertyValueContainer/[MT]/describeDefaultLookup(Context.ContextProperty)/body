@@ -1,0 +1,3 @@
+{
+  return "System property '" + property.getContextPrefix() + "."+ property.getName()+ "'";
+}

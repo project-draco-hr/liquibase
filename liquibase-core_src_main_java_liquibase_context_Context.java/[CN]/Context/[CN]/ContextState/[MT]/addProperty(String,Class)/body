@@ -1,0 +1,5 @@
+{
+  ContextProperty property=new ContextProperty(contextPrefix,propertyName,type);
+  properties.put(propertyName,property);
+  return property;
+}

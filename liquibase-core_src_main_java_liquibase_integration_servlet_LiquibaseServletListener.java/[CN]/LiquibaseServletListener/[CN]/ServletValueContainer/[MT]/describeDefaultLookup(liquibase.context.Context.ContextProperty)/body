@@ -1,0 +1,3 @@
+{
+  return "JNDI, servlet container init parameter, and system property '" + property.getContextPrefix() + "."+ property.getName()+ "'";
+}

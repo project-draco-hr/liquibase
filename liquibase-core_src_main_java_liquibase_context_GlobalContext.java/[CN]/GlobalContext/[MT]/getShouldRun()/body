@@ -1,0 +1,3 @@
+{
+  return getState().getValue(SHOULD_RUN,Boolean.class);
+}

@@ -1,0 +1,6 @@
+{
+  if (!contexts.containsKey(type)) {
+    contexts.put(type,createContext(type));
+  }
+  return (T)contexts.get(type);
+}

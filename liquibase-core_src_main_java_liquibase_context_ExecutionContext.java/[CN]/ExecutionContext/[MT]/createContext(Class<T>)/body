@@ -1,0 +1,10 @@
+{
+  try {
+    T context=type.newInstance();
+    context.init(new SystemPropertyValueContainer());
+    return context;
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException("Cannot create default configuration for context " + type.getName());
+  }
+}

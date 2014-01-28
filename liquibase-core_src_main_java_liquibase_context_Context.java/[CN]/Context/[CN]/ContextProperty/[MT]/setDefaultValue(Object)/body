@@ -1,0 +1,7 @@
+{
+  if (defaultValue != null && !type.isAssignableFrom(defaultValue.getClass())) {
+    throw new UnexpectedLiquibaseException("Property " + name + " on is of type "+ type.getSimpleName()+ ", not "+ defaultValue.getClass().getSimpleName());
+  }
+  this.defaultValue=defaultValue;
+  return this;
+}

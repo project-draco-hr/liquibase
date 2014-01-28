@@ -11,8 +11,10 @@
   String failOnError=null;
   try {
     ic=new InitialContext();
-    failOnError=getValue(LIQUIBASE_ONERROR_FAIL,servletContext,ic);
-    if (checkPreconditions(servletContext,ic)) {
+    servletValueContainer=new ServletValueContainer(servletContext,ic);
+    executionContext=new ExecutionContext(servletValueContainer);
+    failOnError=(String)servletValueContainer.getValue(LIQUIBASE_ONERROR_FAIL);
+    if (checkPreconditions(executionContext,servletContext,ic)) {
       executeUpdate(servletContext,ic);
     }
   }

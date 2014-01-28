@@ -1,0 +1,5 @@
+{
+  for (  ContextProperty property : getState().properties.values()) {
+    property.init(valueContainers);
+  }
+}

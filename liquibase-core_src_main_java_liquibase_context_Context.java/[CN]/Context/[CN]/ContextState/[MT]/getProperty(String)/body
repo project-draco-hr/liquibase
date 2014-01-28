@@ -1,0 +1,7 @@
+{
+  ContextProperty property=properties.get(propertyName);
+  if (property == null) {
+    throw new UnexpectedLiquibaseException("Unknown property on " + getClass().getName() + ": "+ propertyName);
+  }
+  return property;
+}

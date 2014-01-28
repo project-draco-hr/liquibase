@@ -1,0 +1,4 @@
+{
+  getState().setValue(SHOULD_RUN,shouldRun);
+  return this;
+}

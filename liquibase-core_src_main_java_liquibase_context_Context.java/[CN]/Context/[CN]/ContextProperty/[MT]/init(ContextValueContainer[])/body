@@ -1,0 +1,24 @@
+{
+  Object containerValue=null;
+  for (  ContextValueContainer container : valueContainers) {
+    containerValue=container.getValue(contextPrefix,name);
+    for (    String alias : aliases) {
+      if (containerValue != null) {
+        break;
+      }
+      containerValue=container.getValue(contextPrefix,alias);
+    }
+  }
+  if (containerValue == null) {
+    value=defaultValue;
+  }
+ else {
+    try {
+      value=valueOf(containerValue);
+      wasSet=true;
+    }
+ catch (    NumberFormatException e) {
+      throw new UnexpectedLiquibaseException("Error parsing " + containerValue + " as a "+ type.getSimpleName());
+    }
+  }
+}
