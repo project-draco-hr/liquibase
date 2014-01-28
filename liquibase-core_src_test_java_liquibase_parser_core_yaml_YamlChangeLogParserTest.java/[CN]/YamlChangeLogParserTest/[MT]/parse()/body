@@ -1,5 +1,6 @@
 {
-  DatabaseChangeLog changeLog=new YamlChangeLogParser().parse("test.yaml",new ChangeLogParameters(),new ResourceAccessor(){
+  ExecutionContext context=new ExecutionContext();
+  DatabaseChangeLog changeLog=new YamlChangeLogParser().parse("test.yaml",new ChangeLogParameters(context),new ResourceAccessor(){
     @Override public InputStream getResourceAsStream(    String file) throws IOException {
       return new ByteArrayInputStream(changeLogText.getBytes());
     }
@@ -10,6 +11,6 @@
       return null;
     }
   }
-);
+,context);
   System.out.println(changeLog);
 }

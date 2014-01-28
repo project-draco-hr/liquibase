@@ -1,4 +1,5 @@
 {
-  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,true);
+  context.getContext(ChangeLogParserContext.class).setSupportPropertyEscaping(true);
+  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,context);
   assertEquals("${user.name} is a literal, " + System.getProperty("user.name") + " is a variable",handler.expandExpressions("${:user.name} is a literal, ${user.name} is a variable"));
 }

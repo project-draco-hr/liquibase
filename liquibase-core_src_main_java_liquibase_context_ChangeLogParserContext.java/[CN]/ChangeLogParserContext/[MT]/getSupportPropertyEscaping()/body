@@ -1,0 +1,3 @@
+{
+  return getState().getValue(SUPPORT_PROPERTY_ESCAPING,Boolean.class);
+}

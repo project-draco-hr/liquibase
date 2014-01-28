@@ -96,7 +96,7 @@
       if (textString != null) {
         if (change instanceof RawSQLChange) {
           String expandedExpression=textString;
-          if (false == ChangeLogParameters.EnableEscaping) {
+          if (!context.getContext(ChangeLogParserContext.class).getSupportPropertyEscaping()) {
             expandedExpression=changeLogParameters.expandExpressions(textString);
           }
           ((RawSQLChange)change).setSql(expandedExpression);

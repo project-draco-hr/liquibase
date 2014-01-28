@@ -1,0 +1,13 @@
+{
+  this.context=context;
+  log=LogFactory.getLogger();
+  this.resourceAccessor=resourceAccessor;
+  databaseChangeLog=new DatabaseChangeLog();
+  databaseChangeLog.setPhysicalFilePath(physicalChangeLogLocation);
+  databaseChangeLog.setChangeLogParameters(changeLogParameters);
+  this.changeLogParameters=changeLogParameters;
+  changeFactory=ChangeFactory.getInstance();
+  preconditionFactory=PreconditionFactory.getInstance();
+  sqlVisitorFactory=SqlVisitorFactory.getInstance();
+  changeLogParserFactory=ChangeLogParserFactory.getInstance();
+}

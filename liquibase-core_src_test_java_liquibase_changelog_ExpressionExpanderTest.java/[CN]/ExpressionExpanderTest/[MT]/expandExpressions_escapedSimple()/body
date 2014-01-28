@@ -1,4 +1,5 @@
 {
-  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,true);
+  context.getContext(ChangeLogParserContext.class).setSupportPropertyEscaping(true);
+  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,context);
   assertEquals("${user.name}",handler.expandExpressions("${:user.name}"));
 }

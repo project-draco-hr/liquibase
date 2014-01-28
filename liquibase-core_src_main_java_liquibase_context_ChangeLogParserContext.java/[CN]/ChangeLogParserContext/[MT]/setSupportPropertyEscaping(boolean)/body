@@ -1,0 +1,4 @@
+{
+  getState().setValue(SUPPORT_PROPERTY_ESCAPING,support);
+  return this;
+}

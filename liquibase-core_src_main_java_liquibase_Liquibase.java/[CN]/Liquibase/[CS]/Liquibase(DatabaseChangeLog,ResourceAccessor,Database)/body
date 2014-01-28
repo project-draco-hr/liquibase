@@ -1,4 +1,5 @@
 {
+  executionContext=new ExecutionContext(new SystemPropertyValueContainer());
   log=LogFactory.getLogger();
   this.databaseChangeLog=changeLog;
   this.changeLogFile=changeLog.getPhysicalFilePath();
@@ -7,5 +8,5 @@
   }
   this.resourceAccessor=resourceAccessor;
   this.database=database;
-  this.changeLogParameters=new ChangeLogParameters(database);
+  this.changeLogParameters=new ChangeLogParameters(database,executionContext);
 }

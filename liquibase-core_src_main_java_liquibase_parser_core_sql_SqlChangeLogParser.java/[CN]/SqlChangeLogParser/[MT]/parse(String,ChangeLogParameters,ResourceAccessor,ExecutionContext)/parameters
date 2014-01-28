@@ -1,0 +1,4 @@
+String physicalChangeLogLocation
+ChangeLogParameters changeLogParameters
+ResourceAccessor resourceAccessor
+ExecutionContext context

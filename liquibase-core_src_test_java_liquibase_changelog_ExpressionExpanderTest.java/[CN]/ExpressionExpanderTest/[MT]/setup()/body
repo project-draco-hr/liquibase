@@ -1,4 +1,5 @@
 {
-  changeLogParameters=new ChangeLogParameters();
-  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters);
+  context=new ExecutionContext();
+  changeLogParameters=new ChangeLogParameters(context);
+  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,context);
 }

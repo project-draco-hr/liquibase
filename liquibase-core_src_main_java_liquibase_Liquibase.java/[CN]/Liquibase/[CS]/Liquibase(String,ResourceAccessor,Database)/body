@@ -1,9 +1,10 @@
 {
+  executionContext=new ExecutionContext(new SystemPropertyValueContainer());
   log=LogFactory.getLogger();
   if (changeLogFile != null) {
     this.changeLogFile=changeLogFile.replace('\\','/');
   }
   this.resourceAccessor=resourceAccessor;
-  this.changeLogParameters=new ChangeLogParameters(database);
+  this.changeLogParameters=new ChangeLogParameters(database,executionContext);
   this.database=database;
 }

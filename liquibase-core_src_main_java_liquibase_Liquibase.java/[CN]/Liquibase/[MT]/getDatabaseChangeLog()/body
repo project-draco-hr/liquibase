@@ -1,7 +1,7 @@
 {
   if (databaseChangeLog == null) {
     ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor);
-    databaseChangeLog=parser.parse(changeLogFile,changeLogParameters,resourceAccessor);
+    databaseChangeLog=parser.parse(changeLogFile,changeLogParameters,resourceAccessor,executionContext);
   }
   return databaseChangeLog;
 }

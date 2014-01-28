@@ -1,3 +1,3 @@
 {
-  new MockFormattedSqlChangeLogParser(INVALID_CHANGELOG_INVALID_PRECONDITION).parse("asdf.sql",new ChangeLogParameters(),new JUnitResourceAccessor());
+  new MockFormattedSqlChangeLogParser(INVALID_CHANGELOG_INVALID_PRECONDITION).parse("asdf.sql",new ChangeLogParameters(executionContext),new JUnitResourceAccessor(),executionContext);
 }
