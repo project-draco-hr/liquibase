@@ -1,7 +1,6 @@
 {
-  AbstractConfiguration.ConfigurationProperty configuration=LiquibaseConfiguration.getInstance().getProperty(GlobalConfiguration.class,GlobalConfiguration.LIQUIBASE_TABLESPACE_NAME);
-  if (configuration.wasSet()) {
-    return configuration.getValue(String.class);
+  if (liquibaseTablespaceName != null) {
+    return liquibaseTablespaceName;
   }
-  return liquibaseTablespaceName;
+  return LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getLiquibaseTablespaceName();
 }

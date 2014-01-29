@@ -1,7 +1,6 @@
 {
-  AbstractConfiguration.ConfigurationProperty configuration=LiquibaseConfiguration.getInstance().getProperty(GlobalConfiguration.class,GlobalConfiguration.DATABASECHANGELOG_TABLE_NAME);
-  if (configuration.wasSet()) {
-    return configuration.getValue(String.class);
+  if (databaseChangeLogTableName != null) {
+    return databaseChangeLogTableName;
   }
-  return databaseChangeLogTableName;
+  return LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getDatabaseChangeLogTableName();
 }
