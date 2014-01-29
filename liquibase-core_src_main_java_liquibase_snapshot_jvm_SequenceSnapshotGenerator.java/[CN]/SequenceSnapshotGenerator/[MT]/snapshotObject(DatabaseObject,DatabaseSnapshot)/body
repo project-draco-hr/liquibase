@@ -3,13 +3,20 @@
   if (!database.supportsSequences()) {
     return null;
   }
-  List<String> sequenceNames=(List<String>)ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement(getSelectSequenceSql(example.getSchema(),database)),String.class);
-  for (  String name : sequenceNames) {
-    name=cleanNameFromDatabase(name,database);
+  List<Map<String,?>> sequences=ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement(getSelectSequenceSql(example.getSchema(),database)));
+  for (  Map<String,?> sequenceRow : sequences) {
+    String name=cleanNameFromDatabase((String)sequenceRow.get("SEQUENCE_NAME"),database);
     if ((database.isCaseSensitive() && name.equals(example.getName()) || (!database.isCaseSensitive() && name.equalsIgnoreCase(example.getName())))) {
       Sequence seq=new Sequence();
       seq.setName(name);
       seq.setSchema(example.getSchema());
+      seq.setStartValue(toBigInteger(sequenceRow.get("START_VALUE"),database));
+      seq.setMinValue(toBigInteger(sequenceRow.get("MIN_VALUE"),database));
+      seq.setMaxValue(toBigInteger(sequenceRow.get("MAX_VALUE"),database));
+      seq.setCacheSize(toBigInteger(sequenceRow.get("CACHE_SIZE"),database));
+      seq.setIncrementBy(toBigInteger(sequenceRow.get("INCREMENT_BY"),database));
+      seq.setWillCycle(toBoolean(sequenceRow.get("WILL_CYCLE"),database));
+      seq.setOrdered(toBoolean(sequenceRow.get("IS_ORDERED"),database));
       return seq;
     }
   }

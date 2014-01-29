@@ -1,0 +1,4 @@
+{
+  this.setAttribute("lastReturnedValue",lastReturnedValue);
+  return this;
+}

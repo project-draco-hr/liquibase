@@ -1,0 +1,9 @@
+{
+  if (value == null) {
+    return null;
+  }
+  if (value instanceof BigInteger) {
+    return (BigInteger)value;
+  }
+  return new BigInteger(value.toString());
+}
