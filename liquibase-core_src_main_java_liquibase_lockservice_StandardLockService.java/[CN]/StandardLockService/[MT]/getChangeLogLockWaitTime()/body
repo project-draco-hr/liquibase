@@ -1,0 +1,6 @@
+{
+  if (changeLogLockWaitTime != null) {
+    return changeLogLockWaitTime;
+  }
+  return LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getDatabaseChangeLogWaitTime();
+}

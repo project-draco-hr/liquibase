@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(CHANGELOG_WAIT_TIME,minutes);
+  return this;
+}
