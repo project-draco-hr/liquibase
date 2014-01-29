@@ -1,0 +1,3 @@
+{
+  return describeDefaultLookup(getProperty(config,property));
+}
