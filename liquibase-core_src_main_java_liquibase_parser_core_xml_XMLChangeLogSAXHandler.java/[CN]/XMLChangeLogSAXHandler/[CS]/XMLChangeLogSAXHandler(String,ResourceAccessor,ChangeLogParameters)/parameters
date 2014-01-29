@@ -1,0 +1,3 @@
+String physicalChangeLogLocation
+ResourceAccessor resourceAccessor
+ChangeLogParameters changeLogParameters

@@ -1,6 +1,5 @@
 {
-  LiquibaseConfiguration context=new LiquibaseConfiguration();
-  DatabaseChangeLog changeLog=new YamlChangeLogParser().parse("test.yaml",new ChangeLogParameters(context),new ResourceAccessor(){
+  DatabaseChangeLog changeLog=new YamlChangeLogParser().parse("test.yaml",new ChangeLogParameters(),new ResourceAccessor(){
     @Override public InputStream getResourceAsStream(    String file) throws IOException {
       return new ByteArrayInputStream(changeLogText.getBytes());
     }
@@ -11,6 +10,6 @@
       return null;
     }
   }
-,context);
+);
   System.out.println(changeLog);
 }

@@ -1,9 +1,8 @@
 {
   try {
-    LiquibaseConfiguration liquibaseConfiguration=new LiquibaseConfiguration(new SystemPropertyProvider());
-    GlobalConfiguration globalConfiguration=liquibaseConfiguration.getConfiguration(GlobalConfiguration.class);
+    GlobalConfiguration globalConfiguration=LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class);
     if (!globalConfiguration.getShouldRun()) {
-      System.err.println("Liquibase did not run because '" + liquibaseConfiguration.describeDefaultLookup(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN)) + " was set to false");
+      System.err.println("Liquibase did not run because '" + LiquibaseConfiguration.getInstance().describeDefaultLookup(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN)) + " was set to false");
       return;
     }
     Main main=new Main();

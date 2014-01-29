@@ -1,7 +1,7 @@
 {
-  ChangeLogParameters params=new ChangeLogParameters(liquibaseConfiguration);
+  ChangeLogParameters params=new ChangeLogParameters();
   params.set("tablename","rawsql");
-  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/rawSqlParameters.xml",params,new JUnitResourceAccessor(),liquibaseConfiguration);
+  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/rawSqlParameters.xml",params,new JUnitResourceAccessor());
   assertEquals("liquibase/parser/core/xml/rawSqlParameters.xml",changeLog.getLogicalFilePath());
   assertEquals("liquibase/parser/core/xml/rawSqlParameters.xml",changeLog.getPhysicalFilePath());
   assertEquals(1,changeLog.getChangeSets().size());

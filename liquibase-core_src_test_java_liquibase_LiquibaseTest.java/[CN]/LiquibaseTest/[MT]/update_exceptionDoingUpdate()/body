@@ -1,8 +1,7 @@
 {
-  LiquibaseConfiguration context=new LiquibaseConfiguration();
   Contexts contexts=new Contexts("a,b");
   Liquibase liquibase=new Liquibase("com/example/test.xml",mockResourceAccessor,mockDatabase);
-  doThrow(ChangeLogParseException.class).when(mockChangeLogParser).parse("com/example/test.xml",liquibase.getChangeLogParameters(),mockResourceAccessor,context);
+  doThrow(ChangeLogParseException.class).when(mockChangeLogParser).parse("com/example/test.xml",liquibase.getChangeLogParameters(),mockResourceAccessor);
   try {
     liquibase.update(contexts);
   }
@@ -10,6 +9,6 @@
     verify(mockLockService).waitForLock();
     verify(mockLockService).releaseLock();
     verify(mockDatabase).setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
-    verify(mockChangeLogParser).parse("com/example/test.xml",liquibase.getChangeLogParameters(),mockResourceAccessor,context);
+    verify(mockChangeLogParser).parse("com/example/test.xml",liquibase.getChangeLogParameters(),mockResourceAccessor);
   }
 }

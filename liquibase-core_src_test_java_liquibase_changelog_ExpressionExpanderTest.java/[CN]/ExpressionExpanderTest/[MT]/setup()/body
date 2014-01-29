@@ -1,5 +1,5 @@
 {
-  context=new LiquibaseConfiguration();
-  changeLogParameters=new ChangeLogParameters(context);
-  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,context);
+  LiquibaseConfiguration.getInstance().reset();
+  changeLogParameters=new ChangeLogParameters();
+  this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters);
 }

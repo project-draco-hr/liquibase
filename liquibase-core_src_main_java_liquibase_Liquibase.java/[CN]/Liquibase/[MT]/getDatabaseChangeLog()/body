@@ -1,7 +1,7 @@
 {
   if (databaseChangeLog == null) {
     ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser(changeLogFile,resourceAccessor);
-    databaseChangeLog=parser.parse(changeLogFile,changeLogParameters,resourceAccessor,liquibaseConfiguration);
+    databaseChangeLog=parser.parse(changeLogFile,changeLogParameters,resourceAccessor);
   }
   return databaseChangeLog;
 }

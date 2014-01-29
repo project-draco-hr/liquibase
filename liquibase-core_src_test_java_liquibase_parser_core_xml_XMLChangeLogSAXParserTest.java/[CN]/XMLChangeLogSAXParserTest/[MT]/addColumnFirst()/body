@@ -1,5 +1,5 @@
 {
-  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/columnFirstChangeLog.xml",new ChangeLogParameters(liquibaseConfiguration),new JUnitResourceAccessor(),liquibaseConfiguration);
+  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/columnFirstChangeLog.xml",new ChangeLogParameters(),new JUnitResourceAccessor());
   ChangeSet changeSet=changeLog.getChangeSets().get(1);
   List<Change> changes=changeSet.getChanges();
   Change change=changes.get(0);

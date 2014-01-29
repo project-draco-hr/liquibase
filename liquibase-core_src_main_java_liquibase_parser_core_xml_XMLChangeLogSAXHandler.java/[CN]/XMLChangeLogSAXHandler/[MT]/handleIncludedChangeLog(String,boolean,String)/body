@@ -13,7 +13,7 @@
   }
   DatabaseChangeLog changeLog;
   try {
-    changeLog=changeLogParserFactory.getParser(fileName,resourceAccessor).parse(fileName,changeLogParameters,resourceAccessor,context);
+    changeLog=changeLogParserFactory.getParser(fileName,resourceAccessor).parse(fileName,changeLogParameters,resourceAccessor);
   }
  catch (  UnknownChangelogFormatException e) {
     log.warning("included file " + relativeBaseFileName + "/"+ fileName+ " is not a recognized file type");

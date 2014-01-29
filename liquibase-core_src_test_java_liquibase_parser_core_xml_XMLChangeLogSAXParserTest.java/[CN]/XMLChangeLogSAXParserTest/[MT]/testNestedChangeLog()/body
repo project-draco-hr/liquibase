@@ -1,5 +1,5 @@
 {
   final String nestedFileName="liquibase/parser/core/xml/nestedChangeLog.xml";
-  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/nestedChangeLog.xml",new ChangeLogParameters(liquibaseConfiguration),new JUnitResourceAccessor(),liquibaseConfiguration);
+  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/nestedChangeLog.xml",new ChangeLogParameters(),new JUnitResourceAccessor());
   nestedFileAssertions(changeLog,nestedFileName);
 }

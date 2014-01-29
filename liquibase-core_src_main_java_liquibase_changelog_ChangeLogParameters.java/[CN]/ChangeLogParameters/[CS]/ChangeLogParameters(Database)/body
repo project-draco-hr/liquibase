@@ -1,0 +1,49 @@
+{
+  for (  Map.Entry entry : System.getProperties().entrySet()) {
+    changeLogParameters.add(new ChangeLogParameter(entry.getKey().toString(),entry.getValue()));
+  }
+  if (database != null) {
+    this.set("database.autoIncrementClause",database.getAutoIncrementClause(null,null));
+    this.set("database.currentDateTimeFunction",database.getCurrentDateTimeFunction());
+    this.set("database.databaseChangeLogLockTableName",database.getDatabaseChangeLogLockTableName());
+    this.set("database.databaseChangeLogTableName",database.getDatabaseChangeLogTableName());
+    try {
+      this.set("database.databaseMajorVersion",database.getDatabaseMajorVersion());
+    }
+ catch (    DatabaseException ignore) {
+    }
+    try {
+      this.set("database.databaseMinorVersion",database.getDatabaseMinorVersion());
+    }
+ catch (    DatabaseException ignore) {
+    }
+    this.set("database.databaseProductName",database.getDatabaseProductName());
+    try {
+      this.set("database.databaseProductVersion",database.getDatabaseProductVersion());
+    }
+ catch (    DatabaseException ignore) {
+    }
+    this.set("database.defaultCatalogName",database.getDefaultCatalogName());
+    this.set("database.defaultSchemaName",database.getDefaultSchemaName());
+    this.set("database.defaultSchemaNamePrefix",StringUtils.trimToNull(database.getDefaultSchemaName()) == null ? "" : "." + database.getDefaultSchemaName());
+    this.set("database.lineComment",database.getLineComment());
+    this.set("database.liquibaseSchemaName",database.getLiquibaseSchemaName());
+    this.set("database.typeName",database.getShortName());
+    try {
+      this.set("database.isSafeToRunUpdate",database.isSafeToRunUpdate());
+    }
+ catch (    DatabaseException ignore) {
+    }
+    this.set("database.requiresPassword",database.requiresPassword());
+    this.set("database.requiresUsername",database.requiresUsername());
+    this.set("database.supportsForeignKeyDisable",database.supportsForeignKeyDisable());
+    this.set("database.supportsInitiallyDeferrableColumns",database.supportsInitiallyDeferrableColumns());
+    this.set("database.supportsRestrictForeignKeys",database.supportsRestrictForeignKeys());
+    this.set("database.supportsSchemas",database.supportsSchemas());
+    this.set("database.supportsSequences",database.supportsSequences());
+    this.set("database.supportsTablespaces",database.supportsTablespaces());
+  }
+  this.expressionExpander=new ExpressionExpander(this);
+  this.currentDatabase=database;
+  this.currentContexts=new Contexts();
+}
