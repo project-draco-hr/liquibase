@@ -1,6 +1,0 @@
-{
-  if (valueContainers == null) {
-    valueContainers=new ContextValueContainer[0];
-  }
-  this.valueContainers=valueContainers;
-}

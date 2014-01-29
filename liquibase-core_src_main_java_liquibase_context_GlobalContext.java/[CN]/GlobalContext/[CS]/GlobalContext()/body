@@ -1,4 +1,0 @@
-{
-  super("liquibase");
-  getState().addProperty(SHOULD_RUN,Boolean.class).setDescription("Should Liquibase commands execute").setDefaultValue(true).addAlias("liquibase.should.run");
-}

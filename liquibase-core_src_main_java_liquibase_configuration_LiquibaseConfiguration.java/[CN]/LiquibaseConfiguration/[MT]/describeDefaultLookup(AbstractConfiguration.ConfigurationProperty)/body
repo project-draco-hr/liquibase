@@ -1,0 +1,7 @@
+{
+  List<String> reasons=new ArrayList<String>();
+  for (  ConfigurationProvider container : valueContainers) {
+    reasons.add(container.describeDefaultLookup(property));
+  }
+  return StringUtils.join(reasons," AND ");
+}

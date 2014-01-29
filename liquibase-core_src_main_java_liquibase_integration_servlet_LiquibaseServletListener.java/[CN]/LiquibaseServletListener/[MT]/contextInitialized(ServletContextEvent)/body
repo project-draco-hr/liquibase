@@ -12,9 +12,9 @@
   try {
     ic=new InitialContext();
     servletValueContainer=new ServletValueContainer(servletContext,ic);
-    executionContext=new ExecutionContext(servletValueContainer);
+    liquibaseConfiguration=new LiquibaseConfiguration(servletValueContainer);
     failOnError=(String)servletValueContainer.getValue(LIQUIBASE_ONERROR_FAIL);
-    if (checkPreconditions(executionContext,servletContext,ic)) {
+    if (checkPreconditions(liquibaseConfiguration,servletContext,ic)) {
       executeUpdate(servletContext,ic);
     }
   }

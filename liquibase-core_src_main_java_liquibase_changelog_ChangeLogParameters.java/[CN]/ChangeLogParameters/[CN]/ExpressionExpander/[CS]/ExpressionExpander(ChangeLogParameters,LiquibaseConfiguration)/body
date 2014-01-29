@@ -1,0 +1,4 @@
+{
+  this.changeLogParameters=changeLogParameters;
+  this.enableEscaping=context.getConfiguration(ChangeLogParserCofiguration.class).getSupportPropertyEscaping();
+}

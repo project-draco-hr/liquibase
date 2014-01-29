@@ -1,6 +1,6 @@
 {
   SQLFileChange change=new SQLFileChange();
-  ChangeLogParameters changeLogParameters=new ChangeLogParameters(new ExecutionContext());
+  ChangeLogParameters changeLogParameters=new ChangeLogParameters(new LiquibaseConfiguration());
   changeLogParameters.set("table.prefix","prfx");
   changeLogParameters.set("some.other.prop","nofx");
   ChangeSet changeSet=new ChangeSet("x","y",true,true,null,null,null,null);

@@ -1,5 +1,5 @@
 {
-  ExecutionContext context=new ExecutionContext();
+  LiquibaseConfiguration context=new LiquibaseConfiguration();
   Contexts contexts=new Contexts("a,b");
   Liquibase liquibase=new Liquibase("com/example/test.xml",mockResourceAccessor,mockDatabase);
   doThrow(ChangeLogParseException.class).when(mockChangeLogParser).parse("com/example/test.xml",liquibase.getChangeLogParameters(),mockResourceAccessor,context);

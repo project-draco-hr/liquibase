@@ -1,0 +1,5 @@
+{
+  assertNull(exampleConfiguration.getContainer().getValue("propertyBooleanNoDefault",Boolean.class));
+  assertEquals(Boolean.TRUE,exampleConfiguration.getContainer().getValue("propertyBooleanDefaultTrue",Boolean.class));
+  assertEquals(Boolean.FALSE,exampleConfiguration.getContainer().getValue("propertyBooleanDefaultFalse",Boolean.class));
+}

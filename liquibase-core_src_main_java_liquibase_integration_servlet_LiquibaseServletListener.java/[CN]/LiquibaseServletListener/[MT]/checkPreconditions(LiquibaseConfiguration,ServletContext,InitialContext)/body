@@ -1,0 +1,39 @@
+{
+  GlobalConfiguration globalConfiguration=liquibaseConfiguration.getConfiguration(GlobalConfiguration.class);
+  if (!globalConfiguration.getShouldRun()) {
+    LogFactory.getLogger().info("Liquibase did not run on " + hostName + " because "+ liquibaseConfiguration.describeDefaultLookup(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN))+ " was set to false");
+    return false;
+  }
+  String machineIncludes=(String)servletValueContainer.getValue(LIQUIBASE_HOST_INCLUDES);
+  String machineExcludes=(String)servletValueContainer.getValue(LIQUIBASE_HOST_EXCLUDES);
+  boolean shouldRun=false;
+  if (machineIncludes == null && machineExcludes == null) {
+    shouldRun=true;
+  }
+ else   if (machineIncludes != null) {
+    for (    String machine : machineIncludes.split(",")) {
+      machine=machine.trim();
+      if (hostName.equalsIgnoreCase(machine)) {
+        shouldRun=true;
+      }
+    }
+  }
+ else   if (machineExcludes != null) {
+    shouldRun=true;
+    for (    String machine : machineExcludes.split(",")) {
+      machine=machine.trim();
+      if (hostName.equalsIgnoreCase(machine)) {
+        shouldRun=false;
+      }
+    }
+  }
+  if (globalConfiguration.getShouldRun() && globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN).wasSet()) {
+    shouldRun=true;
+    servletContext.log("ignoring " + LIQUIBASE_HOST_INCLUDES + " and "+ LIQUIBASE_HOST_EXCLUDES+ ", since "+ liquibaseConfiguration.describeDefaultLookup(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN))+ "=true");
+  }
+  if (!shouldRun) {
+    servletContext.log("LiquibaseServletListener did not run due to " + LIQUIBASE_HOST_INCLUDES + " and/or "+ LIQUIBASE_HOST_EXCLUDES+ "");
+    return false;
+  }
+  return true;
+}

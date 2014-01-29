@@ -1,10 +1,10 @@
 {
-  executionContext=new ExecutionContext(new SystemPropertyValueContainer());
+  liquibaseConfiguration=new LiquibaseConfiguration(new SystemPropertyProvider());
   log=LogFactory.getLogger();
   if (changeLogFile != null) {
     this.changeLogFile=changeLogFile.replace('\\','/');
   }
   this.resourceAccessor=resourceAccessor;
-  this.changeLogParameters=new ChangeLogParameters(database,executionContext);
+  this.changeLogParameters=new ChangeLogParameters(database,liquibaseConfiguration);
   this.database=database;
 }

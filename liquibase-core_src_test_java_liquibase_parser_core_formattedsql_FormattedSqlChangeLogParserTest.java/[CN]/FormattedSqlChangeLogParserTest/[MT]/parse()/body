@@ -1,7 +1,7 @@
 {
-  ChangeLogParameters params=new ChangeLogParameters(executionContext);
+  ChangeLogParameters params=new ChangeLogParameters(liquibaseConfiguration);
   params.set("tablename","table4");
-  DatabaseChangeLog changeLog=new MockFormattedSqlChangeLogParser(VALID_CHANGELOG).parse("asdf.sql",params,new JUnitResourceAccessor(),executionContext);
+  DatabaseChangeLog changeLog=new MockFormattedSqlChangeLogParser(VALID_CHANGELOG).parse("asdf.sql",params,new JUnitResourceAccessor(),liquibaseConfiguration);
   assertEquals("asdf.sql",changeLog.getLogicalFilePath());
   assertEquals(9,changeLog.getChangeSets().size());
   assertEquals("nvoxland",changeLog.getChangeSets().get(0).getAuthor());

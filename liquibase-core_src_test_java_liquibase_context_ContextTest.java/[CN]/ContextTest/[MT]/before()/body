@@ -1,7 +1,0 @@
-{
-  System.clearProperty("liquibase.example.propertyBooleanNoDefault");
-  System.clearProperty("liquibase.example.propertyBooleanDefaultFalse");
-  System.clearProperty("liquibase.example.property.default.true");
-  exampleContext=new ExampleContext();
-  exampleContext.init(new SystemPropertyValueContainer());
-}

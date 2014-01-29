@@ -1,7 +1,7 @@
 {
-  GlobalContext globalContext=executionContext.getContext(GlobalContext.class);
-  if (!globalContext.getShouldRun()) {
-    log("Liquibase did not run because " + executionContext.describeDefaultLookup(globalContext.getProperty(GlobalContext.SHOULD_RUN)) + " was set to false");
+  GlobalConfiguration globalConfiguration=liquibaseConfiguration.getConfiguration(GlobalConfiguration.class);
+  if (!globalConfiguration.getShouldRun()) {
+    log("Liquibase did not run because " + liquibaseConfiguration.describeDefaultLookup(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN)) + " was set to false");
     return false;
   }
   return true;

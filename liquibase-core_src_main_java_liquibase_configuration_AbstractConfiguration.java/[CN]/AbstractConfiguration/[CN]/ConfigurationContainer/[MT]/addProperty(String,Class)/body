@@ -1,0 +1,5 @@
+{
+  ConfigurationProperty property=new ConfigurationProperty(namespace,propertyName,type);
+  properties.put(propertyName,property);
+  return property;
+}

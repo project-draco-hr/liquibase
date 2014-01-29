@@ -1,5 +1,5 @@
 {
-  context=new ExecutionContext();
+  context=new LiquibaseConfiguration();
   changeLogParameters=new ChangeLogParameters(context);
   this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,context);
 }

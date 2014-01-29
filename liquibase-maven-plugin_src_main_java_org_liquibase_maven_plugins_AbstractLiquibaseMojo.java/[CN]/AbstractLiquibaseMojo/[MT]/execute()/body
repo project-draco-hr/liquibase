@@ -7,9 +7,9 @@
       password=info.getPassword();
     }
   }
-  ExecutionContext executionContext=new ExecutionContext(new SystemPropertyValueContainer());
-  if (!executionContext.getContext(GlobalContext.class).getShouldRun()) {
-    getLog().info("Liquibase did not run because " + executionContext.describeDefaultLookup(executionContext.getContext(GlobalContext.class).getProperty(GlobalContext.SHOULD_RUN)) + " was set to false");
+  LiquibaseConfiguration liquibaseConfiguration=new LiquibaseConfiguration(new SystemPropertyProvider());
+  if (!liquibaseConfiguration.getConfiguration(GlobalConfiguration.class).getShouldRun()) {
+    getLog().info("Liquibase did not run because " + liquibaseConfiguration.describeDefaultLookup(liquibaseConfiguration.getConfiguration(GlobalConfiguration.class).getProperty(GlobalConfiguration.SHOULD_RUN)) + " was set to false");
     return;
   }
   if (skip) {

@@ -1,4 +1,4 @@
 {
-  ChangeLogParameters changeLogParameters=new ChangeLogParameters(executionContext);
+  ChangeLogParameters changeLogParameters=new ChangeLogParameters(liquibaseConfiguration);
   assertEquals(System.getProperty("user.name"),changeLogParameters.getValue("user.name"));
 }

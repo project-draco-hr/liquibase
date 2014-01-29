@@ -1,3 +1,0 @@
-{
-  this.contextState=new ContextState(contextPrefix);
-}

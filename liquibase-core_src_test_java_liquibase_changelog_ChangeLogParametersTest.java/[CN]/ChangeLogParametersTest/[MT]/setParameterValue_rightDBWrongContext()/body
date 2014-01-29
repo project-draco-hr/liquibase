@@ -1,5 +1,5 @@
 {
-  ChangeLogParameters changeLogParameters=new ChangeLogParameters(new H2Database(),executionContext);
+  ChangeLogParameters changeLogParameters=new ChangeLogParameters(new H2Database(),liquibaseConfiguration);
   changeLogParameters.setContexts(new Contexts("junit"));
   changeLogParameters.set("doubleSet","originalValue","anotherContext","baddb, h2");
   assertNull(changeLogParameters.getValue("doubleSet"));

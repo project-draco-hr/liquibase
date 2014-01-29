@@ -9,9 +9,9 @@
     log.debug("",e);
     return;
   }
-  ExecutionContext executionContext=new ExecutionContext(new SystemPropertyValueContainer());
-  if (!executionContext.getContext(GlobalContext.class).getShouldRun()) {
-    log.info("Liquibase did not run on " + hostName + " because "+ executionContext.describeDefaultLookup(executionContext.getContext(GlobalContext.class).getProperty(GlobalContext.SHOULD_RUN))+ " was set to false");
+  LiquibaseConfiguration liquibaseConfiguration=new LiquibaseConfiguration(new SystemPropertyProvider());
+  if (!liquibaseConfiguration.getConfiguration(GlobalConfiguration.class).getShouldRun()) {
+    log.info("Liquibase did not run on " + hostName + " because "+ liquibaseConfiguration.describeDefaultLookup(liquibaseConfiguration.getConfiguration(GlobalConfiguration.class).getProperty(GlobalConfiguration.SHOULD_RUN))+ " was set to false");
     return;
   }
   initialized=true;

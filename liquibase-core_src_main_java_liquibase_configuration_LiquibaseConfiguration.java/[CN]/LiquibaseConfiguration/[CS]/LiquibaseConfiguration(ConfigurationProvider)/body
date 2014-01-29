@@ -1,0 +1,6 @@
+{
+  if (valueContainers == null) {
+    valueContainers=new ConfigurationProvider[0];
+  }
+  this.valueContainers=valueContainers;
+}

@@ -1,5 +1,0 @@
-{
-  this.contextPrefix=contextPrefix;
-  this.name=propertyName;
-  this.type=type;
-}

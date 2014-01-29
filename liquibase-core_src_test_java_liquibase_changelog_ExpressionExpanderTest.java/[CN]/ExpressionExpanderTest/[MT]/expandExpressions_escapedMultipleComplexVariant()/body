@@ -1,7 +1,7 @@
 {
   changeLogParameters.set("a","Value A");
   changeLogParameters.set("b","Value B");
-  context.getContext(ChangeLogParserContext.class).setSupportPropertyEscaping(true);
+  context.getConfiguration(ChangeLogParserCofiguration.class).setSupportPropertyEscaping(true);
   this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters,context);
   assertEquals("Value A is a variable, ${a} and ${b} are literals but this isn't: Value B",handler.expandExpressions("${a} is a variable, ${:a} and ${:b} are literals but this isn't: ${b}"));
 }
