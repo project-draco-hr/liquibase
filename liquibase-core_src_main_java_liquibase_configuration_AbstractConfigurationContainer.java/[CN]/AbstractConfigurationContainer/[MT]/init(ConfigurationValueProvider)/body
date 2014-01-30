@@ -1,0 +1,7 @@
+{
+  if (configurationValueProviders != null) {
+    for (    ConfigurationProperty property : getContainer().properties.values()) {
+      property.init(configurationValueProviders);
+    }
+  }
+}

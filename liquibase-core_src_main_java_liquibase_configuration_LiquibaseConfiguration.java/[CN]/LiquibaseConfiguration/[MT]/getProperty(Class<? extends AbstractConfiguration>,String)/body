@@ -1,4 +1,0 @@
-{
-  AbstractConfiguration configuration=getConfiguration(type);
-  return configuration.getProperty(property);
-}

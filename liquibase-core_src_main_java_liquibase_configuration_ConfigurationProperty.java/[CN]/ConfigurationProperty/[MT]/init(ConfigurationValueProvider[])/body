@@ -1,6 +1,6 @@
 {
   Object containerValue=null;
-  for (  ConfigurationProvider container : valueContainers) {
+  for (  ConfigurationValueProvider container : configurationValueProviders) {
     containerValue=container.getValue(namespace,name);
     for (    String alias : aliases) {
       if (containerValue != null) {
@@ -15,7 +15,7 @@
  else {
     try {
       value=valueOf(containerValue);
-      wasSet=true;
+      wasOverridden=true;
     }
  catch (    NumberFormatException e) {
       throw new UnexpectedLiquibaseException("Error parsing " + containerValue + " as a "+ type.getSimpleName());

@@ -1,7 +1,7 @@
 {
   if (instance == null) {
     instance=new LiquibaseConfiguration();
-    instance.init();
+    instance.init(new SystemPropertyProvider());
   }
   return instance;
 }

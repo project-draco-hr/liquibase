@@ -1,7 +1,0 @@
-{
-  if (configurationProviders == null) {
-    configurationProviders=new ConfigurationProvider[0];
-  }
-  this.configurationProviders=configurationProviders;
-  this.reset();
-}

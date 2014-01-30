@@ -1,3 +1,0 @@
-{
-  return describeValueLookup(getProperty(config,property));
-}
