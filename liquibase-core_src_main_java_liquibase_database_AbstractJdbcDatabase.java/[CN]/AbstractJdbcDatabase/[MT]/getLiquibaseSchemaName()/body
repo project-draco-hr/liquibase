@@ -2,7 +2,7 @@
   if (liquibaseSchemaName != null) {
     return liquibaseSchemaName;
   }
-  AbstractConfiguration.ConfigurationProperty configuration=LiquibaseConfiguration.getInstance().getProperty(GlobalConfiguration.class,GlobalConfiguration.LIQUIBASE_SCHEMA_NAME);
+  ConfigurationProperty configuration=LiquibaseConfiguration.getInstance().getProperty(GlobalConfiguration.class,GlobalConfiguration.LIQUIBASE_SCHEMA_NAME);
   if (configuration.wasSet()) {
     return configuration.getValue(String.class);
   }

@@ -1,7 +1,7 @@
 {
   ConfigurationProperty property=getProperty(propertyName);
-  if (!property.type.isAssignableFrom(returnType)) {
-    throw new UnexpectedLiquibaseException("Property " + propertyName + " on "+ getClass().getName()+ " is of type "+ property.type.getName()+ ", not "+ returnType.getName());
+  if (!property.getType().isAssignableFrom(returnType)) {
+    throw new UnexpectedLiquibaseException("Property " + propertyName + " on "+ getClass().getName()+ " is of type "+ property.getType().getName()+ ", not "+ returnType.getName());
   }
   return (T)property.getValue();
 }
