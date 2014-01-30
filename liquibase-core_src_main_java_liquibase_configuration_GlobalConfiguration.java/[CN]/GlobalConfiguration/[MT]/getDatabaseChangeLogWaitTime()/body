@@ -1,3 +1,0 @@
-{
-  return getContainer().getValue(CHANGELOG_WAIT_TIME,Long.class);
-}

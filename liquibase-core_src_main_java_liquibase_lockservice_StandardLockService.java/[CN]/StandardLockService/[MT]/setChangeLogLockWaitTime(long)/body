@@ -1,3 +1,3 @@
 {
-  this.changeLogLockWaitTime=changeLogLockWaitTime;
+  this.changeLogLockPollRate=changeLogLockWaitTime;
 }

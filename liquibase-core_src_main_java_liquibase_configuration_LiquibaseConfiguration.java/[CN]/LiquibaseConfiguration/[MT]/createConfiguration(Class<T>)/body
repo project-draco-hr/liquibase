@@ -5,6 +5,6 @@
     return configuration;
   }
  catch (  Exception e) {
-    throw new UnexpectedLiquibaseException("Cannot create default configuration " + type.getName());
+    throw new UnexpectedLiquibaseException("Cannot create default configuration " + type.getName(),e);
   }
 }
