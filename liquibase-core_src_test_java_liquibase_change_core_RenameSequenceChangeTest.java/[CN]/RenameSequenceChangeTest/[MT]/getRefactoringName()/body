@@ -1,0 +1,3 @@
+{
+  assertEquals("renameSequence",ChangeFactory.getInstance().getChangeMetaData(refactoring).getName());
+}

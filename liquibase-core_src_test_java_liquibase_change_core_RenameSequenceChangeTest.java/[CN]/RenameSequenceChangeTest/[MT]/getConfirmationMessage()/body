@@ -1,0 +1,5 @@
+{
+  refactoring.setOldSequenceName("OLD_NAME");
+  refactoring.setNewSequenceName("NEW_NAME");
+  assertEquals("Sequence OLD_NAME renamed to NEW_NAME",refactoring.getConfirmationMessage());
+}

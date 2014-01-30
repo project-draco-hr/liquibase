@@ -1,0 +1,3 @@
+{
+  return new Sequence().setName(statement.getOldSequenceName()).setSchema(statement.getCatalogName(),statement.getSchemaName());
+}

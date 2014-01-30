@@ -1,0 +1,6 @@
+{
+  this.catalogName=catalogName;
+  this.schemaName=schemaName;
+  this.oldSequenceName=oldSequenceName;
+  this.newSequenceName=newSequenceName;
+}

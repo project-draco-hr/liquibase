@@ -1,0 +1,5 @@
+{
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
+  statements.add(new RenameSequenceStatement(getCatalogName(),getSchemaName(),getOldSequenceName(),getNewSequenceName()));
+  return statements.toArray(new SqlStatement[statements.size()]);
+}

@@ -1,0 +1,3 @@
+{
+  return "Sequence " + oldSequenceName + " renamed to "+ newSequenceName;
+}
