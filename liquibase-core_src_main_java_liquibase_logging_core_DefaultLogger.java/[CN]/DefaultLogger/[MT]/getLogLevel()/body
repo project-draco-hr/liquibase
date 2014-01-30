@@ -1,0 +1,9 @@
+{
+  LogLevel logLevel=super.getLogLevel();
+  if (logLevel == null) {
+    return toLogLevel(LiquibaseConfiguration.getInstance().getConfiguration(DefaultLoggerConfiguration.class).getLogLevel());
+  }
+ else {
+    return logLevel;
+  }
+}

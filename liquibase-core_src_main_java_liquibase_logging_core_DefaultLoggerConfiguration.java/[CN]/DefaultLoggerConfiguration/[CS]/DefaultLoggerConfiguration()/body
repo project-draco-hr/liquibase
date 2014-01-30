@@ -1,0 +1,4 @@
+{
+  super("liquibase.defaultlogger");
+  getContainer().addProperty(LOG_LEVEL,String.class).setDescription("Logging level").setDefaultValue("INFO");
+}

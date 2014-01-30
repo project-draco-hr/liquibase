@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(LOG_LEVEL,name);
+  return this;
+}
