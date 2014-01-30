@@ -1,7 +1,7 @@
 {
   GlobalConfiguration globalConfiguration=LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class);
   if (!globalConfiguration.getShouldRun()) {
-    LogFactory.getLogger().info("Liquibase did not run on " + hostName + " because "+ LiquibaseConfiguration.getInstance().describeDefaultLookup(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN))+ " was set to false");
+    LogFactory.getLogger().info("Liquibase did not run on " + hostName + " because "+ LiquibaseConfiguration.getInstance().describeValueLookup(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN))+ " was set to false");
     return false;
   }
   String machineIncludes=(String)servletValueContainer.getValue(LIQUIBASE_HOST_INCLUDES);
@@ -29,7 +29,7 @@
   }
   if (globalConfiguration.getShouldRun() && globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN).wasSet()) {
     shouldRun=true;
-    servletContext.log("ignoring " + LIQUIBASE_HOST_INCLUDES + " and "+ LIQUIBASE_HOST_EXCLUDES+ ", since "+ LiquibaseConfiguration.getInstance().describeDefaultLookup(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN))+ "=true");
+    servletContext.log("ignoring " + LIQUIBASE_HOST_INCLUDES + " and "+ LIQUIBASE_HOST_EXCLUDES+ ", since "+ LiquibaseConfiguration.getInstance().describeValueLookup(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN))+ "=true");
   }
   if (!shouldRun) {
     servletContext.log("LiquibaseServletListener did not run due to " + LIQUIBASE_HOST_INCLUDES + " and/or "+ LIQUIBASE_HOST_EXCLUDES+ "");

@@ -1,2 +1,2 @@
-Class<? extends AbstractConfiguration> config
+Class<? extends AbstractConfiguration> type
 String property
