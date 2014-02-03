@@ -1,3 +1,3 @@
 boolean accepted
 String message
-Class<? extends ChangeSetFilter> filterType
+Class<? extends ChangeSetFilter> filter

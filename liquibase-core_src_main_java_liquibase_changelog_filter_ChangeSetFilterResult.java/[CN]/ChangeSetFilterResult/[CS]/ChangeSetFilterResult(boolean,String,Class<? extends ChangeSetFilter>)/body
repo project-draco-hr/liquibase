@@ -1,5 +1,5 @@
 {
   this.accepted=accepted;
   this.message=message;
-  this.filterType=filterType;
+  this.filter=filter;
 }
