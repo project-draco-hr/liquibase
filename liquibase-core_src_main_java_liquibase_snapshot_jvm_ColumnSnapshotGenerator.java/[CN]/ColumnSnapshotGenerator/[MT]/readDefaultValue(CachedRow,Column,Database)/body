@@ -20,6 +20,9 @@
   if (stringVal.isEmpty()) {
     return null;
   }
+  if (database instanceof OracleDatabase && !stringVal.startsWith("'") && !stringVal.endsWith("'")) {
+    return new DatabaseFunction(stringVal);
+  }
   if (stringVal.startsWith("'") && stringVal.endsWith("'")) {
     stringVal=stringVal.substring(1,stringVal.length() - 1);
   }
