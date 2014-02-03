@@ -1,5 +1,5 @@
 {
   ChangeSetStatus status=addStatus(changeSet,databaseChangeLog,database);
   status.setWillRun(true);
-  status.setRunReasons(filterResults);
+  status.setFilterResults(filterResults);
 }

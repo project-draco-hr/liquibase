@@ -8,7 +8,7 @@
     status.setComments(changeSet.getComments());
     status.setDescription(changeSet.getDescription());
     status.setWillRun(false);
-    status.setSkipReason(new ChangeSetFilterResult(false,"Change set is not in change log",NotInChangeLogChangeSetFilter.class));
+    status.setFilterResults(new HashSet<ChangeSetFilterResult>(Arrays.asList(new ChangeSetFilterResult(false,"Change set is not in change log",NotInChangeLogChangeSetFilter.class))));
     returnList.add(status);
   }
   returnList.addAll(changeSetStatuses.values());

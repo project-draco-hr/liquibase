@@ -2,10 +2,10 @@
   if (!willRun) {
     return false;
   }
-  if (runReasons == null) {
+  if (filterResults == null) {
     return false;
   }
-  for (  ChangeSetFilterResult result : runReasons) {
+  for (  ChangeSetFilterResult result : filterResults) {
     if (result.getFilter().equals(filterType)) {
       return true;
     }

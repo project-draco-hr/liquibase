@@ -1,4 +1,4 @@
 ChangeSet changeSet
 DatabaseChangeLog databaseChangeLog
 Database database
-ChangeSetFilterResult filterResult
+Set<ChangeSetFilterResult> filterResults
