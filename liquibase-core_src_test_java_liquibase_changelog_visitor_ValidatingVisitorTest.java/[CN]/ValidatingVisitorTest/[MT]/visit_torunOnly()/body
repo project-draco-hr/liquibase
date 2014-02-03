@@ -10,7 +10,7 @@
   List<RanChangeSet> ran=new ArrayList<RanChangeSet>();
   ran.add(new RanChangeSet(changeSet1));
   ValidatingVisitor handler=new ValidatingVisitor(ran);
-  handler.visit(changeSet1,new DatabaseChangeLog(),null);
+  handler.visit(changeSet1,new DatabaseChangeLog(),null,null);
   assertEquals(0,handler.getSetupExceptions().size());
   assertTrue(handler.validationPassed());
 }

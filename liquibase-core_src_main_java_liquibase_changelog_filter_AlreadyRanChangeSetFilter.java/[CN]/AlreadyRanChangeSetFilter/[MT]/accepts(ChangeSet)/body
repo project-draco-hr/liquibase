@@ -1,3 +1,8 @@
 {
-  return getRanChangeSet(changeSet) != null;
+  if (getRanChangeSet(changeSet) != null) {
+    return new ChangeSetFilterResult(true,"Change set already ran",this.getClass());
+  }
+ else {
+    return new ChangeSetFilterResult(false,"Change set has not ran",this.getClass());
+  }
 }

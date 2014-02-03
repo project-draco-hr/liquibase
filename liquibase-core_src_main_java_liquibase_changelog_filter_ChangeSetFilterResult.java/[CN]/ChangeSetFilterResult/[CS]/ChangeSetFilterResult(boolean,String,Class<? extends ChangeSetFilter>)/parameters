@@ -1,0 +1,3 @@
+boolean accepted
+String message
+Class<? extends ChangeSetFilter> filterType

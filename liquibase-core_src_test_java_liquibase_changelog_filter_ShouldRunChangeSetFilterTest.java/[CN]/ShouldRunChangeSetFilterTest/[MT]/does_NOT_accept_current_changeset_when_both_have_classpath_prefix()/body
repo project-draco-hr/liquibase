@@ -2,5 +2,5 @@
   given_a_database_with_two_executed_changesets();
   ChangeSet changeSet=new ChangeSet("2","testAuthor",false,false,"classpath:path/changelog",null,null,null);
   ShouldRunChangeSetFilter filter=new ShouldRunChangeSetFilter(database,true);
-  assertFalse(filter.accepts(changeSet));
+  assertFalse(filter.accepts(changeSet).isAccepted());
 }

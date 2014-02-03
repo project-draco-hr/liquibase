@@ -1,0 +1,16 @@
+{
+  ArrayList<ChangeSetStatus> returnList=new ArrayList<ChangeSetStatus>();
+  for (  RanChangeSet changeSet : ranChangeSets) {
+    ChangeSetStatus status=new ChangeSetStatus(new ChangeSet(changeSet.getId(),changeSet.getAuthor(),false,false,changeSet.getChangeLog(),null,null,null));
+    status.setPreviouslyRan(true);
+    status.setDateLastExecuted(changeSet.getDateExecuted());
+    status.setStoredCheckSum(changeSet.getLastCheckSum());
+    status.setComments(changeSet.getComments());
+    status.setDescription(changeSet.getDescription());
+    status.setWillRun(false);
+    status.setSkipReason(new ChangeSetFilterResult(false,"Change set is not in change log",NotInChangeLogChangeSetFilter.class));
+    returnList.add(status);
+  }
+  returnList.addAll(changeSetStatuses.values());
+  return returnList;
+}

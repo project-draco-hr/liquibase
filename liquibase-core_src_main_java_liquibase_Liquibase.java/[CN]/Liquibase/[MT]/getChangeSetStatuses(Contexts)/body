@@ -1,0 +1,10 @@
+{
+  changeLogParameters.setContexts(contexts);
+  DatabaseChangeLog changeLog=getDatabaseChangeLog();
+  checkLiquibaseTables(true,changeLog,contexts);
+  changeLog.validate(database,contexts);
+  ChangeLogIterator logIterator=getStandardChangelogIterator(contexts,changeLog);
+  StatusVisitor visitor=new StatusVisitor(database);
+  logIterator.run(visitor,database);
+  return visitor.getStatuses();
+}

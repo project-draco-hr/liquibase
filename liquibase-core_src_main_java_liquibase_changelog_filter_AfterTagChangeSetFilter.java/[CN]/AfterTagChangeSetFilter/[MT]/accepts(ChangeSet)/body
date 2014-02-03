@@ -1,3 +1,8 @@
 {
-  return changeLogsAfterTag.contains(changeLogToString(changeSet.getId(),changeSet.getAuthor(),changeSet.getFilePath()));
+  if (changeLogsAfterTag.contains(changeLogToString(changeSet.getId(),changeSet.getAuthor(),changeSet.getFilePath()))) {
+    return new ChangeSetFilterResult(true,"Change set is before tag '" + tag + "'",this.getClass());
+  }
+ else {
+    return new ChangeSetFilterResult(false,"Change set after tag '" + tag + "'",this.getClass());
+  }
 }

@@ -1,4 +1,4 @@
 {
   ExecutedAfterChangeSetFilter filter=new ExecutedAfterChangeSetFilter(new Date(),new ArrayList<RanChangeSet>());
-  assertFalse(filter.accepts(new ChangeSet("1","testAuthor",false,false,"path/changelog",null,null,null)));
+  assertFalse(filter.accepts(new ChangeSet("1","testAuthor",false,false,"path/changelog",null,null,null)).isAccepted());
 }
