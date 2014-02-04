@@ -1,6 +1,6 @@
 {
   if (connection == null) {
-    return -1;
+    return 999;
   }
   try {
     return connection.getDatabaseMajorVersion();
