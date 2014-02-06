@@ -8,19 +8,31 @@
     }
     for (    ChangeSet changeSet : changeSetList) {
       boolean shouldVisit=true;
+      Set<ChangeSetFilterResult> reasonsAccepted=new HashSet<ChangeSetFilterResult>();
+      Set<ChangeSetFilterResult> reasonsDenied=new HashSet<ChangeSetFilterResult>();
       if (changeSetFilters != null) {
         for (        ChangeSetFilter filter : changeSetFilters) {
-          if (!filter.accepts(changeSet)) {
+          ChangeSetFilterResult acceptsResult=filter.accepts(changeSet);
+          if (acceptsResult.isAccepted()) {
+            reasonsAccepted.add(acceptsResult);
+          }
+ else {
             shouldVisit=false;
+            reasonsDenied.add(acceptsResult);
             break;
           }
         }
       }
+      log.setChangeSet(changeSet);
       if (shouldVisit) {
-        log.setChangeSet(changeSet);
-        visitor.visit(changeSet,databaseChangeLog,database);
-        log.setChangeSet(null);
+        visitor.visit(changeSet,databaseChangeLog,database,reasonsAccepted);
       }
+ else {
+        if (visitor instanceof SkippedChangeSetVisitor) {
+          ((SkippedChangeSetVisitor)visitor).skipped(changeSet,databaseChangeLog,database,reasonsDenied);
+        }
+      }
+      log.setChangeSet(null);
     }
   }
   finally {

@@ -1,0 +1,6 @@
+{
+  this.changeSet=changeSet;
+  this.currentCheckSum=changeSet.generateCheckSum();
+  this.description=changeSet.getDescription();
+  this.comments=changeSet.getComments();
+}

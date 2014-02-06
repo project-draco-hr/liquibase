@@ -1,0 +1,6 @@
+{
+  if (!(obj instanceof ChangeSet)) {
+    return false;
+  }
+  return this.toString(false).equals(((ChangeSet)obj).toString(false));
+}

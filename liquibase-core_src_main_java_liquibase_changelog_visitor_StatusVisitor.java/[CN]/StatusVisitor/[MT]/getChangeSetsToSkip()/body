@@ -1,0 +1,9 @@
+{
+  ArrayList<ChangeSetStatus> returnList=new ArrayList<ChangeSetStatus>();
+  for (  ChangeSetStatus status : changeSetStatuses.values()) {
+    if (!status.getWillRun()) {
+      returnList.add(status);
+    }
+  }
+  return returnList;
+}
