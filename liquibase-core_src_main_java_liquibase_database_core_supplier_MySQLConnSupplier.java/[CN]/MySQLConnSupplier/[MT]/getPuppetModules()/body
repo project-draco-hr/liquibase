@@ -1,5 +1,5 @@
 {
   Set<String> modules=super.getPuppetModules();
-  addPuppetModules(modules);
+  modules.add("puppetlabs/mysql");
   return modules;
 }
