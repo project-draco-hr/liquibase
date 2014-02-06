@@ -1,0 +1,4 @@
+{
+  this.setAttribute("minValue",minValue);
+  return this;
+}

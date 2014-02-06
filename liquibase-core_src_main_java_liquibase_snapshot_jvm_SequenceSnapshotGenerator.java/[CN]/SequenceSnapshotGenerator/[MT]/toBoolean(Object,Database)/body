@@ -1,0 +1,16 @@
+{
+  if (value == null) {
+    return null;
+  }
+  if (value instanceof Boolean) {
+    return (Boolean)value;
+  }
+  String valueAsString=value.toString();
+  valueAsString=valueAsString.replace("'","");
+  if (valueAsString.equalsIgnoreCase("true") || valueAsString.equalsIgnoreCase("'true'") || valueAsString.equalsIgnoreCase("y")|| valueAsString.equalsIgnoreCase("1")|| valueAsString.equalsIgnoreCase("t")) {
+    return Boolean.TRUE;
+  }
+ else {
+    return Boolean.FALSE;
+  }
+}

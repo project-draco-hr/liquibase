@@ -1,0 +1,4 @@
+{
+  this.setAttribute("ordered",isOrdered);
+  return this;
+}

@@ -8,10 +8,10 @@
     if (!database.supportsSequences()) {
       updateListeners("Sequences not supported for " + database.toString() + " ...");
     }
-    List<String> sequenceNames=(List<String>)ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement(getSelectSequenceSql(schema,database)),String.class);
+    List<Map<String,?>> sequenceNames=ExecutorService.getInstance().getExecutor(database).queryForList(new RawSqlStatement(getSelectSequenceSql(schema,database)));
     if (sequenceNames != null) {
-      for (      String sequenceName : sequenceNames) {
-        schema.addDatabaseObject(new Sequence().setName(cleanNameFromDatabase(sequenceName,database)).setSchema(schema));
+      for (      Map<String,?> sequence : sequenceNames) {
+        schema.addDatabaseObject(new Sequence().setName(cleanNameFromDatabase((String)sequence.get("SEQUENCE_NAME"),database)).setSchema(schema));
       }
     }
   }

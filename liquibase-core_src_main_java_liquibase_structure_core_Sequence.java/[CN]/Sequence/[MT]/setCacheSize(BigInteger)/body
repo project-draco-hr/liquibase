@@ -1,0 +1,4 @@
+{
+  this.setAttribute("cacheSize",cacheSize);
+  return this;
+}

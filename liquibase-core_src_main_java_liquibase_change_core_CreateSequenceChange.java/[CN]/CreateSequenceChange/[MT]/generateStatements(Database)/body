@@ -1,3 +1,3 @@
 {
-  return new SqlStatement[]{new CreateSequenceStatement(getCatalogName(),getSchemaName(),getSequenceName()).setIncrementBy(getIncrementBy()).setMaxValue(getMaxValue()).setMinValue(getMinValue()).setOrdered(isOrdered()).setStartValue(getStartValue()).setCycle(getCycle())};
+  return new SqlStatement[]{new CreateSequenceStatement(getCatalogName(),getSchemaName(),getSequenceName()).setIncrementBy(getIncrementBy()).setMaxValue(getMaxValue()).setMinValue(getMinValue()).setOrdered(isOrdered()).setStartValue(getStartValue()).setCycle(getCycle()).setCacheSize(getCacheSize())};
 }

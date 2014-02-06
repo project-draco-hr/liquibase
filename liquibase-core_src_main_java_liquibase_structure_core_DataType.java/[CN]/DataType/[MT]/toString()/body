@@ -5,7 +5,12 @@
     value=value.substring(0,value.length() - " unsigned".length());
     unsigned=true;
   }
-  if (columnSize != null) {
+  if (columnSize == null) {
+    if (decimalDigits != null) {
+      value+="(*, " + decimalDigits + ")";
+    }
+  }
+ else {
     value+="(";
     value+=columnSize;
     if (decimalDigits != null) {

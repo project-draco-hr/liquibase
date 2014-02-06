@@ -1,0 +1,4 @@
+{
+  this.setAttribute("willCycle",willCycle);
+  return this;
+}
