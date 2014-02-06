@@ -1,3 +1,6 @@
 {
-  return databaseChangeLogTableName;
+  if (databaseChangeLogTableName != null) {
+    return databaseChangeLogTableName;
+  }
+  return LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getDatabaseChangeLogTableName();
 }

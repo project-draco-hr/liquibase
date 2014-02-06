@@ -1,7 +1,7 @@
 {
-  String shouldRunProperty=System.getProperty(Liquibase.SHOULD_RUN_SYSTEM_PROPERTY);
-  if (shouldRunProperty != null && !Boolean.valueOf(shouldRunProperty)) {
-    LogFactory.getLogger().info("Liquibase did not run because '" + Liquibase.SHOULD_RUN_SYSTEM_PROPERTY + "' system property was set to false");
+  ConfigurationProperty shouldRunProperty=LiquibaseConfiguration.getInstance().getProperty(GlobalConfiguration.class,GlobalConfiguration.SHOULD_RUN);
+  if (!shouldRunProperty.getValue(Boolean.class)) {
+    LogFactory.getLogger().info("Liquibase did not run because " + LiquibaseConfiguration.getInstance().describeValueLookupLogic(shouldRunProperty) + " was set to false");
     return;
   }
   if (!shouldRun) {

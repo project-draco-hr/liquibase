@@ -1,0 +1,18 @@
+{
+  ChangeSetStatus status=new ChangeSetStatus(changeSet);
+  RanChangeSet ranChangeSetToRemove=null;
+  for (  RanChangeSet ranChangeSet : ranChangeSets) {
+    if (ranChangeSet.isSameAs(changeSet)) {
+      status.setPreviouslyRan(true);
+      status.setDateLastExecuted(ranChangeSet.getDateExecuted());
+      status.setStoredCheckSum(ranChangeSet.getLastCheckSum());
+      ranChangeSetToRemove=ranChangeSet;
+      break;
+    }
+  }
+  if (ranChangeSetToRemove != null) {
+    ranChangeSets.remove(ranChangeSetToRemove);
+  }
+  changeSetStatuses.put(changeSet,status);
+  return status;
+}

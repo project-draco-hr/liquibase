@@ -1,0 +1,3 @@
+{
+  return getContainer().getValue(OUTPUT_LINE_SEPARATOR,String.class);
+}

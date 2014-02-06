@@ -1,0 +1,6 @@
+{
+  LiquibaseConfiguration liquibaseConfiguration=LiquibaseConfiguration.getInstance();
+  GlobalConfiguration globalConfiguration=liquibaseConfiguration.getConfiguration(GlobalConfiguration.class);
+  assertNotNull(globalConfiguration);
+  assertSame("Multiple calls to getConfiguration should return the same instance",globalConfiguration,liquibaseConfiguration.getConfiguration(GlobalConfiguration.class));
+}

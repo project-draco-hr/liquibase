@@ -1,0 +1,3 @@
+{
+  this.changeSets=new HashSet<ChangeSet>(databaseChangeLog.getChangeSets());
+}

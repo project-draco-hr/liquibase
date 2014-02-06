@@ -1,3 +1,10 @@
 {
-  return liquibaseSchemaName == null ? getDefaultSchemaName() : liquibaseSchemaName;
+  if (liquibaseSchemaName != null) {
+    return liquibaseSchemaName;
+  }
+  ConfigurationProperty configuration=LiquibaseConfiguration.getInstance().getProperty(GlobalConfiguration.class,GlobalConfiguration.LIQUIBASE_SCHEMA_NAME);
+  if (configuration.getWasOverridden()) {
+    return configuration.getValue(String.class);
+  }
+  return getDefaultSchemaName();
 }

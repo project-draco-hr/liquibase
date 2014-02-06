@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(DATABASECHANGELOG_TABLE_NAME,name);
+  return this;
+}

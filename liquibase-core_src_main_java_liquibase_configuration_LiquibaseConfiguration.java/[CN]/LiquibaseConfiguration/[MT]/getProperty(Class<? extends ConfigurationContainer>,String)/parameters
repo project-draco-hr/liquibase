@@ -1,0 +1,2 @@
+Class<? extends ConfigurationContainer> type
+String property

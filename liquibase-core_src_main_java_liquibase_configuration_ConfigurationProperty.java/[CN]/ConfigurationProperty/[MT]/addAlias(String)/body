@@ -1,0 +1,6 @@
+{
+  if (aliases != null) {
+    this.aliases.addAll(Arrays.asList(aliases));
+  }
+  return this;
+}

@@ -96,7 +96,7 @@
       if (textString != null) {
         if (change instanceof RawSQLChange) {
           String expandedExpression=textString;
-          if (false == ChangeLogParameters.EnableEscaping) {
+          if (!LiquibaseConfiguration.getInstance().getConfiguration(ChangeLogParserCofiguration.class).getSupportPropertyEscaping()) {
             expandedExpression=changeLogParameters.expandExpressions(textString);
           }
           ((RawSQLChange)change).setSql(expandedExpression);

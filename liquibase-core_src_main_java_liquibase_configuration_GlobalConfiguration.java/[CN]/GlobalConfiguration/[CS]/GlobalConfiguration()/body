@@ -1,0 +1,13 @@
+{
+  super("liquibase");
+  getContainer().addProperty(SHOULD_RUN,Boolean.class).setDescription("Should Liquibase commands execute").setDefaultValue(true).addAlias("liquibase.should.run");
+  getContainer().addProperty(DATABASECHANGELOG_TABLE_NAME,String.class).setDescription("Name of table to use for tracking change history").setDefaultValue("DATABASECHANGELOG");
+  getContainer().addProperty(DATABASECHANGELOGLOCK_TABLE_NAME,String.class).setDescription("Name of table to use for tracking concurrent liquibase usage").setDefaultValue("DATABASECHANGELOGLOCK");
+  getContainer().addProperty(CHANGELOGLOCK_WAIT_TIME,Long.class).setDescription("Number of minutes to wait for the changelog lock to be available before giving up").setDefaultValue(5);
+  getContainer().addProperty(CHANGELOGLOCK_POLL_RATE,Long.class).setDescription("Number of seconds wait between checks to the changelog lock when it is locked").setDefaultValue(10);
+  getContainer().addProperty(LIQUIBASE_TABLESPACE_NAME,String.class).setDescription("Tablespace to use for liquibase objects");
+  getContainer().addProperty(LIQUIBASE_CATALOG_NAME,String.class).setDescription("Catalog to use for liquibase objects");
+  getContainer().addProperty(LIQUIBASE_SCHEMA_NAME,String.class).setDescription("Schema to use for liquibase objects");
+  getContainer().addProperty(OUTPUT_LINE_SEPARATOR,String.class).setDescription("Line separator for output. Defaults to OS default").setDefaultValue(System.getProperty("line.separator"));
+  getContainer().addProperty(OUTPUT_ENCODING,String.class).setDescription("Encoding to output text in. Defaults to file.encoding system property or UTF-8").setDefaultValue(System.getProperty("file.encoding") == null ? "UTF-8" : System.getProperty("file.encoding")).addAlias("file.encoding");
+}

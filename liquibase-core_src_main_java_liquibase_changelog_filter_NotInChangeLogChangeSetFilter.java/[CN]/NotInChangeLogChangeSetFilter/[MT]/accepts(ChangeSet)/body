@@ -1,0 +1,8 @@
+{
+  if (changeSets.contains(changeSet)) {
+    return new ChangeSetFilterResult(false,"Change set is in change log",this.getClass());
+  }
+ else {
+    return new ChangeSetFilterResult(true,"Change set is not in change log",this.getClass());
+  }
+}

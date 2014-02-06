@@ -1,0 +1,3 @@
+{
+  this.configurationContainer=new ConfigurationContainer(namespace);
+}

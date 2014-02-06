@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(LIQUIBASE_TABLESPACE_NAME,name);
+  return this;
+}

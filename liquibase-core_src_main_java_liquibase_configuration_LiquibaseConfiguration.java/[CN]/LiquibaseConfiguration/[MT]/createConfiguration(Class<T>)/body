@@ -1,0 +1,10 @@
+{
+  try {
+    T configuration=type.newInstance();
+    configuration.init(new SystemPropertyProvider());
+    return configuration;
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException("Cannot create default configuration " + type.getName(),e);
+  }
+}

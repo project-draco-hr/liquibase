@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(DATABASECHANGELOGLOCK_TABLE_NAME,name);
+  return this;
+}

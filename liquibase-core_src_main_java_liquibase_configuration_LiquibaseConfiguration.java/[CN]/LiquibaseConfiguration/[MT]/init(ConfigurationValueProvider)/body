@@ -1,0 +1,7 @@
+{
+  if (configurationValueProviders == null) {
+    configurationValueProviders=new ConfigurationValueProvider[0];
+  }
+  this.configurationValueProviders=configurationValueProviders;
+  this.reset();
+}

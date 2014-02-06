@@ -43,7 +43,7 @@
     this.set("database.supportsSequences",database.supportsSequences());
     this.set("database.supportsTablespaces",database.supportsTablespaces());
   }
-  this.expressionExpander=new ExpressionExpander(this,EnableEscaping);
+  this.expressionExpander=new ExpressionExpander(this);
   this.currentDatabase=database;
   this.currentContexts=new Contexts();
 }

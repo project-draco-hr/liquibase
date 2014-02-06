@@ -1,0 +1,4 @@
+{
+  super("liquibase");
+  getContainer().addProperty(SUPPORT_PROPERTY_ESCAPING,Boolean.class).setDescription("Support escaping changelog parameters using a colon. Example: ${:user.name}").setDefaultValue(false).addAlias("enableEscaping");
+}

@@ -1,0 +1,3 @@
+{
+  exampleConfiguration.getContainer().setValue("propertyBooleanDefaultFalse",124);
+}

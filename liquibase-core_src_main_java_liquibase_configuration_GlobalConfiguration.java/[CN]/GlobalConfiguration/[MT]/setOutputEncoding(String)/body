@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(OUTPUT_ENCODING,name);
+  return this;
+}

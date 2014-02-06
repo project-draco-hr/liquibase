@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(OUTPUT_LINE_SEPARATOR,name);
+  return this;
+}
