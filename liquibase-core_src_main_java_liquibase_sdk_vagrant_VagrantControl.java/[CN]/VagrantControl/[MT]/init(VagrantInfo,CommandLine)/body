@@ -1,26 +1,26 @@
 {
   List<String> configs=commandLine.getArgList().subList(2,commandLine.getArgList().size());
+  if (configs.size() == 0) {
+    mainApp.fatal("No database configurations specified");
+  }
   mainApp.out("Vagrant Machine Setup:");
-  mainApp.divider();
   mainApp.out(StringUtils.indent("Local Path: " + vagrantInfo.boxDir.getAbsolutePath()));
   mainApp.out(StringUtils.indent("Config Name: " + vagrantInfo.configName));
   mainApp.out(StringUtils.indent("Database Config(s): " + StringUtils.join(configs,", ")));
-  Collection<ConnectionConfiguration> databases=null;
+  Collection<ConnectionSupplier> databases=null;
   try {
     databases=ConnectionConfigurationFactory.getInstance().findConfigurations(configs);
   }
  catch (  ConnectionConfigurationFactory.UnknownDatabaseException e) {
     mainApp.fatal(e);
   }
-  String[] boxInfo=null;
-  for (  ConnectionConfiguration connectionConfig : databases) {
-    String[] absoluteBox=getAbsoluteBox(connectionConfig.getVagrantBoxName(),vagrantInfo);
-    if (boxInfo == null) {
-      boxInfo=absoluteBox;
+  for (  ConnectionSupplier connectionConfig : databases) {
+    if (vagrantInfo.boxName == null) {
+      vagrantInfo.boxName=connectionConfig.getVagrantBoxName();
     }
  else {
-      if (!boxInfo[0].equals(absoluteBox[0])) {
-        throw new UnexpectedLiquibaseException("Configuration " + connectionConfig + " needs vagrant box "+ absoluteBox[0]+ ", not "+ boxInfo[0]+ " like other configurations");
+      if (!vagrantInfo.boxName.equals(connectionConfig.getVagrantBoxName())) {
+        throw new UnexpectedLiquibaseException("Configuration " + connectionConfig + " needs vagrant box "+ connectionConfig.getVagrantBoxName()+ ", not "+ vagrantInfo.boxName+ " like other configurations");
       }
     }
     if (vagrantInfo.hostName == null) {
@@ -32,17 +32,11 @@
       }
     }
   }
-  if (boxInfo == null) {
-    throw new UnexpectedLiquibaseException("Null boxInfo");
-  }
-  vagrantInfo.boxName=boxInfo[0];
-  vagrantInfo.boxUrl=boxInfo[1];
-  mainApp.out(StringUtils.indent("Base Box Url: " + vagrantInfo.boxUrl));
+  mainApp.out(StringUtils.indent("Vagrant Box: " + vagrantInfo.boxName));
   mainApp.out(StringUtils.indent("Hostname: " + vagrantInfo.hostName));
   mainApp.out("");
-  for (  ConnectionConfiguration config : databases) {
-    mainApp.out("Connection Configuration For '" + config.toString() + "':");
-    mainApp.divider();
+  for (  ConnectionSupplier config : databases) {
+    mainApp.out("Database Configuration For '" + config.toString() + "':");
     mainApp.out(StringUtils.indent(config.getDescription()));
     mainApp.out("");
   }
