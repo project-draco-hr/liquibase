@@ -42,6 +42,7 @@
   database.setDefaultCatalogName(defaultCatalogName);
   database.setDefaultSchemaName(defaultSchemaName);
   database.setOutputDefaultSchema(isOutputDefaultSchema());
+  database.setOutputDefaultCatalog(isOutputDefaultCatalog());
   if (getDatabaseChangeLogTableName() != null)   database.setDatabaseChangeLogTableName(getDatabaseChangeLogTableName());
   if (getDatabaseChangeLogLockTableName() != null)   database.setDatabaseChangeLogLockTableName(getDatabaseChangeLogLockTableName());
   if (getDatabaseChangeLogObjectsTablespace() != null)   database.setLiquibaseTablespaceName(getDatabaseChangeLogObjectsTablespace());
