@@ -41,6 +41,7 @@
   database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
   database.setDefaultCatalogName(defaultCatalogName);
   database.setDefaultSchemaName(defaultSchemaName);
+  database.setOutputDefaultSchema(isOutputDefaultSchema());
   if (getDatabaseChangeLogTableName() != null)   database.setDatabaseChangeLogTableName(getDatabaseChangeLogTableName());
   if (getDatabaseChangeLogLockTableName() != null)   database.setDatabaseChangeLogLockTableName(getDatabaseChangeLogLockTableName());
   if (getDatabaseChangeLogObjectsTablespace() != null)   database.setLiquibaseTablespaceName(getDatabaseChangeLogObjectsTablespace());
