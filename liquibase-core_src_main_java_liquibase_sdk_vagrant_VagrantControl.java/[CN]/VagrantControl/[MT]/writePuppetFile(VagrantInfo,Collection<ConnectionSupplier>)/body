@@ -8,5 +8,5 @@
   Map<String,Object> context=new HashMap<String,Object>();
   context.put("puppetForges",forges);
   context.put("puppetModules",modules);
-  writeVelocityFile("liquibase/sdk/vagrant/Puppetfile.vm",vagrantInfo.boxDir,context);
+  TemplateService.getInstance().write("liquibase/sdk/vagrant/Puppetfile.vm",new File(vagrantInfo.boxDir,"Puppetfile"),context);
 }

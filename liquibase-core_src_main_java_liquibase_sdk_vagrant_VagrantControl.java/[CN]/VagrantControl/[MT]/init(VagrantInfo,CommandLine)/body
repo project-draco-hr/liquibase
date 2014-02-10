@@ -24,10 +24,10 @@
       }
     }
     if (vagrantInfo.hostName == null) {
-      vagrantInfo.hostName=connectionConfig.getHostname();
+      vagrantInfo.hostName=connectionConfig.getIpAddress();
     }
  else {
-      if (!vagrantInfo.hostName.equals(connectionConfig.getHostname())) {
+      if (!vagrantInfo.hostName.equals(connectionConfig.getIpAddress())) {
         throw new UnexpectedLiquibaseException("Configuration " + connectionConfig + " does not match previously defined hostname "+ vagrantInfo.hostName);
       }
     }
@@ -42,6 +42,7 @@
   }
   writeVagrantFile(vagrantInfo);
   writePuppetFiles(vagrantInfo,databases);
+  writeConfigFiles(vagrantInfo,databases);
   mainApp.out("Vagrant Box " + vagrantInfo.configName + " created. To start the box, run 'liquibase-sdk vagrant up "+ vagrantInfo.configName+ "'");
-  mainApp.out("NOTE: If you do not already have a vagrant box called " + vagrantInfo.configName + " installed, run 'vagrant init "+ vagrantInfo.boxName+ " VALID_URL'");
+  mainApp.out("NOTE: If you do not already have a vagrant box called " + vagrantInfo.boxName + " installed, run 'vagrant init "+ vagrantInfo.boxName+ " VALID_URL'");
 }

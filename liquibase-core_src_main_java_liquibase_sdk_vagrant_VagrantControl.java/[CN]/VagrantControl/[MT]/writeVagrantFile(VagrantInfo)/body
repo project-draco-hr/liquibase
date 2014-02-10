@@ -3,5 +3,15 @@
   context.put("configVmBox",vagrantInfo.boxName);
   context.put("configVmNetworkIp",vagrantInfo.hostName);
   context.put("vmCustomizeMemory","8192");
-  writeVelocityFile("liquibase/sdk/vagrant/Vagrantfile.vm",vagrantInfo.boxDir,context);
+  String shellScript;
+  if (vagrantInfo.boxName.contains("windows")) {
+    String config="config.vm.guest = :windows\n" + "config.vm.network :forwarded_port, guest: 3389, host: 3389, id: \"rdp\"\n" + "config.vm.network :forwarded_port, guest: 5985, host: 5985, id: \"winrm\", auto_correct: true\n"+ "config.windows.halt_timeout = 30\n"+ "config.winrm.username = 'vagrant'\n";
+    context.put("windowsConfig",StringUtils.indent(config,4));
+    shellScript="shell/bootstrap.bat";
+  }
+ else {
+    shellScript="shell/bootstrap.sh";
+  }
+  context.put("configVmProvisionScript",shellScript);
+  TemplateService.getInstance().write("liquibase/sdk/vagrant/Vagrantfile.vm",new File(vagrantInfo.boxDir,"Vagrantfile"),context);
 }

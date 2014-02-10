@@ -1,3 +1,3 @@
 {
-  return "jdbc:db2://" + getHostname() + ":50000/lqbase";
+  return "jdbc:db2://" + getIpAddress() + ":50000/lqbase";
 }
