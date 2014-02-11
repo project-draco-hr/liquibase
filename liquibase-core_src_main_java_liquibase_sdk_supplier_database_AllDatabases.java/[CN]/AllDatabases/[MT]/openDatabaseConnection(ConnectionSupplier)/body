@@ -1,5 +1,5 @@
 {
-  String url=connectionSupplier.getUrl();
+  String url=connectionSupplier.getJdbcUrl();
   assertNotNull("Null jdbc url",url);
   String username=connectionSupplier.getDatabaseUsername();
   String password=connectionSupplier.getDatabasePassword();

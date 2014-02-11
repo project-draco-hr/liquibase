@@ -1,6 +1,6 @@
 {
   try {
-    final String url=connectionConfig.getUrl();
+    final String url=connectionConfig.getJdbcUrl();
     if (connectionsAttempted.containsKey(url)) {
       JdbcConnection connection=(JdbcConnection)connectionsByUrl.get(url);
       if (connection == null) {
