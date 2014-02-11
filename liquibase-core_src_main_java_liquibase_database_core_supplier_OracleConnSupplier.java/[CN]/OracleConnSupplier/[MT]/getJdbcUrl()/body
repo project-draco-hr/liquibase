@@ -1,0 +1,3 @@
+{
+  return "jdbc:oracle:thin:@" + getIpAddress() + ":1521:"+ getDatabaseUsername();
+}

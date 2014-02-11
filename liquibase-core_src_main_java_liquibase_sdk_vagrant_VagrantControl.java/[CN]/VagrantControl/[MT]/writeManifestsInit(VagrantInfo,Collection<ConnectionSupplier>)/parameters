@@ -1,0 +1,2 @@
+VagrantInfo vagrantInfo
+Collection<ConnectionSupplier> databases

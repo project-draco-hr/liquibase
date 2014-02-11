@@ -1,0 +1,30 @@
+{
+  File manifestsDir=new File(vagrantInfo.boxDir,"manifests");
+  manifestsDir.mkdirs();
+  Set<String> puppetBlocks=new HashSet<String>();
+  for (  ConnectionSupplier config : databases) {
+    String thisInit=config.getPuppetInit(vagrantInfo.configName);
+    if (thisInit != null) {
+      puppetBlocks.add(thisInit);
+    }
+  }
+  Map<String,Object> context=new HashMap<String,Object>();
+  context.put("puppetBlocks",puppetBlocks);
+  String osLevelConfig;
+  if (vagrantInfo.boxName.contains("linux")) {
+    osLevelConfig="service { \"iptables\":\n" + "  ensure => \"stopped\",\n" + "}\n\n";
+    Set<String> requiredPackages=new HashSet<String>();
+    requiredPackages.add("unzip");
+    for (    ConnectionSupplier config : databases) {
+      requiredPackages.addAll(config.getRequiredPackages(vagrantInfo.configName));
+    }
+    for (    String requiredPackage : requiredPackages) {
+      osLevelConfig+="package { \"" + requiredPackage + "\":\n"+ "    ensure => \"installed\"\n"+ "}\n\n";
+    }
+  }
+ else {
+    osLevelConfig="";
+  }
+  context.put("osLevelConfig",osLevelConfig);
+  TemplateService.getInstance().write("liquibase/sdk/vagrant/manifests/init.pp.vm",new File(manifestsDir,"init.pp"),context);
+}

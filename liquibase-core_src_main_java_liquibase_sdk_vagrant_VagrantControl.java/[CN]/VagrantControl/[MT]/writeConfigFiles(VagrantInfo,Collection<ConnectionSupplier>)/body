@@ -1,0 +1,5 @@
+{
+  for (  ConnectionSupplier config : databases) {
+    config.writeConfigFiles(new File(vagrantInfo.boxDir,"modules/conf"));
+  }
+}

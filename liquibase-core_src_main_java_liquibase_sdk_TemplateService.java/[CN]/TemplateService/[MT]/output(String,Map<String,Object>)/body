@@ -1,0 +1,11 @@
+{
+  StringWriter writer=new StringWriter();
+  try {
+    write(templatePath,writer,contextParams);
+  }
+  finally {
+    writer.flush();
+    writer.close();
+  }
+  return writer.toString();
+}

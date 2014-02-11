@@ -1,24 +1,25 @@
 {
-  List<ConnectionConfiguration> returnList=new ArrayList<ConnectionConfiguration>();
+  List<ConnectionSupplier> returnList=new ArrayList<ConnectionSupplier>();
   for (  String config : descriptions) {
-    Map<String,String> params=parseConfig(config);
+    Map<String,String> params=null;
+    params=parseConfig(config);
     if (!params.containsKey("config")) {
       params.put("config","standard");
     }
     String databaseName=params.get("databaseName");
     String configName=params.get("config");
-    Set<ConnectionConfiguration> potentialConfigurations=configsByDatabase.get(databaseName);
+    Set<ConnectionSupplier> potentialConfigurations=configsByDatabase.get(databaseName);
     if (potentialConfigurations == null) {
       throw new UnknownDatabaseException("No database configurations for " + databaseName);
     }
     boolean foundConfig=false;
-    for (    ConnectionConfiguration potential : potentialConfigurations) {
+    for (    ConnectionSupplier potential : potentialConfigurations) {
       if (potential.getConfigurationName().equals(configName)) {
         if (params.containsKey("version")) {
           potential.setVersion(params.get("version"));
         }
         if (params.containsKey("hostname")) {
-          potential.setHostname(params.get("hostname"));
+          potential.setIpAddress(params.get("hostname"));
         }
         returnList.add(potential);
         foundConfig=true;

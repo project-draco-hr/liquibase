@@ -1,0 +1,3 @@
+{
+  return super.getDescription() + "\n" + "Install Dir: "+ getInstallDir()+ "\n"+ "Port: "+ getPort()+ "\n"+ "Root Password: "+ getAdminPassword();
+}
