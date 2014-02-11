@@ -1,7 +1,7 @@
 {
   Map<String,Object> context=new HashMap<String,Object>();
   context.put("configVmBox",vagrantInfo.boxName);
-  context.put("configVmNetworkIp",vagrantInfo.hostName);
+  context.put("configVmNetworkIp",vagrantInfo.ipAddress);
   context.put("vmCustomizeMemory","8192");
   String shellScript;
   String osLevelConfig;
