@@ -111,7 +111,17 @@
           ((StopChange)change).setMessage(textString);
         }
  else {
-          throw new RuntimeException("Unexpected text in " + changeFactory.getChangeMetaData(change).getName());
+          boolean foundTextParam=false;
+          for (          ChangeParameterMetaData metadata : changeFactory.getChangeMetaData(change).getParameters().values()) {
+            if (metadata.getSerializationType() == LiquibaseSerializable.SerializationType.DIRECT_VALUE) {
+              metadata.setValue(change,textString);
+              foundTextParam=true;
+              break;
+            }
+          }
+          if (!foundTextParam) {
+            throw new RuntimeException("Unexpected text in " + changeFactory.getChangeMetaData(change).getName());
+          }
         }
       }
       text=null;
