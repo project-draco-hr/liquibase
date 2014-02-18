@@ -4,8 +4,8 @@
   }
   String[] databaseConfigs=commandLine.getOptionValue("databases").split("\\s*,\\s*");
   mainApp.out("Vagrant Machine Setup:");
+  mainApp.out(StringUtils.indent("Vagrant Box Name: " + vagrantInfo.boxName));
   mainApp.out(StringUtils.indent("Local Path: " + vagrantInfo.boxDir.getAbsolutePath()));
-  mainApp.out(StringUtils.indent("Config Name: " + vagrantInfo.boxName));
   mainApp.out(StringUtils.indent("Database Config(s): " + StringUtils.join(databaseConfigs,", ")));
   Collection<ConnectionSupplier> databases=null;
   try {
@@ -32,7 +32,7 @@
       }
     }
   }
-  mainApp.out(StringUtils.indent("Vagrant Base: " + vagrantInfo.baseBoxName));
+  mainApp.out(StringUtils.indent("Vagrant Base Box: " + vagrantInfo.baseBoxName));
   mainApp.out(StringUtils.indent("IP Address: " + vagrantInfo.ipAddress));
   Properties liquibaseVagrantProperties=new Properties();
   liquibaseVagrantProperties.put("box.ipaddress",vagrantInfo.ipAddress);

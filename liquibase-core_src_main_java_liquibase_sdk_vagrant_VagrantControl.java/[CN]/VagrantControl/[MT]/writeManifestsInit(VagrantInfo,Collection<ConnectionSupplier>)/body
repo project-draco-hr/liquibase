@@ -23,7 +23,7 @@
     }
   }
  else {
-    osLevelConfig="";
+    osLevelConfig="package { '7zip':\n" + "    ensure  => '9.20',\n" + "    source\t=>\t\"http://downloads.sourceforge.net/sevenzip/7z920-x64.msi\",\n"+ "}\n";
   }
   context.put("osLevelConfig",osLevelConfig);
   TemplateService.getInstance().write("liquibase/sdk/vagrant/manifests/init.pp.vm",new File(manifestsDir,"init.pp"),context);
