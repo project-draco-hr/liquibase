@@ -3,7 +3,7 @@
   manifestsDir.mkdirs();
   Set<String> puppetBlocks=new HashSet<String>();
   for (  ConnectionSupplier config : databases) {
-    String thisInit=config.getPuppetInit(vagrantInfo.configName);
+    String thisInit=config.getPuppetInit(vagrantInfo.boxName);
     if (thisInit != null) {
       puppetBlocks.add(thisInit);
     }
@@ -11,12 +11,12 @@
   Map<String,Object> context=new HashMap<String,Object>();
   context.put("puppetBlocks",puppetBlocks);
   String osLevelConfig;
-  if (vagrantInfo.boxName.contains("linux")) {
+  if (vagrantInfo.baseBoxName.contains("linux")) {
     osLevelConfig="service { \"iptables\":\n" + "  ensure => \"stopped\",\n" + "}\n\n";
     Set<String> requiredPackages=new HashSet<String>();
     requiredPackages.add("unzip");
     for (    ConnectionSupplier config : databases) {
-      requiredPackages.addAll(config.getRequiredPackages(vagrantInfo.configName));
+      requiredPackages.addAll(config.getRequiredPackages(vagrantInfo.boxName));
     }
     for (    String requiredPackage : requiredPackages) {
       osLevelConfig+="package { \"" + requiredPackage + "\":\n"+ "    ensure => \"installed\"\n"+ "}\n\n";

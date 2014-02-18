@@ -1,26 +1,26 @@
 {
-  List<String> configs=commandLine.getArgList().subList(2,commandLine.getArgList().size());
-  if (configs.size() == 0) {
-    mainApp.fatal("No database configurations specified");
+  if (!commandLine.hasOption("databases")) {
+    mainApp.fatal("vagrant init requires --databases option");
   }
+  String[] databaseConfigs=commandLine.getOptionValue("databases").split("\\s*,\\s*");
   mainApp.out("Vagrant Machine Setup:");
   mainApp.out(StringUtils.indent("Local Path: " + vagrantInfo.boxDir.getAbsolutePath()));
-  mainApp.out(StringUtils.indent("Config Name: " + vagrantInfo.configName));
-  mainApp.out(StringUtils.indent("Database Config(s): " + StringUtils.join(configs,", ")));
+  mainApp.out(StringUtils.indent("Config Name: " + vagrantInfo.boxName));
+  mainApp.out(StringUtils.indent("Database Config(s): " + StringUtils.join(databaseConfigs,", ")));
   Collection<ConnectionSupplier> databases=null;
   try {
-    databases=ConnectionConfigurationFactory.getInstance().findConfigurations(configs);
+    databases=ConnectionConfigurationFactory.getInstance().findConfigurations(databaseConfigs);
   }
  catch (  ConnectionConfigurationFactory.UnknownDatabaseException e) {
     mainApp.fatal(e);
   }
   for (  ConnectionSupplier connectionConfig : databases) {
-    if (vagrantInfo.boxName == null) {
-      vagrantInfo.boxName=connectionConfig.getVagrantBoxName();
+    if (vagrantInfo.baseBoxName == null) {
+      vagrantInfo.baseBoxName=connectionConfig.getVagrantBaseBoxName();
     }
  else {
-      if (!vagrantInfo.boxName.equals(connectionConfig.getVagrantBoxName())) {
-        throw new UnexpectedLiquibaseException("Configuration " + connectionConfig + " needs vagrant box "+ connectionConfig.getVagrantBoxName()+ ", not "+ vagrantInfo.boxName+ " like other configurations");
+      if (!vagrantInfo.baseBoxName.equals(connectionConfig.getVagrantBaseBoxName())) {
+        throw new UnexpectedLiquibaseException("Configuration " + connectionConfig + " needs vagrant box "+ connectionConfig.getVagrantBaseBoxName()+ ", not "+ vagrantInfo.baseBoxName+ " like other configurations");
       }
     }
     if (vagrantInfo.ipAddress == null) {
@@ -32,9 +32,9 @@
       }
     }
   }
+  mainApp.out(StringUtils.indent("Vagrant Base: " + vagrantInfo.baseBoxName));
+  mainApp.out(StringUtils.indent("IP Address: " + vagrantInfo.ipAddress));
   Properties liquibaseVagrantProperties=new Properties();
-  mainApp.out(StringUtils.indent("Vagrant Base: " + vagrantInfo.boxName));
-  mainApp.out(StringUtils.indent("Hostname: " + vagrantInfo.ipAddress));
   liquibaseVagrantProperties.put("box.ipaddress",vagrantInfo.ipAddress);
   liquibaseVagrantProperties.put("box.base",vagrantInfo.boxName);
   mainApp.out("");
@@ -68,7 +68,7 @@
       fileName="liquibase." + vagrantInfo.boxDir.getName() + ".properties";
     }
  else {
-      fileName="liquibase." + vagrantInfo.boxDir.getName() + "-"+ connectionSupplier.getConfigurationName()+ ".properties";
+      fileName="liquibase." + vagrantInfo.boxDir.getName() + "-"+ connectionSupplier.getDatabaseShortName()+ ".properties";
     }
     String propertiesFile="### Connection Property File For Vagrant Box '" + vagrantInfo.boxName + "'\n"+ "### Example use: .."+ File.separator+ ".."+ File.separator+ "liquibase --defaultsFile="+ fileName+ " update\n\n"+ "classpath: changelog\n"+ "changeLogFile=com/example/changelog.xml\n"+ "username="+ connectionSupplier.getDatabaseUsername()+ "\n"+ "password="+ connectionSupplier.getDatabaseUsername()+ "\n"+ "url="+ connectionSupplier.getJdbcUrl()+ "\n"+ "#logLevel=DEBUG\n"+ "#referenceUrl="+ connectionSupplier.getJdbcUrl()+ "\n"+ "#referenceUsername="+ connectionSupplier.getDatabaseUsername()+ "\n"+ "#referencePassword="+ connectionSupplier.getDatabasePassword()+ "\n";
     fileName="workspace/" + fileName;
@@ -96,10 +96,10 @@
       vagrantPropertiesStream.close();
     }
   }
-  mainApp.out("Vagrant box '" + vagrantInfo.configName + "' created. To start the box, run 'liquibase-sdk vagrant up "+ vagrantInfo.configName+ "'");
+  mainApp.out("Vagrant Box " + vagrantInfo.boxName + " created. To start the box, run 'liquibase-sdk vagrant "+ vagrantInfo.boxName+ "' up");
   if (propertiesFiles.size() > 0) {
     mainApp.out("Created workspace properties file(s): " + StringUtils.join(propertiesFiles,", "));
   }
   mainApp.out("Make sure any needed JDBC drivers are added to LIQUIBASE_HOME/lib");
-  mainApp.out("NOTE: If you do not already have a vagrant box called " + vagrantInfo.boxName + " installed, run 'vagrant box add "+ vagrantInfo.boxName+ " VALID_URL'");
+  mainApp.out("NOTE: If you do not already have a vagrant box called " + vagrantInfo.baseBoxName + " installed, run 'vagrant box add "+ vagrantInfo.baseBoxName+ " VALID_URL'");
 }

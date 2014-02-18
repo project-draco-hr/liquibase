@@ -1,16 +1,13 @@
 {
   List<String> commandArgs=commandCommandLine.getArgList();
   VagrantInfo vagrantInfo=new VagrantInfo();
-  if (commandArgs.size() == 0) {
-    mainApp.fatal("Missing vagrant command");
+  if (commandArgs.size() < 2) {
+    mainApp.fatal("Usage: liquibase-sdk vagrant BOX_NAME COMMAND");
   }
-  if (commandArgs.size() == 1) {
-    mainApp.fatal("Missing vagrant box name");
-  }
-  String command=commandArgs.get(0);
-  vagrantInfo.configName=commandArgs.get(1);
+  vagrantInfo.boxName=commandArgs.get(0);
+  String command=commandArgs.get(1);
   vagrantInfo.vagrantRoot=new File(mainApp.getSdkRoot(),"vagrant");
-  vagrantInfo.boxDir=new File(vagrantInfo.vagrantRoot,vagrantInfo.configName).getCanonicalFile();
+  vagrantInfo.boxDir=new File(vagrantInfo.vagrantRoot,vagrantInfo.boxName).getCanonicalFile();
   if (command.equals("init")) {
     this.init(vagrantInfo,commandCommandLine);
   }

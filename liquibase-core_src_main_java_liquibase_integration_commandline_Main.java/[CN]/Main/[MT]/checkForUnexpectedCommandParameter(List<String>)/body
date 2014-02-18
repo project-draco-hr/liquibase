@@ -12,8 +12,8 @@
  else   if ("diff".equalsIgnoreCase(command) || "diffChangeLog".equalsIgnoreCase(command)) {
     if (commandParams.size() > 0) {
       for (      String cmdParm : commandParams) {
-        if (!cmdParm.startsWith("--referenceUsername") && !cmdParm.startsWith("--referencePassword") && !cmdParm.startsWith("--referenceDriver")&& !cmdParm.startsWith("--includeSchema")&& !cmdParm.startsWith("--includeCatalog")&& !cmdParm.startsWith("--includeTablespace")&& !cmdParm.startsWith("--referenceUrl")) {
-          messages.add("unexpected command parameters: " + commandParams);
+        if (!cmdParm.startsWith("--referenceUsername") && !cmdParm.startsWith("--referencePassword") && !cmdParm.startsWith("--referenceDriver")&& !cmdParm.startsWith("--referenceDefaultCatalogName")&& !cmdParm.startsWith("--referenceDefaultSchemaName")&& !cmdParm.startsWith("--includeSchema")&& !cmdParm.startsWith("--includeCatalog")&& !cmdParm.startsWith("--includeTablespace")&& !cmdParm.startsWith("--referenceUrl")) {
+          messages.add("unexpected command parameter: " + cmdParm);
         }
       }
     }
