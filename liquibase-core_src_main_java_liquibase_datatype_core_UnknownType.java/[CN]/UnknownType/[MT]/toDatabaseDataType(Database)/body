@@ -23,6 +23,9 @@
  else     if (getName().toUpperCase().startsWith("INTERVAL ")) {
       return new DatabaseDataType(getName().replaceAll("\\(\\d+\\)",""));
     }
+ else {
+      return new DatabaseDataType(getName().toUpperCase());
+    }
   }
   if (dataTypeMaxParameters < parameters.length) {
     parameters=Arrays.copyOfRange(parameters,0,dataTypeMaxParameters);
