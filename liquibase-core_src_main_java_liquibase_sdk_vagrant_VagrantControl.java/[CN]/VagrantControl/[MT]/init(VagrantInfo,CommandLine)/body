@@ -64,12 +64,7 @@
   Set<String> propertiesFiles=new HashSet<String>();
   for (  ConnectionSupplier connectionSupplier : databases) {
     String fileName;
-    if (databases.size() == 1) {
-      fileName="liquibase." + vagrantInfo.boxDir.getName() + ".properties";
-    }
- else {
-      fileName="liquibase." + vagrantInfo.boxDir.getName() + "-"+ connectionSupplier.getDatabaseShortName()+ ".properties";
-    }
+    fileName="liquibase." + vagrantInfo.boxDir.getName() + "-"+ connectionSupplier.getDatabaseShortName()+ ".properties";
     String propertiesFile="### Connection Property File For Vagrant Box '" + vagrantInfo.boxName + "'\n"+ "### Example use: .."+ File.separator+ ".."+ File.separator+ "liquibase --defaultsFile="+ fileName+ " update\n\n"+ "classpath: changelog\n"+ "changeLogFile=com/example/changelog.xml\n"+ "username="+ connectionSupplier.getDatabaseUsername()+ "\n"+ "password="+ connectionSupplier.getDatabaseUsername()+ "\n"+ "url="+ connectionSupplier.getJdbcUrl()+ "\n"+ "#logLevel=DEBUG\n"+ "#referenceUrl="+ connectionSupplier.getJdbcUrl()+ "\n"+ "#referenceUsername="+ connectionSupplier.getDatabaseUsername()+ "\n"+ "#referencePassword="+ connectionSupplier.getDatabasePassword()+ "\n";
     fileName="workspace/" + fileName;
     File propertyFile=new File(mainApp.getSdkRoot(),fileName);

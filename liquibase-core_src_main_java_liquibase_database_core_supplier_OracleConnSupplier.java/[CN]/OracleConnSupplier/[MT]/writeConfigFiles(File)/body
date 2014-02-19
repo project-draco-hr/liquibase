@@ -1,0 +1,7 @@
+{
+  super.writeConfigFiles(configDir);
+  Map<String,Object> context=new HashMap<String,Object>();
+  context.put("supplier",this);
+  TemplateService.getInstance().write("liquibase/sdk/vagrant/supplier/oracle/oracle_install.rsp.vm",new File(configDir,"oracle/oracle_install.rsp"),context);
+  TemplateService.getInstance().write("liquibase/sdk/vagrant/supplier/oracle/oracle.init.sql.vm",new File(configDir,"oracle/oracle_init.sql"),context);
+}
