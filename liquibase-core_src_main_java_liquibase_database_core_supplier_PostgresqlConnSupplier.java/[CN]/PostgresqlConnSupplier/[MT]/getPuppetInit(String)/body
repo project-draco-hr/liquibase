@@ -1,3 +1,5 @@
 {
-  return "class { '::postgresql::server':\n" + "    ip_mask_deny_postgres_user => '0.0.0.0/32',\n" + "    ip_mask_allow_all_users    => '0.0.0.0/0',\n"+ "    listen_addresses           => '*',\n"+ "    ipv4acls                   => ['host all liquibase 0.0.0.0/0 password'],\n"+ "    postgres_password          => 'postgres',\n"+ "}\n"+ "\n"+ "postgresql::server::db { 'liquibase':\n"+ "  user     => '" + getDatabaseUsername() + "',\n"+ "  password => '"+ getDatabasePassword()+ "'\n"+ "}\n";
+  Map<String,Object> context=new HashMap<String,Object>();
+  context.put("supplier",this);
+  return TemplateService.getInstance().output("liquibase/sdk/vagrant/supplier/postgresql/postgresql-linux.puppet.vm",context);
 }
