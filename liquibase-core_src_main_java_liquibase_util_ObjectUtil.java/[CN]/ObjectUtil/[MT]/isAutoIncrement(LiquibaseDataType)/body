@@ -1,0 +1,12 @@
+{
+  boolean retVal=false;
+  String methodName="isAutoIncrement";
+  Method[] methods=dataType.getClass().getMethods();
+  for (  Method method : methods) {
+    if (method.getName().equals(methodName) && method.getParameterTypes().length == 0) {
+      retVal=true;
+      break;
+    }
+  }
+  return retVal;
+}
