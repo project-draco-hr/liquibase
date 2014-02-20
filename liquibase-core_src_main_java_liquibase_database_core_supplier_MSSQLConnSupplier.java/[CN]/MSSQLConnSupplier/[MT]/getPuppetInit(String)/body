@@ -1,0 +1,5 @@
+{
+  Map<String,Object> context=new HashMap<String,Object>();
+  context.put("supplier",this);
+  return TemplateService.getInstance().output("liquibase/sdk/vagrant/supplier/mssql/mssql.puppet.vm",context);
+}

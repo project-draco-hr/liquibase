@@ -1,0 +1,3 @@
+{
+  return VAGRANT_BOX_NAME_WINDOWS_STANDARD;
+}
