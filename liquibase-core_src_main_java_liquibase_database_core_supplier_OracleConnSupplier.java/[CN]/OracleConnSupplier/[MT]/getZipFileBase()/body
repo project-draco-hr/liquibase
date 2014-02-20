@@ -1,6 +1,6 @@
 {
   if (getVersion().startsWith("12.")) {
-    return getInstallDir() + getFileSeparator() + "12c";
+    return "linuxamd64_12c_database";
   }
  else {
     throw new UnexpectedLiquibaseSdkException("Unsupported oracle version: " + getVersion());
