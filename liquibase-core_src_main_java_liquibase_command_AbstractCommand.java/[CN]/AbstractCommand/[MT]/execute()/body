@@ -1,0 +1,14 @@
+{
+  this.validate();
+  try {
+    return this.run();
+  }
+ catch (  Exception e) {
+    if (e instanceof CommandExecutionException) {
+      throw (CommandExecutionException)e;
+    }
+ else {
+      throw new CommandExecutionException(e);
+    }
+  }
+}

@@ -35,6 +35,8 @@
   stream.println("                                rollback support");
   stream.println(" generateChangeLog              Writes Change Log XML to copy the current state");
   stream.println("                                of the database to standard out");
+  stream.println(" snapshot                       Writes the current state");
+  stream.println("                                of the database to standard out");
   stream.println("");
   stream.println("Diff Commands");
   stream.println(" diff [diff parameters]          Writes description of differences");

@@ -1,0 +1,63 @@
+{
+  final Set<String> parentNames=new HashSet<String>(oldParentNames);
+  parentNames.add(newParentName);
+  StringBuilder buffer=new StringBuilder();
+  final boolean expandContainedObjects=parentNames.size() <= 1;
+  final List<String> attributes=sort(databaseObject.getAttributes());
+  for (  String attribute : attributes) {
+    if (attribute.equals("name")) {
+      continue;
+    }
+    if (attribute.equals("schema")) {
+      continue;
+    }
+    Object value=databaseObject.getAttribute(attribute,Object.class);
+    if (value instanceof DatabaseObject) {
+      if (parentNames.contains(((DatabaseObject)value).getName())) {
+        value=null;
+      }
+ else       if (expandContainedObjects) {
+        value=((DatabaseObject)value).getName() + "\n" + StringUtils.indent(serialize((DatabaseObject)value,parentNames,databaseObject.getName()),4);
+      }
+ else {
+        value=databaseObject.getSerializableFieldValue(attribute);
+      }
+    }
+ else     if (value instanceof Collection) {
+      if (((Collection)value).size() == 0) {
+        value=null;
+      }
+ else {
+        if (((Collection)value).iterator().next() instanceof DatabaseObject && expandContainedObjects) {
+          value=StringUtils.join((Collection)value,"\n",new StringUtils.StringUtilsFormatter(){
+            @Override public String toString(            Object obj){
+              if (obj instanceof DatabaseObject) {
+                if (expandContainedObjects) {
+                  return ((DatabaseObject)obj).getName() + "\n" + StringUtils.indent(serialize(((DatabaseObject)obj),parentNames,databaseObject.getName()),4);
+                }
+ else {
+                  return ((DatabaseObject)obj).getName();
+                }
+              }
+ else {
+                return obj.toString();
+              }
+            }
+          }
+);
+          value="\n" + StringUtils.indent((String)value,4);
+        }
+ else {
+          value=databaseObject.getSerializableFieldValue(attribute);
+        }
+      }
+    }
+ else {
+      value=databaseObject.getSerializableFieldValue(attribute);
+    }
+    if (value != null) {
+      buffer.append(attribute).append(": ").append(value).append("\n");
+    }
+  }
+  return buffer.toString().replaceFirst("\n$","");
+}

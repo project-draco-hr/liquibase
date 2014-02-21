@@ -1,0 +1,52 @@
+{
+  try {
+    StringBuilder buffer=new StringBuilder();
+    DatabaseSnapshot snapshot=((DatabaseSnapshot)object);
+    Database database=snapshot.getDatabase();
+    buffer.append("Database snapshot for ").append(database.getConnection().getURL()).append("\n");
+    addDivider(buffer);
+    buffer.append("Database type: ").append(database.getDatabaseProductName()).append("\n");
+    buffer.append("Database version: ").append(database.getDatabaseProductVersion()).append("\n");
+    buffer.append("Database user: ").append(database.getConnection().getConnectionUserName()).append("\n");
+    SnapshotControl snapshotControl=snapshot.getSnapshotControl();
+    List<Class> includedTypes=sort(snapshotControl.getTypesToInclude());
+    buffer.append("Included types:\n").append(StringUtils.indent(StringUtils.join(includedTypes,"\n",new StringUtils.StringUtilsFormatter<Class>(){
+      @Override public String toString(      Class obj){
+        return obj.getName();
+      }
+    }
+))).append("\n");
+    List<Schema> schemas=sort(snapshot.get(Schema.class),new Comparator<Schema>(){
+      @Override public int compare(      Schema o1,      Schema o2){
+        return o1.toString().compareTo(o2.toString());
+      }
+    }
+);
+    for (    Schema schema : schemas) {
+      if (database.supportsSchemas()) {
+        buffer.append("\nCatalog & Schema: ").append(schema.getCatalogName()).append(" / ").append(schema.getName()).append("\n");
+      }
+ else {
+        buffer.append("\nCatalog: ").append(schema.getCatalogName()).append("\n");
+      }
+      StringBuilder catalogBuffer=new StringBuilder();
+      for (      Class type : includedTypes) {
+        List<? extends DatabaseObject> databaseObjects=sort(schema.getDatabaseObjects(type));
+        if (databaseObjects.size() > 0) {
+          catalogBuffer.append(type.getName()).append(":\n");
+          StringBuilder typeBuffer=new StringBuilder();
+          for (          DatabaseObject databaseObject : databaseObjects) {
+            typeBuffer.append(databaseObject.getName()).append("\n");
+            typeBuffer.append(StringUtils.indent(serialize(databaseObject,new HashSet<String>(),databaseObject.getName()),4)).append("\n");
+          }
+          catalogBuffer.append(StringUtils.indent(typeBuffer.toString(),4)).append("\n");
+        }
+      }
+      buffer.append(StringUtils.indent(catalogBuffer.toString(),4));
+    }
+    return buffer.toString().replace("\r\n","\n").replace("\r","\n");
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

@@ -35,6 +35,13 @@
       CommandLineUtils.doGenerateChangeLog(changeLogFile,database,defaultCatalogName,defaultSchemaName,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataOutputDirectory),diffOutputControl);
       return;
     }
+ else     if ("snapshot".equalsIgnoreCase(command)) {
+      SnapshotCommand command=new SnapshotCommand();
+      command.setDatabase(database);
+      command.addExample(new CatalogAndSchema(defaultCatalogName,defaultSchemaName));
+      System.out.println(command.execute());
+      return;
+    }
     Liquibase liquibase=new Liquibase(changeLogFile,fileOpener,database);
     liquibase.setCurrentDateTimeFunction(currentDateTimeFunction);
     for (    Map.Entry<String,Object> entry : changeLogParameters.entrySet()) {
