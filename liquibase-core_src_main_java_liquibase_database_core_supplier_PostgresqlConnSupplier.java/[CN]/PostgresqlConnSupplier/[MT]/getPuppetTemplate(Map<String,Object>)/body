@@ -1,0 +1,3 @@
+{
+  return new ConfigTemplate("liquibase/sdk/vagrant/supplier/postgresql/postgresql-linux.puppet.vm",context);
+}

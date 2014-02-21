@@ -1,0 +1,3 @@
+{
+  return new ConfigTemplate("liquibase/sdk/vagrant/supplier/mssql/mssql.puppet.vm",context);
+}

@@ -1,7 +1,7 @@
 {
-  Set<ConfigFile> configFiles=super.generateConfigFiles(context);
-  configFiles.add(new ConfigFile("liquibase/sdk/vagrant/supplier/postgresql/postgresql.init.sql.vm",context));
-  configFiles.add(new ConfigFile("liquibase/sdk/vagrant/supplier/postgresql/postgresql.conf.vm",context));
-  configFiles.add(new ConfigFile("liquibase/sdk/vagrant/supplier/postgresql/pg_hba.conf.vm",context));
-  return configFiles;
+  Set<ConfigTemplate> configTemplates=super.generateConfigFiles(context);
+  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/postgresql/postgresql.init.sql.vm",context));
+  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/postgresql/postgresql.conf.vm",context));
+  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/postgresql/pg_hba.conf.vm",context));
+  return configTemplates;
 }

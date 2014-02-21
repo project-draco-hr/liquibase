@@ -1,4 +1,4 @@
 {
-  Set<ConfigFile> set=new HashSet<ConfigFile>();
+  Set<ConfigTemplate> set=new HashSet<ConfigTemplate>();
   return set;
 }

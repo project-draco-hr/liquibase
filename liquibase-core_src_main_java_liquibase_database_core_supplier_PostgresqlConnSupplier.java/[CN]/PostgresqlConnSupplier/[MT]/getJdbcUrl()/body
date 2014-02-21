@@ -1,3 +1,3 @@
 {
-  return "jdbc:postgresql://" + getIpAddress() + "/liquibase";
+  return "jdbc:postgresql://" + getIpAddress() + "/"+ getPrimaryCatalog();
 }

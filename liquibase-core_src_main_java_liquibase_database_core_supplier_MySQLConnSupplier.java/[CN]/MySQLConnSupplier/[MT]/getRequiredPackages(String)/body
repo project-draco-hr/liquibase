@@ -1,5 +1,0 @@
-{
-  Set<String> packages=super.getRequiredPackages(vagrantBoxName);
-  packages.add("mysql");
-  return packages;
-}

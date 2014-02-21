@@ -4,10 +4,10 @@
   Set<String> puppetBlocks=new HashSet<String>();
   for (  ConnectionSupplier config : databases) {
     Map<String,Object> context=new HashMap<String,Object>();
-    context.put("supplier",this);
-    String thisInit=config.getPuppetInit(context);
+    context.put("supplier",config);
+    ConnectionSupplier.ConfigTemplate thisInit=config.getPuppetTemplate(context);
     if (thisInit != null) {
-      puppetBlocks.add(thisInit);
+      puppetBlocks.add(thisInit.output());
     }
   }
   Map<String,Object> context=new HashMap<String,Object>();

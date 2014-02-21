@@ -2,12 +2,12 @@
   Map<String,Object> context=new HashMap<String,Object>();
   for (  ConnectionSupplier config : databases) {
     context.put("supplier",config);
-    Set<ConnectionSupplier.ConfigFile> configFiles=config.generateConfigFiles(context);
-    if (configFiles != null) {
-      for (      ConnectionSupplier.ConfigFile configFile : configFiles) {
-        File outputFile=new File(vagrantInfo.boxDir + "/modules/conf/" + config.getDatabaseShortName(),configFile.getOutputFileName());
+    Set<ConnectionSupplier.ConfigTemplate> configTemplates=config.generateConfigFiles(context);
+    if (configTemplates != null) {
+      for (      ConnectionSupplier.ConfigTemplate configTemplate : configTemplates) {
+        File outputFile=new File(vagrantInfo.boxDir + "/modules/conf/" + config.getDatabaseShortName(),configTemplate.getOutputFileName());
         outputFile.getParentFile().mkdirs();
-        configFile.write(outputFile);
+        configTemplate.write(outputFile);
       }
     }
   }
