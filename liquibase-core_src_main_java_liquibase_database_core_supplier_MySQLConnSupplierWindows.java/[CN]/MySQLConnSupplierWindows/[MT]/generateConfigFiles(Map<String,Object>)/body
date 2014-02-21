@@ -1,0 +1,5 @@
+{
+  Set<ConfigFile> configFiles=super.generateConfigFiles(context);
+  configFiles.add(new ConfigFile("liquibase/sdk/vagrant/supplier/mysql/mysql.ini.vm",context));
+  return configFiles;
+}

@@ -1,5 +1,14 @@
 {
+  Map<String,Object> context=new HashMap<String,Object>();
   for (  ConnectionSupplier config : databases) {
-    config.writeConfigFiles(new File(vagrantInfo.boxDir,"modules/conf"));
+    context.put("supplier",config);
+    Set<ConnectionSupplier.ConfigFile> configFiles=config.generateConfigFiles(context);
+    if (configFiles != null) {
+      for (      ConnectionSupplier.ConfigFile configFile : configFiles) {
+        File outputFile=new File(vagrantInfo.boxDir + "/modules/conf/" + config.getDatabaseShortName(),configFile.getOutputFileName());
+        outputFile.getParentFile().mkdirs();
+        configFile.write(outputFile);
+      }
+    }
   }
 }

@@ -3,7 +3,9 @@
   manifestsDir.mkdirs();
   Set<String> puppetBlocks=new HashSet<String>();
   for (  ConnectionSupplier config : databases) {
-    String thisInit=config.getPuppetInit(vagrantInfo.boxName);
+    Map<String,Object> context=new HashMap<String,Object>();
+    context.put("supplier",this);
+    String thisInit=config.getPuppetInit(context);
     if (thisInit != null) {
       puppetBlocks.add(thisInit);
     }

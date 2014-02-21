@@ -1,6 +1,0 @@
-{
-  super.writeConfigFiles(configDir);
-  Map<String,Object> context=new HashMap<String,Object>();
-  context.put("supplier",this);
-  TemplateService.getInstance().write("liquibase/sdk/vagrant/supplier/mysql/mysql.init.sql.vm",new File(configDir,"mysql.init.sql"),context);
-}

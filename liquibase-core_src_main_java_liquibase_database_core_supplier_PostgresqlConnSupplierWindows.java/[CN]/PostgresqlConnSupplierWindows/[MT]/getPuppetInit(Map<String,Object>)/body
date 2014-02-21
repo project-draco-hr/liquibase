@@ -1,0 +1,3 @@
+{
+  return TemplateService.getInstance().output("liquibase/sdk/vagrant/supplier/postgresql/postgresql-windows.puppet.vm",context);
+}

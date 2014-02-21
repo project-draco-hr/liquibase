@@ -1,0 +1,3 @@
+{
+  return TemplateService.getInstance().output("liquibase/sdk/vagrant/supplier/mssql/mssql.puppet.vm",context);
+}

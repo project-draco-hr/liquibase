@@ -1,0 +1,3 @@
+{
+  TemplateService.getInstance().write(templatePath,outputFile,context);
+}

@@ -1,0 +1,3 @@
+{
+  return TemplateService.getInstance().output("liquibase/sdk/vagrant/supplier/oracle/oracle-linux.puppet.vm",context);
+}

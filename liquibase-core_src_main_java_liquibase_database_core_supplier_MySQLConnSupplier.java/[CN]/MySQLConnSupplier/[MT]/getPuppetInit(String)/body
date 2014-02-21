@@ -1,3 +1,0 @@
-{
-  return "class { '::mysql::server':\n" + "    require => Package['mysql'],\n" + "    root_password => '" + getAdminPassword() + "',\n"+ (getVersion() == null ? "" : "    package_ensure => '" + getVersion() + "',\n")+ "    override_options => { 'mysqld' => { 'bind_address'  => '0.0.0.0' } }, \n"+ "}\n"+ "\n"+ "exec { \"Create mysql users and databases\":\n"+ "    require => Class['::mysql::server'],\n"+ "    command => '/bin/sh -c \"mysql -u "+ getAdminUsername()+ " -p"+ getAdminPassword()+ " mysql < /vagrant/modules/conf/mysql.init.sql\"'\n"+ "}\n";
-}

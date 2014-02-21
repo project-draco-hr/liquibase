@@ -1,8 +1,0 @@
-{
-  super.writeConfigFiles(configDir);
-  Map<String,Object> context=new HashMap<String,Object>();
-  context.put("supplier",this);
-  TemplateService.getInstance().write("liquibase/sdk/vagrant/supplier/postgresql/postgresql.init.sql.vm",new File(configDir,"postgresql.init.sql"),context);
-  TemplateService.getInstance().write("liquibase/sdk/vagrant/supplier/postgresql/postgresql.conf.vm",new File(configDir,"postgresql.conf"),context);
-  TemplateService.getInstance().write("liquibase/sdk/vagrant/supplier/postgresql/pg_hba.conf.vm",new File(configDir,"pg_hba.conf"),context);
-}
