@@ -2,7 +2,7 @@
   final Set<String> parentNames=new HashSet<String>(oldParentNames);
   parentNames.add(newParentName);
   StringBuilder buffer=new StringBuilder();
-  final boolean expandContainedObjects=parentNames.size() <= 1;
+  final boolean expandContainedObjects=parentNames.size() <= getExpandDepth();
   final List<String> attributes=sort(databaseObject.getAttributes());
   for (  String attribute : attributes) {
     if (attribute.equals("name")) {

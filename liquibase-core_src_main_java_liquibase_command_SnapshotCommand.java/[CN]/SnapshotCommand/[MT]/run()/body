@@ -2,5 +2,5 @@
   System.out.println("Snapshot!");
   SnapshotControl snapshotControl=new SnapshotControl(database);
   DatabaseSnapshot snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(catalogs.toArray(new CatalogAndSchema[catalogs.size()]),database,snapshotControl);
-  return SnapshotSerializerFactory.getInstance().getSerializer("txt").serialize(snapshot,true);
+  return SnapshotSerializerFactory.getInstance().getSerializer(getSerializerFormat()).serialize(snapshot,true);
 }
