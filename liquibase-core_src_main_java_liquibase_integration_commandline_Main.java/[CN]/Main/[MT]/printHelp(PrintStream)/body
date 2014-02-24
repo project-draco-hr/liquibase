@@ -127,6 +127,12 @@
   stream.println(" --defaultSchemaName=<name>                 Default database schema to use");
   stream.println(" --referenceDefaultCatalogName=<name>       Reference database catalog to use");
   stream.println(" --referenceDefaultSchemaName=<name>        Reference database schema to use");
+  stream.println(" --targetSchemas=<name1,name2>              Target database schemas to include");
+  stream.println("                                            objects from in comparison");
+  stream.println(" --referenceSchemas=<name1,name2>           Reference database schemas to include");
+  stream.println("                                            objects from in comparison");
+  stream.println(" --schemas=<name1,name2>                    Database schemas to include");
+  stream.println("                                            objects from in generateChangeLog");
   stream.println(" --includeCatalog=<true|false>              If true, the catalog will be");
   stream.println("                                            included in generated changeSets");
   stream.println("                                            Defaults to false");

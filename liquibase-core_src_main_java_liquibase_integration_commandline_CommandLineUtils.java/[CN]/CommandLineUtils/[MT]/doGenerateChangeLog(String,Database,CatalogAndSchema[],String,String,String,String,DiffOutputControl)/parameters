@@ -1,0 +1,8 @@
+String changeLogFile
+Database originalDatabase
+CatalogAndSchema[] schemas
+String snapshotTypes
+String author
+String context
+String dataDir
+DiffOutputControl diffOutputControl

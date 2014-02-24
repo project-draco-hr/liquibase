@@ -1,0 +1,19 @@
+{
+  CompareControl.SchemaComparison[] comparisons=new CompareControl.SchemaComparison[schemas.length];
+  int i=0;
+  for (  CatalogAndSchema schema : schemas) {
+    comparisons[i++]=new CompareControl.SchemaComparison(schema,schema);
+  }
+  CompareControl compareControl=new CompareControl(comparisons,snapshotTypes);
+  diffOutputControl.setDataDir(dataDir);
+  GenerateChangeLogCommand command=new GenerateChangeLogCommand();
+  command.setReferenceDatabase(originalDatabase).setSnapshotTypes(snapshotTypes).setOutputStream(System.out).setReferenceSchemas(schemas).setCompareControl(compareControl);
+  command.setChangeLogFile(changeLogFile).setDiffOutputControl(diffOutputControl);
+  command.setAuthor(author).setContext(context);
+  try {
+    command.execute();
+  }
+ catch (  CommandExecutionException e) {
+    throw new LiquibaseException(e);
+  }
+}

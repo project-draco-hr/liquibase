@@ -1,5 +1,5 @@
 {
   catalogAndSchema=database.correctSchema(catalogAndSchema);
   CatalogAndSchema thisCatalogAndSchema=database.correctSchema(this);
-  return catalogAndSchema.toString().equals(thisCatalogAndSchema.toString());
+  return catalogAndSchema.toString().equalsIgnoreCase(thisCatalogAndSchema.toString());
 }

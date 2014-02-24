@@ -1,14 +1,3 @@
 {
-  CompareControl compareControl=new CompareControl(new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(catalogName,schemaName),new CatalogAndSchema(catalogName,schemaName))},snapshotTypes);
-  diffOutputControl.setDataDir(dataDir);
-  GenerateChangeLogCommand command=new GenerateChangeLogCommand();
-  command.setReferenceDatabase(originalDatabase).setSnapshotTypes(snapshotTypes).setOutputStream(System.out).setCompareControl(compareControl);
-  command.setChangeLogFile(changeLogFile).setDiffOutputControl(diffOutputControl);
-  command.setAuthor(author).setContext(context);
-  try {
-    command.execute();
-  }
- catch (  CommandExecutionException e) {
-    throw new LiquibaseException(e);
-  }
+  doGenerateChangeLog(changeLogFile,originalDatabase,new CatalogAndSchema[]{new CatalogAndSchema(catalogName,schemaName)},snapshotTypes,author,context,dataDir,diffOutputControl);
 }

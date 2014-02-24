@@ -1,0 +1,7 @@
+{
+  CatalogAndSchema[] schemas=getTargetSchemas();
+  if (schemas == null) {
+    schemas=new CatalogAndSchema[]{targetDatabase.getDefaultSchema()};
+  }
+  return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,targetDatabase,new SnapshotControl(targetDatabase,snapshotTypes));
+}
