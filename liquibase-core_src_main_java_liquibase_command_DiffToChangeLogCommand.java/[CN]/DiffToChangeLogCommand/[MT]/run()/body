@@ -1,0 +1,14 @@
+{
+  DiffResult diffResult=createDiffResult();
+  PrintStream outputStream=this.getOutputStream();
+  if (outputStream == null) {
+    outputStream=System.out;
+  }
+  if (changeLogFile == null) {
+    new DiffToChangeLog(diffResult,diffOutputControl).print(outputStream);
+  }
+ else {
+    new DiffToChangeLog(diffResult,diffOutputControl).print(changeLogFile);
+  }
+  return null;
+}

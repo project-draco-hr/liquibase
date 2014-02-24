@@ -1,0 +1,5 @@
+{
+  DiffResult diffResult=createDiffResult();
+  new DiffToReport(diffResult,outputStream).print();
+  return null;
+}

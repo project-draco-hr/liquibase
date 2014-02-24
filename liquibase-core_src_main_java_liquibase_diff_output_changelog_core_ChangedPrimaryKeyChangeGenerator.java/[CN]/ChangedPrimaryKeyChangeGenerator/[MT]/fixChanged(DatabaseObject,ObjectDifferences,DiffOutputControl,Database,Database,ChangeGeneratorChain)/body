@@ -6,11 +6,11 @@
   addPkChange.setTableName(pk.getTable().getName());
   addPkChange.setColumnNames(pk.getColumnNames());
   addPkChange.setConstraintName(pk.getName());
-  if (control.isIncludeCatalog()) {
+  if (control.getIncludeCatalog()) {
     dropPkChange.setCatalogName(pk.getSchema().getCatalogName());
     addPkChange.setCatalogName(pk.getSchema().getCatalogName());
   }
-  if (control.isIncludeSchema()) {
+  if (control.getIncludeSchema()) {
     dropPkChange.setSchemaName(pk.getSchema().getName());
     addPkChange.setSchemaName(pk.getSchema().getName());
   }

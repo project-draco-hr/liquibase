@@ -1,0 +1,4 @@
+{
+  this.diffOutputControl=diffOutputControl;
+  return this;
+}

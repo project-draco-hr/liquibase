@@ -18,10 +18,10 @@
     List<Change> changes=new ArrayList<Change>();
     while (rs.next()) {
       InsertDataChange change=new InsertDataChange();
-      if (outputControl.isIncludeCatalog()) {
+      if (outputControl.getIncludeCatalog()) {
         change.setCatalogName(table.getSchema().getCatalogName());
       }
-      if (outputControl.isIncludeSchema()) {
+      if (outputControl.getIncludeSchema()) {
         change.setSchemaName(table.getSchema().getName());
       }
       change.setTableName(table.getName());

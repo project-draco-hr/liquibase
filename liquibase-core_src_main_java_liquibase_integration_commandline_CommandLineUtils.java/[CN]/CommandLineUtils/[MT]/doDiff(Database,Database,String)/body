@@ -1,9 +1,11 @@
 {
-  DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase.getDefaultSchema(),referenceDatabase,new SnapshotControl(referenceDatabase,snapshotTypes));
-  DatabaseSnapshot targetSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(targetDatabase.getDefaultSchema(),targetDatabase,new SnapshotControl(targetDatabase));
-  CompareControl compareControl=new CompareControl(referenceSnapshot.getSnapshotControl().getTypesToInclude());
-  DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,targetSnapshot,compareControl);
+  DiffCommand diffCommand=new DiffCommand().setReferenceDatabase(referenceDatabase).setTargetDatabase(targetDatabase).setSnapshotTypes(snapshotTypes).setOutputStream(System.out);
   System.out.println("");
   System.out.println("Diff Results:");
-  new DiffToReport(diffResult,System.out).print();
+  try {
+    diffCommand.execute();
+  }
+ catch (  CommandExecutionException e) {
+    throw new LiquibaseException(e);
+  }
 }

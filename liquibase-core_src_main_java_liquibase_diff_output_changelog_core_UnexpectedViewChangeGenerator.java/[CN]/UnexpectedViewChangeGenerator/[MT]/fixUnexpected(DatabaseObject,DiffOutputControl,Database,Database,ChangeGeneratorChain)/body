@@ -2,10 +2,10 @@
   View view=(View)unexpectedObject;
   DropViewChange change=new DropViewChange();
   change.setViewName(view.getName());
-  if (control.isIncludeCatalog()) {
+  if (control.getIncludeCatalog()) {
     change.setCatalogName(view.getSchema().getCatalogName());
   }
-  if (control.isIncludeSchema()) {
+  if (control.getIncludeSchema()) {
     change.setSchemaName(view.getSchema().getName());
   }
   for (  Column column : view.getColumns()) {
