@@ -22,7 +22,7 @@
     boolean includeCatalog=Boolean.parseBoolean(getCommandParam("includeCatalog","false"));
     boolean includeSchema=Boolean.parseBoolean(getCommandParam("includeSchema","false"));
     boolean includeTablespace=Boolean.parseBoolean(getCommandParam("includeTablespace","false"));
-    DiffOutputControl diffOutputControl=new DiffOutputControl(includeCatalog,includeSchema,includeTablespace);
+    DiffOutputControl diffOutputControl=new DiffOutputControl(includeCatalog,includeSchema,includeTablespace).addIncludedSchema(new CatalogAndSchema(defaultCatalogName,defaultSchemaName));
     if ("diff".equalsIgnoreCase(command)) {
       CommandLineUtils.doDiff(createReferenceDatabaseFromCommandParams(commandParams),database,StringUtils.trimToNull(diffTypes));
       return;

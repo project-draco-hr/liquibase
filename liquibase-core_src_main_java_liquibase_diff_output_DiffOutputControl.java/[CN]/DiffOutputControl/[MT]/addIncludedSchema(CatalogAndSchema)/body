@@ -1,0 +1,4 @@
+{
+  this.includeSchemas.add(schema);
+  return this;
+}

@@ -1,4 +1,7 @@
 {
+  if (!control.shouldOutput(changedObject,comparisionDatabase)) {
+    return null;
+  }
   ChangeGeneratorChain chain=createGeneratorChain(ChangedObjectChangeGenerator.class,changedObject.getClass(),referenceDatabase);
   if (chain == null) {
     return null;

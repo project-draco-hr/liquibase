@@ -127,6 +127,12 @@
   stream.println(" --defaultSchemaName=<name>                 Default database schema to use");
   stream.println(" --referenceDefaultCatalogName=<name>       Reference database catalog to use");
   stream.println(" --referenceDefaultSchemaName=<name>        Reference database schema to use");
+  stream.println(" --includeCatalog=<true|false>              If true, the catalog will be");
+  stream.println("                                            included in generated changeSets");
+  stream.println("                                            Defaults to false");
+  stream.println(" --includeSchema=<true|false>               If true, the schema will be");
+  stream.println("                                            included in generated changeSets");
+  stream.println("                                            Defaults to false");
   stream.println(" --referenceDriver=<jdbc.driver.ClassName>  Reference database driver class name");
   stream.println(" --dataOutputDirectory=DIR                  Output data as CSV in the given ");
   stream.println("                                            directory");
