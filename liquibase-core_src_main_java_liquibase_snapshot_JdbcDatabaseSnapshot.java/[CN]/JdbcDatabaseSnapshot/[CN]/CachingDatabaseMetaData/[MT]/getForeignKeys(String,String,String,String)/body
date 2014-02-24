@@ -26,7 +26,7 @@
     @Override public List<CachedRow> bulkFetch() throws SQLException, DatabaseException {
       return null;
     }
-    @Override boolean shouldBulkSelect(    ResultSetCache resultSetCache){
+    @Override boolean shouldBulkSelect(    String schemaKey,    ResultSetCache resultSetCache){
       return false;
     }
   }
