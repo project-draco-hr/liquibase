@@ -1,11 +1,3 @@
 {
-  DiffCommand diffCommand=new DiffCommand().setReferenceDatabase(referenceDatabase).setTargetDatabase(targetDatabase).setSnapshotTypes(snapshotTypes).setOutputStream(System.out);
-  System.out.println("");
-  System.out.println("Diff Results:");
-  try {
-    diffCommand.execute();
-  }
- catch (  CommandExecutionException e) {
-    throw new LiquibaseException(e);
-  }
+  doDiff(referenceDatabase,targetDatabase,snapshotTypes,null);
 }

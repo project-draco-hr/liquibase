@@ -1,0 +1,21 @@
+{
+  out.print(title + ": ");
+  Schema lastSchema=null;
+  if (objects.size() == 0) {
+    out.println("NONE");
+  }
+ else {
+    out.println();
+    for (    DatabaseObject object : objects) {
+      if (getIncludeSchema() && object.getSchema() != null && (lastSchema == null || !lastSchema.equals(object.getSchema()))) {
+        lastSchema=object.getSchema();
+        String schemaName=object.getSchema().getName();
+        if (schemaName == null) {
+          schemaName=object.getSchema().getCatalogName();
+        }
+        out.println("  SCHEMA: " + schemaName);
+      }
+      out.println("     " + object);
+    }
+  }
+}

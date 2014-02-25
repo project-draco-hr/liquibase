@@ -1,11 +1,3 @@
 {
-  DiffToChangeLogCommand command=new DiffToChangeLogCommand();
-  command.setReferenceDatabase(referenceDatabase).setTargetDatabase(targetDatabase).setSnapshotTypes(snapshotTypes).setOutputStream(System.out);
-  command.setChangeLogFile(changeLogFile).setDiffOutputControl(diffOutputControl);
-  try {
-    command.execute();
-  }
- catch (  CommandExecutionException e) {
-    throw new LiquibaseException(e);
-  }
+  doDiffToChangeLog(changeLogFile,referenceDatabase,targetDatabase,diffOutputControl,snapshotTypes,null);
 }
