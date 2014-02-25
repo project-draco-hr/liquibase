@@ -1,5 +1,8 @@
 {
   Set<ConfigTemplate> configTemplates=super.generateConfigFiles(context);
   configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/mysql/mysql.init.sql.vm",context));
+  if (isWindows()) {
+    configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/mysql/mysql.ini.vm",context));
+  }
   return configTemplates;
 }
