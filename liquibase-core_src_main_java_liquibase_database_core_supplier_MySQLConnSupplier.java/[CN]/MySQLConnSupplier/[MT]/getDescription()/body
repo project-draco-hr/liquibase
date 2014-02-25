@@ -1,0 +1,8 @@
+{
+  if (getOs().equals("windows")) {
+    return super.getDescription() + "\n" + "Install Dir: "+ getInstallDir()+ "\n"+ "Port: "+ getPort()+ "\n"+ "Root Password: "+ getAdminPassword();
+  }
+ else {
+    return super.getDescription();
+  }
+}
