@@ -1,0 +1,13 @@
+{
+  if (userDefinedTypes == null) {
+    userDefinedTypes=new HashSet<String>();
+    if (getConnection() != null && !(getConnection() instanceof OfflineConnection)) {
+      try {
+        userDefinedTypes.addAll(ExecutorService.getInstance().getExecutor(this).queryForList(new RawSqlStatement("SELECT TYPE_NAME FROM USER_TYPES"),String.class));
+      }
+ catch (      DatabaseException e) {
+      }
+    }
+  }
+  return userDefinedTypes;
+}
