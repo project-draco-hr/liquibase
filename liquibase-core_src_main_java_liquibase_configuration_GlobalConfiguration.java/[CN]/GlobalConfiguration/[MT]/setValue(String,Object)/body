@@ -1,0 +1,5 @@
+{
+  ConfigurationContainer container=getContainer();
+  container.addProperty(propertyName,Object.class);
+  container.setValue(propertyName,value);
+}
