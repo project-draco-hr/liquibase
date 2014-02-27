@@ -1,0 +1,4 @@
+{
+  Set<Class<? extends Change>> classes=new HashSet<Class<? extends Change>>(Arrays.asList(ServiceLocator.getInstance().findClasses(Change.class)));
+  return classes;
+}

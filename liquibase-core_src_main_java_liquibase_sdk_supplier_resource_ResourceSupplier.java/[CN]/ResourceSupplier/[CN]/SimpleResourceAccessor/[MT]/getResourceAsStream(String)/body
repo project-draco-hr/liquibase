@@ -1,0 +1,11 @@
+{
+  if (file.toLowerCase().endsWith("csv")) {
+    return new ByteArrayInputStream(usersCsv.getBytes());
+  }
+ else   if (file.toLowerCase().endsWith("sql")) {
+    return new ByteArrayInputStream(fileSql.getBytes());
+  }
+ else {
+    throw new RuntimeException("Unknown resource type: " + file);
+  }
+}

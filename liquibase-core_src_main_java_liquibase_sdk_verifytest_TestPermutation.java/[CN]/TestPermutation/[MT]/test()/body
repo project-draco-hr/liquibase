@@ -1,0 +1,20 @@
+{
+  if (skipMessage != null) {
+    return;
+  }
+  for (  Setup setup : this.setupCommands) {
+    setup.run();
+  }
+  for (  Assertion assertion : this.assertions) {
+    assertion.run();
+  }
+  try {
+    for (    Verification verification : this.verifications) {
+      verification.run();
+    }
+  }
+ catch (  CannotVerifyException e) {
+    this.verified=false;
+  }
+  this.verified=true;
+}

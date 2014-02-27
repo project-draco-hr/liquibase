@@ -1,0 +1,15 @@
+{
+  if (value == null) {
+    return null;
+  }
+  if (value instanceof Class) {
+    return ((Class)value).getName();
+  }
+  if (value instanceof Database) {
+    return ((Database)value).getShortName();
+  }
+  if (value instanceof Sql) {
+    return ((Sql)value).toSql();
+  }
+  return value.toString();
+}
