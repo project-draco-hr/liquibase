@@ -8,13 +8,32 @@
   for (  Assertion assertion : this.assertions) {
     assertion.run();
   }
+  if (!canVerify) {
+    return;
+  }
+  Exception cleanupError=null;
   try {
-    for (    Verification verification : this.verifications) {
-      verification.run();
+    try {
+      for (      Verification verification : this.verifications) {
+        verification.run();
+      }
+    }
+ catch (    CannotVerifyException e) {
+      this.verified=false;
+    }
+    this.verified=true;
+  }
+  finally {
+    for (    Cleanup cleanup : cleanupCommands) {
+      try {
+        cleanup.run();
+      }
+ catch (      Exception e) {
+        cleanupError=e;
+      }
     }
   }
- catch (  CannotVerifyException e) {
-    this.verified=false;
+  if (cleanupError != null) {
+    throw new UnexpectedLiquibaseSdkException("Cleanup error",cleanupError);
   }
-  this.verified=true;
 }

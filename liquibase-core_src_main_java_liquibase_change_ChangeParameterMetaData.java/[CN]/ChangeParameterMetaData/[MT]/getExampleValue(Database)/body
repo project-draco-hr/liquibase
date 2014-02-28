@@ -1,0 +1,79 @@
+{
+  if (exampleValues != null) {
+    Object exampleValue=null;
+    for (    Map.Entry<String,Object> entry : exampleValues.entrySet()) {
+      if (entry.getKey().equalsIgnoreCase("all")) {
+        exampleValue=entry.getValue();
+      }
+ else       if (DatabaseList.definitionMatches(entry.getKey(),database,false)) {
+        return entry.getValue();
+      }
+    }
+    if (exampleValue != null) {
+      return exampleValue;
+    }
+  }
+  Map standardExamples=new HashMap();
+  standardExamples.put("tableName","person");
+  standardExamples.put("schemaName","public");
+  standardExamples.put("catalogName","cat");
+  standardExamples.put("columnName","id");
+  standardExamples.put("columnNames","id, name");
+  standardExamples.put("indexName","idx_address");
+  standardExamples.put("columnDataType","int");
+  standardExamples.put("dataType","int");
+  standardExamples.put("sequenceName","seq_id");
+  standardExamples.put("viewName","v_person");
+  standardExamples.put("constraintName","const_name");
+  standardExamples.put("primaryKey","pk_id");
+  if (standardExamples.containsKey(parameterName)) {
+    return standardExamples.get(parameterName);
+  }
+  for (  String prefix : new String[]{"base","new","old"}) {
+    if (parameterName.startsWith(prefix)) {
+      String mainName=StringUtils.lowerCaseFirst(parameterName.replaceFirst("^" + prefix,""));
+      if (standardExamples.containsKey(mainName)) {
+        return standardExamples.get(mainName);
+      }
+    }
+  }
+  if (dataType.equals("string")) {
+    return "A String";
+  }
+ else   if (dataType.equals("integer")) {
+    return 3;
+  }
+ else   if (dataType.equals("boolean")) {
+    return true;
+  }
+ else   if (dataType.equals("bigInteger")) {
+    return new BigInteger("371717");
+  }
+ else   if (dataType.equals("list")) {
+    return null;
+  }
+ else   if (dataType.equals("sequenceNextValueFunction")) {
+    return new SequenceNextValueFunction("seq_name");
+  }
+ else   if (dataType.equals("databaseFunction")) {
+    return new DatabaseFunction("now");
+  }
+ else   if (dataType.equals("list of columnConfig")) {
+    ArrayList<ColumnConfig> list=new ArrayList<ColumnConfig>();
+    list.add(new ColumnConfig().setName("id").setType("int"));
+    return list;
+  }
+ else   if (dataType.equals("list of addColumnConfig")) {
+    ArrayList<ColumnConfig> list=new ArrayList<ColumnConfig>();
+    list.add(new AddColumnConfig().setName("id").setType("int"));
+    return list;
+  }
+ else   if (dataType.equals("list of loadDataColumnConfig")) {
+    ArrayList<ColumnConfig> list=new ArrayList<ColumnConfig>();
+    list.add(new LoadDataColumnConfig().setName("id").setType("int"));
+    return list;
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Unknown dataType " + dataType + " for "+ getParameterName());
+  }
+}

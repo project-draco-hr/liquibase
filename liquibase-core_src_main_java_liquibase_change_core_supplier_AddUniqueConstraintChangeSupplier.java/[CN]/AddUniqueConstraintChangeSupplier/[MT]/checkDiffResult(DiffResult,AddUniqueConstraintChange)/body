@@ -1,0 +1,3 @@
+{
+  diffResult.getUnexpectedObject(new UniqueConstraint(change.getConstraintName(),change.getCatalogName(),change.getSchemaName(),change.getTableName()));
+}

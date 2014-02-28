@@ -1,0 +1,12 @@
+{
+  Index example=new Index(change.getIndexName(),change.getCatalogName(),change.getSchemaName(),change.getTableName());
+  List<String> columns=null;
+  if (change.getColumns() != null) {
+    columns=new ArrayList<String>();
+    for (    ColumnConfig col : change.getColumns()) {
+      columns.add(col.getName());
+    }
+    example.setColumns(StringUtils.join(columns,","));
+  }
+  assertNotNull(diffResult.getUnexpectedObject(example));
+}

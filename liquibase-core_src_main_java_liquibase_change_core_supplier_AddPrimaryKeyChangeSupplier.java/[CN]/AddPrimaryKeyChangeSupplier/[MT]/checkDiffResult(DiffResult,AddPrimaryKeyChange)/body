@@ -1,0 +1,4 @@
+{
+  PrimaryKey pk=diffResult.getUnexpectedObject(new PrimaryKey(change.getConstraintName(),change.getCatalogName(),change.getSchemaName(),change.getTableName(),change.getColumnNames().split(",")));
+  assertNotNull(pk);
+}

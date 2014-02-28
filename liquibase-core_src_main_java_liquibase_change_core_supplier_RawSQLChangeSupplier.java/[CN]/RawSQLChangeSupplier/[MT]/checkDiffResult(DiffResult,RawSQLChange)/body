@@ -1,0 +1,4 @@
+{
+  int rows=ExecutorService.getInstance().getExecutor(diffResult.getComparisonSnapshot().getDatabase()).queryForInt(new RawSqlStatement("select count(*) from person"));
+  assertTrue(rows > 0);
+}

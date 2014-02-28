@@ -24,7 +24,7 @@
       change.setResourceAccessor(new JUnitResourceAccessor());
       for (      String paramName : new TreeSet<String>(changeMetaData.getRequiredParameters(database).keySet())) {
         ChangeParameterMetaData param=changeMetaData.getParameters().get(paramName);
-        Object paramValue=param.getExampleValue();
+        Object paramValue=param.getExampleValue(database);
         String serializedValue;
         serializedValue=formatParameter(paramValue);
         state.addComment("Change Parameter: " + param.getParameterName() + "="+ serializedValue);

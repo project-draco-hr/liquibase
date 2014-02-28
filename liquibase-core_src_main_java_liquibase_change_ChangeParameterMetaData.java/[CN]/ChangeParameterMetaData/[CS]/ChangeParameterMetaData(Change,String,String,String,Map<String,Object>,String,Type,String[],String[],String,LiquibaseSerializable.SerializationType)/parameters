@@ -1,0 +1,11 @@
+Change change
+String parameterName
+String displayName
+String description
+Map<String,Object> exampleValues
+String since
+Type dataType
+String[] requiredForDatabase
+String[] supportedDatabases
+String mustEqualExisting
+LiquibaseSerializable.SerializationType serializationType

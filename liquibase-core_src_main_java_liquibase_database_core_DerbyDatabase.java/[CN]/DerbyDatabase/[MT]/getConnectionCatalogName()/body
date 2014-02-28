@@ -1,4 +1,7 @@
 {
+  if (getConnection() == null || getConnection() instanceof OfflineConnection) {
+    return null;
+  }
   try {
     return ExecutorService.getInstance().getExecutor(this).queryForObject(new RawSqlStatement("select current schema from sysibm.sysdummy1"),String.class);
   }

@@ -1,0 +1,5 @@
+{
+  Database database=diffResult.getComparisonSnapshot().getDatabase();
+  int rows=ExecutorService.getInstance().getExecutor(database).queryForInt(new RawSqlStatement("select count(*) from " + database.getDatabaseChangeLogTableName() + " where tag='"+ change.getTag()+ "'"));
+  assertTrue(rows > 0);
+}

@@ -1,0 +1,8 @@
+{
+  Column example=new Column().setName(change.getColumnName()).setRelation(new Table().setName(change.getTableName()).setSchema(new Schema(change.getCatalogName(),change.getSchemaName())));
+  ObjectDifferences diff=diffResult.getChangedObject(example);
+  assertNotNull(diff);
+  assertNotNull(diff.getDifference("defaultValue"));
+  assertNull(diff.getDifference("defaultValue").getReferenceValue());
+  assertNotNull(diff.getDifference("defaultValue").getComparedValue());
+}

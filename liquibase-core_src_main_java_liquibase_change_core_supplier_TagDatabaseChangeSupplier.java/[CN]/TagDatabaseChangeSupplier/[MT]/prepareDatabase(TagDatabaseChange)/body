@@ -1,0 +1,11 @@
+{
+  return new Change[]{new AbstractChange(){
+    @Override public String getConfirmationMessage(){
+      return "Custom change";
+    }
+    @Override public SqlStatement[] generateStatements(    Database database){
+      return new SqlStatement[]{new CreateDatabaseChangeLogTableStatement(),new MarkChangeSetRanStatement(new ChangeSet("1","test",false,false,"com/example/test.xml",null,null,new DatabaseChangeLog("com/example/test.xml")),ChangeSet.ExecType.EXECUTED),new MarkChangeSetRanStatement(new ChangeSet("2","test",false,false,"com/example/test.xml",null,null,new DatabaseChangeLog("com/example/test.xml")),ChangeSet.ExecType.EXECUTED),new MarkChangeSetRanStatement(new ChangeSet("3","test",false,false,"com/example/test.xml",null,null,new DatabaseChangeLog("com/example/test.xml")),ChangeSet.ExecType.EXECUTED),new MarkChangeSetRanStatement(new ChangeSet("4","test",false,false,"com/example/test.xml",null,null,new DatabaseChangeLog("com/example/test.xml")),ChangeSet.ExecType.EXECUTED)};
+    }
+  }
+};
+}

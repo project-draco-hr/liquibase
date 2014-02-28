@@ -1,0 +1,13 @@
+{
+  CreateTableChange createTableChange=new CreateTableChange();
+  createTableChange.setCatalogName(change.getCatalogName());
+  createTableChange.setSchemaName(change.getSchemaName());
+  createTableChange.setTableName(change.getTableName());
+  createTableChange.addColumn(new ColumnConfig().setName("other_col").setType("int"));
+  String dataType=change.getColumnDataType();
+  if (dataType == null) {
+    dataType="int";
+  }
+  createTableChange.addColumn(new ColumnConfig().setName(change.getColumnName()).setType(dataType).setDefaultValue("1"));
+  return new Change[]{createTableChange};
+}

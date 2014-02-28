@@ -1,24 +1,3 @@
 {
-  if (definition == null || definition.isEmpty()) {
-    return returnValueIfEmptyList;
-  }
-  if (definition.contains("all")) {
-    return true;
-  }
-  if (definition.contains("none")) {
-    return false;
-  }
-  if (definition.contains("!" + database.getShortName())) {
-    return false;
-  }
-  Set<String> dbmsSupported=new HashSet<String>();
-  for (  String dbms : definition) {
-    if (!dbms.startsWith("!")) {
-      dbmsSupported.add(dbms);
-    }
-  }
-  if (dbmsSupported.isEmpty() || dbmsSupported.contains(database.getShortName())) {
-    return true;
-  }
-  return false;
+  return definitionMatches(definition,database.getShortName(),returnValueIfEmptyList);
 }

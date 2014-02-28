@@ -1,0 +1,18 @@
+{
+  if (change.getMinValue() != null) {
+    ObjectDifferences diff=diffResult.getChangedObject(new Sequence(change.getCatalogName(),change.getSchemaName(),change.getSequenceName()));
+    assertEquals(change.getMinValue(),diff.getDifference("minValue").getComparedValue());
+  }
+  if (change.getMaxValue() != null) {
+    ObjectDifferences diff=diffResult.getChangedObject(new Sequence(change.getCatalogName(),change.getSchemaName(),change.getSequenceName()));
+    assertEquals(change.getMaxValue(),diff.getDifference("maxValue").getComparedValue());
+  }
+  if (change.getIncrementBy() != null) {
+    ObjectDifferences diff=diffResult.getChangedObject(new Sequence(change.getCatalogName(),change.getSchemaName(),change.getSequenceName()));
+    assertEquals(change.getIncrementBy(),diff.getDifference("incrementBy").getComparedValue());
+  }
+  if (change.isOrdered() != null) {
+    ObjectDifferences diff=diffResult.getChangedObject(new Sequence(change.getCatalogName(),change.getSchemaName(),change.getSequenceName()));
+    assertEquals(change.isOrdered(),diff.getDifference("ordered").getComparedValue());
+  }
+}

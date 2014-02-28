@@ -1,0 +1,5 @@
+{
+  Map<String,Object> returnMap=new HashMap<String,Object>();
+  returnMap.put(new HsqlDatabase().getShortName(),"CREATE PROCEDURE new_customer(firstname VARCHAR(50), lastname VARCHAR(50))\n" + "   MODIFIES SQL DATA\n" + "   INSERT INTO CUSTOMERS (first_name, last_name) VALUES (firstname, lastname)");
+  return returnMap;
+}

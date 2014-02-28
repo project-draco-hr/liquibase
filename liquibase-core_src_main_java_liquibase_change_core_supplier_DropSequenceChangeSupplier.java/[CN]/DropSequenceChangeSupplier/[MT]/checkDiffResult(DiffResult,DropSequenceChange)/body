@@ -1,0 +1,3 @@
+{
+  assertNotNull(diffResult.getMissingObject(new Sequence(change.getCatalogName(),change.getSchemaName(),change.getSequenceName())));
+}

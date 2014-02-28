@@ -1,0 +1,8 @@
+{
+  this();
+  setName(name);
+  if (tableName != null && columns != null) {
+    setTable(new Table(tableCatalog,tableSchema,tableName));
+    setColumns(StringUtils.join(columns,","));
+  }
+}
