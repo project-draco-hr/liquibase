@@ -1,0 +1,9 @@
+{
+  StringBuilder builder=new StringBuilder();
+  builder.append("--liquibase formatted sql\n\n");
+  for (  ChangeSet changeSet : changeSets) {
+    builder.append(serialize(changeSet,true));
+    builder.append("\n");
+  }
+  out.write(builder.toString().getBytes("UTF-8"));
+}

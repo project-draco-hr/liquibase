@@ -1,0 +1,22 @@
+{
+  if (object instanceof ChangeSet) {
+    StringBuilder builder=new StringBuilder();
+    ChangeSet changeSet=(ChangeSet)object;
+    Database database=getTargetDatabase(changeSet);
+    String author=(changeSet.getAuthor()).replaceAll("\\s+","_");
+    author=author.replace("_(generated)","");
+    builder.append("--changeset ").append(author).append(":").append(changeSet.getId()).append("\n");
+    for (    Change change : changeSet.getChanges()) {
+      Sql[] sqls=SqlGeneratorFactory.getInstance().generateSql(change.generateStatements(database),database);
+      if (sqls != null) {
+        for (        Sql sql : sqls) {
+          builder.append(sql.toSql()).append(sql.getEndDelimiter()).append("\n");
+        }
+      }
+    }
+    return builder.toString();
+  }
+ else {
+    throw new UnexpectedLiquibaseException("Cannot serialize object type: " + object.getClass().getName());
+  }
+}
