@@ -1,0 +1,3 @@
+{
+  return "jdbc:sqlserver://" + getIpAddress() + ":1433;databaseName="+ getPrimaryCatalog();
+}

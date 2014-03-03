@@ -9,7 +9,7 @@
 );
   List<RanChangeSet> ran=new ArrayList<RanChangeSet>();
   ValidatingVisitor handler=new ValidatingVisitor(ran);
-  handler.visit(changeSet1,new DatabaseChangeLog(),null);
+  handler.visit(changeSet1,new DatabaseChangeLog(),null,null);
   assertEquals(1,handler.getValidationErrors().getErrorMessages().size());
   assertTrue(handler.getValidationErrors().getErrorMessages().get(0).startsWith("Test message"));
   assertFalse(handler.validationPassed());

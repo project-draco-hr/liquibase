@@ -10,11 +10,11 @@
   }
   addIndexChange.setColumns(columns);
   addIndexChange.setIndexName(index.getName());
-  if (control.isIncludeCatalog()) {
+  if (control.getIncludeCatalog()) {
     dropIndexChange.setCatalogName(index.getSchema().getCatalogName());
     addIndexChange.setCatalogName(index.getSchema().getCatalogName());
   }
-  if (control.isIncludeSchema()) {
+  if (control.getIncludeSchema()) {
     dropIndexChange.setSchemaName(index.getSchema().getName());
     addIndexChange.setSchemaName(index.getSchema().getName());
   }

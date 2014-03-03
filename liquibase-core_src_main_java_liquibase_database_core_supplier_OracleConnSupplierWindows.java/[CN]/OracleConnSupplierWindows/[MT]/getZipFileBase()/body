@@ -1,0 +1,8 @@
+{
+  if (getVersion().startsWith("12.")) {
+    return "winx64_12c_database";
+  }
+ else {
+    throw new UnexpectedLiquibaseSdkException("Unsupported oracle version: " + getVersion());
+  }
+}

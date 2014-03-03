@@ -1,0 +1,4 @@
+{
+  this.includeSchemas.add(schema.toCatalogAndSchema());
+  return this;
+}

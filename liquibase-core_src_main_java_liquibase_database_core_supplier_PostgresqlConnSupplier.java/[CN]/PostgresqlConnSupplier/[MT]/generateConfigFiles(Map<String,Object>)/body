@@ -1,0 +1,7 @@
+{
+  Set<ConfigTemplate> configTemplates=super.generateConfigFiles(context);
+  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/postgresql/postgresql.init.sql.vm",context));
+  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/postgresql/postgresql.conf.vm",context));
+  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/postgresql/pg_hba.conf.vm",context));
+  return configTemplates;
+}

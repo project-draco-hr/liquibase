@@ -18,7 +18,7 @@
   replay(database);
   replay(listener);
   UpdateVisitor visitor=new UpdateVisitor(database,listener);
-  visitor.visit(changeSet,databaseChangeLog,database);
+  visitor.visit(changeSet,databaseChangeLog,database,null);
   verify(database);
   verify(changeSet);
   verify(listener);

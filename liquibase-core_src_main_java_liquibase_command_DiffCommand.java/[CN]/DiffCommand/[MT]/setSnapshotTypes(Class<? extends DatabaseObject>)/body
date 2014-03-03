@@ -1,0 +1,4 @@
+{
+  this.snapshotTypes=snapshotTypes;
+  return this;
+}

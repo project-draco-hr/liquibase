@@ -1,0 +1,3 @@
+{
+  return diffResult.getCompareControl().getSchemaComparisons().length > 1;
+}

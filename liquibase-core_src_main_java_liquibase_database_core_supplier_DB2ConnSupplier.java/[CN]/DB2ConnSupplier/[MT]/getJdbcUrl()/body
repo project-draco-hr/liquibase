@@ -1,0 +1,3 @@
+{
+  return "jdbc:db2://" + getIpAddress() + ":50000/lqbase";
+}

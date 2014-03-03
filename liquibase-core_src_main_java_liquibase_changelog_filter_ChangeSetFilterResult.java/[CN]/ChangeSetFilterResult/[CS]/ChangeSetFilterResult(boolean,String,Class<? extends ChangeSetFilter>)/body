@@ -1,0 +1,5 @@
+{
+  this.accepted=accepted;
+  this.message=message;
+  this.filter=filter;
+}

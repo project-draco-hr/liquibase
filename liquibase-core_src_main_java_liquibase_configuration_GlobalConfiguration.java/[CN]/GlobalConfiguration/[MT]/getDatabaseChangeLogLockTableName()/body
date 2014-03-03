@@ -1,0 +1,3 @@
+{
+  return getContainer().getValue(DATABASECHANGELOGLOCK_TABLE_NAME,String.class);
+}

@@ -1,0 +1,3 @@
+{
+  return getContainer().getValue(LOG_LEVEL,String.class);
+}

@@ -2,10 +2,10 @@
   Difference typeDifference=differences.getDifference("type");
   if (typeDifference != null) {
     ModifyDataTypeChange change=new ModifyDataTypeChange();
-    if (control.isIncludeCatalog()) {
+    if (control.getIncludeCatalog()) {
       change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
     }
-    if (control.isIncludeSchema()) {
+    if (control.getIncludeSchema()) {
       change.setSchemaName(column.getRelation().getSchema().getName());
     }
     change.setTableName(column.getRelation().getName());

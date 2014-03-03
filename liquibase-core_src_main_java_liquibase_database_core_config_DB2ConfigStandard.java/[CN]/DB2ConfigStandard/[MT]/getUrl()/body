@@ -1,3 +1,0 @@
-{
-  return "jdbc:db2://" + getHostname() + ":50000/lqbase";
-}

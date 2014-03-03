@@ -10,17 +10,21 @@
     if (cache.containsKey(wantedKey)) {
       return cache.get(wantedKey);
     }
-    if (didBulkQuery) {
+    if (didBulkQuery.containsKey(schemaKey) && didBulkQuery.get(schemaKey)) {
       return new ArrayList<CachedRow>();
     }
     List<CachedRow> results;
-    if (resultSetExtractor.shouldBulkSelect(this)) {
+    if (resultSetExtractor.shouldBulkSelect(schemaKey,this)) {
       cache.clear();
       results=resultSetExtractor.bulkFetch();
-      didBulkQuery=true;
+      didBulkQuery.put(schemaKey,true);
     }
  else {
-      timesSingleQueried++;
+      Integer previousCount=timesSingleQueried.get(schemaKey);
+      if (previousCount == null) {
+        previousCount=0;
+      }
+      timesSingleQueried.put(schemaKey,previousCount + 1);
       results=resultSetExtractor.fastFetch();
     }
     for (    CachedRow row : results) {

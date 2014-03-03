@@ -2,13 +2,13 @@
   Index index=(Index)missingObject;
   CreateIndexChange change=new CreateIndexChange();
   change.setTableName(index.getTable().getName());
-  if (control.isIncludeTablespace()) {
+  if (control.getIncludeTablespace()) {
     change.setTablespace(index.getTablespace());
   }
-  if (control.isIncludeCatalog()) {
+  if (control.getIncludeCatalog()) {
     change.setCatalogName(index.getTable().getSchema().getCatalogName());
   }
-  if (control.isIncludeSchema()) {
+  if (control.getIncludeSchema()) {
     change.setSchemaName(index.getTable().getSchema().getName());
   }
   change.setIndexName(index.getName());

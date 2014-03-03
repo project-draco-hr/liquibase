@@ -1,5 +1,0 @@
-{
-  Set<String> modules=super.getPuppetModules();
-  modules.add("biemond/oradb");
-  return modules;
-}

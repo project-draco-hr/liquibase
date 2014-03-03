@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(CHANGELOGLOCK_POLL_RATE,seconds);
+  return this;
+}

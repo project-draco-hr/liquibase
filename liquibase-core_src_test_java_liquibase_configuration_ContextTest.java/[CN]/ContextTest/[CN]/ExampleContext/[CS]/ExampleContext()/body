@@ -1,0 +1,6 @@
+{
+  super("liquibase.example");
+  getContainer().addProperty("propertyBooleanNoDefault",Boolean.class).setDescription("An example boolean property with no default");
+  getContainer().addProperty("propertyBooleanDefaultTrue",Boolean.class).setDefaultValue(true).addAlias("property.default.true");
+  getContainer().addProperty("propertyBooleanDefaultFalse",Boolean.class).setDefaultValue(false);
+}

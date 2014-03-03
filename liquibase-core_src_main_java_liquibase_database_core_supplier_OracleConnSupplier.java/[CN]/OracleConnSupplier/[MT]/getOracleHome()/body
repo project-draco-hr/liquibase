@@ -1,0 +1,8 @@
+{
+  if (getVersion().startsWith("12.")) {
+    return getInstallDir() + getFileSeparator() + "12c";
+  }
+ else {
+    throw new UnexpectedLiquibaseSdkException("Unsupported oracle version: " + getVersion());
+  }
+}

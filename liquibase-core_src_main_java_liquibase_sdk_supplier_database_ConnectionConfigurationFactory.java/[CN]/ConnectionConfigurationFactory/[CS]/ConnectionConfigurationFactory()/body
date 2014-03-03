@@ -1,7 +1,7 @@
 {
   try {
-    Class[] classes=ServiceLocator.getInstance().findClasses(ConnectionConfiguration.class);
-    for (    Class<? extends ConnectionConfiguration> clazz : classes) {
+    Class[] classes=ServiceLocator.getInstance().findClasses(ConnectionSupplier.class);
+    for (    Class<? extends ConnectionSupplier> clazz : classes) {
       register(clazz.getConstructor().newInstance());
     }
   }

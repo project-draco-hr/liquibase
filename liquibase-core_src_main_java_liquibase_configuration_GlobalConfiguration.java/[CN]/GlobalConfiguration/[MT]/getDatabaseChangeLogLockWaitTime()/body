@@ -1,0 +1,3 @@
+{
+  return getContainer().getValue(CHANGELOGLOCK_WAIT_TIME,Long.class);
+}

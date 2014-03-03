@@ -1,0 +1,4 @@
+{
+  this.changeLogFile=changeLogFile;
+  return this;
+}

@@ -1,0 +1,4 @@
+{
+  this.compareControl=compareControl;
+  return this;
+}

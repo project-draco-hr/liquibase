@@ -6,10 +6,10 @@
     }
  else {
       AddAutoIncrementChange change=new AddAutoIncrementChange();
-      if (control.isIncludeCatalog()) {
+      if (control.getIncludeCatalog()) {
         change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
       }
-      if (control.isIncludeSchema()) {
+      if (control.getIncludeSchema()) {
         change.setSchemaName(column.getRelation().getSchema().getName());
       }
       change.setTableName(column.getRelation().getName());

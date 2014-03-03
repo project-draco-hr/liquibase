@@ -1,0 +1,13 @@
+{
+  if (schemas == null || schemas.length == 0 || schemas[0] == null) {
+    this.schemas=null;
+    return this;
+  }
+  schemas=StringUtils.join(schemas,",").split("\\s*,\\s*");
+  List<CatalogAndSchema> finalList=new ArrayList<CatalogAndSchema>();
+  for (  String schema : schemas) {
+    finalList.add(database.correctSchema(new CatalogAndSchema(schema)));
+  }
+  this.schemas=finalList.toArray(new CatalogAndSchema[finalList.size()]);
+  return this;
+}

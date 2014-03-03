@@ -1,0 +1,5 @@
+{
+  this.namespace=namespace;
+  this.name=propertyName;
+  this.type=type;
+}

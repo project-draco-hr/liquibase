@@ -1,0 +1,32 @@
+{
+  File manifestsDir=new File(vagrantInfo.boxDir,"manifests");
+  manifestsDir.mkdirs();
+  Set<String> puppetBlocks=new HashSet<String>();
+  for (  ConnectionSupplier config : databases) {
+    Map<String,Object> context=new HashMap<String,Object>();
+    context.put("supplier",config);
+    ConnectionSupplier.ConfigTemplate thisInit=config.getPuppetTemplate(context);
+    if (thisInit != null) {
+      puppetBlocks.add(thisInit.output());
+    }
+  }
+  Map<String,Object> context=new HashMap<String,Object>();
+  context.put("puppetBlocks",puppetBlocks);
+  String osLevelConfig;
+  if (vagrantInfo.baseBoxName.contains("linux")) {
+    osLevelConfig="service { \"iptables\":\n" + "  enable => false,\n" + "  ensure => \"stopped\",\n"+ "}\n\n";
+    Set<String> requiredPackages=new HashSet<String>();
+    requiredPackages.add("unzip");
+    for (    ConnectionSupplier config : databases) {
+      requiredPackages.addAll(config.getRequiredPackages(vagrantInfo.boxName));
+    }
+    for (    String requiredPackage : requiredPackages) {
+      osLevelConfig+="package { \"" + requiredPackage + "\":\n"+ "    ensure => \"installed\"\n"+ "}\n\n";
+    }
+  }
+ else {
+    osLevelConfig="package { '7zip':\n" + "    ensure  => '9.20',\n" + "    source\t=>\t\"http://downloads.sourceforge.net/sevenzip/7z920-x64.msi\",\n"+ "}\n";
+  }
+  context.put("osLevelConfig",osLevelConfig);
+  TemplateService.getInstance().write("liquibase/sdk/vagrant/manifests/init.pp.vm",new File(manifestsDir,"init.pp"),context);
+}

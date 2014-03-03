@@ -2,6 +2,9 @@
   if (value == null || value.toString().equalsIgnoreCase("null")) {
     return null;
   }
+  if (value instanceof DatabaseFunction) {
+    return value.toString();
+  }
   String val=String.valueOf(value);
   if (val.startsWith("'") && val.endsWith("'")) {
     return val;

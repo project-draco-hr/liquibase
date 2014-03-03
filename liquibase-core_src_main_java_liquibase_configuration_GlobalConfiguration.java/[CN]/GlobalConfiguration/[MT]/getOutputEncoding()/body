@@ -1,0 +1,3 @@
+{
+  return getContainer().getValue(OUTPUT_ENCODING,String.class);
+}

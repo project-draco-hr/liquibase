@@ -1,0 +1,16 @@
+{
+  String filePath=changeSet.getFilePath();
+  if (filePath == null) {
+    throw new UnexpectedLiquibaseException("No changeset file path set. Cannot determine target database type");
+  }
+  Matcher matcher=fileNamePatter.matcher(filePath);
+  if (!matcher.matches()) {
+    throw new UnexpectedLiquibaseException("Serializing changelog as sql requires a file name in the format *.databaseType.sql. Example: changelog.h2.sql. Passed: " + filePath);
+  }
+  String shortName=matcher.replaceFirst("$1");
+  Database database=DatabaseFactory.getInstance().getDatabase(shortName);
+  if (database == null) {
+    throw new UnexpectedLiquibaseException("Serializing changelog as sql requires a file name in the format *.databaseType.sql. Example: changelog.h2.sql. Unknown databaes type: " + shortName);
+  }
+  return database;
+}

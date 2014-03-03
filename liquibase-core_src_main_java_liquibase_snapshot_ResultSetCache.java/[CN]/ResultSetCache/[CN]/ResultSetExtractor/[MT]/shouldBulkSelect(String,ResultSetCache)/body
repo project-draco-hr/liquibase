@@ -1,0 +1,3 @@
+{
+  return resultSetCache.getTimesSingleQueried(schemaKey) >= 3;
+}

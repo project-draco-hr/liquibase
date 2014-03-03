@@ -6,13 +6,7 @@
     DataType type=new DataType(dataType);
     if (dataType.equalsIgnoreCase("NUMBER")) {
       type.setColumnSize(columnMetadataResultSet.getInt("DATA_PRECISION"));
-      if (type.getColumnSize() == null) {
-        type.setColumnSize(38);
-      }
       type.setDecimalDigits(columnMetadataResultSet.getInt("DATA_SCALE"));
-      if (type.getDecimalDigits() == null) {
-        type.setDecimalDigits(0);
-      }
     }
  else {
       type.setColumnSize(columnMetadataResultSet.getInt("DATA_LENGTH"));

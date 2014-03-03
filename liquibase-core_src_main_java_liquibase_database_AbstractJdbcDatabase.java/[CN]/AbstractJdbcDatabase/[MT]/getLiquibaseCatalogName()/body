@@ -1,3 +1,10 @@
 {
-  return liquibaseCatalogName == null ? getDefaultCatalogName() : liquibaseCatalogName;
+  if (liquibaseCatalogName != null) {
+    return liquibaseCatalogName;
+  }
+  ConfigurationProperty configuration=LiquibaseConfiguration.getInstance().getProperty(GlobalConfiguration.class,GlobalConfiguration.LIQUIBASE_CATALOG_NAME);
+  if (configuration.getWasOverridden()) {
+    return configuration.getValue(String.class);
+  }
+  return getDefaultCatalogName();
 }

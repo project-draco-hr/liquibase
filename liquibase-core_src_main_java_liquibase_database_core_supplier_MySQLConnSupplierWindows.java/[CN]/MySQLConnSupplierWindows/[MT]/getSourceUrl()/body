@@ -1,0 +1,3 @@
+{
+  return "http://dev.mysql.com/get/Downloads/MySQL-" + getShortVersion() + "/mysql-"+ getVersion()+ "-winx64.msi";
+}

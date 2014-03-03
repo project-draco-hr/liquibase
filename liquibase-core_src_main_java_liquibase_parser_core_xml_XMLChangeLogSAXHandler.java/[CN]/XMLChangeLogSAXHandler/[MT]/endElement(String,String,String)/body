@@ -96,7 +96,7 @@
       if (textString != null) {
         if (change instanceof RawSQLChange) {
           String expandedExpression=textString;
-          if (false == ChangeLogParameters.EnableEscaping) {
+          if (!LiquibaseConfiguration.getInstance().getConfiguration(ChangeLogParserCofiguration.class).getSupportPropertyEscaping()) {
             expandedExpression=changeLogParameters.expandExpressions(textString);
           }
           ((RawSQLChange)change).setSql(expandedExpression);
@@ -111,7 +111,17 @@
           ((StopChange)change).setMessage(textString);
         }
  else {
-          throw new RuntimeException("Unexpected text in " + changeFactory.getChangeMetaData(change).getName());
+          boolean foundTextParam=false;
+          for (          ChangeParameterMetaData metadata : changeFactory.getChangeMetaData(change).getParameters().values()) {
+            if (metadata.getSerializationType() == LiquibaseSerializable.SerializationType.DIRECT_VALUE) {
+              metadata.setValue(change,textString);
+              foundTextParam=true;
+              break;
+            }
+          }
+          if (!foundTextParam) {
+            throw new RuntimeException("Unexpected text in " + changeFactory.getChangeMetaData(change).getName());
+          }
         }
       }
       text=null;

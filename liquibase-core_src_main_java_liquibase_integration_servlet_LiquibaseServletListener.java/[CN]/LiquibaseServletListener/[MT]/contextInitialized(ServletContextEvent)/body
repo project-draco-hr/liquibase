@@ -11,7 +11,9 @@
   String failOnError=null;
   try {
     ic=new InitialContext();
-    failOnError=getValue(LIQUIBASE_ONERROR_FAIL,servletContext,ic);
+    servletValueContainer=new ServletValueContainer(servletContext,ic);
+    LiquibaseConfiguration.getInstance().init(servletValueContainer);
+    failOnError=(String)servletValueContainer.getValue(LIQUIBASE_ONERROR_FAIL);
     if (checkPreconditions(servletContext,ic)) {
       executeUpdate(servletContext,ic);
     }

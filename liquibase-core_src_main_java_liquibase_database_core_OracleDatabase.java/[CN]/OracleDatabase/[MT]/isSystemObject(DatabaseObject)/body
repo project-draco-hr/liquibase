@@ -21,7 +21,7 @@
       return true;
     }
   }
- else   if (example instanceof Table) {
+ else   if (example.getName() != null) {
     if (example.getName().startsWith("BIN$")) {
       return true;
     }

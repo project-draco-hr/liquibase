@@ -1,0 +1,11 @@
+{
+  DiffToChangeLogCommand command=new DiffToChangeLogCommand();
+  command.setReferenceDatabase(referenceDatabase).setTargetDatabase(targetDatabase).setSnapshotTypes(snapshotTypes).setReferenceSchemas(schemas).setTargetSchemas(schemas).setOutputStream(System.out);
+  command.setChangeLogFile(changeLogFile).setDiffOutputControl(diffOutputControl);
+  try {
+    command.execute();
+  }
+ catch (  CommandExecutionException e) {
+    throw new LiquibaseException(e);
+  }
+}

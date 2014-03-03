@@ -1,7 +1,5 @@
 {
   String relativeBaseFileName=changeSet.getChangeLog().getPhysicalFilePath();
-  System.out.println("relativeBaseFileName: " + relativeBaseFileName);
-  System.out.println(new File(".").getAbsolutePath());
   String tempFile=FilenameUtils.concat(FilenameUtils.getFullPath(relativeBaseFileName),fileName);
   if (tempFile != null && new File(tempFile).exists() == true) {
     fileName=tempFile;

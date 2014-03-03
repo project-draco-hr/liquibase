@@ -1,3 +1,6 @@
 {
-  return liquibaseTablespaceName;
+  if (liquibaseTablespaceName != null) {
+    return liquibaseTablespaceName;
+  }
+  return LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getLiquibaseTablespaceName();
 }

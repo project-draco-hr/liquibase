@@ -1,0 +1,14 @@
+{
+  Map<String,Object> context=new HashMap<String,Object>();
+  for (  ConnectionSupplier config : databases) {
+    context.put("supplier",config);
+    Set<ConnectionSupplier.ConfigTemplate> configTemplates=config.generateConfigFiles(context);
+    if (configTemplates != null) {
+      for (      ConnectionSupplier.ConfigTemplate configTemplate : configTemplates) {
+        File outputFile=new File(vagrantInfo.boxDir + "/modules/conf/" + config.getDatabaseShortName(),configTemplate.getOutputFileName());
+        outputFile.getParentFile().mkdirs();
+        configTemplate.write(outputFile);
+      }
+    }
+  }
+}

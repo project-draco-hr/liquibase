@@ -1,0 +1,3 @@
+{
+  return new ConfigTemplate("liquibase/sdk/vagrant/supplier/db2/db2.puppet.vm",context);
+}

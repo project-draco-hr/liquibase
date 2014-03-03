@@ -1,0 +1,9 @@
+{
+  SnapshotControl snapshotControl=new SnapshotControl(database);
+  CatalogAndSchema[] schemas=this.schemas;
+  if (schemas == null) {
+    schemas=new CatalogAndSchema[]{database.getDefaultSchema()};
+  }
+  DatabaseSnapshot snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,database,snapshotControl);
+  return SnapshotSerializerFactory.getInstance().getSerializer(getSerializerFormat()).serialize(snapshot,true);
+}

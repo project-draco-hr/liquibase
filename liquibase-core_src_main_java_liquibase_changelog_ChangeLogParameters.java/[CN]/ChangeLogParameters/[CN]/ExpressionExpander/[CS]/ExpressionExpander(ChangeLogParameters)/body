@@ -1,3 +1,4 @@
 {
-  this(changeLogParameters,false);
+  this.changeLogParameters=changeLogParameters;
+  this.enableEscaping=LiquibaseConfiguration.getInstance().getConfiguration(ChangeLogParserCofiguration.class).getSupportPropertyEscaping();
 }

@@ -1,0 +1,13 @@
+{
+  if (snapshotTypes == null || snapshotTypes.length == 0 || snapshotTypes[0] == null) {
+    this.snapshotTypes=null;
+    return this;
+  }
+  Set<Class<? extends DatabaseObject>> types=DatabaseObjectFactory.getInstance().parseTypes(StringUtils.join(snapshotTypes,","));
+  this.snapshotTypes=new Class[types.size()];
+  int i=0;
+  for (  Class<? extends DatabaseObject> type : types) {
+    this.snapshotTypes[i++]=type;
+  }
+  return this;
+}

@@ -1,0 +1,3 @@
+{
+  return getContainer().getValue(CHANGELOGLOCK_POLL_RATE,Long.class);
+}

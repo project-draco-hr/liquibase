@@ -1,7 +1,0 @@
-{
-  String databaseShortName=config.getDatabaseShortName();
-  if (!configsByDatabase.containsKey(databaseShortName)) {
-    configsByDatabase.put(databaseShortName,new HashSet<ConnectionConfiguration>());
-  }
-  configsByDatabase.get(databaseShortName).add(config);
-}

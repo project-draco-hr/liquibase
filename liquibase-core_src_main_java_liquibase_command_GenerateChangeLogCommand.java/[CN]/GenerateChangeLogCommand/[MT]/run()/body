@@ -1,0 +1,18 @@
+{
+  DiffResult diffResult=createDiffResult();
+  DiffToChangeLog changeLogWriter=new DiffToChangeLog(diffResult,getDiffOutputControl());
+  changeLogWriter.setChangeSetAuthor(author);
+  changeLogWriter.setChangeSetContext(context);
+  changeLogWriter.setChangeSetPath(getChangeLogFile());
+  if (StringUtils.trimToNull(getChangeLogFile()) != null) {
+    changeLogWriter.print(getChangeLogFile());
+  }
+ else {
+    PrintStream outputStream=getOutputStream();
+    if (outputStream == null) {
+      outputStream=System.out;
+    }
+    changeLogWriter.print(outputStream);
+  }
+  return null;
+}

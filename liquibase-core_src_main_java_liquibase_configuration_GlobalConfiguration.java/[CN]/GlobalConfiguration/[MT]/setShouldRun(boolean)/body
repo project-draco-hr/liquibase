@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(SHOULD_RUN,shouldRun);
+  return this;
+}

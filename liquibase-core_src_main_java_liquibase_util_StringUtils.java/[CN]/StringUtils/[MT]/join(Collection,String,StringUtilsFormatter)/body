@@ -1,0 +1,14 @@
+{
+  if (collection == null) {
+    return null;
+  }
+  if (collection.size() == 0) {
+    return "";
+  }
+  StringBuffer buffer=new StringBuffer();
+  for (  Object val : collection) {
+    buffer.append(formatter.toString(val)).append(delimiter);
+  }
+  String returnString=buffer.toString();
+  return returnString.substring(0,returnString.length() - delimiter.length());
+}

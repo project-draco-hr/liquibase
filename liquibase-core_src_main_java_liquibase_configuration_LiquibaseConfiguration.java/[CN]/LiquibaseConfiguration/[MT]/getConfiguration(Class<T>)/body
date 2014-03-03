@@ -1,0 +1,6 @@
+{
+  if (!configurations.containsKey(type)) {
+    configurations.put(type,createConfiguration(type));
+  }
+  return (T)configurations.get(type);
+}

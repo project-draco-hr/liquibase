@@ -1,0 +1,8 @@
+{
+  Database databaseWithDefaultQuoting=new HsqlDatabase();
+  databaseWithDefaultQuoting.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
+  assertEquals("Test",databaseWithDefaultQuoting.escapeObjectName("Test",Table.class));
+  Database databaseWithAllQuoting=new HsqlDatabase();
+  databaseWithAllQuoting.setObjectQuotingStrategy(ObjectQuotingStrategy.QUOTE_ALL_OBJECTS);
+  assertEquals("\"Test\"",databaseWithAllQuoting.escapeObjectName("Test",Table.class));
+}

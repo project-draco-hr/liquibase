@@ -1,0 +1,6 @@
+{
+  if (!implementedDatabases.containsKey(shortName)) {
+    return null;
+  }
+  return implementedDatabases.get(shortName).iterator().next();
+}

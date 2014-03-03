@@ -1,0 +1,4 @@
+{
+  SnapshotControl snapshotControl=new SnapshotControl(getReferenceDatabase(),getSnapshotTypes());
+  return SnapshotGeneratorFactory.getInstance().createSnapshot(getCompareControl().getSchemas(CompareControl.DatabaseRole.REFERENCE),null,snapshotControl);
+}

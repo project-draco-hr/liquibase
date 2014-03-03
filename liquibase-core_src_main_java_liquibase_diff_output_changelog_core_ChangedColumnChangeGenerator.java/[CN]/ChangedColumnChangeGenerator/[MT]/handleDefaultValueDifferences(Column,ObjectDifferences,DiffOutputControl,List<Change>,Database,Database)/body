@@ -5,10 +5,10 @@
     LiquibaseDataType columnDataType=DataTypeFactory.getInstance().from(column.getType());
     if (value == null) {
       DropDefaultValueChange change=new DropDefaultValueChange();
-      if (control.isIncludeCatalog()) {
+      if (control.getIncludeCatalog()) {
         change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
       }
-      if (control.isIncludeSchema()) {
+      if (control.getIncludeSchema()) {
         change.setSchemaName(column.getRelation().getSchema().getName());
       }
       change.setTableName(column.getRelation().getName());
@@ -18,10 +18,10 @@
     }
  else {
       AddDefaultValueChange change=new AddDefaultValueChange();
-      if (control.isIncludeCatalog()) {
+      if (control.getIncludeCatalog()) {
         change.setCatalogName(column.getRelation().getSchema().getCatalog().getName());
       }
-      if (control.isIncludeSchema()) {
+      if (control.getIncludeSchema()) {
         change.setSchemaName(column.getRelation().getSchema().getName());
       }
       change.setTableName(column.getRelation().getName());

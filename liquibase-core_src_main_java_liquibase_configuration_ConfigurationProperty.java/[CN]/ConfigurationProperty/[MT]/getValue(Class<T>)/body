@@ -1,0 +1,6 @@
+{
+  if (!this.type.isAssignableFrom(type)) {
+    throw new UnexpectedLiquibaseException("Property " + name + " on is of type "+ this.type.getSimpleName()+ ", not "+ type.getSimpleName());
+  }
+  return (T)value;
+}
