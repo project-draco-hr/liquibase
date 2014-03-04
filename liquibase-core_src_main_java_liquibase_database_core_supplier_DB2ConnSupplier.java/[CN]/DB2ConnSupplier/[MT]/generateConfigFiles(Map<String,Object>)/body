@@ -1,0 +1,5 @@
+{
+  Set<ConfigTemplate> configTemplates=super.generateConfigFiles(context);
+  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/db2/db2exprc_install.windows.rsp.vm",context));
+  return configTemplates;
+}
