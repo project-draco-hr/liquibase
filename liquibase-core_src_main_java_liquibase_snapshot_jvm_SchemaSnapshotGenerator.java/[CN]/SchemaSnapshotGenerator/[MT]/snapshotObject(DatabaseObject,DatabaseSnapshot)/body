@@ -36,7 +36,7 @@
         String tableSchema=JdbcUtils.getValueForColumn(schemas,"TABLE_SCHEM",database);
         CatalogAndSchema schemaFromJdbcInfo=((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(null,tableSchema);
         Catalog catalog=new Catalog(schemaFromJdbcInfo.getCatalogName());
-        Schema schema=new Schema(catalog,schemaFromJdbcInfo.getSchemaName());
+        Schema schema=new Schema(catalog,tableSchema);
         if (DatabaseObjectComparatorFactory.getInstance().isSameObject(schema,example,database)) {
           if (match == null) {
             match=schema;
