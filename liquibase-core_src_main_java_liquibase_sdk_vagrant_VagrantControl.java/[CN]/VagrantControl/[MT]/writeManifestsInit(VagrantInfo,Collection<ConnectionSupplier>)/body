@@ -14,7 +14,7 @@
   context.put("puppetBlocks",puppetBlocks);
   String osLevelConfig;
   if (vagrantInfo.baseBoxName.contains("linux")) {
-    osLevelConfig="service { \"iptables\":\n" + "  ensure => \"stopped\",\n" + "}\n\n";
+    osLevelConfig="service { \"iptables\":\n" + "  enable => false,\n" + "  ensure => \"stopped\",\n"+ "}\n\n";
     Set<String> requiredPackages=new HashSet<String>();
     requiredPackages.add("unzip");
     for (    ConnectionSupplier config : databases) {

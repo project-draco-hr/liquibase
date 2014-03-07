@@ -1,0 +1,11 @@
+{
+  Set<ConfigTemplate> configTemplates=super.generateConfigFiles(context);
+  if (isWindows()) {
+    configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/db2/db2expc_install.windows.rsp.vm",context));
+  }
+ else {
+    configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/db2/db2expc_install.linux.rsp.vm",context));
+  }
+  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/db2/db2.init.sql.vm",context));
+  return configTemplates;
+}
