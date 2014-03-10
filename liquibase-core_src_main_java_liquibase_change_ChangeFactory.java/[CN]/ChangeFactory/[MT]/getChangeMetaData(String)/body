@@ -1,0 +1,7 @@
+{
+  Change changeObj=create(change);
+  if (changeObj == null) {
+    return null;
+  }
+  return getChangeMetaData(changeObj);
+}

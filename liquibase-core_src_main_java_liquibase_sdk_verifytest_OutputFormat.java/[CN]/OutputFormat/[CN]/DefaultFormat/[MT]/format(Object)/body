@@ -11,5 +11,11 @@
   if (value instanceof Sql) {
     return ((Sql)value).toSql();
   }
+  if (value instanceof Object[]) {
+    return new ArrayFormat(this).format(value);
+  }
+  if (value instanceof Collection) {
+    return new CollectionFormat(this).format(value);
+  }
   return value.toString();
 }

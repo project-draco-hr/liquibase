@@ -2,6 +2,9 @@
   if (file.toLowerCase().endsWith("csv")) {
     return new ByteArrayInputStream(usersCsv.getBytes());
   }
+ else   if (file.toLowerCase().endsWith("my-logic.sql")) {
+    return new ByteArrayInputStream(((String)ChangeFactory.getInstance().getChangeMetaData(new CreateProcedureChange()).getParameters().get("procedureBody").getExampleValue(new HsqlDatabase())).getBytes());
+  }
  else   if (file.toLowerCase().endsWith("sql")) {
     return new ByteArrayInputStream(fileSql.getBytes());
   }

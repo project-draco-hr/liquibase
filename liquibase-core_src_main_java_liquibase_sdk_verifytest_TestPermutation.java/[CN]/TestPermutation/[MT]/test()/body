@@ -2,11 +2,19 @@
   if (skipMessage != null) {
     return;
   }
-  for (  Setup setup : this.setupCommands) {
-    setup.run();
+  try {
+    for (    Setup setup : this.setupCommands) {
+      String message=setup.run();
+      if (message != null) {
+        canVerify=false;
+        skipMessage=message;
+        break;
+      }
+    }
   }
-  for (  Assertion assertion : this.assertions) {
-    assertion.run();
+ catch (  Throwable e) {
+    String message="Error executing setup\n" + "Description: " + output(description) + "\n"+ "Notes: "+ output(notes)+ "\n"+ "Data: "+ output(data);
+    throw new RuntimeException(message,e);
   }
   if (!canVerify) {
     return;
@@ -20,6 +28,10 @@
     }
  catch (    CannotVerifyException e) {
       this.verified=false;
+    }
+catch (    Throwable e) {
+      String message="Error executing verification\n" + "Description: " + output(description) + "\n"+ "Notes: "+ output(notes)+ "\n"+ "Data: "+ output(data);
+      throw new RuntimeException(message,e);
     }
     this.verified=true;
   }

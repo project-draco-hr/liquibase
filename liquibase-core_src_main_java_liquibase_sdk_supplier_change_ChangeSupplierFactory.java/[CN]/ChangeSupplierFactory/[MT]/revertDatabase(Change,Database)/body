@@ -1,5 +1,5 @@
 {
-  ChangeSupplier supplier=getChangeSupplier(change);
+  ChangeSupplier supplier=getSupplier(change);
   try {
     Change[] changes=supplier.revertDatabase(change);
     if (changes != null) {
