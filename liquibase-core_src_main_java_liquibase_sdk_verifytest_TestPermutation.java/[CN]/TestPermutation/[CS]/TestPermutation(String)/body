@@ -1,4 +1,0 @@
-{
-  this.permutationName=permutationName;
-  this.key=permutationName;
-}

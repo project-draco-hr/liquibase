@@ -1,0 +1,25 @@
+{
+  Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+    @Override public void run(){
+      for (      Map.Entry<File,VerifiedTest> entry : filesToWrite.entrySet()) {
+        File file=entry.getKey();
+        VerifiedTest testToWrite=entry.getValue();
+        file.getParentFile().mkdirs();
+        try {
+          FileWriter fileWriter=new FileWriter(file);
+          try {
+            new VerifiedTestWriter().write(testToWrite,fileWriter);
+          }
+  finally {
+            fileWriter.flush();
+            fileWriter.close();
+          }
+        }
+ catch (        IOException e) {
+          throw new UnexpectedLiquibaseException(e);
+        }
+      }
+    }
+  }
+));
+}

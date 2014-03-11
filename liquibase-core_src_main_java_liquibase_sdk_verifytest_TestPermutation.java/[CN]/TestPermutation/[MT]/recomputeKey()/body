@@ -1,0 +1,9 @@
+{
+  longKey=StringUtils.join(description,",",new StringUtils.StringUtilsFormatter(){
+    @Override public String toString(    Object obj){
+      return ((Value)obj).serialize();
+    }
+  }
+);
+  key=MD5Util.computeMD5(longKey);
+}

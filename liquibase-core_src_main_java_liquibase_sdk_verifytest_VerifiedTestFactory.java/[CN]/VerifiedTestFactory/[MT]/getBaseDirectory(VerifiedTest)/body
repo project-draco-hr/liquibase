@@ -1,0 +1,6 @@
+{
+  String testClassName=test.getTestClass().replace(".","/") + ".class";
+  File testClass=new File(this.getClass().getClassLoader().getResource(testClassName).getFile());
+  File classesRoot=new File(testClass.getAbsolutePath().replace(testClassName.replace("/",File.separator),""));
+  return new File(classesRoot.getParentFile().getParentFile(),"src/test/resources");
+}

@@ -1,0 +1,6 @@
+{
+  if (!permutationsByKey.containsKey(key)) {
+    rebuildPermutationsByKey();
+  }
+  return permutationsByKey.get(key);
+}

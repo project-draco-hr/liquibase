@@ -1,0 +1,55 @@
+{
+  TestPermutation previousRun=VerifiedTestFactory.getInstance().getSavedRun(test,this);
+  if (notVerifiedMessage != null) {
+    save(test);
+    return;
+  }
+  try {
+    for (    Setup setup : this.setupCommands) {
+      String message=setup.run();
+      if (message != null) {
+        canVerify=false;
+        notVerifiedMessage=message;
+        break;
+      }
+    }
+  }
+ catch (  Throwable e) {
+    String message="Error executing setup\n" + "Description: " + output(description) + "\n"+ "Notes: "+ output(notes)+ "\n"+ "Data: "+ output(data);
+    throw new RuntimeException(message,e);
+  }
+  if (!canVerify) {
+    save(test);
+    return;
+  }
+  Exception cleanupError=null;
+  try {
+    try {
+      for (      Verification verification : this.verifications) {
+        verification.run();
+      }
+    }
+ catch (    CannotVerifyException e) {
+      this.verified=false;
+    }
+catch (    Throwable e) {
+      String message="Error executing verification\n" + "Description: " + output(description) + "\n"+ "Notes: "+ output(notes)+ "\n"+ "Data: "+ output(data);
+      throw new RuntimeException(message,e);
+    }
+    this.verified=true;
+  }
+  finally {
+    for (    Cleanup cleanup : cleanupCommands) {
+      try {
+        cleanup.run();
+      }
+ catch (      Exception e) {
+        cleanupError=e;
+      }
+    }
+  }
+  if (cleanupError != null) {
+    throw new UnexpectedLiquibaseSdkException("Cleanup error",cleanupError);
+  }
+  save(test);
+}
