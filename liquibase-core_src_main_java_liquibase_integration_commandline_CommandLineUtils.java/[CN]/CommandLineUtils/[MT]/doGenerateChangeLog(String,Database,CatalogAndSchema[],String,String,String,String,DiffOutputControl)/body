@@ -7,7 +7,7 @@
   CompareControl compareControl=new CompareControl(comparisons,snapshotTypes);
   diffOutputControl.setDataDir(dataDir);
   GenerateChangeLogCommand command=new GenerateChangeLogCommand();
-  command.setReferenceDatabase(originalDatabase).setSnapshotTypes(snapshotTypes).setOutputStream(System.out).setReferenceSchemas(schemas).setCompareControl(compareControl);
+  command.setReferenceDatabase(originalDatabase).setSnapshotTypes(snapshotTypes).setOutputStream(System.out).setCompareControl(compareControl);
   command.setChangeLogFile(changeLogFile).setDiffOutputControl(diffOutputControl);
   command.setAuthor(author).setContext(context);
   try {

@@ -1,19 +1,5 @@
 {
   DatabaseSnapshot referenceSnapshot=createReferenceSnapshot();
   DatabaseSnapshot targetSnapshot=createTargetSnapshot();
-  CompareControl.SchemaComparison[] comparisons=new CompareControl.SchemaComparison[referenceSchemas.length];
-  int i=0;
-  for (  CatalogAndSchema schema : referenceSchemas) {
-    CatalogAndSchema targetSchema=null;
-    if (targetSchemas == null) {
-      targetSchema=schema;
-    }
- else {
-      targetSchema=targetSchemas[i];
-    }
-    comparisons[i]=new CompareControl.SchemaComparison(schema,targetSchema);
-    i++;
-  }
-  compareControl=new CompareControl(comparisons,referenceSnapshot.getSnapshotControl().getTypesToInclude());
   return DiffGeneratorFactory.getInstance().compare(referenceSnapshot,targetSnapshot,compareControl);
 }

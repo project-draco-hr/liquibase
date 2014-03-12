@@ -1,7 +1,14 @@
 {
-  CatalogAndSchema[] schemas=getTargetSchemas();
-  if (schemas == null) {
+  CatalogAndSchema[] schemas;
+  if (compareControl == null || compareControl.getSchemaComparisons() == null) {
     schemas=new CatalogAndSchema[]{targetDatabase.getDefaultSchema()};
+  }
+ else {
+    schemas=new CatalogAndSchema[compareControl.getSchemaComparisons().length];
+    int i=0;
+    for (    CompareControl.SchemaComparison comparison : compareControl.getSchemaComparisons()) {
+      schemas[i++]=comparison.getComparisonSchema();
+    }
   }
   return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,targetDatabase,new SnapshotControl(targetDatabase,snapshotTypes));
 }

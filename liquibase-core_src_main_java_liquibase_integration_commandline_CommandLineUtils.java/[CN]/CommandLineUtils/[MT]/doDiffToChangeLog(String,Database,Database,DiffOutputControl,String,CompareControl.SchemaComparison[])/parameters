@@ -3,4 +3,4 @@ Database referenceDatabase
 Database targetDatabase
 DiffOutputControl diffOutputControl
 String snapshotTypes
-CatalogAndSchema[] schemas
+CompareControl.SchemaComparison[] schemaComparisons
