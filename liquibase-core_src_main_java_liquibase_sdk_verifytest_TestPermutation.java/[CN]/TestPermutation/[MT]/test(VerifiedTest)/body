@@ -1,16 +1,26 @@
 {
   TestPermutation previousRun=VerifiedTestFactory.getInstance().getSavedRun(test,this);
-  if (notVerifiedMessage != null) {
+  if (notRanMessage != null) {
     save(test);
     return;
   }
   try {
     for (    Setup setup : this.setupCommands) {
-      String message=setup.run();
-      if (message != null) {
-        canVerify=false;
-        notVerifiedMessage=message;
-        break;
+      SetupResult result=setup.run();
+      if (result == null) {
+        throw new UnexpectedLiquibaseException("No result returned by setup");
+      }
+ else {
+        if (!result.isValid()) {
+          valid=false;
+          canVerify=false;
+          notRanMessage=result.getMessage();
+          break;
+        }
+ else         if (!result.canVerify()) {
+          canVerify=false;
+          notRanMessage=result.getMessage();
+        }
       }
     }
   }
@@ -18,7 +28,7 @@
     String message="Error executing setup\n" + "Description: " + output(description) + "\n"+ "Notes: "+ output(notes)+ "\n"+ "Data: "+ output(data);
     throw new RuntimeException(message,e);
   }
-  if (!canVerify) {
+  if (!valid || !canVerify) {
     save(test);
     return;
   }
