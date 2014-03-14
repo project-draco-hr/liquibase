@@ -1,0 +1,7 @@
+{
+  value=StringUtils.trimToEmpty(value);
+  if (value.length() >= length) {
+    return value;
+  }
+  return value + StringUtils.repeat(" ",length - value.length());
+}

@@ -1,3 +1,6 @@
 {
-  return format.format(value);
+  if (stringValue == null) {
+    stringValue=format.format(value);
+  }
+  return stringValue;
 }
