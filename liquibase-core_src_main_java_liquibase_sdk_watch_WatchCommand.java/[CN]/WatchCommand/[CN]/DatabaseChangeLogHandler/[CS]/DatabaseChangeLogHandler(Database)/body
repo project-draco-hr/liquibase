@@ -1,0 +1,4 @@
+{
+  this.database=database;
+  executor=ExecutorService.getInstance().getExecutor(database);
+}

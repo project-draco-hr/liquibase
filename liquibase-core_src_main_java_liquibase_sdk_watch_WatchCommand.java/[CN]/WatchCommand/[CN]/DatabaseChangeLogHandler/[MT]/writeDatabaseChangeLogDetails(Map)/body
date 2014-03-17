@@ -1,0 +1,6 @@
+{
+  String outString="<table class='table table-striped table-bordered table-condensed'>";
+  outString+="<tr><td><strong>Id</strong></td><td>" + row.get("ID") + "</td></tr>\n"+ "<tr><td><strong>Author</strong></td><td>"+ row.get("AUTHOR")+ "</td></tr>\n"+ "<tr><td><strong>Filename</strong></td><td>"+ row.get("FILENAME")+ "</td></tr>\n"+ "<tr><td><strong>DateExecuted</strong></td><td>"+ new ISODateFormat().format((Date)row.get("DATEEXECUTED"))+ "</td></tr>\n"+ "<tr><td><strong>OrderExecuted</strong></td><td>"+ row.get("ORDEREXECUTED")+ "</td></tr>\n"+ "<tr><td><strong>ExecType</strong></td><td>"+ row.get("EXECTYPE")+ "</td></tr>\n"+ "<tr><td><strong>MD5Sum</strong></td><td>"+ row.get("MD5SUM")+ "</td></tr>\n"+ "<tr><td><strong>Description</strong></td><td>"+ row.get("DESCRIPTION")+ "</td></tr>\n"+ "<tr><td><strong>Comments</strong></td><td>"+ row.get("COMMENTS")+ "</td></tr>\n"+ "<tr><td><strong>Tag</strong></td><td>"+ StringUtils.trimToNull((String)row.get("TAG"))+ "</td></tr>\n"+ "<tr><td><strong>Liquibase</strong></td><td>"+ row.get("LIQUIBASE")+ "</td></tr>\n";
+  outString+="</table>";
+  return outString;
+}

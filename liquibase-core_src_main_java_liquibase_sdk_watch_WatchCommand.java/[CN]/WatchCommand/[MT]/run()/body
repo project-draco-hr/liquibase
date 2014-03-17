@@ -1,3 +1,25 @@
 {
+  Server server=new Server(8080);
+  List<URL> jarUrls=new ArrayList<URL>();
+  File libDir=new File("../../lib/");
+  for (  File file : libDir.listFiles(new FilenameFilter(){
+    @Override public boolean accept(    File dir,    String name){
+      return name.endsWith("jar");
+    }
+  }
+)) {
+    jarUrls.add(file.toURL());
+  }
+  CompositeResourceAccessor resourceAccessor=new CompositeResourceAccessor(new CommandLineResourceAccessor(new URLClassLoader(jarUrls.toArray(new URL[jarUrls.size()]),this.getClass().getClassLoader())));
+  Database database=DatabaseFactory.getInstance().openDatabase("jdbc:mysql://10.10.100.100:3306/lbcat","lbuser","lbuser",resourceAccessor);
+  ResourceHandler staticHandler=new ResourceHandler();
+  staticHandler.setDirectoriesListed(false);
+  staticHandler.setWelcomeFiles(new String[]{"index.html"});
+  staticHandler.setResourceBase(new File(getClass().getClassLoader().getResource("liquibase/sdk/watch/index.html.vm").toURI()).getParentFile().getAbsolutePath());
+  HandlerList handlers=new HandlerList();
+  handlers.setHandlers(new Handler[]{new DatabaseChangeLogHandler(database),staticHandler,new DefaultHandler()});
+  server.setHandler(handlers);
+  server.start();
+  server.join();
   return "Started";
 }

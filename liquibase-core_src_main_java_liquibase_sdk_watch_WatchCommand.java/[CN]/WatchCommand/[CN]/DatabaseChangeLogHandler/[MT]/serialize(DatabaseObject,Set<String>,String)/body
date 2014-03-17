@@ -1,0 +1,109 @@
+{
+  final Set<String> parentNames=new HashSet<String>(oldParentNames);
+  parentNames.add(newParentName);
+  StringBuilder singleValueOut=new StringBuilder();
+  StringBuilder multiValueOut=new StringBuilder();
+  final List<String> attributes=sort(databaseObject.getAttributes());
+  for (  String attribute : attributes) {
+    if (attribute.equals("name")) {
+      continue;
+    }
+    if (attribute.equals("schema")) {
+      continue;
+    }
+    Object value=databaseObject.getAttribute(attribute,Object.class);
+    if (value instanceof Schema) {
+      continue;
+    }
+    boolean multiValue=false;
+    if (value instanceof DatabaseObject) {
+      if (parentNames.contains(((DatabaseObject)value).getName())) {
+        value=null;
+      }
+ else {
+        value=databaseObject.getSerializableFieldValue(attribute);
+      }
+    }
+ else     if (value instanceof Collection) {
+      if (((Collection)value).size() == 0) {
+        value=null;
+      }
+ else {
+        multiValue=true;
+        Object firstValue=((Collection)value).iterator().next();
+        if (firstValue instanceof DatabaseObject) {
+          final List<String> rowAttributes=new ArrayList<String>();
+          rowAttributes.add("name");
+          for (          DatabaseObject obj : ((Collection<DatabaseObject>)value)) {
+            for (            String rowAttribute : obj.getAttributes()) {
+              if (!rowAttributes.contains(rowAttribute)) {
+                Object cellValue=obj.getAttribute(rowAttribute,Object.class);
+                if (cellValue instanceof DatabaseObject && parentNames.contains(((DatabaseObject)cellValue).getName())) {
+                  continue;
+                }
+ else {
+                  if (cellValue == null || (cellValue instanceof Collection && ((Collection)cellValue).size() == 0)) {
+                    continue;
+                  }
+ else {
+                    rowAttributes.add(rowAttribute);
+                  }
+                }
+              }
+            }
+          }
+          value=StringUtils.join((Collection)value,"\n",new StringUtils.StringUtilsFormatter(){
+            @Override public String toString(            Object obj){
+              if (obj instanceof DatabaseObject) {
+                String row="<tr>";
+                for (                String attribute : rowAttributes) {
+                  if (((DatabaseObject)obj).getAttributes().contains(attribute)) {
+                    row+="<td>" + ((DatabaseObject)obj).getSerializableFieldValue(attribute);
+                  }
+ else {
+                    row+="<td></td>";
+                  }
+                }
+                row+="</tr>";
+                return row;
+              }
+ else {
+                return obj.toString();
+              }
+            }
+          }
+);
+          String header="";
+          for (          String rowAttribute : rowAttributes) {
+            header+="<th>" + rowAttribute + "</th>";
+          }
+          value="<table class='table table-bordered table-condensed' style='margin-bottom:0px'><tr>" + header + "</tr>\n"+ StringUtils.indent((String)value,4)+ "</table>";
+        }
+ else {
+          value=databaseObject.getSerializableFieldValue(attribute);
+        }
+      }
+    }
+ else {
+      value=databaseObject.getSerializableFieldValue(attribute);
+    }
+    if (value != null) {
+      if (multiValue) {
+        multiValueOut.append("<h4>").append(attribute).append(":</h4>");
+        multiValueOut.append(value);
+        multiValueOut.append("<br>");
+      }
+ else {
+        singleValueOut.append("<tr><td><strong>").append(attribute).append("</strong></td><td>");
+        singleValueOut.append(value);
+        singleValueOut.append("</td></tr>");
+      }
+    }
+  }
+  String finalOut=singleValueOut.toString();
+  if (finalOut.length() > 0) {
+    finalOut="<h4>Attributes:</h4><table class='table table-bordered table-condensed'>" + finalOut + "</table><br>";
+  }
+  finalOut=finalOut + multiValueOut.toString();
+  return finalOut;
+}
