@@ -1,0 +1,3 @@
+{
+  assertNotNull(diffResult.getMissingObject(new PrimaryKey(change.getConstraintName(),change.getCatalogName(),change.getSchemaName(),change.getTableName())));
+}

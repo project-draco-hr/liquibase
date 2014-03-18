@@ -1,0 +1,7 @@
+{
+  CreateSequenceChange createSequenceChange=new CreateSequenceChange();
+  createSequenceChange.setCatalogName(change.getCatalogName());
+  createSequenceChange.setSchemaName(change.getSchemaName());
+  createSequenceChange.setSequenceName(change.getSequenceName());
+  return new Change[]{createSequenceChange};
+}

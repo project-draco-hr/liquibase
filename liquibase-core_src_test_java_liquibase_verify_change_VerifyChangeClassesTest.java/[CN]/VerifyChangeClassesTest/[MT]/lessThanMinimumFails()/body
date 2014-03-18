@@ -17,7 +17,7 @@
       ArrayList<String> requiredParams=new ArrayList<String>(changeMetaData.getRequiredParameters(database).keySet());
       for (      String paramName : requiredParams) {
         ChangeParameterMetaData param=changeMetaData.getParameters().get(paramName);
-        Object paramValue=param.getExampleValue();
+        Object paramValue=param.getExampleValue(database);
         param.setValue(change,paramValue);
       }
       for (int i=0; i < requiredParams.size(); i++) {

@@ -1,0 +1,9 @@
+{
+  CreateTableChange createTableChange=new CreateTableChange();
+  createTableChange.setCatalogName(change.getCatalogName());
+  createTableChange.setSchemaName(change.getSchemaName());
+  createTableChange.setTableName(change.getTableName());
+  createTableChange.addColumn(new ColumnConfig().setName("id").setType("int").setConstraints(new ConstraintsConfig().setNullable(false).setPrimaryKey(true)));
+  createTableChange.addColumn(new ColumnConfig().setName("not_id").setType("int"));
+  return new Change[]{createTableChange};
+}

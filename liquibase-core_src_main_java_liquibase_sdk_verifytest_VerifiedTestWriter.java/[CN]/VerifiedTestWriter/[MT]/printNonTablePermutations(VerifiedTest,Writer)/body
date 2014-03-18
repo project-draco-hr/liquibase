@@ -1,0 +1,40 @@
+{
+  List<TestPermutation> permutations=new ArrayList(test.getPermutations());
+  Collections.sort(permutations,new Comparator<TestPermutation>(){
+    @Override public int compare(    TestPermutation o1,    TestPermutation o2){
+      return o1.getFullKey().compareTo(o2.getFullKey());
+    }
+  }
+);
+  for (  TestPermutation permutation : permutations) {
+    if (permutation.getRowDescriptionParameter() != null) {
+      continue;
+    }
+    if (!permutation.isValid()) {
+      continue;
+    }
+    out.append("## Permutation: ").append(permutation.getKey()).append(" ##\n\n");
+    out.append("- _VERIFIED:_ ").append(getVerifiedMessage(permutation));
+    out.append("\n");
+    for (    Map.Entry<String,TestPermutation.Value> entry : permutation.getDescription().entrySet()) {
+      appendMapEntry(entry,out);
+    }
+    if (permutation.getNotes().size() > 0) {
+      out.append("\n");
+      out.append("#### Notes ####\n");
+      out.append("\n");
+      for (      Map.Entry<String,TestPermutation.Value> entry : permutation.getNotes().entrySet()) {
+        appendMapEntry(entry,out);
+      }
+    }
+    if (permutation.getData().entrySet().size() > 0) {
+      out.append("\n");
+      out.append("#### Data ####\n");
+      out.append("\n");
+      for (      Map.Entry<String,TestPermutation.Value> entry : permutation.getData().entrySet()) {
+        appendMapEntry(entry,out);
+      }
+    }
+    out.append("\n\n");
+  }
+}

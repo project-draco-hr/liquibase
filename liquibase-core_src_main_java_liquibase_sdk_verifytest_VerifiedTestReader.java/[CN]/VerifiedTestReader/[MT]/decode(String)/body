@@ -1,0 +1,3 @@
+{
+  return string.replace("<br>","\n").replace("\\|","|");
+}

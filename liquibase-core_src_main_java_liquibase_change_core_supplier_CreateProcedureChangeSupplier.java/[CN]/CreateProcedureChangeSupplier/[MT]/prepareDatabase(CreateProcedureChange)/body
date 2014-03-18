@@ -1,0 +1,10 @@
+{
+  CreateTableChange createTableChange=new CreateTableChange();
+  createTableChange.setCatalogName(change.getCatalogName());
+  createTableChange.setSchemaName(change.getSchemaName());
+  createTableChange.setTableName("customers");
+  createTableChange.addColumn(new ColumnConfig().setName("id").setType("int").setConstraints(new ConstraintsConfig().setNullable(false).setPrimaryKey(true)).setAutoIncrement(true));
+  createTableChange.addColumn(new ColumnConfig().setName("first_name").setType("varchar(50)"));
+  createTableChange.addColumn(new ColumnConfig().setName("last_name").setType("varchar(50)"));
+  return new Change[]{createTableChange};
+}

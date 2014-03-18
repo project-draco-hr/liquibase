@@ -1,0 +1,7 @@
+{
+  Set<String> returnSet=new HashSet<String>();
+  for (  Change change : getExtensionChanges()) {
+    returnSet.add(ChangeFactory.getInstance().getChangeMetaData(change).getName());
+  }
+  return returnSet;
+}

@@ -1,0 +1,16 @@
+{
+  String supplierClassName=change.getClass().getName().replaceFirst("(.*)\\.(\\w+)","$1\\.supplier\\.$2Supplier");
+  try {
+    Class supplierClass=Class.forName(supplierClassName);
+    return (ChangeSupplier)supplierClass.newInstance();
+  }
+ catch (  ClassNotFoundException e) {
+    throw new UnexpectedLiquibaseSdkException("No change supplier class " + supplierClassName);
+  }
+catch (  InstantiationException e) {
+    throw new UnexpectedLiquibaseSdkException("Error instantiating supplier class " + supplierClassName);
+  }
+catch (  IllegalAccessException e) {
+    throw new UnexpectedLiquibaseSdkException("Error instantiating supplier class " + supplierClassName);
+  }
+}

@@ -1,0 +1,7 @@
+{
+  CreateTableChange createTableChange=new CreateTableChange();
+  createTableChange.setTableName("person");
+  createTableChange.addColumn(new ColumnConfig().setName("name").setType("varchar(10)"));
+  createTableChange.addColumn(new ColumnConfig().setName("address").setType("varchar(10)"));
+  return new Change[]{createTableChange};
+}

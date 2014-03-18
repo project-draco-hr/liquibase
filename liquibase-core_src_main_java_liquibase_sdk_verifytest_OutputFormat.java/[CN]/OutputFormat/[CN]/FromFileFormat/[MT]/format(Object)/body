@@ -1,0 +1,9 @@
+{
+  if (value == null) {
+    return null;
+  }
+  if (value instanceof TestPermutation.Value) {
+    return ((TestPermutation.Value)value).serialize();
+  }
+  return (String)value;
+}

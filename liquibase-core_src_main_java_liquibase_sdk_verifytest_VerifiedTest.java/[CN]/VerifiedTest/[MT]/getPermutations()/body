@@ -1,0 +1,6 @@
+{
+  ArrayList<TestPermutation> returnList=new ArrayList<TestPermutation>();
+  returnList.addAll(permutationsByKey.values());
+  returnList.addAll(unkeyedPermutations);
+  return Collections.unmodifiableCollection(returnList);
+}

@@ -20,12 +20,12 @@
     DatabaseChangeProperty changePropertyAnnotation=readMethod.getAnnotation(DatabaseChangeProperty.class);
     String mustEqualExisting=createMustEqualExistingMetaData(parameterName,changePropertyAnnotation);
     String description=createDescriptionMetaData(parameterName,changePropertyAnnotation);
-    String example=createExampleValueMetaData(parameterName,changePropertyAnnotation);
+    Map<String,Object> examples=createExampleValueMetaData(parameterName,changePropertyAnnotation);
     String since=createSinceMetaData(parameterName,changePropertyAnnotation);
     SerializationType serializationType=createSerializationTypeMetaData(parameterName,changePropertyAnnotation);
     String[] requiredForDatabase=createRequiredDatabasesMetaData(parameterName,changePropertyAnnotation);
     String[] supportsDatabase=createSupportedDatabasesMetaData(parameterName,changePropertyAnnotation);
-    return new ChangeParameterMetaData(this,parameterName,displayName,description,example,since,type,requiredForDatabase,supportsDatabase,mustEqualExisting,serializationType);
+    return new ChangeParameterMetaData(this,parameterName,displayName,description,examples,since,type,requiredForDatabase,supportsDatabase,mustEqualExisting,serializationType);
   }
  catch (  Exception e) {
     throw new UnexpectedLiquibaseException(e);

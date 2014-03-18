@@ -1,0 +1,7 @@
+{
+  this.value=value;
+  if (formatter == null) {
+    formatter=DefaultFormat;
+  }
+  this.formatter=formatter;
+}

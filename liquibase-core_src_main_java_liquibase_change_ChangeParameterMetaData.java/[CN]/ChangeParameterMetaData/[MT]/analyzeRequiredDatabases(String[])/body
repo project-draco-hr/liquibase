@@ -10,7 +10,7 @@
         if (!change.generateStatementsVolatile(database)) {
           Change testChange=change.getClass().newInstance();
           ValidationErrors originalErrors=getStatementErrors(testChange,database);
-          this.setValue(testChange,this.getExampleValue());
+          this.setValue(testChange,this.getExampleValue(database));
           ValidationErrors finalErrors=getStatementErrors(testChange,database);
           if (originalErrors.getRequiredErrorMessages().size() > 0 && finalErrors.getRequiredErrorMessages().size() < originalErrors.getRequiredErrorMessages().size()) {
             computedDatabases.add(database.getShortName());

@@ -1,0 +1,3 @@
+{
+  assertNotNull(diffResult.getMissingObject(new ForeignKey("fk_test",change.getBaseTableCatalogName(),change.getBaseTableSchemaName(),change.getBaseTableName())));
+}

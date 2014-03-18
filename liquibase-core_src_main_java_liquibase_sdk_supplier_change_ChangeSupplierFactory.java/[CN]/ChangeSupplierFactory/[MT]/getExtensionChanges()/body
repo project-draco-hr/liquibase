@@ -1,0 +1,7 @@
+{
+  Set<Change> returnSet=new HashSet<Change>();
+  for (  String change : ChangeFactory.getInstance().getDefinedChanges()) {
+    returnSet.add(ChangeFactory.getInstance().create(change));
+  }
+  return returnSet;
+}

@@ -1,0 +1,34 @@
+{
+  if (value == null) {
+    return null;
+  }
+  if (value instanceof Class) {
+    return ((Class)value).getName();
+  }
+  if (value instanceof Database) {
+    return ((Database)value).getShortName();
+  }
+  if (value instanceof Sql) {
+    return ((Sql)value).toSql();
+  }
+  if (value instanceof Object[]) {
+    return new ArrayFormat(this).format(value);
+  }
+  if (value instanceof Collection) {
+    return new CollectionFormat(this).format(value);
+  }
+  if (value instanceof TestPermutation.Value) {
+    return ((TestPermutation.Value)value).serialize();
+  }
+  if (value instanceof LiquibaseSerializable) {
+    Map<String,String> map=new HashMap<String,String>();
+    for (    String field : ((LiquibaseSerializable)value).getSerializableFields()) {
+      Object serializedValue=((LiquibaseSerializable)value).getSerializableFieldValue(field);
+      if (serializedValue != null) {
+        map.put(field,serializedValue.toString());
+      }
+    }
+    return StringUtils.join(map,",");
+  }
+  return value.toString();
+}

@@ -1,0 +1,10 @@
+{
+  CreateTableChange createTableChange=new CreateTableChange();
+  createTableChange.setCatalogName(change.getCatalogName());
+  createTableChange.setSchemaName(change.getSchemaName());
+  createTableChange.setTableName(change.getTableName());
+  for (  ColumnConfig column : change.getColumns()) {
+    createTableChange.addColumn(column);
+  }
+  return new Change[]{createTableChange};
+}

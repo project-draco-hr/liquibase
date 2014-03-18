@@ -1,0 +1,8 @@
+{
+  rowDescriptionParameter=key;
+  rowDescription=new HashMap<String,Value>();
+  for (  Map.Entry<String,?> entry : value.entrySet()) {
+    rowDescription.put(entry.getKey(),new Value(entry.getValue(),outputFormat));
+  }
+  recomputeKey();
+}

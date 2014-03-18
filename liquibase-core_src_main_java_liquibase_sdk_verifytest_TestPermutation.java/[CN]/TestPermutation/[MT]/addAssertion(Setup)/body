@@ -1,0 +1,3 @@
+{
+  this.setupCommands.add(setup);
+}
