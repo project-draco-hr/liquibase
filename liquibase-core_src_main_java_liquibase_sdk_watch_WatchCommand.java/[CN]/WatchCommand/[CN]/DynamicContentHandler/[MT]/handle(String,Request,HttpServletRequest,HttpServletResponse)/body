@@ -1,6 +1,10 @@
 {
   try {
-    if (url.equals("/index.html") || url.equals("/") || url.equals("")) {
+    if (url.equals("/favicon.ico")) {
+      httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+      request.setHandled(true);
+    }
+ else     if (url.equals("/index.html") || url.equals("/") || url.equals("")) {
       Map<String,Object> context=new HashMap<String,Object>();
       this.loadIndexData(context);
       httpServletResponse.setContentType("text/html");
