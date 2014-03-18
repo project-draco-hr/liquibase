@@ -1,9 +1,8 @@
 {
   try {
     if (url.equals("/index.html") || url.equals("/") || url.equals("")) {
-      DatabaseSnapshot snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(database.getDefaultSchema(),database,new SnapshotControl(database));
       Map<String,Object> context=new HashMap<String,Object>();
-      this.serialize(snapshot,context);
+      this.loadIndexData(context);
       httpServletResponse.setContentType("text/html");
       httpServletResponse.setStatus(HttpServletResponse.SC_OK);
       TemplateService.getInstance().write("liquibase/sdk/watch/index.html.vm",httpServletResponse.getWriter(),context);

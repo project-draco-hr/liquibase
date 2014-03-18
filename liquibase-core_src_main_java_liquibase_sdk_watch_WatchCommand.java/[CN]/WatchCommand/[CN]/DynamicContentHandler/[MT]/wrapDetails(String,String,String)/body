@@ -1,0 +1,9 @@
+{
+  StringBuilder buffer=new StringBuilder();
+  buffer.append("<div class='panel panel-primary object-details' style='display:none;' id='" + id + "'>");
+  buffer.append("<div class='panel-heading'> <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button><h3 style='margin-top:0px; margin-bottom:0px'>").append(StringUtils.escapeHtml(title)).append("</h3></div>\n");
+  buffer.append("<div class='panel-body'>");
+  buffer.append(StringUtils.indent(details,4));
+  buffer.append("</div></div>");
+  return buffer.toString();
+}

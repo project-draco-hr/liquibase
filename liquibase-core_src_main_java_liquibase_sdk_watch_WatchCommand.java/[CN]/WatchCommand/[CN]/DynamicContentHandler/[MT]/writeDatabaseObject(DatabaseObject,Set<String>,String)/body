@@ -58,7 +58,7 @@
                 String row="<tr>";
                 for (                String attribute : rowAttributes) {
                   if (((DatabaseObject)obj).getAttributes().contains(attribute)) {
-                    row+="<td>" + ((DatabaseObject)obj).getSerializableFieldValue(attribute);
+                    row+="<td>" + StringUtils.escapeHtml(((DatabaseObject)obj).getSerializableFieldValue(attribute).toString());
                   }
  else {
                     row+="<td></td>";
@@ -90,7 +90,7 @@
     if (value != null) {
       if (multiValue) {
         multiValueOut.append("<h4>").append(attribute).append(":</h4>");
-        multiValueOut.append(value);
+        multiValueOut.append(StringUtils.escapeHtml(value.toString()));
         multiValueOut.append("<br>");
       }
  else {

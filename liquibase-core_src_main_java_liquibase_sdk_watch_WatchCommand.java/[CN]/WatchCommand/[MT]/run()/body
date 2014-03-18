@@ -17,7 +17,7 @@
   staticHandler.setWelcomeFiles(new String[]{"index.html"});
   staticHandler.setResourceBase(new File(getClass().getClassLoader().getResource("liquibase/sdk/watch/index.html.vm").toURI()).getParentFile().getAbsolutePath());
   HandlerList handlers=new HandlerList();
-  handlers.setHandlers(new Handler[]{new DatabaseChangeLogHandler(database),staticHandler,new DefaultHandler()});
+  handlers.setHandlers(new Handler[]{new DynamicContentHandler(database),staticHandler,new DefaultHandler()});
   server.setHandler(handlers);
   server.start();
   server.join();

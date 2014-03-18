@@ -1,0 +1,15 @@
+{
+  String outString="<table class='table table-striped table-bordered table-condensed'>";
+  outString+="<tr><th>Id</th><th>Author</th><th>Path</th><th>ExecType</th><th>Tag</th></tr>";
+  StandardChangeLogHistoryService changeLogService=(StandardChangeLogHistoryService)ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database);
+  List<Map> ranChangeSets=(List)changeLogService.queryDatabaseChangeLogTable(database);
+  String changeLogDetails="";
+  for (  Map row : ranChangeSets) {
+    String id=cleanHtmlId(row.get("ID") + ":" + row.get("AUTHOR")+ ":"+ row.get("FILENAME"));
+    outString+="<tr>" + "<td><a style='color:black' class='object-name' href='#" + id + "'>"+ StringUtils.escapeHtml((String)row.get("ID"))+ "</a></td>"+ "<td><a style='color:black' class='object-name' href='#"+ id+ "'>"+ StringUtils.escapeHtml((String)row.get("AUTHOR"))+ "</a></td>"+ "<td><a style='color:black' class='object-name' href='#"+ id+ "'>"+ StringUtils.escapeHtml((String)row.get("FILENAME"))+ "</a></td>"+ "<td><a style='color:black' class='object-name' href='#"+ id+ "'>"+ row.get("EXECTYPE")+ "</a></td>"+ "<td><a style='color:black' class='object-name' href='#"+ id+ "'>"+ StringUtils.escapeHtml((String)StringUtils.trimToEmpty((String)row.get("TAG")))+ "</a></td>"+ "</tr>";
+    changeLogDetails+=wrapDetails(id,row.get("ID") + " :: " + row.get("AUTHOR")+ " :: "+ row.get("FILENAME"),writeDatabaseChangeLogDetails(row));
+  }
+  outString+="</table>";
+  context.put("changeLog",outString);
+  context.put("changeLogDetails",changeLogDetails);
+}
