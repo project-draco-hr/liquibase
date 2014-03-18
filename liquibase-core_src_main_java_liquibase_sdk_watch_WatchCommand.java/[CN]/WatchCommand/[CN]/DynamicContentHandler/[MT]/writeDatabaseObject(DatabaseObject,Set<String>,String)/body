@@ -77,7 +77,7 @@
           for (          String rowAttribute : rowAttributes) {
             header+="<th>" + rowAttribute + "</th>";
           }
-          value="<table class='table table-bordered table-condensed' style='margin-bottom:0px'><tr>" + header + "</tr>\n"+ StringUtils.indent((String)value,4)+ "</table>";
+          value="<div overflow='scroll' style='overflow-x:auto'><table class='table table-bordered table-condensed' style='margin-bottom:0px'><tr>" + header + "</tr>\n"+ StringUtils.indent((String)value,4)+ "</table></div>";
         }
  else {
           value=databaseObject.getSerializableFieldValue(attribute);
