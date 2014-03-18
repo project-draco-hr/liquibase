@@ -1,3 +1,10 @@
 {
-  return definitionMatches(definition,database.getShortName(),returnValueIfEmptyList);
+  String shortName;
+  if (database == null) {
+    shortName="null";
+  }
+ else {
+    shortName=database.getShortName();
+  }
+  return definitionMatches(definition,shortName,returnValueIfEmptyList);
 }
