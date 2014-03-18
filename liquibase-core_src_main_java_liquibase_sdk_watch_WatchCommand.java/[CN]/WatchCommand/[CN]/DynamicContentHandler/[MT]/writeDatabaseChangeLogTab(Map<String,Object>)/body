@@ -1,8 +1,8 @@
 {
   String outString="<table class='table table-striped table-bordered table-condensed'>";
   outString+="<tr><th>Id</th><th>Author</th><th>Path</th><th>ExecType</th><th>Tag</th></tr>";
-  StandardChangeLogHistoryService changeLogService=(StandardChangeLogHistoryService)ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database);
-  List<Map> ranChangeSets=(List)changeLogService.queryDatabaseChangeLogTable(database);
+  SelectFromDatabaseChangeLogStatement select=new SelectFromDatabaseChangeLogStatement("FILENAME","AUTHOR","ID","MD5SUM","DATEEXECUTED","ORDEREXECUTED","EXECTYPE","DESCRIPTION","COMMENTS","TAG","LIQUIBASE").setOrderBy("DATEEXECUTED DESC","ORDEREXECUTED DESC");
+  List<Map> ranChangeSets=(List)ExecutorService.getInstance().getExecutor(database).queryForList(select);
   String changeLogDetails="";
   for (  Map row : ranChangeSets) {
     String id=cleanHtmlId(row.get("ID") + ":" + row.get("AUTHOR")+ ":"+ row.get("FILENAME"));
