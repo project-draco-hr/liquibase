@@ -2,5 +2,5 @@
   if (objectName.contains("(")) {
     return false;
   }
-  return objectName.contains("-") || startsWithNumeric(objectName) || isReservedWord(objectName);
+  return objectName.contains("-") || startsWithNumeric(objectName) || isReservedWord(objectName)|| objectName.contains(" ");
 }
