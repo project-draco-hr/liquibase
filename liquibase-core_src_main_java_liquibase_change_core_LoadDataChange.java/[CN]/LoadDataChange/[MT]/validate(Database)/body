@@ -1,5 +1,0 @@
-{
-  ValidationErrors validate=super.validate(database);
-  validate.checkRequiredField("columns",getColumns());
-  return validate;
-}
