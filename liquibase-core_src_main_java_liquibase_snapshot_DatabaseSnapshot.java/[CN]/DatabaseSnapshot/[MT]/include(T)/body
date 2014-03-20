@@ -19,7 +19,11 @@
   if (isKnownNull(example)) {
     return null;
   }
+  SnapshotListener snapshotListener=snapshotControl.getSnapshotListener();
   SnapshotGeneratorChain chain=createGeneratorChain(example.getClass(),database);
+  if (snapshotListener != null) {
+    snapshotListener.willSnapshot(example,database);
+  }
   T object=chain.snapshot(example,this);
   if (object == null) {
     Set<DatabaseObject> collection=knownNull.get(example.getClass());
@@ -40,6 +44,9 @@
 catch (    IllegalAccessException e) {
       throw new UnexpectedLiquibaseException(e);
     }
+  }
+  if (snapshotListener != null) {
+    snapshotListener.finishedSnapshot(example,object,database);
   }
   return object;
 }

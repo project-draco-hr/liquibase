@@ -1,0 +1,4 @@
+{
+  this.snapshotListener=snapshotListener;
+  return this;
+}

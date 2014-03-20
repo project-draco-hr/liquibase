@@ -1,0 +1,4 @@
+{
+  this.referenceSnapshotControl=referenceSnapshotControl;
+  return this;
+}

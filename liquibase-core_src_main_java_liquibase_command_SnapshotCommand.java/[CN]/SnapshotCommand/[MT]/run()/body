@@ -1,5 +1,6 @@
 {
   SnapshotControl snapshotControl=new SnapshotControl(database);
+  snapshotControl.setSnapshotListener(snapshotListener);
   CatalogAndSchema[] schemas=this.schemas;
   if (schemas == null) {
     schemas=new CatalogAndSchema[]{database.getDefaultSchema()};
