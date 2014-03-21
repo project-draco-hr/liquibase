@@ -10,5 +10,12 @@
       schemas[i++]=comparison.getComparisonSchema();
     }
   }
-  return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,targetDatabase,new SnapshotControl(targetDatabase,snapshotTypes));
+  SnapshotControl snapshotControl=getTargetSnapshotControl();
+  if (snapshotControl == null) {
+    snapshotControl=new SnapshotControl(targetDatabase,snapshotTypes);
+  }
+  if (getSnapshotListener() != null) {
+    snapshotControl.setSnapshotListener(getSnapshotListener());
+  }
+  return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,targetDatabase,snapshotControl);
 }
