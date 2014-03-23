@@ -1,0 +1,73 @@
+{
+  try {
+    GlobalConfiguration globalConfiguration=LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class);
+    if (!globalConfiguration.getShouldRun()) {
+      System.err.println("Liquibase did not run because '" + LiquibaseConfiguration.getInstance().describeValueLookupLogic(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN)) + " was set to false");
+      return;
+    }
+    Main main=new Main();
+    if (args.length == 1 && "--help".equals(args[0])) {
+      main.printHelp(System.err);
+      return;
+    }
+ else     if (args.length == 1 && "--version".equals(args[0])) {
+      System.err.println("Liquibase Version: " + LiquibaseUtil.getBuildVersion() + StreamUtil.getLineSeparator());
+      return;
+    }
+    try {
+      main.parseOptions(args);
+    }
+ catch (    CommandLineParsingException e) {
+      main.printHelp(Arrays.asList(e.getMessage()),System.err);
+      throw e;
+    }
+    File propertiesFile=new File(main.defaultsFile);
+    File localPropertiesFile=new File(main.defaultsFile.replaceFirst("(\\.[^\\.]+)$",".local$1"));
+    if (localPropertiesFile.exists()) {
+      main.parsePropertiesFile(new FileInputStream(localPropertiesFile));
+    }
+    if (propertiesFile.exists()) {
+      main.parsePropertiesFile(new FileInputStream(propertiesFile));
+    }
+    List<String> setupMessages=main.checkSetup();
+    if (setupMessages.size() > 0) {
+      main.printHelp(setupMessages,System.err);
+      return;
+    }
+    main.applyDefaults();
+    main.configureClassLoader();
+    main.doMigration();
+    if ("update".equals(main.command)) {
+      System.err.println("Liquibase Update Successful");
+    }
+ else     if (main.command.startsWith("rollback") && !main.command.endsWith("SQL")) {
+      System.err.println("Liquibase Rollback Successful");
+    }
+ else     if (!main.command.endsWith("SQL")) {
+      System.err.println("Liquibase '" + main.command + "' Successful");
+    }
+  }
+ catch (  Throwable e) {
+    String message=e.getMessage();
+    if (e.getCause() != null) {
+      message=e.getCause().getMessage();
+    }
+    if (message == null) {
+      message="Unknown Reason";
+    }
+    try {
+      if (e.getCause() instanceof ValidationFailedException) {
+        ((ValidationFailedException)e.getCause()).printDescriptiveError(System.out);
+      }
+ else {
+        System.err.println("Unexpected error running Liquibase: " + message + "\n");
+        LogFactory.getInstance().getLog().severe(message);
+        System.err.println(generateLogLevelWarningMessage());
+      }
+    }
+ catch (    Exception e1) {
+      e.printStackTrace();
+    }
+    throw new LiquibaseException("Unexpected error running Liquibase: " + message,e);
+  }
+}
