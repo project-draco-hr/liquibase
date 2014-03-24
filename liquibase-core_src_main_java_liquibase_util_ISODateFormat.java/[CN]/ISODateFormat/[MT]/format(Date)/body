@@ -1,4 +1,7 @@
 {
+  if (date == null) {
+    return null;
+  }
   if (date instanceof java.sql.Date) {
     return format(((java.sql.Date)date));
   }

@@ -50,7 +50,7 @@
           String id=databaseObject.getClass().getName() + "-" + databaseObject.getName();
           id=cleanHtmlId(id);
           typeBuffer.append("<li><a style='color:black' class='object-name' href='#" + id + "'>").append(StringUtils.escapeHtml(databaseObject.getName())).append("</a></li>\n");
-          detailsBuilder.append(wrapDetails(id,databaseObject.getName(),writeDatabaseObject(databaseObject,new HashSet<String>(),databaseObject.getName()))).append("\n");
+          detailsBuilder.append(wrapDetails(id,type.getSimpleName() + " " + databaseObject.getName(),writeDatabaseObject(databaseObject,new HashSet<String>(),databaseObject.getName()))).append("\n");
         }
         catalogBuffer.append(StringUtils.indent(typeBuffer.toString(),4)).append("\n");
         catalogBuffer.append("</ol></div>\n");

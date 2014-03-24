@@ -102,7 +102,7 @@
   }
   String finalOut=singleValueOut.toString();
   if (finalOut.length() > 0) {
-    finalOut="<h4>Attributes:</h4><table class='table table-bordered table-condensed'>" + finalOut + "</table><br>";
+    finalOut="<h4>attributes:</h4><table class='table table-bordered table-condensed'>" + finalOut + "</table><br>";
   }
   finalOut=finalOut + multiValueOut.toString();
   return finalOut;

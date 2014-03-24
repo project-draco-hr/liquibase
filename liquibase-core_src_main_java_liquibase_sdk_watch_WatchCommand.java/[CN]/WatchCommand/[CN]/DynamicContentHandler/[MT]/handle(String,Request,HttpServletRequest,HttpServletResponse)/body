@@ -13,27 +13,36 @@
       request.setHandled(true);
     }
  else     if (url.equals("/liquibase-status.json")) {
-      LockService lockService=LockServiceFactory.getInstance().getLockService(database);
-      lockService.waitForLock();
-      List<Map<String,?>> rows;
-      try {
-        SelectFromDatabaseChangeLogStatement select=new SelectFromDatabaseChangeLogStatement("COUNT(*) AS ROW_COUNT","MAX(DATEEXECUTED) AS LAST_EXEC");
-        rows=executor.queryForList(select);
-      }
+      if (SnapshotGeneratorFactory.getInstance().hasDatabaseChangeLogTable(database)) {
+        LockService lockService=LockServiceFactory.getInstance().getLockService(database);
+        lockService.waitForLock();
+        List<Map<String,?>> rows;
+        try {
+          SelectFromDatabaseChangeLogStatement select=new SelectFromDatabaseChangeLogStatement("COUNT(*) AS ROW_COUNT","MAX(DATEEXECUTED) AS LAST_EXEC");
+          rows=executor.queryForList(select);
+        }
   finally {
-        lockService.releaseLock();
-      }
-      PrintWriter writer=httpServletResponse.getWriter();
-      httpServletResponse.setContentType("application/json");
-      httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-      if (rows.size() == 0) {
-        writer.print("{'count': 0}");
+          lockService.releaseLock();
+        }
+        PrintWriter writer=httpServletResponse.getWriter();
+        httpServletResponse.setContentType("application/json");
+        httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        if (rows.size() == 0) {
+          writer.print("{\"count\": 0}");
+        }
+ else {
+          Map<String,?> row=rows.iterator().next();
+          writer.print("{\"count\":" + row.get("ROW_COUNT") + ", \"lastExec\": \""+ new ISODateFormat().format((Date)row.get("LAST_EXEC"))+ "\"}");
+        }
+        request.setHandled(true);
       }
  else {
-        Map<String,?> row=rows.iterator().next();
-        writer.print("{\"count\":" + row.get("ROW_COUNT") + ", \"lastExec\": \""+ new ISODateFormat().format((Date)row.get("LAST_EXEC"))+ "\"}");
+        PrintWriter writer=httpServletResponse.getWriter();
+        httpServletResponse.setContentType("application/json");
+        httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        writer.print("{\"count\": -1}");
+        request.setHandled(true);
       }
-      request.setHandled(true);
     }
   }
  catch (  Throwable e) {
