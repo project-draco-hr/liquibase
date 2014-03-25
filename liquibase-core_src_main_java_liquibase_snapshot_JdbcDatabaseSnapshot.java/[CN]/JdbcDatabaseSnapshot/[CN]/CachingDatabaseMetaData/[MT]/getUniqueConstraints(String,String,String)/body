@@ -36,7 +36,9 @@
         }
       }
  else       if (database instanceof OracleDatabase) {
-        sql="select uc.constraint_name, uc.table_name,uc.status,uc.deferrable,uc.deferred,ui.tablespace_name from all_constraints uc, all_indexes ui " + "where uc.constraint_type='U' and uc.index_name = ui.index_name " + "and uc.owner = '" + database.correctObjectName(catalogName,Catalog.class) + "' "+ "and ui.table_owner = '"+ database.correctObjectName(catalogName,Catalog.class)+ "' ";
+        CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+        String ownerName=database.correctObjectName(((OracleDatabase)database).getJdbcSchemaName(catalogAndSchema),Catalog.class);
+        sql="select uc.constraint_name, uc.table_name,uc.status,uc.deferrable,uc.deferred,ui.tablespace_name from all_constraints uc, all_indexes ui " + "where uc.constraint_type='U' and uc.index_name = ui.index_name " + "and uc.owner = '" + ownerName + "' "+ "and ui.table_owner = '"+ ownerName+ "' ";
         if (tableName != null) {
           sql+=" and uc.table_name = '" + database.correctObjectName(tableName,Table.class) + "'";
         }
