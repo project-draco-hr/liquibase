@@ -1,2 +1,3 @@
 {
+  setAttribute("objects",new HashMap<Class<? extends DatabaseObject>,Set<DatabaseObject>>());
 }
