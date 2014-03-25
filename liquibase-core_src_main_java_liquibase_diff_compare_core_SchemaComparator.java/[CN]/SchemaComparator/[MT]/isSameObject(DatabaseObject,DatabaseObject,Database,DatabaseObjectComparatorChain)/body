@@ -1,7 +1,4 @@
 {
-  if (chain.isSameObject(databaseObject1,databaseObject2,accordingTo)) {
-    return true;
-  }
   if (!(databaseObject1 instanceof Schema && databaseObject2 instanceof Schema)) {
     return false;
   }
@@ -15,7 +12,7 @@
       return false;
     }
   }
-  if (accordingTo.supportsSchemas()) {
+  if (accordingTo.supportsCatalogs() && accordingTo.supportsSchemas()) {
     String thisSchemaName=thisSchema.getSchemaName();
     String otherSchemaName=otherSchema.getSchemaName();
     if (thisSchemaName == null) {
