@@ -1,5 +1,5 @@
 {
-  return getResultSetCache("getCrossReference").get(new ResultSetCache.UnionResultSetExtractor(database){
+  return getResultSetCache("getImportedKeys").get(new ResultSetCache.UnionResultSetExtractor(database){
     @Override public ResultSetCache.RowData rowKeyParameters(    CachedRow row){
       return new ResultSetCache.RowData(row.getString("FKTABLE_CAT"),row.getString("FKTABLE_SCHEM"),database,row.getString("FKTABLE_NAME"),row.getString("FK_NAME"));
     }
@@ -25,7 +25,7 @@
           throw new RuntimeException("Should have bulk selected");
         }
  else {
-          returnList.addAll(extract(databaseMetaData.getCrossReference(jdbcCatalogName,jdbcSchemaName,foundTable,null,null,null)));
+          returnList.addAll(extract(databaseMetaData.getImportedKeys(jdbcCatalogName,jdbcSchemaName,foundTable)));
         }
       }
       return returnList;
