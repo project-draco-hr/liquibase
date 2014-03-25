@@ -1,12 +1,11 @@
 {
-  if (catalogName == null && schemaName == null) {
-    return "DEFAULT";
+  String catalogName=getCatalogName();
+  String schemaName=getSchemaName();
+  if (catalogName == null) {
+    catalogName="DEFAULT";
   }
-  if (catalogName != null && schemaName == null) {
-    return catalogName;
-  }
-  if (catalogName == null && schemaName != null) {
-    return schemaName;
+  if (schemaName == null) {
+    schemaName="DEFAULT";
   }
   return catalogName + "." + schemaName;
 }

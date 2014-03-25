@@ -1,5 +1,28 @@
 {
-  catalogAndSchema=database.correctSchema(catalogAndSchema);
-  CatalogAndSchema thisCatalogAndSchema=database.correctSchema(this);
-  return catalogAndSchema.toString().equalsIgnoreCase(thisCatalogAndSchema.toString());
+  if (!accordingTo.supportsCatalogs()) {
+    return true;
+  }
+  catalogAndSchema=catalogAndSchema.correct(accordingTo);
+  CatalogAndSchema thisCatalogAndSchema=this.correct(accordingTo);
+  boolean catalogMatches;
+  if (catalogAndSchema.getCatalogName() == null) {
+    catalogMatches=(thisCatalogAndSchema.getCatalogName() == null);
+  }
+ else {
+    catalogMatches=catalogAndSchema.getCatalogName().equalsIgnoreCase(thisCatalogAndSchema.getCatalogName());
+  }
+  if (!catalogMatches) {
+    return false;
+  }
+  if (accordingTo.supportsSchemas()) {
+    if (catalogAndSchema.getSchemaName() == null) {
+      return thisCatalogAndSchema.getSchemaName() == null;
+    }
+ else {
+      return catalogAndSchema.getSchemaName().equalsIgnoreCase(thisCatalogAndSchema.getSchemaName());
+    }
+  }
+ else {
+    return true;
+  }
 }
