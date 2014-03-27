@@ -2,5 +2,5 @@
   if (schema == null) {
     return new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName());
   }
-  return schema.correct(this);
+  return schema.standardize(this);
 }

@@ -1,5 +1,5 @@
 {
-  schema=correctSchema(schema);
+  schema=schema.customize(this);
   List<Map<String,?>> retList=ExecutorService.getInstance().getExecutor(this).queryForList(new GetViewDefinitionStatement(schema.getCatalogName(),schema.getSchemaName(),viewName));
   StringBuilder sb=new StringBuilder();
   for (  Map rowMap : retList) {

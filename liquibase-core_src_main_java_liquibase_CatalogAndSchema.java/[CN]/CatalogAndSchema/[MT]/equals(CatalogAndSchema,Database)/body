@@ -2,8 +2,8 @@
   if (!accordingTo.supportsCatalogs()) {
     return true;
   }
-  catalogAndSchema=catalogAndSchema.correct(accordingTo);
-  CatalogAndSchema thisCatalogAndSchema=this.correct(accordingTo);
+  catalogAndSchema=catalogAndSchema.customize(accordingTo);
+  CatalogAndSchema thisCatalogAndSchema=this.customize(accordingTo);
   boolean catalogMatches;
   if (catalogAndSchema.getCatalogName() == null) {
     catalogMatches=(thisCatalogAndSchema.getCatalogName() == null);

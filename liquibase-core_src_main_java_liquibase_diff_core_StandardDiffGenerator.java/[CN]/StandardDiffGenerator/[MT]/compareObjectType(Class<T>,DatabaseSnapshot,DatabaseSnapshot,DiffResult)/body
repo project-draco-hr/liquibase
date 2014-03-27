@@ -1,10 +1,5 @@
 {
   for (  CompareControl.SchemaComparison schemaComparison : diffResult.getCompareControl().getSchemaComparisons()) {
-    CatalogAndSchema referenceSchema=referenceSnapshot.getDatabase().correctSchema(schemaComparison.getReferenceSchema());
-    CatalogAndSchema comparisonSchema=null;
-    if (comparisonSnapshot.getDatabase() != null) {
-      comparisonSchema=comparisonSnapshot.getDatabase().correctSchema(schemaComparison.getComparisonSchema());
-    }
     for (    T referenceObject : referenceSnapshot.get(type)) {
       T comparisonObject=comparisonSnapshot.get(referenceObject);
       if (comparisonObject == null) {

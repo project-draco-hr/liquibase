@@ -15,5 +15,11 @@
  else {
     schemaName=null;
   }
+  if (catalogName != null) {
+    catalogName=catalogName.toUpperCase();
+  }
+  if (schemaName != null) {
+    schemaName=schemaName.toUpperCase();
+  }
   return new CatalogAndSchema(catalogName,schemaName);
 }

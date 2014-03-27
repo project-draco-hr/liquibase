@@ -1,5 +1,5 @@
 {
-  schema=correctSchema(schema);
+  schema=schema.customize(this);
   String definition=(String)ExecutorService.getInstance().getExecutor(this).queryForObject(new GetViewDefinitionStatement(schema.getCatalogName(),schema.getSchemaName(),viewName),String.class);
   if (definition == null) {
     return null;
