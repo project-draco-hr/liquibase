@@ -1,3 +1,6 @@
 {
-  return functionValue.startsWith("current_timestamp") || functionValue.startsWith("current_datetime") || getCurrentDateTimeFunction().equalsIgnoreCase(functionValue);
+  if (functionValue == null) {
+    return false;
+  }
+  return functionValue.startsWith("current_timestamp") || functionValue.startsWith("current_datetime") || functionValue.equalsIgnoreCase(getCurrentDateTimeFunction());
 }

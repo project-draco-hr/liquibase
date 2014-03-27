@@ -6,13 +6,29 @@
         VerifiedTest testToWrite=entry.getValue();
         file.getParentFile().mkdirs();
         try {
-          FileWriter fileWriter=new FileWriter(file);
-          try {
-            new VerifiedTestWriter().write(testToWrite,fileWriter);
-          }
+          if (testToWrite.hasGroups()) {
+            for (            String group : testToWrite.getGroups()) {
+              String groupValue=group.split(": ",2)[1];
+              File groupFile=new File(file.getAbsolutePath().replaceFirst("\\.accepted.md$","-" + escapeFileName(groupValue) + ".accepted.md"));
+              FileWriter fileWriter=new FileWriter(groupFile);
+              try {
+                new VerifiedTestWriter().write(testToWrite,fileWriter,group);
+              }
   finally {
-            fileWriter.flush();
-            fileWriter.close();
+                fileWriter.flush();
+                fileWriter.close();
+              }
+            }
+          }
+ else {
+            FileWriter fileWriter=new FileWriter(file);
+            try {
+              new VerifiedTestWriter().write(testToWrite,fileWriter,null);
+            }
+  finally {
+              fileWriter.flush();
+              fileWriter.close();
+            }
           }
         }
  catch (        IOException e) {

@@ -13,6 +13,9 @@
     if (!permutation.isValid()) {
       continue;
     }
+    if (group != null && !group.equals(permutation.getGroup())) {
+      continue;
+    }
     out.append("## Permutation: ").append(permutation.getKey()).append(" ##\n\n");
     out.append("- _VERIFIED:_ ").append(getVerifiedMessage(permutation));
     out.append("\n");

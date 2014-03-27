@@ -25,7 +25,11 @@
     }
   }
  catch (  Throwable e) {
-    String message="Error executing setup\n" + "Description: " + output(description) + "\n"+ "Notes: "+ output(notes)+ "\n"+ "Data: "+ output(data);
+    SortedMap<String,Value> fullDescription=new TreeMap<String,Value>(description);
+    if (rowDescription != null) {
+      fullDescription.putAll(rowDescription);
+    }
+    String message="Error executing setup\n" + "Description: " + output(fullDescription) + "\n"+ "Notes: "+ output(notes)+ "\n"+ "Data: "+ output(data);
     throw new RuntimeException(message,e);
   }
   if (!valid || !canVerify) {

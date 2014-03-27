@@ -4,6 +4,9 @@
     if (permutation.getRowDescriptionParameter() == null) {
       continue;
     }
+    if (group != null && !group.equals(permutation.getGroup())) {
+      continue;
+    }
     String tableKey=permutation.getTableKey();
     if (!permutationsByTable.containsKey(tableKey)) {
       permutationsByTable.put(tableKey,new ArrayList<TestPermutation>());
