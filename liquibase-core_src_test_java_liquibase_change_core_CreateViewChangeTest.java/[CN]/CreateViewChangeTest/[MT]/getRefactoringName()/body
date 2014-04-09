@@ -1,3 +1,0 @@
-{
-  assertEquals("createView",ChangeFactory.getInstance().getChangeMetaData(new CreateViewChange()).getName());
-}

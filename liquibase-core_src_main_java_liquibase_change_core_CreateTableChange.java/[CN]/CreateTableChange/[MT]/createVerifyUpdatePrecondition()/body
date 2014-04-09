@@ -1,0 +1,7 @@
+{
+  TableExistsPrecondition precondition=new TableExistsPrecondition();
+  precondition.setCatalogName(getCatalogName());
+  precondition.setSchemaName(getSchemaName());
+  precondition.setTableName(getTableName());
+  return precondition;
+}

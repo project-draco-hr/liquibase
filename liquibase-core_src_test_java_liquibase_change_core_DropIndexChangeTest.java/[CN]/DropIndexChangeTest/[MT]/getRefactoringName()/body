@@ -1,3 +1,0 @@
-{
-  assertEquals("dropIndex",ChangeFactory.getInstance().getChangeMetaData(new DropIndexChange()).getName());
-}

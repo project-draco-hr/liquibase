@@ -1,0 +1,15 @@
+{
+  Precondition precondition=createVerifyUpdatePrecondition();
+  NotPrecondition notPrecondition=new NotPrecondition();
+  notPrecondition.addNestedPrecondition(precondition);
+  try {
+    notPrecondition.check(database,null,null);
+  }
+ catch (  PreconditionFailedException e) {
+    return e.getMessage();
+  }
+catch (  PreconditionErrorException e) {
+    return e.getMessage();
+  }
+  return null;
+}

@@ -1,9 +1,0 @@
-{
-  SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
-  assertEquals(1,sqlStatements.length);
-  assertTrue(sqlStatements[0] instanceof RenameColumnStatement);
-  assertEquals("SCHEMA_NAME",((RenameColumnStatement)sqlStatements[0]).getSchemaName());
-  assertEquals("TABLE_NAME",((RenameColumnStatement)sqlStatements[0]).getTableName());
-  assertEquals("oldColName",((RenameColumnStatement)sqlStatements[0]).getOldColumnName());
-  assertEquals("newColName",((RenameColumnStatement)sqlStatements[0]).getNewColumnName());
-}

@@ -1,3 +1,0 @@
-{
-  assertEquals("sql",ChangeFactory.getInstance().getChangeMetaData(new RawSQLChange()).getName());
-}

@@ -1,9 +1,0 @@
-{
-  fileName="liquibase/change/core/SQLFileTestData.sql";
-  change=new SQLFileChange();
-  change.setSql("select * from tablename");
-  ClassLoaderResourceAccessor opener=new ClassLoaderResourceAccessor();
-  change.setResourceAccessor(opener);
-  change.setPath(fileName);
-  change.finishInitialization();
-}

@@ -1,5 +1,0 @@
-{
-  change.setCascadeConstraints(null);
-  SqlStatement[] sqlStatements=change.generateStatements(new MockDatabase());
-  assertFalse(((DropTableStatement)sqlStatements[0]).isCascadeConstraints());
-}

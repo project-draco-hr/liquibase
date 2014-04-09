@@ -1,5 +1,0 @@
-{
-  AlterSequenceChange refactoring=new AlterSequenceChange();
-  refactoring.setSequenceName("SEQ_NAME");
-  assertEquals("Sequence SEQ_NAME altered",refactoring.getConfirmationMessage());
-}

@@ -47,7 +47,7 @@
       this.verified=false;
     }
 catch (    Throwable e) {
-      String message="Error executing verification\n" + "Description: " + output(description) + "\n"+ "Notes: "+ output(notes)+ "\n"+ "Data: "+ output(data);
+      String message="Error executing verification\n" + "Description: " + output(description) + "\n"+ (rowDescription == null ? "" : "Row Description: " + output(rowDescription) + "\n")+ "Notes: "+ output(notes)+ "\n"+ "Data: "+ output(data);
       throw new RuntimeException(message,e);
     }
     this.verified=true;
