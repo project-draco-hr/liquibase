@@ -1,4 +1,6 @@
 {
-  this.setSchema(new Schema(catalogName,schemaName));
+  if (catalogName != null || schemaName != null) {
+    this.setSchema(new Schema(catalogName,schemaName));
+  }
   setName(tableName);
 }
