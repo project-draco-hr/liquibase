@@ -1,0 +1,4 @@
+{
+  this.passed=passed;
+  this.message=message;
+}

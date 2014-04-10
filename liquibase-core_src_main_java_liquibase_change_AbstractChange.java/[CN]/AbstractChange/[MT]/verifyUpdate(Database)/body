@@ -1,15 +1,3 @@
 {
-  Precondition precondition=createVerifyUpdatePrecondition();
-  try {
-    if (precondition != null) {
-      precondition.check(database,null,null);
-    }
-  }
- catch (  PreconditionFailedException e) {
-    return e.getMessage();
-  }
-catch (  PreconditionErrorException e) {
-    return e.getMessage();
-  }
-  return null;
+  return new VerificationResult.Failed("Not implemented");
 }
