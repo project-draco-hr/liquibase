@@ -1,0 +1,11 @@
+{
+  Column example=new Column(Table.class,getCatalogName(),getSchemaName(),getTableName(),getColumnName());
+  try {
+    Column column=SnapshotGeneratorFactory.getInstance().createSnapshot(example,database);
+    if (column == null)     return new VerificationResult.Unverified("Column does not exist");
+    return new VerificationResult(column.isAutoIncrement(),"Column is not auto-increment");
+  }
+ catch (  Exception e) {
+    return new VerificationResult.Unverified(e);
+  }
+}

@@ -1,3 +1,0 @@
-{
-  return new VerificationResult.Failed("Not implemented");
-}

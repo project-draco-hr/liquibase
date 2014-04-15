@@ -1,0 +1,18 @@
+{
+  VerificationResult result=verifyExecuted(database);
+  if (!result.getVerifiedPassed()) {
+    return result;
+  }
+  try {
+    for (    AddColumnConfig columnConfig : getColumns()) {
+      Column snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new Column(Table.class,getCatalogName(),getSchemaName(),getTableName(),columnConfig.getName()),database);
+      PrimaryKey snapshotPK=((Table)snapshot.getRelation()).getPrimaryKey();
+      ConstraintsConfig constraints=columnConfig.getConstraints();
+      result.additionalCheck(constraints.isPrimaryKey() == (snapshotPK != null && snapshotPK.getColumnNamesAsList().contains(columnConfig.getName())),"Column " + columnConfig.getName() + " not set as primary key");
+    }
+  }
+ catch (  Exception e) {
+    return new VerificationResult.Unverified(e);
+  }
+  return new VerificationResult(true);
+}

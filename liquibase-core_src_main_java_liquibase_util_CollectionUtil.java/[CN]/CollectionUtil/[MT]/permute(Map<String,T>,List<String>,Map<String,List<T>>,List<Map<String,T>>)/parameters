@@ -1,0 +1,4 @@
+Map<String,T> basePermutation
+List<String> remainingKeys
+Map<String,List<T>> parameterValues
+List<Map<String,T>> returnList

@@ -1,4 +1,6 @@
 {
   this.passed=passed;
-  this.message=message;
+  if (!passed) {
+    this.message=failedMessage;
+  }
 }
