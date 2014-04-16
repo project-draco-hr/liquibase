@@ -1,9 +1,0 @@
-{
-  try {
-    Table example=(Table)new Table().setName(getTableName()).setSchema(getCatalogName(),getSchemaName());
-    return new VerificationResult(SnapshotGeneratorFactory.getInstance().has(example,database),"Table does not exist");
-  }
- catch (  Exception e) {
-    return new VerificationResult.Unverified(e.getMessage());
-  }
-}

@@ -1,4 +1,0 @@
-{
-  this(e.getMessage());
-  this.exception=e;
-}

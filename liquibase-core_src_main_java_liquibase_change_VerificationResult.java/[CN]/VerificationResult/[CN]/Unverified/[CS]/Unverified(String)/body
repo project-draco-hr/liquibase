@@ -1,4 +1,0 @@
-{
-  super(false,message);
-  this.verified=false;
-}

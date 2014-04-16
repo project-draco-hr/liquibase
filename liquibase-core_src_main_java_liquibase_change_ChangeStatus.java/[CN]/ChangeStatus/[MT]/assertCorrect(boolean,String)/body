@@ -1,0 +1,9 @@
+{
+  if (!correct) {
+    if (this.status == null || this.status == Status.complete) {
+      this.status=Status.incorrect;
+      this.message=incorrectMessage;
+    }
+  }
+  return this;
+}

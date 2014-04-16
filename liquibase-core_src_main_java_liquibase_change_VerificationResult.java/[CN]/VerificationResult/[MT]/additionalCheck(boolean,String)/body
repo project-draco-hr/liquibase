@@ -1,6 +1,0 @@
-{
-  if (this.passed && !newPassedValue) {
-    this.passed=false;
-    this.message=failMessage;
-  }
-}

@@ -1,0 +1,18 @@
+{
+  if (complete) {
+    if (status == null) {
+      status=Status.complete;
+    }
+  }
+ else {
+    if (this.status == Status.complete) {
+      this.message=incompleteMessage;
+      this.status=Status.incorrect;
+    }
+ else     if (this.status != Status.notApplied && this.status != Status.unknown) {
+      this.message=incompleteMessage;
+      this.status=Status.notApplied;
+    }
+  }
+  return this;
+}

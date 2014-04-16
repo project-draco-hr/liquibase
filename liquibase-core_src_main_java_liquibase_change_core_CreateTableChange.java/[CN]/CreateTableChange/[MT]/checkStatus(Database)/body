@@ -1,0 +1,9 @@
+{
+  try {
+    Table example=(Table)new Table().setName(getTableName()).setSchema(getCatalogName(),getSchemaName());
+    return new ChangeStatus().assertComplete(SnapshotGeneratorFactory.getInstance().has(example,database),"Table does not exist");
+  }
+ catch (  Exception e) {
+    return new ChangeStatus().unknown(e.getMessage());
+  }
+}
