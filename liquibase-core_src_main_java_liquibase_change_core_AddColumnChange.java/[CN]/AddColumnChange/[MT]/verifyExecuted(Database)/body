@@ -1,9 +1,15 @@
 {
   try {
+    VerificationResult result=new VerificationResult(true);
     for (    AddColumnConfig column : getColumns()) {
-      boolean exists=SnapshotGeneratorFactory.getInstance().has(new Column(Table.class,getCatalogName(),getSchemaName(),getTableName(),column.getName()),database);
-      if (!exists) {
+      Column snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new Column(Table.class,getCatalogName(),getSchemaName(),getTableName(),column.getName()),database);
+      if (snapshot == null) {
         return new VerificationResult(false,"Column " + column.getName() + " does not exist");
+      }
+      PrimaryKey snapshotPK=((Table)snapshot.getRelation()).getPrimaryKey();
+      ConstraintsConfig constraints=column.getConstraints();
+      if (constraints != null) {
+        result.additionalCheck(constraints.isPrimaryKey() == (snapshotPK != null && snapshotPK.getColumnNamesAsList().contains(column.getName())),"Column " + column.getName() + " not set as primary key");
       }
     }
   }

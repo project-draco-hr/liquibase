@@ -3,7 +3,14 @@
   try {
     Column column=SnapshotGeneratorFactory.getInstance().createSnapshot(example,database);
     if (column == null)     return new VerificationResult.Unverified("Column does not exist");
-    return new VerificationResult(column.isAutoIncrement(),"Column is not auto-increment");
+    VerificationResult result=new VerificationResult(column.isAutoIncrement(),"Column is not auto-increment");
+    if (getStartWith() != null && column.getAutoIncrementInformation().getStartWith() != null) {
+      result.additionalCheck(getStartWith().equals(column.getAutoIncrementInformation().getStartWith()),"startsWith incorrect");
+    }
+    if (getIncrementBy() != null && column.getAutoIncrementInformation().getIncrementBy() != null) {
+      result.additionalCheck(getIncrementBy().equals(column.getAutoIncrementInformation().getIncrementBy()),"Increment by incorrect");
+    }
+    return result;
   }
  catch (  Exception e) {
     return new VerificationResult.Unverified(e);

@@ -1,3 +1,0 @@
-{
-  return verifyExecuted(database);
-}
