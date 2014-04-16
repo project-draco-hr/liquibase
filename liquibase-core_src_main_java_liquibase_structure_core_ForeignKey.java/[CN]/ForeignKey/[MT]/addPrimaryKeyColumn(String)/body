@@ -5,4 +5,5 @@
  else {
     this.setPrimaryKeyColumns(this.getPrimaryKeyColumns() + ", " + primaryKeyColumn);
   }
+  return this;
 }

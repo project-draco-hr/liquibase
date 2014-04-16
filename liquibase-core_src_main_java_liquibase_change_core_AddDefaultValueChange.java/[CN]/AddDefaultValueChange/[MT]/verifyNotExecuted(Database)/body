@@ -1,0 +1,12 @@
+{
+  try {
+    Column column=SnapshotGeneratorFactory.getInstance().createSnapshot(new Column(Table.class,getCatalogName(),getSchemaName(),getTableName(),getColumnName()),database);
+    if (column == null) {
+      return new VerificationResult.Unverified("Column " + getColumnName() + " does not exist");
+    }
+    return new VerificationResult(column.getDefaultValue() == null,"Column " + getColumnName() + " has a default value");
+  }
+ catch (  Exception e) {
+    return new VerificationResult.Unverified(e);
+  }
+}

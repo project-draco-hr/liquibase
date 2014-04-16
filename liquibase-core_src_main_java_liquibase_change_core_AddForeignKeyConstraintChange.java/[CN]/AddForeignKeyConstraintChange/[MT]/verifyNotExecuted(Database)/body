@@ -1,0 +1,12 @@
+{
+  try {
+    ForeignKey example=new ForeignKey(getConstraintName(),getBaseTableCatalogName(),getBaseTableSchemaName(),getBaseTableName());
+    example.setPrimaryKeyTable(new Table(getReferencedTableCatalogName(),getReferencedTableSchemaName(),getReferencedTableName()));
+    example.setForeignKeyColumns(getBaseColumnNames());
+    example.setPrimaryKeyColumns(getReferencedColumnNames());
+    return new VerificationResult(!SnapshotGeneratorFactory.getInstance().has(example,database),"Foreign key exists");
+  }
+ catch (  Exception e) {
+    return new VerificationResult.Unverified(e);
+  }
+}
