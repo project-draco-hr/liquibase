@@ -1,0 +1,12 @@
+{
+  ChangeStatus result=new ChangeStatus();
+  try {
+    View example=new View(getCatalogName(),getSchemaName(),getViewName());
+    View snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(example,database);
+    result.assertComplete(snapshot != null,"View does not exist");
+    return result;
+  }
+ catch (  Exception e) {
+    return result.unknown(e);
+  }
+}

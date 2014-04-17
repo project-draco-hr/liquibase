@@ -1,0 +1,12 @@
+{
+  ChangeStatus result=new ChangeStatus();
+  try {
+    UniqueConstraint example=new UniqueConstraint(getConstraintName(),getCatalogName(),getSchemaName(),getTableName(),getColumnNames().split("\\s+,\\s+"));
+    UniqueConstraint snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(example,database);
+    result.assertComplete(snapshot != null,"Unique constraint does not exist");
+    return result;
+  }
+ catch (  Exception e) {
+    return result.unknown(e);
+  }
+}
