@@ -1,0 +1,8 @@
+{
+  try {
+    return new ChangeStatus().assertComplete(!SnapshotGeneratorFactory.getInstance().has(new Table(getCatalogName(),getSchemaName(),getTableName()),database),"Table exists");
+  }
+ catch (  Exception e) {
+    return new ChangeStatus().unknown(e);
+  }
+}
