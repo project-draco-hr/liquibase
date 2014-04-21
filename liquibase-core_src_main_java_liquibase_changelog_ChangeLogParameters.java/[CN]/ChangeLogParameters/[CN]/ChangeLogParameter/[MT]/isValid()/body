@@ -1,15 +1,5 @@
 {
-  boolean isValid=true;
-  if (validContexts != null && validContexts.size() > 0) {
-    if (ChangeLogParameters.this.currentContexts != null && ChangeLogParameters.this.currentContexts.size() > 0) {
-      isValid=false;
-      for (      String currentContext : ChangeLogParameters.this.currentContexts) {
-        if (validContexts.contains(currentContext)) {
-          isValid=true;
-        }
-      }
-    }
-  }
+  boolean isValid=validContexts == null || validContexts.matches(ChangeLogParameters.this.currentContexts);
   if (isValid) {
     isValid=DatabaseList.definitionMatches(validDatabases,currentDatabase,true);
   }
