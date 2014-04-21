@@ -5,8 +5,8 @@
   if (this.contexts.size() == 0) {
     return true;
   }
-  for (  String context : runtimeContexts.getContexts()) {
-    if (this.contexts.contains(context)) {
+  for (  String expression : this.contexts) {
+    if (matches(expression,runtimeContexts)) {
       return true;
     }
   }
