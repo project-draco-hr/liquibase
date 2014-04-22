@@ -1,7 +1,0 @@
-{
-  refactoring=new RenameColumnChange();
-  refactoring.setSchemaName("SCHEMA_NAME");
-  refactoring.setTableName("TABLE_NAME");
-  refactoring.setOldColumnName("oldColName");
-  refactoring.setNewColumnName("newColName");
-}

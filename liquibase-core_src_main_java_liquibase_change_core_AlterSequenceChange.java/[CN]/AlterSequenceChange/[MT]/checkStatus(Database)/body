@@ -1,0 +1,25 @@
+{
+  ChangeStatus result=new ChangeStatus();
+  try {
+    Sequence sequence=SnapshotGeneratorFactory.getInstance().createSnapshot(new Sequence(getCatalogName(),getSchemaName(),getSequenceName()),database);
+    if (sequence == null) {
+      return result.unknown("Sequence " + getSequenceName() + " does not exist");
+    }
+    if (getIncrementBy() != null) {
+      result.assertCorrect(getIncrementBy().equals(sequence.getIncrementBy()),"Increment by has a different value");
+    }
+    if (getMinValue() != null) {
+      result.assertCorrect(getMinValue().equals(sequence.getMinValue()),"Min Value is different");
+    }
+    if (getMaxValue() != null) {
+      result.assertCorrect(getMaxValue().equals(sequence.getMaxValue()),"Max Value is different");
+    }
+    if (isOrdered() != null) {
+      result.assertCorrect(isOrdered().equals(sequence.getOrdered()),"Max Value is different");
+    }
+  }
+ catch (  Exception e) {
+    return result.unknown(e);
+  }
+  return result;
+}

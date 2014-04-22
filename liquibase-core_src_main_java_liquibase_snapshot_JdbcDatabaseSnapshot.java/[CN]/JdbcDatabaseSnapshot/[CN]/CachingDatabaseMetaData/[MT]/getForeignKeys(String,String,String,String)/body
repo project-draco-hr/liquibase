@@ -7,7 +7,7 @@
       return new ResultSetCache.RowData(catalogName,schemaName,database,tableName,fkName);
     }
     @Override public List<CachedRow> fastFetch() throws SQLException, DatabaseException {
-      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      CatalogAndSchema catalogAndSchema=new CatalogAndSchema(catalogName,schemaName).customize(database);
       List<CachedRow> returnList=new ArrayList<CachedRow>();
       List<String> tables=new ArrayList<String>();
       String jdbcCatalogName=((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema);
@@ -32,7 +32,7 @@
     }
     @Override public List<CachedRow> bulkFetch() throws SQLException, DatabaseException {
       if (database instanceof OracleDatabase) {
-        CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+        CatalogAndSchema catalogAndSchema=new CatalogAndSchema(catalogName,schemaName).customize(database);
         String jdbcSchemaName=((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema);
         String sql="SELECT  " + "  NULL AS pktable_cat,  " + "  p.owner as pktable_schem,  "+ "  p.table_name as pktable_name,  "+ "  pc.column_name as pkcolumn_name,  "+ "  NULL as fktable_cat,  "+ "  f.owner as fktable_schem,  "+ "  f.table_name as fktable_name,  "+ "  fc.column_name as fkcolumn_name,  "+ "  fc.position as key_seq,  "+ "  NULL as update_rule,  "+ "  decode (f.delete_rule, 'CASCADE', 0, 'SET NULL', 2, 1) as delete_rule,  "+ "  f.constraint_name as fk_name,  "+ "  p.constraint_name as pk_name,  "+ "  decode(f.deferrable, 'DEFERRABLE', 5, 'NOT DEFERRABLE', 7, 'DEFERRED', 6) deferrability  "+ "FROM  "+ "  all_cons_columns pc,  "+ "  all_constraints p,  "+ "  all_cons_columns fc,  "+ "  all_constraints f  "+ "WHERE 1 = 1  "+ "  AND p.owner = '" + jdbcSchemaName + "'  "+ "  AND f.constraint_type = 'R'  "+ "  AND p.owner = f.r_owner  "+ "  AND p.constraint_name = f.r_constraint_name  "+ "  AND p.constraint_type in ('P', 'U')  "+ "  AND pc.owner = p.owner  "+ "  AND pc.constraint_name = p.constraint_name  "+ "  AND pc.table_name = p.table_name  "+ "  AND fc.owner = f.owner  "+ "  AND fc.constraint_name = f.constraint_name  "+ "  AND fc.table_name = f.table_name  "+ "  AND fc.position = pc.position  "+ "ORDER BY fktable_schem, fktable_name, key_seq";
         return executeAndExtract(sql,database);

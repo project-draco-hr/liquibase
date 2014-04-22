@@ -1,0 +1,8 @@
+{
+  for (  DatabaseObject object : configuredObjects) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,example,MockDatabaseSnapshot.this.getDatabase())) {
+      return (T)object;
+    }
+  }
+  return null;
+}

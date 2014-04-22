@@ -1,5 +1,5 @@
 {
-  schema=correctSchema(schema);
+  schema=schema.customize(this);
   List<String> defLines=(List<String>)ExecutorService.getInstance().getExecutor(this).queryForList(new GetViewDefinitionStatement(schema.getCatalogName(),schema.getSchemaName(),viewName),String.class);
   StringBuffer sb=new StringBuffer();
   for (  String defLine : defLines) {

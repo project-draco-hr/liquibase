@@ -1,0 +1,13 @@
+{
+  List values=new ArrayList();
+  if (changeParam.getDataType().equals("list of addColumnConfig")) {
+    for (    AddColumnConfig config : getAddColumnConfigSupplier().getStandardPermutations(database)) {
+      values.add(new ArrayList<ColumnConfig>(Arrays.asList(config)));
+    }
+  }
+ else {
+    Object exampleValue=changeParam.getExampleValue(database);
+    values.add(exampleValue);
+  }
+  return values;
+}

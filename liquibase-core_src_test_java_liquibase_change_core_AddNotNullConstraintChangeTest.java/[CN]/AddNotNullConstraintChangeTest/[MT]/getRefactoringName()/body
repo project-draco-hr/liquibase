@@ -1,3 +1,0 @@
-{
-  assertEquals("addNotNullConstraint",ChangeFactory.getInstance().getChangeMetaData(new AddNotNullConstraintChange()).getName());
-}

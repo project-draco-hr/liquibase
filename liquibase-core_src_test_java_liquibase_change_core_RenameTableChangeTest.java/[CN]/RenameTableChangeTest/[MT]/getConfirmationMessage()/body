@@ -1,5 +1,0 @@
-{
-  refactoring.setOldTableName("OLD_NAME");
-  refactoring.setNewTableName("NEW_NAME");
-  assertEquals("Table OLD_NAME renamed to NEW_NAME",refactoring.getConfirmationMessage());
-}

@@ -6,7 +6,7 @@
   schemas=StringUtils.join(schemas,",").split("\\s*,\\s*");
   List<CatalogAndSchema> finalList=new ArrayList<CatalogAndSchema>();
   for (  String schema : schemas) {
-    finalList.add(database.correctSchema(new CatalogAndSchema(schema)));
+    finalList.add(new CatalogAndSchema(null,schema).customize(database));
   }
   this.schemas=finalList.toArray(new CatalogAndSchema[finalList.size()]);
   return this;

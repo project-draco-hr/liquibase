@@ -1,3 +1,0 @@
-{
-  assertEquals("addLookupTable",ChangeFactory.getInstance().getChangeMetaData(new AddLookupTableChange()).getName());
-}

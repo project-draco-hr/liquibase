@@ -1,8 +1,0 @@
-{
-  SqlStatement[] sqlStatements=change.generateStatements(new MockDatabase());
-  assertEquals(1,sqlStatements.length);
-  assertTrue(sqlStatements[0] instanceof DropTableStatement);
-  assertEquals("SCHEMA_NAME",((DropTableStatement)sqlStatements[0]).getSchemaName());
-  assertEquals("TAB_NAME",((DropTableStatement)sqlStatements[0]).getTableName());
-  assertTrue(((DropTableStatement)sqlStatements[0]).isCascadeConstraints());
-}

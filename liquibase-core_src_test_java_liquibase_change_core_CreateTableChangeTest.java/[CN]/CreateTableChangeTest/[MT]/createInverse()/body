@@ -1,8 +1,0 @@
-{
-  CreateTableChange change=new CreateTableChange();
-  change.setTableName("TestTable");
-  Change[] inverses=change.createInverses();
-  assertEquals(1,inverses.length);
-  assertTrue(inverses[0] instanceof DropTableChange);
-  assertEquals("TestTable",((DropTableChange)inverses[0]).getTableName());
-}

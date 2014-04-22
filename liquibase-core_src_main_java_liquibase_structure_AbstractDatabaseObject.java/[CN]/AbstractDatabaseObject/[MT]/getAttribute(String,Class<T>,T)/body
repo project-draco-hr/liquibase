@@ -1,0 +1,7 @@
+{
+  T value=(T)attributes.get(attribute);
+  if (value == null) {
+    return defaultValue;
+  }
+  return value;
+}

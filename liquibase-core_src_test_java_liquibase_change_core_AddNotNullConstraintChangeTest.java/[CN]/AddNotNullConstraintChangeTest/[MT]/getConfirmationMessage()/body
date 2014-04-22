@@ -1,6 +1,0 @@
-{
-  AddNotNullConstraintChange change=new AddNotNullConstraintChange();
-  change.setTableName("TABLE_NAME");
-  change.setColumnName("COL_HERE");
-  assertEquals("Null constraint has been added to TABLE_NAME.COL_HERE",change.getConfirmationMessage());
-}

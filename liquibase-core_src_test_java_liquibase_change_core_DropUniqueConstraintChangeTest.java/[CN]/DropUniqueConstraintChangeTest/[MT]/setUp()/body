@@ -1,6 +1,0 @@
-{
-  change=new DropUniqueConstraintChange();
-  change.setSchemaName("SCHEMA_NAME");
-  change.setTableName("TAB_NAME");
-  change.setConstraintName("UQ_CONSTRAINT");
-}

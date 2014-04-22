@@ -1,0 +1,25 @@
+{
+  String catalogName=StringUtils.trimToNull(getCatalogName());
+  String schemaName=StringUtils.trimToNull(getSchemaName());
+  if (!accordingTo.supportsCatalogs()) {
+    return new CatalogAndSchema(null,null);
+  }
+  if (catalogName != null && catalogName.equalsIgnoreCase(accordingTo.getDefaultCatalogName())) {
+    catalogName=null;
+  }
+  if (accordingTo.supportsSchemas()) {
+    if (schemaName != null && schemaName.equalsIgnoreCase(accordingTo.getDefaultSchemaName())) {
+      schemaName=null;
+    }
+  }
+ else {
+    schemaName=null;
+  }
+  if (catalogName != null) {
+    catalogName=catalogName.toUpperCase();
+  }
+  if (schemaName != null) {
+    schemaName=schemaName.toUpperCase();
+  }
+  return new CatalogAndSchema(catalogName,schemaName);
+}

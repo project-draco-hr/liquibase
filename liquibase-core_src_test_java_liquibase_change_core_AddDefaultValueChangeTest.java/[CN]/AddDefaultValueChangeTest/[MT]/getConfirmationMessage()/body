@@ -1,7 +1,0 @@
-{
-  AddDefaultValueChange change=new AddDefaultValueChange();
-  change.setSchemaName("SCHEMA_NAME");
-  change.setTableName("TABLE_NAME");
-  change.setColumnName("COLUMN_NAME");
-  assertEquals("Default value added to TABLE_NAME.COLUMN_NAME",change.getConfirmationMessage());
-}

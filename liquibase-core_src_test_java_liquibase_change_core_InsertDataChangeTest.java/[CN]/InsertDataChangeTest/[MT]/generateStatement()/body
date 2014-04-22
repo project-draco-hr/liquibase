@@ -1,9 +1,0 @@
-{
-  SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
-  assertEquals(1,sqlStatements.length);
-  assertTrue(sqlStatements[0] instanceof InsertStatement);
-  assertEquals("123",((InsertStatement)sqlStatements[0]).getColumnValue("id").toString());
-  assertEquals("Andrew",((InsertStatement)sqlStatements[0]).getColumnValue("name").toString());
-  assertEquals("21",((InsertStatement)sqlStatements[0]).getColumnValue("age").toString());
-  assertEquals("1.78",((InsertStatement)sqlStatements[0]).getColumnValue("height").toString());
-}

@@ -1,3 +1,0 @@
-{
-  assertEquals("addPrimaryKey",ChangeFactory.getInstance().getChangeMetaData(new AddPrimaryKeyChange()).getName());
-}

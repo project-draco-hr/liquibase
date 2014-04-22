@@ -1,0 +1,18 @@
+{
+  try {
+    ChangeStatus changeStatus=new ChangeStatus();
+    Column newColumn=SnapshotGeneratorFactory.getInstance().createSnapshot(new Column(Table.class,getCatalogName(),getSchemaName(),getTableName(),getNewColumnName()),database);
+    Column oldColumn=SnapshotGeneratorFactory.getInstance().createSnapshot(new Column(Table.class,getCatalogName(),getSchemaName(),getTableName(),getOldColumnName()),database);
+    if (newColumn == null && oldColumn == null) {
+      return changeStatus.unknown("Neither column exists");
+    }
+    if (newColumn != null && oldColumn != null) {
+      return changeStatus.unknown("Both columns exist");
+    }
+    changeStatus.assertComplete(newColumn != null,"New column does not exist");
+    return changeStatus;
+  }
+ catch (  Exception e) {
+    return new ChangeStatus().unknown(e);
+  }
+}

@@ -1,3 +1,0 @@
-{
-  assertEquals("dropColumn",ChangeFactory.getInstance().getChangeMetaData(new DropColumnChange()).getName());
-}

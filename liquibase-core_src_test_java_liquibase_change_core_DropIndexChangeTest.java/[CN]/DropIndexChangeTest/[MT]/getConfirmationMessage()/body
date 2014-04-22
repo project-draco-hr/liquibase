@@ -1,6 +1,0 @@
-{
-  DropIndexChange refactoring=new DropIndexChange();
-  refactoring.setIndexName("IDX_NAME");
-  refactoring.setTableName("TABLE_NAME");
-  assertEquals("Index IDX_NAME dropped from table TABLE_NAME",refactoring.getConfirmationMessage());
-}

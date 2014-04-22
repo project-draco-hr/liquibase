@@ -1,4 +1,0 @@
-{
-  refactoring.setTag("TAG_NAME");
-  assertEquals("Tag 'TAG_NAME' applied to database",refactoring.getConfirmationMessage());
-}

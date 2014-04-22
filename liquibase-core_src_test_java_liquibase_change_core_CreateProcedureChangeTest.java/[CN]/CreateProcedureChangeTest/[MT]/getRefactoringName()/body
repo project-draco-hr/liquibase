@@ -1,3 +1,0 @@
-{
-  assertEquals("createProcedure",ChangeFactory.getInstance().getChangeMetaData(new CreateProcedureChange()).getName());
-}

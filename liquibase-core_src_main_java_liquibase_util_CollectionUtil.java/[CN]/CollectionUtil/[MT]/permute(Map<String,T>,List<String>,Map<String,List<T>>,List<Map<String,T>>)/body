@@ -1,0 +1,14 @@
+{
+  String thisKey=remainingKeys.get(0);
+  remainingKeys=remainingKeys.subList(1,remainingKeys.size());
+  for (  T value : parameterValues.get(thisKey)) {
+    Map<String,T> permutation=new HashMap<String,T>(basePermutation);
+    permutation.put(thisKey,value);
+    if (remainingKeys.size() == 0) {
+      returnList.add(permutation);
+    }
+ else {
+      permute(permutation,remainingKeys,parameterValues,returnList);
+    }
+  }
+}

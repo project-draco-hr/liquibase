@@ -1,3 +1,0 @@
-{
-  assertEquals("dropForeignKeyConstraint",ChangeFactory.getInstance().getChangeMetaData(new DropForeignKeyConstraintChange()).getName());
-}

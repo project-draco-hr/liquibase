@@ -1,3 +1,0 @@
-{
-  assertEquals("createIndex",ChangeFactory.getInstance().getChangeMetaData(new CreateIndexChange()).getName());
-}

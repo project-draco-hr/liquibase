@@ -1,0 +1,8 @@
+{
+  String out=getStatus().name;
+  String message=getMessage();
+  if (message != null) {
+    out+=": " + message;
+  }
+  return out;
+}
