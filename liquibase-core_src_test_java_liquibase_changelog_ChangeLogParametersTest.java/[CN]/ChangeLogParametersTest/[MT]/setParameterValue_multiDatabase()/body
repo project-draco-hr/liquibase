@@ -1,5 +1,5 @@
 {
   ChangeLogParameters changeLogParameters=new ChangeLogParameters(new H2Database());
-  changeLogParameters.set("doubleSet","originalValue",new Contexts(),"baddb, h2");
+  changeLogParameters.set("doubleSet","originalValue",new ContextExpression(),"baddb, h2");
   assertEquals("originalValue",changeLogParameters.getValue("doubleSet"));
 }

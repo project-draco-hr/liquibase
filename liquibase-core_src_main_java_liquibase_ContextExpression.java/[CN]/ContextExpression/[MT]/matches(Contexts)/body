@@ -1,0 +1,14 @@
+{
+  if (runtimeContexts == null || runtimeContexts.isEmpty()) {
+    return true;
+  }
+  if (this.contexts.size() == 0) {
+    return true;
+  }
+  for (  String expression : this.contexts) {
+    if (matches(expression,runtimeContexts)) {
+      return true;
+    }
+  }
+  return false;
+}
