@@ -1,0 +1,13 @@
+{
+  CreateTableChange createTableChange=new CreateTableChange();
+  createTableChange.setCatalogName(change.getCatalogName());
+  createTableChange.setSchemaName(change.getSchemaName());
+  createTableChange.setTableName(change.getTableName());
+  createTableChange.addColumn(new ColumnConfig().setName("other_col").setType("int"));
+  String type=change.getColumnDataType();
+  if (type == null) {
+    type="varchar(255)";
+  }
+  createTableChange.addColumn(new ColumnConfig().setName(change.getColumnName()).setType(type));
+  return new Change[]{createTableChange};
+}

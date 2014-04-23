@@ -1,0 +1,7 @@
+{
+  Set<DatabaseObjectType> databaseObjects=(Set<DatabaseObjectType>)getObjects().get(type);
+  if (databaseObjects == null) {
+    return new ArrayList<DatabaseObjectType>();
+  }
+  return new ArrayList<DatabaseObjectType>(databaseObjects);
+}

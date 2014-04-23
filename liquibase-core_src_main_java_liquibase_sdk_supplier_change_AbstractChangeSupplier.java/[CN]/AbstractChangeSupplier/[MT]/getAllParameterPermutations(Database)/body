@@ -1,0 +1,15 @@
+{
+  ChangeMetaData changeMetaData=ChangeFactory.getInstance().getChangeMetaData(getChangeName());
+  Set<Set<String>> parameterSets=CollectionUtil.powerSet(changeMetaData.getParameters().keySet());
+  List<Change> changes=new ArrayList<Change>();
+  for (  Set<String> params : parameterSets) {
+    Change change=ChangeFactory.getInstance().create(getChangeName());
+    for (    String param : params) {
+      ChangeParameterMetaData changeParam=changeMetaData.getParameters().get(param);
+      Object exampleValue=changeParam.getExampleValue(database);
+      changeParam.setValue(change,exampleValue);
+    }
+    changes.add(change);
+  }
+  return changes;
+}

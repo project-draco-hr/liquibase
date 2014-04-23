@@ -37,6 +37,8 @@
   stream.println("                                of the database to standard out");
   stream.println(" snapshot                       Writes the current state");
   stream.println("                                of the database to standard out");
+  stream.println(" snapshotReference              Writes the current state");
+  stream.println("                                of the referenceUrl database to standard out");
   stream.println("");
   stream.println("Diff Commands");
   stream.println(" diff [diff parameters]          Writes description of differences");

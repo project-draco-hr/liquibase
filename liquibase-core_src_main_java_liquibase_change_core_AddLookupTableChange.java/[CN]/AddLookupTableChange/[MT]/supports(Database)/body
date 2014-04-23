@@ -1,0 +1,6 @@
+{
+  if (database instanceof HsqlDatabase) {
+    return false;
+  }
+  return super.supports(database);
+}

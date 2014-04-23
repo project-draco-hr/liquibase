@@ -1,0 +1,4 @@
+{
+  this.setSchema(new Schema(catalogName,schemaName));
+  this.setName(sequenceName);
+}

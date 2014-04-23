@@ -1,0 +1,3 @@
+{
+  return ChangeFactory.getInstance().getChangeMetaData(this).getName();
+}

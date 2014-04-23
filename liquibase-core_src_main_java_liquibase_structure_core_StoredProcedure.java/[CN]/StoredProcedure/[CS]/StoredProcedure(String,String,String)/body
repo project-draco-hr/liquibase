@@ -1,0 +1,4 @@
+{
+  this.setSchema(new Schema(catalogName,schemaName));
+  setName(procedureName);
+}

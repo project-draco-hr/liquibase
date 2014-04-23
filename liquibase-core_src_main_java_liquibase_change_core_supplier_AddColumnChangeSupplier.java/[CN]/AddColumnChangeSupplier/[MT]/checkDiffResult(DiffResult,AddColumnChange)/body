@@ -1,0 +1,7 @@
+{
+  for (  ColumnConfig column : change.getColumns()) {
+    Column example=new Column().setName(column.getName()).setRelation(new Table().setName(change.getTableName()).setSchema(new Schema(change.getCatalogName(),change.getSchemaName())));
+    Column snapshot=diffResult.getUnexpectedObject(example);
+    assertNotNull(snapshot);
+  }
+}

@@ -1,0 +1,3 @@
+{
+  super(DropIndexChange.class);
+}

@@ -1,0 +1,5 @@
+{
+  ObjectDifferences colDiff=diffResult.getChangedObject(new Column(Table.class,change.getCatalogName(),change.getSchemaName(),change.getTableName(),change.getColumnName()));
+  assertNotNull(colDiff);
+  assertNotNull(colDiff.getDifference("type"));
+}

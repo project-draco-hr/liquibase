@@ -1,0 +1,21 @@
+{
+  File file=getFile(test);
+  VerifiedTest testToWrite;
+  if (filesToWrite.containsKey(file)) {
+    testToWrite=filesToWrite.get(file);
+  }
+ else   if (file.exists()) {
+    FileReader reader=new FileReader(file);
+    try {
+      testToWrite=new VerifiedTestReader().read(reader);
+    }
+  finally {
+      reader.close();
+    }
+  }
+ else {
+    testToWrite=test;
+  }
+  testToWrite.replacePermutation(testPermutation);
+  filesToWrite.put(file,testToWrite);
+}

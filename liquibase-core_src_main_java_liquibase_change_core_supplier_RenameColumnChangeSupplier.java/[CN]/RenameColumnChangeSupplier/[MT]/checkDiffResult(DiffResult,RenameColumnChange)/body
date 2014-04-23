@@ -1,0 +1,7 @@
+{
+  Column oldColumn=diffResult.getMissingObject(new Column(Table.class,change.getCatalogName(),change.getSchemaName(),change.getTableName(),change.getOldColumnName()));
+  Column newColumn=diffResult.getUnexpectedObject(new Column(Table.class,change.getCatalogName(),change.getSchemaName(),change.getTableName(),change.getNewColumnName()));
+  assertNotNull(oldColumn);
+  assertNotNull(newColumn);
+  assertEquals(oldColumn.getType().toString(),newColumn.getType().toString());
+}

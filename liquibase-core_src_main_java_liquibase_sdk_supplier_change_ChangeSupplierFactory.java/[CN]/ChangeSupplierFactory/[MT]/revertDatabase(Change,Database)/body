@@ -1,0 +1,14 @@
+{
+  ChangeSupplier supplier=getSupplier(change);
+  try {
+    Change[] changes=supplier.revertDatabase(change);
+    if (changes != null) {
+      for (      Change revertChange : changes) {
+        ExecutorService.getInstance().getExecutor(database).execute(revertChange);
+      }
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseSdkException("Error executing change supplier prepareDatabase" + supplier.getClass().getName() + ": "+ e.getMessage(),e);
+  }
+}

@@ -2,5 +2,7 @@
   if (changePropertyAnnotation == null) {
     return null;
   }
-  return StringUtils.trimToNull(changePropertyAnnotation.exampleValue());
+  Map<String,Object> examples=new HashMap<String,Object>();
+  examples.put("all",StringUtils.trimToNull(changePropertyAnnotation.exampleValue()));
+  return examples;
 }

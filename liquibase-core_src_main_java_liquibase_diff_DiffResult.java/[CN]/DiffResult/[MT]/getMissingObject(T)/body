@@ -1,0 +1,10 @@
+{
+  Database accordingTo=getComparisonSnapshot().getDatabase();
+  DatabaseObjectComparatorFactory comparator=DatabaseObjectComparatorFactory.getInstance();
+  for (  T obj : (Set<T>)getMissingObjects(example.getClass())) {
+    if (comparator.isSameObject(obj,example,accordingTo)) {
+      return obj;
+    }
+  }
+  return null;
+}

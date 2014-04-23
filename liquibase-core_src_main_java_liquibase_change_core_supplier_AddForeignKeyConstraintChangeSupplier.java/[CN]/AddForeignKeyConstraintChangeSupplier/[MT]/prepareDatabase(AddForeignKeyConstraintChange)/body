@@ -1,0 +1,17 @@
+{
+  CreateTableChange createBaseTable=new CreateTableChange();
+  createBaseTable.setCatalogName(change.getBaseTableCatalogName());
+  createBaseTable.setSchemaName(change.getBaseTableSchemaName());
+  createBaseTable.setTableName(change.getBaseTableName());
+  for (  String columnName : change.getBaseColumnNames().split("\\s+,\\s+")) {
+    createBaseTable.addColumn(new ColumnConfig().setName(columnName).setType("int"));
+  }
+  CreateTableChange createReferencedTable=new CreateTableChange();
+  createReferencedTable.setCatalogName(change.getReferencedTableCatalogName());
+  createReferencedTable.setSchemaName(change.getReferencedTableSchemaName());
+  createReferencedTable.setTableName(change.getReferencedTableName());
+  for (  String columnName : change.getReferencedColumnNames().split("\\s+,\\s+")) {
+    createReferencedTable.addColumn(new ColumnConfig().setName(columnName).setType("int").setConstraints(new ConstraintsConfig().setPrimaryKey(true)));
+  }
+  return new Change[]{createBaseTable,createReferencedTable};
+}

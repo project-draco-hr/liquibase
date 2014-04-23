@@ -1,0 +1,3 @@
+{
+  super(CreateProcedureChange.class);
+}

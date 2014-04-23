@@ -1,3 +1,0 @@
-{
-  return string.replace("\"","&quot;").replace("'","&#39;").replace("<","&lt;").replace(">","&gt;");
-}

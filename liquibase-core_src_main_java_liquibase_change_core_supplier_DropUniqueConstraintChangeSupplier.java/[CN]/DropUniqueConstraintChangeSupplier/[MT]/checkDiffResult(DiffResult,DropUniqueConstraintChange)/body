@@ -1,0 +1,7 @@
+{
+  String[] columns=null;
+  if (change.getUniqueColumns() != null) {
+    columns=change.getUniqueColumns().split(",");
+  }
+  assertNotNull(diffResult.getMissingObject(new UniqueConstraint(change.getConstraintName(),change.getCatalogName(),change.getSchemaName(),change.getTableName(),columns)));
+}

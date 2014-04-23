@@ -2,8 +2,10 @@
   if (database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof FirebirdDatabase|| database instanceof H2Database|| database instanceof HsqlDatabase|| database instanceof OracleDatabase) {
     return new DatabaseDataType("TIMESTAMP");
   }
-  if (database instanceof MSSQLDatabase && getParameters().length > 0 && "16".equals(getParameters()[0])) {
-    return new DatabaseDataType("SMALLDATETIME");
+  if (database instanceof MSSQLDatabase) {
+    if ((getParameters().length > 0 && "16".equals(getParameters()[0])) || "SMALLDATETIME".equalsIgnoreCase(getRawDefinition())) {
+      return new DatabaseDataType("SMALLDATETIME");
+    }
   }
   if (database instanceof InformixDatabase) {
     return new DatabaseDataType("DATETIME YEAR TO FRACTION",5);

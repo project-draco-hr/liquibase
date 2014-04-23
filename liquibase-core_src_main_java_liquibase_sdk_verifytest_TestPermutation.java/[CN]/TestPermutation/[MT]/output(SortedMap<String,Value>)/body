@@ -1,0 +1,7 @@
+{
+  List<String> out=new ArrayList<String>();
+  for (  Map.Entry<String,Value> entry : map.entrySet()) {
+    out.add(entry.getKey() + "=" + entry.getValue().serialize());
+  }
+  return StringUtils.join(out,", ");
+}

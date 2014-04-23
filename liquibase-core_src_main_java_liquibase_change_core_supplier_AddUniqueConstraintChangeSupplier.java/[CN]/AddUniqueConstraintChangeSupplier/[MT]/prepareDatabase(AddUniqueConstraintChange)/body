@@ -1,0 +1,11 @@
+{
+  CreateTableChange createTableChange=new CreateTableChange();
+  createTableChange.setCatalogName(change.getCatalogName());
+  createTableChange.setSchemaName(change.getSchemaName());
+  createTableChange.setTableName(change.getTableName());
+  for (  String column : change.getColumnNames().split(",")) {
+    createTableChange.addColumn(new ColumnConfig().setName(column.trim()).setType("int").setConstraints(new ConstraintsConfig().setNullable(false)));
+  }
+  createTableChange.addColumn(new ColumnConfig().setName("other_column").setType("int"));
+  return new Change[]{createTableChange};
+}

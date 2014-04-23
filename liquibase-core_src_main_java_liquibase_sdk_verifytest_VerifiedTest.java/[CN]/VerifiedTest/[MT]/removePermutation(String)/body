@@ -1,0 +1,6 @@
+{
+  TestPermutation permutation=getPermutation(key);
+  if (permutation != null) {
+    permutationsByKey.remove(permutation.getKey());
+  }
+}

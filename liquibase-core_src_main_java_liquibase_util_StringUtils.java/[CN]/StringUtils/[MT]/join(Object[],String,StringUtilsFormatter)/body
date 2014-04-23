@@ -1,0 +1,3 @@
+{
+  return join(Arrays.asList(array),delimiter,formatter);
+}

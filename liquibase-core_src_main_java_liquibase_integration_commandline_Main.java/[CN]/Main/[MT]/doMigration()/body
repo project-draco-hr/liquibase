@@ -24,28 +24,34 @@
     boolean includeTablespace=Boolean.parseBoolean(getCommandParam("includeTablespace","false"));
     DiffOutputControl diffOutputControl=new DiffOutputControl(includeCatalog,includeSchema,includeTablespace);
     String referenceSchemaNames=getCommandParam("schemas",null);
+    CompareControl.SchemaComparison[] finalSchemaComparisons;
     CatalogAndSchema[] finalSchemas;
     if (referenceSchemaNames == null) {
+      finalSchemaComparisons=new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(defaultCatalogName,defaultSchemaName),new CatalogAndSchema(defaultCatalogName,defaultSchemaName))};
       finalSchemas=new CatalogAndSchema[]{new CatalogAndSchema(defaultCatalogName,defaultSchemaName)};
     }
  else {
+      List<CompareControl.SchemaComparison> schemaComparisons=new ArrayList<CompareControl.SchemaComparison>();
       List<CatalogAndSchema> schemas=new ArrayList<CatalogAndSchema>();
       for (      String schema : referenceSchemaNames.split(",")) {
         CatalogAndSchema correctedSchema=database.correctSchema(new CatalogAndSchema(schema));
+        schemaComparisons.add(new CompareControl.SchemaComparison(correctedSchema,correctedSchema));
         schemas.add(correctedSchema);
         diffOutputControl.addIncludedSchema(correctedSchema);
       }
+      finalSchemaComparisons=schemaComparisons.toArray(new CompareControl.SchemaComparison[schemaComparisons.size()]);
       finalSchemas=schemas.toArray(new CatalogAndSchema[schemas.size()]);
     }
-    for (    CatalogAndSchema schema : finalSchemas) {
-      diffOutputControl.addIncludedSchema(schema);
+    for (    CompareControl.SchemaComparison schema : finalSchemaComparisons) {
+      diffOutputControl.addIncludedSchema(schema.getReferenceSchema());
+      diffOutputControl.addIncludedSchema(schema.getComparisonSchema());
     }
     if ("diff".equalsIgnoreCase(command)) {
-      CommandLineUtils.doDiff(createReferenceDatabaseFromCommandParams(commandParams),database,StringUtils.trimToNull(diffTypes),finalSchemas);
+      CommandLineUtils.doDiff(createReferenceDatabaseFromCommandParams(commandParams),database,StringUtils.trimToNull(diffTypes),finalSchemaComparisons);
       return;
     }
  else     if ("diffChangeLog".equalsIgnoreCase(command)) {
-      CommandLineUtils.doDiffToChangeLog(changeLogFile,createReferenceDatabaseFromCommandParams(commandParams),database,diffOutputControl,StringUtils.trimToNull(diffTypes),finalSchemas);
+      CommandLineUtils.doDiffToChangeLog(changeLogFile,createReferenceDatabaseFromCommandParams(commandParams),database,diffOutputControl,StringUtils.trimToNull(diffTypes),finalSchemaComparisons);
       return;
     }
  else     if ("generateChangeLog".equalsIgnoreCase(command)) {
@@ -56,6 +62,14 @@
       SnapshotCommand command=new SnapshotCommand();
       command.setDatabase(database);
       command.setSchemas(getCommandParam("schemas",database.getDefaultSchema().toString()));
+      System.out.println(command.execute());
+      return;
+    }
+ else     if ("snapshotReference".equalsIgnoreCase(command)) {
+      SnapshotCommand command=new SnapshotCommand();
+      Database referenceDatabase=createReferenceDatabaseFromCommandParams(commandParams);
+      command.setDatabase(referenceDatabase);
+      command.setSchemas(getCommandParam("schemas",referenceDatabase.getDefaultSchema().toString()));
       System.out.println(command.execute());
       return;
     }

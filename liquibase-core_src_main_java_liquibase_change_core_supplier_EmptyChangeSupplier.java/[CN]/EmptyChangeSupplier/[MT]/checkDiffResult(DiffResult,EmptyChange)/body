@@ -1,0 +1,5 @@
+{
+  assertEquals(0,diffResult.getMissingObjects().size());
+  assertEquals(0,diffResult.getUnexpectedObjects().size());
+  assertEquals(0,diffResult.getChangedObjects().size());
+}

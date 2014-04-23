@@ -1,3 +1,0 @@
-{
-  return new ConfigTemplate("liquibase/sdk/vagrant/supplier/oracle/oracle-windows.puppet.vm",context);
-}

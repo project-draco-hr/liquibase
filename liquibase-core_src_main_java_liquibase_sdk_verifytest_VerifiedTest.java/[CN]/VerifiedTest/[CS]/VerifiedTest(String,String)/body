@@ -1,0 +1,4 @@
+{
+  this.testName=testName;
+  this.testClass=testClass;
+}

@@ -1,0 +1,3 @@
+{
+  assertNotNull(diffResult.getUnexpectedObject(new View(change.getCatalogName(),change.getSchemaName(),change.getViewName())));
+}

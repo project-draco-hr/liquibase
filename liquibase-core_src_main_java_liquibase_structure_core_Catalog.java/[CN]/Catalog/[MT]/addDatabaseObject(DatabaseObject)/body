@@ -1,0 +1,11 @@
+{
+  if (databaseObject == null) {
+    return;
+  }
+  Set<DatabaseObject> objects=this.getObjects().get(databaseObject.getClass());
+  if (objects == null) {
+    objects=new HashSet<DatabaseObject>();
+    this.getObjects().put(databaseObject.getClass(),objects);
+  }
+  objects.add(databaseObject);
+}

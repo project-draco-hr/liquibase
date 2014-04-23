@@ -1,0 +1,3 @@
+{
+  notes.put(key,new Value(value,outputFormat));
+}

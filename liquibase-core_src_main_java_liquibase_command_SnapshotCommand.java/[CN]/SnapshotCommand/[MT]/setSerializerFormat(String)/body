@@ -1,3 +1,4 @@
 {
   this.serializerFormat=serializerFormat;
+  return this;
 }

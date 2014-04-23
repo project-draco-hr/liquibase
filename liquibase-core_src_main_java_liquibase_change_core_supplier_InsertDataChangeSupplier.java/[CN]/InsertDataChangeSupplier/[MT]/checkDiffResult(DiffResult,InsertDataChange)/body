@@ -1,0 +1,5 @@
+{
+  Database database=diffResult.getComparisonSnapshot().getDatabase();
+  int rows=ExecutorService.getInstance().getExecutor(database).queryForInt(new RawSqlStatement("select count(*) from " + database.escapeTableName(change.getCatalogName(),change.getSchemaName(),change.getTableName())));
+  assertTrue(rows > 0);
+}

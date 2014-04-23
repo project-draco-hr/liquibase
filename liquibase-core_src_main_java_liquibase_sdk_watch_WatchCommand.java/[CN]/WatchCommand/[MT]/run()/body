@@ -1,0 +1,26 @@
+{
+  Server server=new Server(port);
+  List<URL> jarUrls=new ArrayList<URL>();
+  File libDir=new File("../../lib/");
+  for (  File file : libDir.listFiles(new FilenameFilter(){
+    @Override public boolean accept(    File dir,    String name){
+      return name.endsWith("jar");
+    }
+  }
+)) {
+    jarUrls.add(file.toURL());
+  }
+  CompositeResourceAccessor resourceAccessor=new CompositeResourceAccessor(new CommandLineResourceAccessor(new URLClassLoader(jarUrls.toArray(new URL[jarUrls.size()]),this.getClass().getClassLoader())));
+  Database database=DatabaseFactory.getInstance().openDatabase(url,username,password,resourceAccessor);
+  ResourceHandler staticHandler=new ResourceHandler();
+  staticHandler.setDirectoriesListed(false);
+  staticHandler.setWelcomeFiles(new String[]{"index.html"});
+  staticHandler.setResourceBase(getClass().getClassLoader().getResource("liquibase/sdk/watch/index.html.vm").toExternalForm().replaceFirst("index.html.vm$",""));
+  HandlerList handlers=new HandlerList();
+  handlers.setHandlers(new Handler[]{new DynamicContentHandler(database),staticHandler,new DefaultHandler()});
+  server.setHandler(handlers);
+  server.start();
+  mainApp.out("Liquibase Watch running on http://localhost:" + getPort() + "/");
+  server.join();
+  return "Started";
+}

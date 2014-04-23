@@ -1,0 +1,9 @@
+{
+  setName(name);
+  if (foreignKeyTable != null) {
+    setForeignKeyTable(new Table(foreignKeyCatalog,foreignKeySchema,foreignKeyTable));
+  }
+  if (baseTableColumns != null && baseTableColumns.length > 0 && baseTableColumns[0] != null) {
+    setForeignKeyColumns(StringUtils.join(baseTableColumns,","));
+  }
+}

@@ -1,0 +1,4 @@
+Database referenceDatabase
+Database targetDatabase
+String snapshotTypes
+CompareControl.SchemaComparison[] schemaComparisons

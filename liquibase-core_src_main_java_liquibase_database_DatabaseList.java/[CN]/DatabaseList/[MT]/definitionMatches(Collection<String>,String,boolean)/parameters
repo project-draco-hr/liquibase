@@ -1,0 +1,3 @@
+Collection<String> definition
+String databaseShortName
+boolean returnValueIfEmptyList

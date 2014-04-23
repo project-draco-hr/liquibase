@@ -1,7 +1,21 @@
 {
-  CatalogAndSchema[] schemas=getReferenceSchemas();
-  if (schemas == null) {
-    schemas=new CatalogAndSchema[]{referenceDatabase.getDefaultSchema()};
+  CatalogAndSchema[] schemas;
+  if (compareControl == null || compareControl.getSchemaComparisons() == null) {
+    schemas=new CatalogAndSchema[]{targetDatabase.getDefaultSchema()};
   }
-  return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,referenceDatabase,new SnapshotControl(referenceDatabase,snapshotTypes));
+ else {
+    schemas=new CatalogAndSchema[compareControl.getSchemaComparisons().length];
+    int i=0;
+    for (    CompareControl.SchemaComparison comparison : compareControl.getSchemaComparisons()) {
+      schemas[i++]=comparison.getReferenceSchema();
+    }
+  }
+  SnapshotControl snapshotControl=getReferenceSnapshotControl();
+  if (snapshotControl == null) {
+    snapshotControl=new SnapshotControl(referenceDatabase,snapshotTypes);
+  }
+  if (getSnapshotListener() != null) {
+    snapshotControl.setSnapshotListener(getSnapshotListener());
+  }
+  return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,referenceDatabase,snapshotControl);
 }

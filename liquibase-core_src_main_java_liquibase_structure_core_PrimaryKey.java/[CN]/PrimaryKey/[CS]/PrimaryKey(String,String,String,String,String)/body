@@ -1,0 +1,11 @@
+{
+  this();
+  setName(name);
+  if (tableName != null) {
+    Table table=new Table(tableCatalogName,tableSchemaName,tableName);
+    if (columnNames != null) {
+      setAttribute("columnNames",Arrays.asList(columnNames));
+    }
+    setTable(table);
+  }
+}

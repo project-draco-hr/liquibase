@@ -5,7 +5,7 @@
   if (defaultSchemaName != null) {
     return defaultSchemaName;
   }
-  if (getConnection() == null) {
+  if (getConnection() == null || getConnection() instanceof OfflineConnection) {
     return null;
   }
   Statement stmt=null;
@@ -16,10 +16,10 @@
     if (rs.next()) {
       String result=rs.getString(1);
       if (result != null) {
-        this.defaultSchemaName=result;
+        this.defaultSchemaName=StringUtils.trimToNull(result);
       }
  else {
-        this.defaultSchemaName=super.getDefaultSchemaName();
+        this.defaultSchemaName=StringUtils.trimToNull(super.getDefaultSchemaName());
       }
     }
   }

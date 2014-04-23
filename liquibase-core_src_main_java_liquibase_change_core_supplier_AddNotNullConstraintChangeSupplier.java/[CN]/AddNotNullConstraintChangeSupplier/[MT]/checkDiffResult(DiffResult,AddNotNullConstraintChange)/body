@@ -1,0 +1,6 @@
+{
+  ObjectDifferences diff=diffResult.getChangedObject(new Column(Table.class,change.getCatalogName(),change.getSchemaName(),change.getTableName(),change.getColumnName()));
+  assertNotNull(diff);
+  assertEquals(true,diff.getDifference("nullable").getReferenceValue());
+  assertEquals(false,diff.getDifference("nullable").getComparedValue());
+}

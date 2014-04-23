@@ -1,0 +1,10 @@
+{
+  Database accordingTo=this.getComparisonSnapshot().getDatabase();
+  DatabaseObjectComparatorFactory comparator=DatabaseObjectComparatorFactory.getInstance();
+  for (  Map.Entry<? extends DatabaseObject,ObjectDifferences> entry : getChangedObjects(example.getClass()).entrySet()) {
+    if (comparator.isSameObject(entry.getKey(),example,accordingTo)) {
+      return entry.getValue();
+    }
+  }
+  return null;
+}
