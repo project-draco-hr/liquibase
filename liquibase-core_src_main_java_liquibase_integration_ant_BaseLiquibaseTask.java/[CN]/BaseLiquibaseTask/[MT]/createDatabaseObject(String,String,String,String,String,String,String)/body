@@ -2,7 +2,7 @@
   String[] strings=classpath.list();
   final List<URL> taskClassPath=new ArrayList<URL>();
   for (  String string : strings) {
-    URL url=new File(string).toURL();
+    URL url=new File(string).toURI().toURL();
     taskClassPath.add(url);
   }
   URLClassLoader loader=AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>(){
@@ -46,5 +46,8 @@
   if (getDatabaseChangeLogTableName() != null)   database.setDatabaseChangeLogTableName(getDatabaseChangeLogTableName());
   if (getDatabaseChangeLogLockTableName() != null)   database.setDatabaseChangeLogLockTableName(getDatabaseChangeLogLockTableName());
   if (getDatabaseChangeLogObjectsTablespace() != null)   database.setLiquibaseTablespaceName(getDatabaseChangeLogObjectsTablespace());
+  if (getCurrentDateTimeFunction() != null) {
+    database.setCurrentDateTimeFunction(getCurrentDateTimeFunction());
+  }
   return database;
 }

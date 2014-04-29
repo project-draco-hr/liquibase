@@ -7,7 +7,6 @@
     changeLogFile=getChangeLogFile().trim();
   }
   Liquibase liquibase=new Liquibase(changeLogFile,new CompositeResourceAccessor(antFO,fsFO),database);
-  liquibase.setCurrentDateTimeFunction(currentDateTimeFunction);
   for (  Map.Entry<String,Object> entry : changeLogProperties.entrySet()) {
     liquibase.setChangeLogParameter(entry.getKey(),entry.getValue());
   }
