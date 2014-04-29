@@ -1,11 +1,14 @@
 {
-  if (StringUtils.trimToNull(getOutputDirectory()) == null) {
+  if (getOutputDirectory() == null) {
     throw new BuildException("dbDoc requires outputDirectory to be set");
+  }
+  if (!getOutputDirectory().isDirectory()) {
+    throw new BuildException("dbDoc output directory is not a directory.");
   }
   Liquibase liquibase=null;
   try {
     liquibase=createLiquibase();
-    liquibase.generateDocumentation(getOutputDirectory());
+    liquibase.generateDocumentation(getOutputDirectory().toString());
   }
  catch (  Exception e) {
     throw new BuildException(e);

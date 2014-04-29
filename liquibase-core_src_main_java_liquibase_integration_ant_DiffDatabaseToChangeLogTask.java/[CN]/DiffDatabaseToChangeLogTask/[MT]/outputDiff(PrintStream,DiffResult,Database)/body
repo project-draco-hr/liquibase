@@ -4,6 +4,6 @@
     new DiffToChangeLog(diffResult,diffOutputControl).print(writer);
   }
  else {
-    new DiffToChangeLog(diffResult,diffOutputControl).print(getChangeLogFile());
+    new DiffToChangeLog(diffResult,diffOutputControl).print(getChangeLogFile().toString());
   }
 }
