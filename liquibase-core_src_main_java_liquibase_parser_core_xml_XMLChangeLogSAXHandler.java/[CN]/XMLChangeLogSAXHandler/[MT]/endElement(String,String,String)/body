@@ -5,7 +5,11 @@
   }
   try {
     if (changeSubObjects.size() > 0) {
-      changeSubObjects.pop();
+      Object subObject=changeSubObjects.pop();
+      if (textString != null) {
+        setProperty(subObject,"text",textString);
+        text=null;
+      }
     }
  else     if (rootPrecondition != null) {
       if ("preConditions".equals(qName)) {
@@ -142,6 +146,9 @@
       modifySqlDbmsList=null;
       modifySqlContexts=null;
       modifySqlAppliedOnRollback=false;
+    }
+ else     if (change != null && textString != null) {
+      setProperty(change,localName,textString);
     }
   }
  catch (  Exception e) {

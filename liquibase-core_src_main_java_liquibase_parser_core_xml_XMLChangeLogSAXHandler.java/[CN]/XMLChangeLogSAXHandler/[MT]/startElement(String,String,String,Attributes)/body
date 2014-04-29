@@ -353,24 +353,27 @@
       ((ExecuteShellCommandChange)change).addArg(atts.getValue("value"));
     }
  else     if (change != null) {
-      String creatorMethod="create" + localName.substring(0,1).toUpperCase() + localName.substring(1);
-      Object objectToCreateFrom;
-      if (changeSubObjects.size() == 0) {
-        objectToCreateFrom=change;
-      }
+      ChangeParameterMetaData param=ChangeFactory.getInstance().getChangeMetaData(change).getParameters().get(localName);
+      if (param == null || param.getSerializationType() == LiquibaseSerializable.SerializationType.NESTED_OBJECT) {
+        String creatorMethod="create" + localName.substring(0,1).toUpperCase() + localName.substring(1);
+        Object objectToCreateFrom;
+        if (changeSubObjects.size() == 0) {
+          objectToCreateFrom=change;
+        }
  else {
-        objectToCreateFrom=changeSubObjects.peek();
+          objectToCreateFrom=changeSubObjects.peek();
+        }
+        Method method;
+        try {
+          method=objectToCreateFrom.getClass().getMethod(creatorMethod);
+        }
+ catch (        NoSuchMethodException e) {
+          throw new MigrationFailedException(changeSet,"Could not find creator method " + creatorMethod + " for tag: "+ localName);
+        }
+        Object subObject=method.invoke(objectToCreateFrom);
+        setAllProperties(subObject,atts);
+        changeSubObjects.push(subObject);
       }
-      Method method;
-      try {
-        method=objectToCreateFrom.getClass().getMethod(creatorMethod);
-      }
- catch (      NoSuchMethodException e) {
-        throw new MigrationFailedException(changeSet,"Could not find creator method " + creatorMethod + " for tag: "+ localName);
-      }
-      Object subObject=method.invoke(objectToCreateFrom);
-      setAllProperties(subObject,atts);
-      changeSubObjects.push(subObject);
     }
  else {
       throw new MigrationFailedException(changeSet,"Unexpected tag: " + localName);
