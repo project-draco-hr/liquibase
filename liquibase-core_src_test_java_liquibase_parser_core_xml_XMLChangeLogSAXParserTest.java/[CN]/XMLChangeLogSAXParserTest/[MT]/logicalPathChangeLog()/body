@@ -1,8 +1,0 @@
-{
-  DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/logicalPathChangeLog.xml",new ChangeLogParameters(),new JUnitResourceAccessor());
-  assertEquals("liquibase/parser-logical/xml/logicalPathChangeLog.xml",changeLog.getLogicalFilePath());
-  assertEquals("liquibase/parser/core/xml/logicalPathChangeLog.xml",changeLog.getPhysicalFilePath());
-  assertEquals(0,changeLog.getPreconditions().getNestedPreconditions().size());
-  assertEquals(1,changeLog.getChangeSets().size());
-  assertEquals("liquibase/parser-logical/xml/logicalPathChangeLog.xml",changeLog.getChangeSets().get(0).getFilePath());
-}

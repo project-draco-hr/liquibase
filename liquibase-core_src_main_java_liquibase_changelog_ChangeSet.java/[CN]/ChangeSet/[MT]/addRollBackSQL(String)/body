@@ -1,6 +1,8 @@
 {
   if (StringUtils.trimToNull(sql) == null) {
-    rollBackChanges.add(new EmptyChange());
+    if (this.rollBackChanges.size() == 0) {
+      rollBackChanges.add(new EmptyChange());
+    }
     return;
   }
   for (  String statment : StringUtils.splitSQL(sql,null)) {

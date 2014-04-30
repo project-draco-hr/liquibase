@@ -17,7 +17,7 @@
       @Override public Sql[] generate(      Database database){
         List<String> commandArray=new ArrayList<String>();
         commandArray.add(executable);
-        commandArray.addAll(args);
+        commandArray.addAll(getArgs());
         try {
           ProcessBuilder pb=new ProcessBuilder(commandArray);
           pb.redirectErrorStream(true);

@@ -1,9 +1,0 @@
-{
-  try {
-    @SuppressWarnings("unused") DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/changelog/parser/xml/missingChangeLog.xml",new ChangeLogParameters(),new JUnitResourceAccessor());
-  }
- catch (  Exception e) {
-    assertTrue(e instanceof ChangeLogParseException);
-    assertEquals("liquibase/changelog/parser/xml/missingChangeLog.xml does not exist",e.getMessage());
-  }
-}

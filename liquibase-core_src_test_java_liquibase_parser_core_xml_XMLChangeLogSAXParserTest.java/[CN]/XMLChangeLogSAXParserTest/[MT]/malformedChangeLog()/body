@@ -1,9 +1,0 @@
-{
-  try {
-    DatabaseChangeLog changeLog=new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/malformedChangeLog.xml",new ChangeLogParameters(),new JUnitResourceAccessor());
-  }
- catch (  Exception e) {
-    assertTrue(e instanceof ChangeLogParseException);
-    assertTrue(e.getMessage().startsWith("Error parsing line"));
-  }
-}
