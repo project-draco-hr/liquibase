@@ -1,0 +1,25 @@
+{
+  List<ResourceAccessor> openers=new ArrayList<ResourceAccessor>();
+  openers.add(new FileSystemResourceAccessor());
+  openers.add(new ClassLoaderResourceAccessor());
+  if (classpath != null) {
+    openers.add(new FileSystemResourceAccessor(classpath));
+  }
+  ResourceAccessor resourceAccessor=new CompositeResourceAccessor(openers);
+  ChangeLogParser sourceParser=ChangeLogParserFactory.getInstance().getParser(src,resourceAccessor);
+  ChangeLogSerializer outSerializer=ChangeLogSerializerFactory.getInstance().getSerializer(out);
+  DatabaseChangeLog changeLog=sourceParser.parse(src,new ChangeLogParameters(),resourceAccessor);
+  File outFile=new File(out);
+  if (!outFile.exists()) {
+    outFile.getParentFile().mkdirs();
+  }
+  FileOutputStream outputStream=new FileOutputStream(outFile);
+  try {
+    outSerializer.write(changeLog.getChangeSets(),outputStream);
+  }
+  finally {
+    outputStream.flush();
+    outputStream.close();
+  }
+  return "Converted successfully";
+}
