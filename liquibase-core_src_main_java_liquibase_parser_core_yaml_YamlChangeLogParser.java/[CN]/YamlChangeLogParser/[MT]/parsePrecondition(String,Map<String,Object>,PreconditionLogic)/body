@@ -1,0 +1,22 @@
+{
+  Precondition precondition=PreconditionFactory.getInstance().create(preconditionName);
+  if (precondition instanceof PreconditionLogic) {
+    List<Map<String,Object>> children=(List<Map<String,Object>>)parsedPrecondition.get(preconditionName);
+    for (    Map<String,Object> child : children) {
+      String childName=child.keySet().iterator().next();
+      parsePrecondition(childName,child,((PreconditionLogic)precondition));
+    }
+  }
+ else {
+    Map<String,Object> preconditionMap=(Map)parsedPrecondition.get(preconditionName);
+    try {
+      for (      Map.Entry<String,Object> param : preconditionMap.entrySet()) {
+        ObjectUtil.setProperty(precondition,(String)param.getKey(),param.getValue().toString());
+      }
+    }
+ catch (    Throwable e) {
+      throw new ChangeLogParseException(e);
+    }
+  }
+  rootPrecondition.addNestedPrecondition(precondition);
+}

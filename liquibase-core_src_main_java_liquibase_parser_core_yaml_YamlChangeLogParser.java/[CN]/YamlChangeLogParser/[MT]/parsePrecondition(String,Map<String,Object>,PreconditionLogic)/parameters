@@ -1,0 +1,3 @@
+String preconditionName
+Map<String,Object> parsedPrecondition
+PreconditionLogic rootPrecondition
