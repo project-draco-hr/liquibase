@@ -1,0 +1,12 @@
+{
+  StringBuilder msg=new StringBuilder();
+  if (databaseChangeLog != null) {
+    msg.append(databaseChangeLog.getFilePath()).append(": ");
+  }
+  if (changeSet != null) {
+    String changeSetName=changeSet.toString(false);
+    msg.append(changeSetName.replace(changeSetName + "::","")).append(": ");
+  }
+  msg.append(message);
+  return msg.toString();
+}
