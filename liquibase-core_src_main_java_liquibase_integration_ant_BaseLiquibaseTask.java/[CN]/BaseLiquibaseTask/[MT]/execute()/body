@@ -8,5 +8,6 @@
   }
   finally {
     loader.resetThreadContextLoader();
+    loader.cleanup();
   }
 }
