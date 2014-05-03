@@ -2,5 +2,7 @@
   if (outputFile == null) {
     return null;
   }
-  return new PrintStream(getOutputFile().getFile());
+  GlobalConfiguration globalConfiguration=LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class);
+  String encoding=(StringUtils.trimToNull(outputEncoding) == null) ? globalConfiguration.getOutputEncoding() : outputEncoding.trim();
+  return new PrintStream(getOutputFile().getOutputStream(),false,encoding);
 }
