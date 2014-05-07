@@ -1,0 +1,7 @@
+{
+  Change change=ChangeFactory.getInstance().create(((ParsedNode)value).getNodeName());
+  if (change != null) {
+    change.load(((ParsedNode)value));
+    this.addChange(change);
+  }
+}

@@ -1,4 +1,0 @@
-{
-  assertNull(new ColumnConfig().setRemarks(null).getRemarks());
-  assertEquals("yyy",new ColumnConfig().setRemarks("yyy").getRemarks());
-}

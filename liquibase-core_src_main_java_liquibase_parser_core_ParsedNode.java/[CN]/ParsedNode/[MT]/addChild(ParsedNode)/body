@@ -1,0 +1,4 @@
+{
+  children.add(node);
+  return this;
+}

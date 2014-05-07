@@ -1,0 +1,6 @@
+{
+  if (node.getNamespace() == null) {
+    return namespace == null;
+  }
+  return node.getNamespace().equals(namespace);
+}

@@ -1,8 +1,0 @@
-{
-  assertTrue(new ColumnConfig().setDefaultValueBoolean(true).hasDefaultValue());
-  assertTrue(new ColumnConfig().setDefaultValueNumeric(5).hasDefaultValue());
-  assertTrue(new ColumnConfig().setDefaultValueDate("1993-02-11T13:22:44.006").hasDefaultValue());
-  assertTrue(new ColumnConfig().setDefaultValueComputed(new DatabaseFunction("func")).hasDefaultValue());
-  assertTrue(new ColumnConfig().setDefaultValue("A value").hasDefaultValue());
-  assertFalse(new ColumnConfig().hasDefaultValue());
-}

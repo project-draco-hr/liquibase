@@ -1,0 +1,21 @@
+{
+  if (value instanceof Collection) {
+    List newValue=new ArrayList();
+    for (    Object obj : ((Collection)value)) {
+      if (obj instanceof Map) {
+        newValue.add(mapToChangeLogNode((Map)obj));
+      }
+ else {
+        newValue.add(obj);
+      }
+    }
+    this.value=newValue;
+  }
+ else   if (value instanceof Map) {
+    this.value=mapToChangeLogNode(((Map)value));
+  }
+ else {
+    this.value=value;
+  }
+  return this;
+}

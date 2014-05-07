@@ -1,4 +1,0 @@
-{
-  assertNull(new ColumnConfig().setConstraints(null).getConstraints());
-  assertNotNull(new ColumnConfig().setConstraints(new ConstraintsConfig()).getConstraints());
-}

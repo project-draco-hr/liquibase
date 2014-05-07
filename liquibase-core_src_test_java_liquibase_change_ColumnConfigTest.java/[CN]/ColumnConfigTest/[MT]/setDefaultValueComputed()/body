@@ -1,4 +1,0 @@
-{
-  assertNull(new ColumnConfig().setDefaultValueComputed(null).getDefaultValueComputed());
-  assertEquals("func",new ColumnConfig().setDefaultValueComputed(new DatabaseFunction("func")).getDefaultValueComputed().toString());
-}

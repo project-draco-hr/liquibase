@@ -1,0 +1,7 @@
+{
+  super.load(parsedNode);
+  String nestedSql=StringUtils.trimToNull(parsedNode.getValue(String.class));
+  if (nestedSql != null) {
+    setSql(nestedSql);
+  }
+}

@@ -1,0 +1,5 @@
+{
+  ChangeSet changeSet=new ChangeSet(changeLog);
+  changeSet.load(node);
+  return changeSet;
+}

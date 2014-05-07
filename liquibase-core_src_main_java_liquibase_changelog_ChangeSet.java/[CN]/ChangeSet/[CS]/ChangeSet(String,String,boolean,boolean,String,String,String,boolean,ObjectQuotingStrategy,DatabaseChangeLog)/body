@@ -1,6 +1,5 @@
 {
-  this.changes=new ArrayList<Change>();
-  log=LogFactory.getLogger();
+  this(databaseChangeLog);
   this.id=id;
   this.author=author;
   this.filePath=filePath;
@@ -9,12 +8,5 @@
   this.runInTransaction=runInTransaction;
   this.objectQuotingStrategy=quotingStrategy;
   this.contexts=new ContextExpression(contextList);
-  if (StringUtils.trimToNull(dbmsList) != null) {
-    String[] strings=dbmsList.toLowerCase().split(",");
-    dbmsSet=new HashSet<String>();
-    for (    String string : strings) {
-      dbmsSet.add(string.trim().toLowerCase());
-    }
-  }
-  this.changeLog=databaseChangeLog;
+  setDbms(dbmsList);
 }

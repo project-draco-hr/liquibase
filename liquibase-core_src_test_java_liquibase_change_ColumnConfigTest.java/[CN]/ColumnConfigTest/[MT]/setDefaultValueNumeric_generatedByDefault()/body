@@ -1,5 +1,0 @@
-{
-  ColumnConfig config=new ColumnConfig().setDefaultValueNumeric("GENERATED_BY_DEFAULT");
-  assertNull(config.getDefaultValueNumeric());
-  assertTrue(config.isAutoIncrement());
-}

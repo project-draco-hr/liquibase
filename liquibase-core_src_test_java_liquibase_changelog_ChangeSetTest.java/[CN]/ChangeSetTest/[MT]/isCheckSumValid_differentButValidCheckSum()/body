@@ -1,6 +1,0 @@
-{
-  CheckSum checkSum=CheckSum.parse("2:asdf");
-  ChangeSet changeSet=new ChangeSet("1","2",false,false,"/test.xml",null,null,null);
-  changeSet.addValidCheckSum(changeSet.generateCheckSum().toString());
-  assertTrue(changeSet.isCheckSumValid(checkSum));
-}

@@ -1,0 +1,30 @@
+{
+  if (children instanceof Map) {
+    for (    Map.Entry<String,Object> child : ((Map<String,Object>)children).entrySet()) {
+      if (child.getValue() instanceof Map || child.getValue() instanceof Collection) {
+        String childKey=child.getKey();
+        ParsedNode childNode=new ParsedNode(null,childKey);
+        childNode.addChildren(child.getValue());
+        addChild(childNode);
+      }
+ else {
+        addChild(null,child.getKey(),child.getValue());
+      }
+    }
+  }
+ else   if (children instanceof Collection) {
+    for (    Object child : (Collection)children) {
+      if (child instanceof Map) {
+        child=mapToChangeLogNode((Map)child);
+      }
+      if (value == null) {
+        value=new ArrayList();
+      }
+      ((Collection)value).add(child);
+    }
+  }
+ else {
+    setValue(children);
+  }
+  return this;
+}

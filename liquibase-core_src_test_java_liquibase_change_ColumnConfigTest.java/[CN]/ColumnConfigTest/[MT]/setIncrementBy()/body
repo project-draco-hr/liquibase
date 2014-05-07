@@ -1,4 +1,0 @@
-{
-  assertNull(new ColumnConfig().setIncrementBy(null).getIncrementBy());
-  assertEquals("131",new ColumnConfig().setIncrementBy(new BigInteger("131")).getIncrementBy().toString());
-}

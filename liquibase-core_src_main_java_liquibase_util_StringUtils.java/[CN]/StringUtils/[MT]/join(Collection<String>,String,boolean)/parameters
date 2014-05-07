@@ -1,0 +1,3 @@
+Collection<String> collection
+String delimiter
+boolean sorted

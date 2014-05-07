@@ -1,7 +1,0 @@
-{
-  for (int i=0; i < atts.getLength(); i++) {
-    String attributeName=atts.getLocalName(i);
-    String attributeValue=atts.getValue(i);
-    setProperty(column,attributeName,attributeValue);
-  }
-}

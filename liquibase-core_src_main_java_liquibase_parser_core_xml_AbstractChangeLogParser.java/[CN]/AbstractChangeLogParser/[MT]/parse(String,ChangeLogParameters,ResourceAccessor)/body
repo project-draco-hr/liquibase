@@ -1,0 +1,16 @@
+{
+  ParsedNode parsedNode=parseToNode(physicalChangeLogLocation,changeLogParameters,resourceAccessor);
+  if (parsedNode == null) {
+    return null;
+  }
+  DatabaseChangeLog changeLog=new DatabaseChangeLog(physicalChangeLogLocation);
+  try {
+    for (    ParsedNode node : parsedNode.getChildren(null,"changeSet")) {
+      changeLog.addChangeSet(createChangeSet(node,changeLog));
+    }
+  }
+ catch (  ParseException e) {
+    throw new ChangeLogParseException(e);
+  }
+  return changeLog;
+}

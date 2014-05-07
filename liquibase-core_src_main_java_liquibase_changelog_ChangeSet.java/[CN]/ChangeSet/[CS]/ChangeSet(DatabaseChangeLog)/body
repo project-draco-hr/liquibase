@@ -1,0 +1,5 @@
+{
+  this.changes=new ArrayList<Change>();
+  log=LogFactory.getLogger();
+  this.changeLog=databaseChangeLog;
+}

@@ -1,0 +1,8 @@
+{
+  for (  ParsedNode node : children) {
+    if (nodeMatches(node,namespace,name)) {
+      return node;
+    }
+  }
+  return null;
+}
