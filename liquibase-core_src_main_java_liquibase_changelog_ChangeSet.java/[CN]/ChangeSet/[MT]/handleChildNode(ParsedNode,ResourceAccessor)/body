@@ -1,0 +1,8 @@
+{
+  if (child.getNodeName().equals("rollback")) {
+    handleRollbackNode(child,resourceAccessor);
+  }
+ else {
+    addChange(toChange(child,resourceAccessor));
+  }
+}

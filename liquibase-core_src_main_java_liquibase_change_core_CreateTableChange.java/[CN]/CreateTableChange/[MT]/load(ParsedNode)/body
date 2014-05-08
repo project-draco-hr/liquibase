@@ -1,8 +1,0 @@
-{
-  super.load(parsedNode);
-  for (  ParsedNode columnNode : parsedNode.getChildren(null,"column")) {
-    ColumnConfig columnConfig=new ColumnConfig();
-    columnConfig.load(columnNode);
-    addColumn(columnConfig);
-  }
-}

@@ -5,9 +5,7 @@
   }
   DatabaseChangeLog changeLog=new DatabaseChangeLog(physicalChangeLogLocation);
   try {
-    for (    ParsedNode node : parsedNode.getChildren(null,"changeSet")) {
-      changeLog.addChangeSet(createChangeSet(node,changeLog));
-    }
+    changeLog.load(parsedNode,resourceAccessor);
   }
  catch (  ParseException e) {
     throw new ChangeLogParseException(e);

@@ -1,0 +1,10 @@
+{
+  Change change=ChangeFactory.getInstance().create(value.getNodeName());
+  if (change == null) {
+    return null;
+  }
+ else {
+    change.load(value,resourceAccessor);
+    return change;
+  }
+}

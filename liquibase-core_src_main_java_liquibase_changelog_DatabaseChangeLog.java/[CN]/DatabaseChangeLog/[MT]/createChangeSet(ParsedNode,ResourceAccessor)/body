@@ -1,0 +1,5 @@
+{
+  ChangeSet changeSet=new ChangeSet(this);
+  changeSet.load(node,resourceAccessor);
+  return changeSet;
+}

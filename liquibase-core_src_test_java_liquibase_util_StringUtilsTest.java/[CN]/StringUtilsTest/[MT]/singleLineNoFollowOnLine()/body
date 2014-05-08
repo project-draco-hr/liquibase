@@ -1,7 +1,0 @@
-{
-  String sql="Some text";
-  String comment=" -- with comment\n";
-  String totalLine=sql + comment;
-  String result=StringUtils.stripComments(totalLine);
-  assertEquals(sql.trim(),result);
-}

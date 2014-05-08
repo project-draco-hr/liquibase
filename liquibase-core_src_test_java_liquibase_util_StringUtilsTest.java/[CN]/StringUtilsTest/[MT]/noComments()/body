@@ -1,5 +1,0 @@
-{
-  String noComments=" Some text but no comments";
-  String result=StringUtils.stripComments(noComments);
-  assertEquals(noComments.trim(),result);
-}

@@ -1,0 +1,23 @@
+{
+  for (  ParsedNode childNode : rollbackNode.getChildren()) {
+    addRollbackChange(toChange(childNode,resourceAccessor));
+  }
+  Object value=rollbackNode.getValue();
+  if (value != null) {
+    if (value instanceof String) {
+      String finalValue=StringUtils.trimToNull((String)value);
+      if (finalValue != null) {
+        String[] strings=StringUtils.processMutliLineSQL(finalValue,true,true,";");
+        for (        String string : strings) {
+          addRollbackChange(new RawSQLChange(string));
+        }
+      }
+    }
+ else     if (value instanceof ParsedNode) {
+      addRollbackChange(toChange((ParsedNode)value,resourceAccessor));
+    }
+ else {
+      throw new ParseException("Unexpected object: " + value.getClass().getName() + " '"+ value.toString()+ "'",0);
+    }
+  }
+}

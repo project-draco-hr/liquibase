@@ -1,4 +1,7 @@
 {
+  if (change == null) {
+    return;
+  }
   changes.add(change);
   change.setChangeSet(this);
 }
