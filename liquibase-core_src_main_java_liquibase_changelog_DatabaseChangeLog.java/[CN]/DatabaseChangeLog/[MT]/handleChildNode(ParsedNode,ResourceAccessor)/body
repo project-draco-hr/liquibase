@@ -1,0 +1,22 @@
+{
+  String nodeName=node.getNodeName();
+  if (nodeName.equals("changeSet")) {
+    this.addChangeSet(createChangeSet(node,resourceAccessor));
+  }
+ else   if (nodeName.equals("include")) {
+    String path=node.getChildValue(null,"file",String.class);
+    try {
+      DatabaseChangeLog childChangeLog=ChangeLogParserFactory.getInstance().getParser(path,resourceAccessor).parse(path,null,resourceAccessor);
+      for (      ChangeSet changeSet : childChangeLog.getChangeSets()) {
+        this.addChangeSet(changeSet);
+      }
+    }
+ catch (    LiquibaseException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+  }
+ else   if (nodeName.equals("preConditions")) {
+    this.preconditionContainer=new PreconditionContainer();
+    this.preconditionContainer.load(node,resourceAccessor);
+  }
+}

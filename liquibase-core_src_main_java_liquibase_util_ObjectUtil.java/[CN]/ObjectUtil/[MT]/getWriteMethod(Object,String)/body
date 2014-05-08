@@ -1,0 +1,10 @@
+{
+  String methodName="set" + propertyName.substring(0,1).toUpperCase(Locale.ENGLISH) + propertyName.substring(1);
+  Method[] methods=getMethods(object);
+  for (  Method method : methods) {
+    if (method.getName().equals(methodName) && method.getParameterTypes().length == 1) {
+      return method;
+    }
+  }
+  return null;
+}

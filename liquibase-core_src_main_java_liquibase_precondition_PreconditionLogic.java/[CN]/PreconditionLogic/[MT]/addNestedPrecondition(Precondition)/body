@@ -1,3 +1,5 @@
 {
-  nestedPreconditions.add(precondition);
+  if (precondition != null) {
+    nestedPreconditions.add(precondition);
+  }
 }

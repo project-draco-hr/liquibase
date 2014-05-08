@@ -1,21 +1,19 @@
 {
   setLogicalFilePath(parsedNode.getChildValue(null,"logicalFilePath",String.class));
-  for (  ParsedNode childNode : parsedNode.getChildren()) {
-    String nodeName=childNode.getNodeName();
-    if (nodeName.equals("changeSet")) {
-      this.addChangeSet(createChangeSet(childNode,resourceAccessor));
+  Object value=parsedNode.getValue();
+  if (value != null) {
+    if (value instanceof ParsedNode) {
+      handleChildNode(((ParsedNode)value),resourceAccessor);
     }
- else     if (nodeName.equals("include")) {
-      String path=childNode.getChildValue(null,"path",String.class);
-      try {
-        DatabaseChangeLog childChangeLog=ChangeLogParserFactory.getInstance().getParser(path,resourceAccessor).parse(path,null,resourceAccessor);
-        for (        ChangeSet changeSet : childChangeLog.getChangeSets()) {
-          this.addChangeSet(changeSet);
+ else     if (value instanceof Collection) {
+      for (      Object childValue : ((Collection)value)) {
+        if (childValue instanceof ParsedNode) {
+          handleChildNode((ParsedNode)childValue,resourceAccessor);
         }
       }
- catch (      LiquibaseException e) {
-        throw new UnexpectedLiquibaseException(e);
-      }
     }
+  }
+  for (  ParsedNode childNode : parsedNode.getChildren()) {
+    handleChildNode(childNode,resourceAccessor);
   }
 }

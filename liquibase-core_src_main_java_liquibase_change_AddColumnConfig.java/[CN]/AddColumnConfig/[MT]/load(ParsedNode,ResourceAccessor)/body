@@ -1,0 +1,6 @@
+{
+  super.load(parsedNode,resourceAccessor);
+  this.beforeColumn=parsedNode.getChildValue(null,"beforeColumn",String.class);
+  this.afterColumn=parsedNode.getChildValue(null,"afterColumn",String.class);
+  this.position=parsedNode.getChildValue(null,"position",Integer.class);
+}

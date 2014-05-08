@@ -1,0 +1,16 @@
+{
+  for (  ParsedNode childNode : parsedNode.getChildren()) {
+    try {
+      if (ObjectUtil.hasWriteProperty(this,childNode.getNodeName())) {
+        Object value=childNode.getValue();
+        if (value != null) {
+          value=value.toString();
+        }
+        ObjectUtil.setProperty(this,childNode.getNodeName(),(String)value);
+      }
+    }
+ catch (    Exception e) {
+      throw new SetupException("Error setting property",e);
+    }
+  }
+}

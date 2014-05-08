@@ -1,10 +1,7 @@
 {
-  String methodName="get" + propertyName.substring(0,1).toUpperCase(Locale.ENGLISH) + propertyName.substring(1);
-  Method[] methods=object.getClass().getMethods();
-  for (  Method method : methods) {
-    if (method.getName().equals(methodName) && method.getParameterTypes().length == 0) {
-      return method.invoke(object);
-    }
+  Method readMethod=getReadMethod(object,propertyName);
+  if (readMethod == null) {
+    throw new UnexpectedLiquibaseException("Property '" + propertyName + "' not found on object type "+ object.getClass().getName());
   }
-  throw new RuntimeException("Property not found: " + propertyName);
+  return readMethod.invoke(object);
 }
