@@ -1,3 +1,3 @@
 {
-  Assert.assertEquals("GETDATE()",getDatabase().getCurrentDateTimeFunction());
+  assertEquals("GETDATE()",getDatabase().getCurrentDateTimeFunction());
 }
