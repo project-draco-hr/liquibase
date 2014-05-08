@@ -1,0 +1,10 @@
+{
+  setClassLoader(resourceAccessor.toClassLoader());
+  try {
+    setClass(parsedNode.getChildValue(null,"class",String.class));
+  }
+ catch (  CustomChangeException e) {
+    throw new SetupException(e);
+  }
+  super.load(parsedNode,resourceAccessor);
+}

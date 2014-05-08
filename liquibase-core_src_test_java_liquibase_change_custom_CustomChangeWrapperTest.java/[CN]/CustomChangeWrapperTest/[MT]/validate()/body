@@ -1,8 +1,0 @@
-{
-  ValidationErrors errors=new ValidationErrors();
-  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
-  Database database=mock(Database.class);
-  changeWrapper.customChange=mock(CustomChange.class);
-  when(changeWrapper.customChange.validate(database)).thenReturn(errors);
-  assertSame(errors,changeWrapper.validate(database));
-}

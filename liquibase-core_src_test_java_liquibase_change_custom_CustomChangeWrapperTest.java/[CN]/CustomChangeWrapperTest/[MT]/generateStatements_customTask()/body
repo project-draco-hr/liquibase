@@ -1,6 +1,0 @@
-{
-  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
-  changeWrapper.customChange=mock(CustomTaskChange.class);
-  Assert.assertEquals(0,changeWrapper.generateStatements(mock(Database.class)).length);
-  verify(((CustomTaskChange)changeWrapper.customChange)).execute(any(Database.class));
-}

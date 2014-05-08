@@ -1,7 +1,0 @@
-{
-  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
-  Database database=mock(Database.class);
-  changeWrapper.customChange=mock(CustomChange.class);
-  when(changeWrapper.customChange.validate(database)).thenThrow(NullPointerException.class);
-  Assert.assertEquals(1,changeWrapper.validate(database).getErrorMessages().size());
-}

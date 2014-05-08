@@ -1,5 +1,6 @@
 {
   ChangeMetaData metaData=ChangeFactory.getInstance().getChangeMetaData(this);
+  this.setResourceAccessor(resourceAccessor);
   for (  ChangeParameterMetaData param : metaData.getParameters().values()) {
     if (Collection.class.isAssignableFrom(param.getDataTypeClass())) {
       if (param.getDataTypeClassParameters().length == 1 && param.getDataTypeClassParameters()[0].equals(ColumnConfig.class)) {
@@ -14,4 +15,6 @@
       param.setValue(this,parsedNode.getChildValue(null,param.getParameterName(),param.getDataTypeClass()));
     }
   }
+  customLoadLogic(parsedNode,resourceAccessor);
+  this.finishInitialization();
 }

@@ -1,7 +1,0 @@
-{
-  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
-  changeWrapper.setClassLoader(getClass().getClassLoader());
-  changeWrapper.setClass(ExampleCustomSqlChange.class.getName());
-  assertTrue(changeWrapper.getCustomChange() instanceof ExampleCustomSqlChange);
-  assertEquals(ExampleCustomSqlChange.class.getName(),changeWrapper.getClassName());
-}

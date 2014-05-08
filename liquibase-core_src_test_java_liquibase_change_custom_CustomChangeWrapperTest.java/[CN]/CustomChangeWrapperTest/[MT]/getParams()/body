@@ -1,9 +1,0 @@
-{
-  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
-  assertEquals(0,changeWrapper.getParams().size());
-  changeWrapper.setParam("param1","x");
-  changeWrapper.setParam("param2","y");
-  assertEquals(2,changeWrapper.getParams().size());
-  assertTrue(changeWrapper.getParams().contains("param1"));
-  assertTrue(changeWrapper.getParams().contains("param2"));
-}

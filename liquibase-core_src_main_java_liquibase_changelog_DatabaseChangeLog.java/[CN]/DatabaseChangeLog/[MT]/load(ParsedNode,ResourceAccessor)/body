@@ -1,4 +1,5 @@
 {
+  setLogicalFilePath(parsedNode.getChildValue(null,"logicalFilePath",String.class));
   for (  ParsedNode childNode : parsedNode.getChildren()) {
     String nodeName=childNode.getNodeName();
     if (nodeName.equals("changeSet")) {
