@@ -1,0 +1,6 @@
+{
+  Object value=parsedNode.getValue();
+  if (value instanceof String) {
+    this.setSelectQuery((String)value);
+  }
+}

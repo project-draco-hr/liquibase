@@ -5,15 +5,27 @@
   }
  else   if (nodeName.equals("include")) {
     String path=node.getChildValue(null,"file",String.class);
+    path=path.replace('\\','/');
     try {
-      DatabaseChangeLog childChangeLog=ChangeLogParserFactory.getInstance().getParser(path,resourceAccessor).parse(path,null,resourceAccessor);
-      for (      ChangeSet changeSet : childChangeLog.getChangeSets()) {
-        this.addChangeSet(changeSet);
-      }
+      include(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceAccessor);
     }
  catch (    LiquibaseException e) {
-      throw new UnexpectedLiquibaseException(e);
+      throw new SetupException(e);
     }
+  }
+ else   if (nodeName.equals("includeAll")) {
+    String path=node.getChildValue(null,"path",String.class);
+    String resourceFilterDef=node.getChildValue(null,"resourceFilter",String.class);
+    IncludeAllFilter resourceFilter=null;
+    if (resourceFilterDef != null) {
+      try {
+        resourceFilter=(IncludeAllFilter)Class.forName(resourceFilterDef).newInstance();
+      }
+ catch (      Exception e) {
+        throw new SetupException(e);
+      }
+    }
+    includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,resourceAccessor);
   }
  else   if (nodeName.equals("preConditions")) {
     this.preconditionContainer=new PreconditionContainer();

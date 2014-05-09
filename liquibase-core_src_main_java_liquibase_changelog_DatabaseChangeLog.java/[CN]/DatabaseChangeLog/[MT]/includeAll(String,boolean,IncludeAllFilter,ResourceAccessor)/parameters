@@ -1,0 +1,4 @@
+String pathName
+boolean isRelativeToChangelogFile
+IncludeAllFilter resourceFilter
+ResourceAccessor resourceAccessor

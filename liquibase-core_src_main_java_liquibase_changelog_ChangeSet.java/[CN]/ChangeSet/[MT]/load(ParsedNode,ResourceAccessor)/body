@@ -16,8 +16,9 @@
   if (filePath == null) {
     filePath=changeLog.getFilePath();
   }
-  this.setFailOnError(node.getChildValue(null,"failOnError",true));
-  this.setFailOnError(node.getChildValue(null,"onValidationFail",true));
+  this.setFailOnError(node.getChildValue(null,"failOnError",Boolean.class));
+  String onValidationFailString=node.getChildValue(null,"onValidationFail","HALT");
+  this.setOnValidationFail(ValidationFailOption.valueOf(onValidationFailString));
   for (  ParsedNode child : node.getChildren()) {
     handleChildNode(child,resourceAccessor);
   }

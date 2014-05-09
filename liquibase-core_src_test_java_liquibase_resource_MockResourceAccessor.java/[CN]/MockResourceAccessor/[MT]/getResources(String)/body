@@ -1,0 +1,13 @@
+{
+  Vector<URL> urls=new Vector<URL>();
+  for (  String file : contentByFileName.keySet()) {
+    if (file.startsWith(packageName)) {
+      String urlName=file;
+      if (!urlName.contains(":")) {
+        urlName="file:///" + urlName;
+      }
+      urls.add(new URL(urlName));
+    }
+  }
+  return urls.elements();
+}

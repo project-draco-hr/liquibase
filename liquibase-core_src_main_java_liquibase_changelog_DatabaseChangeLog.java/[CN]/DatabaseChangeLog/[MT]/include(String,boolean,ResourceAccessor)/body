@@ -1,0 +1,34 @@
+{
+  if (fileName.equalsIgnoreCase(".svn") || fileName.equalsIgnoreCase("cvs")) {
+    return false;
+  }
+  String relativeBaseFileName=this.getPhysicalFilePath();
+  if (isRelativePath) {
+    String tempFile=FilenameUtils.concat(FilenameUtils.getFullPath(relativeBaseFileName),fileName);
+    if (tempFile != null && new File(tempFile).exists() == true) {
+      fileName=tempFile;
+    }
+ else {
+      fileName=FilenameUtils.getFullPath(relativeBaseFileName) + fileName;
+    }
+  }
+  DatabaseChangeLog changeLog;
+  try {
+    changeLog=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor).parse(fileName,changeLogParameters,resourceAccessor);
+  }
+ catch (  UnknownChangelogFormatException e) {
+    LogFactory.getInstance().getLog().warning("included file " + relativeBaseFileName + "/"+ fileName+ " is not a recognized file type");
+    return false;
+  }
+  PreconditionContainer preconditions=changeLog.getPreconditions();
+  if (preconditions != null) {
+    if (null == this.getPreconditions()) {
+      this.setPreconditions(new PreconditionContainer());
+    }
+    this.getPreconditions().addNestedPrecondition(preconditions);
+  }
+  for (  ChangeSet changeSet : changeLog.getChangeSets()) {
+    this.changeSets.add(changeSet);
+  }
+  return true;
+}
