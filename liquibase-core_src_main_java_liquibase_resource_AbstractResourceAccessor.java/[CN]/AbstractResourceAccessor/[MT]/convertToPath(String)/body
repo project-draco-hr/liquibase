@@ -29,5 +29,8 @@
   while (string.contains("/./")) {
     string=string.replace("/./","/");
   }
+  while (string.matches(".*/.*?/\\.\\./.*")) {
+    string=string.replaceAll("/[^/]+/\\.\\./","/");
+  }
   return string;
 }
