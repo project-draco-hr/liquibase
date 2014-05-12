@@ -1,5 +1,5 @@
 {
-  InputStream resourceAsStream=resourceAccessor.getResourceAsStream(physicalChangeLogLocation);
+  InputStream resourceAsStream=StreamUtil.singleInputStream(physicalChangeLogLocation,resourceAccessor);
   if (resourceAsStream == null) {
     throw new IOException("File does not exist: " + physicalChangeLogLocation);
   }

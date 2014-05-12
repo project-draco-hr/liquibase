@@ -1,7 +1,7 @@
 {
   String path=FilenameUtils.concat(basePath,systemId);
   try {
-    InputStream resourceAsStream=resourceAccessor.getResourceAsStream(path);
+    InputStream resourceAsStream=StreamUtil.singleInputStream(path,resourceAccessor);
     if (resourceAsStream == null) {
       return null;
     }

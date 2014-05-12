@@ -1,0 +1,15 @@
+{
+  Enumeration<URL> resources=classLoader.getResources(path);
+  if (resources == null || !resources.hasMoreElements()) {
+    return null;
+  }
+  Set<InputStream> returnSet=new HashSet<InputStream>();
+  while (resources.hasMoreElements()) {
+    URL url=resources.nextElement();
+    InputStream resourceAsStream=url.openStream();
+    if (resourceAsStream != null) {
+      returnSet.add(resourceAsStream);
+    }
+  }
+  return returnSet;
+}

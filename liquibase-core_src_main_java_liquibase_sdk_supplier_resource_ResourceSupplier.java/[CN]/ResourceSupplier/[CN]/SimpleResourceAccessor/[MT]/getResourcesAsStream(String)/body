@@ -1,0 +1,16 @@
+{
+  InputStream stream=null;
+  if (path.toLowerCase().endsWith("csv")) {
+    stream=new ByteArrayInputStream(usersCsv.getBytes());
+  }
+ else   if (path.toLowerCase().endsWith("my-logic.sql")) {
+    stream=new ByteArrayInputStream(((String)ChangeFactory.getInstance().getChangeMetaData(new CreateProcedureChange()).getParameters().get("procedureBody").getExampleValue(new HsqlDatabase())).getBytes());
+  }
+ else   if (path.toLowerCase().endsWith("sql")) {
+    stream=new ByteArrayInputStream(fileSql.getBytes());
+  }
+ else {
+    throw new RuntimeException("Unknown resource type: " + path);
+  }
+  return new HashSet<InputStream>(Arrays.asList(stream));
+}

@@ -1,0 +1,15 @@
+{
+  File absoluteFile=new File(path);
+  File relativeFile=(baseDirectory == null) ? new File(path) : new File(baseDirectory,path);
+  if (absoluteFile.exists() && absoluteFile.isDirectory()) {
+    Set<String> returnSet=new HashSet<String>();
+    getContents(absoluteFile,recursive,includeFiles,includeDirectories,path,returnSet);
+    return returnSet;
+  }
+ else   if (relativeFile.exists() && relativeFile.isDirectory()) {
+    Set<String> returnSet=new HashSet<String>();
+    getContents(relativeFile,recursive,includeFiles,includeDirectories,path,returnSet);
+    return returnSet;
+  }
+  return null;
+}

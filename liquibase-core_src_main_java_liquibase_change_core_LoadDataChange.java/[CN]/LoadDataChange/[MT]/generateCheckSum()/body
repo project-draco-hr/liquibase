@@ -1,7 +1,7 @@
 {
   InputStream stream=null;
   try {
-    stream=getResourceAccessor().getResourceAsStream(getFile());
+    stream=StreamUtil.singleInputStream(getFile(),getResourceAccessor());
     if (stream == null) {
       throw new UnexpectedLiquibaseException(getFile() + " could not be found");
     }
@@ -16,8 +16,7 @@
       try {
         stream.close();
       }
- catch (      IOException e) {
-        ;
+ catch (      IOException ignore) {
       }
     }
   }

@@ -1,3 +1,0 @@
-{
-  return new CommandLineResourceAccessor(Thread.currentThread().getContextClassLoader());
-}

@@ -28,7 +28,7 @@ catch (    SAXNotSupportedException e) {
       }
     }
 );
-    inputStream=resourceAccessor.getResourceAsStream(physicalChangeLogLocation);
+    inputStream=StreamUtil.singleInputStream(physicalChangeLogLocation,resourceAccessor);
     if (inputStream == null) {
       throw new ChangeLogParseException(physicalChangeLogLocation + " does not exist");
     }

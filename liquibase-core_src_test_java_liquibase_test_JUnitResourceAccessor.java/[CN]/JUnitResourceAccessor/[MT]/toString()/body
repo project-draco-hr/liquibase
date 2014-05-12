@@ -1,7 +1,0 @@
-{
-  List<String> urls=new ArrayList<String>();
-  for (  URL url : classLoader.getURLs()) {
-    urls.add(url.toExternalForm());
-  }
-  return getClass().getName() + "(" + StringUtils.join(urls,",")+ ")";
-}

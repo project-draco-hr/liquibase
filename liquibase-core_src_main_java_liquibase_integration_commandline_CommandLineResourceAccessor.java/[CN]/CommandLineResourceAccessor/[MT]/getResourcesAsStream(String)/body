@@ -1,0 +1,12 @@
+{
+  Set<InputStream> resourcesAsStream=super.getResourcesAsStream(path);
+  if (resourcesAsStream == null) {
+    for (    String altPath : getAlternatePaths(path)) {
+      resourcesAsStream=super.getResourcesAsStream(altPath);
+      if (resourcesAsStream != null) {
+        return resourcesAsStream;
+      }
+    }
+  }
+  return resourcesAsStream;
+}

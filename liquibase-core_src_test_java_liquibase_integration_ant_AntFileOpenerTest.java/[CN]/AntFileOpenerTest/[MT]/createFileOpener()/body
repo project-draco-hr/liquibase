@@ -1,4 +1,0 @@
-{
-  Project project=new Project();
-  return new AntResourceAccessor(project,new Path(project));
-}

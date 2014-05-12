@@ -1,0 +1,7 @@
+{
+  List<String> alternatePaths=new ArrayList<String>();
+  if (path.startsWith("/")) {
+    alternatePaths.add(path.substring(1));
+  }
+  return alternatePaths;
+}

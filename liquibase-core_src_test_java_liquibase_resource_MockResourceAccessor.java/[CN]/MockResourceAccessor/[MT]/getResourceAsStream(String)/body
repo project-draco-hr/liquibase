@@ -1,9 +1,0 @@
-{
-  if (contentByFileName.containsKey(file)) {
-    return new ByteArrayInputStream(contentByFileName.get(file).getBytes());
-  }
- else   if (file.startsWith("file:///")) {
-    return getResourceAsStream(file.replaceFirst("file:///",""));
-  }
-  return null;
-}

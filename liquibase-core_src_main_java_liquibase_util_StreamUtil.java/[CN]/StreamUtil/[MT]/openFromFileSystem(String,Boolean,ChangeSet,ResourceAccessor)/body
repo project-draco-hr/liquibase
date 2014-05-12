@@ -15,5 +15,5 @@
     }
     file=base.replaceFirst("/[^/]*$","") + "/" + file;
   }
-  return resourceAccessor.getResourceAsStream(file);
+  return singleInputStream(file,resourceAccessor);
 }

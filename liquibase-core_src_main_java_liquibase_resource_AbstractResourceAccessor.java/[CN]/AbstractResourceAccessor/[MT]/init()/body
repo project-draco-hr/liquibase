@@ -1,0 +1,12 @@
+{
+  Enumeration<URL> baseUrls;
+  try {
+    baseUrls=toClassLoader().getResources("");
+  }
+ catch (  IOException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  while (baseUrls.hasMoreElements()) {
+    this.rootStrings.add(baseUrls.nextElement().toExternalForm());
+  }
+}

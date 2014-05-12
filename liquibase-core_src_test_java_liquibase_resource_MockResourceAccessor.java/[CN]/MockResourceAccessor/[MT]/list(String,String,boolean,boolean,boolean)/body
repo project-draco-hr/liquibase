@@ -1,0 +1,13 @@
+{
+  Set<String> returnSet=new HashSet<String>();
+  for (  String file : contentByFileName.keySet()) {
+    if (file.startsWith(path)) {
+      String urlName=file;
+      if (!urlName.contains(":")) {
+        urlName="file:///" + urlName;
+      }
+      returnSet.add(urlName);
+    }
+  }
+  return returnSet;
+}
