@@ -1,18 +1,31 @@
 {
-  if (value instanceof Collection) {
+  if (value instanceof ParsedNode) {
+    this.addChild((ParsedNode)value);
+  }
+ else   if (value instanceof Collection) {
     List newValue=new ArrayList();
     for (    Object obj : ((Collection)value)) {
       if (obj instanceof Map) {
-        newValue.add(mapToChangeLogNode((Map)obj));
+        addChildren((Map)obj);
+      }
+ else       if (obj instanceof ParsedNode) {
+        addChild(((ParsedNode)obj));
       }
  else {
         newValue.add(obj);
       }
     }
-    this.value=newValue;
+    if (newValue.size() == 0) {
+    }
+ else     if (newValue.size() == 1) {
+      this.value=newValue.get(0);
+    }
+ else {
+      this.value=newValue;
+    }
   }
  else   if (value instanceof Map) {
-    this.value=mapToChangeLogNode(((Map)value));
+    addChildren(((Map)value));
   }
  else {
     this.value=value;

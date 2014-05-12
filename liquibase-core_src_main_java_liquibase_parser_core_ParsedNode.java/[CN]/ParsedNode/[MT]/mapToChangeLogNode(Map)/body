@@ -1,9 +1,0 @@
-{
-  if (((Map)child).size() != 1) {
-    throw new ChangeLogParseException("Maps in lists need to have one and only one key");
-  }
-  String childKey=(String)((Map)child).keySet().iterator().next();
-  ParsedNode childNode=new ParsedNode(null,childKey);
-  childNode.addChildren(((Map)child).get(childKey));
-  return childNode;
-}

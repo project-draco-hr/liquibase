@@ -1,13 +1,8 @@
 {
-  try {
-    ParsedNode node=new ParsedNode(null,getSerializedObjectName());
-    ChangeMetaData metaData=ChangeFactory.getInstance().getChangeMetaData(this);
-    for (    ChangeParameterMetaData param : metaData.getSetParameters(this).values()) {
-      node.addChild(null,param.getParameterName(),param.getCurrentValue(this));
-    }
-    return node;
+  ParsedNode node=new ParsedNode(null,getSerializedObjectName());
+  ChangeMetaData metaData=ChangeFactory.getInstance().getChangeMetaData(this);
+  for (  ChangeParameterMetaData param : metaData.getSetParameters(this).values()) {
+    node.addChild(null,param.getParameterName(),param.getCurrentValue(this));
   }
- catch (  ChangeLogParseException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
+  return node;
 }

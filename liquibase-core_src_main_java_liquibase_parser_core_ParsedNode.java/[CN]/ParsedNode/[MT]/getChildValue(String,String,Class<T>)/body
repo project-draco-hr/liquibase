@@ -3,34 +3,5 @@
   if (rawValue == null) {
     return null;
   }
-  if (type.isAssignableFrom(rawValue.getClass())) {
-    return (T)rawValue;
-  }
-  if (type.equals(String.class)) {
-    return (T)rawValue.toString();
-  }
- else   if (type.equals(Integer.class)) {
-    return (T)Integer.valueOf(rawValue.toString());
-  }
- else   if (type.equals(Float.class)) {
-    return (T)Float.valueOf(rawValue.toString());
-  }
- else   if (type.equals(Double.class)) {
-    return (T)Double.valueOf(rawValue.toString());
-  }
- else   if (type.equals(Long.class)) {
-    return (T)Long.valueOf(rawValue.toString());
-  }
- else   if (type.equals(BigInteger.class)) {
-    return (T)BigInteger.valueOf(Long.valueOf(rawValue.toString()));
-  }
- else   if (type.equals(Boolean.class) && rawValue instanceof String) {
-    return (T)Boolean.valueOf(rawValue.toString());
-  }
- else   if (type.isAssignableFrom(Date.class)) {
-    return (T)new ISODateFormat().parse(rawValue.toString());
-  }
- else {
-    throw new UnexpectedLiquibaseException("Cannot convert " + rawValue.getClass().getName() + " '"+ rawValue+ "' to "+ type.getName());
-  }
+  return convertObject(rawValue,type);
 }

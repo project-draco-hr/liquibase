@@ -1,5 +1,5 @@
 {
-  String nodeName=node.getNodeName();
+  String nodeName=node.getName();
   if (nodeName.equals("changeSet")) {
     this.addChangeSet(createChangeSet(node,resourceAccessor));
   }
@@ -25,10 +25,15 @@
         throw new SetupException(e);
       }
     }
-    includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,resourceAccessor);
+    includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,getStandardChangeLogComparator(),resourceAccessor);
   }
  else   if (nodeName.equals("preConditions")) {
     this.preconditionContainer=new PreconditionContainer();
-    this.preconditionContainer.load(node,resourceAccessor);
+    try {
+      this.preconditionContainer.load(node,resourceAccessor);
+    }
+ catch (    ParsedNodeException e) {
+      e.printStackTrace();
+    }
   }
 }

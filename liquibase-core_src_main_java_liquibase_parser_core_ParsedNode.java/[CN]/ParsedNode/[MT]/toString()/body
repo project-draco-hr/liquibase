@@ -1,5 +1,5 @@
 {
-  String string=nodeName;
+  String string=name;
   if (children.size() > 0) {
     string+="[" + StringUtils.join(children,",",new StringUtils.ToStringFormatter(),true) + "]";
   }

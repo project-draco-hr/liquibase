@@ -1,12 +1,12 @@
 {
   for (  ParsedNode childNode : parsedNode.getChildren()) {
     try {
-      if (ObjectUtil.hasWriteProperty(this,childNode.getNodeName())) {
+      if (ObjectUtil.hasWriteProperty(this,childNode.getName())) {
         Object value=childNode.getValue();
         if (value != null) {
           value=value.toString();
         }
-        ObjectUtil.setProperty(this,childNode.getNodeName(),(String)value);
+        ObjectUtil.setProperty(this,childNode.getName(),(String)value);
       }
     }
  catch (    Exception e) {

@@ -1,8 +1,13 @@
 {
-  Precondition precondition=PreconditionFactory.getInstance().create(node.getNodeName());
+  Precondition precondition=PreconditionFactory.getInstance().create(node.getName());
   if (precondition == null) {
     return null;
   }
-  precondition.load(node,resourceAccessor);
+  try {
+    precondition.load(node,resourceAccessor);
+  }
+ catch (  ParsedNodeException e) {
+    e.printStackTrace();
+  }
   return precondition;
 }

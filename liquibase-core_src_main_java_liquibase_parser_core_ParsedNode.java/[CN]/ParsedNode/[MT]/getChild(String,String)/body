@@ -1,8 +1,12 @@
 {
+  ParsedNode returnNode=null;
   for (  ParsedNode node : children) {
     if (nodeMatches(node,namespace,name)) {
-      return node;
+      if (returnNode != null) {
+        throw new ParsedNodeException("Multiple nodes match " + namespace + "/"+ name);
+      }
+      returnNode=node;
     }
   }
-  return null;
+  return returnNode;
 }

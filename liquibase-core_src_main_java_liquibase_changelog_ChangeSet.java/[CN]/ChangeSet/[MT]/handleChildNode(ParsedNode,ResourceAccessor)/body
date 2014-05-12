@@ -1,11 +1,11 @@
 {
-  if (child.getNodeName().equals("rollback")) {
+  if (child.getName().equals("rollback")) {
     handleRollbackNode(child,resourceAccessor);
   }
- else   if (child.getNodeName().equals("validCheckSum")) {
+ else   if (child.getName().equals("validCheckSum")) {
     addValidCheckSum(child.getValue(String.class));
   }
- else   if (child.getNodeName().equals("modifySql")) {
+ else   if (child.getName().equals("modifySql")) {
     String dbmsString=StringUtils.trimToNull(child.getChildValue(null,"dbms",String.class));
     String contextString=StringUtils.trimToNull(child.getChildValue(null,"context",String.class));
     boolean applyToRollback=child.getChildValue(null,"applyToRollback",false);
@@ -30,21 +30,31 @@
       }
     }
     for (    ParsedNode node : potentialVisitors) {
-      SqlVisitor sqlVisitor=SqlVisitorFactory.getInstance().create(node.getNodeName());
+      SqlVisitor sqlVisitor=SqlVisitorFactory.getInstance().create(node.getName());
       if (sqlVisitor != null) {
         sqlVisitor.setApplyToRollback(applyToRollback);
         if (dbms.size() > 0) {
           sqlVisitor.setApplicableDbms(dbms);
         }
         sqlVisitor.setContexts(context);
-        sqlVisitor.load(node,resourceAccessor);
+        try {
+          sqlVisitor.load(node,resourceAccessor);
+        }
+ catch (        ParsedNodeException e) {
+          e.printStackTrace();
+        }
         addSqlVisitor(sqlVisitor);
       }
     }
   }
- else   if (child.getNodeName().equals("preConditions")) {
+ else   if (child.getName().equals("preConditions")) {
     this.preconditions=new PreconditionContainer();
-    this.preconditions.load(child,resourceAccessor);
+    try {
+      this.preconditions.load(child,resourceAccessor);
+    }
+ catch (    ParsedNodeException e) {
+      e.printStackTrace();
+    }
   }
  else {
     addChange(toChange(child,resourceAccessor));

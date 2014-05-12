@@ -1,4 +1,4 @@
 {
-  addChild(new ParsedNode(namespace,nodeName).setValue(value));
+  addChild(createNode(namespace,nodeName).setValue(value));
   return this;
 }

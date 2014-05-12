@@ -3,7 +3,15 @@
   if (whereParams != null) {
     for (    ParsedNode param : whereParams.getChildren(null,"param")) {
       ColumnConfig columnConfig=new ColumnConfig();
-      columnConfig.load(param,resourceAccessor);
+      try {
+        columnConfig.load(param,resourceAccessor);
+      }
+ catch (      ParsedNodeException e) {
+        e.printStackTrace();
+      }
+catch (      SetupException e) {
+        e.printStackTrace();
+      }
       addWhereParam(columnConfig);
     }
   }

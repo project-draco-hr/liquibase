@@ -6,7 +6,7 @@
       node.setValue(seenText);
     }
   }
- catch (  ChangeLogParseException e) {
+ catch (  ParsedNodeException e) {
     throw new SAXException(e);
   }
 }

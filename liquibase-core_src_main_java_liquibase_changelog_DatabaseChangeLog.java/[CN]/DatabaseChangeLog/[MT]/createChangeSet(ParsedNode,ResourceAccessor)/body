@@ -1,5 +1,10 @@
 {
   ChangeSet changeSet=new ChangeSet(this);
-  changeSet.load(node,resourceAccessor);
+  try {
+    changeSet.load(node,resourceAccessor);
+  }
+ catch (  ParsedNodeException e) {
+    e.printStackTrace();
+  }
   return changeSet;
 }

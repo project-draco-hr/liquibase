@@ -20,7 +20,7 @@
             }
           }
           for (          ParsedNode child : columnNodes) {
-            if (child.getNodeName().equals("column") || child.getNodeName().equals("columns")) {
+            if (child.getName().equals("column") || child.getName().equals("columns")) {
               ColumnConfig columnConfig=(ColumnConfig)collectionType.newInstance();
               columnConfig.load(child,resourceAccessor);
               ((ChangeWithColumns)this).addColumn(columnConfig);

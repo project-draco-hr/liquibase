@@ -15,7 +15,7 @@
     nodeStack.push(node);
     textStack.push(new StringBuffer());
   }
- catch (  ChangeLogParseException e) {
+ catch (  ParsedNodeException e) {
     throw new SAXException(e);
   }
 }

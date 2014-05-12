@@ -12,7 +12,7 @@
       relativeTo=this.getPhysicalFilePath();
     }
     Set<String> unsortedResources=resourceAccessor.list(relativeTo,pathName,true,false,true);
-    SortedSet<String> resources=new TreeSet<String>();
+    SortedSet<String> resources=new TreeSet<String>(resourceComparator);
     if (unsortedResources != null) {
       for (      String resourcePath : unsortedResources) {
         if (resourceFilter == null || resourceFilter.include(resourcePath)) {

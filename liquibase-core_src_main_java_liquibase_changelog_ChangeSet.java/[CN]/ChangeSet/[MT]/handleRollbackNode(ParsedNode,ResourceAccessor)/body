@@ -34,7 +34,7 @@
       foundValue=true;
     }
  else {
-      throw new ParseException("Unexpected object: " + value.getClass().getName() + " '"+ value.toString()+ "'",0);
+      throw new ParsedNodeException("Unexpected object: " + value.getClass().getName() + " '"+ value.toString()+ "'");
     }
   }
   if (!foundValue) {
