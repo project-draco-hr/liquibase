@@ -3,7 +3,7 @@
   try {
     String seenText=this.textStack.pop().toString();
     if (!StringUtils.trimToEmpty(seenText).equals("")) {
-      node.setValue(seenText);
+      node.setValue(changeLogParameters.expandExpressions(seenText));
     }
   }
  catch (  ParsedNodeException e) {

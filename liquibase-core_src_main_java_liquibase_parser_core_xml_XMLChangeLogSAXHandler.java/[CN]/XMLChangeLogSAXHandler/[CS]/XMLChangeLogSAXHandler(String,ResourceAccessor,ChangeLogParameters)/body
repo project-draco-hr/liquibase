@@ -4,7 +4,12 @@
   databaseChangeLog=new DatabaseChangeLog();
   databaseChangeLog.setPhysicalFilePath(physicalChangeLogLocation);
   databaseChangeLog.setChangeLogParameters(changeLogParameters);
-  this.changeLogParameters=changeLogParameters;
+  if (changeLogParameters == null) {
+    this.changeLogParameters=new ChangeLogParameters();
+  }
+ else {
+    this.changeLogParameters=changeLogParameters;
+  }
   changeFactory=ChangeFactory.getInstance();
   preconditionFactory=PreconditionFactory.getInstance();
   sqlVisitorFactory=SqlVisitorFactory.getInstance();
