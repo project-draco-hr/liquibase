@@ -1,4 +1,7 @@
 {
+  if (rawValue == null) {
+    return null;
+  }
   if (type.isAssignableFrom(rawValue.getClass())) {
     return (T)rawValue;
   }

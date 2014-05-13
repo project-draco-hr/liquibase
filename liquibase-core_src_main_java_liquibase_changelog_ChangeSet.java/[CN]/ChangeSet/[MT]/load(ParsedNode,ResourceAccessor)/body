@@ -1,7 +1,7 @@
 {
   this.id=node.getChildValue(null,"id",String.class);
   this.author=node.getChildValue(null,"author",String.class);
-  this.alwaysRun=node.getChildValue(null,"runAlways",false);
+  this.alwaysRun=node.getChildValue(null,"runAlways",node.getChildValue(null,"alwaysRun",false));
   this.runOnChange=node.getChildValue(null,"runOnChange",false);
   this.contexts=new ContextExpression(node.getChildValue(null,"context",String.class));
   setDbms(node.getChildValue(null,"dbms",String.class));
@@ -21,18 +21,5 @@
   this.setOnValidationFail(ValidationFailOption.valueOf(onValidationFailString));
   for (  ParsedNode child : node.getChildren()) {
     handleChildNode(child,resourceAccessor);
-  }
-  Object value=node.getValue();
-  if (value != null) {
-    if (value instanceof ParsedNode) {
-      handleChildNode((ParsedNode)value,resourceAccessor);
-    }
- else     if (value instanceof Collection) {
-      for (      Object child : ((Collection)value)) {
-        if (child instanceof ParsedNode) {
-          handleChildNode((ParsedNode)child,resourceAccessor);
-        }
-      }
-    }
   }
 }

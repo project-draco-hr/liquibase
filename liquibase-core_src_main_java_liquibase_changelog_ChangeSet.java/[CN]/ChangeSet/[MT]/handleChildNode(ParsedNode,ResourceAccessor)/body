@@ -2,8 +2,18 @@
   if (child.getName().equals("rollback")) {
     handleRollbackNode(child,resourceAccessor);
   }
- else   if (child.getName().equals("validCheckSum")) {
-    addValidCheckSum(child.getValue(String.class));
+ else   if (child.getName().equals("validCheckSum") || child.getName().equals("validCheckSums")) {
+    if (child.getValue() == null) {
+      return;
+    }
+    if (child.getValue() instanceof Collection) {
+      for (      Object checksum : (Collection)child.getValue()) {
+        addValidCheckSum((String)checksum);
+      }
+    }
+ else {
+      addValidCheckSum(child.getValue(String.class));
+    }
   }
  else   if (child.getName().equals("modifySql")) {
     String dbmsString=StringUtils.trimToNull(child.getChildValue(null,"dbms",String.class));
@@ -17,18 +27,7 @@
     if (contextString != null) {
       context=new ContextExpression(contextString);
     }
-    List<ParsedNode> potentialVisitors=new ArrayList<ParsedNode>(child.getChildren());
-    Object childValue=child.getValue();
-    if (childValue instanceof ParsedNode) {
-      potentialVisitors.add(child);
-    }
- else     if (childValue instanceof Collection) {
-      for (      Object nested : (Collection)childValue) {
-        if (nested instanceof ParsedNode) {
-          potentialVisitors.add((ParsedNode)nested);
-        }
-      }
-    }
+    List<ParsedNode> potentialVisitors=child.getChildren();
     for (    ParsedNode node : potentialVisitors) {
       SqlVisitor sqlVisitor=SqlVisitorFactory.getInstance().create(node.getName());
       if (sqlVisitor != null) {
@@ -54,6 +53,11 @@
     }
  catch (    ParsedNodeException e) {
       e.printStackTrace();
+    }
+  }
+ else   if (child.getName().equals("changes")) {
+    for (    ParsedNode changeNode : child.getChildren()) {
+      handleChildNode(changeNode,resourceAccessor);
     }
   }
  else {

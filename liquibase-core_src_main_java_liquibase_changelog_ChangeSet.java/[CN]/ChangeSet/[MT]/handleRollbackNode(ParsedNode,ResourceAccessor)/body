@@ -29,10 +29,6 @@
         }
       }
     }
- else     if (value instanceof ParsedNode) {
-      addRollbackChange(toChange((ParsedNode)value,resourceAccessor));
-      foundValue=true;
-    }
  else {
       throw new ParsedNodeException("Unexpected object: " + value.getClass().getName() + " '"+ value.toString()+ "'");
     }
