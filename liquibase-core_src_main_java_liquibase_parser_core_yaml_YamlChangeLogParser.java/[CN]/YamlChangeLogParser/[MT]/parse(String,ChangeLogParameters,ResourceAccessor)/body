@@ -12,12 +12,35 @@
  catch (    Exception e) {
       throw new ChangeLogParseException("Syntax error in " + getSupportedFileExtension() + ": "+ e.getMessage(),e);
     }
-    DatabaseChangeLog changeLog=new DatabaseChangeLog(physicalChangeLogLocation);
-    changeLog.setChangeLogParameters(changeLogParameters);
     List rootList=(List)parsedYaml.get("databaseChangeLog");
     if (rootList == null) {
       throw new ChangeLogParseException("Could not find databaseChangeLog node");
     }
+    for (    Object obj : rootList) {
+      if (obj instanceof Map && ((Map)obj).containsKey("property")) {
+        Map property=(Map)((Map)obj).get("property");
+        ContextExpression context=new ContextExpression((String)property.get("context"));
+        if (property.containsKey("name")) {
+          changeLogParameters.set((String)property.get("name"),(String)property.get("value"),context,(String)property.get("dbms"));
+        }
+ else         if (property.containsKey("file")) {
+          Properties props=new Properties();
+          InputStream propertiesStream=StreamUtil.singleInputStream((String)property.get("file"),resourceAccessor);
+          if (propertiesStream == null) {
+            log.info("Could not open properties file " + property.get("file"));
+          }
+ else {
+            props.load(propertiesStream);
+            for (            Map.Entry entry : props.entrySet()) {
+              changeLogParameters.set(entry.getKey().toString(),entry.getValue().toString(),context,(String)property.get("dbms"));
+            }
+          }
+        }
+      }
+    }
+    replaceParameters(parsedYaml,changeLogParameters);
+    DatabaseChangeLog changeLog=new DatabaseChangeLog(physicalChangeLogLocation);
+    changeLog.setChangeLogParameters(changeLogParameters);
     ParsedNode databaseChangeLogNode=new ParsedNode(null,"databaseChangeLog");
     databaseChangeLogNode.setValue(rootList);
     changeLog.load(databaseChangeLogNode,resourceAccessor);
