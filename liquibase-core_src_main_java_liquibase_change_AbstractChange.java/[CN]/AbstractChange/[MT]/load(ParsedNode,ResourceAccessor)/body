@@ -22,7 +22,7 @@
           for (          ParsedNode child : columnNodes) {
             if (child.getName().equals("column") || child.getName().equals("columns")) {
               List<ParsedNode> columnChildren=child.getChildren(null,"column");
-              if (columnChildren != null) {
+              if (columnChildren != null && columnChildren.size() > 0) {
                 for (                ParsedNode columnChild : columnChildren) {
                   ColumnConfig columnConfig=(ColumnConfig)collectionType.newInstance();
                   columnConfig.load(columnChild,resourceAccessor);
@@ -36,6 +36,22 @@
               }
             }
           }
+        }
+      }
+ else       if (LiquibaseSerializable.class.isAssignableFrom(param.getDataTypeClass())) {
+        try {
+          ParsedNode child=parsedNode.getChild(null,param.getParameterName());
+          if (child != null) {
+            LiquibaseSerializable serializableChild=(LiquibaseSerializable)param.getDataTypeClass().newInstance();
+            serializableChild.load(child,resourceAccessor);
+            param.setValue(this,serializableChild);
+          }
+        }
+ catch (        InstantiationException e) {
+          throw new UnexpectedLiquibaseException(e);
+        }
+catch (        IllegalAccessException e) {
+          throw new UnexpectedLiquibaseException(e);
         }
       }
  else {
