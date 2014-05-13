@@ -1,7 +1,7 @@
 {
   Table missingTable=(Table)missingObject;
   PrimaryKey primaryKey=missingTable.getPrimaryKey();
-  CreateTableChange change=new CreateTableChange();
+  CreateTableChange change=createCreateTableChange();
   change.setTableName(missingTable.getName());
   if (control.getIncludeCatalog()) {
     change.setCatalogName(missingTable.getSchema().getCatalogName());
