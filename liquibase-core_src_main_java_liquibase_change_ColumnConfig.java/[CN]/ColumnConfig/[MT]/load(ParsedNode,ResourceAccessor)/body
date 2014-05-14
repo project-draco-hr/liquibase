@@ -7,8 +7,18 @@
   incrementBy=parsedNode.getChildValue(null,"incrementBy",BigInteger.class);
   remarks=parsedNode.getChildValue(null,"remarks",String.class);
   value=parsedNode.getChildValue(null,"value",String.class);
-  valueNumeric=parsedNode.getChildValue(null,"valueNumeric",Double.class);
-  valueDate=parsedNode.getChildValue(null,"valueDate",Date.class);
+  try {
+    valueNumeric=parsedNode.getChildValue(null,"valueNumeric",Double.class);
+  }
+ catch (  ParsedNodeException e) {
+    valueComputed=new DatabaseFunction(parsedNode.getChildValue(null,"valueNumeric",String.class));
+  }
+  try {
+    valueDate=parsedNode.getChildValue(null,"valueDate",Date.class);
+  }
+ catch (  ParsedNodeException e) {
+    valueComputed=new DatabaseFunction(parsedNode.getChildValue(null,"valueDate",String.class));
+  }
   valueBoolean=parsedNode.getChildValue(null,"valueBoolean",Boolean.class);
   valueBlobFile=parsedNode.getChildValue(null,"valueBlobFile",String.class);
   valueClobFile=parsedNode.getChildValue(null,"valueClobFile",String.class);
@@ -25,8 +35,18 @@
     valueSequenceCurrent=new SequenceCurrentValueFunction(valueSequenceCurrentString);
   }
   defaultValue=parsedNode.getChildValue(null,"defaultValue",String.class);
-  defaultValueNumeric=parsedNode.getChildValue(null,"defaultValueNumeric",Double.class);
-  defaultValueDate=parsedNode.getChildValue(null,"defaultValueDate",Date.class);
+  try {
+    defaultValueNumeric=parsedNode.getChildValue(null,"defaultValueNumeric",Double.class);
+  }
+ catch (  ParsedNodeException e) {
+    defaultValueComputed=new DatabaseFunction(parsedNode.getChildValue(null,"defaultValueNumeric",String.class));
+  }
+  try {
+    defaultValueDate=parsedNode.getChildValue(null,"defaultValueDate",Date.class);
+  }
+ catch (  ParsedNodeException e) {
+    defaultValueComputed=new DatabaseFunction(parsedNode.getChildValue(null,"defaultValueDate",String.class));
+  }
   defaultValueBoolean=parsedNode.getChildValue(null,"defaultValueBoolean",Boolean.class);
   String defaultValueComputedString=parsedNode.getChildValue(null,"defaultValueComputed",String.class);
   if (defaultValueComputedString != null) {

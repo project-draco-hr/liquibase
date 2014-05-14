@@ -1,7 +1,7 @@
 {
   for (  ParsedNode childNode : parsedNode.getChildren()) {
     try {
-      if (ObjectUtil.hasWriteProperty(this,childNode.getName())) {
+      if (this.getSerializableFields().contains(childNode.getName())) {
         Object value=childNode.getValue();
         if (value != null) {
           value=value.toString();
@@ -10,7 +10,14 @@
       }
     }
  catch (    Exception e) {
-      throw new SetupException("Error setting property",e);
+      throw new ParsedNodeException("Error setting property",e);
+    }
+  }
+  if (parsedNode.getValue() != null) {
+    for (    String field : this.getSerializableFields()) {
+      if (this.getSerializableFieldType(field) == SerializationType.DIRECT_VALUE) {
+        ObjectUtil.setProperty(this,field,parsedNode.getValue(String.class));
+      }
     }
   }
 }

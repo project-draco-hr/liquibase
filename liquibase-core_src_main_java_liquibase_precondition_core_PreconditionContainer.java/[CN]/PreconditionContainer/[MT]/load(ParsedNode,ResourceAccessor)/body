@@ -1,0 +1,7 @@
+{
+  this.setOnError(parsedNode.getChildValue(null,"onError",String.class));
+  this.setOnErrorMessage(parsedNode.getChildValue(null,"onErrorMessage",String.class));
+  this.setOnFail(parsedNode.getChildValue(null,"onFail",String.class));
+  this.setOnFailMessage(parsedNode.getChildValue(null,"onFailMessage",String.class));
+  super.load(parsedNode,resourceAccessor);
+}

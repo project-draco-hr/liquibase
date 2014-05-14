@@ -3,11 +3,6 @@
   if (precondition == null) {
     return null;
   }
-  try {
-    precondition.load(node,resourceAccessor);
-  }
- catch (  ParsedNodeException e) {
-    e.printStackTrace();
-  }
+  precondition.load(node,resourceAccessor);
   return precondition;
 }

@@ -2,10 +2,10 @@
   String changeSetId=rollbackNode.getChildValue(null,"changeSetId",String.class);
   if (changeSetId != null) {
     String changeSetAuthor=rollbackNode.getChildValue(null,"changeSetAuthor",String.class);
-    String changeSetPath=rollbackNode.getChildValue(null,"changeSetPath",String.class);
+    String changeSetPath=rollbackNode.getChildValue(null,"changeSetPath",getFilePath());
     ChangeSet changeSet=this.getChangeLog().getChangeSet(changeSetPath,changeSetAuthor,changeSetId);
     if (changeSet == null) {
-      throw new SetupException("Change set " + new ChangeSet(changeSetId,changeSetAuthor,false,false,changeSetPath,null,null,null).toString(false) + " does not exist");
+      throw new ParsedNodeException("Change set " + new ChangeSet(changeSetId,changeSetAuthor,false,false,changeSetPath,null,null,null).toString(false) + " does not exist");
     }
     for (    Change change : changeSet.getChanges()) {
       addRollbackChange(change);

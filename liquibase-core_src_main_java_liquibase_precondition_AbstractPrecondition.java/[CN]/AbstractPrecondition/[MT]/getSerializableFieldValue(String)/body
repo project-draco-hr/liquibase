@@ -1,3 +1,11 @@
 {
-  return null;
+  try {
+    return ObjectUtil.getProperty(this,field);
+  }
+ catch (  IllegalAccessException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+catch (  InvocationTargetException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
 }

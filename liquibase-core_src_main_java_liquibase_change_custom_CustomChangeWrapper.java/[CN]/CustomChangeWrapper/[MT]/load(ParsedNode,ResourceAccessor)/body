@@ -4,7 +4,7 @@
     setClass(parsedNode.getChildValue(null,"class",String.class));
   }
  catch (  CustomChangeException e) {
-    throw new SetupException(e);
+    throw new ParsedNodeException(e);
   }
   super.load(parsedNode,resourceAccessor);
 }

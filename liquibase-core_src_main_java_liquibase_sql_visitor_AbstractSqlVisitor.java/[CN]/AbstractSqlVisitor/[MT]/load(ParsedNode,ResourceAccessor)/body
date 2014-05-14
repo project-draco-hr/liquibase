@@ -22,7 +22,7 @@
       }
     }
  catch (    Exception e) {
-      throw new SetupException("Error setting property",e);
+      throw new ParsedNodeException("Error setting property",e);
     }
   }
 }

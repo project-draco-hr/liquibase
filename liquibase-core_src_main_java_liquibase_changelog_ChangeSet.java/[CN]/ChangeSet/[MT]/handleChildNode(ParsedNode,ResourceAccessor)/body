@@ -36,12 +36,7 @@
           sqlVisitor.setApplicableDbms(dbms);
         }
         sqlVisitor.setContexts(context);
-        try {
-          sqlVisitor.load(node,resourceAccessor);
-        }
- catch (        ParsedNodeException e) {
-          e.printStackTrace();
-        }
+        sqlVisitor.load(node,resourceAccessor);
         addSqlVisitor(sqlVisitor);
       }
     }

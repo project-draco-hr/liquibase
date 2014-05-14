@@ -66,5 +66,10 @@ catch (  IllegalAccessException e) {
     throw new UnexpectedLiquibaseException(e);
   }
   customLoadLogic(parsedNode,resourceAccessor);
-  this.finishInitialization();
+  try {
+    this.finishInitialization();
+  }
+ catch (  SetupException e) {
+    throw new ParsedNodeException(e);
+  }
 }

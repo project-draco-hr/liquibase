@@ -13,4 +13,17 @@
     }
     this.setParam(child.getChildValue(null,"name",String.class),(String)value);
   }
+  CustomChange customChange=null;
+  try {
+    customChange=(CustomChange)Class.forName(className,false,resourceAccessor.toClassLoader()).newInstance();
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  for (  ParsedNode node : parsedNode.getChildren()) {
+    Object value=node.getValue();
+    if (value != null && ObjectUtil.hasProperty(customChange,node.getName())) {
+      this.setParam(node.getName(),value.toString());
+    }
+  }
 }

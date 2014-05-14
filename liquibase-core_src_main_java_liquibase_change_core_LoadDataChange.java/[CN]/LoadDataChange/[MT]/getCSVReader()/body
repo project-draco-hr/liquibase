@@ -12,11 +12,14 @@
     streamReader=new UtfBomAwareReader(stream,getEncoding());
   }
   char quotchar;
-  if (0 == this.quotchar.length()) {
+  if (StringUtils.trimToEmpty(this.quotchar).length() == 0) {
     quotchar='\1';
   }
  else {
     quotchar=this.quotchar.charAt(0);
+  }
+  if (separator == null) {
+    separator=liquibase.util.csv.opencsv.CSVReader.DEFAULT_SEPARATOR + "";
   }
   return new CSVReader(streamReader,separator.charAt(0),quotchar);
 }
