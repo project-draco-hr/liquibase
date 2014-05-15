@@ -1,5 +1,0 @@
-{
-  DatabaseChangeProperty property=mock(DatabaseChangeProperty.class);
-  when(property.serializationType()).thenReturn(LiquibaseSerializable.SerializationType.NESTED_OBJECT);
-  assertEquals(LiquibaseSerializable.SerializationType.NESTED_OBJECT,new ExampleAbstractChange().createSerializationTypeMetaData("x",property));
-}

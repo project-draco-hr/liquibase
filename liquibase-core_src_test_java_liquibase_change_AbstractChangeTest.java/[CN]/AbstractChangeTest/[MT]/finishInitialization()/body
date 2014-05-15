@@ -1,4 +1,0 @@
-{
-  AbstractChange change=new ExampleAbstractChange();
-  change.finishInitialization();
-}

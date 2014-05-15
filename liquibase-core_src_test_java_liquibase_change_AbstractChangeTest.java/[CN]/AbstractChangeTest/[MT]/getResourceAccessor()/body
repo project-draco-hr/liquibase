@@ -1,9 +1,0 @@
-{
-  ResourceAccessor accessor=mock(ResourceAccessor.class);
-  ExampleParamlessAbstractChange change=new ExampleParamlessAbstractChange();
-  assertNull("resourceAccessor defaults to null",change.getResourceAccessor());
-  change.setResourceAccessor(accessor);
-  assertSame(accessor,change.getResourceAccessor());
-  change.setResourceAccessor(null);
-  assertNull("resourceAccessor can be set to null",change.getResourceAccessor());
-}

@@ -1,5 +1,0 @@
-{
-  DatabaseChangeProperty property=mock(DatabaseChangeProperty.class);
-  when(property.description()).thenReturn("test me");
-  assertEquals("test me",new ExampleAbstractChange().createDescriptionMetaData("x",property));
-}

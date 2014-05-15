@@ -1,5 +1,0 @@
-{
-  DatabaseChangeProperty property=mock(DatabaseChangeProperty.class);
-  when(property.since()).thenReturn("3.4");
-  assertEquals("3.4",new ExampleAbstractChange().createSinceMetaData("x",property));
-}

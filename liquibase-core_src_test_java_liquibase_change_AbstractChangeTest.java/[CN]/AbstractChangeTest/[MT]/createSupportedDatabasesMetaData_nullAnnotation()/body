@@ -1,3 +1,0 @@
-{
-  assertArraysEqual(new String[]{"COMPUTE"},new ExampleAbstractChange().createSupportedDatabasesMetaData("x",null));
-}

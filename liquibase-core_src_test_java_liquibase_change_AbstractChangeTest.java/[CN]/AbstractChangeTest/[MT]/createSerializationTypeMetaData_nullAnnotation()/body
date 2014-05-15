@@ -1,3 +1,0 @@
-{
-  assertEquals(LiquibaseSerializable.SerializationType.NAMED_FIELD,new ExampleAbstractChange().createSerializationTypeMetaData("x",null));
-}

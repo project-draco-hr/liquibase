@@ -1,3 +1,0 @@
-{
-  assertNull(new ExampleAbstractChange().createSinceMetaData("x",null));
-}
