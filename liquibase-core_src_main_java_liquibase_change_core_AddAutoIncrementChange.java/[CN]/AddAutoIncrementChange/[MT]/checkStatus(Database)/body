@@ -14,6 +14,6 @@
     return result;
   }
  catch (  Exception e) {
-    return result.unknown(e);
+    throw new RuntimeException(e);
   }
 }
