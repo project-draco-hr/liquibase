@@ -1,5 +1,8 @@
 {
   for (  ParsedNode childNode : parsedNode.getChildren()) {
+    if (!shouldAutoLoad(childNode)) {
+      continue;
+    }
     try {
       if (this.getSerializableFields().contains(childNode.getName())) {
         Object value=childNode.getValue();
