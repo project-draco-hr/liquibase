@@ -1,3 +1,0 @@
-{
-  assertEquals("xyz",new ConstraintsConfig().setReferences("xyz").getReferences());
-}

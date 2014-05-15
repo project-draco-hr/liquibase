@@ -1,0 +1,23 @@
+{
+  if (value instanceof Collection) {
+    List returnList=new ArrayList();
+    for (    Object obj : (Collection)value) {
+      Object objValue=serializeValue(obj);
+      if (objValue != null) {
+        returnList.add(objValue);
+      }
+    }
+    if (((Collection)value).size() == 0) {
+      return null;
+    }
+ else {
+      return returnList;
+    }
+  }
+ else   if (value instanceof LiquibaseSerializable) {
+    return ((LiquibaseSerializable)value).serialize();
+  }
+ else {
+    return value;
+  }
+}

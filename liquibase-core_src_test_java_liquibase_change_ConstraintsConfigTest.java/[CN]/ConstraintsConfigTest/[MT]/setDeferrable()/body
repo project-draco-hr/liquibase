@@ -1,4 +1,0 @@
-{
-  assertEquals(true,new ConstraintsConfig().setDeferrable(true).isDeferrable());
-  assertEquals(false,new ConstraintsConfig().setDeferrable(false).isDeferrable());
-}

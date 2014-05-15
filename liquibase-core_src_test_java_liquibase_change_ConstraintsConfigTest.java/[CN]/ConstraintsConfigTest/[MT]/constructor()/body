@@ -1,8 +1,0 @@
-{
-  ConstraintsConfig constraints=new ConstraintsConfig();
-  assertNull(constraints.isDeleteCascade());
-  assertNull(constraints.isInitiallyDeferred());
-  assertNull(constraints.isNullable());
-  assertNull(constraints.isPrimaryKey());
-  assertNull(constraints.isUnique());
-}
