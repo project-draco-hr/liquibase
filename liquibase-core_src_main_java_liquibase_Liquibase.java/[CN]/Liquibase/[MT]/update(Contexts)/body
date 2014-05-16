@@ -7,7 +7,7 @@
     checkLiquibaseTables(true,changeLog,contexts);
     changeLog.validate(database,contexts);
     ChangeLogIterator changeLogIterator=getStandardChangelogIterator(contexts,changeLog);
-    changeLogIterator.run(createUpdateVisitor(),database);
+    changeLogIterator.run(createUpdateVisitor(),new RuntimeEnvironment(database,contexts));
   }
   finally {
     database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);

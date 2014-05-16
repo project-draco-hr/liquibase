@@ -17,7 +17,7 @@
  else {
       ChangeLogIterator forwardIterator=new ChangeLogIterator(changeLog,new NotRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database),new CountChangeSetFilter(count));
       final ListVisitor listVisitor=new ListVisitor();
-      forwardIterator.run(listVisitor,database);
+      forwardIterator.run(listVisitor,new RuntimeEnvironment(database,contexts));
       logIterator=new ChangeLogIterator(changeLog,new NotRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database),new ChangeSetFilter(){
         @Override public ChangeSetFilterResult accepts(        ChangeSet changeSet){
           return new ChangeSetFilterResult(listVisitor.getSeenChangeSets().contains(changeSet),null,null);
@@ -25,7 +25,7 @@
       }
 );
     }
-    logIterator.run(new RollbackVisitor(database),database);
+    logIterator.run(new RollbackVisitor(database),new RuntimeEnvironment(database,contexts));
   }
   finally {
     lockService.releaseLock();
