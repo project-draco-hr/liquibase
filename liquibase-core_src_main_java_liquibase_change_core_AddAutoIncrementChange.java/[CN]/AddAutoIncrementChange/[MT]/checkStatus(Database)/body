@@ -13,7 +13,9 @@
     }
     return result;
   }
- catch (  Throwable e) {
-    throw new RuntimeException(e);
+ catch (  Exception e) {
+    StringWriter writer=new StringWriter();
+    e.printStackTrace(new PrintWriter(writer));
+    return result.unknown(writer.toString());
   }
 }
