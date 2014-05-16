@@ -14,6 +14,9 @@
     return result;
   }
  catch (  Exception e) {
-    throw e;
+    StringWriter writer=new StringWriter();
+    e.printStackTrace(new PrintWriter(writer));
+    e.printStackTrace();
+    return result.unknown(writer.toString());
   }
 }
