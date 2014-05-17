@@ -1,0 +1,9 @@
+{
+  Map<String,ChangeParameterMetaData> returnMap=new HashMap<String,ChangeParameterMetaData>();
+  for (  Map.Entry<String,ChangeParameterMetaData> entry : getParameters().entrySet()) {
+    if (entry.getValue().getCurrentValue(change) != null) {
+      returnMap.put(entry.getKey(),entry.getValue());
+    }
+  }
+  return Collections.unmodifiableMap(returnMap);
+}

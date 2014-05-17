@@ -1,0 +1,9 @@
+{
+  Set<String> returnSet=new HashSet<String>();
+  for (  String file : contentByFileName.keySet()) {
+    if (file.startsWith(path)) {
+      returnSet.add(file);
+    }
+  }
+  return returnSet;
+}

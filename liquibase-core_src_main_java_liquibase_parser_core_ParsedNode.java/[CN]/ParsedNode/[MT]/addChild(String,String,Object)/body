@@ -1,0 +1,4 @@
+{
+  addChild(createNode(namespace,nodeName).setValue(value));
+  return this;
+}

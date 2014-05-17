@@ -1,0 +1,34 @@
+{
+  if (value instanceof ParsedNode) {
+    this.addChild((ParsedNode)value);
+  }
+ else   if (value instanceof Collection) {
+    List newValue=new ArrayList();
+    for (    Object obj : ((Collection)value)) {
+      if (obj instanceof Map) {
+        addChildren((Map)obj);
+      }
+ else       if (obj instanceof ParsedNode) {
+        addChild(((ParsedNode)obj));
+      }
+ else {
+        newValue.add(obj);
+      }
+    }
+    if (newValue.size() == 0) {
+    }
+ else     if (newValue.size() == 1) {
+      this.value=newValue.get(0);
+    }
+ else {
+      this.value=newValue;
+    }
+  }
+ else   if (value instanceof Map) {
+    addChildren(((Map)value));
+  }
+ else {
+    this.value=value;
+  }
+  return this;
+}

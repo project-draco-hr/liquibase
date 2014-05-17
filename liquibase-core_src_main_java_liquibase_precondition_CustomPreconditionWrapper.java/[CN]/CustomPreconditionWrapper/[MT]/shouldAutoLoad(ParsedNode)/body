@@ -1,0 +1,6 @@
+{
+  if (node.getName().equals("params")) {
+    return false;
+  }
+  return super.shouldAutoLoad(node);
+}

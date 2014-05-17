@@ -1,0 +1,5 @@
+{
+  super.load(parsedNode,resourceAccessor);
+  this.index=parsedNode.getChildValue(null,"index",Integer.class);
+  this.header=parsedNode.getChildValue(null,"header",String.class);
+}

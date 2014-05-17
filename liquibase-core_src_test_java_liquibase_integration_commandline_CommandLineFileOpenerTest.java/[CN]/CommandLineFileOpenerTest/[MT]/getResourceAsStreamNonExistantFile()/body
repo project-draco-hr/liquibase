@@ -1,3 +1,0 @@
-{
-  assertNull(resourceAccessor.getResourceAsStream("non/existant/file.txt"));
-}

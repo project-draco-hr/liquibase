@@ -1,0 +1,4 @@
+List<DatabaseObject> configuredObjects
+DatabaseObject[] examples
+Database database
+SnapshotControl snapshotControl

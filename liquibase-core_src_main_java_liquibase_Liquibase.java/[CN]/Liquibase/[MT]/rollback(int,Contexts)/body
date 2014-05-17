@@ -7,7 +7,7 @@
     checkLiquibaseTables(false,changeLog,contexts);
     changeLog.validate(database,contexts);
     ChangeLogIterator logIterator=new ChangeLogIterator(database.getRanChangeSetList(),changeLog,new AlreadyRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database),new CountChangeSetFilter(changesToRollback));
-    logIterator.run(new RollbackVisitor(database),database);
+    logIterator.run(new RollbackVisitor(database),new RuntimeEnvironment(database,contexts));
   }
   finally {
     try {

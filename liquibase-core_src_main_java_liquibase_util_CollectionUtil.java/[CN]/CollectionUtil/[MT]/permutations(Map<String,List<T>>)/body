@@ -1,0 +1,8 @@
+{
+  List<Map<String,T>> list=new ArrayList<Map<String,T>>();
+  if (parameterValues == null || parameterValues.size() == 0) {
+    return list;
+  }
+  permute(new HashMap<String,T>(),new ArrayList<String>(parameterValues.keySet()),parameterValues,list);
+  return list;
+}

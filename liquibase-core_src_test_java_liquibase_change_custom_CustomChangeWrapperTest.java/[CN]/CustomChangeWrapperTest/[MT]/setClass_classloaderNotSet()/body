@@ -1,3 +1,0 @@
-{
-  new CustomChangeWrapper().setClass(ExampleCustomSqlChange.class.getName());
-}

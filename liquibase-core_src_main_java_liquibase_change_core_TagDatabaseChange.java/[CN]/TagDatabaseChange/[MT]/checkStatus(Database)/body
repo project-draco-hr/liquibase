@@ -1,0 +1,8 @@
+{
+  try {
+    return new ChangeStatus().assertComplete(ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database).tagExists(getTag()),"Database not tagged");
+  }
+ catch (  DatabaseException e) {
+    return new ChangeStatus().unknown(e);
+  }
+}

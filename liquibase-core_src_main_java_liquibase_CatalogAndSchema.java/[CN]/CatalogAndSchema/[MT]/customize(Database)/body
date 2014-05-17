@@ -1,0 +1,18 @@
+{
+  CatalogAndSchema standard=standardize(accordingTo);
+  String catalogName=standard.getCatalogName();
+  String schemaName=standard.getSchemaName();
+  if (catalogName == null) {
+    catalogName=accordingTo.getDefaultCatalogName();
+  }
+  if (schemaName == null) {
+    schemaName=accordingTo.getDefaultSchemaName();
+  }
+  if (catalogName != null) {
+    catalogName=accordingTo.correctObjectName(catalogName,Catalog.class);
+  }
+  if (schemaName != null) {
+    schemaName=accordingTo.correctObjectName(schemaName,Schema.class);
+  }
+  return new CatalogAndSchema(catalogName,schemaName);
+}

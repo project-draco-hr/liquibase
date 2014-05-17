@@ -1,4 +1,0 @@
-{
-  file=file.replaceFirst("^target/classes/","");
-  return _loader.getResourceAsStream(file);
-}

@@ -1,0 +1,3 @@
+{
+  return hasReadProperty(object,propertyName) && hasWriteProperty(object,propertyName);
+}

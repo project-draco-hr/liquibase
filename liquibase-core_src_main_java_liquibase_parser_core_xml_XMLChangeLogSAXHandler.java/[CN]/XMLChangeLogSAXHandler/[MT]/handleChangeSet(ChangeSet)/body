@@ -1,3 +1,0 @@
-{
-  databaseChangeLog.addChangeSet(changeSet);
-}

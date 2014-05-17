@@ -1,0 +1,15 @@
+{
+  setName(columnConfig.getName());
+  setType(new DataType(columnConfig.getType()));
+  if (columnConfig.getDefaultValue() != null) {
+    setDefaultValue(columnConfig.getDefaultValueObject());
+  }
+  if (columnConfig.isAutoIncrement()) {
+    setAutoIncrementInformation(new AutoIncrementInformation(columnConfig.getStartWith(),columnConfig.getIncrementBy()));
+  }
+  ConstraintsConfig constraints=columnConfig.getConstraints();
+  if (constraints != null) {
+    setNullable(constraints.isNullable());
+  }
+  setRemarks(columnConfig.getRemarks());
+}

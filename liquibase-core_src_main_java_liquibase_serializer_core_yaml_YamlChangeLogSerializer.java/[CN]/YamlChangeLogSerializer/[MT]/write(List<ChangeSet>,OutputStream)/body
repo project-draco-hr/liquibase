@@ -1,2 +1,9 @@
 {
+  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out));
+  writer.write("databaseChangeLog:\n");
+  for (  ChangeSet changeSet : changeSets) {
+    writer.write(StringUtils.indent(serialize(changeSet,true),2));
+    writer.write("\n");
+  }
+  writer.flush();
 }

@@ -1,5 +1,0 @@
-{
-  CreateViewChange change=new CreateViewChange();
-  change.setViewName("VIEW_NAME");
-  assertEquals("View VIEW_NAME created",change.getConfirmationMessage());
-}

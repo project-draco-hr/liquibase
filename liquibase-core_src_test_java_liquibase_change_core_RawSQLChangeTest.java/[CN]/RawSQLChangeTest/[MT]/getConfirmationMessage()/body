@@ -1,3 +1,0 @@
-{
-  assertEquals("Custom SQL executed",refactoring.getConfirmationMessage());
-}

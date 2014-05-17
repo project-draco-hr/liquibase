@@ -1,5 +1,0 @@
-{
-  String sql="insert into test_table values(1, 'hello');\n" + "insert into test_table values(2, 'hello');\n" + "--insert into test_table values(3, 'hello');\n"+ "insert into test_table values(4, 'hello');";
-  String[] result=StringUtils.processMutliLineSQL(sql,true,true,";");
-  assertEquals(3,result.length);
-}

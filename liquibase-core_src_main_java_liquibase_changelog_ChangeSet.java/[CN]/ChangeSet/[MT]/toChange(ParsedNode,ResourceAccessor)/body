@@ -1,0 +1,15 @@
+{
+  Change change=ChangeFactory.getInstance().create(value.getName());
+  if (change == null) {
+    return null;
+  }
+ else {
+    try {
+      change.load(value,resourceAccessor);
+    }
+ catch (    ParsedNodeException e) {
+      e.printStackTrace();
+    }
+    return change;
+  }
+}

@@ -8,7 +8,7 @@
     changeLog.validate(database,contexts);
     List<RanChangeSet> ranChangeSetList=database.getRanChangeSetList();
     ChangeLogIterator logIterator=new ChangeLogIterator(ranChangeSetList,changeLog,new AfterTagChangeSetFilter(tagToRollBackTo,ranChangeSetList),new AlreadyRanChangeSetFilter(ranChangeSetList),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database));
-    logIterator.run(new RollbackVisitor(database),database);
+    logIterator.run(new RollbackVisitor(database),new RuntimeEnvironment(database,contexts));
   }
   finally {
     lockService.releaseLock();

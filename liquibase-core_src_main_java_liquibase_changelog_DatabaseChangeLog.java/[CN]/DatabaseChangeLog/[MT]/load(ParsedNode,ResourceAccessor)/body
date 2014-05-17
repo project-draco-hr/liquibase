@@ -1,0 +1,6 @@
+{
+  setLogicalFilePath(parsedNode.getChildValue(null,"logicalFilePath",String.class));
+  for (  ParsedNode childNode : parsedNode.getChildren()) {
+    handleChildNode(childNode,resourceAccessor);
+  }
+}

@@ -1,0 +1,26 @@
+{
+  for (  ParsedNode childNode : parsedNode.getChildren()) {
+    if (!shouldAutoLoad(childNode)) {
+      continue;
+    }
+    try {
+      if (this.getSerializableFields().contains(childNode.getName())) {
+        Object value=childNode.getValue();
+        if (value != null) {
+          value=value.toString();
+        }
+        ObjectUtil.setProperty(this,childNode.getName(),(String)value);
+      }
+    }
+ catch (    Exception e) {
+      throw new ParsedNodeException("Error setting property",e);
+    }
+  }
+  if (parsedNode.getValue() != null) {
+    for (    String field : this.getSerializableFields()) {
+      if (this.getSerializableFieldType(field) == SerializationType.DIRECT_VALUE) {
+        ObjectUtil.setProperty(this,field,parsedNode.getValue(String.class));
+      }
+    }
+  }
+}

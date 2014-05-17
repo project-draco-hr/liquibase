@@ -1,3 +1,0 @@
-{
-  assertEquals("Table TAB_NAME dropped",change.getConfirmationMessage());
-}

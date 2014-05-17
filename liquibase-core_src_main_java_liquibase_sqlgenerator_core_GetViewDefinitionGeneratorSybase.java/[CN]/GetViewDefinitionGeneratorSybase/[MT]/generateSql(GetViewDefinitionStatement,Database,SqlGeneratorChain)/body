@@ -1,5 +1,5 @@
 {
-  CatalogAndSchema schema=database.correctSchema(new CatalogAndSchema(statement.getCatalogName(),statement.getSchemaName()));
+  CatalogAndSchema schema=new CatalogAndSchema(statement.getCatalogName(),statement.getSchemaName()).customize(database);
   String schemaName=schema.getSchemaName();
   if (schemaName == null) {
     schemaName=database.getDefaultSchemaName();

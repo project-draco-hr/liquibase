@@ -1,0 +1,7 @@
+{
+  ParsedNode child=getChild(namespace,nodename);
+  if (child == null) {
+    return null;
+  }
+  return child.getValue();
+}

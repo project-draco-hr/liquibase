@@ -1,0 +1,5 @@
+{
+  super(null,database,snapshotControl);
+  this.configuredObjects=configuredObjects;
+  init(examples);
+}

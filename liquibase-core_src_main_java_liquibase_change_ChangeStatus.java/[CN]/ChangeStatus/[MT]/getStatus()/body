@@ -1,0 +1,6 @@
+{
+  if (this.status == null) {
+    return Status.unknown;
+  }
+  return this.status;
+}

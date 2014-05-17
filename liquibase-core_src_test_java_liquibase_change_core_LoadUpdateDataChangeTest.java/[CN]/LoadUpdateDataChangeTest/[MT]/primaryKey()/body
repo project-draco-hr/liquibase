@@ -1,6 +1,0 @@
-{
-  LoadUpdateDataChange change=new LoadUpdateDataChange();
-  String primaryKey="myPrimaryKey";
-  change.setPrimaryKey(primaryKey);
-  assertEquals(primaryKey,change.getPrimaryKey());
-}

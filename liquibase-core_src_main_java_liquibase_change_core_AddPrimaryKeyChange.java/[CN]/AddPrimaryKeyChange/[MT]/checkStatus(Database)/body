@@ -1,0 +1,12 @@
+{
+  ChangeStatus result=new ChangeStatus();
+  try {
+    PrimaryKey example=new PrimaryKey(getConstraintName(),getCatalogName(),getSchemaName(),getTableName(),getColumnNames().split("\\s+,\\s+"));
+    PrimaryKey snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(example,database);
+    result.assertComplete(snapshot != null,"Primary key does not exist");
+    return result;
+  }
+ catch (  Exception e) {
+    return result.unknown(e);
+  }
+}

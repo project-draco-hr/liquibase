@@ -1,0 +1,9 @@
+{
+  if (StringUtils.trimToNull(dbmsList) != null) {
+    String[] strings=dbmsList.toLowerCase().split(",");
+    dbmsSet=new HashSet<String>();
+    for (    String string : strings) {
+      dbmsSet.add(string.trim().toLowerCase());
+    }
+  }
+}

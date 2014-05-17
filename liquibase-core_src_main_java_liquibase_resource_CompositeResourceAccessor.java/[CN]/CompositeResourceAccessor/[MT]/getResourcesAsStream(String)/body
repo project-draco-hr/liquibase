@@ -1,0 +1,9 @@
+{
+  for (  ResourceAccessor accessor : resourceAccessors) {
+    Set<InputStream> returnSet=accessor.getResourcesAsStream(path);
+    if (returnSet != null && returnSet.size() > 0) {
+      return returnSet;
+    }
+  }
+  return null;
+}

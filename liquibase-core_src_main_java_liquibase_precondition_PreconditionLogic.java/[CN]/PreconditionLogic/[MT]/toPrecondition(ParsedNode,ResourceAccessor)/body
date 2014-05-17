@@ -1,0 +1,8 @@
+{
+  Precondition precondition=PreconditionFactory.getInstance().create(node.getName());
+  if (precondition == null) {
+    return null;
+  }
+  precondition.load(node,resourceAccessor);
+  return precondition;
+}

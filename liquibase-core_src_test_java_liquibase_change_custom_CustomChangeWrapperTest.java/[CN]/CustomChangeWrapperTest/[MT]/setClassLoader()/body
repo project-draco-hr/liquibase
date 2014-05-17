@@ -1,6 +1,0 @@
-{
-  URLClassLoader classLoader=new URLClassLoader(new URL[0]);
-  CustomChangeWrapper changeWrapper=new CustomChangeWrapper();
-  changeWrapper.setClassLoader(classLoader);
-  assertSame(classLoader,changeWrapper.getClassLoader());
-}

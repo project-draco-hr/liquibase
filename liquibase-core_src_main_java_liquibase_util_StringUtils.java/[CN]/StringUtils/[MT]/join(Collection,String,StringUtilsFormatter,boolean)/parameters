@@ -1,0 +1,4 @@
+Collection collection
+String delimiter
+StringUtilsFormatter formatter
+boolean sorted

@@ -1,0 +1,26 @@
+{
+  ParsedNode node=new ParsedNode(null,getSerializedObjectName());
+  for (  String field : getSerializableFields()) {
+    Object fieldValue=getSerializableFieldValue(field);
+    fieldValue=serializeValue(fieldValue);
+    if (fieldValue == null) {
+      continue;
+    }
+    SerializationType type=getSerializableFieldType(field);
+    if (type == SerializationType.DIRECT_VALUE) {
+      node.setValue(fieldValue);
+    }
+ else     if (type == SerializationType.NAMED_FIELD || type == SerializationType.NESTED_OBJECT) {
+      if (fieldValue instanceof ParsedNode) {
+        node.addChild((ParsedNode)fieldValue);
+      }
+ else {
+        node.addChild(new ParsedNode(null,field).setValue(fieldValue));
+      }
+    }
+ else {
+      throw new UnexpectedLiquibaseException("Unknown type: " + type);
+    }
+  }
+  return node;
+}

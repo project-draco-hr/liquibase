@@ -1,9 +1,0 @@
-{
-  Change change=createClassUnderTest();
-  if (change == null) {
-    return;
-  }
-  for (  Database database : TestContext.getInstance().getAllDatabases()) {
-    assertEquals("Unexpected availablity on " + database.getShortName(),!changeIsUnsupported(database),change.supports(database));
-  }
-}

@@ -1,0 +1,19 @@
+{
+  setClassLoader(resourceAccessor.toClassLoader());
+  setClassName(parsedNode.getChildValue(null,"className",String.class));
+  ParsedNode paramsNode=parsedNode.getChild(null,"params");
+  if (paramsNode == null) {
+    paramsNode=parsedNode;
+  }
+  for (  ParsedNode child : paramsNode.getChildren(null,"param")) {
+    Object value=child.getValue();
+    if (value == null) {
+      value=child.getChildValue(null,"value");
+    }
+    if (value != null) {
+      value=value.toString();
+    }
+    this.setParam(child.getChildValue(null,"name",String.class),(String)value);
+  }
+  super.load(parsedNode,resourceAccessor);
+}

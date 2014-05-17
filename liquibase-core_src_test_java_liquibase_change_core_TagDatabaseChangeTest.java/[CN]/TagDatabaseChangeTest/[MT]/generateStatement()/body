@@ -1,8 +1,0 @@
-{
-  TagDatabaseChange refactoring=new TagDatabaseChange();
-  refactoring.setTag("TAG_NAME");
-  SqlStatement[] sqlStatements=refactoring.generateStatements(new MockDatabase());
-  assertEquals(1,sqlStatements.length);
-  assertTrue(sqlStatements[0] instanceof TagDatabaseStatement);
-  assertEquals("TAG_NAME",((TagDatabaseStatement)sqlStatements[0]).getTag());
-}

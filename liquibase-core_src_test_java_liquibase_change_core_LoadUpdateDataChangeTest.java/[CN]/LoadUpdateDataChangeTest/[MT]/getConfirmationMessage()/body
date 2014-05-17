@@ -1,6 +1,0 @@
-{
-  LoadUpdateDataChange refactoring=new LoadUpdateDataChange();
-  refactoring.setTableName("TABLE_NAME");
-  refactoring.setFile("FILE_NAME");
-  assertEquals("Data loaded from FILE_NAME into TABLE_NAME",refactoring.getConfirmationMessage());
-}

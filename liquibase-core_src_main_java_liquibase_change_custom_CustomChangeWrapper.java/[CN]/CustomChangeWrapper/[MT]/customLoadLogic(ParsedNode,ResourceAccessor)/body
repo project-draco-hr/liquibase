@@ -1,0 +1,29 @@
+{
+  ParsedNode paramsNode=parsedNode.getChild(null,"params");
+  if (paramsNode == null) {
+    paramsNode=parsedNode;
+  }
+  for (  ParsedNode child : paramsNode.getChildren(null,"param")) {
+    Object value=child.getValue();
+    if (value == null) {
+      value=child.getChildValue(null,"value");
+    }
+    if (value != null) {
+      value=value.toString();
+    }
+    this.setParam(child.getChildValue(null,"name",String.class),(String)value);
+  }
+  CustomChange customChange=null;
+  try {
+    customChange=(CustomChange)Class.forName(className,false,resourceAccessor.toClassLoader()).newInstance();
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+  for (  ParsedNode node : parsedNode.getChildren()) {
+    Object value=node.getValue();
+    if (value != null && ObjectUtil.hasProperty(customChange,node.getName())) {
+      this.setParam(node.getName(),value.toString());
+    }
+  }
+}

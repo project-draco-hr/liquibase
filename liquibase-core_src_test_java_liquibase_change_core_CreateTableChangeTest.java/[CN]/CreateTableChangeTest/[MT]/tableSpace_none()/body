@@ -1,5 +1,0 @@
-{
-  CreateTableChange change=new CreateTableChange();
-  CreateTableStatement statement=(CreateTableStatement)change.generateStatements(new MockDatabase())[0];
-  assertNull(statement.getTablespace());
-}

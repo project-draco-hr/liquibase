@@ -1,9 +1,0 @@
-{
-  Enumeration<URL> resources=getResources(file);
-  if (resources.hasMoreElements()) {
-    return resources.nextElement().openStream();
-  }
- else {
-    return null;
-  }
-}

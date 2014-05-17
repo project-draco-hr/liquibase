@@ -1,0 +1,12 @@
+{
+  ParsedNode node=new ParsedNode(null,getSerializedObjectName());
+  ChangeMetaData metaData=ChangeFactory.getInstance().getChangeMetaData(this);
+  for (  ChangeParameterMetaData param : metaData.getSetParameters(this).values()) {
+    Object currentValue=param.getCurrentValue(this);
+    currentValue=serializeValue(currentValue);
+    if (currentValue != null) {
+      node.addChild(null,param.getParameterName(),currentValue);
+    }
+  }
+  return node;
+}

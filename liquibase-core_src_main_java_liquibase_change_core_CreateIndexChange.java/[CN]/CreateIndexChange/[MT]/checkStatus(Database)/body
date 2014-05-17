@@ -1,0 +1,22 @@
+{
+  ChangeStatus result=new ChangeStatus();
+  try {
+    Index example=new Index(getIndexName(),getCatalogName(),getSchemaName(),getTableName());
+    if (getColumns() != null) {
+      for (      ColumnConfig column : getColumns()) {
+        example.addColumn(column.getName());
+      }
+    }
+    Index snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(example,database);
+    result.assertComplete(snapshot != null,"Index does not exist");
+    if (snapshot != null) {
+      if (isUnique() != null) {
+        result.assertCorrect(isUnique().equals(snapshot.isUnique()),"Unique does not match");
+      }
+    }
+    return result;
+  }
+ catch (  Exception e) {
+    return result.unknown(e);
+  }
+}

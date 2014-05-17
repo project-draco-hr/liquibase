@@ -1,5 +1,3 @@
 {
-  if (text != null) {
-    text.append(new String(ch,start,length));
-  }
+  textStack.peek().append(new String(ch,start,length));
 }

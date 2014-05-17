@@ -1,0 +1,6 @@
+{
+  this.objects=new ArrayList<DatabaseObject>();
+  if (objects != null) {
+    this.objects.addAll(Arrays.asList(objects));
+  }
+}

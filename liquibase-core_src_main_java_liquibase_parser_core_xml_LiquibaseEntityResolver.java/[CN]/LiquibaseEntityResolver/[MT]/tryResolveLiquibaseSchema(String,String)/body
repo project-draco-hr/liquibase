@@ -15,7 +15,7 @@
       return null;
     }
     try {
-      InputStream resourceAsStream=resourceAccessor.getResourceAsStream(xsdFile);
+      InputStream resourceAsStream=StreamUtil.singleInputStream(xsdFile,resourceAccessor);
       if (resourceAsStream == null) {
         if (Thread.currentThread().getContextClassLoader() != null) {
           resourceAsStream=Thread.currentThread().getContextClassLoader().getResourceAsStream(xsdFile);

@@ -1,0 +1,12 @@
+{
+  InputStream stream=null;
+  if (contentByFileName.containsKey(path)) {
+    stream=new ByteArrayInputStream(contentByFileName.get(path).getBytes());
+  }
+  if (stream == null) {
+    return null;
+  }
+ else {
+    return new HashSet<InputStream>(Arrays.asList(stream));
+  }
+}

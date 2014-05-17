@@ -1,0 +1,17 @@
+{
+  String string=name;
+  if (children.size() > 0) {
+    string+="[" + StringUtils.join(children,",",new StringUtils.ToStringFormatter(),true) + "]";
+  }
+  if (value != null) {
+    String valueString;
+    if (value instanceof Collection) {
+      valueString="(" + StringUtils.join(((Collection)value),",",new StringUtils.ToStringFormatter(),true) + ")";
+    }
+ else {
+      valueString=value.toString();
+    }
+    string+="=" + valueString;
+  }
+  return string;
+}

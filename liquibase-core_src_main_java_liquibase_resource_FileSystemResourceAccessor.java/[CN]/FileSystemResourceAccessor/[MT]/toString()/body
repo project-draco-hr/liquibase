@@ -1,7 +1,7 @@
 {
-  String dir=baseDirectory;
+  File dir=baseDirectory;
   if (dir == null) {
-    dir=new File(".").getAbsolutePath();
+    dir=new File(".");
   }
-  return getClass().getName() + "(" + dir+ ")";
+  return getClass().getName() + "(" + dir.getAbsolutePath()+ ")";
 }

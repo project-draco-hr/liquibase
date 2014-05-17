@@ -1,9 +1,0 @@
-{
-  Enumeration<URL> files=opener.getResources(".");
-  boolean found=false;
-  while (files.hasMoreElements()) {
-    URL u=files.nextElement();
-    found|=u.getFile().lastIndexOf("FileSystemResourceAccessor") > -1;
-  }
-  assertTrue(found);
-}

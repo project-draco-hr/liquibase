@@ -1,7 +1,0 @@
-{
-  assertNull(new ColumnConfig().setValue(null).getValue());
-  assertEquals("abc",new ColumnConfig().setValue("abc").getValue());
-  assertEquals("empty strings are saved","",new ColumnConfig().setValue("").getValue());
-  assertEquals("strings should not be trimmed","  not trimmed  ",new ColumnConfig().setValue("  not trimmed  ").getValue());
-  assertEquals("null",new ColumnConfig().setValue("null").getValue());
-}

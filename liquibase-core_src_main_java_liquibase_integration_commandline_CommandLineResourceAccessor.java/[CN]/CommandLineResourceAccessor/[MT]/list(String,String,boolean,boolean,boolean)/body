@@ -1,0 +1,12 @@
+{
+  Set<String> contents=super.list(relativeTo,path,includeFiles,includeDirectories,recursive);
+  if (contents == null || contents.size() == 0) {
+    for (    String altPath : getAlternatePaths(path)) {
+      contents=super.list(relativeTo,altPath,includeFiles,includeDirectories,recursive);
+      if (contents != null && contents.size() > 0) {
+        return contents;
+      }
+    }
+  }
+  return contents;
+}

@@ -1,3 +1,0 @@
-{
-  return database instanceof SQLiteDatabase || database instanceof SybaseASADatabase || database instanceof MySQLDatabase|| database instanceof DerbyDatabase|| database instanceof SybaseDatabase;
-}

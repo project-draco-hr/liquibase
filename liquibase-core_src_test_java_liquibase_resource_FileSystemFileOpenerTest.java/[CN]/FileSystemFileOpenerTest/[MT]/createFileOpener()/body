@@ -1,5 +1,0 @@
-{
-  File thisClassFile=new File(new URI(this.getClass().getClassLoader().getResource("liquibase/resource/FileSystemResourceAccessor.class").toExternalForm()));
-  String packageDirectory=thisClassFile.getParent();
-  opener=new FileSystemResourceAccessor(packageDirectory);
-}

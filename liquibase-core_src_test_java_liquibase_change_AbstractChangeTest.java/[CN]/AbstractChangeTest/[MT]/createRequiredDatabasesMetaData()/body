@@ -1,5 +1,0 @@
-{
-  DatabaseChangeProperty property=mock(DatabaseChangeProperty.class);
-  when(property.requiredForDatabase()).thenReturn(new String[]{"a","b"});
-  assertArraysEqual(new String[]{"a","b"},new ExampleAbstractChange().createRequiredDatabasesMetaData("x",property));
-}

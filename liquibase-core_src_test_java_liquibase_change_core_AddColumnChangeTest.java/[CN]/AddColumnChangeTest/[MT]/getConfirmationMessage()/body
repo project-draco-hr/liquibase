@@ -1,9 +1,0 @@
-{
-  AddColumnChange refactoring=new AddColumnChange();
-  refactoring.setTableName("TAB");
-  AddColumnConfig column=new AddColumnConfig();
-  column.setName("NEWCOL");
-  column.setType("TYP");
-  refactoring.addColumn(column);
-  assertEquals("Columns NEWCOL(TYP) added to TAB",refactoring.getConfirmationMessage());
-}

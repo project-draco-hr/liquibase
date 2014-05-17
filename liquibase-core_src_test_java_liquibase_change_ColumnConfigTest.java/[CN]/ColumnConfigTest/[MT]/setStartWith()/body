@@ -1,4 +1,0 @@
-{
-  assertNull(new ColumnConfig().setStartWith(null).getStartWith());
-  assertEquals("125",new ColumnConfig().setStartWith(new BigInteger("125")).getStartWith().toString());
-}

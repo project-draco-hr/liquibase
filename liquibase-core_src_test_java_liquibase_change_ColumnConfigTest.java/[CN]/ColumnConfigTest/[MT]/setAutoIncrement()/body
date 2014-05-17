@@ -1,5 +1,0 @@
-{
-  assertNull(new ColumnConfig().setAutoIncrement(null).isAutoIncrement());
-  assertEquals(true,new ColumnConfig().setAutoIncrement(true).isAutoIncrement());
-  assertFalse(new ColumnConfig().setAutoIncrement(false).isAutoIncrement());
-}

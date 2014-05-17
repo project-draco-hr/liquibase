@@ -1,0 +1,22 @@
+{
+  if (StringUtils.trimToNull(relativeTo) == null) {
+    return path;
+  }
+  URL baseUrl=toClassLoader().getResource(relativeTo);
+  if (baseUrl == null) {
+    throw new UnexpectedLiquibaseException("Cannot find base path '" + relativeTo + "'");
+  }
+  if (baseUrl.toExternalForm().startsWith("file:")) {
+    File baseFile=new File(baseUrl.getPath());
+    if (!baseFile.exists()) {
+      throw new UnexpectedLiquibaseException("Base file '" + baseFile.getAbsolutePath() + "' does not exist");
+    }
+    if (baseFile.isFile()) {
+      baseFile=baseFile.getParentFile();
+    }
+    return convertToPath(baseFile.toURI().getPath() + "/" + path);
+  }
+ else {
+    return convertToPath(relativeTo + "/" + path);
+  }
+}

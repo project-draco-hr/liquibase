@@ -5,6 +5,12 @@
     SortedSet<String> values=new TreeSet<String>();
     for (    String field : objectToSerialize.getSerializableFields()) {
       Object value=objectToSerialize.getSerializableFieldValue(field);
+      if (value == null) {
+        continue;
+      }
+      if (!fieldFilter.include(objectToSerialize,field,value)) {
+        continue;
+      }
       if (value instanceof LiquibaseSerializable) {
         values.add(indent(indent) + serializeObject((LiquibaseSerializable)value,indent + 1));
       }

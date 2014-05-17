@@ -1,9 +1,0 @@
-{
-  expect(first.getResourceAsStream("file")).andReturn(validStream);
-  replay(first);
-  replay(second);
-  InputStream is=composite.getResourceAsStream("file");
-  assertEquals(validStream,is);
-  verify(first);
-  verify(second);
-}

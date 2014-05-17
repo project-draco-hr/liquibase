@@ -1,0 +1,3 @@
+{
+  return namespaceMatches(node,namespace) && node.getName().equals(nodename);
+}

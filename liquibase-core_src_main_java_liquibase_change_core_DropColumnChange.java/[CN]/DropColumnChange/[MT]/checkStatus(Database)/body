@@ -1,0 +1,8 @@
+{
+  try {
+    return new ChangeStatus().assertComplete(!SnapshotGeneratorFactory.getInstance().has(new Column(Table.class,getCatalogName(),getSchemaName(),getTableName(),getColumnName()),database),"Column exists");
+  }
+ catch (  Exception e) {
+    return new ChangeStatus().unknown(e);
+  }
+}

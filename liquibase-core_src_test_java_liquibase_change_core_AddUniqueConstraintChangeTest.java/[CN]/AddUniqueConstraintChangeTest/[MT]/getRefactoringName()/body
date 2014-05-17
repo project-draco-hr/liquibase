@@ -1,3 +1,0 @@
-{
-  assertEquals("addUniqueConstraint",ChangeFactory.getInstance().getChangeMetaData(new AddUniqueConstraintChange()).getName());
-}

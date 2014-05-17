@@ -18,9 +18,12 @@
   this.exampleValues=exampleValues;
   if (dataType instanceof Class) {
     this.dataType=StringUtils.lowerCaseFirst(((Class)dataType).getSimpleName());
+    this.dataTypeClass=(Class)dataType;
   }
  else   if (dataType instanceof ParameterizedType) {
     this.dataType=StringUtils.lowerCaseFirst(((Class)((ParameterizedType)dataType).getRawType()).getSimpleName() + " of " + StringUtils.lowerCaseFirst(((Class)((ParameterizedType)dataType).getActualTypeArguments()[0]).getSimpleName()));
+    this.dataTypeClass=(Class)((ParameterizedType)dataType).getRawType();
+    this.dataTypeClassParameters=((ParameterizedType)dataType).getActualTypeArguments();
   }
   this.mustEqualExisting=mustEqualExisting;
   this.serializationType=serializationType;

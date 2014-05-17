@@ -1,0 +1,29 @@
+{
+  ValidationErrors validate=new ValidationErrors();
+  int nonNullValues=0;
+  if (defaultValue != null) {
+    nonNullValues++;
+  }
+  if (defaultValueNumeric != null) {
+    nonNullValues++;
+  }
+  if (defaultValueBoolean != null) {
+    nonNullValues++;
+  }
+  if (defaultValueDate != null) {
+    nonNullValues++;
+  }
+  if (defaultValueComputed != null) {
+    nonNullValues++;
+  }
+  if (defaultValueSequenceNext != null) {
+    nonNullValues++;
+  }
+  if (nonNullValues > 1) {
+    validate.addError("Only one defaultValue* value can be specified");
+  }
+ else {
+    validate.addAll(super.validate(database));
+  }
+  return validate;
+}

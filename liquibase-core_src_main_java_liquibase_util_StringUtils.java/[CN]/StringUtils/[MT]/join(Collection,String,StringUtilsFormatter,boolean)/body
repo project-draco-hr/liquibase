@@ -1,0 +1,10 @@
+{
+  if (sorted) {
+    TreeSet<String> sortedSet=new TreeSet<String>();
+    for (    Object obj : collection) {
+      sortedSet.add(formatter.toString(obj));
+    }
+    return join(sortedSet,delimiter);
+  }
+  return join(collection,delimiter,formatter);
+}

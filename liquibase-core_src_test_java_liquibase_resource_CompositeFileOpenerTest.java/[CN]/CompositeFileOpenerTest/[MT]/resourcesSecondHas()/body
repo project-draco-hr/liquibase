@@ -1,9 +1,0 @@
-{
-  expect(first.getResources("file")).andReturn(empty);
-  expect(second.getResources("file")).andReturn(hasElements);
-  replay(first);
-  replay(second);
-  Enumeration<URL> urls=composite.getResources("file");
-  verify(first);
-  verify(second);
-}

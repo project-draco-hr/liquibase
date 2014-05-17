@@ -1,0 +1,9 @@
+{
+  if (this.status == null) {
+    return "No tests done";
+  }
+ else   if (this.status == Status.complete) {
+    return null;
+  }
+  return message;
+}

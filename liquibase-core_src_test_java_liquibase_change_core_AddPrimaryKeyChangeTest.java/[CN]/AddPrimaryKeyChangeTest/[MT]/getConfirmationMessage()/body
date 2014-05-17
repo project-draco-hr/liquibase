@@ -1,6 +1,0 @@
-{
-  AddPrimaryKeyChange change=new AddPrimaryKeyChange();
-  change.setTableName("TABLE_NAME");
-  change.setColumnNames("COL_HERE");
-  assertEquals("Primary key added to TABLE_NAME (COL_HERE)",change.getConfirmationMessage());
-}

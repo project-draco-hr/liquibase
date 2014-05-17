@@ -1,0 +1,8 @@
+{
+  Method[] methods=methodCache.get(object.getClass());
+  if (methods == null) {
+    methods=object.getClass().getMethods();
+    methodCache.put(object.getClass(),methods);
+  }
+  return methods;
+}

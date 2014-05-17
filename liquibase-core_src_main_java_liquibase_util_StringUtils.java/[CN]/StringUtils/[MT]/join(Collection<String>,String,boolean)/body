@@ -1,0 +1,8 @@
+{
+  if (sorted) {
+    return join(new TreeSet<String>(collection),delimiter);
+  }
+ else {
+    return join(collection,delimiter);
+  }
+}

@@ -1,0 +1,39 @@
+{
+  String changeSetId=rollbackNode.getChildValue(null,"changeSetId",String.class);
+  if (changeSetId != null) {
+    String changeSetAuthor=rollbackNode.getChildValue(null,"changeSetAuthor",String.class);
+    String changeSetPath=rollbackNode.getChildValue(null,"changeSetPath",getFilePath());
+    ChangeSet changeSet=this.getChangeLog().getChangeSet(changeSetPath,changeSetAuthor,changeSetId);
+    if (changeSet == null) {
+      throw new ParsedNodeException("Change set " + new ChangeSet(changeSetId,changeSetAuthor,false,false,changeSetPath,null,null,null).toString(false) + " does not exist");
+    }
+    for (    Change change : changeSet.getChanges()) {
+      addRollbackChange(change);
+    }
+    return;
+  }
+  boolean foundValue=false;
+  for (  ParsedNode childNode : rollbackNode.getChildren()) {
+    addRollbackChange(toChange(childNode,resourceAccessor));
+    foundValue=true;
+  }
+  Object value=rollbackNode.getValue();
+  if (value != null) {
+    if (value instanceof String) {
+      String finalValue=StringUtils.trimToNull((String)value);
+      if (finalValue != null) {
+        String[] strings=StringUtils.processMutliLineSQL(finalValue,true,true,";");
+        for (        String string : strings) {
+          addRollbackChange(new RawSQLChange(string));
+          foundValue=true;
+        }
+      }
+    }
+ else {
+      throw new ParsedNodeException("Unexpected object: " + value.getClass().getName() + " '"+ value.toString()+ "'");
+    }
+  }
+  if (!foundValue) {
+    addRollbackChange(new EmptyChange());
+  }
+}

@@ -1,4 +1,0 @@
-{
-  assertEquals(true,new ConstraintsConfig().setDeleteCascade(true).isDeleteCascade());
-  assertEquals(false,new ConstraintsConfig().setDeleteCascade(false).isDeleteCascade());
-}

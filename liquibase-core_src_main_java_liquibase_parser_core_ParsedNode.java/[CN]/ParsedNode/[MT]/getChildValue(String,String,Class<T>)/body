@@ -1,0 +1,7 @@
+{
+  Object rawValue=getChildValue(namespace,nodename);
+  if (rawValue == null) {
+    return null;
+  }
+  return convertObject(rawValue,type);
+}

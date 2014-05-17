@@ -7,7 +7,7 @@
       return new ResultSetCache.RowData(catalogName,schemaName,database,table);
     }
     @Override public List<CachedRow> fastFetchQuery() throws SQLException, DatabaseException {
-      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      CatalogAndSchema catalogAndSchema=new CatalogAndSchema(catalogName,schemaName).customize(database);
       if (database instanceof OracleDatabase) {
         return queryOracle(catalogAndSchema,null);
       }
@@ -16,7 +16,7 @@
       return extract(databaseMetaData.getTables(catalog,schema,database.correctObjectName(table,Table.class),types));
     }
     @Override public List<CachedRow> bulkFetchQuery() throws SQLException, DatabaseException {
-      CatalogAndSchema catalogAndSchema=database.correctSchema(new CatalogAndSchema(catalogName,schemaName));
+      CatalogAndSchema catalogAndSchema=new CatalogAndSchema(catalogName,schemaName).customize(database);
       if (database instanceof OracleDatabase) {
         return queryOracle(catalogAndSchema,null);
       }

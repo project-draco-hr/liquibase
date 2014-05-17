@@ -1,3 +1,0 @@
-{
-  assertEquals("Unique constraint UQ_CONSTRAINT dropped from TAB_NAME",change.getConfirmationMessage());
-}

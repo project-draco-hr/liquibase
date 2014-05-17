@@ -1,0 +1,6 @@
+File rootFile
+boolean recursive
+boolean includeFiles
+boolean includeDirectories
+String basePath
+Set<String> returnSet

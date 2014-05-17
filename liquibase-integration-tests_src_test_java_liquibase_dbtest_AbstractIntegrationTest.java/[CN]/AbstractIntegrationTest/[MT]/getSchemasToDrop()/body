@@ -1,3 +1,3 @@
 {
-  return new CatalogAndSchema[]{new CatalogAndSchema(null,database.correctObjectName("lbcat2",Schema.class)),new CatalogAndSchema(null,database.getDefaultSchemaName())};
+  return new CatalogAndSchema[]{new CatalogAndSchema(database.correctObjectName("lbcat2",Catalog.class),database.correctObjectName("lbschem2",Schema.class)),new CatalogAndSchema(null,database.getDefaultSchemaName())};
 }

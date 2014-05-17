@@ -1,0 +1,7 @@
+{
+  T value=(T)getChildValue(namespace,nodename,defaultValue.getClass());
+  if (value == null) {
+    return defaultValue;
+  }
+  return value;
+}

@@ -1,4 +1,6 @@
 {
-  if (new File(base).isFile())   throw new IllegalArgumentException("base must be a directory");
-  baseDirectory=base;
+  baseDirectory=new File(base);
+  if (!baseDirectory.isDirectory()) {
+    throw new IllegalArgumentException(base + " must be a directory");
+  }
 }

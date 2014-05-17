@@ -5,6 +5,6 @@
   changeLog.validate(database,contexts);
   ChangeLogIterator logIterator=getStandardChangelogIterator(contexts,changeLog);
   StatusVisitor visitor=new StatusVisitor(database);
-  logIterator.run(visitor,database);
+  logIterator.run(visitor,new RuntimeEnvironment(database,contexts));
   return visitor.getStatuses();
 }

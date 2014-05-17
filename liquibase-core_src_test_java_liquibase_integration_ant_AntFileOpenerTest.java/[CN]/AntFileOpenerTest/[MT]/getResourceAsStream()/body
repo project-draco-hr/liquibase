@@ -1,4 +1,0 @@
-{
-  InputStream inputStream=resourceAccessor.getResourceAsStream("liquibase/integration/ant/AntFileOpenerTest.class");
-  assertNotNull(inputStream);
-}

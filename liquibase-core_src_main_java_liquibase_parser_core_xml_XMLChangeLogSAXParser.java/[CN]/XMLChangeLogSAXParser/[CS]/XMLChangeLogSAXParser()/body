@@ -1,11 +1,5 @@
 {
   saxParserFactory=SAXParserFactory.newInstance();
-  if (System.getProperty("java.vm.version").startsWith("1.4")) {
-    saxParserFactory.setValidating(false);
-    saxParserFactory.setNamespaceAware(false);
-  }
- else {
-    saxParserFactory.setValidating(true);
-    saxParserFactory.setNamespaceAware(true);
-  }
+  saxParserFactory.setValidating(true);
+  saxParserFactory.setNamespaceAware(true);
 }

@@ -1,0 +1,9 @@
+{
+  Set<String> returnSet=new HashSet<String>();
+  for (  TestPermutation permutation : getPermutations()) {
+    if (permutation.getGroup() != null) {
+      returnSet.add(permutation.getGroup());
+    }
+  }
+  return returnSet;
+}

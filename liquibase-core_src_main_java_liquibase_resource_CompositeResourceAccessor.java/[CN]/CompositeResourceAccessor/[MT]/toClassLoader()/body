@@ -1,7 +1,7 @@
 {
-  ClassLoader[] loaders=new ClassLoader[openers.size()];
+  ClassLoader[] loaders=new ClassLoader[resourceAccessors.size()];
   int i=0;
-  for (  ResourceAccessor fo : openers) {
+  for (  ResourceAccessor fo : resourceAccessors) {
     loaders[i++]=fo.toClassLoader();
   }
   return new CompositeClassLoader(loaders);

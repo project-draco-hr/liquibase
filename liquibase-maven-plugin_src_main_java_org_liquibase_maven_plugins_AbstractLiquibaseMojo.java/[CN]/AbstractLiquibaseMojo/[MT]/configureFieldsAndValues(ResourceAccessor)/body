@@ -4,7 +4,7 @@
     getLog().info("  File: " + propertyFile);
     InputStream is;
     try {
-      is=fo.getResourceAsStream(propertyFile);
+      is=StreamUtil.singleInputStream(propertyFile,fo);
     }
  catch (    IOException e) {
       throw new UnexpectedLiquibaseException(e);

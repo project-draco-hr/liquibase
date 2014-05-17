@@ -1,3 +1,0 @@
-{
-  assertEquals("addDefaultValue",ChangeFactory.getInstance().getChangeMetaData(new AddDefaultValueChange()).getName());
-}

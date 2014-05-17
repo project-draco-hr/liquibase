@@ -1,4 +1,0 @@
-{
-  assertEquals(true,new ConstraintsConfig().setInitiallyDeferred(true).isInitiallyDeferred());
-  assertEquals(false,new ConstraintsConfig().setInitiallyDeferred(false).isInitiallyDeferred());
-}

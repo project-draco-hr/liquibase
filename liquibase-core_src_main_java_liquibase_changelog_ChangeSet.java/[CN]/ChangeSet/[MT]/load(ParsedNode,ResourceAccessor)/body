@@ -1,0 +1,25 @@
+{
+  this.id=node.getChildValue(null,"id",String.class);
+  this.author=node.getChildValue(null,"author",String.class);
+  this.alwaysRun=node.getChildValue(null,"runAlways",node.getChildValue(null,"alwaysRun",false));
+  this.runOnChange=node.getChildValue(null,"runOnChange",false);
+  this.contexts=new ContextExpression(node.getChildValue(null,"context",String.class));
+  setDbms(node.getChildValue(null,"dbms",String.class));
+  this.runInTransaction=node.getChildValue(null,"runInTransaction",true);
+  this.comments=node.getChildValue(null,"comment",String.class);
+  String objectQuotingStrategyString=StringUtils.trimToNull(node.getChildValue(null,"objectQuotingStrategy",String.class));
+  this.objectQuotingStrategy=ObjectQuotingStrategy.LEGACY;
+  if (objectQuotingStrategyString != null) {
+    this.objectQuotingStrategy=ObjectQuotingStrategy.valueOf(objectQuotingStrategyString);
+  }
+  this.filePath=StringUtils.trimToNull(node.getChildValue(null,"logicalFilePath",String.class));
+  if (filePath == null) {
+    filePath=changeLog.getFilePath();
+  }
+  this.setFailOnError(node.getChildValue(null,"failOnError",Boolean.class));
+  String onValidationFailString=node.getChildValue(null,"onValidationFail","HALT");
+  this.setOnValidationFail(ValidationFailOption.valueOf(onValidationFailString));
+  for (  ParsedNode child : node.getChildren()) {
+    handleChildNode(child,resourceAccessor);
+  }
+}

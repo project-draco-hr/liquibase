@@ -1,0 +1,6 @@
+{
+  super.load(parsedNode,resourceAccessor);
+  for (  ParsedNode child : parsedNode.getChildren()) {
+    addNestedPrecondition(toPrecondition(child,resourceAccessor));
+  }
+}

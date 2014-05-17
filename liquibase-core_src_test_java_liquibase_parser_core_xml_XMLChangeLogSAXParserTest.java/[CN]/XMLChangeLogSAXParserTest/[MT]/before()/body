@@ -1,3 +1,0 @@
-{
-  LiquibaseConfiguration.getInstance().reset();
-}

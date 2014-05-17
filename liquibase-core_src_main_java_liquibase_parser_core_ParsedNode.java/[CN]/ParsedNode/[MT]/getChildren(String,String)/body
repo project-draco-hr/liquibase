@@ -1,0 +1,9 @@
+{
+  List<ParsedNode> returnList=new ArrayList<ParsedNode>();
+  for (  ParsedNode node : children) {
+    if (nodeMatches(node,namespace,nodename)) {
+      returnList.add(node);
+    }
+  }
+  return Collections.unmodifiableList(returnList);
+}

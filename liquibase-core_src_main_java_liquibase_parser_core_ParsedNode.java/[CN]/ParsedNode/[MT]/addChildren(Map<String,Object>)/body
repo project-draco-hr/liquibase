@@ -1,0 +1,9 @@
+{
+  if (child == null || child.size() == 0) {
+    return this;
+  }
+  for (  Map.Entry<String,Object> entry : child.entrySet()) {
+    this.addChild(null,entry.getKey(),entry.getValue());
+  }
+  return this;
+}

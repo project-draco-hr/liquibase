@@ -1,0 +1,15 @@
+{
+  ParsedNode whereParams=parsedNode.getChild(null,"whereParams");
+  if (whereParams != null) {
+    for (    ParsedNode param : whereParams.getChildren(null,"param")) {
+      ColumnConfig columnConfig=new ColumnConfig();
+      try {
+        columnConfig.load(param,resourceAccessor);
+      }
+ catch (      ParsedNodeException e) {
+        e.printStackTrace();
+      }
+      addWhereParam(columnConfig);
+    }
+  }
+}

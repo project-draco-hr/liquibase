@@ -1,4 +1,0 @@
-{
-  File thisClassFile=new File(new URI(this.getClass().getClassLoader().getResource("liquibase/resource/FileSystemResourceAccessor.class").toExternalForm()));
-  ResourceAccessor o=new FileSystemResourceAccessor(thisClassFile.getAbsolutePath());
-}

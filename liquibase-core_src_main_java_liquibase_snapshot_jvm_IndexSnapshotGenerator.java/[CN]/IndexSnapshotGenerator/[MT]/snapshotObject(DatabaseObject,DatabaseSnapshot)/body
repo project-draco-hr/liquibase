@@ -51,7 +51,7 @@
       if (database instanceof InformixDatabase && type != DatabaseMetaData.tableIndexStatistic && position == 0) {
         System.out.println(this.getClass().getName() + ": corrected position to " + ++position);
       }
-      String filterCondition=row.getString("FILTER_CONDITION");
+      String filterCondition=StringUtils.trimToNull(row.getString("FILTER_CONDITION"));
       if (filterCondition != null) {
         filterCondition=filterCondition.replaceAll("\"","");
         columnName=filterCondition;

@@ -1,6 +1,6 @@
 {
   Index index=(Index)missingObject;
-  CreateIndexChange change=new CreateIndexChange();
+  CreateIndexChange change=createCreateIndexChange();
   change.setTableName(index.getTable().getName());
   if (control.getIncludeTablespace()) {
     change.setTablespace(index.getTablespace());

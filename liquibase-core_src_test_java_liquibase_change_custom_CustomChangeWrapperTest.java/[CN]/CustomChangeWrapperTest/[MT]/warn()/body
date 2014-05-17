@@ -1,3 +1,0 @@
-{
-  assertFalse(new CustomChangeWrapper().warn(mock(Database.class)).hasWarnings());
-}

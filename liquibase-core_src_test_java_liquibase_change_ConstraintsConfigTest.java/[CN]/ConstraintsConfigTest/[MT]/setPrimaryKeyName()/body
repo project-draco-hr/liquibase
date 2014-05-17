@@ -1,3 +1,0 @@
-{
-  assertEquals("xyz",new ConstraintsConfig().setPrimaryKeyName("xyz").getPrimaryKeyName());
-}

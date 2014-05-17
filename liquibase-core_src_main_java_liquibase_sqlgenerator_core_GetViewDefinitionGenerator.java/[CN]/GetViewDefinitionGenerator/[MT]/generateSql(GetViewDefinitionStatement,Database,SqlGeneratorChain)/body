@@ -1,5 +1,5 @@
 {
-  CatalogAndSchema schema=database.correctSchema(new CatalogAndSchema(statement.getCatalogName(),statement.getSchemaName()));
+  CatalogAndSchema schema=new CatalogAndSchema(statement.getCatalogName(),statement.getSchemaName()).customize(database);
   String sql;
   if (database instanceof MSSQLDatabase)   sql="select VIEW_DEFINITION from INFORMATION_SCHEMA.VIEWS where TABLE_NAME='" + database.correctObjectName(statement.getViewName(),View.class) + "'";
  else   sql="select view_definition from information_schema.views where table_name='" + database.correctObjectName(statement.getViewName(),View.class) + "'";

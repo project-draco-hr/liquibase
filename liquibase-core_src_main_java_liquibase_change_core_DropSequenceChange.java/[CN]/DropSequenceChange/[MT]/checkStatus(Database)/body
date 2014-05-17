@@ -1,0 +1,8 @@
+{
+  try {
+    return new ChangeStatus().assertComplete(!SnapshotGeneratorFactory.getInstance().has(new Sequence(getCatalogName(),getSchemaName(),getSequenceName()),database),"Sequence exists");
+  }
+ catch (  Exception e) {
+    return new ChangeStatus().unknown(e);
+  }
+}
