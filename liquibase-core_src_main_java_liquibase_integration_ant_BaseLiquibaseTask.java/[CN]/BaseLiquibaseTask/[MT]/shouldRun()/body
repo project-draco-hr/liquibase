@@ -1,7 +1,8 @@
 {
-  GlobalConfiguration globalConfiguration=LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class);
+  LiquibaseConfiguration configuration=LiquibaseConfiguration.getInstance();
+  GlobalConfiguration globalConfiguration=configuration.getConfiguration(GlobalConfiguration.class);
   if (!globalConfiguration.getShouldRun()) {
-    log("Liquibase did not run because " + LiquibaseConfiguration.getInstance().describeValueLookupLogic(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN)) + " was set to false");
+    log("Liquibase did not run because " + configuration.describeValueLookupLogic(globalConfiguration.getProperty(GlobalConfiguration.SHOULD_RUN)) + " was set to false",Project.MSG_INFO);
     return false;
   }
   return true;

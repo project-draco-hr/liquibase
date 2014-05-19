@@ -1,0 +1,5 @@
+{
+  setProject(project);
+  propertySets=new LinkedList<PropertySet>();
+  parameters=new LinkedList<Property>();
+}

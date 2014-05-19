@@ -1,0 +1,10 @@
+{
+  try {
+    if (database != null) {
+      database.close();
+    }
+  }
+ catch (  DatabaseException e) {
+    log("Error closing the database connection.",e,Project.MSG_WARN);
+  }
+}

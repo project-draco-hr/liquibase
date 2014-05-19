@@ -1,3 +1,4 @@
 {
-  this.outputDefaultSchema=outputDefaultSchema;
+  log("The outputDefaultSchema attribute is deprecated. Use a nested <database> element or set the databaseRef attribute instead.",Project.MSG_WARN);
+  getDatabaseType().setOutputDefaultSchema(outputDefaultSchema);
 }

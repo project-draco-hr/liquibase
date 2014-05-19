@@ -1,3 +1,4 @@
 {
-  this.defaultSchemaName=defaultSchemaName.trim();
+  log("The driver attribute is deprecated. Use a nested <database> element or set the databaseRef attribute instead.",Project.MSG_WARN);
+  getDatabaseType().setDefaultSchemaName(defaultSchemaName);
 }

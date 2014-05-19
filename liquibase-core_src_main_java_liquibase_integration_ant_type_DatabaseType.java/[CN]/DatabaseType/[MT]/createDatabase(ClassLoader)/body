@@ -1,0 +1,74 @@
+{
+  logParameters();
+  validateParameters();
+  try {
+    DatabaseFactory databaseFactory=DatabaseFactory.getInstance();
+    if (databaseClass != null) {
+      Database databaseInstance=(Database)ClasspathUtils.newInstance(databaseClass,classLoader,Database.class);
+      databaseFactory.register(databaseInstance);
+    }
+    Driver driver=(Driver)ClasspathUtils.newInstance(getDriver(),classLoader,Driver.class);
+    if (driver == null) {
+      throw new BuildException("Unable to create Liquibase Database instance. Could not instantiate the JDBC driver.");
+    }
+    Properties connectionProps=new Properties();
+    String user=getUser();
+    if (user != null && !user.isEmpty()) {
+      connectionProps.setProperty(USER,user);
+    }
+    String password=getPassword();
+    if (password != null && !password.isEmpty()) {
+      connectionProps.setProperty(PASSWORD,password);
+    }
+    if (connectionProperties != null) {
+      connectionProps.putAll(connectionProperties.buildProperties());
+    }
+    Connection connection=driver.connect(getUrl(),connectionProps);
+    if (connection == null) {
+      throw new BuildException("Unable to create Liquibase Database instance. Could not connect to the database.");
+    }
+    JdbcConnection jdbcConnection=new JdbcConnection(connection);
+    Database database=databaseFactory.findCorrectDatabaseImplementation(jdbcConnection);
+    String schemaName=getDefaultSchemaName();
+    if (schemaName != null) {
+      database.setDefaultSchemaName(schemaName);
+    }
+    String catalogName=getDefaultCatalogName();
+    if (catalogName != null) {
+      database.setDefaultCatalogName(catalogName);
+    }
+    String currentDateTimeFunction=getCurrentDateTimeFunction();
+    if (currentDateTimeFunction != null) {
+      database.setCurrentDateTimeFunction(currentDateTimeFunction);
+    }
+    database.setOutputDefaultSchema(isOutputDefaultSchema());
+    database.setOutputDefaultCatalog(isOutputDefaultCatalog());
+    String liquibaseSchemaName=getLiquibaseSchemaName();
+    if (liquibaseSchemaName != null) {
+      database.setLiquibaseSchemaName(liquibaseSchemaName);
+    }
+    String liquibaseCatalogName=getLiquibaseCatalogName();
+    if (liquibaseCatalogName != null) {
+      database.setLiquibaseCatalogName(liquibaseCatalogName);
+    }
+    String databaseChangeLogTableName=getDatabaseChangeLogTableName();
+    if (databaseChangeLogTableName != null) {
+      database.setDatabaseChangeLogTableName(databaseChangeLogTableName);
+    }
+    String databaseChangeLogLockTableName=getDatabaseChangeLogLockTableName();
+    if (databaseChangeLogLockTableName != null) {
+      database.setDatabaseChangeLogLockTableName(databaseChangeLogLockTableName);
+    }
+    String liquibaseTablespaceName=getLiquibaseTablespaceName();
+    if (liquibaseTablespaceName != null) {
+      database.setLiquibaseTablespaceName(liquibaseTablespaceName);
+    }
+    return database;
+  }
+ catch (  SQLException e) {
+    throw new BuildException("Unable to create Liquibase database instance. A JDBC error occurred.",e);
+  }
+catch (  DatabaseException e) {
+    throw new BuildException("Unable to create Liquibase database instance.",e);
+  }
+}

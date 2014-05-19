@@ -1,3 +1,0 @@
-{
-  new DiffToReport(diffResult,writer).print();
-}

@@ -1,0 +1,6 @@
+{
+  super.validateParameters();
+  if (changeLogFile == null) {
+    throw new BuildException("Change log file is required.");
+  }
+}

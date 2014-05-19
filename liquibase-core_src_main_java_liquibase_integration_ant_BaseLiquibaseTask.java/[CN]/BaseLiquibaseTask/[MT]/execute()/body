@@ -1,14 +1,31 @@
 {
   super.execute();
-  AntClassLoader loader=getProject().createClassLoader(classpath);
-  loader.setParent(this.getClass().getClassLoader());
-  loader.setParentFirst(false);
-  loader.setThreadContextLoader();
+  log("Starting Liquibase.",Project.MSG_INFO);
+  classLoader=getProject().createClassLoader(classpath);
+  classLoader.setParent(this.getClass().getClassLoader());
+  classLoader.setParentFirst(false);
+  classLoader.setThreadContextLoader();
+  validateParameters();
+  Database database=null;
   try {
-    executeWithLiquibaseClassloader();
+    ResourceAccessor resourceAccessor=createResourceAccessor(classLoader);
+    database=createDatabaseFromType(databaseType);
+    String changeLogFilePath=getChangeLogFilePath();
+    liquibase=new Liquibase(changeLogFilePath,resourceAccessor,database);
+    if (changeLogParameters != null) {
+      changeLogParameters.applyParameters(liquibase);
+    }
+    if (shouldRun()) {
+      executeWithLiquibaseClassloader();
+    }
   }
-  finally {
-    loader.resetThreadContextLoader();
-    loader.cleanup();
+ catch (  LiquibaseException e) {
+    throw new BuildException("Unable to initialize Liquibase.",e);
+  }
+ finally {
+    closeDatabase(database);
+    classLoader.resetThreadContextLoader();
+    classLoader.cleanup();
+    classLoader=null;
   }
 }

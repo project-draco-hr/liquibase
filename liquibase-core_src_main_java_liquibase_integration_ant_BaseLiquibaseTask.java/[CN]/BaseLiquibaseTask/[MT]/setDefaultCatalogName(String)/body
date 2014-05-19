@@ -1,3 +1,4 @@
 {
-  this.defaultCatalogName=defaultCatalogName;
+  log("The defaultCatalogName attribute is deprecated. Use a nested <database> element or set the databaseRef attribute instead.",Project.MSG_WARN);
+  getDatabaseType().setDefaultCatalogName(defaultCatalogName);
 }

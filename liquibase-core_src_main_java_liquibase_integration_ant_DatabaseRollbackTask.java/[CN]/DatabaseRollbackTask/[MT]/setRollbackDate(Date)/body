@@ -1,5 +1,6 @@
 {
-  if (rollbackDate != null) {
-    this.rollbackDate=new Date(rollbackDate.getTime());
+  if (rollbackTag != null || rollbackCount != null) {
+    throw new BuildException("Unable to rollback database. A tag or count has already been set.");
   }
+  this.rollbackDate=new Date(rollbackDate.getTime());
 }

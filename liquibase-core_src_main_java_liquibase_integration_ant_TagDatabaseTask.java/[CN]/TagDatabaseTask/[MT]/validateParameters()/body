@@ -1,0 +1,6 @@
+{
+  super.validateParameters();
+  if (StringUtils.trimToNull(tag) == null) {
+    throw new BuildException("Unable to tag database. The tag attribute is required.");
+  }
+}

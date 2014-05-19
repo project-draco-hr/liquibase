@@ -1,0 +1,6 @@
+{
+  if (!propertySets.isEmpty() || !parameters.isEmpty()) {
+    throw tooManyAttributes();
+  }
+  super.setRefid(ref);
+}

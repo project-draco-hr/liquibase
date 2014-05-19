@@ -1,8 +1,8 @@
 {
-  if (outputFile == null) {
+  if (getOutputFile() == null) {
     return null;
   }
   GlobalConfiguration globalConfiguration=LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class);
-  String encoding=(StringUtils.trimToNull(outputEncoding) == null) ? globalConfiguration.getOutputEncoding() : outputEncoding.trim();
+  String encoding=globalConfiguration.getOutputEncoding();
   return new OutputStreamWriter(getOutputFile().getOutputStream(),encoding);
 }

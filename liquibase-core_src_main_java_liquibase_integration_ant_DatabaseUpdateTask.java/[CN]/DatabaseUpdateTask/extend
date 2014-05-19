@@ -1,1 +1,1 @@
-BaseLiquibaseTask
+AbstractChangeLogBasedTask

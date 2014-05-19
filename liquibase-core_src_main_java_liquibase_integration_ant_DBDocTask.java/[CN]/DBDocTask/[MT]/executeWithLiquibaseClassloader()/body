@@ -1,19 +1,14 @@
 {
-  if (getOutputDirectory() == null) {
-    throw new BuildException("dbDoc requires outputDirectory to be set");
-  }
-  if (!getOutputDirectory().isDirectory()) {
-    throw new BuildException("dbDoc output directory is not a directory.");
-  }
-  Liquibase liquibase=null;
+  Liquibase liquibase=getLiquibase();
   try {
-    liquibase=createLiquibase();
-    liquibase.generateDocumentation(getOutputDirectory().toString());
+    if (contexts != null) {
+      liquibase.generateDocumentation(outputDirectory.toString(),contexts);
+    }
+ else {
+      liquibase.generateDocumentation(outputDirectory.toString());
+    }
   }
- catch (  Exception e) {
-    throw new BuildException(e);
-  }
- finally {
-    closeDatabase(liquibase);
+ catch (  LiquibaseException e) {
+    throw new BuildException("Liquibase encountered an error while creating database documentation.",e);
   }
 }

@@ -1,0 +1,6 @@
+{
+  if (driver != null || url != null || user != null || password != null || defaultSchemaName != null || defaultCatalogName != null || currentDateTimeFunction != null || databaseClass != null || liquibaseSchemaName != null || liquibaseCatalogName != null || databaseChangeLogTableName != null || databaseChangeLogLockTableName != null || liquibaseTablespaceName != null) {
+    throw tooManyAttributes();
+  }
+  super.setRefid(ref);
+}

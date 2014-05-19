@@ -1,0 +1,10 @@
+{
+  Properties retProps=new Properties();
+  for (  PropertySet propertySet : propertySets) {
+    retProps.putAll(propertySet.getProperties());
+  }
+  for (  Property property : properties) {
+    retProps.setProperty(property.getName(),property.getValue());
+  }
+  return retProps;
+}

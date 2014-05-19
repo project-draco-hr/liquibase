@@ -2,5 +2,5 @@
   if (rollbackDate == null) {
     return null;
   }
-  return (Date)rollbackDate.clone();
+  return new Date(rollbackDate.getTime());
 }

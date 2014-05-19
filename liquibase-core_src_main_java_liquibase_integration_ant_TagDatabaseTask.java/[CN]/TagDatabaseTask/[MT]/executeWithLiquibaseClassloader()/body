@@ -1,19 +1,9 @@
 {
-  if (StringUtils.trimToNull(getTag()) == null) {
-    throw new BuildException("tagDatabase requires tag parameter to be set");
-  }
-  if (!shouldRun()) {
-    return;
-  }
-  Liquibase liquibase=null;
+  Liquibase liquibase=getLiquibase();
   try {
-    liquibase=createLiquibase();
-    liquibase.tag(getTag());
+    liquibase.tag(tag);
   }
- catch (  Exception e) {
-    throw new BuildException(e);
-  }
- finally {
-    closeDatabase(liquibase);
+ catch (  LiquibaseException e) {
+    throw new BuildException("Unable to tag database.",e);
   }
 }

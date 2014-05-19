@@ -1,33 +1,32 @@
 {
-  if (!shouldRun()) {
-    return;
-  }
-  Liquibase liquibase=null;
+  Writer writer=null;
+  Liquibase liquibase=getLiquibase();
   try {
-    liquibase=createLiquibase();
     if (isPromptOnNonLocalDatabase() && !liquibase.isSafeToRunUpdate() && UIFactory.getInstance().getFacade().promptForNonLocalDatabase(liquibase.getDatabase())) {
       throw new BuildException("Chose not to run against non-production database");
     }
-    Writer writer=createOutputWriter();
-    if (writer == null) {
-      if (isDropFirst()) {
+    FileResource outputFile=getOutputFile();
+    if (outputFile != null) {
+      writer=getOutputFileWriter();
+      liquibase.update(getContexts(),writer);
+    }
+ else {
+      if (dropFirst) {
         liquibase.dropAll();
       }
       liquibase.update(getContexts());
     }
- else {
-      if (isDropFirst()) {
-        throw new BuildException("Cannot dropFirst when outputting update SQL");
-      }
-      liquibase.update(getContexts(),writer);
-      writer.flush();
-      writer.close();
-    }
   }
- catch (  Exception e) {
-    throw new BuildException(e);
+ catch (  LiquibaseException e) {
+    throw new BuildException("Unable to update database.",e);
+  }
+catch (  UnsupportedEncodingException e) {
+    throw new BuildException("Unable to generate update SQL. Encoding [" + getOutputEncoding() + "] is not supported.",e);
+  }
+catch (  IOException e) {
+    throw new BuildException("Unable to generate update SQL. Error creating output writer.",e);
   }
  finally {
-    closeDatabase(liquibase);
+    FileUtils.close(writer);
   }
 }

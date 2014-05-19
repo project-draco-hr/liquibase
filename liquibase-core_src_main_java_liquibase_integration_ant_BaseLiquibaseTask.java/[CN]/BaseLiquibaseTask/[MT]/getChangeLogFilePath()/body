@@ -1,0 +1,4 @@
+{
+  FileResource changeLogFile=getChangeLogFile();
+  return (changeLogFile != null) ? changeLogFile.toString() : null;
+}

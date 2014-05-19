@@ -1,44 +1,22 @@
 {
-  if (StringUtils.trimToNull(getReferenceUrl()) == null) {
-    throw new BuildException("diffDatabase requires referenceUrl to be set");
-  }
-  Liquibase liquibase=null;
-  Database referenceDatabase=null;
+  PrintStream printStream=null;
   try {
-    PrintStream writer=createPrintStream();
-    if (writer == null && getChangeLogFile() == null) {
-      throw new BuildException("diffDatabase requires outputFile or changeLogFile to be set");
-    }
-    liquibase=createLiquibase();
-    referenceDatabase=createDatabaseObject(getReferenceDriver(),getReferenceUrl(),getReferenceUsername(),getReferencePassword(),getReferenceDefaultCatalogName(),getReferenceDefaultSchemaName(),getDatabaseClass());
-    DiffOutputControl diffOutputControl=new DiffOutputControl();
-    diffOutputControl.setDataDir(getDataDir());
-    DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(referenceDatabase.getDefaultSchema(),referenceDatabase,new SnapshotControl(referenceDatabase,getDiffTypes()));
-    DatabaseSnapshot comparisonSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(liquibase.getDatabase().getDefaultSchema(),liquibase.getDatabase(),new SnapshotControl(liquibase.getDatabase(),getDiffTypes()));
-    CompareControl compareControl=new CompareControl(new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(getReferenceDefaultCatalogName(),getReferenceDefaultSchemaName()),new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()))},referenceSnapshot.getSnapshotControl().getTypesToInclude());
-    DiffResult diffResult=liquibase.diff(referenceDatabase,liquibase.getDatabase(),compareControl);
-    outputDiff(writer,diffResult,liquibase.getDatabase());
-    if (writer != null) {
-      writer.flush();
-      writer.close();
-    }
+    printStream=new PrintStream(outputFile.getOutputStream(),true,getOutputEncoding());
+    DiffResult diffResult=getDiffResult();
+    DiffToReport diffReport=new DiffToReport(diffResult,printStream);
+    log("Writing diff report " + outputFile.toString(),Project.MSG_INFO);
+    diffReport.print();
   }
- catch (  Exception e) {
-    throw new BuildException(e);
+ catch (  DatabaseException e) {
+    throw new BuildException("",e);
+  }
+catch (  UnsupportedEncodingException e) {
+    throw new BuildException("",e);
+  }
+catch (  IOException e) {
+    throw new BuildException("",e);
   }
  finally {
-    try {
-      closeDatabase(liquibase);
-    }
-  finally {
-      if (referenceDatabase != null && referenceDatabase.getConnection() != null) {
-        try {
-          referenceDatabase.close();
-        }
- catch (        DatabaseException e) {
-          LogFactory.getLogger().severe("Error closing referenceDatabase",e);
-        }
-      }
-    }
+    FileUtils.close(printStream);
   }
 }

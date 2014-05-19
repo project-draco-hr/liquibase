@@ -1,3 +1,7 @@
 {
-  changeLogProperties.put(changeLogProperty.getName(),changeLogProperty.getValue());
+  log("The <changeLogProperty> element is deprecated. Use a nested <changeLogParameters> element instead.",Project.MSG_WARN);
+  Property property=new Property();
+  property.setName(changeLogProperty.getName());
+  property.setValue(changeLogProperty.getValue());
+  getChangeLogParametersType().addChangeLogParameter(property);
 }

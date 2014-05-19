@@ -1,0 +1,4 @@
+{
+  GlobalConfiguration globalConfiguration=LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class);
+  return (StringUtils.trimToNull(outputEncoding) == null) ? globalConfiguration.getOutputEncoding() : outputEncoding.trim();
+}

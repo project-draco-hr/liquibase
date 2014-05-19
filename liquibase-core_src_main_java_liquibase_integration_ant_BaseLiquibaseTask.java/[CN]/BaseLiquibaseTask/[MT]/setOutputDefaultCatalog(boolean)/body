@@ -1,3 +1,4 @@
 {
-  this.outputDefaultCatalog=outputDefaultCatalog;
+  log("The outputDefaultCatalog attribute is deprecated. Use a nested <database> element or set the databaseRef attribute instead.",Project.MSG_WARN);
+  getDatabaseType().setOutputDefaultCatalog(outputDefaultCatalog);
 }

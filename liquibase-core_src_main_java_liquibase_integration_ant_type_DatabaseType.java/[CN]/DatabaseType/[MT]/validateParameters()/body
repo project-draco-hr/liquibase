@@ -1,0 +1,8 @@
+{
+  if (getDriver() == null) {
+    throw new BuildException("JDBC driver is required.");
+  }
+  if (getUrl() == null) {
+    throw new BuildException("JDBC URL is required.");
+  }
+}
