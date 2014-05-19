@@ -1,0 +1,40 @@
+{
+  Executor executor=ExecutorService.getInstance().getExecutor(database);
+  String sqlText;
+  if (sqlFile == null) {
+    sqlText=sql;
+  }
+ else {
+    sqlText=FileUtil.getContents(new File(sqlFile));
+  }
+  String out="";
+  String[] sqlStrings=StringUtils.processMutliLineSQL(sqlText,true,true,";");
+  for (  String sql : sqlStrings) {
+    if (sql.toLowerCase().matches("\\s*select .*")) {
+      List<Map<String,?>> rows=executor.queryForList(new RawSqlStatement(sql));
+      out+="Output of " + sql + ":\n";
+      if (rows.size() == 0) {
+        out+="-- Empty Resultset --\n";
+      }
+ else {
+        SortedSet<String> keys=new TreeSet<String>();
+        for (        Map<String,?> row : rows) {
+          keys.addAll(row.keySet());
+        }
+        out+=StringUtils.join(keys," | ") + " |\n";
+        for (        Map<String,?> row : rows) {
+          for (          String key : keys) {
+            out+=row.get(key) + " | ";
+          }
+          out+="\n";
+        }
+      }
+    }
+ else {
+      executor.execute(new RawSqlStatement(sql));
+      out+="Successfully Executed: " + sql + "\n";
+    }
+    out+="\n";
+  }
+  return out.trim();
+}
