@@ -5,35 +5,45 @@
     for (    ChangeParameterMetaData param : metaData.getParameters().values()) {
       if (Collection.class.isAssignableFrom(param.getDataTypeClass())) {
         Class collectionType=(Class)param.getDataTypeClassParameters()[0];
-        if (param.getDataTypeClassParameters().length == 1 && ColumnConfig.class.isAssignableFrom(collectionType)) {
-          List<ParsedNode> columnNodes=new ArrayList<ParsedNode>(parsedNode.getChildren(null,param.getParameterName()));
-          columnNodes.addAll(parsedNode.getChildren(null,"column"));
-          Object nodeValue=parsedNode.getValue();
-          if (nodeValue instanceof ParsedNode) {
-            columnNodes.add((ParsedNode)nodeValue);
-          }
- else           if (nodeValue instanceof Collection) {
-            for (            Object nodeValueChild : ((Collection)nodeValue)) {
-              if (nodeValueChild instanceof ParsedNode) {
-                columnNodes.add((ParsedNode)nodeValueChild);
+        if (param.getDataTypeClassParameters().length == 1) {
+          if (ColumnConfig.class.isAssignableFrom(collectionType)) {
+            List<ParsedNode> columnNodes=new ArrayList<ParsedNode>(parsedNode.getChildren(null,param.getParameterName()));
+            columnNodes.addAll(parsedNode.getChildren(null,"column"));
+            Object nodeValue=parsedNode.getValue();
+            if (nodeValue instanceof ParsedNode) {
+              columnNodes.add((ParsedNode)nodeValue);
+            }
+ else             if (nodeValue instanceof Collection) {
+              for (              Object nodeValueChild : ((Collection)nodeValue)) {
+                if (nodeValueChild instanceof ParsedNode) {
+                  columnNodes.add((ParsedNode)nodeValueChild);
+                }
               }
             }
-          }
-          for (          ParsedNode child : columnNodes) {
-            if (child.getName().equals("column") || child.getName().equals("columns")) {
-              List<ParsedNode> columnChildren=child.getChildren(null,"column");
-              if (columnChildren != null && columnChildren.size() > 0) {
-                for (                ParsedNode columnChild : columnChildren) {
+            for (            ParsedNode child : columnNodes) {
+              if (child.getName().equals("column") || child.getName().equals("columns")) {
+                List<ParsedNode> columnChildren=child.getChildren(null,"column");
+                if (columnChildren != null && columnChildren.size() > 0) {
+                  for (                  ParsedNode columnChild : columnChildren) {
+                    ColumnConfig columnConfig=(ColumnConfig)collectionType.newInstance();
+                    columnConfig.load(columnChild,resourceAccessor);
+                    ((ChangeWithColumns)this).addColumn(columnConfig);
+                  }
+                }
+ else {
                   ColumnConfig columnConfig=(ColumnConfig)collectionType.newInstance();
-                  columnConfig.load(columnChild,resourceAccessor);
+                  columnConfig.load(child,resourceAccessor);
                   ((ChangeWithColumns)this).addColumn(columnConfig);
                 }
               }
- else {
-                ColumnConfig columnConfig=(ColumnConfig)collectionType.newInstance();
-                columnConfig.load(child,resourceAccessor);
-                ((ChangeWithColumns)this).addColumn(columnConfig);
-              }
+            }
+          }
+ else           if (LiquibaseSerializable.class.isAssignableFrom(collectionType)) {
+            List<ParsedNode> childNodes=new ArrayList<ParsedNode>(parsedNode.getChildren(null,param.getParameterName()));
+            for (            ParsedNode childNode : childNodes) {
+              LiquibaseSerializable childObject=(LiquibaseSerializable)collectionType.newInstance();
+              childObject.load(childNode,resourceAccessor);
+              ((Collection)param.getCurrentValue(this)).add(childObject);
             }
           }
         }
