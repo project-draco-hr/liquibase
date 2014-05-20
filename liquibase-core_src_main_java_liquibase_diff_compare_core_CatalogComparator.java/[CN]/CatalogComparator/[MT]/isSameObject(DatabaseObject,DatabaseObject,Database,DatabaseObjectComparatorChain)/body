@@ -1,0 +1,6 @@
+{
+  if (!(databaseObject1 instanceof Catalog && databaseObject2 instanceof Catalog)) {
+    return false;
+  }
+  return databaseObject1.getName().equalsIgnoreCase(databaseObject2.getName());
+}
