@@ -1,18 +1,3 @@
 {
-  Set<Class<? extends DatabaseObject>> finalCompareTypes=null;
-  if (snapshotTypes != null && snapshotTypes.length > 0) {
-    finalCompareTypes=new HashSet<Class<? extends DatabaseObject>>(Arrays.asList(snapshotTypes));
-  }
-  SnapshotControl snapshotControl=new SnapshotControl(this.getDatabase(),snapshotTypes);
-  CompareControl compareControl=new CompareControl(new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(catalogAndSchema,catalogAndSchema)},finalCompareTypes);
-  DatabaseSnapshot originalDatabaseSnapshot=null;
-  try {
-    originalDatabaseSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(compareControl.getSchemas(CompareControl.DatabaseRole.REFERENCE),getDatabase(),snapshotControl);
-    DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(originalDatabaseSnapshot,SnapshotGeneratorFactory.getInstance().createSnapshot(compareControl.getSchemas(CompareControl.DatabaseRole.REFERENCE),null,snapshotControl),compareControl);
-    changeLogWriter.setDiffResult(diffResult);
-    changeLogWriter.print(outputStream);
-  }
- catch (  InvalidExampleException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
+  generateChangeLog(catalogAndSchema,changeLogWriter,outputStream,null,snapshotTypes);
 }
