@@ -9,7 +9,7 @@
  catch (    DatabaseException e) {
       throw new UnexpectedLiquibaseException(e);
     }
-    if (productVersion == null || productVersion.startsWith("9") || productVersion.startsWith("10") || productVersion.startsWith("11")) {
+    if (productVersion == null || productVersion.startsWith("9") || productVersion.startsWith("10") || productVersion.startsWith("11") || productVersion.startsWith("12")) {
       String query="DECLARE @default sysname\n";
       query+="SELECT @default = object_name(default_object_id) FROM sys.columns WHERE object_id=object_id('" + escapedTableName + "') AND name='"+ statement.getColumnName()+ "'\n";
       query+="EXEC ('ALTER TABLE " + escapedTableName + " DROP CONSTRAINT ' + @default)";
