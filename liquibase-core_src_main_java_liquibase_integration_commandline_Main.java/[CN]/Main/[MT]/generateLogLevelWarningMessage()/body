@@ -1,5 +1,5 @@
 {
-  Logger logger=LogFactory.getLogger();
+  Logger logger=LogFactory.getInstance().getLog();
   if (logger != null && logger.getLogLevel() != null && (logger.getLogLevel().equals(LogLevel.OFF))) {
     return "";
   }

@@ -34,5 +34,5 @@
   if (url == null) {
     throw new CommandLineParsingException("referenceUrl parameter missing");
   }
-  return CommandLineUtils.createDatabaseObject(classLoader,url,username,password,driver,defaultCatalogName,defaultSchemaName,Boolean.parseBoolean(outputDefaultCatalog),Boolean.parseBoolean(outputDefaultSchema),null,null,null,null);
+  return CommandLineUtils.createDatabaseObject(classLoader,url,username,password,driver,defaultCatalogName,defaultSchemaName,Boolean.parseBoolean(outputDefaultCatalog),Boolean.parseBoolean(outputDefaultSchema),null,null,this.liquibaseCatalogName,this.liquibaseSchemaName);
 }
