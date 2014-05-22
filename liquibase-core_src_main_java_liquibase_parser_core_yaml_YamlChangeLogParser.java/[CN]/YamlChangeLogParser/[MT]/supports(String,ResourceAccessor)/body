@@ -1,3 +1,8 @@
 {
-  return changeLogFile.toLowerCase().endsWith("." + getSupportedFileExtension());
+  for (  String extension : getSupportedFileExtensions()) {
+    if (changeLogFile.toLowerCase().endsWith("." + extension)) {
+      return true;
+    }
+  }
+  return false;
 }

@@ -5,10 +5,10 @@
   }
   try {
     if (null != logFile) {
-      LogFactory.getLogger().setLogLevel(logLevel,logFile);
+      LogFactory.getInstance().getLog().setLogLevel(logLevel,logFile);
     }
  else {
-      LogFactory.getLogger().setLogLevel(logLevel);
+      LogFactory.getInstance().getLog().setLogLevel(logLevel);
     }
   }
  catch (  IllegalArgumentException e) {
@@ -16,7 +16,7 @@
   }
   FileSystemResourceAccessor fsOpener=new FileSystemResourceAccessor();
   CommandLineResourceAccessor clOpener=new CommandLineResourceAccessor(classLoader);
-  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultCatalogName,this.defaultSchemaName,Boolean.parseBoolean(outputDefaultCatalog),Boolean.parseBoolean(outputDefaultSchema),this.databaseClass,this.driverPropertiesFile,null,null);
+  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultCatalogName,this.defaultSchemaName,Boolean.parseBoolean(outputDefaultCatalog),Boolean.parseBoolean(outputDefaultSchema),this.databaseClass,this.driverPropertiesFile,this.liquibaseCatalogName,this.liquibaseSchemaName);
   try {
     CompositeResourceAccessor fileOpener=new CompositeResourceAccessor(fsOpener,clOpener);
     boolean includeCatalog=Boolean.parseBoolean(getCommandParam("includeCatalog","false"));
@@ -55,6 +55,10 @@
       return;
     }
  else     if ("generateChangeLog".equalsIgnoreCase(command)) {
+      File file=new File(changeLogFile);
+      if (file.exists()) {
+        throw new LiquibaseException("ChangeLogFile " + changeLogFile + " already exists!");
+      }
       CommandLineUtils.doGenerateChangeLog(changeLogFile,database,finalSchemas,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataOutputDirectory),diffOutputControl);
       return;
     }
@@ -62,6 +66,14 @@
       SnapshotCommand command=new SnapshotCommand();
       command.setDatabase(database);
       command.setSchemas(getCommandParam("schemas",database.getDefaultSchema().toString()));
+      System.out.println(command.execute());
+      return;
+    }
+ else     if ("executeSql".equalsIgnoreCase(command)) {
+      ExecuteSqlCommand command=new ExecuteSqlCommand();
+      command.setDatabase(database);
+      command.setSql(getCommandParam("sql",null));
+      command.setSqlFile(getCommandParam("sqlFile",null));
       System.out.println(command.execute());
       return;
     }
@@ -229,7 +241,7 @@
       database.close();
     }
  catch (    DatabaseException e) {
-      LogFactory.getLogger().warning("problem closing connection",e);
+      LogFactory.getInstance().getLog().warning("problem closing connection",e);
     }
   }
 }
