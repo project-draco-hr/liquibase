@@ -1,2 +1,30 @@
 {
+  for (  ChangeLogOutputFile changeLogOutputFile : changeLogOutputFiles) {
+    PrintStream printStream=null;
+    try {
+      FileResource outputFile=changeLogOutputFile.getOutputFile();
+      String encoding=changeLogOutputFile.getEncoding();
+      ChangeLogSerializer changeLogSerializer=changeLogOutputFile.getChangeLogSerializer();
+      printStream=new PrintStream(outputFile.getOutputStream(),true,encoding);
+      DiffResult diffResult=getDiffResult();
+      DiffOutputControl diffOutputControl=getDiffOutputControl();
+      DiffToChangeLog diffToChangeLog=new DiffToChangeLog(diffResult,diffOutputControl);
+      diffToChangeLog.print(printStream,changeLogSerializer);
+    }
+ catch (    UnsupportedEncodingException e) {
+      throw new BuildException("",e);
+    }
+catch (    IOException e) {
+      throw new BuildException("",e);
+    }
+catch (    ParserConfigurationException e) {
+      throw new BuildException("",e);
+    }
+catch (    DatabaseException e) {
+      throw new BuildException("",e);
+    }
+ finally {
+      FileUtils.close(printStream);
+    }
+  }
 }

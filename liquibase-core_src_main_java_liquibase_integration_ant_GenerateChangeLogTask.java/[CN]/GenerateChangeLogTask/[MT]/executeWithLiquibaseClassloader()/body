@@ -1,30 +1,32 @@
 {
-  Liquibase liquibase=null;
-  try {
-    PrintStream writer=createPrintStream();
-    if (writer == null) {
-      throw new BuildException("generateChangeLog requires outputFile to be set");
+  Liquibase liquibase=getLiquibase();
+  Database database=liquibase.getDatabase();
+  CatalogAndSchema catalogAndSchema=buildCatalogAndSchema(database);
+  DiffOutputControl diffOutputControl=getDiffOutputControl();
+  DiffToChangeLog diffToChangeLog=new DiffToChangeLog(diffOutputControl);
+  for (  ChangeLogOutputFile changeLogOutputFile : changeLogOutputFiles) {
+    PrintStream printStream=null;
+    try {
+      FileResource outputFile=changeLogOutputFile.getOutputFile();
+      String encoding=changeLogOutputFile.getEncoding();
+      ChangeLogSerializer changeLogSerializer=changeLogOutputFile.getChangeLogSerializer();
+      printStream=new PrintStream(outputFile.getOutputStream(),true,encoding);
+      liquibase.generateChangeLog(catalogAndSchema,diffToChangeLog,printStream,changeLogSerializer);
     }
-    liquibase=createLiquibase();
-    Database database=liquibase.getDatabase();
-    SnapshotControl snapshotControl=new SnapshotControl(database,getDiffTypes());
-    DatabaseSnapshot referenceSnapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()),database,snapshotControl);
-    DiffResult diffResult=DiffGeneratorFactory.getInstance().compare(referenceSnapshot,null,new CompareControl(new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()),new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()))},getDiffTypes()));
-    DiffOutputControl diffOutputConfig=new DiffOutputControl(getIncludeCatalog(),getIncludeSchema(),getIncludeTablespace()).addIncludedSchema(new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()));
-    diffOutputConfig.setDataDir(getDataDir());
-    if (getChangeLogFile() == null) {
-      new DiffToChangeLog(diffResult,diffOutputConfig).print(writer);
+ catch (    UnsupportedEncodingException e) {
+      throw new BuildException("",e);
     }
- else {
-      new DiffToChangeLog(diffResult,diffOutputConfig).print(getChangeLogFile().toString());
+catch (    IOException e) {
+      throw new BuildException("",e);
     }
-    writer.flush();
-    writer.close();
-  }
- catch (  Exception e) {
-    throw new BuildException(e);
-  }
+catch (    ParserConfigurationException e) {
+      throw new BuildException("Unable to generate a change log. Error configuring parser.",e);
+    }
+catch (    DatabaseException e) {
+      throw new BuildException("Unable to generate a change log.",e);
+    }
  finally {
-    closeDatabase(liquibase);
+      FileUtils.close(printStream);
+    }
   }
 }

@@ -1,0 +1,4 @@
+{
+  changeLogOutputFile.setChangeLogSerializer(new JsonChangeLogSerializer());
+  changeLogOutputFiles.add(changeLogOutputFile);
+}
