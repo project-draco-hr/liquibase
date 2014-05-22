@@ -1,0 +1,13 @@
+{
+  SpringLiquibase liquibase=new SpringLiquibase();
+  liquibase.setChangeLog(changeLog);
+  liquibase.setChangeLogParameters(parameters);
+  liquibase.setContexts(contexts);
+  liquibase.setDropFirst(dropFirst);
+  liquibase.setShouldRun(shouldRun);
+  liquibase.setRollbackFile(rollbackFile);
+  liquibase.setResourceLoader(resourceLoader);
+  liquibase.setDataSource(dataSource);
+  liquibase.setDefaultSchema(defaultSchema);
+  return liquibase;
+}
