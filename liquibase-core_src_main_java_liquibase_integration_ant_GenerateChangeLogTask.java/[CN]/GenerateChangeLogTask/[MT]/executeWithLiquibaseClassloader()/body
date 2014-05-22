@@ -10,6 +10,7 @@
       FileResource outputFile=changeLogOutputFile.getOutputFile();
       String encoding=changeLogOutputFile.getEncoding();
       ChangeLogSerializer changeLogSerializer=changeLogOutputFile.getChangeLogSerializer();
+      log("Writing change log file " + outputFile.toString(),Project.MSG_INFO);
       printStream=new PrintStream(outputFile.getOutputStream(),true,encoding);
       liquibase.generateChangeLog(catalogAndSchema,diffToChangeLog,printStream,changeLogSerializer);
     }
