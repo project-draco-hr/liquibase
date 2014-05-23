@@ -1,4 +1,14 @@
 {
+  File outputDirFile=outputDirectory.getFile();
+  if (!outputDirFile.exists()) {
+    boolean success=outputDirFile.mkdirs();
+    if (!success) {
+      throw new BuildException("Unable to create output directory.");
+    }
+  }
+  if (!outputDirFile.isDirectory()) {
+    throw new BuildException("Output path is not a directory.");
+  }
   Liquibase liquibase=getLiquibase();
   try {
     if (contexts != null) {

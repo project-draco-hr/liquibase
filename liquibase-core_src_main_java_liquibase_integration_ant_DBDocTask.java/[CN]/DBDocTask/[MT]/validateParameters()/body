@@ -6,7 +6,4 @@
   if (outputDirectory == null) {
     throw new BuildException("Output directory is required.");
   }
-  if (!outputDirectory.isDirectory()) {
-    throw new BuildException("The output directory attribute is not a directory.");
-  }
 }
