@@ -1,6 +1,6 @@
 {
   super.validateParameters();
   if (changeLogOutputFiles.isEmpty()) {
-    throw new BuildException("At least one output file element (<json>, <yaml>, or <xml>)must be defined.");
+    throw new BuildException("At least one output file element (<json>, <yaml>, <xml>, or <txt>)must be defined.");
   }
 }
