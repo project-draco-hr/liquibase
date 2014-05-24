@@ -1,0 +1,3 @@
+{
+  task.log(buildMessage(message),e,Project.MSG_DEBUG);
+}
