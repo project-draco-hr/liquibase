@@ -3,5 +3,5 @@
   Property property=new Property();
   property.setName(changeLogProperty.getName());
   property.setValue(changeLogProperty.getValue());
-  getChangeLogParametersType().addChangeLogParameter(property);
+  getChangeLogParametersType().addConfiguredChangeLogParameter(property);
 }
