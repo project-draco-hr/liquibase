@@ -2,9 +2,6 @@
   Writer writer=null;
   Liquibase liquibase=getLiquibase();
   try {
-    if (isPromptOnNonLocalDatabase() && !liquibase.isSafeToRunUpdate() && UIFactory.getInstance().getFacade().promptForNonLocalDatabase(liquibase.getDatabase())) {
-      throw new BuildException("Chose not to run against non-production database");
-    }
     FileResource outputFile=getOutputFile();
     if (outputFile != null) {
       writer=getOutputFileWriter();

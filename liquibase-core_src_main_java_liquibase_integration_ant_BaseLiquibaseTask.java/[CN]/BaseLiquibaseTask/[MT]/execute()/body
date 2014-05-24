@@ -15,6 +15,10 @@
     if (changeLogParameters != null) {
       changeLogParameters.applyParameters(liquibase);
     }
+    if (isPromptOnNonLocalDatabase() && !liquibase.isSafeToRunUpdate() && UIFactory.getInstance().getFacade().promptForNonLocalDatabase(liquibase.getDatabase())) {
+      log("User chose not to run task against a non-local database.",Project.MSG_INFO);
+      return;
+    }
     if (shouldRun()) {
       executeWithLiquibaseClassloader();
     }
