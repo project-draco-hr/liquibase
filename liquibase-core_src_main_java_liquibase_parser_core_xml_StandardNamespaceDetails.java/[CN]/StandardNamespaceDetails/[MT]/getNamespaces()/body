@@ -1,0 +1,3 @@
+{
+  return new String[]{LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE,LiquibaseSerializable.GENERIC_CHANGELOG_EXTENSION_NAMESPACE};
+}
