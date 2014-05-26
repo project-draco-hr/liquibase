@@ -1,6 +1,4 @@
 {
   this.database.markChangeSetExecStatus(changeSet,ChangeSet.ExecType.EXECUTED);
-  if (listener != null) {
-    listener.markedRan(changeSet,databaseChangeLog,database);
-  }
+  listener.markedRan(changeSet,databaseChangeLog,database);
 }
