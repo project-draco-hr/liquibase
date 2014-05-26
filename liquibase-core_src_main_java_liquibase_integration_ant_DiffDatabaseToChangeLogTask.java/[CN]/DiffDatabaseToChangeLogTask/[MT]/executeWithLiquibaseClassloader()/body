@@ -1,7 +1,7 @@
 {
   for (  ChangeLogOutputFile changeLogOutputFile : changeLogOutputFiles) {
     PrintStream printStream=null;
-    String encoding=changeLogOutputFile.getEncoding();
+    String encoding=getOutputEncoding(changeLogOutputFile);
     try {
       FileResource outputFile=changeLogOutputFile.getOutputFile();
       ChangeLogSerializer changeLogSerializer=changeLogOutputFile.getChangeLogSerializer();

@@ -1,0 +1,5 @@
+{
+  LiquibaseConfiguration liquibaseConfiguration=LiquibaseConfiguration.getInstance();
+  GlobalConfiguration globalConfiguration=liquibaseConfiguration.getConfiguration(GlobalConfiguration.class);
+  return globalConfiguration.getOutputEncoding();
+}

@@ -5,7 +5,7 @@
   DiffOutputControl diffOutputControl=getDiffOutputControl();
   DiffToChangeLog diffToChangeLog=new DiffToChangeLog(diffOutputControl);
   for (  ChangeLogOutputFile changeLogOutputFile : changeLogOutputFiles) {
-    String encoding=changeLogOutputFile.getEncoding();
+    String encoding=getOutputEncoding(changeLogOutputFile);
     PrintStream printStream=null;
     try {
       FileResource outputFile=changeLogOutputFile.getOutputFile();
