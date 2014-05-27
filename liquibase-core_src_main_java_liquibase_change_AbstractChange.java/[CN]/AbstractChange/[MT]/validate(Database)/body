@@ -12,7 +12,7 @@
   if (!this.supports(database)) {
     changeValidationErrors.addError(unsupportedWarning);
   }
- else {
+ else   if (!generateStatementsVolatile(database)) {
     boolean sawUnsupportedError=false;
     SqlStatement[] statements;
     statements=generateStatements(database);

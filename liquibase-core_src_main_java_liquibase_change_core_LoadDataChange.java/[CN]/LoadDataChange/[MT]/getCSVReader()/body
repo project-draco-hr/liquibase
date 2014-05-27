@@ -4,6 +4,9 @@
     throw new UnexpectedLiquibaseException("No file resourceAccessor specified for " + getFile());
   }
   InputStream stream=StreamUtil.singleInputStream(getFile(),resourceAccessor);
+  if (stream == null) {
+    return null;
+  }
   Reader streamReader;
   if (getEncoding() == null) {
     streamReader=new UtfBomAwareReader(stream);
