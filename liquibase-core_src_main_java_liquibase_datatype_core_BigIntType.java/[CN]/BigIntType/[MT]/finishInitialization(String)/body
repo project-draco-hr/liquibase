@@ -1,6 +1,6 @@
 {
   super.finishInitialization(originalDefinition);
-  if (originalDefinition.toLowerCase().startsWith("bigserial")) {
+  if (originalDefinition.toLowerCase().contains("serial")) {
     autoIncrement=true;
   }
 }
