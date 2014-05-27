@@ -1,0 +1,16 @@
+{
+  List<String> returnList=new ArrayList<String>();
+  ResultSet schemas=null;
+  try {
+    schemas=((JdbcConnection)database.getConnection()).getMetaData().getSchemas();
+    while (schemas.next()) {
+      returnList.add(JdbcUtils.getValueForColumn(schemas,"TABLE_SCHEM",database));
+    }
+  }
+  finally {
+    if (schemas != null) {
+      schemas.close();
+    }
+  }
+  return returnList.toArray(new String[returnList.size()]);
+}

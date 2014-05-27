@@ -1,3 +1,6 @@
 {
-  this(catalog.getName(),name);
+  schemaName=StringUtils.trimToNull(schemaName);
+  setAttribute("name",schemaName);
+  setAttribute("catalog",catalog);
+  setAttribute("objects",new HashMap<Class<? extends DatabaseObject>,Set<DatabaseObject>>());
 }

@@ -1,3 +1,7 @@
 {
-  return getName();
+  String name=getName();
+  if (name == null) {
+    return "DEFAULT";
+  }
+  return name;
 }

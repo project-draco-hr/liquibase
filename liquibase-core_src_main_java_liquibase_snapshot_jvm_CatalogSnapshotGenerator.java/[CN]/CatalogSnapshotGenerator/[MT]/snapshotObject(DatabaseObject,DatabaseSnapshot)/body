@@ -3,7 +3,6 @@
     throw new UnexpectedLiquibaseException("Unexpected example type: " + example.getClass().getName());
   }
   Database database=snapshot.getDatabase();
-  ResultSet catalogs=null;
   Catalog match=null;
   String catalogName=example.getName();
   if (catalogName == null && database.supportsCatalogs()) {
@@ -11,20 +10,8 @@
   }
   example=new Catalog(catalogName);
   try {
-    if (((AbstractJdbcDatabase)database).jdbcCallsCatalogsSchemas()) {
-      catalogs=((JdbcConnection)database.getConnection()).getMetaData().getSchemas();
-    }
- else {
-      catalogs=((JdbcConnection)database.getConnection()).getMetaData().getCatalogs();
-    }
-    while (catalogs.next()) {
-      Catalog catalog;
-      if (((AbstractJdbcDatabase)database).jdbcCallsCatalogsSchemas()) {
-        catalog=new Catalog(catalogs.getString("TABLE_SCHEM"));
-      }
- else {
-        catalog=new Catalog(catalogs.getString("TABLE_CAT"));
-      }
+    for (    String potentialCatalogName : getDatabaseCatalogNames(database)) {
+      Catalog catalog=new Catalog(potentialCatalogName);
       if (DatabaseObjectComparatorFactory.getInstance().isSameObject(catalog,example,database)) {
         if (match == null) {
           match=catalog;
@@ -38,14 +25,8 @@
  catch (  SQLException e) {
     throw new DatabaseException(e);
   }
- finally {
-    if (catalogs != null) {
-      try {
-        catalogs.close();
-      }
- catch (      SQLException ignore) {
-      }
-    }
+  if (match != null && isDefaultCatalog(match,database)) {
+    match.setDefault(true);
   }
   return match;
 }

@@ -10,6 +10,14 @@
       object2=new Schema();
     }
   }
+ else   if (object1 instanceof Catalog || object2 instanceof Catalog) {
+    if (object1 == null) {
+      object1=new Catalog();
+    }
+    if (object2 == null) {
+      object2=new Catalog();
+    }
+  }
   if (object1 == null || object2 == null) {
     return false;
   }
