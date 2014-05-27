@@ -16,16 +16,21 @@
   if (!(val instanceof String)) {
     return val;
   }
-  String stringVal=(String)val;
-  if (stringVal.isEmpty()) {
-    return null;
-  }
   int type=Integer.MIN_VALUE;
   if (columnInfo.getType().getDataTypeId() != null) {
     type=columnInfo.getType().getDataTypeId();
   }
   String typeName=columnInfo.getType().getTypeName();
   LiquibaseDataType liquibaseDataType=DataTypeFactory.getInstance().from(columnInfo.getType());
+  String stringVal=(String)val;
+  if (stringVal.isEmpty()) {
+    if (liquibaseDataType instanceof CharType) {
+      return "";
+    }
+ else {
+      return null;
+    }
+  }
   if (database instanceof OracleDatabase && !stringVal.startsWith("'") && !stringVal.endsWith("'")) {
     Object maybeDate=null;
     if (liquibaseDataType instanceof DateType || type == Types.DATE) {
