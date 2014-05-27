@@ -12,7 +12,7 @@
     primaryKey=true;
   }
   String additionalInfo=null;
-  if (dataTypeName.toLowerCase().startsWith("bit varying")) {
+  if (dataTypeName.toLowerCase().startsWith("bit varying") || dataTypeName.toLowerCase().startsWith("character varying")) {
   }
  else {
     String[] splitTypeName=dataTypeName.split("\\s+",2);
