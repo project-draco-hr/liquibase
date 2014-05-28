@@ -14,7 +14,7 @@
     executor.execute(new InitializeDatabaseChangeLogLockTableStatement());
     database.commit();
   }
-  if (database instanceof DerbyDatabase && ((DerbyDatabase)database).supportsBooleanDataType()) {
+  if (executor.updatesDatabase() && database instanceof DerbyDatabase && ((DerbyDatabase)database).supportsBooleanDataType()) {
     String lockTable=database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName());
     Object obj=executor.queryForObject(new RawSqlStatement("select min(locked) as test from " + lockTable + " fetch first row only"),Object.class);
     if (!(obj instanceof Boolean)) {
