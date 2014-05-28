@@ -1,0 +1,13 @@
+{
+  try {
+    if (getDatabaseMajorVersion() < 2) {
+      return false;
+    }
+ else {
+      return true;
+    }
+  }
+ catch (  DatabaseException e) {
+    return true;
+  }
+}
