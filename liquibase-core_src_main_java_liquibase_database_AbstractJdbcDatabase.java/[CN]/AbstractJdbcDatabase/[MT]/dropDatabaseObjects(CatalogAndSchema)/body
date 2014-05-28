@@ -27,6 +27,9 @@
     try {
       for (      ChangeSet changeSet : changeSets) {
         for (        Change change : changeSet.getChanges()) {
+          if (change instanceof DropTableChange) {
+            ((DropTableChange)change).setCascadeConstraints(true);
+          }
           SqlStatement[] sqlStatements=change.generateStatements(this);
           for (          SqlStatement statement : sqlStatements) {
             ExecutorService.getInstance().getExecutor(this).execute(statement);
