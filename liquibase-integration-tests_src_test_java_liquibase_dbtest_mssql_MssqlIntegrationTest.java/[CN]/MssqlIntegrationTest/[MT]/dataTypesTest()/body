@@ -14,7 +14,7 @@
       if (expectedType.equalsIgnoreCase("text")) {
         expectedType="nvarchar";
       }
-      String foundTypeDefinition=DataTypeFactory.getInstance().from(column.getType()).toDatabaseDataType(getDatabase()).toString();
+      String foundTypeDefinition=DataTypeFactory.getInstance().from(column.getType(),new MSSQLDatabase()).toDatabaseDataType(getDatabase()).toString();
       String foundType=foundTypeDefinition.replaceFirst("\\(.*","");
       assertEquals("Wrong data type for " + table.getName() + "."+ column.getName(),expectedType.toLowerCase(),foundType.toLowerCase());
       if (expectedType.equalsIgnoreCase("varbinary")) {

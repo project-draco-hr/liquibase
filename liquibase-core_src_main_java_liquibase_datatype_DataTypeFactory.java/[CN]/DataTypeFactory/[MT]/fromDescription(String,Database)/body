@@ -32,12 +32,19 @@
     }
   }
  else {
-    try {
-      liquibaseDataType=classes.iterator().next().newInstance();
+    Iterator<Class<? extends LiquibaseDataType>> iterator=classes.iterator();
+    do {
+      try {
+        liquibaseDataType=iterator.next().newInstance();
+      }
+ catch (      Exception e) {
+        throw new UnexpectedLiquibaseException(e);
+      }
     }
- catch (    Exception e) {
-      throw new UnexpectedLiquibaseException(e);
-    }
+ while ((database != null) && !liquibaseDataType.supports(database) && iterator.hasNext());
+  }
+  if ((database != null) && !liquibaseDataType.supports(database)) {
+    throw new UnexpectedLiquibaseException("Could not find type for " + liquibaseDataType.toString() + " for databaes "+ database.getShortName());
   }
   if (liquibaseDataType == null) {
     liquibaseDataType=new UnknownType(dataTypeName);

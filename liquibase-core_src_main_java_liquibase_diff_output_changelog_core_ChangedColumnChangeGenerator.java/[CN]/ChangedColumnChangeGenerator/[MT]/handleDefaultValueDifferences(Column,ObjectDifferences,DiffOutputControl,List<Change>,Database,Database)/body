@@ -2,7 +2,7 @@
   Difference difference=differences.getDifference("defaultValue");
   if (difference != null) {
     Object value=difference.getReferenceValue();
-    LiquibaseDataType columnDataType=DataTypeFactory.getInstance().from(column.getType());
+    LiquibaseDataType columnDataType=DataTypeFactory.getInstance().from(column.getType(),comparisonDatabase);
     if (value == null) {
       DropDefaultValueChange change=new DropDefaultValueChange();
       if (control.getIncludeCatalog()) {
