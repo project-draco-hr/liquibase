@@ -91,7 +91,7 @@
       }
  else {
         System.err.println("Unexpected error running Liquibase: " + message + "\n");
-        LogFactory.getInstance().getLog().severe(message);
+        LogFactory.getInstance().getLog().severe(message,e);
         System.err.println(generateLogLevelWarningMessage());
       }
     }
