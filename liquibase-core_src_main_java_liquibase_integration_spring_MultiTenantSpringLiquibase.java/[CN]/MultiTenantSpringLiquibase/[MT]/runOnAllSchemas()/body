@@ -1,0 +1,12 @@
+{
+  for (  String schema : schemas) {
+    if (schema.equals("default")) {
+      schema=null;
+    }
+    log.info("Initializing Liquibase for schema " + schema);
+    SpringLiquibase liquibase=getSpringLiquibase(dataSource);
+    liquibase.setDefaultSchema(schema);
+    liquibase.afterPropertiesSet();
+    log.info("Liquibase ran for schema " + schema);
+  }
+}
