@@ -1,4 +1,5 @@
 {
+  snapshotIdService=SnapshotIdService.getInstance();
   if (snapshotGenerators != null) {
     this.snapshotGenerators=snapshotGenerators.iterator();
   }
