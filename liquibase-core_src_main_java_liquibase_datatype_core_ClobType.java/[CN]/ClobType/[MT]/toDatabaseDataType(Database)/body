@@ -1,5 +1,5 @@
 {
-  String originalDefinition=StringUtils.trimToEmpty(this.originalDefinition);
+  String originalDefinition=StringUtils.trimToEmpty(getRawDefinition());
   if (database instanceof FirebirdDatabase) {
     return new DatabaseDataType("BLOB SUB_TYPE TEXT");
   }
