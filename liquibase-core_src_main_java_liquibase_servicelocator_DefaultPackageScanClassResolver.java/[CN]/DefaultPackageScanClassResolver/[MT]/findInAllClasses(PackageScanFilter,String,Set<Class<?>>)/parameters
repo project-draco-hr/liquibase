@@ -1,4 +1,3 @@
 PackageScanFilter test
-String parent
-File location
+String packageName
 Set<Class<?>> classes

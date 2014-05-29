@@ -1,0 +1,13 @@
+{
+  log.debug("Searching for: " + test + " in package: "+ packageName);
+  Set<Class> packageClasses=this.allClassesByPackage.get(packageName);
+  if (packageClasses == null) {
+    log.debug("No classes found in package: " + packageName);
+    return;
+  }
+  for (  Class type : packageClasses) {
+    if (test.matches(type)) {
+      classes.add(type);
+    }
+  }
+}

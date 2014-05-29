@@ -9,10 +9,10 @@
       builder.append(parent).append("/").append(name);
       String packageOrClass=parent == null ? name : builder.toString();
       if (file.isDirectory()) {
-        loadImplementationsInDirectory(test,packageOrClass,file,classes);
+        loadImplementationsInDirectory(packageOrClass,file,classLoader);
       }
  else       if (name.endsWith(".class")) {
-        addIfMatching(test,packageOrClass,classes);
+        this.loadClass(packageOrClass,classLoader);
       }
     }
   }

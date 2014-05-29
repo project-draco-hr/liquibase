@@ -1,0 +1,31 @@
+{
+  try {
+    String externalName=className.substring(0,className.indexOf('.')).replace('/','.');
+    Class<?> type=classLoader.loadClass(externalName);
+    log.debug("Loaded the class: " + type + " in classloader: "+ classLoader);
+    if (Modifier.isAbstract(type.getModifiers()) || Modifier.isInterface(type.getModifiers())) {
+      return;
+    }
+    String packageName=type.getPackage().getName();
+    List<String> packageNameParts=Arrays.asList(packageName.split("\\."));
+    for (int i=0; i < packageNameParts.size(); i++) {
+      String thisPackage=StringUtils.join(packageNameParts.subList(0,i + 1),"/");
+      if (!this.allClassesByPackage.containsKey(thisPackage)) {
+        this.allClassesByPackage.put(thisPackage,new HashSet<Class>());
+      }
+      this.allClassesByPackage.get(thisPackage).add(type);
+    }
+  }
+ catch (  ClassNotFoundException e) {
+    log.debug("Cannot find class '" + className + "' in classloader: "+ classLoader+ ". Reason: "+ e,e);
+  }
+catch (  NoClassDefFoundError e) {
+    log.debug("Cannot find the class definition '" + className + "' in classloader: "+ classLoader+ ". Reason: "+ e,e);
+  }
+catch (  LinkageError e) {
+    log.debug("Cannot find the class definition '" + className + "' in classloader: "+ classLoader+ ". Reason: "+ e,e);
+  }
+catch (  Throwable e) {
+    log.severe("Cannot load class '" + className + "' in classloader: "+ classLoader+ ".  Reason: "+ e,e);
+  }
+}
