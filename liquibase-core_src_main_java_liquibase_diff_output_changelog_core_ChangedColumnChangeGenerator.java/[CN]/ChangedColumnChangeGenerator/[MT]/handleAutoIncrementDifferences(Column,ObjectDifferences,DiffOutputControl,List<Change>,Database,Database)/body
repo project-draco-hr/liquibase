@@ -14,7 +14,7 @@
       }
       change.setTableName(column.getRelation().getName());
       change.setColumnName(column.getName());
-      change.setColumnDataType(DataTypeFactory.getInstance().from(column.getType()).toString());
+      change.setColumnDataType(DataTypeFactory.getInstance().from(column.getType(),comparisonDatabase).toString());
       changes.add(change);
     }
   }

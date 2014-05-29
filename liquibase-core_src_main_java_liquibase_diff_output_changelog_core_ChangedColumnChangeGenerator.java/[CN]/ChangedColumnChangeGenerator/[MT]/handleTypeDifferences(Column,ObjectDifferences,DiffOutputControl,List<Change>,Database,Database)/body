@@ -11,7 +11,7 @@
     change.setTableName(column.getRelation().getName());
     change.setColumnName(column.getName());
     DataType referenceType=(DataType)typeDifference.getReferenceValue();
-    change.setNewDataType(DataTypeFactory.getInstance().from(referenceType).toString());
+    change.setNewDataType(DataTypeFactory.getInstance().from(referenceType,comparisonDatabase).toString());
     changes.add(change);
   }
 }

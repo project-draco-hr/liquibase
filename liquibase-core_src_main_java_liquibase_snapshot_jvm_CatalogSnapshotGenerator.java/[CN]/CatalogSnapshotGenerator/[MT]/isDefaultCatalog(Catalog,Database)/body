@@ -1,0 +1,3 @@
+{
+  return (match.getName() == null || match.getName().equalsIgnoreCase(database.getDefaultCatalogName()));
+}

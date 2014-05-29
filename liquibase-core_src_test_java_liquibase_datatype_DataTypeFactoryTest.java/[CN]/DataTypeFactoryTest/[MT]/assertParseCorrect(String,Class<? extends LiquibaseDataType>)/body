@@ -1,3 +1,0 @@
-{
-  assertParseCorrect(type,type,expectedType);
-}

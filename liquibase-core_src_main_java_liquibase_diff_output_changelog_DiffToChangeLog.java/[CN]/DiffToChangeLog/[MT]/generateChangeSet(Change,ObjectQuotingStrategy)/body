@@ -1,5 +1,0 @@
-{
-  ChangeSet changeSet=new ChangeSet(generateId(),getChangeSetAuthor(),false,false,getChangeSetPath(),changeSetContext,null,quotingStrategy,null);
-  changeSet.addChange(change);
-  return changeSet;
-}

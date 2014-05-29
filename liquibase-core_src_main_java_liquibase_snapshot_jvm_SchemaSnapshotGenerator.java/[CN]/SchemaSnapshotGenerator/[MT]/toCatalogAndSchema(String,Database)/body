@@ -1,0 +1,3 @@
+{
+  return ((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(null,tableSchema);
+}

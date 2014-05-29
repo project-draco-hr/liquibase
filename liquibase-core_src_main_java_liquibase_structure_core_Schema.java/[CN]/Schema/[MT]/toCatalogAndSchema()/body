@@ -1,3 +1,17 @@
 {
-  return new CatalogAndSchema(getCatalogName(),getName());
+  String catalogName;
+  if (getCatalog() != null && getCatalog().isDefault()) {
+    catalogName=null;
+  }
+ else {
+    catalogName=getCatalogName();
+  }
+  String schemaName;
+  if (isDefault()) {
+    schemaName=null;
+  }
+ else {
+    schemaName=getName();
+  }
+  return new CatalogAndSchema(catalogName,schemaName);
 }

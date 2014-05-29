@@ -1,0 +1,4 @@
+{
+  setAttribute("default",isDefault);
+  return this;
+}

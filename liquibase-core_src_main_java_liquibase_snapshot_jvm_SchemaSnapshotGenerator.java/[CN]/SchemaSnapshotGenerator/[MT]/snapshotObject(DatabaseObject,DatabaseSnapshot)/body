@@ -1,9 +1,6 @@
 {
   Database database=snapshot.getDatabase();
-  ResultSet schemas=null;
   Schema match=null;
-  boolean passedCatalog=((Schema)example).getCatalogName() != null;
-  boolean passedSchema=((Schema)example).getName() != null;
   String catalogName=((Schema)example).getCatalogName();
   String schemaName=example.getName();
   if (database.supportsSchemas()) {
@@ -31,10 +28,8 @@
   database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
   try {
     if (database.supportsSchemas()) {
-      schemas=((JdbcConnection)database.getConnection()).getMetaData().getSchemas();
-      while (schemas.next()) {
-        String tableSchema=JdbcUtils.getValueForColumn(schemas,"TABLE_SCHEM",database);
-        CatalogAndSchema schemaFromJdbcInfo=((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(null,tableSchema);
+      for (      String tableSchema : getDatabaseSchemaNames(database)) {
+        CatalogAndSchema schemaFromJdbcInfo=toCatalogAndSchema(tableSchema,database);
         Catalog catalog=new Catalog(schemaFromJdbcInfo.getCatalogName());
         Schema schema=new Schema(catalog,tableSchema);
         if (DatabaseObjectComparatorFactory.getInstance().isSameObject(schema,example,database)) {
@@ -49,7 +44,7 @@
     }
  else {
       Catalog catalog=new Catalog(catalogName);
-      return new Schema(catalog,null);
+      match=new Schema(catalog,null);
     }
   }
  catch (  SQLException e) {
@@ -57,13 +52,9 @@
   }
  finally {
     database.setObjectQuotingStrategy(currentStrategy);
-    if (schemas != null) {
-      try {
-        schemas.close();
-      }
- catch (      SQLException ignore) {
-      }
-    }
+  }
+  if (match != null && (match.getName() == null || match.getName().equalsIgnoreCase(database.getDefaultSchemaName()))) {
+    match.setDefault(true);
   }
   return match;
 }

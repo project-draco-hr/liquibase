@@ -1,5 +1,0 @@
-{
-  SybaseDatabase database=new SybaseDatabase();
-  configureExecutor(database);
-  assertEquals("",database.getViewDefinition(new CatalogAndSchema(null,"dbo"),"view_name"));
-}

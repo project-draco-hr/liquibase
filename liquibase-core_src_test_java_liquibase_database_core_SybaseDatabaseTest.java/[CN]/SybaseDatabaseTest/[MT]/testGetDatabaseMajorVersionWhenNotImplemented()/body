@@ -1,8 +1,0 @@
-{
-  DatabaseConnection connection=createNiceMock(DatabaseConnection.class);
-  expect(connection.getDatabaseMajorVersion()).andThrow(new UnsupportedOperationException());
-  replay(connection);
-  SybaseDatabase database=new SybaseDatabase();
-  database.setConnection(connection);
-  assertEquals(-1,database.getDatabaseMajorVersion());
-}

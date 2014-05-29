@@ -1,6 +1,6 @@
 {
   for (  Database database : TestContext.getInstance().getAllDatabases()) {
     CreateTableStatement statement=new CreateTableStatement(CATALOG_NAME,SCHEMA_NAME,TABLE_NAME);
-    statement.addColumn(COLUMN_NAME1,DataTypeFactory.getInstance().fromDescription("int(11) unsigned"));
+    statement.addColumn(COLUMN_NAME1,DataTypeFactory.getInstance().fromDescription("int(11) unsigned",database));
   }
 }

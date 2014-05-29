@@ -1,3 +1,8 @@
 {
-  return "PUBLIC";
+  if (supportsCatalogs()) {
+    return "PUBLIC";
+  }
+ else {
+    return null;
+  }
 }

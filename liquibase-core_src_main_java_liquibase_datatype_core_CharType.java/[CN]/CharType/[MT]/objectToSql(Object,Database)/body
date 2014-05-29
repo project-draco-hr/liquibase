@@ -6,7 +6,7 @@
     return value.toString();
   }
   String val=String.valueOf(value);
-  if (val.startsWith("'") && val.endsWith("'")) {
+  if (database instanceof PostgresDatabase && val.startsWith("'") && val.endsWith("'")) {
     return val;
   }
  else {

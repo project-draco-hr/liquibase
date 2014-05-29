@@ -2,6 +2,9 @@
   CSVReader reader=null;
   try {
     reader=getCSVReader();
+    if (reader == null) {
+      throw new UnexpectedLiquibaseException("Unable to read file " + this.getFile());
+    }
     String[] headers=reader.readNext();
     if (headers == null) {
       throw new UnexpectedLiquibaseException("Data file " + getFile() + " was empty");

@@ -1,17 +1,8 @@
 {
-  for (  DataSource dataSource : dataSources) {
-    log.info("Initializing Liquibase for data source " + dataSource);
-    SpringLiquibase liquibase=new SpringLiquibase();
-    liquibase.setChangeLog(changeLog);
-    liquibase.setChangeLogParameters(parameters);
-    liquibase.setContexts(contexts);
-    liquibase.setDefaultSchema(defaultSchema);
-    liquibase.setDropFirst(dropFirst);
-    liquibase.setShouldRun(shouldRun);
-    liquibase.setRollbackFile(rollbackFile);
-    liquibase.setResourceLoader(resourceLoader);
-    liquibase.setDataSource(dataSource);
+  for (  DataSource aDataSource : dataSources) {
+    log.info("Initializing Liquibase for data source " + aDataSource);
+    SpringLiquibase liquibase=getSpringLiquibase(aDataSource);
     liquibase.afterPropertiesSet();
-    log.info("Liquibase ran for data source " + dataSource);
+    log.info("Liquibase ran for data source " + aDataSource);
   }
 }

@@ -1,5 +1,0 @@
-{
-  LiquibaseDataType parsed=DataTypeFactory.getInstance().fromDescription(liquibaseString);
-  assertEquals(expectedType.getName(),parsed.getClass().getName());
-  assertEquals(databaseString,parsed.toString());
-}

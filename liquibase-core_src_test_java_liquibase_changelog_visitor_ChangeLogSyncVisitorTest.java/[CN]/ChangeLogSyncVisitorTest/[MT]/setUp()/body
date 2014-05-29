@@ -1,0 +1,4 @@
+{
+  changeSet=new ChangeSet("1","testAuthor",false,false,"path/changelog",null,null,null);
+  databaseChangeLog=new DatabaseChangeLog();
+}
