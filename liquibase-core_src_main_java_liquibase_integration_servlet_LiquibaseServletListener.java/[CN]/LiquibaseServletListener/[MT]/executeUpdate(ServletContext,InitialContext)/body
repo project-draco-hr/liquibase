@@ -10,6 +10,7 @@
   setContexts((String)servletValueContainer.getValue(LIQUIBASE_CONTEXTS));
   this.defaultSchema=StringUtils.trimToNull((String)servletValueContainer.getValue(LIQUIBASE_SCHEMA_DEFAULT));
   Connection connection=null;
+  Database database=null;
   try {
     DataSource dataSource=(DataSource)ic.lookup(this.dataSourceName);
     connection=dataSource.getConnection();
@@ -18,7 +19,7 @@
     ResourceAccessor threadClFO=new ClassLoaderResourceAccessor(contextClassLoader);
     ResourceAccessor clFO=new ClassLoaderResourceAccessor();
     ResourceAccessor fsFO=new FileSystemResourceAccessor();
-    Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+    database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
     database.setDefaultSchemaName(getDefaultSchema());
     Liquibase liquibase=new Liquibase(getChangeLogFile(),new CompositeResourceAccessor(clFO,fsFO,threadClFO),database);
     @SuppressWarnings("unchecked") Enumeration<String> initParameters=servletContext.getInitParameterNames();
@@ -31,7 +32,10 @@
     liquibase.update(getContexts());
   }
   finally {
-    if (connection != null) {
+    if (database != null) {
+      database.close();
+    }
+ else     if (connection != null) {
       connection.close();
     }
   }
