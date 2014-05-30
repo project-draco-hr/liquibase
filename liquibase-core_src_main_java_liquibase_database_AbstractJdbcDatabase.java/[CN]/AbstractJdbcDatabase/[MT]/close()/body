@@ -12,4 +12,5 @@
     }
     connection.close();
   }
+  ExecutorService.getInstance().clearExecutor(this);
 }
