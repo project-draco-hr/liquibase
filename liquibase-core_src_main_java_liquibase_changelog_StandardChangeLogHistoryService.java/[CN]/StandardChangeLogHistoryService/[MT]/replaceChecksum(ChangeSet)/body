@@ -1,5 +1,5 @@
 {
   ExecutorService.getInstance().getExecutor(getDatabase()).execute(new UpdateChangeSetChecksumStatement(changeSet));
   getDatabase().commit();
-  ranChangeSetList=null;
+  reset();
 }

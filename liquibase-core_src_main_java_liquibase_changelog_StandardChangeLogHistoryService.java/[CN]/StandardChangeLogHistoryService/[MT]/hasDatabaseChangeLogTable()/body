@@ -1,4 +1,7 @@
 {
+  if (ranChangeSetList != null) {
+    return true;
+  }
   try {
     return SnapshotGeneratorFactory.getInstance().hasDatabaseChangeLogTable(getDatabase());
   }
