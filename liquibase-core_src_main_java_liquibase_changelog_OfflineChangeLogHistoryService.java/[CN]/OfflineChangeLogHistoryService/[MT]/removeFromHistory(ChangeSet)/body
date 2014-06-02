@@ -1,5 +1,5 @@
 {
-  if (executeAgainstDatabase) {
+  if (isExecuteAgainstDatabase()) {
     ExecutorService.getInstance().getExecutor(getDatabase()).execute(new RemoveChangeSetRanStatusStatement(changeSet));
     getDatabase().commit();
   }

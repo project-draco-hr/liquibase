@@ -4,9 +4,8 @@
     try {
       changeLogFile.createNewFile();
       writeHeader(changeLogFile);
-      if (executeAgainstDatabase) {
+      if (isExecuteAgainstDatabase()) {
         ExecutorService.getInstance().getExecutor(getDatabase()).execute(new CreateDatabaseChangeLogTableStatement());
-        getDatabase().commit();
       }
     }
  catch (    Exception e) {
