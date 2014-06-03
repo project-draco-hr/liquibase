@@ -1,0 +1,3 @@
+{
+  this.message=StringUtils.trimToNull(message);
+}

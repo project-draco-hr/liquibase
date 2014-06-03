@@ -1,0 +1,30 @@
+{
+  return new SqlStatement[]{new RuntimeStatement(){
+    @Override public Sql[] generate(    Database database){
+      String target=getTarget();
+      if (target.equalsIgnoreCase("STDOUT")) {
+        System.out.println(getMessage());
+      }
+ else       if (target.equalsIgnoreCase("STDERR")) {
+        System.err.println(getMessage());
+      }
+ else       if (target.equalsIgnoreCase("DEBUG")) {
+        LogFactory.getInstance().getLog().debug(getMessage());
+      }
+ else       if (target.equalsIgnoreCase("INFO")) {
+        LogFactory.getInstance().getLog().info(getMessage());
+      }
+ else       if (target.equalsIgnoreCase("WARN") || target.equalsIgnoreCase("WARNING")) {
+        LogFactory.getInstance().getLog().warning(getMessage());
+      }
+ else       if (target.equalsIgnoreCase("SEVERE") || target.equalsIgnoreCase("FATAL") || target.equalsIgnoreCase("ERROR")) {
+        LogFactory.getInstance().getLog().severe(getMessage());
+      }
+ else {
+        throw new UnexpectedLiquibaseException("Unknown target: " + target);
+      }
+      return null;
+    }
+  }
+};
+}
