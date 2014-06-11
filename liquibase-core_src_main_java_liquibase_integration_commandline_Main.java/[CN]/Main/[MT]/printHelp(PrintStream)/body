@@ -118,6 +118,9 @@
   stream.println("                                            include the catalog name, even if");
   stream.println("                                            it is the default catalog.");
   stream.println("                                            Defaults to true");
+  stream.println(" --outputFile=<file>                        File to write output to for commands");
+  stream.println("                                            that write output, e.g. updateSQL.");
+  stream.println("                                            If not specified, writes to sysout.");
   stream.println(" --help                                     Prints this message");
   stream.println(" --version                                  Prints this version information");
   stream.println("");
