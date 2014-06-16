@@ -17,5 +17,6 @@
  catch (    LockException e) {
       log.severe("Could not release lock",e);
     }
+    resetServices();
   }
 }

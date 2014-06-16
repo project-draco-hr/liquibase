@@ -20,5 +20,6 @@ catch (  Exception e) {
  catch (    LockException e) {
       log.severe("Unable to release lock: " + e.getMessage());
     }
+    resetServices();
   }
 }

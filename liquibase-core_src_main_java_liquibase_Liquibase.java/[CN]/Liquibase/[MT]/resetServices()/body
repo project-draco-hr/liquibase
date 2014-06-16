@@ -1,0 +1,5 @@
+{
+  LockServiceFactory.getInstance().resetAll();
+  ChangeLogHistoryServiceFactory.getInstance().resetAll();
+  ExecutorService.getInstance().reset();
+}

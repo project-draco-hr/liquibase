@@ -12,4 +12,5 @@
   finally {
     lockService.releaseLock();
   }
+  resetServices();
 }

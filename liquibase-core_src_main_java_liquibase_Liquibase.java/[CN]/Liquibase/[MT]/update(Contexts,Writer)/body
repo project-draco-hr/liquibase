@@ -17,4 +17,5 @@
     lockService.releaseLock();
   }
   ExecutorService.getInstance().setExecutor(database,oldTemplate);
+  resetServices();
 }

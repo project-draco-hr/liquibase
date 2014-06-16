@@ -12,4 +12,5 @@
     throw new LiquibaseException(e);
   }
   ExecutorService.getInstance().setExecutor(database,oldTemplate);
+  resetServices();
 }

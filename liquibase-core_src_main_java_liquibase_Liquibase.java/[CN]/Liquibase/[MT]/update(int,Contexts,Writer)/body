@@ -11,5 +11,6 @@
  catch (  IOException e) {
     throw new LiquibaseException(e);
   }
+  resetServices();
   ExecutorService.getInstance().setExecutor(database,oldTemplate);
 }
