@@ -9,5 +9,6 @@ boolean outputDefaultCatalog
 boolean outputDefaultSchema
 String databaseClass
 String driverPropertiesFile
+String propertyProviderClass
 String liquibaseCatalogName
 String liquibaseSchemaName
