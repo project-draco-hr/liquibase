@@ -1,0 +1,8 @@
+{
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  Date baseDate=new Date();
+  update(contexts,labelExpression);
+  rollback(baseDate,contexts,labelExpression);
+  update(contexts,labelExpression);
+}

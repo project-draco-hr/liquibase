@@ -1,0 +1,7 @@
+{
+  this.key=key;
+  this.value=value;
+  this.validContexts=validContexts;
+  this.labels=labels;
+  this.validDatabases=validDatabases;
+}

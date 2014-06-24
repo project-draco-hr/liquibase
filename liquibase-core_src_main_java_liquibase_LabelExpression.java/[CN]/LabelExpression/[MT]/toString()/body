@@ -1,0 +1,3 @@
+{
+  return "(" + StringUtils.join(new TreeSet(this.labels),"), (") + ")";
+}

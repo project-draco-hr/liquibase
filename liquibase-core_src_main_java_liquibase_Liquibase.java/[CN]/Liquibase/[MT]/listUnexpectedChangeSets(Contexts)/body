@@ -1,9 +1,0 @@
-{
-  changeLogParameters.setContexts(contexts);
-  DatabaseChangeLog changeLog=getDatabaseChangeLog();
-  changeLog.validate(database,contexts);
-  ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database));
-  ExpectedChangesVisitor visitor=new ExpectedChangesVisitor(database.getRanChangeSetList());
-  logIterator.run(visitor,new RuntimeEnvironment(database,contexts));
-  return visitor.getUnexpectedChangeSets();
-}

@@ -1,0 +1,14 @@
+{
+  if (runtimeLabels == null || runtimeLabels.isEmpty()) {
+    return true;
+  }
+  if (this.labels.size() == 0) {
+    return true;
+  }
+  for (  String expression : this.labels) {
+    if (matches(expression,runtimeLabels)) {
+      return true;
+    }
+  }
+  return false;
+}

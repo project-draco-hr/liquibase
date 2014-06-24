@@ -1,0 +1,9 @@
+{
+  labels=StringUtils.trimToNull(labels);
+  if (labels == null) {
+    return;
+  }
+  for (  String label : StringUtils.splitAndTrim(labels,",")) {
+    this.labels.add(label.toLowerCase());
+  }
+}

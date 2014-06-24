@@ -1,7 +1,0 @@
-{
-  changeLogParameters.setContexts(contexts);
-  Date baseDate=new Date();
-  update(contexts);
-  rollback(baseDate,contexts);
-  update(contexts);
-}

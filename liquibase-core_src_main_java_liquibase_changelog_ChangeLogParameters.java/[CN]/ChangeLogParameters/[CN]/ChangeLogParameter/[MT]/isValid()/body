@@ -1,6 +1,9 @@
 {
   boolean isValid=validContexts == null || validContexts.matches(ChangeLogParameters.this.currentContexts);
   if (isValid) {
+    isValid=labels == null || currentLabelExpression.matches(labels);
+  }
+  if (isValid) {
     isValid=DatabaseList.definitionMatches(validDatabases,currentDatabase,true);
   }
   return isValid;

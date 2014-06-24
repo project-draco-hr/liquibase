@@ -1,4 +1,4 @@
 {
-  checkLiquibaseTables(false,null,new Contexts());
+  checkLiquibaseTables(false,null,new Contexts(),new LabelExpression());
   return LockServiceFactory.getInstance().getLockService(database).listLocks();
 }

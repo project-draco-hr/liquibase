@@ -5,6 +5,6 @@
   Liquibase liquibase=createLiquibase(completeChangeLog);
   clearDatabase(liquibase);
   liquibase=createLiquibase(completeChangeLog);
-  List<ChangeSet> list=liquibase.listUnrunChangeSets(this.contexts);
+  List<ChangeSet> list=liquibase.listUnrunChangeSets(new Contexts(this.contexts),new LabelExpression());
   assertTrue(list.size() > 0);
 }

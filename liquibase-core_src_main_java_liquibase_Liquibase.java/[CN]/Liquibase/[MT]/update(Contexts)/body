@@ -1,22 +1,3 @@
 {
-  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
-  lockService.waitForLock();
-  changeLogParameters.setContexts(contexts);
-  try {
-    DatabaseChangeLog changeLog=getDatabaseChangeLog();
-    checkLiquibaseTables(true,changeLog,contexts);
-    changeLog.validate(database,contexts);
-    ChangeLogIterator changeLogIterator=getStandardChangelogIterator(contexts,changeLog);
-    changeLogIterator.run(createUpdateVisitor(),new RuntimeEnvironment(database,contexts));
-  }
-  finally {
-    database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
-    try {
-      lockService.releaseLock();
-    }
- catch (    LockException e) {
-      log.severe("Could not release lock",e);
-    }
-    resetServices();
-  }
+  update(contexts,new LabelExpression());
 }

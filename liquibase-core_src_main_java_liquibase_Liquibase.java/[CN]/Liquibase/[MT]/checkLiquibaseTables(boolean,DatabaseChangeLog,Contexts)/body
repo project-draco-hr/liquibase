@@ -1,8 +1,0 @@
-{
-  ChangeLogHistoryService changeLogHistoryService=ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(getDatabase());
-  changeLogHistoryService.init();
-  if (updateExistingNullChecksums) {
-    changeLogHistoryService.upgradeChecksums(databaseChangeLog,contexts);
-  }
-  LockServiceFactory.getInstance().getLockService(getDatabase()).init();
-}

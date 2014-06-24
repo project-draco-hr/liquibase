@@ -32,6 +32,14 @@
       return null;
     }
   }
+  if (field.equals("labels")) {
+    if (this.getLabels() != null && !this.getLabels().isEmpty()) {
+      return StringUtils.join(this.getLabels().getLabels(),", ");
+    }
+ else {
+      return null;
+    }
+  }
   if (field.equals("dbms")) {
     if (this.getDbmsSet() != null && this.getDbmsSet().size() > 0) {
       StringBuffer dbmsString=new StringBuffer();

@@ -1,17 +1,3 @@
 {
-  changeLogParameters.setContexts(contexts);
-  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
-  lockService.waitForLock();
-  try {
-    DatabaseChangeLog changeLog=getDatabaseChangeLog();
-    checkLiquibaseTables(false,changeLog,contexts);
-    changeLog.validate(database,contexts);
-    List<RanChangeSet> ranChangeSetList=database.getRanChangeSetList();
-    ChangeLogIterator logIterator=new ChangeLogIterator(ranChangeSetList,changeLog,new AfterTagChangeSetFilter(tagToRollBackTo,ranChangeSetList),new AlreadyRanChangeSetFilter(ranChangeSetList),new ContextChangeSetFilter(contexts),new DbmsChangeSetFilter(database));
-    logIterator.run(new RollbackVisitor(database),new RuntimeEnvironment(database,contexts));
-  }
-  finally {
-    lockService.releaseLock();
-  }
-  resetServices();
+  rollback(tagToRollBackTo,contexts,new LabelExpression());
 }

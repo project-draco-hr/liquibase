@@ -1,0 +1,3 @@
+{
+  return this.labels == null || this.labels.isEmpty();
+}

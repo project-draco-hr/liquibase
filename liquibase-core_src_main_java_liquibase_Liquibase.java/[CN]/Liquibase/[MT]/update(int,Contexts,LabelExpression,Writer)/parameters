@@ -1,0 +1,4 @@
+int changesToApply
+Contexts contexts
+LabelExpression labelExpression
+Writer output

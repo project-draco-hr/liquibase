@@ -1,0 +1,17 @@
+{
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  LoggingExecutor outputTemplate=new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database);
+  Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
+  ExecutorService.getInstance().setExecutor(database,outputTemplate);
+  outputHeader("SQL to add all changesets to database history table");
+  markNextChangeSetRan(contexts,labelExpression);
+  try {
+    output.flush();
+  }
+ catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+  ExecutorService.getInstance().setExecutor(database,oldTemplate);
+  resetServices();
+}

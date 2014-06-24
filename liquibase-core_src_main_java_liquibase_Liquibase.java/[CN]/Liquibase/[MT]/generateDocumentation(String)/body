@@ -1,3 +1,3 @@
 {
-  generateDocumentation(outputDirectory,new Contexts());
+  generateDocumentation(outputDirectory,new Contexts(),new LabelExpression());
 }

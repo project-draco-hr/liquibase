@@ -1,0 +1,17 @@
+{
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
+  lockService.waitForLock();
+  try {
+    DatabaseChangeLog changeLog=getDatabaseChangeLog();
+    checkLiquibaseTables(true,changeLog,contexts,labelExpression);
+    changeLog.validate(database,contexts,labelExpression);
+    ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new NotRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database));
+    logIterator.run(new ChangeLogSyncVisitor(database,changeLogSyncListener),new RuntimeEnvironment(database,contexts,labelExpression));
+  }
+  finally {
+    lockService.releaseLock();
+    resetServices();
+  }
+}

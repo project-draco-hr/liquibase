@@ -1,0 +1,22 @@
+{
+  log.info("Generating Database Documentation");
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
+  lockService.waitForLock();
+  try {
+    DatabaseChangeLog changeLog=getDatabaseChangeLog();
+    checkLiquibaseTables(false,changeLog,new Contexts(),new LabelExpression());
+    changeLog.validate(database,contexts,labelExpression);
+    ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new DbmsChangeSetFilter(database));
+    DBDocVisitor visitor=new DBDocVisitor(database);
+    logIterator.run(visitor,new RuntimeEnvironment(database,contexts,labelExpression));
+    visitor.writeHTML(new File(outputDirectory),resourceAccessor);
+  }
+ catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+ finally {
+    lockService.releaseLock();
+  }
+}

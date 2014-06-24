@@ -1,21 +1,3 @@
 {
-  changeLogParameters.setContexts(contexts);
-  Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
-  LoggingExecutor loggingExecutor=new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database);
-  ExecutorService.getInstance().setExecutor(database,loggingExecutor);
-  outputHeader("Update Database Script");
-  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
-  lockService.waitForLock();
-  try {
-    update(contexts);
-    output.flush();
-  }
- catch (  IOException e) {
-    throw new LiquibaseException(e);
-  }
- finally {
-    lockService.releaseLock();
-  }
-  ExecutorService.getInstance().setExecutor(database,oldTemplate);
-  resetServices();
+  update(contexts,new LabelExpression(),output);
 }

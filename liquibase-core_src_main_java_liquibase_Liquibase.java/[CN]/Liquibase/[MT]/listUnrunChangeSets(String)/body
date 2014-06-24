@@ -1,3 +1,0 @@
-{
-  return listUnrunChangeSets(new Contexts(contexts));
-}

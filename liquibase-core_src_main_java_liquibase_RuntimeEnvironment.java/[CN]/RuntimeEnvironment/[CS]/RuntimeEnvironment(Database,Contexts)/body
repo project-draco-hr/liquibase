@@ -1,4 +1,0 @@
-{
-  this.targetDatabase=targetDatabase;
-  this.contexts=contexts;
-}
