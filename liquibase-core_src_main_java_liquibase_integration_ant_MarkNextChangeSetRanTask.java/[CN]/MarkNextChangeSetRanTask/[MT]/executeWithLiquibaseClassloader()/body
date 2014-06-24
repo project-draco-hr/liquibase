@@ -7,10 +7,10 @@
     liquibase=createLiquibase();
     Writer writer=createOutputWriter();
     if (writer == null) {
-      liquibase.markNextChangeSetRan(getContexts());
+      liquibase.markNextChangeSetRan(new Contexts(getContexts()),new LabelExpression(getLabels()));
     }
  else {
-      liquibase.markNextChangeSetRan(getContexts(),writer);
+      liquibase.markNextChangeSetRan(new Contexts(getContexts()),new LabelExpression(getLabels()),writer);
       writer.flush();
       writer.close();
     }

@@ -8,6 +8,7 @@
     throw new RuntimeException("Cannot run Liquibase, " + LIQUIBASE_CHANGELOG + " is not set");
   }
   setContexts((String)servletValueContainer.getValue(LIQUIBASE_CONTEXTS));
+  setLabels((String)servletValueContainer.getValue(LIQUIBASE_LABELS));
   this.defaultSchema=StringUtils.trimToNull((String)servletValueContainer.getValue(LIQUIBASE_SCHEMA_DEFAULT));
   Connection connection=null;
   Database database=null;
@@ -29,7 +30,7 @@
         liquibase.setChangeLogParameter(name.substring(LIQUIBASE_PARAMETER.length()),servletValueContainer.getValue(name));
       }
     }
-    liquibase.update(getContexts());
+    liquibase.update(new Contexts(getContexts()),new LabelExpression(getLabels()));
   }
   finally {
     if (database != null) {

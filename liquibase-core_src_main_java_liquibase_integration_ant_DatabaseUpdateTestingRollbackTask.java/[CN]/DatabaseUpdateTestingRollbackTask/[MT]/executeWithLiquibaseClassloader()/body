@@ -11,7 +11,7 @@
     if (isDropFirst()) {
       liquibase.dropAll();
     }
-    liquibase.updateTestingRollback(getContexts());
+    liquibase.updateTestingRollback(new Contexts(getContexts()),new LabelExpression(getLabels()));
   }
  catch (  Exception e) {
     throw new BuildException(e);

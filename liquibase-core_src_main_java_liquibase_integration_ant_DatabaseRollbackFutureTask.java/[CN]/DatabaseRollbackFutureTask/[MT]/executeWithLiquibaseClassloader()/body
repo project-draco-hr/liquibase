@@ -6,7 +6,7 @@
       throw new BuildException("rollbackFutureDatabase requires outputFile to be set");
     }
     liquibase=createLiquibase();
-    liquibase.futureRollbackSQL(getContexts(),writer);
+    liquibase.futureRollbackSQL(null,new Contexts(getContexts()),new LabelExpression(getLabels()),writer);
     writer.flush();
     writer.close();
   }

@@ -13,13 +13,13 @@
       if (isDropFirst()) {
         liquibase.dropAll();
       }
-      liquibase.update(getContexts());
+      liquibase.update(new Contexts(getContexts()),new LabelExpression(getLabels()));
     }
  else {
       if (isDropFirst()) {
         throw new BuildException("Cannot dropFirst when outputting update SQL");
       }
-      liquibase.update(getContexts(),writer);
+      liquibase.update(new Contexts(getContexts()),new LabelExpression(getLabels()),writer);
       writer.flush();
       writer.close();
     }

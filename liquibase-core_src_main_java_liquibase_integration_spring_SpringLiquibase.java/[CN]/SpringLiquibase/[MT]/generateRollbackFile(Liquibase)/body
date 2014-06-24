@@ -3,7 +3,7 @@
     FileWriter output=null;
     try {
       output=new FileWriter(rollbackFile);
-      liquibase.futureRollbackSQL(getContexts(),output);
+      liquibase.futureRollbackSQL(null,new Contexts(getContexts()),new LabelExpression(getLabels()),output);
     }
  catch (    IOException e) {
       throw new LiquibaseException("Unable to generate rollback file.",e);

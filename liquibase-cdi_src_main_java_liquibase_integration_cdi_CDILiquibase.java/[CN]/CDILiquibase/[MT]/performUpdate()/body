@@ -5,7 +5,7 @@
     c=dataSource.getConnection();
     liquibase=createLiquibase(c);
     liquibase.getDatabase();
-    liquibase.update(config.getContexts());
+    liquibase.update(new Contexts(config.getContexts()),new LabelExpression(config.getLabels()));
     updateSuccessful=true;
   }
  catch (  SQLException e) {

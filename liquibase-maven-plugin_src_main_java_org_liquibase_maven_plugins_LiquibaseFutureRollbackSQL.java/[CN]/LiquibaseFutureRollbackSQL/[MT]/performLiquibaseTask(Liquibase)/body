@@ -1,3 +1,3 @@
 {
-  liquibase.futureRollbackSQL(contexts,outputWriter);
+  liquibase.futureRollbackSQL(null,new Contexts(contexts),new LabelExpression(labels),outputWriter);
 }

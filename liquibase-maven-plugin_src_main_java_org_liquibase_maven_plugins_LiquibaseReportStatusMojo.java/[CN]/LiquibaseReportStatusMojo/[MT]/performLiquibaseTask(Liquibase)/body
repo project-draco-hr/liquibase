@@ -1,3 +1,3 @@
 {
-  liquibase.reportStatus(true,contexts,new OutputStreamWriter(System.out));
+  liquibase.reportStatus(true,new Contexts(contexts),new LabelExpression(labels),new OutputStreamWriter(System.out));
 }
