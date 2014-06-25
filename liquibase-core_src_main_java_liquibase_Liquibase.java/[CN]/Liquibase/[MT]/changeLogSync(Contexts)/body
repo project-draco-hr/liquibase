@@ -1,0 +1,3 @@
+{
+  changeLogSync(contexts,new LabelExpression());
+}

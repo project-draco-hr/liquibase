@@ -1,0 +1,3 @@
+{
+  this.validate(database,contexts,new LabelExpression());
+}
