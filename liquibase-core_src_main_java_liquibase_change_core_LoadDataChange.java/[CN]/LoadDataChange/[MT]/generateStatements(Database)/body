@@ -36,7 +36,7 @@
  else           if (columnConfig.getType() != null) {
             ColumnConfig valueConfig=new ColumnConfig();
             if (columnConfig.getType().equalsIgnoreCase("BOOLEAN")) {
-              valueConfig.setValueBoolean(Boolean.parseBoolean(value.toString().toLowerCase()));
+              valueConfig.setValueBoolean(BooleanParser.parseBoolean(value.toString().toLowerCase()));
             }
  else             if (columnConfig.getType().equalsIgnoreCase("NUMERIC")) {
               valueConfig.setValueNumeric(value.toString());
