@@ -1,0 +1,3 @@
+String parent
+InputStream stream
+ClassLoader loader

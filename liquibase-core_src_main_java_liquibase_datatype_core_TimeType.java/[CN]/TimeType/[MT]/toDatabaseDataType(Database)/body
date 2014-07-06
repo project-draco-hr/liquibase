@@ -28,5 +28,14 @@
   if (database instanceof OracleDatabase) {
     return new DatabaseDataType("DATE");
   }
+  if (database instanceof PostgresDatabase) {
+    String rawDefinition=getRawDefinition().toLowerCase();
+    if (rawDefinition.contains("tz") || rawDefinition.contains("with time zone")) {
+      return new DatabaseDataType("TIME WITH TIME ZONE");
+    }
+ else {
+      return new DatabaseDataType("TIME WITHOUT TIME ZONE");
+    }
+  }
   return new DatabaseDataType(getName());
 }

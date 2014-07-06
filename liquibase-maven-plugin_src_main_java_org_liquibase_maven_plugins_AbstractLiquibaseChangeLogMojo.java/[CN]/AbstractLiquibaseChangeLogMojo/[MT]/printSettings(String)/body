@@ -2,4 +2,5 @@
   super.printSettings(indent);
   getLog().info(indent + "changeLogFile: " + changeLogFile);
   getLog().info(indent + "context(s): " + contexts);
+  getLog().info(indent + "label(s): " + labels);
 }

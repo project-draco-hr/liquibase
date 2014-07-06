@@ -90,6 +90,8 @@
   stream.println("                                            implementation to use");
   stream.println(" --defaultSchemaName=<name>                 Default database schema to use");
   stream.println(" --contexts=<value>                         ChangeSet contexts to execute");
+  stream.println(" --labels=<expression>                      Expression defining labeled");
+  stream.println("                                            ChangeSet to execute");
   stream.println(" --defaultsFile=</path/to/file.properties>  File with default option values");
   stream.println("                                            (default: ./liquibase.properties)");
   stream.println(" --driverPropertiesFile=</path/to/file.properties>  File with custom properties");

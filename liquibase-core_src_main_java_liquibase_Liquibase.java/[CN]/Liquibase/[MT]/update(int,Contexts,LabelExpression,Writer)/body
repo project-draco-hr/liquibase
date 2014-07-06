@@ -1,0 +1,17 @@
+{
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
+  LoggingExecutor loggingExecutor=new LoggingExecutor(ExecutorService.getInstance().getExecutor(database),output,database);
+  ExecutorService.getInstance().setExecutor(database,loggingExecutor);
+  outputHeader("Update " + changesToApply + " Change Sets Database Script");
+  update(changesToApply,contexts,labelExpression);
+  try {
+    output.flush();
+  }
+ catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+  resetServices();
+  ExecutorService.getInstance().setExecutor(database,oldTemplate);
+}

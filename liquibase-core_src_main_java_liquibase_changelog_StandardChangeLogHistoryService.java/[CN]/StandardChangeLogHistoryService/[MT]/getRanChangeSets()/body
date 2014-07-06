@@ -1,41 +1,44 @@
 {
-  Database database=getDatabase();
-  String databaseChangeLogTableName=getDatabase().escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
-  List<RanChangeSet> ranChangeSetList=new ArrayList<RanChangeSet>();
-  if (hasDatabaseChangeLogTable()) {
-    LogFactory.getLogger().info("Reading from " + databaseChangeLogTableName);
-    List<Map<String,?>> results=queryDatabaseChangeLogTable(database);
-    for (    Map rs : results) {
-      String fileName=rs.get("FILENAME").toString();
-      String author=rs.get("AUTHOR").toString();
-      String id=rs.get("ID").toString();
-      String md5sum=rs.get("MD5SUM") == null ? null : rs.get("MD5SUM").toString();
-      String description=rs.get("DESCRIPTION") == null ? null : rs.get("DESCRIPTION").toString();
-      String comments=rs.get("COMMENTS") == null ? null : rs.get("COMMENTS").toString();
-      Object tmpDateExecuted=rs.get("DATEEXECUTED");
-      Date dateExecuted=null;
-      if (tmpDateExecuted instanceof Date) {
-        dateExecuted=(Date)tmpDateExecuted;
-      }
+  if (this.ranChangeSetList == null) {
+    Database database=getDatabase();
+    String databaseChangeLogTableName=getDatabase().escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
+    List<RanChangeSet> ranChangeSetList=new ArrayList<RanChangeSet>();
+    if (hasDatabaseChangeLogTable()) {
+      LogFactory.getLogger().info("Reading from " + databaseChangeLogTableName);
+      List<Map<String,?>> results=queryDatabaseChangeLogTable(database);
+      for (      Map rs : results) {
+        String fileName=rs.get("FILENAME").toString();
+        String author=rs.get("AUTHOR").toString();
+        String id=rs.get("ID").toString();
+        String md5sum=rs.get("MD5SUM") == null ? null : rs.get("MD5SUM").toString();
+        String description=rs.get("DESCRIPTION") == null ? null : rs.get("DESCRIPTION").toString();
+        String comments=rs.get("COMMENTS") == null ? null : rs.get("COMMENTS").toString();
+        Object tmpDateExecuted=rs.get("DATEEXECUTED");
+        Date dateExecuted=null;
+        if (tmpDateExecuted instanceof Date) {
+          dateExecuted=(Date)tmpDateExecuted;
+        }
  else {
-        DateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+          DateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+          try {
+            dateExecuted=df.parse((String)tmpDateExecuted);
+          }
+ catch (          ParseException e) {
+          }
+        }
+        String tag=rs.get("TAG") == null ? null : rs.get("TAG").toString();
+        String execType=rs.get("EXECTYPE") == null ? null : rs.get("EXECTYPE").toString();
         try {
-          dateExecuted=df.parse((String)tmpDateExecuted);
+          RanChangeSet ranChangeSet=new RanChangeSet(fileName,id,author,CheckSum.parse(md5sum),dateExecuted,tag,ChangeSet.ExecType.valueOf(execType),description,comments);
+          ranChangeSetList.add(ranChangeSet);
         }
- catch (        ParseException e) {
+ catch (        IllegalArgumentException e) {
+          LogFactory.getLogger().severe("Unknown EXECTYPE from database: " + execType);
+          throw e;
         }
-      }
-      String tag=rs.get("TAG") == null ? null : rs.get("TAG").toString();
-      String execType=rs.get("EXECTYPE") == null ? null : rs.get("EXECTYPE").toString();
-      try {
-        RanChangeSet ranChangeSet=new RanChangeSet(fileName,id,author,CheckSum.parse(md5sum),dateExecuted,tag,ChangeSet.ExecType.valueOf(execType),description,comments);
-        ranChangeSetList.add(ranChangeSet);
-      }
- catch (      IllegalArgumentException e) {
-        LogFactory.getLogger().severe("Unknown EXECTYPE from database: " + execType);
-        throw e;
       }
     }
+    this.ranChangeSetList=ranChangeSetList;
   }
-  return ranChangeSetList;
+  return Collections.unmodifiableList(ranChangeSetList);
 }

@@ -46,4 +46,5 @@
   this.expressionExpander=new ExpressionExpander(this);
   this.currentDatabase=database;
   this.currentContexts=new Contexts();
+  this.currentLabelExpression=new LabelExpression();
 }

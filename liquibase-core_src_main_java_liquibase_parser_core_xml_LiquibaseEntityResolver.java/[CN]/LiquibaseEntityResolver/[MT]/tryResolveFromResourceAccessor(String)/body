@@ -1,8 +1,10 @@
 {
   String path=FilenameUtils.concat(basePath,systemId);
+  log.debug("Attempting to load " + systemId + " from resourceAccessor as "+ path);
   try {
     InputStream resourceAsStream=StreamUtil.singleInputStream(path,resourceAccessor);
     if (resourceAsStream == null) {
+      log.debug("Could not load " + systemId + " from resourceAccessor as "+ path);
       return null;
     }
     return new InputSource(resourceAsStream);

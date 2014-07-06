@@ -3,7 +3,7 @@
     LockServiceFactory.getInstance().getLockService(database).waitForLock();
     for (    CatalogAndSchema schema : schemas) {
       log.info("Dropping Database Objects in schema: " + schema);
-      checkLiquibaseTables(false,null,new Contexts());
+      checkLiquibaseTables(false,null,new Contexts(),new LabelExpression());
       getDatabase().dropDatabaseObjects(schema);
     }
   }
@@ -20,5 +20,6 @@ catch (  Exception e) {
  catch (    LockException e) {
       log.severe("Unable to release lock: " + e.getMessage());
     }
+    resetServices();
   }
 }

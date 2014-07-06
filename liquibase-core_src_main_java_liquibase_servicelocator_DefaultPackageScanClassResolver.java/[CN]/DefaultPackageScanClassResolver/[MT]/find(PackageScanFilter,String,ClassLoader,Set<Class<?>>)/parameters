@@ -1,4 +1,0 @@
-PackageScanFilter test
-String packageName
-ClassLoader loader
-Set<Class<?>> classes

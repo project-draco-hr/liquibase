@@ -40,6 +40,9 @@
  else     if (paramEntry.getKey().equals("changeLogFile")) {
       this.changeLogFile=paramEntry.getValue();
     }
+ else     if (paramEntry.getKey().equals("outputLiquibaseSql")) {
+      this.outputLiquibaseSql=Boolean.valueOf(paramEntry.getValue());
+    }
  else {
       this.databaseParams.put(paramEntry.getKey(),paramEntry.getValue());
     }

@@ -1,4 +1,0 @@
-{
-  super.upgradeChecksums(databaseChangeLog,contexts);
-  getDatabase().commit();
-}

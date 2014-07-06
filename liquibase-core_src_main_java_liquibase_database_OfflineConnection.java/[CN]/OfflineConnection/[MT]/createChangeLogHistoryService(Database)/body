@@ -1,0 +1,3 @@
+{
+  return new OfflineChangeLogHistoryService(database,new File(changeLogFile),outputLiquibaseSql);
+}

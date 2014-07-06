@@ -1,7 +1,7 @@
 {
   TestChangeSetVisitor testChangeLogVisitor=new ReverseChangeSetVisitor();
   ChangeLogIterator iterator=new ChangeLogIterator(changeLog,new ContextChangeSetFilter(new Contexts("test1")),new DbmsChangeSetFilter(new MySQLDatabase()));
-  iterator.run(testChangeLogVisitor,new RuntimeEnvironment(null,null));
+  iterator.run(testChangeLogVisitor,new RuntimeEnvironment(null,null,null));
   assertEquals(3,testChangeLogVisitor.visitedChangeSets.size());
   assertEquals("5",testChangeLogVisitor.visitedChangeSets.get(0).getId());
   assertEquals("4",testChangeLogVisitor.visitedChangeSets.get(1).getId());

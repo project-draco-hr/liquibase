@@ -1,0 +1,7 @@
+{
+  Object value=super.getSerializableFieldValue(field);
+  if (field.equals("target") && value.equals("")) {
+    return null;
+  }
+  return value;
+}

@@ -8,25 +8,32 @@
       namespaceDetails=NamespaceDetailsFactory.getInstance().getNamespaceDetails(parser,systemId);
     }
     if (namespaceDetails == null) {
+      log.debug("Found no namespace details class " + namespaceDetails.getClass().getName() + " for "+ systemId);
       return null;
     }
+    log.debug("Found namespace details class " + namespaceDetails.getClass().getName() + " for "+ systemId);
     String xsdFile=namespaceDetails.getLocalPath(systemId);
+    log.debug("Local path for " + systemId + " is "+ xsdFile);
     if (xsdFile == null) {
       return null;
     }
     try {
       InputStream resourceAsStream=StreamUtil.singleInputStream(xsdFile,resourceAccessor);
       if (resourceAsStream == null) {
+        log.debug("Could not load " + xsdFile + " with the standard resource accessor. Trying context classloader...");
         if (Thread.currentThread().getContextClassLoader() != null) {
           resourceAsStream=Thread.currentThread().getContextClassLoader().getResourceAsStream(xsdFile);
         }
         if (resourceAsStream == null) {
+          log.debug("Could not load " + xsdFile + " with the standard resource accessor. Trying class classloader...");
           resourceAsStream=this.getClass().getClassLoader().getResourceAsStream(xsdFile);
         }
       }
       if (resourceAsStream == null) {
+        log.debug("Could not find " + xsdFile + " locally");
         return null;
       }
+      log.debug("Successfully loaded XSD from " + xsdFile);
       InputSource source=new InputSource(resourceAsStream);
       source.setPublicId(publicId);
       source.setSystemId(systemId);

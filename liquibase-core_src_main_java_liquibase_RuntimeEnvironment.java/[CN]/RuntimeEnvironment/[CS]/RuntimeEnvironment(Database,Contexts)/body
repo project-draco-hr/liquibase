@@ -1,4 +1,3 @@
 {
-  this.targetDatabase=targetDatabase;
-  this.contexts=contexts;
+  this(targetDatabase,contexts,new LabelExpression());
 }

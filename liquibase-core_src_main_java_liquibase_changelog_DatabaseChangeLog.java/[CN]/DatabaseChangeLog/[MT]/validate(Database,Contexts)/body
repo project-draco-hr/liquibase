@@ -1,12 +1,3 @@
 {
-  ChangeLogIterator logIterator=new ChangeLogIterator(this,new DbmsChangeSetFilter(database),new ContextChangeSetFilter(contexts));
-  ValidatingVisitor validatingVisitor=new ValidatingVisitor(database.getRanChangeSetList());
-  validatingVisitor.validate(database,this);
-  logIterator.run(validatingVisitor,new RuntimeEnvironment(database,contexts));
-  for (  String message : validatingVisitor.getWarnings().getMessages()) {
-    LogFactory.getLogger().warning(message);
-  }
-  if (!validatingVisitor.validationPassed()) {
-    throw new ValidationFailedException(validatingVisitor);
-  }
+  this.validate(database,contexts,new LabelExpression());
 }

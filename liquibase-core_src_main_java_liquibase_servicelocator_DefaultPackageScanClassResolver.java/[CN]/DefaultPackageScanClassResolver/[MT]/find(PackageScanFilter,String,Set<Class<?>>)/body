@@ -1,7 +1,11 @@
 {
   packageName=packageName.replace('.','/');
   Set<ClassLoader> set=getClassLoaders();
-  for (  ClassLoader classLoader : set) {
-    find(test,packageName,classLoader,classes);
+  if (!loadedPackages.contains(packageName)) {
+    for (    ClassLoader classLoader : set) {
+      this.findAllClasses(packageName,classLoader);
+    }
+    loadedPackages.add(packageName);
   }
+  findInAllClasses(test,packageName,classes);
 }

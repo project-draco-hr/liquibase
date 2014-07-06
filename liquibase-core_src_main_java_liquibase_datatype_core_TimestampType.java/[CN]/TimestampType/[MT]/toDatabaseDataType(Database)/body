@@ -1,7 +1,7 @@
 {
   if (database instanceof MySQLDatabase) {
-    if (originalDefinition.contains(" ")) {
-      return new DatabaseDataType(originalDefinition);
+    if (getRawDefinition().contains(" ")) {
+      return new DatabaseDataType(getRawDefinition());
     }
     return new DatabaseDataType("TIMESTAMP");
   }

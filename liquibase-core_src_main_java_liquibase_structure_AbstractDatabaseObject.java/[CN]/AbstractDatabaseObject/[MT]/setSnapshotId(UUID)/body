@@ -1,9 +1,0 @@
-{
-  if (snapshotId == null) {
-    throw new UnexpectedLiquibaseException("Must be a non null uuid");
-  }
-  if (this.snapshotId != null) {
-    throw new UnexpectedLiquibaseException("snapshotId already set");
-  }
-  this.snapshotId=snapshotId;
-}

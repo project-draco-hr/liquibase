@@ -3,14 +3,4 @@
   this.executeAgainstDatabase=executeAgainstDatabase;
   changeLogFile=changeLogFile.getAbsoluteFile();
   this.changeLogFile=changeLogFile;
-  if (!changeLogFile.exists()) {
-    changeLogFile.getParentFile().mkdirs();
-    try {
-      changeLogFile.createNewFile();
-      writeHeader(changeLogFile);
-    }
- catch (    IOException e) {
-      throw new UnexpectedLiquibaseException(e);
-    }
-  }
 }

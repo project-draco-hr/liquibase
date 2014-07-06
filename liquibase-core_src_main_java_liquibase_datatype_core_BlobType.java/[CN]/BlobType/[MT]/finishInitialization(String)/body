@@ -1,4 +1,0 @@
-{
-  super.finishInitialization(originalDefinition);
-  this.originalDefinition=originalDefinition;
-}

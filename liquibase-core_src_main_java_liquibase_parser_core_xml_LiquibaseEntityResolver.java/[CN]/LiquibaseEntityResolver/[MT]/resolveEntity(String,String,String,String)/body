@@ -1,4 +1,5 @@
 {
+  log.debug("Resolving XML entity name='" + name + "', publicId='"+ publicId+ "', baseURI='"+ baseURI+ "', systemId='"+ systemId+ "'");
   InputSource resolved=null;
   if (systemId != null && systemId.toLowerCase().endsWith(".xsd")) {
     if (systemId.startsWith("http://www.liquibase.org/xml/ns/migrator/")) {
@@ -8,6 +9,9 @@
   }
   if (resolved == null && resourceAccessor != null && basePath != null && systemId != null) {
     resolved=tryResolveFromResourceAccessor(systemId);
+  }
+  if (resolved == null) {
+    log.debug("Unable to resolve XML entity locally. Will load from network.");
   }
   return resolved;
 }

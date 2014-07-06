@@ -4,8 +4,11 @@
     try {
       changeLogFile.createNewFile();
       writeHeader(changeLogFile);
+      if (isExecuteAgainstDatabase()) {
+        ExecutorService.getInstance().getExecutor(getDatabase()).execute(new CreateDatabaseChangeLogTableStatement());
+      }
     }
- catch (    IOException e) {
+ catch (    Exception e) {
       throw new UnexpectedLiquibaseException(e);
     }
   }

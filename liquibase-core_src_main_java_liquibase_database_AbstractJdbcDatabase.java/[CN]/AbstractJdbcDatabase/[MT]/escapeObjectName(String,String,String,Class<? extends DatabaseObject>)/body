@@ -15,7 +15,7 @@
       return escapeObjectName(objectName,objectType);
     }
  else     if (catalogName == null || !this.supportsCatalogInObjectName(objectType)) {
-      if (isDefaultSchema(catalogName,schemaName) && !getOutputDefaultSchema()) {
+      if (!defaultSchemaSet && isDefaultSchema(catalogName,schemaName) && !getOutputDefaultSchema()) {
         return escapeObjectName(objectName,objectType);
       }
  else {
@@ -23,10 +23,10 @@
       }
     }
  else {
-      if (isDefaultSchema(catalogName,schemaName) && !getOutputDefaultSchema() && !getOutputDefaultCatalog()) {
+      if (!defaultSchemaSet && isDefaultSchema(catalogName,schemaName) && !getOutputDefaultSchema()&& !getOutputDefaultCatalog()) {
         return escapeObjectName(objectName,objectType);
       }
- else       if (isDefaultSchema(catalogName,schemaName) && !getOutputDefaultCatalog()) {
+ else       if (!defaultSchemaSet && isDefaultSchema(catalogName,schemaName) && !getOutputDefaultCatalog()) {
         return escapeObjectName(schemaName,Schema.class) + "." + escapeObjectName(objectName,objectType);
       }
  else {
@@ -42,7 +42,7 @@
         return escapeObjectName(catalogName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
       }
  else {
-        if (isDefaultCatalog(catalogName)) {
+        if (!defaultCatalogSet && isDefaultCatalog(catalogName)) {
           return escapeObjectName(objectName,objectType);
         }
  else {
@@ -56,7 +56,7 @@
           return escapeObjectName(schemaName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
         }
  else {
-          if (isDefaultCatalog(schemaName)) {
+          if (!defaultCatalogSet && isDefaultCatalog(schemaName)) {
             return escapeObjectName(objectName,objectType);
           }
  else {
@@ -70,7 +70,7 @@
           return escapeObjectName(objectName,objectType);
         }
  else {
-          if (isDefaultCatalog(catalogName) && getOutputDefaultCatalog()) {
+          if (defaultCatalogSet || (isDefaultCatalog(catalogName) && getOutputDefaultCatalog())) {
             return escapeObjectName(catalogName,Catalog.class) + "." + escapeObjectName(objectName,objectType);
           }
  else {

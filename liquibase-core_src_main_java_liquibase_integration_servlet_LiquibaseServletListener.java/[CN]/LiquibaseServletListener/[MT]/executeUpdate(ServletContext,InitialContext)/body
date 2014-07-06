@@ -8,8 +8,10 @@
     throw new RuntimeException("Cannot run Liquibase, " + LIQUIBASE_CHANGELOG + " is not set");
   }
   setContexts((String)servletValueContainer.getValue(LIQUIBASE_CONTEXTS));
+  setLabels((String)servletValueContainer.getValue(LIQUIBASE_LABELS));
   this.defaultSchema=StringUtils.trimToNull((String)servletValueContainer.getValue(LIQUIBASE_SCHEMA_DEFAULT));
   Connection connection=null;
+  Database database=null;
   try {
     DataSource dataSource=(DataSource)ic.lookup(this.dataSourceName);
     connection=dataSource.getConnection();
@@ -18,7 +20,7 @@
     ResourceAccessor threadClFO=new ClassLoaderResourceAccessor(contextClassLoader);
     ResourceAccessor clFO=new ClassLoaderResourceAccessor();
     ResourceAccessor fsFO=new FileSystemResourceAccessor();
-    Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+    database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
     database.setDefaultSchemaName(getDefaultSchema());
     Liquibase liquibase=new Liquibase(getChangeLogFile(),new CompositeResourceAccessor(clFO,fsFO,threadClFO),database);
     @SuppressWarnings("unchecked") Enumeration<String> initParameters=servletContext.getInitParameterNames();
@@ -28,10 +30,13 @@
         liquibase.setChangeLogParameter(name.substring(LIQUIBASE_PARAMETER.length()),servletValueContainer.getValue(name));
       }
     }
-    liquibase.update(getContexts());
+    liquibase.update(new Contexts(getContexts()),new LabelExpression(getLabels()));
   }
   finally {
-    if (connection != null) {
+    if (database != null) {
+      database.close();
+    }
+ else     if (connection != null) {
       connection.close();
     }
   }

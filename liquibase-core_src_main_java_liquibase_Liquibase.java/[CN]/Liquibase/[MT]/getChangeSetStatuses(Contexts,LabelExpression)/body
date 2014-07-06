@@ -1,0 +1,11 @@
+{
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  DatabaseChangeLog changeLog=getDatabaseChangeLog();
+  checkLiquibaseTables(true,changeLog,contexts,labelExpression);
+  changeLog.validate(database,contexts,labelExpression);
+  ChangeLogIterator logIterator=getStandardChangelogIterator(contexts,labelExpression,changeLog);
+  StatusVisitor visitor=new StatusVisitor(database);
+  logIterator.run(visitor,new RuntimeEnvironment(database,contexts,labelExpression));
+  return visitor.getStatuses();
+}

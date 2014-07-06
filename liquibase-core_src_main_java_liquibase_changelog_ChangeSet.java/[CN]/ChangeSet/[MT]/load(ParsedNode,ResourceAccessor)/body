@@ -4,6 +4,7 @@
   this.alwaysRun=node.getChildValue(null,"runAlways",node.getChildValue(null,"alwaysRun",false));
   this.runOnChange=node.getChildValue(null,"runOnChange",false);
   this.contexts=new ContextExpression(node.getChildValue(null,"context",String.class));
+  this.labels=new Labels(StringUtils.trimToNull(node.getChildValue(null,"labels",String.class)));
   setDbms(node.getChildValue(null,"dbms",String.class));
   this.runInTransaction=node.getChildValue(null,"runInTransaction",true);
   this.comments=node.getChildValue(null,"comment",String.class);

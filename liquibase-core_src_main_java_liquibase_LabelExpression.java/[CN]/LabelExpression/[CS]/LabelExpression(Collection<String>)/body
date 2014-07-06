@@ -1,0 +1,7 @@
+{
+  if (labels != null) {
+    for (    String label : labels) {
+      this.labels.add(label.toLowerCase());
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   if (changesToApply > 0) {
-    liquibase.update(changesToApply,contexts,outputWriter);
+    liquibase.update(changesToApply,new Contexts(contexts),new LabelExpression(labels),outputWriter);
   }
  else {
-    liquibase.update(contexts,outputWriter);
+    liquibase.update(new Contexts(contexts),new LabelExpression(labels),outputWriter);
   }
 }

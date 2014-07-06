@@ -14,7 +14,7 @@
   }
   T obj=next.snapshot(example,snapshot,this);
   if (obj != null && obj.getSnapshotId() == null) {
-    obj.setSnapshotId(UUID.randomUUID());
+    obj.setSnapshotId(snapshotIdService.generateId());
   }
   return obj;
 }

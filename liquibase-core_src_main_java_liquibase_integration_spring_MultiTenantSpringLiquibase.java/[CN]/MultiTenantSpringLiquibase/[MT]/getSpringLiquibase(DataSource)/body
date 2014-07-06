@@ -3,6 +3,7 @@
   liquibase.setChangeLog(changeLog);
   liquibase.setChangeLogParameters(parameters);
   liquibase.setContexts(contexts);
+  liquibase.setLabels(labels);
   liquibase.setDropFirst(dropFirst);
   liquibase.setShouldRun(shouldRun);
   liquibase.setRollbackFile(rollbackFile);

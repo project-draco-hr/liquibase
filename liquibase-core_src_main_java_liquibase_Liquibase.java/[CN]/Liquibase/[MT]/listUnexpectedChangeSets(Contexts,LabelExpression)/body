@@ -1,0 +1,10 @@
+{
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  DatabaseChangeLog changeLog=getDatabaseChangeLog();
+  changeLog.validate(database,contexts,labelExpression);
+  ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database));
+  ExpectedChangesVisitor visitor=new ExpectedChangesVisitor(database.getRanChangeSetList());
+  logIterator.run(visitor,new RuntimeEnvironment(database,contexts,labelExpression));
+  return visitor.getUnexpectedChangeSets();
+}

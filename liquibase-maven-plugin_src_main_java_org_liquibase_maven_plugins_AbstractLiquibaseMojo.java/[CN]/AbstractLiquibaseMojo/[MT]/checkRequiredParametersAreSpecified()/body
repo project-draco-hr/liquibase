@@ -1,8 +1,5 @@
 {
-  if (driver == null) {
-    throw new MojoFailureException("The driver has not been specified either as a " + "parameter or in a properties file.");
-  }
- else   if (url == null) {
+  if (url == null) {
     throw new MojoFailureException("The database URL has not been specified either as " + "a parameter or in a properties file.");
   }
   if (password != null && emptyPassword) {

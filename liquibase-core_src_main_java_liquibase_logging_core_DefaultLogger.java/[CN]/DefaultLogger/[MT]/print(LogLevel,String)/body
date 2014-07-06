@@ -2,13 +2,5 @@
   if (StringUtils.trimToNull(message) == null) {
     return;
   }
-  List<String> description=new ArrayList<String>();
-  description.add(name);
-  if (changeLogName != null) {
-    description.add(changeLogName);
-  }
-  if (changeSetName != null) {
-    description.add(changeSetName.replace(changeLogName + "::",""));
-  }
-  err.println(logLevel + " " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date())+ ":"+ StringUtils.join(description,": ")+ ": "+ message);
+  err.println(logLevel + " " + DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date())+ ": "+ name+ ": "+ buildMessage(message));
 }

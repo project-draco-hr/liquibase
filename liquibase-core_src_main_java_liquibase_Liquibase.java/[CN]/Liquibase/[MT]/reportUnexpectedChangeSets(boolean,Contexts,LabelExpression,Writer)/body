@@ -1,0 +1,31 @@
+{
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  try {
+    Collection<RanChangeSet> unexpectedChangeSets=listUnexpectedChangeSets(contexts,labelExpression);
+    if (unexpectedChangeSets.size() == 0) {
+      out.append(getDatabase().getConnection().getConnectionUserName());
+      out.append("@");
+      out.append(getDatabase().getConnection().getURL());
+      out.append(" contains no unexpected changes!");
+      out.append(StreamUtil.getLineSeparator());
+    }
+ else {
+      out.append(String.valueOf(unexpectedChangeSets.size()));
+      out.append(" unexpected changes were found in ");
+      out.append(getDatabase().getConnection().getConnectionUserName());
+      out.append("@");
+      out.append(getDatabase().getConnection().getURL());
+      out.append(StreamUtil.getLineSeparator());
+      if (verbose) {
+        for (        RanChangeSet ranChangeSet : unexpectedChangeSets) {
+          out.append("     ").append(ranChangeSet.toString()).append(StreamUtil.getLineSeparator());
+        }
+      }
+    }
+    out.flush();
+  }
+ catch (  IOException e) {
+    throw new LiquibaseException(e);
+  }
+}

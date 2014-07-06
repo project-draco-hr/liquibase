@@ -1,3 +1,3 @@
 {
-  liquibase.updateTestingRollback(contexts);
+  liquibase.updateTestingRollback(new Contexts(contexts),new LabelExpression(labels));
 }
