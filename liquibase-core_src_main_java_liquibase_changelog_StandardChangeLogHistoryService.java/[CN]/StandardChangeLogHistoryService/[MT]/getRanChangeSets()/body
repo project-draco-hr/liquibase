@@ -1,5 +1,5 @@
 {
-  if (this.ranChangeSetList == null) {
+  if (this.ranChangeSetList.isEmpty()) {
     Database database=getDatabase();
     String databaseChangeLogTableName=getDatabase().escapeTableName(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName());
     List<RanChangeSet> ranChangeSetList=new ArrayList<RanChangeSet>();
