@@ -5,10 +5,10 @@
     FileResource outputFile=getOutputFile();
     if (outputFile != null) {
       writer=new OutputStreamWriter(outputFile.getOutputStream(),getOutputEncoding());
-      liquibase.changeLogSync(getContexts(),writer);
+      liquibase.changeLogSync(new Contexts(getContexts()),getLabels(),writer);
     }
  else {
-      liquibase.changeLogSync(getContexts());
+      liquibase.changeLogSync(new Contexts(getContexts()),getLabels());
     }
   }
  catch (  UnsupportedEncodingException e) {

@@ -5,13 +5,13 @@
     FileResource outputFile=getOutputFile();
     if (outputFile != null) {
       writer=getOutputFileWriter();
-      liquibase.update(getContexts(),writer);
+      liquibase.update(new Contexts(getContexts()),getLabels(),writer);
     }
  else {
       if (dropFirst) {
         liquibase.dropAll();
       }
-      liquibase.update(getContexts());
+      liquibase.update(new Contexts(getContexts()),getLabels());
     }
   }
  catch (  LiquibaseException e) {

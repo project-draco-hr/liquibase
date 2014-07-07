@@ -5,10 +5,10 @@
     FileResource outputFile=getOutputFile();
     if (outputFile != null) {
       writer=getOutputFileWriter();
-      liquibase.markNextChangeSetRan(getContexts(),writer);
+      liquibase.markNextChangeSetRan(new Contexts(getContexts()),getLabels(),writer);
     }
  else {
-      liquibase.markNextChangeSetRan(getContexts());
+      liquibase.markNextChangeSetRan(new Contexts(getContexts()),getLabels());
     }
   }
  catch (  LiquibaseException e) {

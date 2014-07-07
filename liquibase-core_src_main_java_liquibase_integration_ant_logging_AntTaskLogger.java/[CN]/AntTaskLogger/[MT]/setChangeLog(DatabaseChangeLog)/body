@@ -1,3 +1,0 @@
-{
-  changeLogName=(databaseChangeLog == null) ? null : databaseChangeLog.getFilePath();
-}

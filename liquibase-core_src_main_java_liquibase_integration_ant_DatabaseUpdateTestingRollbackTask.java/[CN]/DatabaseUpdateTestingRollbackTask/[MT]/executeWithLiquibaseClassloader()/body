@@ -4,7 +4,7 @@
     if (isDropFirst()) {
       liquibase.dropAll();
     }
-    liquibase.updateTestingRollback(getContexts());
+    liquibase.updateTestingRollback(new Contexts(getContexts()),getLabels());
   }
  catch (  LiquibaseException e) {
     throw new BuildException("Unable to update database with a rollback test.",e);
