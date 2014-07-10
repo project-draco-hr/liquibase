@@ -4,12 +4,16 @@
   if (getReplaceIfExists() != null && getReplaceIfExists()) {
     replaceIfExists=true;
   }
+  boolean fullDefinition=false;
+  if (this.fullDefinition != null) {
+    fullDefinition=this.fullDefinition;
+  }
   if (!supportsReplaceIfExistsOption(database) && replaceIfExists) {
     statements.add(new DropViewStatement(getCatalogName(),getSchemaName(),getViewName()));
-    statements.add(new CreateViewStatement(getCatalogName(),getSchemaName(),getViewName(),getSelectQuery(),false));
+    statements.add(new CreateViewStatement(getCatalogName(),getSchemaName(),getViewName(),getSelectQuery(),false).setFullDefinition(fullDefinition));
   }
  else {
-    statements.add(new CreateViewStatement(getCatalogName(),getSchemaName(),getViewName(),getSelectQuery(),replaceIfExists));
+    statements.add(new CreateViewStatement(getCatalogName(),getSchemaName(),getViewName(),getSelectQuery(),replaceIfExists).setFullDefinition(fullDefinition));
   }
   return statements.toArray(new SqlStatement[statements.size()]);
 }
