@@ -1,5 +1,0 @@
-{
-  SequenceNextValueFunction function=new SequenceNextValueFunction("Sequence1");
-  setFields(function);
-  return function;
-}

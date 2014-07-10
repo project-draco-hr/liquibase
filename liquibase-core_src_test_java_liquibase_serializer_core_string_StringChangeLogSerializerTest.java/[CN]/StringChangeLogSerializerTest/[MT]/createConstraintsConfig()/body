@@ -1,5 +1,0 @@
-{
-  ConstraintsConfig config=new ConstraintsConfig();
-  setFields(config);
-  return config;
-}

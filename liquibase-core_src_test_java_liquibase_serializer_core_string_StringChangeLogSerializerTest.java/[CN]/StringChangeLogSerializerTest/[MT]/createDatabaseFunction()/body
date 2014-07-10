@@ -1,5 +1,0 @@
-{
-  DatabaseFunction function=new DatabaseFunction("FUNCTION_HERE");
-  setFields(function);
-  return function;
-}
