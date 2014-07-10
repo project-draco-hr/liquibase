@@ -9,7 +9,9 @@
     }
     executor.execute(new TagDatabaseStatement(tagString));
     getDatabase().commit();
-    ranChangeSetList.get(ranChangeSetList.size() - 1).setTag(tagString);
+    if (this.ranChangeSetList != null) {
+      ranChangeSetList.get(ranChangeSetList.size() - 1).setTag(tagString);
+    }
   }
  catch (  Exception e) {
     throw new DatabaseException(e);

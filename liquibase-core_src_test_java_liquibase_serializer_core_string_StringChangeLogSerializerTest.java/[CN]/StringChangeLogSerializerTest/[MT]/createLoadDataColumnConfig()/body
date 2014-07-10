@@ -1,5 +1,0 @@
-{
-  LoadDataColumnConfig config=new LoadDataColumnConfig();
-  setFields(config);
-  return config;
-}

@@ -2,5 +2,7 @@
   Database database=getDatabase();
   ExecutorService.getInstance().getExecutor(database).execute(new RemoveChangeSetRanStatusStatement(changeSet));
   getDatabase().commit();
-  this.ranChangeSetList.remove(new RanChangeSet(changeSet));
+  if (this.ranChangeSetList != null) {
+    this.ranChangeSetList.remove(new RanChangeSet(changeSet));
+  }
 }

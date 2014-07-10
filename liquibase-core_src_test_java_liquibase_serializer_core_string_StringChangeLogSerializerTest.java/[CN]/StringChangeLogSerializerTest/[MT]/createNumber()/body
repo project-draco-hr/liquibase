@@ -1,3 +1,0 @@
-{
-  return new Random().nextDouble() * 10000;
-}

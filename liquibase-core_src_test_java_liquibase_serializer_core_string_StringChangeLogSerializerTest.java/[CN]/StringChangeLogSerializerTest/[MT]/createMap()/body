@@ -1,7 +1,0 @@
-{
-  Map map=new HashMap();
-  map.put(createString(),createString());
-  map.put(createString(),createString());
-  map.put(createString(),createString());
-  return map;
-}

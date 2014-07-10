@@ -1,8 +1,0 @@
-{
-  for (  SortedSet<Class<? extends Change>> changeClassSet : ChangeFactory.getInstance().getRegistry().values()) {
-    Change change=changeClassSet.iterator().next().getConstructor().newInstance();
-    setFields(change);
-    String string=new StringChangeLogSerializer().serialize(change,false);
-    assertTrue("@ in string.  Probably poorly serialzed object reference." + string,string.indexOf("@") < 0);
-  }
-}
