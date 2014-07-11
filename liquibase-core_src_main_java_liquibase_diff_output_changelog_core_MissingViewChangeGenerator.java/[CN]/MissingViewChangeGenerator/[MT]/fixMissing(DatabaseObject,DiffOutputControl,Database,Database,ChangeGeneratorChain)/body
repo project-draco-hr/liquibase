@@ -12,6 +12,15 @@
   if (selectQuery == null) {
     selectQuery="COULD NOT DETERMINE VIEW QUERY";
   }
+ else   if (comparisonDatabase instanceof OracleDatabase && view.getColumns() != null && view.getColumns().size() > 0) {
+    selectQuery="CREATE OR REPLACE FORCE VIEW " + comparisonDatabase.escapeViewName(change.getCatalogName(),change.getSchemaName(),change.getViewName()) + " ("+ StringUtils.join(view.getColumns(),", ",new StringUtils.StringUtilsFormatter(){
+      @Override public String toString(      Object obj){
+        return ((Column)obj).getName();
+      }
+    }
+)+ ") AS "+ selectQuery;
+    change.setFullDefinition(true);
+  }
   change.setSelectQuery(selectQuery);
   return new Change[]{change};
 }
