@@ -1,0 +1,12 @@
+{
+  super.init();
+  try {
+    Resource[] resources=ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources("");
+    for (    Resource res : resources) {
+      addRootPath(res.getURL());
+    }
+  }
+ catch (  IOException e) {
+    LogFactory.getInstance().getLog().warning("Error initializing SpringLiquibase",e);
+  }
+}

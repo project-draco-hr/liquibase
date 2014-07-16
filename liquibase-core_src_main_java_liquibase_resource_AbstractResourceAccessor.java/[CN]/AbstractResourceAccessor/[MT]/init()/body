@@ -1,12 +1,15 @@
 {
-  Enumeration<URL> baseUrls;
   try {
-    baseUrls=toClassLoader().getResources("");
+    Enumeration<URL> baseUrls;
+    ClassLoader classLoader=toClassLoader();
+    if (classLoader != null) {
+      baseUrls=classLoader.getResources("");
+      while (baseUrls.hasMoreElements()) {
+        addRootPath(baseUrls.nextElement());
+      }
+    }
   }
  catch (  IOException e) {
     throw new UnexpectedLiquibaseException(e);
-  }
-  while (baseUrls.hasMoreElements()) {
-    this.rootStrings.add(baseUrls.nextElement().toExternalForm());
   }
 }

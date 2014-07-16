@@ -1,4 +1,3 @@
 {
   this.classLoader=getClass().getClassLoader();
-  init();
 }
