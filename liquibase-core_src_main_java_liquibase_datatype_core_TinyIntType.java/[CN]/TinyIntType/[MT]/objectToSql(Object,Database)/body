@@ -5,10 +5,5 @@
   if (value instanceof DatabaseFunction) {
     return value.toString();
   }
-  if (value instanceof Boolean) {
-    return Boolean.TRUE.equals(value) ? "1" : "0";
-  }
- else {
-    return formatNumber(value.toString());
-  }
+  return formatNumber(value.toString());
 }

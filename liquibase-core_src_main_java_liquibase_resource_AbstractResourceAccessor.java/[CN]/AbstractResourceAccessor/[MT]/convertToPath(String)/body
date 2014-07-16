@@ -32,5 +32,6 @@
   while (string.matches(".*/.*?/\\.\\./.*")) {
     string=string.replaceAll("/[^/]+/\\.\\./","/");
   }
+  string=string.replaceFirst(".*liquibase-unzip\\d+\\.dir/","");
   return string;
 }

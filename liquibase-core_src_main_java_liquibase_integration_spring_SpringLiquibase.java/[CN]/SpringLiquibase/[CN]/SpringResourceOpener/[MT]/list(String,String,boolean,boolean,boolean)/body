@@ -2,7 +2,8 @@
   Set<String> returnSet=new HashSet<String>();
   Resource[] resources=ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources(adjustClasspath(path));
   for (  Resource res : resources) {
-    returnSet.add(res.getURL().toExternalForm());
+    File file=res.getFile();
+    getContents(file,recursive,includeFiles,includeDirectories,path,returnSet);
   }
   return returnSet;
 }

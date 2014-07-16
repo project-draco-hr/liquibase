@@ -1,0 +1,4 @@
+{
+  packageName=packageName.replace("/",".");
+  return this.allClassesByPackage.get(packageName);
+}
