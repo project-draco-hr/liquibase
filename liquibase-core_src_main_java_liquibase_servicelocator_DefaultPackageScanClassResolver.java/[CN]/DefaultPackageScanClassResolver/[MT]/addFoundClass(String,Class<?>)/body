@@ -1,0 +1,7 @@
+{
+  packageName=packageName.replace("/",".");
+  if (!this.allClassesByPackage.containsKey(packageName)) {
+    this.allClassesByPackage.put(packageName,new HashSet<Class>());
+  }
+  this.allClassesByPackage.get(packageName).add(type);
+}

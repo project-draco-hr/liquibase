@@ -6,13 +6,7 @@
     if (Modifier.isAbstract(type.getModifiers()) || Modifier.isInterface(type.getModifiers())) {
       return;
     }
-    if (type.getPackage() != null) {
-      String packageName=type.getPackage().getName();
-      List<String> packageNameParts=Arrays.asList(packageName.split("\\."));
-      for (int i=0; i < packageNameParts.size(); i++) {
-        addFoundClass(type);
-      }
-    }
+    addFoundClass(type);
   }
  catch (  ClassNotFoundException e) {
     log.debug("Cannot find class '" + className + "' in classloader: "+ classLoader+ ". Reason: "+ e,e);
