@@ -1,0 +1,7 @@
+{
+  String thisPackage=type.getPackage().getName();
+  if (!this.allClassesByPackage.containsKey(thisPackage)) {
+    this.allClassesByPackage.put(thisPackage,new HashSet<Class>());
+  }
+  return this.allClassesByPackage.get(thisPackage).add(type);
+}
