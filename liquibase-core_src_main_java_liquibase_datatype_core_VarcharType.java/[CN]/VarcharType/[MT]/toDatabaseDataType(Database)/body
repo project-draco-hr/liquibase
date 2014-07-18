@@ -1,5 +1,5 @@
 {
-  if (database instanceof OracleDatabase) {
+  if (database instanceof OracleDatabase || (database instanceof HsqlDatabase && ((HsqlDatabase)database).isUsingOracleSyntax())) {
     return new DatabaseDataType("VARCHAR2",getParameters());
   }
   if (database instanceof InformixDatabase && getSize() > 255) {

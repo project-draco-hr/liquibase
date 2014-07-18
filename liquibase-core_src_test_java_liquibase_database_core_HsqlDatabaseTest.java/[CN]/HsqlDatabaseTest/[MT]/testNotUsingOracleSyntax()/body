@@ -1,0 +1,7 @@
+{
+  HsqlDatabase database=new HsqlDatabase();
+  DatabaseConnection conn=mock(DatabaseConnection.class);
+  when(conn.getURL()).thenReturn("jdbc:hsqldb:mem:testdb");
+  database.setConnection(conn);
+  assertFalse("Using oracle syntax",database.isUsingOracleSyntax());
+}

@@ -3,4 +3,5 @@
     return;
   }
   rollBackChanges.add(change);
+  change.setChangeSet(this);
 }
