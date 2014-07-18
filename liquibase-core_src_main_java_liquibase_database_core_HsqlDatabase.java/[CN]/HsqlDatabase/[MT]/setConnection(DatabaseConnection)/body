@@ -1,0 +1,4 @@
+{
+  oracleSyntax=null;
+  super.setConnection(conn);
+}
