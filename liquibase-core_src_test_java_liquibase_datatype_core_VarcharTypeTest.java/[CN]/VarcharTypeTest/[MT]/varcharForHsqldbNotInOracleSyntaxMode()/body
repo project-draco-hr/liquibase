@@ -1,0 +1,7 @@
+{
+  VarcharType type=new VarcharType();
+  HsqlDatabase hsqlDatabase=mock(HsqlDatabase.class);
+  when(hsqlDatabase.isUsingOracleSyntax()).thenReturn(false);
+  DatabaseDataType databaseDataType=type.toDatabaseDataType(hsqlDatabase);
+  assertEquals("VARCHAR",databaseDataType.getType().toUpperCase());
+}
