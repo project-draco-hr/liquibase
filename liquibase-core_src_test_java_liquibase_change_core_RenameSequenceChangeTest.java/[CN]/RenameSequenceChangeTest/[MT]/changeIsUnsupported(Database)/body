@@ -1,3 +1,0 @@
-{
-  return !database.supportsSequences() || (database instanceof DB2Database) || (database instanceof FirebirdDatabase)|| (database instanceof H2Database)|| (database instanceof HsqlDatabase)|| (database instanceof InformixDatabase);
-}
