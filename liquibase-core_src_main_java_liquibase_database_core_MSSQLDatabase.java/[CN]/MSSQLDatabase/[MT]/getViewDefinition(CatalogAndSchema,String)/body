@@ -7,9 +7,9 @@
   }
   String definition=sb.toString();
   String finalDef=definition.replaceAll("\\r\\n","\n");
+  finalDef=finalDef.replaceAll("--.*","").trim();
   finalDef=INITIAL_COMMENT_PATTERN.matcher(finalDef).replaceFirst("").trim();
   finalDef=CREATE_VIEW_AS_PATTERN.matcher(finalDef).replaceFirst("").trim();
-  finalDef=finalDef.replaceAll("--.*","").trim();
   if (finalDef.startsWith("(") && (finalDef.endsWith(")") || finalDef.endsWith(");"))) {
     finalDef=finalDef.replaceFirst("^\\(","");
     finalDef=finalDef.replaceFirst("\\);?$","");
