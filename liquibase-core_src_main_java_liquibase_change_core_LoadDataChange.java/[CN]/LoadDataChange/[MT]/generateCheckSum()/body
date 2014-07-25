@@ -1,7 +1,7 @@
 {
   InputStream stream=null;
   try {
-    stream=StreamUtil.singleInputStream(getFile(),getResourceAccessor());
+    stream=StreamUtil.openStream(file,isRelativeToChangelogFile(),getChangeSet(),getResourceAccessor());
     if (stream == null) {
       throw new UnexpectedLiquibaseException(getFile() + " could not be found");
     }

@@ -3,7 +3,7 @@
   if (resourceAccessor == null) {
     throw new UnexpectedLiquibaseException("No file resourceAccessor specified for " + getFile());
   }
-  InputStream stream=StreamUtil.singleInputStream(getFile(),resourceAccessor);
+  InputStream stream=StreamUtil.openStream(file,isRelativeToChangelogFile(),getChangeSet(),resourceAccessor);
   if (stream == null) {
     return null;
   }
