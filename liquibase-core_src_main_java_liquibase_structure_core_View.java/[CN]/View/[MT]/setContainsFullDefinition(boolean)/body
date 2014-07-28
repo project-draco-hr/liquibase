@@ -1,0 +1,4 @@
+{
+  this.containsFullDefinition=fullDefinition;
+  return this;
+}

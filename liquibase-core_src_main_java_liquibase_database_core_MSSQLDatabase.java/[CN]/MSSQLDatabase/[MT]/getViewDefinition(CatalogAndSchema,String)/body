@@ -7,12 +7,13 @@
   }
   String definition=sb.toString();
   String finalDef=definition.replaceAll("\\r\\n","\n");
-  finalDef=finalDef.replaceAll("--.*","").trim();
-  finalDef=INITIAL_COMMENT_PATTERN.matcher(finalDef).replaceFirst("").trim();
-  finalDef=CREATE_VIEW_AS_PATTERN.matcher(finalDef).replaceFirst("").trim();
-  if (finalDef.startsWith("(") && (finalDef.endsWith(")") || finalDef.endsWith(");"))) {
-    finalDef=finalDef.replaceFirst("^\\(","");
-    finalDef=finalDef.replaceFirst("\\);?$","");
+  String selectOnly=CREATE_VIEW_AS_PATTERN.matcher(finalDef).replaceFirst("").trim();
+  if (selectOnly.equals(finalDef)) {
+    return "FULL_DEFINITION: " + finalDef;
   }
-  return finalDef;
+  if (selectOnly.startsWith("(") && (selectOnly.endsWith(")") || selectOnly.endsWith(");"))) {
+    selectOnly=selectOnly.replaceFirst("^\\(","");
+    selectOnly=selectOnly.replaceFirst("\\);?$","");
+  }
+  return selectOnly;
 }
