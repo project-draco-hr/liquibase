@@ -1,0 +1,4 @@
+{
+  this.ignoreClasspathPrefix=ignoreClasspathPrefix;
+  this.ranChangeSets=ranChangeSets;
+}

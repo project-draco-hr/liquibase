@@ -8,7 +8,7 @@
     checkLiquibaseTables(false,changeLog,contexts,labelExpression);
     changeLog.validate(database,contexts,labelExpression);
     List<RanChangeSet> ranChangeSetList=database.getRanChangeSetList();
-    ChangeLogIterator logIterator=new ChangeLogIterator(ranChangeSetList,changeLog,new AfterTagChangeSetFilter(tagToRollBackTo,ranChangeSetList),new AlreadyRanChangeSetFilter(ranChangeSetList),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database));
+    ChangeLogIterator logIterator=new ChangeLogIterator(ranChangeSetList,changeLog,new AfterTagChangeSetFilter(tagToRollBackTo,ranChangeSetList),new AlreadyRanChangeSetFilter(ranChangeSetList,ignoreClasspathPrefix),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database));
     logIterator.run(new RollbackVisitor(database),new RuntimeEnvironment(database,contexts,labelExpression));
   }
   finally {
