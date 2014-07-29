@@ -6,11 +6,12 @@
     sb.append(defLine);
   }
   String definition=sb.toString();
-  String finalDef=definition.replaceAll("\\r\\n","\n");
-  String selectOnly=CREATE_VIEW_AS_PATTERN.matcher(finalDef).replaceFirst("").trim();
+  String finalDef=definition.replaceAll("\\r\\n","\n").trim();
+  String selectOnly=CREATE_VIEW_AS_PATTERN.matcher(finalDef).replaceFirst("");
   if (selectOnly.equals(finalDef)) {
     return "FULL_DEFINITION: " + finalDef;
   }
+  selectOnly=selectOnly.trim();
   if (selectOnly.startsWith("(") && (selectOnly.endsWith(")") || selectOnly.endsWith(");"))) {
     selectOnly=selectOnly.replaceFirst("^\\(","");
     selectOnly=selectOnly.replaceFirst("\\);?$","");
