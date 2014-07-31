@@ -9,6 +9,7 @@
     change.setSchemaName(view.getSchema().getName());
   }
   String selectQuery=view.getDefinition();
+  boolean fullDefinitionOverridden=false;
   if (selectQuery == null) {
     selectQuery="COULD NOT DETERMINE VIEW QUERY";
   }
@@ -27,8 +28,11 @@
     }
 )+ ") AS "+ selectQuery;
     change.setFullDefinition(true);
+    fullDefinitionOverridden=true;
   }
   change.setSelectQuery(selectQuery);
-  change.setFullDefinition(view.getContainsFullDefinition());
+  if (!fullDefinitionOverridden) {
+    change.setFullDefinition(view.getContainsFullDefinition());
+  }
   return new Change[]{change};
 }
