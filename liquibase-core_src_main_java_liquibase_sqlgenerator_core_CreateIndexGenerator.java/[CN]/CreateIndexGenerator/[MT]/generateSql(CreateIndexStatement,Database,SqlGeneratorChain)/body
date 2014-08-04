@@ -59,10 +59,5 @@
   if (database instanceof DB2Database && statement.isClustered() != null && statement.isClustered()) {
     buffer.append(" CLUSTER");
   }
-  if (database instanceof PostgresDatabase && statement.isClustered() != null && statement.isClustered()) {
-    return new Sql[]{new UnparsedSql(buffer.toString(),getAffectedIndex(statement)),new UnparsedSql("CLUSTER " + database.escapeTableName(statement.getTableCatalogName(),statement.getTableSchemaName(),statement.getTableName()) + " USING "+ database.escapeObjectName(statement.getIndexName(),Index.class))};
-  }
- else {
-    return new Sql[]{new UnparsedSql(buffer.toString(),getAffectedIndex(statement))};
-  }
+  return new Sql[]{new UnparsedSql(buffer.toString(),getAffectedIndex(statement))};
 }
