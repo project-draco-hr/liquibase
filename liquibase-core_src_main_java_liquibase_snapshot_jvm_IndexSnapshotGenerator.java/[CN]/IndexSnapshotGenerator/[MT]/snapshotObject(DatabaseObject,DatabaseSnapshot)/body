@@ -68,6 +68,9 @@
         returnIndex.setTable((Table)new Table().setName(row.getString("TABLE_NAME")).setSchema(schema));
         returnIndex.setName(indexName);
         returnIndex.setUnique(!nonUnique);
+        if (type == DatabaseMetaData.tableIndexClustered) {
+          returnIndex.setClustered(true);
+        }
         foundIndexes.put(indexName,returnIndex);
       }
       for (int i=returnIndex.getColumns().size(); i < position; i++) {

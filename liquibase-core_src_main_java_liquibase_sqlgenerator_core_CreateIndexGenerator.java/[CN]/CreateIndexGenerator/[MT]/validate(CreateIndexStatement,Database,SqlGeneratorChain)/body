@@ -5,5 +5,8 @@
   if (database instanceof HsqlDatabase) {
     validationErrors.checkRequiredField("name",createIndexStatement.getIndexName());
   }
+  if (!(database instanceof MSSQLDatabase || database instanceof OracleDatabase || database instanceof DB2Database|| database instanceof PostgresDatabase)) {
+    validationErrors.checkDisallowedField("clustered",createIndexStatement.isClustered(),database);
+  }
   return validationErrors;
 }

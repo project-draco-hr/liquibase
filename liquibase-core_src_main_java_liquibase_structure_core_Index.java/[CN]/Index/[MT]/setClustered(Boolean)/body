@@ -1,0 +1,3 @@
+{
+  return (Index)setAttribute("clustered",clustered);
+}
