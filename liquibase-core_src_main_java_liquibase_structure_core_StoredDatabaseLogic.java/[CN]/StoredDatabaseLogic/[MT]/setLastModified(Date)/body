@@ -1,4 +1,0 @@
-{
-  setAttribute("lastModified",date);
-  return (T)this;
-}
