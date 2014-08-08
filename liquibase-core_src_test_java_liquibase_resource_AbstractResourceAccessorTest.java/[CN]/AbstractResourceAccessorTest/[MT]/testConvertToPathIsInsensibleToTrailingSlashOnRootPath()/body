@@ -1,0 +1,14 @@
+{
+{
+    AbstractResourceAccessor ara=new MyARA();
+    ara.addRootPath(new URL("file:/a/"));
+    String path=ara.convertToPath("file:/a/b");
+    assertEquals("b",path);
+  }
+{
+    AbstractResourceAccessor ara=new MyARA();
+    ara.addRootPath(new URL("file:/a"));
+    String path=ara.convertToPath("file:/a/b");
+    assertEquals("b",path);
+  }
+}
