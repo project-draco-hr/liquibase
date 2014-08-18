@@ -19,12 +19,7 @@
   processSystemProperties();
   ClassLoader artifactClassLoader=getMavenArtifactClassLoader();
   configureFieldsAndValues(getFileOpener(artifactClassLoader));
-  try {
-    LogFactory.setLoggingLevel(logging);
-  }
- catch (  IllegalArgumentException e) {
-    throw new MojoExecutionException("Failed to set logging level: " + e.getMessage(),e);
-  }
+  LogFactory.getInstance().setDefaultLoggingLevel(logging);
   displayMojoSettings();
   checkRequiredParametersAreSpecified();
   Database database=null;
