@@ -1,3 +1,9 @@
 {
-  this.clustered=clustered;
+  if (clustered == null) {
+    this.clustered=false;
+  }
+ else {
+    this.clustered=clustered;
+  }
+  return this;
 }
