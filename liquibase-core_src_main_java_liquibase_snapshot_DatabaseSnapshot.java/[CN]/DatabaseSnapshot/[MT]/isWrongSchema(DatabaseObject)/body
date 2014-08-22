@@ -1,0 +1,18 @@
+{
+  boolean isSchemaExamples=true;
+  for (  DatabaseObject obj : originalExamples) {
+    if (!(obj instanceof Schema)) {
+      isSchemaExamples=false;
+      break;
+    }
+  }
+  if (!isSchemaExamples) {
+    return false;
+  }
+  for (  DatabaseObject obj : originalExamples) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(fieldValue.getSchema(),obj,database)) {
+      return false;
+    }
+  }
+  return true;
+}

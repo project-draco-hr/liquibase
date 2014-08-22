@@ -9,6 +9,9 @@
     if (!snapshotControl.shouldInclude(((DatabaseObject)fieldValue).getClass())) {
       return fieldValue;
     }
+    if (isWrongSchema(((DatabaseObject)fieldValue))) {
+      return fieldValue;
+    }
     if (((DatabaseObject)fieldValue).getSnapshotId() == null) {
       return include((DatabaseObject)fieldValue);
     }

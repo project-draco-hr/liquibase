@@ -2,6 +2,7 @@
   this.database=database;
   allFound=new DatabaseObjectCollection(database);
   this.snapshotControl=snapshotControl;
+  this.originalExamples=examples;
   init(examples);
   this.serializableFields=new HashSet<String>();
   this.serializableFields.add("snapshotControl");
