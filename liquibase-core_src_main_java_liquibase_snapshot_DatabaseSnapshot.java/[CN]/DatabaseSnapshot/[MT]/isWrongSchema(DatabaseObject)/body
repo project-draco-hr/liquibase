@@ -1,5 +1,8 @@
 {
   boolean isSchemaExamples=true;
+  if (originalExamples == null) {
+    return false;
+  }
   for (  DatabaseObject obj : originalExamples) {
     if (!(obj instanceof Schema)) {
       isSchemaExamples=false;
