@@ -36,5 +36,6 @@
     }
     out+="\n";
   }
+  database.commit();
   return out.trim();
 }
