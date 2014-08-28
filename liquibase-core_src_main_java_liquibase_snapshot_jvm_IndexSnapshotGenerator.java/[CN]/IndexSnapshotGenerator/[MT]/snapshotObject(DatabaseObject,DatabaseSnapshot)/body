@@ -53,7 +53,9 @@
       }
       String filterCondition=StringUtils.trimToNull(row.getString("FILTER_CONDITION"));
       if (filterCondition != null) {
-        filterCondition=filterCondition.replaceAll("\"","");
+        if (!(database instanceof OracleDatabase)) {
+          filterCondition=filterCondition.replaceAll("\"","");
+        }
         columnName=filterCondition;
       }
       if (type == DatabaseMetaData.tableIndexStatistic) {
