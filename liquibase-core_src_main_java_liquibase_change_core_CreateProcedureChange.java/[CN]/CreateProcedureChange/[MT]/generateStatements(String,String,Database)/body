@@ -1,3 +1,5 @@
 {
-  return new SqlStatement[]{new CreateProcedureStatement(getCatalogName(),getSchemaName(),getProcedureName(),logicText,endDelimiter)};
+  CreateProcedureStatement statement=new CreateProcedureStatement(getCatalogName(),getSchemaName(),getProcedureName(),logicText,endDelimiter);
+  statement.setReplaceIfExists(getReplaceIfExists());
+  return new SqlStatement[]{statement};
 }
