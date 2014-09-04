@@ -13,7 +13,7 @@
       }
     }
  else {
-      validate.checkDisallowedField("replaceIfExists",this.getReplaceIfExists(),null);
+      validate.checkDisallowedField("replaceIfExists",this.getReplaceIfExists(),database);
     }
   }
   return validate;
