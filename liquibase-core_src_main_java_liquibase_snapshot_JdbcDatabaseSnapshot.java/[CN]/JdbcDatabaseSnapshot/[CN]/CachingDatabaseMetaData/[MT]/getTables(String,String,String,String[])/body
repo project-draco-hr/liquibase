@@ -39,7 +39,11 @@
           throw new UnexpectedLiquibaseException("Unknown table type: " + type);
         }
         String ownerName=database.correctObjectName(catalogAndSchema.getCatalogName(),Schema.class);
-        String sql="SELECT null as TABLE_CAT, a.OWNER as TABLE_SCHEM, a." + nameColumn + " as TABLE_NAME, 'TABLE' as TABLE_TYPE,  c.COMMENTS as REMARKS "+ "from "+ allTable+ " a "+ "join ALL_TAB_COMMENTS c on a."+ nameColumn+ "=c.table_name and a.owner=c.owner "+ "WHERE a.OWNER='"+ ownerName+ "'";
+        String sql="SELECT null as TABLE_CAT, a.OWNER as TABLE_SCHEM, a." + nameColumn + " as TABLE_NAME, 'TABLE' as TABLE_TYPE,  c.COMMENTS as REMARKS";
+        if (allTable.equals("ALL_TABLES")) {
+          sql+=", a.TEMPORARY as TEMPORARY, a.DURATION as DURATION";
+        }
+        sql+=" from " + allTable + " a "+ "join ALL_TAB_COMMENTS c on a."+ nameColumn+ "=c.table_name and a.owner=c.owner "+ "WHERE a.OWNER='"+ ownerName+ "'";
         if (tableName != null) {
           sql+=" AND " + nameColumn + "='"+ database.correctObjectName(tableName,Table.class)+ "'";
         }

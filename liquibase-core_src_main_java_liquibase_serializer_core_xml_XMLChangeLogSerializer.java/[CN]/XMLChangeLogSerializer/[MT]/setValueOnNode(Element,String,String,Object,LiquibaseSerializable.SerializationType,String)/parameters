@@ -1,4 +1,6 @@
 Element node
+String objectNamespace
 String objectName
 Object value
 LiquibaseSerializable.SerializationType serializationType
+String parentNamespace

@@ -7,7 +7,7 @@
   }
   Element node=currentChangeLogFileDOM.createElementNS(namespace,nodeName);
   for (  String field : object.getSerializableFields()) {
-    setValueOnNode(node,field,object.getSerializableFieldValue(field),object.getSerializableFieldType(field));
+    setValueOnNode(node,object.getSerializableFieldNamespace(field),field,object.getSerializableFieldValue(field),object.getSerializableFieldType(field),namespace);
   }
   return node;
 }
