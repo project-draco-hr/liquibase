@@ -1,3 +1,4 @@
 String parent
 InputStream stream
 ClassLoader loader
+File parentFile

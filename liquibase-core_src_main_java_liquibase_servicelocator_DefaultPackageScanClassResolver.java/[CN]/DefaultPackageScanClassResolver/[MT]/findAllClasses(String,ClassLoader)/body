@@ -76,7 +76,7 @@
           stream=new FileInputStream(file);
         }
         try {
-          loadImplementationsInJar(packageName,stream,loader);
+          loadImplementationsInJar(packageName,stream,loader,file);
         }
  catch (        IOException ioe) {
           log.warning("Cannot search jar file '" + urlPath + "' for classes due to an IOException: "+ ioe.getMessage(),ioe);
