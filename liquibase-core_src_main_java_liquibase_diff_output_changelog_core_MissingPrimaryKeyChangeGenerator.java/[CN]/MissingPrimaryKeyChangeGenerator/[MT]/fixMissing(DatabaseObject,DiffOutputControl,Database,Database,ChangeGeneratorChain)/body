@@ -13,6 +13,9 @@
   if (control.getIncludeTablespace()) {
     change.setTablespace(pk.getTablespace());
   }
+  if (referenceDatabase instanceof MSSQLDatabase && pk.getBackingIndex() != null && pk.getBackingIndex().getClustered() != null && !pk.getBackingIndex().getClustered()) {
+    change.setClustered(false);
+  }
   control.setAlreadyHandledMissing(pk.getBackingIndex());
   return new Change[]{change};
 }

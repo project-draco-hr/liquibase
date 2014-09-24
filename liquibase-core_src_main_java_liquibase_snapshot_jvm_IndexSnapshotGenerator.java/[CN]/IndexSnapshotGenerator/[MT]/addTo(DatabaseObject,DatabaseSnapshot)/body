@@ -27,6 +27,9 @@
           if (type == DatabaseMetaData.tableIndexClustered) {
             index.setClustered(true);
           }
+ else           if (database instanceof MSSQLDatabase) {
+            index.setClustered(false);
+          }
           foundIndexes.put(indexName,index);
         }
         index.getColumns().add(row.getString("COLUMN_NAME"));

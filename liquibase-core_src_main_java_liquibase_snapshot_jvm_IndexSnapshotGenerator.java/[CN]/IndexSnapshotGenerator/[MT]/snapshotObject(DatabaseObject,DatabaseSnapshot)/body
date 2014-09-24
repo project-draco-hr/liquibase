@@ -73,6 +73,9 @@
         if (type == DatabaseMetaData.tableIndexClustered) {
           returnIndex.setClustered(true);
         }
+ else         if (database instanceof MSSQLDatabase) {
+          returnIndex.setClustered(false);
+        }
         foundIndexes.put(indexName,returnIndex);
       }
       for (int i=returnIndex.getColumns().size(); i < position; i++) {
