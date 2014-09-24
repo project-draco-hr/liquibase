@@ -1,0 +1,37 @@
+{
+  JarInputStream jarStream=null;
+  if (stream instanceof JarInputStream) {
+    jarStream=(JarInputStream)stream;
+  }
+ else {
+    jarStream=new JarInputStream(stream);
+  }
+  JarEntry entry;
+  while ((entry=jarStream.getNextJarEntry()) != null) {
+    String name=entry.getName();
+    if (name != null) {
+      if (name.endsWith(".jar")) {
+        log.debug("Found nested jar " + name);
+        File unzippedParent=unzippedJars.get(parentFile);
+        if (unzippedParent == null) {
+          unzippedParent=FileUtil.unzip(parentFile);
+          unzippedJars.put(parentFile,unzippedParent);
+        }
+        File nestedJar=new File(unzippedParent,name);
+        JarInputStream nestedJarStream=new JarInputStream(new FileInputStream(nestedJar));
+        try {
+          loadImplementationsInJar(parent,nestedJarStream,loader,nestedJar);
+        }
+  finally {
+          nestedJarStream.close();
+        }
+      }
+ else       if (name.contains(parent)) {
+        name=name.trim();
+        if (!entry.isDirectory() && name.endsWith(".class")) {
+          loadClass(name,loader);
+        }
+      }
+    }
+  }
+}
