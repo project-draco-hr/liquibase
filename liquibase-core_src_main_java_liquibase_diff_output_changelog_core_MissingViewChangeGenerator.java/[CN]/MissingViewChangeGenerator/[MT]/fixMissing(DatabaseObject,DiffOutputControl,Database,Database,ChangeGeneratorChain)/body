@@ -23,7 +23,7 @@
     }
     selectQuery="CREATE OR REPLACE FORCE VIEW " + viewName + " ("+ StringUtils.join(view.getColumns(),", ",new StringUtils.StringUtilsFormatter(){
       @Override public String toString(      Object obj){
-        return ((Column)obj).getName();
+        return comparisonDatabase.escapeColumnName(null,null,null,((Column)obj).getName());
       }
     }
 )+ ") AS "+ selectQuery;
