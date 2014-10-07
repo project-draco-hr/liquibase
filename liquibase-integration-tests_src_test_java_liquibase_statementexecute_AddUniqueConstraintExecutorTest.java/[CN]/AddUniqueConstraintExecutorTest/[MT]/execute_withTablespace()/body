@@ -1,5 +1,5 @@
 {
-  statementUnderTest=new AddUniqueConstraintStatement(null,null,TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME).setTablespace(TABLESPACE_NAME);
+  statementUnderTest=new AddUniqueConstraintStatement(null,null,TABLE_NAME,new ColumnConfig[]{new ColumnConfig().setName(COLUMN_NAME)},CONSTRAINT_NAME).setTablespace(TABLESPACE_NAME);
   assertCorrect("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",SybaseASADatabase.class,SybaseDatabase.class);
   assertCorrect("alter table [adduqtest] add constraint [uq_test] unique ([coltomakeuq])",MSSQLDatabase.class);
   assertCorrect("alter table adduqtest add constraint unique (coltomakeuq) constraint uq_test",InformixDatabase.class);

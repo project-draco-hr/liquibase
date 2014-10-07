@@ -5,5 +5,5 @@
   assertNotNull(newTable.getColumn(change.getNewColumnName()));
   assertEquals(change.getNewColumnName().toUpperCase(),newTable.getPrimaryKey().getColumnNames().toUpperCase());
   assertNotNull(diffResult.getUnexpectedObject(new Table(change.getNewTableCatalogName(),change.getNewTableSchemaName(),change.getNewTableName())));
-  assertNotNull(new ForeignKey(change.getConstraintName(),change.getExistingTableCatalogName(),change.getExistingTableSchemaName(),change.getExistingTableName(),change.getExistingColumnName()));
+  assertNotNull(new ForeignKey(change.getConstraintName(),change.getExistingTableCatalogName(),change.getExistingTableSchemaName(),change.getExistingTableName(),new Column(change.getExistingColumnName())));
 }

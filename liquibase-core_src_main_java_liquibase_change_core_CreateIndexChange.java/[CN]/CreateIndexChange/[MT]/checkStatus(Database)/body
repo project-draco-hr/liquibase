@@ -4,7 +4,7 @@
     Index example=new Index(getIndexName(),getCatalogName(),getSchemaName(),getTableName());
     if (getColumns() != null) {
       for (      ColumnConfig column : getColumns()) {
-        example.addColumn(column.getName());
+        example.addColumn(new Column(column));
       }
     }
     Index snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(example,database);

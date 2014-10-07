@@ -1,0 +1,14 @@
+{
+  this();
+  setName(name);
+  if (tableName != null) {
+    Table table=new Table(tableCatalogName,tableSchemaName,tableName);
+    if (columns != null) {
+      setAttribute("columns",Arrays.asList(columns));
+      for (      Column column : getColumns()) {
+        column.setRelation(table);
+      }
+    }
+    setTable(table);
+  }
+}

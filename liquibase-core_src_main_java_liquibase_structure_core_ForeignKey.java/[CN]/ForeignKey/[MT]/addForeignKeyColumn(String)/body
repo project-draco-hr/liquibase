@@ -1,8 +1,0 @@
-{
-  if ((this.getForeignKeyColumns() == null) || (this.getForeignKeyColumns().length() == 0)) {
-    this.setForeignKeyColumns(foreignKeyColumn);
-  }
- else {
-    this.setForeignKeyColumns(this.getForeignKeyColumns() + ", " + foreignKeyColumn);
-  }
-}

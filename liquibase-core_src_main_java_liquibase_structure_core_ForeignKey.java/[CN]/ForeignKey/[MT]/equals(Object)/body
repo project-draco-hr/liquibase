@@ -5,5 +5,11 @@
   if (getForeignKeyColumns() == null) {
     return this.getName().equalsIgnoreCase(that.getName());
   }
-  return (getForeignKeyColumns() != null && that.getForeignKeyColumns() != null && getForeignKeyColumns().equalsIgnoreCase(that.getForeignKeyColumns())) && (getForeignKeyTable() != null && that.getForeignKeyTable() != null && getForeignKeyTable().equals(that.getForeignKeyTable())) && (getPrimaryKeyColumns() != null && that.getPrimaryKeyColumns() != null && getPrimaryKeyColumns().equalsIgnoreCase(that.getPrimaryKeyColumns()))&& (getPrimaryKeyTable() != null && that.getPrimaryKeyTable() != null && getPrimaryKeyTable().equals(that.getPrimaryKeyTable()));
+  StringUtils.StringUtilsFormatter formatter=new StringUtils.StringUtilsFormatter<Column>(){
+    @Override public String toString(    Column obj){
+      return obj.toString(false);
+    }
+  }
+;
+  return (StringUtils.join(getForeignKeyColumns(),",",formatter).equalsIgnoreCase(StringUtils.join(that.getForeignKeyColumns(),",",formatter)) && (getForeignKeyTable() != null && that.getForeignKeyTable() != null && getForeignKeyTable().equals(that.getForeignKeyTable())) && (StringUtils.join(getPrimaryKeyColumns(),",",formatter).equalsIgnoreCase(StringUtils.join(that.getPrimaryKeyColumns(),",",formatter)))&& (getPrimaryKeyTable() != null && that.getPrimaryKeyTable() != null && getPrimaryKeyTable().equals(that.getPrimaryKeyTable())));
 }

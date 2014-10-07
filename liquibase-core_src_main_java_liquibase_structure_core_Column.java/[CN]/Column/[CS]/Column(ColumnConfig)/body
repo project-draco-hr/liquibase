@@ -4,7 +4,7 @@
   if (columnConfig.getDefaultValue() != null) {
     setDefaultValue(columnConfig.getDefaultValueObject());
   }
-  if (columnConfig.isAutoIncrement()) {
+  if (columnConfig.isAutoIncrement() != null && columnConfig.isAutoIncrement()) {
     setAutoIncrementInformation(new AutoIncrementInformation(columnConfig.getStartWith(),columnConfig.getIncrementBy()));
   }
   ConstraintsConfig constraints=columnConfig.getConstraints();

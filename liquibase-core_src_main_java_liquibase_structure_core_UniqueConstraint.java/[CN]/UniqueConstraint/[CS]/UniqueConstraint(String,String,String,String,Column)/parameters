@@ -1,0 +1,5 @@
+String name
+String tableCatalog
+String tableSchema
+String tableName
+Column columns

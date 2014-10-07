@@ -1,3 +1,3 @@
 {
-  return new HashSet<String>(Arrays.asList("id","author","runAlways","runOnChange","failOnError","context","dbms","comment","changes","rollback"));
+  return new HashSet<String>(Arrays.asList("id","author","runAlways","runOnChange","failOnError","context","dbms","comment","changes","rollback","objectQuotingStrategy"));
 }

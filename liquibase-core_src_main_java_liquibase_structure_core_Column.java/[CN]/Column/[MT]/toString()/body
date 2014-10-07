@@ -1,4 +1,14 @@
 {
-  String tableOrViewName=getRelation().getName();
-  return tableOrViewName + "." + getName();
+  if (getName() == null) {
+    return getDefinition();
+  }
+ else {
+    if (getRelation() == null) {
+      return getName();
+    }
+ else {
+      String tableOrViewName=getRelation().getName();
+      return tableOrViewName + "." + getName();
+    }
+  }
 }

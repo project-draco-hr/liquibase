@@ -1,16 +1,22 @@
 {
+  StringUtils.StringUtilsFormatter formatter=new StringUtils.StringUtilsFormatter<Column>(){
+    @Override public String toString(    Column obj){
+      return obj.toString(false);
+    }
+  }
+;
   int result=0;
   if (getPrimaryKeyTable() != null) {
     result=getPrimaryKeyTable().hashCode();
   }
   if (getPrimaryKeyColumns() != null) {
-    result=31 * result + getPrimaryKeyColumns().toUpperCase().hashCode();
+    result=31 * result + StringUtils.join(getPrimaryKeyColumns(),",",formatter).toUpperCase().hashCode();
   }
   if (getForeignKeyTable() != null) {
     result=31 * result + getForeignKeyTable().hashCode();
   }
   if (getForeignKeyColumns() != null) {
-    result=31 * result + getForeignKeyColumns().toUpperCase().hashCode();
+    result=31 * result + StringUtils.join(getForeignKeyColumns(),",",formatter).toUpperCase().hashCode();
   }
   return result;
 }

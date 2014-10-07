@@ -1,14 +1,20 @@
 {
   ForeignKey fk=(ForeignKey)changedObject;
+  StringUtils.StringUtilsFormatter formatter=new StringUtils.StringUtilsFormatter<Column>(){
+    @Override public String toString(    Column obj){
+      return obj.toString(false);
+    }
+  }
+;
   DropForeignKeyConstraintChange dropFkChange=new DropForeignKeyConstraintChange();
   dropFkChange.setConstraintName(fk.getName());
   dropFkChange.setBaseTableName(fk.getForeignKeyTable().getName());
   AddForeignKeyConstraintChange addFkChange=new AddForeignKeyConstraintChange();
   addFkChange.setConstraintName(fk.getName());
   addFkChange.setBaseTableName(fk.getForeignKeyTable().getName());
-  addFkChange.setBaseColumnNames(fk.getForeignKeyColumns());
+  addFkChange.setBaseColumnNames(StringUtils.join(fk.getForeignKeyColumns(),",",formatter));
   addFkChange.setReferencedTableName(fk.getPrimaryKeyTable().getName());
-  addFkChange.setReferencedColumnNames(fk.getPrimaryKeyColumns());
+  addFkChange.setReferencedColumnNames(StringUtils.join(fk.getPrimaryKeyColumns(),",",formatter));
   if (control.getIncludeCatalog()) {
     dropFkChange.setBaseTableCatalogName(fk.getForeignKeyTable().getSchema().getCatalogName());
     addFkChange.setBaseTableCatalogName(fk.getForeignKeyTable().getSchema().getCatalogName());

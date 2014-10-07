@@ -7,5 +7,5 @@
   if (getInitiallyDeferred() != null) {
     initiallyDeferred=getInitiallyDeferred();
   }
-  return new SqlStatement[]{new AddForeignKeyConstraintStatement(getConstraintName(),getBaseTableCatalogName(),getBaseTableSchemaName(),getBaseTableName(),getBaseColumnNames(),getReferencedTableCatalogName(),getReferencedTableSchemaName(),getReferencedTableName(),getReferencedColumnNames()).setDeferrable(deferrable).setInitiallyDeferred(initiallyDeferred).setOnUpdate(getOnUpdate()).setOnDelete(getOnDelete())};
+  return new SqlStatement[]{new AddForeignKeyConstraintStatement(getConstraintName(),getBaseTableCatalogName(),getBaseTableSchemaName(),getBaseTableName(),ColumnConfig.arrayFromNames(getBaseColumnNames()),getReferencedTableCatalogName(),getReferencedTableSchemaName(),getReferencedTableName(),ColumnConfig.arrayFromNames(getReferencedColumnNames())).setDeferrable(deferrable).setInitiallyDeferred(initiallyDeferred).setOnUpdate(getOnUpdate()).setOnDelete(getOnDelete())};
 }

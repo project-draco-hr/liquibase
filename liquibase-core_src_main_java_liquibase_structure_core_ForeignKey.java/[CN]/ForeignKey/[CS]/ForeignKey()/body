@@ -1,2 +1,4 @@
 {
+  setForeignKeyColumns(new ArrayList<Column>());
+  setPrimaryKeyColumns(new ArrayList<Column>());
 }

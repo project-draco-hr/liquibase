@@ -1,4 +1,0 @@
-{
-  this.getColumns().addAll(StringUtils.splitAndTrim(columnNames,","));
-  return this;
-}

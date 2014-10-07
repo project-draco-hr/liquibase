@@ -9,7 +9,12 @@
   if (!((ForeignKey)missingObject).getPrimaryKeyTable().getSchema().equals(((ForeignKey)missingObject).getForeignKeyTable().getSchema()) || control.getIncludeSchema()) {
     change.setReferencedTableSchemaName(fk.getPrimaryKeyTable().getSchema().getName());
   }
-  change.setReferencedColumnNames(fk.getPrimaryKeyColumns());
+  change.setReferencedColumnNames(StringUtils.join(fk.getPrimaryKeyColumns(),",",new StringUtils.StringUtilsFormatter<Column>(){
+    @Override public String toString(    Column obj){
+      return obj.getName();
+    }
+  }
+));
   change.setBaseTableName(fk.getForeignKeyTable().getName());
   if (control.getIncludeCatalog()) {
     change.setBaseTableCatalogName(fk.getForeignKeyTable().getSchema().getCatalogName());
@@ -17,7 +22,12 @@
   if (control.getIncludeSchema()) {
     change.setBaseTableSchemaName(fk.getForeignKeyTable().getSchema().getName());
   }
-  change.setBaseColumnNames(fk.getForeignKeyColumns());
+  change.setBaseColumnNames(StringUtils.join(fk.getForeignKeyColumns(),",",new StringUtils.StringUtilsFormatter<Column>(){
+    @Override public String toString(    Column obj){
+      return obj.getName();
+    }
+  }
+));
   change.setDeferrable(fk.isDeferrable());
   change.setInitiallyDeferred(fk.isInitiallyDeferred());
   change.setOnUpdate(fk.getUpdateRule());

@@ -1,3 +1,7 @@
 {
-  return getAttribute("columnNames",List.class);
+  List<String> names=new ArrayList<String>();
+  for (  Column col : getColumns()) {
+    names.add(col.getName());
+  }
+  return names;
 }

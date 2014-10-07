@@ -1,3 +1,6 @@
 {
+  if (array == null) {
+    return null;
+  }
   return join(Arrays.asList(array),delimiter,formatter);
 }

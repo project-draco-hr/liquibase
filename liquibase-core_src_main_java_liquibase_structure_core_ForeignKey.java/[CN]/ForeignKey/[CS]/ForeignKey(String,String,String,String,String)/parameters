@@ -1,5 +1,0 @@
-String name
-String foreignKeyCatalog
-String foreignKeySchema
-String foreignKeyTable
-String baseTableColumns

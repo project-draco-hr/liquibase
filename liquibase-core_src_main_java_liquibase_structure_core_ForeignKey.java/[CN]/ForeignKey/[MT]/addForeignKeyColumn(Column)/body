@@ -1,0 +1,3 @@
+{
+  getAttribute("foreignKeyColumns",List.class).add(foreignKeyColumn);
+}

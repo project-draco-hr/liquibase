@@ -1,0 +1,9 @@
+{
+  if (position >= getColumns().size()) {
+    for (int i=getColumns().size() - 1; i < position; i++) {
+      this.getColumns().add(null);
+    }
+  }
+  this.getColumns().set(position,column);
+  return this;
+}
