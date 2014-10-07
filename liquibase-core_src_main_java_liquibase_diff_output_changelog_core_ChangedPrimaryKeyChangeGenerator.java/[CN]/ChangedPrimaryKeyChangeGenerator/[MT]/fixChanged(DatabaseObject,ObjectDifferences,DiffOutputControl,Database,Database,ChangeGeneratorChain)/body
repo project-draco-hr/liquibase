@@ -14,14 +14,15 @@
     dropPkChange.setSchemaName(pk.getSchema().getName());
     addPkChange.setSchemaName(pk.getSchema().getName());
   }
-  String referenceColumns=StringUtils.join((Collection<String>)differences.getDifference("columnNames").getReferenceValue(),",");
-  String comparedColumns=StringUtils.join((Collection<String>)differences.getDifference("columnNames").getComparedValue(),",");
+  List<Column> referenceColumns=(List<Column>)differences.getDifference("columns").getReferenceValue();
+  List<Column> comparedColumns=(List<Column>)differences.getDifference("columns").getComparedValue();
+  StringUtils.ToStringFormatter formatter=new StringUtils.ToStringFormatter();
   control.setAlreadyHandledChanged(new Index().setTable(pk.getTable()).setColumns(referenceColumns));
-  if (!referenceColumns.equalsIgnoreCase(comparedColumns)) {
+  if (!StringUtils.join(referenceColumns,",",formatter).equalsIgnoreCase(StringUtils.join(comparedColumns,",",formatter))) {
     control.setAlreadyHandledChanged(new Index().setTable(pk.getTable()).setColumns(comparedColumns));
   }
   control.setAlreadyHandledChanged(new UniqueConstraint().setTable(pk.getTable()).setColumns(referenceColumns));
-  if (!referenceColumns.equalsIgnoreCase(comparedColumns)) {
+  if (!StringUtils.join(referenceColumns,",",formatter).equalsIgnoreCase(StringUtils.join(comparedColumns,",",formatter))) {
     control.setAlreadyHandledChanged(new UniqueConstraint().setTable(pk.getTable()).setColumns(comparedColumns));
   }
   return new Change[]{dropPkChange,addPkChange};

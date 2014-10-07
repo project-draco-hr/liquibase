@@ -12,7 +12,7 @@
       returnValue=this.getRelation().compareTo(o.getRelation());
     }
     if (returnValue == 0) {
-      returnValue=this.getName().compareTo(o.getName());
+      returnValue=this.toString().compareTo(o.toString());
     }
     return returnValue;
   }

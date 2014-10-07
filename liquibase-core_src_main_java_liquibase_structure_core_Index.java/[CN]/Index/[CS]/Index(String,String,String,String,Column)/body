@@ -1,0 +1,10 @@
+{
+  this();
+  setName(indexName);
+  if (tableName != null) {
+    setTable(new Table(catalogName,schemaName,tableName));
+    if (columns != null && columns.length > 0) {
+      setColumns(Arrays.asList(columns));
+    }
+  }
+}

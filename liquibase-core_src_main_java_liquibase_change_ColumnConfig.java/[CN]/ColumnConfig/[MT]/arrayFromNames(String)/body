@@ -1,0 +1,11 @@
+{
+  if (names == null) {
+    return null;
+  }
+  List<String> nameArray=StringUtils.splitAndTrim(names,",");
+  ColumnConfig[] returnArray=new ColumnConfig[nameArray.size()];
+  for (int i=0; i < nameArray.size(); i++) {
+    returnArray[i]=new ColumnConfig().setName(nameArray.get(i));
+  }
+  return returnArray;
+}

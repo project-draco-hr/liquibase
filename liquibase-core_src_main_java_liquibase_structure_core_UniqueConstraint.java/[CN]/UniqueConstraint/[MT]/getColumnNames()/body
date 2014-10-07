@@ -1,3 +1,8 @@
 {
-  return StringUtils.join(getColumns(),", ");
+  return StringUtils.join(getColumns(),", ",new StringUtils.StringUtilsFormatter(){
+    @Override public String toString(    Object obj){
+      return ((Column)obj).toString(false);
+    }
+  }
+);
 }

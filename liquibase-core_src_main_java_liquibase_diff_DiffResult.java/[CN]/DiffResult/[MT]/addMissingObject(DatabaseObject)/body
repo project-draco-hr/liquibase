@@ -1,3 +1,6 @@
 {
+  if (obj instanceof Column && ((Column)obj).getDefinition() != null) {
+    return;
+  }
   missingObjects.add(obj);
 }

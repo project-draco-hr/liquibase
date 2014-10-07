@@ -1,0 +1,13 @@
+{
+  if (includeRelation) {
+    return toString();
+  }
+ else {
+    if (getName() == null) {
+      return getDefinition();
+    }
+ else {
+      return getName();
+    }
+  }
+}

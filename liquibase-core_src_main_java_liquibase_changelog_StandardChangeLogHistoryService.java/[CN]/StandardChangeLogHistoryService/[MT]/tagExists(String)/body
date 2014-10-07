@@ -1,4 +1,4 @@
 {
-  int count=ExecutorService.getInstance().getExecutor(getDatabase()).queryForInt(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByTag(tag),"COUNT(*)"));
+  int count=ExecutorService.getInstance().getExecutor(getDatabase()).queryForInt(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByTag(tag),new ColumnConfig().setDefinition("COUNT(*)")));
   return count > 0;
 }

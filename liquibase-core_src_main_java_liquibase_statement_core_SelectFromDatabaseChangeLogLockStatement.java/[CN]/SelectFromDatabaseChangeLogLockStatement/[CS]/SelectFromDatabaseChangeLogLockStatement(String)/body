@@ -1,3 +1,6 @@
 {
-  this.columnsToSelect=columnsToSelect;
+  this.columnsToSelect=new ColumnConfig[columnsToSelect.length];
+  for (int i=0; i < columnsToSelect.length; i++) {
+    this.columnsToSelect[i]=new ColumnConfig().setName(columnsToSelect[i]);
+  }
 }

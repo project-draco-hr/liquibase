@@ -1,7 +1,0 @@
-String indexName
-String tableCatalogName
-String tableSchemaName
-String tableName
-Boolean isUnique
-String associatedWith
-String columns

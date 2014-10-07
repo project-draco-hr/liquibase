@@ -1,3 +1,8 @@
 {
-  return baseColumnNames;
+  return StringUtils.join(baseColumns,", ",new StringUtils.StringUtilsFormatter<ColumnConfig>(){
+    @Override public String toString(    ColumnConfig obj){
+      return obj.getName();
+    }
+  }
+);
 }

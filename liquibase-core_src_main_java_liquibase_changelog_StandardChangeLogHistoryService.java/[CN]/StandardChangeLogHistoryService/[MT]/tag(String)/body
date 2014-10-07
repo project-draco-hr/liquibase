@@ -2,7 +2,7 @@
   Database database=getDatabase();
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
-    int totalRows=ExecutorService.getInstance().getExecutor(database).queryForInt(new SelectFromDatabaseChangeLogStatement("COUNT(*)"));
+    int totalRows=ExecutorService.getInstance().getExecutor(database).queryForInt(new SelectFromDatabaseChangeLogStatement(new ColumnConfig().setDefinition("COUNT(*)")));
     if (totalRows == 0) {
       ChangeSet emptyChangeSet=new ChangeSet(String.valueOf(new Date().getTime()),"liquibase",false,false,"liquibase-internal",null,null,getDatabase().getObjectQuotingStrategy(),null);
       this.setExecType(emptyChangeSet,ChangeSet.ExecType.EXECUTED);

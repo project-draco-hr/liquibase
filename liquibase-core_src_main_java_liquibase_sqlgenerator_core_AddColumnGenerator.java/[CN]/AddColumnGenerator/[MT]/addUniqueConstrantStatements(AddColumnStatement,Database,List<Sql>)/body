@@ -1,6 +1,6 @@
 {
   if (statement.isUnique()) {
-    AddUniqueConstraintStatement addConstraintStmt=new AddUniqueConstraintStatement(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName(),statement.getUniqueStatementName());
+    AddUniqueConstraintStatement addConstraintStmt=new AddUniqueConstraintStatement(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),ColumnConfig.arrayFromNames(statement.getColumnName()),statement.getUniqueStatementName());
     returnSql.addAll(Arrays.asList(SqlGeneratorFactory.getInstance().generateSql(addConstraintStmt,database)));
   }
 }

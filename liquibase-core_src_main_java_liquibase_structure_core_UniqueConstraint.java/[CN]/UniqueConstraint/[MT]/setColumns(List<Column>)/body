@@ -1,0 +1,7 @@
+{
+  setAttribute("columns",columns);
+  for (  Column column : getColumns()) {
+    column.setRelation(getTable());
+  }
+  return this;
+}

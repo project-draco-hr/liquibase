@@ -1,0 +1,9 @@
+String constraintName
+String baseTableCatalogName
+String baseTableSchemaName
+String baseTableName
+ColumnConfig[] baseColumns
+String referencedTableCatalogName
+String referencedTableSchemaName
+String referencedTableName
+ColumnConfig[] referencedColumns

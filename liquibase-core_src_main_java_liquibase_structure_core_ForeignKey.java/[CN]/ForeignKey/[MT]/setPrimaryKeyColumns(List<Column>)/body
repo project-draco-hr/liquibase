@@ -1,0 +1,7 @@
+{
+  this.setAttribute("primaryKeyColumns",primaryKeyColumns);
+  for (  Column column : getPrimaryKeyColumns()) {
+    column.setRelation(getPrimaryKeyTable());
+  }
+  return this;
+}

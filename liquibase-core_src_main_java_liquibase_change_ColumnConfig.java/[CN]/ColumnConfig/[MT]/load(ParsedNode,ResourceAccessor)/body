@@ -1,5 +1,6 @@
 {
   name=parsedNode.getChildValue(null,"name",String.class);
+  definition=parsedNode.getChildValue(null,"definition",String.class);
   type=parsedNode.getChildValue(null,"type",String.class);
   encoding=parsedNode.getChildValue(null,"encoding",String.class);
   autoIncrement=parsedNode.getChildValue(null,"autoIncrement",Boolean.class);

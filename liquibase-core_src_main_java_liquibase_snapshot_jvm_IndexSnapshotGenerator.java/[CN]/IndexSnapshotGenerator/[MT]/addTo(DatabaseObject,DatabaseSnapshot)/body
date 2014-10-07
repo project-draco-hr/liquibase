@@ -32,7 +32,7 @@
           }
           foundIndexes.put(indexName,index);
         }
-        index.getColumns().add(row.getString("COLUMN_NAME"));
+        index.addColumn(new Column(row.getString("COLUMN_NAME")));
       }
       for (      Index exampleIndex : foundIndexes.values()) {
         table.getIndexes().add(exampleIndex);

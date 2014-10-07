@@ -1,0 +1,6 @@
+{
+  if (columnNames == null) {
+    return null;
+  }
+  return Arrays.asList(arrayFromNames(columnNames));
+}

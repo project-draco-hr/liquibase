@@ -1,7 +1,7 @@
 {
   DropUniqueConstraintStatement statement=new DropUniqueConstraintStatement(getCatalogName(),getSchemaName(),getTableName(),getConstraintName());
   if (database instanceof SybaseASADatabase) {
-    statement.setUniqueColumns(uniqueColumns);
+    statement.setUniqueColumns(ColumnConfig.arrayFromNames(uniqueColumns));
   }
   return new SqlStatement[]{statement};
 }

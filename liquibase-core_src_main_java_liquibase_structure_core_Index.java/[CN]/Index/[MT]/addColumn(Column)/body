@@ -1,0 +1,5 @@
+{
+  column.setRelation(getTable());
+  getColumns().add(column);
+  return this;
+}

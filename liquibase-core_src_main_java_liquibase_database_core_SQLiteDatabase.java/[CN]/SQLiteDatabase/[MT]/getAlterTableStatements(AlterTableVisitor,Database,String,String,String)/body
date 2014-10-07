@@ -46,7 +46,11 @@
     statements.addAll(Arrays.asList(new DropTableStatement(catalogName,schemaName,temp_table_name,false)));
     statements.addAll(Arrays.asList(new ReindexStatement(catalogName,schemaName,tableName)));
     for (    Index index_config : newIndices) {
-      statements.addAll(Arrays.asList(new CreateIndexStatement(index_config.getName(),catalogName,schemaName,tableName,index_config.isUnique(),index_config.getAssociatedWithAsString(),index_config.getColumns().toArray(new String[index_config.getColumns().size()]))));
+      AddColumnConfig[] columns=new AddColumnConfig[index_config.getColumns().size()];
+      for (int i=0; i < index_config.getColumns().size(); i++) {
+        columns[i]=new AddColumnConfig(index_config.getColumns().get(i));
+      }
+      statements.addAll(Arrays.asList(new CreateIndexStatement(index_config.getName(),catalogName,schemaName,tableName,index_config.isUnique(),index_config.getAssociatedWithAsString(),columns)));
     }
     return statements;
   }

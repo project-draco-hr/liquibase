@@ -1,0 +1,11 @@
+{
+  this.baseTableCatalogName=baseTableCatalogName;
+  this.baseTableSchemaName=baseTableSchemaName;
+  this.baseTableName=baseTableName;
+  this.baseColumns=baseColumns;
+  this.referencedTableCatalogName=referencedTableCatalogName;
+  this.referencedTableSchemaName=referencedTableSchemaName;
+  this.referencedTableName=referencedTableName;
+  this.referencedColumns=referencedColumns;
+  this.constraintName=constraintName;
+}

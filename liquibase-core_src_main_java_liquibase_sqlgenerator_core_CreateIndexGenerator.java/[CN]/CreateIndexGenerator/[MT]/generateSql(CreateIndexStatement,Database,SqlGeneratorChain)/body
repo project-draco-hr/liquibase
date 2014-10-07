@@ -36,10 +36,15 @@
     buffer.append("CLUSTER ");
   }
   buffer.append(database.escapeTableName(statement.getTableCatalogName(),statement.getTableSchemaName(),statement.getTableName())).append("(");
-  Iterator<String> iterator=Arrays.asList(statement.getColumns()).iterator();
+  Iterator<AddColumnConfig> iterator=Arrays.asList(statement.getColumns()).iterator();
   while (iterator.hasNext()) {
-    String column=iterator.next();
-    buffer.append(database.escapeColumnName(statement.getTableCatalogName(),statement.getTableSchemaName(),statement.getTableName(),column));
+    AddColumnConfig column=iterator.next();
+    if (column.getDefinition() == null) {
+      buffer.append(database.escapeColumnName(statement.getTableCatalogName(),statement.getTableSchemaName(),statement.getTableName(),column.getName(),false));
+    }
+ else {
+      buffer.append(column.getDefinition());
+    }
     if (iterator.hasNext()) {
       buffer.append(", ");
     }

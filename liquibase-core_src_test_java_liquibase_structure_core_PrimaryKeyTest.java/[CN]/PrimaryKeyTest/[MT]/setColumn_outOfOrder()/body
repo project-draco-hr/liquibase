@@ -1,7 +1,7 @@
 {
   PrimaryKey pk=new PrimaryKey();
-  pk.addColumnName(1,"id2");
-  pk.addColumnName(0,"id1");
+  pk.addColumn(1,new Column("id2"));
+  pk.addColumn(0,new Column("id1"));
   assertEquals(2,pk.getColumnNamesAsList().size());
   assertEquals("id1",pk.getColumnNamesAsList().get(0));
   assertEquals("id2",pk.getColumnNamesAsList().get(1));

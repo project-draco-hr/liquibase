@@ -55,6 +55,9 @@
   if (field.equals("comment")) {
     return StringUtils.trimToNull(this.getComments());
   }
+  if (field.equals("objectQuotingStrategy")) {
+    return this.getObjectQuotingStrategy().toString();
+  }
   if (field.equals("changes")) {
     return getChanges();
   }
