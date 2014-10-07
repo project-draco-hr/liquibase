@@ -1,0 +1,3 @@
+{
+  this.columnsToSelect=new ColumnConfig[0];
+}
