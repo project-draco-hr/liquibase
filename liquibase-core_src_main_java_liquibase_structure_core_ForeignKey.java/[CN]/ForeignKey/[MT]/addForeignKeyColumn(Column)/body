@@ -1,3 +1,4 @@
 {
+  foreignKeyColumn.setRelation(getForeignKeyTable());
   getAttribute("foreignKeyColumns",List.class).add(foreignKeyColumn);
 }
