@@ -1,0 +1,17 @@
+{
+  Object value=super.getSerializableFieldValue(field);
+  if (value != null && field.equals("columns")) {
+    for (    ColumnConfig config : (Collection<ColumnConfig>)value) {
+      config.setType(null);
+      config.setAutoIncrement(null);
+      config.setConstraints(null);
+      config.setDefaultValue(null);
+      config.setValue(null);
+      config.setStartWith(null);
+      config.setIncrementBy(null);
+      config.setEncoding(null);
+      config.setRemarks(null);
+    }
+  }
+  return value;
+}
