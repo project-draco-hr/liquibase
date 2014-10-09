@@ -1,5 +1,5 @@
 {
-  if (database instanceof FirebirdDatabase) {
+  if (database instanceof FirebirdDatabase || database instanceof InformixDatabase) {
     return new DatabaseDataType("FLOAT");
   }
   return super.toDatabaseDataType(database);

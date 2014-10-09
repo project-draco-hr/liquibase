@@ -47,7 +47,7 @@
     }
   }
   buffer.append(",");
-  if (!((isSinglePrimaryKeyColumn && isPrimaryKeyAutoIncrement) && isSinglePrimaryKeyColumn)) {
+  if (isSinglePrimaryKeyColumn && isPrimaryKeyAutoIncrement) {
     if (statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().size() > 0) {
       buffer.append(" PRIMARY KEY (");
       buffer.append(StringUtils.join(primaryKeyColumns,", "));
