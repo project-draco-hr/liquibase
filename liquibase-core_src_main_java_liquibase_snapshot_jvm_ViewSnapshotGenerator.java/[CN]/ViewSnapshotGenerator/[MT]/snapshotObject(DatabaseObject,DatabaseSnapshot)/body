@@ -23,6 +23,12 @@
           definition=definition.replaceFirst("^FULL_DEFINITION: ","");
           view.setContainsFullDefinition(true);
         }
+        if (database instanceof InformixDatabase) {
+          definition=definition.trim();
+          definition=definition.replaceAll("\\s*,\\s*",", ");
+          definition=definition.replaceAll("\\s*;","");
+          definition=definition.replaceAll("(?i)\"" + view.getSchema().getName() + "\"\\.","");
+        }
         view.setDefinition(definition);
       }
  catch (      DatabaseException e) {

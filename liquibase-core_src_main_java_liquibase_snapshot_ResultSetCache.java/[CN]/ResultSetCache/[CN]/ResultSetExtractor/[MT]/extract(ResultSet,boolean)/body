@@ -1,0 +1,35 @@
+{
+  List<Map> result;
+  List<CachedRow> returnList=new ArrayList<CachedRow>();
+  try {
+    result=(List<Map>)new RowMapperResultSetExtractor(new ColumnMapRowMapper(){
+      @Override protected Object getColumnValue(      ResultSet rs,      int index) throws SQLException {
+        Object value=super.getColumnValue(rs,index);
+        if (value != null && value instanceof String) {
+          if (informixIndexTrimHint == false) {
+            value=((String)value).trim();
+          }
+ else {
+            boolean startsWithSpace=false;
+            if (database instanceof InformixDatabase && ((String)value).matches("^ .*$")) {
+              startsWithSpace=true;
+            }
+            value=((String)value).trim();
+            if (startsWithSpace == true) {
+              value=" " + value;
+            }
+          }
+        }
+        return value;
+      }
+    }
+).extractData(resultSet);
+    for (    Map row : result) {
+      returnList.add(new CachedRow(row));
+    }
+  }
+  finally {
+    JdbcUtils.closeResultSet(resultSet);
+  }
+  return returnList;
+}

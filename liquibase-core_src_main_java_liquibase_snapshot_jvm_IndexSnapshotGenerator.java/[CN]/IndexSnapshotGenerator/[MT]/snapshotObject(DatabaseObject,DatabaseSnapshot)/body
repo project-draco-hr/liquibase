@@ -24,7 +24,8 @@
     databaseMetaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
     rs=databaseMetaData.getIndexInfo(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),tableName,exampleName);
     for (    CachedRow row : rs) {
-      String indexName=cleanNameFromDatabase(row.getString("INDEX_NAME"),database);
+      String rawIndexName=row.getString("INDEX_NAME");
+      String indexName=cleanNameFromDatabase(rawIndexName,database);
       if (indexName == null) {
         continue;
       }
@@ -39,7 +40,7 @@
         }
       }
       if (database instanceof InformixDatabase && indexName.startsWith(" ")) {
-        indexName="_generated_index_" + indexName.substring(1);
+        continue;
       }
       short type=row.getShort("TYPE");
       Boolean nonUnique=row.getBoolean("NON_UNIQUE");
@@ -92,7 +93,14 @@
     throw new DatabaseException(e);
   }
   if (exampleName != null) {
-    return foundIndexes.get(exampleName);
+    Index index=null;
+    if (database instanceof InformixDatabase) {
+      index=foundIndexes.get("_generated_index_" + exampleName.substring(1));
+    }
+ else {
+      index=foundIndexes.get(exampleName);
+    }
+    return index;
   }
  else {
     for (    Index index : foundIndexes.values()) {
