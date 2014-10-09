@@ -1,0 +1,7 @@
+{
+  RenameSequenceChange inverse=new RenameSequenceChange();
+  inverse.setSchemaName(getSchemaName());
+  inverse.setOldSequenceName(getNewSequenceName());
+  inverse.setNewSequenceName(getOldSequenceName());
+  return new Change[]{inverse};
+}
