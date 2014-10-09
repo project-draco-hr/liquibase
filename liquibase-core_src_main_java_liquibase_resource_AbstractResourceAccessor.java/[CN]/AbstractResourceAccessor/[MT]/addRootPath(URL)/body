@@ -1,3 +1,9 @@
 {
-  rootStrings.add(path.toExternalForm());
+  String externalForm=path.toExternalForm();
+  if (!externalForm.endsWith("/")) {
+    externalForm+="/";
+  }
+  if (!rootStrings.contains(externalForm)) {
+    rootStrings.add(externalForm);
+  }
 }

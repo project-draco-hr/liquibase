@@ -6,6 +6,7 @@
   if (baseUrl == null) {
     throw new UnexpectedLiquibaseException("Cannot find base path '" + relativeTo + "'");
   }
+  String base;
   if (baseUrl.toExternalForm().startsWith("file:")) {
     File baseFile=new File(baseUrl.getPath());
     if (!baseFile.exists()) {
@@ -14,9 +15,17 @@
     if (baseFile.isFile()) {
       baseFile=baseFile.getParentFile();
     }
-    return convertToPath(baseFile.toURI().getPath() + "/" + path);
+    base=baseFile.toURI().getPath();
   }
  else {
-    return convertToPath(relativeTo + "/" + path);
+    base=relativeTo;
   }
+  String separator="";
+  if (!base.endsWith("/") && !path.startsWith("/")) {
+    separator="/";
+  }
+  if (base.endsWith("/") && path.startsWith("/")) {
+    base=base.substring(0,base.length() - 1);
+  }
+  return convertToPath(base + separator + path);
 }
