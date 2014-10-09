@@ -1,0 +1,10 @@
+{
+  if (database instanceof InformixDatabase) {
+    if (getParameters() != null && getParameters().length == 2) {
+      if ("255".equals(String.valueOf(getParameters()[1]))) {
+        return new DatabaseDataType(getName(),getParameters()[0]);
+      }
+    }
+  }
+  return super.toDatabaseDataType(database);
+}
