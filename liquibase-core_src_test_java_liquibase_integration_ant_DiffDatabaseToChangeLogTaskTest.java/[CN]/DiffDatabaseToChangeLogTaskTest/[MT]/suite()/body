@@ -1,0 +1,6 @@
+{
+  setProperties();
+  URL resource=DiffDatabaseToChangeLogTaskTest.class.getResource("/liquibase/integration/ant/DiffDatabaseToChangeLogTaskTest.xml");
+  File file=new File(resource.toURI());
+  return new AntUnitSuite(file,DiffDatabaseToChangeLogTaskTest.class);
+}

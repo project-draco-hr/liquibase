@@ -1,0 +1,9 @@
+{
+  super.validateParameters();
+  if (changeLog == null) {
+    throw new BuildException("Change log is required.");
+  }
+  if (outputDirectory == null) {
+    throw new BuildException("Output directory is required.");
+  }
+}

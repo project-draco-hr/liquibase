@@ -1,3 +1,4 @@
 {
-  this.currentDateTimeFunction=currentDateTimeFunction.trim();
+  log("The currentDateTimeFunction attribute is deprecated. Use a nested <database> element or set the databaseRef attribute instead.",Project.MSG_WARN);
+  getDatabaseType().setCurrentDateTimeFunction(currentDateTimeFunction);
 }

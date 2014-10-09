@@ -1,0 +1,3 @@
+{
+  return new CatalogAndSchema(database.getDefaultCatalogName(),database.getDefaultSchemaName());
+}

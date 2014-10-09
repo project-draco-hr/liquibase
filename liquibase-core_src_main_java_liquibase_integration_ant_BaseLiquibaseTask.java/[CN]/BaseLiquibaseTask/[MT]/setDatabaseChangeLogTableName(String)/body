@@ -1,3 +1,4 @@
 {
-  this.databaseChangeLogTableName=tableName;
+  log("The databaseChangeLogTableName attribute is deprecated. Use a nested <database> element or set the databaseRef attribute instead.",Project.MSG_WARN);
+  getDatabaseType().setDatabaseChangeLogTableName(tableName);
 }

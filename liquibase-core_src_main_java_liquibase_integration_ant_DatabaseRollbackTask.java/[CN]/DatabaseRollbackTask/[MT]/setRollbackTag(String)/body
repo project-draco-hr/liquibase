@@ -1,3 +1,6 @@
 {
+  if (rollbackDate != null || rollbackCount != null) {
+    throw new BuildException("Unable to rollback database. A date or count has already been set.");
+  }
   this.rollbackTag=rollbackTag;
 }

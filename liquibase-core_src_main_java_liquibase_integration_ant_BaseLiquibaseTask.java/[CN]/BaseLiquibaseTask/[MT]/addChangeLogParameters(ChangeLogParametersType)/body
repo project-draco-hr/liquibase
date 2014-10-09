@@ -1,0 +1,6 @@
+{
+  if (this.changeLogParameters != null) {
+    throw new BuildException("Only one <changeLogParameters> element is allowed.");
+  }
+  this.changeLogParameters=changeLogParameters;
+}

@@ -1,0 +1,6 @@
+{
+  super.validateParameters();
+  if (getOutputFile() == null) {
+    throw new BuildException("Output file is required.");
+  }
+}

@@ -1,0 +1,6 @@
+{
+  log("The outputFile attribute is deprecated. Use a nested <xml>, <json>, <yaml>, or <txt> element instead.",Project.MSG_WARN);
+  ChangeLogOutputFile changeLogOutputFile=new ChangeLogOutputFile();
+  changeLogOutputFile.setOutputFile(outputFile);
+  addConfiguredXml(changeLogOutputFile);
+}

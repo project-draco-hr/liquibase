@@ -1,0 +1,4 @@
+{
+  log("The referenceDefaultSchemaName attribute is deprecated. Use a nested <referenceDatabase> element or set the referenceDatabaseRef attribute instead.",Project.MSG_WARN);
+  getReferenceDatabaseType().setDefaultSchemaName(referenceDefaultSchemaName);
+}

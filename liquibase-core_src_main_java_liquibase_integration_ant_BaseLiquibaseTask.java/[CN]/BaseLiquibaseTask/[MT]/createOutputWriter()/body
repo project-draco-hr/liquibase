@@ -1,6 +1,8 @@
 {
-  if (outputFile == null) {
+  if (getOutputFile() == null) {
     return null;
   }
-  return new FileWriter(new File(getOutputFile()));
+  GlobalConfiguration globalConfiguration=LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class);
+  String encoding=globalConfiguration.getOutputEncoding();
+  return new OutputStreamWriter(getOutputFile().getOutputStream(),encoding);
 }

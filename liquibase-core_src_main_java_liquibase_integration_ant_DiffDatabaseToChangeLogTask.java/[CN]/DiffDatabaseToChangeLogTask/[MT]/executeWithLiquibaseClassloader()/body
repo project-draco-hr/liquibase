@@ -1,0 +1,30 @@
+{
+  for (  ChangeLogOutputFile changeLogOutputFile : changeLogOutputFiles) {
+    PrintStream printStream=null;
+    String encoding=getOutputEncoding(changeLogOutputFile);
+    try {
+      FileResource outputFile=changeLogOutputFile.getOutputFile();
+      ChangeLogSerializer changeLogSerializer=changeLogOutputFile.getChangeLogSerializer();
+      printStream=new PrintStream(outputFile.getOutputStream(),true,encoding);
+      DiffResult diffResult=getDiffResult();
+      DiffOutputControl diffOutputControl=getDiffOutputControl();
+      DiffToChangeLog diffToChangeLog=new DiffToChangeLog(diffResult,diffOutputControl);
+      diffToChangeLog.print(printStream,changeLogSerializer);
+    }
+ catch (    UnsupportedEncodingException e) {
+      throw new BuildException("Unable to diff databases to change log file. Encoding [" + encoding + "] is not supported.",e);
+    }
+catch (    IOException e) {
+      throw new BuildException("Unable to diff databases to change log file. Error creating output stream.",e);
+    }
+catch (    ParserConfigurationException e) {
+      throw new BuildException("Unable to diff databases to change log file. Error configuring parser.",e);
+    }
+catch (    DatabaseException e) {
+      throw new BuildException("Unable to diff databases to change log file.",e);
+    }
+ finally {
+      FileUtils.close(printStream);
+    }
+  }
+}

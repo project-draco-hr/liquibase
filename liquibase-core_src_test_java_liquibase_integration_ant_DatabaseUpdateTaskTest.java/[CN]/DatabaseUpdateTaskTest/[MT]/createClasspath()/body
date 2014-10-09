@@ -1,6 +1,0 @@
-{
-  DatabaseUpdateTask databaseUpdateTask=new DatabaseUpdateTask();
-  Project project=new Project();
-  databaseUpdateTask.setProject(project);
-  assertEquals(project,databaseUpdateTask.createClasspath().getProject());
-}

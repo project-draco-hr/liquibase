@@ -1,0 +1,11 @@
+{
+  for (  Property parameter : getChangeLogParameters()) {
+    liquibase.setChangeLogParameter(parameter.getName(),parameter.getValue());
+  }
+  for (  PropertySet propertySet : getPropertySets()) {
+    Properties properties=propertySet.getProperties();
+    for (    Map.Entry<Object,Object> entry : properties.entrySet()) {
+      liquibase.setChangeLogParameter((String)entry.getKey(),entry.getValue());
+    }
+  }
+}

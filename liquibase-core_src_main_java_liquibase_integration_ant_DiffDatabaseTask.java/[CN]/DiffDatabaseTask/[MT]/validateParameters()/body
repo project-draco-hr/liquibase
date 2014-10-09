@@ -1,0 +1,6 @@
+{
+  super.validateParameters();
+  if (outputFile == null) {
+    throw new BuildException("Unable to make diff report. Output file is required.");
+  }
+}

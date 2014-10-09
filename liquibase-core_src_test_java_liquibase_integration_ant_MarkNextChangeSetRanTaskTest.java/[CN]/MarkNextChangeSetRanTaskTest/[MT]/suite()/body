@@ -1,0 +1,6 @@
+{
+  setProperties();
+  URL resource=MarkNextChangeSetRanTaskTest.class.getResource("/liquibase/integration/ant/MarkNextChangeSetRanTaskTest.xml");
+  File file=new File(resource.toURI());
+  return new AntUnitSuite(file,MarkNextChangeSetRanTaskTest.class);
+}

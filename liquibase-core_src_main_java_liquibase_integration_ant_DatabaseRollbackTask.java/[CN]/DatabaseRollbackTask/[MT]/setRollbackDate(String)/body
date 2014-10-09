@@ -1,0 +1,11 @@
+{
+  if (rollbackTag != null || rollbackCount != null) {
+    throw new BuildException("Unable to rollback database. A tag or count has already been set.");
+  }
+  try {
+    this.rollbackDate=DateUtils.parseIso8601DateTimeOrDate(rollbackDateStr);
+  }
+ catch (  ParseException e) {
+    throw new BuildException("Unable to parse rollback date/time string into a Date object. Please make sure the date or date/time is in ISO 8601 format (yyyy-MM-dd or yyyy-MM-ddTHH:mm:ss).",e);
+  }
+}

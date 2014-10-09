@@ -1,0 +1,17 @@
+{
+  log("Creating Liquibase Database",Project.MSG_DEBUG);
+  log("JDBC driver: " + driver,Project.MSG_DEBUG);
+  log("JDBC URL: " + url,Project.MSG_DEBUG);
+  log("JDBC username: " + user,Project.MSG_DEBUG);
+  log("Default catalog name: " + defaultCatalogName,Project.MSG_DEBUG);
+  log("Default schema name: " + defaultSchemaName,Project.MSG_DEBUG);
+  log("Liquibase catalog name: " + liquibaseCatalogName,Project.MSG_DEBUG);
+  log("Liquibase schema name: " + liquibaseSchemaName,Project.MSG_DEBUG);
+  log("Liquibase tablespace name: " + liquibaseTablespaceName,Project.MSG_DEBUG);
+  log("Database changelog table name: " + databaseChangeLogTableName,Project.MSG_DEBUG);
+  log("Database changelog lock table name: " + databaseChangeLogLockTableName,Project.MSG_DEBUG);
+  log("Output default catalog: " + outputDefaultCatalog,Project.MSG_DEBUG);
+  log("Output default schema: " + outputDefaultSchema,Project.MSG_DEBUG);
+  log("Current date/time function: " + currentDateTimeFunction,Project.MSG_DEBUG);
+  log("Database class: " + databaseClass,Project.MSG_DEBUG);
+}

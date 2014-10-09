@@ -1,9 +1,0 @@
-{
-  DiffOutputControl diffOutputControl=new DiffOutputControl(getIncludeCatalog(),getIncludeSchema(),getIncludeTablespace()).addIncludedSchema(new CatalogAndSchema(getDefaultCatalogName(),getDefaultSchemaName()));
-  if (getChangeLogFile() == null) {
-    new DiffToChangeLog(diffResult,diffOutputControl).print(writer);
-  }
- else {
-    new DiffToChangeLog(diffResult,diffOutputControl).print(getChangeLogFile());
-  }
-}

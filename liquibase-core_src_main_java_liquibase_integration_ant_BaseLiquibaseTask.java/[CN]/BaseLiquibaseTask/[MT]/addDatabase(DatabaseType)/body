@@ -1,0 +1,6 @@
+{
+  if (this.databaseType != null) {
+    throw new BuildException("Only one <database> element is allowed.");
+  }
+  this.databaseType=databaseType;
+}

@@ -1,0 +1,5 @@
+{
+  FileSystemResourceAccessor fileSystemResourceAccessor=new FileSystemResourceAccessor();
+  ClassLoaderResourceAccessor classLoaderResourceAccessor=new ClassLoaderResourceAccessor(classLoader);
+  return new CompositeResourceAccessor(fileSystemResourceAccessor,classLoaderResourceAccessor);
+}
