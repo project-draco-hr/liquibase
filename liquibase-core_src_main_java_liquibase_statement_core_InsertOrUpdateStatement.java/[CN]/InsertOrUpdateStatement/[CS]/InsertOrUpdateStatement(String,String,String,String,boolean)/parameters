@@ -2,4 +2,4 @@ String catalogName
 String schemaName
 String tableName
 String primaryKey
-boolean updateOnly
+boolean onlyUpdate

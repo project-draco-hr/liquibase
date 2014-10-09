@@ -1,4 +1,4 @@
 {
   this(catalogName,schemaName,tableName,primaryKey);
-  this.updateOnly=updateOnly;
+  this.onlyUpdate=onlyUpdate;
 }
