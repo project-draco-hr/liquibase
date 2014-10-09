@@ -1,0 +1,12 @@
+{
+  Main cli=new Main();
+  String[] args=new String[]{"--strict=false"};
+  cli.parseOptions(args);
+  Properties props=new Properties();
+  props.setProperty("driver","DRIVER");
+  props.setProperty("unknown.property","UnknownValue");
+  ByteArrayOutputStream propFile=new ByteArrayOutputStream();
+  props.store(propFile,"");
+  cli.parsePropertiesFile(new ByteArrayInputStream(propFile.toByteArray()));
+  assertEquals("DRIVER",cli.driver);
+}

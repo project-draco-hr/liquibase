@@ -1,0 +1,10 @@
+{
+  Main cli=new Main();
+  Properties props=new Properties();
+  props.setProperty("driver","DRIVER");
+  props.setProperty("unknown.property","UnknownValue");
+  props.setProperty("strict","true");
+  ByteArrayOutputStream propFile=new ByteArrayOutputStream();
+  props.store(propFile,"");
+  cli.parsePropertiesFile(new ByteArrayInputStream(propFile.toByteArray()));
+}
