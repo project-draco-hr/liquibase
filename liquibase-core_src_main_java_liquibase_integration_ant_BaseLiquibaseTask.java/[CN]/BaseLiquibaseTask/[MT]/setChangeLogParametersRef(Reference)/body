@@ -1,0 +1,4 @@
+{
+  changeLogParameters=new ChangeLogParametersType(getProject());
+  changeLogParameters.setRefid(changeLogParametersRef);
+}

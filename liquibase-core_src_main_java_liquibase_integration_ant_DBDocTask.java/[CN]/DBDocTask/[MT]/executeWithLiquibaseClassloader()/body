@@ -1,16 +1,24 @@
 {
-  if (StringUtils.trimToNull(getOutputDirectory()) == null) {
-    throw new BuildException("dbDoc requires outputDirectory to be set");
+  File outputDirFile=outputDirectory.getFile();
+  if (!outputDirFile.exists()) {
+    boolean success=outputDirFile.mkdirs();
+    if (!success) {
+      throw new BuildException("Unable to create output directory.");
+    }
   }
-  Liquibase liquibase=null;
+  if (!outputDirFile.isDirectory()) {
+    throw new BuildException("Output path is not a directory.");
+  }
+  Liquibase liquibase=getLiquibase();
   try {
-    liquibase=createLiquibase();
-    liquibase.generateDocumentation(getOutputDirectory());
+    if (contexts != null) {
+      liquibase.generateDocumentation(outputDirectory.toString(),contexts);
+    }
+ else {
+      liquibase.generateDocumentation(outputDirectory.toString());
+    }
   }
- catch (  Exception e) {
-    throw new BuildException(e);
-  }
- finally {
-    closeDatabase(liquibase);
+ catch (  LiquibaseException e) {
+    throw new BuildException("Liquibase encountered an error while creating database documentation.",e);
   }
 }

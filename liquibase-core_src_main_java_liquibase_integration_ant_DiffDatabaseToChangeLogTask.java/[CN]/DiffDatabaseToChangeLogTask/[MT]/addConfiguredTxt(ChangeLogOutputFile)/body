@@ -1,0 +1,4 @@
+{
+  changeLogOutputFile.setChangeLogSerializer(new StringChangeLogSerializer());
+  changeLogOutputFiles.add(changeLogOutputFile);
+}

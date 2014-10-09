@@ -1,0 +1,6 @@
+{
+  if (databaseType == null) {
+    databaseType=new DatabaseType(getProject());
+  }
+  return databaseType;
+}

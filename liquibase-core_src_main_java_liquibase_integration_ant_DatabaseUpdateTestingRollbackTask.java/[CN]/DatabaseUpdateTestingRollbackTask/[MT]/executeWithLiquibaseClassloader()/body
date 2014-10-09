@@ -1,22 +1,12 @@
 {
-  if (!shouldRun()) {
-    return;
-  }
-  Liquibase liquibase=null;
+  Liquibase liquibase=getLiquibase();
   try {
-    liquibase=createLiquibase();
-    if (isPromptOnNonLocalDatabase() && !liquibase.isSafeToRunUpdate() && UIFactory.getInstance().getFacade().promptForNonLocalDatabase(liquibase.getDatabase())) {
-      throw new BuildException("Chose not to run against non-production database");
-    }
     if (isDropFirst()) {
       liquibase.dropAll();
     }
-    liquibase.updateTestingRollback(new Contexts(getContexts()),new LabelExpression(getLabels()));
+    liquibase.updateTestingRollback(new Contexts(getContexts()),getLabels());
   }
- catch (  Exception e) {
-    throw new BuildException(e);
-  }
- finally {
-    closeDatabase(liquibase);
+ catch (  LiquibaseException e) {
+    throw new BuildException("Unable to update database with a rollback test.",e);
   }
 }

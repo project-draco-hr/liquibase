@@ -1,0 +1,3 @@
+{
+  this.labels=new LabelExpression(labels);
+}

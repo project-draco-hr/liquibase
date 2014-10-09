@@ -1,0 +1,4 @@
+{
+  databaseType=new DatabaseType(getProject());
+  databaseType.setRefid(databaseRef);
+}

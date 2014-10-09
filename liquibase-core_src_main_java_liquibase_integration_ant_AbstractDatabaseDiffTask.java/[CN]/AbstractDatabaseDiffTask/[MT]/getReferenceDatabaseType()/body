@@ -1,0 +1,6 @@
+{
+  if (referenceDatabaseType == null) {
+    referenceDatabaseType=new DatabaseType(getProject());
+  }
+  return referenceDatabaseType;
+}

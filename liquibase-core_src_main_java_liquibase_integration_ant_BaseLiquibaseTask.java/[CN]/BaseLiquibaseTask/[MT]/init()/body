@@ -1,0 +1,4 @@
+{
+  LogFactory.setInstance(new AntTaskLogFactory(this));
+  classpath=new Path(getProject());
+}

@@ -1,5 +1,5 @@
 {
-  if (ranChangeSetList != null) {
+  if (!ranChangeSetList.isEmpty()) {
     return true;
   }
   try {

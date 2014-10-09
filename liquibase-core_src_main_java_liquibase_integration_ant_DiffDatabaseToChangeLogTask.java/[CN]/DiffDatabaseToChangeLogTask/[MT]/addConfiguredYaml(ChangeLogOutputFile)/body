@@ -1,0 +1,4 @@
+{
+  changeLogOutputFile.setChangeLogSerializer(new YamlChangeLogSerializer());
+  changeLogOutputFiles.add(changeLogOutputFile);
+}

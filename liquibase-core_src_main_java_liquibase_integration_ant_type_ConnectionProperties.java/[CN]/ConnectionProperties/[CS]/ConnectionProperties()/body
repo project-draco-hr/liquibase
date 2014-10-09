@@ -1,0 +1,4 @@
+{
+  propertySets=new LinkedList<PropertySet>();
+  properties=new LinkedList<Property>();
+}

@@ -1,0 +1,5 @@
+{
+  if (databaseType == null) {
+    throw new BuildException("A database or databaseref is required.");
+  }
+}

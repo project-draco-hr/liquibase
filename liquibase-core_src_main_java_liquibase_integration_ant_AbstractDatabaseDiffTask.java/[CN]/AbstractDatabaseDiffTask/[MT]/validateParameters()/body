@@ -1,0 +1,6 @@
+{
+  super.validateParameters();
+  if (referenceDatabaseType == null) {
+    throw new BuildException("Reference database element or reference required.");
+  }
+}

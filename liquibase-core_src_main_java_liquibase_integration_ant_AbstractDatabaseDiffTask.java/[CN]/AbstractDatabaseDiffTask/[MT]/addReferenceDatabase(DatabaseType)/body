@@ -1,0 +1,6 @@
+{
+  if (this.referenceDatabaseType != null) {
+    throw new BuildException("Only one <referenceDatabase> element is allowed.");
+  }
+  this.referenceDatabaseType=referenceDatabase;
+}

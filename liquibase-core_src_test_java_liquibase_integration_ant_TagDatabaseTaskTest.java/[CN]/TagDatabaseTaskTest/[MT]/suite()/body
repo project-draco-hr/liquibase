@@ -1,0 +1,6 @@
+{
+  setProperties();
+  URL resource=TagDatabaseTaskTest.class.getResource("/liquibase/integration/ant/TagDatabaseTaskTest.xml");
+  File file=new File(resource.toURI());
+  return new AntUnitSuite(file,TagDatabaseTaskTest.class);
+}

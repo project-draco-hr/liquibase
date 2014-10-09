@@ -1,0 +1,6 @@
+{
+  setProperties();
+  URL resource=DatabaseUpdateTaskTest.class.getResource("/liquibase/integration/ant/DatabaseUpdateTaskTest.xml");
+  File file=new File(resource.toURI());
+  return new AntUnitSuite(file,DatabaseUpdateTaskTest.class);
+}

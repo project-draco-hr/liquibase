@@ -1,0 +1,6 @@
+{
+  if (this.connectionProperties != null) {
+    throw new BuildException("Only one <connectionProperties> element is allowed.");
+  }
+  this.connectionProperties=connectionProperties;
+}

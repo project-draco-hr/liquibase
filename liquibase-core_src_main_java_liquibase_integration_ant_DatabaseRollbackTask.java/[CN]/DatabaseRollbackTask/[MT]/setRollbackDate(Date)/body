@@ -1,5 +1,0 @@
-{
-  if (rollbackDate != null) {
-    this.rollbackDate=new Date(rollbackDate.getTime());
-  }
-}

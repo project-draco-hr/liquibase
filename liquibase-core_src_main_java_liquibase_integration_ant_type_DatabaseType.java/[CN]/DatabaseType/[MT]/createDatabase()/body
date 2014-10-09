@@ -1,0 +1,4 @@
+{
+  ClassLoader contextClassLoader=LoaderUtils.getContextClassLoader();
+  return createDatabase(contextClassLoader);
+}

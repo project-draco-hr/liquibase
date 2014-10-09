@@ -1,0 +1,6 @@
+{
+  if (changeLogParameters == null) {
+    changeLogParameters=new ChangeLogParametersType(getProject());
+  }
+  return changeLogParameters;
+}
