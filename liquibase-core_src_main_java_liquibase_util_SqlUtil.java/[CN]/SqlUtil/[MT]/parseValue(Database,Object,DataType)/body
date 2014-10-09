@@ -227,7 +227,7 @@
     return stringVal;
   }
  else {
-    LogFactory.getLogger().info("Unknown default value: value '" + stringVal + "' typeId "+ typeName+ " ("+ typeId+ "), assuming it is a function");
+    LogFactory.getLogger().info("Unknown default value: value '" + stringVal + "' type "+ typeName+ " ("+ type+ "), assuming it is a function");
     return new DatabaseFunction(stringVal);
   }
 }
