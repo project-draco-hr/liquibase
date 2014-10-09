@@ -1,15 +1,21 @@
 {
   StringBuffer completeSql=new StringBuffer();
   String whereClause=getWhereClause(insertOrUpdateStatement,database);
-  completeSql.append(getRecordCheck(insertOrUpdateStatement,database,whereClause));
-  completeSql.append(getInsertStatement(insertOrUpdateStatement,database,sqlGeneratorChain));
+  if (!insertOrUpdateStatement.getOnlyUpdate()) {
+    completeSql.append(getRecordCheck(insertOrUpdateStatement,database,whereClause));
+    completeSql.append(getInsertStatement(insertOrUpdateStatement,database,sqlGeneratorChain));
+  }
   try {
     String updateStatement=getUpdateStatement(insertOrUpdateStatement,database,whereClause,sqlGeneratorChain);
-    completeSql.append(getElse(database));
+    if (!insertOrUpdateStatement.getOnlyUpdate()) {
+      completeSql.append(getElse(database));
+    }
     completeSql.append(updateStatement);
   }
  catch (  LiquibaseException e) {
   }
-  completeSql.append(getPostUpdateStatements(database));
+  if (!insertOrUpdateStatement.getOnlyUpdate()) {
+    completeSql.append(getPostUpdateStatements(database));
+  }
   return new Sql[]{new UnparsedSql(completeSql.toString(),"",getAffectedTable(insertOrUpdateStatement))};
 }

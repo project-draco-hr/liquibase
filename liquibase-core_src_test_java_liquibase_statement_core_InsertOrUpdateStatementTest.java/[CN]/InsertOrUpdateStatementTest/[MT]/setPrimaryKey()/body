@@ -2,4 +2,5 @@
   String primaryKey="PRIMARYKEY";
   InsertOrUpdateStatement statement=new InsertOrUpdateStatement("CATALOG","SCHEMA","TABLE",primaryKey);
   assertEquals(primaryKey,statement.getPrimaryKey());
+  assertEquals(Boolean.FALSE,statement.getOnlyUpdate());
 }
