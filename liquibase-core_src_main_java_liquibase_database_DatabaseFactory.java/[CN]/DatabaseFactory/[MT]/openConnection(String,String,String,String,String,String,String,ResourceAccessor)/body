@@ -25,7 +25,13 @@
  catch (    Exception e) {
       throw new RuntimeException("Cannot find database driver: " + e.getMessage());
     }
-    Properties driverProperties=new Properties();
+    Properties driverProperties;
+    if (propertyProviderClass == null) {
+      driverProperties=new Properties();
+    }
+ else {
+      driverProperties=(Properties)Class.forName(propertyProviderClass,true,resourceAccessor.toClassLoader()).newInstance();
+    }
     if (username != null) {
       driverProperties.put("user",username);
     }

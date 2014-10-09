@@ -1,4 +1,5 @@
 String url
 String username
 String password
+String propertyProviderClass
 ResourceAccessor resourceAccessor

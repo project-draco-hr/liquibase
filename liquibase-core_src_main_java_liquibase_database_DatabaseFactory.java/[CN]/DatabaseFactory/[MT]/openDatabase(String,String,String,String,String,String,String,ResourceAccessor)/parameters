@@ -4,4 +4,5 @@ String password
 String driver
 String databaseClass
 String driverPropertiesFile
+String propertyProviderClass
 ResourceAccessor resourceAccessor
