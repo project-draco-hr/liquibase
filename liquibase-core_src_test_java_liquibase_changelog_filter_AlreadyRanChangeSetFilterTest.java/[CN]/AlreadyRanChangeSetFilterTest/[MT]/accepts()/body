@@ -1,8 +1,5 @@
 {
-  ArrayList<RanChangeSet> ranChanges=new ArrayList<RanChangeSet>();
-  ranChanges.add(new RanChangeSet("path/changelog","1","testAuthor",CheckSum.parse("12345"),new Date(),null,null,null,null));
-  ranChanges.add(new RanChangeSet("path/changelog","2","testAuthor",CheckSum.parse("12345"),new Date(),null,null,null,null));
-  AlreadyRanChangeSetFilter filter=new AlreadyRanChangeSetFilter(ranChanges);
+  AlreadyRanChangeSetFilter filter=new AlreadyRanChangeSetFilter(getRanChangeSets(),false);
   assertTrue(filter.accepts(new ChangeSet("1","testAuthor",false,false,"path/changelog",null,null,null)).isAccepted());
   assertTrue(filter.accepts(new ChangeSet("1","testAuthor",true,false,"path/changelog",null,null,null)).isAccepted());
   assertTrue(filter.accepts(new ChangeSet("1","testAuthor",false,true,"path/changelog",null,null,null)).isAccepted());

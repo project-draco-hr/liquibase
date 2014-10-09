@@ -7,7 +7,8 @@
     DatabaseChangeLog changeLog=getDatabaseChangeLog();
     checkLiquibaseTables(false,changeLog,contexts,labelExpression);
     changeLog.validate(database,contexts,labelExpression);
-    ChangeLogIterator logIterator=new ChangeLogIterator(database.getRanChangeSetList(),changeLog,new AlreadyRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database),new CountChangeSetFilter(changesToRollback));
+    changeLog.setIgnoreClasspathPrefix(ignoreClasspathPrefix);
+    ChangeLogIterator logIterator=new ChangeLogIterator(database.getRanChangeSetList(),changeLog,new AlreadyRanChangeSetFilter(database.getRanChangeSetList(),ignoreClasspathPrefix),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database),new CountChangeSetFilter(changesToRollback));
     logIterator.run(new RollbackVisitor(database),new RuntimeEnvironment(database,contexts,labelExpression));
   }
   finally {

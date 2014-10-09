@@ -1,6 +1,6 @@
 {
   for (  RanChangeSet ranChangeSet : ranChangeSets) {
-    if (ranChangeSet.getId().equalsIgnoreCase(changeSet.getId()) && ranChangeSet.getAuthor().equalsIgnoreCase(changeSet.getAuthor()) && ranChangeSet.getChangeLog().equalsIgnoreCase(changeSet.getFilePath())) {
+    if (ranChangeSet.getId().equalsIgnoreCase(changeSet.getId()) && ranChangeSet.getAuthor().equalsIgnoreCase(changeSet.getAuthor()) && normalizePath(ranChangeSet.getChangeLog()).equalsIgnoreCase(normalizePath(changeSet.getFilePath()))) {
       return ranChangeSet;
     }
   }
