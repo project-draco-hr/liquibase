@@ -1,0 +1,14 @@
+{
+  Database database=getDatabase();
+  final MockExecutor mockExecutor=new MockExecutor();
+  ExecutorService.getInstance().setExecutor(database,mockExecutor);
+  final List<SqlVisitor> sqlVisitors=new ArrayList<SqlVisitor>();
+  final CreateTableChange change=new CreateTableChange();
+  change.setTableName("test_table");
+  final AppendSqlVisitor appendSqlVisitor=new AppendSqlVisitor();
+  appendSqlVisitor.setApplyToRollback(true);
+  appendSqlVisitor.setValue(" SHOULD BE APPENDED");
+  sqlVisitors.add(appendSqlVisitor);
+  database.executeRollbackStatements(change,sqlVisitors);
+  assertEquals("DROP TABLE test_table SHOULD BE APPENDED;",mockExecutor.getRanSql().trim());
+}

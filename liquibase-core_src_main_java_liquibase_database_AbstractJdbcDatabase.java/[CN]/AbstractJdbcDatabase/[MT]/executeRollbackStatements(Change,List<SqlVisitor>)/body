@@ -1,12 +1,4 @@
 {
-  SqlStatement[] statements=change.generateRollbackStatements(this);
-  List<SqlVisitor> rollbackVisitors=new ArrayList<SqlVisitor>();
-  if (sqlVisitors != null) {
-    for (    SqlVisitor visitor : sqlVisitors) {
-      if (visitor.isApplyToRollback()) {
-        rollbackVisitors.add(visitor);
-      }
-    }
-  }
-  execute(statements,rollbackVisitors);
+  final SqlStatement[] statements=change.generateRollbackStatements(this);
+  executeRollbackStatements(statements,sqlVisitors);
 }

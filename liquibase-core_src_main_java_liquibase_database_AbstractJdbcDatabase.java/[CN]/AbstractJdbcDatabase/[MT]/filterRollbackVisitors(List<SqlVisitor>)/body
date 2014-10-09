@@ -1,0 +1,11 @@
+{
+  final List<SqlVisitor> rollbackVisitors=new ArrayList<SqlVisitor>();
+  if (visitors != null) {
+    for (    SqlVisitor visitor : visitors) {
+      if (visitor.isApplyToRollback()) {
+        rollbackVisitors.add(visitor);
+      }
+    }
+  }
+  return rollbackVisitors;
+}
