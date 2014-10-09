@@ -1,0 +1,6 @@
+{
+  if (updateOnly == null) {
+    return false;
+  }
+  return updateOnly;
+}

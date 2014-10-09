@@ -1,0 +1,4 @@
+{
+  this(catalogName,schemaName,tableName,primaryKey);
+  this.updateOnly=updateOnly;
+}
