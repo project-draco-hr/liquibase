@@ -1,0 +1,22 @@
+{
+  ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("columnName",statement.getColumnName());
+  validationErrors.checkRequiredField("columnType",statement.getColumnType());
+  validationErrors.checkRequiredField("tableName",statement.getTableName());
+  if (statement.isPrimaryKey() && (database instanceof H2Database || database instanceof DB2Database || database instanceof DerbyDatabase|| database instanceof SQLiteDatabase)) {
+    validationErrors.addError("Cannot add a primary key column");
+  }
+  if (database instanceof MySQLDatabase && statement.isAutoIncrement() && !statement.isPrimaryKey()) {
+    validationErrors.addError("Cannot add a non-primary key identity column");
+  }
+  if ((statement.getAddAfterColumn() != null) && !(database instanceof MySQLDatabase)) {
+    validationErrors.addError("Cannot add column on specific position");
+  }
+  if ((statement.getAddBeforeColumn() != null) && !((database instanceof H2Database) || (database instanceof HsqlDatabase))) {
+    validationErrors.addError("Cannot add column on specific position");
+  }
+  if ((statement.getAddAtPosition() != null) && !(database instanceof FirebirdDatabase)) {
+    validationErrors.addError("Cannot add column on specific position");
+  }
+  return validationErrors;
+}

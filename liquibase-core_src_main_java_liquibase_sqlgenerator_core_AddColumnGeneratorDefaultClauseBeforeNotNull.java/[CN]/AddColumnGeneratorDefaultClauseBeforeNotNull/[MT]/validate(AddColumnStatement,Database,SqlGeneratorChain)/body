@@ -1,7 +1,12 @@
 {
   ValidationErrors validationErrors=super.validate(statement,database,sqlGeneratorChain);
-  if (database instanceof DerbyDatabase && statement.isAutoIncrement()) {
-    validationErrors.addError("Cannot add an identity column to derby");
+  if (statement.isMultiple()) {
+    for (    AddColumnStatement column : statement.getColumns()) {
+      validateSingleColumn(column,database,validationErrors);
+    }
+  }
+ else {
+    validateSingleColumn(statement,database,validationErrors);
   }
   return validationErrors;
 }
