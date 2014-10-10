@@ -1,5 +1,6 @@
 {
   List<SqlStatement> sql=new ArrayList<SqlStatement>();
+  List<AddColumnStatement> addColumnStatements=new ArrayList<AddColumnStatement>();
   if (getColumns().size() == 0) {
     return new SqlStatement[]{new AddColumnStatement(catalogName,schemaName,tableName,null,null,null)};
   }
@@ -33,7 +34,7 @@
  else     if ((database instanceof FirebirdDatabase) && (column.getPosition() != null)) {
       addColumnStatement.setAddAtPosition(column.getPosition());
     }
-    sql.add(addColumnStatement);
+    addColumnStatements.add(addColumnStatement);
     if (database instanceof DB2Database) {
       sql.add(new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName()));
     }
@@ -42,6 +43,12 @@
       updateStatement.addNewColumnValue(column.getName(),column.getValueObject());
       sql.add(updateStatement);
     }
+  }
+  if (addColumnStatements.size() == 1) {
+    sql.add(0,addColumnStatements.get(0));
+  }
+ else {
+    sql.add(0,new AddColumnStatement(addColumnStatements));
   }
   for (  ColumnConfig column : getColumns()) {
     String columnRemarks=StringUtils.trimToNull(column.getRemarks());
