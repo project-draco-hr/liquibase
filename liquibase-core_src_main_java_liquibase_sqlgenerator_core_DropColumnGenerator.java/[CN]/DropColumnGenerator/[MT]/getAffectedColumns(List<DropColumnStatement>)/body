@@ -1,0 +1,7 @@
+{
+  List<Column> affected=new ArrayList<Column>();
+  for (  DropColumnStatement column : columns) {
+    affected.add(getAffectedColumn(column));
+  }
+  return affected.toArray(new Column[affected.size()]);
+}

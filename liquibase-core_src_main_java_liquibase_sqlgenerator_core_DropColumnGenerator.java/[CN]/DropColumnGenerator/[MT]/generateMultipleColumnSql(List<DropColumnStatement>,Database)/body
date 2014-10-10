@@ -1,0 +1,19 @@
+{
+  List<Sql> result=new ArrayList<Sql>();
+  if (database instanceof MySQLDatabase) {
+    String alterTable="ALTER TABLE " + database.escapeTableName(columns.get(0).getCatalogName(),columns.get(0).getSchemaName(),columns.get(0).getTableName());
+    for (int i=0; i < columns.size(); i++) {
+      alterTable+=" DROP " + database.escapeColumnName(columns.get(i).getCatalogName(),columns.get(i).getSchemaName(),columns.get(i).getTableName(),columns.get(i).getColumnName());
+      if (i < columns.size() - 1) {
+        alterTable+=",";
+      }
+    }
+    result.add(new UnparsedSql(alterTable,getAffectedColumns(columns)));
+  }
+ else {
+    for (    DropColumnStatement column : columns) {
+      result.add(generateSingleColumnSql(column,database)[0]);
+    }
+  }
+  return result.toArray(new Sql[result.size()]);
+}

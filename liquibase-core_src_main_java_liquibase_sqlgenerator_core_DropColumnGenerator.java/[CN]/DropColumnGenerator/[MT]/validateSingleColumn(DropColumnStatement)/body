@@ -1,0 +1,6 @@
+{
+  ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("tableName",dropColumnStatement.getTableName());
+  validationErrors.checkRequiredField("columnName",dropColumnStatement.getColumnName());
+  return validationErrors;
+}

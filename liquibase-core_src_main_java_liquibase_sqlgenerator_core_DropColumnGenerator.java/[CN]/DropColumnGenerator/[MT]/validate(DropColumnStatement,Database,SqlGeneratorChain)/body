@@ -1,6 +1,19 @@
 {
-  ValidationErrors validationErrors=new ValidationErrors();
-  validationErrors.checkRequiredField("tableName",dropColumnStatement.getTableName());
-  validationErrors.checkRequiredField("columnName",dropColumnStatement.getColumnName());
-  return validationErrors;
+  if (dropColumnStatement.isMultiple()) {
+    ValidationErrors validationErrors=new ValidationErrors();
+    DropColumnStatement firstColumn=dropColumnStatement.getColumns().get(0);
+    for (    DropColumnStatement drop : dropColumnStatement.getColumns()) {
+      validationErrors.addAll(validateSingleColumn(drop));
+      if (drop.getTableName() != null && !drop.getTableName().equals(firstColumn.getTableName())) {
+        validationErrors.addError("All columns must be targeted at the same table");
+      }
+      if (drop.isMultiple()) {
+        validationErrors.addError("Nested multiple drop column statements are not supported");
+      }
+    }
+    return validationErrors;
+  }
+ else {
+    return validateSingleColumn(dropColumnStatement);
+  }
 }
