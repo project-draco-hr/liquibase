@@ -5,13 +5,13 @@
       return new ColumnConfig[0];
     }
     public boolean createThisColumn(    ColumnConfig column){
-      return !column.getName().equals(getColumnName());
+      return !column.getName().equals(columnName);
     }
     public boolean copyThisColumn(    ColumnConfig column){
-      return !column.getName().equals(getColumnName());
+      return !column.getName().equals(columnName);
     }
     public boolean createThisIndex(    Index index){
-      return !index.getColumns().contains(getColumnName());
+      return !index.getColumns().contains(columnName);
     }
   }
 ;
