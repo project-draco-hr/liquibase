@@ -1,0 +1,7 @@
+{
+  List<Column> cols=new ArrayList<Column>();
+  for (  AddColumnStatement c : columns) {
+    cols.add(getAffectedColumn(c));
+  }
+  return cols.toArray(new Column[cols.size()]);
+}
