@@ -1,0 +1,4 @@
+{
+  checkConvertToPathIsConsistentGivenTheRootPathInsertionOrder("file:/th/");
+  checkConvertToPathIsConsistentGivenTheRootPathInsertionOrder("file:/sa/");
+}
