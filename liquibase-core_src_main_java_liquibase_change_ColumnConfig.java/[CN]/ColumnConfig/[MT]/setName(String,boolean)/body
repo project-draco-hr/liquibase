@@ -1,0 +1,4 @@
+{
+  setComputed(computed);
+  return setName(name);
+}

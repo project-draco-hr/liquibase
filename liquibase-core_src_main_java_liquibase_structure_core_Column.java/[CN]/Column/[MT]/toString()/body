@@ -1,6 +1,6 @@
 {
-  if (getName() == null) {
-    return getDefinition();
+  if (getComputed() != null && getComputed()) {
+    return getName();
   }
  else {
     if (getRelation() == null) {

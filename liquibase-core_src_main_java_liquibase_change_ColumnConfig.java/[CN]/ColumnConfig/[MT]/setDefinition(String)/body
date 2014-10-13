@@ -1,4 +1,0 @@
-{
-  this.definition=definition;
-  return this;
-}

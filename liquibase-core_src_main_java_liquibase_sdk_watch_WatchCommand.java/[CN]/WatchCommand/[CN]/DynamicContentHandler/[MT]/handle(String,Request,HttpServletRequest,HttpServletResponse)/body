@@ -18,7 +18,7 @@
         lockService.waitForLock();
         List<Map<String,?>> rows;
         try {
-          SelectFromDatabaseChangeLogStatement select=new SelectFromDatabaseChangeLogStatement(new ColumnConfig().setDefinition("COUNT(*) AS ROW_COUNT"),new ColumnConfig().setDefinition("MAX(DATEEXECUTED) AS LAST_EXEC"));
+          SelectFromDatabaseChangeLogStatement select=new SelectFromDatabaseChangeLogStatement(new ColumnConfig().setName("COUNT(*) AS ROW_COUNT",true),new ColumnConfig().setName("MAX(DATEEXECUTED) AS LAST_EXEC",true));
           rows=executor.queryForList(select);
         }
   finally {

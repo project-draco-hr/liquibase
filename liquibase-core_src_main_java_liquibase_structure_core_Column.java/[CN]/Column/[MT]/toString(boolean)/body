@@ -3,11 +3,6 @@
     return toString();
   }
  else {
-    if (getName() == null) {
-      return getDefinition();
-    }
- else {
-      return getName();
-    }
+    return getName();
   }
 }

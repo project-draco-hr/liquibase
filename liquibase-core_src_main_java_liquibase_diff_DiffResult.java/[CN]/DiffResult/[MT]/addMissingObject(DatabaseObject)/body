@@ -1,5 +1,5 @@
 {
-  if (obj instanceof Column && ((Column)obj).getDefinition() != null) {
+  if (obj instanceof Column && ((Column)obj).getComputed() != null && ((Column)obj).getComputed()) {
     return;
   }
   missingObjects.add(obj);

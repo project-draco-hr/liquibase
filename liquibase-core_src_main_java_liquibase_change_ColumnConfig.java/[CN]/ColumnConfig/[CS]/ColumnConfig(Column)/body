@@ -1,6 +1,6 @@
 {
   setName(columnSnapshot.getName());
-  setDefinition(columnSnapshot.getDefinition());
+  setComputed(columnSnapshot.getComputed());
   if (columnSnapshot.getType() != null) {
     setType(columnSnapshot.getType().toString());
   }

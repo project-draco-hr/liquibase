@@ -1,0 +1,5 @@
+{
+  this.computed=computed;
+  setAttribute("computed",computed);
+  return this;
+}
