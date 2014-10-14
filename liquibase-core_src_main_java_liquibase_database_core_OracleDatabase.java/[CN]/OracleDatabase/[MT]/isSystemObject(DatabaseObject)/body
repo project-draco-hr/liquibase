@@ -34,6 +34,21 @@
  else     if (example.getName().startsWith("SYS_IOT_OVER")) {
       return true;
     }
+ else     if (example.getName().startsWith("MLOG$_")) {
+      return true;
+    }
+ else     if (example.getName().startsWith("RUPD$_")) {
+      return true;
+    }
+ else     if (example.getName().startsWith("WM$_")) {
+      return true;
+    }
+ else     if (example.getName().equals("CREATE$JAVA$LOB$TABLE ")) {
+      return true;
+    }
+ else     if (example.getName().equals("JAVA$CLASS$MD5$TABLE")) {
+      return true;
+    }
   }
   return super.isSystemObject(example);
 }
