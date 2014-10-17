@@ -1,0 +1,6 @@
+{
+  String primaryKey="PRIMARYKEY";
+  InsertOrUpdateStatement statement=new InsertOrUpdateStatement("CATALOG","SCHEMA","TABLE",primaryKey);
+  statement.setOnlyUpdate(null);
+  assertEquals(Boolean.FALSE,statement.getOnlyUpdate());
+}
