@@ -13,7 +13,7 @@
       String jdbcCatalogName=((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema);
       String jdbcSchemaName=((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema);
       if (tableName == null) {
-        for (        CachedRow row : getTables(jdbcCatalogName,jdbcSchemaName,null,new String[]{"TABLE"})) {
+        for (        CachedRow row : getTables(jdbcCatalogName,jdbcSchemaName,null)) {
           tables.add(row.getString("TABLE_NAME"));
         }
       }
