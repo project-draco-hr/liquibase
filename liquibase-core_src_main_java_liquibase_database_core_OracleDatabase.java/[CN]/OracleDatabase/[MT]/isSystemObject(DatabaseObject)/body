@@ -43,7 +43,7 @@
  else     if (example.getName().startsWith("WM$_")) {
       return true;
     }
- else     if (example.getName().equals("CREATE$JAVA$LOB$TABLE ")) {
+ else     if (example.getName().equals("CREATE$JAVA$LOB$TABLE")) {
       return true;
     }
  else     if (example.getName().equals("JAVA$CLASS$MD5$TABLE")) {
