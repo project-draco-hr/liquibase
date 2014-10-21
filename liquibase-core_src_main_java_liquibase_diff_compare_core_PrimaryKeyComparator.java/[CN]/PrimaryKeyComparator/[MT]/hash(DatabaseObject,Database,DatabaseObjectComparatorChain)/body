@@ -1,3 +1,14 @@
 {
-  return DatabaseObjectComparatorFactory.getInstance().hash(((PrimaryKey)databaseObject).getTable(),accordingTo);
+  PrimaryKey pk=(PrimaryKey)databaseObject;
+  if (databaseObject.getName() == null) {
+    return DatabaseObjectComparatorFactory.getInstance().hash(pk.getTable(),accordingTo);
+  }
+ else {
+    if (pk.getTable() == null || pk.getTable().getName() == null) {
+      return new String[]{pk.getName().toLowerCase()};
+    }
+ else {
+      return new String[]{pk.getName().toLowerCase(),pk.getTable().getName().toLowerCase()};
+    }
+  }
 }

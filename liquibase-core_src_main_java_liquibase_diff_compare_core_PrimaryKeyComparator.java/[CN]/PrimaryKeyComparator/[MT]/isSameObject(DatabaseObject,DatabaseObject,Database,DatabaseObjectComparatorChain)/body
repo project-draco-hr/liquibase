@@ -4,5 +4,10 @@
   }
   PrimaryKey thisPrimaryKey=(PrimaryKey)databaseObject1;
   PrimaryKey otherPrimaryKey=(PrimaryKey)databaseObject2;
-  return DatabaseObjectComparatorFactory.getInstance().isSameObject(thisPrimaryKey.getTable(),otherPrimaryKey.getTable(),accordingTo);
+  if (thisPrimaryKey.getTable() != null && thisPrimaryKey.getTable().getName() != null && otherPrimaryKey.getTable() != null && otherPrimaryKey.getTable().getName() != null) {
+    return DatabaseObjectComparatorFactory.getInstance().isSameObject(thisPrimaryKey.getTable(),otherPrimaryKey.getTable(),accordingTo);
+  }
+ else {
+    return StringUtils.trimToEmpty(thisPrimaryKey.getName()).equalsIgnoreCase(otherPrimaryKey.getName());
+  }
 }
