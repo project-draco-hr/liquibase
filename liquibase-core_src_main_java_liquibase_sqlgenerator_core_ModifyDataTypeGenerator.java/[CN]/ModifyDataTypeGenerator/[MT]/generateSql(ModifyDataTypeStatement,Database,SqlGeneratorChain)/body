@@ -1,8 +1,12 @@
 {
   String alterTable="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName());
   alterTable+=" " + getModifyString(database) + " ";
-  alterTable+=database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName());
+  String columnName=database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName());
+  alterTable+=columnName;
   alterTable+=getPreDataTypeString(database);
   alterTable+=DataTypeFactory.getInstance().fromDescription(statement.getNewDataType(),database).toDatabaseDataType(database);
+  if (database instanceof PostgresDatabase) {
+    alterTable+=" USING (" + columnName + "::"+ statement.getNewDataType()+ ")";
+  }
   return new Sql[]{new UnparsedSql(alterTable,getAffectedTable(statement))};
 }
