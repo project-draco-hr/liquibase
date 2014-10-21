@@ -12,7 +12,7 @@
         defaultValueNumeric=defaultValueNumeric.replaceFirst("\\)$","");
       }
       try {
-        this.defaultValueNumeric=NumberFormat.getInstance(Locale.US).parse(defaultValueNumeric);
+        this.defaultValueNumeric=ValueNumeric.of(Locale.US,defaultValueNumeric);
       }
  catch (      ParseException e) {
         this.defaultValueComputed=new DatabaseFunction(defaultValueNumeric);

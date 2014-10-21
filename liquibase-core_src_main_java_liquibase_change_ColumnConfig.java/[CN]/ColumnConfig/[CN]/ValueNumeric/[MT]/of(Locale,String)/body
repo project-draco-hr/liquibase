@@ -1,0 +1,4 @@
+{
+  final Number parsedNumber=NumberFormat.getInstance(locale).parse(value);
+  return new ValueNumeric(value,parsedNumber);
+}
