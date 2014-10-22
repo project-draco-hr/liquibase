@@ -3,6 +3,9 @@
   String catalogName=standard.getCatalogName();
   String schemaName=standard.getSchemaName();
   if (catalogName == null) {
+    if (!accordingTo.supportsSchemas() && schemaName != null) {
+      return new CatalogAndSchema(accordingTo.correctObjectName(schemaName,Catalog.class),null);
+    }
     catalogName=accordingTo.getDefaultCatalogName();
   }
   if (schemaName == null) {

@@ -13,7 +13,10 @@
     }
   }
  else {
-    schemaName=null;
+    if (catalogName == null && schemaName != null) {
+      catalogName=schemaName;
+    }
+    schemaName=catalogName;
   }
   if (catalogName != null) {
     catalogName=catalogName.toUpperCase();
