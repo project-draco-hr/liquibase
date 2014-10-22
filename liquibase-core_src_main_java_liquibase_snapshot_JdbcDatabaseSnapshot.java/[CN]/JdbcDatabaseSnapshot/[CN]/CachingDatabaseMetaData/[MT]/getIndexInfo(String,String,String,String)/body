@@ -24,7 +24,7 @@
  else {
         List<String> tables=new ArrayList<String>();
         if (tableName == null) {
-          for (          CachedRow row : getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null,new String[]{"TABLE"})) {
+          for (          CachedRow row : getTables(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),null)) {
             tables.add(row.getString("TABLE_NAME"));
           }
         }
