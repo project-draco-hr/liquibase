@@ -8,4 +8,13 @@
   if (this.includeSystemClasspath == null) {
     this.includeSystemClasspath=Boolean.TRUE;
   }
+  if (this.outputDefaultCatalog == null) {
+    this.outputDefaultCatalog="true";
+  }
+  if (this.outputDefaultSchema == null) {
+    this.outputDefaultSchema="true";
+  }
+  if (this.defaultsFile == null) {
+    this.defaultsFile="liquibase.properties";
+  }
 }
