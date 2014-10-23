@@ -1,0 +1,9 @@
+{
+  if (obj == null) {
+    return false;
+  }
+  if (!(obj instanceof Number)) {
+    return false;
+  }
+  return obj.toString().equals(this.toString());
+}
