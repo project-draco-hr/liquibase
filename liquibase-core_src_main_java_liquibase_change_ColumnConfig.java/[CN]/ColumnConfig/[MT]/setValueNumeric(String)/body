@@ -8,7 +8,7 @@
       valueNumeric=valueNumeric.replaceFirst("\\)$","");
     }
     try {
-      this.valueNumeric=NumberFormat.getInstance(Locale.US).parse(valueNumeric);
+      this.valueNumeric=ValueNumeric.of(Locale.US,valueNumeric);
     }
  catch (    ParseException e) {
       this.valueComputed=new DatabaseFunction(valueNumeric);
