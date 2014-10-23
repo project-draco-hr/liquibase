@@ -1,30 +1,8 @@
 {
-  String alterTable="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " ADD "+ database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName())+ " "+ DataTypeFactory.getInstance().fromDescription(statement.getColumnType() + (statement.isAutoIncrement() ? "{autoIncrement:true}" : ""),database).toDatabaseDataType(database);
-  if (statement.isAutoIncrement() && database.supportsAutoIncrement()) {
-    AutoIncrementConstraint autoIncrementConstraint=statement.getAutoIncrementConstraint();
-    alterTable+=" " + database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(),autoIncrementConstraint.getIncrementBy());
-  }
-  if (!statement.isNullable()) {
-    alterTable+=" NOT NULL";
+  if (statement.isMultiple()) {
+    return generateMultipleColumns(statement.getColumns(),database);
   }
  else {
-    if (database instanceof SybaseDatabase || database instanceof SybaseASADatabase || database instanceof MySQLDatabase) {
-      alterTable+=" NULL";
-    }
+    return generateSingleColumn(statement,database);
   }
-  if (statement.isPrimaryKey()) {
-    alterTable+=" PRIMARY KEY";
-  }
-  alterTable+=getDefaultClause(statement,database);
-  if (database instanceof MySQLDatabase && statement.getRemarks() != null) {
-    alterTable+=" COMMENT '" + statement.getRemarks() + "' ";
-  }
-  if (statement.getAddAfterColumn() != null && !statement.getAddAfterColumn().isEmpty()) {
-    alterTable+=" AFTER `" + statement.getAddAfterColumn() + "` ";
-  }
-  List<Sql> returnSql=new ArrayList<Sql>();
-  returnSql.add(new UnparsedSql(alterTable,getAffectedColumn(statement)));
-  addUniqueConstrantStatements(statement,database,returnSql);
-  addForeignKeyStatements(statement,database,returnSql);
-  return returnSql.toArray(new Sql[returnSql.size()]);
 }

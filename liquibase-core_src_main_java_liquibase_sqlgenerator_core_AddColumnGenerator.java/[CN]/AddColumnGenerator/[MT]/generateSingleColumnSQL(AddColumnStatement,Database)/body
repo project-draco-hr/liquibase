@@ -1,0 +1,26 @@
+{
+  String alterTable=" ADD " + database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName()) + " "+ DataTypeFactory.getInstance().fromDescription(statement.getColumnType() + (statement.isAutoIncrement() ? "{autoIncrement:true}" : ""),database).toDatabaseDataType(database);
+  if (statement.isAutoIncrement() && database.supportsAutoIncrement()) {
+    AutoIncrementConstraint autoIncrementConstraint=statement.getAutoIncrementConstraint();
+    alterTable+=" " + database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(),autoIncrementConstraint.getIncrementBy());
+  }
+  if (!statement.isNullable()) {
+    alterTable+=" NOT NULL";
+  }
+ else {
+    if (database instanceof SybaseDatabase || database instanceof SybaseASADatabase || database instanceof MySQLDatabase) {
+      alterTable+=" NULL";
+    }
+  }
+  if (statement.isPrimaryKey()) {
+    alterTable+=" PRIMARY KEY";
+  }
+  alterTable+=getDefaultClause(statement,database);
+  if (database instanceof MySQLDatabase && statement.getRemarks() != null) {
+    alterTable+=" COMMENT '" + statement.getRemarks() + "' ";
+  }
+  if (statement.getAddAfterColumn() != null && !statement.getAddAfterColumn().isEmpty()) {
+    alterTable+=" AFTER `" + statement.getAddAfterColumn() + "` ";
+  }
+  return alterTable;
+}

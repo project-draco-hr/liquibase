@@ -8,4 +8,5 @@
   assertTrue(generatorUnderTest.validate(addPKColumn,new SQLiteDatabase(),new MockSqlGeneratorChain()).getErrorMessages().contains("Cannot add a primary key column"));
   assertTrue(generatorUnderTest.validate(new AddColumnStatement(null,null,null,null,null,null,new AutoIncrementConstraint()),new MySQLDatabase(),new MockSqlGeneratorChain()).getErrorMessages().contains("Cannot add a non-primary key identity column"));
   assertTrue(generatorUnderTest.validate(new AddColumnStatement(null,null,null,null,null,null,new AutoIncrementConstraint()),new MySQLDatabase(),new MockSqlGeneratorChain()).getErrorMessages().contains("Cannot add a non-primary key identity column"));
+  assertTrue(generatorUnderTest.validate(new AddColumnStatement(new AddColumnStatement(null,null,TABLE_NAME,COLUMN_NAME,COLUMN_TYPE,null),new AddColumnStatement(null,null,"other_table","other_column",COLUMN_TYPE,null)),new MySQLDatabase(),new MockSqlGeneratorChain()).getErrorMessages().contains("All columns must be targeted at the same table"));
 }

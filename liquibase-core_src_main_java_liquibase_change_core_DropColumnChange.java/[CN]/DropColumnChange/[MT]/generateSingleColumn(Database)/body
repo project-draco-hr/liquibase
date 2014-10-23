@@ -1,0 +1,11 @@
+{
+  if (database instanceof SQLiteDatabase) {
+    return generateStatementsForSQLiteDatabase(database,getColumnName());
+  }
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
+  statements.add(new DropColumnStatement(getCatalogName(),getSchemaName(),getTableName(),getColumnName()));
+  if (database instanceof DB2Database) {
+    statements.add(new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName()));
+  }
+  return statements.toArray(new SqlStatement[statements.size()]);
+}

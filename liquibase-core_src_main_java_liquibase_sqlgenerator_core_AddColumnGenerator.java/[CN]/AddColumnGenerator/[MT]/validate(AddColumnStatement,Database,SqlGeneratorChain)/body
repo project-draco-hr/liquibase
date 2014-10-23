@@ -1,22 +1,19 @@
 {
-  ValidationErrors validationErrors=new ValidationErrors();
-  validationErrors.checkRequiredField("columnName",statement.getColumnName());
-  validationErrors.checkRequiredField("columnType",statement.getColumnType());
-  validationErrors.checkRequiredField("tableName",statement.getTableName());
-  if (statement.isPrimaryKey() && (database instanceof H2Database || database instanceof DB2Database || database instanceof DerbyDatabase|| database instanceof SQLiteDatabase)) {
-    validationErrors.addError("Cannot add a primary key column");
+  if (statement.isMultiple()) {
+    ValidationErrors validationErrors=new ValidationErrors();
+    AddColumnStatement firstColumn=statement.getColumns().get(0);
+    for (    AddColumnStatement column : statement.getColumns()) {
+      validationErrors.addAll(validateSingleColumn(column,database));
+      if (firstColumn.getTableName() != null && !firstColumn.getTableName().equals(column.getTableName())) {
+        validationErrors.addError("All columns must be targeted at the same table");
+      }
+      if (column.isMultiple()) {
+        validationErrors.addError("Nested multiple add column statements are not supported");
+      }
+    }
+    return validationErrors;
   }
-  if (database instanceof MySQLDatabase && statement.isAutoIncrement() && !statement.isPrimaryKey()) {
-    validationErrors.addError("Cannot add a non-primary key identity column");
+ else {
+    return validateSingleColumn(statement,database);
   }
-  if ((statement.getAddAfterColumn() != null) && !(database instanceof MySQLDatabase)) {
-    validationErrors.addError("Cannot add column on specific position");
-  }
-  if ((statement.getAddBeforeColumn() != null) && !((database instanceof H2Database) || (database instanceof HsqlDatabase))) {
-    validationErrors.addError("Cannot add column on specific position");
-  }
-  if ((statement.getAddAtPosition() != null) && !(database instanceof FirebirdDatabase)) {
-    validationErrors.addError("Cannot add column on specific position");
-  }
-  return validationErrors;
 }

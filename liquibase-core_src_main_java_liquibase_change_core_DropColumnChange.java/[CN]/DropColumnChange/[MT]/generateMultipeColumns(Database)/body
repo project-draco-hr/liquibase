@@ -1,0 +1,22 @@
+{
+  List<SqlStatement> statements=new ArrayList<SqlStatement>();
+  List<DropColumnStatement> dropStatements=new ArrayList<DropColumnStatement>();
+  for (  ColumnConfig column : columns) {
+    if (database instanceof SQLiteDatabase) {
+      statements.addAll(Arrays.asList(generateStatementsForSQLiteDatabase(database,column.getName())));
+    }
+ else {
+      dropStatements.add(new DropColumnStatement(getCatalogName(),getSchemaName(),getTableName(),column.getName()));
+    }
+  }
+  if (dropStatements.size() == 1) {
+    statements.add(dropStatements.get(0));
+  }
+ else {
+    statements.add(new DropColumnStatement(dropStatements));
+  }
+  if (database instanceof DB2Database) {
+    statements.add(new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName()));
+  }
+  return statements.toArray(new SqlStatement[statements.size()]);
+}
