@@ -4,9 +4,6 @@
   if (!accordingTo.supportsCatalogs()) {
     return new CatalogAndSchema(null,null);
   }
-  if (catalogName != null && catalogName.equalsIgnoreCase(accordingTo.getDefaultCatalogName())) {
-    catalogName=null;
-  }
   if (accordingTo.supportsSchemas()) {
     if (schemaName != null && schemaName.equalsIgnoreCase(accordingTo.getDefaultSchemaName())) {
       schemaName=null;
@@ -17,6 +14,12 @@
       catalogName=schemaName;
     }
     schemaName=catalogName;
+  }
+  if (catalogName != null && catalogName.equalsIgnoreCase(accordingTo.getDefaultCatalogName())) {
+    catalogName=null;
+  }
+  if (!accordingTo.supportsSchemas()) {
+    schemaName=null;
   }
   if (catalogName != null) {
     catalogName=catalogName.toUpperCase();
