@@ -1,6 +1,11 @@
 {
   if (database instanceof DB2Database) {
-    return "SELECT SEQNAME AS SEQUENCE_NAME FROM SYSCAT.SEQUENCES WHERE SEQTYPE='S' AND SEQSCHEMA = '" + schema.getCatalogName() + "'";
+    if (database.getDatabaseProductName().startsWith("DB2 UDB for AS/400")) {
+      return "SELECT SEQNAME AS SEQUENCE_NAME FROM QSYS2.SYSSEQUENCES WHERE SEQSCHEMA = '" + schema.getCatalogName() + "'";
+    }
+ else {
+      return "SELECT SEQNAME AS SEQUENCE_NAME FROM SYSCAT.SEQUENCES WHERE SEQTYPE='S' AND SEQSCHEMA = '" + schema.getCatalogName() + "'";
+    }
   }
  else   if (database instanceof DerbyDatabase) {
     return "SELECT " + "  seq.SEQUENCENAME AS SEQUENCE_NAME " + "FROM "+ "  SYS.SYSSEQUENCES seq, "+ "  SYS.SYSSCHEMAS sch "+ "WHERE "+ "  sch.SCHEMANAME = '" + new CatalogAndSchema(null,schema.getName()).customize(database).getSchemaName() + "' AND "+ "  sch.SCHEMAID = seq.SCHEMAID";
