@@ -11,12 +11,7 @@
   if (value == null) {
     value=StringUtils.trimToNull((String)parsedNode.getValue());
   }
-  try {
-    valueNumeric=parsedNode.getChildValue(null,"valueNumeric",Double.class);
-  }
- catch (  ParsedNodeException e) {
-    valueComputed=new DatabaseFunction(parsedNode.getChildValue(null,"valueNumeric",String.class));
-  }
+  setValueNumeric(parsedNode.getChildValue(null,"valueNumeric",String.class));
   try {
     valueDate=parsedNode.getChildValue(null,"valueDate",Date.class);
   }
@@ -39,12 +34,7 @@
     valueSequenceCurrent=new SequenceCurrentValueFunction(valueSequenceCurrentString);
   }
   defaultValue=parsedNode.getChildValue(null,"defaultValue",String.class);
-  try {
-    defaultValueNumeric=parsedNode.getChildValue(null,"defaultValueNumeric",Double.class);
-  }
- catch (  ParsedNodeException e) {
-    defaultValueComputed=new DatabaseFunction(parsedNode.getChildValue(null,"defaultValueNumeric",String.class));
-  }
+  setDefaultValueNumeric(parsedNode.getChildValue(null,"defaultValueNumeric",String.class));
   try {
     defaultValueDate=parsedNode.getChildValue(null,"defaultValueDate",Date.class);
   }

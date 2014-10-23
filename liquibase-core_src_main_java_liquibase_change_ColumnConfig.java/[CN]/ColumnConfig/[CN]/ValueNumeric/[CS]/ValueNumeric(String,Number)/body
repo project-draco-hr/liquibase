@@ -1,0 +1,4 @@
+{
+  this.delegate=numeric;
+  this.value=value;
+}
