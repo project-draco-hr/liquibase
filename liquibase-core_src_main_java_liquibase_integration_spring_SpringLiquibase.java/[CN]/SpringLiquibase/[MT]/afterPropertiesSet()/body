@@ -20,19 +20,9 @@
     throw new DatabaseException(e);
   }
  finally {
-    if (c != null) {
-      try {
-        if (!c.getAutoCommit()) {
-          c.rollback();
-        }
-      }
- catch (      SQLException e) {
-      }
-      try {
-        c.close();
-      }
- catch (      SQLException e) {
-      }
+    Database database=liquibase.getDatabase();
+    if (database != null) {
+      database.close();
     }
   }
 }
