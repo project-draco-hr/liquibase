@@ -1,0 +1,47 @@
+{
+  LiquibaseDataType dataType=DataTypeFactory.getInstance().from(column.getType(),database);
+  Object defaultValue=column.getDefaultValue();
+  if (defaultValue == null) {
+  }
+ else   if (column.isAutoIncrement()) {
+  }
+ else   if (defaultValue instanceof Date) {
+    columnConfig.setDefaultValueDate((Date)defaultValue);
+  }
+ else   if (defaultValue instanceof Boolean) {
+    columnConfig.setDefaultValueBoolean(((Boolean)defaultValue));
+  }
+ else   if (defaultValue instanceof Number) {
+    columnConfig.setDefaultValueNumeric(((Number)defaultValue));
+  }
+ else   if (defaultValue instanceof DatabaseFunction) {
+    DatabaseFunction function=(DatabaseFunction)defaultValue;
+    if ("current".equals(function.getValue())) {
+      if (database instanceof InformixDatabase) {
+        if (dataType instanceof DateTimeType) {
+          if (dataType.getAdditionalInformation() == null || dataType.getAdditionalInformation().length() == 0) {
+            if (dataType.getParameters() != null && dataType.getParameters().length > 0) {
+              String parameter=String.valueOf(dataType.getParameters()[0]);
+              if ("4365".equals(parameter)) {
+                function=new DatabaseFunction("current year to fraction(3)");
+              }
+              if ("3594".equals(parameter)) {
+                function=new DatabaseFunction("current year to second");
+              }
+              if ("3080".equals(parameter)) {
+                function=new DatabaseFunction("current year to minute");
+              }
+              if ("2052".equals(parameter)) {
+                function=new DatabaseFunction("current year to day");
+              }
+            }
+          }
+        }
+      }
+    }
+    columnConfig.setDefaultValueComputed(function);
+  }
+ else {
+    columnConfig.setDefaultValue(defaultValue.toString());
+  }
+}
