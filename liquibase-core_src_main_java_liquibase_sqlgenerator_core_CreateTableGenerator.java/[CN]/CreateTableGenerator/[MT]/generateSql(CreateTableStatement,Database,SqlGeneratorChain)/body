@@ -52,7 +52,12 @@
  else {
         buffer.append(" DEFAULT ");
       }
-      buffer.append(statement.getColumnTypes().get(column).objectToSql(defaultValue,database));
+      if (defaultValue instanceof SequenceNextValueFunction) {
+        buffer.append(database.generateDatabaseFunctionValue((SequenceNextValueFunction)defaultValue));
+      }
+ else {
+        buffer.append(statement.getColumnTypes().get(column).objectToSql(defaultValue,database));
+      }
     }
     if (isAutoIncrementColumn) {
       if (database.supportsAutoIncrement()) {
