@@ -8,6 +8,7 @@
     ExecutorService.getInstance().reset();
     LockServiceFactory.getInstance().resetAll();
     LockServiceFactory.getInstance().getLockService(database).init();
+    ChangeLogHistoryServiceFactory.getInstance().resetAll();
     if (database.getConnection() != null) {
       ((JdbcConnection)database.getConnection()).getUnderlyingConnection().createStatement().executeUpdate("drop table " + database.getDatabaseChangeLogLockTableName());
       database.commit();

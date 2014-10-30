@@ -1,0 +1,9 @@
+{
+  Warnings warnings=super.warn(createIndexStatement,database,sqlGeneratorChain);
+  if (!(database instanceof MSSQLDatabase || database instanceof OracleDatabase || database instanceof DB2Database|| database instanceof PostgresDatabase|| database instanceof MockDatabase)) {
+    if (createIndexStatement.isClustered() != null && createIndexStatement.isClustered()) {
+      warnings.addWarning("Creating clustered index not supported with " + database);
+    }
+  }
+  return warnings;
+}
