@@ -1,11 +1,11 @@
 {
-  if (!ranChangeSetList.isEmpty()) {
-    return true;
+  if (!hasDatabaseChangeLogTable) {
+    try {
+      hasDatabaseChangeLogTable=SnapshotGeneratorFactory.getInstance().hasDatabaseChangeLogTable(getDatabase());
+    }
+ catch (    LiquibaseException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
   }
-  try {
-    return SnapshotGeneratorFactory.getInstance().hasDatabaseChangeLogTable(getDatabase());
-  }
- catch (  LiquibaseException e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
+  return hasDatabaseChangeLogTable;
 }

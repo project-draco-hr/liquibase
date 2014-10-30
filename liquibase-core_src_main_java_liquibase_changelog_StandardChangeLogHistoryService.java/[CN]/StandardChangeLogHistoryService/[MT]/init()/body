@@ -1,4 +1,7 @@
 {
+  if (serviceInitialized) {
+    return;
+  }
   Database database=getDatabase();
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   Table changeLogTable=null;
@@ -90,4 +93,5 @@
       LogFactory.getLogger().info("Cannot run " + sql.getClass().getSimpleName() + " on "+ getDatabase().getShortName()+ " when checking databasechangelog table");
     }
   }
+  serviceInitialized=true;
 }

@@ -1,3 +1,5 @@
 {
   hasChangeLogLock=false;
+  hasDatabaseChangeLogLockTable=false;
+  isDatabaseChangeLogLockTableInitialized=false;
 }

@@ -4,6 +4,7 @@
     if (SnapshotGeneratorFactory.getInstance().has(new Table().setName(database.getDatabaseChangeLogTableName()).setSchema(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName()),database)) {
       ExecutorService.getInstance().getExecutor(database).execute(new DropTableStatement(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName(),false));
     }
+    reset();
   }
  catch (  InvalidExampleException e) {
     throw new UnexpectedLiquibaseException(e);
