@@ -1,0 +1,17 @@
+{
+  try {
+    Object value=parsedNode.getValue();
+    if (value != null && value instanceof String) {
+      parsedNode.setValue(changeLogParameters.expandExpressions(parsedNode.getValue(String.class)));
+    }
+    List<ParsedNode> children=parsedNode.getChildren();
+    if (children != null) {
+      for (      ParsedNode child : children) {
+        expandExpressions(child);
+      }
+    }
+  }
+ catch (  ParsedNodeException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}
