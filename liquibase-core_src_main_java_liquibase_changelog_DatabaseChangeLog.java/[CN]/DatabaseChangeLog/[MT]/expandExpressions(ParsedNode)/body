@@ -1,4 +1,7 @@
 {
+  if (changeLogParameters == null) {
+    return;
+  }
   try {
     Object value=parsedNode.getValue();
     if (value != null && value instanceof String) {
