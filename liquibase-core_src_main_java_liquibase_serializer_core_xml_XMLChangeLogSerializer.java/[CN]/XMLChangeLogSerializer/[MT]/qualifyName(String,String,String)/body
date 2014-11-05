@@ -1,0 +1,9 @@
+{
+  if (objectNamespace != null && !objectNamespace.equals(LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE) && !objectNamespace.equals(parentNamespace)) {
+    NamespaceDetails details=NamespaceDetailsFactory.getInstance().getNamespaceDetails(this,objectNamespace);
+    return details.getShortName(objectNamespace) + ":" + objectName;
+  }
+ else {
+    return objectName;
+  }
+}

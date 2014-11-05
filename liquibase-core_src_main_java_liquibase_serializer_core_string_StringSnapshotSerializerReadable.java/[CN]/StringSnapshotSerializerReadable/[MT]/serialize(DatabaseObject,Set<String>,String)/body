@@ -11,6 +11,9 @@
     if (attribute.equals("schema")) {
       continue;
     }
+    if (attribute.equals("catalog")) {
+      continue;
+    }
     Object value=databaseObject.getAttribute(attribute,Object.class);
     if (value instanceof Schema) {
       continue;

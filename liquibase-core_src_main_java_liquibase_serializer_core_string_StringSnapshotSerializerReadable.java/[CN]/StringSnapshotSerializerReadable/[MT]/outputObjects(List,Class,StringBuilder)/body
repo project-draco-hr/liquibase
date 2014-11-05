@@ -1,0 +1,12 @@
+{
+  List<? extends DatabaseObject> databaseObjects=sort(objects);
+  if (databaseObjects.size() > 0) {
+    catalogBuffer.append(type.getName()).append(":\n");
+    StringBuilder typeBuffer=new StringBuilder();
+    for (    DatabaseObject databaseObject : databaseObjects) {
+      typeBuffer.append(databaseObject.getName()).append("\n");
+      typeBuffer.append(StringUtils.indent(serialize(databaseObject,new HashSet<String>(),databaseObject.getName()),4)).append("\n");
+    }
+    catalogBuffer.append(StringUtils.indent(typeBuffer.toString(),4)).append("\n");
+  }
+}
