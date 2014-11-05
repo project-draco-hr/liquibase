@@ -42,6 +42,12 @@
           column.setValueDate((Date)value);
         }
  else {
+          if (referenceDatabase instanceof InformixDatabase) {
+            if (value instanceof byte[]) {
+              byte[] bytes=(byte[])value;
+              value=new String(bytes);
+            }
+          }
           column.setValue(value.toString().replace("\\","\\\\"));
         }
         change.addColumn(column);
