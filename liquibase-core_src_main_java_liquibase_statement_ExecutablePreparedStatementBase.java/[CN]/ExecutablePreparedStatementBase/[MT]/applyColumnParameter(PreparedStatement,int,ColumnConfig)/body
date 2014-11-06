@@ -1,12 +1,19 @@
 {
   if (col.getValue() != null) {
+    log.debug("value is string = " + col.getValue());
     stmt.setString(i,col.getValue());
   }
  else   if (col.getValueBoolean() != null) {
+    log.debug("value is boolean = " + col.getValueBoolean());
     stmt.setBoolean(i,col.getValueBoolean());
   }
  else   if (col.getValueNumeric() != null) {
+    log.debug("value is numeric = " + col.getValueNumeric());
     Number number=col.getValueNumeric();
+    if (number instanceof ColumnConfig.ValueNumeric) {
+      ColumnConfig.ValueNumeric valueNumeric=(ColumnConfig.ValueNumeric)number;
+      number=valueNumeric.getDelegate();
+    }
     if (number instanceof Long) {
       stmt.setLong(i,number.longValue());
     }
@@ -25,11 +32,15 @@
  else     if (number instanceof BigInteger) {
       stmt.setInt(i,number.intValue());
     }
+ else {
+    }
   }
  else   if (col.getValueDate() != null) {
+    log.debug("value is date = " + col.getValueDate());
     stmt.setDate(i,new java.sql.Date(col.getValueDate().getTime()));
   }
  else   if (col.getValueBlobFile() != null) {
+    log.debug("value is blob = " + col.getValueBlobFile());
     try {
       LOBContent<InputStream> lob=toBinaryStream(col.getValueBlobFile());
       if (lob.length <= Integer.MAX_VALUE) {
@@ -45,6 +56,7 @@
   }
  else   if (col.getValueClobFile() != null) {
     try {
+      log.debug("value is clob = " + col.getValueClobFile());
       LOBContent<Reader> lob=toCharacterStream(col.getValueClobFile(),col.getEncoding());
       if (lob.length <= Integer.MAX_VALUE) {
         stmt.setCharacterStream(i,lob.content,(int)lob.length);
@@ -58,6 +70,7 @@
     }
   }
  else {
+    log.debug("value is explicit null");
     stmt.setNull(i,java.sql.Types.NULL);
   }
 }

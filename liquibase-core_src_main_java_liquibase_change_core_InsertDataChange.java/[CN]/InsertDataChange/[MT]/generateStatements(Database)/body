@@ -7,6 +7,9 @@
     if (column.getValueClobFile() != null) {
       needsPreparedStatement=true;
     }
+    if (database instanceof InformixDatabase) {
+      needsPreparedStatement=true;
+    }
   }
   if (needsPreparedStatement) {
     return new SqlStatement[]{new InsertExecutablePreparedStatement(database,catalogName,schemaName,tableName,columns,getChangeSet(),this.getResourceAccessor())};

@@ -1,10 +1,13 @@
 {
   List<ColumnConfig> cols=new ArrayList<ColumnConfig>(getColumns().size());
   String sql=generateSql(cols);
+  log.info("Prepared statement: " + sql);
+  log.debug("Number of columns = " + cols.size());
   PreparedStatement stmt=factory.create(sql);
   try {
     int i=1;
     for (    ColumnConfig col : cols) {
+      log.debug("Applying column parameter = " + i + " for column "+ col.getName());
       applyColumnParameter(stmt,i,col);
       i++;
     }
