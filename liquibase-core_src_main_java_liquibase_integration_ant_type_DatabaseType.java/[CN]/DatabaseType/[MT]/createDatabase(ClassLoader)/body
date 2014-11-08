@@ -20,6 +20,7 @@
     if (password != null && !password.isEmpty()) {
       connectionProps.setProperty(PASSWORD,password);
     }
+    ConnectionProperties connectionProperties=getConnectionProperties();
     if (connectionProperties != null) {
       connectionProps.putAll(connectionProperties.buildProperties());
     }
