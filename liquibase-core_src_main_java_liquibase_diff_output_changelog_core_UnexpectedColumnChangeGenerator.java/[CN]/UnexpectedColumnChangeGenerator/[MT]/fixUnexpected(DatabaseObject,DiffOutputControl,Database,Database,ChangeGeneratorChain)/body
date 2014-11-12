@@ -3,6 +3,9 @@
   if (column.getRelation() instanceof View) {
     return null;
   }
+  if (column.getRelation().getSnapshotId() == null) {
+    return null;
+  }
   DropColumnChange change=new DropColumnChange();
   change.setTableName(column.getRelation().getName());
   if (control.getIncludeCatalog()) {

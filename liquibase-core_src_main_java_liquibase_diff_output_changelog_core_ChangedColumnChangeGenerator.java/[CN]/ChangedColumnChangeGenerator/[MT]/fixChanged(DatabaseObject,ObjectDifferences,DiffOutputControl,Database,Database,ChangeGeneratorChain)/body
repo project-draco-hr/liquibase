@@ -3,6 +3,9 @@
   if (column.getRelation() instanceof View) {
     return null;
   }
+  if (column.getRelation().getSnapshotId() == null) {
+    return null;
+  }
   List<Change> changes=new ArrayList<Change>();
   handleTypeDifferences(column,differences,control,changes,referenceDatabase,comparisonDatabase);
   handleNullableDifferences(column,differences,control,changes,referenceDatabase,comparisonDatabase);
