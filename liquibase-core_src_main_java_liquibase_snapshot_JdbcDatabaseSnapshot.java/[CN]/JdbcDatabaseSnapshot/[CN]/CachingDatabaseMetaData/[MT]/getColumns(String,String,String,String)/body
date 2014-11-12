@@ -21,7 +21,7 @@
       }
       CatalogAndSchema catalogAndSchema=new CatalogAndSchema(catalogName,schemaName).customize(database);
       try {
-        return extract(databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName,columnName));
+        return extract(databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema),((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema),tableName,null));
       }
  catch (      SQLException e) {
         if (shouldReturnEmptyColumns(e)) {
