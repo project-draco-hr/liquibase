@@ -20,7 +20,7 @@
     addIndexChange.setSchemaName(index.getSchema().getName());
   }
   Difference columnsDifference=differences.getDifference("columns");
-  if (columns != null) {
+  if (columnsDifference != null) {
     List<Column> referenceColumns=(List<Column>)columnsDifference.getReferenceValue();
     List<Column> comparedColumns=(List<Column>)columnsDifference.getComparedValue();
     StringUtils.StringUtilsFormatter<Column> formatter=new StringUtils.StringUtilsFormatter<Column>(){
