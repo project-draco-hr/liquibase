@@ -1,3 +1,6 @@
 {
+  if (object instanceof ColumnConfig.ValueNumeric) {
+    object=((ColumnConfig.ValueNumeric)object).getDelegate();
+  }
   return fromDescription(object.getClass().getName(),database);
 }
