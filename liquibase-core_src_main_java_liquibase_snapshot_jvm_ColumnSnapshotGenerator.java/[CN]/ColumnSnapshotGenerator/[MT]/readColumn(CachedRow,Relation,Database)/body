@@ -8,7 +8,7 @@
     remarks=remarks.replace("''","'");
   }
   Column column=new Column();
-  column.setName(rawColumnName);
+  column.setName(rawColumnName.trim());
   column.setRelation(table);
   column.setRemarks(remarks);
   if (database instanceof OracleDatabase) {

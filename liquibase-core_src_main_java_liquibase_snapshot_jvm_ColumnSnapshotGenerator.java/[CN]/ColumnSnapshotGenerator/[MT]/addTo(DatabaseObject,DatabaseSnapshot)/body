@@ -12,7 +12,7 @@
       schema=relation.getSchema();
       allColumnsMetadataRs=databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),relation.getName(),null);
       for (      CachedRow row : allColumnsMetadataRs) {
-        Column exampleColumn=new Column().setRelation(relation).setName(row.getString("COLUMN_NAME"));
+        Column exampleColumn=new Column().setRelation(relation).setName(row.getString("COLUMN_NAME").trim());
         relation.getColumns().add(exampleColumn);
       }
     }
