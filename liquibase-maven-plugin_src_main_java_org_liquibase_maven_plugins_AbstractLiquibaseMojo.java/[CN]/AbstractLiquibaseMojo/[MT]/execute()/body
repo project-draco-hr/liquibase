@@ -25,7 +25,8 @@
   Database database=null;
   try {
     String dbPassword=emptyPassword || password == null ? "" : password;
-    database=CommandLineUtils.createDatabaseObject(artifactClassLoader,url,username,dbPassword,driver,defaultCatalogName,defaultSchemaName,outputDefaultCatalog,outputDefaultSchema,databaseClass,null,propertyProviderClass,changelogCatalogName,changelogSchemaName);
+    String driverPropsFile=(driverPropertiesFile == null) ? null : driverPropertiesFile.getAbsolutePath();
+    database=CommandLineUtils.createDatabaseObject(artifactClassLoader,url,username,dbPassword,driver,defaultCatalogName,defaultSchemaName,outputDefaultCatalog,outputDefaultSchema,databaseClass,driverPropsFile,propertyProviderClass,changelogCatalogName,changelogSchemaName);
     liquibase=createLiquibase(getFileOpener(artifactClassLoader),database);
     getLog().debug("expressionVars = " + String.valueOf(expressionVars));
     if (expressionVars != null) {
