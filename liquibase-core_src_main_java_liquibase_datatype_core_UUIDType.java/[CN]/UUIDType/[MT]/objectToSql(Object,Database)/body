@@ -1,6 +1,6 @@
 {
   if (database instanceof MSSQLDatabase) {
-    return "'" + value + "'";
+    return (value instanceof DatabaseFunction) ? database.generateDatabaseFunctionValue((DatabaseFunction)value) : "'" + value + "'";
   }
   return super.objectToSql(value,database);
 }
