@@ -20,7 +20,7 @@
       sql="select T1.constraint_name as CONSTRAINT_NAME, T2.COLUMN_NAME as COLUMN_NAME from QSYS2.TABLE_CONSTRAINTS T1, QSYS2.SYSCSTCOL T2\n" + "where T1.CONSTRAINT_TYPE='UNIQUE' and T1.CONSTRAINT_NAME=T2.CONSTRAINT_NAME\n" + "and T1.CONSTRAINT_SCHEMA='" + database.correctObjectName(schema.getName(),Schema.class) + "'\n"+ "and T2.CONSTRAINT_SCHEMA='"+ database.correctObjectName(schema.getName(),Schema.class)+ "'\n"+ "order by T2.COLUMN_NAME\n";
     }
  else {
-      sql="select k.colname as column_name from syscat.keycoluse k, syscat.tabconst t " + "where k.constname = t.constname " + "and t.type='U' "+ "and k.constname='" + database.correctObjectName(name,UniqueConstraint.class) + "' "+ "order by colseq";
+      sql="select k.colname as column_name from syscat.keycoluse k, syscat.tabconst t " + "where k.constname = t.constname " + "and k.tabschema = t.tabschema "+ "and t.type='U' "+ "and k.constname='" + database.correctObjectName(name,UniqueConstraint.class) + "' "+ "and t.tabschema = '"+ database.correctObjectName(schema.getName(),Schema.class)+ "' "+ "order by colseq";
     }
   }
  else   if (database instanceof DerbyDatabase) {
