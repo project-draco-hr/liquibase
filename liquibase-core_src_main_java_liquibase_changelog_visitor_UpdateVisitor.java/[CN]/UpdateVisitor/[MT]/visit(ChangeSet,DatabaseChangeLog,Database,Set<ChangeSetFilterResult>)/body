@@ -2,7 +2,14 @@
   ChangeSet.RunStatus runStatus=this.database.getRunStatus(changeSet);
   log.debug("Running Changeset:" + changeSet);
   fireWillRun(changeSet,databaseChangeLog,database,runStatus);
-  ChangeSet.ExecType execType=changeSet.execute(databaseChangeLog,execListener,this.database);
+  ExecType execType=null;
+  try {
+    execType=changeSet.execute(databaseChangeLog,execListener,this.database);
+  }
+ catch (  MigrationFailedException e) {
+    fireRunFailed(changeSet,databaseChangeLog,database,e);
+    throw e;
+  }
   if (!runStatus.equals(ChangeSet.RunStatus.NOT_RAN)) {
     execType=ChangeSet.ExecType.RERAN;
   }
