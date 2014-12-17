@@ -1,6 +1,13 @@
 {
   if (changes != null) {
+    String changeSetContext=this.changeSetContext;
+    if (diffOutputControl.getContext() != null) {
+      changeSetContext=diffOutputControl.getContext().toString().replaceFirst("^\\(","").replaceFirst("\\)$","");
+    }
     ChangeSet changeSet=new ChangeSet(generateId(),getChangeSetAuthor(),false,false,null,changeSetContext,null,false,quotingStrategy,null);
+    if (diffOutputControl.getLabels() != null) {
+      changeSet.setLabels(diffOutputControl.getLabels());
+    }
     for (    Change change : changes) {
       changeSet.addChange(change);
     }
