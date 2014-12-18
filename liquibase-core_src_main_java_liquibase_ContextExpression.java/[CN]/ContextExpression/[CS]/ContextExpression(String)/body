@@ -1,3 +1,4 @@
 {
   parseContextString(contexts);
+  this.originalString=contexts;
 }
