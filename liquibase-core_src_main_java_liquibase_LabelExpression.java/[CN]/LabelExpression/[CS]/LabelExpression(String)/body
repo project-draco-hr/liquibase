@@ -1,4 +1,5 @@
 {
+  labels=labels.replace("\\","");
   parseLabelString(labels);
   originalString=labels;
 }
