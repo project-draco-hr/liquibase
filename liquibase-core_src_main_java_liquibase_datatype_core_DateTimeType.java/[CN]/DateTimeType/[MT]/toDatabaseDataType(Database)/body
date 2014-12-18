@@ -6,6 +6,9 @@
     if ((getParameters().length > 0 && "16".equals(getParameters()[0])) || "SMALLDATETIME".equalsIgnoreCase(getRawDefinition())) {
       return new DatabaseDataType("SMALLDATETIME");
     }
+ else     if (getRawDefinition().toLowerCase().startsWith("datetime2")) {
+      return new DatabaseDataType(getRawDefinition());
+    }
   }
   if (database instanceof InformixDatabase) {
     if (getAdditionalInformation() == null || getAdditionalInformation().length() == 0) {

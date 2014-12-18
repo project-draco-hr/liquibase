@@ -1,19 +1,26 @@
 {
-  File[] files=location.listFiles();
-  StringBuilder builder=null;
-  for (  File file : files) {
-    builder=new StringBuilder(100);
-    String name=file.getName();
-    if (name != null) {
-      name=name.trim();
-      builder.append(parent).append("/").append(name);
-      String packageOrClass=parent == null ? name : builder.toString();
-      if (file.isDirectory()) {
-        loadImplementationsInDirectory(packageOrClass,file,classLoader);
-      }
- else       if (name.endsWith(".class")) {
-        this.loadClass(packageOrClass,classLoader);
+  Set<String> classFiles=classFilesByLocation.get(location.toString());
+  if (classFiles == null) {
+    classFiles=new HashSet<String>();
+    File[] files=location.listFiles();
+    StringBuilder builder=null;
+    for (    File file : files) {
+      builder=new StringBuilder(100);
+      String name=file.getName();
+      if (name != null) {
+        name=name.trim();
+        builder.append(parent).append("/").append(name);
+        String packageOrClass=parent == null ? name : builder.toString();
+        if (file.isDirectory()) {
+          loadImplementationsInDirectory(packageOrClass,file,classLoader);
+        }
+ else         if (name.endsWith(".class")) {
+          classFiles.add(packageOrClass);
+        }
       }
     }
+  }
+  for (  String packageOrClass : classFiles) {
+    this.loadClass(packageOrClass,classLoader);
   }
 }
