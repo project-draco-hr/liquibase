@@ -26,7 +26,7 @@
   }
   if (field.equals("context")) {
     if (!this.getContexts().isEmpty()) {
-      return this.getContexts().toString();
+      return this.getContexts().toString().replaceFirst("^\\(","").replaceFirst("\\)$","");
     }
  else {
       return null;

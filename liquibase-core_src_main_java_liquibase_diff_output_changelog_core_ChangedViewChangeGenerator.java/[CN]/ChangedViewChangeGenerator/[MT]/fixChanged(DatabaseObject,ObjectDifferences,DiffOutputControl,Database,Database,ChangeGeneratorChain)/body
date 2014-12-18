@@ -9,10 +9,35 @@
     change.setSchemaName(view.getSchema().getName());
   }
   String selectQuery=view.getDefinition();
+  boolean fullDefinitionOverridden=false;
   if (selectQuery == null) {
     selectQuery="COULD NOT DETERMINE VIEW QUERY";
   }
+ else   if (comparisonDatabase instanceof OracleDatabase && view.getColumns() != null && view.getColumns().size() > 0) {
+    String viewName;
+    if (change.getCatalogName() == null && change.getSchemaName() == null) {
+      viewName=comparisonDatabase.escapeObjectName(change.getViewName(),View.class);
+    }
+ else {
+      viewName=comparisonDatabase.escapeViewName(change.getCatalogName(),change.getSchemaName(),change.getViewName());
+    }
+    selectQuery="CREATE OR REPLACE FORCE VIEW " + viewName + " ("+ StringUtils.join(view.getColumns(),", ",new StringUtils.StringUtilsFormatter(){
+      @Override public String toString(      Object obj){
+        if (((Column)obj).getComputed() != null && ((Column)obj).getComputed()) {
+          return ((Column)obj).getName();
+        }
+ else {
+          return comparisonDatabase.escapeColumnName(null,null,null,((Column)obj).getName(),false);
+        }
+      }
+    }
+)+ ") AS "+ selectQuery;
+    change.setFullDefinition(true);
+    fullDefinitionOverridden=true;
+  }
   change.setSelectQuery(selectQuery);
-  change.setReplaceIfExists(true);
+  if (!fullDefinitionOverridden) {
+    change.setFullDefinition(view.getContainsFullDefinition());
+  }
   return new Change[]{change};
 }

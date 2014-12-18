@@ -1,3 +1,6 @@
 {
+  if (originalString != null) {
+    return originalString;
+  }
   return "(" + StringUtils.join(new TreeSet(this.contexts),"), (") + ")";
 }
