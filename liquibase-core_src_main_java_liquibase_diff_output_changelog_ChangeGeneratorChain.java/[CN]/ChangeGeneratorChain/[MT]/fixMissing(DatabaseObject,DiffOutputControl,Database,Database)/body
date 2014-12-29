@@ -2,6 +2,9 @@
   if (missingObject == null) {
     return null;
   }
+  if (control.getObjectChangeFilter() != null && !control.getObjectChangeFilter().includeMissing(missingObject,referenceDatabase,comparisionDatabase)) {
+    return null;
+  }
   if (changeGenerators == null) {
     return null;
   }
