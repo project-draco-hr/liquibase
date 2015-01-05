@@ -2,7 +2,9 @@
   if (caseSensitive == null) {
     try {
       if (getConnection() != null) {
-        String collation=ExecutorService.getInstance().getExecutor(this).queryForObject(new RawSqlStatement("SELECT CONVERT(varchar(100), SERVERPROPERTY('COLLATION'))"),String.class);
+        String catalog=getConnection().getCatalog();
+        String sql=String.format("SELECT CONVERT(varchar(100), DATABASEPROPERTYEX('%s', 'COLLATION'))",catalog);
+        String collation=ExecutorService.getInstance().getExecutor(this).queryForObject(new RawSqlStatement(sql),String.class);
         caseSensitive=!collation.contains("_CI_");
       }
     }
