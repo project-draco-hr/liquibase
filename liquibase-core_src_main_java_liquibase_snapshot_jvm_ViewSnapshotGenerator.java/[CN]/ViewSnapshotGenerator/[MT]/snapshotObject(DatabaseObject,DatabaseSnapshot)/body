@@ -23,8 +23,12 @@
           definition=definition.replaceFirst("^FULL_DEFINITION: ","");
           view.setContainsFullDefinition(true);
         }
-        definition=definition.trim();
+        int length=definition.length();
+        if (definition.charAt(length - 1) == 0) {
+          definition=definition.substring(0,length - 2);
+        }
         if (database instanceof InformixDatabase) {
+          definition=definition.trim();
           definition=definition.replaceAll("\\s*,\\s*",", ");
           definition=definition.replaceAll("\\s*;","");
           definition=definition.replaceAll("(?i)\"" + view.getSchema().getName() + "\"\\.","");
