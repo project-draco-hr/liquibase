@@ -10,7 +10,7 @@
     changeLog.setIgnoreClasspathPrefix(ignoreClasspathPrefix);
     List<RanChangeSet> ranChangeSetList=database.getRanChangeSetList();
     ChangeLogIterator logIterator=new ChangeLogIterator(ranChangeSetList,changeLog,new ExecutedAfterChangeSetFilter(dateToRollBackTo,ranChangeSetList),new AlreadyRanChangeSetFilter(ranChangeSetList,ignoreClasspathPrefix),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database));
-    logIterator.run(new RollbackVisitor(database),new RuntimeEnvironment(database,contexts,labelExpression));
+    logIterator.run(new RollbackVisitor(database,changeExecListener),new RuntimeEnvironment(database,contexts,labelExpression));
   }
   finally {
     lockService.releaseLock();
