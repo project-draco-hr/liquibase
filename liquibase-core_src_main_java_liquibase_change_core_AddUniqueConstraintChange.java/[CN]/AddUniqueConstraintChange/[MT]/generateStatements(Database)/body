@@ -13,5 +13,8 @@
   }
   AddUniqueConstraintStatement statement=new AddUniqueConstraintStatement(getCatalogName(),getSchemaName(),getTableName(),ColumnConfig.arrayFromNames(getColumnNames()),getConstraintName());
   statement.setTablespace(getTablespace()).setDeferrable(deferrable).setInitiallyDeferred(initiallyDeferred).setDisabled(disabled);
+  statement.setForIndexName(getForIndexName());
+  statement.setForIndexSchemaName(getForIndexSchemaName());
+  statement.setForIndexCatalogName(getForIndexCatalogName());
   return new SqlStatement[]{statement};
 }
