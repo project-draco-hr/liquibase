@@ -1,0 +1,39 @@
+{
+  List<Change> returnList=new ArrayList<Change>();
+  UniqueConstraint uniqueConstraint=(UniqueConstraint)changedObject;
+  DropUniqueConstraintChange dropUniqueConstraintChange=createDropUniqueConstraintChange();
+  dropUniqueConstraintChange.setTableName(uniqueConstraint.getTable().getName());
+  dropUniqueConstraintChange.setConstraintName(uniqueConstraint.getName());
+  AddUniqueConstraintChange addUniqueConstraintChange=createAddUniqueConstraintChange();
+  addUniqueConstraintChange.setConstraintName(uniqueConstraint.getName());
+  addUniqueConstraintChange.setTableName(uniqueConstraint.getTable().getName());
+  addUniqueConstraintChange.setColumnNames(uniqueConstraint.getColumnNames());
+  returnList.add(dropUniqueConstraintChange);
+  if (control.getIncludeCatalog()) {
+    dropUniqueConstraintChange.setCatalogName(uniqueConstraint.getSchema().getCatalogName());
+    addUniqueConstraintChange.setCatalogName(uniqueConstraint.getSchema().getCatalogName());
+  }
+  if (control.getIncludeSchema()) {
+    dropUniqueConstraintChange.setSchemaName(uniqueConstraint.getSchema().getName());
+    addUniqueConstraintChange.setSchemaName(uniqueConstraint.getSchema().getName());
+  }
+  Index backingIndex=uniqueConstraint.getBackingIndex();
+  if (comparisonDatabase instanceof OracleDatabase) {
+    if (backingIndex != null && backingIndex.getName() != null) {
+      returnList.addAll(Arrays.asList(ChangeGeneratorFactory.getInstance().fixMissing(backingIndex,control,referenceDatabase,comparisonDatabase)));
+      addUniqueConstraintChange.setForIndexName(backingIndex.getName());
+      Schema schema=backingIndex.getSchema();
+      if (schema != null) {
+        if (control.getIncludeCatalog()) {
+          addUniqueConstraintChange.setForIndexCatalogName(schema.getCatalogName());
+        }
+        if (control.getIncludeSchema()) {
+          addUniqueConstraintChange.setForIndexSchemaName(schema.getName());
+        }
+      }
+    }
+  }
+  control.setAlreadyHandledChanged(backingIndex);
+  returnList.add(addUniqueConstraintChange);
+  return returnList.toArray(new Change[returnList.size()]);
+}
