@@ -1,0 +1,4 @@
+{
+  DatabaseConnection databaseConnection=new OfflineConnection(url);
+  return DatabaseFactory.getInstance().openDatabase(url,null,null,null,null);
+}

@@ -1,9 +1,11 @@
 {
   Connection sqlConn=null;
   try {
-    Method wrappedConn=conn.getClass().getMethod("getWrappedConnection");
-    wrappedConn.setAccessible(true);
-    sqlConn=(Connection)wrappedConn.invoke(conn);
+    if (conn instanceof JdbcConnection) {
+      Method wrappedConn=conn.getClass().getMethod("getWrappedConnection");
+      wrappedConn.setAccessible(true);
+      sqlConn=(Connection)wrappedConn.invoke(conn);
+    }
   }
  catch (  Exception e) {
     throw new UnexpectedLiquibaseException(e);
