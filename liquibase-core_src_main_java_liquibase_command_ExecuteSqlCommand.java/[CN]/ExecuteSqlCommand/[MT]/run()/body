@@ -12,7 +12,7 @@
     sqlText=FileUtil.getContents(file);
   }
   String out="";
-  String[] sqlStrings=StringUtils.processMutliLineSQL(sqlText,true,true,";");
+  String[] sqlStrings=StringUtils.processMutliLineSQL(sqlText,true,true,delimiter);
   for (  String sql : sqlStrings) {
     if (sql.toLowerCase().matches("\\s*select .*")) {
       List<Map<String,?>> rows=executor.queryForList(new RawSqlStatement(sql));

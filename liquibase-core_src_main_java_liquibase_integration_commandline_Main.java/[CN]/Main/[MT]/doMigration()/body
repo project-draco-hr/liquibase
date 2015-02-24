@@ -78,6 +78,7 @@
       command.setDatabase(database);
       command.setSql(getCommandParam("sql",null));
       command.setSqlFile(getCommandParam("sqlFile",null));
+      command.setDelimiter(getCommandParam("delimiter",";"));
       System.out.println(command.execute());
       return;
     }
