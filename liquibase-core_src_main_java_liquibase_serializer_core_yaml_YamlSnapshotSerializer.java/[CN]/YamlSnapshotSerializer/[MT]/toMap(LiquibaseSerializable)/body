@@ -1,0 +1,21 @@
+{
+  if (object instanceof DatabaseObject) {
+    if (alreadySerializingObject) {
+      return ((DatabaseObject)object).getClass().getName() + "#" + ((DatabaseObject)object).getSnapshotId();
+    }
+ else {
+      alreadySerializingObject=true;
+      Object map=super.toMap(object);
+      alreadySerializingObject=false;
+      return map;
+    }
+  }
+  if (object instanceof DatabaseObjectCollection) {
+    Map<String,Object> returnMap=new HashMap<String,Object>();
+    for (    Map.Entry<Class<? extends DatabaseObject>,Set<? extends DatabaseObject>> entry : ((DatabaseObjectCollection)object).toMap().entrySet()) {
+      returnMap.put(entry.getKey().getName(),new ArrayList(entry.getValue()));
+    }
+    return returnMap;
+  }
+  return super.toMap(object);
+}
