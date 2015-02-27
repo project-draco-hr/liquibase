@@ -1,0 +1,9 @@
+{
+  super.load(parsedNode,resourceAccessor);
+  ParsedNode typeNode=parsedNode.getChild(null,"type");
+  if (typeNode != null) {
+    DataType type=new DataType();
+    type.load(typeNode,resourceAccessor);
+    setType(type);
+  }
+}

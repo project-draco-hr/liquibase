@@ -7,4 +7,6 @@
   this.serializableFields=new HashSet<String>();
   this.serializableFields.add("snapshotControl");
   this.serializableFields.add("objects");
+  this.serializableFields.add("database");
+  this.serializableFields.add("created");
 }

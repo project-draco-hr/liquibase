@@ -1,0 +1,31 @@
+{
+  Yaml yaml=new Yaml();
+  try {
+    InputStream stream=StreamUtil.singleInputStream(path,resourceAccessor);
+    if (stream == null) {
+      throw new LiquibaseParseException(path + " does not exist");
+    }
+    Map parsedYaml;
+    try {
+      parsedYaml=yaml.loadAs(stream,Map.class);
+    }
+ catch (    Exception e) {
+      throw new LiquibaseParseException("Syntax error in " + getSupportedFileExtensions()[0] + ": "+ e.getMessage(),e);
+    }
+    Map rootList=(Map)parsedYaml.get("snapshot");
+    if (rootList == null) {
+      throw new LiquibaseParseException("Could not find root snapshot node");
+    }
+    DatabaseSnapshot snapshot=new RestoredDatabaseSnapshot(database);
+    ParsedNode snapshotNode=new ParsedNode(null,"snapshot");
+    snapshotNode.setValue(rootList);
+    snapshot.load(snapshotNode,resourceAccessor);
+    return snapshot;
+  }
+ catch (  Throwable e) {
+    if (e instanceof LiquibaseParseException) {
+      throw (LiquibaseParseException)e;
+    }
+    throw new LiquibaseParseException(e);
+  }
+}
