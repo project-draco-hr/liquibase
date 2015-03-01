@@ -1,0 +1,4 @@
+{
+  assertEquals("org.mariadb.jdbc.Driver",this.database.getDefaultDriver("jdbc:mariadb://localhost/liquibase"));
+  assertNull(this.database.getDefaultDriver("jdbc:db2://localhost;databaseName=liquibase"));
+}
