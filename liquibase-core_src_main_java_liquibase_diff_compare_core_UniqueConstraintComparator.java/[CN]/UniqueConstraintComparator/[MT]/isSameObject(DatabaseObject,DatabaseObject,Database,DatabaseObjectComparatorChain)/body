@@ -25,7 +25,7 @@
           return false;
         }
       }
-      return DefaultDatabaseObjectComparator.nameMatches(databaseObject1,databaseObject2,accordingTo);
+      return true;
     }
   }
  else {
