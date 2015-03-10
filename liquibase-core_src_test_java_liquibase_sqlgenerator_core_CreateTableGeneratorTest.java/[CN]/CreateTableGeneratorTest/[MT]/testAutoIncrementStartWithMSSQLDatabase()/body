@@ -2,9 +2,9 @@
   for (  Database database : TestContext.getInstance().getAllDatabases()) {
     if (database instanceof MSSQLDatabase) {
       CreateTableStatement statement=new CreateTableStatement(CATALOG_NAME,SCHEMA_NAME,TABLE_NAME);
-      statement.addColumn(COLUMN_NAME1,DataTypeFactory.getInstance().fromDescription("BIGINT{autoIncrement:true}",database),new AutoIncrementConstraint(COLUMN_NAME1,BigInteger.ZERO,null));
+      statement.addColumn(COLUMN_NAME1,DataTypeFactory.getInstance().fromDescription("BIGINT{autoIncrement:true}",database),new ColumnConstraint[]{new AutoIncrementConstraint(COLUMN_NAME1,BigInteger.ZERO,null),new NotNullConstraint(COLUMN_NAME1)});
       Sql[] generatedSql=this.generatorUnderTest.generateSql(statement,database,null);
-      assertEquals("CREATE TABLE [SCHEMA_NAME].[TABLE_NAME] ([COLUMN1_NAME] BIGINT IDENTITY (0, 1))",generatedSql[0].toSql());
+      assertEquals("CREATE TABLE [SCHEMA_NAME].[TABLE_NAME] ([COLUMN1_NAME] BIGINT IDENTITY (0, 1) NOT NULL)",generatedSql[0].toSql());
     }
   }
 }
