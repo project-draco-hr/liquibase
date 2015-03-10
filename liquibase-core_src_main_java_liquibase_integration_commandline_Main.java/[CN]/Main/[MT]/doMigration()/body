@@ -121,6 +121,17 @@
       System.err.println("Successfully tagged " + liquibase.getDatabase().getConnection().getConnectionUserName() + "@"+ liquibase.getDatabase().getConnection().getURL());
       return;
     }
+ else     if ("tagExists".equalsIgnoreCase(command)) {
+      String tag=commandParams.iterator().next();
+      boolean exists=liquibase.tagExists(tag);
+      if (exists) {
+        System.err.println("The tag " + tag + " already exists in "+ liquibase.getDatabase().getConnection().getConnectionUserName()+ "@"+ liquibase.getDatabase().getConnection().getURL());
+      }
+ else {
+        System.err.println("The tag " + tag + " does not exist in "+ liquibase.getDatabase().getConnection().getConnectionUserName()+ "@"+ liquibase.getDatabase().getConnection().getURL());
+      }
+      return;
+    }
  else     if ("dropAll".equals(command)) {
       liquibase.dropAll();
       System.err.println("All objects dropped from " + liquibase.getDatabase().getConnection().getConnectionUserName() + "@"+ liquibase.getDatabase().getConnection().getURL());
