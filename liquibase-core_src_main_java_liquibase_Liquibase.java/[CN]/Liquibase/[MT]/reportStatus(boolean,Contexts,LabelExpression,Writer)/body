@@ -2,7 +2,7 @@
   changeLogParameters.setContexts(contexts);
   changeLogParameters.setLabels(labels);
   try {
-    List<ChangeSet> unrunChangeSets=listUnrunChangeSets(contexts,labels);
+    List<ChangeSet> unrunChangeSets=listUnrunChangeSets(contexts,labels,false);
     if (unrunChangeSets.size() == 0) {
       out.append(getDatabase().getConnection().getConnectionUserName());
       out.append("@");
