@@ -1,6 +1,6 @@
 {
   if (database instanceof MSSQLDatabase) {
-    return new DatabaseDataType("FLOAT");
+    return new DatabaseDataType("[float](53)");
   }
   if (database instanceof MySQLDatabase) {
     return new DatabaseDataType("DOUBLE",getParameters());

@@ -7,7 +7,32 @@
     return new DatabaseDataType("LONG VARCHAR");
   }
  else   if (database instanceof MSSQLDatabase) {
-    return new DatabaseDataType("NVARCHAR","MAX");
+    if (originalDefinition.equalsIgnoreCase("text") || originalDefinition.equals("[text]")) {
+      return new DatabaseDataType("[text]");
+    }
+    if (originalDefinition.equalsIgnoreCase("ntext") || originalDefinition.equals("[ntext]")) {
+      return new DatabaseDataType("[ntext]");
+    }
+    Object[] parameters=getParameters();
+    boolean max=true;
+    if (parameters.length > 0) {
+      String param1=parameters[0].toString();
+      max=!param1.matches("\\d+") || new BigInteger(param1).compareTo(BigInteger.valueOf(4000L)) > 0;
+    }
+    if (max) {
+      try {
+        if (database.getDatabaseMajorVersion() <= 8) {
+          return new DatabaseDataType("[ntext]");
+        }
+      }
+ catch (      DatabaseException ignore) {
+      }
+      return new DatabaseDataType("[nvarchar]","MAX");
+    }
+    if (parameters.length > 1) {
+      parameters=Arrays.copyOfRange(parameters,0,1);
+    }
+    return new DatabaseDataType("[nvarchar]",parameters);
   }
  else   if (database instanceof MySQLDatabase) {
     if (originalDefinition.toLowerCase().startsWith("text")) {

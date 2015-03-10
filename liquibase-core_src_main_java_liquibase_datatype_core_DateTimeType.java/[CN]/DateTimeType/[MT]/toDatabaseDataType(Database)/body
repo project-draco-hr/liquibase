@@ -1,4 +1,5 @@
 {
+  String originalDefinition=StringUtils.trimToEmpty(getRawDefinition());
   boolean allowFractional=supportsFractionalDigits(database);
   if (database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof FirebirdDatabase|| database instanceof H2Database|| database instanceof HsqlDatabase) {
     return new DatabaseDataType("TIMESTAMP");
@@ -7,12 +8,27 @@
     return new DatabaseDataType("TIMESTAMP",getParameters());
   }
   if (database instanceof MSSQLDatabase) {
-    if ((getParameters().length > 0 && "16".equals(getParameters()[0])) || "SMALLDATETIME".equalsIgnoreCase(getRawDefinition())) {
-      return new DatabaseDataType("SMALLDATETIME");
+    Object[] parameters=getParameters();
+    if (originalDefinition.equalsIgnoreCase("smalldatetime") || originalDefinition.equals("[smalldatetime]")) {
+      return new DatabaseDataType("[smalldatetime]");
     }
- else     if (getRawDefinition().toLowerCase().startsWith("datetime2")) {
-      return new DatabaseDataType(getRawDefinition());
+ else     if (originalDefinition.equalsIgnoreCase("datetime2") || originalDefinition.equals("[datetime2]") || originalDefinition.matches("(?i)datetime2\\s*\\(.+")|| originalDefinition.matches("\\[datetime2\\]\\s*\\(.+")) {
+      try {
+        if (database.getDatabaseMajorVersion() <= 9) {
+          return new DatabaseDataType("[datetime]");
+        }
+      }
+ catch (      DatabaseException ignore) {
+      }
+      if (parameters.length == 0) {
+        parameters=new Object[]{7};
+      }
+ else       if (parameters.length > 1) {
+        parameters=Arrays.copyOfRange(parameters,0,1);
+      }
+      return new DatabaseDataType("[datetime2]",parameters);
     }
+    return new DatabaseDataType("[datetime]");
   }
   if (database instanceof InformixDatabase) {
     if (getAdditionalInformation() == null || getAdditionalInformation().length() == 0) {
@@ -33,12 +49,12 @@
       }
     }
     if (getAdditionalInformation() != null && getAdditionalInformation().length() > 0) {
-      return new DatabaseDataType(getRawDefinition());
+      return new DatabaseDataType(originalDefinition);
     }
     return new DatabaseDataType("DATETIME YEAR TO FRACTION",5);
   }
   if (database instanceof PostgresDatabase) {
-    String rawDefinition=getRawDefinition().toLowerCase();
+    String rawDefinition=originalDefinition.toLowerCase();
     Object[] params=getParameters();
     if (rawDefinition.contains("tz") || rawDefinition.contains("with time zone")) {
       if (params.length == 0 || !allowFractional) {

@@ -2,11 +2,12 @@
   if (database instanceof MSSQLDatabase) {
     try {
       if (database.getDatabaseMajorVersion() <= 9) {
-        return new DatabaseDataType("SMALLDATETIME");
+        return new DatabaseDataType("[datetime]");
       }
     }
  catch (    DatabaseException ignore) {
     }
+    return new DatabaseDataType("[date]");
   }
   return new DatabaseDataType(getName());
 }
