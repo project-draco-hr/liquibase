@@ -1,4 +1,5 @@
 {
+  resultSet.setFetchSize(FETCH_SIZE);
   List<Map> result;
   List<CachedRow> returnList=new ArrayList<CachedRow>();
   try {
