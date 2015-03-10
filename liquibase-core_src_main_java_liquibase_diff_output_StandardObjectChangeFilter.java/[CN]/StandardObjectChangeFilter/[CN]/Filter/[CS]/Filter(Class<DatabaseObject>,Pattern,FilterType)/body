@@ -1,0 +1,5 @@
+{
+  this.objectType=objectType;
+  this.nameMatcher=nameMatcher;
+  this.filterType=filterType;
+}

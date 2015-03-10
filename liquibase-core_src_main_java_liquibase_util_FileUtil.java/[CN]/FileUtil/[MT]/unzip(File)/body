@@ -24,7 +24,7 @@
         out.close();
       }
     }
-    FileUtil.forceDeleteOnExit(tempDir);
+    FileUtil.deleteOnExit(tempDir);
   }
   finally {
     jarFile.close();

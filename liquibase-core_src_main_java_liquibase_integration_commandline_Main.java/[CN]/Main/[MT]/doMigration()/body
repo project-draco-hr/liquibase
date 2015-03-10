@@ -22,7 +22,18 @@
     boolean includeCatalog=Boolean.parseBoolean(getCommandParam("includeCatalog","false"));
     boolean includeSchema=Boolean.parseBoolean(getCommandParam("includeSchema","false"));
     boolean includeTablespace=Boolean.parseBoolean(getCommandParam("includeTablespace","false"));
+    String excludeObjects=StringUtils.trimToNull(getCommandParam("excludeObjects",null));
+    String includeObjects=StringUtils.trimToNull(getCommandParam("includeObjects",null));
     DiffOutputControl diffOutputControl=new DiffOutputControl(includeCatalog,includeSchema,includeTablespace);
+    if (excludeObjects != null && includeObjects != null) {
+      throw new UnexpectedLiquibaseException("Cannot specify both excludeObjects and includeObjects");
+    }
+    if (excludeObjects != null) {
+      diffOutputControl.setObjectChangeFilter(new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.EXCLUDE,excludeObjects));
+    }
+    if (includeObjects != null) {
+      diffOutputControl.setObjectChangeFilter(new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.INCLUDE,includeObjects));
+    }
     String referenceSchemaNames=getCommandParam("schemas",null);
     CompareControl.SchemaComparison[] finalSchemaComparisons;
     CatalogAndSchema[] finalSchemas;

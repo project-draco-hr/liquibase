@@ -1,3 +1,13 @@
 {
-  return new DiffOutputControl(includeCatalog,includeSchema,includeTablespace);
+  DiffOutputControl diffOutputControl=new DiffOutputControl(includeCatalog,includeSchema,includeTablespace);
+  if (excludeObjects != null && includeObjects != null) {
+    throw new UnexpectedLiquibaseException("Cannot specify both excludeObjects and includeObjects");
+  }
+  if (excludeObjects != null) {
+    diffOutputControl.setObjectChangeFilter(new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.EXCLUDE,excludeObjects));
+  }
+  if (includeObjects != null) {
+    diffOutputControl.setObjectChangeFilter(new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.INCLUDE,includeObjects));
+  }
+  return diffOutputControl;
 }

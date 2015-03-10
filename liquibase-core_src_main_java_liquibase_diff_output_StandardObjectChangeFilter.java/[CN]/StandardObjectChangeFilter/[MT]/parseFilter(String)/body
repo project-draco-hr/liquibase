@@ -1,0 +1,23 @@
+{
+  filter=StringUtils.trimToNull(filter);
+  if (filter == null) {
+    return;
+  }
+  for (  String subfilter : filter.split("\\s*,\\s*")) {
+    String[] split=subfilter.split(":");
+    if (split.length == 1) {
+      filters.add(new Filter(null,Pattern.compile(split[0]),filterType));
+    }
+ else {
+      String className=StringUtils.upperCaseFirst(split[0]);
+      className="liquibase.structure.core." + className;
+      try {
+        Class<DatabaseObject> clazz=(Class<DatabaseObject>)Class.forName(className);
+        filters.add(new Filter(clazz,Pattern.compile(split[1]),filterType));
+      }
+ catch (      ClassNotFoundException e) {
+        throw new UnexpectedLiquibaseException(e);
+      }
+    }
+  }
+}

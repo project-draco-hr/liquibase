@@ -12,7 +12,17 @@
   getLog().info("Performing Diff on database " + db.toString());
   if (diffChangeLogFile != null) {
     try {
-      CommandLineUtils.doDiffToChangeLog(diffChangeLogFile,referenceDatabase,db,new DiffOutputControl(diffIncludeCatalog,diffIncludeSchema,diffIncludeTablespace).addIncludedSchema(new CatalogAndSchema(referenceDefaultCatalogName,referenceDefaultSchemaName)),StringUtils.trimToNull(diffTypes));
+      DiffOutputControl diffOutputControl=new DiffOutputControl(diffIncludeCatalog,diffIncludeSchema,diffIncludeTablespace).addIncludedSchema(new CatalogAndSchema(referenceDefaultCatalogName,referenceDefaultSchemaName));
+      if (diffExcludeObjects != null && diffIncludeObjects != null) {
+        throw new UnexpectedLiquibaseException("Cannot specify both excludeObjects and includeObjects");
+      }
+      if (diffExcludeObjects != null) {
+        diffOutputControl.setObjectChangeFilter(new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.EXCLUDE,diffExcludeObjects));
+      }
+      if (diffIncludeObjects != null) {
+        diffOutputControl.setObjectChangeFilter(new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.INCLUDE,diffIncludeObjects));
+      }
+      CommandLineUtils.doDiffToChangeLog(diffChangeLogFile,referenceDatabase,db,diffOutputControl,StringUtils.trimToNull(diffTypes));
       getLog().info("Differences written to Change Log File, " + diffChangeLogFile);
     }
  catch (    IOException e) {
