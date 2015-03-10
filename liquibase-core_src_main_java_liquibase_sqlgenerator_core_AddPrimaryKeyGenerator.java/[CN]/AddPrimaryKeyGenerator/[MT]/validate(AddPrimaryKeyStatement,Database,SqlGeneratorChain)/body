@@ -7,5 +7,8 @@
       validationErrors.checkDisallowedField("clustered",addPrimaryKeyStatement.isClustered(),database);
     }
   }
+  if (!(database instanceof OracleDatabase)) {
+    validationErrors.checkDisallowedField("forIndexName",addPrimaryKeyStatement.getForIndexName(),database);
+  }
   return validationErrors;
 }

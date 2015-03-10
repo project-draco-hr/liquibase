@@ -9,7 +9,7 @@
     changeLog.validate(database,contexts,labelExpression);
     changeLog.setIgnoreClasspathPrefix(ignoreClasspathPrefix);
     ChangeLogIterator logIterator=new ChangeLogIterator(database.getRanChangeSetList(),changeLog,new AlreadyRanChangeSetFilter(database.getRanChangeSetList(),ignoreClasspathPrefix),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database),new CountChangeSetFilter(changesToRollback));
-    logIterator.run(new RollbackVisitor(database),new RuntimeEnvironment(database,contexts,labelExpression));
+    logIterator.run(new RollbackVisitor(database,changeExecListener),new RuntimeEnvironment(database,contexts,labelExpression));
   }
   finally {
     try {

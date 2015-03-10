@@ -2,5 +2,8 @@
   ValidationErrors validationErrors=new ValidationErrors();
   validationErrors.checkRequiredField("columnNames",addUniqueConstraintStatement.getColumnNames());
   validationErrors.checkRequiredField("tableName",addUniqueConstraintStatement.getTableName());
+  if (!(database instanceof OracleDatabase)) {
+    validationErrors.checkDisallowedField("forIndexName",addUniqueConstraintStatement.getForIndexName(),database);
+  }
   return validationErrors;
 }

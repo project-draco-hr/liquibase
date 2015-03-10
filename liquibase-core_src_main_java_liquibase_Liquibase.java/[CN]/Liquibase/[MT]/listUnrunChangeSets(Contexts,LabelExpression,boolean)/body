@@ -1,0 +1,13 @@
+{
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labels);
+  DatabaseChangeLog changeLog=getDatabaseChangeLog();
+  if (checkLiquibaseTables) {
+    checkLiquibaseTables(true,changeLog,contexts,labels);
+  }
+  changeLog.validate(database,contexts,labels);
+  ChangeLogIterator logIterator=getStandardChangelogIterator(contexts,labels,changeLog);
+  ListVisitor visitor=new ListVisitor();
+  logIterator.run(visitor,new RuntimeEnvironment(database,contexts,labels));
+  return visitor.getSeenChangeSets();
+}

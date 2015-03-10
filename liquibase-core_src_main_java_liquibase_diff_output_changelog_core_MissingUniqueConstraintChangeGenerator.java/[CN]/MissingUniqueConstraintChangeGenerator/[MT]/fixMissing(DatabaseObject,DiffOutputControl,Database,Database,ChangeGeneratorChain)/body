@@ -1,4 +1,5 @@
 {
+  List<Change> returnList=new ArrayList<Change>();
   UniqueConstraint uc=(UniqueConstraint)missingObject;
   if (uc.getTable() == null) {
     return null;
@@ -19,7 +20,24 @@
   change.setDeferrable(uc.isDeferrable());
   change.setInitiallyDeferred(uc.isInitiallyDeferred());
   change.setDisabled(uc.isDisabled());
+  if (comparisonDatabase instanceof OracleDatabase) {
+    Index backingIndex=uc.getBackingIndex();
+    if (backingIndex != null && backingIndex.getName() != null) {
+      returnList.addAll(Arrays.asList(ChangeGeneratorFactory.getInstance().fixMissing(backingIndex,control,referenceDatabase,comparisonDatabase)));
+      change.setForIndexName(backingIndex.getName());
+      Schema schema=backingIndex.getSchema();
+      if (schema != null) {
+        if (control.getIncludeCatalog()) {
+          change.setForIndexCatalogName(schema.getCatalogName());
+        }
+        if (control.getIncludeSchema()) {
+          change.setForIndexSchemaName(schema.getName());
+        }
+      }
+    }
+  }
   Index backingIndex=uc.getBackingIndex();
   control.setAlreadyHandledMissing(backingIndex);
-  return new Change[]{change};
+  returnList.add(change);
+  return returnList.toArray(new Change[returnList.size()]);
 }

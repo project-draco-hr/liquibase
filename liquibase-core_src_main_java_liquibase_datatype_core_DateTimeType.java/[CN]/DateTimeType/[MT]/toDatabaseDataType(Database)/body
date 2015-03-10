@@ -1,6 +1,9 @@
 {
-  if (database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof FirebirdDatabase|| database instanceof H2Database|| database instanceof HsqlDatabase|| database instanceof OracleDatabase) {
+  if (database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof FirebirdDatabase|| database instanceof H2Database|| database instanceof HsqlDatabase) {
     return new DatabaseDataType("TIMESTAMP");
+  }
+  if (database instanceof OracleDatabase) {
+    return new DatabaseDataType("TIMESTAMP",getParameters());
   }
   if (database instanceof MSSQLDatabase) {
     if ((getParameters().length > 0 && "16".equals(getParameters()[0])) || "SMALLDATETIME".equalsIgnoreCase(getRawDefinition())) {

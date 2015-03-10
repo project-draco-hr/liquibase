@@ -2,6 +2,9 @@
   AddPrimaryKeyStatement statement=new AddPrimaryKeyStatement(getCatalogName(),getSchemaName(),getTableName(),getColumnNames(),getConstraintName());
   statement.setTablespace(getTablespace());
   statement.setClustered(getClustered());
+  statement.setForIndexName(getForIndexName());
+  statement.setForIndexSchemaName(getForIndexSchemaName());
+  statement.setForIndexCatalogName(getForIndexCatalogName());
   if (database instanceof DB2Database) {
     return new SqlStatement[]{statement,new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName())};
   }

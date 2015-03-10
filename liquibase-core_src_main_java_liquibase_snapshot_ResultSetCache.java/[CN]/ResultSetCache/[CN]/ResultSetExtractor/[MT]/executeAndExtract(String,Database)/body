@@ -5,8 +5,10 @@
   Statement statement=null;
   ResultSet resultSet=null;
   try {
-    statement=((JdbcConnection)database.getConnection()).createStatement();
+    JdbcConnection connection=(JdbcConnection)database.getConnection();
+    statement=connection.createStatement();
     resultSet=statement.executeQuery(sql);
+    resultSet.setFetchSize(FETCH_SIZE);
     return extract(resultSet);
   }
   finally {

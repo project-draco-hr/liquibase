@@ -26,7 +26,7 @@
       }
 );
     }
-    logIterator.run(new RollbackVisitor(database),new RuntimeEnvironment(database,contexts,labelExpression));
+    logIterator.run(new RollbackVisitor(database,changeExecListener),new RuntimeEnvironment(database,contexts,labelExpression));
   }
   finally {
     lockService.releaseLock();

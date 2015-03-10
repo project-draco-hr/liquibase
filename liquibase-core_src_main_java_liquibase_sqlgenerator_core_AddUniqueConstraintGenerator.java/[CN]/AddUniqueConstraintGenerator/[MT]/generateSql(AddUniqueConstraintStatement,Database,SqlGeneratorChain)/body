@@ -30,5 +30,8 @@
       sql+=" USING INDEX TABLESPACE " + statement.getTablespace();
     }
   }
+  if (statement.getForIndexName() != null) {
+    sql+=" USING INDEX " + database.escapeObjectName(statement.getForIndexCatalogName(),statement.getForIndexSchemaName(),statement.getForIndexName(),Index.class);
+  }
   return new Sql[]{new UnparsedSql(sql,getAffectedUniqueConstraint(statement))};
 }
