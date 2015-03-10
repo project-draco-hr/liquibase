@@ -1,3 +1,9 @@
 {
-  return "public";
+  try {
+    String currentSchema=ExecutorService.getInstance().getExecutor(this).queryForObject(new RawCallStatement("select current_schema"),String.class);
+    return currentSchema;
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Failed to get current schema",e);
+  }
 }
