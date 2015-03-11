@@ -41,7 +41,7 @@
           }
         }
  else {
-          if (ObjectUtil.hasProperty(object,attr)) {
+          if (value != null && ObjectUtil.hasProperty(object,attr)) {
             object.setAttribute(attr,null);
             ObjectUtil.setProperty(object,attr,value);
           }

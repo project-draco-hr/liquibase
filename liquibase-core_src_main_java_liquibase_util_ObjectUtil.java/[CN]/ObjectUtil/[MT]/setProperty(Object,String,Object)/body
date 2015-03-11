@@ -4,6 +4,10 @@
     throw new UnexpectedLiquibaseException("Property '" + propertyName + "' not found on object type "+ object.getClass().getName());
   }
   try {
+    if (!method.getParameterTypes()[0].isAssignableFrom(propertyValue.getClass())) {
+      setProperty(object,propertyName,propertyValue.toString());
+      return;
+    }
     method.invoke(object,propertyValue);
   }
  catch (  IllegalAccessException e) {
