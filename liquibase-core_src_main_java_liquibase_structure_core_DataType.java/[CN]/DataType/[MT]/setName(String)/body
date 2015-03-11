@@ -1,5 +1,0 @@
-{
-  setAttribute("name",name);
-  typeName=name;
-  return this;
-}
