@@ -1,0 +1,26 @@
+{
+  Statement statement=null;
+  try {
+    statement=((JdbcConnection)database.getConnection()).createStatement();
+    String schemaName=getSchemaName();
+    if (schemaName == null) {
+      schemaName=database.getDefaultSchemaName();
+    }
+    String tableName=getTableName();
+    String columnName=getColumnName();
+    try {
+      String sql=format("select t.%s from %s.%s t where 0=1",columnName,schemaName,tableName);
+      statement.executeQuery(sql).close();
+      return;
+    }
+ catch (    SQLException e) {
+      throw new PreconditionFailedException(format("Column %s.%s.%s does not exist",schemaName,tableName,columnName),changeLog,this);
+    }
+  }
+ catch (  DatabaseException e) {
+    throw new PreconditionErrorException(e,changeLog,this);
+  }
+ finally {
+    JdbcUtils.closeStatement(statement);
+  }
+}
