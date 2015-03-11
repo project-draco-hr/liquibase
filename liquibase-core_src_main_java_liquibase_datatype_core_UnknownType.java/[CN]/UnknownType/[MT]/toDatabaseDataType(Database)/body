@@ -14,10 +14,7 @@
     parameters=new Object[0];
   }
   if (database instanceof MSSQLDatabase) {
-    String name=getName();
-    if (name.matches("(?i)[a-z0-9]+")) {
-      name=((MSSQLDatabase)database).delimitIdentifier(name.toLowerCase(Locale.ENGLISH));
-    }
+    String name=database.escapeDataTypeName(getName());
     if (dataTypeMaxParameters < parameters.length) {
       parameters=Arrays.copyOfRange(parameters,0,dataTypeMaxParameters);
     }

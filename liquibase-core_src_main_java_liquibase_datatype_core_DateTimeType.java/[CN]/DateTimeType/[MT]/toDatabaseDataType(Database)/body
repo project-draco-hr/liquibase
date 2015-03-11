@@ -10,12 +10,12 @@
   if (database instanceof MSSQLDatabase) {
     Object[] parameters=getParameters();
     if (originalDefinition.equalsIgnoreCase("smalldatetime") || originalDefinition.equals("[smalldatetime]")) {
-      return new DatabaseDataType("[smalldatetime]");
+      return new DatabaseDataType(database.escapeDataTypeName("smalldatetime"));
     }
  else     if (originalDefinition.equalsIgnoreCase("datetime2") || originalDefinition.equals("[datetime2]") || originalDefinition.matches("(?i)datetime2\\s*\\(.+")|| originalDefinition.matches("\\[datetime2\\]\\s*\\(.+")) {
       try {
         if (database.getDatabaseMajorVersion() <= 9) {
-          return new DatabaseDataType("[datetime]");
+          return new DatabaseDataType(database.escapeDataTypeName("datetime"));
         }
       }
  catch (      DatabaseException ignore) {
@@ -26,9 +26,9 @@
  else       if (parameters.length > 1) {
         parameters=Arrays.copyOfRange(parameters,0,1);
       }
-      return new DatabaseDataType("[datetime2]",parameters);
+      return new DatabaseDataType(database.escapeDataTypeName("datetime2"),parameters);
     }
-    return new DatabaseDataType("[datetime]");
+    return new DatabaseDataType(database.escapeDataTypeName("datetime"));
   }
   if (database instanceof InformixDatabase) {
     if (getAdditionalInformation() == null || getAdditionalInformation().length() == 0) {

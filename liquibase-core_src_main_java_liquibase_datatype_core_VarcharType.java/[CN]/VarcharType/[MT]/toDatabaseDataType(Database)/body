@@ -12,12 +12,12 @@
       if (!param1.matches("\\d+") || new BigInteger(param1).compareTo(BigInteger.valueOf(8000L)) > 0) {
         try {
           if (database.getDatabaseMajorVersion() <= 8) {
-            return new DatabaseDataType("[varchar]","8000");
+            return new DatabaseDataType(database.escapeDataTypeName("varchar"),"8000");
           }
         }
  catch (        DatabaseException ignore) {
         }
-        return new DatabaseDataType("[varchar]","MAX");
+        return new DatabaseDataType(database.escapeDataTypeName("varchar"),"MAX");
       }
     }
     if (parameters.length == 0) {
@@ -26,7 +26,7 @@
  else     if (parameters.length > 1) {
       parameters=Arrays.copyOfRange(parameters,0,1);
     }
-    return new DatabaseDataType("[varchar]",parameters);
+    return new DatabaseDataType(database.escapeDataTypeName("varchar"),parameters);
   }
   return super.toDatabaseDataType(database);
 }

@@ -7,7 +7,7 @@
     Object[] parameters=getParameters();
     try {
       if (database.getDatabaseMajorVersion() <= 9) {
-        return new DatabaseDataType("[datetime]");
+        return new DatabaseDataType(database.escapeDataTypeName("datetime"));
       }
     }
  catch (    DatabaseException e) {
@@ -18,7 +18,7 @@
  else     if (parameters.length > 1) {
       parameters=Arrays.copyOfRange(parameters,0,1);
     }
-    return new DatabaseDataType("[time]",parameters);
+    return new DatabaseDataType(database.escapeDataTypeName("time"),parameters);
   }
   if (database instanceof MySQLDatabase) {
     boolean supportsParameters=true;

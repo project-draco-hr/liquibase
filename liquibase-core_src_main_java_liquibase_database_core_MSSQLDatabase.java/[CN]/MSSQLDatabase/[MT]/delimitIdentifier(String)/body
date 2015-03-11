@@ -1,6 +1,0 @@
-{
-  if (identifier == null) {
-    return null;
-  }
-  return quotingStartCharacter + identifier.replace(quotingEndCharacter,quotingEndReplacement) + quotingEndCharacter;
-}
