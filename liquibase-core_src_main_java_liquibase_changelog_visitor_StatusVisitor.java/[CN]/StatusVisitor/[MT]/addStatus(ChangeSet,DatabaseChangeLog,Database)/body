@@ -6,6 +6,7 @@
       status.setPreviouslyRan(true);
       status.setDateLastExecuted(ranChangeSet.getDateExecuted());
       status.setStoredCheckSum(ranChangeSet.getLastCheckSum());
+      status.setRanChangeSet(ranChangeSet);
       ranChangeSetToRemove=ranChangeSet;
       break;
     }
