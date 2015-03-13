@@ -1,5 +1,0 @@
-{
-  DumperOptions dumperOptions=new DumperOptions();
-  dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-  return new Yaml(new LiquibaseRepresenter(),dumperOptions);
-}

@@ -1,0 +1,13 @@
+{
+  if (isJson()) {
+    String out=yaml.dumpAs(toMap(object),Tag.MAP,DumperOptions.FlowStyle.FLOW);
+    out=out.replaceAll("!!int \"(\\d+)\"","$1");
+    out=out.replaceAll("!!bool \"(\\w+)\"","$1");
+    out=out.replaceAll("!!timestamp \"([^\"]*)\"","$1");
+    out=out.replaceAll("!!float \"([^\"]*)\"","$1");
+    return out;
+  }
+ else {
+    return yaml.dumpAsMap(toMap(object));
+  }
+}

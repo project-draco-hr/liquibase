@@ -1,7 +1,0 @@
-{
-  DumperOptions dumperOptions=new DumperOptions();
-  dumperOptions.setPrettyFlow(true);
-  dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.FLOW);
-  dumperOptions.setDefaultScalarStyle(DumperOptions.ScalarStyle.DOUBLE_QUOTED);
-  return new Yaml(new LiquibaseRepresenter(),dumperOptions);
-}

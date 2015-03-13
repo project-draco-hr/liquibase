@@ -1,0 +1,19 @@
+{
+  Class<? extends SnapshotParser>[] classes;
+  snapshotParserComparator=new Comparator<SnapshotParser>(){
+    @Override public int compare(    SnapshotParser o1,    SnapshotParser o2){
+      return Integer.valueOf(o2.getPriority()).compareTo(o1.getPriority());
+    }
+  }
+;
+  parsers=new ArrayList<SnapshotParser>();
+  try {
+    classes=ServiceLocator.getInstance().findClasses(SnapshotParser.class);
+    for (    Class<? extends SnapshotParser> clazz : classes) {
+      register((SnapshotParser)clazz.getConstructor().newInstance());
+    }
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

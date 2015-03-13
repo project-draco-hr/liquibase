@@ -1,0 +1,8 @@
+{
+  for (  SnapshotParser parser : parsers) {
+    if (parser.supports(fileNameOrExtension,resourceAccessor)) {
+      return parser;
+    }
+  }
+  throw new UnknownFormatException("Cannot find parser that supports " + fileNameOrExtension);
+}
