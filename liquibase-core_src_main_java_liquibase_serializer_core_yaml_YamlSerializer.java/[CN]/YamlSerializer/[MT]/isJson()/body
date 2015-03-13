@@ -1,0 +1,3 @@
+{
+  return getValidFileExtensions()[0].equals("json");
+}

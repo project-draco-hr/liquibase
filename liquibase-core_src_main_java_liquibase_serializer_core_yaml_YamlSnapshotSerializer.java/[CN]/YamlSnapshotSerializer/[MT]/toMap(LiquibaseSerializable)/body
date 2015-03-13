@@ -1,0 +1,23 @@
+{
+  if (object instanceof DatabaseObject) {
+    if (alreadySerializingObject) {
+      return ((DatabaseObject)object).getClass().getName() + "#" + ((DatabaseObject)object).getSnapshotId();
+    }
+ else {
+      alreadySerializingObject=true;
+      Object map=super.toMap(object);
+      alreadySerializingObject=false;
+      return map;
+    }
+  }
+  if (object instanceof DatabaseObjectCollection) {
+    SortedMap<String,Object> returnMap=new TreeMap<String,Object>();
+    for (    Map.Entry<Class<? extends DatabaseObject>,Set<? extends DatabaseObject>> entry : ((DatabaseObjectCollection)object).toMap().entrySet()) {
+      ArrayList value=new ArrayList(entry.getValue());
+      Collections.sort(value,new DatabaseObjectComparator());
+      returnMap.put(entry.getKey().getName(),value);
+    }
+    return returnMap;
+  }
+  return super.toMap(object);
+}
