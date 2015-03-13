@@ -1,15 +1,3 @@
 {
-  try {
-    Database database=DatabaseFactory.getInstance().openDatabase(url,username,password,driver,databaseClass,driverPropertiesFile,propertyProviderClass,new ClassLoaderResourceAccessor(classLoader));
-    database.setDefaultCatalogName(StringUtils.trimToNull(defaultCatalogName));
-    database.setDefaultSchemaName(StringUtils.trimToNull(defaultSchemaName));
-    database.setOutputDefaultCatalog(outputDefaultCatalog);
-    database.setOutputDefaultSchema(outputDefaultSchema);
-    database.setLiquibaseCatalogName(StringUtils.trimToNull(liquibaseCatalogName));
-    database.setLiquibaseSchemaName(StringUtils.trimToNull(liquibaseSchemaName));
-    return database;
-  }
- catch (  Exception e) {
-    throw new DatabaseException(e);
-  }
+  return createDatabaseObject(new ClassLoaderResourceAccessor(classLoader),url,username,password,driver,defaultCatalogName,defaultSchemaName,outputDefaultCatalog,outputDefaultSchema,databaseClass,driverPropertiesFile,propertyProviderClass,liquibaseCatalogName,liquibaseSchemaName);
 }
