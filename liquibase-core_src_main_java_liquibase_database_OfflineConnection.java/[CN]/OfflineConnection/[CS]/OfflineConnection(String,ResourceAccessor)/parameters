@@ -1,3 +1,2 @@
-String path
-Database database
+String url
 ResourceAccessor resourceAccessor

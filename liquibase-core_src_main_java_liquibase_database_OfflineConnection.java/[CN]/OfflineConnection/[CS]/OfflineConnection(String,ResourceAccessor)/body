@@ -44,7 +44,20 @@
       this.outputLiquibaseSql=Boolean.valueOf(paramEntry.getValue());
     }
  else     if (paramEntry.getKey().equals("snapshot")) {
-      this.snapshotFile=paramEntry.getValue();
+      String snapshotFile=paramEntry.getValue();
+      try {
+        SnapshotParser parser=SnapshotParserFactory.getInstance().getParser(snapshotFile,resourceAccessor);
+        this.snapshot=parser.parse(snapshotFile,resourceAccessor);
+        this.snapshot.getDatabase().setConnection(this);
+        for (        Catalog catalog : this.snapshot.get(Catalog.class)) {
+          if (catalog.isDefault()) {
+            this.catalog=catalog.getName();
+          }
+        }
+      }
+ catch (      LiquibaseException e) {
+        throw new UnexpectedLiquibaseException("Cannot parse snapshot",e);
+      }
     }
  else {
       this.databaseParams.put(paramEntry.getKey(),paramEntry.getValue());
