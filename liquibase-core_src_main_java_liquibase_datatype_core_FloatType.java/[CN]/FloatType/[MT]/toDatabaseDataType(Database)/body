@@ -13,6 +13,11 @@
     }
     return new DatabaseDataType(database.escapeDataTypeName("float"),parameters);
   }
+  if (database instanceof MySQLDatabase || database instanceof DB2Database) {
+    if (originalDefinition.equalsIgnoreCase("REAL")) {
+      return new DatabaseDataType("REAL");
+    }
+  }
   if (database instanceof FirebirdDatabase || database instanceof InformixDatabase) {
     return new DatabaseDataType("FLOAT");
   }

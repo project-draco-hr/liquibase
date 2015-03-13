@@ -58,6 +58,12 @@
  else     if (originalDefinition.toLowerCase().startsWith("varbinary") || originalDefinition.equals("java.sql.Types.VARBINARY")) {
       return new DatabaseDataType("VARBINARY",getParameters());
     }
+ else     if (originalDefinition.toLowerCase().startsWith("tinyblob")) {
+      return new DatabaseDataType("TINYBLOB");
+    }
+ else     if (originalDefinition.toLowerCase().startsWith("mediumblob")) {
+      return new DatabaseDataType("MEDIUMBLOB");
+    }
  else {
       return new DatabaseDataType("LONGBLOB");
     }

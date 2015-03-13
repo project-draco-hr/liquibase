@@ -13,30 +13,27 @@
     if (originalDefinition.equalsIgnoreCase("ntext") || originalDefinition.equals("[ntext]")) {
       return new DatabaseDataType(database.escapeDataTypeName("ntext"));
     }
-    Object[] parameters=getParameters();
-    boolean max=true;
-    if (parameters.length > 0) {
-      String param1=parameters[0].toString();
-      max=!param1.matches("\\d+") || new BigInteger(param1).compareTo(BigInteger.valueOf(4000L)) > 0;
-    }
-    if (max) {
-      try {
-        if (database.getDatabaseMajorVersion() <= 8) {
-          return new DatabaseDataType(database.escapeDataTypeName("ntext"));
-        }
-      }
- catch (      DatabaseException ignore) {
-      }
+    if (originalDefinition.equalsIgnoreCase("nclob")) {
       return new DatabaseDataType(database.escapeDataTypeName("nvarchar"),"MAX");
     }
-    if (parameters.length > 1) {
-      parameters=Arrays.copyOfRange(parameters,0,1);
+    try {
+      if (database.getDatabaseMajorVersion() <= 8) {
+        return new DatabaseDataType(database.escapeDataTypeName("text"));
+      }
     }
-    return new DatabaseDataType(database.escapeDataTypeName("nvarchar"),parameters);
+ catch (    DatabaseException ignore) {
+    }
+    return new DatabaseDataType(database.escapeDataTypeName("varchar"),"MAX");
   }
  else   if (database instanceof MySQLDatabase) {
     if (originalDefinition.toLowerCase().startsWith("text")) {
       return new DatabaseDataType("TEXT");
+    }
+ else     if (originalDefinition.toLowerCase().startsWith("tinytext")) {
+      return new DatabaseDataType("TINYTEXT");
+    }
+ else     if (originalDefinition.toLowerCase().startsWith("mediumtext")) {
+      return new DatabaseDataType("MEDIUMTEXT");
     }
  else {
       return new DatabaseDataType("LONGTEXT");
@@ -54,6 +51,9 @@
     return new DatabaseDataType("TEXT");
   }
  else   if (database instanceof OracleDatabase) {
+    if (originalDefinition.equalsIgnoreCase("nclob")) {
+      return new DatabaseDataType("NCLOB");
+    }
     return new DatabaseDataType("CLOB");
   }
  else   if (database instanceof InformixDatabase) {
