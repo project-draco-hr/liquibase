@@ -4,6 +4,7 @@
     out=out.replaceAll("!!int \"(\\d+)\"","$1");
     out=out.replaceAll("!!bool \"(\\w+)\"","$1");
     out=out.replaceAll("!!timestamp \"([^\"]*)\"","$1");
+    out=out.replaceAll("!!float \"([^\"]*)\"","$1");
     return out;
   }
  else {
