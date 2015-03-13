@@ -1,0 +1,7 @@
+{
+  multiRepresenters.put(DatabaseFunction.class,new TypeStoringAsStringRepresenter());
+  multiRepresenters.put(SequenceNextValueFunction.class,new TypeStoringAsStringRepresenter());
+  multiRepresenters.put(SequenceCurrentValueFunction.class,new TypeStoringAsStringRepresenter());
+  multiRepresenters.put(java.util.Date.class,new TypeStoringAsStringRepresenter());
+  multiRepresenters.put(java.sql.Date.class,new TypeStoringAsStringRepresenter());
+}

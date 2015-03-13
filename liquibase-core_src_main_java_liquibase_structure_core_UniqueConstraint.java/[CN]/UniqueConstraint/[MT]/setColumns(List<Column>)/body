@@ -1,7 +1,9 @@
 {
   setAttribute("columns",columns);
-  for (  Column column : getColumns()) {
-    column.setRelation(getTable());
+  if (getAttribute("table",Object.class) instanceof Table) {
+    for (    Column column : getColumns()) {
+      column.setRelation(getTable());
+    }
   }
   return this;
 }

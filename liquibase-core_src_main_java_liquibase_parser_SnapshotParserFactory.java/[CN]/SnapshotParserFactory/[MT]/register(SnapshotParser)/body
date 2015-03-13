@@ -1,0 +1,4 @@
+{
+  parsers.add(snapshotParser);
+  Collections.sort(parsers,snapshotParserComparator);
+}

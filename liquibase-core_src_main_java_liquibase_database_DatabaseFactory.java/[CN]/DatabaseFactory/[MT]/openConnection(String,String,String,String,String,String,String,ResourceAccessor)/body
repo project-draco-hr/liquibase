@@ -1,6 +1,6 @@
 {
   if (url.startsWith("offline:")) {
-    return new OfflineConnection(url);
+    return new OfflineConnection(url,resourceAccessor);
   }
   driver=StringUtils.trimToNull(driver);
   if (driver == null) {

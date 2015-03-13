@@ -1,0 +1,5 @@
+{
+  Set<String> fields=super.getSerializableFields();
+  fields.remove("objects");
+  return fields;
+}

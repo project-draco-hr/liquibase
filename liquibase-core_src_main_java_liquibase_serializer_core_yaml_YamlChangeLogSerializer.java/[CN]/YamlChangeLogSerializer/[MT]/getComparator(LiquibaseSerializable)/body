@@ -1,0 +1,8 @@
+{
+  if (object instanceof ChangeSet) {
+    return new ChangeSetComparator();
+  }
+ else {
+    return super.getComparator(object);
+  }
+}

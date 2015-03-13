@@ -1,0 +1,7 @@
+{
+  Method readMethod=getReadMethod(object,propertyName);
+  if (readMethod == null) {
+    return null;
+  }
+  return readMethod.getReturnType();
+}
