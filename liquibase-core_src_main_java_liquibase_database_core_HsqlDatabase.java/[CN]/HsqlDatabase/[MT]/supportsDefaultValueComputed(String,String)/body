@@ -1,3 +1,4 @@
 {
-  return "datetime".equals(columnType) ? Arrays.asList(SUPPORTED_DEFAULT_VALUE_COMPUTED_LIST).contains(defaultValue) : false;
+  HashSet<String> possibleComputedValues=SUPPORTED_DEFAULT_VALUE_COMPUTED_MAP.get(columnType);
+  return (possibleComputedValues != null) ? possibleComputedValues.contains(defaultValue) : false;
 }
