@@ -29,7 +29,7 @@
         throw new SetupException(e);
       }
     }
-    includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,getStandardChangeLogComparator(),resourceAccessor);
+    includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,node.getChildValue(null,"ignoreMissingOrEmptyDirectory",false),getStandardChangeLogComparator(),resourceAccessor);
   }
  else   if (nodeName.equals("preConditions")) {
     this.preconditionContainer=new PreconditionContainer();
