@@ -1,0 +1,3 @@
+{
+  return "datetime".equals(columnType) ? Arrays.asList(SUPPORTED_DEFAULT_VALUE_COMPUTED_LIST).contains(defaultValue) : false;
+}
