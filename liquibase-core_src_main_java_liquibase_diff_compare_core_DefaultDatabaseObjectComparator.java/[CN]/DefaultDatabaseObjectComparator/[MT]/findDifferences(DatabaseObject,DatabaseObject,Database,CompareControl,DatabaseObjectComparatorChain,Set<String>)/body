@@ -11,6 +11,8 @@
     }
     Object attribute1=databaseObject1.getAttribute(attribute,Object.class);
     Object attribute2=databaseObject2.getAttribute(attribute,Object.class);
+    attribute1=undoCollection(attribute1,attribute2);
+    attribute2=undoCollection(attribute2,attribute1);
     ObjectDifferences.CompareFunction compareFunction;
     if (attribute1 instanceof DatabaseObject || attribute2 instanceof DatabaseObject) {
       Class<? extends DatabaseObject> type;
