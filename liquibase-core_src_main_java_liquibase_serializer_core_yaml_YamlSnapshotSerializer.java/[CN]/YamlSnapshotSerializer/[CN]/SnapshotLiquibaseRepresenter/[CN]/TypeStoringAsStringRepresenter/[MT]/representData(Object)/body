@@ -9,5 +9,5 @@
  else {
     value=data.toString();
   }
-  return representScalar(Tag.STR,value + "#{" + data.getClass().getName()+ "}");
+  return representScalar(Tag.STR,value + "!{" + data.getClass().getName()+ "}");
 }
