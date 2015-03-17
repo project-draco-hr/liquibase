@@ -1,4 +1,5 @@
 {
+  log=new LogFactory().getLog();
   try {
     Class[] classes=ServiceLocator.getInstance().findClasses(Database.class);
     for (    Class<? extends Database> clazz : classes) {
