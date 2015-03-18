@@ -5,7 +5,7 @@
       value=(Logger)ServiceLocator.getInstance().newInstance(Logger.class);
     }
  catch (    Exception e) {
-      throw new ServiceNotFoundException(e);
+      value=new DefaultLogger();
     }
     value.setName(name);
     if (defaultLoggingLevel != null) {
