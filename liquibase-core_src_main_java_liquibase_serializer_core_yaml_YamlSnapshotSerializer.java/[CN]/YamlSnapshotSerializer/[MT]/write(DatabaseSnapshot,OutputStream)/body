@@ -1,4 +1,4 @@
 {
-  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out));
+  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out,"utf-8"));
   writer.write(serialize(snapshot,true));
 }
