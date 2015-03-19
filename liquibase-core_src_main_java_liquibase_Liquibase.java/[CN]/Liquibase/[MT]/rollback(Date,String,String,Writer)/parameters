@@ -1,0 +1,4 @@
+Date dateToRollBackTo
+String rollbackScript
+String contexts
+Writer output

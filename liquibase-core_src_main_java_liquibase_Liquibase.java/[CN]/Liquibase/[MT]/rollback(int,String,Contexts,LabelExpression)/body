@@ -1,0 +1,29 @@
+{
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
+  lockService.waitForLock();
+  try {
+    DatabaseChangeLog changeLog=getDatabaseChangeLog();
+    checkLiquibaseTables(false,changeLog,contexts,labelExpression);
+    changeLog.validate(database,contexts,labelExpression);
+    changeLog.setIgnoreClasspathPrefix(ignoreClasspathPrefix);
+    ChangeLogIterator logIterator=new ChangeLogIterator(database.getRanChangeSetList(),changeLog,new AlreadyRanChangeSetFilter(database.getRanChangeSetList(),ignoreClasspathPrefix),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database),new CountChangeSetFilter(changesToRollback));
+    if (rollbackScript == null) {
+      logIterator.run(new RollbackVisitor(database,changeExecListener),new RuntimeEnvironment(database,contexts,labelExpression));
+    }
+ else {
+      executeRollbackScript(rollbackScript,contexts,labelExpression);
+      removeRunStatus(logIterator,contexts,labelExpression);
+    }
+  }
+  finally {
+    try {
+      lockService.releaseLock();
+    }
+ catch (    LockException e) {
+      log.severe("Error releasing lock",e);
+    }
+    resetServices();
+  }
+}

@@ -1,0 +1,3 @@
+{
+  rollback(changesToRollback,rollbackScript,new Contexts(contexts),new LabelExpression());
+}

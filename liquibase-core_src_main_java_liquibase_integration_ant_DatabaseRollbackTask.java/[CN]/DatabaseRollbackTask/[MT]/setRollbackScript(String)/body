@@ -1,0 +1,3 @@
+{
+  this.rollbackScript=rollbackScript;
+}
