@@ -56,7 +56,7 @@
         }
       }
  catch (      LiquibaseException e) {
-        throw new UnexpectedLiquibaseException("Cannot parse snapshot",e);
+        throw new UnexpectedLiquibaseException("Cannot parse snapshot " + url,e);
       }
     }
  else {
