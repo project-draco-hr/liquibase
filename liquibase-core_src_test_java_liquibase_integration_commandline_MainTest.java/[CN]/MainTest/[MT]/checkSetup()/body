@@ -29,7 +29,7 @@
     cli.command=noArgCommand[i];
     assertEquals(0,cli.checkSetup().size());
   }
-  String[] singleArgCommand={"updateCount","updateCountSQL","rollback","rollbackToDate","rollbackCount","rollbackSQL","rollbackToDateSQL","rollbackCountSQL","tag","dbDoc"};
+  String[] singleArgCommand={"updateCount","updateCountSQL","tag","dbDoc"};
   cli.commandParams.add("--logLevel=debug");
   for (int i=0; i < singleArgCommand.length; i++) {
     cli.command=singleArgCommand[i];

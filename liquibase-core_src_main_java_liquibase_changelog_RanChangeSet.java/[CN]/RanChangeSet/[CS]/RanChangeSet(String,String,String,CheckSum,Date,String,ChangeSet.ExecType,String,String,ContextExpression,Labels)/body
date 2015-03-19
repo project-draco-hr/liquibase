@@ -13,4 +13,6 @@
   this.execType=execType;
   this.description=description;
   this.comments=comments;
+  this.contextExpression=contextExpression;
+  this.labels=labels;
 }
