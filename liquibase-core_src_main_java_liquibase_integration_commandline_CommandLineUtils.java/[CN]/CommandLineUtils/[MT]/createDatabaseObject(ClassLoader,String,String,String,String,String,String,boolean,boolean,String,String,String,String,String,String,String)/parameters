@@ -12,3 +12,5 @@ String driverPropertiesFile
 String propertyProviderClass
 String liquibaseCatalogName
 String liquibaseSchemaName
+String databaseChangeLogTableName
+String databaseChangeLogLockTableName
