@@ -1,0 +1,3 @@
+{
+  this(key,value,new ContextExpression(validContexts),new Labels(labels),StringUtils.splitAndTrim(validDatabases,","),globalParam,changeLog);
+}

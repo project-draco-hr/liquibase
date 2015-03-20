@@ -1,0 +1,4 @@
+{
+  ChangeLogParameter parameter=findParameter(key,changeLog);
+  return parameter != null ? parameter.getValue() : null;
+}

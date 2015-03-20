@@ -45,19 +45,26 @@
       String context=node.getChildValue(null,"context",String.class);
       String dbms=node.getChildValue(null,"dbms",String.class);
       String labels=node.getChildValue(null,"labels",String.class);
-      if (node.getChildValue(null,"file",String.class) == null) {
-        this.changeLogParameters.set(node.getChildValue(null,"name",String.class),node.getChildValue(null,"value",String.class),context,labels,dbms);
+      Boolean global=node.getChildValue(null,"global",Boolean.class);
+      if (global == null) {
+        global=true;
+      }
+      String file=node.getChildValue(null,"file",String.class);
+      if (file == null) {
+        String name=node.getChildValue(null,"name",String.class);
+        String value=node.getChildValue(null,"value",String.class);
+        this.changeLogParameters.set(name,value,context,labels,dbms,global,this);
       }
  else {
         Properties props=new Properties();
-        InputStream propertiesStream=StreamUtil.singleInputStream(node.getChildValue(null,"file",String.class),resourceAccessor);
+        InputStream propertiesStream=StreamUtil.singleInputStream(file,resourceAccessor);
         if (propertiesStream == null) {
-          LogFactory.getInstance().getLog().info("Could not open properties file " + node.getChildValue(null,"file",String.class));
+          LogFactory.getInstance().getLog().info("Could not open properties file " + file);
         }
  else {
           props.load(propertiesStream);
           for (          Map.Entry entry : props.entrySet()) {
-            this.changeLogParameters.set(entry.getKey().toString(),entry.getValue().toString(),context,labels,dbms);
+            this.changeLogParameters.set(entry.getKey().toString(),entry.getValue().toString(),context,labels,dbms,global,this);
           }
         }
       }
