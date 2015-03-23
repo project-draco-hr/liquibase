@@ -17,6 +17,9 @@
  else   if (parameterType.equals(BigInteger.class)) {
     finalValue=new BigInteger(propertyValue);
   }
+ else   if (parameterType.equals(BigDecimal.class)) {
+    finalValue=new BigDecimal(propertyValue);
+  }
  else   if (parameterType.equals(DatabaseFunction.class)) {
     finalValue=new DatabaseFunction(propertyValue);
   }
