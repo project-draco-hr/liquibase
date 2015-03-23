@@ -2,7 +2,7 @@
   try {
     Field foundField=findField(object,field);
     foundField.setAccessible(true);
-    return foundField.get(object);
+    foundField.set(object,value);
   }
  catch (  Exception e) {
     throw new UnexpectedLiquibaseException(e);
