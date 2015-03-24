@@ -1,18 +1,6 @@
 {
   try {
-    Field foundField=null;
-    Class<? extends Object> classToCheck=object.getClass();
-    while (foundField == null && !classToCheck.equals(Object.class)) {
-      try {
-        foundField=classToCheck.getDeclaredField(field);
-      }
- catch (      NoSuchFieldException e) {
-        classToCheck=classToCheck.getSuperclass();
-      }
-    }
-    if (foundField == null) {
-      throw new UnexpectedLiquibaseException("No field " + field + " on "+ object.getClass());
-    }
+    Field foundField=findField(object,field);
     foundField.setAccessible(true);
     return foundField.get(object);
   }
