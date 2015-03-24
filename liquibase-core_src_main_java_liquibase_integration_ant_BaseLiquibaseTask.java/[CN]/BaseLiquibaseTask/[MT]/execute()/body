@@ -9,8 +9,7 @@
   try {
     ResourceAccessor resourceAccessor=createResourceAccessor(classLoader);
     database=createDatabaseFromType(databaseType);
-    String changeLogFilePath=getChangeLogFilePath();
-    liquibase=new Liquibase(changeLogFilePath,resourceAccessor,database);
+    liquibase=new Liquibase(getChangeLogFile(),resourceAccessor,database);
     if (changeLogParameters != null) {
       changeLogParameters.applyParameters(liquibase);
     }
