@@ -42,7 +42,7 @@
           setSerializableFieldValue(childNode.getName(),childObject);
         }
  else         if (childNode.getValue() != null) {
-          ObjectUtil.setProperty(this,childNode.getName(),childNode.getValue().toString());
+          ObjectUtil.setProperty(this,childNode.getName(),convertEscaped(childNode.getValue().toString()));
         }
       }
  else {
