@@ -16,7 +16,7 @@
       unsortedResources=resourceAccessor.list(relativeTo,pathName,true,false,true);
     }
  catch (    FileNotFoundException e) {
-      if (!ignoreMissingOrEmptyDirectory) {
+      if (errorIfMissingOrEmpty) {
         throw e;
       }
     }
@@ -28,7 +28,7 @@
         }
       }
     }
-    if (resources.size() == 0 && !ignoreMissingOrEmptyDirectory) {
+    if (resources.size() == 0 && errorIfMissingOrEmpty) {
       throw new SetupException("Could not find directory or directory was empty for includeAll '" + pathName + "'");
     }
     for (    String path : resources) {
