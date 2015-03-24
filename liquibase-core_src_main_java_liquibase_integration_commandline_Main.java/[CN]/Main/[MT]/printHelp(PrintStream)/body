@@ -107,6 +107,13 @@
   stream.println("                                            liquibase tables");
   stream.println(" --liquibaseSchemaName=<name>               The name of the schema with the");
   stream.println("                                            liquibase tables");
+  stream.println(" --databaseChangeLogTableName=<name>        The name of the Liquibase ChangeLog");
+  stream.println("                                            table (default: DATABASECHANGELOG)");
+  stream.println(" --databaseChangeLogLockTableName=<name>    The name of the Liquibase ChangeLog");
+  stream.println("                                            Lock table");
+  stream.println("                                            (default: DATABASECHANGELOGLOCK)");
+  stream.println(" --liquibaseSchemaName=<name>               The name of the schema with the");
+  stream.println("                                            liquibase tables");
   stream.println(" --includeSystemClasspath=<true|false>      Include the system classpath");
   stream.println("                                            in the Liquibase classpath");
   stream.println("                                            (default: true)");
