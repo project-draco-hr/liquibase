@@ -11,7 +11,15 @@
     if (isRelativeToChangelogFile) {
       relativeTo=this.getPhysicalFilePath();
     }
-    Set<String> unsortedResources=resourceAccessor.list(relativeTo,pathName,true,false,true);
+    Set<String> unsortedResources=null;
+    try {
+      unsortedResources=resourceAccessor.list(relativeTo,pathName,true,false,true);
+    }
+ catch (    FileNotFoundException e) {
+      if (!ignoreMissingOrEmptyDirectory) {
+        throw e;
+      }
+    }
     SortedSet<String> resources=new TreeSet<String>(resourceComparator);
     if (unsortedResources != null) {
       for (      String resourcePath : unsortedResources) {
@@ -20,7 +28,7 @@
         }
       }
     }
-    if (resources.size() == 0) {
+    if (resources.size() == 0 && !ignoreMissingOrEmptyDirectory) {
       throw new SetupException("Could not find directory or directory was empty for includeAll '" + pathName + "'");
     }
     for (    String path : resources) {

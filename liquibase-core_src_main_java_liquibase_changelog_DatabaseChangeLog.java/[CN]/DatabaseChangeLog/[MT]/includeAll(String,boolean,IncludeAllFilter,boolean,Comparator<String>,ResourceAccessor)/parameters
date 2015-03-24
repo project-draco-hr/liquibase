@@ -1,5 +1,6 @@
 String pathName
 boolean isRelativeToChangelogFile
 IncludeAllFilter resourceFilter
+boolean ignoreMissingOrEmptyDirectory
 Comparator<String> resourceComparator
 ResourceAccessor resourceAccessor
