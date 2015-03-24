@@ -21,7 +21,7 @@
       additionalInfo=splitTypeName[1];
     }
   }
-  SortedSet<Class<? extends LiquibaseDataType>> classes=registry.get(dataTypeName.toLowerCase());
+  Collection<Class<? extends LiquibaseDataType>> classes=registry.get(dataTypeName.toLowerCase());
   LiquibaseDataType liquibaseDataType=null;
   if (classes == null) {
     if (dataTypeName.toUpperCase().startsWith("INTERVAL")) {
