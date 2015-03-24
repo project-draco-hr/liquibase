@@ -1,4 +1,4 @@
 {
-  DatabaseConnection databaseConnection=new OfflineConnection(url);
+  DatabaseConnection databaseConnection=new OfflineConnection(url,new JUnitResourceAccessor());
   return DatabaseFactory.getInstance().openDatabase(url,null,null,null,null);
 }
