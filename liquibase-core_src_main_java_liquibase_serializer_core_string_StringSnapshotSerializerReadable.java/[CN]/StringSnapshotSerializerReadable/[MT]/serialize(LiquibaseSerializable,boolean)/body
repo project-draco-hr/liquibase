@@ -44,7 +44,7 @@
         }
         outputObjects(objects,type,catalogBuffer);
       }
-      buffer.append(StringUtils.indent(catalogBuffer.toString(),4));
+      buffer.append(StringUtils.indent(catalogBuffer.toString(),INDENT_LENGTH));
     }
     return buffer.toString().replace("\r\n","\n").replace("\r","\n");
   }

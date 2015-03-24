@@ -18,7 +18,8 @@
     return;
   }
   ClassLoader artifactClassLoader=getMavenArtifactClassLoader();
-  configureFieldsAndValues(getFileOpener(artifactClassLoader));
+  ResourceAccessor fileOpener=getFileOpener(artifactClassLoader);
+  configureFieldsAndValues(fileOpener);
   LogFactory.getInstance().setDefaultLoggingLevel(logging);
   displayMojoSettings();
   checkRequiredParametersAreSpecified();
@@ -27,7 +28,7 @@
     String dbPassword=emptyPassword || password == null ? "" : password;
     String driverPropsFile=(driverPropertiesFile == null) ? null : driverPropertiesFile.getAbsolutePath();
     database=CommandLineUtils.createDatabaseObject(artifactClassLoader,url,username,dbPassword,driver,defaultCatalogName,defaultSchemaName,outputDefaultCatalog,outputDefaultSchema,databaseClass,driverPropsFile,propertyProviderClass,changelogCatalogName,changelogSchemaName);
-    liquibase=createLiquibase(getFileOpener(artifactClassLoader),database);
+    liquibase=createLiquibase(fileOpener,database);
     getLog().debug("expressionVars = " + String.valueOf(expressionVars));
     if (expressionVars != null) {
       for (      Map.Entry<Object,Object> var : expressionVars.entrySet()) {

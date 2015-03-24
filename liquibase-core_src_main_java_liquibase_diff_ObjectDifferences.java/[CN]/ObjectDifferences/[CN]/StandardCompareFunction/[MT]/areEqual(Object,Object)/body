@@ -9,6 +9,10 @@
     return DatabaseObjectComparatorFactory.getInstance().isSameObject((DatabaseObject)referenceValue,(DatabaseObject)compareToValue,accordingTo);
   }
  else {
+    if ((referenceValue instanceof Number) && (compareToValue instanceof Number) && !referenceValue.getClass().equals(compareToValue.getClass())) {
+      referenceValue=new BigDecimal(referenceValue.toString());
+      compareToValue=new BigDecimal(compareToValue.toString());
+    }
     return referenceValue.equals(compareToValue);
   }
 }

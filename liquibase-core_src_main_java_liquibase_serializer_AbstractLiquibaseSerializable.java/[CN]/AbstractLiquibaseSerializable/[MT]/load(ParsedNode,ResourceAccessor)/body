@@ -9,7 +9,7 @@
         if (value != null) {
           value=value.toString();
         }
-        ObjectUtil.setProperty(this,childNode.getName(),(String)value);
+        ObjectUtil.setProperty(this,childNode.getName(),convertEscaped(value));
       }
     }
  catch (    Exception e) {
@@ -19,7 +19,9 @@
   if (parsedNode.getValue() != null) {
     for (    String field : this.getSerializableFields()) {
       if (this.getSerializableFieldType(field) == SerializationType.DIRECT_VALUE) {
-        ObjectUtil.setProperty(this,field,parsedNode.getValue(String.class));
+        Object value=parsedNode.getValue(String.class);
+        value=convertEscaped(value);
+        ObjectUtil.setProperty(this,field,value);
       }
     }
   }

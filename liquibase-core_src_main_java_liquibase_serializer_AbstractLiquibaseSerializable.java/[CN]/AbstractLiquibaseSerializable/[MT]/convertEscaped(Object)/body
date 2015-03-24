@@ -1,0 +1,23 @@
+{
+  Matcher matcher=Pattern.compile("(.*)!\\{(.*)\\}").matcher((String)value);
+  if (matcher.matches()) {
+    String stringValue=matcher.group(1);
+    try {
+      Class<?> aClass=Class.forName(matcher.group(2));
+      if (Date.class.isAssignableFrom(aClass)) {
+        Date date=new ISODateFormat().parse(stringValue);
+        value=aClass.getConstructor(long.class).newInstance(date.getTime());
+      }
+ else       if (Enum.class.isAssignableFrom(aClass)) {
+        value=Enum.valueOf((Class<? extends Enum>)aClass,stringValue);
+      }
+ else {
+        value=aClass.getConstructor(String.class).newInstance(stringValue);
+      }
+    }
+ catch (    Exception e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+  }
+  return value;
+}

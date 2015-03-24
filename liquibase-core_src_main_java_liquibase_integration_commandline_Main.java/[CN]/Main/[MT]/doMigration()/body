@@ -16,9 +16,9 @@
   }
   FileSystemResourceAccessor fsOpener=new FileSystemResourceAccessor();
   CommandLineResourceAccessor clOpener=new CommandLineResourceAccessor(classLoader);
-  Database database=CommandLineUtils.createDatabaseObject(classLoader,this.url,this.username,this.password,this.driver,this.defaultCatalogName,this.defaultSchemaName,Boolean.parseBoolean(outputDefaultCatalog),Boolean.parseBoolean(outputDefaultSchema),this.databaseClass,this.driverPropertiesFile,this.propertyProviderClass,this.liquibaseCatalogName,this.liquibaseSchemaName);
+  CompositeResourceAccessor fileOpener=new CompositeResourceAccessor(fsOpener,clOpener);
+  Database database=CommandLineUtils.createDatabaseObject(fileOpener,this.url,this.username,this.password,this.driver,this.defaultCatalogName,this.defaultSchemaName,Boolean.parseBoolean(outputDefaultCatalog),Boolean.parseBoolean(outputDefaultSchema),this.databaseClass,this.driverPropertiesFile,this.propertyProviderClass,this.liquibaseCatalogName,this.liquibaseSchemaName);
   try {
-    CompositeResourceAccessor fileOpener=new CompositeResourceAccessor(fsOpener,clOpener);
     boolean includeCatalog=Boolean.parseBoolean(getCommandParam("includeCatalog","false"));
     boolean includeSchema=Boolean.parseBoolean(getCommandParam("includeSchema","false"));
     boolean includeTablespace=Boolean.parseBoolean(getCommandParam("includeTablespace","false"));
@@ -58,11 +58,11 @@
       diffOutputControl.addIncludedSchema(schema.getComparisonSchema());
     }
     if ("diff".equalsIgnoreCase(command)) {
-      CommandLineUtils.doDiff(createReferenceDatabaseFromCommandParams(commandParams),database,StringUtils.trimToNull(diffTypes),finalSchemaComparisons);
+      CommandLineUtils.doDiff(createReferenceDatabaseFromCommandParams(commandParams,fileOpener),database,StringUtils.trimToNull(diffTypes),finalSchemaComparisons);
       return;
     }
  else     if ("diffChangeLog".equalsIgnoreCase(command)) {
-      CommandLineUtils.doDiffToChangeLog(changeLogFile,createReferenceDatabaseFromCommandParams(commandParams),database,diffOutputControl,StringUtils.trimToNull(diffTypes),finalSchemaComparisons);
+      CommandLineUtils.doDiffToChangeLog(changeLogFile,createReferenceDatabaseFromCommandParams(commandParams,fileOpener),database,diffOutputControl,StringUtils.trimToNull(diffTypes),finalSchemaComparisons);
       return;
     }
  else     if ("generateChangeLog".equalsIgnoreCase(command)) {
@@ -96,7 +96,7 @@
     }
  else     if ("snapshotReference".equalsIgnoreCase(command)) {
       SnapshotCommand command=new SnapshotCommand();
-      Database referenceDatabase=createReferenceDatabaseFromCommandParams(commandParams);
+      Database referenceDatabase=createReferenceDatabaseFromCommandParams(commandParams,fileOpener);
       command.setDatabase(referenceDatabase);
       command.setSchemas(getCommandParam("schemas",referenceDatabase.getDefaultSchema().getSchemaName()));
       System.out.println(command.execute());

@@ -4,4 +4,5 @@
   multiRepresenters.put(SequenceCurrentValueFunction.class,new TypeStoringAsStringRepresenter());
   multiRepresenters.put(java.util.Date.class,new TypeStoringAsStringRepresenter());
   multiRepresenters.put(java.sql.Date.class,new TypeStoringAsStringRepresenter());
+  multiRepresenters.put(Enum.class,new TypeStoringAsStringRepresenter());
 }
