@@ -5,6 +5,9 @@
  else   if (value instanceof DatabaseFunction) {
     return database.generateDatabaseFunctionValue((DatabaseFunction)value);
   }
+ else   if (value instanceof BigDecimal) {
+    return formatNumber(((BigDecimal)value).toPlainString());
+  }
  else   if (value instanceof Number) {
     return formatNumber(value.toString());
   }
