@@ -6,18 +6,18 @@
   if (database instanceof MySQLDatabase) {
     try {
       if (database.getDatabaseMajorVersion() < 5) {
-        return new Sql[]{new UnparsedSql("UPDATE " + tableNameEscaped + " C "+ "LEFT JOIN ("+ "SELECT MAX(DATEEXECUTED) as MAXDATE "+ "FROM ("+ "SELECT DATEEXECUTED "+ "FROM "+ tableNameEscaped+ ") AS X"+ ") AS D "+ "ON C.DATEEXECUTED = D.MAXDATE "+ "SET C.TAG = "+ tagEscaped+ " "+ "WHERE D.MAXDATE IS NOT NULL")};
+        return new Sql[]{new UnparsedSql("UPDATE " + tableNameEscaped + " C "+ "LEFT JOIN ("+ "SELECT MAX(DATEEXECUTED) as MAXDATE "+ "FROM ("+ "SELECT DATEEXECUTED "+ "FROM "+ tableNameEscaped+ ") AS X"+ ") AS D "+ "ON C.DATEEXECUTED = D.MAXDATE "+ "SET C.TAG = "+ tagEscaped+ " "+ "WHERE D.MAXDATE IS NOT NULL "+ "AND C.TAG IS NULL")};
       }
     }
  catch (    DatabaseException e) {
     }
-    updateStatement.setWhereClause("DATEEXECUTED = (" + "SELECT MAX(DATEEXECUTED) " + "FROM ("+ "SELECT DATEEXECUTED "+ "FROM " + tableNameEscaped + ") AS X"+ ")");
+    updateStatement.setWhereClause("DATEEXECUTED = (" + "SELECT MAX(DATEEXECUTED) " + "FROM ("+ "SELECT DATEEXECUTED "+ "FROM " + tableNameEscaped + ") AS X"+ ") "+ "AND TAG IS NULL");
   }
  else   if (database instanceof InformixDatabase) {
-    return new Sql[]{new UnparsedSql("SELECT MAX(dateexecuted) max_date " + "FROM " + tableNameEscaped + " "+ "INTO TEMP max_date_temp WITH NO LOG"),new UnparsedSql("UPDATE " + tableNameEscaped + " "+ "SET TAG = "+ tagEscaped+ " "+ "WHERE DATEEXECUTED = ("+ "SELECT max_date "+ "FROM max_date_temp"+ ");"),new UnparsedSql("DROP TABLE max_date_temp;")};
+    return new Sql[]{new UnparsedSql("SELECT MAX(dateexecuted) max_date " + "FROM " + tableNameEscaped + " "+ "INTO TEMP max_date_temp WITH NO LOG"),new UnparsedSql("UPDATE " + tableNameEscaped + " "+ "SET TAG = "+ tagEscaped+ " "+ "WHERE DATEEXECUTED = ("+ "SELECT max_date "+ "FROM max_date_temp"+ ") "+ "AND tag IS NULL;"),new UnparsedSql("DROP TABLE max_date_temp;")};
   }
  else {
-    updateStatement.setWhereClause("DATEEXECUTED = (" + "SELECT MAX(DATEEXECUTED) " + "FROM " + tableNameEscaped + ")");
+    updateStatement.setWhereClause(database.escapeObjectName("DATEEXECUTED",Column.class) + " = (" + "SELECT MAX("+ database.escapeObjectName("DATEEXECUTED",Column.class)+ ") "+ "FROM "+ tableNameEscaped+ ") "+ "AND "+ database.escapeObjectName("TAG",Column.class)+ " IS NULL");
   }
   return SqlGeneratorFactory.getInstance().generateSql(updateStatement,database);
 }
