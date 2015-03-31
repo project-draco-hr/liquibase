@@ -1,3 +1,8 @@
 {
-  liquibase.update(new Contexts(getContexts()),new LabelExpression(getLabels()));
+  if (tag != null) {
+    liquibase.update(tag,new Contexts(getContexts()),new LabelExpression(getLabels()));
+  }
+ else {
+    liquibase.update(new Contexts(getContexts()),new LabelExpression(getLabels()));
+  }
 }
