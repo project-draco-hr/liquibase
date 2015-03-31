@@ -17,7 +17,7 @@
     return new Sql[]{new UnparsedSql("SELECT MAX(dateexecuted) max_date " + "FROM " + tableNameEscaped + " "+ "INTO TEMP max_date_temp WITH NO LOG"),new UnparsedSql("UPDATE " + tableNameEscaped + " "+ "SET TAG = "+ tagEscaped+ " "+ "WHERE DATEEXECUTED = ("+ "SELECT max_date "+ "FROM max_date_temp"+ ") "+ "AND tag IS NULL;"),new UnparsedSql("DROP TABLE max_date_temp;")};
   }
  else {
-    updateStatement.setWhereClause("DATEEXECUTED = (" + "SELECT MAX(DATEEXECUTED) " + "FROM " + tableNameEscaped + ") "+ "AND TAG IS NULL");
+    updateStatement.setWhereClause(database.escapeObjectName("DATEEXECUTED",Column.class) + " = (" + "SELECT MAX("+ database.escapeObjectName("DATEEXECUTED",Column.class)+ ") "+ "FROM "+ tableNameEscaped+ ") "+ "AND "+ database.escapeObjectName("TAG",Column.class)+ " IS NULL");
   }
   return SqlGeneratorFactory.getInstance().generateSql(updateStatement,database);
 }
