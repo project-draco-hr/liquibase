@@ -1,0 +1,11 @@
+{
+  AlterSequenceChange change=new AlterSequenceChange();
+  if (control.getIncludeCatalog()) {
+    change.setCatalogName(sequence.getSchema().getCatalogName());
+  }
+  if (control.getIncludeSchema()) {
+    change.setSchemaName(sequence.getSchema().getName());
+  }
+  change.setSequenceName(sequence.getName());
+  return change;
+}
