@@ -1,0 +1,3 @@
+int changesToRollback
+String rollbackScript
+String contexts

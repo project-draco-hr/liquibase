@@ -1,0 +1,8 @@
+{
+  for (  String param : commandParams) {
+    if (!param.contains("=")) {
+      return param;
+    }
+  }
+  return null;
+}

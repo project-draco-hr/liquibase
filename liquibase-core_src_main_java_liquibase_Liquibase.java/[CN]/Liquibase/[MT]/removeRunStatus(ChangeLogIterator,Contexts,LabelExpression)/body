@@ -1,0 +1,12 @@
+{
+  logIterator.run(new ChangeSetVisitor(){
+    @Override public Direction getDirection(){
+      return Direction.REVERSE;
+    }
+    @Override public void visit(    ChangeSet changeSet,    DatabaseChangeLog databaseChangeLog,    Database database,    Set<ChangeSetFilterResult> filterResults) throws LiquibaseException {
+      database.removeRanStatus(changeSet);
+      database.commit();
+    }
+  }
+,new RuntimeEnvironment(database,contexts,labelExpression));
+}

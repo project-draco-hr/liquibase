@@ -1,0 +1,4 @@
+int changesToRollback
+String rollbackScript
+Contexts contexts
+Writer output

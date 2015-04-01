@@ -3,6 +3,6 @@
   ExecutorService.getInstance().getExecutor(database).execute(new MarkChangeSetRanStatement(changeSet,execType));
   getDatabase().commit();
   if (this.ranChangeSetList != null) {
-    this.ranChangeSetList.add(new RanChangeSet(changeSet,execType));
+    this.ranChangeSetList.add(new RanChangeSet(changeSet,execType,null,null));
   }
 }

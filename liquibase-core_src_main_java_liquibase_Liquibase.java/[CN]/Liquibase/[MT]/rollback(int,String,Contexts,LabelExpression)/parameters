@@ -1,0 +1,4 @@
+int changesToRollback
+String rollbackScript
+Contexts contexts
+LabelExpression labelExpression

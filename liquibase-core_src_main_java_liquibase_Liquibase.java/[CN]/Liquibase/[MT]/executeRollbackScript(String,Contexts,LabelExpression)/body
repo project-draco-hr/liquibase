@@ -1,0 +1,28 @@
+{
+  final Executor executor=ExecutorService.getInstance().getExecutor(database);
+  String rollbackScriptContents;
+  try {
+    Set<InputStream> streams=resourceAccessor.getResourcesAsStream(rollbackScript);
+    if (streams == null || streams.size() == 0) {
+      throw new LiquibaseException("Cannot find rollbackScript " + rollbackScript);
+    }
+ else     if (streams.size() > 1) {
+      throw new LiquibaseException("Found multiple rollbackScripts named " + rollbackScript);
+    }
+    rollbackScriptContents=StreamUtil.getStreamContents(streams.iterator().next());
+  }
+ catch (  IOException e) {
+    throw new LiquibaseException("Error reading rollbackScript " + executor + ": "+ e.getMessage());
+  }
+  RawSQLChange rollbackChange=new RawSQLChange(rollbackScriptContents);
+  rollbackChange.setSplitStatements(true);
+  rollbackChange.setStripComments(true);
+  try {
+    executor.execute(rollbackChange);
+  }
+ catch (  DatabaseException e) {
+    System.err.println("Error executing rollback script. ChangeSets will still be marked as rolled back: " + e.getMessage());
+    log.severe("Error executing rollback script",e);
+  }
+  database.commit();
+}

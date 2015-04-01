@@ -18,6 +18,8 @@
     boolean hasComments=changeLogTable.getColumn("COMMENTS") != null;
     boolean hasTag=changeLogTable.getColumn("TAG") != null;
     boolean hasLiquibase=changeLogTable.getColumn("LIQUIBASE") != null;
+    boolean hasContexts=changeLogTable.getColumn("CONTEXTS") != null;
+    boolean hasLabels=changeLogTable.getColumn("LABELS") != null;
     boolean liquibaseColumnNotRightSize=false;
     if (!(this.getDatabase() instanceof SQLiteDatabase)) {
       Integer columnSize=changeLogTable.getColumn("LIQUIBASE").getType().getColumnSize();
@@ -65,6 +67,14 @@
       statementsToExecute.add(new AddColumnStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"EXECTYPE","VARCHAR(10)",null));
       statementsToExecute.add(new UpdateStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()).addNewColumnValue("EXECTYPE","EXECUTED"));
       statementsToExecute.add(new SetNullableStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"EXECTYPE","VARCHAR(10)",false));
+    }
+    if (!hasContexts) {
+      executor.comment("Adding missing databasechangelog.contexts column");
+      statementsToExecute.add(new AddColumnStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"CONTEXTS","VARCHAR(255)",null));
+    }
+    if (!hasLabels) {
+      executor.comment("Adding missing databasechangelog.labels column");
+      statementsToExecute.add(new AddColumnStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"LABELS","VARCHAR(255)",null));
     }
     List<Map<String,?>> md5sumRS=ExecutorService.getInstance().getExecutor(database).queryForList(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum(),new ColumnConfig().setName("MD5SUM")));
     if (md5sumRS.size() > 0) {
