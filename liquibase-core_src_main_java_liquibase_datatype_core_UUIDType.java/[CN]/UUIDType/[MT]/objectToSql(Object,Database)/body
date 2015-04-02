@@ -1,6 +1,0 @@
-{
-  if (database instanceof MSSQLDatabase) {
-    return "'" + value + "'";
-  }
-  return super.objectToSql(value,database);
-}
