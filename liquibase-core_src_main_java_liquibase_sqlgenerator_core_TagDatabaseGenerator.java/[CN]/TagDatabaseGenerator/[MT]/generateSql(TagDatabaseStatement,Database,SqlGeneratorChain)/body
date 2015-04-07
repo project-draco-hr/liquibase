@@ -32,7 +32,7 @@
     return new Sql[]{new UnparsedSql("MERGE INTO " + tableNameEscaped + " a "+ "USING ("+ selectClause+ " "+ orderColumnNameEscaped+ ", "+ dateColumnNameEscaped+ " from "+ tableNameEscaped+ " order by "+ dateColumnNameEscaped+ " desc, "+ orderColumnNameEscaped+ " desc"+ endClause+ " b "+ "ON ( a."+ dateColumnNameEscaped+ " = b."+ dateColumnNameEscaped+ " and a."+ orderColumnNameEscaped+ "=b."+ orderColumnNameEscaped+ " ) "+ "WHEN MATCHED THEN "+ "UPDATE SET  a.tag="+ tagEscaped+ delimiter)};
   }
  else {
-    UpdateStatement updateStatement=new UpdateStatement(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()).addNewColumnValue("TAG",statement.getTag()).setWhereClause(orderColumnNameEscaped + " = (" + "SELECT MAX("+ orderColumnNameEscaped+ ") "+ "FROM "+ tableNameEscaped+ ")");
+    UpdateStatement updateStatement=new UpdateStatement(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName()).addNewColumnValue("TAG",statement.getTag()).setWhereClause(dateColumnNameEscaped + " = (" + "SELECT MAX("+ dateColumnNameEscaped+ ") "+ "FROM "+ tableNameEscaped+ ")");
     return SqlGeneratorFactory.getInstance().generateSql(updateStatement,database);
   }
 }
