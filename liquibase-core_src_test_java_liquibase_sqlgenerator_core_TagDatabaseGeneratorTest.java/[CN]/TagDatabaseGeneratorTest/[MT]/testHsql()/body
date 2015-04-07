@@ -1,0 +1,6 @@
+{
+  TagDatabaseStatement statement=new TagDatabaseStatement("v1.0");
+  Sql[] sql=SqlGeneratorFactory.getInstance().generateSql(statement,new HsqlDatabase());
+  assertEquals(1,sql.length);
+  assertEquals("UPDATE DATABASECHANGELOG " + "SET TAG = 'v1.0' " + "WHERE DATEEXECUTED = ("+ "SELECT MAX(DATEEXECUTED) "+ "FROM DATABASECHANGELOG"+ ")",sql[0].toSql());
+}
