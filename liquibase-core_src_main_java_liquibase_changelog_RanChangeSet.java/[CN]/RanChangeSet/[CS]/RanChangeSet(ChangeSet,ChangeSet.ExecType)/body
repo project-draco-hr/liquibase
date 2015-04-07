@@ -1,3 +1,0 @@
-{
-  this(changeSet.getFilePath(),changeSet.getId(),changeSet.getAuthor(),changeSet.generateCheckSum(),new Date(),null,execType,changeSet.getDescription(),changeSet.getComments());
-}

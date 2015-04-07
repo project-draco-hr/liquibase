@@ -1,0 +1,4 @@
+String tagToRollBackTo
+String rollbackScript
+String contexts
+Writer output

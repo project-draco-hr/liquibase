@@ -7,3 +7,5 @@ String tag
 ChangeSet.ExecType execType
 String description
 String comments
+ContextExpression contextExpression
+Labels labels

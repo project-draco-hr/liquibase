@@ -3,6 +3,6 @@
   changeLogParameters.setLabels(labelExpression);
   Date baseDate=new Date();
   update(contexts,labelExpression);
-  rollback(baseDate,contexts,labelExpression);
+  rollback(baseDate,null,contexts,labelExpression);
   update(contexts,labelExpression);
 }

@@ -1,3 +1,3 @@
 {
-  rollback(tagToRollBackTo,contexts,new LabelExpression());
+  rollback(tagToRollBackTo,null,contexts);
 }
