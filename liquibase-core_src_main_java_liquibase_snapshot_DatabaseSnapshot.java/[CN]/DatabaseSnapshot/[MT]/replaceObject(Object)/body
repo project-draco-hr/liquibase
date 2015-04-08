@@ -10,7 +10,14 @@
       return fieldValue;
     }
     if (isWrongSchema(((DatabaseObject)fieldValue))) {
-      return fieldValue;
+      DatabaseObject savedFieldValue=referencedObjects.get((DatabaseObject)fieldValue);
+      if (savedFieldValue == null) {
+        savedFieldValue=(DatabaseObject)fieldValue;
+        savedFieldValue.setSnapshotId(SnapshotIdService.getInstance().generateId());
+        includeNestedObjects(savedFieldValue);
+        referencedObjects.add(savedFieldValue);
+      }
+      return savedFieldValue;
     }
     if (((DatabaseObject)fieldValue).getSnapshotId() == null) {
       return include((DatabaseObject)fieldValue);

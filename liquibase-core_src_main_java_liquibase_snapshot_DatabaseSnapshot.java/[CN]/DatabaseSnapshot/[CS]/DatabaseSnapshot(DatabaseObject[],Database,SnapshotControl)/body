@@ -1,12 +1,14 @@
 {
   this.database=database;
   allFound=new DatabaseObjectCollection(database);
+  referencedObjects=new DatabaseObjectCollection(database);
   this.snapshotControl=snapshotControl;
   this.originalExamples=examples;
   init(examples);
   this.serializableFields=new HashSet<String>();
   this.serializableFields.add("snapshotControl");
   this.serializableFields.add("objects");
+  this.serializableFields.add("referencedObjects");
   this.serializableFields.add("database");
   this.serializableFields.add("created");
 }

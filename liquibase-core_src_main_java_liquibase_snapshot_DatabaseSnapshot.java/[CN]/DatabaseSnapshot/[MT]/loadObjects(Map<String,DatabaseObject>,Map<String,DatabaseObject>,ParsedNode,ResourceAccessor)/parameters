@@ -1,0 +1,4 @@
+Map<String,DatabaseObject> objectMap
+Map<String,DatabaseObject> allObjects
+ParsedNode referencedObjectsNode
+ResourceAccessor resourceAccessor
