@@ -1,0 +1,7 @@
+{
+  Database database=getDatabase();
+  assertEquals("MySchema.MyUDT",database.unescapeDataTypeName("MySchema.MyUDT"));
+  assertEquals("MySchema.MyUDT",database.unescapeDataTypeName("MySchema.[MyUDT]"));
+  assertEquals("MySchema.MyUDT",database.unescapeDataTypeName("[MySchema].MyUDT"));
+  assertEquals("MySchema.MyUDT",database.unescapeDataTypeName("[MySchema].[MyUDT]"));
+}
