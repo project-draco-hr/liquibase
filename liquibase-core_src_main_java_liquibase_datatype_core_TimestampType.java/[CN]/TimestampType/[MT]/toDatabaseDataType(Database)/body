@@ -1,12 +1,13 @@
 {
+  String originalDefinition=StringUtils.trimToEmpty(getRawDefinition());
   if (database instanceof MySQLDatabase) {
-    if (getRawDefinition().contains(" ")) {
+    if (originalDefinition.contains(" ")) {
       return new DatabaseDataType(getRawDefinition());
     }
     return super.toDatabaseDataType(database);
   }
   if (database instanceof MSSQLDatabase) {
-    return new DatabaseDataType("DATETIME");
+    return new DatabaseDataType(database.escapeDataTypeName("datetime"));
   }
   return super.toDatabaseDataType(database);
 }

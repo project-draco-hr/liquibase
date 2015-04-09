@@ -1,5 +1,8 @@
 {
-  if (database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof FirebirdDatabase|| database instanceof MSSQLDatabase|| database instanceof PostgresDatabase|| database instanceof InformixDatabase|| database instanceof MySQLDatabase) {
+  if (database instanceof MSSQLDatabase) {
+    return new DatabaseDataType(database.escapeDataTypeName("smallint"));
+  }
+  if (database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof FirebirdDatabase|| database instanceof PostgresDatabase|| database instanceof InformixDatabase|| database instanceof MySQLDatabase) {
     return new DatabaseDataType("SMALLINT");
   }
   if (database instanceof OracleDatabase) {

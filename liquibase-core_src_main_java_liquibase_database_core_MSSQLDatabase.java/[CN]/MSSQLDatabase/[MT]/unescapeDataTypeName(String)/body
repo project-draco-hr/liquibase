@@ -1,0 +1,18 @@
+{
+  int indexOfPeriod=dataTypeName.indexOf('.');
+  if (indexOfPeriod < 0) {
+    if (dataTypeName.matches("\\[[^]\\[]++\\]")) {
+      dataTypeName=dataTypeName.substring(1,dataTypeName.length() - 1);
+    }
+    return dataTypeName;
+  }
+  String schemaName=dataTypeName.substring(0,indexOfPeriod);
+  if (schemaName.matches("\\[[^]\\[]++\\]")) {
+    schemaName=schemaName.substring(1,schemaName.length() - 1);
+  }
+  dataTypeName=dataTypeName.substring(indexOfPeriod + 1,dataTypeName.length());
+  if (dataTypeName.matches("\\[[^]\\[]++\\]")) {
+    dataTypeName=dataTypeName.substring(1,dataTypeName.length() - 1);
+  }
+  return schemaName + "." + dataTypeName;
+}
