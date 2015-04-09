@@ -1,6 +1,7 @@
 {
   if (tag == null) {
     update(contexts,labelExpression);
+    return;
   }
   changeLogParameters.setContexts(contexts);
   changeLogParameters.setLabels(labelExpression);
