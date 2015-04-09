@@ -20,7 +20,7 @@
     }
   }
  else   if (fieldValue instanceof Collection) {
-    Iterator fieldValueIterator=((Collection)fieldValue).iterator();
+    Iterator fieldValueIterator=new CopyOnWriteArrayList((Collection)fieldValue).iterator();
     List newValues=new ArrayList();
     while (fieldValueIterator.hasNext()) {
       Object obj=fieldValueIterator.next();
