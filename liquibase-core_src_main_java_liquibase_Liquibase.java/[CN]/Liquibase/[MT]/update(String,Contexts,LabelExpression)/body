@@ -1,0 +1,21 @@
+{
+  if (tag == null) {
+    update(contexts,labelExpression);
+  }
+  changeLogParameters.setContexts(contexts);
+  changeLogParameters.setLabels(labelExpression);
+  LockService lockService=LockServiceFactory.getInstance().getLockService(database);
+  lockService.waitForLock();
+  try {
+    DatabaseChangeLog changeLog=getDatabaseChangeLog();
+    checkLiquibaseTables(true,changeLog,contexts,labelExpression);
+    changeLog.validate(database,contexts,labelExpression);
+    List<RanChangeSet> ranChangeSetList=database.getRanChangeSetList();
+    ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new ShouldRunChangeSetFilter(database,ignoreClasspathPrefix),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database),new UpToTagChangeSetFilter(tag,ranChangeSetList));
+    logIterator.run(createUpdateVisitor(),new RuntimeEnvironment(database,contexts,labelExpression));
+  }
+  finally {
+    lockService.releaseLock();
+    resetServices();
+  }
+}

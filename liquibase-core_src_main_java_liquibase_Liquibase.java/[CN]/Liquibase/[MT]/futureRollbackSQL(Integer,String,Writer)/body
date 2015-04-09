@@ -1,3 +1,0 @@
-{
-  futureRollbackSQL(count,new Contexts(contexts),new LabelExpression(),output);
-}
