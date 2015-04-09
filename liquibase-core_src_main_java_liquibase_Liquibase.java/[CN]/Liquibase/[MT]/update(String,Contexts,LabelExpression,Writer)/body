@@ -1,4 +1,7 @@
 {
+  if (tag == null) {
+    update(contexts,labelExpression,output);
+  }
   changeLogParameters.setContexts(contexts);
   changeLogParameters.setLabels(labelExpression);
   Executor oldTemplate=ExecutorService.getInstance().getExecutor(database);
