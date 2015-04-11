@@ -6,7 +6,9 @@
   InputStream in=null;
   try {
     if (buildInfoFile != null) {
-      in=buildInfoFile.openStream();
+      URLConnection connection=buildInfoFile.openConnection();
+      connection.setUseCaches(false);
+      in=connection.getInputStream();
       buildInfo.load(in);
       String o=(String)buildInfo.get("build.version");
       if (o != null) {
