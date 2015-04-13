@@ -5,9 +5,6 @@
  else   if (value instanceof DatabaseFunction) {
     return functionToSql((DatabaseFunction)value,database);
   }
- else   if (value instanceof BigDecimal) {
-    return formatNumber(((BigDecimal)value).toPlainString());
-  }
  else   if (value instanceof Number) {
     return numberToSql((Number)value,database);
   }
