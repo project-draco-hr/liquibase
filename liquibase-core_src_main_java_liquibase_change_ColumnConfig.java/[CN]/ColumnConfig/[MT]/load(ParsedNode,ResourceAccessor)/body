@@ -7,6 +7,7 @@
   startWith=parsedNode.getChildValue(null,"startWith",BigInteger.class);
   incrementBy=parsedNode.getChildValue(null,"incrementBy",BigInteger.class);
   remarks=parsedNode.getChildValue(null,"remarks",String.class);
+  descending=parsedNode.getChildValue(null,"descending",Boolean.class);
   value=parsedNode.getChildValue(null,"value",String.class);
   if (value == null) {
     value=StringUtils.trimToNull((String)parsedNode.getValue());
