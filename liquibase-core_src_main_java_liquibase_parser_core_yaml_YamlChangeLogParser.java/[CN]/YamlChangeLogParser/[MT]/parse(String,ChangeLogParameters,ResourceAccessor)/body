@@ -12,6 +12,7 @@
  catch (    Exception e) {
       throw new ChangeLogParseException("Syntax error in " + getSupportedFileExtensions()[0] + ": "+ e.getMessage(),e);
     }
+    DatabaseChangeLog changeLog=new DatabaseChangeLog(physicalChangeLogLocation);
     List rootList=(List)parsedYaml.get("databaseChangeLog");
     if (rootList == null) {
       throw new ChangeLogParseException("Could not find databaseChangeLog node");
@@ -21,12 +22,13 @@
         Map property=(Map)((Map)obj).get("property");
         ContextExpression context=new ContextExpression((String)property.get("context"));
         Labels labels=new Labels((String)property.get("labels"));
+        Boolean global=getGlobalParam(property);
         if (property.containsKey("name")) {
           Object value=property.get("value");
           if (value != null) {
             value=value.toString();
           }
-          changeLogParameters.set((String)property.get("name"),(String)value,context,labels,(String)property.get("dbms"));
+          changeLogParameters.set((String)property.get("name"),(String)value,context,labels,(String)property.get("dbms"),global,changeLog);
         }
  else         if (property.containsKey("file")) {
           Properties props=new Properties();
@@ -37,14 +39,13 @@
  else {
             props.load(propertiesStream);
             for (            Map.Entry entry : props.entrySet()) {
-              changeLogParameters.set(entry.getKey().toString(),entry.getValue().toString(),context,labels,(String)property.get("dbms"));
+              changeLogParameters.set(entry.getKey().toString(),entry.getValue().toString(),context,labels,(String)property.get("dbms"),global,changeLog);
             }
           }
         }
       }
     }
-    replaceParameters(parsedYaml,changeLogParameters);
-    DatabaseChangeLog changeLog=new DatabaseChangeLog(physicalChangeLogLocation);
+    replaceParameters(parsedYaml,changeLogParameters,changeLog);
     changeLog.setChangeLogParameters(changeLogParameters);
     ParsedNode databaseChangeLogNode=new ParsedNode(null,"databaseChangeLog");
     databaseChangeLogNode.setValue(rootList);

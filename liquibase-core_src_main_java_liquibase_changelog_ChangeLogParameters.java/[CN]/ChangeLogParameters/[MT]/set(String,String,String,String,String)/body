@@ -1,3 +1,0 @@
-{
-  set(key,value,new ContextExpression(contexts),new Labels(labels),databases);
-}

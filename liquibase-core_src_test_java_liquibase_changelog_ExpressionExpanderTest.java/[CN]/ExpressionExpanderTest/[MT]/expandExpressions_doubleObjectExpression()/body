@@ -1,5 +1,5 @@
 {
   changeLogParameters.set("here",4);
   changeLogParameters.set("there",15);
-  assertEquals("A string with two expressions 4 and 15 set",handler.expandExpressions("A string with two expressions ${here} and ${there} set"));
+  assertEquals("A string with two expressions 4 and 15 set",handler.expandExpressions("A string with two expressions ${here} and ${there} set",null));
 }
