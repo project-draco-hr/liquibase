@@ -1,0 +1,7 @@
+String key
+String value
+ContextExpression contexts
+Labels labels
+String databases
+boolean globalParam
+DatabaseChangeLog changeLog

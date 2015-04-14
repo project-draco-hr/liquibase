@@ -1,0 +1,11 @@
+{
+  Boolean global=null;
+  Object globalObj=property.get("global");
+  if (globalObj == null) {
+    global=true;
+  }
+ else {
+    global=(Boolean)globalObj;
+  }
+  return global;
+}
