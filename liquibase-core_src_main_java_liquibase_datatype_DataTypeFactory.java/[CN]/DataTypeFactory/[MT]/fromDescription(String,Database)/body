@@ -11,8 +11,17 @@
     dataTypeName=dataTypeName.replaceFirst(" identity$","");
     autoIncrement=true;
   }
-  if (dataTypeName.matches("\"[^\"]++\"") || dataTypeName.matches("\\[[^]\\[]++\\]") || dataTypeName.matches("`[^`]++`")|| dataTypeName.matches("'[^']++'")) {
-    dataTypeName=dataTypeName.substring(1,dataTypeName.length() - 1);
+  final String[][] quotePairs=new String[][]{{"\"","\""},{"[","]"},{"`","`"},{"'","'"}};
+  for (  String[] quotePair : quotePairs) {
+    String openQuote=quotePair[0];
+    String closeQuote=quotePair[1];
+    if (dataTypeName.startsWith(openQuote)) {
+      int indexOfCloseQuote=dataTypeName.indexOf(closeQuote,openQuote.length());
+      if (indexOfCloseQuote != -1 && dataTypeName.indexOf(closeQuote,indexOfCloseQuote + closeQuote.length()) == -1) {
+        dataTypeName=dataTypeName.substring(openQuote.length(),indexOfCloseQuote) + dataTypeName.substring(indexOfCloseQuote + closeQuote.length(),dataTypeName.length());
+        break;
+      }
+    }
   }
   String additionalInfo=null;
   if (dataTypeName.toLowerCase().startsWith("bit varying") || dataTypeName.toLowerCase().startsWith("character varying")) {
