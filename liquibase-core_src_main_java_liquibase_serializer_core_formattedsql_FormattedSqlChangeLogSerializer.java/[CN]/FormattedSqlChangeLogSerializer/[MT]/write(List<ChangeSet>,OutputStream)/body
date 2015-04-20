@@ -5,5 +5,5 @@
     builder.append(serialize(changeSet,true));
     builder.append("\n");
   }
-  out.write(builder.toString().getBytes("UTF-8"));
+  out.write(builder.toString().getBytes(LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()));
 }

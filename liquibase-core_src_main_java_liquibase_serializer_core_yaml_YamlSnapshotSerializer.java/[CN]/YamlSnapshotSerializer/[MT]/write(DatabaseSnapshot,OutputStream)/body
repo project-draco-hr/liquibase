@@ -1,4 +1,4 @@
 {
-  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out,"utf-8"));
+  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out,LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()));
   writer.write(serialize(snapshot,true));
 }
