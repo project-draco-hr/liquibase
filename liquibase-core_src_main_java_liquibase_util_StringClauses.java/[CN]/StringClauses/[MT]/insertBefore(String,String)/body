@@ -1,0 +1,3 @@
+{
+  return insertBefore(existingKey,newValue,StringUtils.trimToNull(newValue));
+}

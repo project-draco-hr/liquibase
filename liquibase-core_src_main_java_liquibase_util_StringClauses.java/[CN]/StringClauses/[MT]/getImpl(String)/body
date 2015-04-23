@@ -1,0 +1,14 @@
+{
+  Object o=this.clauses.get(exitingKey);
+  if (o == null) {
+    for (    Object obj : this.clauses.values()) {
+      if (obj instanceof StringClauses) {
+        Object childObj=((StringClauses)obj).getImpl(exitingKey);
+        if (childObj != null) {
+          return childObj;
+        }
+      }
+    }
+  }
+  return o;
+}

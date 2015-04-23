@@ -1,0 +1,22 @@
+{
+  existingKey=StringUtils.trimToEmpty(existingKey).toLowerCase();
+  newKey=StringUtils.trimToEmpty(newKey).toLowerCase();
+  if (!clauses.containsKey(existingKey)) {
+    throw new IllegalArgumentException("Existing key '" + existingKey + "' does not exist");
+  }
+  if (newKey.equals("")) {
+    throw new IllegalArgumentException("New key cannot be null or empty");
+  }
+  if (clauses.containsKey(newKey)) {
+    throw new IllegalArgumentException("Cannot add clause with key '" + newKey + "' because it is already defined");
+  }
+  LinkedHashMap<String,Object> newMap=new LinkedHashMap<String,Object>();
+  for (  Map.Entry<String,Object> entry : clauses.entrySet()) {
+    newMap.put(entry.getKey(),entry.getValue());
+    if (entry.getKey().equals(existingKey)) {
+      newMap.put(newKey,newValue);
+    }
+  }
+  this.clauses=newMap;
+  return this;
+}

@@ -1,0 +1,11 @@
+{
+  exitingKey=StringUtils.trimToEmpty(exitingKey).toLowerCase();
+  Object clauses=getImpl(exitingKey);
+  if (clauses == null) {
+    return null;
+  }
+  if (clauses instanceof String) {
+    return new StringClauses().append((String)clauses);
+  }
+  return (StringClauses)clauses;
+}

@@ -1,0 +1,14 @@
+{
+  if (clauses.size() == 0) {
+    return "";
+  }
+  List finalList=new ArrayList(clauses.values());
+  ListIterator iterator=finalList.listIterator();
+  while (iterator.hasNext()) {
+    Object next=iterator.next();
+    if (next == null || next.toString().equals("")) {
+      iterator.remove();
+    }
+  }
+  return start + StringUtils.join(finalList,separator,new StringUtils.ToStringFormatter()) + end;
+}

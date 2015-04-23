@@ -1,0 +1,14 @@
+{
+  if (start == null) {
+    start="";
+  }
+  if (separator == null) {
+    separator=" ";
+  }
+  if (end == null) {
+    end="";
+  }
+  this.start=start;
+  this.end=end;
+  this.separator=separator;
+}

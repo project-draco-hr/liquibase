@@ -1,0 +1,15 @@
+{
+  key=StringUtils.trimToEmpty(key).toLowerCase();
+  clause=StringUtils.trimToEmpty(clause);
+  if (key.equals("")) {
+    key=clause;
+  }
+  if (key.equals("") || clause.equals("")) {
+    return this;
+  }
+  if (clauses.containsKey(key)) {
+    throw new IllegalArgumentException("Cannot add clause with key '" + key + "' because it is already defined");
+  }
+  clauses.put(key,clause.trim());
+  return this;
+}
