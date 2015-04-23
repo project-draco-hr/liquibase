@@ -1,0 +1,14 @@
+{
+  key=StringUtils.trimToEmpty(key).toLowerCase();
+  if (key.equals("")) {
+    throw new IllegalArgumentException("Cannot specify a null or empty key");
+  }
+  if (clauses.containsKey(key)) {
+    throw new IllegalArgumentException("Cannot add clause with key '" + key + "' because it is already defined");
+  }
+  LinkedHashMap<String,Object> newMap=new LinkedHashMap<String,Object>();
+  newMap.put(key,clause);
+  newMap.putAll(this.clauses);
+  this.clauses=newMap;
+  return this;
+}

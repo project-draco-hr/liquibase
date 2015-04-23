@@ -1,0 +1,13 @@
+{
+  Object[] returnArray=new Object[clauses.size()];
+  ArrayList<Object> currentValues=new ArrayList<Object>(clauses.values());
+  for (int i=0; i < currentValues.size(); i++) {
+    if (stringify) {
+      returnArray[i]=currentValues.get(i).toString();
+    }
+ else {
+      returnArray[i]=currentValues.get(i);
+    }
+  }
+  return returnArray;
+}

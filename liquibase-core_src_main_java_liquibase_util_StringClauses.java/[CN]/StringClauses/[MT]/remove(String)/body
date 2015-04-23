@@ -1,0 +1,4 @@
+{
+  clauses.remove(key.toLowerCase());
+  return this;
+}

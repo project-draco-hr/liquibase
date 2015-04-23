@@ -1,0 +1,9 @@
+{
+  key=StringUtils.trimToEmpty(key).toLowerCase();
+  Validate.notNull(key,"key must be a non-null, non-empty value");
+  if (clauses.containsKey(key)) {
+    throw new IllegalArgumentException("Cannot add clause with key '" + key + "' because it is already defined");
+  }
+  clauses.put(key,subclauses);
+  return this;
+}

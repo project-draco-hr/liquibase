@@ -1,0 +1,3 @@
+{
+  return insertAfterImpl(existingKey,newKey,newValue);
+}

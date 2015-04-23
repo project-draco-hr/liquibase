@@ -1,0 +1,3 @@
+{
+  return insertAfter(existingKey,newValue,StringUtils.trimToEmpty(newValue));
+}

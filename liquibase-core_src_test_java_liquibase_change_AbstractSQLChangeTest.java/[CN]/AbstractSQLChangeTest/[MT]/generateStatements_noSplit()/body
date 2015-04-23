@@ -4,5 +4,5 @@
   change.setStripComments(true);
   SqlStatement[] statements=change.generateStatements(mock(Database.class));
   assertEquals(1,statements.length);
-  assertEquals("LINE 1;\nLINE 2;\nLINE 3;",((RawSqlStatement)statements[0]).getSql());
+  assertEquals("LINE 1;\n\nLINE 2;\nLINE 3;",((RawSqlStatement)statements[0]).getSql());
 }
