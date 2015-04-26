@@ -1,7 +1,6 @@
 {
-  fileNameOrExtension=fileNameOrExtension.replaceAll(".*\\.","");
-  List<ChangeLogSerializer> changeLogSerializers=serializers.get(fileNameOrExtension);
-  if (changeLogSerializers == null || changeLogSerializers.isEmpty()) {
+  List<ChangeLogSerializer> changeLogSerializers=getSerializers(fileNameOrExtension);
+  if (changeLogSerializers.isEmpty()) {
     throw new RuntimeException("No serializers associated with the filename or extension '" + fileNameOrExtension + "'");
   }
   return changeLogSerializers.get(0);
