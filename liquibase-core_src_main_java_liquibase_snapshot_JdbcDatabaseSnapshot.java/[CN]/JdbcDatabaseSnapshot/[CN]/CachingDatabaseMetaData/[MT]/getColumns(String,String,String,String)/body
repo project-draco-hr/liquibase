@@ -7,6 +7,9 @@
       return new ResultSetCache.RowData(catalogName,schemaName,database,tableName,columnName);
     }
     @Override boolean shouldBulkSelect(    String schemaKey,    ResultSetCache resultSetCache){
+      if (System.getProperty("NO_BULK_SELECT") != null) {
+        return false;
+      }
       return true;
     }
     @Override public List<CachedRow> fastFetchQuery() throws SQLException, DatabaseException {
