@@ -2,7 +2,7 @@
   DatabaseConnection liquibaseConnection;
   if (c == null) {
     log.warning("Null connection returned by liquibase datasource. Using offline unknown database");
-    liquibaseConnection=new OfflineConnection("offline:unknown");
+    liquibaseConnection=new OfflineConnection("offline:unknown",resourceAccessor);
   }
  else {
     liquibaseConnection=new JdbcConnection(c);
