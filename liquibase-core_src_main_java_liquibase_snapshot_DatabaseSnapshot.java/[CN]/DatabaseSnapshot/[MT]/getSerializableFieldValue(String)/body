@@ -5,6 +5,9 @@
  else   if (field.equals("objects")) {
     return allFound;
   }
+ else   if (field.equals("referencedObjects")) {
+    return referencedObjects;
+  }
  else   if (field.equals("created")) {
     return new ISODateFormat().format(new Timestamp(new Date().getTime()));
   }

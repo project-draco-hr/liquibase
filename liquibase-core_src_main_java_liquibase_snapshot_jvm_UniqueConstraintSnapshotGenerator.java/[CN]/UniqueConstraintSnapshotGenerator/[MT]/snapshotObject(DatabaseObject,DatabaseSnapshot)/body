@@ -9,6 +9,7 @@
   UniqueConstraint constraint=new UniqueConstraint();
   constraint.setTable(table);
   constraint.setName(example.getName());
+  constraint.setBackingIndex(exampleConstraint.getBackingIndex());
   for (  Map<String,?> col : metadata) {
     constraint.getColumns().add(new Column((String)col.get("COLUMN_NAME")).setRelation(table));
   }

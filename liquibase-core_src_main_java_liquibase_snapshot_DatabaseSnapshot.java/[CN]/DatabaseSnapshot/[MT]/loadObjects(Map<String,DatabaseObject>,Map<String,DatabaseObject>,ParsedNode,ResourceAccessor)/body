@@ -1,0 +1,15 @@
+{
+  if (node == null) {
+    return;
+  }
+  for (  ParsedNode typeNode : node.getChildren()) {
+    Class<? extends DatabaseObject> objectType=(Class<? extends DatabaseObject>)Class.forName(typeNode.getName());
+    for (    ParsedNode objectNode : typeNode.getChildren()) {
+      DatabaseObject databaseObject=objectType.newInstance();
+      databaseObject.load(objectNode,resourceAccessor);
+      String key=objectType.getName() + "#" + databaseObject.getSnapshotId();
+      objectMap.put(key,databaseObject);
+      allObjects.put(key,databaseObject);
+    }
+  }
+}
