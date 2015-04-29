@@ -5,7 +5,9 @@
     return null;
   }
   for (  Resource resource : resources) {
-    returnSet.add(resource.getURL().openStream());
+    URLConnection connection=resource.getURL().openConnection();
+    connection.setUseCaches(false);
+    returnSet.add(connection.getInputStream());
   }
   return returnSet;
 }

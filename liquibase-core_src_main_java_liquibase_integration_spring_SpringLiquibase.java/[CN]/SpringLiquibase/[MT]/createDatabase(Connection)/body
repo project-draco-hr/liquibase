@@ -1,5 +1,13 @@
 {
-  Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(c));
+  DatabaseConnection liquibaseConnection;
+  if (c == null) {
+    log.warning("Null connection returned by liquibase datasource. Using offline unknown database");
+    liquibaseConnection=new OfflineConnection("offline:unknown");
+  }
+ else {
+    liquibaseConnection=new JdbcConnection(c);
+  }
+  Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(liquibaseConnection);
   if (StringUtils.trimToNull(this.defaultSchema) != null) {
     database.setDefaultSchemaName(this.defaultSchema);
   }
