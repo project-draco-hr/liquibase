@@ -11,7 +11,9 @@
   constraint.setName(example.getName());
   constraint.setBackingIndex(exampleConstraint.getBackingIndex());
   for (  Map<String,?> col : metadata) {
-    constraint.getColumns().add(new Column((String)col.get("COLUMN_NAME")).setRelation(table));
+    String ascOrDesc=(String)col.get("ASC_OR_DESC");
+    Boolean descending="D".equals(ascOrDesc) ? Boolean.TRUE : "A".equals(ascOrDesc) ? Boolean.FALSE : null;
+    constraint.getColumns().add(new Column((String)col.get("COLUMN_NAME")).setDescending(descending).setRelation(table));
   }
   return constraint;
 }
