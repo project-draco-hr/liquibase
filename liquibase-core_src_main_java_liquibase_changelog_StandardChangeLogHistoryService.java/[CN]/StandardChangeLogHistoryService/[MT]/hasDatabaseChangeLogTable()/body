@@ -1,5 +1,5 @@
 {
-  if (!hasDatabaseChangeLogTable) {
+  if (hasDatabaseChangeLogTable == null) {
     try {
       hasDatabaseChangeLogTable=SnapshotGeneratorFactory.getInstance().hasDatabaseChangeLogTable(getDatabase());
     }

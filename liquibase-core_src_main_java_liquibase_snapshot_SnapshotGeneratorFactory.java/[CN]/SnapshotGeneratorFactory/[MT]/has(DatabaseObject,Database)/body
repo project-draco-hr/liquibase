@@ -1,6 +1,15 @@
 {
   List<Class<? extends DatabaseObject>> types=new ArrayList<Class<? extends DatabaseObject>>(getContainerTypes(example.getClass(),database));
   types.add(example.getClass());
+  if (example instanceof Table && (example.getName().equals(database.getDatabaseChangeLogTableName()) || example.getName().equals(database.getDatabaseChangeLogLockTableName()))) {
+    try {
+      ExecutorService.getInstance().getExecutor(database).queryForInt(new RawSqlStatement("select count(*) from " + database.escapeObjectName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),example.getName(),Table.class)));
+      return true;
+    }
+ catch (    DatabaseException e) {
+      return false;
+    }
+  }
   if (createSnapshot(example,database,new SnapshotControl(database,types.toArray(new Class[types.size()]))) != null) {
     return true;
   }
