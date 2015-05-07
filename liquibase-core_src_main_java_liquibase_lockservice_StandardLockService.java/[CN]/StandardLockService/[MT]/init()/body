@@ -7,6 +7,7 @@
     database.commit();
     LogFactory.getLogger().debug("Created database lock table with name: " + database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogLockTableName()));
     createdTable=true;
+    hasDatabaseChangeLogLockTable=true;
   }
   if (!isDatabaseChangeLogLockTableInitialized(createdTable)) {
     executor.comment("Initialize Database Lock Table");
