@@ -59,6 +59,9 @@
         throw new UnexpectedLiquibaseException("Cannot parse snapshot " + url,e);
       }
     }
+ else     if (paramEntry.getKey().equals("sendsStringParametersAsUnicode")) {
+      this.sendsStringParametersAsUnicode=Boolean.parseBoolean(paramEntry.getValue());
+    }
  else {
       this.databaseParams.put(paramEntry.getKey(),paramEntry.getValue());
     }
