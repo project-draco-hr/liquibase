@@ -61,6 +61,14 @@
     }
     return this.getObjectQuotingStrategy().toString();
   }
+  if (field.equals("preconditions")) {
+    if (this.getPreconditions() != null && this.getPreconditions().getNestedPreconditions().size() > 0) {
+      return this.getPreconditions();
+    }
+ else {
+      return null;
+    }
+  }
   if (field.equals("changes")) {
     return getChanges();
   }
