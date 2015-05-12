@@ -27,7 +27,7 @@
     CompareControl.SchemaComparison[] finalSchemaComparisons;
     CatalogAndSchema[] finalSchemas;
     if (referenceSchemaNames == null) {
-      finalSchemaComparisons=new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(defaultCatalogName,defaultSchemaName),new CatalogAndSchema(defaultCatalogName,defaultSchemaName))};
+      finalSchemaComparisons=new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(referenceDefaultCatalogName,referenceDefaultSchemaName),new CatalogAndSchema(defaultCatalogName,defaultSchemaName))};
       finalSchemas=new CatalogAndSchema[]{new CatalogAndSchema(defaultCatalogName,defaultSchemaName)};
     }
  else {

@@ -3,8 +3,8 @@
   String url=referenceUrl;
   String username=referenceUsername;
   String password=referencePassword;
-  String defaultSchemaName=this.defaultSchemaName;
-  String defaultCatalogName=this.defaultCatalogName;
+  String defaultSchemaName=this.referenceDefaultSchemaName;
+  String defaultCatalogName=this.referenceDefaultCatalogName;
   for (  String param : commandParams) {
     String[] splitArg=splitArg(param);
     String attributeName=splitArg[0];
