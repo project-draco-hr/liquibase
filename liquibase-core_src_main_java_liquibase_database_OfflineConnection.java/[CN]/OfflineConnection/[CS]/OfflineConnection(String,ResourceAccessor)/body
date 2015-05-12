@@ -35,7 +35,7 @@
       this.catalog=this.params.get("catalog");
     }
  else     if (paramEntry.getKey().equals("caseSensitive")) {
-      this.caseSensitive=Boolean.valueOf(paramEntry.getValue());
+      this.caseSensitive=Boolean.parseBoolean(paramEntry.getValue());
     }
  else     if (paramEntry.getKey().equals("changeLogFile")) {
       this.changeLogFile=paramEntry.getValue();

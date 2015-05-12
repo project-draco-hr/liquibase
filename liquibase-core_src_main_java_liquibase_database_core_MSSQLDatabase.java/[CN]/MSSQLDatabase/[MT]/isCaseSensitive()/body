@@ -1,21 +1,19 @@
 {
   if (caseSensitive == null) {
     try {
-      if (getConnection() != null) {
+      if (getConnection() instanceof JdbcConnection) {
         String catalog=getConnection().getCatalog();
-        String sql=String.format("SELECT CONVERT(varchar(100), DATABASEPROPERTYEX('%s', 'COLLATION'))",catalog);
+        String sql="SELECT CONVERT([sysname], DATABASEPROPERTYEX(N'" + escapeStringForDatabase(catalog) + "', 'Collation'))";
         String collation=ExecutorService.getInstance().getExecutor(this).queryForObject(new RawSqlStatement(sql),String.class);
-        caseSensitive=!collation.contains("_CI_");
+        caseSensitive=collation != null && !collation.contains("_CI_");
+      }
+ else       if (getConnection() instanceof OfflineConnection) {
+        caseSensitive=((OfflineConnection)getConnection()).isCaseSensitive();
       }
     }
  catch (    Exception e) {
       LogFactory.getLogger().warning("Cannot determine case sensitivity from MSSQL",e);
     }
   }
-  if (caseSensitive == null) {
-    return false;
-  }
- else {
-    return caseSensitive.booleanValue();
-  }
+  return caseSensitive != null && caseSensitive;
 }
