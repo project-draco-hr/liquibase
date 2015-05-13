@@ -14,10 +14,12 @@
       return new ArrayList<CachedRow>();
     }
     List<CachedRow> results;
+    boolean didBulkSelect=false;
     if (resultSetExtractor.shouldBulkSelect(schemaKey,this)) {
       cache.clear();
       results=resultSetExtractor.bulkFetch();
       didBulkQuery.put(schemaKey,true);
+      didBulkSelect=true;
     }
  else {
       Integer previousCount=timesSingleQueried.get(schemaKey);
@@ -28,7 +30,14 @@
       results=resultSetExtractor.fastFetch();
     }
     for (    CachedRow row : results) {
-      for (      String rowKey : resultSetExtractor.rowKeyParameters(row).getKeyPermutations()) {
+      String[] keyPermutations;
+      if (didBulkSelect) {
+        keyPermutations=resultSetExtractor.rowKeyParameters(row).getKeyPermutations();
+      }
+ else {
+        keyPermutations=new String[]{wantedKey};
+      }
+      for (      String rowKey : keyPermutations) {
         if (!cache.containsKey(rowKey)) {
           cache.put(rowKey,new ArrayList<CachedRow>());
         }
