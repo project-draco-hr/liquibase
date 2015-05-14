@@ -73,8 +73,8 @@
     return getChanges();
   }
   if (field.equals("rollback")) {
-    if (this.getRollBackChanges() != null && this.getRollBackChanges().length > 0) {
-      return this.getRollBackChanges();
+    if (rollback != null && rollback.getChanges() != null && rollback.getChanges().size() > 0) {
+      return rollback;
     }
  else {
       return null;
