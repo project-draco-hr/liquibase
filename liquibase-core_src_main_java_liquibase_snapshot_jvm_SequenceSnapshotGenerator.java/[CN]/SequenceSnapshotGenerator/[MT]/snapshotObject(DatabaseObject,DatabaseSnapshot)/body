@@ -1,4 +1,7 @@
 {
+  if (example.getSnapshotId() != null) {
+    return example;
+  }
   Database database=snapshot.getDatabase();
   if (!database.supportsSequences()) {
     return null;
@@ -7,17 +10,7 @@
   for (  Map<String,?> sequenceRow : sequences) {
     String name=cleanNameFromDatabase((String)sequenceRow.get("SEQUENCE_NAME"),database);
     if ((database.isCaseSensitive() && name.equals(example.getName()) || (!database.isCaseSensitive() && name.equalsIgnoreCase(example.getName())))) {
-      Sequence seq=new Sequence();
-      seq.setName(name);
-      seq.setSchema(example.getSchema());
-      seq.setStartValue(toBigInteger(sequenceRow.get("START_VALUE"),database));
-      seq.setMinValue(toBigInteger(sequenceRow.get("MIN_VALUE"),database));
-      seq.setMaxValue(toBigInteger(sequenceRow.get("MAX_VALUE"),database));
-      seq.setCacheSize(toBigInteger(sequenceRow.get("CACHE_SIZE"),database));
-      seq.setIncrementBy(toBigInteger(sequenceRow.get("INCREMENT_BY"),database));
-      seq.setWillCycle(toBoolean(sequenceRow.get("WILL_CYCLE"),database));
-      seq.setOrdered(toBoolean(sequenceRow.get("IS_ORDERED"),database));
-      return seq;
+      return mapToSequence(sequenceRow,example.getSchema(),database);
     }
   }
   return null;
