@@ -9,6 +9,7 @@
   }
   processSystemProperties();
   LiquibaseConfiguration liquibaseConfiguration=LiquibaseConfiguration.getInstance();
+  liquibaseShouldRun=true;
   if (!liquibaseConfiguration.getConfiguration(GlobalConfiguration.class).getShouldRun()) {
     getLog().info("Liquibase did not run because " + liquibaseConfiguration.describeValueLookupLogic(GlobalConfiguration.class,GlobalConfiguration.SHOULD_RUN) + " was set to false");
     return;
