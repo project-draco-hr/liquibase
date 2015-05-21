@@ -1,6 +1,7 @@
 {
   setDatabase(database);
   this.executeAgainstDatabase=executeAgainstDatabase;
+  this.executeDdlAgainstDatabase=executeDdlAgainstDatabase;
   changeLogFile=changeLogFile.getAbsoluteFile();
   this.changeLogFile=changeLogFile;
 }

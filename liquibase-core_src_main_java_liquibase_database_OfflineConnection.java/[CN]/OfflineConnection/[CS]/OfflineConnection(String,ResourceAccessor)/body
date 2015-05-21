@@ -43,6 +43,9 @@
  else     if (paramEntry.getKey().equals("outputLiquibaseSql")) {
       this.outputLiquibaseSql=Boolean.valueOf(paramEntry.getValue());
     }
+ else     if (paramEntry.getKey().equals("outputLiquibaseDdlSql")) {
+      this.outputLiquibaseDdlSql=Boolean.valueOf(paramEntry.getValue());
+    }
  else     if (paramEntry.getKey().equals("snapshot")) {
       String snapshotFile=paramEntry.getValue();
       try {

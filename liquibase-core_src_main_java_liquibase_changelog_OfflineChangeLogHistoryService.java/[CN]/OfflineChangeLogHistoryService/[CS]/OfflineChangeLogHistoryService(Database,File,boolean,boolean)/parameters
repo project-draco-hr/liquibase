@@ -1,3 +1,4 @@
 Database database
 File changeLogFile
 boolean executeAgainstDatabase
+boolean executeDdlAgainstDatabase
