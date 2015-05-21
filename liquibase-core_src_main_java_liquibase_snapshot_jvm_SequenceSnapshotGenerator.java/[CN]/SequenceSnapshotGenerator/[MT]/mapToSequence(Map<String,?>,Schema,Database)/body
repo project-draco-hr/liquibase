@@ -10,6 +10,6 @@
   seq.setIncrementBy(toBigInteger(sequenceRow.get("INCREMENT_BY"),database));
   seq.setWillCycle(toBoolean(sequenceRow.get("WILL_CYCLE"),database));
   seq.setOrdered(toBoolean(sequenceRow.get("IS_ORDERED"),database));
-  seq.setSnapshotId(SnapshotIdService.getInstance().generateId());
+  seq.setAttribute("liquibase-complete",true);
   return seq;
 }

@@ -2,6 +2,11 @@
   if (example.getSnapshotId() != null) {
     return example;
   }
+  if (example.getAttribute("liquibase-complete",false)) {
+    example.setSnapshotId(SnapshotIdService.getInstance().generateId());
+    example.setAttribute("liquibase-complete",null);
+    return example;
+  }
   Database database=snapshot.getDatabase();
   if (!database.supportsSequences()) {
     return null;
