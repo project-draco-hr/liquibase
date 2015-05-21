@@ -1,19 +1,26 @@
 {
+  if (!reflectionCache.containsKey(object.getClass())) {
+    getFields(object);
+  }
+  Map<String,Field> fieldsByName=reflectionCache.get(object.getClass());
+  Field foundField=fieldsByName.get(field);
   try {
-    Field foundField=null;
-    Class<? extends Object> classToCheck=object.getClass();
-    while (foundField == null && !classToCheck.equals(Object.class)) {
-      try {
-        foundField=classToCheck.getDeclaredField(field);
-      }
- catch (      NoSuchFieldException e) {
-        classToCheck=classToCheck.getSuperclass();
-      }
-    }
     if (foundField == null) {
-      throw new UnexpectedLiquibaseException("No field " + field + " on "+ object.getClass());
+      Class<? extends Object> classToCheck=object.getClass();
+      while (foundField == null && !classToCheck.equals(Object.class)) {
+        try {
+          foundField=classToCheck.getDeclaredField(field);
+        }
+ catch (        NoSuchFieldException e) {
+          classToCheck=classToCheck.getSuperclass();
+        }
+      }
+      if (foundField == null) {
+        throw new UnexpectedLiquibaseException("No field " + field + " on "+ object.getClass());
+      }
+      foundField.setAccessible(true);
+      fieldsByName.put(field,foundField);
     }
-    foundField.setAccessible(true);
     return foundField.get(object);
   }
  catch (  Exception e) {
