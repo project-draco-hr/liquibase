@@ -1,6 +1,6 @@
 {
   List<ColumnConfig> columnsToSelect=Arrays.asList(statement.getColumnsToSelect());
-  String sql="SELECT " + StringUtils.join(columnsToSelect,",",new StringUtils.StringUtilsFormatter<ColumnConfig>(){
+  String sql="SELECT " + (database instanceof MSSQLDatabase && statement.getLimit() != null ? "TOP " + statement.getLimit() + " " : "") + StringUtils.join(columnsToSelect,",",new StringUtils.StringUtilsFormatter<ColumnConfig>(){
     @Override public String toString(    ColumnConfig column){
       if (column.getComputed() != null && column.getComputed()) {
         return column.getName();
@@ -10,7 +10,7 @@
       }
     }
   }
-).toUpperCase() + " FROM "+ database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName());
+).toUpperCase()+ " FROM "+ database.escapeTableName(database.getLiquibaseCatalogName(),database.getLiquibaseSchemaName(),database.getDatabaseChangeLogTableName());
   SelectFromDatabaseChangeLogStatement.WhereClause whereClause=statement.getWhereClause();
   if (whereClause != null) {
     if (whereClause instanceof SelectFromDatabaseChangeLogStatement.ByTag) {
@@ -25,6 +25,22 @@
   }
   if (statement.getOrderByColumns() != null && statement.getOrderByColumns().length > 0) {
     sql+=" ORDER BY " + StringUtils.join(statement.getOrderByColumns(),", ").toUpperCase();
+  }
+  if (statement.getLimit() != null) {
+    if (database instanceof OracleDatabase) {
+      if (whereClause == null) {
+        sql+=" WHERE ROWNUM=" + statement.getLimit();
+      }
+ else {
+        sql+=" AND ROWNUM=" + statement.getLimit();
+      }
+    }
+ else     if (database instanceof MySQLDatabase || database instanceof PostgresDatabase) {
+      sql+=" LIMIT " + statement.getLimit();
+    }
+ else     if (database instanceof DB2Database) {
+      sql+=" FETCH FIRST " + statement.getLimit() + " ROWS ONLY";
+    }
   }
   return new Sql[]{new UnparsedSql(sql)};
 }
