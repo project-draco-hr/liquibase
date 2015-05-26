@@ -7,6 +7,9 @@
       return true;
     }
  catch (    DatabaseException e) {
+      if (database instanceof PostgresDatabase) {
+        database.rollback();
+      }
       return false;
     }
   }
