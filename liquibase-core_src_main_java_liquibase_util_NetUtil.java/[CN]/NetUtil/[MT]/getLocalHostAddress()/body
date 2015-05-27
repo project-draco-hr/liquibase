@@ -1,3 +1,9 @@
 {
-  return getLocalHost().getHostAddress();
+  try {
+    return getLocalHost().getHostAddress();
+  }
+ catch (  Throwable e) {
+    LogFactory.getInstance().getLog().debug("Error getting hostname",e);
+    return "unknown";
+  }
 }
