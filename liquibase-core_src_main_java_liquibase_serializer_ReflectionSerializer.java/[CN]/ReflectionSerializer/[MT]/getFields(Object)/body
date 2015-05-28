@@ -1,19 +1,23 @@
 {
-  Set<String> returnSet=new HashSet<String>();
-  Set<Field> allFields=new HashSet<Field>();
-  Class classToExtractFieldsFrom=object.getClass();
-  while (!classToExtractFieldsFrom.equals(Object.class)) {
-    allFields.addAll(Arrays.asList(classToExtractFieldsFrom.getDeclaredFields()));
-    classToExtractFieldsFrom=classToExtractFieldsFrom.getSuperclass();
-  }
-  for (  Field field : allFields) {
-    if (field.getName().equals("serialVersionUID") || field.getName().equals("serializableFields")) {
-      continue;
+  if (!reflectionCache.containsKey(object.getClass())) {
+    Map<String,Field> fields=new HashMap<String,Field>();
+    Set<Field> allFields=new HashSet<Field>();
+    Class classToExtractFieldsFrom=object.getClass();
+    while (!classToExtractFieldsFrom.equals(Object.class)) {
+      allFields.addAll(Arrays.asList(classToExtractFieldsFrom.getDeclaredFields()));
+      classToExtractFieldsFrom=classToExtractFieldsFrom.getSuperclass();
     }
-    if (field.isSynthetic() || field.getName().equals("$VRc")) {
-      continue;
+    for (    Field field : allFields) {
+      if (field.getName().equals("serialVersionUID") || field.getName().equals("serializableFields")) {
+        continue;
+      }
+      if (field.isSynthetic() || field.getName().equals("$VRc")) {
+        continue;
+      }
+      fields.put(field.getName(),field);
+      field.setAccessible(true);
     }
-    returnSet.add(field.getName());
+    reflectionCache.put(object.getClass(),fields);
   }
-  return returnSet;
+  return reflectionCache.get(object.getClass()).keySet();
 }

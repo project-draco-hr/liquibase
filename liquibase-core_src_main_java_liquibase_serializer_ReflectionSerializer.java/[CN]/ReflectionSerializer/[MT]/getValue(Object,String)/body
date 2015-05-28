@@ -1,7 +1,15 @@
 {
+  if (!reflectionCache.containsKey(object.getClass())) {
+    getFields(object);
+  }
+  Map<String,Field> fieldsByName=reflectionCache.get(object.getClass());
+  Field foundField=fieldsByName.get(field);
   try {
-    Field foundField=findField(object,field);
-    foundField.setAccessible(true);
+    if (foundField == null) {
+      Field foundField=findField(object,field);
+      foundField.setAccessible(true);
+      fieldsByName.put(field,foundField);
+    }
     return foundField.get(object);
   }
  catch (  Exception e) {

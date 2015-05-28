@@ -9,7 +9,9 @@
   lockService.waitForLock();
   try {
     DatabaseChangeLog changeLog=getDatabaseChangeLog();
-    checkLiquibaseTables(false,changeLog,contexts,labelExpression);
+    if (checkLiquibaseTables) {
+      checkLiquibaseTables(false,changeLog,contexts,labelExpression);
+    }
     changeLog.validate(database,contexts,labelExpression);
     ChangeLogIterator logIterator;
     if (count == null && tag == null) {

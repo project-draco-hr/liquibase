@@ -1,0 +1,3 @@
+Database database
+boolean expandTypesIfNeeded
+Class<? extends DatabaseObject> types

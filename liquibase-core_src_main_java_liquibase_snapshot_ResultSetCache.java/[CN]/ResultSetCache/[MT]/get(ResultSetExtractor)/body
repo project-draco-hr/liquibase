@@ -20,6 +20,7 @@
       didBulkQuery.put(schemaKey,true);
     }
  else {
+      cache=new HashMap<String,List<CachedRow>>();
       Integer previousCount=timesSingleQueried.get(schemaKey);
       if (previousCount == null) {
         previousCount=0;

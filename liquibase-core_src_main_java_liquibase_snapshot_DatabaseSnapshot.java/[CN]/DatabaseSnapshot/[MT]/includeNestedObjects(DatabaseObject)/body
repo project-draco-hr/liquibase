@@ -2,7 +2,12 @@
   for (  String field : new HashSet<String>(object.getAttributes())) {
     Object fieldValue=object.getAttribute(field,Object.class);
     Object newFieldValue=replaceObject(fieldValue);
-    if (fieldValue != newFieldValue && newFieldValue != null) {
+    if (newFieldValue == null) {
+      if (object instanceof PrimaryKey && field.equals("backingIndex")) {
+        object.setAttribute(field,null);
+      }
+    }
+ else     if (fieldValue != newFieldValue) {
       object.setAttribute(field,newFieldValue);
     }
   }

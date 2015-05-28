@@ -12,8 +12,9 @@
       schema=relation.getSchema();
       allColumnsMetadataRs=databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),relation.getName(),null);
       for (      CachedRow row : allColumnsMetadataRs) {
-        Column exampleColumn=new Column().setRelation(relation).setName(StringUtils.trimToNull(row.getString("COLUMN_NAME")));
-        relation.getColumns().add(exampleColumn);
+        Column column=readColumn(row,relation,database);
+        column.setAttribute(LIQUIBASE_COMPLETE,true);
+        relation.getColumns().add(column);
       }
     }
  catch (    Exception e) {
