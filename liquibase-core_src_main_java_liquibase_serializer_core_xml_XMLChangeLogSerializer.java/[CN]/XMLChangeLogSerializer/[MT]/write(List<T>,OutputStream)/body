@@ -1,0 +1,48 @@
+{
+  DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+  factory.setNamespaceAware(true);
+  DocumentBuilder documentBuilder;
+  try {
+    documentBuilder=factory.newDocumentBuilder();
+  }
+ catch (  ParserConfigurationException e) {
+    throw new RuntimeException(e);
+  }
+  documentBuilder.setEntityResolver(new LiquibaseEntityResolver(this));
+  Document doc=documentBuilder.newDocument();
+  Element changeLogElement=doc.createElementNS(LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE,"databaseChangeLog");
+  changeLogElement.setAttribute("xmlns",LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE);
+  changeLogElement.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
+  Map<String,String> shortNameByNamespace=new HashMap<String,String>();
+  Map<String,String> urlByNamespace=new HashMap<String,String>();
+  for (  NamespaceDetails details : NamespaceDetailsFactory.getInstance().getNamespaceDetails()) {
+    for (    String namespace : details.getNamespaces()) {
+      if (details.supports(this,namespace)) {
+        String shortName=details.getShortName(namespace);
+        String url=details.getSchemaUrl(namespace);
+        if (shortName != null && url != null) {
+          shortNameByNamespace.put(namespace,shortName);
+          urlByNamespace.put(namespace,url);
+        }
+      }
+    }
+  }
+  for (  Map.Entry<String,String> entry : shortNameByNamespace.entrySet()) {
+    if (!entry.getValue().equals("")) {
+      changeLogElement.setAttribute("xmlns:" + entry.getValue(),entry.getKey());
+    }
+  }
+  String schemaLocationAttribute="";
+  for (  Map.Entry<String,String> entry : urlByNamespace.entrySet()) {
+    if (!entry.getValue().equals("")) {
+      schemaLocationAttribute+=entry.getKey() + " " + entry.getValue()+ " ";
+    }
+  }
+  changeLogElement.setAttribute("xsi:schemaLocation",schemaLocationAttribute.trim());
+  doc.appendChild(changeLogElement);
+  setCurrentChangeLogFileDOM(doc);
+  for (  T child : children) {
+    doc.getDocumentElement().appendChild(createNode(child));
+  }
+  new DefaultXmlWriter().write(doc,out);
+}

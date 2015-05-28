@@ -61,12 +61,20 @@
     }
     return this.getObjectQuotingStrategy().toString();
   }
+  if (field.equals("preconditions")) {
+    if (this.getPreconditions() != null && this.getPreconditions().getNestedPreconditions().size() > 0) {
+      return this.getPreconditions();
+    }
+ else {
+      return null;
+    }
+  }
   if (field.equals("changes")) {
     return getChanges();
   }
   if (field.equals("rollback")) {
-    if (this.getRollBackChanges() != null && this.getRollBackChanges().length > 0) {
-      return this.getRollBackChanges();
+    if (rollback != null && rollback.getChanges() != null && rollback.getChanges().size() > 0) {
+      return rollback;
     }
  else {
       return null;

@@ -1,0 +1,9 @@
+{
+  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out));
+  writer.write("databaseChangeLog:\n");
+  for (  T child : children) {
+    writer.write(StringUtils.indent(serialize(child,true),2));
+    writer.write("\n");
+  }
+  writer.flush();
+}
