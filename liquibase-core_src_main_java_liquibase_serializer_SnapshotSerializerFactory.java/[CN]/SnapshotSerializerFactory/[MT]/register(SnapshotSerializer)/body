@@ -1,5 +1,11 @@
 {
   for (  String extension : snapshotSerializer.getValidFileExtensions()) {
-    serializers.put(extension,snapshotSerializer);
+    List<SnapshotSerializer> snapshotSerializers=serializers.get(extension);
+    if (snapshotSerializers == null) {
+      snapshotSerializers=new ArrayList<SnapshotSerializer>();
+      serializers.put(extension,snapshotSerializers);
+    }
+    snapshotSerializers.add(snapshotSerializer);
+    Collections.sort(snapshotSerializers,PrioritizedService.COMPARATOR);
   }
 }

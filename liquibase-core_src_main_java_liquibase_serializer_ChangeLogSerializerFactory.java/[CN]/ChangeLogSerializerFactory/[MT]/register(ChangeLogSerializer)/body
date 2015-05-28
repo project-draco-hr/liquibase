@@ -1,5 +1,11 @@
 {
   for (  String extension : changeLogSerializer.getValidFileExtensions()) {
-    serializers.put(extension,changeLogSerializer);
+    List<ChangeLogSerializer> changeLogSerializers=serializers.get(extension);
+    if (changeLogSerializers == null) {
+      changeLogSerializers=new ArrayList<ChangeLogSerializer>();
+      serializers.put(extension,changeLogSerializers);
+    }
+    changeLogSerializers.add(changeLogSerializer);
+    Collections.sort(changeLogSerializers,PrioritizedService.COMPARATOR);
   }
 }
