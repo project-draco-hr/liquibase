@@ -1,2 +1,41 @@
 {
+  Database database=snapshot.getDatabase();
+  Relation relation=((Column)example).getRelation();
+  if (((Column)example).getComputed() != null && ((Column)example).getComputed()) {
+    return example;
+  }
+  Schema schema=relation.getSchema();
+  List<CachedRow> columnMetadataRs=null;
+  try {
+    Column column=null;
+    if (example.getAttribute(LIQUIBASE_COMPLETE,false)) {
+      column=(Column)example;
+      example.setAttribute(LIQUIBASE_COMPLETE,null);
+    }
+ else {
+      JdbcDatabaseSnapshot.CachingDatabaseMetaData databaseMetaData=((JdbcDatabaseSnapshot)snapshot).getMetaData();
+      columnMetadataRs=databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),relation.getName(),example.getName());
+      if (columnMetadataRs.size() > 0) {
+        CachedRow data=columnMetadataRs.get(0);
+        column=readColumn(data,relation,database);
+      }
+    }
+    if (column != null && database instanceof MSSQLDatabase && database.getDatabaseMajorVersion() >= 8) {
+      String sql;
+      if (database.getDatabaseMajorVersion() >= 9) {
+        sql="SELECT CAST([ep].[value] AS [nvarchar](MAX)) AS [REMARKS] " + "FROM [sys].[extended_properties] AS [ep] " + "WHERE [ep].[class] = 1 "+ "AND [ep].[major_id] = OBJECT_ID(N'" + database.escapeStringForDatabase(database.escapeTableName(schema.getCatalogName(),schema.getName(),relation.getName())) + "') "+ "AND [ep].[minor_id] = COLUMNPROPERTY([ep].[major_id], N'"+ database.escapeStringForDatabase(column.getName())+ "', 'ColumnId') "+ "AND [ep].[name] = 'MS_Description'";
+      }
+ else {
+        sql="SELECT CAST([p].[value] AS [ntext]) AS [REMARKS] " + "FROM [dbo].[sysproperties] AS [p] " + "WHERE [p].[id] = OBJECT_ID(N'" + database.escapeStringForDatabase(database.escapeTableName(schema.getCatalogName(),schema.getName(),relation.getName())) + "') "+ "AND [p].[smallid] = COLUMNPROPERTY([p].[id], N'"+ database.escapeStringForDatabase(column.getName())+ "', 'ColumnId') "+ "AND [p].[type] = 4 "+ "AND [p].[name] = 'MS_Description'";
+      }
+      List<String> remarks=ExecutorService.getInstance().getExecutor(snapshot.getDatabase()).queryForList(new RawSqlStatement(sql),String.class);
+      if (remarks != null && remarks.size() > 0) {
+        column.setRemarks(StringUtils.trimToNull(remarks.iterator().next()));
+      }
+    }
+    return column;
+  }
+ catch (  Exception e) {
+    throw new DatabaseException(e);
+  }
 }
