@@ -1,17 +1,3 @@
 {
-  if (sql == null) {
-    return new ArrayList<CachedRow>();
-  }
-  Statement statement=null;
-  ResultSet resultSet=null;
-  try {
-    JdbcConnection connection=(JdbcConnection)database.getConnection();
-    statement=connection.createStatement();
-    resultSet=statement.executeQuery(sql);
-    resultSet.setFetchSize(FETCH_SIZE);
-    return extract(resultSet);
-  }
-  finally {
-    JdbcUtils.close(resultSet,statement);
-  }
+  return executeAndExtract(sql,database,false);
 }
