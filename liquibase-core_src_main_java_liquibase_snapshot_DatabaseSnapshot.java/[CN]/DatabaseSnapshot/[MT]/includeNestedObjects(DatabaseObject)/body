@@ -1,5 +1,14 @@
 {
   for (  String field : new HashSet<String>(object.getAttributes())) {
+    if (object.getClass() == Index.class && field.equals("columns")) {
+      continue;
+    }
+    if (object.getClass() == PrimaryKey.class && field.equals("columns")) {
+      continue;
+    }
+    if (object.getClass() == UniqueConstraint.class && field.equals("columns")) {
+      continue;
+    }
     Object fieldValue=object.getAttribute(field,Object.class);
     Object newFieldValue=replaceObject(fieldValue);
     if (newFieldValue == null) {
