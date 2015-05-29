@@ -3,6 +3,6 @@
     return toString();
   }
  else {
-    return getName();
+    return getName() + (getDescending() != null && getDescending() ? " DESC" : "");
   }
 }

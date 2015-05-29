@@ -33,9 +33,9 @@
         }
       }
  else       if (database instanceof MSSQLDatabase) {
-        sql="select CONSTRAINT_NAME, TABLE_NAME from INFORMATION_SCHEMA.TABLE_CONSTRAINTS " + "where CONSTRAINT_TYPE = 'Unique' " + "and CONSTRAINT_SCHEMA='" + jdbcSchemaName + "'";
+        sql="SELECT " + "[TC].[CONSTRAINT_NAME], " + "[TC].[TABLE_NAME] "+ "FROM [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] AS [TC] "+ "WHERE [TC].[CONSTRAINT_TYPE] = 'UNIQUE' "+ "AND [TC].[CONSTRAINT_CATALOG] = N'" + database.escapeStringForDatabase(jdbcCatalogName) + "' "+ "AND [TC].[CONSTRAINT_SCHEMA] = N'"+ database.escapeStringForDatabase(jdbcSchemaName)+ "'";
         if (tableName != null) {
-          sql+=" and TABLE_NAME='" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" AND [TC].[TABLE_NAME] = N'" + database.escapeStringForDatabase(database.correctObjectName(tableName,Table.class)) + "'";
         }
       }
  else       if (database instanceof OracleDatabase) {
