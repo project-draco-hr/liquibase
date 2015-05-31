@@ -9,7 +9,7 @@
     if (headers == null) {
       throw new UnexpectedLiquibaseException("Data file " + getFile() + " was empty");
     }
-    List<SqlStatement> statements=new ArrayList<SqlStatement>();
+    InsertSetStatement statements=this.createStatementSet(getCatalogName(),getSchemaName(),getTableName());
     String[] line;
     int lineNumber=0;
     while ((line=reader.readNext()) != null) {
@@ -65,9 +65,9 @@
         }
         insertStatement.addColumnValue(columnName,value);
       }
-      statements.add(insertStatement);
+      statements.addInsertStatement(insertStatement);
     }
-    return statements.toArray(new SqlStatement[statements.size()]);
+    return new SqlStatement[]{statements};
   }
  catch (  IOException e) {
     throw new RuntimeException(e);
