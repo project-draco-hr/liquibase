@@ -1,6 +1,5 @@
 {
   ValidationErrors validationErrors=new ValidationErrors();
   validationErrors.checkRequiredField("tableName",setTableRemarksStatement.getTableName());
-  validationErrors.checkRequiredField("remarks",setTableRemarksStatement.getRemarks());
   return validationErrors;
 }
