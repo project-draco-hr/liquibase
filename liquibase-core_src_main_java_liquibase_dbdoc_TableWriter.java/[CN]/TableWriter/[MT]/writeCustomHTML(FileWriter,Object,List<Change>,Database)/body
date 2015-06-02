@@ -3,4 +3,5 @@
   writeTableRemarks(fileWriter,table,database);
   writeColumns(fileWriter,table,database);
   writeTableIndexes(fileWriter,table,database);
+  writeTableForeignKeys(fileWriter,table,database);
 }
