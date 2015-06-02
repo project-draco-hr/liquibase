@@ -2,4 +2,5 @@
   final Table table=(Table)object;
   writeTableRemarks(fileWriter,table,database);
   writeColumns(fileWriter,table,database);
+  writeTableIndexes(fileWriter,table,database);
 }
