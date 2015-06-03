@@ -1,7 +1,7 @@
 {
   HsqlDatabase database=new HsqlDatabase();
   File changeLogCsvFile=new File(temporaryFolder.getRoot(),"changeLog.csv");
-  OfflineConnection connection=new OfflineConnection("offline:hsqldb?changeLogFile=" + changeLogCsvFile.getAbsolutePath() + "&outputLiquibaseSql=true&outputLiquibaseDdlSql="+ outputLiquibaseDdlSql,new ClassLoaderResourceAccessor());
+  OfflineConnection connection=new OfflineConnection("offline:hsqldb?changeLogFile=" + changeLogCsvFile.getAbsolutePath() + "&outputLiquibaseSql="+ outputLiquibaseSql,new ClassLoaderResourceAccessor());
   database.setConnection(connection);
   connection.attached(database);
   OfflineChangeLogHistoryService changeLogHistoryService=(OfflineChangeLogHistoryService)ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database);

@@ -1,3 +1,3 @@
 {
-  return new OfflineChangeLogHistoryService(database,new File(changeLogFile),outputLiquibaseSql,outputLiquibaseDdlSql);
+  return new OfflineChangeLogHistoryService(database,new File(changeLogFile),outputLiquibaseSql != OutputLiquibaseSql.NONE,outputLiquibaseSql == OutputLiquibaseSql.ALL);
 }

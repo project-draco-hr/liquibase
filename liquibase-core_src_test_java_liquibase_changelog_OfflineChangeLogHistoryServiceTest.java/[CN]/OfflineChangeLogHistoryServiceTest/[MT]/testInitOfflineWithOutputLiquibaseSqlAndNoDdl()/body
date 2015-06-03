@@ -1,6 +1,6 @@
 {
   StringWriter writer=new StringWriter();
-  OfflineChangeLogHistoryService service=createService(writer,false);
+  OfflineChangeLogHistoryService service=createService(writer,"data_only");
   ChangeSet changeSet=createChangeSet();
   service.init();
   service.setExecType(changeSet,ChangeSet.ExecType.EXECUTED);
