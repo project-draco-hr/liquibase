@@ -13,7 +13,7 @@
       }
       String catalog=((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema);
       String schema=((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema);
-      return extract(databaseMetaData.getTables(catalog,schema,database.correctObjectName(table,Table.class),new String[]{"TABLE"}));
+      return extract(databaseMetaData.getTables(catalog,schema,table,new String[]{"TABLE"}));
     }
     @Override public List<CachedRow> bulkFetchQuery() throws SQLException, DatabaseException {
       CatalogAndSchema catalogAndSchema=new CatalogAndSchema(catalogName,schemaName).customize(database);

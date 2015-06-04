@@ -23,57 +23,57 @@
       if (database instanceof MySQLDatabase || database instanceof HsqlDatabase) {
         sql="select CONSTRAINT_NAME, TABLE_NAME " + "from " + database.getSystemSchema() + ".table_constraints "+ "where constraint_schema='"+ jdbcCatalogName+ "' "+ "and constraint_type='UNIQUE'";
         if (tableName != null) {
-          sql+=" and table_name='" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" and table_name='" + tableName + "'";
         }
       }
  else       if (database instanceof PostgresDatabase) {
         sql="select CONSTRAINT_NAME, TABLE_NAME " + "from " + database.getSystemSchema() + ".table_constraints "+ "where constraint_catalog='"+ jdbcCatalogName+ "' "+ "and constraint_schema='"+ jdbcSchemaName+ "' "+ "and constraint_type='UNIQUE'";
         if (tableName != null) {
-          sql+=" and table_name='" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" and table_name='" + tableName + "'";
         }
       }
  else       if (database instanceof MSSQLDatabase) {
         sql="select CONSTRAINT_NAME, TABLE_NAME from INFORMATION_SCHEMA.TABLE_CONSTRAINTS " + "where CONSTRAINT_TYPE = 'Unique' " + "and CONSTRAINT_SCHEMA='" + jdbcSchemaName + "'";
         if (tableName != null) {
-          sql+=" and TABLE_NAME='" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" and TABLE_NAME='" + tableName + "'";
         }
       }
  else       if (database instanceof OracleDatabase) {
         sql="select uc.constraint_name, uc.table_name,uc.status,uc.deferrable,uc.deferred,ui.tablespace_name, ui.index_name, ui.owner as INDEX_CATALOG from all_constraints uc, all_indexes ui " + "where uc.constraint_type='U' and uc.index_name = ui.index_name " + "and uc.owner = '" + jdbcSchemaName + "' "+ "and ui.table_owner = '"+ jdbcSchemaName+ "' ";
         if (tableName != null) {
-          sql+=" and uc.table_name = '" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" and uc.table_name = '" + tableName + "'";
         }
       }
  else       if (database instanceof DB2Database) {
         if (database.getDatabaseProductName().startsWith("DB2 UDB for AS/400")) {
           sql="select constraint_name as constraint_name, table_name as table_name from QSYS2.TABLE_CONSTRAINTS where table_schema='" + jdbcSchemaName + "' and constraint_type='UNIQUE'";
           if (tableName != null) {
-            sql+=" and table_name = '" + database.correctObjectName(tableName,Table.class) + "'";
+            sql+=" and table_name = '" + tableName + "'";
           }
         }
  else {
           sql="select distinct k.constname as constraint_name, t.tabname as TABLE_NAME from syscat.keycoluse k, syscat.tabconst t " + "where k.constname = t.constname " + "and t.tabschema = '" + jdbcSchemaName + "' "+ "and t.type='U'";
           if (tableName != null) {
-            sql+=" and t.tabname = '" + database.correctObjectName(tableName,Table.class) + "'";
+            sql+=" and t.tabname = '" + tableName + "'";
           }
         }
       }
  else       if (database instanceof FirebirdDatabase) {
         sql="SELECT RDB$INDICES.RDB$INDEX_NAME AS CONSTRAINT_NAME, RDB$INDICES.RDB$RELATION_NAME AS TABLE_NAME FROM RDB$INDICES " + "LEFT JOIN RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDICES.RDB$INDEX_NAME " + "WHERE RDB$INDICES.RDB$UNIQUE_FLAG IS NOT NULL "+ "AND RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE != 'PRIMARY KEY' "+ "AND NOT(RDB$INDICES.RDB$INDEX_NAME LIKE 'RDB$%')";
         if (tableName != null) {
-          sql+=" AND RDB$INDICES.RDB$RELATION_NAME='" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" AND RDB$INDICES.RDB$RELATION_NAME='" + tableName + "'";
         }
       }
  else       if (database instanceof DerbyDatabase) {
         sql="select c.constraintname as CONSTRAINT_NAME, tablename AS TABLE_NAME " + "from sys.systables t, sys.sysconstraints c, sys.sysschemas s " + "where s.schemaname='" + jdbcCatalogName + "' "+ "and t.tableid = c.tableid "+ "and t.schemaid=s.schemaid "+ "and c.type = 'U'";
         if (tableName != null) {
-          sql+=" AND t.tablename = '" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" AND t.tablename = '" + tableName + "'";
         }
       }
  else       if (database instanceof InformixDatabase) {
         sql="select sysindexes.idxname, sysindexes.idxtype, systables.tabname " + "from sysindexes, systables " + "where sysindexes.tabid = systables.tabid "+ "and sysindexes.idxtype ='U'";
         if (tableName != null) {
-          sql+=" AND systables.tabname = '" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" AND systables.tabname = '" + tableName + "'";
         }
       }
  else       if (database instanceof SybaseDatabase) {
@@ -83,13 +83,13 @@
  else       if (database instanceof SybaseASADatabase) {
         sql="select sysconstraint.constraint_name, sysconstraint.constraint_type, systable.table_name " + "from sysconstraint, systable " + "where sysconstraint.table_object_id = systable.object_id "+ "and sysconstraint.constraint_type = 'U'";
         if (tableName != null) {
-          sql+=" and systable.table_name = '" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" and systable.table_name = '" + tableName + "'";
         }
       }
  else {
         sql="select CONSTRAINT_NAME, CONSTRAINT_TYPE, TABLE_NAME " + "from " + database.getSystemSchema() + ".constraints "+ "where constraint_schema='"+ jdbcSchemaName+ "' "+ "and constraint_catalog='"+ jdbcCatalogName+ "' "+ "and constraint_type='UNIQUE'";
         if (tableName != null) {
-          sql+=" and table_name='" + database.correctObjectName(tableName,Table.class) + "'";
+          sql+=" and table_name='" + tableName + "'";
         }
       }
       return sql;
