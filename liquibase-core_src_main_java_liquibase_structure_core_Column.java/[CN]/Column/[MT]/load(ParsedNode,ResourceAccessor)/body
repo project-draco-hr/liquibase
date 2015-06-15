@@ -6,4 +6,10 @@
     type.load(typeNode,resourceAccessor);
     setType(type);
   }
+  ParsedNode autoIncrementInformation=parsedNode.getChild(null,"autoIncrementInformation");
+  if (autoIncrementInformation != null) {
+    AutoIncrementInformation info=new AutoIncrementInformation();
+    info.load(autoIncrementInformation,resourceAccessor);
+    setAutoIncrementInformation(info);
+  }
 }

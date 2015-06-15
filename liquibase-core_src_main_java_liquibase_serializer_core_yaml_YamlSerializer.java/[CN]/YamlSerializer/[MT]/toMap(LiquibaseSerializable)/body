@@ -8,6 +8,9 @@
       if (value instanceof DataType) {
         value=((Map)toMap((DataType)value)).values().iterator().next();
       }
+      if (value instanceof Column.AutoIncrementInformation) {
+        value=((Map)toMap((Column.AutoIncrementInformation)value)).values().iterator().next();
+      }
       if (value instanceof LiquibaseSerializable) {
         value=toMap((LiquibaseSerializable)value);
       }

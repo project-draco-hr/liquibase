@@ -1,0 +1,4 @@
+{
+  this.startWith=(BigInteger)convertEscaped(parsedNode.getChildValue(null,"startWith"));
+  this.incrementBy=(BigInteger)convertEscaped(parsedNode.getChildValue(null,"incrementBy"));
+}
