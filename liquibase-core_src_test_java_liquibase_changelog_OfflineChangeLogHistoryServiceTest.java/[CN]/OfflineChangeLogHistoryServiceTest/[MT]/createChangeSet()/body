@@ -1,0 +1,6 @@
+{
+  DatabaseChangeLog databaseChangeLog=new DatabaseChangeLog("/patch/changeLog.xml");
+  ChangeSet changeSet=new ChangeSet("id","author",false,false,"/path/changeSet.xml","","",databaseChangeLog);
+  databaseChangeLog.addChangeSet(changeSet);
+  return changeSet;
+}
