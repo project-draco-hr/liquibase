@@ -1,0 +1,4 @@
+{
+  inserts.add(statement);
+  return this;
+}
