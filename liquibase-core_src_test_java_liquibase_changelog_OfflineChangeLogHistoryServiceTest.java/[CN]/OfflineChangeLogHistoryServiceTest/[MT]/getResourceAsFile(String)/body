@@ -1,0 +1,12 @@
+{
+  URL resourceUrl=getClass().getResource(resourceName);
+  if (resourceUrl == null) {
+    throw new IllegalArgumentException("Resource " + resourceName + " not found for class "+ getClass().getName());
+  }
+  try {
+    return new File(resourceUrl.toURI());
+  }
+ catch (  URISyntaxException e) {
+    return new File(resourceUrl.getPath());
+  }
+}

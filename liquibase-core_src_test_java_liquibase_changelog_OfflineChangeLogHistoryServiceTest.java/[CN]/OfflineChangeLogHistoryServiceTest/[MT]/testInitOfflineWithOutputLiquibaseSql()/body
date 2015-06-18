@@ -1,0 +1,10 @@
+{
+  StringWriter writer=new StringWriter();
+  OfflineChangeLogHistoryService service=createService(writer,"true");
+  ChangeSet changeSet=createChangeSet();
+  service.init();
+  service.setExecType(changeSet,ChangeSet.ExecType.EXECUTED);
+  writer.close();
+  assertTrue(writer.toString().contains("CREATE TABLE PUBLIC.DATABASECHANGELOG"));
+  assertTrue(writer.toString().contains("INSERT INTO PUBLIC.DATABASECHANGELOG"));
+}

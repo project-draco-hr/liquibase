@@ -1,0 +1,15 @@
+{
+  if (s == null) {
+    return null;
+  }
+  s=s.toUpperCase();
+  if (s.equals("TRUE")) {
+    return ALL;
+  }
+ else   if (s.equals("FALSE")) {
+    return NONE;
+  }
+ else {
+    return valueOf(s);
+  }
+}
