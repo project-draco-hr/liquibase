@@ -1,0 +1,9 @@
+{
+  if (statement.peek() == null) {
+    return new UnparsedSql[0];
+  }
+  StringBuffer sql=new StringBuffer();
+  generateHeader(sql,statement,database);
+  generateValues(sql,statement,database);
+  return new Sql[]{new UnparsedSql(sql.toString(),getAffectedTable(statement))};
+}
