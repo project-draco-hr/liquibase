@@ -1,5 +1,5 @@
 {
-  RanChangeSet ranChangeSet=ranIndex.get(changeSet.toString(false));
+  RanChangeSet ranChangeSet=findChangeSet(changeSet);
   boolean ran=ranChangeSet != null;
   boolean shouldValidate=!ran || changeSet.shouldRunOnChange() || changeSet.shouldAlwaysRun();
   for (  Change change : changeSet.getChanges()) {
