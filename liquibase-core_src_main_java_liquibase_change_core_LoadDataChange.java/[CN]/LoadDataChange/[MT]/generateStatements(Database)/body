@@ -67,7 +67,12 @@
       }
       statements.addInsertStatement(insertStatement);
     }
-    return new SqlStatement[]{statements};
+    if (database instanceof MSSQLDatabase || database instanceof MySQLDatabase || database instanceof PostgresDatabase) {
+      return new SqlStatement[]{statements};
+    }
+ else {
+      return statements.getStatementsArray();
+    }
   }
  catch (  IOException e) {
     throw new RuntimeException(e);
