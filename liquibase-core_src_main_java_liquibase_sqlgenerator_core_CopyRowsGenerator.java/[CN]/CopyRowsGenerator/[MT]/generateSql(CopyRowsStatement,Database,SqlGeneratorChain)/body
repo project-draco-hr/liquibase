@@ -1,5 +1,8 @@
 {
   StringBuffer sql=new StringBuffer();
+  if (statement.getCopyColumns().size() == 0) {
+    return new Sql[]{};
+  }
   if (database instanceof SQLiteDatabase) {
     sql.append("INSERT INTO `").append(statement.getTargetTable()).append("` (");
     for (int i=0; i < statement.getCopyColumns().size(); i++) {
