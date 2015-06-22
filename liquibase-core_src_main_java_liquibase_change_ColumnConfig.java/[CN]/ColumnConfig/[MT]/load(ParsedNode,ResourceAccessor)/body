@@ -1,4 +1,9 @@
 {
+  for (  ParsedNode child : parsedNode.getChildren()) {
+    if (!ObjectUtil.hasProperty(this,child.getName())) {
+      throw new ParsedNodeException("Unexpected node: " + child.getName());
+    }
+  }
   name=parsedNode.getChildValue(null,"name",String.class);
   computed=parsedNode.getChildValue(null,"computed",Boolean.class);
   type=parsedNode.getChildValue(null,"type",String.class);

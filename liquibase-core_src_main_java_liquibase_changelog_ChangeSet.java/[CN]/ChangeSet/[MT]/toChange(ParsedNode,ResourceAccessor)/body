@@ -4,12 +4,7 @@
     return null;
   }
  else {
-    try {
-      change.load(value,resourceAccessor);
-    }
- catch (    ParsedNodeException e) {
-      e.printStackTrace();
-    }
+    change.load(value,resourceAccessor);
     return change;
   }
 }
