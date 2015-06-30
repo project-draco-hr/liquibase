@@ -1,0 +1,3 @@
+{
+  return prependImpl(key,StringUtils.trimToEmpty(clause));
+}

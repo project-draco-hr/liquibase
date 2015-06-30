@@ -1,0 +1,3 @@
+{
+  return replaceImpl(key,StringUtils.trimToEmpty(newValue));
+}

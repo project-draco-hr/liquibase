@@ -1,0 +1,4 @@
+{
+  clauses.put(literal.getClass().getName().toLowerCase() + " #" + clauses.size(),literal);
+  return this;
+}

@@ -1,0 +1,17 @@
+{
+  key=StringUtils.trimToEmpty(key).toLowerCase();
+  if (!clauses.containsKey(key)) {
+    throw new IllegalArgumentException("Key '" + key + "' is not defined");
+  }
+  LinkedHashMap<String,Object> newMap=new LinkedHashMap<String,Object>();
+  for (  Map.Entry<String,Object> entry : clauses.entrySet()) {
+    if (entry.getKey().equals(key)) {
+      newMap.put(key,newValue);
+    }
+ else {
+      newMap.put(entry.getKey(),entry.getValue());
+    }
+  }
+  this.clauses=newMap;
+  return this;
+}

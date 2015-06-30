@@ -1,0 +1,8 @@
+{
+  exitingKey=StringUtils.trimToEmpty(exitingKey).toLowerCase();
+  Object clauses=getImpl(exitingKey);
+  if (clauses == null) {
+    return null;
+  }
+  return clauses.toString();
+}

@@ -1,9 +1,34 @@
 {
-  String stripped=stripComments ? stripComments(multiLineSQL) : multiLineSQL;
-  if (splitStatements) {
-    return splitSQL(stripped,endDelimiter);
+  if (endDelimiter != null && StringUtils.trimToNull(endDelimiter.toLowerCase().replace("\\r","").replace("\\n","").replace(";","").replace(" ","").replace("go","")) == null) {
+    endDelimiter=null;
   }
+  boolean useDefaultDelimiter=endDelimiter == null;
+  StringClauses[] parsedList=SqlParser.parse(multiLineSQL,splitStatements,true,!stripComments,!splitStatements);
+  List<String> returnArray=new ArrayList<String>();
+  for (  StringClauses parsed : parsedList) {
+    String currentString;
+    if (useDefaultDelimiter) {
+      currentString=parsed.toString();
+    }
  else {
-    return new String[]{stripped};
+      currentString="";
+      for (      Object piece : parsed.toArray(false)) {
+        if (splitStatements && piece instanceof String && ((String)piece).matches(endDelimiter)) {
+          currentString=StringUtils.trimToNull(currentString);
+          if (currentString != null) {
+            returnArray.add(currentString);
+          }
+          currentString="";
+        }
+ else {
+          currentString+=piece;
+        }
+      }
+    }
+    currentString=StringUtils.trimToNull(currentString);
+    if (currentString != null) {
+      returnArray.add(currentString);
+    }
   }
+  return returnArray.toArray(new String[returnArray.size()]);
 }

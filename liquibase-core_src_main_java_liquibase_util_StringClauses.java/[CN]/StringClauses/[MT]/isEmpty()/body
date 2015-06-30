@@ -1,0 +1,11 @@
+{
+  if (clauses.size() == 0) {
+    return true;
+  }
+  for (  Object clause : clauses.values()) {
+    if (clause != null && !clause.toString().trim().equals("")) {
+      return false;
+    }
+  }
+  return true;
+}
