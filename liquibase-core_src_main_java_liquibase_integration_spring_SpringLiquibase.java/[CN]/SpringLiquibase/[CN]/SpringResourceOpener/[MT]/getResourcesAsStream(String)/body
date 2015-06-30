@@ -1,11 +1,17 @@
 {
+  if (path == null) {
+    return null;
+  }
   Set<InputStream> returnSet=new HashSet<InputStream>();
   Resource[] resources=ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources(adjustClasspath(path));
   if (resources == null || resources.length == 0) {
     return null;
   }
   for (  Resource resource : resources) {
-    returnSet.add(resource.getURL().openStream());
+    LogFactory.getInstance().getLog().debug("Opening " + resource.getURL().toExternalForm() + " as "+ path);
+    URLConnection connection=resource.getURL().openConnection();
+    connection.setUseCaches(false);
+    returnSet.add(connection.getInputStream());
   }
   return returnSet;
 }

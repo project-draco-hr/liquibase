@@ -2,8 +2,47 @@
   super.init();
   try {
     Resource[] resources=ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources("");
-    for (    Resource res : resources) {
-      addRootPath(res.getURL());
+    if (resources.length == 0 || resources.length == 1 && !resources[0].exists()) {
+      Set<String> liquibasePackages=new HashSet<String>();
+      for (      Resource manifest : ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources("META-INF/MANIFEST.MF")) {
+        if (manifest.exists()) {
+          InputStream inputStream=null;
+          try {
+            inputStream=manifest.getInputStream();
+            Manifest manifestObj=new Manifest(inputStream);
+            Attributes attributes=manifestObj.getAttributes("Liquibase-Package");
+            if (attributes != null) {
+              for (              Object attr : attributes.values()) {
+                String packages="\\s*,\\s*";
+                ;
+                for (                String fullPackage : attr.toString().split(packages)) {
+                  liquibasePackages.add(fullPackage.split("\\.")[0]);
+                }
+              }
+            }
+          }
+  finally {
+            if (inputStream != null) {
+              inputStream.close();
+            }
+          }
+        }
+      }
+      if (liquibasePackages.size() == 0) {
+        LogFactory.getInstance().getLog().warning("No Liquibase-Packages entry found in MANIFEST.MF. Using fallback of entire 'liquibase' package");
+        liquibasePackages.add("liquibase");
+      }
+      for (      String foundPackage : liquibasePackages) {
+        resources=ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources(foundPackage);
+        for (        Resource res : resources) {
+          addRootPath(res.getURL());
+        }
+      }
+    }
+ else {
+      for (      Resource res : resources) {
+        addRootPath(res.getURL());
+      }
     }
   }
  catch (  IOException e) {

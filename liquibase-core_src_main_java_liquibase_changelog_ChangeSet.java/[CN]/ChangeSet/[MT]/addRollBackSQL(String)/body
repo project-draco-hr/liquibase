@@ -1,11 +1,11 @@
 {
   if (StringUtils.trimToNull(sql) == null) {
-    if (this.rollBackChanges.size() == 0) {
-      rollBackChanges.add(new EmptyChange());
+    if (rollback.getChanges().size() == 0) {
+      rollback.getChanges().add(new EmptyChange());
     }
     return;
   }
   for (  String statment : StringUtils.splitSQL(sql,null)) {
-    rollBackChanges.add(new RawSQLChange(statment.trim()));
+    rollback.getChanges().add(new RawSQLChange(statment.trim()));
   }
 }

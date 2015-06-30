@@ -5,7 +5,7 @@
   try {
     Object value=parsedNode.getValue();
     if (value != null && value instanceof String) {
-      parsedNode.setValue(changeLogParameters.expandExpressions(parsedNode.getValue(String.class)));
+      parsedNode.setValue(changeLogParameters.expandExpressions(parsedNode.getValue(String.class),this));
     }
     List<ParsedNode> children=parsedNode.getChildren();
     if (children != null) {

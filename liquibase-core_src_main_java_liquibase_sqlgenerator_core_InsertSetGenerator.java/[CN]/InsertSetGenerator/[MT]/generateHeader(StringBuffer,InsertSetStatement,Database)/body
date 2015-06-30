@@ -1,0 +1,4 @@
+{
+  InsertStatement insert=statement.peek();
+  myGenerator.generateHeader(sql,insert,database);
+}

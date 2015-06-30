@@ -13,7 +13,7 @@
       }
       String catalog=((AbstractJdbcDatabase)database).getJdbcCatalogName(catalogAndSchema);
       String schema=((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema);
-      return extract(databaseMetaData.getTables(catalog,schema,database.correctObjectName(table,Table.class),new String[]{"TABLE"}));
+      return extract(databaseMetaData.getTables(catalog,schema,table,new String[]{"TABLE"}));
     }
     @Override public List<CachedRow> bulkFetchQuery() throws SQLException, DatabaseException {
       CatalogAndSchema catalogAndSchema=new CatalogAndSchema(catalogName,schemaName).customize(database);
@@ -28,7 +28,7 @@
       String ownerName=database.correctObjectName(catalogAndSchema.getCatalogName(),Schema.class);
       String sql="SELECT null as TABLE_CAT, a.OWNER as TABLE_SCHEM, a.TABLE_NAME as TABLE_NAME, a.TEMPORARY as TEMPORARY, a.DURATION as DURATION, 'TABLE' as TABLE_TYPE, c.COMMENTS as REMARKS " + "from ALL_TABLES a " + "join ALL_TAB_COMMENTS c on a.TABLE_NAME=c.table_name and a.owner=c.owner "+ "WHERE a.OWNER='" + ownerName + "'";
       if (tableName != null) {
-        sql+=" AND a.TABLE_NAME='" + database.correctObjectName(tableName,Table.class) + "'";
+        sql+=" AND a.TABLE_NAME='" + tableName + "'";
       }
       return executeAndExtract(sql,database);
     }

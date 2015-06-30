@@ -1,2 +1,20 @@
 {
+  RanChangeSet last=null;
+  List<RanChangeSet> ranChangeSets=getRanChangeSets();
+  if (ranChangeSets.isEmpty()) {
+    ChangeSet emptyChangeSet=new ChangeSet(String.valueOf(new Date().getTime()),"liquibase",false,false,"liquibase-internal",null,null,getDatabase().getObjectQuotingStrategy(),null);
+    appendChangeSet(emptyChangeSet,ExecType.EXECUTED);
+    last=new RanChangeSet(emptyChangeSet);
+  }
+ else {
+    last=ranChangeSets.get(ranChangeSets.size() - 1);
+  }
+  ChangeSet lastChangeSet=new ChangeSet(last.getId(),last.getAuthor(),false,false,last.getChangeLog(),null,null,true,null,null);
+  replaceChangeSet(lastChangeSet,new ReplaceChangeSetLogic(){
+    @Override public String[] execute(    String[] line){
+      line[COLUMN_TAG]=tagString;
+      return line;
+    }
+  }
+);
 }

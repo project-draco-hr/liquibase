@@ -1,4 +1,7 @@
 {
+  if (filePath == null) {
+    return null;
+  }
   if (ignoreClasspathPrefix) {
     return filePath.replaceFirst("^classpath:","");
   }

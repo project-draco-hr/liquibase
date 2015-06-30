@@ -1,0 +1,9 @@
+{
+  if (quotingStrategy == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS) {
+    return super.escapeObjectName(objectName,objectType);
+  }
+  if (objectName != null && quotingStrategy != ObjectQuotingStrategy.QUOTE_ALL_OBJECTS && isReservedWord(objectName.toUpperCase())) {
+    return "\"" + objectName.toUpperCase() + "\"";
+  }
+  return objectName;
+}

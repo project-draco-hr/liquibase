@@ -1,0 +1,3 @@
+{
+  return new SqlStatement[]{new SetColumnRemarksStatement(catalogName,schemaName,tableName,columnName,remarks)};
+}

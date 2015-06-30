@@ -3,7 +3,7 @@
   if (defaultNullValue != null) {
     statements.add(new UpdateStatement(getCatalogName(),getSchemaName(),getTableName()).addNewColumnValue(getColumnName(),defaultNullValue).setWhereClause(database.escapeObjectName(getColumnName(),Column.class) + " IS NULL"));
   }
-  statements.add(new SetNullableStatement(getCatalogName(),getSchemaName(),getTableName(),getColumnName(),getColumnDataType(),false));
+  statements.add(new SetNullableStatement(getCatalogName(),getSchemaName(),getTableName(),getColumnName(),getColumnDataType(),false,getConstraintName()));
   if (database instanceof DB2Database) {
     statements.add(new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName()));
   }

@@ -1,12 +1,16 @@
 {
+  String originalDefinition=StringUtils.trimToEmpty(getRawDefinition());
   if (database instanceof MySQLDatabase) {
-    if (getRawDefinition().contains(" ")) {
+    if (getRawDefinition().contains(" ") || getRawDefinition().contains("(")) {
       return new DatabaseDataType(getRawDefinition());
     }
-    return new DatabaseDataType("TIMESTAMP");
+    return super.toDatabaseDataType(database);
   }
   if (database instanceof MSSQLDatabase) {
-    return new DatabaseDataType("DATETIME");
+    if (!LiquibaseConfiguration.getInstance().getProperty(GlobalConfiguration.class,GlobalConfiguration.CONVERT_DATA_TYPES).getValue(Boolean.class) && originalDefinition.toLowerCase().startsWith("timestamp")) {
+      return new DatabaseDataType(database.escapeDataTypeName("TIMESTAMP"));
+    }
+    return new DatabaseDataType(database.escapeDataTypeName("DATETIME"));
   }
   return super.toDatabaseDataType(database);
 }

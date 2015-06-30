@@ -1,0 +1,4 @@
+String minimumVersion
+int major
+int minor
+int patch

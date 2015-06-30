@@ -6,6 +6,9 @@
   }
  else   if (nodeName.equals("include")) {
     String path=node.getChildValue(null,"file",String.class);
+    if (path == null) {
+      throw new UnexpectedLiquibaseException("No 'file' attribute on 'include'");
+    }
     path=path.replace('\\','/');
     try {
       include(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceAccessor);
@@ -26,7 +29,7 @@
         throw new SetupException(e);
       }
     }
-    includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,getStandardChangeLogComparator(),resourceAccessor);
+    includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,node.getChildValue(null,"errorIfMissingOrEmpty",true),getStandardChangeLogComparator(),resourceAccessor);
   }
  else   if (nodeName.equals("preConditions")) {
     this.preconditionContainer=new PreconditionContainer();
@@ -42,19 +45,26 @@
       String context=node.getChildValue(null,"context",String.class);
       String dbms=node.getChildValue(null,"dbms",String.class);
       String labels=node.getChildValue(null,"labels",String.class);
-      if (node.getChildValue(null,"file",String.class) == null) {
-        this.changeLogParameters.set(node.getChildValue(null,"name",String.class),node.getChildValue(null,"value",String.class),context,labels,dbms);
+      Boolean global=node.getChildValue(null,"global",Boolean.class);
+      if (global == null) {
+        global=true;
+      }
+      String file=node.getChildValue(null,"file",String.class);
+      if (file == null) {
+        String name=node.getChildValue(null,"name",String.class);
+        String value=node.getChildValue(null,"value",String.class);
+        this.changeLogParameters.set(name,value,context,labels,dbms,global,this);
       }
  else {
         Properties props=new Properties();
-        InputStream propertiesStream=StreamUtil.singleInputStream(node.getChildValue(null,"file",String.class),resourceAccessor);
+        InputStream propertiesStream=StreamUtil.singleInputStream(file,resourceAccessor);
         if (propertiesStream == null) {
-          LogFactory.getInstance().getLog().info("Could not open properties file " + node.getChildValue(null,"file",String.class));
+          LogFactory.getInstance().getLog().info("Could not open properties file " + file);
         }
  else {
           props.load(propertiesStream);
           for (          Map.Entry entry : props.entrySet()) {
-            this.changeLogParameters.set(entry.getKey().toString(),entry.getValue().toString(),context,labels,dbms);
+            this.changeLogParameters.set(entry.getKey().toString(),entry.getValue().toString(),context,labels,dbms,global,this);
           }
         }
       }

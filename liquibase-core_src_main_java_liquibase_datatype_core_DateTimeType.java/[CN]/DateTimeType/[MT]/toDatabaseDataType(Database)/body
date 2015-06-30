@@ -1,4 +1,6 @@
 {
+  String originalDefinition=StringUtils.trimToEmpty(getRawDefinition());
+  boolean allowFractional=supportsFractionalDigits(database);
   if (database instanceof DB2Database || database instanceof DerbyDatabase || database instanceof FirebirdDatabase|| database instanceof H2Database|| database instanceof HsqlDatabase) {
     return new DatabaseDataType("TIMESTAMP");
   }
@@ -6,9 +8,27 @@
     return new DatabaseDataType("TIMESTAMP",getParameters());
   }
   if (database instanceof MSSQLDatabase) {
-    if ((getParameters().length > 0 && "16".equals(getParameters()[0])) || "SMALLDATETIME".equalsIgnoreCase(getRawDefinition())) {
-      return new DatabaseDataType("SMALLDATETIME");
+    Object[] parameters=getParameters();
+    if (originalDefinition.equalsIgnoreCase("smalldatetime") || originalDefinition.equals("[smalldatetime]")) {
+      return new DatabaseDataType(database.escapeDataTypeName("smalldatetime"));
     }
+ else     if (originalDefinition.equalsIgnoreCase("datetime2") || originalDefinition.equals("[datetime2]") || originalDefinition.matches("(?i)datetime2\\s*\\(.+")|| originalDefinition.matches("\\[datetime2\\]\\s*\\(.+")) {
+      try {
+        if (database.getDatabaseMajorVersion() <= 9) {
+          return new DatabaseDataType(database.escapeDataTypeName("datetime"));
+        }
+      }
+ catch (      DatabaseException ignore) {
+      }
+      if (parameters.length == 0) {
+        parameters=new Object[]{7};
+      }
+ else       if (parameters.length > 1) {
+        parameters=new Object[]{parameters[1]};
+      }
+      return new DatabaseDataType(database.escapeDataTypeName("datetime2"),parameters);
+    }
+    return new DatabaseDataType(database.escapeDataTypeName("datetime"));
   }
   if (database instanceof InformixDatabase) {
     if (getAdditionalInformation() == null || getAdditionalInformation().length() == 0) {
@@ -29,35 +49,44 @@
       }
     }
     if (getAdditionalInformation() != null && getAdditionalInformation().length() > 0) {
-      return new DatabaseDataType(getRawDefinition());
+      return new DatabaseDataType(originalDefinition);
     }
     return new DatabaseDataType("DATETIME YEAR TO FRACTION",5);
   }
   if (database instanceof PostgresDatabase) {
-    String rawDefinition=getRawDefinition().toLowerCase();
+    String rawDefinition=originalDefinition.toLowerCase();
+    Object[] params=getParameters();
     if (rawDefinition.contains("tz") || rawDefinition.contains("with time zone")) {
-      return new DatabaseDataType("TIMESTAMP WITH TIME ZONE");
+      if (params.length == 0 || !allowFractional) {
+        return new DatabaseDataType("TIMESTAMP WITH TIME ZONE");
+      }
+ else {
+        return new DatabaseDataType("TIMESTAMP(" + params[0] + ") WITH TIME ZONE");
+      }
     }
  else {
-      return new DatabaseDataType("TIMESTAMP WITHOUT TIME ZONE");
+      if (params.length == 0 || !allowFractional) {
+        return new DatabaseDataType("TIMESTAMP WITHOUT TIME ZONE");
+      }
+ else {
+        return new DatabaseDataType("TIMESTAMP(" + params[0] + ") WITHOUT TIME ZONE");
+      }
     }
   }
   if (database instanceof SQLiteDatabase) {
     return new DatabaseDataType("TEXT");
   }
   if (database instanceof MySQLDatabase) {
-    boolean supportsParameters=true;
-    try {
-      supportsParameters=database.getDatabaseMajorVersion() >= 5 && database.getDatabaseMinorVersion() >= 6 && ((MySQLDatabase)database).getDatabasePatchVersion() >= 4;
-    }
- catch (    Exception ignore) {
-    }
-    if (supportsParameters && getParameters().length > 0 && Integer.valueOf(getParameters()[0].toString()) <= 6) {
-      return new DatabaseDataType(getName(),getParameters());
-    }
- else {
+    if (getParameters().length == 0 || !allowFractional) {
       return new DatabaseDataType(getName());
     }
+    Object[] params=getParameters();
+    Integer precision=Integer.valueOf(params[0].toString());
+    if (precision > 6) {
+      LogFactory.getInstance().getLog().warning("MySQL does not support a timestamp precision" + " of '" + precision + "' - resetting to"+ " the maximum of '6'");
+      params=new Object[]{6};
+    }
+    return new DatabaseDataType(getName(),params);
   }
   return new DatabaseDataType(getName());
 }

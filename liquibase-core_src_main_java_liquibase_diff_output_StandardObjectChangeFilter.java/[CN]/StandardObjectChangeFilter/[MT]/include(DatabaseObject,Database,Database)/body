@@ -1,0 +1,16 @@
+{
+  if (filters.size() == 0) {
+    return true;
+  }
+  for (  Filter filter : filters) {
+    if (filter.matches(object)) {
+      if (filterType == FilterType.INCLUDE) {
+        return true;
+      }
+      if (filterType == FilterType.EXCLUDE) {
+        return false;
+      }
+    }
+  }
+  return filterType == FilterType.EXCLUDE;
+}

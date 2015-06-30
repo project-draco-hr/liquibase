@@ -1,0 +1,3 @@
+{
+  futureRollbackSQL(null,contexts,output,checkLiquibaseTables);
+}

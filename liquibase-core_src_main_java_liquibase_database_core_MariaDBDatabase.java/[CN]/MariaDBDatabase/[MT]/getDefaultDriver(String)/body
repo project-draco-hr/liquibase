@@ -1,0 +1,6 @@
+{
+  if (url.startsWith("jdbc:mariadb")) {
+    return "org.mariadb.jdbc.Driver";
+  }
+  return null;
+}

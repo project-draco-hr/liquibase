@@ -14,9 +14,5 @@
  catch (  IOException e) {
     throw new LiquibaseException(e);
   }
- finally {
-    lockService.releaseLock();
-  }
   ExecutorService.getInstance().setExecutor(database,oldTemplate);
-  resetServices();
 }

@@ -1,5 +1,10 @@
 {
   String originalDefinition=StringUtils.trimToEmpty(getRawDefinition());
+  if (database instanceof MSSQLDatabase) {
+    if (!LiquibaseConfiguration.getInstance().getProperty(GlobalConfiguration.class,GlobalConfiguration.CONVERT_DATA_TYPES).getValue(Boolean.class) && originalDefinition.toLowerCase().startsWith("text")) {
+      return new DatabaseDataType("TEXT");
+    }
+  }
   if (database instanceof FirebirdDatabase) {
     return new DatabaseDataType("BLOB SUB_TYPE TEXT");
   }
@@ -7,11 +12,48 @@
     return new DatabaseDataType("LONG VARCHAR");
   }
  else   if (database instanceof MSSQLDatabase) {
-    return new DatabaseDataType("NVARCHAR","MAX");
+    if (originalDefinition.equalsIgnoreCase("text") || originalDefinition.equals("[text]") || originalDefinition.matches("(?i)text .+")|| originalDefinition.matches("\\[text\\] .+")) {
+      DatabaseDataType type=new DatabaseDataType(database.escapeDataTypeName("text"));
+      type.addAdditionalInformation(getAdditionalInformation());
+      return type;
+    }
+    if (originalDefinition.equalsIgnoreCase("ntext") || originalDefinition.equals("[ntext]") || originalDefinition.matches("(?i)ntext .+")|| originalDefinition.matches("\\[ntext\\] .+")) {
+      DatabaseDataType type=new DatabaseDataType(database.escapeDataTypeName("ntext"));
+      type.addAdditionalInformation(getAdditionalInformation());
+      return type;
+    }
+    if (originalDefinition.equalsIgnoreCase("nclob")) {
+      try {
+        if (database.getDatabaseMajorVersion() <= 8) {
+          DatabaseDataType type=new DatabaseDataType(database.escapeDataTypeName("ntext"));
+          type.addAdditionalInformation(getAdditionalInformation());
+          return type;
+        }
+      }
+ catch (      DatabaseException ignore) {
+      }
+      return new DatabaseDataType(database.escapeDataTypeName("nvarchar"),"MAX");
+    }
+    try {
+      if (database.getDatabaseMajorVersion() <= 8) {
+        DatabaseDataType type=new DatabaseDataType(database.escapeDataTypeName("text"));
+        type.addAdditionalInformation(getAdditionalInformation());
+        return type;
+      }
+    }
+ catch (    DatabaseException ignore) {
+    }
+    return new DatabaseDataType(database.escapeDataTypeName("varchar"),"MAX");
   }
  else   if (database instanceof MySQLDatabase) {
     if (originalDefinition.toLowerCase().startsWith("text")) {
       return new DatabaseDataType("TEXT");
+    }
+ else     if (originalDefinition.toLowerCase().startsWith("tinytext")) {
+      return new DatabaseDataType("TINYTEXT");
+    }
+ else     if (originalDefinition.toLowerCase().startsWith("mediumtext")) {
+      return new DatabaseDataType("MEDIUMTEXT");
     }
  else {
       return new DatabaseDataType("LONGTEXT");
@@ -29,6 +71,9 @@
     return new DatabaseDataType("TEXT");
   }
  else   if (database instanceof OracleDatabase) {
+    if (originalDefinition.equalsIgnoreCase("nclob")) {
+      return new DatabaseDataType("NCLOB");
+    }
     return new DatabaseDataType("CLOB");
   }
  else   if (database instanceof InformixDatabase) {

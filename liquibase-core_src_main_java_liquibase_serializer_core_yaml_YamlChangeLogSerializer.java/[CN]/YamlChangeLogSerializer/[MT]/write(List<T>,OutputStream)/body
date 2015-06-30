@@ -1,0 +1,12 @@
+{
+  List<Object> maps=new ArrayList<Object>();
+  for (  T changeSet : children) {
+    maps.add(toMap(changeSet));
+  }
+  Map<String,Object> containerMap=new HashMap<String,Object>();
+  containerMap.put("databaseChangeLog",maps);
+  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out));
+  writer.write(yaml.dumpAsMap(containerMap));
+  writer.write("\n");
+  writer.flush();
+}

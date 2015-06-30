@@ -2,6 +2,9 @@
   if (changedObject == null) {
     return null;
   }
+  if (control.getObjectChangeFilter() != null && !control.getObjectChangeFilter().includeChanged(changedObject,differences,referenceDatabase,comparisionDatabase)) {
+    return null;
+  }
   if (changeGenerators == null) {
     return null;
   }

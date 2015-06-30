@@ -1,4 +1,4 @@
 {
   changeLogParameters.set("here",4);
-  assertEquals("A string with one expression 4 set",handler.expandExpressions("A string with one expression ${here} set"));
+  assertEquals("A string with one expression 4 set",handler.expandExpressions("A string with one expression ${here} set",null));
 }

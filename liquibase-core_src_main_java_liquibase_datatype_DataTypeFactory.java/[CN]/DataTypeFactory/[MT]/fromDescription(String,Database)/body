@@ -1,15 +1,27 @@
 {
   String dataTypeName=dataTypeDefinition;
   if (dataTypeName.matches(".+\\(.*\\).*")) {
-    dataTypeName=dataTypeDefinition.replaceFirst("\\s*\\(.*\\)","");
+    dataTypeName=dataTypeName.replaceFirst("\\s*\\(.*\\)","");
   }
   if (dataTypeName.matches(".+\\{.*")) {
     dataTypeName=dataTypeName.replaceFirst("\\s*\\{.*","");
   }
-  boolean primaryKey=false;
+  boolean autoIncrement=false;
   if (dataTypeName.endsWith(" identity")) {
     dataTypeName=dataTypeName.replaceFirst(" identity$","");
-    primaryKey=true;
+    autoIncrement=true;
+  }
+  final String[][] quotePairs=new String[][]{{"\"","\""},{"[","]"},{"`","`"},{"'","'"}};
+  for (  String[] quotePair : quotePairs) {
+    String openQuote=quotePair[0];
+    String closeQuote=quotePair[1];
+    if (dataTypeName.startsWith(openQuote)) {
+      int indexOfCloseQuote=dataTypeName.indexOf(closeQuote,openQuote.length());
+      if (indexOfCloseQuote != -1 && dataTypeName.indexOf(closeQuote,indexOfCloseQuote + closeQuote.length()) == -1) {
+        dataTypeName=dataTypeName.substring(openQuote.length(),indexOfCloseQuote) + dataTypeName.substring(indexOfCloseQuote + closeQuote.length(),dataTypeName.length());
+        break;
+      }
+    }
   }
   String additionalInfo=null;
   if (dataTypeName.toLowerCase().startsWith("bit varying") || dataTypeName.toLowerCase().startsWith("character varying")) {
@@ -21,7 +33,7 @@
       additionalInfo=splitTypeName[1];
     }
   }
-  SortedSet<Class<? extends LiquibaseDataType>> classes=registry.get(dataTypeName.toLowerCase());
+  Collection<Class<? extends LiquibaseDataType>> classes=registry.get(dataTypeName.toLowerCase());
   LiquibaseDataType liquibaseDataType=null;
   if (classes == null) {
     if (dataTypeName.toUpperCase().startsWith("INTERVAL")) {
@@ -76,10 +88,10 @@
       }
     }
   }
-  if (primaryKey && liquibaseDataType instanceof IntType) {
+  if (autoIncrement && liquibaseDataType instanceof IntType) {
     ((IntType)liquibaseDataType).setAutoIncrement(true);
   }
-  if (primaryKey && liquibaseDataType instanceof BigIntType) {
+  if (autoIncrement && liquibaseDataType instanceof BigIntType) {
     ((BigIntType)liquibaseDataType).setAutoIncrement(true);
   }
   liquibaseDataType.finishInitialization(dataTypeDefinition);

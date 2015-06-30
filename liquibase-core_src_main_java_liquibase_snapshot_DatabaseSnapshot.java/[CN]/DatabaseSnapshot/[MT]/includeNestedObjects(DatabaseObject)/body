@@ -1,8 +1,22 @@
 {
   for (  String field : new HashSet<String>(object.getAttributes())) {
+    if (object.getClass() == Index.class && field.equals("columns")) {
+      continue;
+    }
+    if (object.getClass() == PrimaryKey.class && field.equals("columns")) {
+      continue;
+    }
+    if (object.getClass() == UniqueConstraint.class && field.equals("columns")) {
+      continue;
+    }
     Object fieldValue=object.getAttribute(field,Object.class);
     Object newFieldValue=replaceObject(fieldValue);
-    if (fieldValue != newFieldValue && newFieldValue != null) {
+    if (newFieldValue == null) {
+      if (object instanceof PrimaryKey && field.equals("backingIndex")) {
+        object.setAttribute(field,null);
+      }
+    }
+ else     if (fieldValue != newFieldValue) {
       object.setAttribute(field,newFieldValue);
     }
   }

@@ -1,5 +1,5 @@
 {
-  if (isExecuteAgainstDatabase()) {
+  if (isExecuteDmlAgainstDatabase()) {
     ExecutorService.getInstance().getExecutor(getDatabase()).execute(new MarkChangeSetRanStatement(changeSet,execType));
     getDatabase().commit();
   }

@@ -1,0 +1,3 @@
+String sql
+Database database
+boolean informixTrimHint

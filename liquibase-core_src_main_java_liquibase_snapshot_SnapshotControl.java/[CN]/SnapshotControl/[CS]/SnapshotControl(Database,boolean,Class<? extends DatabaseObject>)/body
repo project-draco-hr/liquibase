@@ -1,0 +1,13 @@
+{
+  if (types == null || types.length == 0) {
+    setTypes(DatabaseObjectFactory.getInstance().getStandardTypes(),database);
+  }
+ else {
+    if (expandTypesIfNeeded) {
+      setTypes(new HashSet<Class<? extends DatabaseObject>>(Arrays.asList(types)),database);
+    }
+ else {
+      this.types=new HashSet<Class<? extends DatabaseObject>>(Arrays.asList(types));
+    }
+  }
+}

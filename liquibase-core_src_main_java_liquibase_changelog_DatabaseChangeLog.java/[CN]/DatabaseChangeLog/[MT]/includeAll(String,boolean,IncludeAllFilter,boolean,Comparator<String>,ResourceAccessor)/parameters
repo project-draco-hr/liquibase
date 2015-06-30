@@ -1,0 +1,6 @@
+String pathName
+boolean isRelativeToChangelogFile
+IncludeAllFilter resourceFilter
+boolean errorIfMissingOrEmpty
+Comparator<String> resourceComparator
+ResourceAccessor resourceAccessor
