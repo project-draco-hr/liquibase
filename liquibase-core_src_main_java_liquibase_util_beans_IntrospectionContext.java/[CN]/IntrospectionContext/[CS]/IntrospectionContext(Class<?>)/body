@@ -1,0 +1,6 @@
+{
+  if (targetClass == null) {
+    throw new NullPointerException();
+  }
+  this.targetClass=targetClass;
+}

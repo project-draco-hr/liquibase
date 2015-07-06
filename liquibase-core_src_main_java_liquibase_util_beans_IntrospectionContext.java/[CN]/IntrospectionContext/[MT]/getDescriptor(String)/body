@@ -1,0 +1,3 @@
+{
+  return descriptors.get(name);
+}

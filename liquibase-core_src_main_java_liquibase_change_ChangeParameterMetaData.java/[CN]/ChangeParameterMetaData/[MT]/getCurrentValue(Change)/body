@@ -1,6 +1,6 @@
 {
   try {
-    for (    PropertyDescriptor descriptor : Introspector.getBeanInfo(change.getClass()).getPropertyDescriptors()) {
+    for (    PropertyDescriptor descriptor : PropertyUtils.getInstance().getDescriptors(change.getClass())) {
       if (descriptor.getDisplayName().equals(this.parameterName)) {
         Method readMethod=descriptor.getReadMethod();
         if (readMethod == null) {

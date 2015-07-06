@@ -1,3 +1,4 @@
 {
   this.columns=columns;
+  return this;
 }
