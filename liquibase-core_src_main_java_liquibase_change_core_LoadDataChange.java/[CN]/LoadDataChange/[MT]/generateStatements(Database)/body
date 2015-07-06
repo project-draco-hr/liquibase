@@ -14,7 +14,7 @@
     int lineNumber=0;
     while ((line=reader.readNext()) != null) {
       lineNumber++;
-      if (line.length == 0 || (line.length == 1 && StringUtils.trimToNull(line[0]) == null)) {
+      if (line.length == 0 || (line.length == 1 && StringUtils.trimToNull(line[0]) == null) || isCsvCommentLine(line)) {
         continue;
       }
       InsertStatement insertStatement=this.createStatement(getCatalogName(),getSchemaName(),getTableName());
