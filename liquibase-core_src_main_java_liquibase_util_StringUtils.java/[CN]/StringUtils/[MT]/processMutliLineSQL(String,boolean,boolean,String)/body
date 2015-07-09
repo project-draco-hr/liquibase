@@ -1,44 +1,30 @@
 {
-  if (endDelimiter != null && StringUtils.trimToNull(endDelimiter.toLowerCase().replace("\\r","").replace("\\n","").replace(";","").replace(" ","").replace("go","")) == null) {
-    endDelimiter=null;
-  }
-  boolean useDefaultDelimiter=endDelimiter == null;
-  StringClauses[] parsedList=SqlParser.parse(multiLineSQL,splitStatements,true,!stripComments,!splitStatements);
+  StringClauses parsed=SqlParser.parse(multiLineSQL,true,!stripComments);
   List<String> returnArray=new ArrayList<String>();
   String currentString="";
-  for (  StringClauses parsed : parsedList) {
-    if (useDefaultDelimiter) {
-      currentString=parsed.toString();
-    }
- else {
-      for (      Object piece : parsed.toArray(false)) {
-        if (splitStatements && piece instanceof String && ((String)piece).matches(endDelimiter)) {
-          currentString=StringUtils.trimToNull(currentString);
-          if (currentString != null) {
-            returnArray.add(currentString);
-          }
-          currentString="";
-        }
- else {
-          currentString+=piece;
-        }
-      }
-    }
-    if (useDefaultDelimiter) {
+  String previousPiece=null;
+  boolean previousDelimiter=false;
+  for (  Object piece : parsed.toArray(true)) {
+    if (splitStatements && piece instanceof String && isDelimiter((String)piece,previousPiece,endDelimiter)) {
       currentString=StringUtils.trimToNull(currentString);
       if (currentString != null) {
         returnArray.add(currentString);
       }
+      currentString="";
+      previousDelimiter=true;
     }
  else {
-      currentString+=";";
+      if (!previousDelimiter || StringUtils.trimToNull((String)piece) != null) {
+        if (!currentString.equals("") || StringUtils.trimToNull((String)piece) != null) {
+          currentString+=piece;
+        }
+      }
+      previousDelimiter=false;
     }
+    previousPiece=(String)piece;
   }
-  if (!useDefaultDelimiter) {
-    currentString=StringUtils.trimToNull(currentString);
-    if (currentString != null && !currentString.equals(";")) {
-      returnArray.add(currentString);
-    }
+  if (StringUtils.trimToNull(currentString) != null) {
+    returnArray.add(currentString);
   }
   return returnArray.toArray(new String[returnArray.size()]);
 }
