@@ -1,5 +1,3 @@
 String sqlBlock
-boolean split
 boolean preserveWhitespace
 boolean preserveComments
-boolean includeDelimiters

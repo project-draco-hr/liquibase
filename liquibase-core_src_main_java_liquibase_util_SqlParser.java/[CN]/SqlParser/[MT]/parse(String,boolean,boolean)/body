@@ -1,5 +1,4 @@
 {
-  List<StringClauses> returnList=new ArrayList<StringClauses>();
   StringClauses clauses=new StringClauses(preserveWhitespace ? "" : " ");
   int i=0;
   SimpleSqlGrammer t=new SimpleSqlGrammer(new StringReader(sqlBlock));
@@ -9,22 +8,6 @@
       if (token.kind == SimpleSqlGrammerConstants.WHITESPACE) {
         if (preserveWhitespace) {
           clauses.append(new StringClauses.Whitespace(token.image));
-        }
-      }
- else       if (token.kind == SimpleSqlGrammerConstants.DELIMITER) {
-        if (split) {
-          if (!clauses.isEmpty()) {
-            if (includeDelimiters) {
-              clauses.append(new StringClauses.Delimiter(token.image));
-            }
-            returnList.add(clauses);
-            clauses=new StringClauses(preserveWhitespace ? "" : " ");
-          }
-        }
- else {
-          if (includeDelimiters) {
-            clauses.append(new StringClauses.Delimiter(token.image));
-          }
         }
       }
  else       if (token.kind == SimpleSqlGrammerConstants.LINE_COMMENT || token.kind == SimpleSqlGrammerConstants.MULTI_LINE_COMMENT) {
@@ -37,12 +20,9 @@
       }
       token=t.getNextToken();
     }
-    if (!clauses.isEmpty()) {
-      returnList.add(clauses);
-    }
   }
  catch (  Exception e) {
     throw new UnexpectedLiquibaseException(e);
   }
-  return returnList.toArray(new StringClauses[returnList.size()]);
+  return clauses;
 }
