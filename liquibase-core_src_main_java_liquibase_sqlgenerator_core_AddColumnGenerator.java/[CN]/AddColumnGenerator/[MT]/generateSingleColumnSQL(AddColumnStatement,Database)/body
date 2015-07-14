@@ -5,6 +5,7 @@
     AutoIncrementConstraint autoIncrementConstraint=statement.getAutoIncrementConstraint();
     alterTable+=" " + database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(),autoIncrementConstraint.getIncrementBy());
   }
+  alterTable+=getDefaultClause(statement,database);
   if (!statement.isNullable()) {
     alterTable+=" NOT NULL";
   }
@@ -16,7 +17,6 @@
   if (statement.isPrimaryKey()) {
     alterTable+=" PRIMARY KEY";
   }
-  alterTable+=getDefaultClause(statement,database);
   if (database instanceof MySQLDatabase && statement.getRemarks() != null) {
     alterTable+=" COMMENT '" + statement.getRemarks() + "' ";
   }
