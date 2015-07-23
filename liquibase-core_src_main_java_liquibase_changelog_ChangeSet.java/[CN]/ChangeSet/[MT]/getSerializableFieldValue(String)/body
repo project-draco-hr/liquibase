@@ -72,6 +72,9 @@
   if (field.equals("changes")) {
     return getChanges();
   }
+  if (field.equals("created")) {
+    return getCreated();
+  }
   if (field.equals("rollback")) {
     if (rollback != null && rollback.getChanges() != null && rollback.getChanges().size() > 0) {
       return rollback;
