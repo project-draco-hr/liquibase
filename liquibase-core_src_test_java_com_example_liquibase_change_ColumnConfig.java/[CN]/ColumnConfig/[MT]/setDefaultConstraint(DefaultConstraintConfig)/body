@@ -1,3 +1,4 @@
 {
   this.defaultConstraint=defaultConstraint;
+  return this;
 }

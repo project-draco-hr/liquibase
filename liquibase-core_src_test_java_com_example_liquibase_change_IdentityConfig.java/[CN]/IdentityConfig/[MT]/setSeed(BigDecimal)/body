@@ -1,3 +1,4 @@
 {
   this.seed=seed;
+  return this;
 }

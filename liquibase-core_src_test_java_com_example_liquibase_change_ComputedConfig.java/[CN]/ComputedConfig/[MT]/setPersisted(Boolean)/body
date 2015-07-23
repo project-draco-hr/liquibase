@@ -1,3 +1,4 @@
 {
   this.persisted=persisted;
+  return this;
 }
