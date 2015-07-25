@@ -22,6 +22,9 @@
     if (object instanceof PrimaryKey) {
       return matches(((PrimaryKey)object).getTable());
     }
+    if (object instanceof UniqueConstraint) {
+      return matches(((UniqueConstraint)object).getTable());
+    }
     if (object instanceof Data) {
       return matches(((Data)object).getTable());
     }
