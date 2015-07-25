@@ -1,4 +1,0 @@
-{
-  String firstSegmentOfString=line[0];
-  return org.apache.commons.lang.StringUtils.startsWith(firstSegmentOfString,"#");
-}
