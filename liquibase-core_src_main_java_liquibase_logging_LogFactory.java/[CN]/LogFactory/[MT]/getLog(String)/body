@@ -4,12 +4,12 @@
     try {
       ServiceLocator serviceLocator=ServiceLocator.getInstance();
       if (serviceLocator == null) {
-        return new DefaultLogger();
+        return defaultLogger;
       }
       value=(Logger)serviceLocator.newInstance(Logger.class);
     }
  catch (    Exception e) {
-      return new DefaultLogger();
+      return defaultLogger;
     }
     value.setName(name);
     if (defaultLoggingLevel != null) {

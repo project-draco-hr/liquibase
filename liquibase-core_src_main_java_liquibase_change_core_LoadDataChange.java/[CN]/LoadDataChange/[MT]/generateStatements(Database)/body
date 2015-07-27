@@ -68,6 +68,10 @@
       statements.addInsertStatement(insertStatement);
     }
     if (database instanceof MSSQLDatabase || database instanceof MySQLDatabase || database instanceof PostgresDatabase) {
+      List<InsertStatement> innerStatements=statements.getStatements();
+      if (innerStatements != null && innerStatements.size() > 0 && innerStatements.get(0) instanceof InsertOrUpdateStatement) {
+        return statements.getStatementsArray();
+      }
       return new SqlStatement[]{statements};
     }
  else {
