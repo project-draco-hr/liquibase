@@ -1,0 +1,6 @@
+{
+  if (commentLineStartsWith == null) {
+    return;
+  }
+  this.commentLineStartsWith=commentLineStartsWith;
+}
