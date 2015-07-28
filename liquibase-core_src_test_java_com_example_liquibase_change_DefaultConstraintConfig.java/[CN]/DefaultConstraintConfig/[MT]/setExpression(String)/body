@@ -1,3 +1,4 @@
 {
   this.expression=expression;
+  return this;
 }

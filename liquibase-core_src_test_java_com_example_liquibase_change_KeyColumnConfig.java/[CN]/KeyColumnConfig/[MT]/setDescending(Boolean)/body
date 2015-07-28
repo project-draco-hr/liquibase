@@ -1,3 +1,4 @@
 {
   this.descending=descending;
+  return this;
 }
