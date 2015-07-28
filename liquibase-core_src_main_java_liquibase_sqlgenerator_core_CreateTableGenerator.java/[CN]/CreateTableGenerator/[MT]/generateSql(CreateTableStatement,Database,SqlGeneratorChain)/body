@@ -137,7 +137,7 @@
     buffer.append(" FOREIGN KEY (").append(database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),fkConstraint.getColumn())).append(") REFERENCES ");
     if (referencesString != null) {
       if (!referencesString.contains(".") && database.getDefaultSchemaName() != null && database.getOutputDefaultSchema()) {
-        referencesString=database.getDefaultSchemaName() + "." + referencesString;
+        referencesString=database.escapeObjectName(database.getDefaultSchemaName(),Schema.class) + "." + referencesString;
       }
       buffer.append(referencesString);
     }
