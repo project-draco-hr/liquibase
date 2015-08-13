@@ -1,0 +1,6 @@
+{
+  initMocks(this);
+  given(connection.prepareStatement(anyString())).willReturn(ps);
+  database=new MSSQLDatabase();
+  preparedStatementFactory=new PreparedStatementFactory(connection);
+}
