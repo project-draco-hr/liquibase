@@ -1,0 +1,10 @@
+{
+  InputStream processStream=this.processStream;
+  this.processStream=null;
+  try {
+    StreamUtil.copy(processStream,outputStream);
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+}
