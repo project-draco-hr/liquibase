@@ -13,7 +13,7 @@
  else {
       return null;
     }
-    if (table != null) {
+    if (table != null && database instanceof MSSQLDatabase) {
       String schemaName;
       Schema tableSchema=table.getSchema();
       if (tableSchema == null) {
