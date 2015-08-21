@@ -12,9 +12,10 @@
     InsertSetStatement statements=this.createStatementSet(getCatalogName(),getSchemaName(),getTableName());
     String[] line;
     int lineNumber=0;
+    boolean isCommentingEnabled=StringUtils.isNotEmpty(commentLineStartsWith);
     while ((line=reader.readNext()) != null) {
       lineNumber++;
-      if (line.length == 0 || (line.length == 1 && StringUtils.trimToNull(line[0]) == null)) {
+      if (line.length == 0 || (line.length == 1 && StringUtils.trimToNull(line[0]) == null) || (isCommentingEnabled && isLineCommented(line))) {
         continue;
       }
       InsertStatement insertStatement=this.createStatement(getCatalogName(),getSchemaName(),getTableName());

@@ -5,7 +5,7 @@
     if (stream == null) {
       throw new UnexpectedLiquibaseException(getFile() + " could not be found");
     }
-    stream=new BufferedInputStream(stream);
+    stream=new EmptyLineAndCommentSkippingInputStream(stream,commentLineStartsWith);
     return CheckSum.compute(getTableName() + ":" + CheckSum.compute(stream,true));
   }
  catch (  IOException e) {
