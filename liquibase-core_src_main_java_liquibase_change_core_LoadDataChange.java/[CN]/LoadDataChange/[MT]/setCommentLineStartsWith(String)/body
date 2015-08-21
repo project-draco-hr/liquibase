@@ -1,6 +1,6 @@
 {
   if (commentLineStartsWith == null) {
-    this.commentLineStartsWith="#";
+    this.commentLineStartsWith=DEFAULT_COMMENT_PATTERN;
   }
  else   if (commentLineStartsWith.equals("")) {
     this.commentLineStartsWith=null;
