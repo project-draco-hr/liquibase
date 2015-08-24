@@ -1,0 +1,24 @@
+{
+  Matcher matcher=Pattern.compile(":name|\\?|:value").matcher(predicate.trim());
+  StringBuffer sb=new StringBuffer();
+  Iterator<String> columnNameIter=columnNames.iterator();
+  Iterator<Object> paramIter=parameters.iterator();
+  while (matcher.find()) {
+    if (matcher.group().equals(":name")) {
+      while (columnNameIter.hasNext()) {
+        String columnName=columnNameIter.next();
+        if (columnName == null) {
+          continue;
+        }
+        matcher.appendReplacement(sb,Matcher.quoteReplacement(database.escapeObjectName(columnName,Column.class)));
+        break;
+      }
+    }
+ else     if (paramIter.hasNext()) {
+      Object param=paramIter.next();
+      matcher.appendReplacement(sb,Matcher.quoteReplacement(DataTypeFactory.getInstance().fromObject(param,database).objectToSql(param,database)));
+    }
+  }
+  matcher.appendTail(sb);
+  return sb.toString();
+}
