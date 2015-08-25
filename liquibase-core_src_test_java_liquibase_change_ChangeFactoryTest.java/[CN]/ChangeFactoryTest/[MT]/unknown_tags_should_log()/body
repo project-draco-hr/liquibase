@@ -1,8 +1,0 @@
-{
-  Logger mockLogger=Mockito.mock(Logger.class);
-  ChangeFactory changeFactory=ChangeFactory.getInstance();
-  changeFactory.setLogger(mockLogger);
-  Change change=changeFactory.create("doesNotExistChange");
-  assertNull(change);
-  Mockito.verify(mockLogger).warning(Mockito.anyString());
-}
