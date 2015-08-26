@@ -1,0 +1,15 @@
+{
+  ClassLoader classLoader=OSGiUtil.class.getClassLoader();
+  try {
+    classLoader.loadClass("org.osgi.framework.BundleReference");
+  }
+ catch (  ClassNotFoundException e) {
+    return false;
+  }
+  if (classLoader instanceof BundleReference) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}
