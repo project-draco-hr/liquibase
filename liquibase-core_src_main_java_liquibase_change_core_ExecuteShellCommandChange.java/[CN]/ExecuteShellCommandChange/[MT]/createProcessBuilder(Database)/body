@@ -1,0 +1,5 @@
+{
+  ProcessBuilder pb=new ProcessBuilder(finalCommandArray);
+  pb.redirectErrorStream(true);
+  return pb;
+}

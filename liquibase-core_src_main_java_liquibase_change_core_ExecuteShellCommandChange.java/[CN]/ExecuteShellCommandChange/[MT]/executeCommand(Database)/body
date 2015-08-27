@@ -1,10 +1,7 @@
 {
-  List<String> commandArray=new ArrayList<String>();
-  commandArray.add(getExecutable());
-  commandArray.addAll(getArgs());
   ByteArrayOutputStream errorStream=new ByteArrayOutputStream();
   ByteArrayOutputStream inputStream=new ByteArrayOutputStream();
-  ProcessBuilder pb=createProcessBuilder(commandArray,database);
+  ProcessBuilder pb=createProcessBuilder(database);
   Process p=pb.start();
   int returnCode=0;
   try {

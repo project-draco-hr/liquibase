@@ -1,0 +1,6 @@
+{
+  List<String> commandArray=new ArrayList<String>();
+  commandArray.add(getExecutable());
+  commandArray.addAll(getArgs());
+  return commandArray;
+}
