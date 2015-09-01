@@ -1,0 +1,4 @@
+Database database
+String predicate
+List<String> columnNames
+List<Object> parameters

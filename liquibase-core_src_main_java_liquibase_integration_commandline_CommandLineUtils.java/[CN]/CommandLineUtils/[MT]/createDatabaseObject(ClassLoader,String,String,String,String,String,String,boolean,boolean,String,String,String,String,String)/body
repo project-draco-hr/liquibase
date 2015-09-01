@@ -1,3 +1,0 @@
-{
-  return createDatabaseObject(new ClassLoaderResourceAccessor(classLoader),url,username,password,driver,defaultCatalogName,defaultSchemaName,outputDefaultCatalog,outputDefaultSchema,databaseClass,driverPropertiesFile,propertyProviderClass,liquibaseCatalogName,liquibaseSchemaName);
-}

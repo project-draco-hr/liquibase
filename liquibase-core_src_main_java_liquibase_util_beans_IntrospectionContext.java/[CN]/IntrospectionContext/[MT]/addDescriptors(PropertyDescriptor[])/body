@@ -1,0 +1,5 @@
+{
+  for (  PropertyDescriptor descriptor : descriptors) {
+    addDescriptor(descriptor);
+  }
+}

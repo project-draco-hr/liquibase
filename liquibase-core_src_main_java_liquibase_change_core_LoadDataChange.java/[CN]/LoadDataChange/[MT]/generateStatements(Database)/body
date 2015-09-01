@@ -9,12 +9,13 @@
     if (headers == null) {
       throw new UnexpectedLiquibaseException("Data file " + getFile() + " was empty");
     }
-    List<SqlStatement> statements=new ArrayList<SqlStatement>();
+    InsertSetStatement statements=this.createStatementSet(getCatalogName(),getSchemaName(),getTableName());
     String[] line;
     int lineNumber=0;
+    boolean isCommentingEnabled=StringUtils.isNotEmpty(commentLineStartsWith);
     while ((line=reader.readNext()) != null) {
       lineNumber++;
-      if (line.length == 0 || (line.length == 1 && StringUtils.trimToNull(line[0]) == null)) {
+      if (line.length == 0 || (line.length == 1 && StringUtils.trimToNull(line[0]) == null) || (isCommentingEnabled && isLineCommented(line))) {
         continue;
       }
       InsertStatement insertStatement=this.createStatement(getCatalogName(),getSchemaName(),getTableName());
@@ -65,9 +66,18 @@
         }
         insertStatement.addColumnValue(columnName,value);
       }
-      statements.add(insertStatement);
+      statements.addInsertStatement(insertStatement);
     }
-    return statements.toArray(new SqlStatement[statements.size()]);
+    if (database instanceof MSSQLDatabase || database instanceof MySQLDatabase || database instanceof PostgresDatabase) {
+      List<InsertStatement> innerStatements=statements.getStatements();
+      if (innerStatements != null && innerStatements.size() > 0 && innerStatements.get(0) instanceof InsertOrUpdateStatement) {
+        return statements.getStatementsArray();
+      }
+      return new SqlStatement[]{statements};
+    }
+ else {
+      return statements.getStatementsArray();
+    }
   }
  catch (  IOException e) {
     throw new RuntimeException(e);

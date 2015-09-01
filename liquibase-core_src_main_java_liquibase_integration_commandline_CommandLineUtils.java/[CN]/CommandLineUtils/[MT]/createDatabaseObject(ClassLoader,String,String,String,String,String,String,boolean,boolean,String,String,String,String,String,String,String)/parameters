@@ -1,0 +1,16 @@
+ClassLoader classLoader
+String url
+String username
+String password
+String driver
+String defaultCatalogName
+String defaultSchemaName
+boolean outputDefaultCatalog
+boolean outputDefaultSchema
+String databaseClass
+String driverPropertiesFile
+String propertyProviderClass
+String liquibaseCatalogName
+String liquibaseSchemaName
+String databaseChangeLogTableName
+String databaseChangeLogLockTableName

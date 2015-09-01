@@ -5,7 +5,7 @@
       throw new UnexpectedLiquibaseException("No @DatabaseChange annotation for " + getClass().getName());
     }
     Set<ChangeParameterMetaData> params=new HashSet<ChangeParameterMetaData>();
-    for (    PropertyDescriptor property : Introspector.getBeanInfo(this.getClass()).getPropertyDescriptors()) {
+    for (    PropertyDescriptor property : PropertyUtils.getInstance().getDescriptors(getClass())) {
       if (isInvalidProperty(property)) {
         continue;
       }

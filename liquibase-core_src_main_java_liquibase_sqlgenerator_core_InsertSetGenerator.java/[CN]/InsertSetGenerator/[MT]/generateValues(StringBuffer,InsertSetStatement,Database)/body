@@ -1,0 +1,16 @@
+{
+  int index=0;
+  for (  InsertStatement statement : statements.getStatements()) {
+    index++;
+    if (index > statements.getBatchThreshold()) {
+      sql.deleteCharAt(sql.lastIndexOf(","));
+      sql.append(";\n");
+      generateHeader(sql,statements,database);
+      index=0;
+    }
+    myGenerator.generateValues(sql,statement,database);
+    sql.append(",");
+  }
+  sql.deleteCharAt(sql.lastIndexOf(","));
+  sql.append(";");
+}

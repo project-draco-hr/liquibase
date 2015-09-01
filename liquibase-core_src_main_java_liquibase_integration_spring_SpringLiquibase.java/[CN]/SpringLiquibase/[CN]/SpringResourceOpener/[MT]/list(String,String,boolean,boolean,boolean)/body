@@ -1,8 +1,15 @@
 {
+  if (path == null) {
+    return null;
+  }
   Set<String> returnSet=new HashSet<String>();
-  Resource[] resources=ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources(adjustClasspath(path));
+  String tempFile=FilenameUtils.concat(FilenameUtils.getFullPath(relativeTo),path);
+  Resource[] resources=ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources(adjustClasspath(tempFile));
   for (  Resource res : resources) {
-    returnSet.addAll(super.list(relativeTo,res.getURL().toExternalForm(),includeFiles,includeDirectories,recursive));
+    Set<String> list=super.list(null,res.getURL().toExternalForm(),includeFiles,includeDirectories,recursive);
+    if (list != null) {
+      returnSet.addAll(list);
+    }
   }
   return returnSet;
 }

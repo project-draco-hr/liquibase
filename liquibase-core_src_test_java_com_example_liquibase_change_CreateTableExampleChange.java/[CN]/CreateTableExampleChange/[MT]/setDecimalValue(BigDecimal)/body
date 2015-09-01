@@ -1,0 +1,4 @@
+{
+  this.decimalValue=decimalValue;
+  return this;
+}

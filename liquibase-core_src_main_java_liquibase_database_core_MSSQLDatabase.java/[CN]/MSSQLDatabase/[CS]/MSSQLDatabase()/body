@@ -25,4 +25,5 @@
   systemTablesAndViews.add("sysconstraints");
   super.quotingStartCharacter="[";
   super.quotingEndCharacter="]";
+  super.quotingEndReplacement="]]";
 }

@@ -9,11 +9,11 @@
     RanChangeSet ranChangeSet=database.getRanChangeSet(this);
     if (hasCustomRollbackChanges()) {
       final List<SqlStatement> statements=new LinkedList<SqlStatement>();
-      for (      Change rollback : rollBackChanges) {
-        if (((rollback instanceof DbmsTargetedChange)) && !DatabaseList.definitionMatches(((DbmsTargetedChange)rollback).getDbms(),database,true)) {
+      for (      Change change : rollback.getChanges()) {
+        if (((change instanceof DbmsTargetedChange)) && !DatabaseList.definitionMatches(((DbmsTargetedChange)change).getDbms(),database,true)) {
           continue;
         }
-        SqlStatement[] changeStatements=rollback.generateStatements(database);
+        SqlStatement[] changeStatements=change.generateStatements(database);
         if (changeStatements != null) {
           statements.addAll(Arrays.asList(changeStatements));
         }

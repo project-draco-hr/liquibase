@@ -14,7 +14,19 @@
   }
   DatabaseChangeLog changeLog;
   try {
-    changeLog=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor).parse(fileName,changeLogParameters,resourceAccessor);
+    DatabaseChangeLog rootChangeLog=ROOT_CHANGE_LOG.get();
+    if (rootChangeLog == null) {
+      ROOT_CHANGE_LOG.set(this);
+    }
+    try {
+      ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor);
+      changeLog=parser.parse(fileName,changeLogParameters,resourceAccessor);
+    }
+  finally {
+      if (rootChangeLog == null) {
+        ROOT_CHANGE_LOG.remove();
+      }
+    }
   }
  catch (  UnknownChangelogFormatException e) {
     LogFactory.getInstance().getLog().warning("included file " + relativeBaseFileName + "/"+ fileName+ " is not a recognized file type");

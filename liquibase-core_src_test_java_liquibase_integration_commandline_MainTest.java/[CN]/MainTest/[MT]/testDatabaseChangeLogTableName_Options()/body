@@ -1,0 +1,7 @@
+{
+  Main main=new Main();
+  String[] opts={"--databaseChangeLogTableName=OPTSCHANGELOG","--databaseChangeLogLockTableName=OPTSCHANGELOGLOCK"};
+  main.parseOptions(opts);
+  assertEquals("OPTSCHANGELOG",main.databaseChangeLogTableName);
+  assertEquals("OPTSCHANGELOGLOCK",main.databaseChangeLogLockTableName);
+}

@@ -1,3 +1,6 @@
 {
-  return quotingStartCharacter + escapeStringForDatabase(objectName) + quotingEndCharacter;
+  if (objectName == null) {
+    return null;
+  }
+  return quotingStartCharacter + objectName.replace(quotingEndCharacter,quotingEndReplacement) + quotingEndCharacter;
 }

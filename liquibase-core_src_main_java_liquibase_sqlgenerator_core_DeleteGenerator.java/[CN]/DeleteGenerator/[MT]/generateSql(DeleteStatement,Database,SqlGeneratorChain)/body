@@ -1,17 +1,7 @@
 {
   StringBuffer sql=new StringBuffer("DELETE FROM " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()));
   if (statement.getWhere() != null) {
-    String fixedWhereClause="WHERE " + statement.getWhere();
-    for (    String columnName : statement.getWhereColumnNames()) {
-      if (columnName == null) {
-        continue;
-      }
-      fixedWhereClause=fixedWhereClause.replaceFirst(":name",database.escapeObjectName(columnName,Column.class));
-    }
-    for (    Object param : statement.getWhereParameters()) {
-      fixedWhereClause=fixedWhereClause.replaceFirst("\\?|:value",DataTypeFactory.getInstance().fromObject(param,database).objectToSql(param,database).replaceAll("\\$","\\$"));
-    }
-    sql.append(" ").append(fixedWhereClause);
+    sql.append(" WHERE ").append(replacePredicatePlaceholders(database,statement.getWhere(),statement.getWhereColumnNames(),statement.getWhereParameters()));
   }
   return new Sql[]{new UnparsedSql(sql.toString(),getAffectedTable(statement))};
 }

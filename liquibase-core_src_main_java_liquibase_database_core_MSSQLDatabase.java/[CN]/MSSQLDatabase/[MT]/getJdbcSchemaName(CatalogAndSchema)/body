@@ -1,6 +1,6 @@
 {
   String schemaName=super.getJdbcSchemaName(schema);
-  if (schemaName != null) {
+  if (schemaName != null && !isCaseSensitive()) {
     schemaName=schemaName.toLowerCase();
   }
   return schemaName;

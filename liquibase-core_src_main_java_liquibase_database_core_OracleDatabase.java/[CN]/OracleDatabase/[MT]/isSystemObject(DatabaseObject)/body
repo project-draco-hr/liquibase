@@ -34,6 +34,9 @@
  else     if (example.getName().startsWith("SYS_IOT_OVER")) {
       return true;
     }
+ else     if ((example.getName().startsWith("MDRT_") || example.getName().startsWith("MDRS_")) && example.getName().endsWith("$")) {
+      return true;
+    }
  else     if (example.getName().startsWith("MLOG$_")) {
       return true;
     }

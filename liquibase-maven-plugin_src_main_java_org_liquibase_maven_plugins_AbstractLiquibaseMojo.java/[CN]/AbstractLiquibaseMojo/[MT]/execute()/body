@@ -13,7 +13,7 @@
     getLog().info("Liquibase did not run because " + liquibaseConfiguration.describeValueLookupLogic(GlobalConfiguration.class,GlobalConfiguration.SHOULD_RUN) + " was set to false");
     return;
   }
-  if (skip) {
+  if (!liquibaseShouldRun) {
     getLog().warn("Liquibase skipped due to maven configuration");
     return;
   }
@@ -26,7 +26,8 @@
   Database database=null;
   try {
     String dbPassword=emptyPassword || password == null ? "" : password;
-    database=CommandLineUtils.createDatabaseObject(fileOpener,url,username,dbPassword,driver,defaultCatalogName,defaultSchemaName,outputDefaultCatalog,outputDefaultSchema,databaseClass,null,propertyProviderClass,changelogCatalogName,changelogSchemaName);
+    String driverPropsFile=(driverPropertiesFile == null) ? null : driverPropertiesFile.getAbsolutePath();
+    database=CommandLineUtils.createDatabaseObject(artifactClassLoader,url,username,dbPassword,driver,defaultCatalogName,defaultSchemaName,outputDefaultCatalog,outputDefaultSchema,databaseClass,driverPropsFile,propertyProviderClass,changelogCatalogName,changelogSchemaName,databaseChangeLogTableName,databaseChangeLogLockTableName);
     liquibase=createLiquibase(fileOpener,database);
     getLog().debug("expressionVars = " + String.valueOf(expressionVars));
     if (expressionVars != null) {

@@ -17,6 +17,9 @@
     if (isOrdered() != null) {
       result.assertCorrect(isOrdered().equals(sequence.getOrdered()),"Max Value is different");
     }
+    if (getCacheSize() != null) {
+      result.assertCorrect(getCacheSize().equals(sequence.getCacheSize()),"Cache size is different");
+    }
   }
  catch (  Exception e) {
     return result.unknown(e);

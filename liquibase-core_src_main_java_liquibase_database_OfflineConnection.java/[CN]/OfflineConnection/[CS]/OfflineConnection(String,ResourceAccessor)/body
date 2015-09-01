@@ -35,13 +35,13 @@
       this.catalog=this.params.get("catalog");
     }
  else     if (paramEntry.getKey().equals("caseSensitive")) {
-      this.caseSensitive=Boolean.valueOf(paramEntry.getValue());
+      this.caseSensitive=Boolean.parseBoolean(paramEntry.getValue());
     }
  else     if (paramEntry.getKey().equals("changeLogFile")) {
       this.changeLogFile=paramEntry.getValue();
     }
  else     if (paramEntry.getKey().equals("outputLiquibaseSql")) {
-      this.outputLiquibaseSql=Boolean.valueOf(paramEntry.getValue());
+      this.outputLiquibaseSql=OutputLiquibaseSql.fromString(paramEntry.getValue());
     }
  else     if (paramEntry.getKey().equals("snapshot")) {
       String snapshotFile=paramEntry.getValue();
@@ -58,6 +58,9 @@
  catch (      LiquibaseException e) {
         throw new UnexpectedLiquibaseException("Cannot parse snapshot " + url,e);
       }
+    }
+ else     if (paramEntry.getKey().equals("sendsStringParametersAsUnicode")) {
+      this.sendsStringParametersAsUnicode=Boolean.parseBoolean(paramEntry.getValue());
     }
  else {
       this.databaseParams.put(paramEntry.getKey(),paramEntry.getValue());
