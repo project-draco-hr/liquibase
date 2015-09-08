@@ -75,6 +75,10 @@
         columnSize=columnSize / 2;
       }
     }
+    if (columnTypeName.equalsIgnoreCase("TIMESTAMP") && decimalDigits == null) {
+      columnTypeName="DATE";
+      dataType=Types.DATE;
+    }
   }
   DataType type=new DataType(columnTypeName);
   type.setDataTypeId(dataType);
