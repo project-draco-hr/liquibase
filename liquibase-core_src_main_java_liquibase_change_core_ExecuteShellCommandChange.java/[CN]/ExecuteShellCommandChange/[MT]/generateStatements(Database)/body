@@ -12,6 +12,7 @@
   if (executor instanceof LoggingExecutor) {
     nonExecutedMode=true;
   }
+  this.finalCommandArray=createFinalCommandArray(database);
   if (shouldRun && !nonExecutedMode) {
     return new SqlStatement[]{new RuntimeStatement(){
       @Override public Sql[] generate(      Database database){
@@ -19,8 +20,7 @@
           executeCommand(database);
         }
  catch (        Exception e) {
-          e.printStackTrace();
-          throw new UnexpectedLiquibaseException("Error executing command: " + e,e);
+          throw new UnexpectedLiquibaseException("Error executing command: " + e.getLocalizedMessage(),e);
         }
         return null;
       }
@@ -28,7 +28,12 @@
 };
   }
   if (nonExecutedMode) {
-    return new SqlStatement[]{new CommentStatement(getCommandString())};
+    try {
+      return new SqlStatement[]{new CommentStatement(getCommandString())};
+    }
+  finally {
+      nonExecutedCleanup();
+    }
   }
   return new SqlStatement[0];
 }
