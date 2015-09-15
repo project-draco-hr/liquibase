@@ -17,7 +17,7 @@
       sql="select TC.CONSTRAINT_NAME as CONSTRAINT_NAME, CC.COLUMN_NAME as COLUMN_NAME from INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC " + "inner join INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE CC on TC.CONSTRAINT_NAME = CC.CONSTRAINT_NAME " + "where TC.CONSTRAINT_SCHEMA='" + database.correctObjectName(schema.getName(),Schema.class) + "' "+ "and TC.TABLE_NAME='"+ database.correctObjectName(example.getTable().getName(),Table.class)+ "' "+ "and TC.CONSTRAINT_NAME='"+ database.correctObjectName(name,UniqueConstraint.class)+ "'"+ "order by TC.CONSTRAINT_NAME";
     }
  else     if (database instanceof OracleDatabase) {
-      sql="select ucc.owner as constraint_container, ucc.column_name " + "from all_cons_columns ucc " + "where " + (bulkQuery ? "" : "ucc.constraint_name='" + database.correctObjectName(name,UniqueConstraint.class) + "' and ") + "ucc.owner='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "order by ucc.position";
+      sql="select ucc.owner as constraint_container, ucc.constraint_name as constraint_name, ucc.column_name " + "from all_cons_columns ucc " + "where " + (bulkQuery ? "" : "ucc.constraint_name='" + database.correctObjectName(name,UniqueConstraint.class) + "' and ") + "ucc.owner='"+ database.correctObjectName(schema.getCatalogName(),Catalog.class)+ "' "+ "and ucc.table_name not like 'BIN$%' "+ "order by ucc.position";
     }
  else     if (database instanceof DB2Database) {
       if (database.getDatabaseProductName().startsWith("DB2 UDB for AS/400")) {
@@ -79,7 +79,7 @@
     if (bulkQuery) {
       this.columnCache=new HashMap<String,List<Map<String,?>>>();
       for (      Map<String,?> row : rows) {
-        String key=row.get("constraint_container") + "_" + row.get("constraint_name");
+        String key=row.get("CONSTRAINT_CONTAINER") + "_" + row.get("CONSTRAINT_NAME");
         List<Map<String,?>> constraintRows=this.columnCache.get(key);
         if (constraintRows == null) {
           constraintRows=new ArrayList<Map<String,?>>();
@@ -94,7 +94,7 @@
     }
   }
  else {
-    String lookupKey=schema.toString() + "_" + name;
+    String lookupKey=schema.getName() + "_" + example.getName();
     List<Map<String,?>> rows=this.columnCache.get(lookupKey);
     if (rows == null) {
       rows=new ArrayList<Map<String,?>>();
