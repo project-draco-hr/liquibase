@@ -4,6 +4,9 @@
     if (originalDefinition.toLowerCase().startsWith("longvarbinary") || originalDefinition.startsWith("java.sql.Types.LONGVARBINARY")) {
       return new DatabaseDataType("LONGVARBINARY");
     }
+ else     if (originalDefinition.toLowerCase().startsWith("binary")) {
+      return new DatabaseDataType("BINARY",getParameters());
+    }
  else {
       return new DatabaseDataType("BLOB");
     }
@@ -63,6 +66,9 @@
     }
  else     if (originalDefinition.toLowerCase().startsWith("mediumblob")) {
       return new DatabaseDataType("MEDIUMBLOB");
+    }
+ else     if (originalDefinition.toLowerCase().startsWith("binary")) {
+      return new DatabaseDataType("BINARY",getParameters());
     }
  else {
       return new DatabaseDataType("LONGBLOB");
