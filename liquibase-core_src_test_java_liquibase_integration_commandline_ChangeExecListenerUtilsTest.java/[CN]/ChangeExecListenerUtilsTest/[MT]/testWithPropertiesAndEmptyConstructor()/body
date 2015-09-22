@@ -1,0 +1,4 @@
+{
+  ChangeExecListenerNoPropertiesOrDatabase listener=(ChangeExecListenerNoPropertiesOrDatabase)ChangeExecListenerUtils.getChangeExecListener(database,resourceAccessor,ChangeExecListenerNoPropertiesOrDatabase.class.getName(),tmpFile.getAbsolutePath());
+  assertNotNull(listener);
+}
