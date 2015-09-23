@@ -29,6 +29,17 @@
         throw new SetupException(e);
       }
     }
+    String resourceComparatorDef=node.getChildValue(null,"resourceComparator",String.class);
+    Comparator<?> resourceComparator=null;
+    if (resourceComparatorDef != null) {
+      try {
+        resourceComparator=(Comparator<?>)Class.forName(resourceComparatorDef).newInstance();
+      }
+ catch (      Exception e) {
+        LogFactory.getInstance().getLog().info("no resourceComparator defined - taking default implementation");
+        resourceComparator=getStandardChangeLogComparator();
+      }
+    }
     includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,node.getChildValue(null,"errorIfMissingOrEmpty",true),getStandardChangeLogComparator(),resourceAccessor);
   }
  else   if (nodeName.equals("preConditions")) {
