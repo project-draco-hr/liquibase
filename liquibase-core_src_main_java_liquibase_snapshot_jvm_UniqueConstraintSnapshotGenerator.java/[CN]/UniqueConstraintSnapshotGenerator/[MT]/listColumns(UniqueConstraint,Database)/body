@@ -4,6 +4,11 @@
   String name=example.getName();
   boolean bulkQuery;
   String sql;
+  String currentSchema=example.getSchema().toCatalogAndSchema().customize(database).toString();
+  if (this.currentCachedSchema == null || !this.currentCachedSchema.equals(currentSchema)) {
+    this.columnCache=null;
+    this.currentCachedSchema=currentSchema;
+  }
   if (this.columnCache == null) {
     bulkQuery=(database instanceof OracleDatabase) && columnQueryCount > 3;
     columnQueryCount++;
