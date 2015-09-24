@@ -7,7 +7,7 @@
   systemTablesAndViews.add("systabauth");
   systemTablesAndViews.add("syscolauth");
   systemTablesAndViews.add("sysviews");
-  systemTablesAndViews.add("sysusers");
+  systemTablesAndViews.add("sy??susers");
   systemTablesAndViews.add("sysdepend");
   systemTablesAndViews.add("syssynonyms");
   systemTablesAndViews.add("syssyntable");
