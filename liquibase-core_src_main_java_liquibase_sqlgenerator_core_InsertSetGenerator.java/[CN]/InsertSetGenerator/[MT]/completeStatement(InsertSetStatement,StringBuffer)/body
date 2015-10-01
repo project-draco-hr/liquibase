@@ -1,0 +1,5 @@
+{
+  sql.deleteCharAt(sql.lastIndexOf(","));
+  sql.append(";\n");
+  return new UnparsedSql(sql.toString(),getAffectedTable(statement));
+}

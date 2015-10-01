@@ -4,6 +4,19 @@
   }
   StringBuffer sql=new StringBuffer();
   generateHeader(sql,statement,database);
-  generateValues(sql,statement,database);
-  return new Sql[]{new UnparsedSql(sql.toString(),getAffectedTable(statement))};
+  ArrayList<Sql> result=new ArrayList<Sql>();
+  int index=0;
+  for (  InsertStatement sttmnt : statement.getStatements()) {
+    index++;
+    myGenerator.generateValues(sql,sttmnt,database);
+    sql.append(",");
+    if (index > statement.getBatchThreshold()) {
+      result.add(completeStatement(statement,sql));
+      index=0;
+      sql=new StringBuffer();
+      generateHeader(sql,statement,database);
+    }
+  }
+  result.add(completeStatement(statement,sql));
+  return result.toArray(new UnparsedSql[result.size()]);
 }
