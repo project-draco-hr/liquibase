@@ -1,4 +1,7 @@
 {
+  if (((View)example).getDefinition() != null) {
+    return example;
+  }
   Database database=snapshot.getDatabase();
   Schema schema=example.getSchema();
   List<CachedRow> viewsMetadataRs=null;
