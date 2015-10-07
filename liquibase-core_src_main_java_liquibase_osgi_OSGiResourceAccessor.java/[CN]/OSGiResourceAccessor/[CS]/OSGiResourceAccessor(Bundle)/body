@@ -1,0 +1,4 @@
+{
+  super(bundle.adapt(BundleWiring.class).getClassLoader());
+  this.bundle=bundle;
+}
