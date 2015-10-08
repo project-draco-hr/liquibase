@@ -112,6 +112,8 @@
       return;
     }
     Liquibase liquibase=new Liquibase(changeLogFile,fileOpener,database);
+    ChangeExecListener listener=ChangeExecListenerUtils.getChangeExecListener(liquibase.getDatabase(),liquibase.getResourceAccessor(),changeExecListenerClass,changeExecListenerPropertiesFile);
+    liquibase.setChangeExecListener(listener);
     liquibase.setCurrentDateTimeFunction(currentDateTimeFunction);
     for (    Map.Entry<String,Object> entry : changeLogParameters.entrySet()) {
       liquibase.setChangeLogParameter(entry.getKey(),entry.getValue());
