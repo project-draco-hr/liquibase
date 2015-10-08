@@ -11,19 +11,19 @@
     }
     InsertSetStatement statements=this.createStatementSet(getCatalogName(),getSchemaName(),getTableName());
     String[] line;
-    int lineNumber=0;
+    int lineNumber=1;
     boolean isCommentingEnabled=StringUtils.isNotEmpty(commentLineStartsWith);
     while ((line=reader.readNext()) != null) {
       lineNumber++;
       if (line.length == 0 || (line.length == 1 && StringUtils.trimToNull(line[0]) == null) || (isCommentingEnabled && isLineCommented(line))) {
         continue;
       }
+      if (line.length != headers.length) {
+        throw new UnexpectedLiquibaseException("CSV file " + getFile() + " Line "+ lineNumber+ " has "+ line.length+ " values defined, Header has "+ headers.length+ ". Numbers MUST be equal (check for unquoted string with embedded commas)");
+      }
       InsertStatement insertStatement=this.createStatement(getCatalogName(),getSchemaName(),getTableName());
       for (int i=0; i < headers.length; i++) {
         String columnName=null;
-        if (i >= line.length) {
-          throw new UnexpectedLiquibaseException("CSV Line " + lineNumber + " has only "+ (i - 1)+ " columns, the header has "+ headers.length);
-        }
         Object value=line[i];
         ColumnConfig columnConfig=getColumnConfig(i,headers[i].trim());
         if (columnConfig != null) {
