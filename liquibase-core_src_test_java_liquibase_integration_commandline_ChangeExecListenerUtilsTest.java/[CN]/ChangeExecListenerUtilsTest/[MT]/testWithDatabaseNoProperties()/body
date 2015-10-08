@@ -1,0 +1,4 @@
+{
+  ChangeExecListenerWithDatabase listener=(ChangeExecListenerWithDatabase)ChangeExecListenerUtils.getChangeExecListener(database,resourceAccessor,ChangeExecListenerWithDatabase.class.getName(),null);
+  assertEquals(database,listener.getDatabase());
+}
