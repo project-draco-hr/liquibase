@@ -32,7 +32,7 @@
       throw new SetupException("Could not find directory or directory was empty for includeAll '" + pathName + "'");
     }
     for (    String path : resources) {
-      include(path,false,resourceAccessor);
+      include(path,false,resourceAccessor,includeContexts);
     }
   }
  catch (  Exception e) {

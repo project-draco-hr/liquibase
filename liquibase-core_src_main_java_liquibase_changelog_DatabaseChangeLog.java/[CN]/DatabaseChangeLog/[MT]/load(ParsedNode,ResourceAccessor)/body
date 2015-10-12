@@ -1,5 +1,6 @@
 {
   setLogicalFilePath(parsedNode.getChildValue(null,"logicalFilePath",String.class));
+  setContexts(new ContextExpression(parsedNode.getChildValue(null,"context",String.class)));
   String objectQuotingStrategy=parsedNode.getChildValue(null,"objectQuotingStrategy",String.class);
   if (objectQuotingStrategy != null) {
     setObjectQuotingStrategy(ObjectQuotingStrategy.valueOf(objectQuotingStrategy));
