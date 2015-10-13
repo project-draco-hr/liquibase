@@ -35,7 +35,7 @@
  else       if (database instanceof MSSQLDatabase) {
         sql="select CONSTRAINT_NAME, TABLE_NAME from INFORMATION_SCHEMA.TABLE_CONSTRAINTS " + "where CONSTRAINT_TYPE = 'Unique' " + "and CONSTRAINT_SCHEMA='" + jdbcSchemaName + "'";
         if (tableName != null) {
-          sql+=" and TABLE_NAME='" + tableName + "'";
+          sql+=" and TABLE_NAME='" + database.escapeStringForDatabase(tableName) + "'";
         }
       }
  else       if (database instanceof OracleDatabase) {
