@@ -28,7 +28,7 @@
     this.getPreconditions().addNestedPrecondition(preconditions);
   }
   for (  ChangeSet changeSet : changeLog.getChangeSets()) {
-    this.changeSets.add(changeSet);
+    addChangeSet(changeSet);
   }
   return true;
 }
