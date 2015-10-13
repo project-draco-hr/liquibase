@@ -1,4 +1,0 @@
-{
-  this.willCycle=willCycle;
-  return this;
-}
