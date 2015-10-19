@@ -7,10 +7,12 @@
   if (remarks != null) {
     remarks=remarks.replace("''","'");
   }
+  Integer position=columnMetadataResultSet.getInt("ORDINAL_POSITION");
   Column column=new Column();
   column.setName(StringUtils.trimToNull(rawColumnName));
   column.setRelation(table);
   column.setRemarks(remarks);
+  column.setOrder(position);
   if (database instanceof OracleDatabase) {
     String nullable=columnMetadataResultSet.getString("NULLABLE");
     if (nullable.equals("Y")) {

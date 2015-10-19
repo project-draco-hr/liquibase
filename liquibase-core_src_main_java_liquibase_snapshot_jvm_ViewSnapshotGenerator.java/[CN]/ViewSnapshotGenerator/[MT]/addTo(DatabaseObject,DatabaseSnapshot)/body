@@ -9,7 +9,12 @@
     try {
       viewsMetadataRs=((JdbcDatabaseSnapshot)snapshot).getMetaData().getViews(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),null);
       for (      CachedRow row : viewsMetadataRs) {
-        schema.addDatabaseObject(new View().setName(row.getString("TABLE_NAME")).setSchema(schema));
+        View view=new View();
+        view.setName(row.getString("TABLE_NAME"));
+        view.setSchema(schema);
+        view.setRemarks(row.getString("REMARKS"));
+        view.setDefinition(row.getString("OBJECT_BODY"));
+        schema.addDatabaseObject(view);
       }
     }
  catch (    SQLException e) {
