@@ -9,7 +9,18 @@
   List<Class<? extends DatabaseObject>> types=getOrderedOutputTypes(MissingObjectChangeGenerator.class);
   for (  Class<? extends DatabaseObject> type : types) {
     ObjectQuotingStrategy quotingStrategy=ObjectQuotingStrategy.QUOTE_ALL_OBJECTS;
-    for (    DatabaseObject object : diffResult.getMissingObjects(type,comparator)) {
+    for (    DatabaseObject object : diffResult.getMissingObjects(type,new DatabaseObjectComparator(){
+      @Override public int compare(      DatabaseObject o1,      DatabaseObject o2){
+        if (o1 instanceof Column && o1.getAttribute("order",Integer.class) != null && o2.getAttribute("order",Integer.class) != null) {
+          int i=o1.getAttribute("order",Integer.class).compareTo(o2.getAttribute("order",Integer.class));
+          if (i != 0) {
+            return i;
+          }
+        }
+        return super.compare(o1,o2);
+      }
+    }
+)) {
       if (object == null) {
         continue;
       }
