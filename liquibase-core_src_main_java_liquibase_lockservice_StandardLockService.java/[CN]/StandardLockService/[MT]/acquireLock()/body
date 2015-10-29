@@ -13,6 +13,13 @@
  else {
       executor.comment("Lock Database");
       int rowsUpdated=executor.update(new LockDatabaseChangeLogStatement());
+      if (rowsUpdated == -1) {
+        LogFactory.getLogger().debug("Database did not return a proper row count (Might be MSSQL with NOCOUNT enabled)");
+        database.rollback();
+        executor.update(new RawSqlStatement("set nocount off"));
+        rowsUpdated=executor.update(new LockDatabaseChangeLogStatement());
+        executor.update(new RawSqlStatement("set nocount on"));
+      }
       if (rowsUpdated > 1) {
         throw new LockException("Did not update change log lock correctly");
       }
