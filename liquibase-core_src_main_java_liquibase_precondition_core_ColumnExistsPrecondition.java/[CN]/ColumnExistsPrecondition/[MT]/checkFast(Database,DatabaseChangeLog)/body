@@ -9,7 +9,7 @@
     String tableName=getTableName();
     String columnName=getColumnName();
     try {
-      String sql=format("select t.%s from %s.%s t where 0=1",columnName,schemaName,tableName);
+      String sql=format("select t.%s from %s.%s t where 0=1",database.escapeColumnNameList(columnName),database.escapeObjectName(schemaName,Schema.class),database.escapeObjectName(tableName,Table.class));
       statement.executeQuery(sql).close();
       return;
     }
