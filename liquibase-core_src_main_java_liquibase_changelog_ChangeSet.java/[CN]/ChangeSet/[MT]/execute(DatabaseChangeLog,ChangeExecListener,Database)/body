@@ -140,7 +140,7 @@ catch (    PreconditionErrorException e) {
       execType=ExecType.FAILED;
     }
  else {
-      log.severe("Change Set " + toString(false) + " failed.  Error: "+ e.getMessage(),e);
+      log.severe("Change Set " + toString(false) + " failed.  Error: "+ e.getMessage());
       if (e instanceof MigrationFailedException) {
         throw ((MigrationFailedException)e);
       }
