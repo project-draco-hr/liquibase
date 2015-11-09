@@ -1,5 +1,5 @@
 {
-  if (getChangeSets().contains(changeSet)) {
+  if (this.changeSets.contains(changeSet)) {
     return;
   }
   if (changeSet.getRunOrder() == null) {
