@@ -1,0 +1,5 @@
+{
+  given_a_database_with_one_twice_executed_changeset();
+  ShouldRunChangeSetFilter filter=new ShouldRunChangeSetFilter(database);
+  assertFalse("RunOnChange not changed changeset should NOT be accepted",filter.accepts(new ChangeSet("1","testAuthor",false,true,"path/changelog",null,null,null)).isAccepted());
+}

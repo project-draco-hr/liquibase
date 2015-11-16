@@ -1,0 +1,11 @@
+{
+  expect(database.getRanChangeSetList()).andReturn(ranChanges);
+  expect(database.getDatabaseChangeLogTableName()).andReturn("DATABASECHANGELOG").anyTimes();
+  expect(database.getDefaultSchemaName()).andReturn(null).anyTimes();
+  Executor template=createMock(Executor.class);
+  expect(template.update(isA(UpdateStatement.class))).andReturn(1).anyTimes();
+  replay(database);
+  replay(template);
+  ExecutorService.getInstance().setExecutor(database,template);
+  return database;
+}

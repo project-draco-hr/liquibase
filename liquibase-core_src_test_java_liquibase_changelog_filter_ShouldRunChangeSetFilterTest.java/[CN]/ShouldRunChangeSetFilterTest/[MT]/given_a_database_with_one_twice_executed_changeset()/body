@@ -1,0 +1,10 @@
+{
+  ArrayList<RanChangeSet> ranChanges=new ArrayList<RanChangeSet>();
+  RanChangeSet ranChangeSet1=new RanChangeSet("path/changelog","1","testAuthor",CheckSum.parse("not_matched_checksum"),new Date(),null,null,null,null,null,null);
+  ranChangeSet1.setOrderExecuted(1);
+  ranChanges.add(ranChangeSet1);
+  RanChangeSet ranChangeSet2=new RanChangeSet("path/changelog","1","testAuthor",CheckSum.parse("7:d41d8cd98f00b204e9800998ecf8427e"),new Date(),null,null,null,null,null,null);
+  ranChangeSet2.setOrderExecuted(2);
+  ranChanges.add(ranChangeSet2);
+  return mock_database(ranChanges);
+}
