@@ -4,6 +4,10 @@
     reader=new FileReader(this.changeLogFile);
     CSVReader csvReader=new CSVReader(reader);
     String[] line=csvReader.readNext();
+    if (line == null) {
+      writeHeader(this.changeLogFile);
+      return new ArrayList<RanChangeSet>();
+    }
     if (!line[COLUMN_ID].equals("ID")) {
       throw new DatabaseException("Missing header in file " + this.changeLogFile.getAbsolutePath());
     }
