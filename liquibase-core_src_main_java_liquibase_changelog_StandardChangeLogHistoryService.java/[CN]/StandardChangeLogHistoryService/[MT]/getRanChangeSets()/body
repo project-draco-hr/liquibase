@@ -10,7 +10,7 @@
         String fileName=rs.get("FILENAME").toString();
         String author=rs.get("AUTHOR").toString();
         String id=rs.get("ID").toString();
-        String md5sum=rs.get("MD5SUM") == null ? null : rs.get("MD5SUM").toString();
+        String md5sum=rs.get("MD5SUM") == null || !databaseChecksumsCompatible ? null : rs.get("MD5SUM").toString();
         String description=rs.get("DESCRIPTION") == null ? null : rs.get("DESCRIPTION").toString();
         String comments=rs.get("COMMENTS") == null ? null : rs.get("COMMENTS").toString();
         Object tmpDateExecuted=rs.get("DATEEXECUTED");
