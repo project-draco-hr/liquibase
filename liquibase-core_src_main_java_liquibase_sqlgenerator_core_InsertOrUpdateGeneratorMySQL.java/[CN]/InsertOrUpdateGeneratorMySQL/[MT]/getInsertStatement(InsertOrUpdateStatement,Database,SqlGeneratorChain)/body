@@ -8,7 +8,7 @@
   for (  String columnKey : insertOrUpdateStatement.getColumnValues().keySet()) {
     if (!hashPkFields.contains(columnKey)) {
       hasFields=true;
-      updateClause.append(columnKey).append(" = ");
+      updateClause.append(database.escapeObjectName(columnKey,Column.class)).append(" = ");
       Object columnValue=insertOrUpdateStatement.getColumnValue(columnKey);
       updateClause.append(DataTypeFactory.getInstance().fromObject(columnValue,database).objectToSql(columnValue,database));
       updateClause.append(",");
