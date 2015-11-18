@@ -4,7 +4,7 @@
       CreateTableStatement statement=new CreateTableStatement(CATALOG_NAME,SCHEMA_NAME,TABLE_NAME);
       statement.addColumn(COLUMN_NAME1,DataTypeFactory.getInstance().fromDescription("BIGINT{autoIncrement:true}",database),new AutoIncrementConstraint(COLUMN_NAME1,BigInteger.valueOf(2),BigInteger.TEN));
       Sql[] generatedSql=this.generatorUnderTest.generateSql(statement,database,null);
-      assertEquals("CREATE TABLE [SCHEMA_NAME].[TABLE_NAME] ([COLUMN1_NAME] BIGINT IDENTITY NULL)",generatedSql[0].toSql());
+      assertEquals("CREATE TABLE [SCHEMA_NAME]..[TABLE_NAME] ([COLUMN1_NAME] BIGINT IDENTITY NULL)",generatedSql[0].toSql());
     }
   }
 }
