@@ -3,6 +3,7 @@
     this.valueNumeric=null;
   }
  else {
+    String saved=new String(valueNumeric);
     if (valueNumeric.startsWith("(")) {
       valueNumeric=valueNumeric.replaceFirst("^\\(","");
       valueNumeric=valueNumeric.replaceFirst("\\)$","");
@@ -11,7 +12,7 @@
       this.valueNumeric=ValueNumeric.of(Locale.US,valueNumeric);
     }
  catch (    ParseException e) {
-      this.valueComputed=new DatabaseFunction(valueNumeric);
+      this.valueComputed=new DatabaseFunction(saved);
     }
   }
   return this;
