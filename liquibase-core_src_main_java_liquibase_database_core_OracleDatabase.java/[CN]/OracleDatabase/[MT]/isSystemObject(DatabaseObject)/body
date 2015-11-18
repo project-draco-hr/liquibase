@@ -52,6 +52,9 @@
  else     if (example.getName().equals("JAVA$CLASS$MD5$TABLE")) {
       return true;
     }
+ else     if (example.getName().startsWith("ISEQ$$_")) {
+      return true;
+    }
   }
   return super.isSystemObject(example);
 }
