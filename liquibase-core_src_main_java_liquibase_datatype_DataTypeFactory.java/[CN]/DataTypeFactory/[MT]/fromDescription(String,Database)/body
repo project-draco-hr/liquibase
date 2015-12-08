@@ -56,6 +56,9 @@
     for (    String param : params) {
       param=StringUtils.trimToNull(param);
       if (param != null) {
+        if (liquibaseDataType instanceof CharType && !(database instanceof OracleDatabase)) {
+          param=param.replaceFirst(" BYTE","");
+        }
         liquibaseDataType.addParameter(param);
       }
     }
