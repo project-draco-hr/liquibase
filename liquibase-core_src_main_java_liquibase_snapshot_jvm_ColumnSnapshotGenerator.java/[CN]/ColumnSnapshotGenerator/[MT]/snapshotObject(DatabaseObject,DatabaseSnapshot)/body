@@ -21,7 +21,7 @@
       }
     }
     if (column != null && database instanceof MSSQLDatabase) {
-      List<String> remarks=ExecutorService.getInstance().getExecutor(snapshot.getDatabase()).queryForList(new RawSqlStatement("SELECT\n" + " CAST(value as varchar(max)) as REMARKS\n" + " FROM\n"+ " sys.extended_properties\n"+ "  WHERE\n"+ " name='MS_Description' "+ " AND major_id = OBJECT_ID('" + database.escapeStringForDatabase(database.escapeObjectName(column.getRelation().getName(),Table.class)) + "')\n"+ " AND\n"+ " minor_id = COLUMNPROPERTY(major_id, '"+ column.getName()+ "', 'ColumnId')"),String.class);
+      List<String> remarks=ExecutorService.getInstance().getExecutor(snapshot.getDatabase()).queryForList(new RawSqlStatement("SELECT\n" + " CAST(value as varchar(max)) as REMARKS\n" + " FROM\n"+ " sys.extended_properties\n"+ "  WHERE\n"+ " name='MS_Description' "+ " AND major_id = OBJECT_ID('" + database.escapeStringForDatabase(database.escapeObjectName(column.getRelation().getName(),Table.class)) + "')\n"+ " AND\n"+ " minor_id = COLUMNPROPERTY(major_id, '"+ database.escapeStringForDatabase(column.getName())+ "', 'ColumnId')"),String.class);
       if (remarks != null && remarks.size() > 0) {
         column.setRemarks(StringUtils.trimToNull(remarks.iterator().next()));
       }
