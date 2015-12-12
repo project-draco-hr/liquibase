@@ -12,5 +12,8 @@
     }
     return new DatabaseDataType(database.escapeDataTypeName("datetime"));
   }
+  if (database instanceof SybaseDatabase) {
+    return new DatabaseDataType(database.escapeDataTypeName("datetime"));
+  }
   return super.toDatabaseDataType(database);
 }
