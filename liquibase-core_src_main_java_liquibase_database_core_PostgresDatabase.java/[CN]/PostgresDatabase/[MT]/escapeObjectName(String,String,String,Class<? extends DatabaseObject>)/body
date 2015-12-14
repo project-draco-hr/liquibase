@@ -1,6 +1,0 @@
-{
-  if (Index.class.isAssignableFrom(objectType)) {
-    return escapeObjectName(objectName,objectType);
-  }
-  return super.escapeObjectName(catalogName,schemaName,objectName,objectType);
-}
