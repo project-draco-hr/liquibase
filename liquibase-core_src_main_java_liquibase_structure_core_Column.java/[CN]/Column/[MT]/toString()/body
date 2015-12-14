@@ -4,6 +4,10 @@
   }
  else {
     String tableOrViewName=getRelation().getName();
-    return tableOrViewName + "." + getName()+ (getDescending() != null && getDescending() ? " DESC" : "");
+    if (getRelation().getSchema() != null) {
+      tableOrViewName=getRelation().getSchema().toString() + "." + tableOrViewName+ (getDescending() != null && getDescending() ? " DESC" : "");
+      ;
+    }
+    return tableOrViewName + "." + getName();
   }
 }

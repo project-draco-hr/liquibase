@@ -5,7 +5,16 @@
     stringBuffer.append(" unique ");
   }
   if (getTable() != null && getColumns() != null) {
-    stringBuffer.append(" on ").append(getTable().getName());
+    String tableName=getTable().getName();
+    if (getTable().getSchema() != null) {
+      if (getTable().getSchema().getCatalogName() == null) {
+        tableName=getTable().getSchema() + "." + tableName;
+      }
+ else {
+        tableName=getTable().getSchema().getCatalogName() + "." + getTable().getSchema().getName()+ "."+ tableName;
+      }
+    }
+    stringBuffer.append(" on ").append(tableName);
     if (getColumns() != null && getColumns().size() > 0) {
       stringBuffer.append("(");
       for (      Column column : getColumns()) {
