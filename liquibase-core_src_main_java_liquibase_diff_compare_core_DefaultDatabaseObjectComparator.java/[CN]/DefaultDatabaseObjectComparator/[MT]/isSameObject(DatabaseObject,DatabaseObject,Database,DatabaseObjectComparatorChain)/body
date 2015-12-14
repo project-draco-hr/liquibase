@@ -1,4 +1,7 @@
 {
+  if (databaseObject1.getSchema() != null && databaseObject2.getSchema() != null && !DatabaseObjectComparatorFactory.getInstance().isSameObject(databaseObject1.getSchema(),databaseObject2.getSchema(),accordingTo)) {
+    return false;
+  }
   if (databaseObject1.getClass().isAssignableFrom(databaseObject2.getClass()) || databaseObject2.getClass().isAssignableFrom(databaseObject1.getClass())) {
     return nameMatches(databaseObject1,databaseObject2,accordingTo);
   }
