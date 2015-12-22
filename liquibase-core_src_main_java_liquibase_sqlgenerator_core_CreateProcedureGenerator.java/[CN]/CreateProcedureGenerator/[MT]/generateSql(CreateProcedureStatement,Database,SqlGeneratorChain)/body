@@ -1,6 +1,6 @@
 {
   List<Sql> sql=new ArrayList<Sql>();
-  String procedureText=statement.getProcedureText();
+  String procedureText=addSchemaToText(statement.getProcedureText(),statement.getSchemaName(),"PROCEDURE",database);
   if (statement.getReplaceIfExists() != null && statement.getReplaceIfExists()) {
     String fullyQualifiedName=database.escapeObjectName(statement.getProcedureName(),StoredProcedure.class);
     String schemaName=statement.getSchemaName();
@@ -18,5 +18,6 @@
     }
   }
   sql.add(new UnparsedSql(procedureText,statement.getEndDelimiter()));
+  surroundWithSchemaSets(sql,statement.getSchemaName(),database);
   return sql.toArray(new Sql[sql.size()]);
 }
