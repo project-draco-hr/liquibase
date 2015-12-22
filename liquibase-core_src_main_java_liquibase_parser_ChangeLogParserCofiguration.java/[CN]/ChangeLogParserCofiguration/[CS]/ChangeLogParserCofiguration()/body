@@ -1,4 +1,5 @@
 {
   super("liquibase");
   getContainer().addProperty(SUPPORT_PROPERTY_ESCAPING,Boolean.class).setDescription("Support escaping changelog parameters using a colon. Example: ${:user.name}").setDefaultValue(false).addAlias("enableEscaping");
+  getContainer().addProperty(USE_PROCEDURE_SCHEMA,Boolean.class).setDescription("If set to true (default value), createProcedure tags with a set schemaName will modify the procedure body with the given schema name.").setDefaultValue(true);
 }
