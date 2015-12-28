@@ -11,7 +11,7 @@
       List<CachedRow> returnList=new ArrayList<CachedRow>();
       CatalogAndSchema catalogAndSchema=new CatalogAndSchema(catalogName,schemaName).customize(database);
       if (database instanceof OracleDatabase) {
-        String sql="SELECT c.INDEX_NAME, 3 AS TYPE, c.TABLE_NAME, c.COLUMN_NAME, c.COLUMN_POSITION AS ORDINAL_POSITION, e.COLUMN_EXPRESSION AS FILTER_CONDITION, case I.UNIQUENESS when 'UNIQUE' then 0 else 1 end as NON_UNIQUE " + "FROM ALL_IND_COLUMNS c " + "JOIN ALL_INDEXES i on i.index_name = c.index_name "+ "LEFT JOIN all_ind_expressions e on (e.column_position = c.column_position AND e.index_name = c.index_name) "+ "WHERE c.TABLE_OWNER='" + database.correctObjectName(catalogAndSchema.getCatalogName(),Schema.class) + "' "+ "AND c.table_name not in (select object_name from dba_recyclebin) "+ "AND i.OWNER=c.TABLE_OWNER";
+        String sql="SELECT c.INDEX_NAME, 3 AS TYPE, c.TABLE_NAME, c.COLUMN_NAME, c.COLUMN_POSITION AS ORDINAL_POSITION, e.COLUMN_EXPRESSION AS FILTER_CONDITION, case I.UNIQUENESS when 'UNIQUE' then 0 else 1 end as NON_UNIQUE " + "FROM ALL_IND_COLUMNS c " + "JOIN ALL_INDEXES i on i.index_name = c.index_name "+ "LEFT JOIN dba_recyclebin d ON d.object_name=c.table_name "+ "LEFT JOIN all_ind_expressions e on (e.column_position = c.column_position AND e.index_name = c.index_name) "+ "WHERE c.TABLE_OWNER='" + database.correctObjectName(catalogAndSchema.getCatalogName(),Schema.class) + "' "+ "AND d.object_name IS NULL "+ "AND i.OWNER=c.TABLE_OWNER";
         if (!bulkFetch && tableName != null) {
           sql+=" AND c.TABLE_NAME='" + tableName + "'";
         }
