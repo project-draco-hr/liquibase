@@ -3,6 +3,13 @@
   if (schemaComparisons != null) {
     for (    CompareControl.SchemaComparison schemaComparison : schemaComparisons) {
       for (      T referenceObject : referenceSnapshot.get(type)) {
+        Schema referenceObjectSchema=referenceObject.getSchema();
+        if (referenceObjectSchema != null && !referenceObjectSchema.toCatalogAndSchema().equals(schemaComparison.getReferenceSchema(),referenceSnapshot.getDatabase())) {
+          continue;
+        }
+        if (referenceObject instanceof Catalog && !schemaComparison.getReferenceSchema().getCatalogName().equalsIgnoreCase(referenceObject.getName())) {
+          continue;
+        }
         T comparisonObject=comparisonSnapshot.get(referenceObject);
         if (comparisonObject == null) {
           diffResult.addMissingObject(referenceObject);
@@ -15,6 +22,13 @@
         }
       }
       for (      T comparisonObject : comparisonSnapshot.get(type)) {
+        Schema comparisonObjectSchema=comparisonObject.getSchema();
+        if (comparisonObjectSchema != null && !comparisonObjectSchema.toCatalogAndSchema().equals(schemaComparison.getComparisonSchema(),comparisonSnapshot.getDatabase())) {
+          continue;
+        }
+        if (comparisonObject instanceof Catalog && !schemaComparison.getReferenceSchema().getCatalogName().equalsIgnoreCase(comparisonObject.getName())) {
+          continue;
+        }
         if (referenceSnapshot.get(comparisonObject) == null) {
           diffResult.addUnexpectedObject(comparisonObject);
         }
