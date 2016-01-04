@@ -4,11 +4,13 @@
     for (    CompareControl.SchemaComparison schemaComparison : schemaComparisons) {
       for (      T referenceObject : referenceSnapshot.get(type)) {
         Schema referenceObjectSchema=referenceObject.getSchema();
-        if (referenceObjectSchema != null && !referenceObjectSchema.toCatalogAndSchema().equals(schemaComparison.getReferenceSchema(),referenceSnapshot.getDatabase())) {
-          continue;
-        }
-        if (referenceObject instanceof Catalog && schemaComparison.getReferenceSchema().getCatalogName() != null && !schemaComparison.getReferenceSchema().getCatalogName().equalsIgnoreCase(referenceObject.getName())) {
-          continue;
+        if (referenceObjectSchema != null && referenceObjectSchema.getName() != null) {
+          if (!referenceObjectSchema.toCatalogAndSchema().equals(schemaComparison.getReferenceSchema(),referenceSnapshot.getDatabase())) {
+            continue;
+          }
+          if (referenceObject instanceof Catalog && schemaComparison.getReferenceSchema().getCatalogName() != null && !schemaComparison.getReferenceSchema().getCatalogName().equalsIgnoreCase(referenceObject.getName())) {
+            continue;
+          }
         }
         T comparisonObject=comparisonSnapshot.get(referenceObject);
         if (comparisonObject == null) {
