@@ -1,0 +1,3 @@
+{
+  return getContainer().getValue(USE_PROCEDURE_SCHEMA,Boolean.class);
+}
