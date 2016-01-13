@@ -1,7 +1,6 @@
 {
-  LiquibaseEntityResolver liquibaseSchemaResolver=new LiquibaseEntityResolver(new XMLChangeLogSAXParser());
   liquibaseSchemaResolver.useResoureAccessor(new JUnitResourceAccessor(),"");
-  assertNotNull(liquibaseSchemaResolver.resolveEntity(null,null,null,"http://www.liquibase.org/xml/ns/migrator/dbchangelog-1.0.xsd"));
-  assertNotNull(liquibaseSchemaResolver.resolveEntity(null,null,null,"http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"));
-  assertNull(liquibaseSchemaResolver.resolveEntity(null,null,null,"http://www.liquibase.org/xml/ns/migrator/invalid.xsd"));
+  assertNotNull(liquibaseSchemaResolver.resolveEntity(null,null,null,VALID_SYSTEM_ID_WITH_MIGRATOR_PATH));
+  assertNotNull(liquibaseSchemaResolver.resolveEntity(null,null,null,VALID_SYSTEM_ID));
+  assertNull(liquibaseSchemaResolver.resolveEntity(null,null,null,INVALID_SYSTEM_ID));
 }

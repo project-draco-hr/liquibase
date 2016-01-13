@@ -18,7 +18,13 @@
       return null;
     }
     try {
-      InputStream resourceAsStream=StreamUtil.singleInputStream(xsdFile,resourceAccessor);
+      InputStream resourceAsStream=null;
+      try {
+        resourceAsStream=StreamUtil.singleInputStream(xsdFile,resourceAccessor);
+      }
+ catch (      IOException e) {
+        log.debug("Could not load " + xsdFile + " with the standard resource accessor.");
+      }
       if (resourceAsStream == null) {
         log.debug("Could not load " + xsdFile + " with the standard resource accessor. Trying context classloader...");
         if (Thread.currentThread().getContextClassLoader() != null) {

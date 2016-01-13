@@ -1,0 +1,7 @@
+{
+  if (parser == null) {
+    throw new RuntimeException("Parser can not be null");
+  }
+  NamespaceDetails namespaceDetails=NamespaceDetailsFactory.getInstance().getNamespaceDetails(parser,systemId);
+  return resolve(namespaceDetails);
+}

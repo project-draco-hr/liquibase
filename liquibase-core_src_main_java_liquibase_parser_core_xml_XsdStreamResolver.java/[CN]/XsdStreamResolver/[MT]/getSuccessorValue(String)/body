@@ -1,0 +1,6 @@
+{
+  if (successor != null) {
+    return successor.getResourceAsStream(xsdFile);
+  }
+  return null;
+}

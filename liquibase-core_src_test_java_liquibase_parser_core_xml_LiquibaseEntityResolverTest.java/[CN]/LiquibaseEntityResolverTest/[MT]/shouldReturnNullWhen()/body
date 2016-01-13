@@ -1,0 +1,3 @@
+{
+  assertNotNull(liquibaseSchemaResolver.resolveEntity(null,null,null,VALID_SYSTEM_ID));
+}

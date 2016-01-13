@@ -1,0 +1,5 @@
+{
+  this.systemId=systemId;
+  this.publicId=publicId;
+  this.resourceAccessor=resourceAccessor;
+}
