@@ -9,11 +9,6 @@
     return null;
   }
   try {
-    ResourceAccessorXsdStreamResolver resourceAccessorXsdStreamResolver=new ResourceAccessorXsdStreamResolver(resourceAccessor);
-    ContextClassLoaderXsdStreamResolver contextClassLoaderXsdStreamResolver=new ContextClassLoaderXsdStreamResolver();
-    ClassLoaderXsdStreamResolver classLoaderXsdStreamResolver=new ClassLoaderXsdStreamResolver();
-    resourceAccessorXsdStreamResolver.setSuccessor(contextClassLoaderXsdStreamResolver);
-    contextClassLoaderXsdStreamResolver.setSuccessor(classLoaderXsdStreamResolver);
     InputStream resourceAsStream=resourceAccessorXsdStreamResolver.getResourceAsStream(xsdFile);
     if (resourceAsStream == null) {
       LOGGER.debug("Could not find " + xsdFile + " locally");

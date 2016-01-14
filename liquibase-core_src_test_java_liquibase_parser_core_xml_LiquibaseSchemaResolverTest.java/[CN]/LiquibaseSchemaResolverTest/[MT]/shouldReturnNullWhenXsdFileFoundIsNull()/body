@@ -1,0 +1,5 @@
+{
+  when(nameSpaceDetialsForParser.getLocalPath(SYSTEM_ID)).thenReturn(null);
+  InputSource inputSource=liquibaseSchemaResolver.resolve(liquibaseParser);
+  assertThat(inputSource).isNull();
+}

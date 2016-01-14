@@ -1,0 +1,4 @@
+{
+  InputStream returnValue=classLoaderXsdStreamResolver.getResourceAsStream(EXISTING_XSD_FILE);
+  assertThat(returnValue).isInstanceOf(InputStream.class);
+}

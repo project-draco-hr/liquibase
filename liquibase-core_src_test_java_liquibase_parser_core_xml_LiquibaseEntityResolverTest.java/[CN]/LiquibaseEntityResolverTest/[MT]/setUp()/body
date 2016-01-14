@@ -1,4 +1,8 @@
 {
-  parser=new XMLChangeLogSAXParser();
-  liquibaseSchemaResolver=new LiquibaseEntityResolver(parser);
+  PowerMockito.mockStatic(StreamUtil.class);
+  PowerMockito.whenNew(LiquibaseSchemaResolver.class).withArguments(SYSTEM_ID,PUBLIC_ID,resourceAccessor).thenReturn(liquibaseSchemaResolver);
+  when(liquibaseSchemaResolver.resolve(parser)).thenReturn(inputSource);
+  when(liquibaseSchemaResolver.resolve(serializer)).thenReturn(inputSource);
+  liquibaseEntityResolver=new LiquibaseEntityResolver(parser);
+  liquibaseEntityResolver.useResoureAccessor(resourceAccessor,BASE_PATH);
 }

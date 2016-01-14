@@ -1,5 +1,9 @@
 {
   this.systemId=systemId;
   this.publicId=publicId;
-  this.resourceAccessor=resourceAccessor;
+  resourceAccessorXsdStreamResolver=new ResourceAccessorXsdStreamResolver(resourceAccessor);
+  contextClassLoaderXsdStreamResolver=new ContextClassLoaderXsdStreamResolver();
+  classLoaderXsdStreamResolver=new ClassLoaderXsdStreamResolver();
+  resourceAccessorXsdStreamResolver.setSuccessor(contextClassLoaderXsdStreamResolver);
+  contextClassLoaderXsdStreamResolver.setSuccessor(classLoaderXsdStreamResolver);
 }

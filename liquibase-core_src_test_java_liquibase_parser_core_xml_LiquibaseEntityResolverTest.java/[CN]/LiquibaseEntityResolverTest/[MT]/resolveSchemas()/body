@@ -1,6 +1,0 @@
-{
-  liquibaseSchemaResolver.useResoureAccessor(new JUnitResourceAccessor(),"");
-  assertNotNull(liquibaseSchemaResolver.resolveEntity(null,null,null,VALID_SYSTEM_ID_WITH_MIGRATOR_PATH));
-  assertNotNull(liquibaseSchemaResolver.resolveEntity(null,null,null,VALID_SYSTEM_ID));
-  assertNull(liquibaseSchemaResolver.resolveEntity(null,null,null,INVALID_SYSTEM_ID));
-}
