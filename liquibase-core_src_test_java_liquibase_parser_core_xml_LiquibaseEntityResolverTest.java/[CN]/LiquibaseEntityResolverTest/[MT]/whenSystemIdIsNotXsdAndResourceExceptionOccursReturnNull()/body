@@ -1,0 +1,5 @@
+{
+  PowerMockito.when(StreamUtil.singleInputStream(PATH_AND_SYSTEM_ID,resourceAccessor)).thenThrow(new RuntimeException());
+  InputSource result=liquibaseEntityResolver.resolveEntity(NAME,PUBLIC_ID,BASE_URI,FILE_SYSTEM_ID);
+  assertThat(result).isEqualTo(null);
+}

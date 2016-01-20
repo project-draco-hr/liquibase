@@ -1,0 +1,4 @@
+{
+  InputSource result=liquibaseEntityResolver.resolveEntity(NAME,PUBLIC_ID,BASE_URI,SYSTEM_ID);
+  assertThat(result).isSameAs(inputSource);
+}
