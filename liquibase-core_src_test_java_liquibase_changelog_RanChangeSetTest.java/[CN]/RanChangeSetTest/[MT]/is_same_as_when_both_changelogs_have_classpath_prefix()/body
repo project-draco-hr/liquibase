@@ -1,0 +1,5 @@
+{
+  RanChangeSet ranChangeSet=new RanChangeSet("classpath:/db/file.log","1","author",null,null,null,null,null,null,null,null);
+  ChangeSet incomingChangeSet=new ChangeSet("1","author",false,false,"classpath:/db/file.log",null,null,null);
+  assertTrue(ranChangeSet.isSameAs(incomingChangeSet));
+}
