@@ -1,0 +1,9 @@
+{
+  try {
+    liquibaseSchemaResolver.resolve((LiquibaseParser)null);
+    fail("Excepted RuntimeException. But no Exception was thrown");
+  }
+ catch (  RuntimeException e) {
+    assertThat(e.getMessage()).isEqualTo("Parser can not be null");
+  }
+}

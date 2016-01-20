@@ -1,0 +1,27 @@
+{
+  if (systemId == null) {
+    return null;
+  }
+  LOGGER.debug("Found namespace details class " + namespaceDetails.getClass().getName() + " for "+ systemId);
+  String xsdFile=namespaceDetails.getLocalPath(systemId);
+  LOGGER.debug("Local path for " + systemId + " is "+ xsdFile);
+  if (xsdFile == null) {
+    return null;
+  }
+  try {
+    InputStream resourceAsStream=resourceAccessorXsdStreamResolver.getResourceAsStream(xsdFile);
+    if (resourceAsStream == null) {
+      LOGGER.debug("Could not find " + xsdFile + " locally");
+      return null;
+    }
+    LOGGER.debug("Successfully loaded XSD from " + xsdFile);
+    org.xml.sax.InputSource source=new org.xml.sax.InputSource(resourceAsStream);
+    source.setPublicId(publicId);
+    source.setSystemId(systemId);
+    return source;
+  }
+ catch (  Exception ex) {
+    LOGGER.debug("Error loading XSD",ex);
+    return null;
+  }
+}

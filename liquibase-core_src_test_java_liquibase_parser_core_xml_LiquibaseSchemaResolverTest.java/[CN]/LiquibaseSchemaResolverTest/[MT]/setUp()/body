@@ -1,0 +1,11 @@
+{
+  PowerMockito.mockStatic(NamespaceDetailsFactory.class);
+  liquibaseSchemaResolver=new LiquibaseSchemaResolver(SYSTEM_ID,PUBLIC_ID,resourceAccessor);
+  Whitebox.setInternalState(liquibaseSchemaResolver,"resourceAccessorXsdStreamResolver",resourceAccessorXsdStreamResolver);
+  when(NamespaceDetailsFactory.getInstance()).thenReturn(namespaceDetailsFactory);
+  when(namespaceDetailsFactory.getNamespaceDetails(liquibaseParser,SYSTEM_ID)).thenReturn(nameSpaceDetialsForParser);
+  when(namespaceDetailsFactory.getNamespaceDetails(liquibaseSerializer,SYSTEM_ID)).thenReturn(namespaceDetailsForSerializer);
+  when(nameSpaceDetialsForParser.getLocalPath(SYSTEM_ID)).thenReturn(XSD_FILE);
+  when(namespaceDetailsForSerializer.getLocalPath(SYSTEM_ID)).thenReturn(XSD_FILE);
+  when(resourceAccessorXsdStreamResolver.getResourceAsStream(XSD_FILE)).thenReturn(inputStream);
+}

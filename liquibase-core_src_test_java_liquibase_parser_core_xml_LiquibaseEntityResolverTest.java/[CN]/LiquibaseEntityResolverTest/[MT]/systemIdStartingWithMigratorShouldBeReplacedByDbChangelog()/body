@@ -1,0 +1,5 @@
+{
+  PowerMockito.whenNew(LiquibaseSchemaResolver.class).withArguments(SYSTEM_ID_FROM_MIGRATOR_PATH,PUBLIC_ID,resourceAccessor).thenReturn(liquibaseSchemaResolver);
+  InputSource result=liquibaseEntityResolver.resolveEntity(NAME,PUBLIC_ID,BASE_URI,SYSTEM_ID_WITH_MIGRATOR_PATH);
+  assertThat(result).isSameAs(inputSource);
+}

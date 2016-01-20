@@ -1,0 +1,5 @@
+{
+  liquibaseSchemaResolver=new LiquibaseSchemaResolver(null,PUBLIC_ID,resourceAccessor);
+  InputSource inputSource=liquibaseSchemaResolver.resolve(liquibaseParser);
+  assertThat(inputSource).isNull();
+}
