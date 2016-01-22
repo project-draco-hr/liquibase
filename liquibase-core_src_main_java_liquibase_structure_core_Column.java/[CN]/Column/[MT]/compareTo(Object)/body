@@ -10,6 +10,9 @@
     }
  else {
       returnValue=this.getRelation().compareTo(o.getRelation());
+      if (returnValue == 0 && this.getRelation().getSchema() != null && o.getRelation().getSchema() != null) {
+        returnValue=StringUtils.trimToEmpty(this.getSchema().getName()).compareTo(StringUtils.trimToEmpty(o.getRelation().getSchema().getName()));
+      }
     }
     if (returnValue == 0) {
       returnValue=this.toString().compareTo(o.toString());
