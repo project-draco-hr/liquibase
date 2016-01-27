@@ -4,6 +4,9 @@
   }
  else {
     String tableOrViewName=getRelation().getName();
+    if (getRelation().getSchema() != null && getRelation().getSchema().getName() != null) {
+      tableOrViewName=getRelation().getSchema().getName() + "." + tableOrViewName;
+    }
     return tableOrViewName + "." + getName();
   }
 }

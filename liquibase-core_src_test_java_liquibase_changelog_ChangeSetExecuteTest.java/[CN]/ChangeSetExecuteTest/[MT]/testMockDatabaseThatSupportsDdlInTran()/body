@@ -1,6 +1,0 @@
-{
-  Database database=createMockDatabaseThatSupportsDdlInTran();
-  replay(database);
-  assertTrue(database.supportsDDLInTransaction());
-  assertFalse(database.getAutoCommitMode());
-}

@@ -1,0 +1,3 @@
+{
+  return StringUtils.trimToEmpty(this.getName()).toLowerCase().hashCode();
+}
