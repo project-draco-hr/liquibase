@@ -2,6 +2,7 @@
   View view=(View)changedObject;
   CreateViewChange change=new CreateViewChange();
   change.setViewName(view.getName());
+  change.setReplaceIfExists(true);
   if (control.getIncludeCatalog()) {
     change.setCatalogName(view.getSchema().getCatalogName());
   }

@@ -1,5 +1,0 @@
-{
-  ChangeSet changeSetWithClasspathPrefix=new ChangeSet("1","testAuthor",false,false,"classpath:path/changelog",null,null,null);
-  AlreadyRanChangeSetFilter filter=new AlreadyRanChangeSetFilter(getRanChangeSets(),true);
-  assertTrue(filter.accepts(changeSetWithClasspathPrefix).isAccepted());
-}
