@@ -1,5 +1,0 @@
-{
-  ChangeExecListenerWithDatabaseAndProperties listener=(ChangeExecListenerWithDatabaseAndProperties)ChangeExecListenerUtils.getChangeExecListener(database,resourceAccessor,ChangeExecListenerWithDatabaseAndProperties.class.getName(),null);
-  assertNull(listener.getProperties());
-  assertEquals(database,listener.getDatabase());
-}

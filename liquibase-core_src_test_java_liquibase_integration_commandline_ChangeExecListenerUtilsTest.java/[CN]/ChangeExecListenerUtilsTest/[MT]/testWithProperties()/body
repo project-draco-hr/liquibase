@@ -1,5 +1,0 @@
-{
-  ChangeExecListenerWithProperties listener=(ChangeExecListenerWithProperties)ChangeExecListenerUtils.getChangeExecListener(database,resourceAccessor,ChangeExecListenerWithProperties.class.getName(),tmpFile.getAbsolutePath());
-  assertEquals("value",listener.getProperties().get("test"));
-  assertEquals("table.name, table2.name2",listener.getProperties().get("exclusions"));
-}
