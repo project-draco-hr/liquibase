@@ -12,6 +12,7 @@
     if (checkLiquibaseTables) {
       checkLiquibaseTables(false,changeLog,contexts,labelExpression);
     }
+    ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database).generateDeploymentId();
     changeLog.validate(database,contexts,labelExpression);
     ChangeLogIterator logIterator;
     if (count == null) {

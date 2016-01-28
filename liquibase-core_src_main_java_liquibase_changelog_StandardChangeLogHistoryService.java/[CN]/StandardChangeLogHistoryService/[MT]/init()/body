@@ -32,6 +32,7 @@
       checksumNotRightSize=columnSize != null && columnSize < 35;
     }
     boolean hasExecTypeColumn=changeLogTable.getColumn("EXECTYPE") != null;
+    boolean hasDeploymentIdColumn=changeLogTable.getColumn("DEPLOYMENT_ID") != null;
     if (!hasDescription) {
       executor.comment("Adding missing databasechangelog.description column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"DESCRIPTION","VARCHAR(255)",null));
@@ -89,6 +90,12 @@
  else {
       executor.comment("Adding missing databasechangelog.labels column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"LABELS","VARCHAR(" + getLabelsSize() + ")",null));
+    }
+    if (!hasDeploymentIdColumn) {
+      executor.comment("Adding missing databasechangelog.deployment_id column");
+      statementsToExecute.add(new AddColumnStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"DEPLOYMENT_ID","VARCHAR(10)",null));
+      statementsToExecute.add(new UpdateStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()).addNewColumnValue("DEPLOYMENT_ID",getDeploymentId()));
+      statementsToExecute.add(new SetNullableStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"DEPLOYMENT_ID","VARCHAR(10)",false));
     }
     List<Map<String,?>> md5sumRS=ExecutorService.getInstance().getExecutor(database).queryForList(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum(),new ColumnConfig().setName("MD5SUM")).setLimit(1));
     if (md5sumRS.size() > 0) {

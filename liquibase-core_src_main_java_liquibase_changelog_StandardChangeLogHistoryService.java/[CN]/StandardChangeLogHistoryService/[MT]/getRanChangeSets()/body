@@ -32,8 +32,9 @@
         String execType=rs.get("EXECTYPE") == null ? null : rs.get("EXECTYPE").toString();
         ContextExpression contexts=new ContextExpression((String)rs.get("CONTEXTS"));
         Labels labels=new Labels((String)rs.get("LABELS"));
+        String deploymentId=(String)rs.get("DEPLOYMENT_ID");
         try {
-          RanChangeSet ranChangeSet=new RanChangeSet(fileName,id,author,CheckSum.parse(md5sum),dateExecuted,tag,ChangeSet.ExecType.valueOf(execType),description,comments,contexts,labels);
+          RanChangeSet ranChangeSet=new RanChangeSet(fileName,id,author,CheckSum.parse(md5sum),dateExecuted,tag,ChangeSet.ExecType.valueOf(execType),description,comments,contexts,labels,deploymentId);
           ranChangeSet.setOrderExecuted(orderExecuted);
           ranChangeSetList.add(ranChangeSet);
         }
