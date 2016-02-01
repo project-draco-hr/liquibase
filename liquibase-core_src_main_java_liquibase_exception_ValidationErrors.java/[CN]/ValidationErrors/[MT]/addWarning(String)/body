@@ -1,0 +1,4 @@
+{
+  warningMessages.add(message);
+  return this;
+}
