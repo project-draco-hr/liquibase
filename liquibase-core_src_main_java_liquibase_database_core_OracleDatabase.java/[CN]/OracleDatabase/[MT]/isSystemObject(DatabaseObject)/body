@@ -23,8 +23,13 @@
   }
  else   if (example.getName() != null) {
     if (example.getName().startsWith("BIN$")) {
-      if (example instanceof PrimaryKey || example instanceof Index || example instanceof liquibase.statement.UniqueConstraint) {
-        return false;
+      if (this.canAccessDbaRecycleBin()) {
+        if (example instanceof PrimaryKey || example instanceof Index || example instanceof liquibase.statement.UniqueConstraint) {
+          return false;
+        }
+ else {
+          return true;
+        }
       }
  else {
         return true;
