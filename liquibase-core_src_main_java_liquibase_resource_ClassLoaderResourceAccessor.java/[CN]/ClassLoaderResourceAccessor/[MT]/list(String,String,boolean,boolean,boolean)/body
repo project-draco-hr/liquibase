@@ -7,43 +7,53 @@
   }
   while (fileUrls.hasMoreElements()) {
     URL fileUrl=fileUrls.nextElement();
-    if (!fileUrl.toExternalForm().startsWith("file:")) {
-      if (fileUrl.toExternalForm().startsWith("jar:file:") || fileUrl.toExternalForm().startsWith("wsjar:file:") || fileUrl.toExternalForm().startsWith("zip:")) {
-        String file=fileUrl.getFile();
-        String[] zipAndFile=file.split("!");
-        String splitPath=zipAndFile[0];
-        if (splitPath.matches("file:\\/[A-Za-z]:\\/.*")) {
-          splitPath=splitPath.replaceFirst("file:\\/","");
-        }
+    if (fileUrl.toExternalForm().startsWith("jar:file:") || fileUrl.toExternalForm().startsWith("wsjar:file:") || fileUrl.toExternalForm().startsWith("zip:")) {
+      String[] zipAndFile=fileUrl.getFile().split("!");
+      String zipFilePath=zipAndFile[0];
+      if (zipFilePath.matches("file:\\/[A-Za-z]:\\/.*")) {
+        zipFilePath=zipFilePath.replaceFirst("file:\\/","");
+      }
  else {
-          splitPath=splitPath.replaceFirst("file:","");
+        zipFilePath=zipFilePath.replaceFirst("file:","");
+      }
+      zipFilePath=URLDecoder.decode(zipFilePath,"UTF-8");
+      if (path.startsWith("classpath:")) {
+        path=path.replaceFirst("classpath:","");
+      }
+      if (path.startsWith("classpath*:")) {
+        path=path.replaceFirst("classpath\\*:","");
+      }
+      JarFile zipfile=new JarFile(zipFilePath,false);
+      Enumeration<JarEntry> entries=zipfile.entries();
+      while (entries.hasMoreElements()) {
+        JarEntry entry=entries.nextElement();
+        if (entry.getName().startsWith(path)) {
+          if (!recursive) {
+            String pathAsDir=path.endsWith("/") ? path : path + "/";
+            if (!entry.getName().startsWith(pathAsDir) || entry.getName().substring(pathAsDir.length()).contains("/")) {
+              continue;
+            }
+          }
+          if (entry.isDirectory() && includeDirectories) {
+            returnSet.add(entry.getName());
+          }
+ else           if (includeFiles) {
+            returnSet.add(entry.getName());
+          }
         }
-        splitPath=URLDecoder.decode(splitPath,"UTF-8");
-        File zipfile=new File(splitPath);
-        File zipFileDir=FileUtil.unzip(zipfile);
-        if (path.startsWith("classpath:")) {
-          path=path.replaceFirst("classpath:","");
-        }
-        if (path.startsWith("classpath*:")) {
-          path=path.replaceFirst("classpath\\*:","");
-        }
-        File dirInZip=new File(zipFileDir,zipAndFile[1]);
-        if (!dirInZip.exists()) {
-          dirInZip=new File(zipFileDir,path);
-        }
-        URI fileUri=dirInZip.toURI();
-        fileUrl=fileUri.toURL();
       }
     }
-    try {
-      File file=new File(fileUrl.toURI());
-      if (file.exists()) {
-        getContents(file,recursive,includeFiles,includeDirectories,path,returnSet);
+ else {
+      try {
+        File file=new File(fileUrl.toURI());
+        if (file.exists()) {
+          getContents(file,recursive,includeFiles,includeDirectories,path,returnSet);
+        }
       }
-    }
- catch (    URISyntaxException e) {
-    }
-catch (    IllegalArgumentException e) {
+ catch (      URISyntaxException e) {
+      }
+catch (      IllegalArgumentException e) {
+      }
     }
     Enumeration<URL> resources=classLoader.getResources(path);
     while (resources.hasMoreElements()) {
