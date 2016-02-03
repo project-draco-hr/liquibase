@@ -23,7 +23,11 @@
   }
  else   if (example.getName() != null) {
     if (example.getName().startsWith("BIN$")) {
-      if (this.canAccessDbaRecycleBin()) {
+      boolean filteredInOriginalQuery=this.canAccessDbaRecycleBin();
+      if (!filteredInOriginalQuery) {
+        filteredInOriginalQuery=StringUtils.trimToEmpty(example.getSchema().getName()).equalsIgnoreCase(this.getConnection().getConnectionUserName());
+      }
+      if (filteredInOriginalQuery) {
         if (example instanceof PrimaryKey || example instanceof Index || example instanceof liquibase.statement.UniqueConstraint) {
           return false;
         }
