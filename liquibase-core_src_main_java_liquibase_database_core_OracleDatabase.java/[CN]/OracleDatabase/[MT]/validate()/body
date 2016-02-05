@@ -5,22 +5,8 @@
     LogFactory.getInstance().getLog().info("Cannot validate offline database");
     return errors;
   }
-  Statement statement=null;
-  try {
-    statement=((JdbcConnection)connection).createStatement();
-    statement.executeQuery("select 1 from dba_recyclebin where 0=1");
-    this.canAccessDbaRecycleBin=true;
-  }
- catch (  Exception e) {
-    if (e instanceof SQLException && e.getMessage().startsWith("ORA-00942")) {
-      errors.addWarning(getDbaRecycleBinWarning());
-    }
- else {
-      errors.addError(e.getMessage());
-    }
-  }
- finally {
-    JdbcUtils.close(null,statement);
+  if (!canAccessDbaRecycleBin()) {
+    errors.addWarning(getDbaRecycleBinWarning());
   }
   return errors;
 }
