@@ -26,6 +26,7 @@
     newLine[COLUMN_LIQUIBASE]=LiquibaseUtil.getBuildVersion().replaceAll("SNAPSHOT","SNP");
     newLine[COLUMN_CONTEXTS]=changeSet.getContexts() == null ? null : changeSet.getContexts().toString();
     newLine[COLUMN_LABELS]=changeSet.getLabels() == null ? null : changeSet.getLabels().toString();
+    newLine[DEPLOYMENT_ID]=getDeploymentId();
     csvWriter.writeNext(newLine);
     csvWriter.flush();
     csvWriter.close();
