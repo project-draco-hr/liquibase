@@ -45,6 +45,7 @@
     }
     boolean hasExecTypeColumn=changeLogTable.getColumn("EXECTYPE") != null;
     String charTypeName=getCharTypeName();
+    boolean hasDeploymentIdColumn=changeLogTable.getColumn("DEPLOYMENT_ID") != null;
     if (!hasDescription) {
       executor.comment("Adding missing databasechangelog.description column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"DESCRIPTION",charTypeName + "(255)",null));
@@ -102,6 +103,13 @@
  else {
       executor.comment("Adding missing databasechangelog.labels column");
       statementsToExecute.add(new AddColumnStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"LABELS",charTypeName + "(" + getLabelsSize()+ ")",null));
+    }
+    if (!hasDeploymentIdColumn) {
+      executor.comment("Adding missing databasechangelog.deployment_id column");
+      statementsToExecute.add(new AddColumnStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName(),"DEPLOYMENT_ID","VARCHAR(10)",null));
+      if (database instanceof DB2Database) {
+        statementsToExecute.add(new ReorganizeTableStatement(getLiquibaseCatalogName(),getLiquibaseSchemaName(),getDatabaseChangeLogTableName()));
+      }
     }
     List<Map<String,?>> md5sumRS=ExecutorService.getInstance().getExecutor(database).queryForList(new SelectFromDatabaseChangeLogStatement(new SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum(),new ColumnConfig().setName("MD5SUM")).setLimit(1));
     if (md5sumRS.size() > 0) {

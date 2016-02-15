@@ -15,4 +15,5 @@
   this.comments=comments;
   this.contextExpression=contextExpression;
   this.labels=labels;
+  this.deploymentId=deploymentId;
 }
