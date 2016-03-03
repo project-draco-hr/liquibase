@@ -15,7 +15,7 @@
     }
     DiffOutputControl diffOutputControl=new DiffOutputControl();
     File tempFile=File.createTempFile("liquibase-test",".xml");
-    FileUtil.deleteOnExit(tempFile);
+    deleteOnExit(tempFile);
     if (outputCsv) {
       diffOutputControl.setDataDir(new File(tempFile.getParentFile(),"liquibase-data").getCanonicalPath().replaceFirst("\\w:",""));
     }
