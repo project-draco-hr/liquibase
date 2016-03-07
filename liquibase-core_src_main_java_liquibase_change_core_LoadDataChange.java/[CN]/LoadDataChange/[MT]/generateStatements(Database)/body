@@ -19,15 +19,14 @@
       if (line.length == 0 || (line.length == 1 && StringUtils.trimToNull(line[0]) == null) || (isCommentingEnabled && isLineCommented(line))) {
         continue;
       }
+      if (line.length != headers.length) {
+        throw new UnexpectedLiquibaseException("CSV file " + getFile() + " Line "+ lineNumber+ " has "+ line.length+ " values defined, Header has "+ headers.length+ ". Numbers MUST be equal (check for unquoted string with embedded commas)");
+      }
       boolean needsPreparedStatement=false;
       List<ColumnConfig> columns=new ArrayList<ColumnConfig>();
       for (int i=0; i < headers.length; i++) {
-        if (i >= line.length) {
-          throw new UnexpectedLiquibaseException("CSV Line " + lineNumber + " has only "+ (i - 1)+ " columns, the header has "+ headers.length);
-        }
         Object value=line[i].trim();
         String columnName=headers[i].trim();
-        boolean isNull=value.toString().equalsIgnoreCase("NULL");
         ColumnConfig valueConfig=new ColumnConfig();
         ColumnConfig columnConfig=getColumnConfig(i,headers[i].trim());
         if (columnConfig != null) {
@@ -38,34 +37,79 @@
             columnName=columnConfig.getName();
           }
           valueConfig.setName(columnName);
-          if (!isNull && columnConfig.getType() != null) {
+          if (columnConfig.getType() != null) {
             if (columnConfig.getType().equalsIgnoreCase("BOOLEAN")) {
-              valueConfig.setValueBoolean(BooleanParser.parseBoolean(value.toString().toLowerCase()));
+              if (value.toString().equalsIgnoreCase("NULL")) {
+                valueConfig.setValue(null);
+              }
+ else {
+                valueConfig.setValueBoolean(BooleanParser.parseBoolean(value.toString().toLowerCase()));
+              }
             }
  else             if (columnConfig.getType().equalsIgnoreCase("NUMERIC")) {
-              valueConfig.setValueNumeric(value.toString());
+              if (value.toString().equalsIgnoreCase("NULL")) {
+                valueConfig.setValue(null);
+              }
+ else {
+                valueConfig.setValueNumeric(value.toString());
+              }
             }
  else             if (columnConfig.getType().toLowerCase().contains("date") || columnConfig.getType().toLowerCase().contains("time")) {
-              valueConfig.setValueDate(value.toString());
+              if (value.toString().equalsIgnoreCase("NULL")) {
+                valueConfig.setValue(null);
+              }
+ else {
+                valueConfig.setValueDate(value.toString());
+              }
             }
  else             if (columnConfig.getType().equalsIgnoreCase("STRING")) {
-              valueConfig.setValue(value.toString());
+              if (value.toString().equalsIgnoreCase("NULL")) {
+                valueConfig.setValue(null);
+              }
+ else {
+                valueConfig.setValue(value.toString());
+              }
             }
  else             if (columnConfig.getType().equalsIgnoreCase("COMPUTED")) {
-              liquibase.statement.DatabaseFunction function=new liquibase.statement.DatabaseFunction(value.toString());
-              valueConfig.setValueComputed(function);
+              if (value.toString().equalsIgnoreCase("NULL")) {
+                valueConfig.setValue(null);
+              }
+ else {
+                liquibase.statement.DatabaseFunction function=new liquibase.statement.DatabaseFunction(value.toString());
+                valueConfig.setValueComputed(function);
+              }
             }
  else             if (columnConfig.getType().equalsIgnoreCase("SEQUENCE")) {
-              liquibase.statement.SequenceNextValueFunction function=new liquibase.statement.SequenceNextValueFunction(columnConfig.getDefaultValue());
+              String sequenceName;
+              if (value.toString().equalsIgnoreCase("NULL")) {
+                sequenceName=columnConfig.getDefaultValue();
+                if (sequenceName == null) {
+                  throw new UnexpectedLiquibaseException("Must set a sequence name in the loadData column defaultValue attribute");
+                }
+              }
+ else {
+                sequenceName=value.toString();
+              }
+              liquibase.statement.SequenceNextValueFunction function=new liquibase.statement.SequenceNextValueFunction(sequenceName);
               valueConfig.setValueComputed(function);
             }
  else             if (columnConfig.getType().equalsIgnoreCase("BLOB")) {
-              valueConfig.setValueBlobFile(value.toString());
-              needsPreparedStatement=true;
+              if (value.toString().equalsIgnoreCase("NULL")) {
+                valueConfig.setValue(null);
+              }
+ else {
+                valueConfig.setValueBlobFile(value.toString());
+                needsPreparedStatement=true;
+              }
             }
  else             if (columnConfig.getType().equalsIgnoreCase("CLOB")) {
-              valueConfig.setValueClobFile(value.toString());
-              needsPreparedStatement=true;
+              if (value.toString().equalsIgnoreCase("NULL")) {
+                valueConfig.setValue(null);
+              }
+ else {
+                valueConfig.setValueClobFile(value.toString());
+                needsPreparedStatement=true;
+              }
             }
  else {
               throw new UnexpectedLiquibaseException("loadData type of " + columnConfig.getType() + " is not supported.  Please use BOOLEAN, NUMERIC, DATE, STRING, COMPUTED, SEQUENCE or SKIP");
@@ -77,7 +121,7 @@
             columnName=((AbstractJdbcDatabase)database).quoteObject(columnName,Column.class);
           }
           valueConfig.setName(columnName);
-          if (!isNull) {
+          if (value.toString().equalsIgnoreCase("NULL")) {
             valueConfig.setValue((String)value);
           }
         }
