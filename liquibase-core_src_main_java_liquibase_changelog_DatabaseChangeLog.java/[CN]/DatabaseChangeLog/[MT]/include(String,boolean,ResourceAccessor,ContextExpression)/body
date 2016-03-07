@@ -18,13 +18,22 @@
     if (rootChangeLog == null) {
       ROOT_CHANGE_LOG.set(this);
     }
+    DatabaseChangeLog parentChangeLog=PARENT_CHANGE_LOG.get();
+    PARENT_CHANGE_LOG.set(this);
     try {
       ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor);
       changeLog=parser.parse(fileName,changeLogParameters,resourceAccessor);
+      changeLog.setIncludeContexts(includeContexts);
     }
   finally {
       if (rootChangeLog == null) {
         ROOT_CHANGE_LOG.remove();
+      }
+      if (parentChangeLog == null) {
+        PARENT_CHANGE_LOG.remove();
+      }
+ else {
+        PARENT_CHANGE_LOG.set(parentChangeLog);
       }
     }
   }

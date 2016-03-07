@@ -9,10 +9,11 @@
   if (contexts == null || contexts.isEmpty()) {
     return new ChangeSetFilterResult(true,"No runtime context specified, all contexts will run",this.getClass());
   }
-  if (changeSet.getContexts().isEmpty()) {
+  Collection<ContextExpression> inheritableContexts=changeSet.getInheritableContexts();
+  if (changeSet.getContexts().isEmpty() && inheritableContexts.isEmpty()) {
     return new ChangeSetFilterResult(true,"Change set runs under all contexts",this.getClass());
   }
-  if (changeSet.getContexts().matches(contexts)) {
+  if (changeSet.getContexts().matches(contexts) && ContextExpression.matchesAll(inheritableContexts,contexts)) {
     return new ChangeSetFilterResult(true,"Context matches '" + contexts.toString() + "'",this.getClass());
   }
  else {
