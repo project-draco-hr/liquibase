@@ -1,5 +1,8 @@
 {
   try {
+    if (isAzureDb()) {
+      return false;
+    }
     if (this.getDatabaseMajorVersion() >= 11) {
       return true;
     }

@@ -1,0 +1,3 @@
+{
+  return isoDate.length() >= "yyyy-MM-ddThh:mm:ss.SSS".length();
+}

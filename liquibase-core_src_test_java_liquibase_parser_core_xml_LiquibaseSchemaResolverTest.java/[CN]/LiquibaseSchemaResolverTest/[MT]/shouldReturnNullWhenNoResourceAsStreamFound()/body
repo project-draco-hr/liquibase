@@ -1,0 +1,5 @@
+{
+  when(resourceAccessorXsdStreamResolver.getResourceAsStream(XSD_FILE)).thenReturn(null);
+  InputSource inputSource=liquibaseSchemaResolver.resolve(liquibaseParser);
+  assertThat(inputSource).isNull();
+}

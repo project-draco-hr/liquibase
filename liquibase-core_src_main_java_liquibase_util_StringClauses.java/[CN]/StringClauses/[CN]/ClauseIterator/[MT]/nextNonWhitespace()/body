@@ -1,0 +1,10 @@
+{
+  Object next;
+  while (hasNext()) {
+    next=clauses.get(keyIterator.next());
+    if (!(next instanceof Whitespace) && !(next instanceof Comment)) {
+      return next;
+    }
+  }
+  return null;
+}

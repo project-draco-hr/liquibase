@@ -1,7 +1,7 @@
 {
   try {
     T configuration=type.newInstance();
-    configuration.init(new SystemPropertyProvider());
+    configuration.init(configurationValueProviders);
     return configuration;
   }
  catch (  Exception e) {

@@ -72,15 +72,15 @@
     return new DatabaseFunction(stringVal.trim());
   }
  else   if (typeId == Types.BIT) {
-    if (stringVal.startsWith("b'")) {
-      stringVal=stringVal.replaceFirst("b'","").replaceFirst("'$","");
+    if (stringVal.startsWith("b'") || stringVal.startsWith("B'")) {
+      stringVal=stringVal.replaceFirst("b'","").replaceFirst("B'","").replaceFirst("'$","");
     }
     stringVal=stringVal.trim();
     if (scanner.hasNextBoolean()) {
       return scanner.nextBoolean();
     }
  else {
-      return new Integer(stringVal);
+      return Integer.valueOf(stringVal);
     }
   }
  else   if (liquibaseDataType instanceof BlobType || typeId == Types.BLOB) {

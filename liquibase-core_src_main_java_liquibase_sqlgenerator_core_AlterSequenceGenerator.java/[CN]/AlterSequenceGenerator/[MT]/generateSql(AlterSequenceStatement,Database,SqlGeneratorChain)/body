@@ -29,8 +29,8 @@
       buffer.append(" CACHE ").append(statement.getCacheSize());
     }
   }
-  if (statement.getWillCycle() != null && database instanceof OracleDatabase) {
-    if (statement.getWillCycle()) {
+  if (statement.getCycle() != null && database instanceof OracleDatabase) {
+    if (statement.getCycle()) {
       buffer.append(" CYCLE ");
     }
  else {

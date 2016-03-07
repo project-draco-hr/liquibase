@@ -1,3 +1,0 @@
-{
-  return "select current_schema";
-}

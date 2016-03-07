@@ -4,6 +4,10 @@
     reader=new FileReader(this.changeLogFile);
     CSVReader csvReader=new CSVReader(reader);
     String[] line=csvReader.readNext();
+    if (line == null) {
+      writeHeader(this.changeLogFile);
+      return new ArrayList<RanChangeSet>();
+    }
     if (!line[COLUMN_ID].equals("ID")) {
       throw new DatabaseException("Missing header in file " + this.changeLogFile.getAbsolutePath());
     }
@@ -17,7 +21,11 @@
       if (line.length > COLUMN_LABELS) {
         labels=new Labels(line[COLUMN_LABELS]);
       }
-      returnList.add(new RanChangeSet(line[COLUMN_FILENAME],line[COLUMN_ID],line[COLUMN_AUTHOR],CheckSum.parse(line[COLUMN_MD5SUM]),new ISODateFormat().parse(line[COLUMN_DATEEXECUTED]),line[COLUMN_TAG],ChangeSet.ExecType.valueOf(line[COLUMN_EXECTYPE]),line[COLUMN_DESCRIPTION],line[COLUMN_COMMENTS],contexts,labels));
+      String deploymentId=null;
+      if (line.length > DEPLOYMENT_ID) {
+        deploymentId=line[DEPLOYMENT_ID];
+      }
+      returnList.add(new RanChangeSet(line[COLUMN_FILENAME],line[COLUMN_ID],line[COLUMN_AUTHOR],CheckSum.parse(line[COLUMN_MD5SUM]),new ISODateFormat().parse(line[COLUMN_DATEEXECUTED]),line[COLUMN_TAG],ChangeSet.ExecType.valueOf(line[COLUMN_EXECTYPE]),line[COLUMN_DESCRIPTION],line[COLUMN_COMMENTS],contexts,labels,deploymentId));
     }
     return returnList;
   }

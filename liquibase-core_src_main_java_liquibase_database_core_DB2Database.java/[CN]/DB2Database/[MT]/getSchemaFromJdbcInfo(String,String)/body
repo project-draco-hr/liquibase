@@ -1,3 +1,6 @@
 {
+  if (rawCatalogName != null && rawSchemaName == null) {
+    rawSchemaName=rawCatalogName;
+  }
   return new CatalogAndSchema(rawSchemaName,null).customize(this);
 }

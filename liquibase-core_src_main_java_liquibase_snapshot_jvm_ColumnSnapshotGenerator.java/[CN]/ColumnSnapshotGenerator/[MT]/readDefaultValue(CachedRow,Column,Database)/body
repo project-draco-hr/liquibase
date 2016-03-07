@@ -25,5 +25,20 @@
       }
     }
   }
+  if (database instanceof PostgresDatabase) {
+    Object defaultValue=columnMetadataResultSet.get("COLUMN_DEF");
+    if (defaultValue != null && defaultValue instanceof String) {
+      Matcher matcher=postgresValuePattern.matcher((String)defaultValue);
+      if (matcher.matches()) {
+        defaultValue=matcher.group(1);
+      }
+      columnMetadataResultSet.set("COLUMN_DEF",defaultValue);
+    }
+  }
+  if (database instanceof DB2Database) {
+    if (columnMetadataResultSet.get("COLUMN_DEF") != null && ((String)columnMetadataResultSet.get("COLUMN_DEF")).equalsIgnoreCase("NULL")) {
+      columnMetadataResultSet.set("COLUMN_DEF",null);
+    }
+  }
   return SqlUtil.parseValue(database,columnMetadataResultSet.get("COLUMN_DEF"),columnInfo.getType());
 }

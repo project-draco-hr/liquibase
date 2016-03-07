@@ -1,0 +1,12 @@
+String changeLog
+String id
+String author
+CheckSum lastCheckSum
+Date dateExecuted
+String tag
+ChangeSet.ExecType execType
+String description
+String comments
+ContextExpression contextExpression
+Labels labels
+String deploymentId

@@ -1,0 +1,39 @@
+{
+  try {
+    DatabaseSnapshot returnSnapshot=new RestoredDatabaseSnapshot(this.database);
+    for (    DatabaseObject example : examples) {
+      DatabaseObject existingObject=this.get(example);
+      if (existingObject == null) {
+        continue;
+      }
+      if (example instanceof Schema) {
+        for (        Class<? extends DatabaseObject> type : this.snapshotControl.getTypesToInclude()) {
+          for (          DatabaseObject object : this.get(type)) {
+            if (object.getSchema() == null) {
+              if (object instanceof Catalog) {
+                if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,((Schema)example).getCatalog(),database)) {
+                  returnSnapshot.allFound.add(object);
+                }
+              }
+ else {
+                returnSnapshot.allFound.add(object);
+              }
+            }
+ else {
+              if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object.getSchema(),example,database)) {
+                returnSnapshot.allFound.add(object);
+              }
+            }
+          }
+        }
+      }
+ else {
+        returnSnapshot.allFound.add(existingObject);
+      }
+    }
+    return returnSnapshot;
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

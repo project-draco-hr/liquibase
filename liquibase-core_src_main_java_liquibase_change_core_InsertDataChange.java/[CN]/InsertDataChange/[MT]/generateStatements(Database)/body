@@ -7,8 +7,17 @@
     if (column.getValueClobFile() != null) {
       needsPreparedStatement=true;
     }
-    if (database instanceof InformixDatabase) {
-      needsPreparedStatement=true;
+    if (!needsPreparedStatement && database instanceof InformixDatabase) {
+      if (column.getValue() != null) {
+        try {
+          Column snapshot=SnapshotGeneratorFactory.getInstance().createSnapshot(new Column(column),database);
+          if (snapshot != null) {
+            needsPreparedStatement=true;
+          }
+        }
+ catch (        Exception ignore) {
+        }
+      }
     }
   }
   if (needsPreparedStatement) {

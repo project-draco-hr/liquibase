@@ -1,0 +1,41 @@
+{
+  Set<String> classFiles=classFilesByLocation.get(parentFileName);
+  if (classFiles == null) {
+    classFiles=new HashSet<String>();
+    classFilesByLocation.put(parentFileName,classFiles);
+    JarInputStream jarStream;
+    if (parentFileStream instanceof JarInputStream) {
+      jarStream=(JarInputStream)parentFileStream;
+    }
+ else {
+      jarStream=new JarInputStream(parentFileStream);
+    }
+    JarEntry entry;
+    while ((entry=jarStream.getNextJarEntry()) != null) {
+      String name=entry.getName();
+      if (name != null) {
+        if (name.endsWith(".jar")) {
+          log.debug("Found nested jar " + name);
+          InputStream nestedJarResourceStream=loader.getResourceAsStream(name);
+          if (nestedJarResourceStream != null) {
+            JarInputStream nestedJarStream=new JarInputStream(nestedJarResourceStream);
+            try {
+              loadImplementationsInJar(parentPackage,nestedJarStream,loader,parentFileName + "!" + name);
+            }
+  finally {
+              nestedJarStream.close();
+            }
+          }
+        }
+ else         if (!entry.isDirectory() && name.endsWith(".class")) {
+          classFiles.add(name.trim());
+        }
+      }
+    }
+  }
+  for (  String name : classFiles) {
+    if (name.contains(parentPackage)) {
+      loadClass(name,loader);
+    }
+  }
+}

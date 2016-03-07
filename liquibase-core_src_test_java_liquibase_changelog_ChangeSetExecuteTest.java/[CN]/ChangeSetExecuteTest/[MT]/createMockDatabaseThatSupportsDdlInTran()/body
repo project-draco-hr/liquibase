@@ -1,7 +1,0 @@
-{
-  Database database=createMock(Database.class);
-  expect(database.supportsDDLInTransaction()).andStubReturn(true);
-  expect(database.getAutoCommitMode()).andStubReturn(false);
-  database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
-  return database;
-}

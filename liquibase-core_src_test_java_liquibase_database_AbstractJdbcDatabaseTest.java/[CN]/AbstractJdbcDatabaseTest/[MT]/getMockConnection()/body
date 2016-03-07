@@ -1,8 +1,0 @@
-{
-  DatabaseConnection conn=createMock(DatabaseConnection.class);
-  conn.setAutoCommit(false);
-  expectLastCall().anyTimes();
-  expect(conn.getDatabaseProductName()).andReturn(getProductNameString()).anyTimes();
-  replay(conn);
-  return conn;
-}

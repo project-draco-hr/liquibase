@@ -1,0 +1,7 @@
+{
+  String name=super.escapeObjectName(catalogName,schemaName,objectName,objectType);
+  if (name != null) {
+    name=name.replaceFirst("\\.","..");
+  }
+  return name;
+}

@@ -1,0 +1,4 @@
+{
+  InputStream returnValue=classLoaderXsdStreamResolver.getResourceAsStream(NON_EXISTING_XSD_FILE);
+  assertThat(returnValue).isSameAs(successorValue);
+}

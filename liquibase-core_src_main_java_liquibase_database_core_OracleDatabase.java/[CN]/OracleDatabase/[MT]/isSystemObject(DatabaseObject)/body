@@ -23,7 +23,21 @@
   }
  else   if (example.getName() != null) {
     if (example.getName().startsWith("BIN$")) {
-      return true;
+      boolean filteredInOriginalQuery=this.canAccessDbaRecycleBin();
+      if (!filteredInOriginalQuery) {
+        filteredInOriginalQuery=StringUtils.trimToEmpty(example.getSchema().getName()).equalsIgnoreCase(this.getConnection().getConnectionUserName());
+      }
+      if (filteredInOriginalQuery) {
+        if (example instanceof PrimaryKey || example instanceof Index || example instanceof liquibase.statement.UniqueConstraint) {
+          return false;
+        }
+ else {
+          return true;
+        }
+      }
+ else {
+        return true;
+      }
     }
  else     if (example.getName().startsWith("AQ$")) {
       return true;
@@ -50,6 +64,9 @@
       return true;
     }
  else     if (example.getName().equals("JAVA$CLASS$MD5$TABLE")) {
+      return true;
+    }
+ else     if (example.getName().startsWith("ISEQ$$_")) {
       return true;
     }
   }

@@ -4,6 +4,8 @@
     String className=generator.getClass().getName();
     if (className.contains(".ext.")) {
     }
+ else     if (className.endsWith("CreateTableGeneratorInformix")) {
+    }
  else     if (className.endsWith("Generator")) {
       assertEquals("Incorrect level/naming convention for " + className,SqlGenerator.PRIORITY_DEFAULT,specializationlevel);
     }

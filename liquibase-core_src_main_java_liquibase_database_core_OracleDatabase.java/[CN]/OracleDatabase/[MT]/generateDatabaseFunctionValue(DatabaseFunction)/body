@@ -2,5 +2,9 @@
   if (databaseFunction != null && databaseFunction.toString().equalsIgnoreCase("current_timestamp")) {
     return databaseFunction.toString();
   }
+  if (databaseFunction instanceof SequenceNextValueFunction || databaseFunction instanceof SequenceCurrentValueFunction) {
+    String quotedSeq=super.generateDatabaseFunctionValue(databaseFunction);
+    return quotedSeq.replaceFirst("\"([^\\.\"]*)\\.([^\\.\"]*)\"","\"$1\".\"$2\"");
+  }
   return super.generateDatabaseFunctionValue(databaseFunction);
 }

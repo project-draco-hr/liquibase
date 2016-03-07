@@ -1,4 +1,0 @@
-{
-  Database database=getADatabaseWithCollation("Latin1_General_CI_AI");
-  assertFalse("Should be case insensitive",database.isCaseSensitive());
-}

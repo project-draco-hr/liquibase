@@ -20,7 +20,18 @@
   if (comparisonDatabase instanceof OracleDatabase) {
     Index backingIndex=pk.getBackingIndex();
     if (backingIndex != null && backingIndex.getName() != null) {
-      returnList.addAll(Arrays.asList(ChangeGeneratorFactory.getInstance().fixMissing(backingIndex,control,referenceDatabase,comparisonDatabase)));
+      try {
+        if (!control.getIncludeCatalog() && !control.getIncludeSchema()) {
+          CatalogAndSchema schema=comparisonDatabase.getDefaultSchema().customize(comparisonDatabase);
+          backingIndex.getTable().setSchema(schema.getCatalogName(),schema.getSchemaName());
+        }
+        if (referenceDatabase.equals(comparisonDatabase) || !SnapshotGeneratorFactory.getInstance().has(backingIndex,comparisonDatabase)) {
+          returnList.addAll(Arrays.asList(ChangeGeneratorFactory.getInstance().fixMissing(backingIndex,control,referenceDatabase,comparisonDatabase)));
+        }
+      }
+ catch (      Exception e) {
+        throw new UnexpectedLiquibaseException(e);
+      }
       change.setForIndexName(backingIndex.getName());
       Schema schema=backingIndex.getSchema();
       if (schema != null) {

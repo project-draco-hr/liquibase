@@ -1,0 +1,18 @@
+{
+  CreateSequenceStatement statement=new CreateSequenceStatement(null,null,"seq_my_table");
+  MSSQLDatabase database10=new MSSQLDatabase(){
+    @Override public int getDatabaseMajorVersion() throws DatabaseException {
+      return 10;
+    }
+  }
+;
+  MSSQLDatabase database11=new MSSQLDatabase(){
+    @Override public int getDatabaseMajorVersion() throws DatabaseException {
+      return 11;
+    }
+  }
+;
+  ChangeFactory.getInstance();
+  assertFalse("unsupported create sequence",SqlGeneratorFactory.getInstance().supports(statement,database10));
+  assertTrue("supported create sequence",SqlGeneratorFactory.getInstance().supports(statement,database11));
+}

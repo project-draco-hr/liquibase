@@ -1,0 +1,5 @@
+{
+  keyIterator.previous();
+  String keyToReplace=keyIterator.next();
+  clauses.put(keyToReplace,newClause);
+}

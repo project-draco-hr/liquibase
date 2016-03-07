@@ -1,3 +1,15 @@
 {
+  if (getConnection() == null || getConnection() instanceof OfflineConnection) {
+    return null;
+  }
+  try {
+    String schemaName=ExecutorService.getInstance().getExecutor(this).queryForObject(new RawSqlStatement("select username from sysmaster:informix.syssessions where sid = dbinfo('sessionid')"),String.class);
+    if (schemaName != null) {
+      return schemaName.trim();
+    }
+  }
+ catch (  Exception e) {
+    LogFactory.getInstance().getLog().info("Error getting connection schema",e);
+  }
   return null;
 }
