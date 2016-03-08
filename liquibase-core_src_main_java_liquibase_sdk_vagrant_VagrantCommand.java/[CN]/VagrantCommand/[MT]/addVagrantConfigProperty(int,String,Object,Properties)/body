@@ -1,5 +1,0 @@
-{
-  if (value != null) {
-    properties.put("database." + index + "."+ name,value);
-  }
-}

@@ -1,5 +1,0 @@
-{
-  String testPackageDir=test.getTestClass().replaceFirst("\\.[^\\.]*$","").replace(".","/");
-  String fileName=test.getTestClass().replaceFirst(".*\\.","") + "." + escapeFileName(test.getTestName())+ ".accepted.md";
-  return new File(new File(getBaseDirectory(test),testPackageDir),fileName);
-}

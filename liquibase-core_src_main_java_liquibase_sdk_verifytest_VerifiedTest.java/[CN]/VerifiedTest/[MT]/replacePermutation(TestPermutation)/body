@@ -1,4 +1,0 @@
-{
-  removePermutation(permutation.getKey());
-  addPermutation(permutation);
-}

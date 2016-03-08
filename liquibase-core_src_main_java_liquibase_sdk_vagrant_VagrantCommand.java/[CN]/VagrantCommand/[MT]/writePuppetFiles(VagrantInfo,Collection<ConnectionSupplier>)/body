@@ -1,9 +1,0 @@
-{
-  copyFile("liquibase/sdk/vagrant/shell/bootstrap.sh",new File(vagrantInfo.boxDir,"shell")).setExecutable(true);
-  copyFile("liquibase/sdk/vagrant/shell/bootstrap.bat",new File(vagrantInfo.boxDir,"shell")).setExecutable(true);
-  writePuppetFile(vagrantInfo,databases);
-  writeManifestsInit(vagrantInfo,databases);
-  File modulesDir=new File(vagrantInfo.boxDir,"modules");
-  copyFile("liquibase/sdk/vagrant/modules/my_firewall/manifests/pre.pp",new File(modulesDir,"my_firewall/manifests"));
-  copyFile("liquibase/sdk/vagrant/modules/my_firewall/manifests/post.pp",new File(modulesDir,"my_firewall/manifests"));
-}

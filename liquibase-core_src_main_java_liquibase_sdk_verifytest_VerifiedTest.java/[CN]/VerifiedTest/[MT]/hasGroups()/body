@@ -1,4 +1,0 @@
-{
-  Collection<TestPermutation> permutations=getPermutations();
-  return permutations != null && permutations.size() > 0 && permutations.iterator().next().getGroup() != null;
-}

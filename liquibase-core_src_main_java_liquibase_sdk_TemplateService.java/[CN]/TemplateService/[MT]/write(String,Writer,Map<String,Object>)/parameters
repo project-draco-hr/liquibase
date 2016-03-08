@@ -1,3 +1,0 @@
-String templatePath
-Writer output
-Map<String,Object> contextParams

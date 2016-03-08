@@ -1,3 +1,0 @@
-{
-  return "jdbc:informix-sqli://" + getIpAddress() + ":9088/liquibase:informixserver=ol_ids_1150_1";
-}

@@ -1,5 +1,0 @@
-{
-  this.templatePath=templatePath;
-  this.context=context;
-  this.outputFileName=templatePath.replaceFirst(".*/","").replaceFirst("\\.vm$","");
-}

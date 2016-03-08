@@ -1,3 +1,0 @@
-{
-  return id.replaceAll("[^a-zA-Z0-9_\\-]","_");
-}

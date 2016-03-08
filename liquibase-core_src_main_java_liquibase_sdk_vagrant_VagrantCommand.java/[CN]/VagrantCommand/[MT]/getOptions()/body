@@ -1,4 +1,0 @@
-{
-  Option databases=new Option("databases",true,"Database configurations");
-  return new Options().addOption(databases);
-}

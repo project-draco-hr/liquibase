@@ -1,3 +1,0 @@
-String templatePath
-File outputFile
-Map<String,Object> contextParams

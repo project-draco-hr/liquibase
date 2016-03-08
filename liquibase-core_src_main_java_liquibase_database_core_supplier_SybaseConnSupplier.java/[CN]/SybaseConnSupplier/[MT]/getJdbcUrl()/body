@@ -1,3 +1,0 @@
-{
-  return "jdbc:sybase:Tds:" + getIpAddress() + ":5000/liquibase";
-}

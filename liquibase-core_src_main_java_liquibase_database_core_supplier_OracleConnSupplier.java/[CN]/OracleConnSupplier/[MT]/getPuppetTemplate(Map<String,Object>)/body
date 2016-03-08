@@ -1,8 +1,0 @@
-{
-  if (isWindows()) {
-    return new ConfigTemplate("liquibase/sdk/vagrant/supplier/oracle/oracle-windows.puppet.vm",context);
-  }
- else {
-    return new ConfigTemplate("liquibase/sdk/vagrant/supplier/oracle/oracle-linux.puppet.vm",context);
-  }
-}

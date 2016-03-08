@@ -1,3 +1,0 @@
-{
-  return DriverManager.getConnection(this.getJdbcUrl(),this.getDatabaseUsername(),this.getDatabasePassword());
-}

@@ -1,6 +1,0 @@
-{
-  if (value == null) {
-    return null;
-  }
-  return StringUtils.join(((Collection)value),", ",itemFormatter);
-}

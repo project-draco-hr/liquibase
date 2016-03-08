@@ -1,7 +1,0 @@
-{
-  String version=getVersion();
-  if (version == null) {
-    version="LATEST";
-  }
-  return "JDBC Url: " + getJdbcUrl() + "\n"+ "Version: "+ version+ "\n"+ "Standard User: "+ getDatabaseUsername()+ "\n"+ "         Password: "+ getDatabasePassword()+ "\n"+ "Primary Catalog: "+ getPrimaryCatalog()+ "\n"+ "Primary Schema: "+ getPrimarySchema()+ " (if applicable)\n"+ "\n"+ "Alternate User: "+ getAlternateUsername()+ "\n"+ "          Password: "+ getAlternateUserPassword()+ "\n"+ "Alternate Catalog: "+ getAlternateCatalog()+ "\n"+ "Alternate Schema: "+ getAlternateSchema()+ " (if applicable)\n"+ "Alternate Tablespace: "+ getAlternateTablespace()+ "\n";
-}

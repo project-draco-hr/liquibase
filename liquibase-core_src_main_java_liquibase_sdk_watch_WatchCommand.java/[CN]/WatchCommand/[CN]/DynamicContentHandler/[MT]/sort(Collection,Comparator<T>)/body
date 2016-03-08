@@ -1,5 +1,0 @@
-{
-  List returnList=new ArrayList(objects);
-  Collections.sort(returnList,comparator);
-  return returnList;
-}

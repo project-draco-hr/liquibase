@@ -1,8 +1,0 @@
-{
-  if (isWindows()) {
-    return "C:\\oracle-" + getVersion();
-  }
- else {
-    return "/opt/oracle";
-  }
-}
