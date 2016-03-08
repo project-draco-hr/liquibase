@@ -121,8 +121,11 @@
             columnName=((AbstractJdbcDatabase)database).quoteObject(columnName,Column.class);
           }
           valueConfig.setName(columnName);
-          if (value.toString().equalsIgnoreCase("NULL")) {
+          if (value == null || value.toString().equalsIgnoreCase("NULL")) {
             valueConfig.setValue((String)value);
+          }
+ else {
+            valueConfig.setValue(value.toString());
           }
         }
         columns.add(valueConfig);
