@@ -4,3 +4,4 @@ IncludeAllFilter resourceFilter
 boolean errorIfMissingOrEmpty
 Comparator<String> resourceComparator
 ResourceAccessor resourceAccessor
+ContextExpression includeContexts

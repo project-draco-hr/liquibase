@@ -10,8 +10,9 @@
       throw new UnexpectedLiquibaseException("No 'file' attribute on 'include'");
     }
     path=path.replace('\\','/');
+    ContextExpression includeContexts=new ContextExpression(node.getChildValue(null,"context",String.class));
     try {
-      include(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceAccessor);
+      include(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceAccessor,includeContexts);
     }
  catch (    LiquibaseException e) {
       throw new SetupException(e);
@@ -40,7 +41,8 @@
         resourceComparator=getStandardChangeLogComparator();
       }
     }
-    includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,node.getChildValue(null,"errorIfMissingOrEmpty",true),getStandardChangeLogComparator(),resourceAccessor);
+    ContextExpression includeContexts=new ContextExpression(node.getChildValue(null,"context",String.class));
+    includeAll(path,node.getChildValue(null,"relativeToChangelogFile",false),resourceFilter,node.getChildValue(null,"errorIfMissingOrEmpty",true),getStandardChangeLogComparator(),resourceAccessor,includeContexts);
   }
  else   if (nodeName.equals("preConditions")) {
     this.preconditionContainer=new PreconditionContainer();
