@@ -1,5 +1,8 @@
 {
   try {
+    if (pathName == null) {
+      throw new SetupException("No path attribute for includeAll");
+    }
     pathName=pathName.replace('\\','/');
     if (!(pathName.endsWith("/"))) {
       pathName=pathName + '/';
