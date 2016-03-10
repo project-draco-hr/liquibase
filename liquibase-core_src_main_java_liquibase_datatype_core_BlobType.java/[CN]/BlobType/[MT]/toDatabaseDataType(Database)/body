@@ -75,6 +75,9 @@
     }
   }
   if (database instanceof PostgresDatabase) {
+    if (originalDefinition.toLowerCase().startsWith("binary")) {
+      return new DatabaseDataType("BINARY",getParameters());
+    }
     return new DatabaseDataType("BYTEA");
   }
   if (database instanceof SybaseASADatabase) {
@@ -86,6 +89,9 @@
   if (database instanceof OracleDatabase) {
     if (getRawDefinition().toLowerCase().startsWith("bfile")) {
       return new DatabaseDataType("BFILE");
+    }
+    if (originalDefinition.toLowerCase().startsWith("raw")) {
+      return new DatabaseDataType("RAW",getParameters());
     }
     return new DatabaseDataType("BLOB");
   }
