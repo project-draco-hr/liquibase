@@ -2,8 +2,8 @@
   out.println("Validation Error: ");
   if (invalidMD5Sums.size() > 0) {
     out.println("     " + invalidMD5Sums.size() + " change sets have changed since they were ran against the database");
-    for (    ChangeSet changeSet : invalidMD5Sums) {
-      out.println("          " + changeSet.toString(false));
+    for (    String message : invalidMD5Sums) {
+      out.println("          " + message);
     }
   }
   if (failedPreconditions.size() > 0) {
