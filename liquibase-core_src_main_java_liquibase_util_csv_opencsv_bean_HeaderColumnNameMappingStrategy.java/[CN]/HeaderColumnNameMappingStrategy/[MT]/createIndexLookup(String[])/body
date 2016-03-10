@@ -1,0 +1,7 @@
+{
+  if (indexLookup.isEmpty()) {
+    for (int i=0; i < values.length; i++) {
+      indexLookup.put(values[i],i);
+    }
+  }
+}

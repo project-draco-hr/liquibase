@@ -1,6 +1,0 @@
-{
-  for (Iterator iter=allLines.iterator(); iter.hasNext(); ) {
-    String[] nextLine=(String[])iter.next();
-    writeNext(nextLine);
-  }
-}

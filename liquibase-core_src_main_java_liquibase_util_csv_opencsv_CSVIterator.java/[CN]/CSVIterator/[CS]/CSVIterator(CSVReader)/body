@@ -1,0 +1,4 @@
+{
+  this.reader=reader;
+  nextLine=reader.readNext();
+}

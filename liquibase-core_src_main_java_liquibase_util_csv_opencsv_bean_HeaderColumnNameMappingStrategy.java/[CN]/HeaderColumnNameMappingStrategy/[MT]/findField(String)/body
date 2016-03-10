@@ -1,0 +1,6 @@
+{
+  if (null == fieldMap) {
+    fieldMap=loadFieldMap();
+  }
+  return fieldMap.get(name.toUpperCase().trim());
+}

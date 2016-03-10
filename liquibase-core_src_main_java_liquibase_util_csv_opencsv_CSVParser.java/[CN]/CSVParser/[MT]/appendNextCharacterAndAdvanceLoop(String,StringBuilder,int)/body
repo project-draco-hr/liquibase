@@ -1,0 +1,5 @@
+{
+  sb.append(line.charAt(i + 1));
+  i++;
+  return i;
+}

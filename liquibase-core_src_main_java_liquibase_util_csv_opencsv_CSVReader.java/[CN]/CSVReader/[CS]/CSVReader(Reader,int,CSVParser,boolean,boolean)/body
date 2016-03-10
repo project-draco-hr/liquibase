@@ -1,0 +1,8 @@
+{
+  this.br=(reader instanceof BufferedReader ? (BufferedReader)reader : new BufferedReader(reader));
+  this.lineReader=new LineReader(br,keepCR);
+  this.skipLines=line;
+  this.parser=csvParser;
+  this.keepCR=keepCR;
+  this.verifyReader=verifyReader;
+}

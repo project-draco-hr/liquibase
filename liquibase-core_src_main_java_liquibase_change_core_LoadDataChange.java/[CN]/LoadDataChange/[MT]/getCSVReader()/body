@@ -22,7 +22,7 @@
     quotchar=this.quotchar.charAt(0);
   }
   if (separator == null) {
-    separator=liquibase.util.csv.opencsv.CSVReader.DEFAULT_SEPARATOR + "";
+    separator=liquibase.util.csv.CSVReader.DEFAULT_SEPARATOR + "";
   }
   return new CSVReader(streamReader,separator.charAt(0),quotchar);
 }

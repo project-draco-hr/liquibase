@@ -1,0 +1,3 @@
+MappingStrategy<T> mapper
+Reader reader
+CsvToBeanFilter filter

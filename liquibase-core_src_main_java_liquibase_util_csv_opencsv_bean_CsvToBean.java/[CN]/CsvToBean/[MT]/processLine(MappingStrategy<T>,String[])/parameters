@@ -1,0 +1,2 @@
+MappingStrategy<T> mapper
+String[] line

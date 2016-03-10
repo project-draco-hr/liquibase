@@ -1,13 +1,21 @@
 {
+  if (isClosed()) {
+    hasNext=false;
+    return null;
+  }
   if (!this.linesSkiped) {
     for (int i=0; i < skipLines; i++) {
-      br.readLine();
+      lineReader.readLine();
+      linesRead++;
     }
     this.linesSkiped=true;
   }
-  String nextLine=br.readLine();
+  String nextLine=lineReader.readLine();
   if (nextLine == null) {
     hasNext=false;
   }
-  return hasNext ? nextLine.trim().replaceAll("\ufeff","") : null;
+ else {
+    linesRead++;
+  }
+  return hasNext ? nextLine : null;
 }

@@ -1,0 +1,6 @@
+{
+  if (result != null) {
+    recordsRead++;
+  }
+  return result;
+}

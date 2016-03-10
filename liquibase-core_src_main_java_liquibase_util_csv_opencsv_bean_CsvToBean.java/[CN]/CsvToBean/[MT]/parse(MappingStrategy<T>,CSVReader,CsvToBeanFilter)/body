@@ -1,0 +1,21 @@
+{
+  long lineProcessed=0;
+  String[] line=null;
+  try {
+    mapper.captureHeader(csv);
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Error capturing CSV header!",e);
+  }
+  try {
+    List<T> list=new ArrayList<T>();
+    while (null != (line=csv.readNext())) {
+      lineProcessed++;
+      processLine(mapper,filter,line,list);
+    }
+    return list;
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Error parsing CSV line: " + lineProcessed + " values: "+ Arrays.toString(line),e);
+  }
+}

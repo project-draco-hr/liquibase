@@ -1,0 +1,3 @@
+{
+  return inQuotes && nextLine.length() > (i + 1) && isCharacterQuoteCharacter(nextLine.charAt(i + 1));
+}

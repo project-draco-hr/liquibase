@@ -1,0 +1,3 @@
+{
+  this(reader,line,new CSVParser(separator,quotechar,escape,strictQuotes,ignoreLeadingWhiteSpace),keepCR,DEFAULT_VERIFY_READER);
+}

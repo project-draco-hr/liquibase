@@ -1,0 +1,7 @@
+{
+  if (null == header) {
+    throw new IllegalStateException("The header row hasn't been read yet.");
+  }
+  createIndexLookup(header);
+  return indexLookup.get(name);
+}

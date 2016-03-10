@@ -1,0 +1,14 @@
+{
+  if (!verifyReader) {
+    return false;
+  }
+  try {
+    br.mark(READ_AHEAD_LIMIT);
+    int nextByte=br.read();
+    br.reset();
+    return nextByte == -1;
+  }
+ catch (  IOException e) {
+    return true;
+  }
+}

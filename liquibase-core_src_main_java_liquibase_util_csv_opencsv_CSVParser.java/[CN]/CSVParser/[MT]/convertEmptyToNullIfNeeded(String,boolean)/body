@@ -1,0 +1,6 @@
+{
+  if (s.isEmpty() && shouldConvertEmptyToNull(fromQuotedField)) {
+    return null;
+  }
+  return s;
+}

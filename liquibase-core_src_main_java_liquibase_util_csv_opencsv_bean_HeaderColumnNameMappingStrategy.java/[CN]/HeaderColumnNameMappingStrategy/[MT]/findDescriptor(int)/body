@@ -1,4 +1,4 @@
 {
   String columnName=getColumnName(col);
-  return (null != columnName && columnName.trim().length() > 0) ? findDescriptor(columnName) : null;
+  return (StringUtils.trimToNull(columnName) != null) ? findDescriptor(columnName) : null;
 }

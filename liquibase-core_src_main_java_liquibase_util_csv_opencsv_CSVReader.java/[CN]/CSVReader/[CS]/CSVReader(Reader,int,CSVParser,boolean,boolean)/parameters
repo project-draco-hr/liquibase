@@ -1,0 +1,5 @@
+Reader reader
+int line
+CSVParser csvParser
+boolean keepCR
+boolean verifyReader

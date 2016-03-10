@@ -1,0 +1,8 @@
+{
+  Map<String,BeanField> map=new HashMap<String,BeanField>();
+  for (  Field field : loadFields(getType())) {
+    boolean required=field.getAnnotation(CsvBind.class).required();
+    map.put(field.getName().toUpperCase().trim(),new BeanField(field,required));
+  }
+  return map;
+}

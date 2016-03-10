@@ -1,0 +1,6 @@
+{
+  this.columnMapping.clear();
+  for (  Map.Entry<String,String> entry : columnMapping.entrySet()) {
+    this.columnMapping.put(entry.getKey().toUpperCase(),entry.getValue());
+  }
+}

@@ -1,0 +1,7 @@
+{
+  BeanField beanField=mapper.findField(col);
+  if (beanField != null) {
+    String value=line[col];
+    beanField.setFieldValue(bean,value);
+  }
+}
