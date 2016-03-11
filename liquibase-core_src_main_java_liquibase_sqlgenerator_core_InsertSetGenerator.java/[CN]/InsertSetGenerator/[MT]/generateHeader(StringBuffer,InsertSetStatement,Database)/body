@@ -1,4 +1,4 @@
 {
   InsertStatement insert=statement.peek();
-  myGenerator.generateHeader(sql,insert,database);
+  ((InsertGenerator)SqlGeneratorFactory.getInstance().getBestGenerator(statement,database)).generateHeader(sql,insert,database);
 }

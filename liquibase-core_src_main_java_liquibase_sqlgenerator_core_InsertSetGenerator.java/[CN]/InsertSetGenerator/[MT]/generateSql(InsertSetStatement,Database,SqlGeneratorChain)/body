@@ -8,7 +8,7 @@
   int index=0;
   for (  InsertStatement sttmnt : statement.getStatements()) {
     index++;
-    myGenerator.generateValues(sql,sttmnt,database);
+    ((InsertGenerator)SqlGeneratorFactory.getInstance().getBestGenerator(sttmnt,database)).generateValues(sql,sttmnt,database);
     sql.append(",");
     if (index > statement.getBatchThreshold()) {
       result.add(completeStatement(statement,sql));
