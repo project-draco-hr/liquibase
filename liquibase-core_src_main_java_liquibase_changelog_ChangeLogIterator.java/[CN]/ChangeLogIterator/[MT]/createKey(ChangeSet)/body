@@ -1,0 +1,3 @@
+{
+  return changeSet.toString(true) + ":" + changeSet.getLabels().toString()+ ":"+ changeSet.getContexts().toString()+ ":"+ StringUtils.join(changeSet.getDbmsSet(),",");
+}
