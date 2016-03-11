@@ -1,4 +1,5 @@
 {
+  path=convertToPath(relativeTo,path);
   File absoluteFile=new File(path);
   File relativeFile=(baseDirectory == null) ? new File(path) : new File(baseDirectory,path);
   if (absoluteFile.exists() && absoluteFile.isDirectory()) {
