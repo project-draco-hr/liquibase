@@ -1,3 +1,5 @@
 {
-  return changeSet.toString(true) + ":" + changeSet.getLabels().toString()+ ":"+ changeSet.getContexts().toString()+ ":"+ StringUtils.join(changeSet.getDbmsSet(),",");
+  Labels labels=changeSet.getLabels();
+  ContextExpression contexts=changeSet.getContexts();
+  return changeSet.toString(true) + ":" + (labels == null ? null : labels.toString())+ ":"+ (contexts == null ? null : contexts.toString())+ ":"+ StringUtils.join(changeSet.getDbmsSet(),",");
 }
