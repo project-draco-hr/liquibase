@@ -1,4 +1,0 @@
-String catalogName
-String schemaName
-String objectName
-Class<? extends DatabaseObject> objectType
