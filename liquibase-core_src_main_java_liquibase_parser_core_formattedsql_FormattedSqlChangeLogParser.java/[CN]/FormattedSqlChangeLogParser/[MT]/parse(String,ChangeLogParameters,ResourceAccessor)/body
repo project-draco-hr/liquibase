@@ -114,7 +114,7 @@
           }
  else           if (rollbackMatcher.matches()) {
             if (rollbackMatcher.groupCount() == 1) {
-              currentRollbackSql.append(rollbackMatcher.group(1)).append(System.lineSeparator());
+              currentRollbackSql.append(rollbackMatcher.group(1)).append(SystemUtils.LINE_SEPARATOR);
             }
           }
  else           if (preconditionsMatcher.matches()) {
@@ -148,7 +148,7 @@
             }
           }
  else {
-            currentSql.append(line).append(System.lineSeparator());
+            currentSql.append(line).append(SystemUtils.LINE_SEPARATOR);
           }
         }
       }
