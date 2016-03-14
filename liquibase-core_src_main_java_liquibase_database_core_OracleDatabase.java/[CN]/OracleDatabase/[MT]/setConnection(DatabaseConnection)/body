@@ -1,5 +1,5 @@
 {
-  reservedWords.addAll(Arrays.asList("GROUP","USER","SESSION","PASSWORD","RESOURCE","START","SIZE","UID","DESC"));
+  reservedWords.addAll(Arrays.asList("GROUP","USER","SESSION","PASSWORD","RESOURCE","START","SIZE","UID","DESC","ORDER"));
   Connection sqlConn=null;
   if (!(conn instanceof OfflineConnection)) {
     try {
