@@ -133,7 +133,7 @@
       buffer.append(referencesString);
     }
  else {
-      buffer.append(database.escapeObjectName(fkConstraint.getReferencedTableName(),Table.class)).append("(").append(database.escapeColumnNameList(fkConstraint.getReferencedColumnNames())).append(")");
+      buffer.append(database.escapeObjectName(fkConstraint.getReferencedTableCatalogName(),fkConstraint.getReferencedTableSchemaName(),fkConstraint.getReferencedTableName(),Table.class)).append("(").append(database.escapeColumnNameList(fkConstraint.getReferencedColumnNames())).append(")");
     }
     if (fkConstraint.isDeleteCascade()) {
       buffer.append(" ON DELETE CASCADE");
