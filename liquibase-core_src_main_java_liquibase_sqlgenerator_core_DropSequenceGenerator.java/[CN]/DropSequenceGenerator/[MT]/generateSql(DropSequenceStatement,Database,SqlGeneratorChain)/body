@@ -1,6 +1,6 @@
 {
   String sql="DROP SEQUENCE ";
-  if (database instanceof PostgresDatabase && statement.getOnlyIfExists() != null && statement.getOnlyIfExists()) {
+  if ((database instanceof MSSQLDatabase || database instanceof PostgresDatabase) && statement.getOnlyIfExists() != null && statement.getOnlyIfExists()) {
     sql+="IF EXISTS ";
   }
   sql+=database.escapeSequenceName(statement.getCatalogName(),statement.getSchemaName(),statement.getSequenceName());
