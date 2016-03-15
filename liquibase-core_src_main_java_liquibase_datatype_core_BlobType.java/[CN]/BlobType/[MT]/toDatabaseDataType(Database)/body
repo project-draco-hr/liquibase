@@ -71,7 +71,7 @@
     if (getRawDefinition().toLowerCase().startsWith("bfile")) {
       return new DatabaseDataType("BFILE");
     }
-    if (originalDefinition.toLowerCase().startsWith("raw")) {
+    if (originalDefinition.toLowerCase().startsWith("raw") || originalDefinition.toLowerCase().startsWith("binary")) {
       return new DatabaseDataType("RAW",getParameters());
     }
     return new DatabaseDataType("BLOB");
