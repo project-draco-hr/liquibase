@@ -15,6 +15,9 @@
   if (database instanceof SybaseDatabase) {
     return new DatabaseDataType(database.escapeDataTypeName("datetime"));
   }
+  if (database instanceof DB2Database) {
+    return new DatabaseDataType(database.escapeDataTypeName("timestamp"),getParameters());
+  }
   if (getAdditionalInformation() != null && (database instanceof PostgresDatabase || database instanceof OracleDatabase) || database instanceof HsqlDatabase) {
     DatabaseDataType type=new DatabaseDataType("TIMESTAMP");
     type.addAdditionalInformation(this.getAdditionalInformation());
