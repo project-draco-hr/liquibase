@@ -1,4 +1,15 @@
 {
   this.ignoreClasspathPrefix=ignoreClasspathPrefix;
   this.ranChangeSets=database.getRanChangeSetList();
+  onlyRecentRanChangeSets=new ArrayList<RanChangeSet>();
+  for (  RanChangeSet ranChangeSet : ranChangeSets) {
+    boolean isRecentChangeSet=true;
+    for (    RanChangeSet ranChangeSetOther : ranChangeSets) {
+      if (ranChangeSet.equals(ranChangeSetOther) && ranChangeSet.getOrderExecuted() < ranChangeSetOther.getOrderExecuted()) {
+        isRecentChangeSet=false;
+        break;
+      }
+    }
+    if (isRecentChangeSet)     onlyRecentRanChangeSets.add(ranChangeSet);
+  }
 }
