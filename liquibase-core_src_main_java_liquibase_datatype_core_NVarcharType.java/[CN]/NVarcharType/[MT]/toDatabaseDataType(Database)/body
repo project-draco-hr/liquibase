@@ -1,4 +1,7 @@
 {
+  if (getRawDefinition().toLowerCase().contains("national character varying")) {
+    setAdditionalInformation(null);
+  }
   if (database instanceof HsqlDatabase || database instanceof PostgresDatabase || database instanceof DerbyDatabase) {
     return new DatabaseDataType("VARCHAR",getParameters());
   }
