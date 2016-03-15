@@ -1,5 +1,5 @@
 {
-  if (getRawDefinition().toLowerCase().contains("national character varying")) {
+  if (getRawDefinition() != null && getRawDefinition().toLowerCase().contains("national character varying")) {
     setAdditionalInformation(null);
   }
   if (database instanceof HsqlDatabase || database instanceof PostgresDatabase || database instanceof DerbyDatabase) {
