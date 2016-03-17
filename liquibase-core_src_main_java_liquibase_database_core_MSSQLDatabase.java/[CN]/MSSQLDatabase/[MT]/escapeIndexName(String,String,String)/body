@@ -1,3 +1,0 @@
-{
-  return escapeObjectName(indexName,Index.class);
-}
