@@ -27,7 +27,7 @@
     }
   }
  else   if (fieldValue instanceof Collection) {
-    Iterator fieldValueIterator=((Collection)fieldValue).iterator();
+    Iterator fieldValueIterator=new CopyOnWriteArrayList((Collection)fieldValue).iterator();
     List newValues=new ArrayList();
     while (fieldValueIterator.hasNext()) {
       Object obj=fieldValueIterator.next();
@@ -57,7 +57,7 @@
   }
  else   if (fieldValue instanceof Map) {
     Map newMap=(Map)fieldValue.getClass().newInstance();
-    for (    Map.Entry entry : (Set<Map.Entry>)((Map)fieldValue).entrySet()) {
+    for (    Map.Entry entry : new HashSet<Map.Entry>((Set<Map.Entry>)((Map)fieldValue).entrySet())) {
       Object key=replaceObject(entry.getKey());
       Object value=replaceObject(entry.getValue());
       if (key != null) {

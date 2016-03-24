@@ -32,7 +32,9 @@
           }
           foundIndexes.put(indexName,index);
         }
-        index.addColumn(new Column(row.getString("COLUMN_NAME")).setRelation(index.getTable()));
+        String ascOrDesc=row.getString("ASC_OR_DESC");
+        Boolean descending="D".equals(ascOrDesc) ? Boolean.TRUE : "A".equals(ascOrDesc) ? Boolean.FALSE : null;
+        index.addColumn(new Column(row.getString("COLUMN_NAME")).setComputed(false).setDescending(descending).setRelation(index.getTable()));
       }
       for (      Index exampleIndex : foundIndexes.values()) {
         table.getIndexes().add(exampleIndex);

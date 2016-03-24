@@ -1,0 +1,8 @@
+{
+  fileNameOrExtension=fileNameOrExtension.replaceAll(".*\\.","");
+  List<ChangeLogSerializer> changeLogSerializers=serializers.get(fileNameOrExtension);
+  if (changeLogSerializers == null) {
+    return Collections.emptyList();
+  }
+  return changeLogSerializers;
+}

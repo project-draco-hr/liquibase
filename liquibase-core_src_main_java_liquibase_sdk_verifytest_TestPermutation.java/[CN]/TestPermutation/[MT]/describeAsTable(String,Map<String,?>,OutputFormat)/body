@@ -1,8 +1,0 @@
-{
-  rowDescriptionParameter=key;
-  rowDescription=new TreeMap<String,Value>();
-  for (  Map.Entry<String,?> entry : value.entrySet()) {
-    rowDescription.put(entry.getKey(),new Value(entry.getValue(),outputFormat));
-  }
-  recomputeKey();
-}

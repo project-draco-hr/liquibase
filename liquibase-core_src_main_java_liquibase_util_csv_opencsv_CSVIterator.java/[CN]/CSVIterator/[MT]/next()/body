@@ -1,0 +1,10 @@
+{
+  String[] temp=nextLine;
+  try {
+    nextLine=reader.readNext();
+  }
+ catch (  IOException e) {
+    throw new RuntimeException(e);
+  }
+  return temp;
+}

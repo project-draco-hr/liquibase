@@ -26,7 +26,7 @@
     return "SELECT SEQUENCE_NAME AS SEQUENCE_NAME, MIN_VALUE, MAX_VALUE, INCREMENT_BY, CYCLE_FLAG AS WILL_CYCLE, ORDER_FLAG AS IS_ORDERED, LAST_NUMBER as START_VALUE, CACHE_SIZE FROM ALL_SEQUENCES WHERE SEQUENCE_OWNER = '" + schema.getCatalogName() + "'";
   }
  else   if (database instanceof PostgresDatabase) {
-    return "SELECT relname AS SEQUENCE_NAME FROM pg_class, pg_namespace " + "WHERE relkind='S' " + "AND pg_class.relnamespace = pg_namespace.oid "+ "AND nspname = '" + schema.getName() + "' "+ "AND 'nextval(''"+ schema.getName()+ "."+ "'||relname||'''::regclass)' not in (select adsrc from pg_attrdef where adsrc is not null) "+ "AND 'nextval(''"+ schema.getName()+ "."+ "\"'||relname||'\"''::regclass)' not in (select adsrc from pg_attrdef where adsrc is not null) "+ "AND 'nextval('''||relname||'''::regclass)' not in (select adsrc from pg_attrdef where adsrc is not null)"+ "AND 'nextval(''\"'||relname||'\"''::regclass)' not in (select adsrc from pg_attrdef where adsrc is not null)";
+    return "SELECT relname AS SEQUENCE_NAME FROM pg_class, pg_namespace " + "WHERE relkind='S' " + "AND pg_class.relnamespace = pg_namespace.oid "+ "AND nspname = '" + schema.getName() + "'";
   }
  else   if (database instanceof MSSQLDatabase) {
     return "SELECT SEQUENCE_NAME, " + "cast(START_VALUE AS BIGINT) AS START_VALUE, " + "cast(MINIMUM_VALUE AS BIGINT) AS MIN_VALUE, "+ "cast(MAXIMUM_VALUE AS BIGINT) AS MAX_VALUE, "+ "CAST(INCREMENT AS BIGINT) AS INCREMENT_BY, "+ "CYCLE_OPTION AS WILL_CYCLE "+ "FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_SCHEMA = '" + schema.getName() + "'";

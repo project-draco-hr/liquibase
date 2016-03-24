@@ -1,3 +1,0 @@
-{
-  return TemplateService.getInstance().output(templatePath,context);
-}

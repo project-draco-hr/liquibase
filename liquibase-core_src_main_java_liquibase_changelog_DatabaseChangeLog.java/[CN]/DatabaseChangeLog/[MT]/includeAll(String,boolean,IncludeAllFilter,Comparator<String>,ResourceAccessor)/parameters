@@ -1,5 +1,0 @@
-String pathName
-boolean isRelativeToChangelogFile
-IncludeAllFilter resourceFilter
-Comparator<String> resourceComparator
-ResourceAccessor resourceAccessor

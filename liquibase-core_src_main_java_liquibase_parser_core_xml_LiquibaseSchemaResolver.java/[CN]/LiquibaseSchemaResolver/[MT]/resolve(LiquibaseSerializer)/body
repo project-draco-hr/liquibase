@@ -1,0 +1,7 @@
+{
+  if (serializer == null) {
+    throw new RuntimeException("Serializer can not be null");
+  }
+  NamespaceDetails namespaceDetails=NamespaceDetailsFactory.getInstance().getNamespaceDetails(serializer,systemId);
+  return getInputSourceFromXsd(namespaceDetails);
+}

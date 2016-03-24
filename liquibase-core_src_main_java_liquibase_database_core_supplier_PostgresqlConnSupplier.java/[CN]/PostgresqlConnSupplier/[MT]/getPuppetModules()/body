@@ -1,5 +1,0 @@
-{
-  Set<String> modules=super.getPuppetModules();
-  modules.add("puppetlabs/postgresql");
-  return modules;
-}

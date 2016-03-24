@@ -1,0 +1,6 @@
+{
+  if (string == null) {
+    return true;
+  }
+  return StringUtils.trimToNull(string.toString()) == null;
+}

@@ -1,0 +1,3 @@
+{
+  return quotechar == NO_QUOTE_CHARACTER ? (nextChar == quotechar || nextChar == escapechar || nextChar == separator) : (nextChar == quotechar || nextChar == escapechar);
+}

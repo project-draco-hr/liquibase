@@ -11,7 +11,7 @@
       if (getChangeSet() != null) {
         ChangeLogParameters parameters=getChangeSet().getChangeLogParameters();
         if (parameters != null) {
-          content=parameters.expandExpressions(content);
+          content=parameters.expandExpressions(content,getChangeSet().getChangeLog());
         }
       }
       return content;

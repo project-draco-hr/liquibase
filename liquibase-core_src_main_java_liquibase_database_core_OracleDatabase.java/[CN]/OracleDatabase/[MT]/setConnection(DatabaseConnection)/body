@@ -1,18 +1,56 @@
 {
+  reservedWords.addAll(Arrays.asList("GROUP","USER","SESSION","PASSWORD","RESOURCE","START","SIZE","UID","DESC","ORDER"));
+  Connection sqlConn=null;
   if (!(conn instanceof OfflineConnection)) {
     try {
-      Method wrappedConn=conn.getClass().getMethod("getWrappedConnection");
-      wrappedConn.setAccessible(true);
-      Connection sqlConn=(Connection)wrappedConn.invoke(conn);
-      reservedWords.addAll(Arrays.asList(sqlConn.getMetaData().getSQLKeywords().toUpperCase().split(",\\s*")));
-      reservedWords.addAll(Arrays.asList("GROUP","USER","SESSION","PASSWORD","RESOURCE","START","SIZE","UID","DESC"));
-      Method method=sqlConn.getClass().getMethod("setRemarksReporting",Boolean.TYPE);
-      method.setAccessible(true);
-      method.invoke(sqlConn,true);
+      if (conn instanceof JdbcConnection) {
+        Method wrappedConn=conn.getClass().getMethod("getWrappedConnection");
+        wrappedConn.setAccessible(true);
+        sqlConn=(Connection)wrappedConn.invoke(conn);
+      }
     }
  catch (    Exception e) {
-      LogFactory.getLogger().info("Error configuring OracleDatabase connection: " + e.getMessage(),e);
-      ;
+      throw new UnexpectedLiquibaseException(e);
+    }
+    if (sqlConn != null) {
+      try {
+        reservedWords.addAll(Arrays.asList(sqlConn.getMetaData().getSQLKeywords().toUpperCase().split(",\\s*")));
+      }
+ catch (      SQLException e) {
+        LogFactory.getLogger().info("Could get sql keywords on OracleDatabase: " + e.getMessage());
+      }
+      try {
+        Method method=sqlConn.getClass().getMethod("setRemarksReporting",Boolean.TYPE);
+        method.setAccessible(true);
+        method.invoke(sqlConn,true);
+      }
+ catch (      Exception e) {
+        LogFactory.getLogger().info("Could not set remarks reporting on OracleDatabase: " + e.getMessage());
+        ;
+      }
+      Statement statement=null;
+      ResultSet resultSet=null;
+      try {
+        statement=sqlConn.createStatement();
+        resultSet=statement.executeQuery("SELECT value FROM v$parameter WHERE name = 'compatible'");
+        String compatibleVersion=null;
+        if (resultSet.next()) {
+          compatibleVersion=resultSet.getString("value");
+        }
+        if (compatibleVersion != null) {
+          Matcher majorVersionMatcher=Pattern.compile("(\\d+)\\..*").matcher(compatibleVersion);
+          if (majorVersionMatcher.matches()) {
+            this.databaseMajorVersion=Integer.valueOf(majorVersionMatcher.group(1));
+          }
+        }
+      }
+ catch (      SQLException e) {
+        String message="Cannot read from v$parameter: " + e.getMessage();
+        LogFactory.getLogger().info("Could not set check compatibility mode on OracleDatabase: " + message);
+      }
+ finally {
+        JdbcUtils.close(resultSet,statement);
+      }
     }
   }
   super.setConnection(conn);

@@ -1,0 +1,8 @@
+{
+  StringBuilder sb=new StringBuilder(nextElement.length() * 2);
+  for (int j=0; j < nextElement.length(); j++) {
+    char nextChar=nextElement.charAt(j);
+    processCharacter(sb,nextChar);
+  }
+  return sb;
+}

@@ -9,7 +9,7 @@
   }
   Integer position=columnMetadataResultSet.getInt("ORDINAL_POSITION");
   Column column=new Column();
-  column.setName(rawColumnName);
+  column.setName(StringUtils.trimToNull(rawColumnName));
   column.setRelation(table);
   column.setRemarks(remarks);
   column.setOrder(position);

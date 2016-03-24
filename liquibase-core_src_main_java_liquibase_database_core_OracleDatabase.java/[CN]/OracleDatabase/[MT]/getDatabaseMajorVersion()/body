@@ -1,0 +1,8 @@
+{
+  if (databaseMajorVersion == null) {
+    return super.getDatabaseMajorVersion();
+  }
+ else {
+    return databaseMajorVersion;
+  }
+}

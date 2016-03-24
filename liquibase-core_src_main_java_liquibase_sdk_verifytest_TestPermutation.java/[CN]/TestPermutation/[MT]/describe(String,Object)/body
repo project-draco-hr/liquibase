@@ -1,3 +1,0 @@
-{
-  describe(key,value,OutputFormat.DefaultFormat);
-}

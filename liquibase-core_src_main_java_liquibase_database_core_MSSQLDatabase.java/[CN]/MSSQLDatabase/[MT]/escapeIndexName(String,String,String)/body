@@ -1,3 +1,0 @@
-{
-  return super.escapeObjectName(indexName,Index.class);
-}

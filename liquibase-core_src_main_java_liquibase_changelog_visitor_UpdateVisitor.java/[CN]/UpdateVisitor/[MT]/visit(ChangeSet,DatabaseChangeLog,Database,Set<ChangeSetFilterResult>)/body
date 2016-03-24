@@ -3,6 +3,7 @@
   log.debug("Running Changeset:" + changeSet);
   fireWillRun(changeSet,databaseChangeLog,database,runStatus);
   ExecType execType=null;
+  ObjectQuotingStrategy previousStr=this.database.getObjectQuotingStrategy();
   try {
     execType=changeSet.execute(databaseChangeLog,execListener,this.database);
   }
@@ -14,7 +15,7 @@
     execType=ChangeSet.ExecType.RERAN;
   }
   fireRan(changeSet,databaseChangeLog,database,execType);
-  this.database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
+  this.database.setObjectQuotingStrategy(previousStr);
   this.database.markChangeSetExecStatus(changeSet,execType);
   this.database.commit();
 }

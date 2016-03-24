@@ -1,0 +1,8 @@
+{
+  tmpFile=File.createTempFile("changeExecListener",".properties");
+  FileOutputStream out=new FileOutputStream(tmpFile);
+  Properties properties=new Properties();
+  properties.put("test","value");
+  properties.put("exclusions","table.name, table2.name2");
+  properties.store(out,"");
+}

@@ -3,7 +3,8 @@
     return null;
   }
   try {
-    return ExecutorService.getInstance().getExecutor(this).queryForObject(new RawCallStatement("call current_schema"),String.class);
+    String currentSchemaStatement=getConnectionSchemaNameCallStatement();
+    return ExecutorService.getInstance().getExecutor(this).queryForObject(new RawCallStatement(currentSchemaStatement),String.class);
   }
  catch (  Exception e) {
     LogFactory.getLogger().info("Error getting default schema",e);

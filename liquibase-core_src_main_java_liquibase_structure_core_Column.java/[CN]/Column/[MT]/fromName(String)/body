@@ -1,0 +1,13 @@
+{
+  columnName=columnName.trim();
+  Boolean descending=null;
+  if (columnName.matches("(?i).*\\s+DESC")) {
+    columnName=columnName.replaceFirst("(?i)\\s+DESC$","");
+    descending=true;
+  }
+ else   if (columnName.matches("(?i).*\\s+ASC")) {
+    columnName=columnName.replaceFirst("(?i)\\s+ASC$","");
+    descending=false;
+  }
+  return new Column(columnName).setDescending(descending);
+}

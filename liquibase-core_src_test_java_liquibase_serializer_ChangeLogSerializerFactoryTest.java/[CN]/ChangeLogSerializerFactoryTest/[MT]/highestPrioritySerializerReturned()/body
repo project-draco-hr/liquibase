@@ -1,0 +1,19 @@
+{
+  ChangeLogSerializerFactory factory=ChangeLogSerializerFactory.getInstance();
+  XMLChangeLogSerializer highestPriority=new XMLChangeLogSerializer(){
+    @Override public int getPriority(){
+      return super.getPriority() + 4;
+    }
+  }
+;
+  factory.register(highestPriority);
+  XMLChangeLogSerializer higherPriority=new XMLChangeLogSerializer(){
+    @Override public int getPriority(){
+      return super.getPriority() + 1;
+    }
+  }
+;
+  factory.register(higherPriority);
+  assertSame(highestPriority,factory.getSerializer("xml"));
+  assertEquals(3,factory.getSerializers().get("xml").size());
+}

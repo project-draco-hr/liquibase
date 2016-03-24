@@ -1,6 +1,6 @@
 {
   for (  CheckSum validCheckSum : validCheckSums) {
-    if (validCheckSum.toString().equalsIgnoreCase("1:any")) {
+    if (validCheckSum.toString().equalsIgnoreCase("1:any") || validCheckSum.toString().equalsIgnoreCase("1:all") || validCheckSum.toString().equalsIgnoreCase("1:*")) {
       return true;
     }
   }
@@ -15,7 +15,7 @@
     return true;
   }
   for (  CheckSum validCheckSum : validCheckSums) {
-    if (currentMd5Sum.equals(validCheckSum)) {
+    if (currentMd5Sum.equals(validCheckSum) || storedCheckSum.equals(validCheckSum)) {
       return true;
     }
   }

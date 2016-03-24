@@ -1,4 +1,0 @@
-{
-  Map<String,ChangeLogSerializer> generators=ChangeLogSerializerFactory.getInstance().getSerializers();
-  assertEquals(5,generators.size());
-}

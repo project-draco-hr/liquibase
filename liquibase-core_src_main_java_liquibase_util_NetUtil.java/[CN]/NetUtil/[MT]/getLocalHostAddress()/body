@@ -1,18 +1,9 @@
 {
-  String osName=System.getProperty("os.name");
-  if (osName != null && osName.toLowerCase().contains("windows")) {
-    return InetAddress.getLocalHost().getHostAddress();
+  try {
+    return getLocalHost().getHostAddress();
   }
-  InetAddress lch=null;
-  Enumeration<NetworkInterface> e=NetworkInterface.getNetworkInterfaces();
-  while (e.hasMoreElements()) {
-    NetworkInterface i=e.nextElement();
-    Enumeration<InetAddress> ie=i.getInetAddresses();
-    if (!ie.hasMoreElements()) {
-      break;
-    }
-    lch=ie.nextElement();
-    if (!lch.isLoopbackAddress())     break;
+ catch (  Throwable e) {
+    LogFactory.getInstance().getLog().debug("Error getting hostname",e);
+    return "unknown";
   }
-  return lch == null ? null : lch.getHostAddress();
 }

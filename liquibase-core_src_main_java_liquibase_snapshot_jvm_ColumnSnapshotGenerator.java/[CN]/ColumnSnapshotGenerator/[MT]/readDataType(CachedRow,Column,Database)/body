@@ -1,9 +1,10 @@
 {
   if (database instanceof OracleDatabase) {
-    String dataType=columnMetadataResultSet.getString("DATA_TYPE");
+    String dataType=columnMetadataResultSet.getString("DATA_TYPE_NAME");
     dataType=dataType.replace("VARCHAR2","VARCHAR");
     dataType=dataType.replace("NVARCHAR2","NVARCHAR");
     DataType type=new DataType(dataType);
+    type.setDataTypeId(columnMetadataResultSet.getInt("DATA_TYPE"));
     if (dataType.equalsIgnoreCase("NUMBER")) {
       type.setColumnSize(columnMetadataResultSet.getInt("DATA_PRECISION"));
       type.setDecimalDigits(columnMetadataResultSet.getInt("DATA_SCALE"));
@@ -22,7 +23,7 @@
         DataType.ColumnSizeUnit unit=null;
         if ("C".equals(charUsed)) {
           unit=DataType.ColumnSizeUnit.CHAR;
-          type.setColumnSize(type.getColumnSize());
+          type.setColumnSize(columnMetadataResultSet.getInt("CHAR_LENGTH"));
         }
  else         if ("B".equals(charUsed)) {
           unit=DataType.ColumnSizeUnit.BYTE;
@@ -33,6 +34,23 @@
     return type;
   }
   String columnTypeName=(String)columnMetadataResultSet.get("TYPE_NAME");
+  if (database instanceof MSSQLDatabase) {
+    if (columnTypeName.equalsIgnoreCase("numeric() identity")) {
+      columnTypeName="numeric";
+    }
+ else     if (columnTypeName.equalsIgnoreCase("xml")) {
+      columnMetadataResultSet.set("COLUMN_SIZE",null);
+      columnMetadataResultSet.set("DECIMAL_DIGITS",null);
+    }
+ else     if (columnTypeName.equalsIgnoreCase("datetimeoffset")) {
+      columnMetadataResultSet.set("COLUMN_SIZE",columnMetadataResultSet.getInt("DECIMAL_DIGITS"));
+      columnMetadataResultSet.set("DECIMAL_DIGITS",null);
+    }
+ else     if (columnTypeName.equalsIgnoreCase("time")) {
+      columnMetadataResultSet.set("COLUMN_SIZE",columnMetadataResultSet.getInt("DECIMAL_DIGITS"));
+      columnMetadataResultSet.set("DECIMAL_DIGITS",null);
+    }
+  }
   if (database instanceof FirebirdDatabase) {
     if (columnTypeName.equals("BLOB SUB_TYPE 0")) {
       columnTypeName="BLOB";

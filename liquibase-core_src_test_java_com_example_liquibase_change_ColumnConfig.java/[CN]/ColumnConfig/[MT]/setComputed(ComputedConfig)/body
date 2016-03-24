@@ -1,0 +1,4 @@
+{
+  this.computed=computed;
+  return this;
+}

@@ -1,0 +1,3 @@
+{
+  return inserts.toArray(new InsertStatement[0]);
+}

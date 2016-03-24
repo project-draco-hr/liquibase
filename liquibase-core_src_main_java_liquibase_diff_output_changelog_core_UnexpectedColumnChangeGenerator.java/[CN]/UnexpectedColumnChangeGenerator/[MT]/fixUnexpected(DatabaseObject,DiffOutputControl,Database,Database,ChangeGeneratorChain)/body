@@ -1,5 +1,8 @@
 {
   Column column=(Column)unexpectedObject;
+  if (column.getComputed() != null && column.getComputed()) {
+    return null;
+  }
   if (column.getRelation() instanceof View) {
     return null;
   }

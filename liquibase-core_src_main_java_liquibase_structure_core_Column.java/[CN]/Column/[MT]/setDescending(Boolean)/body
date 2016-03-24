@@ -1,0 +1,5 @@
+{
+  this.descending=descending;
+  setAttribute("descending",descending);
+  return this;
+}

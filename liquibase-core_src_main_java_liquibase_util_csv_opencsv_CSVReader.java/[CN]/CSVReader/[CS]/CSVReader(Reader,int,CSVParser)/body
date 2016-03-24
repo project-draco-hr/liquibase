@@ -1,0 +1,3 @@
+{
+  this(reader,line,csvParser,DEFAULT_KEEP_CR,DEFAULT_VERIFY_READER);
+}

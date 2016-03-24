@@ -1,0 +1,4 @@
+{
+  this.uniqueConstraints=uniqueConstraints;
+  return this;
+}

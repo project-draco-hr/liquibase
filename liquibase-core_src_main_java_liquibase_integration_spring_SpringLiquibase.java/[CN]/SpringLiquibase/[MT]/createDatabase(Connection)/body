@@ -1,7 +1,0 @@
-{
-  Database database=DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(c));
-  if (StringUtils.trimToNull(this.defaultSchema) != null) {
-    database.setDefaultSchemaName(this.defaultSchema);
-  }
-  return database;
-}

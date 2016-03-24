@@ -1,0 +1,6 @@
+{
+  ValidationErrors validationErrors=new ValidationErrors();
+  validationErrors.checkRequiredField("tableName",insertStatementSet.peek().getTableName());
+  validationErrors.checkRequiredField("columns",insertStatementSet.peek().getColumnValues());
+  return validationErrors;
+}

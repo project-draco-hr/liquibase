@@ -1,3 +1,3 @@
 {
-  return "Adaptive Server Anywhere".equalsIgnoreCase(conn.getDatabaseProductName()) || "SQL Anywhere".equalsIgnoreCase(conn.getDatabaseProductName()) || "Adaptive Server IQ".equalsIgnoreCase(conn.getDatabaseProductName());
+  return "Adaptive Server Anywhere".equalsIgnoreCase(conn.getDatabaseProductName()) || "SQL Anywhere".equalsIgnoreCase(conn.getDatabaseProductName()) || "Adaptive Server IQ".equalsIgnoreCase(conn.getDatabaseProductName())|| "Sybase IQ".equalsIgnoreCase(conn.getDatabaseProductName());
 }

@@ -1,0 +1,6 @@
+{
+  UpdateExecutablePreparedStatement statement=new UpdateExecutablePreparedStatement(database,null,null,"DATABASECHANGELOG",new ArrayList<ColumnConfig>(asList(new ColumnConfig().setName("MD5SUM").setValue("7:e27bf9c0c2313160ef960a15d44ced47"))),changeSet,resourceAccessor).setWhereClause(":name = :value AND :name = :value AND :name = :value").addWhereColumnName("ID").addWhereColumnName("AUTHOR").addWhereColumnName("FILENAME").addWhereParameters("SYPA: AUTO_START t????p INT -> TEXT, vaartus 0 00 17 * * ?","martin","db/changelog.xml");
+  statement.execute(preparedStatementFactory);
+  verify(connection).prepareStatement("UPDATE [DATABASECHANGELOG] " + "SET [MD5SUM] = ? " + "WHERE [ID] = N'SYPA: AUTO_START t????p INT -> TEXT, vaartus 0 00 17 * * ?' "+ "AND [AUTHOR] = 'martin' "+ "AND [FILENAME] = 'db/changelog.xml'");
+  verify(ps).setString(1,"7:e27bf9c0c2313160ef960a15d44ced47");
+}

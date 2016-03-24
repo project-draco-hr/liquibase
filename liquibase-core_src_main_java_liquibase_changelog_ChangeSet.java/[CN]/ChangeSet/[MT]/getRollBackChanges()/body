@@ -1,3 +1,0 @@
-{
-  return rollBackChanges.toArray(new Change[rollBackChanges.size()]);
-}

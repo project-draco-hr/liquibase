@@ -17,6 +17,9 @@
     }
     base=baseFile.toURI().getPath();
   }
+ else   if (baseUrl.toExternalForm().startsWith("jar:file:")) {
+    return convertToPath(new File(relativeTo).getParent() + '/' + path);
+  }
  else {
     base=relativeTo;
   }

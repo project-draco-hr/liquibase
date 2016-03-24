@@ -1,7 +1,0 @@
-{
-  String version=super.getVersion();
-  if (version == null) {
-    return "9.3.2-3";
-  }
-  return version;
-}

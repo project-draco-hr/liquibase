@@ -1,0 +1,19 @@
+{
+  mark(MAX_CHAR_SIZE_IN_BYTES);
+  int char1=super.read();
+  if (char1 == '\r' || char1 == '\n') {
+    mark(MAX_CHAR_SIZE_IN_BYTES);
+  }
+ else {
+    reset();
+    return false;
+  }
+  int char2=super.read();
+  if (char2 == '\n') {
+    return true;
+  }
+ else {
+    reset();
+    return true;
+  }
+}

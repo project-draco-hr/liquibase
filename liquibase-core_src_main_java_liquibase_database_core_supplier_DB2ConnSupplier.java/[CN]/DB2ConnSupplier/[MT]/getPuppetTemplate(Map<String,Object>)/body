@@ -1,8 +1,0 @@
-{
-  if (isWindows()) {
-    return new ConfigTemplate("liquibase/sdk/vagrant/supplier/db2/db2-windows.puppet.vm",context);
-  }
- else {
-    return new ConfigTemplate("liquibase/sdk/vagrant/supplier/db2/db2-linux.puppet.vm",context);
-  }
-}

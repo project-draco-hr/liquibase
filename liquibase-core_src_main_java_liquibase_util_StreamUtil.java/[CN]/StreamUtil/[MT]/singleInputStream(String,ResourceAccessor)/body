@@ -4,10 +4,24 @@
     return null;
   }
   if (streams.size() != 1) {
-    for (    InputStream stream : streams) {
-      stream.close();
+    if (streams.size() > 1 && path != null && path.startsWith("liquibase/parser/core/xml/") && path.endsWith(".xsd")) {
+      LogFactory.getLogger().debug("Found " + streams.size() + " files that match "+ path+ ", but choosing one at random.");
+      InputStream returnStream=null;
+      for (      InputStream stream : streams) {
+        if (returnStream == null) {
+          returnStream=stream;
+        }
+ else {
+          stream.close();
+        }
+      }
     }
-    throw new IOException("Found " + streams.size() + " files that match "+ path);
+ else {
+      for (      InputStream stream : streams) {
+        stream.close();
+      }
+      throw new IOException("Found " + streams.size() + " files that match "+ path);
+    }
   }
   return streams.iterator().next();
 }

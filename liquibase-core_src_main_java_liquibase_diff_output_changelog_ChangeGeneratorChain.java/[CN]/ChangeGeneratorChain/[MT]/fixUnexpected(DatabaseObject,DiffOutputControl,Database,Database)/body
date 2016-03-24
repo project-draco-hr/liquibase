@@ -2,6 +2,9 @@
   if (unexpectedObject == null) {
     return null;
   }
+  if (control.getObjectChangeFilter() != null && !control.getObjectChangeFilter().includeUnexpected(unexpectedObject,referenceDatabase,comparisionDatabase)) {
+    return null;
+  }
   if (changeGenerators == null) {
     return null;
   }

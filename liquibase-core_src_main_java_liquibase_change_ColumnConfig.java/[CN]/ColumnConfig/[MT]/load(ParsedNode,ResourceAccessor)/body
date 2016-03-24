@@ -1,4 +1,9 @@
 {
+  for (  ParsedNode child : parsedNode.getChildren()) {
+    if (!ObjectUtil.hasProperty(this,child.getName())) {
+      throw new ParsedNodeException("Unexpected node: " + child.getName());
+    }
+  }
   name=parsedNode.getChildValue(null,"name",String.class);
   computed=parsedNode.getChildValue(null,"computed",Boolean.class);
   type=parsedNode.getChildValue(null,"type",String.class);
@@ -7,6 +12,7 @@
   startWith=parsedNode.getChildValue(null,"startWith",BigInteger.class);
   incrementBy=parsedNode.getChildValue(null,"incrementBy",BigInteger.class);
   remarks=parsedNode.getChildValue(null,"remarks",String.class);
+  descending=parsedNode.getChildValue(null,"descending",Boolean.class);
   value=parsedNode.getChildValue(null,"value",String.class);
   if (value == null) {
     value=StringUtils.trimToNull((String)parsedNode.getValue());

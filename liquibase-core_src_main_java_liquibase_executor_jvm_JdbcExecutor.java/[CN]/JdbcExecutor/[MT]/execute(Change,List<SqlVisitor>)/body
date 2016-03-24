@@ -1,8 +1,0 @@
-{
-  SqlStatement[] sqlStatements=change.generateStatements(database);
-  if (sqlStatements != null) {
-    for (    SqlStatement statement : sqlStatements) {
-      execute(statement,sqlVisitors);
-    }
-  }
-}

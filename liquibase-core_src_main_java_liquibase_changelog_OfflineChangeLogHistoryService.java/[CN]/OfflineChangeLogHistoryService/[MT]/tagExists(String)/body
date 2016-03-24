@@ -1,3 +1,9 @@
 {
+  List<RanChangeSet> ranChangeSets=getRanChangeSets();
+  for (  RanChangeSet changeset : ranChangeSets) {
+    if (tag.equals(changeset.getTag())) {
+      return true;
+    }
+  }
   return false;
 }

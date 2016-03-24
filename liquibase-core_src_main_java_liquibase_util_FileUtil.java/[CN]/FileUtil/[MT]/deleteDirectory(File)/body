@@ -1,9 +1,0 @@
-{
-  if (!directory.exists()) {
-    return;
-  }
-  cleanDirectory(directory);
-  if (!directory.delete()) {
-    throw new IOException("Cannot delete " + directory.getAbsolutePath());
-  }
-}

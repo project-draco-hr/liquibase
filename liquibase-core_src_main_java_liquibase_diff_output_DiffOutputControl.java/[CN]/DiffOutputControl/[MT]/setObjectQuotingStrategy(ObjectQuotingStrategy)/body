@@ -1,0 +1,4 @@
+{
+  this.objectQuotingStrategy=objectQuotingStrategy;
+  return this;
+}

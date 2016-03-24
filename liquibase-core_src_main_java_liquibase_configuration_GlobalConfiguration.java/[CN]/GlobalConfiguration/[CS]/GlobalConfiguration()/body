@@ -1,6 +1,6 @@
 {
   super("liquibase");
-  getContainer().addProperty(SHOULD_RUN,Boolean.class).setDescription("Should Liquibase commands execute").setDefaultValue(true).addAlias("liquibase.should.run");
+  getContainer().addProperty(SHOULD_RUN,Boolean.class).setDescription("Should Liquibase commands execute").setDefaultValue(true).addAlias("should.run");
   getContainer().addProperty(DATABASECHANGELOG_TABLE_NAME,String.class).setDescription("Name of table to use for tracking change history").setDefaultValue("DATABASECHANGELOG");
   getContainer().addProperty(DATABASECHANGELOGLOCK_TABLE_NAME,String.class).setDescription("Name of table to use for tracking concurrent liquibase usage").setDefaultValue("DATABASECHANGELOGLOCK");
   getContainer().addProperty(CHANGELOGLOCK_WAIT_TIME,Long.class).setDescription("Number of minutes to wait for the changelog lock to be available before giving up").setDefaultValue(5);

@@ -1,5 +1,0 @@
-{
-  HashSet<String> forges=new HashSet<String>();
-  forges.add("http://forge.puppetlabs.com");
-  return forges;
-}

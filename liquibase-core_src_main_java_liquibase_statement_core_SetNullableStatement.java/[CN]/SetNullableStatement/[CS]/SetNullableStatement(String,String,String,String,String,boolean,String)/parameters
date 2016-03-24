@@ -1,0 +1,7 @@
+String catalogName
+String schemaName
+String tableName
+String columnName
+String columnDataType
+boolean nullable
+String constraintName

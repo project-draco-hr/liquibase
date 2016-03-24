@@ -1,0 +1,4 @@
+{
+  this.objectChangeFilter=objectChangeFilter;
+  return this;
+}

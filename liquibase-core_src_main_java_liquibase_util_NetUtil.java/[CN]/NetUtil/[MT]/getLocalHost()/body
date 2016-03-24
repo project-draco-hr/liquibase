@@ -1,0 +1,24 @@
+{
+  String osName=System.getProperty("os.name");
+  if (osName != null && osName.toLowerCase().contains("windows")) {
+    return InetAddress.getLocalHost();
+  }
+  InetAddress loopback=null;
+  Enumeration<NetworkInterface> e=NetworkInterface.getNetworkInterfaces();
+  while (e.hasMoreElements()) {
+    NetworkInterface i=e.nextElement();
+    if (i.isUp() && !i.isPointToPoint()) {
+      Enumeration<InetAddress> ie=i.getInetAddresses();
+      while (ie.hasMoreElements()) {
+        InetAddress lch=ie.nextElement();
+        if (lch.isLoopbackAddress()) {
+          loopback=lch;
+        }
+ else         if (!lch.isLinkLocalAddress()) {
+          return lch;
+        }
+      }
+    }
+  }
+  return loopback;
+}

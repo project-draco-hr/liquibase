@@ -1,5 +1,5 @@
 {
-  RanChangeSet ranChangeSet=ranIndex.get(changeSet.toString(false));
+  RanChangeSet ranChangeSet=findChangeSet(changeSet);
   boolean ran=ranChangeSet != null;
   boolean shouldValidate=!ran || changeSet.shouldRunOnChange() || changeSet.shouldAlwaysRun();
   for (  Change change : changeSet.getChanges()) {
@@ -31,7 +31,7 @@
   if (ranChangeSet != null) {
     if (!changeSet.isCheckSumValid(ranChangeSet.getLastCheckSum())) {
       if (!changeSet.shouldRunOnChange()) {
-        invalidMD5Sums.add(changeSet);
+        invalidMD5Sums.add(changeSet.toString(false) + " was: " + ranChangeSet.getLastCheckSum().toString()+ " but is now: "+ changeSet.generateCheckSum().toString());
       }
     }
   }

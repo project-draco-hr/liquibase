@@ -1,0 +1,3 @@
+{
+  return STANDARD_CHANGELOG_NAMESPACE;
+}

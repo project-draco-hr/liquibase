@@ -1,0 +1,16 @@
+{
+  try {
+    Field foundField=findField(object,field);
+    Type dataType=foundField.getGenericType();
+    if (dataType instanceof Class) {
+      return (Class)dataType;
+    }
+    if (dataType instanceof ParameterizedType) {
+      return (Class)((ParameterizedType)dataType).getRawType();
+    }
+    return Object.class;
+  }
+ catch (  Exception e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

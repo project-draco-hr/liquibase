@@ -1,0 +1,20 @@
+{
+  ChangeLogParameter result=null;
+  List<ChangeLogParameter> found=new ArrayList<ChangeLogParameter>();
+  for (  ChangeLogParameter param : changeLogParameters) {
+    if (param.getKey().equalsIgnoreCase(key) && param.isValid()) {
+      found.add(param);
+    }
+  }
+  if (found.size() == 1) {
+    result=found.get(0);
+  }
+ else   if (found.size() > 1) {
+    for (    ChangeLogParameter changeLogParameter : found) {
+      if (changeLogParameter.getChangeLog() == changeLog) {
+        result=changeLogParameter;
+      }
+    }
+  }
+  return result;
+}

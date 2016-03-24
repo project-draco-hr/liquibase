@@ -1,0 +1,8 @@
+{
+  fileNameOrExtension=fileNameOrExtension.replaceAll(".*\\.","");
+  List<SnapshotSerializer> snapshotSerializers=serializers.get(fileNameOrExtension);
+  if (snapshotSerializers == null) {
+    return Collections.emptyList();
+  }
+  return snapshotSerializers;
+}

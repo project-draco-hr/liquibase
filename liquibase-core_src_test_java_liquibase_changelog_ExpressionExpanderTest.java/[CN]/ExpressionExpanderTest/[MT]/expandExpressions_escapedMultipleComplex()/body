@@ -1,5 +1,5 @@
 {
   LiquibaseConfiguration.getInstance().getConfiguration(ChangeLogParserCofiguration.class).setSupportPropertyEscaping(true);
   this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters);
-  assertEquals("${user.name} and ${user.name} are literals but this isn't: " + System.getProperty("user.name"),handler.expandExpressions("${:user.name} and ${:user.name} are literals but this isn't: ${user.name}"));
+  assertEquals("${user.name} and ${user.name} are literals but this isn't: " + System.getProperty("user.name"),handler.expandExpressions("${:user.name} and ${:user.name} are literals but this isn't: ${user.name}",null));
 }

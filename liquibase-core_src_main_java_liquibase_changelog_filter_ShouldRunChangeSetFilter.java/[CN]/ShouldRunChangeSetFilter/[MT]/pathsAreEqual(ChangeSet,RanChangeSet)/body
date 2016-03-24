@@ -1,3 +1,10 @@
 {
-  return getPath(ranChangeSet).equalsIgnoreCase(getPath(changeSet));
+  String ranChangeSetPath=getPath(ranChangeSet);
+  String changeSetPath=getPath(changeSet);
+  if (ranChangeSetPath == null) {
+    return changeSetPath == null;
+  }
+ else {
+    return ranChangeSetPath.equalsIgnoreCase(changeSetPath);
+  }
 }
