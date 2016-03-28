@@ -1,3 +1,0 @@
-{
-  assertNotNull(diffResult.getMissingObject(new Table(change.getCatalogName(),change.getSchemaName(),change.getTableName())));
-}

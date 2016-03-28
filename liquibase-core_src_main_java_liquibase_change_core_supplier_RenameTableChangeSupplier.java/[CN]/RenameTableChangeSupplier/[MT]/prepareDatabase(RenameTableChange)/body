@@ -1,9 +1,0 @@
-{
-  CreateTableChange createTableChange=new CreateTableChange();
-  createTableChange.setCatalogName(change.getCatalogName());
-  createTableChange.setSchemaName(change.getSchemaName());
-  createTableChange.setTableName(change.getOldTableName());
-  createTableChange.addColumn(new ColumnConfig().setName("id").setType("int"));
-  createTableChange.addColumn(new ColumnConfig().setName("other_column").setType("varchar(10)"));
-  return new Change[]{createTableChange};
-}

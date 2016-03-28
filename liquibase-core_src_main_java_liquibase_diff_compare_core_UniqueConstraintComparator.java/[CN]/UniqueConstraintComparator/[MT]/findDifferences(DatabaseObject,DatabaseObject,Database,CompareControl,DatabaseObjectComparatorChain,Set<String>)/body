@@ -19,6 +19,6 @@
     }
   }
 );
-  differences.compare("backingIndex",databaseObject1,databaseObject2,new ObjectDifferences.StandardCompareFunction(accordingTo));
+  differences.compare("backingIndex",databaseObject1,databaseObject2,new ObjectDifferences.StandardCompareFunction(chain.getSchemaComparisons(),accordingTo));
   return differences;
 }

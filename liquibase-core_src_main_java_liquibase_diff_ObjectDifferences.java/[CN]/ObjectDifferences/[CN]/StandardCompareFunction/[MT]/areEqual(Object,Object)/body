@@ -6,7 +6,7 @@
     return false;
   }
   if (referenceValue instanceof DatabaseObject && compareToValue instanceof DatabaseObject) {
-    return DatabaseObjectComparatorFactory.getInstance().isSameObject((DatabaseObject)referenceValue,(DatabaseObject)compareToValue,accordingTo);
+    return DatabaseObjectComparatorFactory.getInstance().isSameObject((DatabaseObject)referenceValue,(DatabaseObject)compareToValue,schemaComparisons,accordingTo);
   }
  else {
     if ((referenceValue instanceof Number) && (compareToValue instanceof Number) && !referenceValue.getClass().equals(compareToValue.getClass())) {

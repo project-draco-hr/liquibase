@@ -1,7 +1,7 @@
 {
   PrimaryKey pk=(PrimaryKey)databaseObject;
   if (databaseObject.getName() == null) {
-    return DatabaseObjectComparatorFactory.getInstance().hash(pk.getTable(),accordingTo);
+    return DatabaseObjectComparatorFactory.getInstance().hash(pk.getTable(),chain.getSchemaComparisons(),accordingTo);
   }
  else {
     if (pk.getTable() == null || pk.getTable().getName() == null) {

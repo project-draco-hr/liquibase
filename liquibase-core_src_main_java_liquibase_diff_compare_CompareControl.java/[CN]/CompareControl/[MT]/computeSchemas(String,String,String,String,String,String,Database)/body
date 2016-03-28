@@ -1,0 +1,38 @@
+{
+  if (schemaNames == null && referenceSchemaNames == null) {
+    ;
+  }
+ else   if (schemaNames == null && referenceSchemaNames != null) {
+    schemaNames=referenceSchemaNames;
+  }
+ else   if (schemaNames != null && referenceSchemaNames == null) {
+    referenceSchemaNames=schemaNames;
+  }
+  ComputedSchemas returnObj=new ComputedSchemas();
+  if (referenceSchemaNames == null) {
+    returnObj.finalSchemaComparisons=new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(referenceDefaultCatalogName,referenceDefaultSchemaName),new CatalogAndSchema(defaultCatalogName,defaultSchemaName))};
+    returnObj.finalTargetSchemas=new CatalogAndSchema[]{new CatalogAndSchema(defaultCatalogName,defaultSchemaName)};
+  }
+ else {
+    List<SchemaComparison> schemaComparisons=new ArrayList<CompareControl.SchemaComparison>();
+    List<CatalogAndSchema> referenceSchemas=new ArrayList<CatalogAndSchema>();
+    List<CatalogAndSchema> targetSchemas=new ArrayList<CatalogAndSchema>();
+    List<String> splitReferenceSchemaNames=StringUtils.splitAndTrim(referenceSchemaNames,",");
+    List<String> splitSchemaNames=StringUtils.splitAndTrim(schemaNames,",");
+    if (splitReferenceSchemaNames.size() != splitSchemaNames.size()) {
+      throw new UnexpectedLiquibaseException("You must specify the same number of schemas in --schemas and --referenceSchemas");
+    }
+    for (int i=0; i < splitReferenceSchemaNames.size(); i++) {
+      String referenceSchema=splitReferenceSchemaNames.get(i);
+      String targetSchema=splitSchemaNames.get(i);
+      CatalogAndSchema correctedTargetSchema=new CatalogAndSchema(null,targetSchema).customize(database);
+      CatalogAndSchema correctedReferenceSchema=new CatalogAndSchema(null,referenceSchema).customize(database);
+      schemaComparisons.add(new CompareControl.SchemaComparison(correctedReferenceSchema,correctedTargetSchema));
+      referenceSchemas.add(correctedReferenceSchema);
+      targetSchemas.add(correctedTargetSchema);
+    }
+    returnObj.finalSchemaComparisons=schemaComparisons.toArray(new CompareControl.SchemaComparison[schemaComparisons.size()]);
+    returnObj.finalTargetSchemas=targetSchemas.toArray(new CatalogAndSchema[targetSchemas.size()]);
+  }
+  return returnObj;
+}

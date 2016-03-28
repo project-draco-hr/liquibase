@@ -1,0 +1,4 @@
+DatabaseObject object1
+DatabaseObject object2
+CompareControl.SchemaComparison[] schemaComparisons
+Database accordingTo

@@ -11,7 +11,7 @@
           for (          DatabaseObject object : this.get(type)) {
             if (object.getSchema() == null) {
               if (object instanceof Catalog) {
-                if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,((Schema)example).getCatalog(),database)) {
+                if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,((Schema)example).getCatalog(),null,database)) {
                   returnSnapshot.allFound.add(object);
                 }
               }
@@ -20,7 +20,7 @@
               }
             }
  else {
-              if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object.getSchema(),example,database)) {
+              if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object.getSchema(),example,null,database)) {
                 returnSnapshot.allFound.add(object);
               }
             }

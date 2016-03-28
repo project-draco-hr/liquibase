@@ -7,7 +7,7 @@
     collectionMap=new HashMap<String,Set<DatabaseObject>>();
     cache.put(databaseObject.getClass(),collectionMap);
   }
-  String[] hashes=DatabaseObjectComparatorFactory.getInstance().hash(databaseObject,database);
+  String[] hashes=DatabaseObjectComparatorFactory.getInstance().hash(databaseObject,null,database);
   for (  String hash : hashes) {
     Set<DatabaseObject> collection=collectionMap.get(hash);
     if (collection == null) {

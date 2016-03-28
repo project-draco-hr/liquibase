@@ -1,0 +1,7 @@
+String schemaNames
+String referenceSchemaNames
+String defaultCatalogName
+String defaultSchemaName
+String referenceDefaultCatalogName
+String referenceDefaultSchemaName
+Database database

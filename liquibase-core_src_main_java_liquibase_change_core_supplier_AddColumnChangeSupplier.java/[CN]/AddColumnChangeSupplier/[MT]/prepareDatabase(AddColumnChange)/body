@@ -1,8 +1,0 @@
-{
-  CreateTableChange createTableChange=new CreateTableChange();
-  createTableChange.setCatalogName(change.getCatalogName());
-  createTableChange.setSchemaName(change.getSchemaName());
-  createTableChange.setTableName(change.getTableName());
-  createTableChange.addColumn(new ColumnConfig().setName("other_col").setType("int"));
-  return new Change[]{createTableChange};
-}

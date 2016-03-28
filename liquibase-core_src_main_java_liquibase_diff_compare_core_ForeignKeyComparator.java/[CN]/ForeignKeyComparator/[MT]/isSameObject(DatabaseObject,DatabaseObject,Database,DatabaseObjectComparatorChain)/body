@@ -23,7 +23,7 @@
  else {
       columnsTheSame=StringUtils.join(thisForeignKey.getForeignKeyColumns(),",",formatter).equalsIgnoreCase(StringUtils.join(otherForeignKey.getForeignKeyColumns(),",",formatter)) && StringUtils.join(thisForeignKey.getPrimaryKeyColumns(),",",formatter).equalsIgnoreCase(StringUtils.join(otherForeignKey.getPrimaryKeyColumns(),",",formatter));
     }
-    return columnsTheSame && DatabaseObjectComparatorFactory.getInstance().isSameObject(thisForeignKey.getForeignKeyTable(),otherForeignKey.getForeignKeyTable(),accordingTo) && DatabaseObjectComparatorFactory.getInstance().isSameObject(thisForeignKey.getPrimaryKeyTable(),otherForeignKey.getPrimaryKeyTable(),accordingTo);
+    return columnsTheSame && DatabaseObjectComparatorFactory.getInstance().isSameObject(thisForeignKey.getForeignKeyTable(),otherForeignKey.getForeignKeyTable(),chain.getSchemaComparisons(),accordingTo) && DatabaseObjectComparatorFactory.getInstance().isSameObject(thisForeignKey.getPrimaryKeyTable(),otherForeignKey.getPrimaryKeyTable(),chain.getSchemaComparisons(),accordingTo);
   }
   return false;
 }

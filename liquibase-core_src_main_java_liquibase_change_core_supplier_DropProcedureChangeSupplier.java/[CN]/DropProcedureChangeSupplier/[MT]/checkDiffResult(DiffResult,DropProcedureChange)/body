@@ -1,3 +1,0 @@
-{
-  assertNotNull(diffResult.getMissingObject(new StoredProcedure(change.getCatalogName(),change.getSchemaName(),change.getProcedureName())));
-}

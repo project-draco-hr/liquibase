@@ -1,0 +1,4 @@
+boolean includeCatalog
+boolean includeSchema
+boolean includeTablespace
+CompareControl.SchemaComparison[] schemaComparisons

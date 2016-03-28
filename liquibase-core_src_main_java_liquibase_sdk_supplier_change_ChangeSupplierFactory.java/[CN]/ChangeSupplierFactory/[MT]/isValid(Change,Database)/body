@@ -1,3 +1,0 @@
-{
-  return getSupplier(change).isValid(change,database);
-}

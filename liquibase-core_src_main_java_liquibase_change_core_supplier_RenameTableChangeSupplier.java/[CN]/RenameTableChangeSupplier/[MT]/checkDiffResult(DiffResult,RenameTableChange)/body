@@ -1,4 +1,0 @@
-{
-  assertNotNull(diffResult.getMissingObject(new Table(change.getCatalogName(),change.getSchemaName(),change.getOldTableName())));
-  assertNotNull(diffResult.getUnexpectedObject(new Table(change.getCatalogName(),change.getSchemaName(),change.getNewTableName())));
-}

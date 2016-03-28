@@ -1,10 +1,10 @@
 {
   if (object instanceof Table) {
     Schema liquibaseSchema=new Schema(getLiquibaseCatalogName(),getLiquibaseSchemaName());
-    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,new Table().setName(getDatabaseChangeLogTableName()).setSchema(liquibaseSchema),this)) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,new Table().setName(getDatabaseChangeLogTableName()).setSchema(liquibaseSchema),null,this)) {
       return true;
     }
-    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,new Table().setName(getDatabaseChangeLogLockTableName()).setSchema(liquibaseSchema),this)) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(object,new Table().setName(getDatabaseChangeLogLockTableName()).setSchema(liquibaseSchema),null,this)) {
       return true;
     }
     return false;

@@ -1,0 +1,4 @@
+{
+  this.comparators=comparators;
+  this.schemaComparisons=schemaComparisons;
+}
