@@ -1,6 +1,5 @@
 {
   StringClauses clauses=new StringClauses(preserveWhitespace ? "" : " ");
-  int i=0;
   SimpleSqlGrammar t=new SimpleSqlGrammar(new StringReader(sqlBlock));
   try {
     Token token=t.getNextToken();
@@ -16,7 +15,7 @@
         }
       }
  else {
-        clauses.append(token.image + ":" + i++,token.image);
+        clauses.append(token.image);
       }
       token=t.getNextToken();
     }
