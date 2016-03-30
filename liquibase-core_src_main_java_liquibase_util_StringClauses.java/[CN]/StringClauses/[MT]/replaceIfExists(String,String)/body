@@ -1,0 +1,8 @@
+{
+  if (contains(key)) {
+    return replaceImpl(key,StringUtils.trimToEmpty(newValue));
+  }
+ else {
+    return this;
+  }
+}
