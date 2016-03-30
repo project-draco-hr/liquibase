@@ -72,15 +72,15 @@
     return new DatabaseFunction(stringVal.trim());
   }
  else   if (typeId == Types.BIT) {
-    if (stringVal.startsWith("b'")) {
-      stringVal=stringVal.replaceFirst("b'","").replaceFirst("'$","");
+    if (stringVal.startsWith("b'") || stringVal.startsWith("B'")) {
+      stringVal=stringVal.replaceFirst("b'","").replaceFirst("B'","").replaceFirst("'$","");
     }
     stringVal=stringVal.trim();
     if (scanner.hasNextBoolean()) {
       return scanner.nextBoolean();
     }
  else {
-      return new Integer(stringVal);
+      return Integer.valueOf(stringVal);
     }
   }
  else   if (liquibaseDataType instanceof BlobType || typeId == Types.BLOB) {
@@ -234,7 +234,13 @@
     return stringVal;
   }
  else {
-    LogFactory.getLogger().info("Unknown default value: value '" + stringVal + "' type "+ typeName+ " ("+ type+ "), assuming it is a function");
+    if (stringVal.equals("")) {
+      return stringVal;
+    }
+    LogFactory.getLogger().info("Unknown default value: value '" + stringVal + "' type "+ typeName+ " ("+ type+ "). Calling it a function so it's not additionally quoted");
+    if (strippedSingleQuotes) {
+      return new DatabaseFunction("'" + stringVal + "'");
+    }
     return new DatabaseFunction(stringVal);
   }
 }

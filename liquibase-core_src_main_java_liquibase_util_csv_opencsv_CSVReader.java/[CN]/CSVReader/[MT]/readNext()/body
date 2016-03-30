@@ -1,4 +1,20 @@
 {
-  String nextLine=getNextLine();
-  return hasNext ? parseLine(nextLine) : null;
+  String[] result=null;
+  do {
+    String nextLine=getNextLine();
+    if (!hasNext) {
+      return validateResult(result);
+    }
+    String[] r=parser.parseLineMulti(nextLine);
+    if (r.length > 0) {
+      if (result == null) {
+        result=r;
+      }
+ else {
+        result=combineResultsFromMultipleReads(result,r);
+      }
+    }
+  }
+ while (parser.isPending());
+  return validateResult(result);
 }

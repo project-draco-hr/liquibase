@@ -1,0 +1,11 @@
+{
+  if (globalParam == true) {
+    ChangeLogParameter param=findParameter(key,null);
+    if (param == null) {
+      changeLogParameters.add(new ChangeLogParameter(key,value,contexts,labels,databases,globalParam,changeLog));
+    }
+  }
+ else {
+    changeLogParameters.add(new ChangeLogParameter(key,value,contexts,labels,databases,globalParam,changeLog));
+  }
+}

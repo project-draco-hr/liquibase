@@ -1,0 +1,4 @@
+{
+  final String something="liquibase/delta-changelogs/";
+  Assert.assertEquals("null basePath must not kill the result of concatenation",FilenameUtils.concat(null,something),something);
+}

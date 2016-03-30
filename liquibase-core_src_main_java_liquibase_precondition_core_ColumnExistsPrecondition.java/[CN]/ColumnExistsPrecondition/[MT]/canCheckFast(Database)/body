@@ -1,0 +1,10 @@
+{
+  if (getCatalogName() != null)   return false;
+  if (!(database.getConnection() instanceof JdbcConnection))   return false;
+  if (getColumnName() == null)   return false;
+  if (!getColumnName().matches("(?i)[a-z][a-z_0-9]*"))   return false;
+  if (!(getSchemaName() != null || database.getDefaultSchemaName() != null)) {
+    return false;
+  }
+  return true;
+}

@@ -10,7 +10,17 @@
   Database database=liquibase.getDatabase();
   getLog().info("Generating Change Log from database " + database.toString());
   try {
-    CommandLineUtils.doGenerateChangeLog(outputChangeLogFile,database,defaultCatalogName,defaultSchemaName,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataDir),new DiffOutputControl(outputDefaultCatalog,outputDefaultSchema,true));
+    DiffOutputControl diffOutputControl=new DiffOutputControl(outputDefaultCatalog,outputDefaultSchema,true);
+    if (diffExcludeObjects != null && diffIncludeObjects != null) {
+      throw new UnexpectedLiquibaseException("Cannot specify both excludeObjects and includeObjects");
+    }
+    if (diffExcludeObjects != null) {
+      diffOutputControl.setObjectChangeFilter(new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.EXCLUDE,diffExcludeObjects));
+    }
+    if (diffIncludeObjects != null) {
+      diffOutputControl.setObjectChangeFilter(new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.INCLUDE,diffIncludeObjects));
+    }
+    CommandLineUtils.doGenerateChangeLog(outputChangeLogFile,database,defaultCatalogName,defaultSchemaName,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataDir),diffOutputControl);
     getLog().info("Output written to Change Log file, " + outputChangeLogFile);
   }
  catch (  IOException e) {

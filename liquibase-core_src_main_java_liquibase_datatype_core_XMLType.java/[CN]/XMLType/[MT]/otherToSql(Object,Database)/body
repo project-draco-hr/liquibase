@@ -1,0 +1,23 @@
+{
+  if (value == null) {
+    return null;
+  }
+  String val=value.toString();
+  if (database instanceof MSSQLDatabase && !StringUtils.isAscii(val)) {
+    return "N'" + database.escapeStringForDatabase(val) + "'";
+  }
+ else   if (database instanceof PostgresDatabase) {
+    try {
+      if (database.getDatabaseMajorVersion() <= 7 || (database.getDatabaseMajorVersion() == 8 && database.getDatabaseMinorVersion() <= 2)) {
+        return "'" + database.escapeStringForDatabase(val) + "'";
+      }
+    }
+ catch (    DatabaseException ignore) {
+    }
+    return "xml '" + database.escapeStringForDatabase(val) + "'";
+  }
+ else   if (database instanceof OracleDatabase) {
+    return "XMLType('" + database.escapeStringForDatabase(val) + "')";
+  }
+  return "'" + database.escapeStringForDatabase(val) + "'";
+}

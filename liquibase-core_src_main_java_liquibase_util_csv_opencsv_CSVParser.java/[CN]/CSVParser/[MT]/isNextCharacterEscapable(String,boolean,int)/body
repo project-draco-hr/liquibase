@@ -1,0 +1,3 @@
+{
+  return inQuotes && nextLine.length() > (i + 1) && isCharacterEscapable(nextLine.charAt(i + 1));
+}

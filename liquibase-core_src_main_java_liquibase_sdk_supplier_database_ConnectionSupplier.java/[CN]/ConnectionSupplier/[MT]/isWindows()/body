@@ -1,3 +1,0 @@
-{
-  return getOs().equalsIgnoreCase(OS_WINDOWS);
-}

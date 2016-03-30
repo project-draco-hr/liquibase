@@ -1,0 +1,4 @@
+{
+  contextClassLoaderXsdStreamResolver.setSuccessor(successor);
+  when(successor.getResourceAsStream(NON_EXISTING_XSD_FILE)).thenReturn(successorValue);
+}

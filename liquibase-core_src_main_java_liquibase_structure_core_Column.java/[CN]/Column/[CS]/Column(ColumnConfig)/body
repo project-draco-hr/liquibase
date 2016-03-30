@@ -1,5 +1,6 @@
 {
   setName(columnConfig.getName());
+  setDescending(columnConfig.getDescending());
   setType(new DataType(columnConfig.getType()));
   if (columnConfig.getDefaultValue() != null) {
     setDefaultValue(columnConfig.getDefaultValueObject());

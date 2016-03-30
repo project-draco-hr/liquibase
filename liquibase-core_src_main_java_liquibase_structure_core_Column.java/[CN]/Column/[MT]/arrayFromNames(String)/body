@@ -5,7 +5,7 @@
   List<String> columnNameList=StringUtils.splitAndTrim(columnNames,",");
   Column[] returnArray=new Column[columnNameList.size()];
   for (int i=0; i < columnNameList.size(); i++) {
-    returnArray[i]=new Column(columnNameList.get(i));
+    returnArray[i]=fromName(columnNameList.get(i));
   }
   return returnArray;
 }

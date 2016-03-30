@@ -1,6 +1,6 @@
 {
   if (getRelation() == null) {
-    return getName();
+    return getName() + (getDescending() != null && getDescending() ? " DESC" : "");
   }
  else {
     String tableOrViewName=getRelation().getName();

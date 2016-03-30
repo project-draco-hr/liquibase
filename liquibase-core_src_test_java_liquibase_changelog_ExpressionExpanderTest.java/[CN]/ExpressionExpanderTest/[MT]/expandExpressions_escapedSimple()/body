@@ -1,5 +1,5 @@
 {
   LiquibaseConfiguration.getInstance().getConfiguration(ChangeLogParserCofiguration.class).setSupportPropertyEscaping(true);
   this.handler=new ChangeLogParameters.ExpressionExpander(changeLogParameters);
-  assertEquals("${user.name}",handler.expandExpressions("${:user.name}"));
+  assertEquals("${user.name}",handler.expandExpressions("${:user.name}",null));
 }

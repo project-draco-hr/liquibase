@@ -1,0 +1,14 @@
+{
+  if (!commentSkipEnabled) {
+    return false;
+  }
+  mark(commentLineStartsWithLength * MAX_CHAR_SIZE_IN_BYTES);
+  for (int i=0; i < commentLineStartsWithLength; i++) {
+    if (commentLineStartsWith.charAt(i) != super.read()) {
+      reset();
+      return false;
+    }
+  }
+  readUntilEndOfLine();
+  return true;
+}

@@ -1,0 +1,9 @@
+{
+  if (number == null) {
+    return null;
+  }
+  if (number instanceof BigDecimal) {
+    return formatNumber(((BigDecimal)number).toPlainString());
+  }
+  return formatNumber(number.toString());
+}

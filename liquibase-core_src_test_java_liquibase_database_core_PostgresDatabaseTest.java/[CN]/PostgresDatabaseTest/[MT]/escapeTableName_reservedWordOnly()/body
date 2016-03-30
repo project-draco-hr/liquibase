@@ -1,0 +1,6 @@
+{
+  Database database=getDatabase();
+  database.setObjectQuotingStrategy(ObjectQuotingStrategy.QUOTE_ONLY_RESERVED_WORDS);
+  assertEquals("\"user\"",database.escapeTableName(null,null,"user"));
+  assertEquals("tableName",database.escapeTableName(null,null,"tableName"));
+}

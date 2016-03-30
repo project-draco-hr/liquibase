@@ -8,5 +8,8 @@
   if (control.getIncludeSchema()) {
     change.setSchemaName(sequence.getSchema().getName());
   }
+  if (comparisonDatabase instanceof PostgresDatabase) {
+    change.setOnlyIfExists(true);
+  }
   return new Change[]{change};
 }

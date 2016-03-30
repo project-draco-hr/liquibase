@@ -1,3 +1,3 @@
 {
-  return new String[]{"yaml"};
+  return new String[]{"yaml","yml"};
 }

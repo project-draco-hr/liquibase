@@ -1,0 +1,5 @@
+{
+  Labels labels=changeSet.getLabels();
+  ContextExpression contexts=changeSet.getContexts();
+  return changeSet.toString(true) + ":" + (labels == null ? null : labels.toString())+ ":"+ (contexts == null ? null : contexts.toString())+ ":"+ StringUtils.join(changeSet.getDbmsSet(),",");
+}

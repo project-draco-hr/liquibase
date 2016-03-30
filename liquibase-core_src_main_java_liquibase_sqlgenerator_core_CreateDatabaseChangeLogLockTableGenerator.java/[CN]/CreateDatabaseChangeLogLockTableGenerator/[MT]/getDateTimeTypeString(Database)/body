@@ -1,0 +1,12 @@
+{
+  if (database instanceof MSSQLDatabase) {
+    try {
+      if (database.getDatabaseMajorVersion() >= 10) {
+        return "datetime2(3)";
+      }
+    }
+ catch (    DatabaseException e) {
+    }
+  }
+  return "datetime";
+}

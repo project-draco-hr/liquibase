@@ -1,0 +1,7 @@
+{
+  IntrospectionContext context=new IntrospectionContext(targetClass);
+  for (  BeanIntrospector introspector : introspectors) {
+    introspector.introspect(context);
+  }
+  return context.getDescriptors();
+}

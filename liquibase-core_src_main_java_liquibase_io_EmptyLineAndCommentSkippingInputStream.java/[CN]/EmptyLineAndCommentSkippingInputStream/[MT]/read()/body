@@ -1,0 +1,6 @@
+{
+  if (isPositionAtStart() || skipIfNewLine()) {
+    skipCommentsAndNewLines();
+  }
+  return super.read();
+}

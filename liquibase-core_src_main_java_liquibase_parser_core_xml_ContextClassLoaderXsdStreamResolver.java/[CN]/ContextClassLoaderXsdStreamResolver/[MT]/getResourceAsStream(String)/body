@@ -1,0 +1,13 @@
+{
+  LOGGER.debug("Trying to load resource from context classloader");
+  if (Thread.currentThread().getContextClassLoader() == null) {
+    LOGGER.debug("Failed to load resource from context classloader");
+    return getSuccessorValue(xsdFile);
+  }
+  InputStream resourceAsStream=Thread.currentThread().getContextClassLoader().getResourceAsStream(xsdFile);
+  if (resourceAsStream == null) {
+    LOGGER.debug("Failed to load resource from context classloader");
+    return getSuccessorValue(xsdFile);
+  }
+  return resourceAsStream;
+}

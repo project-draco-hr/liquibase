@@ -1,0 +1,4 @@
+String fileName
+boolean isRelativePath
+ResourceAccessor resourceAccessor
+ContextExpression includeContexts

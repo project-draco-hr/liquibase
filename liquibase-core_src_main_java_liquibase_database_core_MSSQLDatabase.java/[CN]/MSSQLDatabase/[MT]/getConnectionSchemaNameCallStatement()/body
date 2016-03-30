@@ -1,0 +1,3 @@
+{
+  return "select schema_name()";
+}

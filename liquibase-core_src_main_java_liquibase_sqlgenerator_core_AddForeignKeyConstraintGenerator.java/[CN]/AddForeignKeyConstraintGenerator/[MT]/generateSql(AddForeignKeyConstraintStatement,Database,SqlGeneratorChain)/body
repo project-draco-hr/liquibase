@@ -8,6 +8,8 @@
   if (statement.getOnUpdate() != null) {
     if (database instanceof OracleDatabase) {
     }
+ else     if ((database instanceof MSSQLDatabase) && statement.getOnUpdate().equalsIgnoreCase("RESTRICT")) {
+    }
  else     if (database instanceof InformixDatabase) {
     }
  else {

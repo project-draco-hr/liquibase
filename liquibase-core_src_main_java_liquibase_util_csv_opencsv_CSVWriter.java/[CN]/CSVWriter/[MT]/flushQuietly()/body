@@ -1,0 +1,7 @@
+{
+  try {
+    flush();
+  }
+ catch (  IOException e) {
+  }
+}

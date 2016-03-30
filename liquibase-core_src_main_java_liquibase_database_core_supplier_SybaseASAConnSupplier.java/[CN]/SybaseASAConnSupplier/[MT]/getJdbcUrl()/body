@@ -1,3 +1,0 @@
-{
-  return "jdbc:sybase:Tds:" + getIpAddress() + ":9810/servicename=prior";
-}

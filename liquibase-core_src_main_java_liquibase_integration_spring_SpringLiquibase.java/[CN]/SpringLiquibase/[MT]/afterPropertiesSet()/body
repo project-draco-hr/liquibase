@@ -20,7 +20,10 @@
     throw new DatabaseException(e);
   }
  finally {
-    Database database=liquibase.getDatabase();
+    Database database=null;
+    if (liquibase != null) {
+      database=liquibase.getDatabase();
+    }
     if (database != null) {
       database.close();
     }

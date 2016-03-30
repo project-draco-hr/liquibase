@@ -1,5 +1,5 @@
 {
-  if (rollBackChanges != null && rollBackChanges.size() > 0) {
+  if (rollback != null && rollback.getChanges() != null && rollback.getChanges().size() > 0) {
     return true;
   }
   for (  Change change : getChanges()) {

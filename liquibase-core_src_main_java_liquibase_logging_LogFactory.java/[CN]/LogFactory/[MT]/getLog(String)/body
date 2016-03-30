@@ -2,10 +2,14 @@
   if (!loggers.containsKey(name)) {
     Logger value;
     try {
-      value=(Logger)ServiceLocator.getInstance().newInstance(Logger.class);
+      ServiceLocator serviceLocator=ServiceLocator.getInstance();
+      if (serviceLocator == null) {
+        return defaultLogger;
+      }
+      value=(Logger)serviceLocator.newInstance(Logger.class);
     }
  catch (    Exception e) {
-      value=new DefaultLogger();
+      return defaultLogger;
     }
     value.setName(name);
     if (defaultLoggingLevel != null) {

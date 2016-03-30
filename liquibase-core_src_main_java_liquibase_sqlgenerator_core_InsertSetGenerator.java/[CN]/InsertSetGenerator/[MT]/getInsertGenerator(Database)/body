@@ -1,0 +1,7 @@
+{
+  SortedSet<SqlGenerator> generators=SqlGeneratorFactory.getInstance().getGenerators(new InsertStatement(null,null,null),database);
+  if (generators == null || generators.size() == 0) {
+    return null;
+  }
+  return (InsertGenerator)generators.iterator().next();
+}

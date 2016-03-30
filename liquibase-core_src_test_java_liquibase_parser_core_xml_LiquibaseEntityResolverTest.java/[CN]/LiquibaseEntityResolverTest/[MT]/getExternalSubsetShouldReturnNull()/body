@@ -1,0 +1,4 @@
+{
+  InputSource externalSubset=liquibaseEntityResolver.getExternalSubset(NAME,BASE_URI);
+  assertThat(externalSubset).isNull();
+}

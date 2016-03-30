@@ -1,0 +1,11 @@
+{
+  if (editorMap == null) {
+    editorMap=new HashMap<Class<?>,PropertyEditor>();
+  }
+  PropertyEditor editor=editorMap.get(cls);
+  if (editor == null) {
+    editor=PropertyEditorManager.findEditor(cls);
+    addEditorToMap(cls,editor);
+  }
+  return editor;
+}

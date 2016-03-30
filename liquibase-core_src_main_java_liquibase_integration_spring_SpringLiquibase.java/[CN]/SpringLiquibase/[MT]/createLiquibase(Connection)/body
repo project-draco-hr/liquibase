@@ -1,5 +1,6 @@
 {
-  Liquibase liquibase=new Liquibase(getChangeLog(),createResourceOpener(),createDatabase(c));
+  SpringResourceOpener resourceAccessor=createResourceOpener();
+  Liquibase liquibase=new Liquibase(getChangeLog(),resourceAccessor,createDatabase(c,resourceAccessor));
   liquibase.setIgnoreClasspathPrefix(isIgnoreClasspathPrefix());
   if (parameters != null) {
     for (    Map.Entry<String,String> entry : parameters.entrySet()) {

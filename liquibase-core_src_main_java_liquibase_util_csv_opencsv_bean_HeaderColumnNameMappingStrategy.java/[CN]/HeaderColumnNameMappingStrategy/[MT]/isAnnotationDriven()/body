@@ -1,0 +1,12 @@
+{
+  if (!determinedIfAnnotationDriven) {
+    for (    Field field : type.getDeclaredFields()) {
+      if (field.isAnnotationPresent(CsvBind.class)) {
+        annotationDriven=true;
+        break;
+      }
+    }
+    determinedIfAnnotationDriven=true;
+  }
+  return annotationDriven;
+}

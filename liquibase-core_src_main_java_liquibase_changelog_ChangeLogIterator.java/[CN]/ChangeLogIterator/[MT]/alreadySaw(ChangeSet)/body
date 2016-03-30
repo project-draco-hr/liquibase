@@ -1,0 +1,3 @@
+{
+  return seenChangeSets.contains(createKey(changeSet));
+}

@@ -1,0 +1,11 @@
+{
+  if (commentLineStartsWith == null) {
+    this.commentLineStartsWith=DEFAULT_COMMENT_PATTERN;
+  }
+ else   if (commentLineStartsWith.equals("")) {
+    this.commentLineStartsWith=null;
+  }
+ else {
+    this.commentLineStartsWith=commentLineStartsWith;
+  }
+}

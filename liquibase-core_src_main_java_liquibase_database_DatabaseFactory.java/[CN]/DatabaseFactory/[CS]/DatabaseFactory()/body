@@ -3,7 +3,12 @@
   try {
     Class[] classes=ServiceLocator.getInstance().findClasses(Database.class);
     for (    Class<? extends Database> clazz : classes) {
-      register(clazz.getConstructor().newInstance());
+      try {
+        register(clazz.getConstructor().newInstance());
+      }
+ catch (      Throwable e) {
+        throw new UnexpectedLiquibaseException("Error registering " + clazz.getName(),e);
+      }
     }
   }
  catch (  Exception e) {

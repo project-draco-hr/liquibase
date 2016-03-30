@@ -1,3 +1,6 @@
 {
-  changeLogParameters.add(new ChangeLogParameter(paramter,value));
+  ChangeLogParameter param=findParameter(paramter,null);
+  if (param == null) {
+    changeLogParameters.add(new ChangeLogParameter(paramter,value));
+  }
 }

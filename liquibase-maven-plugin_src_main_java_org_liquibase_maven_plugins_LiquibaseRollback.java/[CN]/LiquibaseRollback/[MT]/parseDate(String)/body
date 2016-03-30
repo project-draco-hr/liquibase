@@ -1,0 +1,15 @@
+{
+  ISODateFormat isoFormat=new ISODateFormat();
+  try {
+    return isoFormat.parse(date);
+  }
+ catch (  ParseException e) {
+    DateFormat format=DateFormat.getDateInstance();
+    try {
+      return format.parse(date);
+    }
+ catch (    ParseException e1) {
+      throw new ParseException("Date must match ISODateFormat or standard platform format.\n" + e.getMessage(),0);
+    }
+  }
+}

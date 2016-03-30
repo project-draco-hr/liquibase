@@ -1,0 +1,2 @@
+String objectName
+Class<? extends DatabaseObject> objectType

@@ -1,5 +1,12 @@
 {
   String externalForm=path.toExternalForm();
+  if (externalForm.startsWith("file:")) {
+    try {
+      externalForm=new File(path.toURI()).getCanonicalFile().toURL().toExternalForm();
+    }
+ catch (    Throwable e) {
+    }
+  }
   if (!externalForm.endsWith("/")) {
     externalForm+="/";
   }

@@ -1,0 +1,22 @@
+{
+  if (propertiesFile != null) {
+    File file=new File(propertiesFile);
+    if (file.exists()) {
+      Properties properties=new Properties();
+      FileInputStream inputStream=new FileInputStream(propertiesFile);
+      try {
+        properties.load(inputStream);
+      }
+  finally {
+        inputStream.close();
+      }
+      return properties;
+    }
+ else {
+      throw new FileNotFoundException(propertiesFile);
+    }
+  }
+ else {
+    return null;
+  }
+}

@@ -4,9 +4,10 @@
   String columnName=database.escapeColumnName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName(),statement.getColumnName());
   alterTable+=columnName;
   alterTable+=getPreDataTypeString(database);
-  alterTable+=DataTypeFactory.getInstance().fromDescription(statement.getNewDataType(),database).toDatabaseDataType(database);
+  DatabaseDataType newDataType=DataTypeFactory.getInstance().fromDescription(statement.getNewDataType(),database).toDatabaseDataType(database);
+  alterTable+=newDataType;
   if (database instanceof PostgresDatabase) {
-    alterTable+=" USING (" + columnName + "::"+ statement.getNewDataType()+ ")";
+    alterTable+=" USING (" + columnName + "::"+ newDataType+ ")";
   }
   return new Sql[]{new UnparsedSql(alterTable,getAffectedTable(statement))};
 }

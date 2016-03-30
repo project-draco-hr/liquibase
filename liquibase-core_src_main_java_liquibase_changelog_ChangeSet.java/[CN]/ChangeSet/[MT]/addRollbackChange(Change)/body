@@ -2,6 +2,6 @@
   if (change == null) {
     return;
   }
-  rollBackChanges.add(change);
+  rollback.getChanges().add(change);
   change.setChangeSet(this);
 }

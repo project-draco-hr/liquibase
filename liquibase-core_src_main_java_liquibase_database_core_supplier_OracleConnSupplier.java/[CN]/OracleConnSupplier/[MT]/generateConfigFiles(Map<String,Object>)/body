@@ -1,7 +1,0 @@
-{
-  Set<ConfigTemplate> configTemplates=super.generateConfigFiles(context);
-  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/oracle/oracle_install.rsp.vm",context));
-  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/oracle/oracle_netca.rsp.vm",context));
-  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/oracle/oracle.init.sql.vm",context));
-  return configTemplates;
-}

@@ -1,3 +1,3 @@
 {
-  return desc.getName().equals(name);
+  return desc.getName().equals(name.trim());
 }

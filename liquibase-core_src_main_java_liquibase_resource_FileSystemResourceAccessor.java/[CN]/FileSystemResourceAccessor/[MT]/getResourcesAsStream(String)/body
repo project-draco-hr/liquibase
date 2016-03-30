@@ -4,14 +4,14 @@
   InputStream fileStream=null;
   if (absoluteFile.isAbsolute()) {
     try {
-      fileStream=new BufferedInputStream(new FileInputStream(absoluteFile));
+      fileStream=openStream(absoluteFile);
     }
  catch (    FileNotFoundException e) {
     }
   }
   if (fileStream == null) {
     try {
-      fileStream=new BufferedInputStream(new FileInputStream(relativeFile));
+      fileStream=openStream(relativeFile);
     }
  catch (    FileNotFoundException e2) {
       return null;

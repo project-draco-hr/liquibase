@@ -1,0 +1,5 @@
+{
+  PowerMockito.mockStatic(StreamUtil.class);
+  resourceAccessorXsdStreamResolver.setSuccessor(successor);
+  when(successor.getResourceAsStream(XSD_FILE)).thenReturn(successorValue);
+}

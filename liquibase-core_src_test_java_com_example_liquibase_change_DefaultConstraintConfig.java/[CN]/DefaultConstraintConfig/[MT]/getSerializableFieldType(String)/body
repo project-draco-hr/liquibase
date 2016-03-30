@@ -1,0 +1,6 @@
+{
+  if ("expression".equals(field)) {
+    return SerializationType.DIRECT_VALUE;
+  }
+  return SerializationType.NAMED_FIELD;
+}

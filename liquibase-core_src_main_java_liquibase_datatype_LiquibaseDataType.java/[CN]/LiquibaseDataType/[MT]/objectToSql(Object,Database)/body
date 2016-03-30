@@ -3,10 +3,10 @@
     return null;
   }
  else   if (value instanceof DatabaseFunction) {
-    return database.generateDatabaseFunctionValue((DatabaseFunction)value);
+    return functionToSql((DatabaseFunction)value,database);
   }
  else   if (value instanceof Number) {
-    return formatNumber(value.toString());
+    return numberToSql((Number)value,database);
   }
-  return value.toString();
+  return otherToSql(value,database);
 }

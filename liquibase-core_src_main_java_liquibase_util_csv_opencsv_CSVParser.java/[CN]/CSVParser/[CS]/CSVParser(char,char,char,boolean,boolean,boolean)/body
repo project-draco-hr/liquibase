@@ -1,0 +1,3 @@
+{
+  this(separator,quotechar,escape,strictQuotes,ignoreLeadingWhiteSpace,ignoreQuotations,DEFAULT_NULL_FIELD_INDICATOR);
+}

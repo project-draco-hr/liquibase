@@ -24,6 +24,9 @@
  else     if (type.equals(BigInteger.class)) {
       return (T)new BigInteger(rawValue.toString());
     }
+ else     if (type.equals(BigDecimal.class)) {
+      return (T)new BigDecimal(rawValue.toString());
+    }
  else     if (type.equals(Boolean.class) && rawValue instanceof String) {
       return (T)Boolean.valueOf(rawValue.toString());
     }

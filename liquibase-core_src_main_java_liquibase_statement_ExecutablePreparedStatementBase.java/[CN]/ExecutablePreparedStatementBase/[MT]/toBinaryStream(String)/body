@@ -5,8 +5,8 @@
   }
   try {
     if (in instanceof FileInputStream) {
-      in=createStream(in);
-      return new LOBContent<InputStream>(in,((FileInputStream)in).getChannel().size());
+      InputStream bufferedInput=createStream(in);
+      return new LOBContent<InputStream>(bufferedInput,((FileInputStream)in).getChannel().size());
     }
     in=createStream(in);
     final int IN_MEMORY_THRESHOLD=100000;

@@ -1,0 +1,4 @@
+MappingStrategy<T> mapper
+String[] line
+T bean
+int col

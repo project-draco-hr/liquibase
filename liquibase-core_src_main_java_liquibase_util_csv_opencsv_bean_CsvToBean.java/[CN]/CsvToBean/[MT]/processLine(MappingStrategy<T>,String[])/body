@@ -1,0 +1,12 @@
+{
+  T bean=mapper.createBean();
+  for (int col=0; col < line.length; col++) {
+    if (mapper.isAnnotationDriven()) {
+      processField(mapper,line,bean,col);
+    }
+ else {
+      processProperty(mapper,line,bean,col);
+    }
+  }
+  return bean;
+}

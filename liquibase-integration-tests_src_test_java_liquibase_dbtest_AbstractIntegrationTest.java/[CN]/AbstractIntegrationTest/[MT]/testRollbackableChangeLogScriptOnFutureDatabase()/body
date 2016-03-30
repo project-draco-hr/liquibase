@@ -6,5 +6,5 @@
   Liquibase liquibase=createLiquibase(rollbackChangeLog);
   clearDatabase(liquibase);
   liquibase=createLiquibase(rollbackChangeLog);
-  liquibase.futureRollbackSQL(this.contexts,writer);
+  liquibase.futureRollbackSQL(new Contexts(this.contexts),new LabelExpression(),writer);
 }

@@ -1,3 +1,12 @@
 {
-  return false;
+  boolean isAutoIncrementSupported=false;
+  try {
+    if (getDatabaseMajorVersion() >= 12) {
+      isAutoIncrementSupported=true;
+    }
+  }
+ catch (  DatabaseException ex) {
+    isAutoIncrementSupported=false;
+  }
+  return isAutoIncrementSupported;
 }

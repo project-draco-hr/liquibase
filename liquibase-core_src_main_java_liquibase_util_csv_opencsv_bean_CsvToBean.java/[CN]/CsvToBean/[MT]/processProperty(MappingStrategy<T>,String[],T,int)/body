@@ -1,0 +1,8 @@
+{
+  PropertyDescriptor prop=mapper.findDescriptor(col);
+  if (null != prop) {
+    String value=checkForTrim(line[col],prop);
+    Object obj=convertValue(value,prop);
+    prop.getWriteMethod().invoke(bean,obj);
+  }
+}

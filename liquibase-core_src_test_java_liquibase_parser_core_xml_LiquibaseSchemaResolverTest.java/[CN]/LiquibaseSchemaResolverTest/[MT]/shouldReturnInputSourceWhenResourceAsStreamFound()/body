@@ -1,0 +1,6 @@
+{
+  InputSource inputSource=liquibaseSchemaResolver.resolve(liquibaseParser);
+  assertThat(inputSource.getByteStream()).isEqualTo(inputStream);
+  assertThat(inputSource.getPublicId()).isEqualTo(PUBLIC_ID);
+  assertThat(inputSource.getPublicId()).isEqualTo(PUBLIC_ID);
+}

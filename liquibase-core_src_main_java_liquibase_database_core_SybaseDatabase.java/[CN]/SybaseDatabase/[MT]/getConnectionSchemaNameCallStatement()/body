@@ -1,0 +1,3 @@
+{
+  return "select user_name()";
+}

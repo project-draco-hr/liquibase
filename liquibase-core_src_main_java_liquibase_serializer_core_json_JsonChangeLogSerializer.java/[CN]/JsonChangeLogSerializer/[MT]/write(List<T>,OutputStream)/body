@@ -1,0 +1,15 @@
+{
+  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out));
+  writer.write("{ \"databaseChangeLog\": [\n");
+  int i=0;
+  for (  T child : children) {
+    String serialized=serialize(child,true);
+    if (++i < children.size()) {
+      serialized=serialized.replaceFirst("}\\s*$","},\n");
+    }
+    writer.write(StringUtils.indent(serialized,2));
+    writer.write("\n");
+  }
+  writer.write("]}");
+  writer.flush();
+}

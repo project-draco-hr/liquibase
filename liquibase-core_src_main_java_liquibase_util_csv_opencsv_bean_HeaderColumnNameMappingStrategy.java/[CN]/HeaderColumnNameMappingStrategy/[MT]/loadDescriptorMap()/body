@@ -1,0 +1,9 @@
+{
+  Map<String,PropertyDescriptor> map=new HashMap<String,PropertyDescriptor>();
+  PropertyDescriptor[] descriptors;
+  descriptors=loadDescriptors(getType());
+  for (  PropertyDescriptor descriptor : descriptors) {
+    map.put(descriptor.getName().toUpperCase().trim(),descriptor);
+  }
+  return map;
+}

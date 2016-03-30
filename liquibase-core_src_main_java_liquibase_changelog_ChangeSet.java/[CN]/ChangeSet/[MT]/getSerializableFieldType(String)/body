@@ -1,5 +1,5 @@
 {
-  if (field.equals("comment") || field.equals("changes") || field.equals("rollback")) {
+  if (field.equals("comment") || field.equals("preconditions") || field.equals("changes")|| field.equals("rollback")) {
     return SerializationType.NESTED_OBJECT;
   }
  else {

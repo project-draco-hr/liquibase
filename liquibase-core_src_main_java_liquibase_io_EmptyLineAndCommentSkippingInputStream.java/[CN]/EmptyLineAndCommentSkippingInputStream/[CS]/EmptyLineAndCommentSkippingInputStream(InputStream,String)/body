@@ -1,0 +1,6 @@
+{
+  super(in);
+  this.commentLineStartsWith=commentLineStartsWith;
+  this.commentSkipEnabled=StringUtils.isNotEmpty(commentLineStartsWith);
+  this.commentLineStartsWithLength=commentSkipEnabled ? commentLineStartsWith.length() : -1;
+}

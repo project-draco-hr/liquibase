@@ -1,0 +1,6 @@
+{
+  if (database instanceof MSSQLDatabase && ((MSSQLDatabase)database).sendsStringParametersAsUnicode()) {
+    return "nvarchar";
+  }
+  return "varchar";
+}

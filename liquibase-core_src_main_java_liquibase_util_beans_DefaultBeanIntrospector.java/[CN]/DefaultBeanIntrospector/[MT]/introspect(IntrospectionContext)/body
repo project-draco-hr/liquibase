@@ -1,0 +1,6 @@
+{
+  PropertyDescriptor[] descriptors=Introspector.getBeanInfo(context.getTargetClass()).getPropertyDescriptors();
+  if (descriptors != null) {
+    context.addDescriptors(descriptors);
+  }
+}

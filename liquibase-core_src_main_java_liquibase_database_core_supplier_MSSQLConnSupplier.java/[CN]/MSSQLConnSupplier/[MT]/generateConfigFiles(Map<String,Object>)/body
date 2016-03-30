@@ -1,5 +1,0 @@
-{
-  Set<ConfigTemplate> configTemplates=super.generateConfigFiles(context);
-  configTemplates.add(new ConfigTemplate("liquibase/sdk/vagrant/supplier/mssql/mssql.init.sql.vm",context));
-  return configTemplates;
-}
