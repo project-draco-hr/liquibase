@@ -8,6 +8,15 @@
  else   if (schemaNames != null && referenceSchemaNames == null) {
     referenceSchemaNames=schemaNames;
   }
+  if (schemaNames == null && outputSchemaNames != null) {
+    if (defaultSchemaName == null) {
+      schemaNames=database.getDefaultSchemaName();
+    }
+ else {
+      schemaNames=defaultSchemaName;
+    }
+    referenceSchemaNames=schemaNames;
+  }
   ComputedSchemas returnObj=new ComputedSchemas();
   if (referenceSchemaNames == null) {
     returnObj.finalSchemaComparisons=new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(referenceDefaultCatalogName,referenceDefaultSchemaName),new CatalogAndSchema(defaultCatalogName,defaultSchemaName))};
@@ -19,15 +28,25 @@
     List<CatalogAndSchema> targetSchemas=new ArrayList<CatalogAndSchema>();
     List<String> splitReferenceSchemaNames=StringUtils.splitAndTrim(referenceSchemaNames,",");
     List<String> splitSchemaNames=StringUtils.splitAndTrim(schemaNames,",");
+    List<String> splitOutputSchemaNames=StringUtils.splitAndTrim(StringUtils.trimToNull(outputSchemaNames),",");
     if (splitReferenceSchemaNames.size() != splitSchemaNames.size()) {
       throw new UnexpectedLiquibaseException("You must specify the same number of schemas in --schemas and --referenceSchemas");
+    }
+    if (splitOutputSchemaNames != null && splitOutputSchemaNames.size() != splitSchemaNames.size()) {
+      throw new UnexpectedLiquibaseException("You must specify the same number of schemas in --schemas and --outputSchemas");
     }
     for (int i=0; i < splitReferenceSchemaNames.size(); i++) {
       String referenceSchema=splitReferenceSchemaNames.get(i);
       String targetSchema=splitSchemaNames.get(i);
+      String outputSchema=null;
+      if (splitOutputSchemaNames != null) {
+        outputSchema=splitOutputSchemaNames.get(i);
+      }
       CatalogAndSchema correctedTargetSchema=new CatalogAndSchema(null,targetSchema).customize(database);
       CatalogAndSchema correctedReferenceSchema=new CatalogAndSchema(null,referenceSchema).customize(database);
-      schemaComparisons.add(new CompareControl.SchemaComparison(correctedReferenceSchema,correctedTargetSchema));
+      SchemaComparison comparison=new SchemaComparison(correctedReferenceSchema,correctedTargetSchema);
+      comparison.setOutputSchemaAs(outputSchema);
+      schemaComparisons.add(comparison);
       referenceSchemas.add(correctedReferenceSchema);
       targetSchemas.add(correctedTargetSchema);
     }

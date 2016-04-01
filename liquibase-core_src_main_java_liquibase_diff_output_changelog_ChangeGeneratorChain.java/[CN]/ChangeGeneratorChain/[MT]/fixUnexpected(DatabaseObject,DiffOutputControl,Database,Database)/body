@@ -22,5 +22,7 @@
   if (changes.length == 0) {
     return null;
   }
-  return changeGenerator.fixSchema(changes,control.getSchemaComparisons());
+  changes=changeGenerator.fixSchema(changes,control.getSchemaComparisons());
+  changes=changeGenerator.fixOutputAsSchema(changes,control.getSchemaComparisons());
+  return changes;
 }

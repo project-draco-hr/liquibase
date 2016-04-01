@@ -23,5 +23,6 @@
     return null;
   }
   changes=changeGenerator.fixSchema(changes,control.getSchemaComparisons());
+  changes=changeGenerator.fixOutputAsSchema(changes,control.getSchemaComparisons());
   return changes;
 }
