@@ -1,3 +1,6 @@
 {
+  if (StringUtils.trimToNull(clause) == null) {
+    return prepend(new Whitespace(clause));
+  }
   return prepend(uniqueKey(clause),clause);
 }
