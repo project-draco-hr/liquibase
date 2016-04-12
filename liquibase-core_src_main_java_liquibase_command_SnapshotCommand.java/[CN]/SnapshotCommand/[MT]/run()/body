@@ -14,6 +14,7 @@
   finally {
     database.setObjectQuotingStrategy(originalQuotingStrategy);
   }
+  snapshot.setMetadata(this.getSnapshotMetadata());
   String format=getSerializerFormat();
   if (format == null) {
     format="txt";

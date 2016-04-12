@@ -31,6 +31,7 @@
         returnSnapshot.allFound.add(existingObject);
       }
     }
+    returnSnapshot.getMetadata().putAll(this.getMetadata());
     return returnSnapshot;
   }
  catch (  Exception e) {

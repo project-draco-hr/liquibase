@@ -11,4 +11,5 @@
   this.serializableFields.add("referencedObjects");
   this.serializableFields.add("database");
   this.serializableFields.add("created");
+  this.serializableFields.add("metadata");
 }
