@@ -1,0 +1,4 @@
+{
+  if (goingOutNodes == null)   goingOutNodes=new ArrayList<GraphNode<T>>();
+  goingOutNodes.add(node);
+}
