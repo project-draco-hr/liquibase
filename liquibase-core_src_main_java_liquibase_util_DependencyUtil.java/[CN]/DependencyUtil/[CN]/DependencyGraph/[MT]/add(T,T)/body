@@ -1,0 +1,20 @@
+{
+  GraphNode<T> firstNode=null;
+  GraphNode<T> afterNode=null;
+  if (nodes.containsKey(evalFirstValue)) {
+    firstNode=nodes.get(evalFirstValue);
+  }
+ else {
+    firstNode=createNode(evalFirstValue);
+    nodes.put(evalFirstValue,firstNode);
+  }
+  if (nodes.containsKey(evalAfterValue)) {
+    afterNode=nodes.get(evalAfterValue);
+  }
+ else {
+    afterNode=createNode(evalAfterValue);
+    nodes.put(evalAfterValue,afterNode);
+  }
+  firstNode.addGoingOutNode(afterNode);
+  afterNode.addComingInNode(firstNode);
+}

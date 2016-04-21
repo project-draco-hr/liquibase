@@ -24,5 +24,12 @@
   if (getSnapshotListener() != null) {
     snapshotControl.setSnapshotListener(getSnapshotListener());
   }
-  return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,referenceDatabase,snapshotControl);
+  ObjectQuotingStrategy originalStrategy=referenceDatabase.getObjectQuotingStrategy();
+  try {
+    referenceDatabase.setObjectQuotingStrategy(ObjectQuotingStrategy.QUOTE_ALL_OBJECTS);
+    return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,referenceDatabase,snapshotControl);
+  }
+  finally {
+    referenceDatabase.setObjectQuotingStrategy(originalStrategy);
+  }
 }

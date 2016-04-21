@@ -1,0 +1,4 @@
+{
+  if (comingInNodes == null)   comingInNodes=new ArrayList<GraphNode<T>>();
+  comingInNodes.add(node);
+}
