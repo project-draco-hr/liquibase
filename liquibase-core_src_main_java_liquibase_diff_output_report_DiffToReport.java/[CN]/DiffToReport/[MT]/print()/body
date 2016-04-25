@@ -6,11 +6,39 @@
   if (schemas != null && schemas.length > 0) {
     out.println("Compared Schemas: " + StringUtils.join(Arrays.asList(schemas),", ",new StringUtils.StringUtilsFormatter<CompareControl.SchemaComparison>(){
       @Override public String toString(      CompareControl.SchemaComparison obj){
-        String referenceName=obj.getReferenceSchema().getCatalogName();
-        String comparisonName=obj.getComparisonSchema().getCatalogName();
-        if (diffResult.getReferenceSnapshot().getDatabase().supportsSchemas()) {
-          referenceName=referenceName + "." + obj.getReferenceSchema().getSchemaName();
-          comparisonName=comparisonName + "." + obj.getComparisonSchema().getSchemaName();
+        String referenceName;
+        String comparisonName;
+        Database referenceDatabase=diffResult.getReferenceSnapshot().getDatabase();
+        Database comparisonDatabase=diffResult.getComparisonSnapshot().getDatabase();
+        if (referenceDatabase.supportsSchemas()) {
+          referenceName=obj.getReferenceSchema().getSchemaName();
+          if (referenceName == null) {
+            referenceName=referenceDatabase.getDefaultSchemaName();
+          }
+        }
+ else         if (referenceDatabase.supportsCatalogs()) {
+          referenceName=obj.getReferenceSchema().getCatalogName();
+          if (referenceName == null) {
+            referenceName=referenceDatabase.getDefaultCatalogName();
+          }
+        }
+ else {
+          return "";
+        }
+        if (comparisonDatabase.supportsSchemas()) {
+          comparisonName=obj.getComparisonSchema().getSchemaName();
+          if (comparisonName == null) {
+            comparisonName=comparisonDatabase.getDefaultSchemaName();
+          }
+        }
+ else         if (comparisonDatabase.supportsCatalogs()) {
+          comparisonName=obj.getComparisonSchema().getCatalogName();
+          if (comparisonName == null) {
+            comparisonName=comparisonDatabase.getDefaultCatalogName();
+          }
+        }
+ else {
+          return "";
         }
         if (referenceName.equalsIgnoreCase(comparisonName)) {
           return referenceName;
