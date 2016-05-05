@@ -1,0 +1,13 @@
+{
+  if (this.baseDirectory != null) {
+    return string;
+  }
+ else {
+    try {
+      return "file:" + new File(string).getCanonicalPath().substring(this.baseDirectory.getCanonicalPath().length());
+    }
+ catch (    IOException e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+  }
+}

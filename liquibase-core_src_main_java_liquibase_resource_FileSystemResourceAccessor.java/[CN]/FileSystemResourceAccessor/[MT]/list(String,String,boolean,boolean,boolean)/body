@@ -1,15 +1,15 @@
 {
-  path=convertToPath(relativeTo,path);
-  File absoluteFile=new File(path);
-  File relativeFile=(baseDirectory == null) ? new File(path) : new File(baseDirectory,path);
-  if (absoluteFile.exists() && absoluteFile.isDirectory()) {
-    Set<String> returnSet=new HashSet<String>();
-    getContents(absoluteFile,recursive,includeFiles,includeDirectories,path,returnSet);
-    return returnSet;
+  File finalDir;
+  if (relativeTo == null) {
+    finalDir=new File(this.baseDirectory,path);
   }
- else   if (relativeFile.exists() && relativeFile.isDirectory()) {
+ else {
+    finalDir=new File(this.baseDirectory,relativeTo);
+    finalDir=new File(finalDir.getParentFile(),path);
+  }
+  if (finalDir.exists() && finalDir.isDirectory()) {
     Set<String> returnSet=new HashSet<String>();
-    getContents(relativeFile,recursive,includeFiles,includeDirectories,path,returnSet);
+    getContents(finalDir,recursive,includeFiles,includeDirectories,path,returnSet);
     return returnSet;
   }
   return null;
