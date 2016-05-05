@@ -1,4 +1,9 @@
 {
+  ObjectQuotingStrategy incomingQuotingStrategy=null;
+  if (this.quotingStrategy != null) {
+    incomingQuotingStrategy=database.getObjectQuotingStrategy();
+    database.setObjectQuotingStrategy(this.quotingStrategy);
+  }
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
     if (this.hasDatabaseChangeLogLockTable()) {
@@ -32,6 +37,9 @@
     }
  catch (    DatabaseException e) {
       ;
+    }
+    if (incomingQuotingStrategy != null) {
+      database.setObjectQuotingStrategy(incomingQuotingStrategy);
     }
   }
 }
