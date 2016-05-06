@@ -1,4 +1,5 @@
 {
+  this.changeSetPath=changeLogFile;
   ChangeLogSerializer changeLogSerializer=ChangeLogSerializerFactory.getInstance().getSerializer(changeLogFile);
   this.print(changeLogFile,changeLogSerializer);
 }

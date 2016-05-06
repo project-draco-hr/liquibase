@@ -1,4 +1,5 @@
 {
+  this.changeSetPath=changeLogFile;
   File file=new File(changeLogFile);
   if (!file.exists()) {
     LogFactory.getLogger().info(file + " does not exist, creating");
