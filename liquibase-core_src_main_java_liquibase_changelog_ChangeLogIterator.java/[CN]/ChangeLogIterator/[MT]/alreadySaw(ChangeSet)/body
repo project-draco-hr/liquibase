@@ -1,3 +1,6 @@
 {
-  return seenChangeSets.contains(createKey(changeSet));
+  if (changeSet.key == null) {
+    changeSet.key=createKey(changeSet);
+  }
+  return seenChangeSets.contains(changeSet.key);
 }
