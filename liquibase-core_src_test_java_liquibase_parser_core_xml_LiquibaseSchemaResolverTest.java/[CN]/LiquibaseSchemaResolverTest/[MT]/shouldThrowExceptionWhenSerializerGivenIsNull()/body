@@ -1,0 +1,9 @@
+{
+  try {
+    liquibaseSchemaResolver.resolve((LiquibaseSerializer)null);
+    fail("Excepted RuntimeException. But no Exception was thrown");
+  }
+ catch (  RuntimeException e) {
+    assertThat(e.getMessage()).isEqualTo("Serializer can not be null");
+  }
+}

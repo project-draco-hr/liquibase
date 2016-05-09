@@ -1,0 +1,8 @@
+{
+  if (escapechar != NO_ESCAPE_CHARACTER && checkCharactersToEscape(nextChar)) {
+    sb.append(escapechar).append(nextChar);
+  }
+ else {
+    sb.append(nextChar);
+  }
+}

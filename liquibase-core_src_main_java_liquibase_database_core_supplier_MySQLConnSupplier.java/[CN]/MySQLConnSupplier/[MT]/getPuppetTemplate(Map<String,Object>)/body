@@ -1,8 +1,0 @@
-{
-  if (isWindows()) {
-    return new ConfigTemplate("liquibase/sdk/vagrant/supplier/mysql/mysql-windows.puppet.vm",context);
-  }
- else {
-    return new ConfigTemplate("liquibase/sdk/vagrant/supplier/mysql/mysql-linux.puppet.vm",context);
-  }
-}

@@ -1,3 +1,5 @@
 {
-  return super.getViewDefinition(schema,name).replaceFirst("CREATE VIEW \\w+ AS ","");
+  schema=schema.customize(this);
+  String definition=ExecutorService.getInstance().getExecutor(this).queryForObject(new GetViewDefinitionStatement(schema.getCatalogName(),schema.getSchemaName(),viewName),String.class);
+  return "FULL_DEFINITION: " + definition;
 }

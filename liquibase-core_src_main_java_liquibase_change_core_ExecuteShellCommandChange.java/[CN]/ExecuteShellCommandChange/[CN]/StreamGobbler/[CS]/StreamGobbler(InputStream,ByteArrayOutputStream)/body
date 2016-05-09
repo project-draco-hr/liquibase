@@ -1,0 +1,4 @@
+{
+  this.processStream=processStream;
+  this.outputStream=outputStream;
+}

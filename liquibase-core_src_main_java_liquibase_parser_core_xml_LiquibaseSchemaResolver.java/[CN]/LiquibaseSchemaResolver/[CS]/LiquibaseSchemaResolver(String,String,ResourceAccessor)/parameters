@@ -1,0 +1,3 @@
+String systemId
+String publicId
+ResourceAccessor resourceAccessor

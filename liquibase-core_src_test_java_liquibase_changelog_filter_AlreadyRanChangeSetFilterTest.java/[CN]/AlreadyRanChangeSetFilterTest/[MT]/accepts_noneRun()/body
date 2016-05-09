@@ -1,4 +1,0 @@
-{
-  AlreadyRanChangeSetFilter filter=new AlreadyRanChangeSetFilter(new ArrayList<RanChangeSet>(),false);
-  assertFalse(filter.accepts(new ChangeSet("1","testAuthor",false,false,"path/changelog",null,null,null)).isAccepted());
-}

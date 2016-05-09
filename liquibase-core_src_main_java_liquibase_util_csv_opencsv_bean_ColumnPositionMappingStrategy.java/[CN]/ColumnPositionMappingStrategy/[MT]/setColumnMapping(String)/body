@@ -1,0 +1,5 @@
+{
+  this.columnMapping=columnMapping != null ? columnMapping.clone() : new String[]{};
+  resetIndexMap();
+  createIndexLookup(this.columnMapping);
+}

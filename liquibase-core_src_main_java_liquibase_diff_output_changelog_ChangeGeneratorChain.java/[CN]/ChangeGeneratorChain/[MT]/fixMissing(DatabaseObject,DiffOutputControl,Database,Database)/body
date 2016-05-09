@@ -14,12 +14,15 @@
   if (control.alreadyHandledMissing(missingObject,comparisionDatabase)) {
     return null;
   }
-  Change[] changes=((MissingObjectChangeGenerator)changeGenerators.next()).fixMissing(missingObject,control,referenceDatabase,comparisionDatabase,this);
+  MissingObjectChangeGenerator changeGenerator=(MissingObjectChangeGenerator)changeGenerators.next();
+  Change[] changes=changeGenerator.fixMissing(missingObject,control,referenceDatabase,comparisionDatabase,this);
   if (changes == null) {
     return null;
   }
   if (changes.length == 0) {
     return null;
   }
+  changes=changeGenerator.fixSchema(changes,control.getSchemaComparisons());
+  changes=changeGenerator.fixOutputAsSchema(changes,control.getSchemaComparisons());
   return changes;
 }

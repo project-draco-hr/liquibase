@@ -26,13 +26,13 @@
                 List<ParsedNode> columnChildren=child.getChildren(null,"column");
                 if (columnChildren != null && columnChildren.size() > 0) {
                   for (                  ParsedNode columnChild : columnChildren) {
-                    ColumnConfig columnConfig=(ColumnConfig)collectionType.newInstance();
+                    ColumnConfig columnConfig=createEmptyColumnConfig(collectionType);
                     columnConfig.load(columnChild,resourceAccessor);
                     ((ChangeWithColumns)this).addColumn(columnConfig);
                   }
                 }
  else {
-                  ColumnConfig columnConfig=(ColumnConfig)collectionType.newInstance();
+                  ColumnConfig columnConfig=createEmptyColumnConfig(collectionType);
                   columnConfig.load(child,resourceAccessor);
                   ((ChangeWithColumns)this).addColumn(columnConfig);
                 }
@@ -43,7 +43,9 @@
             if (!collectionType.isInterface() && !Modifier.isAbstract(collectionType.getModifiers())) {
               String elementName=((LiquibaseSerializable)collectionType.newInstance()).getSerializedObjectName();
               List<ParsedNode> nodes=new ArrayList<ParsedNode>(parsedNode.getChildren(null,param.getParameterName()));
-              nodes.addAll(parsedNode.getChildren(null,elementName));
+              if (!elementName.equals(param.getParameterName())) {
+                nodes.addAll(parsedNode.getChildren(null,elementName));
+              }
               Object nodeValue=parsedNode.getValue();
               if (nodeValue instanceof ParsedNode) {
                 nodes.add((ParsedNode)nodeValue);

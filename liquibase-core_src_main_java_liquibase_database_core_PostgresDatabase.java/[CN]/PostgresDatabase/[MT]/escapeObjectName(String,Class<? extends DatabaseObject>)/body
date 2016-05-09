@@ -1,5 +1,5 @@
 {
-  if (hasMixedCase(objectName)) {
+  if (quotingStrategy == ObjectQuotingStrategy.LEGACY && hasMixedCase(objectName)) {
     return "\"" + objectName + "\"";
   }
  else {

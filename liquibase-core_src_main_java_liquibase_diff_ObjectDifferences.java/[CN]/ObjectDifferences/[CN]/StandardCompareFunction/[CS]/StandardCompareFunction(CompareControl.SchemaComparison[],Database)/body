@@ -1,0 +1,4 @@
+{
+  this.schemaComparisons=schemaComparisons;
+  this.accordingTo=accordingTo;
+}

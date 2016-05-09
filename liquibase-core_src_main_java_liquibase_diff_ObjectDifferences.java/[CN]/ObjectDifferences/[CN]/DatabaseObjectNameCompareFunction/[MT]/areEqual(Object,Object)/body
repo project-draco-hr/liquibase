@@ -1,5 +1,8 @@
 {
   if (referenceValue instanceof Collection) {
+    if (!(compareToValue instanceof Collection)) {
+      return false;
+    }
     if (((Collection)referenceValue).size() != ((Collection)compareToValue).size()) {
       return false;
     }

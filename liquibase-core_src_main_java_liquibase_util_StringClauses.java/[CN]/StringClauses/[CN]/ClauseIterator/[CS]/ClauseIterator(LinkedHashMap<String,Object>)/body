@@ -1,0 +1,4 @@
+{
+  this.keyIterator=new ArrayList(clauses.keySet()).listIterator();
+  this.clauses=clauses;
+}

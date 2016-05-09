@@ -1,0 +1,7 @@
+{
+  Database database=new MSSQLDatabase();
+  UpdateStatement statement=new UpdateStatement(null,null,"DATABASECHANGELOG").addNewColumnValue("MD5SUM","7:e27bf9c0c2313160ef960a15d44ced47").setWhereClause(":name = :value AND :name = :value AND :name = :value").addWhereColumnName("ID").addWhereColumnName("AUTHOR").addWhereColumnName("FILENAME").addWhereParameters("SYPA: AUTO_START t????p INT -> TEXT, vaartus 0 00 17 * * ?","martin","db/changelog.xml");
+  UpdateGenerator generator=new UpdateGenerator();
+  Sql[] sqls=generator.generateSql(statement,database,null);
+  assertEquals("UPDATE [DATABASECHANGELOG] " + "SET [MD5SUM] = '7:e27bf9c0c2313160ef960a15d44ced47' " + "WHERE [ID] = N'SYPA: AUTO_START t????p INT -> TEXT, vaartus 0 00 17 * * ?' "+ "AND [AUTHOR] = 'martin' "+ "AND [FILENAME] = 'db/changelog.xml'",sqls[0].toSql());
+}

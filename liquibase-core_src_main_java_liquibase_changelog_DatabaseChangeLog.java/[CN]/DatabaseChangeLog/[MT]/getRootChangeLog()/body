@@ -1,0 +1,3 @@
+{
+  return rootChangeLog != null ? rootChangeLog : this;
+}

@@ -1,4 +1,5 @@
 {
   this.ranChangeSetList=null;
   this.serviceInitialized=false;
+  this.hasDatabaseChangeLogTable=null;
 }

@@ -1,5 +1,7 @@
 {
   this.getAttribute("primaryKeyColumns",List.class).add(primaryKeyColumn);
-  primaryKeyColumn.setRelation(getPrimaryKeyTable());
+  if (primaryKeyColumn.getAttribute("relation",Object.class) == null) {
+    primaryKeyColumn.setRelation(getPrimaryKeyTable());
+  }
   return this;
 }

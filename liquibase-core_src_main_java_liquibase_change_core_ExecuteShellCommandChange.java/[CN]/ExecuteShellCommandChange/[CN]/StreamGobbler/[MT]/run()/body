@@ -1,0 +1,18 @@
+{
+  try {
+    BufferedInputStream bufferedInputStream=new BufferedInputStream(processStream);
+    while (processStream != null) {
+      if (bufferedInputStream.available() > 0) {
+        StreamUtil.copy(bufferedInputStream,outputStream);
+      }
+      try {
+        Thread.sleep(100);
+      }
+ catch (      InterruptedException ignore) {
+      }
+    }
+  }
+ catch (  IOException ioe) {
+    ioe.printStackTrace();
+  }
+}

@@ -1,4 +1,7 @@
 {
-  foreignKeyColumn.setRelation(getForeignKeyTable());
+  if (foreignKeyColumn.getAttribute("relation",Object.class) == null) {
+    foreignKeyColumn.setRelation(getForeignKeyTable());
+  }
   getAttribute("foreignKeyColumns",List.class).add(foreignKeyColumn);
+  return this;
 }

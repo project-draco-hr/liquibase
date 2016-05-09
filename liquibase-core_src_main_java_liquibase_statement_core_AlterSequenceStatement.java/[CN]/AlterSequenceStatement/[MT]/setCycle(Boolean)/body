@@ -1,0 +1,4 @@
+{
+  this.cycle=cycle;
+  return this;
+}

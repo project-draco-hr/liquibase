@@ -1,0 +1,3 @@
+{
+  return StringUtils.startsWith(line[0],commentLineStartsWith);
+}

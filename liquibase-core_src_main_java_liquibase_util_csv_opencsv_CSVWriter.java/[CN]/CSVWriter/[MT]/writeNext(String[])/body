@@ -1,27 +1,3 @@
 {
-  if (nextLine == null)   return;
-  StringBuffer sb=new StringBuffer();
-  for (int i=0; i < nextLine.length; i++) {
-    if (i != 0) {
-      sb.append(separator);
-    }
-    String nextElement=nextLine[i];
-    if (nextElement == null)     continue;
-    if (quotechar != NO_QUOTE_CHARACTER)     sb.append(quotechar);
-    for (int j=0; j < nextElement.length(); j++) {
-      char nextChar=nextElement.charAt(j);
-      if (escapechar != NO_ESCAPE_CHARACTER && nextChar == quotechar) {
-        sb.append(escapechar).append(nextChar);
-      }
- else       if (escapechar != NO_ESCAPE_CHARACTER && nextChar == escapechar) {
-        sb.append(escapechar).append(nextChar);
-      }
- else {
-        sb.append(nextChar);
-      }
-    }
-    if (quotechar != NO_QUOTE_CHARACTER)     sb.append(quotechar);
-  }
-  sb.append(lineEnd);
-  pw.write(sb.toString());
+  writeNext(nextLine,true);
 }

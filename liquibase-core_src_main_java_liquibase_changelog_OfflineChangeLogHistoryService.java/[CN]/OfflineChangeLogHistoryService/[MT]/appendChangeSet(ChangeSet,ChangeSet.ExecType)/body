@@ -12,7 +12,7 @@
     while ((line=csvReader.readNext()) != null) {
       csvWriter.writeNext(line);
     }
-    String[] newLine=new String[13];
+    String[] newLine=new String[14];
     newLine[COLUMN_ID]=changeSet.getId();
     newLine[COLUMN_AUTHOR]=changeSet.getAuthor();
     newLine[COLUMN_FILENAME]=changeSet.getFilePath();
@@ -27,6 +27,9 @@
     if (newLine.length > 11) {
       newLine[COLUMN_CONTEXTS]=changeSet.getContexts() == null ? null : changeSet.getContexts().toString();
       newLine[COLUMN_LABELS]=changeSet.getLabels() == null ? null : changeSet.getLabels().toString();
+    }
+    if (newLine.length > 13) {
+      newLine[DEPLOYMENT_ID]=getDeploymentId();
     }
     csvWriter.writeNext(newLine);
     csvWriter.flush();

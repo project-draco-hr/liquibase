@@ -111,6 +111,10 @@
   stream.println(" --driverPropertiesFile=</path/to/file.properties>  File with custom properties");
   stream.println("                                            to be set on the JDBC connection");
   stream.println("                                            to be created");
+  stream.println(" --changeExecListenerClass=<ChangeExecListener.ClassName>     Custom Change Exec");
+  stream.println("                                            listener implementation to use");
+  stream.println(" --changeExecListenerPropertiesFile=</path/to/file.properties> Properties for");
+  stream.println("                                            Custom Change Exec listener");
   stream.println(" --liquibaseCatalogName=<name>              The name of the catalog with the");
   stream.println("                                            liquibase tables");
   stream.println(" --liquibaseSchemaName=<name>               The name of the schema with the");
@@ -161,6 +165,13 @@
   stream.println(" --referenceDefaultSchemaName=<name>        Reference database schema to use");
   stream.println(" --schemas=<name1,name2>                    Database schemas to include");
   stream.println("                                            objects from in comparison");
+  stream.println(" --referenceSchemas=<name1,name2>           Reference database schemas to");
+  stream.println("                                            include objects from in comparison");
+  stream.println("                                            only needed if different than");
+  stream.println("                                            --schemas");
+  stream.println(" --outputSchemaAs=<name1,name2>             On diffChangeLog/generateChangeLog,");
+  stream.println("                                            use these names as schemaName");
+  stream.println("                                            instead of the real names.");
   stream.println(" --includeCatalog=<true|false>              If true, the catalog will be");
   stream.println("                                            included in generated changeSets");
   stream.println("                                            Defaults to false");

@@ -1,3 +1,5 @@
 {
-  return new SqlStatement[]{new DropSequenceStatement(getCatalogName(),getSchemaName(),getSequenceName())};
+  DropSequenceStatement statement=new DropSequenceStatement(getCatalogName(),getSchemaName(),getSequenceName());
+  statement.setOnlyIfExists(getOnlyIfExists());
+  return new SqlStatement[]{statement};
 }

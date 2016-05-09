@@ -7,7 +7,14 @@
     schemas=new CatalogAndSchema[compareControl.getSchemaComparisons().length];
     int i=0;
     for (    CompareControl.SchemaComparison comparison : compareControl.getSchemaComparisons()) {
-      schemas[i++]=comparison.getReferenceSchema();
+      CatalogAndSchema schema;
+      if (referenceDatabase.supportsSchemas()) {
+        schema=new CatalogAndSchema(referenceDatabase.getDefaultCatalogName(),comparison.getReferenceSchema().getSchemaName());
+      }
+ else {
+        schema=new CatalogAndSchema(comparison.getReferenceSchema().getSchemaName(),comparison.getReferenceSchema().getSchemaName());
+      }
+      schemas[i++]=schema;
     }
   }
   SnapshotControl snapshotControl=getReferenceSnapshotControl();
@@ -17,5 +24,12 @@
   if (getSnapshotListener() != null) {
     snapshotControl.setSnapshotListener(getSnapshotListener());
   }
-  return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,referenceDatabase,snapshotControl);
+  ObjectQuotingStrategy originalStrategy=referenceDatabase.getObjectQuotingStrategy();
+  try {
+    referenceDatabase.setObjectQuotingStrategy(ObjectQuotingStrategy.QUOTE_ALL_OBJECTS);
+    return SnapshotGeneratorFactory.getInstance().createSnapshot(schemas,referenceDatabase,snapshotControl);
+  }
+  finally {
+    referenceDatabase.setObjectQuotingStrategy(originalStrategy);
+  }
 }

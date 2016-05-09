@@ -1,0 +1,7 @@
+{
+  String convertedSchemaName=CompareControl.SchemaComparison.convertSchema(schemaName,diffResult.getCompareControl().getSchemaComparisons());
+  if (convertedSchemaName != null && !convertedSchemaName.equals(schemaName)) {
+    schemaName=schemaName + " -> " + convertedSchemaName;
+  }
+  return schemaName;
+}

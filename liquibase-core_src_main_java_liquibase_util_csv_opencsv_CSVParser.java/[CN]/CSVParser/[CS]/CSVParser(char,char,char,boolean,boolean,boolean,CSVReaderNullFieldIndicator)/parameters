@@ -1,0 +1,7 @@
+char separator
+char quotechar
+char escape
+boolean strictQuotes
+boolean ignoreLeadingWhiteSpace
+boolean ignoreQuotations
+CSVReaderNullFieldIndicator nullFieldIndicator

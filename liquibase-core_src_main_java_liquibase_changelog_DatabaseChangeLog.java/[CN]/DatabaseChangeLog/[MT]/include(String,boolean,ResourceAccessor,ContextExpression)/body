@@ -1,0 +1,57 @@
+{
+  if (fileName.equalsIgnoreCase(".svn") || fileName.equalsIgnoreCase("cvs")) {
+    return false;
+  }
+  String relativeBaseFileName=this.getPhysicalFilePath();
+  if (isRelativePath) {
+    String tempFile=FilenameUtils.concat(FilenameUtils.getFullPath(relativeBaseFileName),fileName);
+    if (tempFile != null && new File(tempFile).exists() == true) {
+      fileName=tempFile;
+    }
+ else {
+      fileName=FilenameUtils.getFullPath(relativeBaseFileName) + fileName;
+    }
+  }
+  DatabaseChangeLog changeLog;
+  try {
+    DatabaseChangeLog rootChangeLog=ROOT_CHANGE_LOG.get();
+    if (rootChangeLog == null) {
+      ROOT_CHANGE_LOG.set(this);
+    }
+    DatabaseChangeLog parentChangeLog=PARENT_CHANGE_LOG.get();
+    PARENT_CHANGE_LOG.set(this);
+    try {
+      ChangeLogParser parser=ChangeLogParserFactory.getInstance().getParser(fileName,resourceAccessor);
+      changeLog=parser.parse(fileName,changeLogParameters,resourceAccessor);
+      changeLog.setIncludeContexts(includeContexts);
+    }
+  finally {
+      if (rootChangeLog == null) {
+        ROOT_CHANGE_LOG.remove();
+      }
+      if (parentChangeLog == null) {
+        PARENT_CHANGE_LOG.remove();
+      }
+ else {
+        PARENT_CHANGE_LOG.set(parentChangeLog);
+      }
+    }
+  }
+ catch (  UnknownChangelogFormatException e) {
+    if (StringUtils.trimToEmpty(fileName).matches("\\.\\w+$")) {
+      LogFactory.getInstance().getLog().warning("included file " + relativeBaseFileName + "/"+ fileName+ " is not a recognized file type");
+    }
+    return false;
+  }
+  PreconditionContainer preconditions=changeLog.getPreconditions();
+  if (preconditions != null) {
+    if (null == this.getPreconditions()) {
+      this.setPreconditions(new PreconditionContainer());
+    }
+    this.getPreconditions().addNestedPrecondition(preconditions);
+  }
+  for (  ChangeSet changeSet : changeLog.getChangeSets()) {
+    addChangeSet(changeSet);
+  }
+  return true;
+}

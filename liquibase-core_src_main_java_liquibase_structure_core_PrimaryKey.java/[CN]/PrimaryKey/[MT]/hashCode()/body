@@ -1,6 +1,3 @@
 {
-  int result;
-  result=(getColumnNames() != null ? getColumnNames().hashCode() : 0);
-  result=31 * result + (getTable().getName() != null ? getTable().getName().hashCode() : 0);
-  return result;
+  return toString().hashCode();
 }

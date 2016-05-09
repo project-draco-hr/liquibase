@@ -1,18 +1,26 @@
 {
   List<Sql> sql=new ArrayList<Sql>();
-  String procedureText=statement.getProcedureText();
+  String schemaName=statement.getSchemaName();
+  if (schemaName == null) {
+    schemaName=database.getDefaultSchemaName();
+  }
+  String procedureText=addSchemaToText(statement.getProcedureText(),schemaName,"PROCEDURE",database);
   if (statement.getReplaceIfExists() != null && statement.getReplaceIfExists()) {
     String fullyQualifiedName=database.escapeObjectName(statement.getProcedureName(),StoredProcedure.class);
-    String schemaName=statement.getSchemaName();
-    if (schemaName == null) {
-      schemaName=database.getDefaultSchemaName();
-    }
     if (schemaName != null) {
       fullyQualifiedName=database.escapeObjectName(schemaName,Schema.class) + "." + fullyQualifiedName;
     }
     sql.add(new UnparsedSql("if object_id('" + fullyQualifiedName + "', 'p') is null exec ('create procedure "+ fullyQualifiedName+ " as select 1 a')"));
-    procedureText=procedureText.replaceFirst("(?i)create\\s+procedure","ALTER PROCEDURE");
+    StringClauses parsedSql=SqlParser.parse(procedureText,true,true);
+    StringClauses.ClauseIterator clauseIterator=parsedSql.getClauseIterator();
+    Object next="START";
+    while (next != null && !(next.toString().equalsIgnoreCase("create") || next.toString().equalsIgnoreCase("alter")) && clauseIterator.hasNext()) {
+      next=clauseIterator.nextNonWhitespace();
+    }
+    clauseIterator.replace("ALTER");
+    procedureText=parsedSql.toString();
   }
   sql.add(new UnparsedSql(procedureText,statement.getEndDelimiter()));
+  surroundWithSchemaSets(sql,statement.getSchemaName(),database);
   return sql.toArray(new Sql[sql.size()]);
 }

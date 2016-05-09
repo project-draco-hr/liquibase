@@ -1,5 +1,10 @@
 {
-  this.output=output;
+  if (output != null) {
+    this.output=output;
+  }
+ else {
+    this.output=new NoopWriter();
+  }
   this.delegatedReadExecutor=delegatedExecutor;
   setDatabase(database);
 }

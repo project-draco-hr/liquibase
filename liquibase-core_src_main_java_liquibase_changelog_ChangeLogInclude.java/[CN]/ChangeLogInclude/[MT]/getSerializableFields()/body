@@ -1,3 +1,3 @@
 {
-  return new LinkedHashSet<String>(Arrays.asList("file","relativeToChangelogFile"));
+  return new LinkedHashSet<String>(Arrays.asList("file","relativeToChangelogFile","context"));
 }

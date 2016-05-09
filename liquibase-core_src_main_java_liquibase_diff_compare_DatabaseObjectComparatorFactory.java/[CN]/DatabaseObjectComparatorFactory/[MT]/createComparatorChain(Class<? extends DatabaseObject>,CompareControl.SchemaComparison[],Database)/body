@@ -1,0 +1,17 @@
+{
+  String key=databaseObjectType.getName() + ":" + database.getShortName();
+  if (comparatorChainsByClassAndDatabase.containsKey(key)) {
+    DatabaseObjectComparatorChain copy=comparatorChainsByClassAndDatabase.get(key).copy();
+    copy.setSchemaComparisons(schemaComparisons);
+    return copy;
+  }
+  List<DatabaseObjectComparator> comparators=DatabaseObjectComparatorFactory.getInstance().getComparators(databaseObjectType,database);
+  if (comparators == null || comparators.size() == 0) {
+    return null;
+  }
+  DatabaseObjectComparatorChain chain=new DatabaseObjectComparatorChain(comparators,null);
+  comparatorChainsByClassAndDatabase.put(key,chain);
+  chain=chain.copy();
+  chain.setSchemaComparisons(schemaComparisons);
+  return chain;
+}

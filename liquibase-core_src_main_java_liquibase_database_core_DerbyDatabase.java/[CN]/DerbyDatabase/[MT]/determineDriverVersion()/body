@@ -9,11 +9,11 @@
         return;
       }
     }
-    driverVersionMajor=-1;
-    driverVersionMinor=-1;
+    driverVersionMajor=10;
+    driverVersionMinor=6;
   }
  catch (  Exception e) {
-    driverVersionMajor=-1;
-    driverVersionMinor=-1;
+    driverVersionMajor=10;
+    driverVersionMinor=6;
   }
 }

@@ -7,10 +7,10 @@
   int thisConstraintSize=thisConstraint.getColumns().size();
   int otherConstraintSize=otherConstraint.getColumns().size();
   if (thisConstraint.getTable() != null && otherConstraint.getTable() != null) {
-    if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(thisConstraint.getTable(),otherConstraint.getTable(),accordingTo)) {
+    if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(thisConstraint.getTable(),otherConstraint.getTable(),chain.getSchemaComparisons(),accordingTo)) {
       return false;
     }
-    if (databaseObject1.getSchema() != null && databaseObject2.getSchema() != null && !DatabaseObjectComparatorFactory.getInstance().isSameObject(databaseObject1.getSchema(),databaseObject2.getSchema(),accordingTo)) {
+    if (databaseObject1.getSchema() != null && databaseObject2.getSchema() != null && !DatabaseObjectComparatorFactory.getInstance().isSameObject(databaseObject1.getSchema(),databaseObject2.getSchema(),chain.getSchemaComparisons(),accordingTo)) {
       return false;
     }
     if (databaseObject1.getName() != null && databaseObject2.getName() != null && DefaultDatabaseObjectComparator.nameMatches(databaseObject1,databaseObject2,accordingTo)) {
@@ -24,7 +24,7 @@
         return false;
       }
       for (int i=0; i < otherConstraintSize; i++) {
-        if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(thisConstraint.getColumns().get(i).setRelation(thisConstraint.getTable()),otherConstraint.getColumns().get(i).setRelation(otherConstraint.getTable()),accordingTo)) {
+        if (!DatabaseObjectComparatorFactory.getInstance().isSameObject(thisConstraint.getColumns().get(i).setRelation(thisConstraint.getTable()),otherConstraint.getColumns().get(i).setRelation(otherConstraint.getTable()),chain.getSchemaComparisons(),accordingTo)) {
           return false;
         }
       }
@@ -39,7 +39,7 @@
       return false;
     }
     if (databaseObject1.getSchema() != null && databaseObject2.getSchema() != null) {
-      return DatabaseObjectComparatorFactory.getInstance().isSameObject(databaseObject1.getSchema(),databaseObject2.getSchema(),accordingTo);
+      return DatabaseObjectComparatorFactory.getInstance().isSameObject(databaseObject1.getSchema(),databaseObject2.getSchema(),chain.getSchemaComparisons(),accordingTo);
     }
  else {
       return true;

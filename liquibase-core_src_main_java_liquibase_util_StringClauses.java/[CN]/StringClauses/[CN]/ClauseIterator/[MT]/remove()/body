@@ -1,0 +1,4 @@
+{
+  clauses.remove(keyIterator.previous());
+  keyIterator.remove();
+}

@@ -11,5 +11,5 @@
   outputDir.mkdir();
   liquibase=createLiquibase(completeChangeLog);
   liquibase.generateDocumentation(outputDir.getAbsolutePath(),this.contexts);
-  FileUtil.deleteOnExit(outputDir);
+  deleteOnExit(outputDir);
 }

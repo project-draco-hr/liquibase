@@ -1,0 +1,9 @@
+{
+  if (literal != null) {
+    LinkedHashMap<String,Object> newMap=new LinkedHashMap<String,Object>();
+    newMap.put(uniqueKey(literal.getClass().getName().toLowerCase()),literal);
+    newMap.putAll(this.clauses);
+    this.clauses=newMap;
+  }
+  return this;
+}

@@ -5,6 +5,7 @@
   lockService.waitForLock();
   try {
     DatabaseChangeLog changeLog=getDatabaseChangeLog();
+    ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database).generateDeploymentId();
     checkLiquibaseTables(false,changeLog,contexts,labelExpression);
     changeLog.validate(database,contexts,labelExpression);
     ChangeLogIterator logIterator=new ChangeLogIterator(changeLog,new NotRanChangeSetFilter(database.getRanChangeSetList()),new ContextChangeSetFilter(contexts),new LabelChangeSetFilter(labelExpression),new DbmsChangeSetFilter(database),new CountChangeSetFilter(1));

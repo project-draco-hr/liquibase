@@ -1,6 +1,7 @@
 {
   List<SqlStatement> sql=new ArrayList<SqlStatement>();
   List<AddColumnStatement> addColumnStatements=new ArrayList<AddColumnStatement>();
+  List<UpdateStatement> addColumnUpdateStatements=new ArrayList<UpdateStatement>();
   if (getColumns().size() == 0) {
     return new SqlStatement[]{new AddColumnStatement(catalogName,schemaName,tableName,null,null,null)};
   }
@@ -35,14 +36,20 @@
       addColumnStatement.setAddAtPosition(column.getPosition());
     }
     addColumnStatements.add(addColumnStatement);
-    if (database instanceof DB2Database) {
-      sql.add(new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName()));
-    }
     if (column.getValueObject() != null) {
       UpdateStatement updateStatement=new UpdateStatement(getCatalogName(),getSchemaName(),getTableName());
       updateStatement.addNewColumnValue(column.getName(),column.getValueObject());
-      sql.add(updateStatement);
+      if (database instanceof DB2Database) {
+        addColumnUpdateStatements.add(updateStatement);
+      }
+ else {
+        sql.add(updateStatement);
+      }
     }
+  }
+  if (database instanceof DB2Database) {
+    sql.add(new ReorganizeTableStatement(getCatalogName(),getSchemaName(),getTableName()));
+    sql.addAll(addColumnUpdateStatements);
   }
   if (addColumnStatements.size() == 1) {
     sql.add(0,addColumnStatements.get(0));

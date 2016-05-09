@@ -13,6 +13,7 @@
         if (schemaName == null) {
           schemaName=object.getSchema().getCatalogName();
         }
+        schemaName=includeSchemaComparison(schemaName);
         out.println("  SCHEMA: " + schemaName);
       }
       out.println("     " + object);

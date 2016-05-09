@@ -5,5 +5,5 @@
     }
   }
 ;
-  return getName() + "(" + getForeignKeyTable()+ "."+ StringUtils.join(getForeignKeyColumns(),", ",columnFormatter)+ " -> "+ getPrimaryKeyTable()+ "."+ StringUtils.join(getPrimaryKeyColumns(),", ",columnFormatter)+ ")";
+  return getName() + "(" + getForeignKeyTable()+ "["+ StringUtils.join(getForeignKeyColumns(),", ",columnFormatter)+ "] -> "+ getPrimaryKeyTable()+ "["+ StringUtils.join(getPrimaryKeyColumns(),", ",columnFormatter)+ "])";
 }

@@ -1,8 +1,0 @@
-{
-  this.mainApp=mainApp;
-  this.vagrantPath=this.mainApp.getPath("vagrant.exe","vagrant.bat","vagrant.sh","vagrant");
-  if (vagrantPath == null) {
-    throw new UnexpectedLiquibaseSdkException("Cannot find vagrant in " + mainApp.getPath());
-  }
-  mainApp.debug("Vagrant path: " + vagrantPath);
-}

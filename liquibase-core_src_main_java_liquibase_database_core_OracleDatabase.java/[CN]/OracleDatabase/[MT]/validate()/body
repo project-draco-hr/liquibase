@@ -1,0 +1,12 @@
+{
+  ValidationErrors errors=super.validate();
+  DatabaseConnection connection=getConnection();
+  if (connection == null || connection instanceof OfflineConnection) {
+    LogFactory.getInstance().getLog().info("Cannot validate offline database");
+    return errors;
+  }
+  if (!canAccessDbaRecycleBin()) {
+    errors.addWarning(getDbaRecycleBinWarning());
+  }
+  return errors;
+}

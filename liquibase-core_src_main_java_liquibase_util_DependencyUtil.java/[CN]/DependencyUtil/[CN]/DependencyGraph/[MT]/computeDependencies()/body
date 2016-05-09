@@ -1,0 +1,12 @@
+{
+  List<GraphNode<T>> orphanNodes=getOrphanNodes();
+  List<GraphNode<T>> nextNodesToDisplay=new ArrayList<GraphNode<T>>();
+  if (orphanNodes != null) {
+    for (    GraphNode<T> node : orphanNodes) {
+      listener.evaluating(node.value);
+      evaluatedNodes.add(node);
+      nextNodesToDisplay.addAll(node.getGoingOutNodes());
+    }
+    computeDependencies(nextNodesToDisplay);
+  }
+}

@@ -1,3 +1,0 @@
-{
-  assertNotNull(diffResult.getMissingObject(new Index(change.getIndexName())));
-}

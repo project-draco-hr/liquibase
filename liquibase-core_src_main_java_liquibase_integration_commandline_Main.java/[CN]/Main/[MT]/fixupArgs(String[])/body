@@ -12,6 +12,7 @@
         i++;
       }
     }
+    arg=arg.replace("\\,",",");
     fixedArgs.add(arg);
   }
   return fixedArgs.toArray(new String[fixedArgs.size()]);

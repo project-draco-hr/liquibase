@@ -41,13 +41,13 @@
  else         if (value instanceof Date) {
           column.setValueDate((Date)value);
         }
- else {
+ else         if (value instanceof byte[]) {
           if (referenceDatabase instanceof InformixDatabase) {
-            if (value instanceof byte[]) {
-              byte[] bytes=(byte[])value;
-              value=new String(bytes);
-            }
+            column.setValue(new String((byte[])value));
           }
+          column.setValueComputed(new DatabaseFunction("UNSUPPORTED FOR DIFF: BINARY DATA"));
+        }
+ else {
           column.setValue(value.toString().replace("\\","\\\\"));
         }
         change.addColumn(column);

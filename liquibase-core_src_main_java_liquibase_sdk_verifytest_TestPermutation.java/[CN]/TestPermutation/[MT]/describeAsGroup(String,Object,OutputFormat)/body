@@ -1,4 +1,0 @@
-{
-  this.group=key + ": " + outputFormat.format(value);
-  describe(key,value);
-}

@@ -1,3 +1,0 @@
-{
-  super(DropDefaultValueChange.class);
-}

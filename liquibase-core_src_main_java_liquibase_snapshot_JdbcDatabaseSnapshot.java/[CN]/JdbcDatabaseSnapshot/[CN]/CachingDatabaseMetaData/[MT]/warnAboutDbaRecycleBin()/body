@@ -1,0 +1,6 @@
+{
+  if (!warnedAboutDbaRecycleBin && !(((OracleDatabase)database).canAccessDbaRecycleBin())) {
+    LogFactory.getInstance().getLog().warning(((OracleDatabase)database).getDbaRecycleBinWarning());
+    warnedAboutDbaRecycleBin=true;
+  }
+}

@@ -8,6 +8,7 @@
     if (checkLiquibaseTables) {
       checkLiquibaseTables(true,changeLog,contexts,labelExpression);
     }
+    ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database).generateDeploymentId();
     changeLog.validate(database,contexts,labelExpression);
     ChangeLogIterator changeLogIterator=getStandardChangelogIterator(contexts,labelExpression,changeLog);
     changeLogIterator.run(createUpdateVisitor(),new RuntimeEnvironment(database,contexts,labelExpression));

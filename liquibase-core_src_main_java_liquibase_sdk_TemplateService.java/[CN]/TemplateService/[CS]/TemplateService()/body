@@ -1,6 +1,0 @@
-{
-  engine=new VelocityEngine();
-  engine.setProperty(RuntimeConstants.RESOURCE_LOADER,"classpath");
-  engine.setProperty("classpath.resource.loader.class",ClasspathResourceLoader.class.getName());
-  engine.init();
-}

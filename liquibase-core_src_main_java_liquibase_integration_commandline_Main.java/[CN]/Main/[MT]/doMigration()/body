@@ -19,12 +19,15 @@
   CompositeResourceAccessor fileOpener=new CompositeResourceAccessor(fsOpener,clOpener);
   Database database=CommandLineUtils.createDatabaseObject(fileOpener,this.url,this.username,this.password,this.driver,this.defaultCatalogName,this.defaultSchemaName,Boolean.parseBoolean(outputDefaultCatalog),Boolean.parseBoolean(outputDefaultSchema),this.databaseClass,this.driverPropertiesFile,this.propertyProviderClass,this.liquibaseCatalogName,this.liquibaseSchemaName,this.databaseChangeLogTableName,this.databaseChangeLogLockTableName);
   try {
+    CompareControl.ComputedSchemas computedSchemas=CompareControl.computeSchemas(getCommandParam("schemas",null),getCommandParam("referenceSchemas",null),getCommandParam("outputSchemasAs",null),defaultCatalogName,defaultSchemaName,referenceDefaultCatalogName,referenceDefaultSchemaName,database);
+    CompareControl.SchemaComparison[] finalSchemaComparisons=computedSchemas.finalSchemaComparisons;
+    CatalogAndSchema[] finalTargetSchemas=computedSchemas.finalTargetSchemas;
     boolean includeCatalog=Boolean.parseBoolean(getCommandParam("includeCatalog","false"));
     boolean includeSchema=Boolean.parseBoolean(getCommandParam("includeSchema","false"));
     boolean includeTablespace=Boolean.parseBoolean(getCommandParam("includeTablespace","false"));
     String excludeObjects=StringUtils.trimToNull(getCommandParam("excludeObjects",null));
     String includeObjects=StringUtils.trimToNull(getCommandParam("includeObjects",null));
-    DiffOutputControl diffOutputControl=new DiffOutputControl(includeCatalog,includeSchema,includeTablespace);
+    DiffOutputControl diffOutputControl=new DiffOutputControl(includeCatalog,includeSchema,includeTablespace,finalSchemaComparisons);
     if (excludeObjects != null && includeObjects != null) {
       throw new UnexpectedLiquibaseException("Cannot specify both excludeObjects and includeObjects");
     }
@@ -33,25 +36,6 @@
     }
     if (includeObjects != null) {
       diffOutputControl.setObjectChangeFilter(new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.INCLUDE,includeObjects));
-    }
-    String referenceSchemaNames=getCommandParam("schemas",null);
-    CompareControl.SchemaComparison[] finalSchemaComparisons;
-    CatalogAndSchema[] finalSchemas;
-    if (referenceSchemaNames == null) {
-      finalSchemaComparisons=new CompareControl.SchemaComparison[]{new CompareControl.SchemaComparison(new CatalogAndSchema(referenceDefaultCatalogName,referenceDefaultSchemaName),new CatalogAndSchema(defaultCatalogName,defaultSchemaName))};
-      finalSchemas=new CatalogAndSchema[]{new CatalogAndSchema(defaultCatalogName,defaultSchemaName)};
-    }
- else {
-      List<CompareControl.SchemaComparison> schemaComparisons=new ArrayList<CompareControl.SchemaComparison>();
-      List<CatalogAndSchema> schemas=new ArrayList<CatalogAndSchema>();
-      for (      String schema : referenceSchemaNames.split(",")) {
-        CatalogAndSchema correctedSchema=new CatalogAndSchema(null,schema).customize(database);
-        schemaComparisons.add(new CompareControl.SchemaComparison(correctedSchema,correctedSchema));
-        schemas.add(correctedSchema);
-        diffOutputControl.addIncludedSchema(correctedSchema);
-      }
-      finalSchemaComparisons=schemaComparisons.toArray(new CompareControl.SchemaComparison[schemaComparisons.size()]);
-      finalSchemas=schemas.toArray(new CatalogAndSchema[schemas.size()]);
     }
     for (    CompareControl.SchemaComparison schema : finalSchemaComparisons) {
       diffOutputControl.addIncludedSchema(schema.getReferenceSchema());
@@ -74,7 +58,7 @@
       if (file.exists()) {
         throw new LiquibaseException("ChangeLogFile " + changeLogFile + " already exists!");
       }
-      CommandLineUtils.doGenerateChangeLog(changeLogFile,database,finalSchemas,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataOutputDirectory),diffOutputControl);
+      CommandLineUtils.doGenerateChangeLog(changeLogFile,database,finalTargetSchemas,StringUtils.trimToNull(diffTypes),StringUtils.trimToNull(changeSetAuthor),StringUtils.trimToNull(changeSetContext),StringUtils.trimToNull(dataOutputDirectory),diffOutputControl);
       return;
     }
  else     if ("snapshot".equalsIgnoreCase(command)) {
@@ -112,6 +96,8 @@
       return;
     }
     Liquibase liquibase=new Liquibase(changeLogFile,fileOpener,database);
+    ChangeExecListener listener=ChangeExecListenerUtils.getChangeExecListener(liquibase.getDatabase(),liquibase.getResourceAccessor(),changeExecListenerClass,changeExecListenerPropertiesFile);
+    liquibase.setChangeExecListener(listener);
     liquibase.setCurrentDateTimeFunction(currentDateTimeFunction);
     for (    Map.Entry<String,Object> entry : changeLogParameters.entrySet()) {
       liquibase.setChangeLogParameter(entry.getKey(),entry.getValue());

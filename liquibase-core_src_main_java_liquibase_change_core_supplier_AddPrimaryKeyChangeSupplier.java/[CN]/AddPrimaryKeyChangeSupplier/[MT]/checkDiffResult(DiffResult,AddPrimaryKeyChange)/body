@@ -1,9 +1,0 @@
-{
-  String[] columnNames=change.getColumnNames().split(",");
-  Column[] columns=new Column[columnNames.length];
-  for (int i=0; i < columnNames.length; i++) {
-    columns[i]=new Column(columnNames[i]);
-  }
-  PrimaryKey pk=diffResult.getUnexpectedObject(new PrimaryKey(change.getConstraintName(),change.getCatalogName(),change.getSchemaName(),change.getTableName(),columns));
-  assertNotNull(pk);
-}

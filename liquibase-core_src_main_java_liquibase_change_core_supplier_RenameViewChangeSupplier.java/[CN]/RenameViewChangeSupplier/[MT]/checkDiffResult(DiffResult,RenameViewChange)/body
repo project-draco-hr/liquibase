@@ -1,4 +1,0 @@
-{
-  assertNotNull(diffResult.getMissingObject(new View(change.getCatalogName(),change.getSchemaName(),change.getOldViewName())));
-  assertNotNull(diffResult.getUnexpectedObject(new View(change.getCatalogName(),change.getSchemaName(),change.getNewViewName())));
-}

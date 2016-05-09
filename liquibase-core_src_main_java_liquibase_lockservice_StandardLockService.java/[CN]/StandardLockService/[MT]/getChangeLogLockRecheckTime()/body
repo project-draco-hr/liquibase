@@ -1,6 +1,6 @@
 {
-  if (changeLogLockPollRate != null) {
-    return changeLogLockPollRate;
+  if (changeLogLockRecheckTime != null) {
+    return changeLogLockRecheckTime;
   }
   return LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getDatabaseChangeLogLockPollRate();
 }

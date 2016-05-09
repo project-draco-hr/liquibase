@@ -1,6 +1,7 @@
 {
   try {
     this.currentChangeLogFileDOM=DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+    this.currentChangeLogFileDOM.setXmlVersion(XML_VERSION);
   }
  catch (  ParserConfigurationException e) {
     throw new UnexpectedLiquibaseException(e);

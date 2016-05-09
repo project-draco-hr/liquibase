@@ -1,8 +1,0 @@
-{
-  try {
-    changeName=changeClass.newInstance().getSerializedObjectName();
-  }
- catch (  Exception e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
-}

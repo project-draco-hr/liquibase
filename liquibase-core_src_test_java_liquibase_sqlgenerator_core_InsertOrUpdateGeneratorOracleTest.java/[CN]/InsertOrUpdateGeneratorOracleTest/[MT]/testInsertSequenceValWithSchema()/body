@@ -1,0 +1,12 @@
+{
+  OracleDatabase database=new OracleDatabase();
+  InsertGenerator generator=new InsertGenerator();
+  InsertStatement statement=new InsertStatement("mycatalog","myschema","mytable");
+  ColumnConfig columnConfig=new ColumnConfig();
+  columnConfig.setValueSequenceNext(new SequenceNextValueFunction("myschema.my_seq"));
+  columnConfig.setName("col3");
+  statement.addColumn(columnConfig);
+  Sql[] sql=generator.generateSql(statement,database,null);
+  String theSql=sql[0].toSql();
+  assertEquals("INSERT INTO mycatalog.mytable (col3) VALUES (\"myschema\".\"my_seq\".nextval)",theSql);
+}

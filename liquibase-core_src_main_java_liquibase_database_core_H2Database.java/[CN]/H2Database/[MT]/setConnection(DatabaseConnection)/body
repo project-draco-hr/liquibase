@@ -1,0 +1,37 @@
+{
+  Connection sqlConn=null;
+  if (!(conn instanceof OfflineConnection)) {
+    try {
+      if (conn instanceof JdbcConnection) {
+        Method wrappedConn=conn.getClass().getMethod("getWrappedConnection");
+        wrappedConn.setAccessible(true);
+        sqlConn=(Connection)wrappedConn.invoke(conn);
+      }
+    }
+ catch (    Exception e) {
+      throw new UnexpectedLiquibaseException(e);
+    }
+    if (sqlConn != null) {
+      Statement statement=null;
+      ResultSet resultSet=null;
+      try {
+        statement=sqlConn.createStatement();
+        resultSet=statement.executeQuery("SELECT SCHEMA()");
+        String schemaName=null;
+        if (resultSet.next()) {
+          schemaName=resultSet.getString(1);
+        }
+        if (schemaName != null) {
+          this.connectionSchemaName=schemaName;
+        }
+      }
+ catch (      SQLException e) {
+        LogFactory.getLogger().info("Could not read current schema name: " + e.getMessage());
+      }
+ finally {
+        JdbcUtils.close(resultSet,statement);
+      }
+    }
+  }
+  super.setConnection(conn);
+}

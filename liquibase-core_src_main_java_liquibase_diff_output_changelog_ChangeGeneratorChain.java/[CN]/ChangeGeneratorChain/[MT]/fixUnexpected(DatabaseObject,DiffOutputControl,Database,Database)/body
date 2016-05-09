@@ -14,12 +14,15 @@
   if (control.alreadyHandledUnexpected(unexpectedObject,comparisionDatabase)) {
     return null;
   }
-  Change[] changes=((UnexpectedObjectChangeGenerator)changeGenerators.next()).fixUnexpected(unexpectedObject,control,referenceDatabase,comparisionDatabase,this);
+  UnexpectedObjectChangeGenerator changeGenerator=(UnexpectedObjectChangeGenerator)changeGenerators.next();
+  Change[] changes=changeGenerator.fixUnexpected(unexpectedObject,control,referenceDatabase,comparisionDatabase,this);
   if (changes == null) {
     return null;
   }
   if (changes.length == 0) {
     return null;
   }
+  changes=changeGenerator.fixSchema(changes,control.getSchemaComparisons());
+  changes=changeGenerator.fixOutputAsSchema(changes,control.getSchemaComparisons());
   return changes;
 }

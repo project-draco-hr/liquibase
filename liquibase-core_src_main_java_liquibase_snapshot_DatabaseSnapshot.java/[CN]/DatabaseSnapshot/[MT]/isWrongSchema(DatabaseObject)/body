@@ -13,7 +13,7 @@
     return false;
   }
   for (  DatabaseObject obj : originalExamples) {
-    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(fieldValue.getSchema(),obj,database)) {
+    if (DatabaseObjectComparatorFactory.getInstance().isSameObject(fieldValue.getSchema(),obj,schemaComparisons,database)) {
       return false;
     }
   }

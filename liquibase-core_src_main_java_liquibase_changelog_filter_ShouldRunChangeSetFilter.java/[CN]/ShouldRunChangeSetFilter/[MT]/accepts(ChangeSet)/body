@@ -1,5 +1,5 @@
 {
-  for (  RanChangeSet ranChangeSet : ranChangeSets) {
+  for (  RanChangeSet ranChangeSet : this.ranChangeSets.values()) {
     if (changeSetsMatch(changeSet,ranChangeSet)) {
       if (changeSet.shouldAlwaysRun()) {
         return new ChangeSetFilterResult(true,"Change set always runs",this.getClass());

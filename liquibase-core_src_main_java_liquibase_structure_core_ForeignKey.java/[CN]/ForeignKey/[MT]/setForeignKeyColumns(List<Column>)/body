@@ -1,7 +1,9 @@
 {
   this.setAttribute("foreignKeyColumns",foreignKeyColumns);
   for (  Column column : getForeignKeyColumns()) {
-    column.setRelation(getForeignKeyTable());
+    if (column.getAttribute("relation",Object.class) == null) {
+      column.setRelation(getForeignKeyTable());
+    }
   }
   return this;
 }

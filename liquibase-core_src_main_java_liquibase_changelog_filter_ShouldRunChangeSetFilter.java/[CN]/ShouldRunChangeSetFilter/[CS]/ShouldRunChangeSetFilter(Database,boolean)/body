@@ -1,4 +1,31 @@
 {
   this.ignoreClasspathPrefix=ignoreClasspathPrefix;
-  this.ranChangeSets=database.getRanChangeSetList();
+  this.ranChangeSets=new HashMap<String,RanChangeSet>();
+  for (  RanChangeSet ranChangeSet : database.getRanChangeSetList()) {
+    RanChangeSet existingChangeSet=ranChangeSets.get(ranChangeSet.toString());
+    boolean addToSet=false;
+    if (existingChangeSet == null) {
+      addToSet=true;
+    }
+ else {
+      Date existingDate=existingChangeSet.getDateExecuted();
+      Date thisDate=ranChangeSet.getDateExecuted();
+      if (existingDate != null && thisDate != null) {
+        int comparedDates=thisDate.compareTo(existingDate);
+        if (comparedDates < 0) {
+          addToSet=true;
+        }
+ else         if (comparedDates == 0) {
+          Integer existingOrder=existingChangeSet.getOrderExecuted();
+          Integer thisOrder=ranChangeSet.getOrderExecuted();
+          if (existingOrder != null && thisOrder != null && thisOrder.compareTo(existingOrder) < 0) {
+            addToSet=true;
+          }
+        }
+      }
+    }
+    if (addToSet) {
+      this.ranChangeSets.put(ranChangeSet.toString(),ranChangeSet);
+    }
+  }
 }

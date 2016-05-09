@@ -1,3 +1,0 @@
-{
-  super(RenameColumnChange.class);
-}

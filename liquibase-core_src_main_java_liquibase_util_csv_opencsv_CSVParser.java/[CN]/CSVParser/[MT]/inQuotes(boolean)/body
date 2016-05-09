@@ -1,0 +1,3 @@
+{
+  return (inQuotes && !ignoreQuotations) || inField;
+}

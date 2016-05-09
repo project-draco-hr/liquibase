@@ -1,3 +1,0 @@
-{
-  return new ChangeSet("test-id","test-author",false,false,"/test.xml",null,null,runInTransaction,null);
-}

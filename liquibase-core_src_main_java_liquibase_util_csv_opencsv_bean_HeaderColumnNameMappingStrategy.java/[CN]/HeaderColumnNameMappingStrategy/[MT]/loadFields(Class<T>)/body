@@ -1,0 +1,9 @@
+{
+  List<Field> fields=new ArrayList<Field>();
+  for (  Field field : cls.getDeclaredFields()) {
+    if (field.isAnnotationPresent(CsvBind.class)) {
+      fields.add(field);
+    }
+  }
+  return fields;
+}

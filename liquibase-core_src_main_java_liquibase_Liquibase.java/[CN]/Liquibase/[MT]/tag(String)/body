@@ -2,6 +2,7 @@
   LockService lockService=LockServiceFactory.getInstance().getLockService(database);
   lockService.waitForLock();
   try {
+    ChangeLogHistoryServiceFactory.getInstance().getChangeLogService(database).generateDeploymentId();
     checkLiquibaseTables(false,null,new Contexts(),new LabelExpression());
     getDatabase().tag(tagString);
   }

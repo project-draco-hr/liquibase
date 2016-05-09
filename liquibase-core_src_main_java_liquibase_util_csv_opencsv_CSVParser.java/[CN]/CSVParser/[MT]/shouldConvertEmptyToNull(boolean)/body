@@ -1,0 +1,12 @@
+{
+switch (nullFieldIndicator) {
+case BOTH:
+    return true;
+case EMPTY_SEPARATORS:
+  return !fromQuotedField;
+case EMPTY_QUOTES:
+return fromQuotedField;
+default :
+return false;
+}
+}

@@ -1,0 +1,15 @@
+{
+  boolean generateOne=false;
+  key=StringUtils.trimToNull(key);
+  if (key == null) {
+    generateOne=true;
+  }
+ else   if (clauses.containsKey(key.toLowerCase())) {
+    generateOne=true;
+  }
+  while (generateOne) {
+    key=UUID.randomUUID().toString().replace("-","").substring(0,6);
+    generateOne=clauses.containsKey(key);
+  }
+  return key;
+}

@@ -1,0 +1,26 @@
+{
+  if (schemaComparisons == null || schemaComparisons.length == 0 || schemaName == null) {
+    return schemaName;
+  }
+  String convertedSchemaName=null;
+  for (  CompareControl.SchemaComparison comparison : schemaComparisons) {
+    if (schemaName.equals(comparison.getComparisonSchema().getSchemaName())) {
+      convertedSchemaName=comparison.getReferenceSchema().getSchemaName();
+    }
+ else     if (schemaName.equals(comparison.getComparisonSchema().getCatalogName())) {
+      convertedSchemaName=comparison.getReferenceSchema().getCatalogName();
+    }
+ else     if (schemaName.equals(comparison.getReferenceSchema().getSchemaName())) {
+      convertedSchemaName=comparison.getComparisonSchema().getSchemaName();
+    }
+ else     if (schemaName.equals(comparison.getReferenceSchema().getCatalogName())) {
+      convertedSchemaName=comparison.getComparisonSchema().getCatalogName();
+    }
+  }
+  if (convertedSchemaName == null) {
+    return schemaName;
+  }
+ else {
+    return convertedSchemaName;
+  }
+}

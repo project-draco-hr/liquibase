@@ -1,4 +1,7 @@
 {
+  if (value == null) {
+    return null;
+  }
   Matcher matcher=Pattern.compile("(.*)!\\{(.*)\\}").matcher((String)value);
   if (matcher.matches()) {
     String stringValue=matcher.group(1);

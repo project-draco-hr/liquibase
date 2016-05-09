@@ -15,7 +15,7 @@
     }
     DiffOutputControl diffOutputControl=new DiffOutputControl();
     File tempFile=File.createTempFile("liquibase-test",".xml");
-    FileUtil.deleteOnExit(tempFile);
+    deleteOnExit(tempFile);
     if (outputCsv) {
       diffOutputControl.setDataDir(new File(tempFile.getParentFile(),"liquibase-data").getCanonicalPath().replaceFirst("\\w:",""));
     }
@@ -51,7 +51,7 @@
     DiffResult emptyDiffResult=DiffGeneratorFactory.getInstance().compare(emptySnapshot,migratedSnapshot,compareControl);
     output=new FileOutputStream(tempFile);
     try {
-      new DiffToChangeLog(emptyDiffResult,new DiffOutputControl(true,true,true)).print(new PrintStream(output));
+      new DiffToChangeLog(emptyDiffResult,new DiffOutputControl(true,true,true,null)).print(new PrintStream(output));
       output.flush();
     }
   finally {

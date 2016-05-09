@@ -1,8 +1,6 @@
 {
+  Validate.notNull(StringUtils.trimToNull(key),"key must be a non-null, non-empty value");
   key=StringUtils.trimToEmpty(key).toLowerCase();
-  if (key.equals("")) {
-    throw new IllegalArgumentException("Cannot specify a null or empty key");
-  }
   if (clauses.containsKey(key)) {
     throw new IllegalArgumentException("Cannot add clause with key '" + key + "' because it is already defined");
   }

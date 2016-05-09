@@ -1,0 +1,5 @@
+{
+  when(StreamUtil.singleInputStream(XSD_FILE,resourceAccessor)).thenReturn(null);
+  InputStream returnValue=resourceAccessorXsdStreamResolver.getResourceAsStream(XSD_FILE);
+  assertThat(returnValue).isSameAs(successorValue);
+}

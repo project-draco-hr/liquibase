@@ -1,7 +1,0 @@
-{
-  Set<ConnectionSupplier> configurations=configsByDatabase.get(database.getShortName());
-  if (configurations == null) {
-    return new HashSet<ConnectionSupplier>();
-  }
-  return configurations;
-}

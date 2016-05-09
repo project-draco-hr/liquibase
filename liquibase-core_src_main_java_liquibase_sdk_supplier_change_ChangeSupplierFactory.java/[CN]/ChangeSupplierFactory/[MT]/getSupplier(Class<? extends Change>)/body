@@ -1,8 +1,0 @@
-{
-  try {
-    return getSupplier(change.newInstance());
-  }
- catch (  Exception e) {
-    throw new UnexpectedLiquibaseException(e);
-  }
-}

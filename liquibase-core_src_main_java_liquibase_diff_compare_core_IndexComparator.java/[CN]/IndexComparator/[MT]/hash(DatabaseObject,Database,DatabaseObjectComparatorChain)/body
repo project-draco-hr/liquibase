@@ -5,7 +5,7 @@
   }
   Table table=((Index)databaseObject).getTable();
   if (table != null) {
-    hashes.addAll(Arrays.asList(DatabaseObjectComparatorFactory.getInstance().hash(table,accordingTo)));
+    hashes.addAll(Arrays.asList(DatabaseObjectComparatorFactory.getInstance().hash(table,chain.getSchemaComparisons(),accordingTo)));
   }
   return hashes.toArray(new String[hashes.size()]);
 }

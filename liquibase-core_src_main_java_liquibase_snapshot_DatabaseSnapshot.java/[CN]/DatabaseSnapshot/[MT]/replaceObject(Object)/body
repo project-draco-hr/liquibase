@@ -10,7 +10,7 @@
       return fieldValue;
     }
     if (isWrongSchema(((DatabaseObject)fieldValue))) {
-      DatabaseObject savedFieldValue=referencedObjects.get((DatabaseObject)fieldValue);
+      DatabaseObject savedFieldValue=referencedObjects.get((DatabaseObject)fieldValue,schemaComparisons);
       if (savedFieldValue == null) {
         savedFieldValue=(DatabaseObject)fieldValue;
         savedFieldValue.setSnapshotId(SnapshotIdService.getInstance().generateId());

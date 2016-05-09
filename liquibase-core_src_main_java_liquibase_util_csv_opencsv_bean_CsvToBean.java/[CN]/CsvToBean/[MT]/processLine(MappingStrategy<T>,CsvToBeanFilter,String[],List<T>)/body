@@ -1,0 +1,6 @@
+{
+  if (filter == null || filter.allowLine(line)) {
+    T obj=processLine(mapper,line);
+    list.add(obj);
+  }
+}

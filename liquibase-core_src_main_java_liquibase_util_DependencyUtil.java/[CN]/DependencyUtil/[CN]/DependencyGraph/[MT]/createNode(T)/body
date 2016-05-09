@@ -1,0 +1,5 @@
+{
+  GraphNode<T> node=new GraphNode<T>();
+  node.value=value;
+  return node;
+}
