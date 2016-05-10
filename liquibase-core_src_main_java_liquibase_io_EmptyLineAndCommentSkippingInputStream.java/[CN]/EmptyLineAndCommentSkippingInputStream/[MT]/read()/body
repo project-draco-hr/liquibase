@@ -11,8 +11,8 @@
       return this.read();
     }
   }
- else   if (read == this.commentLineStartsWith.toCharArray()[0]) {
-    while ((read=this.read()) != '\n' && read > 0) {
+ else   if (commentSkipEnabled && read == this.commentLineStartsWith.toCharArray()[0]) {
+    while ((read=super.read()) != '\n' && read != '\r' && read > 0) {
       ;
     }
     read=this.read();
