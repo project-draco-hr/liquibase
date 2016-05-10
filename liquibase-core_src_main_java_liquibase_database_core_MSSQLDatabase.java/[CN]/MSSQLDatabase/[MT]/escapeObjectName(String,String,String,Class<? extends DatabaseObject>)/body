@@ -1,9 +1,8 @@
 {
-  boolean includeCatalog=false;
   if (View.class.isAssignableFrom(objectType)) {
-    String name=super.escapeObjectName(objectName,objectType);
+    String name=this.escapeObjectName(objectName,objectType);
     if (schemaName != null) {
-      name=super.escapeObjectName(schemaName,Schema.class) + "." + name;
+      name=this.escapeObjectName(schemaName,Schema.class) + "." + name;
     }
     return name;
   }
@@ -14,9 +13,9 @@
     return super.escapeObjectName(catalogName,schemaName,objectName,objectType);
   }
  else {
-    String name=super.escapeObjectName(objectName,objectType);
+    String name=this.escapeObjectName(objectName,objectType);
     if (schemaName != null) {
-      name=super.escapeObjectName(schemaName,Schema.class) + "." + name;
+      name=this.escapeObjectName(schemaName,Schema.class) + "." + name;
     }
     return name;
   }
