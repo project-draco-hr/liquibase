@@ -106,7 +106,7 @@ catch (    PreconditionErrorException e) {
             listener.willRun(change,this,changeLog,database);
           }
           if (change.generateStatementsVolatile(database)) {
-            executor.comment("WARNING The following SQL is possibly incorrect, invalid, and/or may change on each run:");
+            executor.comment("WARNING The following SQL may change each run and therefore is possibly incorrect and/or invalid:");
           }
           database.executeStatements(change,databaseChangeLog,sqlVisitors);
           log.info(change.getConfirmationMessage());
