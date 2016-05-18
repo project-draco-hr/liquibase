@@ -24,11 +24,21 @@
   if (!accordingTo.supportsSchemas() && catalogName != null && schemaName != null && !catalogName.equals(schemaName)) {
     schemaName=null;
   }
-  if (catalogName != null) {
-    catalogName=catalogName.toUpperCase();
+  if (accordingTo instanceof PostgresDatabase) {
+    if (catalogName != null) {
+      catalogName=catalogName.toLowerCase();
+    }
+    if (schemaName != null) {
+      schemaName=schemaName.toLowerCase();
+    }
   }
-  if (schemaName != null) {
-    schemaName=schemaName.toUpperCase();
+ else {
+    if (catalogName != null) {
+      catalogName=catalogName.toUpperCase();
+    }
+    if (schemaName != null) {
+      schemaName=schemaName.toUpperCase();
+    }
   }
   return new CatalogAndSchema(catalogName,schemaName);
 }
