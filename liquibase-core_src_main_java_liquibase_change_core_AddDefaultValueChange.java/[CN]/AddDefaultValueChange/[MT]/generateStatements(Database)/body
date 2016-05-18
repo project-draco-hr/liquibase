@@ -27,6 +27,7 @@
   }
  else   if (getDefaultValueSequenceNext() != null) {
     defaultValue=getDefaultValueSequenceNext();
+    ((SequenceNextValueFunction)defaultValue).setSequenceSchemaName(this.getSchemaName());
   }
   return new SqlStatement[]{new AddDefaultValueStatement(getCatalogName(),getSchemaName(),getTableName(),getColumnName(),getColumnDataType(),defaultValue)};
 }
