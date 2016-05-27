@@ -14,6 +14,9 @@
   }
  else {
     String name=this.escapeObjectName(objectName,objectType);
+    if (schemaName == null) {
+      schemaName=this.getDefaultSchemaName();
+    }
     if (schemaName != null) {
       name=this.escapeObjectName(schemaName,Schema.class) + "." + name;
     }
