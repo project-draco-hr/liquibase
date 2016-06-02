@@ -1,3 +1,12 @@
 {
-  return this.getUnderlyingConnection().hashCode();
+  Connection underlyingConnection=this.getUnderlyingConnection();
+  try {
+    if (underlyingConnection == null || underlyingConnection.isClosed()) {
+      return super.hashCode();
+    }
+  }
+ catch (  SQLException e) {
+    return super.hashCode();
+  }
+  return underlyingConnection.hashCode();
 }

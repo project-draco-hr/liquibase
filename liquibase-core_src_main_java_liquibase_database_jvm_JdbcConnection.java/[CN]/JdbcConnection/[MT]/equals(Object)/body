@@ -1,3 +1,10 @@
 {
-  return obj instanceof JdbcConnection && this.getUnderlyingConnection().equals(((JdbcConnection)obj).getUnderlyingConnection());
+  if (!(obj instanceof JdbcConnection)) {
+    return false;
+  }
+  Connection underlyingConnection=this.getUnderlyingConnection();
+  if (underlyingConnection == null) {
+    return ((JdbcConnection)obj).getUnderlyingConnection() == null;
+  }
+  return underlyingConnection.equals(((JdbcConnection)obj).getUnderlyingConnection());
 }
