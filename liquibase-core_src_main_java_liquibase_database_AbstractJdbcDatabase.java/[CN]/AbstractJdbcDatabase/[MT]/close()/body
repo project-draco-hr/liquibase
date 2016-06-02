@@ -1,4 +1,5 @@
 {
+  ExecutorService.getInstance().clearExecutor(this);
   DatabaseConnection connection=getConnection();
   if (connection != null) {
     if (previousAutoCommit != null) {
@@ -12,5 +13,4 @@
     }
     connection.close();
   }
-  ExecutorService.getInstance().clearExecutor(this);
 }
