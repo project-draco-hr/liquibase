@@ -1,8 +1,11 @@
 {
   String originalDefinition=StringUtils.trimToEmpty(getRawDefinition());
   if (database instanceof H2Database || database instanceof HsqlDatabase) {
-    if (originalDefinition.toLowerCase().startsWith("longvarbinary") || originalDefinition.startsWith("java.sql.Types.LONGVARBINARY")) {
-      return new DatabaseDataType("LONGVARBINARY");
+    if (originalDefinition.toLowerCase().startsWith("varbinary") || originalDefinition.startsWith("java.sql.Types.VARBINARY")) {
+      return new DatabaseDataType("VARBINARY",getParameters());
+    }
+ else     if (originalDefinition.toLowerCase().startsWith("longvarbinary") || originalDefinition.startsWith("java.sql.Types.LONGVARBINARY")) {
+      return new DatabaseDataType("LONGVARBINARY",getParameters());
     }
  else     if (originalDefinition.toLowerCase().startsWith("binary")) {
       return new DatabaseDataType("BINARY",getParameters());
@@ -71,7 +74,7 @@
     if (getRawDefinition().toLowerCase().startsWith("bfile")) {
       return new DatabaseDataType("BFILE");
     }
-    if (originalDefinition.toLowerCase().startsWith("raw") || originalDefinition.toLowerCase().startsWith("binary")) {
+    if (originalDefinition.toLowerCase().startsWith("raw") || originalDefinition.toLowerCase().startsWith("binary") || originalDefinition.toLowerCase().startsWith("varbinary")) {
       return new DatabaseDataType("RAW",getParameters());
     }
     return new DatabaseDataType("BLOB");
