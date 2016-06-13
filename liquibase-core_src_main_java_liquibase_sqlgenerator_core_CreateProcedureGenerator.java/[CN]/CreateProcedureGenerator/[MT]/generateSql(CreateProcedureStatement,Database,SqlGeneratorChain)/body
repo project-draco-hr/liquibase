@@ -20,6 +20,7 @@
     clauseIterator.replace("ALTER");
     procedureText=parsedSql.toString();
   }
+  procedureText=removeTrailingDelimiter(procedureText,statement.getEndDelimiter());
   sql.add(new UnparsedSql(procedureText,statement.getEndDelimiter()));
   surroundWithSchemaSets(sql,statement.getSchemaName(),database);
   return sql.toArray(new Sql[sql.size()]);

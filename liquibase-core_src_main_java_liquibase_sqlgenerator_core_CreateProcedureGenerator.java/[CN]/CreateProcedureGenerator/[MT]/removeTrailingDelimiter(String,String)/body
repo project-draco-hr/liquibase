@@ -1,0 +1,12 @@
+{
+  String endDelimiterRegexp;
+  if (endDelimiter.length() == 1) {
+    endDelimiterRegexp="(?s)(.*)" + Pattern.quote(endDelimiter);
+  }
+ else {
+    endDelimiterRegexp="(?s)(.*)" + endDelimiter;
+  }
+  endDelimiterRegexp+="[\\s\\n]*$";
+  procedureText=procedureText.replaceFirst(endDelimiterRegexp,"$1");
+  return procedureText;
+}
