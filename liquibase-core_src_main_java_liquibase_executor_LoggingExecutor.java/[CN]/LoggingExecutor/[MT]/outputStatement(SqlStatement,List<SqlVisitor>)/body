@@ -10,6 +10,11 @@
       if (statement == null) {
         continue;
       }
+      if (database instanceof OracleDatabase) {
+        while (statement.matches("(?s).*[\\s\\r\\n]*/[\\s\\r\\n]*$")) {
+          statement=statement.replaceFirst("[\\s\\r\\n]*/[\\s\\r\\n]*$","");
+        }
+      }
       output.write(statement);
       if (database instanceof MSSQLDatabase || database instanceof SybaseDatabase || database instanceof SybaseASADatabase) {
         output.write(StreamUtil.getLineSeparator());
@@ -26,7 +31,7 @@
         }
         if (potentialDelimiter != null) {
           potentialDelimiter=potentialDelimiter.replaceFirst("\\$$","");
-          if (potentialDelimiter.replaceAll("\\\\n","\n").replace("\\\\r","\r").matches("[;/\r\n\\w@\\-]+")) {
+          if (potentialDelimiter.replaceAll("\\n","\n").replace("\\r","\r").matches("[;/\r\n\\w@\\-]+")) {
             endDelimiter=potentialDelimiter;
           }
         }
