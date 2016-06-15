@@ -46,7 +46,7 @@
         }
       }
  else       if (database instanceof DB2Database) {
-        if (((DB2Database)database).isAS400()) {
+        if (((DB2Database)database).getDataServerType() == DataServerType.DB2I) {
           sql="select constraint_name as constraint_name, table_name as table_name from QSYS2.TABLE_CONSTRAINTS where table_schema='" + jdbcSchemaName + "' and constraint_type='UNIQUE'";
           if (tableName != null) {
             sql+=" and table_name = '" + tableName + "'";

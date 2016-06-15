@@ -1,6 +1,6 @@
 {
   if (database instanceof DB2Database) {
-    if (database.getDatabaseProductName().startsWith("DB2 UDB for AS/400")) {
+    if (((DB2Database)database).getDataServerType() == DataServerType.DB2I) {
       return "SELECT SEQNAME AS SEQUENCE_NAME FROM QSYS2.SYSSEQUENCES WHERE SEQSCHEMA = '" + schema.getCatalogName() + "'";
     }
  else {
