@@ -1,16 +1,3 @@
 {
-  if (this.isZOS == null) {
-    if (getConnection() != null && getConnection() instanceof JdbcConnection) {
-      try {
-        this.isZOS=getConnection().getDatabaseProductName().toLowerCase().contains("zos");
-      }
- catch (      DatabaseException e) {
-        this.isZOS=false;
-      }
-    }
- else {
-      this.isZOS=false;
-    }
-  }
-  return this.isZOS;
+  return getDataServerType() == DataServerType.DB2Z;
 }

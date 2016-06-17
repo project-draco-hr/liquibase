@@ -59,7 +59,7 @@
       }
  else {
         String selectStatement;
-        if (database.getDatabaseProductName().startsWith("DB2 UDB for AS/400")) {
+        if (((DB2Database)database).getDataServerType() == DataServerType.DB2I) {
           selectStatement="select " + database.escapeColumnName(rawCatalogName,rawSchemaName,rawTableName,rawColumnName) + " from "+ rawSchemaName+ "."+ rawTableName+ " where 0=1";
           LogFactory.getLogger().debug("rawCatalogName : <" + rawCatalogName + ">");
           LogFactory.getLogger().debug("rawSchemaName : <" + rawSchemaName + ">");

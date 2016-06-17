@@ -14,7 +14,7 @@
       String jdbcSchemaName=((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema);
       if (database instanceof DB2Database) {
         String sql;
-        if (((DB2Database)database).isAS400()) {
+        if (((DB2Database)database).getDataServerType() == DataServerType.DB2I) {
           sql=getDB2ISql(jdbcSchemaName);
         }
  else {
@@ -56,7 +56,7 @@
         CatalogAndSchema catalogAndSchema=new CatalogAndSchema(catalogName,schemaName).customize(database);
         String jdbcSchemaName=((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema);
         String sql;
-        if (database.getDatabaseProductName().startsWith("DB2 UDB for AS/400")) {
+        if (((DB2Database)database).getDataServerType() == DataServerType.DB2I) {
           sql=getDB2ISql(jdbcSchemaName);
         }
  else {
