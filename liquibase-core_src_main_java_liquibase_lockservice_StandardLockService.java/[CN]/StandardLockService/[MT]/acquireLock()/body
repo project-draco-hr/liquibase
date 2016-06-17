@@ -2,6 +2,7 @@
   if (hasChangeLogLock) {
     return true;
   }
+  quotingStrategy=database.getObjectQuotingStrategy();
   Executor executor=ExecutorService.getInstance().getExecutor(database);
   try {
     database.rollback();

@@ -1,6 +1,36 @@
 {
-  if (isPositionAtStart() || skipIfNewLine()) {
-    skipCommentsAndNewLines();
+  int read=super.read();
+  if (read < 0) {
+    return read;
   }
-  return super.read();
+  if (read == '\r') {
+    return this.read();
+  }
+ else   if (read == '\n') {
+    if (lastRead == '\n') {
+      return this.read();
+    }
+  }
+ else   if (commentSkipEnabled && read == this.commentLineStartsWith.toCharArray()[0]) {
+    while ((read=super.read()) != '\n' && read != '\r' && read > 0) {
+      ;
+    }
+    read=this.read();
+  }
+  if (read == '\n') {
+    if (lastRead < 0) {
+      return this.read();
+    }
+ else {
+      mark(MAX_CHAR_SIZE_IN_BYTES);
+      if (this.read() < 0) {
+        return -1;
+      }
+ else {
+        reset();
+      }
+    }
+  }
+  this.lastRead=read;
+  return read;
 }

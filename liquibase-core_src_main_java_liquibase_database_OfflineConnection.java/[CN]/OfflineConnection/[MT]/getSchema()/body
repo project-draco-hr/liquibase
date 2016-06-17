@@ -1,0 +1,11 @@
+{
+  if (snapshot == null) {
+    return null;
+  }
+  for (  Schema schema : snapshot.get(Schema.class)) {
+    if (schema.isDefault()) {
+      return schema.getName();
+    }
+  }
+  return null;
+}

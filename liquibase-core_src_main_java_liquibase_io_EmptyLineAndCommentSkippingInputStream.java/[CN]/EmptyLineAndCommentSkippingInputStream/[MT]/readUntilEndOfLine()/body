@@ -1,5 +1,0 @@
-{
-  while (!skipIfNewLine()) {
-    super.read();
-  }
-}

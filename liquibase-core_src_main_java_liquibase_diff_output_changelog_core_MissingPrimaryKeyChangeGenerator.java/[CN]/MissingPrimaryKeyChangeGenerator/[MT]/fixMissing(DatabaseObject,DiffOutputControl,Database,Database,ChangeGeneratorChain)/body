@@ -17,7 +17,7 @@
   if (referenceDatabase instanceof MSSQLDatabase && pk.getBackingIndex() != null && pk.getBackingIndex().getClustered() != null && !pk.getBackingIndex().getClustered()) {
     change.setClustered(false);
   }
-  if (comparisonDatabase instanceof OracleDatabase) {
+  if (comparisonDatabase instanceof OracleDatabase || (comparisonDatabase instanceof DB2Database && pk.getBackingIndex() != null && !comparisonDatabase.isSystemObject(pk.getBackingIndex()))) {
     Index backingIndex=pk.getBackingIndex();
     if (backingIndex != null && backingIndex.getName() != null) {
       try {

@@ -1,0 +1,6 @@
+{
+  if (example instanceof Index && example.getName() != null && example.getName().matches("SQL\\d+")) {
+    return true;
+  }
+  return super.isSystemObject(example);
+}
