@@ -1,3 +1,16 @@
 {
-  return dateTimeFormatWithDecimal.format(date);
+  StringBuilder sb=new StringBuilder(dateTimeFormat.format(date));
+  int nanos=date.getNanos();
+  if (nanos != 0) {
+    String nanosString=String.format("%09d",nanos);
+    int lastNotNullIndex=8;
+    for (; lastNotNullIndex > 0; lastNotNullIndex--) {
+      if (nanosString.charAt(lastNotNullIndex) != '0') {
+        break;
+      }
+    }
+    sb.append('.');
+    sb.append(nanosString.substring(0,lastNotNullIndex + 1));
+  }
+  return sb.toString();
 }
