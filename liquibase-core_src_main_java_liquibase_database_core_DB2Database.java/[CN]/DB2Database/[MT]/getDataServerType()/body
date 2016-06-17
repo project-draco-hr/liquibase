@@ -1,0 +1,26 @@
+{
+  if (this.dataServerType == null) {
+    DatabaseConnection databaseConnection=getConnection();
+    if (databaseConnection != null && databaseConnection instanceof JdbcConnection) {
+      try {
+        String databaseProductVersion=databaseConnection.getDatabaseProductVersion();
+        if (databaseProductVersion.startsWith("SQL")) {
+          this.dataServerType=DataServerType.DB2LUW;
+        }
+ else         if (databaseProductVersion.startsWith("QSQ")) {
+          this.dataServerType=DataServerType.DB2I;
+        }
+ else         if (databaseProductVersion.startsWith("DSN")) {
+          this.dataServerType=DataServerType.DB2Z;
+        }
+      }
+ catch (      DatabaseException e) {
+        this.dataServerType=DataServerType.DB2LUW;
+      }
+    }
+ else {
+      this.dataServerType=DataServerType.DB2LUW;
+    }
+  }
+  return this.dataServerType;
+}
