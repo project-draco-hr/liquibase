@@ -17,6 +17,9 @@
         if (((DB2Database)database).getDataServerType() == DataServerType.DB2I) {
           sql=getDB2ISql(jdbcSchemaName);
         }
+ else         if (((DB2Database)database).getDataServerType() == DataServerType.DB2Z) {
+          sql=getDB2ZSql(jdbcSchemaName);
+        }
  else {
           sql=getDB2Sql(jdbcSchemaName);
         }
@@ -59,6 +62,9 @@
         if (((DB2Database)database).getDataServerType() == DataServerType.DB2I) {
           sql=getDB2ISql(jdbcSchemaName);
         }
+ else         if (((DB2Database)database).getDataServerType() == DataServerType.DB2Z) {
+          sql=getDB2ZSql(jdbcSchemaName);
+        }
  else {
           sql=getDB2Sql(jdbcSchemaName);
         }
@@ -73,6 +79,9 @@
     }
     protected String getDB2ISql(    String jdbcSchemaName){
       return " SELECT " + " PKTABLE_SCHEM AS pktable_cat, " + " PKTABLE_NAME as pktable_name, "+ " PKCOLUMN_NAME as pkcolumn_name, "+ " FKTABLE_SCHEM as fktable_cat, "+ " FKTABLE_NAME as fktable_name, "+ " FKCOLUMN_NAME as fkcolumn_name, "+ " KEY_SEQ as key_seq, "+ " UPDATE_RULE as update_rule, "+ " DELETE_RULE as delete_rule, "+ " FK_NAME as fk_name, "+ " PK_NAME as pk_name, "+ " DEFERRABILITY as deferrability "+ " FROM "+ " sysibm.SQLFOREIGNKEYS "+ " WHERE pktable_schem = '" + jdbcSchemaName + "' "+ " ORDER BY key_seq ";
+    }
+    protected String getDB2ZSql(    String jdbcSchemaName){
+      return " SELECT " + " PK.TBCREATOR AS PKTABLE_CAT, " + " PK.TBNAME    AS PKTABLE_NAME, "+ " PK.NAME      AS PKCOLUMN_NAME, "+ " FK.CREATOR   AS FKTABLE_CAT, "+ " FK.TBNAME    AS FKTABLE_NAME, "+ " FK.COLNAME   AS FKCOLUMN_NAME, "+ " FK.COLSEQ    AS KEY_SEQ, "+ " 1            AS UPDATE_RULE, "+ " DECODE (R.DELETERULE, 'A', 3, 'C', 0, 'N', 2, 'R', 1, 1) AS DELETE_RULE, "+ " R.RELNAME    AS FK_NAME, "+ " ''           AS PK_NAME, "+ " 7            AS DEFERRABILITY "+ " FROM SYSIBM.SYSRELS R, "+ "      SYSIBM.SYSFOREIGNKEYS FK, "+ "      SYSIBM.SYSCOLUMNS PK "+ " WHERE R.CREATOR      = '" + jdbcSchemaName + "'"+ "   AND R.RELNAME      = FK.RELNAME"+ "   AND R.CREATOR      = FK.CREATOR"+ "   AND R.TBNAME       = FK.TBNAME"+ "   AND R.REFTBCREATOR = PK.TBCREATOR"+ "   AND R.REFTBNAME    = PK.TBNAME"+ "   AND FK.COLSEQ      = PK.KEYSEQ"+ " ORDER BY R.RELNAME, FK.COLSEQ asc ";
     }
     @Override boolean shouldBulkSelect(    String schemaKey,    ResultSetCache resultSetCache){
       if (database instanceof DB2Database) {
