@@ -1,0 +1,8 @@
+{
+  if (err.equals(System.err) || err.equals(System.out)) {
+    return;
+  }
+  err.flush();
+  err.close();
+  err=System.err;
+}
