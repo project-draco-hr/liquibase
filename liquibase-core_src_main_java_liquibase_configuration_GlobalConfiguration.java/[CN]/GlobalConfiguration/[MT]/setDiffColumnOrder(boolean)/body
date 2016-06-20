@@ -1,0 +1,4 @@
+{
+  getContainer().setValue(DIFF_COLUMN_ORDER,diff);
+  return this;
+}
