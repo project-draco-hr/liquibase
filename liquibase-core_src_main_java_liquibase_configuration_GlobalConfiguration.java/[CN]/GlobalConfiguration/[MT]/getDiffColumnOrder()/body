@@ -1,0 +1,3 @@
+{
+  return getContainer().getValue(DIFF_COLUMN_ORDER,Boolean.class);
+}
