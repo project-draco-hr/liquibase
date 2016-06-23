@@ -1,12 +1,25 @@
 {
-  String endDelimiterRegexp;
-  if (endDelimiter.length() == 1) {
-    endDelimiterRegexp="(?s)(.*)" + Pattern.quote(endDelimiter);
+  if (procedureText == null) {
+    return null;
+  }
+  if (endDelimiter == null) {
+    return procedureText;
+  }
+  String fixedText=procedureText;
+  while (fixedText.length() > 0) {
+    String lastChar=fixedText.substring(fixedText.length() - 1);
+    if (lastChar.equals(" ") || lastChar.equals("\n") || lastChar.equals("\r")|| lastChar.equals("\t")) {
+      fixedText=fixedText.substring(0,fixedText.length() - 1);
+    }
+ else {
+      break;
+    }
+  }
+  endDelimiter=endDelimiter.replace("\\r","\r").replace("\\n","\n");
+  if (fixedText.endsWith(endDelimiter)) {
+    return fixedText.substring(0,fixedText.length() - endDelimiter.length());
   }
  else {
-    endDelimiterRegexp="(?s)(.*)" + endDelimiter;
+    return procedureText;
   }
-  endDelimiterRegexp+="[\\s\\n]*$";
-  procedureText=procedureText.replaceFirst(endDelimiterRegexp,"$1");
-  return procedureText;
 }
