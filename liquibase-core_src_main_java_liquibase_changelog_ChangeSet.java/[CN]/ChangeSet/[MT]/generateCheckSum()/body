@@ -1,10 +1,13 @@
 {
-  StringBuffer stringToMD5=new StringBuffer();
-  for (  Change change : getChanges()) {
-    stringToMD5.append(change.generateCheckSum()).append(":");
+  if (checkSum == null) {
+    StringBuffer stringToMD5=new StringBuffer();
+    for (    Change change : getChanges()) {
+      stringToMD5.append(change.generateCheckSum()).append(":");
+    }
+    for (    SqlVisitor visitor : this.getSqlVisitors()) {
+      stringToMD5.append(visitor.generateCheckSum()).append(";");
+    }
+    checkSum=CheckSum.compute(stringToMD5.toString());
   }
-  for (  SqlVisitor visitor : this.getSqlVisitors()) {
-    stringToMD5.append(visitor.generateCheckSum()).append(";");
-  }
-  return CheckSum.compute(stringToMD5.toString());
+  return checkSum;
 }

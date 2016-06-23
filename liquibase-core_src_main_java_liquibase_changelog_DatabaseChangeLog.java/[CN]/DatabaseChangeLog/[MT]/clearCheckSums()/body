@@ -1,0 +1,5 @@
+{
+  for (  ChangeSet changeSet : getChangeSets()) {
+    changeSet.clearCheckSum();
+  }
+}
