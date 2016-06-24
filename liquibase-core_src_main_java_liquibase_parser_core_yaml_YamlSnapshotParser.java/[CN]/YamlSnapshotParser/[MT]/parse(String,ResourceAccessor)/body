@@ -12,6 +12,13 @@
  catch (    Exception e) {
       throw new LiquibaseParseException("Syntax error in " + getSupportedFileExtensions()[0] + ": "+ e.getMessage(),e);
     }
+ finally {
+      try {
+        stream.close();
+      }
+ catch (      IOException ioe) {
+      }
+    }
     Map rootList=(Map)parsedYaml.get("snapshot");
     if (rootList == null) {
       throw new LiquibaseParseException("Could not find root snapshot node");
