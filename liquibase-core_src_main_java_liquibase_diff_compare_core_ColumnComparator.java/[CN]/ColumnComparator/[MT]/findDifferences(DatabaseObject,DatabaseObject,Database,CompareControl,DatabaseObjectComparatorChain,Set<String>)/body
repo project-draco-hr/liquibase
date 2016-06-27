@@ -1,6 +1,9 @@
 {
   exclude.add("name");
   exclude.add("type");
+  if (!LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getDiffColumnOrder()) {
+    exclude.add("order");
+  }
   ObjectDifferences differences=chain.findDifferences(databaseObject1,databaseObject2,accordingTo,compareControl,exclude);
   differences.compare("name",databaseObject1,databaseObject2,new ObjectDifferences.DatabaseObjectNameCompareFunction(Column.class,accordingTo));
   differences.compare("type",databaseObject1,databaseObject2,new ObjectDifferences.DatabaseObjectNameCompareFunction(Column.class,accordingTo));
