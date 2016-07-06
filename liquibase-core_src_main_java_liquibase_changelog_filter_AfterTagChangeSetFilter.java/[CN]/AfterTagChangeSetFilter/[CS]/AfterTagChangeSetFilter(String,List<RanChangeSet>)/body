@@ -7,6 +7,9 @@
     }
     if (!seenTag && tag.equalsIgnoreCase(ranChangeSet.getTag())) {
       seenTag=true;
+      if (StringUtils.trimToEmpty(ranChangeSet.getDescription()).equals("tagDatabase")) {
+        changeLogsAfterTag.add(changeLogToString(ranChangeSet.getId(),ranChangeSet.getAuthor(),ranChangeSet.getChangeLog()));
+      }
     }
   }
   if (!seenTag) {
