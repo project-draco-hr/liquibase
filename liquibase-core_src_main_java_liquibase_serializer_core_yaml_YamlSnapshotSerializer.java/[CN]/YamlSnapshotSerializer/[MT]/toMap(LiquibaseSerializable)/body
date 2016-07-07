@@ -1,7 +1,22 @@
 {
   if (object instanceof DatabaseObject) {
     if (alreadySerializingObject) {
-      return ((DatabaseObject)object).getClass().getName() + "#" + ((DatabaseObject)object).getSnapshotId();
+      String snapshotId=((DatabaseObject)object).getSnapshotId();
+      if (snapshotId == null) {
+        String name=((DatabaseObject)object).getName();
+        Object table=((DatabaseObject)object).getAttribute("table",Object.class);
+        if (table == null) {
+          table=((DatabaseObject)object).getAttribute("relation",Object.class);
+        }
+        if (table != null) {
+          name=table.toString() + "." + name;
+        }
+        if (((DatabaseObject)object).getSchema() != null) {
+          name=((DatabaseObject)object).getSchema().toString() + "." + name;
+        }
+        throw new UnexpectedLiquibaseException("Found a null snapshotId for " + StringUtils.lowerCaseFirst(object.getClass().getSimpleName()) + " "+ name);
+      }
+      return ((DatabaseObject)object).getClass().getName() + "#" + snapshotId;
     }
  else {
       alreadySerializingObject=true;
