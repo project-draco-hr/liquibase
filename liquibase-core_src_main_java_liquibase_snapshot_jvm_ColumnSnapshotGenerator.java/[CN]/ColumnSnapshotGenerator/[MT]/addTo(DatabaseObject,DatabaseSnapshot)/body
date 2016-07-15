@@ -13,6 +13,7 @@
       allColumnsMetadataRs=databaseMetaData.getColumns(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema),((AbstractJdbcDatabase)database).getJdbcSchemaName(schema),relation.getName(),null);
       for (      CachedRow row : allColumnsMetadataRs) {
         Column column=readColumn(row,relation,database);
+        setAutoIncrementDetails(column,database,snapshot);
         column.setAttribute(LIQUIBASE_COMPLETE,true);
         relation.getColumns().add(column);
       }
