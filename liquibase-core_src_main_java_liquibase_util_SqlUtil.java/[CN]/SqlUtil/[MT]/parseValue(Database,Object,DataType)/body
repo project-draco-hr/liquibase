@@ -188,6 +188,9 @@
       return scanner.nextBigDecimal();
     }
  else {
+      if (stringVal.equals("")) {
+        return new DatabaseFunction("''");
+      }
       return new DatabaseFunction(stringVal);
     }
   }
