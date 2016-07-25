@@ -18,6 +18,7 @@
       if (columnMetadataRs.size() > 0) {
         CachedRow data=columnMetadataRs.get(0);
         column=readColumn(data,relation,database);
+        setAutoIncrementDetails(column,database,snapshot);
       }
     }
     if (column != null && database instanceof MSSQLDatabase && ((!((MSSQLDatabase)database).isAzureDb() && database.getDatabaseMajorVersion() >= 8) || database.getDatabaseMajorVersion() >= 12)) {

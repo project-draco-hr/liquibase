@@ -20,7 +20,7 @@
       }
 ;
       DependencyUtil.DependencyGraph graph=new DependencyUtil.DependencyGraph(nameListener);
-      addDependencies(graph,schemas,database);
+      addDependencies(graph,schemas,missingObjects,database);
       graph.computeDependencies();
       if (dependencyOrder.size() > 0) {
         List<DatabaseObject> toSort=new ArrayList<DatabaseObject>();

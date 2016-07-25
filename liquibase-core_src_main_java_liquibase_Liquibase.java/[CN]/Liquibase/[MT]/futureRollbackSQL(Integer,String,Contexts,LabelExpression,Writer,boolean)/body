@@ -44,7 +44,12 @@
     logIterator.run(new RollbackVisitor(database,changeExecListener),new RuntimeEnvironment(database,contexts,labelExpression));
   }
   finally {
-    lockService.releaseLock();
+    try {
+      lockService.releaseLock();
+    }
+ catch (    LockException e) {
+      log.severe("Could not release lock",e);
+    }
     ExecutorService.getInstance().setExecutor(database,oldTemplate);
     resetServices();
   }

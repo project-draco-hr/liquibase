@@ -1,7 +1,7 @@
 {
   List<Change> returnList=new ArrayList<Change>();
   PrimaryKey pk=(PrimaryKey)missingObject;
-  AddPrimaryKeyChange change=new AddPrimaryKeyChange();
+  AddPrimaryKeyChange change=createAddPrimaryKeyChange();
   change.setTableName(pk.getTable().getName());
   if (control.getIncludeCatalog()) {
     change.setCatalogName(pk.getTable().getSchema().getCatalogName());

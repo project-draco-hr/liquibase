@@ -10,7 +10,12 @@
     getDatabase().commit();
   }
   finally {
-    lockService.releaseLock();
+    try {
+      lockService.releaseLock();
+    }
+ catch (    LockException e) {
+      log.severe("Could not release lock",e);
+    }
   }
   resetServices();
 }
