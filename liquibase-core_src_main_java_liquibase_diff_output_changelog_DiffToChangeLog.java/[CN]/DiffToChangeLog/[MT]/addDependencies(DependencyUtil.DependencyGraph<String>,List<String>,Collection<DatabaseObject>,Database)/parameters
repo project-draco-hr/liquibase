@@ -1,3 +1,4 @@
 DependencyUtil.DependencyGraph<String> graph
 List<String> schemas
+Collection<DatabaseObject> missingObjects
 Database database

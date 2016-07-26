@@ -26,18 +26,22 @@
       columnConfig.setAutoIncrement(true);
     }
     ConstraintsConfig constraintsConfig=null;
-    if (column.isAutoIncrement() && primaryKey != null && primaryKey.getColumnNamesAsList().contains(column.getName())) {
-      constraintsConfig=new ConstraintsConfig();
-      constraintsConfig.setPrimaryKey(true);
-      constraintsConfig.setPrimaryKeyTablespace(primaryKey.getTablespace());
-      if (comparisonDatabase instanceof MySQLDatabase && "PRIMARY".equals(primaryKey.getName())) {
-        constraintsConfig.setPrimaryKeyName(null);
+    if (column.isAutoIncrement() && primaryKey != null && primaryKey.getColumns().size() == 1 && primaryKey.getColumnNamesAsList().contains(column.getName())) {
+      if (referenceDatabase instanceof MSSQLDatabase && primaryKey.getBackingIndex() != null && primaryKey.getBackingIndex().getClustered() != null && !primaryKey.getBackingIndex().getClustered()) {
       }
  else {
-        constraintsConfig.setPrimaryKeyName(primaryKey.getName());
+        constraintsConfig=new ConstraintsConfig();
+        constraintsConfig.setPrimaryKey(true);
+        constraintsConfig.setPrimaryKeyTablespace(primaryKey.getTablespace());
+        if (comparisonDatabase instanceof MySQLDatabase && "PRIMARY".equals(primaryKey.getName())) {
+          constraintsConfig.setPrimaryKeyName(null);
+        }
+ else {
+          constraintsConfig.setPrimaryKeyName(primaryKey.getName());
+        }
+        control.setAlreadyHandledMissing(primaryKey);
+        control.setAlreadyHandledMissing(primaryKey.getBackingIndex());
       }
-      control.setAlreadyHandledMissing(primaryKey);
-      control.setAlreadyHandledMissing(primaryKey.getBackingIndex());
     }
  else     if (column.isNullable() != null && !column.isNullable()) {
       constraintsConfig=new ConstraintsConfig();
@@ -49,6 +53,16 @@
     setDefaultValue(columnConfig,column,referenceDatabase);
     if (column.getRemarks() != null) {
       columnConfig.setRemarks(column.getRemarks());
+    }
+    if (column.getAutoIncrementInformation() != null) {
+      BigInteger startWith=column.getAutoIncrementInformation().getStartWith();
+      BigInteger incrementBy=column.getAutoIncrementInformation().getIncrementBy();
+      if (startWith != null && !startWith.equals(BigInteger.ONE)) {
+        columnConfig.setStartWith(startWith);
+      }
+      if (incrementBy != null && !incrementBy.equals(BigInteger.ONE)) {
+        columnConfig.setIncrementBy(incrementBy);
+      }
     }
     change.addColumn(columnConfig);
     control.setAlreadyHandledMissing(column);

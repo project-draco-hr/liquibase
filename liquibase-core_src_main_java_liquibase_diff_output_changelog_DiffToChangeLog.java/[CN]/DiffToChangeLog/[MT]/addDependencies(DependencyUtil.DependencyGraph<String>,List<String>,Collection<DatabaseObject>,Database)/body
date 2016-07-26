@@ -1,0 +1,32 @@
+{
+  if (database instanceof DB2Database) {
+    Executor executor=ExecutorService.getInstance().getExecutor(database);
+    List<Map<String,?>> rs=executor.queryForList(new RawSqlStatement("select TABSCHEMA, TABNAME, BSCHEMA, BNAME from syscat.tabdep where " + StringUtils.join(schemas," AND ",new StringUtils.StringUtilsFormatter<String>(){
+      @Override public String toString(      String obj){
+        return "TABSCHEMA='" + obj + "'";
+      }
+    }
+)));
+    for (    Map<String,?> row : rs) {
+      String tabName=StringUtils.trimToNull((String)row.get("TABSCHEMA")) + "." + StringUtils.trimToNull((String)row.get("TABNAME"));
+      String bName=StringUtils.trimToNull((String)row.get("BSCHEMA")) + "." + StringUtils.trimToNull((String)row.get("BNAME"));
+      graph.add(bName,tabName);
+    }
+  }
+ else   if (database instanceof MSSQLDatabase) {
+    Executor executor=ExecutorService.getInstance().getExecutor(database);
+    List<Map<String,?>> rs=executor.queryForList(new RawSqlStatement("select object_schema_name(referencing_id) as referencing_schema_name, object_name(referencing_id) as referencing_name, object_name(referenced_id) as referenced_name, object_schema_name(referenced_id) as referenced_schema_name  from sys.sql_expression_dependencies depz where " + StringUtils.join(schemas," AND ",new StringUtils.StringUtilsFormatter<String>(){
+      @Override public String toString(      String obj){
+        return "object_schema_name(referenced_id)='" + obj + "'";
+      }
+    }
+)));
+    if (rs.size() > 0) {
+      for (      Map<String,?> row : rs) {
+        String bName=StringUtils.trimToNull((String)row.get("REFERENCED_SCHEMA_NAME")) + "." + StringUtils.trimToNull((String)row.get("REFERENCED_NAME"));
+        String tabName=StringUtils.trimToNull((String)row.get("REFERENCING_SCHEMA_NAME")) + "." + StringUtils.trimToNull((String)row.get("REFERENCING_NAME"));
+        graph.add(bName,tabName);
+      }
+    }
+  }
+}

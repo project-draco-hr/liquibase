@@ -25,6 +25,9 @@
  catch (      ParseException ignore) {
       }
     }
+    if (value.contains("/") || value.contains("-")) {
+      return value;
+    }
     return new DatabaseFunction(value);
   }
 }
