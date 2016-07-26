@@ -20,6 +20,9 @@
       if (constraint.containsColumn("INDEX_NAME")) {
         uq.setBackingIndex(new Index((String)constraint.get("INDEX_NAME"),(String)constraint.get("INDEX_CATALOG"),null,table.getName()));
       }
+      if ("CLUSTERED".equals(constraint.get("TYPE_DESC"))) {
+        uq.setClustered(true);
+      }
       if (seenConstraints.add(uq.getName())) {
         table.getUniqueConstraints().add(uq);
       }
