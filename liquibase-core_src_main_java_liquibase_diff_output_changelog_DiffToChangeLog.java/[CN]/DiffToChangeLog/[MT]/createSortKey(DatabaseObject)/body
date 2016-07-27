@@ -1,3 +1,0 @@
-{
-  return object.getClass().getName() + ":" + object.toString();
-}
