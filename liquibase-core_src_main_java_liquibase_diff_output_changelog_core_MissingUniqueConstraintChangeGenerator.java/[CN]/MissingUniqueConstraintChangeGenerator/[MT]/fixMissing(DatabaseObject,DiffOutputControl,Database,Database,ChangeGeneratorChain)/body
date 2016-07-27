@@ -20,6 +20,9 @@
   change.setDeferrable(uc.isDeferrable() ? Boolean.TRUE : null);
   change.setInitiallyDeferred(uc.isInitiallyDeferred() ? Boolean.TRUE : null);
   change.setDisabled(uc.isDisabled() ? Boolean.TRUE : null);
+  if (referenceDatabase instanceof MSSQLDatabase) {
+    change.setClustered(uc.isClustered() ? Boolean.TRUE : null);
+  }
   if (comparisonDatabase instanceof OracleDatabase) {
     Index backingIndex=uc.getBackingIndex();
     if (backingIndex != null && backingIndex.getName() != null) {
