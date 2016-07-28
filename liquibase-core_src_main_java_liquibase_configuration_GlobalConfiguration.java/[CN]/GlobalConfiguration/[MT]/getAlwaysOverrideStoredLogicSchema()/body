@@ -1,0 +1,3 @@
+{
+  return getContainer().getValue(ALWAYS_OVERRIDE_STORED_LOGIC_SCHEMA,Boolean.class);
+}

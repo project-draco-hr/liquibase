@@ -1,4 +1,7 @@
 {
+  if (schemaName == null) {
+    return procedureText;
+  }
   if ((StringUtils.trimToNull(schemaName) != null) && LiquibaseConfiguration.getInstance().getProperty(ChangeLogParserCofiguration.class,ChangeLogParserCofiguration.USE_PROCEDURE_SCHEMA).getValue(Boolean.class)) {
     StringClauses parsedSql=SqlParser.parse(procedureText,true,true);
     StringClauses.ClauseIterator clauseIterator=parsedSql.getClauseIterator();

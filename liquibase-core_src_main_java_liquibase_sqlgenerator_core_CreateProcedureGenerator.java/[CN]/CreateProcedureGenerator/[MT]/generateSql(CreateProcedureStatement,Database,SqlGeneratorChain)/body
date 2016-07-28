@@ -1,7 +1,7 @@
 {
   List<Sql> sql=new ArrayList<Sql>();
   String schemaName=statement.getSchemaName();
-  if (schemaName == null) {
+  if (schemaName == null && LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getAlwaysOverrideStoredLogicSchema()) {
     schemaName=database.getDefaultSchemaName();
   }
   String procedureText=addSchemaToText(statement.getProcedureText(),schemaName,"PROCEDURE",database);
