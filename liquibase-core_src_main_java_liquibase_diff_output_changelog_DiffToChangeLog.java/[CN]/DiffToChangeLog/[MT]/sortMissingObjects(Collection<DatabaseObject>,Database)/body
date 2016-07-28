@@ -47,7 +47,7 @@
           }
         }
 );
-        toSort.addAll(0,toNotSort);
+        toSort.addAll(toNotSort);
         return toSort;
       }
     }
