@@ -1,4 +1,7 @@
 {
+  if (getConnection() == null) {
+    return -1;
+  }
   try {
     return getConnection().getDatabaseMinorVersion();
   }
