@@ -52,7 +52,7 @@
       }
     }
  catch (    DatabaseException e) {
-      LogFactory.getInstance().getLog().debug("Cannot get view dependencies: " + e.getMessage());
+      LogFactory.getInstance().getLog().debug("Cannot get object dependencies: " + e.getMessage());
     }
   }
   return new ArrayList<DatabaseObject>(missingObjects);

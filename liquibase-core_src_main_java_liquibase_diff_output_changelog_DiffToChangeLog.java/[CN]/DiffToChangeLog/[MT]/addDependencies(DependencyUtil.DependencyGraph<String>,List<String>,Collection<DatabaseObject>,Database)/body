@@ -20,10 +20,16 @@
         return "object_schema_name(referenced_id)='" + obj + "'";
       }
     }
-);
-    sql+=") UNION select object_schema_name(object_id) as referencing_schema_name, object_name(object_id) as referencing_name, object_name(parent_object_id) as referenced_name, object_schema_name(parent_object_id) as referenced_schema_name " + "from sys.objects " + "where parent_object_id > 0 "+ "and is_ms_shipped=0 "+ "and )" + StringUtils.join(schemas," OR ",new StringUtils.StringUtilsFormatter<String>(){
+) + ")";
+    sql+=" UNION select object_schema_name(object_id) as referencing_schema_name, object_name(object_id) as referencing_name, object_name(parent_object_id) as referenced_name, object_schema_name(parent_object_id) as referenced_schema_name " + "from sys.objects " + "where parent_object_id > 0 "+ "and is_ms_shipped=0 "+ "and (" + StringUtils.join(schemas," OR ",new StringUtils.StringUtilsFormatter<String>(){
       @Override public String toString(      String obj){
         return "object_schema_name(object_id)='" + obj + "'";
+      }
+    }
+) + ")";
+    sql+="UNION select object_schema_name(fk.object_id) as referencing_schema_name, fk.name as referencing_name, i.name as referenced_name, object_schema_name(i.object_id) as referenced_schema_name " + "from sys.foreign_keys fk " + "join sys.indexes i on fk.referenced_object_id=i.object_id and fk.key_index_id=i.index_id "+ "where fk.is_ms_shipped=0 "+ "and (" + StringUtils.join(schemas," OR ",new StringUtils.StringUtilsFormatter<String>(){
+      @Override public String toString(      String obj){
+        return "object_schema_name(fk.object_id)='" + obj + "'";
       }
     }
 ) + ")";
