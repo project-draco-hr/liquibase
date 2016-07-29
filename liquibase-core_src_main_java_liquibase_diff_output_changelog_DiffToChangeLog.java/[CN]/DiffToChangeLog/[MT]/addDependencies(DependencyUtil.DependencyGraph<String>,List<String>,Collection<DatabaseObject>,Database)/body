@@ -27,12 +27,14 @@
       }
     }
 ) + ")";
-    sql+="UNION select object_schema_name(fk.object_id) as referencing_schema_name, fk.name as referencing_name, i.name as referenced_name, object_schema_name(i.object_id) as referenced_schema_name " + "from sys.foreign_keys fk " + "join sys.indexes i on fk.referenced_object_id=i.object_id and fk.key_index_id=i.index_id "+ "where fk.is_ms_shipped=0 "+ "and (" + StringUtils.join(schemas," OR ",new StringUtils.StringUtilsFormatter<String>(){
+    sql+=" UNION select object_schema_name(fk.object_id) as referencing_schema_name, fk.name as referencing_name, i.name as referenced_name, object_schema_name(i.object_id) as referenced_schema_name " + "from sys.foreign_keys fk " + "join sys.indexes i on fk.referenced_object_id=i.object_id and fk.key_index_id=i.index_id "+ "where fk.is_ms_shipped=0 "+ "and (" + StringUtils.join(schemas," OR ",new StringUtils.StringUtilsFormatter<String>(){
       @Override public String toString(      String obj){
         return "object_schema_name(fk.object_id)='" + obj + "'";
       }
     }
 ) + ")";
+    sql+=" UNION select object_schema_name(i.object_id) as referencing_schema_name, object_name(i.object_id) as referencing_name, s.name as referenced_name, null as referenced_schema_name " + "from sys.indexes i " + "join sys.partition_schemes s on i.data_space_id = s.data_space_id";
+    sql+=" UNION select null as referencing_schema_name, s.name as referencing_name, f.name as referenced_name, null as referenced_schema_name from sys.partition_functions f " + "join sys.partition_schemes s on s.function_id=f.function_id";
     List<Map<String,?>> rs=executor.queryForList(new RawSqlStatement(sql));
     if (rs.size() > 0) {
       for (      Map<String,?> row : rs) {
