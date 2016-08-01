@@ -1,0 +1,6 @@
+{
+  if (obj == null || !(obj instanceof ValidationErrors)) {
+    return false;
+  }
+  return this.toString().equals(obj.toString());
+}

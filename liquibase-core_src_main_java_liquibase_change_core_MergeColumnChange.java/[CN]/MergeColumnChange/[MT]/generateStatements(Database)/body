@@ -27,7 +27,7 @@
         return !(column.getName().equals(getColumn1Name()) || column.getName().equals(getColumn2Name()));
       }
       @Override public boolean createThisIndex(      Index index){
-        return !(index.getColumns().contains(getColumn1Name()) || index.getColumns().contains(getColumn2Name()));
+        return !(index.getColumnNames().contains(getColumn1Name()) || index.getColumnNames().contains(getColumn2Name()));
       }
     }
 ;

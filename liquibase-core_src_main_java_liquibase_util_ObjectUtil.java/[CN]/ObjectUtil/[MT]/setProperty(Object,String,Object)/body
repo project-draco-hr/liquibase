@@ -18,7 +18,7 @@
     throw new UnexpectedLiquibaseException(e);
   }
 catch (  IllegalArgumentException e) {
-    throw new UnexpectedLiquibaseException("Cannot call " + method.toString() + " with value of type "+ propertyValue.getClass().getName());
+    throw new UnexpectedLiquibaseException("Cannot call " + method.toString() + " with value of type "+ (propertyValue == null ? "null" : propertyValue.getClass().getName()));
   }
 catch (  InvocationTargetException e) {
     throw new UnexpectedLiquibaseException(e);
