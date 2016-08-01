@@ -12,7 +12,7 @@
     }
   }
  catch (  NumberFormatException ex) {
-    String test=s.toString().trim().toLowerCase();
+    String test=s.trim().toLowerCase();
     if (test.equalsIgnoreCase("true")) {
       return true;
     }

@@ -11,7 +11,7 @@
       return !column.getName().equals(columnName);
     }
     public boolean createThisIndex(    Index index){
-      return !index.getColumns().contains(columnName);
+      return !index.getColumnNames().contains(columnName);
     }
   }
 ;
