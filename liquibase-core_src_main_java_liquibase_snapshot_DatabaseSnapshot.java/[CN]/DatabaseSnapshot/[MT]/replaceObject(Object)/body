@@ -19,6 +19,15 @@
       }
       return savedFieldValue;
     }
+    if (fieldValue instanceof Catalog && isWrongCatalog(((DatabaseObject)fieldValue))) {
+      DatabaseObject savedFieldValue=referencedObjects.get((DatabaseObject)fieldValue,schemaComparisons);
+      if (savedFieldValue == null) {
+        savedFieldValue=(DatabaseObject)fieldValue;
+        savedFieldValue.setSnapshotId(SnapshotIdService.getInstance().generateId());
+        referencedObjects.add(savedFieldValue);
+      }
+      return savedFieldValue;
+    }
     if (((DatabaseObject)fieldValue).getSnapshotId() == null) {
       return include((DatabaseObject)fieldValue);
     }
