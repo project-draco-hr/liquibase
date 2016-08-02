@@ -36,7 +36,7 @@
           value=new String(c.readPassword(attributeName + ": "));
         }
  else {
-          value=new String(c.readLine(attributeName + ": "));
+          value=c.readLine(attributeName + ": ");
         }
       }
       try {
