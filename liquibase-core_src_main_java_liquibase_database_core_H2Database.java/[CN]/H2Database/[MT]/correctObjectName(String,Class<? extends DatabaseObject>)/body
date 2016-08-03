@@ -1,6 +1,0 @@
-{
-  if (Schema.class.equals(objectType)) {
-    return name.toLowerCase();
-  }
-  return super.correctObjectName(name,objectType);
-}
