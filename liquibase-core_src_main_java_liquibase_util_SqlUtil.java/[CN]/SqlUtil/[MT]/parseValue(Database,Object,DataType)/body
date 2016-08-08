@@ -76,20 +76,15 @@
       stringVal=stringVal.replaceFirst("b'","").replaceFirst("B'","").replaceFirst("'$","");
     }
     stringVal=stringVal.trim();
+    if (database instanceof MySQLDatabase) {
+      return stringVal.equals("1") || stringVal.equalsIgnoreCase("true");
+    }
     Object value;
     if (scanner.hasNextBoolean()) {
       value=scanner.nextBoolean();
     }
  else {
       value=Integer.valueOf(stringVal);
-    }
-    if (database instanceof MSSQLDatabase && value instanceof Boolean) {
-      if ((Boolean)value) {
-        return new DatabaseFunction("'true'");
-      }
- else {
-        return new DatabaseFunction("'false'");
-      }
     }
     return value;
   }
