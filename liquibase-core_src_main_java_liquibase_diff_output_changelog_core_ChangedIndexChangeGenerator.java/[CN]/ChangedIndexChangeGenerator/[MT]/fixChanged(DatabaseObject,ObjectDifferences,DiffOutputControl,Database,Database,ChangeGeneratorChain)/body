@@ -1,4 +1,13 @@
 {
+  Difference clusteredDiff=differences.getDifference("clustered");
+  if (clusteredDiff != null) {
+    if (clusteredDiff.getReferenceValue() == null || clusteredDiff.getComparedValue() == null) {
+      differences.removeDifference("clustered");
+    }
+  }
+  if (!differences.hasDifferences()) {
+    return new Change[0];
+  }
   Index index=(Index)changedObject;
   if (index.getTable() != null) {
     if (index.getTable().getPrimaryKey() != null && DatabaseObjectComparatorFactory.getInstance().isSameObject(index.getTable().getPrimaryKey().getBackingIndex(),changedObject,differences.getSchemaComparisons(),comparisonDatabase)) {
