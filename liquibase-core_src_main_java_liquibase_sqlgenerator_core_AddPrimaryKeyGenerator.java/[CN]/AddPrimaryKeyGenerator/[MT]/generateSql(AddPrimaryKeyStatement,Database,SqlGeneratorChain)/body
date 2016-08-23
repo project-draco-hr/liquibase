@@ -5,7 +5,7 @@
   }
  else {
     sql="ALTER TABLE " + database.escapeTableName(statement.getCatalogName(),statement.getSchemaName(),statement.getTableName()) + " ADD CONSTRAINT "+ database.escapeConstraintName(statement.getConstraintName())+ " PRIMARY KEY";
-    if (database instanceof MSSQLDatabase && !statement.isClustered()) {
+    if (database instanceof MSSQLDatabase && statement.isClustered() != null) {
       if (statement.isClustered()) {
         sql+=" CLUSTERED";
       }
