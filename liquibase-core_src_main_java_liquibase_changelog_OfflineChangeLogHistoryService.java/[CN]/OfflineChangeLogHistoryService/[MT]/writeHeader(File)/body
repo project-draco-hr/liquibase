@@ -1,7 +1,7 @@
 {
-  FileWriter writer=null;
+  Writer writer=null;
   try {
-    writer=new FileWriter(file);
+    writer=new OutputStreamWriter(new FileOutputStream(file),LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding());
     CSVWriter csvWriter=new CSVWriter(writer);
     csvWriter.writeNext(new String[]{"ID","AUTHOR","FILENAME","DATEEXECUTED","ORDEREXECUTED","EXECTYPE","MD5SUM","DESCRIPTION","COMMENTS","TAG","LIQUIBASE","CONTEXTS","LABELS"});
   }

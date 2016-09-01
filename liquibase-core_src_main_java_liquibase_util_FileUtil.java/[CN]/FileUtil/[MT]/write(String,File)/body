@@ -2,7 +2,7 @@
   file.getParentFile().mkdirs();
   FileOutputStream output=new FileOutputStream(file);
   try {
-    StreamUtil.copy(new ByteArrayInputStream(contents.getBytes("UTF-8")),output);
+    StreamUtil.copy(new ByteArrayInputStream(contents.getBytes(LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding())),output);
   }
   finally {
     output.close();

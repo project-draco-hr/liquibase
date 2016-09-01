@@ -1,5 +1,5 @@
 {
-  FileWriter fileWriter=createFileWriter(object);
+  Writer fileWriter=createFileWriter(object);
   try {
     fileWriter.append("<html>");
     writeHeader(object,fileWriter);

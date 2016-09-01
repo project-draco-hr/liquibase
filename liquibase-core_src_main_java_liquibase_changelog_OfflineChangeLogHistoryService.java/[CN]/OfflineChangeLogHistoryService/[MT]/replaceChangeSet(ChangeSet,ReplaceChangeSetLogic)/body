@@ -1,11 +1,11 @@
 {
   File oldFile=this.changeLogFile;
   File newFile=new File(oldFile.getParentFile(),oldFile.getName() + ".new");
-  FileReader reader=null;
-  FileWriter writer=null;
+  Reader reader=null;
+  Writer writer=null;
   try {
-    reader=new FileReader(oldFile);
-    writer=new FileWriter(newFile);
+    reader=new InputStreamReader(new FileInputStream(oldFile),LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding());
+    writer=new OutputStreamWriter(new FileOutputStream(newFile),LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding());
     CSVReader csvReader=new CSVReader(reader);
     CSVWriter csvWriter=new CSVWriter(writer);
     String[] line;
