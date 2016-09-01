@@ -1,0 +1,10 @@
+{
+  String id=idRoot + "-" + changeNumber++;
+  if (LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getGeneratedChangeSetIdsContainDescription() && changes != null && changes.length == 1) {
+    id=id + " (" + changes[0].getDescription()+ ")";
+    if (id.length() > 100) {
+      id=id.substring(0,97) + "...";
+    }
+  }
+  return id;
+}

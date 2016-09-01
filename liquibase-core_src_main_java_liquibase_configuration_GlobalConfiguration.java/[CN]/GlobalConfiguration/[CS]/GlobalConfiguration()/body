@@ -14,4 +14,5 @@
   getContainer().addProperty(GENERATE_CHANGESET_CREATED_VALUES,Boolean.class).setDescription("Should Liquibase include a 'created' attribute in diff/generateChangeLog changeSets with the current datetime").setDefaultValue(false);
   getContainer().addProperty(AUTO_REORG,Boolean.class).setDescription("Should Liquibase automatically include REORG TABLE commands when needed?").setDefaultValue(true);
   getContainer().addProperty(DIFF_COLUMN_ORDER,Boolean.class).setDescription("Should Liquibase compare column order in diff operation?").setDefaultValue(true);
+  getContainer().addProperty(GENERATED_CHANGESET_IDS_INCLUDE_DESCRIPTION,Boolean.class).setDescription("Should Liquibase include the change description in the id when generating changeSets?").setDefaultValue(false);
 }
