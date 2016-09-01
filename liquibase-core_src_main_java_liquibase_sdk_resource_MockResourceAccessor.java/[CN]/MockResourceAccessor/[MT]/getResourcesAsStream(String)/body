@@ -1,7 +1,7 @@
 {
   InputStream stream=null;
   if (contentByFileName.containsKey(path)) {
-    stream=new ByteArrayInputStream(contentByFileName.get(path).getBytes());
+    stream=new ByteArrayInputStream(contentByFileName.get(path).getBytes(LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()));
   }
   if (stream == null) {
     return null;

@@ -29,6 +29,8 @@
     if (column.isAutoIncrement() && primaryKey != null && primaryKey.getColumns().size() == 1 && primaryKey.getColumnNamesAsList().contains(column.getName())) {
       if (referenceDatabase instanceof MSSQLDatabase && primaryKey.getBackingIndex() != null && primaryKey.getBackingIndex().getClustered() != null && !primaryKey.getBackingIndex().getClustered()) {
       }
+ else       if (referenceDatabase instanceof PostgresDatabase && primaryKey.getBackingIndex() != null && primaryKey.getBackingIndex().getClustered() != null && primaryKey.getBackingIndex().getClustered()) {
+      }
  else {
         constraintsConfig=new ConstraintsConfig();
         constraintsConfig.setPrimaryKey(true);

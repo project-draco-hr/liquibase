@@ -1,7 +1,7 @@
 {
-  FileReader reader=null;
+  Reader reader=null;
   try {
-    reader=new FileReader(this.changeLogFile);
+    reader=new InputStreamReader(new FileInputStream(this.changeLogFile),LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding());
     CSVReader csvReader=new CSVReader(reader);
     String[] line=csvReader.readNext();
     if (line == null) {

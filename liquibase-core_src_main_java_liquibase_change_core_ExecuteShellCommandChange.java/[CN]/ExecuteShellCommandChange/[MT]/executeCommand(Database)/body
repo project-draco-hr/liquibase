@@ -16,8 +16,8 @@
  catch (  InterruptedException e) {
     ;
   }
-  LogFactory.getLogger().severe(errorStream.toString());
-  LogFactory.getLogger().info(inputStream.toString());
+  LogFactory.getLogger().severe(errorStream.toString(LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()));
+  LogFactory.getLogger().info(inputStream.toString(LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()));
   if (returnCode != 0) {
     throw new RuntimeException(getCommandString() + " returned an code of " + returnCode);
   }

@@ -6,7 +6,7 @@
   String changeLogOutFile=changeLog.replace(":","_");
   File xmlFile=new File(outputDir,changeLogOutFile + ".html");
   xmlFile.getParentFile().mkdirs();
-  BufferedWriter changeLogStream=new BufferedWriter(new FileWriter(xmlFile,false));
+  BufferedWriter changeLogStream=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(xmlFile,false),LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()));
   try {
     changeLogStream.write("<html><body><pre>\n");
     changeLogStream.write(StreamUtil.getStreamContents(stylesheet).replace("<","&lt;").replace(">","&gt;"));

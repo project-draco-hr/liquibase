@@ -1,8 +1,8 @@
 {
   if (rollbackFile != null) {
-    FileWriter output=null;
+    Writer output=null;
     try {
-      output=new FileWriter(rollbackFile);
+      output=new OutputStreamWriter(new FileOutputStream(rollbackFile),LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding());
       if (tag != null) {
         liquibase.futureRollbackSQL(tag,new Contexts(getContexts()),new LabelExpression(getLabels()),output);
       }

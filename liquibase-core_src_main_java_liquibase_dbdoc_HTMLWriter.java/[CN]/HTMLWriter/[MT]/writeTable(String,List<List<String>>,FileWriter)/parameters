@@ -1,3 +1,0 @@
-String title
-List<List<String>> cells
-FileWriter fileWriter

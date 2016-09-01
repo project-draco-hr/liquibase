@@ -4,7 +4,7 @@
     if (diffOutputControl.getContext() != null) {
       changeSetContext=diffOutputControl.getContext().toString().replaceFirst("^\\(","").replaceFirst("\\)$","");
     }
-    ChangeSet changeSet=new ChangeSet(generateId(),getChangeSetAuthor(),false,false,this.changeSetPath,changeSetContext,null,false,quotingStrategy,null);
+    ChangeSet changeSet=new ChangeSet(generateId(changes),getChangeSetAuthor(),false,false,this.changeSetPath,changeSetContext,null,false,quotingStrategy,null);
     changeSet.setCreated(created);
     if (diffOutputControl.getLabels() != null) {
       changeSet.setLabels(diffOutputControl.getLabels());

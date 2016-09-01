@@ -1,0 +1,4 @@
+Writer fileWriter
+Object object
+List<Change> changes
+Database database

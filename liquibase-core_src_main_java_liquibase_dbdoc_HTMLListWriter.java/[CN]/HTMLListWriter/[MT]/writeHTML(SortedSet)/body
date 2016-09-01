@@ -1,5 +1,5 @@
 {
-  FileWriter fileWriter=new FileWriter(new File(outputDir,filename));
+  Writer fileWriter=new OutputStreamWriter(new FileOutputStream(new File(outputDir,filename)),LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding());
   try {
     fileWriter.append("<HTML>\n" + "<HEAD>\n" + "<TITLE>\n");
     fileWriter.append(title);

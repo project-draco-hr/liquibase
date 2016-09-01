@@ -1,3 +1,8 @@
 {
-  liquibase.reportStatus(true,new Contexts(contexts),new LabelExpression(labels),new OutputStreamWriter(System.out));
+  try {
+    liquibase.reportStatus(true,new Contexts(contexts),new LabelExpression(labels),new OutputStreamWriter(System.out,LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()));
+  }
+ catch (  UnsupportedEncodingException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
 }

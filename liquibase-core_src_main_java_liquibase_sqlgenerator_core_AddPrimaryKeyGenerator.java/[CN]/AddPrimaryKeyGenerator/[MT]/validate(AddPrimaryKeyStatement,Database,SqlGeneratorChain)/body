@@ -3,7 +3,7 @@
   validationErrors.checkRequiredField("columnNames",addPrimaryKeyStatement.getColumnNames());
   validationErrors.checkRequiredField("tableName",addPrimaryKeyStatement.getTableName());
   if (!(database instanceof MSSQLDatabase || database instanceof MockDatabase)) {
-    if (!addPrimaryKeyStatement.isClustered()) {
+    if (addPrimaryKeyStatement.isClustered() != null && !addPrimaryKeyStatement.isClustered()) {
       validationErrors.checkDisallowedField("clustered",addPrimaryKeyStatement.isClustered(),database);
     }
   }
