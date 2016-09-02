@@ -1,10 +1,22 @@
 {
-  String id=idRoot + "-" + changeNumber++;
-  if (LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getGeneratedChangeSetIdsContainDescription() && changes != null && changes.length == 1) {
-    id=id + " (" + changes[0].getDescription()+ ")";
-    if (id.length() > 100) {
-      id=id.substring(0,97) + "...";
+  String desc="";
+  if (LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getGeneratedChangeSetIdsContainDescription()) {
+    if (!overriddenIdRoot) {
+      this.idRoot=Long.toString(Long.decode(idRoot),36);
+      idRoot=idRoot.substring(idRoot.length() - 4);
+      this.overriddenIdRoot=true;
+    }
+    if (changes != null && changes.length > 0) {
+      desc=" (" + StringUtils.join(changes," :: ",new StringUtils.StringUtilsFormatter<Change>(){
+        @Override public String toString(        Change obj){
+          return obj.getDescription();
+        }
+      }
+) + ")";
+    }
+    if (desc.length() > 150) {
+      desc=desc.substring(0,146) + "...)";
     }
   }
-  return id;
+  return idRoot + "-" + changeNumber+++ desc;
 }
