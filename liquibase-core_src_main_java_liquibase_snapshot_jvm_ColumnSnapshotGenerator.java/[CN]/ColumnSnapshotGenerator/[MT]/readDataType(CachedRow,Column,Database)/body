@@ -104,7 +104,7 @@
       dataType=Types.DATE;
     }
   }
-  if (database instanceof PostgresDatabase && dataType == Types.OTHER && columnSize != null && columnSize.equals(Integer.MAX_VALUE)) {
+  if (database instanceof PostgresDatabase && columnSize != null && columnSize.equals(Integer.MAX_VALUE)) {
     columnSize=null;
   }
   DataType type=new DataType(columnTypeName);
