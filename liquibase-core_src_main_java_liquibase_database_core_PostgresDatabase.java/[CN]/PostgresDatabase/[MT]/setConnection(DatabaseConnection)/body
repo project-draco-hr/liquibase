@@ -1,7 +1,7 @@
 {
   super.setConnection(conn);
   Logger log=LogFactory.getInstance().getLog();
-  if (conn != null && conn instanceof JdbcConnection) {
+  if (conn instanceof JdbcConnection) {
     Statement statement=null;
     ResultSet resultSet=null;
     try {
