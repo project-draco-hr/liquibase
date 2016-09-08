@@ -1,5 +1,5 @@
 {
-  FileSystemResourceAccessor fileSystemResourceAccessor=new FileSystemResourceAccessor();
+  FileSystemResourceAccessor fileSystemResourceAccessor=new FileSystemResourceAccessor(getProject().getBaseDir());
   ClassLoaderResourceAccessor classLoaderResourceAccessor=new ClassLoaderResourceAccessor(classLoader);
   return new CompositeResourceAccessor(fileSystemResourceAccessor,classLoaderResourceAccessor);
 }

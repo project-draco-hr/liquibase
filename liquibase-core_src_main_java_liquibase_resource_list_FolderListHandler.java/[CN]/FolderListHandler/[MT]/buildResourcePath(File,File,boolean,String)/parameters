@@ -1,0 +1,4 @@
+File file
+File relativeTo
+boolean isFolder
+String resultPrefix

@@ -1,6 +1,3 @@
 {
-  baseDirectory=new File(base);
-  if (!baseDirectory.isDirectory()) {
-    throw new IllegalArgumentException(base + " must be a directory");
-  }
+  this(new File(base));
 }

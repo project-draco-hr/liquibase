@@ -1,8 +1,0 @@
-{
-  if (file.getName().toLowerCase().endsWith(".gz")) {
-    return new BufferedInputStream(new GZIPInputStream(new FileInputStream(file)));
-  }
- else {
-    return new BufferedInputStream(new FileInputStream(file));
-  }
-}

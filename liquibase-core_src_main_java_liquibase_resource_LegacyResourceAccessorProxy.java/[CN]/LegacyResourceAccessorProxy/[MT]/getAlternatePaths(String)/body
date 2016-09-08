@@ -1,0 +1,6 @@
+{
+  if (enableFuzyRootSlash && path.startsWith(ListHandler.RESOURCE_PATH_SEPERATOR)) {
+    return Collections.singletonList((path.substring(1)));
+  }
+  return Collections.emptyList();
+}

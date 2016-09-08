@@ -1,0 +1,29 @@
+{
+  Set<String> result=new HashSet<String>();
+  JarFile zipFile=new JarFile(jarFile,false);
+  try {
+    Enumeration<JarEntry> entries=zipFile.entries();
+    while (entries.hasMoreElements()) {
+      JarEntry entry=entries.nextElement();
+      if (!entry.getName().startsWith(path)) {
+        continue;
+      }
+      if (!recursive) {
+        String pathAsDir=path.endsWith(ListHandler.RESOURCE_PATH_SEPERATOR) ? path : path + ListHandler.RESOURCE_PATH_SEPERATOR;
+        if (!entry.getName().startsWith(pathAsDir) || entry.getName().substring(pathAsDir.length()).contains(ListHandler.RESOURCE_PATH_SEPERATOR)) {
+          continue;
+        }
+      }
+      if (entry.isDirectory() && includeDirectories) {
+        result.add(standardizeName(entry.getName()));
+      }
+ else       if (includeFiles) {
+        result.add(standardizeName(entry.getName()));
+      }
+    }
+    return result;
+  }
+  finally {
+    zipFile.close();
+  }
+}

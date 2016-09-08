@@ -1,0 +1,13 @@
+{
+  logger.debug(this.getClass().getSimpleName() + " openStream " + url.toExternalForm()+ " as "+ path);
+  URLConnection connection=url.openConnection();
+  connection.setUseCaches(false);
+  InputStream resourceAsStream=connection.getInputStream();
+  if (resourceAsStream != null && path.endsWith(".gz")) {
+    resourceAsStream=new BufferedInputStream(new GZIPInputStream(resourceAsStream));
+  }
+ else   if (resourceAsStream != null && path.endsWith(".zip")) {
+    resourceAsStream=new BufferedInputStream(new ZipInputStream(resourceAsStream));
+  }
+  return resourceAsStream;
+}

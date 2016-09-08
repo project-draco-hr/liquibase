@@ -1,0 +1,11 @@
+{
+  try {
+    Enumeration<URL> resources=classLoader.getResources(JAR_SCAN_RESOURCE);
+    while (resources.hasMoreElements()) {
+      addListHandlerFromResourceURL(resources.nextElement(),JAR_SCAN_RESOURCE);
+    }
+  }
+ catch (  IOException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

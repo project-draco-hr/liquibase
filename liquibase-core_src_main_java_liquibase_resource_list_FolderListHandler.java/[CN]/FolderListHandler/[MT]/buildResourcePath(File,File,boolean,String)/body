@@ -1,0 +1,24 @@
+{
+  List<String> result=new ArrayList<String>();
+  while (file != null) {
+    if (file.getName().equals(relativeTo.getName())) {
+      break;
+    }
+    result.add(standardizeName(file.getName()));
+    file=file.getParentFile();
+  }
+  StringBuilder buf=new StringBuilder();
+  buf.append(resultPrefix);
+  if (!resultPrefix.endsWith(ListHandler.RESOURCE_PATH_SEPERATOR)) {
+    buf.append(ListHandler.RESOURCE_PATH_SEPERATOR);
+  }
+  Collections.reverse(result);
+  Iterator<String> i=result.iterator();
+  while (i.hasNext()) {
+    buf.append(i.next());
+    if (i.hasNext() && !isFolder) {
+      buf.append(ListHandler.RESOURCE_PATH_SEPERATOR);
+    }
+  }
+  return buf.toString();
+}

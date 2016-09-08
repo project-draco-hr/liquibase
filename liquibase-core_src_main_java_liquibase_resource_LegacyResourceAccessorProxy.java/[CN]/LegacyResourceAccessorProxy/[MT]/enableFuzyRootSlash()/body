@@ -1,0 +1,5 @@
+{
+  logger.debug(getClass().getSimpleName() + " enableFuzyRootSlash");
+  this.enableFuzyRootSlash=true;
+  return this;
+}

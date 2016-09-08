@@ -1,0 +1,15 @@
+{
+  String path=pathCleanup(pathRaw);
+  Set<String> returnSet=new HashSet<String>();
+  Set<String> thisSet=proxy.list(relativeTo,path,includeFiles,includeDirectories,recursive);
+  if (thisSet != null) {
+    returnSet.addAll(thisSet);
+  }
+  for (  String altPath : getAlternatePaths(path)) {
+    returnSet.addAll(proxy.list(relativeTo,altPath,includeFiles,includeDirectories,recursive));
+  }
+  if (!returnSet.isEmpty()) {
+    return returnSet;
+  }
+  return null;
+}

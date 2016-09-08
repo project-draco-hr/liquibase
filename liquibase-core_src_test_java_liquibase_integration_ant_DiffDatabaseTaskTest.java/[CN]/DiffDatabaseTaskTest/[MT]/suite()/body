@@ -1,6 +1,3 @@
 {
-  setProperties();
-  URL resource=DiffDatabaseTaskTest.class.getResource("/liquibase/integration/ant/DiffDatabaseTaskTest.xml");
-  File file=new File(resource.toURI());
-  return new AntUnitSuite(file,DiffDatabaseTaskTest.class);
+  return buildSuite("DiffDatabaseTaskTest.xml",DiffDatabaseTaskTest.class);
 }

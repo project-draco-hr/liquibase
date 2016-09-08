@@ -1,0 +1,7 @@
+{
+  ClassLoader myClassLoader=new ClassLoader(){
+  }
+;
+  MyARA test=new MyARA(myClassLoader);
+  assertEquals(myClassLoader.hashCode(),test.toClassLoader().hashCode());
+}

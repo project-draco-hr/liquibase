@@ -1,6 +1,3 @@
 {
-  setProperties();
-  URL resource=DropAllTaskTest.class.getResource("/liquibase/integration/ant/DropAllTaskTest.xml");
-  File file=new File(resource.toURI());
-  return new AntUnitSuite(file,DropAllTaskTest.class);
+  return buildSuite("DropAllTaskTest.xml",DropAllTaskTest.class);
 }

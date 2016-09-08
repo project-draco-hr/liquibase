@@ -1,0 +1,12 @@
+{
+  try {
+    URL[] classLoaderSources=new URL[folders.length];
+    for (int i=0; i < folders.length; i++) {
+      classLoaderSources[i]=folders[i].toURI().toURL();
+    }
+    return new URLClassLoader(classLoaderSources);
+  }
+ catch (  MalformedURLException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
+}

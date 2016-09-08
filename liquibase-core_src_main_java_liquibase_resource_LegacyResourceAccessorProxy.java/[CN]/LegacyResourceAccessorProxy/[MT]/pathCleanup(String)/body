@@ -1,0 +1,6 @@
+{
+  if (pathCleanup == null) {
+    return path;
+  }
+  return path.replaceFirst(pathCleanup,"");
+}

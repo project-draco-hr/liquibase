@@ -1,0 +1,5 @@
+{
+  logger.debug(getClass().getSimpleName() + " enableThreadContextClassLoader");
+  this.classLoader=new ThreadContextClassLoader();
+  return this;
+}

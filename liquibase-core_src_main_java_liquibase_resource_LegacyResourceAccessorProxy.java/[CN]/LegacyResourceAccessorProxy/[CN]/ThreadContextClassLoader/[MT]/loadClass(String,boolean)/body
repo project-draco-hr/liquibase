@@ -1,0 +1,15 @@
+{
+  ClassLoader contextClassLoader=Thread.currentThread().getContextClassLoader();
+  if (contextClassLoader != null) {
+    try {
+      Class<?> classe=contextClassLoader.loadClass(name);
+      if (resolve) {
+        resolveClass(classe);
+      }
+      return classe;
+    }
+ catch (    ClassNotFoundException notFound) {
+    }
+  }
+  return proxy.toClassLoader().loadClass(name);
+}

@@ -1,0 +1,5 @@
+String resultPrefix
+File rootFile
+boolean recursive
+boolean includeFiles
+boolean includeDirectories

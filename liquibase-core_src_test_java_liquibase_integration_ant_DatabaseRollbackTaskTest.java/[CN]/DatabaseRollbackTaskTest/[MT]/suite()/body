@@ -1,6 +1,3 @@
 {
-  setProperties();
-  URL resource=DatabaseRollbackTaskTest.class.getResource("/liquibase/integration/ant/DatabaseRollbackTaskTest.xml");
-  File file=new File(resource.toURI());
-  return new AntUnitSuite(file,DatabaseRollbackTaskTest.class);
+  return buildSuite("DatabaseRollbackTaskTest.xml",DatabaseRollbackTaskTest.class);
 }

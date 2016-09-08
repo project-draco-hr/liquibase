@@ -1,0 +1,7 @@
+String resultPrefix
+File rootFile
+File currentFile
+boolean recursive
+boolean includeFiles
+boolean includeDirectories
+Set<String> returnSet

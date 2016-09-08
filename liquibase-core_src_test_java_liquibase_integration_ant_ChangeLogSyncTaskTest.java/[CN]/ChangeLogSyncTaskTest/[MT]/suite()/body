@@ -1,6 +1,3 @@
 {
-  setProperties();
-  URL resource=ChangeLogSyncTaskTest.class.getResource("/liquibase/integration/ant/ChangeLogSyncTaskTest.xml");
-  File file=new File(resource.toURI());
-  return new AntUnitSuite(file,ChangeLogSyncTaskTest.class);
+  return buildSuite("ChangeLogSyncTaskTest.xml",ChangeLogSyncTaskTest.class);
 }

@@ -35,13 +35,11 @@
       for (      String foundPackage : liquibasePackages) {
         resources=ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources(foundPackage);
         for (        Resource res : resources) {
-          addRootPath(res.getURL());
         }
       }
     }
  else {
       for (      Resource res : resources) {
-        addRootPath(res.getURL());
       }
     }
   }

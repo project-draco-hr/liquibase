@@ -1,0 +1,6 @@
+{
+  System.setProperty("liquibase.test.ant.basedir","src/test/resources/liquibase/integration/ant/");
+  URL resource=ChangeLogSyncTaskTest.class.getResource("/liquibase/integration/ant/" + testFile);
+  File file=new File(resource.toURI());
+  return new AntUnitSuite(file,testClass);
+}

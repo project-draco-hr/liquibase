@@ -1,0 +1,5 @@
+String relativeTo
+String pathRaw
+boolean includeFiles
+boolean includeDirectories
+boolean recursive

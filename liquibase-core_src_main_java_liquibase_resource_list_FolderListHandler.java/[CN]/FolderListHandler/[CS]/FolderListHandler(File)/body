@@ -1,0 +1,4 @@
+{
+  this.baseDirectory=Validate.notNullArgument(folder,"Can't list null folder.");
+  Validate.isTrueArgument(folder.isDirectory(),folder + " must be a directory");
+}

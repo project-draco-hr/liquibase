@@ -1,0 +1,5 @@
+{
+  logger.debug(getClass().getSimpleName() + " enableCheckFileSystem");
+  this.enableCheckFileSystem=true;
+  return this;
+}

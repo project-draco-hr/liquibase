@@ -1,0 +1,3 @@
+{
+  return name.replace("\\",RESOURCE_PATH_SEPERATOR);
+}

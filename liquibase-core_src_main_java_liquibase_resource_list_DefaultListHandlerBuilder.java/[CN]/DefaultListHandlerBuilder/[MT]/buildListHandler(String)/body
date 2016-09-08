@@ -1,0 +1,26 @@
+{
+  Validate.notNullArgument(urlPath,"Can't select list handler on null urlPath");
+  if (urlPath.startsWith(PREFIX_FILE)) {
+    if (urlPath.endsWith(POSTFIX_JAR)) {
+      return new JarFileListHandler(urlPath.substring(PREFIX_FILE.length()));
+    }
+ else     if (urlPath.endsWith(POSTFIX_ZIP)) {
+      return new JarFileListHandler(urlPath.substring(PREFIX_FILE.length()));
+    }
+ else {
+      return new FolderListHandler(urlPath.substring(PREFIX_FILE.length()));
+    }
+  }
+ else   if (urlPath.startsWith(PREFIX_JAR_FILE)) {
+    return new JarFileListHandler(urlPath.substring(PREFIX_JAR_FILE.length()));
+  }
+ else   if (urlPath.startsWith(PREFIX_WS_JAR_FILE)) {
+    return new JarFileListHandler(urlPath.substring(PREFIX_WS_JAR_FILE.length()));
+  }
+ else   if (urlPath.startsWith(PREFIX_ZIP_FILE)) {
+    return new JarFileListHandler(urlPath.substring(PREFIX_ZIP_FILE.length()));
+  }
+ else {
+    return null;
+  }
+}

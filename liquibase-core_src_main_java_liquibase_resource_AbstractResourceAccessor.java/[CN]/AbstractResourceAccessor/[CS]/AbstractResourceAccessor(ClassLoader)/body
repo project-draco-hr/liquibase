@@ -1,0 +1,5 @@
+{
+  this.classLoader=Validate.notNullArgument(classLoader,"classLoader is required");
+  this.logger=LogFactory.getInstance().getLog();
+  this.logger.debug("Created ResourceAccessor: " + this);
+}
