@@ -1,6 +1,9 @@
 {
   File finalDir;
   String resourceUrlPrefix=path;
+  if (path.startsWith(baseDirectory.toURI().toString())) {
+    path=path.substring(baseDirectory.toURI().toString().length());
+  }
   if (relativeToFile == null) {
     finalDir=new File(baseDirectory,path);
   }
