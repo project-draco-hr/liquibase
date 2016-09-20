@@ -1,4 +1,3 @@
 {
-  this.resourceAccessors=Validate.notNullArgument(resourceAccessors,"Can create composite with null value");
-  this.classLoader=new CompositeClassLoader();
+  this.resourceAccessors=resourceAccessors;
 }

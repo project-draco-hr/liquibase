@@ -6,7 +6,7 @@
       returnSet.addAll(thisSet);
     }
   }
-  if (!returnSet.isEmpty()) {
+  if (returnSet.size() > 0) {
     return returnSet;
   }
   return null;

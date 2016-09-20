@@ -1,3 +1,4 @@
 {
-  this(classLoader,new DefaultListHandlerBuilder());
+  this.classLoader=classLoader;
+  init();
 }

@@ -1,5 +1,0 @@
-String relativeToFile
-String path
-boolean includeFiles
-boolean includeDirectories
-boolean recursive

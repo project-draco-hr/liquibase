@@ -1,3 +1,8 @@
 {
-  return classLoader;
+  ClassLoader[] loaders=new ClassLoader[resourceAccessors.size()];
+  int i=0;
+  for (  ResourceAccessor fo : resourceAccessors) {
+    loaders[i++]=fo.toClassLoader();
+  }
+  return new CompositeClassLoader(loaders);
 }

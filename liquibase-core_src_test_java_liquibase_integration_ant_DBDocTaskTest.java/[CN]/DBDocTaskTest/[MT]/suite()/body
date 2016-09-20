@@ -1,3 +1,6 @@
 {
-  return buildSuite("DBDocTaskTest.xml",DBDocTaskTest.class);
+  setProperties();
+  URL resource=DBDocTaskTest.class.getResource("/liquibase/integration/ant/DBDocTaskTest.xml");
+  File file=new File(resource.toURI());
+  return new AntUnitSuite(file,DBDocTaskTest.class);
 }

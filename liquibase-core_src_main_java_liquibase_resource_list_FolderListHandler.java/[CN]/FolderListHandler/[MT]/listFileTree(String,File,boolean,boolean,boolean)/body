@@ -1,3 +1,0 @@
-{
-  return listFileTree(resultPrefix,rootFile,rootFile,recursive,includeFiles,includeDirectories,new LinkedHashSet<String>());
-}

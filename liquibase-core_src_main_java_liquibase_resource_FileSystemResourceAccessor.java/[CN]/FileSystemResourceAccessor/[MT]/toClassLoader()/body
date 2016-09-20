@@ -1,0 +1,15 @@
+{
+  try {
+    URL url;
+    if (baseDirectory == null) {
+      url=new File("/").toURI().toURL();
+    }
+ else {
+      url=baseDirectory.toURI().toURL();
+    }
+    return new URLClassLoader(new URL[]{url});
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

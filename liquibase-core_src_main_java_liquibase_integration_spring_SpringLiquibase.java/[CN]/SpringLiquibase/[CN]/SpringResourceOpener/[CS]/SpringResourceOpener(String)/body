@@ -1,4 +1,3 @@
 {
-  super(getResourceLoader().getClassLoader());
   this.parentFile=parentFile;
 }

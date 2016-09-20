@@ -35,15 +35,13 @@
       for (      String foundPackage : liquibasePackages) {
         resources=ResourcePatternUtils.getResourcePatternResolver(getResourceLoader()).getResources(foundPackage);
         for (        Resource res : resources) {
-          String urlPath=res.getURL().toExternalForm();
-          addListHandler(urlPath,listHandlerBuilder.buildListHandler(urlPath));
+          addRootPath(res.getURL());
         }
       }
     }
  else {
       for (      Resource res : resources) {
-        String urlPath=res.getURL().toExternalForm();
-        addListHandler(urlPath,listHandlerBuilder.buildListHandler(urlPath));
+        addRootPath(res.getURL());
       }
     }
   }

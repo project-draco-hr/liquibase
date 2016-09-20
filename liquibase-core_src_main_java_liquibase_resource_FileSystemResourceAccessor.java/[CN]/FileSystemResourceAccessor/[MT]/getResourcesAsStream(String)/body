@@ -1,0 +1,23 @@
+{
+  File absoluteFile=new File(path);
+  File relativeFile=(baseDirectory == null) ? new File(path) : new File(baseDirectory,path);
+  InputStream fileStream=null;
+  if (absoluteFile.isAbsolute()) {
+    try {
+      fileStream=openStream(absoluteFile);
+    }
+ catch (    FileNotFoundException e) {
+    }
+  }
+  if (fileStream == null) {
+    try {
+      fileStream=openStream(relativeFile);
+    }
+ catch (    FileNotFoundException e2) {
+      return null;
+    }
+  }
+  Set<InputStream> returnSet=new HashSet<InputStream>();
+  returnSet.add(fileStream);
+  return returnSet;
+}

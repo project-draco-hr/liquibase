@@ -1,4 +1,0 @@
-{
-  super(createURLClassLoader(Validate.notNullArgument(base,"baseDirectory is required.")));
-  Validate.isTrueArgument(base.isDirectory(),base + " must be a directory");
-}

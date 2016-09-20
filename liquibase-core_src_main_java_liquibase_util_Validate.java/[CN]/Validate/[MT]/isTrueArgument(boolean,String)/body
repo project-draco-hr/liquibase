@@ -1,5 +1,0 @@
-{
-  if (!value) {
-    throw new IllegalArgumentException(message);
-  }
-}

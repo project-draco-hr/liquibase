@@ -1,0 +1,21 @@
+{
+  File[] files=rootFile.listFiles();
+  if (files == null) {
+    return;
+  }
+  for (  File file : files) {
+    if (file.isDirectory()) {
+      if (includeDirectories) {
+        returnSet.add(convertToPath(file.getAbsolutePath()));
+      }
+      if (recursive) {
+        getContents(file,recursive,includeFiles,includeDirectories,basePath,returnSet);
+      }
+    }
+ else {
+      if (includeFiles) {
+        returnSet.add(convertToPath(file.getAbsolutePath()));
+      }
+    }
+  }
+}

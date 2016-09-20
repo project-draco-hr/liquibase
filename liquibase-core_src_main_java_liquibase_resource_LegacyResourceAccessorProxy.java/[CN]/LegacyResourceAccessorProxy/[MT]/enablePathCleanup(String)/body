@@ -1,5 +1,0 @@
-{
-  logger.debug(getClass().getSimpleName() + " enablePathCleanup " + matchRegex);
-  this.pathCleanup=matchRegex;
-  return this;
-}

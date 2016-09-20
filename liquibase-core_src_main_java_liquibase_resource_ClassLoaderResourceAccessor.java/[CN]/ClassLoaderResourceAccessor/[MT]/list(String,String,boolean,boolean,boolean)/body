@@ -1,9 +1,74 @@
 {
-  for (  ListHandler handler : listHandlers.values()) {
-    Set<String> result=handler.list(relativeTo,path,includeFiles,includeDirectories,recursive);
-    if (result != null && !result.isEmpty()) {
-      return result;
+  path=convertToPath(relativeTo,path);
+  Enumeration<URL> fileUrls=classLoader.getResources(path);
+  Set<String> returnSet=new HashSet<String>();
+  if (!fileUrls.hasMoreElements() && (path.startsWith("jar:") || path.startsWith("file:"))) {
+    fileUrls=new Vector<URL>(Arrays.asList(new URL(path))).elements();
+  }
+  while (fileUrls.hasMoreElements()) {
+    URL fileUrl=fileUrls.nextElement();
+    if (fileUrl.toExternalForm().startsWith("jar:file:") || fileUrl.toExternalForm().startsWith("wsjar:file:") || fileUrl.toExternalForm().startsWith("zip:")) {
+      String[] zipAndFile=fileUrl.getFile().split("!");
+      String zipFilePath=zipAndFile[0];
+      if (zipFilePath.matches("file:\\/[A-Za-z]:\\/.*")) {
+        zipFilePath=zipFilePath.replaceFirst("file:\\/","");
+      }
+ else {
+        zipFilePath=zipFilePath.replaceFirst("file:","");
+      }
+      zipFilePath=URLDecoder.decode(zipFilePath,LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding());
+      if (path.startsWith("classpath:")) {
+        path=path.replaceFirst("classpath:","");
+      }
+      if (path.startsWith("classpath*:")) {
+        path=path.replaceFirst("classpath\\*:","");
+      }
+      JarFile zipfile=new JarFile(zipFilePath,false);
+      try {
+        Enumeration<JarEntry> entries=zipfile.entries();
+        while (entries.hasMoreElements()) {
+          JarEntry entry=entries.nextElement();
+          if (entry.getName().startsWith(path)) {
+            if (!recursive) {
+              String pathAsDir=path.endsWith("/") ? path : path + "/";
+              if (!entry.getName().startsWith(pathAsDir) || entry.getName().substring(pathAsDir.length()).contains("/")) {
+                continue;
+              }
+            }
+            if (entry.isDirectory() && includeDirectories) {
+              returnSet.add(entry.getName());
+            }
+ else             if (includeFiles) {
+              returnSet.add(entry.getName());
+            }
+          }
+        }
+      }
+  finally {
+        zipfile.close();
+      }
+    }
+ else {
+      try {
+        File file=new File(fileUrl.toURI());
+        if (file.exists()) {
+          getContents(file,recursive,includeFiles,includeDirectories,path,returnSet);
+        }
+      }
+ catch (      URISyntaxException e) {
+      }
+catch (      IllegalArgumentException e) {
+      }
+    }
+    Enumeration<URL> resources=classLoader.getResources(path);
+    while (resources.hasMoreElements()) {
+      String url=resources.nextElement().toExternalForm();
+      url=url.replaceFirst("^\\Q" + path + "\\E","");
+      returnSet.add(url);
     }
   }
-  return null;
+  if (returnSet.size() == 0) {
+    return null;
+  }
+  return returnSet;
 }

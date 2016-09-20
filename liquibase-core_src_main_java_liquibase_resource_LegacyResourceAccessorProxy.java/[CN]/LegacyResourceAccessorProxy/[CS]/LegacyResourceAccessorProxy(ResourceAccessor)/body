@@ -1,4 +1,0 @@
-{
-  this.proxy=Validate.notNullArgument(proxy,"Can't create legacy proxy with null ResourceAccessor");
-  this.logger=LogFactory.getInstance().getLog();
-}

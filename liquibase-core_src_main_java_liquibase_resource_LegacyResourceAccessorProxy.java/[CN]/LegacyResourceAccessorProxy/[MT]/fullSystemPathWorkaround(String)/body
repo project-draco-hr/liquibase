@@ -1,8 +1,0 @@
-{
-  try {
-    return Collections.singleton(InputStream.class.cast(new FileInputStream(new File(path))));
-  }
- catch (  IOException e) {
-  }
-  return null;
-}

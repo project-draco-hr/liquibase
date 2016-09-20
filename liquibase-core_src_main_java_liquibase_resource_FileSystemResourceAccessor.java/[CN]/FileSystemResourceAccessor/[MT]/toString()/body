@@ -1,4 +1,7 @@
 {
-  URLClassLoader cl=URLClassLoader.class.cast(classLoader);
-  return getClass().getName() + "(" + cl.getURLs()[0].toExternalForm()+ ")";
+  File dir=baseDirectory;
+  if (dir == null) {
+    dir=new File(".");
+  }
+  return getClass().getName() + "(" + dir.getAbsolutePath()+ ")";
 }

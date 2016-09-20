@@ -1,7 +1,0 @@
-{
-  String urlPath=listHandlerBuilder.buildURLPath(url,path);
-  if (listHandlers.containsKey(urlPath)) {
-    return false;
-  }
-  return addListHandler(urlPath,listHandlerBuilder.buildListHandler(urlPath));
-}

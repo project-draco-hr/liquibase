@@ -1,0 +1,7 @@
+{
+  AbstractResourceAccessor ara=new MyARA();
+  ara.addRootPath(new URL(prefix + "logs/"));
+  ara.addRootPath(new URL(prefix));
+  String path=ara.convertToPath(prefix + "logs/cs-1.0.xml");
+  assertEquals("cs-1.0.xml",path);
+}

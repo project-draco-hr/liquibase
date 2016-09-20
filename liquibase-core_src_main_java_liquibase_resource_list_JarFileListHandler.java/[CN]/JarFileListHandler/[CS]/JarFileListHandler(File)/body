@@ -1,3 +1,0 @@
-{
-  this.jarFile=Validate.notNullArgument(jarFile,"Can't list null jar file.");
-}

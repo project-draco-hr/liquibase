@@ -1,0 +1,7 @@
+{
+  AbstractResourceAccessor ara=new MyARA();
+  URL rootPathURL=ara.toClassLoader().getResource("liquibase/resource/");
+  ara.addRootPath(rootPathURL);
+  String path=ara.convertToPath("liquibase/resource/empty.txt","changelogs/");
+  assertEquals("changelogs/",path);
+}
