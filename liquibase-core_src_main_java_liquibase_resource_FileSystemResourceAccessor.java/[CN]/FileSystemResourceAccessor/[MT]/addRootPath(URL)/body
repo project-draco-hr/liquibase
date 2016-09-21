@@ -1,0 +1,13 @@
+{
+  try {
+    File pathAsFile=new File(path.toURI());
+    for (    File fileSystemRoot : File.listRoots()) {
+      if (pathAsFile.equals(fileSystemRoot)) {
+        return;
+      }
+    }
+  }
+ catch (  URISyntaxException e) {
+  }
+  super.addRootPath(path);
+}
