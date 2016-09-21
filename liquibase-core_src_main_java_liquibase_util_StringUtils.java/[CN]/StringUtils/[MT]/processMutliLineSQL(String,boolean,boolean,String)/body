@@ -15,7 +15,7 @@
     }
  else {
       if (!previousDelimiter || StringUtils.trimToNull((String)piece) != null) {
-        if (!currentString.equals("") || StringUtils.trimToNull((String)piece) != null) {
+        if (!currentString.toString().equals("") || StringUtils.trimToNull((String)piece) != null) {
           currentString.append(piece);
         }
       }

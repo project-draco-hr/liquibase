@@ -1,5 +1,5 @@
 {
-  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out));
+  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(out,LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()));
   writer.write("{ \"databaseChangeLog\": [\n");
   int i=0;
   for (  T child : children) {

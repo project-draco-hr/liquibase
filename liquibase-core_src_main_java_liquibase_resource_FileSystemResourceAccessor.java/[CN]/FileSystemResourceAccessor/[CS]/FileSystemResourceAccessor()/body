@@ -1,3 +1,5 @@
 {
   baseDirectory=null;
+  readyForInit=true;
+  init();
 }

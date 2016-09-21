@@ -3,4 +3,6 @@
   if (!baseDirectory.isDirectory()) {
     throw new IllegalArgumentException(base + " must be a directory");
   }
+  readyForInit=true;
+  init();
 }

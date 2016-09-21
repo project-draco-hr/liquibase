@@ -23,6 +23,13 @@
           columnMetadataResultSet.set("COLUMN_DEF","GENERATED ALWAYS AS (" + column_def + ")");
         }
       }
+      Object defaultValue=columnMetadataResultSet.get("COLUMN_DEF");
+      if (defaultValue != null && defaultValue instanceof String) {
+        String lowerCaseDefaultValue=((String)defaultValue).toLowerCase();
+        if (lowerCaseDefaultValue.contains("iseq$$") && lowerCaseDefaultValue.endsWith(".nextval")) {
+          columnMetadataResultSet.set("COLUMN_DEF",null);
+        }
+      }
     }
   }
   if (database instanceof PostgresDatabase) {

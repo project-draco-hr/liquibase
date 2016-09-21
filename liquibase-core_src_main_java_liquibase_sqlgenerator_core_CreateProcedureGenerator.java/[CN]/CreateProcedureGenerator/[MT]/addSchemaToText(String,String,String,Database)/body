@@ -1,9 +1,15 @@
 {
+  if (schemaName == null) {
+    return procedureText;
+  }
   if ((StringUtils.trimToNull(schemaName) != null) && LiquibaseConfiguration.getInstance().getProperty(ChangeLogParserCofiguration.class,ChangeLogParserCofiguration.USE_PROCEDURE_SCHEMA).getValue(Boolean.class)) {
     StringClauses parsedSql=SqlParser.parse(procedureText,true,true);
     StringClauses.ClauseIterator clauseIterator=parsedSql.getClauseIterator();
     Object next="START";
     while (next != null && !next.toString().equalsIgnoreCase(keywordBeforeName) && clauseIterator.hasNext()) {
+      if (!keywordBeforeName.equalsIgnoreCase("PACKAGE") && ((String)next).equalsIgnoreCase("PACKAGE")) {
+        return procedureText;
+      }
       next=clauseIterator.nextNonWhitespace();
     }
     if (next != null && clauseIterator.hasNext()) {

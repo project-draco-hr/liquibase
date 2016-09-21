@@ -9,5 +9,6 @@
   validationErrors.checkRequiredField("referencedColumnNames",addForeignKeyConstraintStatement.getReferencedColumnNames());
   validationErrors.checkRequiredField("referencedTableName",addForeignKeyConstraintStatement.getReferencedTableName());
   validationErrors.checkRequiredField("constraintName",addForeignKeyConstraintStatement.getConstraintName());
+  validationErrors.checkDisallowedField("onDelete",addForeignKeyConstraintStatement.getOnDelete(),database,SybaseDatabase.class);
   return validationErrors;
 }

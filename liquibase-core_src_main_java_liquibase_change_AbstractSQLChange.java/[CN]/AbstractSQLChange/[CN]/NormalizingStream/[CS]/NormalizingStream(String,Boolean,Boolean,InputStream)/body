@@ -1,4 +1,9 @@
 {
   this.stream=new PushbackInputStream(stream,2048);
-  this.headerStream=new ByteArrayInputStream((endDelimiter + ":" + splitStatements+ ":"+ stripComments+ ":").getBytes());
+  try {
+    this.headerStream=new ByteArrayInputStream((endDelimiter + ":" + splitStatements+ ":"+ stripComments+ ":").getBytes(LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()));
+  }
+ catch (  UnsupportedEncodingException e) {
+    throw new UnexpectedLiquibaseException(e);
+  }
 }

@@ -1,9 +1,9 @@
 {
   if (lastChangeSetSequenceValue == null) {
     lastChangeSetSequenceValue=0;
-    FileReader reader=null;
+    Reader reader=null;
     try {
-      reader=new FileReader(this.changeLogFile);
+      reader=new InputStreamReader(new FileInputStream(this.changeLogFile),LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding());
       CSVReader csvReader=new CSVReader(reader);
       String[] line=csvReader.readNext();
       List<RanChangeSet> returnList=new ArrayList<RanChangeSet>();

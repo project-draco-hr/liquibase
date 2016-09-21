@@ -1,0 +1,3 @@
+String title
+Writer fileWriter
+List<Change> changes

@@ -9,7 +9,12 @@
       if (database instanceof MSSQLDatabase) {
         clause+=" CONSTRAINT " + ((MSSQLDatabase)database).generateDefaultConstraintName(statement.getTableName(),statement.getColumnName());
       }
-      clause+=" DEFAULT " + DataTypeFactory.getInstance().fromDescription(statement.getColumnType(),database).objectToSql(defaultValue,database);
+      if (defaultValue instanceof DatabaseFunction) {
+        clause+=" DEFAULT " + DataTypeFactory.getInstance().fromObject(defaultValue,database).objectToSql(defaultValue,database);
+      }
+ else {
+        clause+=" DEFAULT " + DataTypeFactory.getInstance().fromDescription(statement.getColumnType(),database).objectToSql(defaultValue,database);
+      }
     }
   }
   return clause;

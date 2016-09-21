@@ -1,6 +1,6 @@
 {
   StringClauses clauses=new StringClauses(preserveWhitespace ? "" : " ");
-  SimpleSqlGrammar t=new SimpleSqlGrammar(new StringReader(sqlBlock));
+  SimpleSqlGrammar t=new SimpleSqlGrammar(new SqlCharStream(new StringReader(sqlBlock)));
   try {
     Token token=t.getNextToken();
     while (!token.toString().equals("")) {

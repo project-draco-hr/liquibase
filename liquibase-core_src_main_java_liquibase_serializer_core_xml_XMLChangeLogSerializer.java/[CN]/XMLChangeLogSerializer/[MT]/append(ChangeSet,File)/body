@@ -1,7 +1,12 @@
 {
   FileInputStream in=new FileInputStream(changeLogFile);
-  String existingChangeLog=StreamUtil.getStreamContents(in);
-  in.close();
+  String existingChangeLog;
+  try {
+    existingChangeLog=StreamUtil.getStreamContents(in);
+  }
+  finally {
+    in.close();
+  }
   FileOutputStream out=new FileOutputStream(changeLogFile);
   try {
     if (!existingChangeLog.contains("</databaseChangeLog>")) {
@@ -9,7 +14,7 @@
     }
  else {
       existingChangeLog=existingChangeLog.replaceFirst("</databaseChangeLog>",serialize(changeSet,true) + "\n</databaseChangeLog>");
-      StreamUtil.copy(new ByteArrayInputStream(existingChangeLog.getBytes()),out);
+      StreamUtil.copy(new ByteArrayInputStream(existingChangeLog.getBytes(LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding())),out);
     }
     out.flush();
   }
